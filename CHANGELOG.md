@@ -4,3 +4,4 @@
 
 - chore: initial commit.
 - feat: Astro Starlight documentation site.
+- fix: add `package-lock.json` to repository for CI deploy.
