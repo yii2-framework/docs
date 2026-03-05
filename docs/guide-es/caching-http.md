@@ -19,14 +19,14 @@ La cabecera `Last-Modified` usa un sello de tiempo para indicar si la página ha
 almacena en la caché.
 
 Puedes configurar la propiedad [[yii\filters\HttpCache::lastModified]] para activar el envío de la cabecera `Last-Modified`.
-La propiedad debe ser una llamada de retorno (callable) PHP que devuelva un timestamp UNIX sobre el tiempo de modificación de
+La propiedad debe ser una llamada de retorno (callable) PHP que devuelva un timestamp Unix sobre el tiempo de modificación de
 la página. El formato de la función de llamada de retorno debe ser el siguiente,
 
 ```php
 /**
   * @param Action $action el objeto acción que se está controlando actualmente
   * @param array $params el valor de la propiedad "params"
-  * @return int un sello de tiempo UNIX que representa el tiempo de modificación de la página
+  * @return int un sello de tiempo Unix que representa el tiempo de modificación de la página
   */
 function ($action, $params)
 ```

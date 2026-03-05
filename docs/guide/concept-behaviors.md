@@ -266,7 +266,7 @@ class User extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
-                // if you're using datetime instead of UNIX timestamp:
+                // if you're using datetime instead of Unix timestamp:
                 // 'value' => new Expression('NOW()'),
             ],
         ];
@@ -276,14 +276,14 @@ class User extends ActiveRecord
 
 The behavior configuration above specifies that when the record is being:
 
-- inserted, the behavior should assign the current UNIX timestamp to
+- inserted, the behavior should assign the current Unix timestamp to
   the `created_at` and `updated_at` attributes
-- updated, the behavior should assign the current UNIX timestamp to the `updated_at` attribute
+- updated, the behavior should assign the current Unix timestamp to the `updated_at` attribute
 
-> Note: For the above implementation to work with MySQL database, please declare the columns(`created_at`, `updated_at`) as int(11) for being UNIX timestamp.
+> Note: For the above implementation to work with MySQL database, please declare the columns(`created_at`, `updated_at`) as int(11) for being Unix timestamp.
 
 With that code in place, if you have a `User` object and try to save it, you will find its `created_at` and `updated_at` are automatically
-filled with the current UNIX timestamp:
+filled with the current Unix timestamp:
 
 ```php
 $user = new User;

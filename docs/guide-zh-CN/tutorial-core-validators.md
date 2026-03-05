@@ -128,7 +128,7 @@ public function rules()
 ```
 
 该验证器检查输入值是否为适当格式的 date，time，或者 datetime。
-另外，它还可以帮你把输入值转换为一个 UNIX 时间戳并保存到
+另外，它还可以帮你把输入值转换为一个 Unix 时间戳并保存到
 [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]] 所指定的属性里。
 
 - `format`：被验证值的日期/时间格式。

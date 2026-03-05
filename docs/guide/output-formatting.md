@@ -73,7 +73,7 @@ The formatter supports the following output formats that are related with date a
 - [[yii\i18n\Formatter::asDate()|date]]: the value is formatted as a date, e.g. `January 01, 2014`.
 - [[yii\i18n\Formatter::asTime()|time]]: the value is formatted as a time, e.g. `14:23`.
 - [[yii\i18n\Formatter::asDatetime()|datetime]]: the value is formatted as date and time, e.g. `January 01, 2014 14:23`.
-- [[yii\i18n\Formatter::asTimestamp()|timestamp]]: the value is formatted as a [unix timestamp](https://en.wikipedia.org/wiki/Unix_time), e.g. `1412609982`.
+- [[yii\i18n\Formatter::asTimestamp()|timestamp]]: the value is formatted as a [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time), e.g. `1412609982`.
 - [[yii\i18n\Formatter::asRelativeTime()|relativeTime]]: the value is formatted as the time interval between a date
   and now in human readable form e.g. `1 hour ago`.
 - [[yii\i18n\Formatter::asDuration()|duration]]: the value is formatted as a duration in human readable format. e.g. `1 day, 2 minutes`.
@@ -131,7 +131,7 @@ The value being formatted is assumed to be in UTC, unless a time zone is explici
 In the following examples, we assume the target [[yii\i18n\Formatter::timeZone|time zone]] is set as `Europe/Berlin`.
 
 ```php
-// formatting a UNIX timestamp as a time
+// formatting a Unix timestamp as a time
 echo Yii::$app->formatter->asTime(1412599260); // 14:41:00
 
 // formatting a datetime string (in UTC) as a time
@@ -237,4 +237,4 @@ By default, the currently active [[yii\i18n\Formatter::locale|locale]] is determ
 > If the intl extension is not installed, the data will not be localized.
 >
 > Note that for date values that are before year 1901 or after 2038, they will not be localized on 32-bit systems, even
-> if the intl extension is installed. This is because in this case ICU is using 32-bit UNIX timestamps to date values.
+> if the intl extension is installed. This is because in this case ICU is using 32-bit Unix timestamps to date values.

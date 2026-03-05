@@ -16,14 +16,14 @@ only works for `GET` and `HEAD` requests. It can handle three kinds of cache-rel
 The `Last-Modified` header uses a timestamp to indicate if the page has been modified since the client caches it.
 
 You may configure the [[yii\filters\HttpCache::lastModified]] property to enable sending
-the `Last-Modified` header. The property should be a PHP callable returning a UNIX timestamp about
+the `Last-Modified` header. The property should be a PHP callable returning a Unix timestamp about
 the page modification time. The signature of the PHP callable should be as follows,
 
 ```php
 /**
   * @param Action $action the action object that is being handled currently
   * @param array $params the value of the "params" property
-  * @return int a UNIX timestamp representing the page modification time
+  * @return int a Unix timestamp representing the page modification time
   */
 function ($action, $params)
 ```

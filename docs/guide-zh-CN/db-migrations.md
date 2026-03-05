@@ -757,7 +757,7 @@ yii migrate 3
 yii migrate/to 150101_185401                      # using timestamp to specify the migration 使用时间戳来指定迁移
 yii migrate/to "2015-01-01 18:54:01"              # using a string that can be parsed by strtotime() 使用一个可以被 strtotime() 解析的字符串
 yii migrate/to m150101_185401_create_news_table   # using full name 使用全名
-yii migrate/to 1392853618                         # using UNIX timestamp 使用 UNIX 时间戳
+yii migrate/to 1392853618                         # using Unix timestamp 使用 Unix 时间戳
 ```
 
 如果在指定要提交的迁移前面还有未提交的迁移，那么在执行这个被指定的迁移之前，
@@ -822,7 +822,7 @@ yii migrate/new all     # 显示所有还未提交的迁移
 yii migrate/mark 150101_185401                      # 使用时间戳来指定迁移
 yii migrate/mark "2015-01-01 18:54:01"              # 使用一个可以被 strtotime() 解析的字符串
 yii migrate/mark m150101_185401_create_news_table   # 使用全名
-yii migrate/mark 1392853618                         # 使用 UNIX 时间戳
+yii migrate/mark 1392853618                         # 使用 Unix 时间戳
 ```
 
 该命令将会添加或者删除 `migration` 表当中的某几行数据来表明数据库已经提交到了指定的某个迁移上。

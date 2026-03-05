@@ -776,7 +776,7 @@ by using the `migrate/to` command in one of the following formats:
 yii migrate/to 150101_185401                      # using timestamp to specify the migration
 yii migrate/to "2015-01-01 18:54:01"              # using a string that can be parsed by strtotime()
 yii migrate/to m150101_185401_create_news_table   # using full name
-yii migrate/to 1392853618                         # using UNIX timestamp
+yii migrate/to 1392853618                         # using Unix timestamp
 ```
 
 If there are any unapplied migrations earlier than the specified one, they will all be applied before the specified
@@ -841,7 +841,7 @@ the following command:
 yii migrate/mark 150101_185401                      # using timestamp to specify the migration
 yii migrate/mark "2015-01-01 18:54:01"              # using a string that can be parsed by strtotime()
 yii migrate/mark m150101_185401_create_news_table   # using full name
-yii migrate/mark 1392853618                         # using UNIX timestamp
+yii migrate/mark 1392853618                         # using Unix timestamp
 ```
 
 The command will modify the `migration` table by adding or deleting certain rows to indicate that the database

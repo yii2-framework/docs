@@ -736,7 +736,7 @@ utilizando el comando `migrate/to` de acuerdo a uno de los siguientes formatos:
 yii migrate/to 150101_185401                      # utiliza la marca temporal para especificar la migración
 yii migrate/to "2015-01-01 18:54:01"              # utiliza un string que puede ser analizado por strtotime()
 yii migrate/to m150101_185401_create_news_table   # utiliza el nombre completo
-yii migrate/to 1392853618                         # utiliza el tiempo UNIX
+yii migrate/to 1392853618                         # utiliza el tiempo Unix
 ```
 
 Si hubiera migraciones previas a la especificada sin aplicar, estas serán aplicadas antes de que la migración especificada
@@ -793,7 +793,7 @@ con el siguiente comando:
 yii migrate/mark 150101_185401                      # utiliza la marca temporal para especificar la migración
 yii migrate/mark "2015-01-01 18:54:01"              # utiliza un string que puede ser analizado por strtotime()
 yii migrate/mark m150101_185401_create_news_table   # utiliza el nombre completo
-yii migrate/mark 1392853618                         # utiliza el tiempo UNIX
+yii migrate/mark 1392853618                         # utiliza el tiempo Unix
 ```
 
 El comando modificará la tabla `migration` agregando o eliminado ciertos registros para indicar que en la base de datos

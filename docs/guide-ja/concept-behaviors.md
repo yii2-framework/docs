@@ -266,7 +266,7 @@ class User extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
-                // UNIX タイムスタンプではなく datetime を使う場合は
+                // Unix タイムスタンプではなく datetime を使う場合は
                 // 'value' => new Expression('NOW()'),
             ],
         ];
@@ -276,14 +276,14 @@ class User extends ActiveRecord
 
 上のビヘイビア構成は、レコードが:
 
-- 挿入されるとき、ビヘイビアは現在の UNIX タイムスタンプを
+- 挿入されるとき、ビヘイビアは現在の Unix タイムスタンプを
   `created_at` と `updated_at` 属性に割り当てます
-- 更新されるとき、ビヘイビアは現在の UNIX タイムスタンプを `updated_at` 属性に割り当てます
+- 更新されるとき、ビヘイビアは現在の Unix タイムスタンプを `updated_at` 属性に割り当てます
 
-> Note: 上記の実装が MySQL データベースで動作するようにするためには、`created_at` と `updated_at` のカラムを UNIX タイムスタンプ になるように int(11) として宣言してください。
+> Note: 上記の実装が MySQL データベースで動作するようにするためには、`created_at` と `updated_at` のカラムを Unix タイムスタンプ になるように int(11) として宣言してください。
 
 このコードが所定の位置にあれば、例えば `User` オブジェクトがあって、それを保存しようとしたら、そこで、
-`created_at` と `updated_at` が自動的に現在の UNIX タイムスタンプで埋められます。
+`created_at` と `updated_at` が自動的に現在の Unix タイムスタンプで埋められます。
 
 ```php
 $user = new User;

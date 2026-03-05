@@ -204,7 +204,7 @@ Uma vez que os atributos do Active Record são nomeados de acordo com as colunas
 
 ### Transformação de Dados (Data Transformation) <span id="data-transformation"></span>
 
-Acontece frequentemente que os dados que estão sendo inseridos e/ou exibidos estão em um formato que é diferente do utilizado no momento da gravação na base de dados. Por exemplo, em uma base de dados você está gravando a data de aniversário do `customer` como UNIX timestamps (que não é muito amigável), embora, na maioria das vezes você gostaria de manipular aniversários como strings no formato de `'YYYY/MM/DD'`. Para atingir este objetivo, você pode definir métodos de _transformação de dados_ na classe Active Record `Customer` como a seguir:
+Acontece frequentemente que os dados que estão sendo inseridos e/ou exibidos estão em um formato que é diferente do utilizado no momento da gravação na base de dados. Por exemplo, em uma base de dados você está gravando a data de aniversário do `customer` como Unix timestamps (que não é muito amigável), embora, na maioria das vezes você gostaria de manipular aniversários como strings no formato de `'YYYY/MM/DD'`. Para atingir este objetivo, você pode definir métodos de _transformação de dados_ na classe Active Record `Customer` como a seguir:
 
 ```php
 class Customer extends ActiveRecord

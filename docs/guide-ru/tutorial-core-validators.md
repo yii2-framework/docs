@@ -108,7 +108,7 @@ public function rules()
 ```
 
 Этот валидатор проверяет соответствие входящих данных форматам _date_, _time_ или _datetime_.
-Опционально, он может конвертировать входящее значение в UNIX timestamp и сохранить в атрибуте,
+Опционально, он может конвертировать входящее значение в Unix timestamp и сохранить в атрибуте,
 описанном здесь: [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]].
 
 - `format`: формат даты/времени, согласно которому должна быть сделана проверка.
@@ -117,7 +117,7 @@ public function rules()
   прочитать в [руководстве PHP по date_create_from_format()](https://www.php.net/manual/ru/datetime.createfromformat.php).
   Если значение не задано, используется `Yii::$app->formatter->dateFormat`.
   Подробнее читайте в [[yii\validators\DateValidator::$format|документации по API]].
-- `timestampAttribute`: имя атрибута, которому данный валидатор может присваивать значение UNIX timestamp,
+- `timestampAttribute`: имя атрибута, которому данный валидатор может присваивать значение Unix timestamp,
   получаемое из входных даты и времени. Это может быть как тот же атрибут, что валидируется в данный момент. Если это так,
   после валидации оригинальное значение будет перезаписано значеним timestamp.
   Дополнительные примеры вы можете найти в разделе ["Handling date input with the DatePicker"](https://github.com/yiisoft/yii2-jui/blob/master/docs/guide/topics-date-picker.md).
@@ -126,7 +126,7 @@ public function rules()
   [[yii\validators\DateValidator::$timestampAttributeFormat|$timestampAttributeFormat]] и
   [[yii\validators\DateValidator::$timestampAttributeTimeZone|$timestampAttributeTimeZone]] соответственно.
 
-  При использовании `timestampAttribute`, входное значение будет конвертировано в unix timestamp, который по определению
+  При использовании `timestampAttribute`, входное значение будет конвертировано в Unix timestamp, который по определению
   содержит время в UTC. То есть будет произведено преобразование из [[yii\validators\DateValidator::timeZone|входного часового пояса]]
   в UTC.
 

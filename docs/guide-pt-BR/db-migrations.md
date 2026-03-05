@@ -237,7 +237,7 @@ usando o comando `migrate/to` em um dos formatos seguintes:
 yii migrate/to 150101_185401                        # usando a marcação de data para especificar a migração
 yii migrate/to "2015-01-01 18:54:01"                # usando uma string que pode ser analisada por strtotime()
 yii migrate/to m150101_185401_criar_tabela_noticias # usando o nome completo
-yii migrate/to 1392853618                           # usando uma marcação de data no estilo UNIX
+yii migrate/to 1392853618                           # usando uma marcação de data no estilo Unix
 ```
 
 Se existirem migrações mais recentes do que a especificada, elas serão todas aplicadas antes da migração definida.
@@ -292,7 +292,7 @@ posteriormente. Você pode alcançar este objetivo com o seguinte comando:
 yii migrate/mark 150101_185401                        # usando a marcação de data para especificar a migração
 yii migrate/mark "2015-01-01 18:54:01"                # usando uma string que pode ser analisada por strtotime()
 yii migrate/mark m150101_185401_criar_tabela_noticias # usando o nome completo
-yii migrate/mark 1392853618                           # usando uma marcação de data no estilo UNIX
+yii migrate/mark 1392853618                           # usando uma marcação de data no estilo Unix
 ```
 
 O comando modificará a tabela `migration` adicionando ou deletando certos registros para indicar que o banco

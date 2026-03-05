@@ -1,0 +1,23 @@
+---
+name: vale
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  vale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Run Vale
+        uses: errata-ai/vale-action@v2.1.1
+        with:
+          files: docs
+          vale_flags: "--config=.github/linters/.vale.ini"
+          fail_on_error: true

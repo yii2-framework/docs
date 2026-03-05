@@ -73,7 +73,7 @@ return [
 - [[yii\i18n\Formatter::asDate()|date]]：这个变量将被格式化为日期 `January 01, 2014`。
 - [[yii\i18n\Formatter::asTime()|time]]：这个变量将被格式化为时间 `14:23`。
 - [[yii\i18n\Formatter::asDatetime()|datetime]]：这个变量将被格式化为日期+时间 `January 01, 2014 14:23`。
-- [[yii\i18n\Formatter::asTimestamp()|timestamp]]：这个变量将被格式化为 UNIX 时间戳 [unix timestamp](https://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4)，例如 `1412609982`。
+- [[yii\i18n\Formatter::asTimestamp()|timestamp]]：这个变量将被格式化为 Unix 时间戳 [Unix timestamp](https://zh.wikipedia.org/wiki/Unix%E6%97%B6%E9%97%B4)，例如 `1412609982`。
 - [[yii\i18n\Formatter::asRelativeTime()|relativeTime]]：这个变量将被格式化为人类可读的
   当前相对时间 `1 hour ago`。
 - [[yii\i18n\Formatter::asDuration()|duration]]：这个变量将被格式化为人类可读的时长 `1 day, 2 minutes`。
@@ -131,7 +131,7 @@ echo Yii::$app->formatter->asDate('now', 'php:Y-m-d'); // 2014-10-06
 下面使用 `Europe/Berlin` 作为默认 [[yii\i18n\Formatter::timeZone|time zone]]
 
 ```php
-// formatting a UNIX timestamp as a time
+// formatting a Unix timestamp as a time
 echo Yii::$app->formatter->asTime(1412599260); // 14:41:00
 
 // formatting a datetime string (in UTC) as a time
@@ -236,4 +236,4 @@ echo Yii::$app->formatter->asDate('2014-01-01'); // output: 1 января 2014 
 > 如果 `intl` 扩展没有被安装，数据格式化不会考虑本地化。
 >
 > 在 32 位系统中，1901 年前或者 2038 年后的日期数据将不会被本地化，
-> 因为 ICU 使用的是 32 位的 UNIX 时间戳。
+> 因为 ICU 使用的是 32 位的 Unix 时间戳。

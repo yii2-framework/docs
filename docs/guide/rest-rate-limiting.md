@@ -8,9 +8,9 @@ To enable rate limiting, the [[yii\web\User::identityClass|user identity class]]
 This interface requires implementation of three methods:
 
 - `getRateLimit()`: returns the maximum number of allowed requests and the time period (e.g., `[100, 600]` means there can be at most 100 API calls within 600 seconds).
-- `loadAllowance()`: returns the number of remaining requests allowed and the corresponding UNIX timestamp
+- `loadAllowance()`: returns the number of remaining requests allowed and the corresponding Unix timestamp
   when the rate limit was last checked.
-- `saveAllowance()`: saves both the number of remaining requests allowed and the current UNIX timestamp.
+- `saveAllowance()`: saves both the number of remaining requests allowed and the current Unix timestamp.
 
 You may want to use two columns in the user table to record the allowance and timestamp information. With those defined,
 then `loadAllowance()` and `saveAllowance()` can be implemented to read and save the values

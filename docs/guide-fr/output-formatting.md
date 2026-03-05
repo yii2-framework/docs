@@ -62,7 +62,7 @@ Le formateur prend en charge les formats de sortie suivants en relation avec les
 - [[yii\i18n\Formatter::asDate()|date]]: la valeur est formatée sous la forme d'une date, p. ex. `January 01, 2014`.
 - [[yii\i18n\Formatter::asTime()|time]]: la valeur est formatée sous la forme d'un temps, p. ex. `14:23`.
 - [[yii\i18n\Formatter::asDatetime()|datetime]]: la valeur est formatée sous la forme d'une date et d'un temps, p. ex. `January 01, 2014 14:23`.
-- [[yii\i18n\Formatter::asTimestamp()|timestamp]]: la valeur est formatée sous la forme d'un [horodatage unix ](https://fr.wikipedia.org/wiki/Heure_Unix), p. ex. `1412609982`.
+- [[yii\i18n\Formatter::asTimestamp()|timestamp]]: la valeur est formatée sous la forme d'un [horodatage Unix ](https://fr.wikipedia.org/wiki/Heure_Unix), p. ex. `1412609982`.
 - [[yii\i18n\Formatter::asRelativeTime()|relativeTime]]: la valeur est formatée sous la forme d'un intervalle de temps entre un temps et le temps actuel dans une forme lisible par l'homme, p.ex. `1 hour ago`.
 - [[yii\i18n\Formatter::asDuration()|duration]]: la valeur est formatée comme une durée dans un format lisible par l'homme, p. ex. `1 day, 2 minutes`.
 
@@ -95,7 +95,7 @@ Lors du formatage des dates et des temps, Yii les convertit dans le [[yii\i18n\F
 Dans les exemples qui suivent, nous supposons que la cible [[yii\i18n\Formatter::timeZone|fuseau horaire]] est définie à `Europe/Berlin`.
 
 ```php
-// formatage d'un horodatage UNIX comme un temps
+// formatage d'un horodatage Unix comme un temps
 echo Yii::$app->formatter->asTime(1412599260); // 14:41:00
 
 // formatage d'une chaîne de caractère date-temps (en UTC) comme un temps
@@ -170,4 +170,4 @@ Par défaut, la [[yii\i18n\Formatter::locale|locale]] est déterminée par la va
 >
 > Si l'extension intl extension n'est pas installée, les données ne sont pas localisées.
 >
-> Notez que pour les valeurs de dates qui sont antérieures à l'année 1901, ou postérieures à 2038, la localisation n'est pas faite sur les systèmes 32 bits, même si l'extension intl est installée. Cela est dû au fait que, dans ce cas, ICU utilise des horodatages UNIX 32 bits pour les valeurs de date.
+> Notez que pour les valeurs de dates qui sont antérieures à l'année 1901, ou postérieures à 2038, la localisation n'est pas faite sur les systèmes 32 bits, même si l'extension intl est installée. Cela est dû au fait que, dans ce cas, ICU utilise des horodatages Unix 32 bits pour les valeurs de date.

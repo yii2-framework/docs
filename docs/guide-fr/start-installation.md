@@ -219,7 +219,7 @@ server {
     location ~ \.php$ {
         include fastcgi.conf;
         fastcgi_pass   127.0.0.1:9000;
-        #fastcgi_pass unix:/var/run/php5-fpm.sock;
+        #fastcgi_pass Unix:/var/run/php5-fpm.sock;
     }
 
     location ~ /\.(ht|svn|git) {

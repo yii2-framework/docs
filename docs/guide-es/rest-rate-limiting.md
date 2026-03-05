@@ -8,9 +8,9 @@ Para activar la limitación de rango, la clase [[yii\web\User::identityClass|use
 Este interface requiere la implementación de tres métodos:
 
 - `getRateLimit()`: devuelve el número máximo de peticiones permitidas y el periodo de tiempo (p.e., `[100, 600]` significa que como mucho puede haber 100 llamadas al API dentro de 600 segundos).
-- `loadAllowance()`: devuelve el número de peticiones que quedan permitidas y el tiempo (fecha/hora) UNIX
+- `loadAllowance()`: devuelve el número de peticiones que quedan permitidas y el tiempo (fecha/hora) Unix
   con el último límite del rango que ha sido comprobado.
-- `saveAllowance()`: guarda ambos, el número restante de peticiones permitidas y el tiempo actual (fecha/hora) UNIX .
+- `saveAllowance()`: guarda ambos, el número restante de peticiones permitidas y el tiempo actual (fecha/hora) Unix .
 
 Puedes usar dos columnas en la tabla de usuario para guardar la información de lo permitido y la fecha/hora (timestamp). Con ambas definidas,
 entonces `loadAllowance()` y `saveAllowance()` pueden ser utilizados para leer y guardar los valores de las dos columnas correspondientes al actual usuario autenticado.

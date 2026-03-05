@@ -13,13 +13,13 @@ ne fonctionne que pour les requêtes `GET` et `HEAD`. Il peut gérer trois sorte
 
 L'entête `Last-Modified` (dernière modification) utilise un horodatage pour indiquer si la page a été modifiée depuis sa mise en cache par le client.
 
-Vous pouvez configurer la propriété [[yii\filters\HttpCache::lastModified]] pour activer l'envoi de l'entête `Last-modified`. La propriété doit être une fonction de rappel PHP qui retourne un horodatage UNIX concernant la modification de la page. La signature de la fonction de rappel PHP doit être comme suit :
+Vous pouvez configurer la propriété [[yii\filters\HttpCache::lastModified]] pour activer l'envoi de l'entête `Last-modified`. La propriété doit être une fonction de rappel PHP qui retourne un horodatage Unix concernant la modification de la page. La signature de la fonction de rappel PHP doit être comme suit :
 
 ```php
 /**
   * @param Action $action l'objet action qui est actuellement géré
   * @param array $params la valeur de la propriété "params"
-  * @return int un horodatage UNIX représentant l'instant de modification de la page
+  * @return int un horodatage Unix représentant l'instant de modification de la page
   */
 function ($action, $params)
 ```

@@ -84,11 +84,11 @@ Este validador compara o valor de entrada especificado com um outro e certifica 
 ]
 ```
 
-Este validador verifica se o valor de entrada é uma data, hora ou data e hora em um formato adequado. Opcionalmente, pode converter o valor de entrada para um UNIX timestamp ou outro formato legível e armazená-lo em um atributo especificado via [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]].
+Este validador verifica se o valor de entrada é uma data, hora ou data e hora em um formato adequado. Opcionalmente, pode converter o valor de entrada para um Unix timestamp ou outro formato legível e armazená-lo em um atributo especificado via [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]].
 
 - `format`: o formato date/time que o valor que está sendo validado deve ter. Este pode ser um padrão de data e hora conforme descrito no [ICU manual] (https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax). Alternativamente esta pode ser uma string com o prefixo `php:` representando um formato que pode ser reconhecido pela classe PHP `Datetime`. Por favor, consulte <https://www.php.net/manual/pt_BR/datetime.createfromformat.php> para formatos suportados. Se isso não for definido, ele terá o valor de `Yii::$app->formatter->dateFormat`. Consulte a [[yii\validators\DateValidator::$format|documentação da API]] para mais detalhes.
 
-- `timestampAttribute`: o nome do atributo para que este validador possa atribuir o UNIX timestamp convertido a partir da entrada de data / hora. Este pode ser o mesmo atributo que está sendo validado. Se este for o caso, valor original será substituído pelo valor timestamp após a validação. Veja a seção ["Manipulando Datas com DatePicker"] (https://github.com/yiisoft/yii2-jui/blob/master/docs/guide/topics-date-picker.md) para exemplos de uso.
+- `timestampAttribute`: o nome do atributo para que este validador possa atribuir o Unix timestamp convertido a partir da entrada de data / hora. Este pode ser o mesmo atributo que está sendo validado. Se este for o caso, valor original será substituído pelo valor timestamp após a validação. Veja a seção ["Manipulando Datas com DatePicker"] (https://github.com/yiisoft/yii2-jui/blob/master/docs/guide/topics-date-picker.md) para exemplos de uso.
 
 Desde a versão 2.0.4, um formato e um fuso horário podem ser especificados utilizando os atributos [[yii\validators\DateValidator::$timestampAttributeFormat|$timestampAttributeFormat]] e [[yii\validators\DateValidator::$timestampAttributeTimeZone|$timestampAttributeTimeZone]], respectivamente.
 

@@ -246,7 +246,7 @@ class User extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
-                // si vous utilisez datetime au lieur de l'UNIX timestamp:
+                // si vous utilisez datetime au lieur de l'Unix timestamp:
                 // 'value' => new Expression('NOW()'),
             ],
         ];
@@ -256,12 +256,12 @@ class User extends ActiveRecord
 
 Le comportement ci-dessus spécifie que lorsque l'enregistrement est :
 
-- inséré, le comportement doit assigner l'horodate UNIX courante aux attributs `created_at` (créé le) et `updated_at` (mis à jour le) ;
-- mis à jour, le comportement doit assigner l'horodate UNIX courante à l'attribut `updated_at` ;
+- inséré, le comportement doit assigner l'horodate Unix courante aux attributs `created_at` (créé le) et `updated_at` (mis à jour le) ;
+- mis à jour, le comportement doit assigner l'horodate Unix courante à l'attribut `updated_at` ;
 
-> Note: pour que la mise en œuvre ci-dessus fonctionne avec une base de données MySQL, vous devez déclarer les colonnes (`created_at`, `updated_at`) en tant que `int(11)` pour qu'elles puissent représenter des horodates UNIX.
+> Note: pour que la mise en œuvre ci-dessus fonctionne avec une base de données MySQL, vous devez déclarer les colonnes (`created_at`, `updated_at`) en tant que `int(11)` pour qu'elles puissent représenter des horodates Unix.
 
-Avec ce code en place, si vous avez un objet `User` (utilisateur) et que vous essayez de le sauvegarder, il verra ses attributs `created_at` et `updated_at` automatiquement remplis avec l'horodate UNIX :
+Avec ce code en place, si vous avez un objet `User` (utilisateur) et que vous essayez de le sauvegarder, il verra ses attributs `created_at` et `updated_at` automatiquement remplis avec l'horodate Unix :
 
 ```php
 $user = new User;

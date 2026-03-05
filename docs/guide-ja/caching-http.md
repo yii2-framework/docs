@@ -16,14 +16,14 @@
 `Last-Modified` ヘッダは、クライアントがキャッシュした時からページが変更されたかどうかを示すために、タイムスタンプを使用しています。
 
 `Last-Modified` ヘッダの送信を有効にするには [[yii\filters\HttpCache::lastModified]] プロパティを構成します。
-このプロパティは、ページの更新時刻に関する UNIX タイムスタンプを返す PHP のコーラブルでなければなりません。
+このプロパティは、ページの更新時刻に関する Unix タイムスタンプを返す PHP のコーラブルでなければなりません。
 この PHP コーラブルのシグニチャは以下のとおりです。
 
 ```php
 /**
   * @param Action $action 現在扱っているアクション・オブジェクト
   * @param array $params "params" プロパティの値
-  * @return int ページの更新時刻を表す UNIX タイムスタンプ
+  * @return int ページの更新時刻を表す Unix タイムスタンプ
   */
 function ($action, $params)
 ```

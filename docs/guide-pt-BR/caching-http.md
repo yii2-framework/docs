@@ -13,13 +13,13 @@ Para usar o cache no cliente, você poderá configurar [[yii\filters\HttpCache]]
 
 O cabeçalho `Last-modified` usa uma data (timestamp) para indicar se a página foi modificada desde que o cliente a armazenou em cache.
 
-Você pode configurar a propriedade [[yii\filters\HttpCache::lastModified]] para permitir enviar o cabeçalho `Last-modified`. A propriedade deve ser um PHP _callable_ retornando uma data (UNIX timestamp) sobre o tempo de modificação. A declaração do PHP _callable_ deve ser a seguinte,
+Você pode configurar a propriedade [[yii\filters\HttpCache::lastModified]] para permitir enviar o cabeçalho `Last-modified`. A propriedade deve ser um PHP _callable_ retornando uma data (Unix timestamp) sobre o tempo de modificação. A declaração do PHP _callable_ deve ser a seguinte,
 
 ```php
 /**
   * @param Action $action O Objeto da ação que está sendo manipulada no momento
   * @param array $params o valor da propriedade "params"
-  * @return int uma data(timestamp) UNIX timestamp representando o tempo da
+  * @return int uma data(timestamp) Unix timestamp representando o tempo da
   * última modificação na página
   */
 function ($action, $params)

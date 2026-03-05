@@ -9,8 +9,8 @@
 
 - `getRateLimit()`：返回允许的请求的最大数目及时间，例如，`[100, 600]` 表示在 600 秒内最多 100 次的 API 调用。
 - `loadAllowance()`：返回剩余的允许的请求和最后一次速率限制检查时
-  相应的 UNIX 时间戳数。
-- `saveAllowance()`：保存剩余的允许请求数和当前的 UNIX 时间戳。
+  相应的 Unix 时间戳数。
+- `saveAllowance()`：保存剩余的允许请求数和当前的 Unix 时间戳。
 
 你可以在 user 表中使用两列来记录容差和时间戳信息。
 `loadAllowance()` 和 `saveAllowance()`

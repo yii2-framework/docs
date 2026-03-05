@@ -73,7 +73,7 @@ return [
 - [[yii\i18n\Formatter::asDate()|date]] - 値は日付としてフォーマットされます。例えば `January 01, 2014`。
 - [[yii\i18n\Formatter::asTime()|time]] - 値は時刻としてフォーマットされます。例えば `14:23`。
 - [[yii\i18n\Formatter::asDatetime()|datetime]] - 値は日付および時刻としてフォーマットされます。例えば `January 01, 2014 14:23`。
-- [[yii\i18n\Formatter::asTimestamp()|timestamp]] - 値は [unix タイムスタンプ](https://ja.wikipedia.org/wiki/UNIX%E6%99%82%E9%96%93) としてフォーマットされます。例えば `1412609982`
+- [[yii\i18n\Formatter::asTimestamp()|timestamp]] - 値は [Unix タイムスタンプ](https://ja.wikipedia.org/wiki/Unix%E6%99%82%E9%96%93) としてフォーマットされます。例えば `1412609982`
 - [[yii\i18n\Formatter::asRelativeTime()|relativeTime]] - 値は、その日時と現在との間隔として、人間に分かりやすい言葉でフォーマットされます。
   例えば `1 hour ago`。
 - [[yii\i18n\Formatter::asDuration()|duration]] - 値は継続時間として、人間に分かりやすい言葉でフォーマットされます。例えば `1 day, 2 minutes`。
@@ -138,7 +138,7 @@ UTC であると見なされます。
 次の例では、ターゲット・[[yii\i18n\Formatter::timeZone|タイム・ゾーン]] が `Europe/Berlin` に設定されているものとします。
 
 ```php
-// UNIX タイムスタンプを時刻としてフォーマット
+// Unix タイムスタンプを時刻としてフォーマット
 echo Yii::$app->formatter->asTime(1412599260); // 14:41:00
 
 // UTC の日付時刻文字列を時刻としてフォーマット
@@ -256,4 +256,4 @@ echo Yii::$app->formatter->asDate('2014-01-01'); // 出力: 2014/01/01
 > intl 拡張がインストールされていない場合は、データはローカライズされません。
 >
 > 1901年より前、または、2038年より後の日時の値は、たとえ intl 拡張がインストールされていても、32-bit システムではローカライズされないことに注意してください。
-> これは、この場合、ICU ライブラリが日時の値に対して 32-bit の UNIX タイムスタンプを使用しているのが原因です。
+> これは、この場合、ICU ライブラリが日時の値に対して 32-bit の Unix タイムスタンプを使用しているのが原因です。

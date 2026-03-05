@@ -776,7 +776,7 @@ yii migrate 3
 yii migrate/to 150101_185401                      # タイムスタンプを使ってマイグレーションを指定
 yii migrate/to "2015-01-01 18:54:01"              # strtotime() によって解釈できる文字列を使用
 yii migrate/to m150101_185401_create_news_table   # フルネームを使用
-yii migrate/to 1392853618                         # UNIX タイムスタンプを使用
+yii migrate/to 1392853618                         # Unix タイムスタンプを使用
 ```
 
 指定されたマイグレーションよりも古いものが適用されずに残っている場合は、指定されたものが適用される前に、
@@ -841,7 +841,7 @@ yii migrate/new all     # 適用可能な全てのマイグレーションを表
 yii migrate/mark 150101_185401                      # タイムスタンプを使ってマイグレーションを指定
 yii migrate/mark "2015-01-01 18:54:01"              # strtotime() によって解釈できる文字列を使用
 yii migrate/mark m150101_185401_create_news_table   # フルネームを使用
-yii migrate/mark 1392853618                         # UNIX タイムスタンプを使用
+yii migrate/mark 1392853618                         # Unix タイムスタンプを使用
 ```
 
 このコマンドは、一定の行を追加または削除して、`migration` テーブルを修正し、データベースが指定されたものまでマイグレーションが適用済みであることを示します。

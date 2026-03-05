@@ -266,7 +266,7 @@ class User extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
-                // if you're using datetime instead of UNIX timestamp:
+                // if you're using datetime instead of Unix timestamp:
                 // 'value' => new Expression('NOW()'),
             ],
         ];
@@ -280,10 +280,10 @@ class User extends ActiveRecord
   `created_at` 和 `updated_at` 属性；
 - 当记录更新时，行为将当前时间戳赋值给 `updated_at` 属性。
 
-> Note: 对于上述实现使用MySQL数据库，请将列 (`created_at`, `updated_at`) 定义为 int(11) 作为 UNIX 时间戳。
+> Note: 对于上述实现使用MySQL数据库，请将列 (`created_at`, `updated_at`) 定义为 int(11) 作为 Unix 时间戳。
 
 有了以上这段代码，如果你有一个 `User` 对象并且试图保存它，你会发现它的 `created_at` 和 `updated_at`
-被当前的UNIX时间戳自动填充：
+被当前的Unix时间戳自动填充：
 
 ```php
 $user = new User;

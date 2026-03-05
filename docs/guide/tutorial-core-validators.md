@@ -129,7 +129,7 @@ shortcuts:
 ```
 
 This validator checks if the input value is a date, time or datetime in a proper format.
-Optionally, it can convert the input value into a UNIX timestamp or other machine readable format and store it in an attribute
+Optionally, it can convert the input value into a Unix timestamp or other machine readable format and store it in an attribute
 specified via [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]].
 
 - `format`: the date/time format that the value being validated should be in.
@@ -139,7 +139,7 @@ specified via [[yii\validators\DateValidator::timestampAttribute|timestampAttrib
   If this is not set, it will take the value of `Yii::$app->formatter->dateFormat`.
   See the [[yii\validators\DateValidator::$format|API documentation]] for more details.
 
-- `timestampAttribute`: the name of the attribute to which this validator may assign the UNIX timestamp
+- `timestampAttribute`: the name of the attribute to which this validator may assign the Unix timestamp
   converted from the input date/time. This can be the same attribute as the one being validated. If this is the case,
   the original value will be overwritten with the timestamp value after validation.
   See ["Handling date input with the DatePicker"](https://github.com/yiisoft/yii2-jui/blob/master/docs/guide/topics-date-picker.md) for a usage example.
@@ -148,7 +148,7 @@ specified via [[yii\validators\DateValidator::timestampAttribute|timestampAttrib
   [[yii\validators\DateValidator::$timestampAttributeFormat|$timestampAttributeFormat]] and
   [[yii\validators\DateValidator::$timestampAttributeTimeZone|$timestampAttributeTimeZone]].
 
-  Note, that when using `timestampAttribute`, the input value will be converted to a unix timestamp, which by definition is in UTC, so
+  Note, that when using `timestampAttribute`, the input value will be converted to a Unix timestamp, which by definition is in UTC, so
   a conversion from the [[yii\validators\DateValidator::timeZone|input time zone]] to UTC will be performed (this behavior
   can be changed by setting [[yii\validators\DateValidator::$defaultTimeZone|$defaultTimeZone]] since 2.0.39).
 

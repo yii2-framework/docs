@@ -129,7 +129,7 @@ compare バリデータは、文字列や数値を比較するためにしか使
 ```
 
 このバリデータは、入力値が正しい書式の date、time、または datetime であるかどうかをチェックします。
-オプションとして、入力値を UNIX タイムスタンプ (または、その他、機械による読み取りが可能な形式) に変換して、
+オプションとして、入力値を Unix タイムスタンプ (または、その他、機械による読み取りが可能な形式) に変換して、
 [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]] によって指定された属性に保存することも出来ます。
 
 - `format`: 検証される値が従っているべき日付/時刻の書式。
@@ -139,7 +139,7 @@ compare バリデータは、文字列や数値を比較するためにしか使
   サポートされている書式については、<https://www.php.net/manual/ja/datetime.createfromformat.php> を参照してください。
   このプロパティが設定されていないときは、`Yii::$app->formatter->dateFormat` の値を取ります。
 
-- `timestampAttribute`: このバリデータが、入力された日付/時刻から変換した UNIX タイムスタンプを代入することが出来る属性の名前。
+- `timestampAttribute`: このバリデータが、入力された日付/時刻から変換した Unix タイムスタンプを代入することが出来る属性の名前。
   これは、検証される属性と同じ属性であってもかまいません。
   その場合は、元の値は検証実行後にタイムスタンプで上書きされます。
   [DatePicker で日付の入力を扱う](https://github.com/yiisoft/yii2-jui/blob/master/docs/guide-ja/topics-date-picker.md) に使用例がありますので、参照してください。
@@ -148,7 +148,7 @@ compare バリデータは、文字列や数値を比較するためにしか使
   [[yii\validators\DateValidator::$timestampAttributeTimeZone|$timestampAttributeTimeZone]] を使って、
   この属性に対するフォーマットとタイム・ゾーンを指定することが出来ます。
 
-`timestampAttribute` を使う場合、入力値が UNIX タイムスタンプに変換されること、そして、UNIX タイムスタンプは定義により UTC であることに注意して下さい。
+`timestampAttribute` を使う場合、入力値が Unix タイムスタンプに変換されること、そして、Unix タイムスタンプは定義により UTC であることに注意して下さい。
 すなわち、[[yii\validators\DateValidator::timeZone|入力のタイム・ゾーン]] から UTC への変換が実行されます。
 （この動作は、2.0.39 以降では、[[yii\validators\DateValidator::$defaultTimeZone|$defaultTimeZone]] を設定して変更することが出来ます）
 

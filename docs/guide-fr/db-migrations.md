@@ -686,7 +686,7 @@ Vous pouvez également spécifier explicitement une migration particulière à l
 yii migrate/to 150101_185401                      # utiliser l'horodatage pour spécifier la migration
 yii migrate/to "2015-01-01 18:54:01"              # utilise une chaîne de caractères qui peut être analysée par strtotime()
 yii migrate/to m150101_185401_create_news_table   # utilise le nom complet
-yii migrate/to 1392853618                         # utilise un horodatage UNIX
+yii migrate/to 1392853618                         # utilise un horodatage Unix
 ```
 
 S'il existe des migrations non appliquée antérieures à celle spécifiée, elles sont toutes appliquées avant que la migration spécifiée ne le soit.
@@ -748,7 +748,7 @@ Au lieu d'appliquer ou défaire réellement des migrations, parfois, vous voulez
 yii migrate/mark 150101_185401                      # utilise un horodatage pour spécifier la migration
 yii migrate/mark "2015-01-01 18:54:01"              # utilise une chaîne de caractères qui peut être analysée par strtotime()
 yii migrate/mark m150101_185401_create_news_table   # utilise le nom complet
-yii migrate/mark 1392853618                         # utilise un horodatage UNIX
+yii migrate/mark 1392853618                         # utilise un horodatage Unix
 ```
 
 La commande modifie la table `migration` en ajoutant ou en supprimant certaines lignes pour indiquer que la base de données s'est vue appliquer toutes les migrations jusqu'à celle spécifiée. Aucune migration n'est appliquée ou défaite par cette commande.

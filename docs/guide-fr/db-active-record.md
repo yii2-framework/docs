@@ -263,7 +263,7 @@ Si vous êtes attaché à la cohérence du style de codage, vous devriez renomme
 ### Transformation des données <span id="data-transformation"></span>
 
 Il arrive souvent que les données entrées et/ou affichées soient dans un format qui diffère de celui utilisé pour stocker les données dans la base.
-Par exemple, dans la base de données, vous stockez la date d'anniversaire des clients sous la forme de horodates UNIX (bien que ce soit pas une conception des meilleures),
+Par exemple, dans la base de données, vous stockez la date d'anniversaire des clients sous la forme de horodates Unix (bien que ce soit pas une conception des meilleures),
 tandis que dans la plupart des cas, vous avez envie de manipuler les dates d'anniversaire sous la forme de chaînes de caractères dans le format `'YYYY/MM/DD'`.
 Pour le faire, vous pouvez définir des méthodes de _transformation de données_ dans la classe d'enregistrement actif comme ceci :
 

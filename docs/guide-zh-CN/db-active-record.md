@@ -274,7 +274,7 @@ $email = $customer->email;
 ### 数据转换（Data Transformation） <span id="data-transformation"></span>
 
 常常遇到，要输入或显示的数据是一种格式，而要将其存储在数据库中是另一种格式。
-例如，在数据库中，您将客户的生日存储为 UNIX 时间戳（虽然这不是一个很好的设计），
+例如，在数据库中，您将客户的生日存储为 Unix 时间戳（虽然这不是一个很好的设计），
 而在大多数情况下，你想以字符串 `'YYYY/MM/DD'` 的格式处理生日数据。
 为了实现这一目标，您可以在 `Customer` 中定义 _数据转换_ 方法
 定义 Active Record 类如下：
