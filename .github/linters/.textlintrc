@@ -1,13 +1,13 @@
 {
-  "rules": {
-    "terminology": {
-      "defaultTerms": false,
-      "terms": [
-        [
-          "\\bUNIX\\b",
-          "Unix"
-        ]
-      ]
+    "rules": {
+        "terminology": {
+            "defaultTerms": false,
+            "terms": [
+                [
+                    "\\bUNIX\\b",
+                    "Unix"
+                ]
+            ]
+        }
     }
-  }
 }
