@@ -27,6 +27,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           fail_on_error: false
-          files: docs/guide
+          files: src/content/docs/guide
           filter_mode: nofilter
           reporter: github-check

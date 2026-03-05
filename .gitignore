@@ -1,3 +1,7 @@
+# astro
+.astro/
+dist/
+
 # codecoverage (if present)
 code_coverage
 

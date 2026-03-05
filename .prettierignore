@@ -1,1 +1,3 @@
-docs/guide-ru/tutorial-core-validators.md
+dist/
+.astro/
+src/content/docs/ru/guide/tutorial-core-validators.md
