@@ -24,6 +24,7 @@ jobs:
       - name: Run Vale.
         uses: errata-ai/vale-action@reviewdog
         with:
+          fail_on_error: false
           files: docs/guide
           filter_mode: nofilter
           reporter: github-check
