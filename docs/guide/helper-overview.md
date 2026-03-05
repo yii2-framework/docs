@@ -1,5 +1,4 @@
-Helpers
-=======
+# Helpers
 
 > Note: This section is under development.
 
@@ -16,12 +15,10 @@ echo Html::encode('Test > test');
 ```
 
 > Note: To support [customizing helper classes](#customizing-helper-classes), Yii breaks each core helper class
-  into two classes: a base class (e.g. `BaseArrayHelper`) and a concrete class (e.g. `ArrayHelper`).
-  When you use a helper, you should only use the concrete version and never use the base class.
+> into two classes: a base class (e.g. `BaseArrayHelper`) and a concrete class (e.g. `ArrayHelper`).
+> When you use a helper, you should only use the concrete version and never use the base class.
 
-
-Core Helper Classes
--------------------
+## Core Helper Classes
 
 The following core helper classes are provided in the Yii releases:
 
@@ -39,9 +36,7 @@ The following core helper classes are provided in the Yii releases:
 - [Url](helper-url.md)
 - VarDumper
 
-
-Customizing Helper Classes <span id="customizing-helper-classes"></span>
---------------------------
+## Customizing Helper Classes <span id="customizing-helper-classes"></span>
 
 To customize a core helper class (e.g. [[yii\helpers\ArrayHelper]]), you should create a new class extending
 from the helpers corresponding base class (e.g. [[yii\helpers\BaseArrayHelper]]) and name your class the same

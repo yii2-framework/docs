@@ -1,5 +1,4 @@
-小部件
-=======
+# 小部件
 
 小部件是在[视图](structure-views.md)中使用的可重用单元，
 使用面向对象方式创建复杂和可配置用户界面单元。
@@ -17,7 +16,6 @@ Yii提供许多优秀的小部件，比如 [[yii\widgets\ActiveForm|active form]
 [jQuery UI widgets](widget-jui.md)，
 [Twitter Bootstrap widgets](widget-bootstrap.md)。
 接下来介绍小部件的基本知识，如果你想了解某个小部件请参考对应的类 API 文档。
-
 
 ## 使用小部件 <span id="using-widgets"></span>
 
@@ -39,7 +37,7 @@ use yii\jui\DatePicker;
 ]) ?>
 ```
 
-一些小部件可在 [[yii\base\Widget::begin()]] 
+一些小部件可在 [[yii\base\Widget::begin()]]
 和 [[yii\base\Widget::end()]] 调用中使用数据内容。
 例如如下代码使用 [[yii\widgets\ActiveForm]] 小部件生成一个登录表单，
 小部件会在 `begin()` 和 `end()` 执行处分别生成 `<form>` 的开始标签和结束标签，
@@ -82,7 +80,6 @@ use yii\helpers\Html;
 
 有关详细信息，请参阅
 [依赖注入容器“实践中的应用”一节](concept-di-container.md#practical-usage) 。
-
 
 ## 创建小部件 <span id="creating-widgets"></span>
 
@@ -132,7 +129,6 @@ use app\components\HelloWidget;
 <?= HelloWidget::widget(['message' => 'Good morning']) ?>
 ```
 
-
 有时小部件需要渲染很多内容，虽然你可以在 `run()` 方法中嵌入内容，但更好的方法是将内容放入一个[视图](structure-views.md)文件，
 然后调用 [[yii\base\Widget::render()]] 方法渲染该视图文件，
 例如：
@@ -172,12 +168,12 @@ class HelloWidget extends Widget
 }
 ```
 
-如上所示，PHP 输出缓冲在 `init()` 启动，所有在 `init()` 
+如上所示，PHP 输出缓冲在 `init()` 启动，所有在 `init()`
 和 `run()` 方法之间的输出内容都会被获取，并在 `run()` 处理和返回。
 
 > Info: 当你调用 [[yii\base\Widget::begin()]] 时会创建一个新的小部件
-  实例并在构造结束时调用 `init()` 方法，
-  在 `end()` 时会调用 `run()` 方法并输出返回结果。
+> 实例并在构造结束时调用 `init()` 方法，
+> 在 `end()` 时会调用 `run()` 方法并输出返回结果。
 
 如下代码显示如何使用这种 `HelloWidget`：
 
@@ -202,7 +198,6 @@ use app\components\HelloWidget;
 假如小部件类文件在 `@app/components` 下，
 上述示例会渲染 `@app/components/views/hello.php` 视图文件。
 您可以覆盖 [[yii\base\Widget::getViewPath()]] 方法自定义视图文件所在路径。
-
 
 ## 最佳实践 <span id="best-practices"></span>
 

@@ -1,5 +1,4 @@
-Clase auxiliar Html (Html helper)
-=================================
+# Clase auxiliar Html (Html helper)
 
 Todas las aplicaciones web generan grandes cantidades de marcado HTML (HTML markup). Si el marcado es estático, se
 puede realizar de forma efectiva
@@ -8,10 +7,9 @@ generan dinámicamente empieza a complicarse su gestión sin ayuda extra. Yii of
 que proporciona un conjunto de métodos estáticos para gestionar las etiquetas HTML más comúnmente usadas, sus opciones y contenidos.
 
 > Note: Si el marcado es casi estático, es preferible usar HTML directamente. No es necesario encapsularlo todo con
-llamadas a la clase auxiliar Html.
+> llamadas a la clase auxiliar Html.
 
 ## Lo fundamental <span id="basics"></span>
-
 
 Teniendo en cuenta que la construcción de HTML dinámico mediante la concatenación de cadenas de texto se complica
 rápidamente, Yii proporciona un conjunto de métodos para manipular las opciones de etiquetas y la construcción de las
@@ -94,7 +92,6 @@ eliminara una propiedad, se puede especificar como una cadena de texto.
 
 ## Codificación y Decodificación del contenido <span id="encoding-and-decoding-content"></span>
 
-
 Para que el contenido se muestre correctamente y de forma segura con caracteres especiales HTML el contenido debe ser
 codificado. En PHP esto se hace con [htmlspecialchars](https://www.php.net/manual/es/function.htmlspecialchars.php) y
 [htmlspecialchars_decode](https://www.php.net/manual/es/function.htmlspecialchars-decode.php). El problema con el uso
@@ -111,12 +108,11 @@ $decodedUserName = Html::decode($userName);
 
 ## Formularios <span id="forms"></span>
 
-
 El trato con el marcado de formularios es una tarea repetitiva y propensa a errores. Por esto hay un grupo de métodos
 para ayudar a gestionarlos.
 
 > Note: hay que considerar la opción de usar [[yii\widgets\ActiveForm|ActiveForm]] en caso de que se gestionen
-formularios que requieran validaciones.
+> formularios que requieran validaciones.
 
 ### Creando formularios <span id="creating-forms"></span>
 
@@ -276,7 +272,6 @@ echo Html::getAttributeName('dates[0]');
 
 ## Estilos y scripts <span id="styles-and-scripts"></span>
 
-
 Existen dos métodos para generar etiquetas que envuelvan estilos y scripts incrustados (embebbed):
 
 ```php
@@ -325,7 +320,6 @@ para `cssFile`.
 
 ## Enlaces <span id="hyperlinks"></span>
 
-
 Existe un método para generar hipervínculos a conveniencia:
 
 ```php
@@ -345,7 +339,6 @@ Si se requiere generar enlaces de tipo `mailto` se puede usar el siguiente códi
 
 ## Imagenes <span id="images"></span>
 
-
 Para generar una etiqueta de tipo imagen se puede usar el siguiente ejemplo:
 
 ```php
@@ -360,7 +353,6 @@ Aparte de los [alias](concept-aliases.md) el primer argumento puede aceptar ruta
 que [Url::to()](helper-url.md).
 
 ## Listas <span id="lists"></span>
-
 
 Las listas desordenadas se puede generar como se muestra a continuación:
 

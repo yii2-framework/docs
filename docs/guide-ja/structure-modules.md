@@ -1,12 +1,10 @@
-モジュール
-==========
+# モジュール
 
 モジュールは、[モデル](structure-models.md)、[ビュー](structure-views.md)、[コントローラ](structure-controllers.md)、およびその他の支援コンポーネントから構成される自己充足的なソフトウェアのユニットです。
 モジュールが [アプリケーション](structure-applications.md) にインストールされている場合、エンド・ユーザはモジュールのコントローラにアクセスする事が出来ます。
 これらのことを理由として、モジュールは小さなアプリケーションと見なされることがよくあります。
 しかし、モジュールは単独では配備できず、アプリケーションの中に存在しなければならないという点で
 [アプリケーション](structure-applications.md) とは異なります。
-
 
 ## モジュールを作成する <span id="creating-modules"></span>
 
@@ -25,7 +23,6 @@ forum/
         default/                 DefaultController のためのビュー・ファイルを含む
             index.php            index ビュー・ファイル
 ```
-
 
 ### モジュール・クラス <span id="module-classes"></span>
 
@@ -79,7 +76,6 @@ return [
 ];
 ```
 
-
 ### モジュール内のコントローラ <span id="controllers-in-modules"></span>
 
 モジュールの中でコントローラを作成するときは、コントローラ・クラスをモジュール・クラスの名前空間の
@@ -103,7 +99,6 @@ class PostController extends Controller
 いくつかのコントローラがこの名前空間の外にある場合でも、[[yii\base\Module::controllerMap]] プロパティを構成することによって、それらをアクセス可能にすることが出来ます。
 これは、[アプリケーションでのコントローラ・マップ](structure-applications.md#controller-map) の場合と同様です。
 
-
 ### モジュール内のビュー <span id="views-in-modules"></span>
 
 モジュール内のビューは、モジュールの [[yii\base\Module::basePath|ベース・パス]] 内の `views` ディレクトリに置かれなくてはなりません。
@@ -116,7 +111,6 @@ class PostController extends Controller
 レイアウトは、デフォルトでは `views/layouts` ディレクトリに置かれなければならず、また、
 [[yii\base\Module::layout]] プロパティがレイアウトの名前を指すように構成しなければなりません。
 `layout` プロパティを構成しない場合は、アプリケーションのレイアウトが代りに使用されます。
-
 
 ### モジュール内のコンソールコマンド <span id="console-commands-in-modules"></span>
 
@@ -164,9 +158,8 @@ yii <module_id>/<command>/<sub_command>
 > モジュールを [コンソール・アプリケーション設定](tutorial-console.md#configuration) にも含める必要があります。
 
 [[yii\base\Application::modules|modules]] プロパティは、モジュールの構成情報の配列を取ります。
-各配列のキーは、アプリケーションの全てのモジュールの中でそのモジュールを特定するためのユニークな *モジュール ID* を表します。
+各配列のキーは、アプリケーションの全てのモジュールの中でそのモジュールを特定するためのユニークな _モジュール ID_ を表します。
 そして、対応する配列の値は、そのモジュールを作成するための [構成情報](concept-configurations.md) です。
-
 
 ### ルート <span id="routes"></span>
 
@@ -187,7 +180,6 @@ yii <module_id>/<command>/<sub_command>
 モジュールが [バージョン管理された API](rest-versioning.md) で使用される場合は、その URL 規則はアプリケーション構成情報の
 `urlManager` のセクションに直接に追加されなければなりません。
 
-
 ### モジュールにアクセスする <span id="accessing-modules"></span>
 
 モジュール内において、モジュール ID や、モジュールのパラメータ、モジュールのコンポーネントなどにアクセスするために、[モジュール・クラス](#module-classes) のインスタンスを取得する必要があることがよくあります。
@@ -203,9 +195,9 @@ $module = MyModuleClass::getInstance();
 手動で作成したインスタンスは、リクエストに対するレスポンスとして Yii によって作成されたインスタンスとは別のものになります。
 
 > Info: モジュールを開発するとき、モジュールが固定の ID を使うと仮定してはいけません。
-  なぜなら、モジュールは、アプリケーションや他のモジュールの中で使うときに、任意の ID と結び付けることが出来るからです。
-  モジュール ID を取得するためには、上記の方法を使って最初にモジュールのインスタンスを取得し、
-  そして `$module->id` によって ID を取得しなければなりません。
+> なぜなら、モジュールは、アプリケーションや他のモジュールの中で使うときに、任意の ID と結び付けることが出来るからです。
+> モジュール ID を取得するためには、上記の方法を使って最初にモジュールのインスタンスを取得し、
+> そして `$module->id` によって ID を取得しなければなりません。
 
 モジュールのインスタンスにアクセスするためには、次の二つの方法を使うことも出来ます。
 
@@ -226,7 +218,6 @@ $module = \Yii::$app->controller->module;
 $maxPostCount = $module->params['maxPostCount'];
 ```
 
-
 ### モジュールをブートストラップする <span id="bootstrapping-modules"></span>
 
 いくつかのモジュールは、全てのリクエストで毎回走らせる必要があります。[[yii\debug\Module|デバッグ]]・モジュールがその一例です。
@@ -246,11 +237,10 @@ $maxPostCount = $module->params['maxPostCount'];
 ]
 ```
 
-
 ## 入れ子のモジュール <span id="nested-modules"></span>
 
 モジュールはレベルの制限無く入れ子にすることが出来ます。つまり、モジュールは別のモジュールを含むことが出来、その含まれたモジュールもさらに別のモジュールを含むことが出来ます。
-含む側を *親モジュール*、含まれる側を *子モジュール* と呼びます。
+含む側を _親モジュール_、含まれる側を _子モジュール_ と呼びます。
 子モジュールは、親モジュールの [[yii\base\Module::modules|modules]] プロパティの中で宣言されなければなりません。例えば、
 
 ```php
@@ -277,8 +267,8 @@ class Module extends \yii\base\Module
 `dashboard` コントローラの `index` アクションを表します。
 
 > Info: [[yii\base\Module::getModule()|getModule()]] メソッドは、親モジュールに直接属する子モジュールだけを返します。
-[[yii\base\Application::loadedModules]] プロパティがロードされた全てのモジュールのリストを保持しています。
-このリストには、直接の子と孫以下の両方のモジュールが含まれ、クラス名によってインデックスされています。
+> [[yii\base\Application::loadedModules]] プロパティがロードされた全てのモジュールのリストを保持しています。
+> このリストには、直接の子と孫以下の両方のモジュールが含まれ、クラス名によってインデックスされています。
 
 ## モジュール内からコンポーネントにアクセスする
 

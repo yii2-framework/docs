@@ -1,5 +1,4 @@
-Scripts de Entrada
-==================
+# Scripts de Entrada
 
 Scripts de entrada são o primeiro passo no processo de inicialização da aplicação.
 Uma aplicação (seja uma aplicação Web ou uma aplicação console) possui um único script de
@@ -19,13 +18,12 @@ possam executar aplicações do console através do comando
 
 O trabalho principal dos scripts de entrada é o seguinte:
 
-* Definir constantes globais;
-* Registrar o [autoloader do Composer](https://getcomposer.org/doc/01-basic-usage.md#autoloading);
-* Incluir o arquivo da classe [[Yii]];
-* Carregar a configuração da aplicação;
-* Criar e configurar uma instância da [aplicação](structure-applications.md);
-* Chamar [[yii\base\Application::run()]] para processar as requisições que chegam.
-
+- Definir constantes globais;
+- Registrar o [autoloader do Composer](https://getcomposer.org/doc/01-basic-usage.md#autoloading);
+- Incluir o arquivo da classe [[Yii]];
+- Carregar a configuração da aplicação;
+- Criar e configurar uma instância da [aplicação](structure-applications.md);
+- Chamar [[yii\base\Application::run()]] para processar as requisições que chegam.
 
 ## Aplicações Web <span id="web-applications"></span>
 
@@ -49,7 +47,6 @@ $config = require __DIR__ . '/../config/web.php';
 // cria, configura e executa a aplicação
 (new yii\web\Application($config))->run();
 ```
-
 
 ## Aplicações Console <span id="console-applications"></span>
 
@@ -83,22 +80,21 @@ $exitCode = $application->run();
 exit($exitCode);
 ```
 
-
 ## Definindo Constantes <span id="defining-constants"></span>
 
 Os scrips de entrada são o melhor lugar para definir as constantes globais. O
 Yii suporta as seguintes três constantes:
 
-* `YII_DEBUG`: especifica se a aplicação está rodando no modo de depuração. No
+- `YII_DEBUG`: especifica se a aplicação está rodando no modo de depuração. No
   modo de depuração, uma aplicação manterá mais informações de log, e revelará
   stacks de chamadas de erros detalhadas se forem lançadas exceções. Por este
   motivo, o modo de depuração deveria ser usado principalmente durante o
   desenvolvimento. O valor padrão de `YII_DEBUG` é `false`.
-* `YII_ENV`: especifica em qual ambiente a aplicação está rodando. Isso foi
+- `YII_ENV`: especifica em qual ambiente a aplicação está rodando. Isso foi
   descrito em maiores detalhes na seção [Configurações](concept-configurations.md#environment-constants).
   O valor padrão de `YII_ENV` é `'prod'`, significando que a aplicação está
   executando em ambiente de produção.
-* `YII_ENABLE_ERROR_HANDLER`: especifica se deve ativar o manipulador de erros
+- `YII_ENABLE_ERROR_HANDLER`: especifica se deve ativar o manipulador de erros
   fornecido pelo Yii. O valor padrão desta constante é `true`.
 
 Ao definir uma constante, frequentemente usamos código como o a seguir:

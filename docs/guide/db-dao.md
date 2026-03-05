@@ -1,12 +1,11 @@
-Database Access Objects
-=======================
+# Database Access Objects
 
 Built on top of [PDO](https://www.php.net/manual/en/book.pdo.php), Yii DAO (Database Access Objects) provides an
 object-oriented API for accessing relational databases. It is the foundation for other more advanced database
 access methods, including [query builder](db-query-builder.md) and [active record](db-active-record.md).
 
-When using Yii DAO, you mainly need to deal with plain SQLs and PHP arrays. As a result, it is the most efficient 
-way to access databases. However, because SQL syntax may vary for different databases, using Yii DAO also means 
+When using Yii DAO, you mainly need to deal with plain SQLs and PHP arrays. As a result, it is the most efficient
+way to access databases. However, because SQL syntax may vary for different databases, using Yii DAO also means
 you have to take extra effort to create a database-agnostic application.
 
 In Yii 2.0, DAO supports the following databases out of the box:
@@ -20,8 +19,8 @@ In Yii 2.0, DAO supports the following databases out of the box:
 - [MSSQL](https://www.microsoft.com/en-us/sqlserver/default.aspx): version 2008 or higher.
 
 > Note: New version of pdo_oci for PHP 7 currently exists only as the source code. Follow
-  [instruction provided by community](https://github.com/yiisoft/yii2/issues/10975#issuecomment-248479268)
-  to compile it or use [PDO emulation layer](https://github.com/taq/pdooci).
+> [instruction provided by community](https://github.com/yiisoft/yii2/issues/10975#issuecomment-248479268)
+> to compile it or use [PDO emulation layer](https://github.com/taq/pdooci).
 
 ## Creating DB Connections <span id="creating-db-connections"></span>
 
@@ -60,18 +59,18 @@ You can then access the DB connection via the expression `Yii::$app->db`.
 
 > Tip: You can configure multiple DB application components if your application needs to access multiple databases.
 
-When configuring a DB connection, you should always specify its Data Source Name (DSN) via the [[yii\db\Connection::dsn|dsn]] 
-property. The format of DSN varies for different databases. Please refer to the [PHP manual](https://www.php.net/manual/en/pdo.construct.php) 
+When configuring a DB connection, you should always specify its Data Source Name (DSN) via the [[yii\db\Connection::dsn|dsn]]
+property. The format of DSN varies for different databases. Please refer to the [PHP manual](https://www.php.net/manual/en/pdo.construct.php)
 for more details. Below are some examples:
-  
-* MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
-* SQLite: `sqlite:/path/to/database/file`
-* PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
-* CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
-* MS SQL Server (via sqlsrv driver): `sqlsrv:Server=localhost;Database=mydatabase`
-* MS SQL Server (via dblib driver): `dblib:host=localhost;dbname=mydatabase`
-* MS SQL Server (via mssql driver): `mssql:host=localhost;dbname=mydatabase`
-* Oracle: `oci:dbname=//localhost:1521/mydatabase`
+
+- MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
+- SQLite: `sqlite:/path/to/database/file`
+- PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
+- CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
+- MS SQL Server (via sqlsrv driver): `sqlsrv:Server=localhost;Database=mydatabase`
+- MS SQL Server (via dblib driver): `dblib:host=localhost;dbname=mydatabase`
+- MS SQL Server (via mssql driver): `mssql:host=localhost;dbname=mydatabase`
+- Oracle: `oci:dbname=//localhost:1521/mydatabase`
 
 Note that if you are connecting with a database via ODBC, you should configure the [[yii\db\Connection::driverName]]
 property so that Yii can know the actual database type. For example,
@@ -87,16 +86,16 @@ property so that Yii can know the actual database type. For example,
 ```
 
 Besides the [[yii\db\Connection::dsn|dsn]] property, you often need to configure [[yii\db\Connection::username|username]]
-and [[yii\db\Connection::password|password]]. Please refer to [[yii\db\Connection]] for the full list of configurable properties. 
+and [[yii\db\Connection::password|password]]. Please refer to [[yii\db\Connection]] for the full list of configurable properties.
 
 > Info: When you create a DB connection instance, the actual connection to the database is not established until
-  you execute the first SQL or you call the [[yii\db\Connection::open()|open()]] method explicitly.
+> you execute the first SQL or you call the [[yii\db\Connection::open()|open()]] method explicitly.
 
 > Tip: Sometimes you may want to execute some queries right after the database connection is established to initialize
 > some environment variables (e.g., to set the timezone or character set). You can do so by registering an event handler
 > for the [[yii\db\Connection::EVENT_AFTER_OPEN|afterOpen]] event
 > of the database connection. You may register the handler directly in the application configuration like so:
-> 
+>
 > ```php
 > 'db' => [
 >     // ...
@@ -119,17 +118,16 @@ For MS SQL Server additional connection option is needed for proper binary data 
 ],
 ```
 
-
 ## Executing SQL Queries <span id="executing-sql-queries"></span>
 
 Once you have a database connection instance, you can execute a SQL query by taking the following steps:
-  
+
 1. Create a [[yii\db\Command]] with a plain SQL query;
 2. Bind parameters (optional);
 3. Call one of the SQL execution methods in [[yii\db\Command]].
 
 The following example shows various ways of fetching data from a database:
-  
+
 ```php
 // return a set of rows. each row is an associative array of column names and values.
 // an empty array is returned if the query returned no results
@@ -153,8 +151,7 @@ $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
 ```
 
 > Note: To preserve precision, the data fetched from databases are all represented as strings, even if the corresponding
-  database column types are numerical.
-
+> database column types are numerical.
 
 ### Binding Parameters <span id="binding-parameters"></span>
 
@@ -172,9 +169,9 @@ In the SQL statement, you can embed one or multiple parameter placeholders (e.g.
 placeholder should be a string starting with a colon. You may then call one of the following parameter binding methods
 to bind the parameter values:
 
-* [[yii\db\Command::bindValue()|bindValue()]]: bind a single parameter value 
-* [[yii\db\Command::bindValues()|bindValues()]]: bind multiple parameter values in one call
-* [[yii\db\Command::bindParam()|bindParam()]]: similar to [[yii\db\Command::bindValue()|bindValue()]] but also
+- [[yii\db\Command::bindValue()|bindValue()]]: bind a single parameter value
+- [[yii\db\Command::bindValues()|bindValues()]]: bind multiple parameter values in one call
+- [[yii\db\Command::bindParam()|bindParam()]]: similar to [[yii\db\Command::bindValue()|bindValue()]] but also
   support binding parameter references.
 
 The following example shows alternative ways of binding parameters:
@@ -185,7 +182,7 @@ $params = [':id' => $_GET['id'], ':status' => 1];
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
           ->bindValues($params)
           ->queryOne();
-            
+
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
           ->queryOne();
 ```
@@ -217,15 +214,14 @@ $post2 = $command->queryOne();
 // ...
 ```
 
-Notice that you bind the placeholder to the `$id` variable before the execution, and then change the value of that variable 
-before each subsequent execution (this is often done with loops). Executing queries in this manner can be vastly 
-more efficient than running a new query for every different parameter value. 
+Notice that you bind the placeholder to the `$id` variable before the execution, and then change the value of that variable
+before each subsequent execution (this is often done with loops). Executing queries in this manner can be vastly
+more efficient than running a new query for every different parameter value.
 
 > Info: Parameter binding is only used in places where values need to be inserted into strings that contain plain SQL.
 > In many places in higher abstraction layers like [query builder](db-query-builder.md) and [active record](db-active-record.md)
 > you often specify an array of values which will be transformed into SQL. In these places parameter binding is done by Yii
 > internally, so there is no need to specify params manually.
-
 
 ### Executing Non-SELECT Queries <span id="non-select-queries"></span>
 
@@ -287,15 +283,14 @@ The code above will either insert a new page record or increment its visit count
 Note that the aforementioned methods only create the query and you always have to call [[yii\db\Command::execute()|execute()]]
 to actually run them.
 
-
 ## Quoting Table and Column Names <span id="quoting-table-and-column-names"></span>
 
 When writing database-agnostic code, properly quoting table and column names is often a headache because
 different databases have different name quoting rules. To overcome this problem, you may use the following
 quoting syntax introduced by Yii:
 
-* `[[column name]]`: enclose a column name to be quoted in double square brackets; 
-* `{{table name}}`: enclose a table name to be quoted in double curly brackets.
+- `[[column name]]`: enclose a column name to be quoted in double square brackets;
+- `{{table name}}`: enclose a table name to be quoted in double curly brackets.
 
 Yii DAO will automatically convert such constructs into the corresponding quoted column or table names using the
 DBMS specific syntax.
@@ -306,7 +301,6 @@ For example,
 $count = Yii::$app->db->createCommand("SELECT COUNT([[id]]) FROM {{employee}}")
             ->queryScalar();
 ```
-
 
 ### Using Table Prefix <span id="using-table-prefix"></span>
 
@@ -338,13 +332,12 @@ $count = Yii::$app->db->createCommand("SELECT COUNT([[id]]) FROM {{%employee}}")
             ->queryScalar();
 ```
 
-
 ## Performing Transactions <span id="performing-transactions"></span>
 
 When running multiple related queries in a sequence, you may need to wrap them in a transaction to ensure the integrity
 and consistency of your database. If any of the queries fails, the database will be rolled back to the state as if
 none of these queries were executed.
-  
+
 The following code shows a typical way of using transactions:
 
 ```php
@@ -364,7 +357,7 @@ try {
     $db->createCommand($sql1)->execute();
     $db->createCommand($sql2)->execute();
     // ... executing other SQL statements ...
-    
+
     $transaction->commit();
 } catch(\Exception $e) {
     $transaction->rollBack();
@@ -383,10 +376,9 @@ will be triggered and caught, the [[yii\db\Transaction::rollBack()|rollBack()]] 
 the changes made by the queries prior to that failed query in the transaction. `throw $e` will then re-throw the
 exception as if we had not caught it, so the normal error handling process will take care of it.
 
-> Note: in the above code we have two catch-blocks for compatibility 
+> Note: in the above code we have two catch-blocks for compatibility
 > with PHP 5.x and PHP 7.x. `\Exception` implements the [`\Throwable` interface](https://www.php.net/manual/en/class.throwable.php)
 > since PHP 7.0, so you can skip the part with `\Exception` if your app uses only PHP 7.0 and higher.
-
 
 ### Specifying Isolation Levels <span id="specifying-isolation-levels"></span>
 
@@ -399,7 +391,7 @@ $isolationLevel = \yii\db\Transaction::REPEATABLE_READ;
 Yii::$app->db->transaction(function ($db) {
     ....
 }, $isolationLevel);
-  
+
 // or alternatively
 
 $transaction = Yii::$app->db->beginTransaction($isolationLevel);
@@ -421,14 +413,13 @@ you may need to set the isolation level for all transactions explicitly to avoid
 At the time of this writing, only MSSQL and SQLite are affected by this limitation.
 
 > Note: SQLite only supports two isolation levels, so you can only use `READ UNCOMMITTED` and `SERIALIZABLE`.
-Usage of other levels will result in an exception being thrown.
+> Usage of other levels will result in an exception being thrown.
 
 > Note: PostgreSQL does not allow setting the isolation level before the transaction starts so you can not
-specify the isolation level directly when starting the transaction.
-You have to call [[yii\db\Transaction::setIsolationLevel()]] in this case after the transaction has started.
+> specify the isolation level directly when starting the transaction.
+> You have to call [[yii\db\Transaction::setIsolationLevel()]] in this case after the transaction has started.
 
 [isolation levels]: https://en.wikipedia.org/wiki/Isolation_%28database_systems%29#Isolation_levels
-
 
 ### Nesting Transactions <span id="nesting-transactions"></span>
 
@@ -437,7 +428,7 @@ If your DBMS supports Savepoint, you may nest multiple transactions like the fol
 ```php
 Yii::$app->db->transaction(function ($db) {
     // outer transaction
-    
+
     $db->transaction(function ($db) {
         // inner transaction
     });
@@ -474,12 +465,11 @@ try {
 }
 ```
 
-
 ## Replication and Read-Write Splitting <span id="read-write-splitting"></span>
 
-Many DBMS support [database replication](https://en.wikipedia.org/wiki/Replication_(computing)#Database_replication)
+Many DBMS support [database replication](<https://en.wikipedia.org/wiki/Replication_(computing)#Database_replication>)
 to get better database availability and faster server response time. With database replication, data are replicated
-from the so-called *master servers* to *slave servers*. All writes and updates must take place on the master servers,
+from the so-called _master servers_ to _slave servers_. All writes and updates must take place on the master servers,
 while reads may also take place on the slave servers.
 
 To take advantage of database replication and achieve read-write splitting, you can configure a [[yii\db\Connection]]
@@ -530,8 +520,8 @@ Yii::$app->db->createCommand("UPDATE user SET username='demo' WHERE id=1")->exec
 ```
 
 > Info: Queries performed by calling [[yii\db\Command::execute()]] are considered as write queries, while
-  all other queries done through one of the "query" methods of [[yii\db\Command]] are read queries.
-  You can get the currently active slave connection via `Yii::$app->db->slave`.
+> all other queries done through one of the "query" methods of [[yii\db\Command]] are read queries.
+> You can get the currently active slave connection via `Yii::$app->db->slave`.
 
 The `Connection` component supports load balancing and failover between slaves.
 When performing a read query for the first time, the `Connection` component will randomly pick a slave and
@@ -541,12 +531,10 @@ a "dead" server can be remembered so that it will not be tried again during a
 [[yii\db\Connection::serverRetryInterval|certain period of time]].
 
 > Info: In the above configuration, a connection timeout of 10 seconds is specified for every slave.
-  This means if a slave cannot be reached in 10 seconds, it is considered as "dead". You can adjust this parameter
-  based on your actual environment.
-
+> This means if a slave cannot be reached in 10 seconds, it is considered as "dead". You can adjust this parameter
+> based on your actual environment.
 
 You can also configure multiple masters with multiple slaves. For example,
-
 
 ```php
 [
@@ -589,13 +577,12 @@ You can also configure multiple masters with multiple slaves. For example,
 ```
 
 The above configuration specifies two masters and four slaves. The `Connection` component also supports
-load balancing and failover between masters just as it does between slaves. A difference is that when none 
+load balancing and failover between masters just as it does between slaves. A difference is that when none
 of the masters are available an exception will be thrown.
 
 > Note: When you use the [[yii\db\Connection::masters|masters]] property to configure one or multiple
-  masters, all other properties for specifying a database connection (e.g. `dsn`, `username`, `password`)
-  with the `Connection` object itself will be ignored.
-
+> masters, all other properties for specifying a database connection (e.g. `dsn`, `username`, `password`)
+> with the `Connection` object itself will be ignored.
 
 By default, transactions use the master connection. And within a transaction, all DB operations will use
 the master connection. For example,
@@ -637,26 +624,25 @@ $rows = Yii::$app->db->useMaster(function ($db) {
 
 You may also directly set `Yii::$app->db->enableSlaves` to be `false` to direct all queries to the master connection.
 
-
 ## Working with Database Schema <span id="database-schema"></span>
 
 Yii DAO provides a whole set of methods to let you manipulate the database schema, such as creating new tables,
 dropping a column from a table, etc. These methods are listed as follows:
 
-* [[yii\db\Command::createTable()|createTable()]]: creating a table
-* [[yii\db\Command::renameTable()|renameTable()]]: renaming a table
-* [[yii\db\Command::dropTable()|dropTable()]]: removing a table
-* [[yii\db\Command::truncateTable()|truncateTable()]]: removing all rows in a table
-* [[yii\db\Command::addColumn()|addColumn()]]: adding a column
-* [[yii\db\Command::renameColumn()|renameColumn()]]: renaming a column
-* [[yii\db\Command::dropColumn()|dropColumn()]]: removing a column
-* [[yii\db\Command::alterColumn()|alterColumn()]]: altering a column
-* [[yii\db\Command::addPrimaryKey()|addPrimaryKey()]]: adding a primary key
-* [[yii\db\Command::dropPrimaryKey()|dropPrimaryKey()]]: removing a primary key
-* [[yii\db\Command::addForeignKey()|addForeignKey()]]: adding a foreign key
-* [[yii\db\Command::dropForeignKey()|dropForeignKey()]]: removing a foreign key
-* [[yii\db\Command::createIndex()|createIndex()]]: creating an index
-* [[yii\db\Command::dropIndex()|dropIndex()]]: removing an index
+- [[yii\db\Command::createTable()|createTable()]]: creating a table
+- [[yii\db\Command::renameTable()|renameTable()]]: renaming a table
+- [[yii\db\Command::dropTable()|dropTable()]]: removing a table
+- [[yii\db\Command::truncateTable()|truncateTable()]]: removing all rows in a table
+- [[yii\db\Command::addColumn()|addColumn()]]: adding a column
+- [[yii\db\Command::renameColumn()|renameColumn()]]: renaming a column
+- [[yii\db\Command::dropColumn()|dropColumn()]]: removing a column
+- [[yii\db\Command::alterColumn()|alterColumn()]]: altering a column
+- [[yii\db\Command::addPrimaryKey()|addPrimaryKey()]]: adding a primary key
+- [[yii\db\Command::dropPrimaryKey()|dropPrimaryKey()]]: removing a primary key
+- [[yii\db\Command::addForeignKey()|addForeignKey()]]: adding a foreign key
+- [[yii\db\Command::dropForeignKey()|dropForeignKey()]]: removing a foreign key
+- [[yii\db\Command::createIndex()|createIndex()]]: creating an index
+- [[yii\db\Command::dropIndex()|dropIndex()]]: removing an index
 
 These methods can be used like the following:
 
@@ -682,5 +668,5 @@ $table = Yii::$app->db->getTableSchema('post');
 ```
 
 The method returns a [[yii\db\TableSchema]] object which contains the information about the table's columns,
-primary keys, foreign keys, etc. All this information is mainly utilized by [query builder](db-query-builder.md) 
-and [active record](db-active-record.md) to help you write database-agnostic code. 
+primary keys, foreign keys, etc. All this information is mainly utilized by [query builder](db-query-builder.md)
+and [active record](db-active-record.md) to help you write database-agnostic code.

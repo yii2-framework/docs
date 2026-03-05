@@ -1,22 +1,18 @@
-Dependency Injection Container
-==============================
+# Dependency Injection Container
 
 A dependency injection (DI) container is an object that knows how to instantiate and configure objects and
 all their dependent objects. [Martin Fowler's article](https://martinfowler.com/articles/injection.html) has well
 explained why DI container is useful. Here we will mainly explain the usage of the DI container provided by Yii.
 
-
-Dependency Injection <span id="dependency-injection"></span>
---------------------
+## Dependency Injection <span id="dependency-injection"></span>
 
 Yii provides the DI container feature through the class [[yii\di\Container]]. It supports the following kinds of
 dependency injection:
 
-* Constructor injection;
-* Method injection;
-* Setter and property injection;
-* PHP callable injection;
-
+- Constructor injection;
+- Method injection;
+- Setter and property injection;
+- PHP callable injection;
 
 ### Constructor Injection <span id="constructor-injection"></span>
 
@@ -38,7 +34,6 @@ $foo = $container->get('Foo');
 $bar = new Bar;
 $foo = new Foo($bar);
 ```
-
 
 ### Method Injection <span id="method-injection"></span>
 
@@ -104,10 +99,9 @@ $container->get('Foo', [], [
 ```
 
 > Info: The [[yii\di\Container::get()]] method takes its third parameter as a configuration array that should
-  be applied to the object being created. If the class implements the [[yii\base\Configurable]] interface (e.g.
-  [[yii\base\BaseObject]]), the configuration array will be passed as the last parameter to the class constructor;
-  otherwise, the configuration will be applied *after* the object is created.
-
+> be applied to the object being created. If the class implements the [[yii\base\Configurable]] interface (e.g.
+> [[yii\base\BaseObject]]), the configuration array will be passed as the last parameter to the class constructor;
+> otherwise, the configuration will be applied _after_ the object is created.
 
 ### PHP Callable Injection <span id="php-callable-injection"></span>
 
@@ -146,9 +140,7 @@ $foo = $container->get('Foo');
 
 By doing so, the person who wants to configure the `Foo` class no longer needs to be aware of how it is built.
 
-
-Registering Dependencies <span id="registering-dependencies"></span>
-------------------------
+## Registering Dependencies <span id="registering-dependencies"></span>
 
 You can use [[yii\di\Container::set()]] to register dependencies. The registration requires a dependency name
 as well as a dependency definition. A dependency name can be a class name, an interface name, or an alias name;
@@ -204,7 +196,7 @@ $container->set('pageCache', new FileCache);
 ```
 
 > Tip: If a dependency name is the same as the corresponding dependency definition, you do not
-  need to register it with the DI container.
+> need to register it with the DI container.
 
 A dependency registered via `set()` will generate an instance each time the dependency is needed.
 You can use [[yii\di\Container::setSingleton()]] to register a dependency that only generates
@@ -219,8 +211,7 @@ $container->setSingleton('yii\db\Connection', [
 ]);
 ```
 
-Resolving Dependencies <span id="resolving-dependencies"></span>
-----------------------
+## Resolving Dependencies <span id="resolving-dependencies"></span>
 
 Once you have registered dependencies, you can use the DI container to create new objects,
 and the container will automatically resolve dependencies by instantiating them and injecting
@@ -228,10 +219,10 @@ them into the newly created objects. The dependency resolution is recursive, mea
 if a dependency has other dependencies, those dependencies will also be resolved automatically.
 
 You can use [[yii\di\Container::get()|get()]] to either create or get object instance.
-The method takes a dependency name, which can be a class name, an interface name or an alias name. 
-The dependency name may be registered via [[yii\di\Container::set()|set()]] 
-or [[yii\di\Container::setSingleton()|setSingleton()]]. You may optionally provide a list of class 
-constructor parameters and a [configuration](concept-configurations.md) to configure the newly created object. 
+The method takes a dependency name, which can be a class name, an interface name or an alias name.
+The dependency name may be registered via [[yii\di\Container::set()|set()]]
+or [[yii\di\Container::setSingleton()|setSingleton()]]. You may optionally provide a list of class
+constructor parameters and a [configuration](concept-configurations.md) to configure the newly created object.
 
 For example:
 
@@ -312,9 +303,7 @@ $finder = new UserFinder($db);
 $lister = new UserLister($finder);
 ```
 
-
-Practical Usage <span id="practical-usage"></span>
----------------
+## Practical Usage <span id="practical-usage"></span>
 
 Yii creates a DI container when you include the `Yii.php` file in the [entry script](structure-entry-scripts.md)
 of your application. The DI container is accessible via [[Yii::$container]]. When you call [[Yii::createObject()]],
@@ -323,7 +312,7 @@ As aforementioned, the DI container will automatically resolve the dependencies 
 into obtained object. Because Yii uses [[Yii::createObject()]] in most of its core code to create
 new objects, this means you can customize the objects globally by dealing with [[Yii::$container]].
 
-For example, let's customize globally the default number of pagination buttons of [[yii\widgets\LinkPager]]. 
+For example, let's customize globally the default number of pagination buttons of [[yii\widgets\LinkPager]].
 
 ```php
 \Yii::$container->set('yii\widgets\LinkPager', ['maxButtonCount' => 5]);
@@ -387,26 +376,25 @@ use yii\web\Controller;
 use app\components\BookingInterface;
 
 class HotelController extends Controller
-{    
+{
     public function actionBook($id, BookingInterface $bookingService)
     {
         $result = $bookingService->book($id);
-        // ...    
+        // ...
     }
 }
-``` 
+```
 
-Advanced Practical Usage <span id="advanced-practical-usage"></span>
----------------
+## Advanced Practical Usage <span id="advanced-practical-usage"></span>
 
 Say we work on API application and have:
 
 - `app\components\Request` class that extends `yii\web\Request` and provides additional functionality
-- `app\components\Response` class that extends `yii\web\Response` and should have `format` property 
+- `app\components\Response` class that extends `yii\web\Response` and should have `format` property
   set to `json` on creation
 - `app\storage\FileStorage` and `app\storage\DocumentsReader` classes that implement some logic on
   working with documents that are located in some file storage:
-  
+
   ```php
   class FileStorage
   {
@@ -414,7 +402,7 @@ Say we work on API application and have:
           // whatever
       }
   }
-  
+
   class DocumentsReader
   {
       public function __construct(FileStorage $fs) {
@@ -430,9 +418,9 @@ or [[yii\di\Container::setSingleton()|setSingleton()]] respectively for each ite
 
 The configuration array format is:
 
-  - `key`: class name, interface name or alias name. The key will be passed to the
+- `key`: class name, interface name or alias name. The key will be passed to the
   [[yii\di\Container::set()|set()]] method as a first argument `$class`.
-  - `value`: the definition associated with `$class`. Possible values are described in [[yii\di\Container::set()|set()]]
+- `value`: the definition associated with `$class`. Possible values are described in [[yii\di\Container::set()|set()]]
   documentation for the `$definition` parameter. Will be passed to the [[set()]] method as
   the second argument `$definition`.
 
@@ -451,15 +439,15 @@ $container->setDefinitions([
     }
 ]);
 
-$reader = $container->get('app\storage\DocumentsReader'); 
-// Will create DocumentReader object with its dependencies as described in the config 
+$reader = $container->get('app\storage\DocumentsReader');
+// Will create DocumentReader object with its dependencies as described in the config
 ```
 
-> Tip: Container may be configured in declarative style using application configuration since version 2.0.11. 
-Check out the [Application Configurations](concept-configurations.md#application-configurations) subsection of
-the [Configurations](concept-configurations.md) guide article.
+> Tip: Container may be configured in declarative style using application configuration since version 2.0.11.
+> Check out the [Application Configurations](concept-configurations.md#application-configurations) subsection of
+> the [Configurations](concept-configurations.md) guide article.
 
-Everything works, but in case we need to create `DocumentWriter` class, 
+Everything works, but in case we need to create `DocumentWriter` class,
 we shall copy-paste the line that creates `FileStorage` object, that is not the smartest way, obviously.
 
 As described in the [Resolving Dependencies](#resolving-dependencies) subsection, [[yii\di\Container::set()|set()]]
@@ -484,23 +472,23 @@ $container->setDefinitions([
     ]
 ]);
 
-$reader = $container->get('app\storage\DocumentsReader'); 
+$reader = $container->get('app\storage\DocumentsReader');
 // Will behave exactly the same as in the previous example.
 ```
 
 You might notice `Instance::of('tempFileStorage')` notation. It means, that the [[yii\di\Container|Container]]
-will implicitly provide a dependency registered with the name of `tempFileStorage` and pass it as the first argument 
+will implicitly provide a dependency registered with the name of `tempFileStorage` and pass it as the first argument
 of `app\storage\DocumentsWriter` constructor.
 
 > Note: [[yii\di\Container::setDefinitions()|setDefinitions()]] and [[yii\di\Container::setSingletons()|setSingletons()]]
-  methods are available since version 2.0.11.
-  
-Another step on configuration optimization is to register some dependencies as singletons. 
+> methods are available since version 2.0.11.
+
+Another step on configuration optimization is to register some dependencies as singletons.
 A dependency registered via [[yii\di\Container::set()|set()]] will be instantiated each time it is needed.
 Some classes do not change the state during runtime, therefore they may be registered as singletons
-in order to increase the application performance. 
+in order to increase the application performance.
 
-A good example could be `app\storage\FileStorage` class, that executes some operations on file system with a simple 
+A good example could be `app\storage\FileStorage` class, that executes some operations on file system with a simple
 API (e.g. `$fs->read()`, `$fs->write()`). These operations do not change the internal class state, so we can
 create its instance once and use it multiple times.
 
@@ -526,21 +514,18 @@ $container->setDefinitions([
 $reader = $container->get('app\storage\DocumentsReader');
 ```
 
-When to Register Dependencies <span id="when-to-register-dependencies"></span>
------------------------------
+## When to Register Dependencies <span id="when-to-register-dependencies"></span>
 
 Because dependencies are needed when new objects are being created, their registration should be done
 as early as possible. The following are the recommended practices:
 
-* If you are the developer of an application, you can register your dependencies using application configuration.
-  Please, read the [Application Configurations](concept-configurations.md#application-configurations) subsection of 
+- If you are the developer of an application, you can register your dependencies using application configuration.
+  Please, read the [Application Configurations](concept-configurations.md#application-configurations) subsection of
   the [Configurations](concept-configurations.md) guide article.
-* If you are the developer of a redistributable [extension](structure-extensions.md), you can register dependencies
+- If you are the developer of a redistributable [extension](structure-extensions.md), you can register dependencies
   in the bootstrapping class of the extension.
 
-
-Summary <span id="summary"></span>
--------
+## Summary <span id="summary"></span>
 
 Both dependency injection and [service locator](concept-service-locator.md) are popular design patterns
 that allow building software in a loosely-coupled and more testable fashion. We highly recommend you to read

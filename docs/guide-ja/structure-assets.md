@@ -1,5 +1,4 @@
-アセット
-========
+# アセット
 
 Yii では、アセットは、ウェブ・ページで参照できるファイルを意味します。アセットは CSS ファイルであったり、JavaScript ファイルであったり、画像やビデオのファイルであったりします。
 アセットはウェブでアクセス可能なディレクトリに配置され、ウェブ・サーバによって直接に提供されます。
@@ -10,13 +9,11 @@ Yii では、アセットは、ウェブ・ページで参照できるファイ�
 そして、このウィジェットを新しいバージョンにアップグレードしたときは、自動的に新しいバージョンのアセット・ファイルが使用されるようになります。
 このチュートリアルでは、Yii によって提供される強力なアセット管理機能について説明します。
 
-
 ## アセット・バンドル <span id="asset-bundles"></span>
 
-Yii はアセットを *アセット・バンドル* を単位として管理します。アセット・バンドルは、簡単に言えば、
+Yii はアセットを _アセット・バンドル_ を単位として管理します。アセット・バンドルは、簡単に言えば、
 あるディレクトリの下に集められた一群のアセットです。
 [ビュー](structure-views.md) の中でアセット・バンドルを登録すると、バンドルの中の CSS や JavaScript のファイルがレンダリングされるウェブ・ページに挿入されます。
-
 
 ## アセット・バンドルを定義する <span id="defining-asset-bundles"></span>
 
@@ -56,23 +53,23 @@ class AppAsset extends AssetBundle
 バンドルは、他の二つのバンドル、すなわち [[yii\web\YiiAsset]] と [[yii\bootstrap\BootstrapAsset]] に依存しています。
 以下、[[yii\web\AssetBundle]] のプロパティに関して、更に詳細に説明します。
 
-* [[yii\web\AssetBundle::sourcePath|sourcePath]]: このバンドルのアセット・ファイルを含むルート・ディレクトリを指定します。
+- [[yii\web\AssetBundle::sourcePath|sourcePath]]: このバンドルのアセット・ファイルを含むルート・ディレクトリを指定します。
   ルート・ディレクトリがウェブ・アクセス可能でない場合に、このプロパティをセットしなければなりません。
   そうでない場合は、代りに、[[yii\web\AssetBundle::basePath|basePath]] と [[yii\web\AssetBundle::baseUrl|baseUrl]] のプロパティをセットしなければなりません。
   [パス・エイリアス](concept-aliases.md) をここで使うことが出来ます。
-* [[yii\web\AssetBundle::basePath|basePath]]: このバンドルのアセット・ファイルを含むウェブ・アクセス可能なディレクトリを指定します。
+- [[yii\web\AssetBundle::basePath|basePath]]: このバンドルのアセット・ファイルを含むウェブ・アクセス可能なディレクトリを指定します。
   [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティをセットした場合は、[アセット・マネージャ](#asset-manager) がバンドルに含まれるファイルをウェブ・アクセス可能なディレクトリに発行して、
   その結果、このプロパティを上書きします。
   アセット・ファイルが既にウェブ・アクセス可能なディレクトリにあり、アセットの発行が必要でない場合に、このプロパティをセットしなければなりません。
   [パス・エイリアス](concept-aliases.md) をここで使うことが出来ます。
-* [[yii\web\AssetBundle::baseUrl|baseUrl]]: [[yii\web\AssetBundle::basePath|basePath]] ディレクトリに対応する URL を指定します。
+- [[yii\web\AssetBundle::baseUrl|baseUrl]]: [[yii\web\AssetBundle::basePath|basePath]] ディレクトリに対応する URL を指定します。
   [[yii\web\AssetBundle::basePath|basePath]] と同じように、[[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティをセットした場合は、
   [アセット・マネージャ](#asset-manager) がアセットを発行して、その結果、このプロパティを上書きします。
   [パス・エイリアス](concept-aliases.md) をここで使うことが出来ます。
-* [[yii\web\AssetBundle::css|css]]: このバンドルに含まれている CSS ファイルをリストする配列です。
+- [[yii\web\AssetBundle::css|css]]: このバンドルに含まれている CSS ファイルをリストする配列です。
   ディレクトリの区切りとしてフォワード・スラッシュ "/" だけを使わなければならないことに注意してください。
   それぞれのファイルは、個別に、パス文字列、または、パス文字列と属性のタグと値を一緒に含む配列によって指定することが出来ます。
-* [[yii\web\AssetBundle::js|js]]: このバンドルに含まれる JavaScript ファイルをリストする配列です。
+- [[yii\web\AssetBundle::js|js]]: このバンドルに含まれる JavaScript ファイルをリストする配列です。
   この配列の形式は、[[yii\web\AssetBundle::css|css]] の配列の形式と同じです。
   それぞれの JavaScript ファイルは、以下の二つの形式のどちらかによって指定することが出来ます。
   - ローカルの JavaScript ファイルを表す相対パス (例えば `js/main.js`)。
@@ -81,26 +78,25 @@ class AppAsset extends AssetBundle
   - 外部の JavaScript ファイルを表す絶対 URL。
     例えば、`https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js` や
     `//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js` など。
-* [[yii\web\AssetBundle::depends|depends]]: このバンドルが依存しているアセット・バンドルの名前をリストする配列です
+- [[yii\web\AssetBundle::depends|depends]]: このバンドルが依存しているアセット・バンドルの名前をリストする配列です
   (バンドルの依存関係については、すぐ後で説明します)。
-* [[yii\web\AssetBundle::jsOptions|jsOptions]]: このバンドルにある *全て* の JavaScript ファイルについて、
+- [[yii\web\AssetBundle::jsOptions|jsOptions]]: このバンドルにある _全て_ の JavaScript ファイルについて、
   それを登録するときに呼ばれる [[yii\web\View::registerJsFile()]] メソッドに渡されるオプションを指定します。
-* [[yii\web\AssetBundle::cssOptions|cssOptions]]: このバンドルにある *全て* の CSS ファイルについて、
+- [[yii\web\AssetBundle::cssOptions|cssOptions]]: このバンドルにある _全て_ の CSS ファイルについて、
   それを登録するときに呼ばれる [[yii\web\View::registerCssFile()]] メソッドに渡されるオプションを指定します。
-* [[yii\web\AssetBundle::publishOptions|publishOptions]]: ソースのアセット・ファイルをウェブ・ディレクトリに発行するときに呼ばれる
+- [[yii\web\AssetBundle::publishOptions|publishOptions]]: ソースのアセット・ファイルをウェブ・ディレクトリに発行するときに呼ばれる
   [[yii\web\AssetManager::publish()]] メソッドに渡されるオプションを指定します。
   これは [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティを指定した場合にだけ使用されます。
-
 
 ### アセットの配置場所 <span id="asset-locations"></span>
 
 アセットは、配置場所を基準にして、次のように分類することが出来ます。
 
-* ソース・アセット: アセット・ファイルは、ウェブ経由で直接にアクセスすることが出来ない PHP ソース・コードと一緒に配置されています。
+- ソース・アセット: アセット・ファイルは、ウェブ経由で直接にアクセスすることが出来ない PHP ソース・コードと一緒に配置されています。
   ページの中でソース・アセットを使用するためには、ウェブ・ディレクトリにコピーして、いわゆる発行されたアセットに変換しなければなりません。
-  このプロセスは、すぐ後で詳しく説明しますが、*アセット発行* と呼ばれます。
-* 発行されたアセット: アセット・ファイルはウェブ・ディレクトリに配置されており、したがってウェブ経由で直接にアクセスすることが出来ます。
-* 外部アセット: アセット・ファイルは、あなたのウェブ・アプリケーションをホストしているのとは別のウェブ・サーバ上に
+  このプロセスは、すぐ後で詳しく説明しますが、_アセット発行_ と呼ばれます。
+- 発行されたアセット: アセット・ファイルはウェブ・ディレクトリに配置されており、したがってウェブ経由で直接にアクセスすることが出来ます。
+- 外部アセット: アセット・ファイルは、あなたのウェブ・アプリケーションをホストしているのとは別のウェブ・サーバ上に
   配置されています。
 
 アセット・バンドル・クラスを定義するときに、[[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティを指定した場合は、
@@ -117,10 +113,9 @@ class AppAsset extends AssetBundle
 アセット・バンドル・クラスを定義するときには [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティを指定しなければなりません。
 
 > Note: `@webroot/assets` を [[yii\web\AssetBundle::sourcePath|ソース・パス]] として使ってはいけません。
-  このディレクトリは、デフォルトでは、[[yii\web\AssetManager|アセット・マネージャ]] がソースの配置場所から発行されたアセット・ファイルを保存する場所として使われます。
-  このディレクトリの中のファイルはすべて一時的なものと見なされており、
-  削除されることがあります。
-
+> このディレクトリは、デフォルトでは、[[yii\web\AssetManager|アセット・マネージャ]] がソースの配置場所から発行されたアセット・ファイルを保存する場所として使われます。
+> このディレクトリの中のファイルはすべて一時的なものと見なされており、
+> 削除されることがあります。
 
 ### アセットの依存関係 <span id="asset-dependencies"></span>
 
@@ -131,11 +126,10 @@ jQuery UI JavaScript ファイルより前にインクルードされること�
 
 アセットの依存関係は、主として、[[yii\web\AssetBundle::depends]] プロパティによって指定されます。
 `AppAsset` の例では、このアセット・バンドルは他の二つのアセット・バンドル、すなわち、[[yii\web\YiiAsset]] と [[yii\bootstrap\BootstrapAsset]] に依存しています。
-このことは、`AppAsset` の CSS と JavaScript ファイルが、依存している二つのアセット・バンドルにあるファイルの *後に*
+このことは、`AppAsset` の CSS と JavaScript ファイルが、依存している二つのアセット・バンドルにあるファイルの _後に_
 インクルードされることを意味します。
 
 アセットの依存関係は中継されます。つまり、バンドル A が B に依存し、B が C に依存していると、A は C にも依存していることになります。
-
 
 ### アセットのオプション <span id="asset-options"></span>
 
@@ -144,9 +138,9 @@ CSS と JavaScript ファイルがページにインクルードされる方法�
 これらのプロパティの値は、[ビュー](structure-views.md) が CSS と JavaScript ファイルをインクルードするために、[[yii\web\View::registerCssFile()]] および
 [[yii\web\View::registerJsFile()]] メソッドを呼ぶときに、それぞれ、オプションとして引き渡されます。
 
-> Note: バンドル・クラスでセットしたオプションは、バンドルの中の *全て* の CSS/JavaScript ファイルに適用されます。
-  いろいろなファイルに別々のオプションを使用したい場合は、上述した [[yii\web\AssetBundle::css|css] の形式を使うか、
-または、別々のアセット・バンドルを作成して、個々のバンドルの中では、一組のオプションを使うようにしなければなりません。
+> Note: バンドル・クラスでセットしたオプションは、バンドルの中の _全て_ の CSS/JavaScript ファイルに適用されます。
+> いろいろなファイルに別々のオプションを使用したい場合は、上述した [[yii\web\AssetBundle::css|css] の形式を使うか、
+> または、別々のアセット・バンドルを作成して、個々のバンドルの中では、一組のオプションを使うようにしなければなりません。
 
 例えば、IE9 以下のブラウザに対して CSS ファイルを条件的にインクルードするために、次のオプションを使うことが出来ます。
 
@@ -158,7 +152,7 @@ public $cssOptions = ['condition' => 'lte IE9'];
 
 ```html
 <!--[if lte IE9]>
-<link rel="stylesheet" href="path/to/foo.css">
+  <link rel="stylesheet" href="path/to/foo.css" />
 <![endif]-->
 ```
 
@@ -186,24 +180,23 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-class FontAwesomeAsset extends AssetBundle 
+class FontAwesomeAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/font-awesome'; 
-    public $css = [ 
-        'css/font-awesome.min.css', 
-    ]; 
+    public $sourcePath = '@bower/font-awesome';
+    public $css = [
+        'css/font-awesome.min.css',
+    ];
     public $publishOptions = [
         'only' => [
             'fonts/*',
             'css/*',
         ]
     ];
-}  
+}
 ```
 
 上記の例は、["fontawesome" パッケージ](https://fontawesome.com/) のためのアセット・バンドルを定義するものです。
 発行オプション `only` を指定して、`fonts` と `css` サブ・ディレクトリだけが発行されるようにしています。
-
 
 ### Bower と NPM のアセットのインストール <span id="bower-npm-assets"></span>
 
@@ -213,14 +206,14 @@ PHP の世界には Composer があって、PHP の依存を管理していま�
 
 このことを達成するために Composer の構成を少し修正しなければなりません。二つの方法があります。
 
-___
+---
 
 #### asset-packagist レポジトリを使う
 
 この方法は NPM または Bower のパッケージを必要とするプロジェクトの大半の要求を満たすことが出来ます。
 
 > Note: 2.0.13 以降、ベーシック・アプリケーション・テンプレートとアドバンスト・アプリケーション・テンプレートはともに、
-  デフォルトで asset-packagist を使うように前もって構成されていますので、このセクションは読み飛ばすことが出来ます。
+> デフォルトで asset-packagist を使うように前もって構成されていますので、このセクションは読み飛ばすことが出来ます。
 
 プロジェクトの `composer.json` に、下記を追加します。
 
@@ -276,24 +269,23 @@ Yii を使ってこれらのアセットを発行したい場合は、プロジ�
 ```
 
 > Note: `fxp/composer-asset-plugin` は、asset-packagist に比べて、`composer update`
-  コマンドを著しく遅くします。
-  
-____
-  
+> コマンドを著しく遅くします。
+
+---
+
 Composer で Bower と NPM をサポートできるように構成した後は:
 
 1. アプリケーションまたはエクステンションの `composer.json` ファイルを修正して、パッケージを `require` のエントリに入れます。
-  ライブラリを参照するのに、`bower-asset/PackageName` (Bower パッケージ) または `npm-asset/PackageName` (NPM パッケージ)
-  を使わなければなりません。
+   ライブラリを参照するのに、`bower-asset/PackageName` (Bower パッケージ) または `npm-asset/PackageName` (NPM パッケージ)
+   を使わなければなりません。
 2. `composer update` を実行します。
 3. アセット・バンドル・クラスを作成して、アプリケーションまたはエクステンションで使う予定の JavaScript/CSS ファイルをリストに挙げます。
-  [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティは、`@bower/PackageName` または `@npm/PackageName` としなければなりません。
-  これは、Composer が Bower または NPM パッケージを、このエイリアスに対応するディレクトリにインストールするためです。
+   [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティは、`@bower/PackageName` または `@npm/PackageName` としなければなりません。
+   これは、Composer が Bower または NPM パッケージを、このエイリアスに対応するディレクトリにインストールするためです。
 
 > Note: パッケージの中には、全ての配布ファイルをサブ・ディレクトリに置くものがあります。
-  その場合には、そのサブ・ディレクトリを [[yii\web\AssetBundle::sourcePath|sourcePath]] の値として指定しなければなりません。
-  例えば、[[yii\web\JqueryAsset]] は `@bower/jquery` ではなく `@bower/jquery/dist` を使います。
-
+> その場合には、そのサブ・ディレクトリを [[yii\web\AssetBundle::sourcePath|sourcePath]] の値として指定しなければなりません。
+> 例えば、[[yii\web\JqueryAsset]] は `@bower/jquery` ではなく `@bower/jquery/dist` を使います。
 
 ## アセット・バンドルを使う <span id="using-asset-bundles"></span>
 
@@ -306,7 +298,7 @@ AppAsset::register($this);  // $this はビュー・オブジェクトを表す
 ```
 
 > Info: [[yii\web\AssetBundle::register()]] メソッドは、[[yii\web\AssetBundle::basePath|basePath]] や [[yii\web\AssetBundle::baseUrl|baseUrl]] など、
-  発行されたアセットに関する情報を含むアセット・バンドル・オブジェクトを返します。
+> 発行されたアセットに関する情報を含むアセット・バンドル・オブジェクトを返します。
 
 他の場所でアセット・バンドルを登録しようとするときは、必要とされるビュー・オブジェクトを提供しなければなりません。
 例えば、[ウィジェット](structure-widgets.md)・クラスの中でアセット・バンドルを登録するためには、`$this->view` によってビュー・オブジェクトを取得することが出来ます。
@@ -317,7 +309,6 @@ AppAsset::register($this);  // $this はビュー・オブジェクトを表す
 その後、ビューがページをレンダリングするときに、登録されたバンドルのリストに挙げられている CSS と JavaScript ファイルのための `<link>` タグと `<script>` タグが生成されます。
 これらのタグの順序は、登録されたバンドル間の依存関係、および、[[yii\web\AssetBundle::css]] と
 [[yii\web\AssetBundle::js]] のプロパティのリストに挙げられたアセットの順序によって決定されます。
-
 
 ### 動的なアセット・バンドル <span id="dynamic-asset-bundles"></span>
 
@@ -359,8 +350,7 @@ $bundle->js[] = 'i18n/' . Yii::$app->language . '.js'; // 動的に追加され�
 ```
 
 > Note: アセット・バンドルの動的な調整はサポートされてはいますが、**推奨はされません**。
-  予期しない副作用を引き起こしやすいので、可能であれば避けるべきです。
-
+> 予期しない副作用を引き起こしやすいので、可能であれば避けるべきです。
 
 ### アセット・バンドルをカスタマイズする <span id="customizing-asset-bundles"></span>
 
@@ -421,7 +411,7 @@ return [
 ];
 ```
 
-[[yii\web\AssetManager::bundles]] を `false` にセットすることによって、*全て* のバンドルを無効にすることも出来ます。
+[[yii\web\AssetManager::bundles]] を `false` にセットすることによって、_全て_ のバンドルを無効にすることも出来ます。
 
 [[yii\web\AssetManager::bundles]] によってなされたカスタマイズはアセット・バンドルの生成時、すなわち、オブジェクトのコンストラクタの段階で適用される、
 ということを心に留めてください。
@@ -472,12 +462,11 @@ return [
 ];
 ```
 
-
 ### アセット・マッピング <span id="asset-mapping"></span>
 
 時として、複数のアセット・バンドルで使われている 正しくない/互換でない アセット・ファイル・パスを「修正」したい場合があります。
 例えば、バンドル A がバージョン 1.11.1 の `jquery.min.js` を使い、バンドル B がバージョン 2.1.1 の `jquery.js` を使っているような場合です。
-それぞれのバンドルをカスタマイズすることで問題を修正することも出来ますが、それよりも簡単な方法は、*アセット・マップ* 機能を使って、正しくないアセットを望ましいアセットに割り付けることです。
+それぞれのバンドルをカスタマイズすることで問題を修正することも出来ますが、それよりも簡単な方法は、_アセット・マップ_ 機能を使って、正しくないアセットを望ましいアセットに割り付けることです。
 そうするためには、以下のように [[yii\web\AssetManager::assetMap]] プロパティを構成します。
 
 ```php
@@ -501,14 +490,13 @@ return [
 例えば、`my/path/to/jquery.js` というアセット・ファイルは `jquery.js` というキーにマッチします。
 
 > Note: 相対パスを使って指定されたアセットだけがアセット・マッピングの対象になります。
-  そして、置き換える側のアセットのパスは、絶対 URL であるか、[[yii\web\AssetManager::basePath]] からの相対パスであるかの、どちらかでなければなりません。
-
+> そして、置き換える側のアセットのパスは、絶対 URL であるか、[[yii\web\AssetManager::basePath]] からの相対パスであるかの、どちらかでなければなりません。
 
 ### アセット発行 <span id="asset-publishing"></span>
 
 既に述べたように、アセット・バンドルがウェブからアクセス出来ないディレクトリに配置されている場合は、
 バンドルがビューに登録されるときに、アセットがウェブ・ディレクトリにコピーされます。
-このプロセスは *アセット発行* と呼ばれ、[[yii\web\AssetManager|アセット・マネージャ]] によって自動的に実行されます。
+このプロセスは _アセット発行_ と呼ばれ、[[yii\web\AssetManager|アセット・マネージャ]] によって自動的に実行されます。
 
 デフォルトでは、アセットが発行されるディレクトリは `@webroot/assets` であり、`@web/assets` という URL に対応するものです。
 この場所は、[[yii\web\AssetManager::basePath|basePath]] と [[yii\web\AssetManager::baseUrl|baseUrl]]
@@ -532,14 +520,13 @@ return [
 この方がファイルのコピーより速く、また、
 発行されたアセットが常に最新であることを保証することも出来ます。
 
-
 ### キャッシュの廃棄 <span id="cache-busting"></span>
 
 運用モードで動作しているウェブ・アプリケーションでは、アセットなどの静的なリソースに対する HTTP キャッシュを有効にするのが通例です。
 この慣行の難点は、アセットを修正して運用サーバに配備したときに、ユーザのクライアントが HTTP キャッシュのせいで古いバージョンを使い続けるおそれが常にあるという点です。
 この難点を克服するために、キャッシュ廃棄機能を使うことが出来ます。
 これはバージョン 2.0.3 で導入された機能で、[[yii\web\AssetManager]]　を下記のように構成することで有効になります。
-  
+
 ```php
 return [
     // ...
@@ -556,13 +543,12 @@ return [
 パラメータ `v` が `yii.js` ファイルの最終更新日時のタイムスタンプを表しています。
 これで、あなたがアセットを修正したときには、その URL も変更され、クライアントに最新バージョンのアセットを強制的に取得させることが出来ます。
 
-
 ## よく使われるアセット・バンドル <span id="common-asset-bundles"></span>
 
 コアの Yii コードは多くのアセット・バンドルを定義しています。
 その中で、下記のバンドルはよく使われるものであり、あなたのアプリケーションやエクステンションのコードでも参照することが出来るものです。
 
-- [[yii\web\YiiAsset]]: 主として `yii.js` ファイルをインクルードするためのバンドルです。  このファイルはモジュール化された JavaScript のコードを編成するメカニズムを実装しています。
+- [[yii\web\YiiAsset]]: 主として `yii.js` ファイルをインクルードするためのバンドルです。 このファイルはモジュール化された JavaScript のコードを編成するメカニズムを実装しています。
   また、`data-method` と `data-confirm` の属性に対する特別なサポートや、その他の有用な機能を提供します。
   `yii.js` に関する詳細な情報は [クライアント・スクリプトのセクション](output-client-scripts.md#yii.js) にあります。
 - [[yii\web\JqueryAsset]]: jQuery の bower パッケージから `jquery.js` ファイルをインクルードします。
@@ -574,7 +560,6 @@ return [
 あなたのコードが、jQuery や jQuery UI または Bootstrap に依存する場合は、自分自身のバージョンを作るのではなく、これらの定義済みのアセット・バンドルを使用すべきです。
 これらのバンドルのデフォルトの設定があなたの必要を満たさない時は、[アセット・バンドルをカスタマイズする](#customizing-asset-bundles)
 の項で説明したように、それをカスタマイズすることが出来ます。
-
 
 ## アセット変換 <span id="asset-conversion"></span>
 
@@ -644,19 +629,18 @@ return [
 コマンドの中の `{from}` と `{to}` のトークンは、ソースのアセット・ファイルのパスとターゲットのアセット・ファイルのパスに置き換えられます。
 
 > Info: 上記で説明した方法の他にも、拡張構文のアセットを扱う方法はあります。
-  例えば、[grunt](https://gruntjs.com/) のようなビルド・ツールを使って、拡張構文のアセットをモニターし、
-  自動的に変換することが出来ます。
-  この場合は、元のファイルではなく、結果として作られる CSS/JavaScript ファイルをアセット・バンドルのリストに挙げなければなりません。
-
+> 例えば、[grunt](https://gruntjs.com/) のようなビルド・ツールを使って、拡張構文のアセットをモニターし、
+> 自動的に変換することが出来ます。
+> この場合は、元のファイルではなく、結果として作られる CSS/JavaScript ファイルをアセット・バンドルのリストに挙げなければなりません。
 
 ## アセットを結合して圧縮する <span id="combining-compressing-assets"></span>
 
 ウェブ・ページは数多くの CSS および/または JavaScript ファイルをインクルードすることがあり得ます。
 HTTP リクエストの数とこれらのファイルの全体としてのダウンロード・サイズを削減するためによく用いられる方法は、複数の CSS/JavaScript ファイルを結合して圧縮し、一つまたはごく少数のファイルにまとめることです。
 そして、ウェブ・ページでは元のファイルをインクルードする代りに、圧縮されたファイルをインクルードする訳です。
-  
+
 > Info: アセットの結合と圧縮は、通常はアプリケーションが本番モードにある場合に必要になります。
-  開発モードにおいては、たいていは元の CSS/JavaScript ファイルを使う方がデバッグのために好都合です。
+> 開発モードにおいては、たいていは元の CSS/JavaScript ファイルを使う方がデバッグのために好都合です。
 
 次に、既存のアプリケーション・コードを修正する必要なしに、
 アセット・ファイルを結合して圧縮する方法を紹介します。
@@ -665,16 +649,16 @@ HTTP リクエストの数とこれらのファイルの全体としてのダウ
 2. これらのバンドルを一個か数個のグループにまとめる。どのバンドルも一つのグループにしか属することが出来ないことに注意。
 3. 各グループの CSS ファイルを一つのファイルに結合/圧縮する。JavaScript ファイルに対しても同様にこれを行う。
 4. 各グループに対して新しいアセット・バンドルを定義する。
-  * [[yii\web\AssetBundle::css|css]] と [[yii\web\AssetBundle::js|js]] のプロパティに、
-    それぞれ、結合された CSS ファイルと JavaScript ファイルをセットする。
-  * 各グループに属する元のアセット・バンドルをカスタマイズして、[[yii\web\AssetBundle::css|css]] と
-    [[yii\web\AssetBundle::js|js]] のプロパティを空にし、[[yii\web\AssetBundle::depends|depends]]
-    プロパティにグループのために作られた新しいバンドルを指定する。
+
+- [[yii\web\AssetBundle::css|css]] と [[yii\web\AssetBundle::js|js]] のプロパティに、
+  それぞれ、結合された CSS ファイルと JavaScript ファイルをセットする。
+- 各グループに属する元のアセット・バンドルをカスタマイズして、[[yii\web\AssetBundle::css|css]] と
+  [[yii\web\AssetBundle::js|js]] のプロパティを空にし、[[yii\web\AssetBundle::depends|depends]]
+  プロパティにグループのために作られた新しいバンドルを指定する。
 
 この方法を使うと、ビューでアセット・バンドルを登録したときに、
 元のバンドルが属するグループのための新しいアセット・バンドルが自動的に登録されるようになります。
 そして、結果として、結合/圧縮されたアセット・ファイルが、元のファイルの代りに、ページにインクルードされます。
-
 
 ### 一例 <span id="example"></span>
 
@@ -690,7 +674,7 @@ HTTP リクエストの数とこれらのファイルの全体としてのダウ
 この例では話を簡単にするために、最初の方法、すなわち、全てのバンドルを含む単一のグループを使用することにします。
 
 > Info: アセット・バンドルをグループに分けることは些細な仕事ではありません。通常、そのためには、いろいろなページのさまざまなアセットの現実世界での転送量を分析することが必要になります。
-  とりあえず、最初は、簡単にするために、単一のグループから始めて良いでしょう。
+> とりあえず、最初は、簡単にするために、単一のグループから始めて良いでしょう。
 
 既存のツール (例えば [Closure Compiler](https://developers.google.com/closure/compiler/) や [YUI Compressor](https://github.com/yui/yuicompressor/)) を使って、
 全てのバンドルにある CSS と JavaScript のファイルを結合して圧縮します。
@@ -741,7 +725,7 @@ return [
 return [
     'components' => [
         'assetManager' => [
-            'bundles' => require __DIR__ . '/' . (YII_ENV_PROD ? 'assets-prod.php' : 'assets-dev.php'),  
+            'bundles' => require __DIR__ . '/' . (YII_ENV_PROD ? 'assets-prod.php' : 'assets-dev.php'),
         ],
     ],
 ];
@@ -751,10 +735,9 @@ return [
 開発モードのものは `assets-dev.php` に保存するという訳です。
 
 > Note: このアセット結合のメカニズムは、登録されるアセット・バンドルのプロパティをオーバーライドできるという [[yii\web\AssetManager::bundles]] の機能に基づいています。
-  しかし、既に上で述べたように、この機能は、[[yii\web\AssetBundle::init()]]
-  メソッドの中やバンドルが登録された後で実行されるアセット・バンドルの修正をカバーしていません。
-  そのような動的なバンドルの使用は、アセット結合をする際には避けなければなりません。
-
+> しかし、既に上で述べたように、この機能は、[[yii\web\AssetBundle::init()]]
+> メソッドの中やバンドルが登録された後で実行されるアセット・バンドルの修正をカバーしていません。
+> そのような動的なバンドルの使用は、アセット結合をする際には避けなければなりません。
 
 ### `asset` コマンドを使う <span id="using-asset-command"></span>
 
@@ -810,7 +793,7 @@ return [
 既に述べたように、一つまたは複数のグループを定義することが出来ます。
 
 > Note: パス・エイリアス `@webroot` および `@web` はコンソール・アプリケーションでは利用できませんので、
-  これらは構成情報の中で明示的に定義しなければなりません。
+> これらは構成情報の中で明示的に定義しなければなりません。
 
 JavaScript ファイルは結合され、圧縮されて `js/all-{hash}.js` に保存されます。ここで {hash} は、
 結果として作られたファイルのハッシュで置き換えられるものです。
@@ -820,10 +803,9 @@ JavaScript ファイルは結合され、圧縮されて `js/all-{hash}.js` に�
 CSS ファイルの結合に [YUI Compressor](https://github.com/yui/yuicompressor/) を使用します。
 あなたの好みのツールを使うためには、手作業でツールをインストールしたり、オプションを修正したりしなければなりません。
 
-
 この構成情報ファイルを使い、`asset` コマンドを走らせて、アセット・ファイルを結合して圧縮し、
 同時に、新しいアセット・バンドルの構成情報ファイル `assets-prod.php` を生成することが出来ます。
-  
+
 ```
 yii asset assets.php config/assets-prod.php
 ```
@@ -832,16 +814,14 @@ yii asset assets.php config/assets-prod.php
 この生成された構成情報ファイルをアプリケーションの構成情報にインクルードすることが出来ます。
 
 > Note: アプリケーションのアセット・バンドルを [[yii\web\AssetManager::bundles]] または [[yii\web\AssetManager::assetMap]] によってカスタマイズしており、
-そのカスタマイズを圧縮のソース・ファイルにも適用したい場合は、それらのオプションを `asset` コマンドの構成ファイルの
-`assetManager` のセクションに含めなければいけません。
+> そのカスタマイズを圧縮のソース・ファイルにも適用したい場合は、それらのオプションを `asset` コマンドの構成ファイルの
+> `assetManager` のセクションに含めなければいけません。
 
 > Note: 圧縮のソースを指定する場合は、パラメータが動的に (例えば `init()` メソッドの中や登録後に) 修正されるアセット・バンドルを避けなければなりません。
-  なぜなら、パラメータの動的な修正は、圧縮後は正しく働かない可能性があるからです。
-
+> なぜなら、パラメータの動的な修正は、圧縮後は正しく働かない可能性があるからです。
 
 > Info: `asset` コマンドを使うことは、アセットの結合・圧縮のプロセスを自動化する唯一の選択肢ではありません。
-  優秀なタスク実行ツールである [grunt](https://gruntjs.com/) を使っても、同じ目的を達することが出来ます。
-
+> 優秀なタスク実行ツールである [grunt](https://gruntjs.com/) を使っても、同じ目的を達することが出来ます。
 
 ### アセット・バンドルをグループ化する <span id="grouping-asset-bundles"></span>
 
@@ -892,4 +872,4 @@ return [
 この構成情報によって `asset` コマンドを実行すると、上記の定義に従ってアセット・バンドルが結合されます。
 
 > Info: ターゲット・バンドルのうちの一つについて `depends` の構成を空のままにしておくことが出来ます。
-  そのようにすると、他のターゲット・バンドルが依存しないために残された全てのアセット・バンドルが、このターゲット・バンドルに含まれるようになります。
+> そのようにすると、他のターゲット・バンドルが依存しないために残された全てのアセット・バンドルが、このターゲット・バンドルに含まれるようになります。

@@ -1,27 +1,24 @@
-Быстрый старт
-===========
+# Быстрый старт
 
 Yii включает полноценный набор средств для упрощённой реализации [RESTful API](https://ru.wikipedia.org/wiki/REST).
 В частности это следующие возможности:
 
-* Быстрое создание прототипов с поддержкой распространенных API к [Active Record](db-active-record.md);
-* Настройка формата ответа (JSON и XML реализованы по умолчанию);
-* Получение сериализованных объектов с нужной вам выборкой полей;
-* Надлежащее форматирование данных и ошибок при их валидации;
-* Коллекция пагинаций, фильтров и сортировок;
-* Поддержка [HATEOAS](https://ru.wikipedia.org/wiki/HATEOAS);
-* Эффективная маршрутизация с надлежащей проверкой HTTP методов;
-* Встроенная поддержка методов `OPTIONS` и `HEAD`;
-* Аутентификация и авторизация;
-* HTTP кэширование и кэширование данных;
-* Настройка ограничения для частоты запросов (Rate limiting);
-
+- Быстрое создание прототипов с поддержкой распространенных API к [Active Record](db-active-record.md);
+- Настройка формата ответа (JSON и XML реализованы по умолчанию);
+- Получение сериализованных объектов с нужной вам выборкой полей;
+- Надлежащее форматирование данных и ошибок при их валидации;
+- Коллекция пагинаций, фильтров и сортировок;
+- Поддержка [HATEOAS](https://ru.wikipedia.org/wiki/HATEOAS);
+- Эффективная маршрутизация с надлежащей проверкой HTTP методов;
+- Встроенная поддержка методов `OPTIONS` и `HEAD`;
+- Аутентификация и авторизация;
+- HTTP кэширование и кэширование данных;
+- Настройка ограничения для частоты запросов (Rate limiting);
 
 Рассмотрим пример, как можно настроить Yii под RESTful API, приложив при этом минимум усилий.
 
 Предположим, вы захотели RESTful API для данных по пользователям. Эти данные хранятся в базе данных и для работы с ними
-вами была ранее создана модель [[yii\db\ActiveRecord|ActiveRecord]]  (класс `app\models\User`).
-
+вами была ранее создана модель [[yii\db\ActiveRecord|ActiveRecord]] (класс `app\models\User`).
 
 ## Создание контроллера <span id="creating-controller"></span>
 
@@ -42,7 +39,6 @@ class UserController extends ActiveController
 как `app\models\User`, тем самым указав контроллеру, к какой модели ему необходимо обращаться для редактирования или
 выборки данных.
 
-
 ## Настройка правил URL <span id="configuring-url-rules"></span>
 
 Далее изменим настройки компонента `urlManager` в конфигурации приложения:
@@ -61,7 +57,6 @@ class UserController extends ActiveController
 Настройки выше добавляют правило для контроллера `user`, которое предоставляет доступ к данным пользователя через красивые
 URL и логичные глаголы HTTP.
 
-
 ## Включение JSON на прием данных<span id="enabling-json-input"></span>
 
 Для того чтобы API мог принимать данные в формате JSON, сконфигурируйте [[yii\web\Request::$parsers|parsers]] свойство у компонента `request` [application component](structure-application-components.md) на использование [[yii\web\JsonParser]] JSON данных на входе:
@@ -75,24 +70,23 @@ URL и логичные глаголы HTTP.
 ```
 
 > Note: Конфигурация, приведенная выше необязательна. Без приведенной выше конфигурации, API сможет определить только
-  `application/x-www-form-urlencoded` и `multipart/form-data` форматы.
-
+> `application/x-www-form-urlencoded` и `multipart/form-data` форматы.
 
 ## Пробуем <span id="trying-it-out"></span>
 
 Вот так просто мы и создали RESTful API для доступа к данным пользователя. API нашего сервиса сейчас включает в себя:
 
-* `GET /users`: получение постранично списка всех пользователей;
-* `HEAD /users`: получение метаданных листинга пользователей;
-* `POST /users`: создание нового пользователя;
-* `GET /users/123`: получение информации по конкретному пользователю с id равным 123;
-* `HEAD /users/123`: получение метаданных по конкретному пользователю с id равным 123;
-* `PATCH /users/123` и `PUT /users/123`: изменение информации по пользователю с id равным 123;
-* `DELETE /users/123`: удаление пользователя с id равным 123;
-* `OPTIONS /users`: получение поддерживаемых методов, по которым можно обратится к `/users`;
-* `OPTIONS /users/123`: получение поддерживаемых методов, по которым можно обратится к `/users/123`.
+- `GET /users`: получение постранично списка всех пользователей;
+- `HEAD /users`: получение метаданных листинга пользователей;
+- `POST /users`: создание нового пользователя;
+- `GET /users/123`: получение информации по конкретному пользователю с id равным 123;
+- `HEAD /users/123`: получение метаданных по конкретному пользователю с id равным 123;
+- `PATCH /users/123` и `PUT /users/123`: изменение информации по пользователю с id равным 123;
+- `DELETE /users/123`: удаление пользователя с id равным 123;
+- `OPTIONS /users`: получение поддерживаемых методов, по которым можно обратится к `/users`;
+- `OPTIONS /users/123`: получение поддерживаемых методов, по которым можно обратится к `/users/123`.
 
-Пробуем получить ответы по API используя `curl`: 
+Пробуем получить ответы по API используя `curl`:
 
 ```
 $ curl -i -H "Accept:application/json" "http://localhost/users"
@@ -105,8 +99,8 @@ X-Pagination-Total-Count: 1000
 X-Pagination-Page-Count: 50
 X-Pagination-Current-Page: 1
 X-Pagination-Per-Page: 20
-Link: <http://localhost/users?page=1>; rel=self, 
-      <http://localhost/users?page=2>; rel=next, 
+Link: <http://localhost/users?page=1>; rel=self,
+      <http://localhost/users?page=2>; rel=next,
       <http://localhost/users?page=50>; rel=last
 Transfer-Encoding: chunked
 Content-Type: application/json; charset=UTF-8
@@ -138,8 +132,8 @@ X-Pagination-Total-Count: 1000
 X-Pagination-Page-Count: 50
 X-Pagination-Current-Page: 1
 X-Pagination-Per-Page: 20
-Link: <http://localhost/users?page=1>; rel=self, 
-      <http://localhost/users?page=2>; rel=next, 
+Link: <http://localhost/users?page=1>; rel=self,
+      <http://localhost/users?page=2>; rel=next,
       <http://localhost/users?page=50>; rel=last
 Transfer-Encoding: chunked
 Content-Type: application/xml
@@ -159,7 +153,7 @@ Content-Type: application/xml
 ```
 
 > Tip: Вы можете получить доступ к API через веб-браузер, введя адрес `http://localhost/users`. Но в этом случае
-  для передачи определённых заголовков вам, скорее всего, потребуются дополнительные плагины для браузера.
+> для передачи определённых заголовков вам, скорее всего, потребуются дополнительные плагины для браузера.
 
 Если внимательно посмотреть результат ответа, то можно обнаружить, что в заголовках есть информация об общем числе записей,
 количестве страниц и т. д. Тут так же можно обнаружить ссылки на другие страницы, как, например,
@@ -168,7 +162,6 @@ Content-Type: application/xml
 Используя параметры `fields` и `expand` в URL, можно указать, какие поля должны быть включены в результат. Например,
 по адресу `http://localhost/users?fields=id,email` мы получим информацию по пользователям, которая будет содержать
 только `id` и `email`.
-
 
 > Info: Вы наверное заметили, что при обращении к `http://localhost/users` мы получаем информацию с полями,
 > которые нежелательно показывать, такими как `password_hash` и `auth_key`. Вы можете и должны удалить эти поля как

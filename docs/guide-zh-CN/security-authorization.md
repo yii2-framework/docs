@@ -1,9 +1,7 @@
-授权
-=============
+# 授权
 
 授权是指验证用户是否允许做某件事的过程。Yii提供两种授权方法：
 存取控制过滤器（ACF）和基于角色的存取控制（RBAC）。
-
 
 ## 存取控制过滤器 <span id="access-control-filter"></span>
 
@@ -48,23 +46,23 @@ class SiteController extends Controller
 
 上面的代码中 ACF 以行为 (behavior) 的形式附加到 `site` 控制器。
 这就是很典型的使用行动过滤器的方法。 `only` 选项指明 ACF 应当只
-对 `login`， `logout` 和 `signup` 方法起作用。所有其它的 `site` 
+对 `login`， `logout` 和 `signup` 方法起作用。所有其它的 `site`
 控制器中的方法不受存取控制的限制。 `rules` 选项列出了 [[yii\filters\AccessRule|存取规则 (access rules)]]，解读如下：
 
-- 允许所有访客（还未经认证的用户）执行 `login` 和 `signup` 动作。 
+- 允许所有访客（还未经认证的用户）执行 `login` 和 `signup` 动作。
   `roles` 选项包含的问号 `?` 是一个特殊的标识，代表”访客用户”。
 - 允许已认证用户执行 `logout` 动作。`@`是另一个特殊标识，
   代表”已认证用户”。
 
 ACF 自顶向下逐一检查存取规则，直到找到一个与当前
-欲执行的动作相符的规则。 然后该匹配规则中的 `allow` 
+欲执行的动作相符的规则。 然后该匹配规则中的 `allow`
 选项的值用于判定该用户是否获得授权。如果没有找到匹配的规则，
 意味着该用户没有获得授权。（译者注： `only` 中没有列出的动作，将无条件获得授权）
 
 当 ACF 判定一个用户没有获得执行当前动作的授权时，它的默认处理是：
 
-* 如果该用户是访客，将调用 [[yii\web\User::loginRequired()]] 将用户的浏览器重定向到登录页面。
-* 如果该用户是已认证用户，将抛出一个 [[yii\web\ForbiddenHttpException]] 异常。
+- 如果该用户是访客，将调用 [[yii\web\User::loginRequired()]] 将用户的浏览器重定向到登录页面。
+- 如果该用户是已认证用户，将抛出一个 [[yii\web\ForbiddenHttpException]] 异常。
 
 你可以通过配置 [[yii\filters\AccessControl::denyCallback]] 属性定制该行为：
 
@@ -81,40 +79,38 @@ ACF 自顶向下逐一检查存取规则，直到找到一个与当前
 [[yii\filters\AccessRule|Access rules]] 支持很多的选项。下列是所支持选项的总览。
 你可以派生 [[yii\filters\AccessRule]] 来创建自定义的存取规则类。
 
-  * [[yii\filters\AccessRule::allow|allow]]： 指定该规则是 "允许" 还是 "拒绝" 。（译者注：true是允许，false是拒绝）
+- [[yii\filters\AccessRule::allow|allow]]： 指定该规则是 "允许" 还是 "拒绝" 。（译者注：true是允许，false是拒绝）
 
-  * [[yii\filters\AccessRule::actions|actions]]：指定该规则用于匹配哪些动作。
+- [[yii\filters\AccessRule::actions|actions]]：指定该规则用于匹配哪些动作。
   它的值应该是动作方法的ID数组。匹配比较是大小写敏感的。如果该选项为空，或者不使用该选项，
   意味着当前规则适用于所有的动作。
 
-  * [[yii\filters\AccessRule::controllers|controllers]]：指定该规则用于匹配哪些控制器。
+- [[yii\filters\AccessRule::controllers|controllers]]：指定该规则用于匹配哪些控制器。
   它的值应为控制器ID数组。匹配比较是大小写敏感的。如果该选项为空，或者不使用该选项，
   则意味着当前规则适用于所有的动作。（译者注：这个选项一般是在控制器的自定义父类中使用才有意义）
 
-  * [[yii\filters\AccessRule::roles|roles]]：指定该规则用于匹配哪些用户角色。
+- [[yii\filters\AccessRule::roles|roles]]：指定该规则用于匹配哪些用户角色。
   系统自带两个特殊的角色，通过 [[yii\web\User::isGuest]] 来判断：
+  - `?`： 用于匹配访客用户 （未经认证）
+  - `@`： 用于匹配已认证用户
 
-    - `?`： 用于匹配访客用户 （未经认证）
-    - `@`： 用于匹配已认证用户
+使用其他角色名时，将触发调用 [[yii\web\User::can()]]，这时要求 RBAC 的支持 （在下一节中阐述）。
+如果该选项为空或者不使用该选项，意味着该规则适用于所有角色。
 
-  使用其他角色名时，将触发调用 [[yii\web\User::can()]]，这时要求 RBAC 的支持 （在下一节中阐述）。
-  如果该选项为空或者不使用该选项，意味着该规则适用于所有角色。
-
-  * [[yii\filters\AccessRule::roleParams|roleParams]]：指定将传递给 [[yii\web\User::can()]] 的参数。
+- [[yii\filters\AccessRule::roleParams|roleParams]]：指定将传递给 [[yii\web\User::can()]] 的参数。
   请参阅下面描述RBAC规则的部分，了解如何使用它。 如果此选项为空或未设置，则不传递任何参数。
-    
-  * [[yii\filters\AccessRule::ips|ips]]：指定该规则用于匹配哪些 [[yii\web\Request::userIP|客户端IP地址]] 。
+- [[yii\filters\AccessRule::ips|ips]]：指定该规则用于匹配哪些 [[yii\web\Request::userIP|客户端IP地址]] 。
   IP 地址可在其末尾包含通配符 `*` 以匹配一批前缀相同的IP地址。
   例如，`192.168.*` 匹配所有 `192.168.` 段的IP地址。
   如果该选项为空或者不使用该选项，意味着该规则适用于所有角色。
 
-  * [[yii\filters\AccessRule::verbs|verbs]]：指定该规则用于匹配哪种请求方法（例如`GET`，`POST`）。
+- [[yii\filters\AccessRule::verbs|verbs]]：指定该规则用于匹配哪种请求方法（例如`GET`，`POST`）。
   这里的匹配大小写不敏感。
 
-  * [[yii\filters\AccessRule::matchCallback|matchCallback]]：指定一个PHP回调函数用于
+- [[yii\filters\AccessRule::matchCallback|matchCallback]]：指定一个PHP回调函数用于
   判定该规则是否满足条件。（译者注：此处的回调函数是匿名函数）
 
-  * [[yii\filters\AccessRule::denyCallback|denyCallback]]: 指定一个PHP回调函数，
+- [[yii\filters\AccessRule::denyCallback|denyCallback]]: 指定一个PHP回调函数，
   当这个规则不满足条件时该函数会被调用。（译者注：此处的回调函数是匿名函数）
 
 以下例子展示了如何使用 `matchCallback` 选项，
@@ -152,7 +148,6 @@ class SiteController extends Controller
 }
 ```
 
-
 ## 基于角色的存取控制 （RBAC） <span id="rbac"></span>
 
 基于角色的存取控制 （RBAC） 提供了一个简单而强大的集中式存取控制机制。
@@ -167,31 +162,28 @@ Yii 实现了通用的分层的 RBAC，遵循的模型是 [NIST RBAC model](http
 
 为方便后面的讲述，这里先介绍一些 RBAC 的基本概念。
 
-
 ### 基本概念 <span id="basic-concepts"></span>
 
-角色是 *权限* 的集合 （例如：建贴、改贴）。一个角色
+角色是 _权限_ 的集合 （例如：建贴、改贴）。一个角色
 可以指派给一个或者多个用户。要检查某用户是否有一个特定的权限，
 系统会检查该包含该权限的角色是否指派给了该用户。
 
-可以用一个规则 *rule* 与一个角色或者权限关联。一个规则用一段代码代表，
+可以用一个规则 _rule_ 与一个角色或者权限关联。一个规则用一段代码代表，
 规则的执行是在检查一个用户是否满足这个角色或者权限时进行的。例如，"改帖" 的权限
 可以使用一个检查该用户是否是帖子的创建者的规则。权限检查中，如果该用户
 不是帖子创建者，那么他（她）将被认为不具有 "改帖"的权限。
 
 角色和权限都可以按层次组织。特定情况下，一个角色可能由其他角色或权限构成，
-而权限又由其他的权限构成。Yii 实现了所谓的 *局部顺序* 的层次结构，包含更多的特定的 *树* 的层次。
+而权限又由其他的权限构成。Yii 实现了所谓的 _局部顺序_ 的层次结构，包含更多的特定的 _树_ 的层次。
 一个角色可以包含一个权限，反之则不行。（译者注：可理解为角色在上方，权限在下方，从上到下如果碰到权限那么再往下不能出现角色）
-
 
 ### 配置 RBAC <span id="configuring-rbac"></span>
 
-在开始定义授权数据和执行存取检查之前，需要先配置应用组件 [[yii\base\Application::authManager|authManager]] 。 
-Yii 提供了两套授权管理器： [[yii\rbac\PhpManager]] 
+在开始定义授权数据和执行存取检查之前，需要先配置应用组件 [[yii\base\Application::authManager|authManager]] 。
+Yii 提供了两套授权管理器： [[yii\rbac\PhpManager]]
 和 [[yii\rbac\DbManager]]。前者使用 PHP 脚本存放授权数据，
 而后者使用数据库存放授权数据。 如果你的应用不要求大量的动态角色和权限管理，
 你可以考虑使用前者。
-
 
 #### 使用 `PhpManager` <span id="using-php-manager"></span>
 
@@ -214,7 +206,6 @@ return [
 [[yii\rbac\PhpManager]] 默认将 RBAC 数据保存在 `@app/rbac` 目录下的文件中。
 如果权限层次数据在运行时会被修改，需确保WEB服务器进程对该目录和其中的文件有写权限。
 
-
 #### 使用 `DbManager` <span id="using-db-manager"></span>
 
 以下代码展示使用 [[yii\rbac\DbManager]] 时如何在应用配置文件中配置 `authManager`：
@@ -232,8 +223,9 @@ return [
     ],
 ];
 ```
+
 > Note: 如果您使用的是 yii2-basic-app 模板，则有一个 `config/console.php` 配置文件，其中
-   `authManager` 需要另外声明在 `config/web.php`。
+>  `authManager` 需要另外声明在 `config/web.php`。
 > 在 yii2-advanced-app 的情况下，`authManager` 只能在 `common/config/main.php` 中声明一次。
 
 `DbManager` 使用4个数据库表存放它的数据：
@@ -251,7 +243,6 @@ return [
 部分中有关处理来自不同名称空间的迁移的更多信息。
 
 现在可以通过 `\Yii::$app->authManager` 访问 `authManager` 。
-
 
 ### 建立授权数据 <span id="generating-rbac-data"></span>
 
@@ -308,7 +299,7 @@ class m170124_084304_init_rbac extends Migration
         $auth->add($author);
         $auth->addChild($author, $createPost);
 
-        // 添加 "admin" 角色并赋予 "updatePost" 
+        // 添加 "admin" 角色并赋予 "updatePost"
     // 和 "author" 权限
         $admin = $auth->createRole('admin');
         $auth->add($admin);
@@ -320,7 +311,7 @@ class m170124_084304_init_rbac extends Migration
         $auth->assign($author, 2);
         $auth->assign($admin, 1);
     }
-    
+
     public function down()
     {
         $auth = Yii::$app->authManager;
@@ -331,7 +322,7 @@ class m170124_084304_init_rbac extends Migration
 ```
 
 > 如果您不想硬编码哪些用户具有某些角色，请不要在迁移中使用 `->assign()` 调用。
-  相反，请创建UI或控制台命令来管理分配。
+> 相反，请创建UI或控制台命令来管理分配。
 
 迁移可以通过 `yii migrate` 使用。
 
@@ -370,7 +361,7 @@ class RbacController extends Controller
         $auth->add($author);
         $auth->addChild($author, $createPost);
 
-        // 添加 "admin" 角色并赋予 "updatePost" 
+        // 添加 "admin" 角色并赋予 "updatePost"
     // 和 "author" 权限
         $admin = $auth->createRole('admin');
         $auth->add($admin);
@@ -386,7 +377,7 @@ class RbacController extends Controller
 ```
 
 > Note: 如果您使用高级模板，则需要将 `RbacController` 放在 `console/controllers` 目录中，
-  并将命名空间更改为 `console/controllers`。
+> 并将命名空间更改为 `console/controllers`。
 
 上面的命令可以通过以下方式从控制台执行：
 
@@ -395,7 +386,7 @@ yii rbac/init
 ```
 
 > 如果您不想硬编码用户具有某些角色，请不要将 `->assign()` 调用放入命令中。
-  相反，请创建UI或控制台命令来管理分配。
+> 相反，请创建UI或控制台命令来管理分配。
 
 ## 为用户分配角色（Assigning roles to users）
 
@@ -430,7 +421,6 @@ public function signup()
 
 对于需要动态更新授权数据的复杂访问控制的应用程序，可能需要使用
 `authManager` 提供的 API 来开发特殊的用户界面（即管理面板）。
-
 
 ### 使用规则 (Rules) <span id="using-rules"></span>
 
@@ -491,7 +481,6 @@ $auth->addChild($author, $updateOwnPost);
 
 ![RBAC hierarchy with a rule](images/rbac-hierarchy-2.png "有一个规则的 RBAC 层次结构")
 
-
 ### 存取检查 <span id="access-check"></span>
 
 授权数据准备好后，存取检查简单到只需要一个方法调用 [[yii\rbac\ManagerInterface::checkAccess()]]。
@@ -518,10 +507,9 @@ if (\Yii::$app->user->can('updatePost', ['post' => $post])) {
 
 下图所示为当前用户是 John 时所发生的事情：
 
-
 ![Access check](images/rbac-access-check-2.png "存取权限检查")
 
-我们从图中的 `updatePost` 开始，经过 `updateOwnPost`。为通过检查，`Authorrule` 
+我们从图中的 `updatePost` 开始，经过 `updateOwnPost`。为通过检查，`Authorrule`
 规则的 `execute()` 方法应当返回 `true` 。该方法从 `can()` 方法调用接收到 `$params` 参数，
 因此它的值是 `['post' => $post]` 。如果一切顺利，我们会达到指派给 John 的 `author` 角色。
 
@@ -605,7 +593,7 @@ public function behaviors()
 
 ### 使用默认角色 <span id="using-default-roles"></span>
 
-所谓默认角色就是 *隐式* 地指派给 *所有* 用户的角色。不需要调用 
+所谓默认角色就是 _隐式_ 地指派给 _所有_ 用户的角色。不需要调用
 [[yii\rbac\ManagerInterface::assign()]] 方法做显示指派，并且授权数据中不包含指派信息。
 
 默认角色通常与一个规则关联，用以检查该角色是否符合被检查的用户。
@@ -618,7 +606,6 @@ public function behaviors()
 假设在 user 表中，你有一个 `group` 字段，用 1 代表管理员组，用 2 表示作者组。
 你规划两个 RBAC 角色 `admin` 和 `author` 分别对应这两个组的权限。
 你可以这样设置 RBAC 数据，
-
 
 ```php
 namespace app\rbac;
@@ -668,9 +655,9 @@ $auth->addChild($admin, $author);
 // ... 添加$admin角色的子项部分代码 ... （译者注：省略部分参照之前的控制台命令）
 ```
 
-注意，在上述代码中，因为 "author" 作为 "admin" 的子角色，当你实现这个规则的 `execute()` 方法时， 
-你也需要遵从这个层次结构。这就是为何当角色名为 "author" 的情况下（译者注：`$item->name`就是角色名）， 
-`execute()` 方法在组为 1 或者 2 时均要返回 true 
+注意，在上述代码中，因为 "author" 作为 "admin" 的子角色，当你实现这个规则的 `execute()` 方法时，
+你也需要遵从这个层次结构。这就是为何当角色名为 "author" 的情况下（译者注：`$item->name`就是角色名），
+`execute()` 方法在组为 1 或者 2 时均要返回 true
 （意思是用户属于 "admin" 或者 "author" 组 ）。
 
 接下来，在配置 `authManager` 时指定 [[yii\rbac\BaseManager::$defaultRoles]] 选项（译者注：在应用配置文件中的组件部分配置）：
@@ -688,7 +675,7 @@ return [
 ];
 ```
 
-现在如果你执行一个存取权限检查， 判定该规则时， `admin` 和 `author` 
+现在如果你执行一个存取权限检查， 判定该规则时， `admin` 和 `author`
 两个角色都将会检查。如果规则返回 true ，意思是角色符合当前用户。基于上述规则
 的实现，意味着如果某用户的 `group` 值为 1 ， `admin` 角色将赋予该用户，
 如果 `group` 值是 2 则将赋予 `author` 角色。

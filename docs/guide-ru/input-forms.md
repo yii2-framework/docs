@@ -1,5 +1,4 @@
-Создание форм
-=============
+# Создание форм
 
 Основным способом использования форм в Yii является использование [[yii\widgets\ActiveForm]]. Этот подход должен быть
 применён, когда форма основана на модели. Кроме того, имеются дополнительные методы в [[yii\helpers\Html]], которые
@@ -55,7 +54,7 @@ $form = ActiveForm::begin([
 
 В вышеприведённом коде [[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]] не только создаёт экземпляр формы, но
 также и знаменует её начало. Весь контент, расположенный между [[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]]
-и [[yii\widgets\ActiveForm::end()|ActiveForm::end()]], будет завёрнут в HTML-тег `<form>`. Вы можете изменить некоторые 
+и [[yii\widgets\ActiveForm::end()|ActiveForm::end()]], будет завёрнут в HTML-тег `<form>`. Вы можете изменить некоторые
 настройки виджета через передачу массива в его `begin` метод, так же как и в любом другом виджете. В этом случае дополнительный CSS-класс и идентификатор будет прикреплён к открывающемуся тегу `<form>`. Для просмотра всех доступных настроек, пожалуйста, обратитесь к документации API [[yii\widgets\ActiveForm]].
 
 Для создания в форме элемента с меткой и любой применимой валидацией с помощью JavaScript, вызывается [[yii\widgets\ActiveForm::field()|ActiveForm::field()]], который возвращает экземпляр [[yii\widgets\ActiveField]]. Когда этот метод вызывается непосредственно, то результатом будет текстовый элемент (`input type="text"`). Для того, чтобы настроить элемент, можно вызвать один за другим дополнительные методы [[yii\widgets\ActiveField|ActiveField]]:
@@ -65,11 +64,11 @@ $form = ActiveForm::begin([
 echo $form->field($model, 'password')->passwordInput();
 // добавлена подсказка (hint) и настроена метка (label)
 echo $form->field($model, 'username')->textInput()->hint('Пожалуйста, введите имя')->label('Имя');
-// создание элемента HTML5 для ввода email 
+// создание элемента HTML5 для ввода email
 echo $form->field($model, 'email')->input('email');
 ```
 
-Впоследствии будут созданы `<label>`, `<input>` и другие теги в соответствии с [[yii\widgets\ActiveField::$template|template]], который определён в элементе. Имя элемента формы определяется автоматически из моделей [[yii\base\Model::formName()|form name]] 
+Впоследствии будут созданы `<label>`, `<input>` и другие теги в соответствии с [[yii\widgets\ActiveField::$template|template]], который определён в элементе. Имя элемента формы определяется автоматически из моделей [[yii\base\Model::formName()|form name]]
 и их атрибутов. Например, имя элемента для атрибута `username` в коде, приведённом выше, будет `LoginForm[username]`.
 Это правило именования будет учитываться на стороне сервера при получении массива результатов `$_POST['LoginForm']`
 для всех элементов формы входа (Login Form).
@@ -92,7 +91,7 @@ echo $form->field($model, 'items[]')->checkboxList(['a' => 'Item A', 'b' => 'Ite
 
 > Имена и идентификаторы форм и их элементов не должны совпадать с элементами форм, такими как `submit`, `length` или `method`. Конфликты имен могут вызывать трудно диагностируемые ошибки. Подробнее о способах избегания подобных проблем смотрите [DOMLint](https://kangax.github.io/domlint/).
 
-Дополнительные HTML-элементы можно добавить к форме, используя обычный HTML или методы из класса помощника [[yii\helpers\Html|Html]], как это было сделано с помощью [[yii\helpers\Html::submitButton()|Html::submitButton()]] в примере, приведённом выше. 
+Дополнительные HTML-элементы можно добавить к форме, используя обычный HTML или методы из класса помощника [[yii\helpers\Html|Html]], как это было сделано с помощью [[yii\helpers\Html::submitButton()|Html::submitButton()]] в примере, приведённом выше.
 
 > Tip: Если вы используете Twitter Bootstrap CSS в своём приложении, то воспользуйтесь [[yii\bootstrap\ActiveForm]] вместо [[yii\widgets\ActiveForm]]. Он добавит к ActiveForm дополнительные стили, которые сработают в рамках bootstrap CSS.
 
@@ -100,14 +99,12 @@ echo $form->field($model, 'items[]')->checkboxList(['a' => 'Item A', 'b' => 'Ite
 >
 > ```css
 > div.required label.control-label:after {
->     content: " *";
->     color: red;
+>   content: " *";
+>   color: red;
 > }
 > ```
 
-
-Создание выпадающего списка <span id="creating-activeform-dropdownlist"></span>
----------------------
+## Создание выпадающего списка <span id="creating-activeform-dropdownlist"></span>
 
 Для создания выпадающего списка можно использовать метод ActiveForm [[yii\widgets\ActiveField::dropDownList()|dropDownList()]]:
 
@@ -128,8 +125,7 @@ echo $form->field($model, 'product_category')->dropdownList(
 
 Текущее значение поля модели будет автоматически выбрано в списке.
 
-Работа с Pjax <span id="working-with-pjax"></span>
---------------
+## Работа с Pjax <span id="working-with-pjax"></span>
 
 Виджет [[yii\widgets\Pjax|Pjax]] позволяет обновлять определённую область страницы вместо
 перезагрузки всей страницы. Вы можете использовать его для обновления формы после её отсылки.
@@ -155,6 +151,7 @@ Pjax::begin([
     ActiveForm::end();
 Pjax::end();
 ```
+
 > Tip: Будьте осторожны со ссылками внутри виджета [[yii\widgets\Pjax|Pjax]] так как ответ будет
 > также отображаться внутри виджета. Чтобы ссылка работала без PJAX, добавьте к ней HTML-атрибут
 > `data-pjax="0"`.
@@ -167,13 +164,11 @@ Pjax::end();
 Они не будут исправлены и признаны устаревшими в пользу класса`FormData` из HTML5.
 
 Это означет, что поддержка файлов и значений submit-кнопок через AJAX или виджет
-[[yii\widgets\Pjax|Pjax]] зависит от 
+[[yii\widgets\Pjax|Pjax]] зависит от
 [поддержки в браузере](https://developer.mozilla.org/ru/docs/Web/API/FormData#%D1%81%D0%BE%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C)
 класса `FormData`.
 
-
-Ещё по теме <span id="further-reading"></span>
----------------
+## Ещё по теме <span id="further-reading"></span>
 
 Следующая глава [Валидация](input-validation.md) описывает валидацию отправленной формы как на стороне сервера,
 так и на стороне клиента.

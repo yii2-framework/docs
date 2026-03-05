@@ -98,7 +98,7 @@ use yii\helpers\Html;
 
 ## <div dir="rtl">تطبيق المثال</div> <span id="trying-it-out"></span>
 
--------------
+---
 
 <p dir="rtl">
 بعد إنشاء ال action وصفحة ال view،  يمكنك الوصول إلى الصفحة الجديدة عن طريق  عنوان URL التالي:

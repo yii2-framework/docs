@@ -1,5 +1,4 @@
-ブートストラップ
-================
+# ブートストラップ
 
 ブートストラップとは、アプリケーションが、入ってくるリクエストの解決と処理を開始する前に、環境を準備する過程を指すものです。
 ブートストラップは二つの場所、すなわち、[エントリ・スクリプト](structure-entry-scripts.md) と
@@ -13,19 +12,20 @@
 アプリケーションのコンストラクタでは、次のようなブートストラップの仕事が行われます。
 
 1. [[yii\base\Application::preInit()|preInit()]] が呼ばれます。
-  このメソッドは、いくつかの優先度の高いアプリケーション・プロパティ、例えば [[yii\base\Application::basePath|basePath]] などを構成します。
+   このメソッドは、いくつかの優先度の高いアプリケーション・プロパティ、例えば [[yii\base\Application::basePath|basePath]] などを構成します。
 2. [[yii\base\Application::errorHandler|エラー・ハンドラ]] を登録します。
 3. 与えられたアプリケーションの構成情報を使って、アプリケーションのプロパティを初期化します。
 4. [[yii\base\Application::init()|init()]] が呼ばれます。
-  そして `init()` が [[yii\base\Application::bootstrap()|bootstrap()]] を呼んで、ブートストラップ・コンポーネントを走らせます。
-  - エクステンション・マニフェスト・ファイル `vendor/yiisoft/extensions.php` をインクルードします。
-  - エクステンションによって宣言された [ブートストラップ・コンポーネント](structure-extensions.md#bootstrapping-classes)
-    を作成して実行します。
-  - アプリケーションの [bootstrap プロパティ](structure-applications.md#bootstrap) に宣言されている
-    [アプリケーション・コンポーネント](structure-application-components.md) および/または [モジュール](structure-modules.md)
-    を作成して実行します。
+   そして `init()` が [[yii\base\Application::bootstrap()|bootstrap()]] を呼んで、ブートストラップ・コンポーネントを走らせます。
 
-ブートストラップの仕事は *全て* のリクエストを処理する前に、毎回しなければなりませんので、
+- エクステンション・マニフェスト・ファイル `vendor/yiisoft/extensions.php` をインクルードします。
+- エクステンションによって宣言された [ブートストラップ・コンポーネント](structure-extensions.md#bootstrapping-classes)
+  を作成して実行します。
+- アプリケーションの [bootstrap プロパティ](structure-applications.md#bootstrap) に宣言されている
+  [アプリケーション・コンポーネント](structure-application-components.md) および/または [モジュール](structure-modules.md)
+  を作成して実行します。
+
+ブートストラップの仕事は _全て_ のリクエストを処理する前に、毎回しなければなりませんので、
 この過程を軽いものに保って可能な限り最適化することは非常に重要なことです。
 
 あまりに多くのブートストラップ・コンポーネントを登録しないように努めてください。
@@ -34,7 +34,7 @@
 のリストに挙げなければなりません。
 なぜなら、URL 規則を使ってリクエストが解決される前に、新しい URL 規則を有効にしなければならないからです。
 
-本番運用モードにおいては、[PHP OPCache] や [APC]  など、バイトコード・キャッシュを有効にして、
+本番運用モードにおいては、[PHP OPCache] や [APC] など、バイトコード・キャッシュを有効にして、
 PHP ファイルをインクルードして解析するのに要する時間を最小化してください。
 
 [PHP OPcache]: https://www.php.net/manual/ja/book.opcache.php

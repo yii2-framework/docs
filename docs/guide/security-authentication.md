@@ -1,5 +1,4 @@
-Authentication
-==============
+# Authentication
 
 Authentication is the process of verifying the identity of a user. It usually uses an identifier
 (e.g. a username or an email address) and a secret token (e.g. a password or an access token) to judge
@@ -8,9 +7,8 @@ if the user is the one whom he claims as. Authentication is the basis of the log
 Yii provides an authentication framework which wires up various components to support login. To use this framework,
 you mainly need to do the following work:
 
-* Configure the [[yii\web\User|user]] application component;
-* Create a class that implements the [[yii\web\IdentityInterface]] interface.
-
+- Configure the [[yii\web\User|user]] application component;
+- Create a class that implements the [[yii\web\IdentityInterface]] interface.
 
 ## Configuring [[yii\web\User]] <span id="configuring-user"></span>
 
@@ -30,26 +28,25 @@ return [
 ];
 ```
 
-
 ## Implementing [[yii\web\IdentityInterface]] <span id="implementing-identity"></span>
 
 The [[yii\web\User::identityClass|identity class]] must implement the [[yii\web\IdentityInterface]] which contains
 the following methods:
 
-* [[yii\web\IdentityInterface::findIdentity()|findIdentity()]]: it looks for an instance of the identity
+- [[yii\web\IdentityInterface::findIdentity()|findIdentity()]]: it looks for an instance of the identity
   class using the specified user ID. This method is used when you need to maintain the login status via session.
-* [[yii\web\IdentityInterface::findIdentityByAccessToken()|findIdentityByAccessToken()]]: it looks for
+- [[yii\web\IdentityInterface::findIdentityByAccessToken()|findIdentityByAccessToken()]]: it looks for
   an instance of the identity class using the specified access token. This method is used when you need
   to authenticate a user by a single secret token (e.g. in a stateless RESTful application).
-* [[yii\web\IdentityInterface::getId()|getId()]]: it returns the ID of the user represented by this identity instance.
-* [[yii\web\IdentityInterface::getAuthKey()|getAuthKey()]]: it returns a key used to validate session and auto-login in
+- [[yii\web\IdentityInterface::getId()|getId()]]: it returns the ID of the user represented by this identity instance.
+- [[yii\web\IdentityInterface::getAuthKey()|getAuthKey()]]: it returns a key used to validate session and auto-login in
   case it is enabled.
-* [[yii\web\IdentityInterface::validateAuthKey()|validateAuthKey()]]: it implements the logic for verifying
+- [[yii\web\IdentityInterface::validateAuthKey()|validateAuthKey()]]: it implements the logic for verifying
   authentication key.
 
 If a particular method is not needed, you may implement it with an empty body. For example, if your application
 is a pure stateless RESTful application, you would only need to implement [[yii\web\IdentityInterface::findIdentityByAccessToken()|findIdentityByAccessToken()]]
-and [[yii\web\IdentityInterface::getId()|getId()]] while leaving all other methods with an empty body. Or if your 
+and [[yii\web\IdentityInterface::getId()|getId()]] while leaving all other methods with an empty body. Or if your
 application uses session only authentication, you would need to implement all the methods except
 [[yii\web\IdentityInterface::findIdentityByAccessToken()|findIdentityByAccessToken()]].
 
@@ -140,10 +137,9 @@ class User extends ActiveRecord implements IdentityInterface
 ```
 
 > Note: Do not confuse the `User` identity class with [[yii\web\User]]. The former is the class implementing
-  the authentication logic. It is often implemented as an [Active Record](db-active-record.md) class associated
-  with some persistent storage for storing the user credential information. The latter is an application component
-  class responsible for managing the user authentication state.
-
+> the authentication logic. It is often implemented as an [Active Record](db-active-record.md) class associated
+> with some persistent storage for storing the user credential information. The latter is an application component
+> class responsible for managing the user authentication state.
 
 ## Using [[yii\web\User]] <span id="using-user"></span>
 
@@ -193,22 +189,21 @@ Yii::$app->user->logout();
 ```
 
 Note that logging out a user is only meaningful when session is enabled. The method will clean up
-the user authentication status from both memory and session. And by default, it will also destroy *all*
+the user authentication status from both memory and session. And by default, it will also destroy _all_
 user session data. If you want to keep the session data, you should call `Yii::$app->user->logout(false)`, instead.
-
 
 ## Authentication Events <span id="auth-events"></span>
 
 The [[yii\web\User]] class raises a few events during the login and logout processes.
 
-* [[yii\web\User::EVENT_BEFORE_LOGIN|EVENT_BEFORE_LOGIN]]: raised at the beginning of [[yii\web\User::login()]].
+- [[yii\web\User::EVENT_BEFORE_LOGIN|EVENT_BEFORE_LOGIN]]: raised at the beginning of [[yii\web\User::login()]].
   If the event handler sets the [[yii\web\UserEvent::isValid|isValid]] property of the event object to be `false`,
   the login process will be cancelled.
-* [[yii\web\User::EVENT_AFTER_LOGIN|EVENT_AFTER_LOGIN]]: raised after a successful login.
-* [[yii\web\User::EVENT_BEFORE_LOGOUT|EVENT_BEFORE_LOGOUT]]: raised at the beginning of [[yii\web\User::logout()]].
+- [[yii\web\User::EVENT_AFTER_LOGIN|EVENT_AFTER_LOGIN]]: raised after a successful login.
+- [[yii\web\User::EVENT_BEFORE_LOGOUT|EVENT_BEFORE_LOGOUT]]: raised at the beginning of [[yii\web\User::logout()]].
   If the event handler sets the [[yii\web\UserEvent::isValid|isValid]] property of the event object to be `false`,
   the logout process will be cancelled.
-* [[yii\web\User::EVENT_AFTER_LOGOUT|EVENT_AFTER_LOGOUT]]: raised after a successful logout.
+- [[yii\web\User::EVENT_AFTER_LOGOUT|EVENT_AFTER_LOGOUT]]: raised after a successful logout.
 
 You may respond to these events to implement features such as login audit, online user statistics. For example,
 in the handler for [[yii\web\User::EVENT_AFTER_LOGIN|EVENT_AFTER_LOGIN]], you may record the login time and IP

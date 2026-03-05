@@ -1,5 +1,4 @@
-收发邮件
-========
+# 收发邮件
 
 > Note: 本节正在开发中。
 
@@ -10,9 +9,7 @@ Yii 支持组成和发送电子邮件。然而，该框架提供的只有内容�
 
 大多数情况下你可以使用 [yii2-swiftmailer](https://github.com/yiisoft/yii2-swiftmailer) 官方扩展。
 
-
-配置
--------
+## 配置
 
 邮件组件配置取决于你所使用的扩展。
 一般来说你的应用程序配置应如下：
@@ -28,9 +25,7 @@ return [
 ];
 ```
 
-
-基本用法
----------
+## 基本用法
 
 一旦 “mailer” 组件被配置，可以使用下面的代码来发送邮件：
 
@@ -60,9 +55,9 @@ $message->setTo(Yii::$app->params['adminEmail'])
     ->send();
 ```
 
-> Note: 每个 “mailer” 的扩展也有两个主要类别：“Mailer” 
-  和 “Message”。 “Mailer” 总是知道类名和具体的 “Message”。
-  不要试图直接实例 “Message” 对象 - 而是始终使用 `compose()` 方法。
+> Note: 每个 “mailer” 的扩展也有两个主要类别：“Mailer”
+> 和 “Message”。 “Mailer” 总是知道类名和具体的 “Message”。
+> 不要试图直接实例 “Message” 对象 - 而是始终使用 `compose()` 方法。
 
 你也可以一次发送几封邮件：
 
@@ -78,9 +73,7 @@ Yii::$app->mailer->sendMultiple($messages);
 
 一些特定的扩展可能会受益于这种方法，使用单一的网络消息等。
 
-
-撰写邮件内容
-------------
+## 撰写邮件内容
 
 Yii 允许通过特殊的视图文件来撰写实际的邮件内容。默认情况下，
 这些文件应该位于 “@app/mail” 路径。
@@ -169,9 +162,7 @@ use yii\helpers\Html;
 <?php $this->endPage() ?>
 ```
 
-
-文件附件
----------
+## 文件附件
 
 你可以使用 `attach()` 和 `attachContent()` 方法来添加附件的信息：
 
@@ -185,9 +176,7 @@ $message->attach('/path/to/source/file.pdf');
 $message->attachContent('Attachment content', ['fileName' => 'attach.txt', 'contentType' => 'text/plain']);
 ```
 
-
-嵌入图片
----------
+## 嵌入图片
 
 你可以使用 `embed()` 方法将图片插入到邮件内容。
 此方法返回会图片 ID ，这将用在“img”标签中。
@@ -205,9 +194,7 @@ Yii::$app->mailer->compose('embed-email', ['imageFileName' => '/path/to/image.jp
 <img src="<?= $message->embed($imageFileName); ?>">
 ```
 
-
-测试和调试
------------
+## 测试和调试
 
 开发人员常常要检查一下，有什么电子邮件是由应用程序发送的，他们的内容是什么等。
 这可通过 `yii\mail\BaseMailer::useFileTransport` 来检查。
@@ -220,11 +207,9 @@ Yii::$app->mailer->compose('embed-email', ['imageFileName' => '/path/to/image.jp
 这种机制可以用来调试应用程序或运行单元测试。
 
 > Tip: 该邮件信息文件是会被 `\yii\mail\MessageInterface::toString()` 转成字符串保存的，
-  它依赖于实际在应用程序中使用的邮件扩展。
+> 它依赖于实际在应用程序中使用的邮件扩展。
 
-
-创建自己的邮件解决方案
-------------------------
+## 创建自己的邮件解决方案
 
 为了创建你自己的邮件解决方案，你需要创建两个类，一个用于 “Mailer”，另一个用于 “Message”。
 你可以使用 `yii\mail\BaseMailer` 和 `yii\mail\BaseMessage` 作为基类。

@@ -1,12 +1,10 @@
-Classe assistante ArrayHelper
-=============================
+# Classe assistante ArrayHelper
 
 En plus du jeu riche de [fonctions de tableaux](https://www.php.net/manual/fr/book.array.php) qu'offre PHP, la classe assistante traitant les tableaux dans Yii fournit des méthodes statiques supplémentaires qui vous permettent de traiter les tableaux avec plus d'efficacité.
 
-
 ## Obtention de valeurs <span id="getting-values"></span>
 
-Récupérer des valeurs d'un tableau ou d'un objet ou une structure complexe écrits tous deux en PHP standard est un processus assez répétitif. Vous devez d'abord vérifier que la clé existe avec `isset`, puis si c'est le cas, vous récupérez la valeur associée, sinon il vous faut fournir une valeur par défaut : 
+Récupérer des valeurs d'un tableau ou d'un objet ou une structure complexe écrits tous deux en PHP standard est un processus assez répétitif. Vous devez d'abord vérifier que la clé existe avec `isset`, puis si c'est le cas, vous récupérez la valeur associée, sinon il vous faut fournir une valeur par défaut :
 
 ```php
 class User
@@ -58,7 +56,6 @@ $type = ArrayHelper::remove($array, 'type');
 
 Après exécution du code, `$array` contiendra `['options' => [1, 2]]` et `$type` sera `A`. Notez que contrairement à la méthode `getValue`, `remove` accepte seulement les noms de clé.
 
-
 ## Tester l'existence des clés <span id="checking-existence-of-keys"></span>
 
 `ArrayHelper::keyExists` fonctionne comme [array_key_exists](https://www.php.net/manual/fr/function.array-key-exists.php) sauf qu'elle prend également en charge la comparaison de clés insensible à la casse. Par exemple,
@@ -79,7 +76,7 @@ if (!ArrayHelper::keyExists('username', $data1, false) || !ArrayHelper::keyExist
 
 ## Récupération de colonnes <span id="retrieving-columns"></span>
 
-Il arrive souvent que vous ayez à récupérer une colonne de valeurs d'un tableau de lignes de données ou d'objets. Un exemple courant est l'obtention d'une liste d'identifiants. 
+Il arrive souvent que vous ayez à récupérer une colonne de valeurs d'un tableau de lignes de données ou d'objets. Un exemple courant est l'obtention d'une liste d'identifiants.
 
 ```php
 $array = [
@@ -99,12 +96,11 @@ $result = ArrayHelper::getColumn($array, function ($element) {
 });
 ```
 
-
 ## Réindexation de tableaux <span id="reindexing-arrays"></span>
 
-La méthode `index` peut être utilisées pour indexer un tableau selon une clé spécifiée. L'entrée doit être soit un tableau multidimensionnel, soit un tableau d'objets. `$key` peut être un nom de clé du sous-tableau, un nom de propriété d'objet ou une fonction anonyme qui doit retourner la valeur à utiliser comme clé. 
+La méthode `index` peut être utilisées pour indexer un tableau selon une clé spécifiée. L'entrée doit être soit un tableau multidimensionnel, soit un tableau d'objets. `$key` peut être un nom de clé du sous-tableau, un nom de propriété d'objet ou une fonction anonyme qui doit retourner la valeur à utiliser comme clé.
 
-L'attribut `$groups` est un tableau de clés qui est utilisé pour regrouper le tableau d'entrée en un ou plusieurs sous-tableaux basés sur les clés spécifiées. 
+L'attribut `$groups` est un tableau de clés qui est utilisé pour regrouper le tableau d'entrée en un ou plusieurs sous-tableaux basés sur les clés spécifiées.
 
 Si l'argument `$key` ou sa valeur pour l'élément particulier est `null` alors que `$groups` n'est pas défini, l'élément du tableau est écarté. Autrement, si `$groups` est spécifié, l'élément du tableau est ajouté au tableau résultant sans aucune clé.
 
@@ -119,13 +115,13 @@ $array = [
 $result = ArrayHelper::index($array, 'id');
 ```
 
-Le résultat est un tableau associatif, dans lequel la clé est la valeur de l'attribut `id` : 
+Le résultat est un tableau associatif, dans lequel la clé est la valeur de l'attribut `id` :
 
 ```php
 [
     '123' => ['id' => '123', 'data' => 'abc', 'device' => 'laptop'],
     '345' => ['id' => '345', 'data' => 'hgi', 'device' => 'smartphone']
-    // Le second élément du tableau d'origine est écrasé par le dernier élément parce que les identifiants sont identiques. 
+    // Le second élément du tableau d'origine est écrasé par le dernier élément parce que les identifiants sont identiques.
 ]
 ```
 
@@ -143,7 +139,7 @@ Passer `id` comme troisième argument regroupe `$array` par `id`:
 $result = ArrayHelper::index($array, null, 'id');
 ```
 
-Le résultat est un tableau multidimensionnel regroupé par `id` au premier niveau et non indexé au deuxième niveau : 
+Le résultat est un tableau multidimensionnel regroupé par `id` au premier niveau et non indexé au deuxième niveau :
 
 ```php
 [
@@ -157,7 +153,7 @@ Le résultat est un tableau multidimensionnel regroupé par `id` au premier nive
 ]
 ```
 
-Une fonction anonyme peut également être utilisée dans le tableau de regroupement : 
+Une fonction anonyme peut également être utilisée dans le tableau de regroupement :
 
 ```php
 $result = ArrayHelper::index($array, 'data', [function ($element) {
@@ -187,7 +183,7 @@ Le résultat est un tableau multidimensionnel regroupé par `id` au premier nive
 
 ## Construction de tableaux de mise en correspondance <span id="building-maps"></span>
 
-Afin de construire un tableau de mise en correspondance (paires clé-valeur) sur la base d'un tableau multidimensionnel ou d'un tableau d'objets, vous pouvez utiliser la méthode `map`. 
+Afin de construire un tableau de mise en correspondance (paires clé-valeur) sur la base d'un tableau multidimensionnel ou d'un tableau d'objets, vous pouvez utiliser la méthode `map`.
 Les paramètres `$from` et `$to` spécifient les noms de clé ou les noms des propriétés pour construire le tableau de mise en correspondance. Le paramètre facultatif `$group` est un nom de clé ou de propriété qui permet de regrouper les éléments du tableau au premier niveau. Par exemple :
 
 ```php
@@ -217,7 +213,6 @@ $result = ArrayHelper::map($array, 'id', 'name', 'class');
 //     ],
 // ]
 ```
-
 
 ## Tri multidimensionnel <span id="multidimensional-sorting"></span>
 
@@ -254,7 +249,6 @@ Le troisième argument précise la direction. Dans le cas d'un tri selon une cl�
 
 Le dernier argument est une option de tri de PHP qui peut prendre les mêmes valeurs que celles acceptées par la fonction [sort()](https://www.php.net/manual/fr/function.sort.php) de PHP.
 
-
 ## Détection des types de tableau <span id="detecting-array-types"></span>
 
 Il est pratique de savoir si un tableau est indexé ou associatif. Voici un exemple :
@@ -269,7 +263,6 @@ $associative = ['framework' => 'Yii', 'version' => '2.0'];
 echo ArrayHelper::isAssociative($associative);
 ```
 
-
 ## Encodage et décodage de valeurs HTML <span id="html-encoding-values"></span>
 
 Afin d'encoder ou décoder des caractères spéciaux dans un tableau de chaînes de caractères en/depuis des entités HTML, vous pouvez utiliser les fonctions suivantes :
@@ -281,11 +274,10 @@ $decoded = ArrayHelper::htmlDecode($data);
 
 Seules les valeurs sont encodées par défaut. En passant un deuxième argument comme `false` vous pouvez également encoder les clés d'un tableau. L'encodage utilise le jeu de caractères de l'application et on peut le changer via un troisième argument.
 
-
 ## Fusion de tableaux <span id="merging-arrays"></span>
 
 La fonction [[yii\helpers\ArrayHelper::merge()|ArrayHelper::merge()]] vous permet de fusionner deux, ou plus, tableaux en un seul de manière récursive. Si chacun des tableaux possède un élément avec la même chaîne clé valeur, le dernier écrase le premier (ce qui est un fonctionnement différent de [array_merge_recursive()](https://www.php.net/manual/fr/function.array-merge-recursive.php)).
-La fusion récursive est entreprise si les deux tableaux possèdent un élément de type tableau avec la même clé. Pour des éléments dont la clé est un entier, les éléments du deuxième tableau sont ajoutés aux éléments du premier tableau. Vous pouvez utiliser l'objet [[yii\helpers\UnsetArrayValue]] pour supprimer la valeur du premier tableau ou [[yii\helpers\ReplaceArrayValue]] pour forcer le remplacement de la première valeur au lieu de la fusion récursive. 
+La fusion récursive est entreprise si les deux tableaux possèdent un élément de type tableau avec la même clé. Pour des éléments dont la clé est un entier, les éléments du deuxième tableau sont ajoutés aux éléments du premier tableau. Vous pouvez utiliser l'objet [[yii\helpers\UnsetArrayValue]] pour supprimer la valeur du premier tableau ou [[yii\helpers\ReplaceArrayValue]] pour forcer le remplacement de la première valeur au lieu de la fusion récursive.
 
 Par exemple :
 
@@ -343,7 +335,6 @@ Le résultat est :
 ]
 ```
 
-
 ## Conversion d'objets en tableaux <span id="converting-objects-to-arrays"></span>
 
 Il arrive souvent que vous ayez besoin de convertir un objet, ou un tableau d'objets, en tableau. Le cas le plus courant est la conversion de modèles d'enregistrements actifs afin de servir des tableaux de données via une API REST ou pour un autre usage. Le code suivant peut alors être utilisé :
@@ -364,16 +355,15 @@ $data = ArrayHelper::toArray($posts, [
 ]);
 ```
 
-Le premier argument contient les données à convertir. Dans notre cas, nous convertissons un modèle d'enregistrements actifs `Post`. 
+Le premier argument contient les données à convertir. Dans notre cas, nous convertissons un modèle d'enregistrements actifs `Post`.
 
 The second argument est un tableau de mise en correspondance de conversions par classe. Nous définissons une mise en correspondance pour le modèle `Post`. Chaque tableau de mise en correspondance contient un jeu de mise en correspondance. Chaque mise en correspondance peut être :
 
 - Un nom de champ à inclure tel quel.
-- Une paire clé-valeur dans laquelle la clé est donnée sous forme de chaîne de caractères et la valeur sous forme du nom de la colonne dont on doit prendre la valeur. 
-- Une paire clé-valeur dans laquelle la clé est donnée sous forme de chaîne de caractères et la valeur sous forme de fonction de rappel qui la retourne. 
+- Une paire clé-valeur dans laquelle la clé est donnée sous forme de chaîne de caractères et la valeur sous forme du nom de la colonne dont on doit prendre la valeur.
+- Une paire clé-valeur dans laquelle la clé est donnée sous forme de chaîne de caractères et la valeur sous forme de fonction de rappel qui la retourne.
 
 Le résultat de la conversion ci-dessus pour un modèle unique est :
-
 
 ```php
 [
@@ -399,6 +389,6 @@ ArrayHelper::isIn('a', ['a']);
 // true
 ArrayHelper::isIn('a', new ArrayObject(['a']));
 
-// true 
+// true
 ArrayHelper::isSubset(new ArrayObject(['a', 'c']), new ArrayObject(['a', 'b', 'c']));
 ```

@@ -1,12 +1,9 @@
-Trabajar con código de terceros
-===============================
+# Trabajar con código de terceros
 
 De tiempo en tiempo, puede necesitar usar algún código de terceros en sus aplicaciones Yii. O puedes querer
 utilizar Yii como una librería en otros sistemas de terceros. En esta sección, te enseñaremos cómo conseguir estos objetivos.
 
-
-Utilizar librerías de terceros en Yii <span id="using-libs-in-yii"></span>
--------------------------------------
+## Utilizar librerías de terceros en Yii <span id="using-libs-in-yii"></span>
 
 Para usar una librería en una aplicación Yii, primeramente debes de asegurarte que las clases en la librería
 son incluidas adecuadamente o pueden ser cargadas de forma automática.
@@ -38,7 +35,7 @@ En muchos casos, puedes necesitar descargar manualmente el fichero de la versió
 donde `BasePath` representa el [camino base (base path)](structure-applications.md#basePath) de tu aplicación.
 
 Si la librería lleva su propio cargador automático (autoloader), puedes instalarlo en [script de entrada](structure-entry-scripts.md) de tu aplicación.
-Es recomendable que la instalación se  termine antes de incluir el fichero `Yii.php` de forma que el cargador automático tenga precedencia al cargar
+Es recomendable que la instalación se termine antes de incluir el fichero `Yii.php` de forma que el cargador automático tenga precedencia al cargar
 de forma automática las clases.
 
 Si la librería no provee un cargador automático de clases, pero la denominación de sus clases sigue el [PSR-4](https://www.php-fig.org/psr/psr-4/),
@@ -56,28 +53,27 @@ Puedes incluir el siguiente código en la configuración de tu aplicación:
 ```
 
 Si ninguno de lo anterior es el caso, estaría bien que la librería dependa del camino de inclusión (include path) de configuración de PHP
-para localizar correctamente e incluir los ficheros  de las clases. Simplemente siguiendo estas instrucciones de cómo configurar el camino de inclusión de PHP.
+para localizar correctamente e incluir los ficheros de las clases. Simplemente siguiendo estas instrucciones de cómo configurar el camino de inclusión de PHP.
 
 En el caso más grave en el que la librería necesite incluir cada uno de sus ficheros de clases, puedes usar el siguiente método
 para incluir las clases según se pidan:
 
-* Identificar que clases contiene la librería.
-* Listar las clases y el camino a los archivos correspondientes en `Yii::$classMap`  en el script de entrada [script de entrada](structure-entry-scripts.md)
+- Identificar que clases contiene la librería.
+- Listar las clases y el camino a los archivos correspondientes en `Yii::$classMap` en el script de entrada [script de entrada](structure-entry-scripts.md)
   de la aplicación. Por ejemplo,
+
 ```php
 Yii::$classMap['Class1'] = 'path/to/Class1.php';
 Yii::$classMap['Class2'] = 'path/to/Class2.php';
 ```
 
-
-Utilizar Yii en Sistemas de Terceros <span id="using-yii-in-others"></span>
-------------------------------------
+## Utilizar Yii en Sistemas de Terceros <span id="using-yii-in-others"></span>
 
 Debido a que Yii provee muchas posibilidades excelentes, a veces puedes querer usar alguna de sus características para permitir
 el desarrollo o mejora de sistemas de terceros, como es WordPress, Joomla, o aplicaciones desarrolladas usando otros frameworks de PHP.
 Por ejemplo, puedes querer utilizar la clase [[yii\helpers\ArrayHelper]] o usar la característica [Active Record](db-active-record.md)
 en un sistema de terceros. Para lograr este objetivo, principalmente necesitas realizar dos pasos:
-instalar Yii , e iniciar  Yii.
+instalar Yii , e iniciar Yii.
 
 Si el sistema de terceros usa Composer para manejar sus dependencias, simplemente ejecuta estos comandos
 para instalar Yii:
@@ -132,9 +128,7 @@ el [componente de la aplicación](structure-application-components.md) `db` con 
 Ahora puedes usar muchas características provistas por Yii. Por ejemplo, puedes crear clases Active Record y usarlas
 para trabajar con bases de datos.
 
-
-Utilizar Yii 2 con Yii 1 <span id="using-both-yii2-yii1"></span>
-------------------------
+## Utilizar Yii 2 con Yii 1 <span id="using-both-yii2-yii1"></span>
 
 Si estaba usando Yii 1 previamente, es como si tuvieras una aplicación Yii 1 funcionando. En vez de reescribir
 toda la aplicación en Yii 2, puedes solamente mejorarla usando alguna de las características sólo disponibles en Yii 2.
@@ -183,7 +177,7 @@ Yii::$container = new yii\di\Container;
 ```
 
 ¡Esto es todo!. Ahora, en cualquier parte de tu código, puedes usar `Yii::$app` para acceder a la instancia de la aplicación de Yii 2,
-mientras `Yii::app()` proporciona la instancia de la aplicación de  Yii 1 :
+mientras `Yii::app()` proporciona la instancia de la aplicación de Yii 1 :
 
 ```php
 echo get_class(Yii::app()); // genera 'CWebApplication'

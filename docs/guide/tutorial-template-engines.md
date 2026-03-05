@@ -1,5 +1,4 @@
-Using template engines
-======================
+# Using template engines
 
 By default, Yii uses PHP as its template language, but you can configure Yii to support other rendering engines, such as
 [Twig](https://twig.symfony.com/) or [Smarty](https://www.smarty.net/) available as extensions.
@@ -41,6 +40,7 @@ your `composer.json` file to include them, too:
 "yiisoft/yii2-smarty": "~2.0.0",
 "yiisoft/yii2-twig": "~2.0.0",
 ```
+
 That code would be added to the `require` section of `composer.json`. After making that change and saving the file, you can install the extensions by running `composer update --prefer-dist` in the command-line.
 
 For details about using concrete template engine please refer to its documentation:

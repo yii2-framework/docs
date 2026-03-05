@@ -1,5 +1,4 @@
-Assets
-======
+# Assets
 
 Un asset en Yii es un archivo al que se puede hacer referencia en una página Web. Puede ser un archivo CSS, un archivo
 JavaScript, una imagen o un archivo de video, etc. Los assets se encuentran en los directorios públicos de la web y se
@@ -13,7 +12,7 @@ En este tutorial, se describirá la poderosa capacidad que proporciona la gesti�
 
 ## Asset Bundles <span id="asset-bundles"></span>
 
-Yii gestiona los assets en unidades de *asset bundle*. Un asset bundle es simplemente un conjunto de assets
+Yii gestiona los assets en unidades de _asset bundle_. Un asset bundle es simplemente un conjunto de assets
 localizados en un directorio. Cuando se registra un asset bundle en una [vista](structure-views.md), éste incluirá los
 archivos CSS y JavaScript del bundle en la página Web renderizada.
 
@@ -55,50 +54,50 @@ corresponde a la URL `@web`; el bundle contiene un único archivo CSS `css/site.
 el bundle depende de otros dos bundles: [[yii\web\YiiAsset]] y [[yii\bootstrap\BootstrapAsset]].
 A continuación se explicarán más detalladamente las propiedades del [[yii\web\AssetBundle]]:
 
-* [[yii\web\AssetBundle::sourcePath|sourcePath]]: especifica el directorio raíz que contiene los archivos asset en el
-  bundle.  Si no, se deben especificar las propiedades [[yii\web\AssetBundle::basePath|basePath]] y
+- [[yii\web\AssetBundle::sourcePath|sourcePath]]: especifica el directorio raíz que contiene los archivos asset en el
+  bundle. Si no, se deben especificar las propiedades [[yii\web\AssetBundle::basePath|basePath]] y
   [[yii\web\AssetBundle::baseUrl|baseUrl]], en su lugar. Se pueden usar [alias de ruta](concept-aliases.md).
-* [[yii\web\AssetBundle::basePath|basePath]]: especifica el directorio Web público que contiene los archivos assets de
+- [[yii\web\AssetBundle::basePath|basePath]]: especifica el directorio Web público que contiene los archivos assets de
   este bundle. Cuando se especifica la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]], el [gestor de
-  assets](#asset-manager) publicará los assets de este bundle en un directorio  Web público  y sobrescribirá la
+  assets](#asset-manager) publicará los assets de este bundle en un directorio Web público y sobrescribirá la
   propiedad en consecuencia. Se debe establecer esta propiedad si los archivos asset ya se encuentran en un directorio
   Web público y no necesitan ser publicados. Se pueden usar [alias de ruta](concept-aliases.md).
-* [[yii\web\AssetBundle::baseUrl|baseUrl]]: especifica la URL correspondiente al directorio
+- [[yii\web\AssetBundle::baseUrl|baseUrl]]: especifica la URL correspondiente al directorio
   [[yii\web\AssetBundle::basePath|basePath]]. Como en [[yii\web\AssetBundle::basePath|basePath]], si se especifica la
   propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]], el [gestor de assets](#asset-manager) publicara los assets
   y sobrescribirá esta propiedad en consecuencia. Se pueden usar [alias de ruta](concept-aliases.md).
-* [[yii\web\AssetBundle::js|js]]: un array lista los archivos JavaScript que contiene este bundle. Tenga en cuenta que
+- [[yii\web\AssetBundle::js|js]]: un array lista los archivos JavaScript que contiene este bundle. Tenga en cuenta que
   solo deben usarse las barras invertidas "/" como separadores de directorios. Cada archivo Javascript se puede
   especificar en uno de los siguientes formatos:
-    - una ruta relativa que represente un archivo local JavaScript (ej. `js/main.js`). La ruta actual del fichero
-      se puede determinar anteponiendo [[yii\web\AssetManager::basePath]] a la ruta relativa, y la URL actual de un
-      archivo puede ser determinada anteponiendo [[yii\web\AssetManager::baseUrl]] a la ruta relativa.
-    - una URL absoluta que represente un archivo JavaScript externo. Por ejemplo,
+  - una ruta relativa que represente un archivo local JavaScript (ej. `js/main.js`). La ruta actual del fichero
+    se puede determinar anteponiendo [[yii\web\AssetManager::basePath]] a la ruta relativa, y la URL actual de un
+    archivo puede ser determinada anteponiendo [[yii\web\AssetManager::baseUrl]] a la ruta relativa.
+  - una URL absoluta que represente un archivo JavaScript externo. Por ejemplo,
     `https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js` o
     `//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js`.
-* [[yii\web\AssetBundle::css|css]]: un array que lista los archivos CSS que contiene este bundle. El formato de este
+- [[yii\web\AssetBundle::css|css]]: un array que lista los archivos CSS que contiene este bundle. El formato de este
   array es el mismo que el de [[yii\web\AssetBundle::js|js]].
-* [[yii\web\AssetBundle::depends|depends]]: un array que lista los nombres de los asset bundles de los que depende este
+- [[yii\web\AssetBundle::depends|depends]]: un array que lista los nombres de los asset bundles de los que depende este
   asset bundle (para explicarlo brevemente).
-* [[yii\web\AssetBundle::jsOptions|jsOptions]]: especifica las opciones que se enviarán al método
-  [[yii\web\View::registerJsFile()]] cuando se le llame para registrar *todos* los archivos JavaScript de este bundle.
-* [[yii\web\AssetBundle::cssOptions|cssOptions]]: especifica las opciones que se enviarán al método
-  [[yii\web\View::registerCssFile()]] cuando se le llame para registrar *todos* los archivos CSS de este bundle.
-* [[yii\web\AssetBundle::publishOptions|publishOptions]]: especifica las opciones que se enviarán al método
+- [[yii\web\AssetBundle::jsOptions|jsOptions]]: especifica las opciones que se enviarán al método
+  [[yii\web\View::registerJsFile()]] cuando se le llame para registrar _todos_ los archivos JavaScript de este bundle.
+- [[yii\web\AssetBundle::cssOptions|cssOptions]]: especifica las opciones que se enviarán al método
+  [[yii\web\View::registerCssFile()]] cuando se le llame para registrar _todos_ los archivos CSS de este bundle.
+- [[yii\web\AssetBundle::publishOptions|publishOptions]]: especifica las opciones que se enviarán al método
   [[yii\web\AssetManager::publish()]] cuando se le llame para publicar los archivos de los assets fuente a un
   directorio Web.
-Solo se usa si se especifica la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]].
+  Solo se usa si se especifica la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]].
 
 ### Ubicación de los Assets <span id="asset-locations"></span>
 
 Según la localización de los assets, se pueden clasificar como:
 
-* assets fuente (source assets): los assets se encuentran junto con el código fuente PHP, al que no se puede acceder
+- assets fuente (source assets): los assets se encuentran junto con el código fuente PHP, al que no se puede acceder
   directamente a través de la Web. Para usar los assets fuente en una página, deben ser copiados en un directorio
-  público y transformados en los llamados assets publicados. El proceso se llama *publicación de assets* que será
+  público y transformados en los llamados assets publicados. El proceso se llama _publicación de assets_ que será
   descrito a continuación.
-* assets publicados (published assets): los archivos assets se encuentran en el directorio Web y son accesibles vía Web.
-* assets externos (external assets): los archivos assets se encuentran en un servidor Web diferente al de la aplicación.
+- assets publicados (published assets): los archivos assets se encuentran en el directorio Web y son accesibles vía Web.
+- assets externos (external assets): los archivos assets se encuentran en un servidor Web diferente al de la aplicación.
 
 Cuando se define una clase asset bundle, si se especifica la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]],
 significa que cualquier asset listado que use rutas relativas será considerado como un asset fuente. Si no se
@@ -115,8 +114,8 @@ fuente, en directorios que no son accesibles para la Web, se tiene que especific
 [[yii\web\AssetBundle::sourcePath|sourcePath]] cuando se definan clases asset bundle para ellas.
 
 > Note: No se debe usar `@webroot/assets` como [[yii\web\AssetBundle::sourcePath|source path]]. Este directorio se usa
-  por defecto por el [[yii\web\AssetManager|asset manager]] para guardar los archivos asset publicados temporalmente y
-  pueden ser eliminados.
+> por defecto por el [[yii\web\AssetManager|asset manager]] para guardar los archivos asset publicados temporalmente y
+> pueden ser eliminados.
 
 ### Dependencias de los Asset <span id="asset-dependencies"></span>
 
@@ -127,7 +126,7 @@ llama ordenar las dependencias entre archivos.
 
 Las dependencias de los assets se especifican principalmente a través de la propiedad [[yii\AssetBundle::depends]].
 En el ejemplo `AppAsset`, el asset bundle depende de otros dos asset bundles [[yii\web\YiiAsset]] y
-[[yii\bootstrap\BootstrapAsset]], que significa que los archivos CSS y JavaScript en `AppAsset` se incluirán *después*
+[[yii\bootstrap\BootstrapAsset]], que significa que los archivos CSS y JavaScript en `AppAsset` se incluirán _después_
 que los archivos de los dos bundles dependientes.
 
 Las dependencias son transitivas. Esto significa, que si un bundle A depende de un bundle B que depende de C, A
@@ -141,12 +140,12 @@ incluidos en una página. Los valores de estas propiedades serán enviadas a los
 [[yii\web\View::registerCssFile()]] y [[yii\web\View::registerJsFile()]], respectivamente cuando las
 [vistas](structure-views.md) los llamen para incluir los archivos CSS y JavaScript.
 
-> Note: Las opciones que se especifican en una clase bundle se aplican a *todos* los archivos CSS/JavaScript de un
-  bundle. Si se quiere usar diferentes opciones para diferentes archivos, se deben crear assets bundles separados y
-  usar un conjunto de opciones para cada bundle.
+> Note: Las opciones que se especifican en una clase bundle se aplican a _todos_ los archivos CSS/JavaScript de un
+> bundle. Si se quiere usar diferentes opciones para diferentes archivos, se deben crear assets bundles separados y
+> usar un conjunto de opciones para cada bundle.
 
 Por ejemplo, para incluir una archivo CSS condicionalmente para navegadores que como IE9 o anteriores, se puede usar la
-  siguiente opción:
+siguiente opción:
 
 ```php
 public $cssOptions = ['condition' => 'lte IE9'];
@@ -156,7 +155,7 @@ Esto provoca que un archivo CSS dentro de un bundle sea incluido usando los sigu
 
 ```html
 <!--[if lte IE9]>
-<link rel="stylesheet" href="path/to/foo.css">
+  <link rel="stylesheet" href="path/to/foo.css" />
 <![endif]-->
 ```
 
@@ -167,7 +166,7 @@ public $cssOptions = ['noscript' => true];
 ```
 
 Para incluir un archivo JavaScript en la sección cabecera (head) de una página (por defecto, los archivos JavaScript se
-  incluyen al final de la sección cuerpo(body)), se puede usar el siguiente código:
+incluyen al final de la sección cuerpo(body)), se puede usar el siguiente código:
 
 ```php
 public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
@@ -209,19 +208,19 @@ la opción de publicación `beforeCopy`, solo los subdirectorios `fonts` y `css`
 
 La mayoría de paquetes JavaScript/CSS se gestionan con [Bower](https://bower.io/) y/o [NPM](https://www.npmjs.com/).
 Si tu aplicación o extensión usa estos paquetes, se recomienda seguir los siguientes pasos para gestionar los assets en
-  la librería:
+la librería:
 
 1. Modificar el archivo `composer.json` de tu aplicación o extensión e introducir el paquete en la lista `require`.
-  Se debe usar `bower-asset/PackageName` (para paquetes Bower) o `npm-asset/PackageName` (para paquetes NPM) para
-  referenciar la librería.
+   Se debe usar `bower-asset/PackageName` (para paquetes Bower) o `npm-asset/PackageName` (para paquetes NPM) para
+   referenciar la librería.
 2. Crear una clase asset bundle y listar los archivos JavaScript/CSS que se planea usar en la aplicación o extensión.
-  Se debe especificar la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]] como `@bower\PackageName` o
-  `@npm\PackageName`. Esto se debe a que Composer instalará el paquete Bower o NPM en el correspondiente directorio de
-    este alias.
+   Se debe especificar la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]] como `@bower\PackageName` o
+   `@npm\PackageName`. Esto se debe a que Composer instalará el paquete Bower o NPM en el correspondiente directorio de
+   este alias.
 
 > Note: Algunos paquetes pueden distribuir sus archivos en subdirectorios. Si es el caso, se debe especificar el
-  subdirectorio como valor del [[yii\web\AssetBundle::sourcePath|sourcePath]]. Por ejemplo, [[yii\web\JqueryAsset]]
-  usa `@bower/jquery/dist` en vez de `@bower/jquery`.
+> subdirectorio como valor del [[yii\web\AssetBundle::sourcePath|sourcePath]]. Por ejemplo, [[yii\web\JqueryAsset]]
+> usa `@bower/jquery/dist` en vez de `@bower/jquery`.
 
 ## Uso de Asset Bundles <span id="using-asset-bundles"></span>
 
@@ -235,8 +234,8 @@ AppAsset::register($this);  // $this representa el objeto vista
 ```
 
 > Info: El método [[yii\web\AssetBundle::register()]] devuelve un objeto asset bundle que contiene la
-  información acerca de los assets publicados, tales como [[yii\web\AssetBundle::basePath|basePath]] o
-  [[yii\web\AssetBundle::baseUrl|baseUrl]].
+> información acerca de los assets publicados, tales como [[yii\web\AssetBundle::basePath|basePath]] o
+> [[yii\web\AssetBundle::baseUrl|baseUrl]].
 
 Si se registra un asset bundle en otro lugar, se debe proporcionar la vista necesaria al objeto. Por ejemplo, para
 registrar un asset bundle en una clase [widget](structure-widgets.md), se puede obtener el objeto vista mediante
@@ -244,7 +243,7 @@ registrar un asset bundle en una clase [widget](structure-widgets.md), se puede 
 
 Cuando se registra un asset bundle con una vista, por detrás, Yii registrará todos sus asset bundles dependientes.
 Y si un asset bundle se encuentra en un directorio inaccesible por la Web, éste será publicado a un directorio Web
-público. Después cuando la vista renderice una página, se generarán las etiquetas (tags) `<link>` y `<script>`  para
+público. Después cuando la vista renderice una página, se generarán las etiquetas (tags) `<link>` y `<script>` para
 los archivos CSS y JavaScript listados en los bundles registrados. El orden de estas etiquetas será determinado por
 las dependencias entre los bundles registrados y los otros assets listados en las propiedades
 [[yii\web\AssetBundle::css]] y [[yii\web\AssetBundle::js]].
@@ -278,10 +277,10 @@ return [
 
 Del mismo modo, se pueden configurar múltiples asset bundles a través de [[yii\web\AssetManager::bundles]]. Las claves
 del array deben ser los nombres de clase (sin la primera barra invertida) de los asset bundles, y los valores del array
-  deben ser las correspondientes [configuraciones de arrays](concept-configurations.md).
+deben ser las correspondientes [configuraciones de arrays](concept-configurations.md).
 
 > Tip: Se puede elegir condicionalmente que assets se van a usar en un asset bundle. El siguiente ejemplo
-muestra como usar `jquery.js` en el entorno de desarrollo y `jquery.min.js` en los otros casos:
+> muestra como usar `jquery.js` en el entorno de desarrollo y `jquery.min.js` en los otros casos:
 >
 > ```php
 > 'yii\web\JqueryAsset' => [
@@ -309,14 +308,14 @@ return [
 ];
 ```
 
-Además se pueden deshabilitar *todos* los asset bundles asignando `false` a [[yii\web\AssetManager::bundles]].
+Además se pueden deshabilitar _todos_ los asset bundles asignando `false` a [[yii\web\AssetManager::bundles]].
 
 ### Mapeo de Assets (Asset Mapping) <span id="asset-mapping"></span>
 
 A veces se puede querer "arreglar" rutas de archivos incorrectos/incompatibles usadas en múltiples asset bundles.
 Por ejemplo, el bundle A usa `jquery.min.js` con versión 1.11.1, y el bundle B usa `jquery.js` con versión 2.11.1.
 Mientras que se puede solucionar el problema personalizando cada bundle, una forma más fácil, es usar la
-característica *asset map* para mapear los assets incorrectos a los deseados. Para hacerlo, se tiene que configurar la
+característica _asset map_ para mapear los assets incorrectos a los deseados. Para hacerlo, se tiene que configurar la
 propiedad [[yii\web\AssetManager::assetMap]] como en el siguiente ejemplo:
 
 ```php
@@ -341,13 +340,13 @@ registrado con la vista.
 Por ejemplo, un archivo asset `mi/ruta/a/jquery.js` concuerda con la clave `jquery.js`.
 
 > Note: Sólo los assets especificados usando rutas relativas están sujetos al mapeo de assets. Y las rutas de los
-assets destino deben ser tanto URLs absolutas o rutas relativas a [[yii\web\AssetManager::basePath]].
+> assets destino deben ser tanto URLs absolutas o rutas relativas a [[yii\web\AssetManager::basePath]].
 
 ### Publicación de Asset <span id="asset-publishing"></span>
 
 Como se ha comentado anteriormente, si un asset bundle se encuentra en un directorio que no es accesible por la Web,
 este asset será copiado a un directorio Web cuando se registre el bundle con una vista. Este proceso se llama
-*publicación de assets*, y se efectúa automáticamente por el [[yii\web\AssetManager|asset manager]].
+_publicación de assets_, y se efectúa automáticamente por el [[yii\web\AssetManager|asset manager]].
 
 De forma predeterminada, los assets se publican en el directorio `@webroot/assets` cuando corresponden a la URL
 `@web\assets`. Se puede personalizar esta ubicación configurando las propiedades
@@ -460,9 +459,9 @@ Los tokens `{from}` y `{to}` en los comandos se reemplazarán por las rutas de o
 de destino de los archivos asset.
 
 > Info: Hay otras maneras de trabajar con las assets de sintaxis extendidas, además de la descrita
-  anteriormente. Por ejemplo, se pueden usar herramientas generadoras tales como [grunt](https://gruntjs.com/) para
-  monitorear y convertir automáticamente los assets de sintaxis extendidas. En este caso, se deben listar los archivos
-  CSS/JavaScript resultantes en lugar de los archivos de originales.
+> anteriormente. Por ejemplo, se pueden usar herramientas generadoras tales como [grunt](https://gruntjs.com/) para
+> monitorear y convertir automáticamente los assets de sintaxis extendidas. En este caso, se deben listar los archivos
+> CSS/JavaScript resultantes en lugar de los archivos de originales.
 
 ## Combinación y Compresión de Assets <span id="combining-compressing-assets"></span>
 
@@ -470,9 +469,9 @@ Una página web puede incluir muchos archivos CSS y/o JavaScript. Para reducir e
 HTTP y el tamaño total de descarga de estos archivos, una práctica común es combinar y comprimir uno o
 varios archivos, y después incluir los archivos comprimidos en las páginas Web.
 
->Información: La combinación y compresión de assets es habitualmente necesario cuando una aplicación se encuentra en
-modo de producción. En modo de desarrollo, es más conveniente usar los archivos CSS/JavaScript originales por temas
-relacionados con el debugging.
+> Información: La combinación y compresión de assets es habitualmente necesario cuando una aplicación se encuentra en
+> modo de producción. En modo de desarrollo, es más conveniente usar los archivos CSS/JavaScript originales por temas
+> relacionados con el debugging.
 
 En el siguiente ejemplo, se muestra una propuesta para combinar y comprimir archivos asset sin necesidad de modificar
 el código de la aplicación.
@@ -481,10 +480,10 @@ el código de la aplicación.
 2. Dividir estos bundles en uno o más grupos. Tenga en cuenta que cada bundle solo puede pertenecer a un único grupo.
 3. Combina/Comprime los archivos CSS de cada grupo en un único archivo. Hace lo mismo para los archivos JavaScript.
 4. Define un nuevo asset bundle para cada grupo:
-    * Establece las propiedades [[yii\web\AssetBundle::css|css]] y [[yii\web\AssetBundle::js|js]] para que sean los
-      archivos CSS y JavaScript combinados, respectivamente.
-    * Personaliza los asset bundles en cada grupo configurando sus propiedades [[yii\web\AssetBundle::css|css]] y
-      [[yii\web\AssetBundle::js|js]] para que sean el nuevo asset bundle creado para el grupo.
+   - Establece las propiedades [[yii\web\AssetBundle::css|css]] y [[yii\web\AssetBundle::js|js]] para que sean los
+     archivos CSS y JavaScript combinados, respectivamente.
+   - Personaliza los asset bundles en cada grupo configurando sus propiedades [[yii\web\AssetBundle::css|css]] y
+     [[yii\web\AssetBundle::js|js]] para que sean el nuevo asset bundle creado para el grupo.
 
 Usando este propuesta, cuando se registre un asset bundle en una vista, se genera un registro automático del nuevo
 asset bundle para el grupo al que pertenece el bundle original. Y como resultado, los archivos combinados/comprimidos
@@ -505,8 +504,8 @@ más grandes y por tanto incrementan el tiempo de transmisión del archivo inici
 opción, ej., usar un único grupo que contenga todos los bundles.
 
 > Info: Dividiendo los asset bundles en grupos no es una tarea trivial. Normalmente requiere un análisis de los
-  datos del tráfico real de varios assets en diferentes páginas. Al principio, se puede empezar con un
-  único grupo para simplificar.
+> datos del tráfico real de varios assets en diferentes páginas. Al principio, se puede empezar con un
+> único grupo para simplificar.
 
 Se pueden usar herramientas existentes (ej. [Closure Compiler](https://developers.google.com/closure/compiler/),
 [YUI Compressor](https://github.com/yui/yuicompressor/)) para combinar y comprimir todos los bundles. Hay que tener en
@@ -619,7 +618,7 @@ Se debe modificar este archivo para especificar que bundles plantea combinar en 
 como se ha comentado.
 
 > Note: Debido a que los alias `@webroot` y `@web` no están disponibles en la aplicación de consola, se deben definir
-  explícitamente en la configuración.
+> explícitamente en la configuración.
 
 Los archivos JavaScript se combinan, comprimen y guardan en `js/all-{hash}.js` donde {hash} se reemplaza con el hash
 del archivo resultante.
@@ -641,5 +640,5 @@ El archivo de configuración generado se puede incluir en la configuración de l
 anterior subsección.
 
 > Info: Usar el comando `asset` no es la única opción de automatizar el proceso de combinación y compresión.
-  Se puede usar la excelente herramienta de ejecución de tareas [grunt](https://gruntjs.com/) para lograr el mismo
-  objetivo.
+> Se puede usar la excelente herramienta de ejecución de tareas [grunt](https://gruntjs.com/) para lograr el mismo
+> objetivo.

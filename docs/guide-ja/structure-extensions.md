@@ -1,5 +1,4 @@
-エクステンション
-================
+# エクステンション
 
 エクステンションは、Yii のアプリケーションで使われることに限定して設計され、そのまますぐに使える機能を提供する再配布可能なソフトウェア・パッケージです。
 例えば、[yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug) エクステンションは、あなたのアプリケーションにおいて、全てのページの末尾に便利なデバッグ・ツールバーを追加して、
@@ -8,8 +7,7 @@
 また、あなたのコードをエクステンションとしてパッケージ化すると、あなたの優れた仕事を他の人たちと共有することが出来ます。
 
 > Info: 「エクステンション」という用語は Yii に限定されたソフトウェア・パッケージを指すものとして使用します。
-  Yii がなくても使用できる汎用のソフトウェア・パッケージを指すためには、「パッケージ」または「ライブラリ」という用語を使うことにします。
-
+> Yii がなくても使用できる汎用のソフトウェア・パッケージを指すためには、「パッケージ」または「ライブラリ」という用語を使うことにします。
 
 ## エクステンションを使う <span id="using-extensions"></span>
 
@@ -34,13 +32,13 @@ Composer は依存関係を管理するものですから、あるパッケー�
 
 ```json
 {
-    // ...
+  // ...
 
-    "require": {
-        // ... 他の依存パッケージ
+  "require": {
+    // ... 他の依存パッケージ
 
-        "yiisoft/yii2-imagine": "*"
-    }
+    "yiisoft/yii2-imagine": "*"
+  }
 }
 ```
 
@@ -48,8 +46,8 @@ Composer は依存関係を管理するものですから、あるパッケー�
 それと同時に、`imagine/imagine` という別のディレクトリも作られて、依存するパッケージがそこにインストールされている筈です。
 
 > Info: `yiisoft/yii2-imagine` は Yii 開発チームによって開発され保守されるコア・エクステンションの一つです。
-  全てのコア・エクステンションは [Packagist](https://packagist.org/) でホストされ、`yiisoft/yii2-xyz` のように名付けられます。
-  ここで `xyz` はエクステンションによってさまざまに変ります。
+> 全てのコア・エクステンションは [Packagist](https://packagist.org/) でホストされ、`yiisoft/yii2-xyz` のように名付けられます。
+> ここで `xyz` はエクステンションによってさまざまに変ります。
 
 これであなたはインストールされたエクステンションをあなたのアプリケーションの一部であるかのように使うことが出来ます。
 次の例は、`yiisoft/yii2-imagine` エクステンションによって提供される `yii\imagine\Image` クラスをどのようにして使うことが出来るかを示すものです。
@@ -64,7 +62,6 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 ```
 
 > Info: エクステンションのクラスは [Yii クラス・オートローダ](concept-autoloading.md) によってオートロードされます。
-
 
 ### エクステンションを手作業でインストールする <span id="installing-extensions-manually"></span>
 
@@ -89,7 +86,6 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 ]
 ```
 
-
 ## エクステンションを作成する <span id="creating-extensions"></span>
 
 あなたの優れたコードを他の人々と共有する必要があると感じたときは、エクステンションを作成することを考慮するのが良いでしょう。
@@ -101,12 +97,11 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 以下は、エクステンションを Composer のパッケージとして作成するために踏む基本的なステップです。
 
 1. エクステンションのためのプロジェクトを作成して、[github.com](https://github.com) などの VCS レポジトリ上でホストします。
-  エクステンションに関する開発と保守の作業はこのレポジトリ上でしなければなりません。
+   エクステンションに関する開発と保守の作業はこのレポジトリ上でしなければなりません。
 2. プロジェクトのルート・ディレクトリに、Composer によって要求される `composer.json` という名前のファイルを作成します。
-  詳細については、次の項を参照してください。
+   詳細については、次の項を参照してください。
 3. エクステンションを [Packagist](https://packagist.org/) などの Composer レポジトリに登録します。
-  そうすると、他のユーザがエクステンションを見つけて Composer を使ってインストールすることが出来るようになります。
-
+   そうすると、他のユーザがエクステンションを見つけて Composer を使ってインストールすることが出来るようになります。
 
 ### `composer.json` <span id="composer-json"></span>
 
@@ -116,44 +111,43 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 
 ```json
 {
-    // パッケージ名
-    "name": "yiisoft/yii2-imagine",
+  // パッケージ名
+  "name": "yiisoft/yii2-imagine",
 
-    // パッケージタイプ
-    "type": "yii2-extension",
+  // パッケージタイプ
+  "type": "yii2-extension",
 
-    "description": "The Imagine integration for the Yii framework",
-    "keywords": ["yii2", "imagine", "image", "helper"],
-    "license": "BSD-3-Clause",
-    "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?labels=ext%3Aimagine",
-        "forum": "https://forum.yiiframework.com/",
-        "wiki": "https://www.yiiframework.com/wiki/",
-        "irc": "ircs://irc.libera.chat:6697/yii",
-        "source": "https://github.com/yiisoft/yii2"
-    },
-    "authors": [
-        {
-            "name": "Antonio Ramirez",
-            "email": "amigo.cobos@gmail.com"
-        }
-    ],
-
-    // 依存パッケージ
-    "require": {
-        "yiisoft/yii2": "~2.0.0",
-        "imagine/imagine": "v0.5.0"
-    },
-
-    // クラスのオートロードの仕様
-    "autoload": {
-        "psr-4": {
-            "yii\\imagine\\": ""
-        }
+  "description": "The Imagine integration for the Yii framework",
+  "keywords": ["yii2", "imagine", "image", "helper"],
+  "license": "BSD-3-Clause",
+  "support": {
+    "issues": "https://github.com/yiisoft/yii2/issues?labels=ext%3Aimagine",
+    "forum": "https://forum.yiiframework.com/",
+    "wiki": "https://www.yiiframework.com/wiki/",
+    "irc": "ircs://irc.libera.chat:6697/yii",
+    "source": "https://github.com/yiisoft/yii2"
+  },
+  "authors": [
+    {
+      "name": "Antonio Ramirez",
+      "email": "amigo.cobos@gmail.com"
     }
+  ],
+
+  // 依存パッケージ
+  "require": {
+    "yiisoft/yii2": "~2.0.0",
+    "imagine/imagine": "v0.5.0"
+  },
+
+  // クラスのオートロードの仕様
+  "autoload": {
+    "psr-4": {
+      "yii\\imagine\\": ""
+    }
+  }
 }
 ```
-
 
 #### パッケージ名 <span id="package-name"></span>
 
@@ -166,7 +160,6 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 プロジェクト名には、Yii 2 エクステンションを表す `yii2-` を前置することを推奨します。例えば、`myname/yii2-mywidget` です。
 このようにすると、ユーザはパッケージが Yii 2 エクステンションであることをより容易に知ることが出来ます。
 
-
 #### パッケージ・タイプ <span id="package-type"></span>
 
 パッケージがインストールされたときに Yii のエクステンションとして認識されるように、エクステンションのパッケージ・タイプを `yii2-extension` と指定することは重要なことです。
@@ -175,7 +168,6 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 `vendor/yiisoft/extensions.php` というファイルが自動的に更新されて、新しいエクステンションに関する情報を含むようになります。
 Yii のアプリケーションは、このファイルによって、どんなエクステンションがインストールされているかを知ることが出来ます
 (その情報には、[[yii\base\Application::extensions]] を通じてアクセスすることが出来ます)。
-
 
 #### 依存パッケージ <span id="dependencies"></span>
 
@@ -191,10 +183,10 @@ Yii は [Composer アセット・プラグイン](https://github.com/fxpio/compo
 
 ```json
 {
-    // 依存パッケージ
-    "require": {
-        "bower-asset/jquery": ">=1.11.*"
-    }
+  // 依存パッケージ
+  "require": {
+    "bower-asset/jquery": ">=1.11.*"
+  }
 }
 ```
 
@@ -206,7 +198,6 @@ Composer が Bower または NPM のパッケージをインストールする�
 
 アセット管理に関する詳細については、[アセット](structure-assets.md#bower-npm-assets) のセクションを参照してください。
 
-
 #### クラスのオートロード <span id="class-autoloading"></span>
 
 エクステンションのクラスが Yii のクラス・オートローダまたは Composer のクラス・オートローダによってオートロードされるように、
@@ -214,13 +205,13 @@ Composer が Bower または NPM のパッケージをインストールする�
 
 ```json
 {
-    // ....
+  // ....
 
-    "autoload": {
-        "psr-4": {
-            "yii\\imagine\\": ""
-        }
+  "autoload": {
+    "psr-4": {
+      "yii\\imagine\\": ""
     }
+  }
 }
 ```
 
@@ -230,12 +221,10 @@ Composer が Bower または NPM のパッケージをインストールする�
 名前空間に対応するディレクトリを指す [エイリアス](concept-aliases.md#extension-aliases) を作成します。
 例えば、上記の `autoload` の宣言は、`@yii/imagine` という名前のエイリアスに対応することになります。
 
-
 ### 推奨されるプラクティス <span id="recommended-practices"></span>
 
 エクステンションは他の人々によって使われることを意図したものですから、多くの場合、追加の開発努力が必要になります。
 以下に、高品質のエクステンションを作成するときによく用いられ、また推奨されるプラクティスのいくつかを紹介します。
-
 
 #### 名前空間 <span id="namespaces"></span>
 
@@ -249,7 +238,6 @@ Composer が Bower または NPM のパッケージをインストールする�
 
 `yii`、`yii2` または `yiisoft` をベンダー名として使ってはいけません。これらの名前は、Yii のコア・コードに使うために予約されています。
 
-
 #### ブートストラップ・クラス <span id="bootstrapping-classes"></span>
 
 場合によっては、アプリケーションが [ブートストラップ](runtime-bootstrapping.md) の段階にある間に、エクステンションに何らかのコードを実行させたい場合があるでしょう。
@@ -257,7 +245,7 @@ Composer が Bower または NPM のパッケージをインストールする�
 エクステンションのユーザに対して、エクステンションの中にあるイベント・ハンドラを `beginRequest`
 イベントに明示的にアタッチするように指示することも出来ますが、より良い方法は、それを自動的に行うことです。
 
-この目的を達するためには、[[yii\base\BootstrapInterface]] を実装する、いわゆる *ブートストラップ・クラス* を作成します。
+この目的を達するためには、[[yii\base\BootstrapInterface]] を実装する、いわゆる _ブートストラップ・クラス_ を作成します。
 例えば、
 
 ```php
@@ -281,18 +269,17 @@ class MyBootstrapClass implements BootstrapInterface
 
 ```json
 {
-    // ...
+  // ...
 
-    "extra": {
-        "bootstrap": "myname\\mywidget\\MyBootstrapClass"
-    }
+  "extra": {
+    "bootstrap": "myname\\mywidget\\MyBootstrapClass"
+  }
 }
 ```
 
 このエクステンションがアプリケーションにインストールされると、すべてのリクエストのブートストラップの過程において、
 毎回、Yii が自動的にブートストラップ・クラスのインスタンスを作成し、
 その [[yii\base\BootstrapInterface::bootstrap()|bootstrap()]] メソッドを呼びます。
-
 
 #### データベースを扱う <span id="working-with-databases"></span>
 
@@ -307,7 +294,6 @@ class MyBootstrapClass implements BootstrapInterface
 - マイグレーションがさまざまな DBMS に適用可能なものになるように試みる。
 - マイグレーションの中では [アクティブ・レコード](db-active-record.md) の使用を避ける。
 
-
 #### アセットを使う <span id="using-assets"></span>
 
 あなたのエクステンションがウィジェットかモジュールである場合は、動作するために何らかの [アセット](structure-assets.md) が必要である可能性が高いでしょう。
@@ -317,11 +303,10 @@ class MyBootstrapClass implements BootstrapInterface
 
 - アセット・ファイルをウェブからアクセス出来る特定のフォルダに手作業でコピーするように、エクステンションのユーザに要求する。
 - [アセット・バンドル](structure-assets.md) を宣言し、アセット発行メカニズムに頼って、
-アセット・バンドルにリストされているファイルをウェブからアクセス出来るフォルダに自動的にコピーする。
+  アセット・バンドルにリストされているファイルをウェブからアクセス出来るフォルダに自動的にコピーする。
 
 あなたのエクステンションが他の人々にとって一層使いやすいものになるように、第二の方法をとることを推奨します。
 アセットの取り扱い一般に関する詳細は [アセット](structure-assets.md) のセクションを参照してください。
-
 
 #### 国際化と地域化 <span id="i18n-l10n"></span>
 
@@ -336,7 +321,6 @@ class MyBootstrapClass implements BootstrapInterface
 
 詳細については、[国際化](tutorial-i18n.md) のセクションを参照してください。
 
-
 #### テスト <span id="testing"></span>
 
 あなたは、あなたのエクステンションが他の人々に問題をもたらすことなく完璧に動作することを望むでしょう。
@@ -347,12 +331,10 @@ class MyBootstrapClass implements BootstrapInterface
 Yii はテストのサポートを提供しており、それよって、単体テスト、機能テスト、受入テストを書くことが一層簡単に出来るようになっています。
 詳細については、[テスト](test-overview.md) のセクションを参照してください。
 
-
 #### バージョン管理 <span id="versioning"></span>
 
 エクステンションのリリースごとにバージョン番号 (例えば `1.0.1`) を付けるべきです。
 どのようなバージョン番号を付けるべきかを決定するときは、[セマンティック・バージョニング](https://semver.org) のプラクティスに従うことを推奨します。
-
 
 #### リリース(公開) <span id="releasing"></span>
 
@@ -366,25 +348,24 @@ Composer レポジトリに新しいリリースについて通知するだけ�
 エクステンションのリリースには、コード・ファイル以外に、人々があなたのエクステンションについて知ったり、
 エクステンションを使ったりするのを助けるために、下記のものを含めることを考慮すべきです。
 
-* パッケージのルート・ディレクトリに readme ファイル: あなたのエクステンションが何をするものか、
+- パッケージのルート・ディレクトリに readme ファイル: あなたのエクステンションが何をするものか、
   そして、どのようにインストールして使うものかを説明するものです。
   [Markdown](https://daringfireball.net/projects/markdown/) 形式で書いて、`readme.md` という名前にすることを推奨します。
-* パッケージのルート・ディレクトリに changelog ファイル: それぞれのリリースで何が変ったかを一覧表示するものです。
+- パッケージのルート・ディレクトリに changelog ファイル: それぞれのリリースで何が変ったかを一覧表示するものです。
   このファイルは Markdown 形式で書いて `changelog.md` と名付けることが出来ます。
-* パッケージのルート・ディレクトリに upgrade ファイル: エクステンションの古いリリースからのアップグレード方法について説明するものです。
+- パッケージのルート・ディレクトリに upgrade ファイル: エクステンションの古いリリースからのアップグレード方法について説明するものです。
   このファイルは Markdown 形式で書いて `upgrade.md` と名付けることが出来ます。
-* チュートリアル、デモ、スクリーン・ショットなど: あなたのエクステンションが readme ファイルでは十分にカバーできないほど多くの機能を提供するものである場合は、
+- チュートリアル、デモ、スクリーン・ショットなど: あなたのエクステンションが readme ファイルでは十分にカバーできないほど多くの機能を提供するものである場合は、
   これらが必要になります。
-* API ドキュメント: あなたのコードは、他の人々が読んで理解することがより一層容易に出来るように、十分な解説を含むべきです。
+- API ドキュメント: あなたのコードは、他の人々が読んで理解することがより一層容易に出来るように、十分な解説を含むべきです。
   [BaseObject のクラス・ファイル](https://github.com/yiisoft/yii2/blob/master/framework/base/BaseObject.php) を参照すると、
   コードに解説を加える方法を学ぶことが出来ます。
 
 > Info: コードのコメントを Markdown 形式で書くことが出来ます。
-  `yiisoft/yii2-apidoc` エクステンションが、コードのコメントに基づいて綺麗な API ドキュメントを生成するツールを提供しています。
+> `yiisoft/yii2-apidoc` エクステンションが、コードのコメントに基づいて綺麗な API ドキュメントを生成するツールを提供しています。
 
 > Info: これは要求ではありませんが、あなたのエクステンションも一定のコーディング・スタイルを守るのが良いと思います。
-  [コア・フレームワーク・コード・スタイル](https://github.com/yiisoft/yii2/blob/master/docs/internals/core-code-style.md) を参照してください。
-
+> [コア・フレームワーク・コード・スタイル](https://github.com/yiisoft/yii2/blob/master/docs/internals/core-code-style.md) を参照してください。
 
 ## コア・エクステンション <span id="core-extensions"></span>
 

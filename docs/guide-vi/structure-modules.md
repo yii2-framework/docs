@@ -1,12 +1,10 @@
-Modules
-=======
+# Modules
 
 Modules là các đơn vị phần mềm độc lập bao gồm các [models](structure-models.md), [views](structure-views.md),
 [controllers](structure-controllers.md), và các thành phần hỗ trợ khác. Người dùng cuối có thể truy cập các controller
 của module khi các controller đã được cài đặt trong [application](structure-applications.md). Vì những lý do này, thường được xem là
 ứng dụng nhỏ. Modules khác với [applications](structure-applications.md) trong đó các mô-đun không thể tự được triển khai
 và phải nằm trong các ứng dụng
-
 
 ## Tạo Modules <span id="creating-modules"></span>
 
@@ -25,7 +23,6 @@ forum/
         default/                 chứa các file view cho DefaultController
             index.php            tập tin index cho view
 ```
-
 
 ### Lớp Module <span id="module-classes"></span>
 
@@ -79,7 +76,6 @@ return [
 ];
 ```
 
-
 ### Controller trong Modules <span id="controllers-in-modules"></span>
 
 Khi tạo controllers trong module, các quy ước đặt tên lớp controller theo `controllers` với
@@ -103,7 +99,6 @@ Bạn có thể tùy chỉnh không gian tên của lớp controller bằng vi�
 . Trong trường hợp một số controllers nằm ngoài không gian tên, bạn có thể làm cho chúng có thể truy cập bằng cách cấu hình
 qua thuộc tính [[yii\base\Module::controllerMap]], tương tự như [điều bạn làm cho ứng dụng](structure-applications.md#controller-map).
 
-
 ### Views trong Modules <span id="views-in-modules"></span>
 
 Views trong module nên đặt tại đường dẫn là `views` nằm trong module [[yii\base\Module::basePath|base path]].
@@ -116,7 +111,6 @@ Một module có thể chỉ định [layout](structure-views.md#layouts) đư�
 . Các layout nên mặc định đặt trong đường dẫn là `views/layouts`, và bạn nên cấu hình
 thuộc tính [[yii\base\Module::layout]] để đề cập tới tên của layout. Nếu bạn không cấu hình thuộc tính `layout`,
 thì layout trong ứng dụng sẽ được dùng thay thế.
-
 
 ### Console commands trong Modules <span id="console-commands-in-modules"></span>
 
@@ -161,9 +155,8 @@ yii <module_id>/<command>/<sub_command>
 ```
 
 Thuộc tính [[yii\base\Application::modules|modules]] nhận một mảng cấu hình cho các module. Mỗi key của mảng
-đại diện cho *định danh module* trong đó xác định duy nhất module trong số tất cả các module trong ứng dụng, và giá trị
+đại diện cho _định danh module_ trong đó xác định duy nhất module trong số tất cả các module trong ứng dụng, và giá trị
 tương ứng của mảng là các [cấu hình](concept-configurations.md) cho việc tạo module.
-
 
 ### Routes <span id="routes"></span>
 
@@ -176,14 +169,13 @@ chỉ có chứa định danh module, và thuộc tính [[yii\base\Module::defau
 sẽ xác định cho controller/action nào được sử dụng. Điều này có nghĩa là route `forum` sẽ đại diện cho controller `default`
 trong module `forum`.
 
-Các quy tắc quản lý URL cho các module nên được thêm vào trước phương thức [[yii\web\UrlManager::parseRequest()]] được kích hoạt. Có nghĩa là 
+Các quy tắc quản lý URL cho các module nên được thêm vào trước phương thức [[yii\web\UrlManager::parseRequest()]] được kích hoạt. Có nghĩa là
 thực hiện nó trong phương thức `init()` của module sẽ không hoạt động vì module sẽ được khởi tạo khi các routes được xử lý. Vì vậy, các quy tắc
 nên được thêm vào ở [giai đoạn bootstrap](structure-extensions.md#bootstrapping-classes). Đây cũng là cách hay để
-để nhóm các quy tắc URL của module bằng [[\yii\web\GroupUrlRule]].  
+để nhóm các quy tắc URL của module bằng [[\yii\web\GroupUrlRule]].
 
-Trong trường hợp một module được sử dụng để [version API](rest-versioning.md), quy tắc URL của nó nên được thêm trực tiếp vào mục `urlManager` 
+Trong trường hợp một module được sử dụng để [version API](rest-versioning.md), quy tắc URL của nó nên được thêm trực tiếp vào mục `urlManager`
 của cấu hình ứng dụng.
-
 
 ### Truy cập vào Module <span id="accessing-modules"></span>
 
@@ -200,9 +192,9 @@ sẽ trả về instance được yêu cầu của lớp module. Nếu module kh
 Yii để đáp ứng các yêu cầu.
 
 > Thông tin: Khi phát triển một module, bạn không nên cho rằng module sẽ có định danh cố định. Điều này là do một module
-  có thể liên kế tới một định danh tùy ý khi được sử dụng trong một ứng dụng hoặc một module khác. Để có một định danh
-  module, bạn nên sử dụng cách tiếp cận ở trên để lấy một instance của module trước, và nhận thông tin định danh qua
-  `$module->id`.
+> có thể liên kế tới một định danh tùy ý khi được sử dụng trong một ứng dụng hoặc một module khác. Để có một định danh
+> module, bạn nên sử dụng cách tiếp cận ở trên để lấy một instance của module trước, và nhận thông tin định danh qua
+> `$module->id`.
 
 Bạn cũng có thể truy cập vào instance của module bằng các phương pháp sau:
 
@@ -223,7 +215,6 @@ Một khi bạn có các instance module, bạn có thể truy cập các tham s
 $maxPostCount = $module->params['maxPostCount'];
 ```
 
-
 ### Tải trước các module <span id="bootstrapping-modules"></span>
 
 Một số module có thể cần phải được chạy cho mọi yêu cầu. Module [[yii\debug\Module|debug]] là một ví dụ như vậy.
@@ -243,11 +234,10 @@ Ví dụ, cấu hình ứng dụng sau đây đảm bảo module `debug` luôn l
 ]
 ```
 
-
 ## Các module con <span id="nested-modules"></span>
 
 Các module có thể được lồng vào nhau với không giới hạn. Đó là, một module có thể chứa một module khác và module này có thể chứa
-một module khác. Chúng tôi gọi module đầu là *module cha mẹ* trong khi module sau gọi là *module con*. Các module con phải được khai báo trong
+một module khác. Chúng tôi gọi module đầu là _module cha mẹ_ trong khi module sau gọi là _module con_. Các module con phải được khai báo trong
 thuộc tính [[yii\base\Module::modules|modules]] của các module cha mẹ. Ví dụ,
 
 ```php
@@ -270,12 +260,12 @@ class Module extends \yii\base\Module
 ```
 
 Đối với controller trong các module con, các route của nó nên bao gồm các định danh của các module cha.
-Ví dụ, với route `forum/admin/dashboard/index` đại diện cho action `index` của controller`dashboard` 
+Ví dụ, với route `forum/admin/dashboard/index` đại diện cho action `index` của controller`dashboard`
 bên trong module `admin` đó là một module con của module`forum`.
 
 > Thông tin: Phương thức [[yii\base\Module::getModule()|getModule()]] chỉ trả về mô đun con trực tiếp thuộc về nó
-. Thuộc tính [[yii\base\Application::loadedModules]] giữ một danh sách các module được tải, bao gồm cả
-module trực tiếp và module lồng nhau, được đánh dầu bởi tên class.
+> . Thuộc tính [[yii\base\Application::loadedModules]] giữ một danh sách các module được tải, bao gồm cả
+> module trực tiếp và module lồng nhau, được đánh dầu bởi tên class.
 
 ## Truy cập các thành phần từ bên trong các module
 
@@ -308,15 +298,15 @@ Ví dụ, xem xét một phần cấu hình ứng dụng này:
 ```
 
 Các bảng cơ sở dữ liệu ứng dụng sẽ có tiền tố là `main_`, trong khi đó các bảng trong module có tiền tố là `module_`.
-Lưu ý rằng cấu hình ở trên không được hợp nhất; thành phần modules cho ví dụ trên sẽ có các bộ đệm truy vấn được bật 
+Lưu ý rằng cấu hình ở trên không được hợp nhất; thành phần modules cho ví dụ trên sẽ có các bộ đệm truy vấn được bật
 vì nó là giá trị mặc định.
 
 ## Bài thực hành <span id="best-practices"></span>
 
-Các module được sử dụng tốt nhất trong các ứng dụng lớn có tính năng có thể được chia thành nhiều nhóm, mỗi bộ bao gồm một tập hợp các 
+Các module được sử dụng tốt nhất trong các ứng dụng lớn có tính năng có thể được chia thành nhiều nhóm, mỗi bộ bao gồm một tập hợp các
 tính năng liên quan chặt chẽ. Mỗi nhóm tính năng như vậy có thể được phát triển dưới dạng một module được phát triển và duy trì bởi
 một nhà phát triển hoặc nhóm cụ thể.
 
-Các module cũng là một cách tốt để sử dụng lại mã ở cấp độ nhóm tính năng. Một số tính năng thường được sử dụng,chẳng hạn như 
-quản lý người dùng, quản lý bình luận, tất cả đều có thể được phát triển về mặt module để chúng 
+Các module cũng là một cách tốt để sử dụng lại mã ở cấp độ nhóm tính năng. Một số tính năng thường được sử dụng,chẳng hạn như
+quản lý người dùng, quản lý bình luận, tất cả đều có thể được phát triển về mặt module để chúng
 có thể được tái sử dụng dễ dàng trong các dự án trong tương lai.

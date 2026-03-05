@@ -1,5 +1,4 @@
-Extending ActiveForm on the Client Side
-=======================================
+# Extending ActiveForm on the Client Side
 
 The [[yii\widgets\ActiveForm]] widget comes with a set of JavaScript methods that are used for client validation.
 Its implementation is very flexible and allows you to extend it in different ways.
@@ -11,7 +10,7 @@ ActiveForm triggers a series of dedicated events. Using the code like the follow
 events and handle them:
 
 ```javascript
-$('#contact-form').on('beforeSubmit', function (e) {
+$("#contact-form").on("beforeSubmit", function (e) {
   if (!confirm("Everything is correct. Submit?")) {
     return false;
   }
@@ -68,7 +67,7 @@ The signature of the event handler should be:
 ```javascript
 function (event, attribute, messages, deferreds)
 ```
-      
+
 where
 
 - `event`: an Event object.
@@ -114,7 +113,7 @@ where event is an Event object.
 If the handler returns a boolean `false`, it will stop form submission.
 
 ### `ajaxBeforeSend`
-          
+
 `ajaxBeforeSend` event is triggered before sending an AJAX request for AJAX-based validation.
 
 The signature of the event handler should be:
@@ -144,7 +143,7 @@ where
 - `event`: an Event object.
 - `jqXHR`: a jqXHR object
 - `textStatus`: the status of the request ("success", "notmodified", "error", "timeout",
-"abort", or "parsererror").
+  "abort", or "parsererror").
 
 ## Submitting the form via AJAX
 
@@ -153,26 +152,25 @@ as a normal request by default. If you want the form to be submitted via AJAX, y
 by handling the `beforeSubmit` event of the form in the following way:
 
 ```javascript
-var $form = $('#formId');
-$form.on('beforeSubmit', function() {
-    var data = $form.serialize();
-    $.ajax({
-        url: $form.attr('action'),
-        type: 'POST',
-        data: data,
-        success: function (data) {
-            // Implement successful
-        },
-        error: function(jqXHR, errMsg) {
-            alert(errMsg);
-        }
-    });
-    return false; // prevent default submit
+var $form = $("#formId");
+$form.on("beforeSubmit", function () {
+  var data = $form.serialize();
+  $.ajax({
+    url: $form.attr("action"),
+    type: "POST",
+    data: data,
+    success: function (data) {
+      // Implement successful
+    },
+    error: function (jqXHR, errMsg) {
+      alert(errMsg);
+    },
+  });
+  return false; // prevent default submit
 });
 ```
 
 To learn more about the jQuery `ajax()` function, please refer to the [jQuery documentation](https://api.jquery.com/jQuery.ajax/).
-
 
 ## Adding fields dynamically
 
@@ -183,20 +181,22 @@ To enable client validation for these fields, they have to be registered with th
 You have to add a field itself and then add it to validation list:
 
 ```javascript
-$('#contact-form').yiiActiveForm('add', {
-    id: 'address',
-    name: 'address',
-    container: '.field-address',
-    input: '#address',
-    error: '.help-block',
-    validate:  function (attribute, value, messages, deferred, $form) {
-        yii.validation.required(value, messages, {message: "Validation Message Here"});
-    }
+$("#contact-form").yiiActiveForm("add", {
+  id: "address",
+  name: "address",
+  container: ".field-address",
+  input: "#address",
+  error: ".help-block",
+  validate: function (attribute, value, messages, deferred, $form) {
+    yii.validation.required(value, messages, {
+      message: "Validation Message Here",
+    });
+  },
 });
 ```
 
 To remove a field from validation list so it's not validated you can do the following:
 
 ```javascript
-$('#contact-form').yiiActiveForm('remove', 'address');
+$("#contact-form").yiiActiveForm("remove", "address");
 ```

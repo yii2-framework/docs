@@ -1,5 +1,4 @@
-Yii 和 Docker
-=============
+# Yii 和 Docker
 
 对于开发和部署 Yii 应用程序可以使用 Docker 容器运行。容器就像一个轻量级的独立虚拟机，它将其服务映射到主机的端口，即在端口 80 上的容器中的Web服务器在您的（本地）主机上的端口 8888 上可用。
 
@@ -46,39 +45,38 @@ OpenSSL version: OpenSSL 1.1.0g  2 Nov 2017
 Docker的基本命令是：
 
     docker-compose up -d
-    
+
 在后台启动堆栈中的所有服务
 
     docker-compose ps
-    
+
 列出正在运行的服务
 
     docker-compose logs -f
-    
+
 持续查看所有服务的日志
 
     docker-compose stop
-    
+
 优雅地停止堆栈中的所有服务
 
     docker-compose kill
-    
+
 立即停止堆栈中的所有服务
 
     docker-compose down -v
-    
+
 停止并删除所有服务，**在不使用 host-volumes 时注意数据丢失**
 
 在容器中运行命令
 
     docker-compose run --rm php composer install
-    
+
 在新的容器中运行 composer 安装
 
     docker-compose exec php bash
-    
-在 *运行中的* `php` 服务中执行 bash
 
+在 _运行中的_ `php` 服务中执行 bash
 
 ## 高级主题
 

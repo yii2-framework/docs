@@ -1,5 +1,4 @@
-認証
-====
+# 認証
 
 認証は、ユーザが誰であるかを確認するプロセスです。
 通常は、識別子 (ユーザ名やメール・アドレスなど) と秘密のトークン (パスワードやアクセス・トークンなど) を使って、ユーザがそうであると主張する通りのユーザであるか否かを判断します。
@@ -8,9 +7,8 @@
 Yii はさまざまなコンポーネントを結び付けてログインをサポートする認証フレームワークを提供しています。
 このフレームワークを使用するために、あなたは主として次の仕事をする必要があります。
 
-* [[yii\web\User|user]] アプリケーション・コンポーネントを構成する。
-* [[yii\web\IdentityInterface]] インタフェイスを実装するクラスを作成する。
-
+- [[yii\web\User|user]] アプリケーション・コンポーネントを構成する。
+- [[yii\web\IdentityInterface]] インタフェイスを実装するクラスを作成する。
 
 ## [[yii\web\User]] を構成する <span id="configuring-user"></span>
 
@@ -30,21 +28,20 @@ return [
 ];
 ```
 
-
 ## [[yii\web\IdentityInterface]] を実装する <span id="implementing-identity"></span>
 
 [[yii\web\User::identityClass|ユーザ識別情報クラス]] が実装しなければならない
 [[yii\web\IdentityInterface]] は次のメソッドを含んでいます。
 
-* [[yii\web\IdentityInterface::findIdentity()|findIdentity()]]: 指定されたユーザ ID を使ってユーザ識別情報クラスのインスタンスを探します。
+- [[yii\web\IdentityInterface::findIdentity()|findIdentity()]]: 指定されたユーザ ID を使ってユーザ識別情報クラスのインスタンスを探します。
   セッションを通じてログイン状態を保持する必要がある場合に、このメソッドが使用されます。
-* [[yii\web\IdentityInterface::findIdentityByAccessToken()|findIdentityByAccessToken()]]: 
+- [[yii\web\IdentityInterface::findIdentityByAccessToken()|findIdentityByAccessToken()]]:
   指定されたアクセス・トークンを使ってユーザ識別情報クラスのインスタンスを探します。
   単一の秘密のトークンでユーザを認証する必要がある場合 (ステートレスな RESTful アプリケーションなどの場合) に、このメソッドが使用されます。
-* [[yii\web\IdentityInterface::getId()|getId()]]: ユーザ識別情報クラスのインスタンスによって表されるユーザの ID を返します。
-* [[yii\web\IdentityInterface::getAuthKey()|getAuthKey()]]: 自動ログインが有効にされている場合に、
+- [[yii\web\IdentityInterface::getId()|getId()]]: ユーザ識別情報クラスのインスタンスによって表されるユーザの ID を返します。
+- [[yii\web\IdentityInterface::getAuthKey()|getAuthKey()]]: 自動ログインが有効にされている場合に、
   セッションと自動ログインを検証するキーを返します。
-* [[yii\web\IdentityInterface::validateAuthKey()|validateAuthKey()]]: 
+- [[yii\web\IdentityInterface::validateAuthKey()|validateAuthKey()]]:
   クッキー・ベースのログイン・キーを検証するロジックを実装します。
 
 特定のメソッドが必要でない場合は、中身を空にして実装しても構いません。例えば、あなたのアプリケーションが純粋なステート・レス RESTful アプリケーションであるなら、
@@ -140,17 +137,16 @@ class User extends ActiveRecord implements IdentityInterface
 ```
 
 > Note: ユーザ識別情報クラスである `User` と [[yii\web\User]] を混同してはいけません。
-  前者は認証のロジックを実装するクラスであり、普通は、ユーザの認証情報を保存する何らかの持続的ストレージと関連付けられた
-  [アクティブ・レコード](db-active-record.md) クラスとして実装されます。
-  後者はユーザの認証状態の管理に責任を持つアプリケーション・コンポーネントです。
-
+> 前者は認証のロジックを実装するクラスであり、普通は、ユーザの認証情報を保存する何らかの持続的ストレージと関連付けられた
+> [アクティブ・レコード](db-active-record.md) クラスとして実装されます。
+> 後者はユーザの認証状態の管理に責任を持つアプリケーション・コンポーネントです。
 
 ## [[yii\web\User]] を使う <span id="using-user"></span>
 
 [[yii\web\User]] は、主として、`user` アプリケーション・コンポーネントの形で使います。
 
 現在のユーザの識別情報は、`Yii::$app->user->identity` という式を使って取得することが出来ます。
-これは、現在ログインしているユーザの [[yii\web\User::identityClass|ユーザ識別情報クラス]] 
+これは、現在ログインしているユーザの [[yii\web\User::identityClass|ユーザ識別情報クラス]]
 のインスタンスを返すか、現在のユーザが認証されていない (つまりゲストである) 場合は null を返します。
 次のコードは、[[yii\web\User]] からその他の認証関連の情報を取得する方法を示すものです。
 
@@ -193,22 +189,21 @@ Yii::$app->user->logout();
 ```
 
 ユーザのログアウトはセッションが有効にされている場合にだけ意味があることに注意してください。
-`logout()` メソッドは、ユーザ認証状態をメモリとセッションの両方から消去します。そして、デフォルトでは、ユーザのセッションデータの *全て* を破壊します。
+`logout()` メソッドは、ユーザ認証状態をメモリとセッションの両方から消去します。そして、デフォルトでは、ユーザのセッションデータの _全て_ を破壊します。
 セッション・データを保持したい場合は、代りに、`Yii::$app->user->logout(false)` を呼ばなければなりません。
-
 
 ## 認証のイベント <span id="auth-events"></span>
 
 [[yii\web\User]] クラスは、ログインとログアウトのプロセスで、いくつかのイベントを発生させます。
 
-* [[yii\web\User::EVENT_BEFORE_LOGIN|EVENT_BEFORE_LOGIN]]: [[yii\web\User::login()]] の開始時に発生します。
+- [[yii\web\User::EVENT_BEFORE_LOGIN|EVENT_BEFORE_LOGIN]]: [[yii\web\User::login()]] の開始時に発生します。
   イベント・ハンドラがイベントの [[yii\web\UserEvent::isValid|isValid]] プロパティを `false` にセットした場合は、
   ログインのプロセスがキャンセルされます。
-* [[yii\web\User::EVENT_AFTER_LOGIN|EVENT_AFTER_LOGIN]]: ログインが成功した時に発生します。
-* [[yii\web\User::EVENT_BEFORE_LOGOUT|EVENT_BEFORE_LOGOUT]]: [[yii\web\User::logout()]] の開始時に発生します。
+- [[yii\web\User::EVENT_AFTER_LOGIN|EVENT_AFTER_LOGIN]]: ログインが成功した時に発生します。
+- [[yii\web\User::EVENT_BEFORE_LOGOUT|EVENT_BEFORE_LOGOUT]]: [[yii\web\User::logout()]] の開始時に発生します。
   イベント・ハンドラがイベントの [[yii\web\UserEvent::isValid|isValid]] プロパティを `false` にセットした場合は、
   ログアウトのプロセスがキャンセルされます。
-* [[yii\web\User::EVENT_AFTER_LOGOUT|EVENT_AFTER_LOGOUT]]: ログアウトが成功した時に発生します。
+- [[yii\web\User::EVENT_AFTER_LOGOUT|EVENT_AFTER_LOGOUT]]: ログアウトが成功した時に発生します。
 
 これらのイベントに反応して、ログイン監査、オンライン・ユーザ統計などの機能を実装することが出来ます。
 例えば、[[yii\web\User::EVENT_AFTER_LOGIN|EVENT_AFTER_LOGIN]] のハンドラの中で、

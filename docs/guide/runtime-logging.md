@@ -1,29 +1,27 @@
-Logging
-=======
+# Logging
 
 Yii provides a powerful logging framework that is highly customizable and extensible. Using this framework, you
 can easily log various types of messages, filter them, and gather them at different targets, such as files, databases,
-emails. 
+emails.
 
 Using the Yii logging framework involves the following steps:
-  
-* Record [log messages](#log-messages) at various places in your code;
-* Configure [log targets](#log-targets) in the application configuration to filter and export log messages;
-* Examine the filtered logged messages exported by different targets (e.g. the [Yii debugger](tool-debugger.md)).
+
+- Record [log messages](#log-messages) at various places in your code;
+- Configure [log targets](#log-targets) in the application configuration to filter and export log messages;
+- Examine the filtered logged messages exported by different targets (e.g. the [Yii debugger](tool-debugger.md)).
 
 In this section, we will mainly describe the first two steps.
-
 
 ## Log Messages <span id="log-messages"></span>
 
 Recording log messages is as simple as calling one of the following logging methods:
 
-* [[Yii::debug()]]: record a message to trace how a piece of code runs. This is mainly for development use.
-* [[Yii::info()]]: record a message that conveys some useful information.
-* [[Yii::warning()]]: record a warning message that indicates something unexpected has happened.
-* [[Yii::error()]]: record a fatal error that should be investigated as soon as possible.
+- [[Yii::debug()]]: record a message to trace how a piece of code runs. This is mainly for development use.
+- [[Yii::info()]]: record a message that conveys some useful information.
+- [[Yii::warning()]]: record a warning message that indicates something unexpected has happened.
+- [[Yii::error()]]: record a fatal error that should be investigated as soon as possible.
 
-These logging methods record log messages at various *severity levels* and *categories*. They share
+These logging methods record log messages at various _severity levels_ and _categories_. They share
 the same function signature `function ($message, $category = 'application')`, where `$message` stands for
 the log message to be recorded, while `$category` is the category of the log message. The code in the following
 example records a trace message under the default category `application`:
@@ -33,28 +31,27 @@ Yii::debug('start calculating average revenue');
 ```
 
 > Info: Log messages can be strings as well as complex data, such as arrays or objects. It is the responsibility
-of [log targets](#log-targets) to properly deal with log messages. By default, if a log message is not a string,
-it will be exported as a string by calling [[yii\helpers\VarDumper::export()]].
+> of [log targets](#log-targets) to properly deal with log messages. By default, if a log message is not a string,
+> it will be exported as a string by calling [[yii\helpers\VarDumper::export()]].
 
 To better organize and filter log messages, it is recommended that you specify an appropriate category for each
-log message. You may choose a hierarchical naming scheme for categories, which will make it easier for 
+log message. You may choose a hierarchical naming scheme for categories, which will make it easier for
 [log targets](#log-targets) to filter messages based on their categories. A simple yet effective naming scheme
-is to use the PHP magic constant `__METHOD__` for the category names. This is also the approach used in the core 
+is to use the PHP magic constant `__METHOD__` for the category names. This is also the approach used in the core
 Yii framework code. For example,
 
 ```php
 Yii::debug('start calculating average revenue', __METHOD__);
 ```
 
-The `__METHOD__` constant evaluates as the name of the method (prefixed with the fully qualified class name) where 
-the constant appears. For example, it is equal to the string `'app\controllers\RevenueController::calculate'` if 
+The `__METHOD__` constant evaluates as the name of the method (prefixed with the fully qualified class name) where
+the constant appears. For example, it is equal to the string `'app\controllers\RevenueController::calculate'` if
 the above line of code is called within this method.
 
-> Info: The logging methods described above are actually shortcuts to the [[yii\log\Logger::log()|log()]] method 
-of the [[yii\log\Logger|logger object]] which is a singleton accessible through the expression `Yii::getLogger()`. When
-enough messages are logged or when the application ends, the logger object will call a 
-[[yii\log\Dispatcher|message dispatcher]] to send recorded log messages to the registered [log targets](#log-targets).
-
+> Info: The logging methods described above are actually shortcuts to the [[yii\log\Logger::log()|log()]] method
+> of the [[yii\log\Logger|logger object]] which is a singleton accessible through the expression `Yii::getLogger()`. When
+> enough messages are logged or when the application ends, the logger object will call a
+> [[yii\log\Dispatcher|message dispatcher]] to send recorded log messages to the registered [log targets](#log-targets).
 
 ## Log Targets <span id="log-targets"></span>
 
@@ -96,41 +93,40 @@ return [
 ```
 
 > Note: The `log` component must be loaded during [bootstrapping](runtime-bootstrapping.md) time so that
-it can dispatch log messages to targets promptly. That is why it is listed in the `bootstrap` array as shown above.
+> it can dispatch log messages to targets promptly. That is why it is listed in the `bootstrap` array as shown above.
 
-In the above code, two log targets are registered in the [[yii\log\Dispatcher::targets]] property: 
+In the above code, two log targets are registered in the [[yii\log\Dispatcher::targets]] property:
 
-* the first target selects error and warning messages and saves them in a database table;
-* the second target selects error messages under the categories whose names start with `yii\db\`, and sends
+- the first target selects error and warning messages and saves them in a database table;
+- the second target selects error messages under the categories whose names start with `yii\db\`, and sends
   them in an email to both `admin@example.com` and `developer@example.com`.
 
-Yii comes with the following built-in log targets. Please refer to the API documentation about these classes to 
-learn how to configure and use them. 
+Yii comes with the following built-in log targets. Please refer to the API documentation about these classes to
+learn how to configure and use them.
 
-* [[yii\log\DbTarget]]: stores log messages in a database table.
-* [[yii\log\EmailTarget]]: sends log messages to pre-specified email addresses.
-* [[yii\log\FileTarget]]: saves log messages in files.
-* [[yii\log\SyslogTarget]]: saves log messages to syslog by calling the PHP function `syslog()`.
+- [[yii\log\DbTarget]]: stores log messages in a database table.
+- [[yii\log\EmailTarget]]: sends log messages to pre-specified email addresses.
+- [[yii\log\FileTarget]]: saves log messages in files.
+- [[yii\log\SyslogTarget]]: saves log messages to syslog by calling the PHP function `syslog()`.
 
 In the following, we will describe the features common to all log targets.
 
-  
 ### Message Filtering <span id="message-filtering"></span>
 
-For each log target, you can configure its [[yii\log\Target::levels|levels]] and 
+For each log target, you can configure its [[yii\log\Target::levels|levels]] and
 [[yii\log\Target::categories|categories]] properties to specify which severity levels and categories of the messages the target should process.
 
 The [[yii\log\Target::levels|levels]] property takes an array consisting of one or several of the following values:
 
-* `error`: corresponding to messages logged by [[Yii::error()]].
-* `warning`: corresponding to messages logged by [[Yii::warning()]].
-* `info`: corresponding to messages logged by [[Yii::info()]].
-* `trace`: corresponding to messages logged by [[Yii::debug()]].
-* `profile`: corresponding to messages logged by [[Yii::beginProfile()]] and [[Yii::endProfile()]], which will
-be explained in more details in the [Profiling](#performance-profiling) subsection.
+- `error`: corresponding to messages logged by [[Yii::error()]].
+- `warning`: corresponding to messages logged by [[Yii::warning()]].
+- `info`: corresponding to messages logged by [[Yii::info()]].
+- `trace`: corresponding to messages logged by [[Yii::debug()]].
+- `profile`: corresponding to messages logged by [[Yii::beginProfile()]] and [[Yii::endProfile()]], which will
+  be explained in more details in the [Profiling](#performance-profiling) subsection.
 
 If you do not specify the [[yii\log\Target::levels|levels]] property, it means the target will process messages
-of *any* severity level.
+of _any_ severity level.
 
 The [[yii\log\Target::categories|categories]] property takes an array consisting of message category names or patterns.
 A target will only process messages whose category can be found or match one of the patterns in this array.
@@ -140,12 +136,12 @@ are used as category names for the log messages recorded in the [[yii\db\Command
 the pattern `yii\db\*`.
 
 If you do not specify the [[yii\log\Target::categories|categories]] property, it means the target will process
-messages of *any* category.
+messages of _any_ category.
 
 In addition to specifying allowed categories using the [[yii\log\Target::categories|categories]] property, you may also
 exclude certain categories by the [[yii\log\Target::except|except]] property. If the category of a message
 is found or matches one of the patterns in this property, it will NOT be processed by the target.
-  
+
 The following target configuration specifies that the target should only process error and warning messages
 under the categories whose names match either `yii\db\*` or `yii\web\HttpException:*`, but not `yii\web\HttpException:404`.
 
@@ -164,9 +160,8 @@ under the categories whose names match either `yii\db\*` or `yii\web\HttpExcepti
 ```
 
 > Info: When an HTTP exception is caught by the [error handler](runtime-handling-errors.md), an error message
-  will be logged with the category name in the format of `yii\web\HttpException:ErrorCode`. For example,
-  the [[yii\web\NotFoundHttpException]] will cause an error message of category `yii\web\HttpException:404`.
-
+> will be logged with the category name in the format of `yii\web\HttpException:ErrorCode`. For example,
+> the [[yii\web\NotFoundHttpException]] will cause an error message of category `yii\web\HttpException:404`.
 
 ### Message Formatting <span id="message-formatting"></span>
 
@@ -257,8 +252,7 @@ levels of the call stack at which the log message is recorded; and if `YII_DEBUG
 will be included.
 
 > Info: Getting call stack information is not trivial. Therefore, you should only use this feature during development
-or when debugging an application.
-
+> or when debugging an application.
 
 ### Message Flushing and Exporting <span id="flushing-exporting"></span>
 
@@ -266,7 +260,6 @@ As aforementioned, log messages are maintained in an array by the [[yii\log\Logg
 memory consumption by this array, the logger will flush the recorded messages to the [log targets](#log-targets)
 each time the array accumulates a certain number of log messages. You can customize this number by configuring
 the [[yii\log\Dispatcher::flushInterval|flushInterval]] property of the `log` component:
-
 
 ```php
 return [
@@ -319,7 +312,6 @@ return [
 
 > Note: Frequent message flushing and exporting will degrade the performance of your application.
 
-
 ### Toggling Log Targets <span id="toggling-log-targets"></span>
 
 You can enable or disable a log target by configuring its [[yii\log\Target::enabled|enabled]] property.
@@ -362,8 +354,8 @@ sending the content of the [[yii\log\Target::messages]] array to a designated me
 log target classes included in the Yii release.
 
 > Tip: Instead of creating your own loggers you may try any PSR-3 compatible logger such
-  as [Monolog](https://github.com/Seldaek/monolog) by using
-  [PSR log target extension](https://github.com/samdark/yii2-psr-log-target).
+> as [Monolog](https://github.com/Seldaek/monolog) by using
+> [PSR log target extension](https://github.com/samdark/yii2-psr-log-target).
 
 ## Performance Profiling <span id="performance-profiling"></span>
 

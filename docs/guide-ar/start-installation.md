@@ -72,7 +72,7 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 
 <blockquote class="tip"><p dir="rtl">
     تلميح: اذا كنت ترغب بتثبيت أحدث نسخة خاصة بالمطورين من ال Yii، فيمكنك ذلك من خلال إضافة الخيار <a href="https://getcomposer.org/doc/04-schema.md#minimum-stability">stability</a> وذلك من خلال سطر الأوامر التالي:
-</p></blockquote>  
+</p></blockquote>
 
 ```bash
     composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
@@ -84,7 +84,7 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 
 ### <div dir="rtl">تثبيت ال Yii من خلال ال Archive File</div> <span id="installing-from-archive-file"></span>
 
---------------------------
+---
 
 <p dir="rtl">
 يتضمن تثبيت Yii من ملف أرشيف ثلاث خطوات وهي:
@@ -96,14 +96,14 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 (يتم ذلك تلقائيًا إذا قمت بتثبيت ال Yii باستخدام Composer): </li>
 </ol>
 
-  ```php
-  // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-  'cookieValidationKey' => 'enter your secret key here',
-  ```
+```php
+// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+'cookieValidationKey' => 'enter your secret key here',
+```
 
 ### <div dir="rtl">خيارات تثبيت أخرى</div> <span id="other-installation-options"></span>
 
---------------------------
+---
 
 <p dir="rtl">
 توضح تعليمات التثبيت أعلاه كيفية تثبيت ال Yii ، والذي يقوم أيضًا بإنشاء تطبيق ويب أساسي(basic).
@@ -121,7 +121,7 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 
 ### <div dir="rtl">تثبيت ال Assets</div> <span id="installing-assets"></span>
 
---------------------------
+---
 
 <p dir="rtl">
     تعتمد ال Yii على حزم <a href="https://bower.io/">Bower</a> و/أو <a href="https://www.npmjs.com/">NPM</a> لتثبيت مكتبات ال (CSS و JavaScript). ويستخدم ال composer للحصول على هذه المكتبات ، مما يسمح بالحصول على إصدارات ال PHP و CSS/JavaScript في نفس الوقت. ويمكن تحقيق ذلك إما عن طريق استخدام <a href="https://asset-packagist.org/">asset-packagist.org</a> أو من خلال ال <a href="https://github.com/fxpio/composer-asset-plugin">composer asset plugin</a>، يرجى الرجوع إلى <a href="../guide/structure-assets.md">Assets documentation</a> لمزيد من التفاصيل.
@@ -144,7 +144,7 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 
 ### <div dir="rtl">التحقق من التثبيت</div> <span id="verifying-installation"></span>
 
---------------------------
+---
 
 <p dir="rtl">
     بعد الانتهاء من التثبيت، ستحتاج الى القيام بإعداد خادم الويب الخاص بك(your web server) (انظر القسم التالي) أو قم باستخدام <a href="https://www.php.net/manual/en/features.commandline.webserver.php">built-in PHP web server</a> عن طريق تنفيذ الأمر التالي داخل المسار web في المشروع الخاص بك:
@@ -189,7 +189,7 @@ http://localhost:8080/
 
 ### <div dir="rtl">إعداد ال Web Servers</div> <span id="configuring-web-servers"></span>
 
------------------------
+---
 
 <blockquote class="info"><p dir="rtl">
 معلومة: يمكنك تخطي هذا الجزء الآن إذا كنت تختبر فقط إطار العمل Yii دون أي نية لنشر هذا التطبيق على الويب(بدون رفع التطبيق على production server).
@@ -218,7 +218,7 @@ http://localhost:8080/
 
 ### <div dir="rtl">الإعدادات الموصى بها لل Apache</div> <span id="recommended-apache-configuration"></span>
 
------------------------
+---
 
 <p dir="rtl">
     استخدم الإعدادات التالية في ملف ال <code>httpd.conf</code> في Apache أو ضمن إعدادات ال virtual host.
@@ -247,7 +247,7 @@ DocumentRoot "path/to/basic/web"
 
 ### <div dir="rtl">الإعدادات الموصى بها لل Nginx</div> <span id="recommended-nginx-configuration"></span>
 
------------------------
+---
 
 <p dir="rtl">
     لاستخدام <a href="https://wiki.nginx.org/">Nginx</a>، يجب تثبيت PHP على أنه <a href="https://www.php.net/install.fpm">FPM SAPI</a>، ويمكنك استخدام إعدادات ال Nginx التالية، مع الإنتباه على استبدال المسار من  <code>path/to/basic/web</code> الى المسار الفعلي  وصولا إلى <code>basic/web</code> بالإضافة الى إستبدال <code>mysite.test</code> إلى ال hostname الخاص بالتطبيق.

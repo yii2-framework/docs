@@ -1,19 +1,16 @@
-Testowanie
-==========
+# Testowanie
 
 Testowanie jest istotnym elementem produkcji każdego oprogramowania. Niezależnie, czy jesteśmy tego świadomi, czy też nie, testy przeprowadzamy nieustannie.
-Dla przykładu, kiedy napiszemy klasę w PHP, możemy debugować ją krok po kroku lub po prostu użyć wyrażeń jak echo lub die, aby sprawdzić, czy implementacja 
+Dla przykładu, kiedy napiszemy klasę w PHP, możemy debugować ją krok po kroku lub po prostu użyć wyrażeń jak echo lub die, aby sprawdzić, czy implementacja
 działa zgodnie z naszym początkowym planem. W przypadku aplikacji web wprowadzamy testowe dane w formularzach, aby upewnić się, że strona odpowiada tak, jak powinna.
 
-Proces testowania może zostać zautomatyzowany, dzięki czemu za każdym razem, kiedy musimy coś sprawdzić, wystarczy wywołać kod, który zrobi to za nas. 
-Kod, który weryfikuje zgodność wyniku z planowaną odpowiedzią, jest nazywany testem, a proces jego tworzenia i późniejszego wykonania jest nazywany testowaniem zautomatyzowanym, 
+Proces testowania może zostać zautomatyzowany, dzięki czemu za każdym razem, kiedy musimy coś sprawdzić, wystarczy wywołać kod, który zrobi to za nas.
+Kod, który weryfikuje zgodność wyniku z planowaną odpowiedzią, jest nazywany testem, a proces jego tworzenia i późniejszego wykonania jest nazywany testowaniem zautomatyzowanym,
 co jest głównym tematem tych rozdziałów.
 
+## Tworzenie kodu z testami
 
-Tworzenie kodu z testami
-------------------------
-
-Tworzenie kodu opartego na testach (Test-Driven Development, TDD) i opartego na zachowaniach (Behavior-Driven Development, BDD) jest podejściem deweloperskim 
+Tworzenie kodu opartego na testach (Test-Driven Development, TDD) i opartego na zachowaniach (Behavior-Driven Development, BDD) jest podejściem deweloperskim
 opierającym się na opisywaniu zachowania fragmentu kodu lub też całej jego funkcjonalności jako zestawu scenariuszy lub testów przed napisaniem właściwego kodu
 i dopiero potem stworzeniu implementacji, która pozwoli na poprawne przejście testów, spełniających zadane kryteria.
 
@@ -41,13 +38,12 @@ Podsumowując, zalety takiego projektowania są następujące:
 
 Na dłuższą metę przynosi to zwykle efekt w postaci mnóstwa oszczędzonego czasu i problemów.
 
-> **Wskazówka**: Jeśli chcesz dowiedzieć się więcej na temat reguł ustalania wymagań dla oprogramowania i modelowania istoty tego rozdziału, 
+> **Wskazówka**: Jeśli chcesz dowiedzieć się więcej na temat reguł ustalania wymagań dla oprogramowania i modelowania istoty tego rozdziału,
 > warto zapoznać się z domenowym podejściem do tworzenia aplikacji [(Domain Driven Development, DDD)](https://pl.wikipedia.org/wiki/Domain-Driven_Design).
 
-Kiedy i jak testować
---------------------
+## Kiedy i jak testować
 
-Podejście typu "testy najpierw" opisane powyżej, ma sens w przypadku długofalowych i relatywnie skomplikowanych projektów i może być przesadne w przypadku prostszych. 
+Podejście typu "testy najpierw" opisane powyżej, ma sens w przypadku długofalowych i relatywnie skomplikowanych projektów i może być przesadne w przypadku prostszych.
 Przesłanki, kiedy testy są odpowiednie są następujące:
 
 - Projekt jest już duży i skomplikowany.
@@ -67,8 +63,6 @@ W niektórych przypadkach jakakolwiek forma automatycznego testu może być nadm
 
 Pomimo tego, jeśli masz na to czas, automatyzacja testowania jest również dobrym pomysłem.
 
-
-Biblioteka
--------------
+## Biblioteka
 
 - Test Driven Development: By Example - Kent Beck. (ISBN: 0321146530)

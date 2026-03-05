@@ -1,21 +1,18 @@
-Releasing a new version
-=======================
+# Releasing a new version
 
 The list of steps needed to make a release of the framework has grown over time and became
 hard to manage manually, so we have created a command line tool to ensure no step is forgotten.
 
-Release steps overview
-----------------------
+## Release steps overview
 
 - ...
 
-The release command
--------------------
+## The release command
 
 These steps are automated in the [release console command](../../build/controllers/ReleaseController.php)
 which is included in the framework development repository.
 
-The release command can be invoked using the Yii application contained in the `build` directory of 
+The release command can be invoked using the Yii application contained in the `build` directory of
 the framework:
 
     ./build/build help release  # run this in framework repo root
@@ -26,7 +23,7 @@ the framework:
 ### Requirements
 
 The release command depends on the development environment introduced in
-the [Git Workflow Document](git-workflow.md#extensions), i.e. the application 
+the [Git Workflow Document](git-workflow.md#extensions), i.e. the application
 templates must be located under `/apps/` and extensions must be located under `/extensions/`.
 This structure is preferably created using the `dev/app` and `dev/ext` commands.
 
@@ -65,7 +62,6 @@ The default release command will release a new minor version from the currently 
 To release another version than the default, you have to specify it using the `--version` option, e.g.
 `--version=2.1.0`, or `--version=2.1.0-beta`.
 
-
 #### Release a new major version e.g. 2.1.0
 
 Releasing a new major version includes a branch change as described in the
@@ -81,4 +77,4 @@ before.
 - adjust composer.json branch alias for master to `2.1.x-dev`.
 - delete `2.1` branch
 
-Now check out `master` and run the release command with the `--version=2.1.0` option. 
+Now check out `master` and run the release command with the `--version=2.1.0` option.

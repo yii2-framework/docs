@@ -1,5 +1,4 @@
-过滤器
-=======
+# 过滤器
 
 过滤器是 [控制器动作](structure-controllers.md#actions) 执行之前或之后执行的对象。
 例如访问控制过滤器可在动作执行之前来控制特殊终端用户是否有权限执行动作，
@@ -7,7 +6,6 @@
 
 过滤器可包含预过滤（过滤逻辑在动作*之前*）或后过滤（过滤逻辑在动作*之后*），
 也可同时包含两者。
-
 
 ## 使用过滤器 <span id="using-filters"></span>
 
@@ -31,35 +29,34 @@ public function behaviors()
 }
 ```
 
-控制器类的过滤器默认应用到该类的 *所有* 动作，
+控制器类的过滤器默认应用到该类的 _所有_ 动作，
 你可以配置 [[yii\base\ActionFilter::only|only]] 属性明确指定控制器应用到哪些动作。
 在上述例子中，`HttpCache` 过滤器只应用到 `index` 和 `view` 动作。
 也可以配置 [[yii\base\ActionFilter::except|except]] 属性
 使一些动作不执行过滤器。
 
 除了控制器外，可在 [模块](structure-modules.md)或[应用主体](structure-applications.md) 中申明过滤器。
-申明之后，过滤器会应用到所属该模块或应用主体的 *所有* 控制器动作，
-除非像上述一样配置过滤器的 [[yii\base\ActionFilter::only|only]] 
+申明之后，过滤器会应用到所属该模块或应用主体的 _所有_ 控制器动作，
+除非像上述一样配置过滤器的 [[yii\base\ActionFilter::only|only]]
 和 [[yii\base\ActionFilter::except|except]] 属性。
 
 > Note: 在模块或应用主体中申明过滤器，在[[yii\base\ActionFilter::only|only]] 和 [[yii\base\ActionFilter::except|except]]
-  属性中使用[路由](structure-controllers.md#routes) 代替动作 ID，
-  因为在模块或应用主体中只用动作ID并不能唯一指定到具体动作。
+> 属性中使用[路由](structure-controllers.md#routes) 代替动作 ID，
+> 因为在模块或应用主体中只用动作ID并不能唯一指定到具体动作。
 
 当一个动作有多个过滤器时，根据以下规则先后执行：
 
-* 预过滤
-    - 按顺序执行应用主体中 `behaviors()` 列出的过滤器。
-    - 按顺序执行模块中 `behaviors()` 列出的过滤器。
-    - 按顺序执行控制器中 `behaviors()` 列出的过滤器。
-    - 如果任意过滤器终止动作执行，
-      后面的过滤器（包括预过滤和后过滤）不再执行。
-* 成功通过预过滤后执行动作。
-* 后过滤
-    - 倒序执行控制器中 `behaviors()` 列出的过滤器。
-    - 倒序执行模块中 `behaviors()` 列出的过滤器。
-    - 倒序执行应用主体中 `behaviors()` 列出的过滤器。
-
+- 预过滤
+  - 按顺序执行应用主体中 `behaviors()` 列出的过滤器。
+  - 按顺序执行模块中 `behaviors()` 列出的过滤器。
+  - 按顺序执行控制器中 `behaviors()` 列出的过滤器。
+  - 如果任意过滤器终止动作执行，
+    后面的过滤器（包括预过滤和后过滤）不再执行。
+- 成功通过预过滤后执行动作。
+- 后过滤
+  - 倒序执行控制器中 `behaviors()` 列出的过滤器。
+  - 倒序执行模块中 `behaviors()` 列出的过滤器。
+  - 倒序执行应用主体中 `behaviors()` 列出的过滤器。
 
 ## 创建过滤器 <span id="creating-filters"></span>
 
@@ -96,12 +93,10 @@ class ActionTimeFilter extends ActionFilter
 }
 ```
 
-
 ## 核心过滤器 <span id="core-filters"></span>
 
 Yii 提供了一组常用过滤器，在 `yii\filters` 命名空间下，
 接下来我们简要介绍这些过滤器。
-
 
 ### [[yii\filters\AccessControl|AccessControl]] <span id="access-control"></span>
 
@@ -138,7 +133,6 @@ public function behaviors()
 
 更多关于访问控制的详情请参阅 [授权](security-authorization.md) 一节。
 
-
 ### 认证方法过滤器 <span id="auth-method-filters"></span>
 
 认证方法过滤器通过 [HTTP Basic Auth](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81)
@@ -165,7 +159,6 @@ public function behaviors()
 
 认证方法过滤器通常在实现 RESTful API中使用，
 更多关于访问控制的详情请参阅 RESTful [认证](rest-authentication.md) 一节。
-
 
 ### [[yii\filters\ContentNegotiator|ContentNegotiator]] <span id="content-negotiator"></span>
 
@@ -225,9 +218,7 @@ use yii\web\Response;
 ```
 
 > Info: 如果请求中没有检测到内容格式和语言，
-  使用 [[formats]] 和 [[languages]] 第一个配置项。
-
-
+> 使用 [[formats]] 和 [[languages]] 第一个配置项。
 
 ### [[yii\filters\HttpCache|HttpCache]] <span id="http-cache"></span>
 
@@ -253,7 +244,6 @@ public function behaviors()
 ```
 
 更多关于使用 HttpCache 详情请参阅 [HTTP 缓存](caching-http.md) 一节。
-
 
 ### [[yii\filters\PageCache|PageCache]] <span id="page-cache"></span>
 
@@ -286,13 +276,11 @@ public function behaviors()
 
 更多关于使用 PageCache 详情请参阅 [页面缓存](caching-page.md) 一节。
 
-
 ### [[yii\filters\RateLimiter|RateLimiter]] <span id="rate-limiter"></span>
 
 RateLimiter 根据 [漏桶算法](https://en.wikipedia.org/wiki/Leaky_bucket) 来实现速率限制。
 主要用在实现 RESTful APIs，更多关于该过滤器详情请参阅
 [Rate Limiting](rest-rate-limiting.md) 一节。
-
 
 ### [[yii\filters\VerbFilter|VerbFilter]] <span id="verb-filter"></span>
 
@@ -322,7 +310,7 @@ public function behaviors()
 
 ### [[yii\filters\Cors|Cors]] <span id="cors"></span>
 
-跨域资源共享 [CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS) 
+跨域资源共享 [CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS)
 机制允许一个网页的许多资源（例如字体、JavaScript等）
 这些资源可以通过其他域名访问获取。
 特别是 JavaScript 的 AJAX 调用可使用 XMLHttpRequest 机制，
@@ -350,11 +338,11 @@ public function behaviors()
 
 CROS过滤器可以通过 [[yii\filters\Cors::$cors|$cors]] 属性进行调整。
 
-* `cors['Origin']`：定义允许来源的数组，可为 `['*']`（任何用户）或 `['https://www.myserver.net', 'https://www.myotherserver.com']`。 默认为 `['*']`。
-* `cors['Access-Control-Request-Method']`：允许动作数组如 `['GET', 'OPTIONS', 'HEAD']`。默认为 `['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS']`。
-* `cors['Access-Control-Request-Headers']`：允许请求头部数组，可为 `['*']` 所有类型头部 或 `['X-Request-With']` 指定类型头部。默认为 `['*']`。
-* `cors['Access-Control-Allow-Credentials']`：定义当前请求是否使用证书，可为 `true`，`false` 或 `null`（不设置）。默认为 `null`。
-* `cors['Access-Control-Max-Age']`: 定义请求的有效时间，默认为 `86400`。
+- `cors['Origin']`：定义允许来源的数组，可为 `['*']`（任何用户）或 `['https://www.myserver.net', 'https://www.myotherserver.com']`。 默认为 `['*']`。
+- `cors['Access-Control-Request-Method']`：允许动作数组如 `['GET', 'OPTIONS', 'HEAD']`。默认为 `['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS']`。
+- `cors['Access-Control-Request-Headers']`：允许请求头部数组，可为 `['*']` 所有类型头部 或 `['X-Request-With']` 指定类型头部。默认为 `['*']`。
+- `cors['Access-Control-Allow-Credentials']`：定义当前请求是否使用证书，可为 `true`，`false` 或 `null`（不设置）。默认为 `null`。
+- `cors['Access-Control-Max-Age']`: 定义请求的有效时间，默认为 `86400`。
 
 例如，允许来源为 `https://www.myserver.net` 和方式为 `GET`，`HEAD` 和 `OPTIONS` 的 CORS 如下：
 

@@ -1,5 +1,4 @@
-Модульные тесты
-===============
+# Модульные тесты
 
 > Note: Данный раздел находится в разработке.
 
@@ -12,14 +11,12 @@
 - [Документация PHPUnit начиная с главы 2](https://phpunit.de/manual/current/en/writing-tests-for-phpunit.html).
 - [Codeception Unit Tests](https://codeception.com/docs/05-UnitTests).
 
-Запуск тестов шаблонов проектов basic и advanced
-------------------------------------------------
+## Запуск тестов шаблонов проектов basic и advanced
 
-- [Инструкции для шаблона advanced](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-testing.md).  
+- [Инструкции для шаблона advanced](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-testing.md).
 - [Инструкции для шаблона basic](https://github.com/yiisoft/yii2-app-basic/blob/master/README.md#testing).
 
-Модульные тесты фреймворка
---------------------------
+## Модульные тесты фреймворка
 
 Если вам необходимо запустить набор модульных тестов для самого Yii, прочитайте
 "[Подготовка к разработке Yii 2](https://github.com/yiisoft/yii2/blob/master/docs/internals-ru/getting-started.md)".

@@ -15,11 +15,11 @@ REST API dan lain sebagainnya.
 
 Jika Anda sudah familiar dengan framework lain, Anda mungkin akan bersyukur ketika membandingkan Yii dengan yang lain:
 
--   Seperti kebanyakan PHP framework, Yii mengimplementasikan pola arsitektur MVC (Model-View-Controller) dan mempromosikan kode organisasi berdasarkan pola itu.
--   Yii mengambil filosofi bahwa kode harus ditulis dengan cara sederhana namun elegan. Yii tidak akan pernah mencoba untuk mendesain berlebihan terutama untuk mengikuti beberapa pola desain secara ketat.
--   Yii adalah fullstack framework yang menyediakan banyak fitur teruji dan siap pakai seperti: query builder dan ActiveRecord baik untuk relasional maupun NoSQL database; dukungan pengembangan REST API; dukungan caching berlapis dan masih banyak lagi.
--   Yii sangat extensible. Anda dapat menyesuaikan atau mengganti hampir setiap bagian dari kode inti Yii. Anda juga bisa mengambil keuntungan dari arsitektur ekstensi Yii yang solid untuk menggunakan atau mengembangkan ekstensi untuk disebarkan kembali.
--   Kinerja tinggi (High performance) selalu menjadi tujuan utama dari Yii.
+- Seperti kebanyakan PHP framework, Yii mengimplementasikan pola arsitektur MVC (Model-View-Controller) dan mempromosikan kode organisasi berdasarkan pola itu.
+- Yii mengambil filosofi bahwa kode harus ditulis dengan cara sederhana namun elegan. Yii tidak akan pernah mencoba untuk mendesain berlebihan terutama untuk mengikuti beberapa pola desain secara ketat.
+- Yii adalah fullstack framework yang menyediakan banyak fitur teruji dan siap pakai seperti: query builder dan ActiveRecord baik untuk relasional maupun NoSQL database; dukungan pengembangan REST API; dukungan caching berlapis dan masih banyak lagi.
+- Yii sangat extensible. Anda dapat menyesuaikan atau mengganti hampir setiap bagian dari kode inti Yii. Anda juga bisa mengambil keuntungan dari arsitektur ekstensi Yii yang solid untuk menggunakan atau mengembangkan ekstensi untuk disebarkan kembali.
+- Kinerja tinggi (High performance) selalu menjadi tujuan utama dari Yii.
 
 Yii tidak dikerjakan oleh satu orang, Yii didukung oleh [tim pengembang inti yang kuat][yii_team], serta komunitas besar
 profesional yang terus memberikan kontribusi bagi pengembangan Yii. Tim pengembang Yii terus mengamati perkembangan tren

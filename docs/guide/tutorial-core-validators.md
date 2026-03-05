@@ -1,8 +1,7 @@
-Core Validators
-===============
+# Core Validators
 
 Yii provides a set of commonly used core validators, found primarily under the `yii\validators` namespace.
-Instead of using lengthy validator class names, you may use *aliases* to specify the use of these core
+Instead of using lengthy validator class names, you may use _aliases_ to specify the use of these core
 validators. For example, you can use the alias `required` to refer to the [[yii\validators\RequiredValidator]] class:
 
 ```php
@@ -17,7 +16,6 @@ public function rules()
 The [[yii\validators\Validator::builtInValidators]] property declares all supported validator aliases.
 
 In the following, we will describe the main usage and properties of every core validator.
-
 
 ## [[yii\validators\BooleanValidator|boolean]] <span id="boolean"></span>
 
@@ -37,10 +35,8 @@ This validator checks if the input value is a boolean.
 - `falseValue`: the value representing `false`. Defaults to `'0'`.
 - `strict`: whether the type of the input value should match that of `trueValue` and `falseValue`. Defaults to `false`.
 
-
 > Note: Because data input submitted via HTML forms are all strings, you normally should leave the
-  [[yii\validators\BooleanValidator::strict|strict]] property as `false`.
-
+> [[yii\validators\BooleanValidator::strict|strict]] property as `false`.
 
 ## [[yii\captcha\CaptchaValidator|captcha]] <span id="captcha"></span>
 
@@ -58,7 +54,6 @@ to make sure an input is the same as the verification code displayed by [[yii\ca
   [[yii\captcha\CaptchaAction|CAPTCHA action]] that renders the CAPTCHA image. Defaults to `'site/captcha'`.
 - `skipOnEmpty`: whether the validation can be skipped if the input is empty. Defaults to `false`,
   which means the input is required.
-
 
 ## [[yii\validators\CompareValidator|compare]] <span id="compare"></span>
 
@@ -86,14 +81,14 @@ is as specified by the `operator` property.
   of this property and `compareAttribute` are specified, this property will take precedence.
 - `operator`: the comparison operator. Defaults to `==`, meaning checking if the input value is equal
   to that of `compareAttribute` or `compareValue`. The following operators are supported:
-    * `==`: check if two values are equal. The comparison is done is non-strict mode.
-    * `===`: check if two values are equal. The comparison is done is strict mode.
-    * `!=`: check if two values are NOT equal. The comparison is done is non-strict mode.
-    * `!==`: check if two values are NOT equal. The comparison is done is strict mode.
-    * `>`: check if value being validated is greater than the value being compared with.
-    * `>=`: check if value being validated is greater than or equal to the value being compared with.
-    * `<`: check if value being validated is less than the value being compared with.
-    * `<=`: check if value being validated is less than or equal to the value being compared with.
+  - `==`: check if two values are equal. The comparison is done is non-strict mode.
+  - `===`: check if two values are equal. The comparison is done is strict mode.
+  - `!=`: check if two values are NOT equal. The comparison is done is non-strict mode.
+  - `!==`: check if two values are NOT equal. The comparison is done is strict mode.
+  - `>`: check if value being validated is greater than the value being compared with.
+  - `>=`: check if value being validated is greater than or equal to the value being compared with.
+  - `<`: check if value being validated is less than the value being compared with.
+  - `<=`: check if value being validated is less than or equal to the value being compared with.
 - `type`: The default comparison type is '[[yii\validators\CompareValidator::TYPE_STRING|string]]', which means the values are
   compared byte by byte. When comparing numbers, make sure to set the [[yii\validators\CompareValidator::$type|$type]]
   to '[[yii\validators\CompareValidator::TYPE_NUMBER|number]]' to enable numeric comparison.
@@ -119,7 +114,6 @@ Afterwards these two values are compared with the compare validator.
 Client validation is not enabled as this will only work on the server-side because the date validator currently does not
 provide client validation, so [[yii\validators\CompareValidator::$enableClientValidation|$enableClientValidation]]
 is set to `false` on the compare validator too.
-
 
 ## [[yii\validators\DateValidator|date]] <span id="date"></span>
 
@@ -153,9 +147,9 @@ specified via [[yii\validators\DateValidator::timestampAttribute|timestampAttrib
   Since version 2.0.4, a format and timezone can be specified for this attribute using
   [[yii\validators\DateValidator::$timestampAttributeFormat|$timestampAttributeFormat]] and
   [[yii\validators\DateValidator::$timestampAttributeTimeZone|$timestampAttributeTimeZone]].
-  
+
   Note, that when using `timestampAttribute`, the input value will be converted to a unix timestamp, which by definition is in UTC, so
-  a conversion from the [[yii\validators\DateValidator::timeZone|input time zone]] to UTC will be performed (this behavior 
+  a conversion from the [[yii\validators\DateValidator::timeZone|input time zone]] to UTC will be performed (this behavior
   can be changed by setting [[yii\validators\DateValidator::$defaultTimeZone|$defaultTimeZone]] since 2.0.39).
 
 - Since version 2.0.4 it is also possible to specify a [[yii\validators\DateValidator::$min|minimum]] or
@@ -203,9 +197,8 @@ function foo($model, $attribute) {
 ```
 
 > Info: How to determine if a value is empty or not is a separate topic covered
-  in the [Empty Values](input-validation.md#handling-empty-inputs) section. Default value from database
-  schema could be loaded via [loadDefaultValues()](db-active-record.md#default-attribute-values) method of the model.
-
+> in the [Empty Values](input-validation.md#handling-empty-inputs) section. Default value from database
+> schema could be loaded via [loadDefaultValues()](db-active-record.md#default-attribute-values) method of the model.
 
 ## [[yii\validators\NumberValidator|double]] <span id="double"></span>
 
@@ -221,7 +214,6 @@ This validator checks if the input value is a double number. It is equivalent to
 - `max`: the upper limit (inclusive) of the value. If not set, it means the validator does not check the upper limit.
 - `min`: the lower limit (inclusive) of the value. If not set, it means the validator does not check the lower limit.
 
-
 ## [[yii\validators\EachValidator|each]] <span id="each"></span>
 
 > Info: This validator has been available since version 2.0.4.
@@ -233,7 +225,7 @@ This validator checks if the input value is a double number. It is equivalent to
 ]
 ```
 
-This validator only works with an array attribute. It validates if *every* element of the array can be successfully
+This validator only works with an array attribute. It validates if _every_ element of the array can be successfully
 validated by a specified validation rule. In the above example, the `categoryIDs` attribute must take an array value
 and each array element will be validated by the `integer` validation rule.
 
@@ -243,8 +235,7 @@ and each array element will be validated by the `integer` validation rule.
   If `false`, it will use `message` as the error message.
 
 > Note: If the attribute value is not an array, it is considered validation fails and the `message` will be returned
-  as the error message.
-
+> as the error message.
 
 ## [[yii\validators\EmailValidator|email]] <span id="email"></span>
 
@@ -265,7 +256,6 @@ This validator checks if the input value is a valid email address.
   Defaults to `false`. Note that in order to use IDN validation you have to install and enable the `intl` PHP extension,
   or an exception would be thrown.
 
-
 ## [[yii\validators\ExistValidator|exist]] <span id="exist"></span>
 
 ```php
@@ -282,7 +272,7 @@ This validator checks if the input value is a valid email address.
     ['a1', 'exist', 'targetAttribute' => 'a2'],
     // equivalent of
     ['a1', 'exist', 'targetAttribute' => ['a1' => 'a2']],
-    
+
     // a2 needs to exist, its value will use a2 to check for the existence, a1 will receive error message
     // i.e. a2 = 2, valid if there is value 2 in column "a2"
     ['a1', 'exist', 'targetAttribute' => ['a2']],
@@ -311,11 +301,11 @@ This validator checks if the input value is a valid email address.
     // i.e. a1 = 9, valid if there is value 9 in column "a1"
     //      a1 = [9, 10], valid if there are values 9 and 10 in column "a1"
     ['a1', 'exist', 'allowArray' => true],
-    
+
     // type_id needs to exist in the column "id" in the table defined in ProductType class
     // i.e. type_id = 1, valid if there is value 1 in column "id" of ProductType's table
-    ['type_id', 'exist', 'targetClass' => ProductType::class, 'targetAttribute' => ['type_id' => 'id']],    
-    
+    ['type_id', 'exist', 'targetClass' => ProductType::class, 'targetAttribute' => ['type_id' => 'id']],
+
     // the same as the previous, but using already defined relation "type"
     ['type_id', 'exist', 'targetRelation' => 'type'],
 ]
@@ -327,8 +317,8 @@ an [Active Record](db-active-record.md) attribute. You can use `targetAttribute`
 class. If you do not specify them, they will take the values of the attribute and the model class being validated.
 
 You can use this validator to validate against a single column or multiple columns (i.e., the combination of
-multiple attribute values should exist). In case of validation fail on the multiple columns checked at the same time 
-(like `['a1', 'a2']` in the examples) and `skipOnError` set to `true`, only the first attribute without any previous 
+multiple attribute values should exist). In case of validation fail on the multiple columns checked at the same time
+(like `['a1', 'a2']` in the examples) and `skipOnError` set to `true`, only the first attribute without any previous
 errors will receive a new error message.
 
 - `targetClass`: the name of the [Active Record](db-active-record.md) class that should be used
@@ -338,16 +328,16 @@ errors will receive a new error message.
   You may use an array to validate the existence of multiple columns at the same time. The array values
   are the attributes that will be used to validate the existence, while the array keys are the attributes
   whose values are to be validated. If the key, and the value are the same, you can just specify the value.  
-  Assuming we have ModelA to be validated and ModelB set as the target class the following `targetAttribute`'s 
+  Assuming we have ModelA to be validated and ModelB set as the target class the following `targetAttribute`'s
   configurations are taken as:
-    - `null` => value of a currently validated attribute of ModelA will be checked against stored values of ModelB's attribute with the same name
-    - `'a'` => value of a currently validated attribute of ModelA will be checked against stored values of attribute "a" of ModelB
-    - `['a']` => value of attribute "a" of ModelA will be checked against stored values of attribute "a" of ModelB
-    - `['a' => 'a']` => the same as above
-    - `['a', 'b']` => value of attribute "a" of ModelA will be checked against stored values of attribute "a" of ModelB and 
-      at the same time value of attribute "b" of ModelA will be checked against stored values of attribute "b" of ModelB
-    - `['a' => 'b']` => value of attribute "a" of ModelA will be checked against stored values of attribute "b" of ModelB
-- `targetRelation`: since version 2.0.14 you can use convenient attribute `targetRelation`, which overrides the `targetClass` and `targetAttribute` attributes using specs from the requested relation.  
+  - `null` => value of a currently validated attribute of ModelA will be checked against stored values of ModelB's attribute with the same name
+  - `'a'` => value of a currently validated attribute of ModelA will be checked against stored values of attribute "a" of ModelB
+  - `['a']` => value of attribute "a" of ModelA will be checked against stored values of attribute "a" of ModelB
+  - `['a' => 'a']` => the same as above
+  - `['a', 'b']` => value of attribute "a" of ModelA will be checked against stored values of attribute "a" of ModelB and
+    at the same time value of attribute "b" of ModelA will be checked against stored values of attribute "b" of ModelB
+  - `['a' => 'b']` => value of attribute "a" of ModelA will be checked against stored values of attribute "b" of ModelB
+- `targetRelation`: since version 2.0.14 you can use convenient attribute `targetRelation`, which overrides the `targetClass` and `targetAttribute` attributes using specs from the requested relation.
 - `filter`: an additional filter to be applied to the DB query used to check the existence of the input value.
   This can be a string, or an array representing the additional query condition (refer to [[yii\db\Query::where()]]
   on the format of query condition), or an anonymous function with the signature `function ($query)`, where `$query`
@@ -355,7 +345,6 @@ errors will receive a new error message.
 - `allowArray`: whether to allow the input value to be an array. Defaults to `false`. If this property is `true`
   and the input is an array, then every element of the array must exist in the target column. Note that
   this property cannot be set `true` if you are validating against multiple columns by setting `targetAttribute` as an array.
-
 
 ## [[yii\validators\FileValidator|file]] <span id="file"></span>
 
@@ -391,7 +380,6 @@ This validator checks if the input is a valid uploaded file.
 `FileValidator` is used together with [[yii\web\UploadedFile]]. Please refer to the [Uploading Files](input-file-upload.md)
 section for complete coverage about uploading files and performing validation about the uploaded files.
 
-
 ## [[yii\validators\FilterValidator|filter]] <span id="filter"></span>
 
 ```php
@@ -404,10 +392,10 @@ section for complete coverage about uploading files and performing validation ab
         // normalize phone input here
         return $value;
     }],
-    
+
     // normalize "phone" using the function "normalizePhone"
     ['phone', 'filter', 'filter' => [$this, 'normalizePhone']],
-    
+
     public function normalizePhone($value) {
         return $value;
     }
@@ -435,7 +423,6 @@ back to the attribute being validated.
 > ['property', 'filter', 'filter' => 'intval'],
 > ```
 
-
 ## [[yii\validators\ImageValidator|image]] <span id="image"></span>
 
 ```php
@@ -458,6 +445,7 @@ validation purpose:
 - `maxHeight`: the maximum height of the image. Defaults to `null`, meaning no upper limit.
 
 ## [[yii\validators\IpValidator|ip]] <span id="ip"></span>
+
 ```php
 [
     // checks if "ip_address" is a valid IPv4 or IPv6 address
@@ -481,53 +469,56 @@ The validator has such configuration options:
 - `ipv4`: whether the validating value can be an IPv4 address. Defaults to `true`.
 - `ipv6`: whether the validating value can be an IPv6 address. Defaults to `true`.
 - `subnet`: whether the address can be an IP with CIDR subnet, like `192.168.10.0/24`
-    * `true` - the subnet is required, addresses without CIDR will be rejected
-    * `false` - the address can not have the CIDR
-    * `null` - the CIDR is optional
+  - `true` - the subnet is required, addresses without CIDR will be rejected
+  - `false` - the address can not have the CIDR
+  - `null` - the CIDR is optional
 
-    Defaults to `false`.
+  Defaults to `false`.
+
 - `normalize`: whether to add the CIDR prefix with the smallest length (32 for IPv4 and 128 for IPv6) to an
-address without it. Works only when `subnet` is not `false`. For example:
-    * `10.0.1.5` will normalized to `10.0.1.5/32`
-    * `2008:db0::1` will be normalized to `2008:db0::1/128`
+  address without it. Works only when `subnet` is not `false`. For example:
+  _ `10.0.1.5` will normalized to `10.0.1.5/32`
+  _ `2008:db0::1` will be normalized to `2008:db0::1/128`
 
-    Defaults to `false`.
+      Defaults to `false`.
+
 - `negation`: whether the validation address can have a negation character `!` at the beginning. Defaults to `false`.
 - `expandIPv6`: whether to expand an IPv6 address to the full notation format.
-For example, `2008:db0::1` will be expanded to `2008:0db0:0000:0000:0000:0000:0000:0001`. Defaults to `false`.
+  For example, `2008:db0::1` will be expanded to `2008:0db0:0000:0000:0000:0000:0000:0001`. Defaults to `false`.
 - `ranges`: array of IPv4 or IPv6 ranges that are allowed or forbidden.
 
-    When the array is empty, or the option is not set, all the IP addresses are allowed.
-    Otherwise, the rules are checked sequentially until the first match is found.
-    IP address is forbidden, when it has not matched any of the rules.
-    
-    For example:
-    ```php
-    [
-        'client_ip', 'ip', 'ranges' => [
-            '192.168.10.128'
-            '!192.168.10.0/24',
-            'any' // allows any other IP addresses
-        ]
-    ]
-    ```
-In this example, access is allowed for all the IPv4 and IPv6 addresses excluding `192.168.10.0/24` subnet.
-IPv4 address `192.168.10.128` is also allowed, because it is listed before the restriction.
+      When the array is empty, or the option is not set, all the IP addresses are allowed.
+      Otherwise, the rules are checked sequentially until the first match is found.
+      IP address is forbidden, when it has not matched any of the rules.
+
+      For example:
+      ```php
+      [
+          'client_ip', 'ip', 'ranges' => [
+              '192.168.10.128'
+              '!192.168.10.0/24',
+              'any' // allows any other IP addresses
+          ]
+      ]
+      ```
+
+  In this example, access is allowed for all the IPv4 and IPv6 addresses excluding `192.168.10.0/24` subnet.
+  IPv4 address `192.168.10.128` is also allowed, because it is listed before the restriction.
+
 - `networks`: array of network aliases, that can be used in `ranges`. Format of array:
-    * key - alias name
-    * value - array of strings. String can be a range, IP address or another alias. String can be
+  - key - alias name
+  - value - array of strings. String can be a range, IP address or another alias. String can be
     negated with `!` (independent of `negation` option).
 
-    The following aliases are defined by default:
-    
-    * `*`: `any`
-    * `any`: `0.0.0.0/0, ::/0`
-    * `private`: `10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, fd00::/8`
-    * `multicast`: `224.0.0.0/4, ff00::/8`
-    * `linklocal`: `169.254.0.0/16, fe80::/10`
-    * `localhost`: `127.0.0.0/8', ::1`
-    * `documentation`: `192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24, 2001:db8::/32`
-    * `system`: `multicast, linklocal, localhost, documentation`
+  The following aliases are defined by default:
+  - `*`: `any`
+  - `any`: `0.0.0.0/0, ::/0`
+  - `private`: `10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, fd00::/8`
+  - `multicast`: `224.0.0.0/4, ff00::/8`
+  - `linklocal`: `169.254.0.0/16, fe80::/10`
+  - `localhost`: `127.0.0.0/8', ::1`
+  - `documentation`: `192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24, 2001:db8::/32`
+  - `system`: `multicast, linklocal, localhost, documentation`
 
 > Info: This validator has been available since version 2.0.7.
 
@@ -550,7 +541,6 @@ This validator checks if the input value can be found among the given list of va
 - `allowArray`: whether to allow the input value to be an array. When this is `true` and the input value is an array,
   every element in the array must be found in the given list of values, or the validation would fail.
 
-
 ## [[yii\validators\NumberValidator|integer]] <span id="integer"></span>
 
 ```php
@@ -564,7 +554,6 @@ This validator checks if the input value is an integer.
 
 - `max`: the upper limit (inclusive) of the value. If not set, it means the validator does not check the upper limit.
 - `min`: the lower limit (inclusive) of the value. If not set, it means the validator does not check the lower limit.
-
 
 ## [[yii\validators\RegularExpressionValidator|match]] <span id="match"></span>
 
@@ -583,7 +572,6 @@ This validator checks if the input value matches the specified regular expressio
   only if the input value matches the pattern. If this is set `true`, the validation is considered
   successful only if the input value does NOT match the pattern.
 
-
 ## [[yii\validators\NumberValidator|number]] <span id="number"></span>
 
 ```php
@@ -597,7 +585,6 @@ This validator checks if the input value is a number. It is equivalent to the [d
 
 - `max`: the upper limit (inclusive) of the value. If not set, it means the validator does not check the upper limit.
 - `min`: the lower limit (inclusive) of the value. If not set, it means the validator does not check the lower limit.
-
 
 ## [[yii\validators\RequiredValidator|required]] <span id="required"></span>
 
@@ -618,8 +605,7 @@ This validator checks if the input value is provided and not empty.
   if this property is `true`.
 
 > Info: How to determine if a value is empty or not is a separate topic covered
-  in the [Empty Values](input-validation.md#handling-empty-inputs) section.
-
+> in the [Empty Values](input-validation.md#handling-empty-inputs) section.
 
 ## [[yii\validators\SafeValidator|safe]] <span id="safe"></span>
 
@@ -632,7 +618,6 @@ This validator checks if the input value is provided and not empty.
 
 This validator does not perform data validation. Instead, it is used to mark an attribute to be
 a [safe attribute](structure-models.md#safe-attributes).
-
 
 ## [[yii\validators\StringValidator|string]] <span id="string"></span>
 
@@ -647,15 +632,14 @@ This validator checks if the input value is a valid string with certain length.
 
 - `length`: specifies the length limit of the input string being validated. This can be specified
   in one of the following forms:
-    * an integer: the exact length that the string should be of;
-    * an array of one element: the minimum length of the input string (e.g. `[8]`). This will overwrite `min`.
-    * an array of two elements: the minimum and maximum lengths of the input string (e.g. `[8, 128]`).
+  - an integer: the exact length that the string should be of;
+  - an array of one element: the minimum length of the input string (e.g. `[8]`). This will overwrite `min`.
+  - an array of two elements: the minimum and maximum lengths of the input string (e.g. `[8, 128]`).
     This will overwrite both `min` and `max`.
 - `min`: the minimum length of the input string. If not set, it means no minimum length limit.
 - `max`: the maximum length of the input string. If not set, it means no maximum length limit.
 - `encoding`: the encoding of the input string to be validated. If not set, it will use the application's
   [[yii\base\Application::charset|charset]] value which defaults to `UTF-8`.
-
 
 ## [[yii\validators\FilterValidator|trim]] <span id="trim"></span>
 
@@ -668,7 +652,6 @@ This validator checks if the input value is a valid string with certain length.
 
 This validator does not perform data validation. Instead, it will trim the surrounding white spaces around
 the input value. Note that if the input value is an array, it will be ignored by this validator.
-
 
 ## [[yii\validators\UniqueValidator|unique]] <span id="unique"></span>
 
@@ -699,16 +682,16 @@ the input value. Note that if the input value is an array, it will be ignored by
     // a1 needs to be unique by checking the uniqueness of both a2 and a3 (using a1 value)
     // i.e. a1 = 5, a2 = 6, valid if there is no value 5 in column "a3" and at the same time no value 6 in column "a2"
     ['a1', 'unique', 'targetAttribute' => ['a2', 'a1' => 'a3']],
-    
+
     // type_id needs to be unique in the column "id" in the table defined in ProductType class
     // i.e. type_id = 1, valid if there is no value 1 in column "id" of ProductType's table
-    ['type_id', 'unique', 'targetClass' => ProductType::class, 'targetAttribute' => 'id'],    
+    ['type_id', 'unique', 'targetClass' => ProductType::class, 'targetAttribute' => 'id'],
 ]
 ```
 
-This validator checks if the input value is unique in a table column. It only works with [Active Record](db-active-record.md) 
-model attributes. It supports validation against either a single column or multiple columns. In case of validation fail 
-on the multiple columns checked at the same time (like `['a1', 'a2']` in the examples) and `skipOnError` set to `true`, 
+This validator checks if the input value is unique in a table column. It only works with [Active Record](db-active-record.md)
+model attributes. It supports validation against either a single column or multiple columns. In case of validation fail
+on the multiple columns checked at the same time (like `['a1', 'a2']` in the examples) and `skipOnError` set to `true`,
 only the first attribute without any previous errors will receive a new error message.
 
 - `targetClass`: the name of the [Active Record](db-active-record.md) class that should be used
@@ -720,18 +703,17 @@ only the first attribute without any previous errors will receive a new error me
   whose values are to be validated. If the key, and the value are the same, you can just specify the value.  
   Assuming we have ModelA to be validated and ModelB set as the target class the following `targetAttribute`'s
   configurations are taken as:
-    - `null` => value of a currently validated attribute of ModelA will be checked against stored values of ModelB's attribute with the same name
-    - `'a'` => value of a currently validated attribute of ModelA will be checked against stored values of attribute "a" of ModelB
-    - `['a']` => value of attribute "a" of ModelA will be checked against stored values of attribute "a" of ModelB
-    - `['a' => 'a']` => the same as above
-    - `['a', 'b']` => value of attribute "a" of ModelA will be checked against stored values of attribute "a" of ModelB and
-      at the same time value of attribute "b" of ModelA will be checked against stored values of attribute "b" of ModelB
-    - `['a' => 'b']` => value of attribute "a" of ModelA will be checked against stored values of attribute "b" of ModelB
+  - `null` => value of a currently validated attribute of ModelA will be checked against stored values of ModelB's attribute with the same name
+  - `'a'` => value of a currently validated attribute of ModelA will be checked against stored values of attribute "a" of ModelB
+  - `['a']` => value of attribute "a" of ModelA will be checked against stored values of attribute "a" of ModelB
+  - `['a' => 'a']` => the same as above
+  - `['a', 'b']` => value of attribute "a" of ModelA will be checked against stored values of attribute "a" of ModelB and
+    at the same time value of attribute "b" of ModelA will be checked against stored values of attribute "b" of ModelB
+  - `['a' => 'b']` => value of attribute "a" of ModelA will be checked against stored values of attribute "b" of ModelB
 - `filter`: an additional filter to be applied to the DB query used to check the uniqueness of the input value.
   This can be a string, or an array representing the additional query condition (refer to [[yii\db\Query::where()]]
   on the format of query condition), or an anonymous function with the signature `function ($query)`, where `$query`
   is the [[yii\db\Query|Query]] object that you can modify in the function.
-
 
 ## [[yii\validators\UrlValidator|url]] <span id="url"></span>
 
@@ -754,5 +736,5 @@ This validator checks if the input value is a valid URL.
   extension, otherwise an exception would be thrown.
 
 > Note: The validator checks that URL scheme and host part is correct. It does NOT check the remaining parts of a URL
-and is NOT designed to protect against XSS or any other attacks. See [Security best practices](security-best-practices.md)
-article to learn more about threats prevention when developing applications.
+> and is NOT designed to protect against XSS or any other attacks. See [Security best practices](security-best-practices.md)
+> article to learn more about threats prevention when developing applications.

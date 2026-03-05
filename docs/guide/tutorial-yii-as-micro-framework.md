@@ -19,15 +19,15 @@ Create file `composer.json` under the `micro-app` directory using your favorite 
 
 ```json
 {
-    "require": {
-        "yiisoft/yii2": "~2.0.0"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ]
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
 }
 ```
 
@@ -39,7 +39,7 @@ After you have installed the framework, it's time to create an [entry point](str
 
 Create a `web` directory and put `index.php` inside with the following content:
 
-```php 
+```php
 <?php
 
 // comment out the following two lines when deployed to production
@@ -123,7 +123,6 @@ Opening the application URL in a browser should now print "Hello World!" which h
 > that you are not tied to that name (in case you thought you were), then adjusted
 > [[yii\base\Application::$controllerNamespace|controllers namespace]] and set the correct alias.
 
-
 ## Creating a REST API
 
 In order to demonstrate the usage of our "micro framework", we will create a simple REST API for posts.
@@ -160,7 +159,7 @@ namespace micro\models;
 use yii\db\ActiveRecord;
 
 class Post extends ActiveRecord
-{ 
+{
     public static function tableName()
     {
         return '{{post}}';

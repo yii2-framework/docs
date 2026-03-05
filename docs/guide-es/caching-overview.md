@@ -1,5 +1,4 @@
-El Almacenamiento en Caché
-==========================
+# El Almacenamiento en Caché
 
 El almacenamiento en caché es una forma económica y eficaz para mejorar el rendimiento de una aplicación web. Mediante
 el almacenamiento de datos relativamente estáticos en la memoria caché y su correspondiente recuperación cuando éstos sean
@@ -12,7 +11,7 @@ el contenido de la página que ha sido visitada más recientemente en el caché 
 
 Yii soporta los siguientes mecanismos de almacenamiento de caché:
 
-* [Caché de datos](caching-data.md)
-* [Caché de fragmentos](caching-fragment.md)
-* [Caché de páginas](caching-page.md)
-* [Caché HTTP](caching-http.md)
+- [Caché de datos](caching-data.md)
+- [Caché de fragmentos](caching-fragment.md)
+- [Caché de páginas](caching-page.md)
+- [Caché HTTP](caching-http.md)

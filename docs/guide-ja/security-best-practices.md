@@ -1,19 +1,15 @@
-セキュリティのベスト・プラクティス
-==================================
+# セキュリティのベスト・プラクティス
 
 下記において、一般的なセキュリティの指針を復習し、Yii を使ってアプリケーションを開発するときに脅威を回避する方法を説明します。
 これらの原則のほとんどのものは Yii に固有のものではなく、ウェブ・サイトまたはソフトウェアの開発一般に適用されるものです。
 従って、これらの原則の背後にある一般的な考え方について、さらに参照すべき文書へのリンクが追加されています。
 
-
-基本的な指針
-------------
+## 基本的な指針
 
 どのようなアプリケーションが開発されているかに関わらず、セキュリティに関しては二つの大きな指針が存在します。
 
 1. 入力をフィルタする。
 2. 出力をエスケープする。
-
 
 ### 入力をフィルタする
 
@@ -36,7 +32,6 @@ Yii においては、たいていの場合、同様のチェックを行うた�
 - <https://owasp.org/www-community/vulnerabilities/Improper_Data_Validation>
 - <https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet>
 
-
 ### 出力をエスケープする
 
 データを使用するコンテキストに応じて、出力をエスケープしなければなりません。
@@ -50,9 +45,7 @@ JavaScript や SQL のコンテキストでは、対象となる文字は別の�
 - <https://owasp.org/www-community/attacks/Code_Injection>
 - <https://owasp.org/www-community/attacks/xss/>
 
-
-SQL インジェクションを回避する
-------------------------------
+## SQL インジェクションを回避する
 
 SQL インジェクションは、次のように、エスケープされていない文字列を連結してクエリ・テキストを構築する場合に発生します。
 
@@ -93,14 +86,14 @@ $userIDs = $connection
 ```
 
 データがカラム名やテーブル名を指定するために使われる場合は、事前定義された一連の値だけを許可するのが最善の方法です。
-  
+
 ```php
 function actionList($orderBy = null)
 {
     if (!in_array($orderBy, ['name', 'status'])) {
         throw new BadRequestHttpException('name と status だけを並べ替えに使うことが出来ます。')
     }
-    
+
     // ...
 }
 ```
@@ -119,9 +112,7 @@ $rowCount = $connection->createCommand($sql)->queryScalar();
 
 - <https://owasp.org/www-community/attacks/SQL_Injection>
 
-
-XSS を回避する
---------------
+## XSS を回避する
 
 XSS すなわちクロス・サイト・スクリプティングは、ブラウザに HTML を出力する際に、出力が適切にエスケープされていないと発生します。
 例えば、ユーザ名を入力できるフォームで `Alexander` の代りに `<script>alert('Hello!');</script>` と入力した場合、
@@ -135,7 +126,6 @@ XSS の回避は、Yii においてはとても簡単です。一般に、二つ
 2. データを HTML として出力したい。
 
 プレーン・テキストしか必要でない場合は、エスケープは次のようにとても簡単です。
-
 
 ```php
 <?= \yii\helpers\Html::encode($username) ?>
@@ -153,9 +143,7 @@ HtmlPurifier の処理は非常に重いので、キャッシュを追加する�
 
 - <https://owasp.org/www-community/attacks/xss/>
 
-
-CSRF を回避する
----------------
+## CSRF を回避する
 
 CSRF は、クロス・サイト・リクエスト・フォージェリ (cross-site request forgery) の略称です。
 多くのアプリケーションは、ユーザのブラウザから来るリクエストはユーザ自身によって発せられたものだと仮定しているけれども、その仮定は間違っているかもしれない ... というのが CSRF の考え方です。
@@ -179,7 +167,7 @@ CSRF は、クロス・サイト・リクエスト・フォージェリ (cross-s
 CSRF を回避するためには、常に次のことを守らなければなりません。
 
 1. HTTP の規格、すなわち、GET はアプリケーションの状態を変更すべきではない、という規則に従うこと。
-  詳細は [RFC2616](https://www.rfc-editor.org/rfc/rfc9110.html#name-method-definitions) を参照して下さい。
+   詳細は [RFC2616](https://www.rfc-editor.org/rfc/rfc9110.html#name-method-definitions) を参照して下さい。
 2. Yii の CSRF 保護を有効にしておくこと。
 
 場合によっては、コントローラやアクションの単位で CSRF 検証を無効化する必要があることがあるでしょう。これは、そのプロパティを設定することによって達成することが出来ます。
@@ -254,17 +242,15 @@ class ContactAction extends Action
 > Warning: CSRF を無効化すると、あらゆるサイトから POST リクエストをあなたのサイトに送信することが出来るようになります。その場合には、IP アドレスや秘密のトークンをチェックするなど、追加の検証を実装することが重要です。
 
 > Note: バージョン 2.0.21 以降、Yii は `sameSite` クッキー設定 (PHP バージョン 7.4.0 以上が必要) をサポートしています。
-  ただし、`sameSite` クッキー設定を行えば、上記の CSRF 対策が不要になるということではありません。何故なら、今はまだ全てのブラウザがこの設定をサポートしている訳ではないからです。
-  詳細については [セッションとクッキー - sameSite オプション](runtime-sessions-cookies.md#samesite) を参照して下さい。
+> ただし、`sameSite` クッキー設定を行えば、上記の CSRF 対策が不要になるということではありません。何故なら、今はまだ全てのブラウザがこの設定をサポートしている訳ではないからです。
+> 詳細については [セッションとクッキー - sameSite オプション](runtime-sessions-cookies.md#samesite) を参照して下さい。
 
 このトピックについて更に読むべき文書:
 
 - <https://owasp.org/www-community/attacks/csrf>
 - <https://owasp.org/www-community/SameSite>
 
-
-ファイルの曝露を回避する
-------------------------
+## ファイルの曝露を回避する
 
 デフォルトでは、サーバのウェブ・ルートは、`index.php` がある `web` ディレクトリを指すように意図されています。
 共有ホスティング環境の場合、それをすることが出来ずに、全てのコード、構成情報、ログをサーバのウェブ・ルートの下に置かなくてはならないことがあり得ます。
@@ -272,9 +258,7 @@ class ContactAction extends Action
 そういう場合には、`web` 以外の全てに対してアクセスを拒否することを忘れないでください。
 それも出来ない場合は、アプリケーションを別の場所でホストすることを検討してください。
 
-
-本番環境ではデバッグ情報とデバッグ・ツールを無効にする
-------------------------------------------------------
+## 本番環境ではデバッグ情報とデバッグ・ツールを無効にする
 
 デバッグ・モードでは、Yii は極めて多くのエラー情報を出力します。これは確かに開発には役立つものです。
 しかし、実際の所、これらの饒舌なエラー情報は、攻撃者にとっても、データベース構造、構成情報の値、コードの断片などを曝露してくれる重宝なものです。
@@ -291,9 +275,7 @@ class ContactAction extends Action
 - <https://owasp.org/www-project-.net/articles/Exception_Handling.md>
 - <https://owasp.org/www-pdf-archive/OWASP_Top_10_2007.pdf> (A6 - Information Leakage and Improper Error Handling)
 
-
-TLS によるセキュアな接続を使う
-------------------------------
+## TLS によるセキュアな接続を使う
 
 Yii が提供する機能には、クッキーや PHP セッションに依存するものがあります。これらのものは、接続が侵害された場合には、脆弱性となり得ます。
 アプリケーションが TLS (しばしば [SSL](https://ja.wikipedia.org/wiki/Transport_Layer_Security) と呼ばれます) によるセキュアな接続を使用している場合は、この危険性を減少させることが出来ます。
@@ -307,12 +289,10 @@ H5BP プロジェクトが提供する構成例を参考にすることも出来
 - [Lighttpd](https://github.com/h5bp/server-configs-lighttpd).
 
 > Note: TLS が構成されているときは、(セッションの)クッキーを TLS のみで送信することが推奨されます。
-  これは、セッション および/または クッキーのの `secure` フラグを設定することで達成されます。
-  詳細は [セッションとクッキー - secure フラグ](runtime-sessions-cookies.md#secure) を参照して下さい。
+> これは、セッション および/または クッキーのの `secure` フラグを設定することで達成されます。
+> 詳細は [セッションとクッキー - secure フラグ](runtime-sessions-cookies.md#secure) を参照して下さい。
 
-
-サーバの構成をセキュアにする
-----------------------------
+## サーバの構成をセキュアにする
 
 このセクションの目的は、Yii ベースのウェブ・サイトをホストするサーバの構成を作成するときに、
 考慮に入れなければならないリスクに照明を当てることにあります。
@@ -352,7 +332,7 @@ return [
 ```
 
 > Note: 「ホスト・ヘッダ攻撃」に対する保護のためには、常に、フィルタの使用よりもウェブ・サーバの構成を優先すべきです。
-  [[yii\filters\HostControl]] は、サーバの構成が出来ない場合にだけ使うべきものです。
+> [[yii\filters\HostControl]] は、サーバの構成が出来ない場合にだけ使うべきものです。
 
 ### SSL ピア検証を構成する
 
@@ -373,9 +353,10 @@ stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error m
 
 1. [https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem) をダウンロードする。
 2. php.ini に以下を追加する。
-  ```
-  openssl.cafile="/path/to/cacert.pem"
-  curl.cainfo="/path/to/cacert.pem".
-  ```
+
+```
+openssl.cafile="/path/to/cacert.pem"
+curl.cainfo="/path/to/cacert.pem".
+```
 
 `cacert.pem` ファイルを最新に保つ必要があることに注意して下さい。

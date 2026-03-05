@@ -1,5 +1,4 @@
-Форматирование данных
-=====================
+# Форматирование данных
 
 Для форматирования вывода Yii предоставляет класс, преобразующий данные в человеко-понятный формат.
 [[yii\i18n\Formatter]] это класс-помощник, который зарегистрирован как
@@ -11,25 +10,25 @@ Formatter может быть использован двумя различны
 
 1. Напрямую, используя методы форматирования (все методы форматирования имеют префикс `as`):
 
-  ```php
-  echo Yii::$app->formatter->asDate('2014-01-01', 'long'); // выведет: January 1, 2014
-  echo Yii::$app->formatter->asPercent(0.125, 2); // выведет: 12.50%
-  echo Yii::$app->formatter->asEmail('cebe@example.com'); // выведет: <a href="mailto:cebe@example.com">cebe@example.com</a>
-  echo Yii::$app->formatter->asBoolean(true); // выведет: Yes
-  // он также умеет отображать null значения:
-  echo Yii::$app->formatter->asDate(null); // выведет: (not set)
-  ```
+```php
+echo Yii::$app->formatter->asDate('2014-01-01', 'long'); // выведет: January 1, 2014
+echo Yii::$app->formatter->asPercent(0.125, 2); // выведет: 12.50%
+echo Yii::$app->formatter->asEmail('cebe@example.com'); // выведет: <a href="mailto:cebe@example.com">cebe@example.com</a>
+echo Yii::$app->formatter->asBoolean(true); // выведет: Yes
+// он также умеет отображать null значения:
+echo Yii::$app->formatter->asDate(null); // выведет: (not set)
+```
 
 2. Используя метод [[yii\i18n\Formatter::format()|format()]] и имя формата.
-  Этот метод также используется в виджетах наподобие [[yii\grid\GridView]] и [[yii\widgets\DetailView]], в которых
-  вы можете задать формат отображения данных в колонке через конфигурацию виджета.
+   Этот метод также используется в виджетах наподобие [[yii\grid\GridView]] и [[yii\widgets\DetailView]], в которых
+   вы можете задать формат отображения данных в колонке через конфигурацию виджета.
 
-  ```php
-  echo Yii::$app->formatter->format('2014-01-01', 'date'); // выведет: January 1, 2014
-  // вы также можете использовать массивы для настроек метода форматирования:
-  // `2` это значение для $decimals параметра метода asPercent().
-  echo Yii::$app->formatter->format(0.125, ['percent', 2]); // выведет: 12.50%
-  ```
+```php
+echo Yii::$app->formatter->format('2014-01-01', 'date'); // выведет: January 1, 2014
+// вы также можете использовать массивы для настроек метода форматирования:
+// `2` это значение для $decimals параметра метода asPercent().
+echo Yii::$app->formatter->format(0.125, ['percent', 2]); // выведет: 12.50%
+```
 
 Все данные, отображаемые через компонент formatter, будут локализованы, если
 [расширение PHP intl](https://www.php.net/manual/ru/book.intl.php) было установлено. Для этого вы можете настроить свойство
@@ -61,9 +60,7 @@ echo Yii::$app->formatter->asDate('2014-01-01'); // выведет: 1 январ
 > имена месяца и дня, потому что в этом случае intl будет использовать 32-ух битный UNIX timestamp. На 64-битной системе
 > intl formatter будет работать во всех случаях, если, конечно, intl был установлен.
 
-
-Настройка форматирования <span id="configuring-format"></span>
---------------------------------------------------------------
+## Настройка форматирования <span id="configuring-format"></span>
 
 Форматы по умолчанию, используемые в методах форматирования, можно настраивать через свойства
 [[yii\i18n\Formatter|класса форматирования]]. Вы можете задать форматирование по умолчанию для всего приложения, настроив
@@ -82,8 +79,7 @@ echo Yii::$app->formatter->asDate('2014-01-01'); // выведет: 1 январ
 ],
 ```
 
-Форматирование значений даты и времени <span id="date-and-time"></span>
------------------------------------------------------------------------
+## Форматирование значений даты и времени <span id="date-and-time"></span>
 
 Класс форматирования предоставляет различные методы для форматирования значений даты и времени. Например:
 
@@ -98,7 +94,7 @@ echo Yii::$app->formatter->asDate('2014-01-01'); // выведет: 1 январ
 - [[yii\i18n\Formatter::asDuration()|duration]]: значение будет отформатировано как продолжительность в человеко-понятном
   формате, например `1 день, 2 минуты`.
 
-Форматирование даты и времени для методов [[yii\i18n\Formatter::asDate()|date]], [[yii\i18n\Formatter::asTime()|time]] и 
+Форматирование даты и времени для методов [[yii\i18n\Formatter::asDate()|date]], [[yii\i18n\Formatter::asTime()|time]] и
 [[yii\i18n\Formatter::asDatetime()|datetime]] может быть задано глобально через конфигурацию свойств форматирования
 [[yii\i18n\Formatter::$dateFormat|$dateFormat]], [[yii\i18n\Formatter::$timeFormat|$timeFormat]] и
 [[yii\i18n\Formatter::$datetimeFormat|$datetimeFormat]].
@@ -148,8 +144,7 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
 > Как обновить базу вы можете узнать из [руководства ICU](https://userguide.icu-project.org/datetime/timezone#TOC-Updating-the-Time-Zone-Data).
 > Смотрите также: [Настройка вашего PHP окружения для интернационализации](tutorial-i18n.md#setup-environment).
 
-Форматирование чисел <span id="numbers"></span>
------------------------------------------------
+## Форматирование чисел <span id="numbers"></span>
 
 Для форматирования числовых значений класс форматирования предоставляет следующие методы:
 
@@ -182,8 +177,7 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
 ]
 ```
 
-Остальное форматирование  <span id="other"></span>
---------------------------------------------------
+## Остальное форматирование <span id="other"></span>
 
 Кроме форматирование даты, времени и чисел, Yii предоставляет набор других полезных средств форматирования для различных
 ситуаций:
@@ -206,8 +200,7 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
   отображено как `Yes` и `false` как `No`, переведенное на язык приложения. Вы можете настроить это через свойство
   [[yii\i18n\Formatter::booleanFormat]].
 
-`null` значения <span id="null-values"></span>
-----------------------------------------------
+## `null` значения <span id="null-values"></span>
 
 Для значений `null` в PHP класс форматирования будет отображать вместо пустой строки маркер, по умолчанию это
 `(not set)`, переведенный на язык приложения. Вы можете настроить свойство [[yii\i18n\Formatter::nullDisplay|nullDisplay]]

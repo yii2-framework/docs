@@ -1,5 +1,4 @@
-查询构建器
-=============
+# 查询构建器
 
 查询构建器建立在 [Database Access Objects](db-dao.md) 基础之上，可让你创建
 程序化的、DBMS无关的SQL语句。相比于原生的SQL语句，查询构建器可以帮你
@@ -25,17 +24,16 @@ $rows = (new \yii\db\Query())
 字符串 `'Smith'`。
 
 ```sql
-SELECT `id`, `email` 
+SELECT `id`, `email`
 FROM `user`
 WHERE `last_name` = :last_name
 LIMIT 10
 ```
 
 > Tip: 你平时更多的时候会使用 [[yii\db\Query]] 而不是 [[yii\db\QueryBuilder]]。
-  当你调用其中一个查询方法时，后者将会被前者隐式的调用。[[yii\db\QueryBuilder]]主要负责将
-  DBMS 不相关的 [[yii\db\Query]] 对象转换成 DBMS 相关的 SQL 语句（例如，
-  以不同的方式引用表或字段名称）。
-
+> 当你调用其中一个查询方法时，后者将会被前者隐式的调用。[[yii\db\QueryBuilder]]主要负责将
+> DBMS 不相关的 [[yii\db\Query]] 对象转换成 DBMS 相关的 SQL 语句（例如，
+> 以不同的方式引用表或字段名称）。
 
 ## 创建查询 <span id="building-queries"></span>
 
@@ -46,13 +44,12 @@ LIMIT 10
 
 接下来，我们会对这些查询构建器方法进行一一讲解：
 
-
 ### [[yii\db\Query::select()|select()]] <span id="select"></span>
 
 [[yii\db\Query::select()|select()]] 方法用来指定 SQL 语句当中的 `SELECT` 子句。
 你可以像下面的例子一样使用一个数组或者字符串来定义需要查询的字段。当 SQL 语句
 是由查询对象生成的时候，被查询的字段名称将会自动的被引号括起来。
-  
+
 ```php
 $query->select(['id', 'email']);
 
@@ -62,7 +59,7 @@ $query->select('id, email');
 ```
 
 就像写原生 SQL 语句一样，被选取的字段可以包含表前缀，以及/或者字段别名。
-例如： 
+例如：
 
 ```php
 $query->select(['user.id AS user_id', 'email']);
@@ -86,7 +83,7 @@ $query->select(['user_id' => 'user.id', 'email']);
 你必须使用数组的格式，以避免自动的错误的引号添加。例如：
 
 ```php
-$query->select(["CONCAT(first_name, ' ', last_name) AS full_name", 'email']); 
+$query->select(["CONCAT(first_name, ' ', last_name) AS full_name", 'email']);
 ```
 
 与所有涉及原始 SQL 的地方一样，当在 select 中编写 DB 表达式时，可以对表名和列名使用
@@ -94,7 +91,7 @@ $query->select(["CONCAT(first_name, ' ', last_name) AS full_name", 'email']);
 
 从 2.0.1 的版本开始你就可以使用子查询了。在定义每一个子查询的时候，
 你应该使用 [[yii\db\Query]] 对象。例如：
-  
+
 ```php
 $subQuery = (new Query())->select('COUNT(*)')->from('user');
 
@@ -115,7 +112,6 @@ $query->select('user_id')->distinct();
 $query->select(['id', 'username'])
     ->addSelect(['email']);
 ```
-
 
 ### [[yii\db\Query::from()|from()]] <span id="from"></span>
 
@@ -149,11 +145,12 @@ $query->from(['u' => 'public.user', 'p' => 'public.post']);
 ```php
 $subQuery = (new Query())->select('id')->from('user')->where('status=1');
 
-// SELECT * FROM (SELECT `id` FROM `user` WHERE status=1) u 
+// SELECT * FROM (SELECT `id` FROM `user` WHERE status=1) u
 $query->from(['u' => $subQuery]);
 ```
 
 #### 前缀
+
 `from` 还可以应用默认的 [[yii\db\Connection::$tablePrefix|tablePrefix]] 前缀，实现细节请参考
 [“数据库访问对象指南”的“Quoting Tables”章节](db-dao.md#quoting-table-and-column-names).
 
@@ -184,7 +181,7 @@ $query->where('YEAR(somedate) = 2015');
 
 千万不要像如下的例子一样直接在条件语句当中嵌入变量，特别是当这些变量来源于终端用户输入的时候，
 因为这样我们的软件将很容易受到 SQL 注入的攻击。
-  
+
 ```php
 // 危险！千万别这样干，除非你非常的确定 $status 是一个整型数值。
 $query->where("status=$status");
@@ -198,7 +195,7 @@ $query->where('status=:status')
     ->addParams([':status' => $status]);
 ```
 
-与涉及原生 SQL 的所有地方一样，在以字符串格式写入条件时，可以对表名和列名使用 
+与涉及原生 SQL 的所有地方一样，在以字符串格式写入条件时，可以对表名和列名使用
 [与 DBMS 无关的引用语法](db-dao.md#quoting-table-and-column-names)。
 
 #### 哈希格式 <span id="hash-format"></span>
@@ -218,7 +215,7 @@ $query->where([
 
 就像你所看到的一样，查询构建器非常的智能，能恰当地处理数值当中的空值和数组。
 
-你也可以像下面那样在子查询当中使用哈希格式： 
+你也可以像下面那样在子查询当中使用哈希格式：
 
 ```php
 $userQuery = (new Query())->select('id')->from('user');
@@ -253,12 +250,11 @@ $query->where([$column => $value]);
 其中每个操作数可以是字符串格式、哈希格式或者嵌套的操作符格式，
 而操作符可以是如下列表中的一个：
 
-- `and`：操作数会被 `AND` 关键字串联起来。例如，`['and', 'id=1', 'id=2']` 
+- `and`：操作数会被 `AND` 关键字串联起来。例如，`['and', 'id=1', 'id=2']`
   将会生成 `id=1 AND id=2`。如果操作数是一个数组，它也会按上述规则转换成
-  字符串。例如，`['and', 'type=1', ['or', 'id=1', 'id=2']]` 
+  字符串。例如，`['and', 'type=1', ['or', 'id=1', 'id=2']]`
   将会生成 `type=1 AND (id=1 OR id=2)`。
   这个方法不会自动加引号或者转义。
-  
 - `or`：用法和 `and` 操作符类似，这里就不再赘述。
 
 - `not`：只需要操作数 1，它将包含在 `NOT()` 中。例如，`['not'，'id = 1']` 将生成 `['not', 'id=1']`。操作数 1 也可以是个描述多个表达式的数组。例如 `['not', ['status' => 'draft', 'name' => 'example']]` 将生成 `NOT ((status='draft') AND (name='example'))`。
@@ -274,8 +270,8 @@ $query->where([$column => $value]);
   在生成条件时。
 
 - `in`：第一个操作数应为字段名称或者 DB 表达式。第二个操作符既可以是一个数组，
-  也可以是一个  `Query` 对象。它会转换成`IN` 条件语句。如果第二个操作数是一个
-  数组，那么它代表的是字段或 DB 表达式的取值范围。如果第二个操作数是 `Query` 
+  也可以是一个 `Query` 对象。它会转换成`IN` 条件语句。如果第二个操作数是一个
+  数组，那么它代表的是字段或 DB 表达式的取值范围。如果第二个操作数是 `Query`
   对象，那么这个子查询的结果集将会作为第一个操作符的字段或者 DB 表达式的取值范围。
   例如， `['in', 'id', [1, 2, 3]]` 将生成 `id IN (1, 2, 3)`。
   该方法将正确地为字段名加引号以及为取值范围转义。`in` 操作符还支持组合字段，此时，
@@ -306,7 +302,7 @@ $query->where([$column => $value]);
 - `not like`：用法和 `like` 操作符类似，区别在于会使用 `NOT LIKE`
   来生成条件语句。
 
-- `or not like`：用法和 `not like` 操作符类似，区别在于会使用 `OR` 
+- `or not like`：用法和 `not like` 操作符类似，区别在于会使用 `OR`
   来串联多个 `NOT LIKE` 条件语句。
 
 - `exists`：需要一个操作数，该操作数必须是代表子查询 [[yii\db\Query]] 的一个实例，
@@ -367,7 +363,6 @@ $query->andWhere(new OrCondition([
 使用对象格式可以定义自己的条件集，并且可以更容易维护别人定义的条件集。（注：这里是说对象比数组更可靠）
 更多细节请参考 [Adding Custom Conditions and Expressions](#adding-custom-conditions-and-expressions) 章节。
 
-
 #### 附加条件 <span id="appending-conditions"></span>
 
 你可以使用 [[yii\db\Query::andWhere()|andWhere()]] 或者 [[yii\db\Query::orWhere()|orWhere()]] 在原有条件的基础上
@@ -391,7 +386,6 @@ if (!empty($search)) {
 ... WHERE (`status` = 10) AND (`title` LIKE '%yii%')
 ```
 
-
 #### 过滤条件 <span id="filter-conditions"></span>
 
 当 `WHERE` 条件来自于用户的输入时，你通常需要忽略用户输入的空值。
@@ -403,13 +397,13 @@ if (!empty($search)) {
 // $username 和 $email 来自于用户的输入
 $query->filterWhere([
     'username' => $username,
-    'email' => $email,		
+    'email' => $email,
 ]);
 ```
 
 [[yii\db\Query::filterWhere()|filterWhere()]] 和 [[yii\db\Query::where()|where()]] 唯一的不同就在于，前者
-将忽略在条件当中的[hash format](#hash-format)的空值。所以如果 `$email` 为空而 `$username` 
-不为空，那么上面的代码最终将生产如下 SQL `...WHERE username=:username`。 
+将忽略在条件当中的[hash format](#hash-format)的空值。所以如果 `$email` 为空而 `$username`
+不为空，那么上面的代码最终将生产如下 SQL `...WHERE username=:username`。
 
 > Tip: 当一个值为 `null`、空数组、空字符串或者一个只包含空格的字符串时，那么它将被判定为空值。
 
@@ -470,7 +464,6 @@ $query->orderBy('id ASC')
     ->addOrderBy('name DESC');
 ```
 
-
 ### [[yii\db\Query::groupBy()|groupBy()]] <span id="group-by"></span>
 
 [[yii\db\Query::groupBy()|groupBy()]] 方法是用来指定 SQL 语句当中的 `GROUP BY` 片断的。例如，
@@ -489,14 +482,13 @@ $query->groupBy('id, status');
 
 > Note: 当 `GROUP BY` 语句包含一些 DB 表达式的时候，你应该使用数组的格式。
 
-你可以调用 [[yii\db\Query::addOrderBy()|addOrderBy()]] 来为 `GROUP BY` 
+你可以调用 [[yii\db\Query::addOrderBy()|addOrderBy()]] 来为 `GROUP BY`
 子句添加额外的字段。例如，
 
 ```php
 $query->groupBy(['id', 'status'])
     ->addGroupBy('age');
 ```
-
 
 ### [[yii\db\Query::having()|having()]] <span id="having"></span>
 
@@ -510,7 +502,7 @@ $query->having(['status' => 1]);
 
 请查阅 [where()](#where) 的文档来获取更多有关于如何指定一个条件的细节。
 
-你可以调用 [[yii\db\Query::andHaving()|andHaving()]] 或者 [[yii\db\Query::orHaving()|orHaving()]] 
+你可以调用 [[yii\db\Query::andHaving()|andHaving()]] 或者 [[yii\db\Query::orHaving()|orHaving()]]
 方法来为 `HAVING` 子句追加额外的条件，例如，
 
 ```php
@@ -519,12 +511,11 @@ $query->having(['status' => 1])
     ->andHaving(['>', 'age', 30]);
 ```
 
-
 ### [[yii\db\Query::limit()|limit()]] 和 [[yii\db\Query::offset()|offset()]] <span id="limit-offset"></span>
 
 [[yii\db\Query::limit()|limit()]] 和 [[yii\db\Query::offset()|offset()]] 是用来指定 SQL 语句当中
 的 `LIMIT` 和 `OFFSET` 子句的。例如，
-  
+
 ```php
 // ... LIMIT 10 OFFSET 20
 $query->limit(10)->offset(20);
@@ -533,8 +524,7 @@ $query->limit(10)->offset(20);
 如果你指定了一个无效的 limit 或者 offset（例如，一个负数），那么它将会被忽略掉。
 
 > Tip: 在不支持 `LIMIT` 和 `OFFSET` 的 DBMS 中（例如，MSSQL），
-  查询构建器将生成一条模拟 `LIMIT`/`OFFSET` 行为的 SQL 语句。
-
+> 查询构建器将生成一条模拟 `LIMIT`/`OFFSET` 行为的 SQL 语句。
 
 ### [[yii\db\Query::join()|join()]] <span id="join"></span>
 
@@ -580,7 +570,6 @@ $query->leftJoin(['u' => $subQuery], 'u.id = author_id');
 
 在这个例子当中，你应该将子查询放到一个数组当中，而数组当中的键，则为这个子查询的别名。
 
-
 ### [[yii\db\Query::union()|union()]] <span id="union"></span>
 
 [[yii\db\Query::union()|union()]] 方法是用来指定 SQL 语句当中的 `UNION` 子句的。例如，
@@ -600,7 +589,6 @@ $query1->union($query2);
 ```
 
 你可以通过多次调用 [[yii\db\Query::union()|union()]] 方法来追加更多的 `UNION` 子句。
-
 
 ## 查询方法 <span id="query-methods"></span>
 
@@ -624,7 +612,7 @@ $rows = (new \yii\db\Query())
     ->select(['id', 'email'])
     ->from('user')
     ->all();
-    
+
 // SELECT * FROM `user` WHERE `username` LIKE `%test%`
 $row = (new \yii\db\Query())
     ->from('user')
@@ -633,10 +621,10 @@ $row = (new \yii\db\Query())
 ```
 
 > Note: [[yii\db\Query::one()|one()]] 方法只返回查询结果当中的第一条数据，
-  条件语句中不会加上 `LIMIT 1` 条件。如果你清楚的知道查询将会只返回一行或几行数据
-  （例如， 如果你是通过某些主键来查询的），这很好也提倡这样做。但是，如果查询结果
-  有机会返回大量的数据时，那么你应该显示调用 `limit(1)` 方法，以改善性能。
-  例如，`(new \yii\db\Query())->from('user')->limit(1)->one()`。
+> 条件语句中不会加上 `LIMIT 1` 条件。如果你清楚的知道查询将会只返回一行或几行数据
+> （例如， 如果你是通过某些主键来查询的），这很好也提倡这样做。但是，如果查询结果
+> 有机会返回大量的数据时，那么你应该显示调用 `limit(1)` 方法，以改善性能。
+> 例如，`(new \yii\db\Query())->from('user')->limit(1)->one()`。
 
 所有的这些查询方法都有一个可选的参数 `$db`, 该参数指代的是 [[yii\db\Connection|DB connection]]，
 执行一个 DB 查询时会用到。如果你省略了这个参数，那么 `db` [application component](structure-application-components.md) 将会被用作
@@ -650,11 +638,11 @@ $count = (new \yii\db\Query())
     ->count();
 ```
 
-当你调用 [[yii\db\Query]] 当中的一个查询方法的时候，实际上内在的运作机制如下： 
+当你调用 [[yii\db\Query]] 当中的一个查询方法的时候，实际上内在的运作机制如下：
 
-* 在当前 [[yii\db\Query]] 的构造基础之上，调用 [[yii\db\QueryBuilder]] 来生成一条 SQL 语句；
-* 利用生成的 SQL 语句创建一个 [[yii\db\Command]] 对象； 
-* 调用 [[yii\db\Command]] 的查询方法（例如，`queryAll()`）来执行这条 SQL 语句，并检索数据。
+- 在当前 [[yii\db\Query]] 的构造基础之上，调用 [[yii\db\QueryBuilder]] 来生成一条 SQL 语句；
+- 利用生成的 SQL 语句创建一个 [[yii\db\Command]] 对象；
+- 调用 [[yii\db\Command]] 的查询方法（例如，`queryAll()`）来执行这条 SQL 语句，并检索数据。
 
 有时候，你也许想要测试或者使用一个由 [[yii\db\Query]] 对象创建的 SQL 语句。
 你可以使用以下的代码来达到目的：
@@ -666,7 +654,7 @@ $command = (new \yii\db\Query())
     ->where(['last_name' => 'Smith'])
     ->limit(10)
     ->createCommand();
-    
+
 // 打印 SQL 语句
 echo $command->sql;
 // 打印被绑定的参数
@@ -676,11 +664,10 @@ print_r($command->params);
 $rows = $command->queryAll();
 ```
 
-
 ### 索引查询结果 <span id="indexing-query-results"></span>
 
 当你在调用 [[yii\db\Query::all()|all()]] 方法时，它将返回一个以连续的整型数值为索引的数组。
-而有时候你可能希望使用一个特定的字段或者表达式的值来作为索引结果集数组。那么你可以在调用 [[yii\db\Query::all()|all()]] 
+而有时候你可能希望使用一个特定的字段或者表达式的值来作为索引结果集数组。那么你可以在调用 [[yii\db\Query::all()|all()]]
 之前使用 [[yii\db\Query::indexBy()|indexBy()]] 方法来达到这个目的。
 例如，
 
@@ -712,7 +699,6 @@ $query = (new \yii\db\Query())
 > 此外，你用表名连接取列名的时候，比如 `customer.id`，结果中将只包含 `id` 列，因此你必须调用
 > `->indexBy('id')` 不要带表名前缀。
 
-
 ### 批处理查询 <span id="batch-query"></span>
 
 当需要处理大数据的时候，像 [[yii\db\Query::all()]] 这样的方法就不太合适了，
@@ -742,10 +728,10 @@ foreach ($query->each() as $user) {
 }
 ```
 
-[[yii\db\Query::batch()]] 和 [[yii\db\Query::each()]] 方法将会返回一个实现了`Iterator` 
-接口 [[yii\db\BatchQueryResult]]  的对象，可以用在 `foreach` 结构当中使用。在第一次迭代取数据的时候，
+[[yii\db\Query::batch()]] 和 [[yii\db\Query::each()]] 方法将会返回一个实现了`Iterator`
+接口 [[yii\db\BatchQueryResult]] 的对象，可以用在 `foreach` 结构当中使用。在第一次迭代取数据的时候，
 数据库会执行一次 SQL 查询，然后在剩下的迭代中，将直接从结果集中批量获取数据。默认情况下，
-一批的大小为 100，也就意味着一批获取的数据是 100 行。你可以通过给 `batch()` 
+一批的大小为 100，也就意味着一批获取的数据是 100 行。你可以通过给 `batch()`
 或者 `each()` 方法的第一个参数传值来改变每批行数的大小。
 
 相对于 [[yii\db\Query::all()]] 方法，批处理查询每次只读取 100 行的数据到内存。
@@ -753,7 +739,6 @@ foreach ($query->each() as $user) {
 如果你通过 [[yii\db\Query::indexBy()]] 方法为查询结果指定了索引字段，
 那么批处理查询将仍然保持相对应的索引方案，
 例如，
-
 
 ```php
 $query = (new \yii\db\Query())
@@ -775,17 +760,15 @@ MySQL 是通过 PDO 驱动库实现批量查询的。默认情况下，MySQL 查
 这违背了使用游标（cursor）获取数据的目的，
 因为它不阻止驱动程序将整个结果集加载到客户端的内存中。
 
-
 > Note: 当使用 `libmysqlclient` 时（PHP5 的标配），计算 PHP 的内存限制时，用于数据结果集的内存不会计算在内。
-  看上去批量查询是正确运行的，实际上整个数据集都被加载到了客户端的内存中，
-  而且这个使用量可能还会再增长。
+> 看上去批量查询是正确运行的，实际上整个数据集都被加载到了客户端的内存中，
+> 而且这个使用量可能还会再增长。
 
 要禁用缓存并减少客户端内存的需求量，PDO 连接属性 `PDO::MYSQL_ATTR_USE_BUFFERED_QUERY` 必须设置为 `false`。
 这样，直到整个数据集被处理完毕前，通过此连接是无法创建其他查询的。
 这样的操作可能会阻碍 `ActiveRecord` 执行表结构查询。
 如果这不构成问题（表结构已被缓存过了），
 我们可以通过切换原本的连接到非缓存模式，然后在批量查询完成后再切换回来。
-
 
 ```php
 Yii::$app->db->pdo->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
@@ -796,8 +779,8 @@ Yii::$app->db->pdo->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 ```
 
 > Note: 对于 MyISAM，在执行批量查询的过程中，表可能将被锁，
-  将延迟或拒绝其他连接的写入操作。
-  当使用非缓存查询时，尽量缩短游标打开的时间。
+> 将延迟或拒绝其他连接的写入操作。
+> 当使用非缓存查询时，尽量缩短游标打开的时间。
 
 如果表结构没有被缓存，或在批量查询被处理过程中需要执行其他查询，
 你可以创建一个单独的非缓存链接到数据库：
@@ -841,8 +824,7 @@ $unbufferedDb->close();
 ```
 
 > Note: 非缓存查询在 PHP 端使用更少的缓存，但会增加 MySQL 服务器端的负载。
-  建议您使用生产实践设计自己的代码以获取额外的海量数据，[例如，将数字键分段，使用非缓存的查询遍历](https://github.com/yiisoft/yii2/issues/8420#issuecomment-296109257)。
-
+> 建议您使用生产实践设计自己的代码以获取额外的海量数据，[例如，将数字键分段，使用非缓存的查询遍历](https://github.com/yiisoft/yii2/issues/8420#issuecomment-296109257)。
 
 ### 添加自定义查询条件和表达式（Adding custom Conditions and Expressions） <span id="adding-custom-conditions-and-expressions"></span>
 
@@ -886,12 +868,12 @@ class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
         $this->columns = $columns;
         $this->value = $value;
     }
-    
+
     public static function fromArrayDefinition($operator, $operands)
     {
         throw new InvalidArgumentException('Not implemented yet, but we will do it later');
     }
-    
+
     public function getColumns() { return $this->columns; }
     public function getValue() { return $this->vaule; }
 }
@@ -918,11 +900,11 @@ class AllGreaterConditionBuilder implements \yii\db\ExpressionBuilderInterface
     * @param ExpressionInterface $condition 要构建的查询条件对象
     * @param array $params 绑定的参数
     * @return AllGreaterCondition
-    */ 
+    */
     public function build(ExpressionInterface $expression, array &$params = [])
     {
         $value = $condition->getValue();
-        
+
         $conditions = [];
         foreach ($expression->getColumns() as $column) {
             $conditions[] = new SimpleCondition($column, '>', $value);
@@ -974,21 +956,20 @@ $query->andWhere(new AllGreaterCondition(['posts', 'comments', 'reactions', 'sub
 
 并在 `app\db\conditions\AllGreaterCondition` 对象中实现 `AllGreaterCondition::fromArrayDefinition()`方法：
 
-
 ```php
 namespace app\db\conditions;
 
 class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
 {
     // ... 这里省略其他方法的实现
-      
+
     public static function fromArrayDefinition($operator, $operands)
     {
         return new static($operands[0], $operands[1]);
     }
 }
 ```
-    
+
 然后呢，我们就可以使用更简短的操作符格式来创建自定义查询条件了：
 
 ```php
@@ -1000,13 +981,11 @@ $query->andWhere(['ALL>', ['posts', 'comments', 'reactions', 'subscriptions'], $
 而条件对象实现了 [[yii\db\condition\ConditionInterface]] 接口，它是继承了 [[yii\db\ExpressionInterface|ExpressionInterface]] 接口，
 如上面的栗子所写的，它用于数组定义的条件的场景，当然条件对象也需要构建器。
 
-
 总结起来就是:
 
 - Expression – 表达式对象，是数据集的数据转换对象（DTO），它可以被编译为一些特定 SQL 语句 （操作符、字符串、数组、JSON等等）。
 
 - Condition – 条件对象，是表达式对象超集，它可以聚合多个表达式对象（或标量值），然后编译成一条 SQL 查询条件。
-
 
 你可以创建自己的类来实现 [[yii\db\ExpressionInterface|ExpressionInterface]] 接口，达到封装的目的：隐藏复杂的 SQL 语句拼装过程。
 想学习到更多关于表达式对象的实践

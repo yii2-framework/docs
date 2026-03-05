@@ -1,5 +1,4 @@
-Skrip Masuk
-===========
+# Skrip Masuk
 
 Skrip masuk adalah langkah pertama pada proses _bootstrap_ aplikasi. Dalam sebuah aplikasi (apakah
 itu aplikasi web atau aplikasi konsol) memiliki satu skrip masuk. Pengguna mengirim _request_ ke
@@ -15,13 +14,12 @@ sehingga pengguna dapat menjalan aplikasi konsol menggunakan perintah `./yii <ro
 
 Skrip masuk umumnya mengerjakan tugas berikut ini:
 
-* Menentukan _global constant_;
-* Mendaftarkan [autoloader Composer](https://getcomposer.org/doc/01-basic-usage.md#autoloading);
-* Memasukkan file _class_ [[Yii]];
-* Mengambil konfigurasi aplikasi, dan memuatnya;
-* Membuat dan mengatur objek [application](structure-applications.md);
-* Memanggil [[yii\base\Application::run()]] untuk memproses _request_ yang diterima;
-
+- Menentukan _global constant_;
+- Mendaftarkan [autoloader Composer](https://getcomposer.org/doc/01-basic-usage.md#autoloading);
+- Memasukkan file _class_ [[Yii]];
+- Mengambil konfigurasi aplikasi, dan memuatnya;
+- Membuat dan mengatur objek [application](structure-applications.md);
+- Memanggil [[yii\base\Application::run()]] untuk memproses _request_ yang diterima;
 
 ## Aplikasi Web<span id="web-applications"></span>
 
@@ -45,7 +43,6 @@ $config = require __DIR__ . '/../config/web.php';
 // Membuat, mengkonfigurasi, dan menjalankan aplikasi
 (new yii\web\Application($config))->run();
 ```
-
 
 ## Aplikasi Konsol <span id="console-applications"></span>
 
@@ -79,18 +76,17 @@ $exitCode = $application->run();
 exit($exitCode);
 ```
 
-
 ## Menentukan _Constant_ <span id="defining-constants"></span>
 
 Skrip masuk adalah file yang tepat untuk menentukan _global constant_. Yii mengenali tiga _constant_ berikut ini:
 
-* `YII_DEBUG`: untuk menentukan apakah aplikasi sedang dalam mode _debug_. Pada saat mode _debug_, aplikasi
+- `YII_DEBUG`: untuk menentukan apakah aplikasi sedang dalam mode _debug_. Pada saat mode _debug_, aplikasi
   akan menyimpan informasi log lebih banyak, dan akan menampilkan detail error urutan pemanggilan _(error call stack)_ jika ada _exception_ yang di-_throw_. Alasan inilah,
   kenapa mode _debug_ sebaiknya digunakan pada tahap pengembangan. Nilai _default_ dari `YII_DEBUG` adalah `false`.
-* `YII_ENV`: untuk menentukan pada mode _environment_ manakah aplikasi ini dijalankan. _Constant_ ini akan dijelaskan lebih lanjut di
+- `YII_ENV`: untuk menentukan pada mode _environment_ manakah aplikasi ini dijalankan. _Constant_ ini akan dijelaskan lebih lanjut di
   bagian [Konfigurasi](concept-configurations.md#environment-constants).
   Nilai _default_ dari `YII_ENV` adalah `prod`, yang berarti aplikasi sedang dijalankan pada _production environment_.
-* `YII_ENABLE_ERROR_HANDLER`: untuk menentukan apakah akan mengaktifkan penanganan eror yang disediakan oleh Yii. Nilai _default_
+- `YII_ENABLE_ERROR_HANDLER`: untuk menentukan apakah akan mengaktifkan penanganan eror yang disediakan oleh Yii. Nilai _default_
   dari _constant_ ini adalah `true`.
 
 Untuk menentukan _constant_, kita biasanya menggunakan kode berikut ini:

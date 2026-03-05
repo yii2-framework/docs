@@ -1,11 +1,9 @@
-共享托管环境
-==========================
+# 共享托管环境
 
 共享的托管环境常常会对目录结构以及配置文件有较多的限制。
 然而，在大多数情况下，你仍可以通过少量的修改以在共享托管环境下运行 Yii 2.0。
 
-部署一个基础应用模板
----------------------------
+## 部署一个基础应用模板
 
 由于共享托管环境往往只有一个 webroot，如果可能，请优先使用基础项目模板（ basic project template )构建你的应用程序。
 参考 [安装 Yii 章节](start-installation.md)在本地安装基础项目模板。
@@ -60,8 +58,7 @@ RewriteRule . index.php
 为了检查环境配置，将 `requirements.php` 从你的根目录拷贝到 webroot 目录，
 并通过浏览器输入 URL `https://example.com/requirements.php` 运行它。最后，检查结束后别忘了删除这个文件哦！
 
-部署一个高级应用程序模板
----------------------------------
+## 部署一个高级应用程序模板
 
 将高级应用程序部署到共享主机比基本应用程序有点棘手但可以实现。
 请按照[高级项目模板文档](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/topic-shared-hosting.md)中的说明进行操作。

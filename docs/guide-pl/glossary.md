@@ -54,7 +54,7 @@ Dostawca jest organizacją lub indywidualnym deweloperem dostarczającym kod w f
 
 ## instalacja
 
-Instalacja jest procesem przygotowania do działania, zarówno poprzez wykonanie instrukcji zawartych w pliku typu readme, jak i przez uruchomienie specjalnie do tego celu 
+Instalacja jest procesem przygotowania do działania, zarówno poprzez wykonanie instrukcji zawartych w pliku typu readme, jak i przez uruchomienie specjalnie do tego celu
 przygotowanego skryptu. W przypadku Yii dotyczy to ustawienia praw dostępu i spełnienia wymogów oprogramowania.
 
 ## installation
@@ -75,7 +75,7 @@ Konfiguracja może odnosić się zarówno do procesu ustawiania właściwości o
 
 ## moduł
 
-Moduł jest mini aplikacją zawierającą elementy MVC, takie jak modele, widoki, kontrolery itp., która może być używana wewnątrz głównej aplikacji, poprzez przekierowanie obsługi 
+Moduł jest mini aplikacją zawierającą elementy MVC, takie jak modele, widoki, kontrolery itp., która może być używana wewnątrz głównej aplikacji, poprzez przekierowanie obsługi
 żądań do modułu zamiast standardowo do własnego kontrolera.
 
 # N

@@ -1,11 +1,10 @@
-Localizador de Servicios
-========================
+# Localizador de Servicios
 
 Un localizador de servicios es un objeto que sabe cómo proporcionar todo tipo de servicios (o componentes) que puede necesitar una aplicación. Dentro de un localizador de servicios, existe en cada componente como una única instancia, únicamente identificado por un ID. Se utiliza el ID para recuperar un componente desde el localizador de servicios.
 
 En Yii, un localizador de servicio es simplemente una instancia de [[yii\di\ServiceLocator]], o de una clase hija.
 
-El localizador de servicio más utilizado en Yii es el objeto *aplicación*, que se puede acceder a través de `\Yii::$app`. Los servicios que prestá son llamadas *componentes de la aplicación*, como los componentes `request`, `response`, and `urlManager`. Usted puede configurar estos componentes, o incluso cambiarlos por sus propias implementaciones fácilmente a través de la funcionalidad proporcionada por el localizador de servicios.
+El localizador de servicio más utilizado en Yii es el objeto _aplicación_, que se puede acceder a través de `\Yii::$app`. Los servicios que prestá son llamadas _componentes de la aplicación_, como los componentes `request`, `response`, and `urlManager`. Usted puede configurar estos componentes, o incluso cambiarlos por sus propias implementaciones fácilmente a través de la funcionalidad proporcionada por el localizador de servicios.
 
 Además del objeto de aplicación, cada objeto módulo es también un localizador de servicios.
 
@@ -47,7 +46,7 @@ $cache = $locator->cache;
 
 Como puede observarse, [[yii\di\ServiceLocator]] le permite acceder a un componente como una propiedad utilizando el ID de componente. Cuando acceda a un componente, por primera vez, [[yii\di\ServiceLocator]] utilizará la información de registro de componente para crear una nueva instancia del componente y devolverlo. Más tarde, si se accede de nuevo al componente, el localizador de servicio devolverá la misma instancia.
 
-Usted puede utilizar [[yii\di\ServiceLocator::has()]] para comprobar si un ID de componente ya ha sido registrada. 
+Usted puede utilizar [[yii\di\ServiceLocator::has()]] para comprobar si un ID de componente ya ha sido registrada.
 Si llama [[yii\di\ServiceLocator::get()]] con una identificación válida, se produce una excepción.
 
 Debido a que los localizadores de servicios a menudo se crean con [configuraciones](concept-configurations.md), se proporciona una propiedad que puede escribir el nombre [[yii\di\ServiceLocator::setComponents()|components]]. Esto le permite configurar y registrar varios componentes a la vez. El siguiente código muestra un arreglo de configuración que se puede utilizar para configurar una aplicación, al mismo tiempo que el registro de la "db", "cache" y "buscar" componentes:

@@ -1,5 +1,4 @@
-处理密码
-========
+# 处理密码
 
 大部分开发者知道密码不能以明文形式存储，但是许多开发者仍认为使用 `md5` 或者 `sha1` 来哈希化密码是安全的。
 一度，使用上述的哈希算法是足够安全的，但是，
@@ -12,7 +11,6 @@ Yii 提供了两个帮助函数以让使用 `crypt` 来进行安全的哈希密�
 
 当一个用户为第一次使用，提供了一个密码时（比如：注册时），密码就需要被哈希化。
 
-
 ```php
 $hash = Yii::$app->getSecurity()->generatePasswordHash($password);
 ```
@@ -20,7 +18,6 @@ $hash = Yii::$app->getSecurity()->generatePasswordHash($password);
 哈希串可以被关联到对应的模型属性，这样，它可以被存储到数据库中以备将来使用。
 
 当一个用户尝试登录时，表单提交的密码需要使用之前的存储的哈希串来验证：
-
 
 ```php
 if (Yii::$app->getSecurity()->validatePassword($password, $hash)) {

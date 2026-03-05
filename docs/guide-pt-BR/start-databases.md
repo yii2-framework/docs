@@ -1,5 +1,4 @@
-Trabalhando com Bancos de Dados
-===============================
+# Trabalhando com Bancos de Dados
 
 Esta seção descreverá como criar uma nova página que exibe informações de países obtidos de uma tabela de banco de dados chamada `pais`. Para isso, você
 configurará uma conexão com o banco de dados, criará uma classe de
@@ -7,17 +6,15 @@ configurará uma conexão com o banco de dados, criará uma classe de
 
 Ao longo deste tutorial, você aprenderá como:
 
-* configurar uma conexão de BD
-* definir uma classe Active Record
-* consultar dados usando a classe de Active Record
-* exibir dados em uma view de forma paginada
+- configurar uma conexão de BD
+- definir uma classe Active Record
+- consultar dados usando a classe de Active Record
+- exibir dados em uma view de forma paginada
 
 Perceba que para terminar essa seção, você deve ter conhecimento e experiência
 básicos em bancos de dados. Em particular, você deve saber como criar um banco de dados e como executar instruções SQL usando uma ferramenta cliente de bancos de dados.
 
-
-Preparando o Banco de Dados <span id="preparing-database"></span>
----------------------------
+## Preparando o Banco de Dados <span id="preparing-database"></span>
 
 Para começar, crie um banco de dados chamado `yii2basico`, de onde você
 obterá os dados em sua aplicação. Você pode criar um banco de dados SQLite, MySQL,
@@ -51,8 +48,7 @@ INSERT INTO `pais` VALUES ('US','Estados Unidos',322976000);
 Neste ponto, você tem um banco de dados chamado `yii2basico` e dentro dele uma
 tabela `pais` com três colunas, contendo dez linhas de dados.
 
-Configurando uma Conexão de BD <span id="configuring-db-connection"></span>
-------------------------------
+## Configurando uma Conexão de BD <span id="configuring-db-connection"></span>
 
 Antes de prosseguir, certifique-se de que você possui instalados tanto a
 extensão [PDO](https://www.php.net/manual/pt_BR/book.pdo.php) do PHP quanto o driver
@@ -81,8 +77,8 @@ por meio da qual você pode fazer consultas SQL ao banco de dados subjacente.
 A conexão configurada acima pode ser acessada no código da aplicação através da expressão `Yii::$app->db`.
 
 > Info: O arquivo `config/db.php` será absorvido (incluso) pela configuração principal da
-  aplicação `config/web.php`, que especifica como a instância da [aplicação](structure-applications.md)
-  deve ser inicializada. Para mais informações, por favor, consulte a seção [Configurações](concept-configurations.md).
+> aplicação `config/web.php`, que especifica como a instância da [aplicação](structure-applications.md)
+> deve ser inicializada. Para mais informações, por favor, consulte a seção [Configurações](concept-configurations.md).
 
 Se você precisa trabalhar com bancos de dados para os quais não há suporte nativo no Yii, consulte as seguintes extensões:
 
@@ -91,8 +87,7 @@ Se você precisa trabalhar com bancos de dados para os quais não há suporte na
 - [Firebird](https://github.com/edgardmessias/yii2-firebird)
 - [MariaDB](https://github.com/sam-it/yii2-mariadb)
 
-Criando um Active Record <span id="creating-active-record"></span>
-------------------------
+## Criando um Active Record <span id="creating-active-record"></span>
 
 Para representar e buscar os dados da tabela `pais`, crie uma classe que deriva de [Active Record](db-active-record.md) chamada `Pais` e salve-a
 no arquivo `models/Pais.php`.
@@ -114,8 +109,8 @@ nenhum código nela! Só com o código acima, o Yii descobrirá o nome da tabela
 associada a partir do nome da classe.
 
 > Info: Se não houver nenhuma correspondência direta do nome da classe com o nome
-  da tabela, você pode sobrescrever o método [[yii\db\ActiveRecord::tableName()]]
-  para especificar explicitamente o nome da tabela associada.
+> da tabela, você pode sobrescrever o método [[yii\db\ActiveRecord::tableName()]]
+> para especificar explicitamente o nome da tabela associada.
 
 Usando a classe `Pais`, você pode manipular facilmente os dados na tabela
 `pais`, conforme é demonstrado nos fragmentos de código a seguir:
@@ -138,14 +133,12 @@ $pais->save();
 ```
 
 > Info: O Active Record é uma maneira poderosa de acessar e manipular dados
-  do banco de dados de uma forma orientada a objetos. Você pode encontrar informações
-  mais detalhadas na seção [Active Record](db-active-record.md. Alternativamente,
-  você também pode interagir com o banco de dados usando um método de acesso a
-  dados em baixo nível chamado [Objeto de Acesso a Dados (Data Access Objects)](db-dao.md).
+> do banco de dados de uma forma orientada a objetos. Você pode encontrar informações
+> mais detalhadas na seção [Active Record](db-active-record.md. Alternativamente,
+> você também pode interagir com o banco de dados usando um método de acesso a
+> dados em baixo nível chamado [Objeto de Acesso a Dados (Data Access Objects)](db-dao.md).
 
-
-Criando uma Action <span id="creating-action"></span>
-------------------
+## Criando uma Action <span id="creating-action"></span>
 
 Para disponibiliar os dados de países aos usuários finais, você precisa criar uma nova
 action. Em vez de colocar a nova action no controller `site`
@@ -194,16 +187,14 @@ uma consulta ao BD e retorna todos os dados da tabela `pais`. Para limitar o
 número de países retornados a cada requisição, a consulta é paginada com a ajuda
 de um objeto [[yii\data\Pagination]]. O objeto `Pagination` serve para dois propósitos:
 
-* Define as cláusulas `offset` e `limit` da declaração SQL representada pela query
+- Define as cláusulas `offset` e `limit` da declaração SQL representada pela query
   (consulta) de modo que apenas retorne uma única página de dados por vez (no exemplo, no máximo
   5 linhas por página).
-* É usado na view para exibir um paginador que consiste de uma lista de botões de páginas, conforme será explicado na próxima subseção.
+- É usado na view para exibir um paginador que consiste de uma lista de botões de páginas, conforme será explicado na próxima subseção.
 
 No final do código, a action `index` renderiza uma view chamada `index` e envia a ela os dados dos países e as informações de paginação.
 
-
-Criando uma View <span id="creating-view"></span>
-----------------
+## Criando uma View <span id="creating-view"></span>
 
 Dentro do diretório `views`, primeiro crie um subdiretório chamado `pais`.
 Esta pasta será usada para guardar todas as views renderizadas pelo controller
@@ -234,9 +225,7 @@ Na segunda parte, um widget [[yii\widgets\LinkPager]] é renderizado usando as
 informações de paginação passadas pela action. O widget `LinkPager` exibe uma
 lista de botões de páginas. Clicar em qualquer um deles vai atualizar os dados dos países conforme a página correspondente.
 
-
-Conferindo <span id="trying-it-out"></span>
---------
+## Conferindo <span id="trying-it-out"></span>
 
 Para ver se todo os códigos acima funcionam, use o seu navegador para acessar a seguinte URL:
 
@@ -259,22 +248,20 @@ https://hostname/index.php?r=pais/index&page=2
 Por trás das cortinas, [[yii\data\Pagination|Pagination]] está fornecendo toda
 a funcionalidade necessária para paginar um conjunto de dados:
 
-* Inicialmente, [[yii\data\Pagination|Pagination]] representa a primeira página,
+- Inicialmente, [[yii\data\Pagination|Pagination]] representa a primeira página,
   que reflete a consulta SELECT de países com a cláusula `LIMIT 5 OFFSET 0`.
   Como resultado, os primeiros cinco países serão buscados e exibidos.
-* O widget [[yii\widgets\LinkPager|LinkPager]] renderiza os botões das páginas
+- O widget [[yii\widgets\LinkPager|LinkPager]] renderiza os botões das páginas
   usando as URLs criadas pelo [[yii\data\Pagination::createUrl()|Pagination]].
   As URLs conterão um parâmetro `page`, que representa os diferentes números de
   páginas.
-* Se você clicar no botão de página "2", uma nova requisição para a rota
+- Se você clicar no botão de página "2", uma nova requisição para a rota
   `pais/index` será disparada e tratada. [[yii\data\Pagination|Pagination]] lê
   o parâmetro `page` da URL e define o número da página atual como sendo 2. A nova
   consulta de países então terá a cláusula `LIMIT 5 OFFSET 5` e retornará os
   próximos cinco países para a exibição.
 
-
-Resumo <span id="summary"></span>
-------
+## Resumo <span id="summary"></span>
 
 Nesta seção, você aprendeu como trabalhar com um banco de dados. Você também
 aprendeu como buscar e exibir dados em páginas com a ajuda do

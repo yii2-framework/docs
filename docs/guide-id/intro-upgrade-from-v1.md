@@ -14,25 +14,25 @@ beberapa fitur yang sebelumnya harus anda kembangkan sendiri, kini telah menjadi
 
 Yii 2.0 sepenuhnya menggunakan [composer](https://getcomposer.org/), yaitu dependency manager yang sudah diakui oleh PHP.
 
--   Instalasi dari kerangka inti serta ekstensi, ditangani melalui Composer.
--   Silakan merujuk ke bagian [Instalasi Yii](start-installation.md) untuk belajar cara menginstal Yii 2.0.
--   Jika ingin membuat ekstensi baru, atau mengubah/memperbarui ekstensi 1.1 yang telah Anda buat ke ekstensi 2.0 (agar kompatibel), silakan merujuk pada panduan [Membuat Ekstensi](structure-extensions.md#menciptakan-ekstensi).
+- Instalasi dari kerangka inti serta ekstensi, ditangani melalui Composer.
+- Silakan merujuk ke bagian [Instalasi Yii](start-installation.md) untuk belajar cara menginstal Yii 2.0.
+- Jika ingin membuat ekstensi baru, atau mengubah/memperbarui ekstensi 1.1 yang telah Anda buat ke ekstensi 2.0 (agar kompatibel), silakan merujuk pada panduan [Membuat Ekstensi](structure-extensions.md#menciptakan-ekstensi).
 
 ## Persyaratan PHP
 
 Yii 2.0 membutuhkan PHP 5.4 atau versi yang lebih tinggi, ini karena ada perubahan besar atas PHP versi 5.2 yang sebelumnya dibutuhkan oleh Yii 1.1. Akibatnya, ada banyak perbedaan pada tingkat bahasa yang harus Anda perhatikan.
 Dibawah ini ringkasan perubahan utama mengenai PHP tersebut:
 
--   [Namespaces](https://www.php.net/manual/en/language.namespaces.php).
--   [Anonymous fungsi](https://www.php.net/manual/en/functions.anonymous.php).
--   Sintaks array pendek `[... elemen ...]` digunakan sebagai pengganti `array (... elemen ...)`.
--   Tags echo pendek `<=` digunakan dalam tampilan file. Ini aman digunakan mulai dari PHP 5.4.
--   [Class SPL dan interface](https://www.php.net/manual/en/book.spl.php).
--   [Late Static Bindings](https://www.php.net/manual/en/language.oop5.late-static-bindings.php).
--   [Tanggal dan Waktu](https://www.php.net/manual/en/book.datetime.php).
--   [Traits](https://www.php.net/manual/en/language.oop5.traits.php).
--   [Intl](https://www.php.net/manual/en/book.intl.php). Yii 2.0 menggunakan `ekstensi PHP intl`
-      untuk mendukung fitur internasionalisasi.
+- [Namespaces](https://www.php.net/manual/en/language.namespaces.php).
+- [Anonymous fungsi](https://www.php.net/manual/en/functions.anonymous.php).
+- Sintaks array pendek `[... elemen ...]` digunakan sebagai pengganti `array (... elemen ...)`.
+- Tags echo pendek `<=` digunakan dalam tampilan file. Ini aman digunakan mulai dari PHP 5.4.
+- [Class SPL dan interface](https://www.php.net/manual/en/book.spl.php).
+- [Late Static Bindings](https://www.php.net/manual/en/language.oop5.late-static-bindings.php).
+- [Tanggal dan Waktu](https://www.php.net/manual/en/book.datetime.php).
+- [Traits](https://www.php.net/manual/en/language.oop5.traits.php).
+- [Intl](https://www.php.net/manual/en/book.intl.php). Yii 2.0 menggunakan `ekstensi PHP intl`
+    untuk mendukung fitur internasionalisasi.
 
 ## Namespace
 
@@ -306,11 +306,11 @@ Silakan merujuk ke bagian [Managing Aset](structure-assets.md) untuk lebih jelas
 
 Yii 2.0 memperkenalkan banyak helper umum untuk digunakan, termasuk.
 
--   [[yii\helpers\Html]]
--   [[yii\helpers\ArrayHelper]]
--   [[yii\helpers\StringHelper]]
--   [[yii\helpers\FileHelper]]
--   [[yii\helpers\Json]]
+- [[yii\helpers\Html]]
+- [[yii\helpers\ArrayHelper]]
+- [[yii\helpers\StringHelper]]
+- [[yii\helpers\FileHelper]]
+- [[yii\helpers\Json]]
 
 Silakan lihat bagian [Tinjauan Helper](helper-overview.md) untuk lebih jelasnya.
 

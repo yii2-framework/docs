@@ -1,21 +1,18 @@
-Performance Tuning
-==================
+# Performance Tuning
 
-There are many factors affecting the performance of your Web application. Some are environmental, some are related 
+There are many factors affecting the performance of your Web application. Some are environmental, some are related
 with your code, while some others are related with Yii itself. In this section, we will enumerate most of these
 factors and explain how you can improve your application performance by adjusting these factors.
-
 
 ## Optimizing your PHP Environment <span id="optimizing-php"></span>
 
 A well configured PHP environment is very important. In order to get maximum performance,
 
 - Use the latest stable PHP version. Major releases of PHP may bring significant performance improvements.
-- Enable bytecode caching with [Opcache](https://www.php.net/manual/en/book.opcache.php) (PHP 5.5 or later) or [APC](https://www.php.net/manual/en/book.apcu.php) 
+- Enable bytecode caching with [Opcache](https://www.php.net/manual/en/book.opcache.php) (PHP 5.5 or later) or [APC](https://www.php.net/manual/en/book.apcu.php)
   (PHP 5.4). Bytecode caching avoids the time spent in parsing and including PHP scripts for every
   incoming request.
 - [Tune `realpath()` cache](https://github.com/samdark/realpath_cache_tuner).
-
 
 ## Disabling Debug Mode <span id="disable-debug"></span>
 
@@ -31,22 +28,20 @@ defined('YII_DEBUG') or define('YII_DEBUG', false);
 ```
 
 > Info: The default value of `YII_DEBUG` is `false`. So if you are certain that you do not change its default
-  value somewhere else in your application code, you may simply remove the above line to disable debug mode. 
-  
+> value somewhere else in your application code, you may simply remove the above line to disable debug mode.
 
 ## Using Caching Techniques <span id="using-caching"></span>
 
 You can use various caching techniques to significantly improve the performance of your application. For example,
 if your application allows users to enter text in Markdown format, you may consider caching the parsed Markdown
-content to avoid parsing the same Markdown text repeatedly in every request. Please refer to 
+content to avoid parsing the same Markdown text repeatedly in every request. Please refer to
 the [Caching](caching-overview.md) section to learn about the caching support provided by Yii.
-
 
 ## Enabling Schema Caching <span id="enable-schema-caching"></span>
 
 Schema caching is a special caching feature that should be enabled whenever you are using [Active Record](db-active-record.md).
 As you know, Active Record is intelligent enough to detect schema information (e.g. column names, column types, constraints)
-about a DB table without requiring you to manually describe them. Active Record obtains this information by executing 
+about a DB table without requiring you to manually describe them. Active Record obtains this information by executing
 extra SQL queries. By enabling schema caching, the retrieved schema information will be saved in the cache and reused
 in future requests.
 
@@ -78,21 +73,19 @@ return [
 ];
 ```
 
-
 ## Combining and Minimizing Assets <span id="optimizing-assets"></span>
 
-A complex Web page often includes many CSS and/or JavaScript asset files. To reduce the number of HTTP requests 
+A complex Web page often includes many CSS and/or JavaScript asset files. To reduce the number of HTTP requests
 and the overall download size of these assets, you should consider combining them into one single file and
 compressing it. This may greatly improve the page loading time and reduce the server load. For more details,
 please refer to the [Assets](structure-assets.md) section.
-
 
 ## Optimizing Session Storage <span id="optimizing-session"></span>
 
 By default session data are stored in files. The implementation is locking a file from opening a session to the point it's
 closed either by `session_write_close()` (in Yii it could be done as `Yii::$app->session->close()`) or at the end of request.
 While session file is locked all other requests which are trying to use the same session are blocked i.e. waiting for the
-initial request to release session file. This is fine for development and probably small projects. But when it comes 
+initial request to release session file. This is fine for development and probably small projects. But when it comes
 to handling massive concurrent requests, it is better to use more sophisticated storage, such as database. Yii supports
 a variety of session storage out of box. You can use these storage by configuring the `session` component in the
 [application configuration](concept-configurations.md) like the following,
@@ -135,12 +128,11 @@ storage limit.
 If you have [Redis](https://redis.io/) on your server, it is highly recommended you use it as session storage by using
 [[yii\redis\Session]].
 
-
 ## Optimizing Databases <span id="optimizing-databases"></span>
 
 Executing DB queries and fetching data from databases are often the main performance bottleneck in
 a Web application. Although using [data caching](caching-data.md) techniques may alleviate the performance hit,
-it does not fully solve the problem. When the database contains enormous amounts of data and the cached data is invalid, 
+it does not fully solve the problem. When the database contains enormous amounts of data and the cached data is invalid,
 fetching the latest data could be prohibitively expensive without proper database and query design.
 
 A general technique to improve the performance of DB queries is to create indices for table columns that
@@ -151,7 +143,6 @@ For complex DB queries, it is recommended that you create database views to save
 
 Last but not least, use `LIMIT` in your `SELECT` queries. This avoids fetching an overwhelming amount of data from the database
 and exhausting the memory allocated to PHP.
-
 
 ## Using Plain Arrays <span id="using-arrays"></span>
 
@@ -166,7 +157,7 @@ class PostController extends Controller
     public function actionIndex()
     {
         $posts = Post::find()->limit(100)->asArray()->all();
-        
+
         return $this->render('index', ['posts' => $posts]);
     }
 }
@@ -175,8 +166,7 @@ class PostController extends Controller
 In the above code, `$posts` will be populated as an array of table rows. Each row is a plain array. To access
 the `title` column of the i-th row, you may use the expression `$posts[$i]['title']`.
 
-You may also use [DAO](db-dao.md) to build queries and retrieve data in plain arrays. 
-
+You may also use [DAO](db-dao.md) to build queries and retrieve data in plain arrays.
 
 ## Optimizing Composer Autoloader <span id="optimizing-autoloader"></span>
 
@@ -192,23 +182,21 @@ Additionally you may consider using
 and [APCu cache](https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-b-apcu-cache).
 Note that both optimizations may or may not be suitable for your particular case.
 
-
 ## Processing Data Offline <span id="processing-data-offline"></span>
 
 When a request involves some resource intensive operations, you should think of ways to perform those operations
 in offline mode without having users wait for them to finish.
 
-There are two methods to process data offline: pull and push. 
+There are two methods to process data offline: pull and push.
 
-In the pull method, whenever a request involves some complex operation, you create a task and save it in a persistent 
+In the pull method, whenever a request involves some complex operation, you create a task and save it in a persistent
 storage, such as database. You then use a separate process (such as a cron job) to pull the tasks and process them.
 This method is easy to implement, but it has some drawbacks. For example, the task process needs to periodically pull
 from the task storage. If the pull frequency is too low, the tasks may be processed with great delay, but if the frequency
 is too high, it will introduce high overhead.
 
-In the push method, you would use a message queue (e.g. RabbitMQ, ActiveMQ, Amazon SQS, etc.) to manage the tasks. 
+In the push method, you would use a message queue (e.g. RabbitMQ, ActiveMQ, Amazon SQS, etc.) to manage the tasks.
 Whenever a new task is put on the queue, it will initiate or notify the task handling process to trigger the task processing.
-
 
 ## Performance Profiling <span id="performance-profiling"></span>
 

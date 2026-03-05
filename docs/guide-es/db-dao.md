@@ -1,5 +1,4 @@
-Objetos de Acceso a Bases de Datos
-==================================
+# Objetos de Acceso a Bases de Datos
 
 Construido sobre [PDO](https://www.php.net/manual/es/book.pdo.php), Yii DAO (Objetos de Acceso a Bases de Datos) proporciona una
 API orientada a objetos para el acceso a bases de datos relacionales. Es el fundamento para otros métodos de acceso a bases de datos
@@ -62,14 +61,14 @@ Cuando configuras una conexión DB, deberías siempre especificar el Nombre de O
 propiedad [[yii\db\Connection::dsn|dsn]]. El formato del DSN varia para cada diferente base de datos. Por favor consulte el
 [manual de PHP](https://www.php.net/manual/es/function.PDO-construct.php) para más detalles. Abajo están algunos ejemplos:
 
-* MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
-* SQLite: `sqlite:/path/to/database/file`
-* PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
-* CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
-* MS SQL Server (mediante sqlsrv driver): `sqlsrv:Server=localhost;Database=mydatabase`
-* MS SQL Server (mediante dblib driver): `dblib:host=localhost;dbname=mydatabase`
-* MS SQL Server (mediante mssql driver): `mssql:host=localhost;dbname=mydatabase`
-* Oracle: `oci:dbname=//localhost:1521/mydatabase`
+- MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
+- SQLite: `sqlite:/path/to/database/file`
+- PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
+- CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
+- MS SQL Server (mediante sqlsrv driver): `sqlsrv:Server=localhost;Database=mydatabase`
+- MS SQL Server (mediante dblib driver): `dblib:host=localhost;dbname=mydatabase`
+- MS SQL Server (mediante mssql driver): `mssql:host=localhost;dbname=mydatabase`
+- Oracle: `oci:dbname=//localhost:1521/mydatabase`
 
 Nota que si estás conectándote con una base de datos mediante ODBC, deberías configurar la propiedad [[yii\db\Connection::driverName]]
 para que Yii pueda conocer el tipo de base de datos actual. Por ejemplo,
@@ -88,8 +87,7 @@ Además de la propiedad [[yii\db\Connection::dsn|dsn]], a menudo es necesario co
 y [[yii\db\Connection::password|password]]. Por favor consulta [[yii\db\Connection]] para ver la lista completa de propiedades configurables.
 
 > Info: Cuando se crea una instancia de conexión DB, la conexión actual a la base de datos no se establece hasta que
-  ejecutes el primer SQL o llames explícitamente al método [[yii\db\Connection::open()|open()]].
-
+> ejecutes el primer SQL o llames explícitamente al método [[yii\db\Connection::open()|open()]].
 
 ## Ejecutando Consultas SQL <span id="executing-sql-queries"></span>
 
@@ -127,11 +125,11 @@ $count = $db->createCommand('SELECT COUNT(*) FROM post')
 ```
 
 > Note: Para preservar la precisión, los datos obtenidos de las bases de datos son todos representados como cadenas, incluso si el tipo de columna correspondiente
-a la base de datos es numérico.
+> a la base de datos es numérico.
 
 > Tip: Si necesitas ejecutar una consulta SQL inmediatamente después de establecer una conexión (ej., para establecer una zona horaria o un conjunto de caracteres),
 > puedes hacerlo con el evento [[yii\db\Connection::EVENT_AFTER_OPEN]]. Por ejemplo,
->
+
 ```php
 return [
     // ...
@@ -150,7 +148,6 @@ return [
 ];
 ```
 
-
 ### Parámetros Vinculados (Binding Parameters) <span id="binding-parameters"></span>
 
 Cuando creamos un comando DB para un SQL con parámetros, nosotros deberíamos casi siempre aprovechar el uso de los parámetros vinculados
@@ -167,9 +164,9 @@ En la sentencia SQL, puedes incrustar uno o múltiples parámetros placeholders 
 placeholder debería ser una cadena que empiece con dos puntos. A continuación puedes llamar a uno de los siguientes métodos para
 unir los valores de los parámetros vinculados:
 
-* [[yii\db\Command::bindValue()|bindValue()]]: une un solo parámetro
-* [[yii\db\Command::bindValues()|bindValues()]]: une múltiples parámetros en una sola llamada
-* [[yii\db\Command::bindParam()|bindParam()]]: similar a [[yii\db\Command::bindValue()|bindValue()]] pero también
+- [[yii\db\Command::bindValue()|bindValue()]]: une un solo parámetro
+- [[yii\db\Command::bindValues()|bindValues()]]: une múltiples parámetros en una sola llamada
+- [[yii\db\Command::bindParam()|bindParam()]]: similar a [[yii\db\Command::bindValue()|bindValue()]] pero también
   soporta las referencias de parámetros vinculados.
 
 El siguiente ejemplo muestra formas alternativas de vincular parámetros:
@@ -213,7 +210,6 @@ $post2 = $command->queryOne();
 Observe que vincula el placeholder a la variable `$id` antes de la ejecución, y entonces cambia el valor de esa variable
 antes de cada subsiguiente ejecución (esto se hace a menudo con bucles). Ejecutando consultas de esta manera puede ser
 bastante más eficiente que ejecutar una nueva consulta para cada valor diferente del parámetro.
-
 
 ### Ejecutando Consultas Non-SELECT <span id="non-select-queries"></span>
 
@@ -259,15 +255,14 @@ $db->createCommand()->batchInsert('user', ['name', 'age'], [
 ])->execute();
 ```
 
-
 ## Entrecomillado de Tablas y Nombres de Columna <span id="quoting-table-and-column-names"></span>
 
 Al escribir código de database-agnostic, entrecomillar correctamente los nombres de las tablas y las columnas es a menudo
 un dolor de cabeza porque las diferentes bases de datos tienen diferentes reglas para entrecomillar los nombres. Para
 solventar este problema, puedes usar la siguiente sintaxis de entrecomillado introducido por Yii:
 
-* `[[column name]]`: encierra con dobles corchetes el nombre de una columna que debe ser entrecomillado;
-* `{{table name}}`: encierra con dobles llaves el nombre de una tabla que debe ser entrecomillado.
+- `[[column name]]`: encierra con dobles corchetes el nombre de una columna que debe ser entrecomillado;
+- `{{table name}}`: encierra con dobles llaves el nombre de una tabla que debe ser entrecomillado.
 
 Yii DAO automáticamente convertirá tales construcciones en un SQL con los correspondientes entrecomillados de los nombres de las columnas o tablas.
 Por ejemplo,
@@ -277,7 +272,6 @@ Por ejemplo,
 $count = $db->createCommand("SELECT COUNT([[id]]) FROM {{employee}}")
             ->queryScalar();
 ```
-
 
 ### Usando Prefijos de Tabla <span id="using-table-prefix"></span>
 
@@ -308,7 +302,6 @@ la conexión DB. Por ejemplo,
 $count = $db->createCommand("SELECT COUNT([[id]]) FROM {{%employee}}")
             ->queryScalar();
 ```
-
 
 ## Realización de Transacciones <span id="performing-transactions"></span>
 
@@ -353,10 +346,9 @@ el método [[yii\db\Transaction::commit()|commit()]] es llamado para confirmar l
 se disparará y se capturará, y el método [[yii\db\Transaction::rollBack()|rollBack()]] es llamado para revertir
 los cambios hechos por las consultas antes de que fallara la consulta en la transacción.
 
-
 ### Especificando los Niveles de Aislamiento <span id="specifying-isolation-levels"></span>
 
-Yii también soporta la configuración de [niveles de aislamiento] para tus transacciones. Por defecto, cuando comienza una  nueva transacción,
+Yii también soporta la configuración de [niveles de aislamiento] para tus transacciones. Por defecto, cuando comienza una nueva transacción,
 utilizará el nivel de aislamiento definido por tu sistema de base de datos. Se puede sobrescribir el nivel de aislamiento por defecto de la
 siguiente manera,
 
@@ -390,14 +382,13 @@ en las configuraciones.
 En el momento de escribir esto, solo MSSQL y SQLite serán afectadas.
 
 > Note: SQLite solo soporta dos niveles de aislamiento, por lo que solo se puede usar `READ UNCOMMITTED` y
-`SERIALIZABLE`. El uso de otros niveles causará el lanzamiento de una excepción.
+> `SERIALIZABLE`. El uso de otros niveles causará el lanzamiento de una excepción.
 
 > Note: PostgreSQL no permite configurar el nivel de aislamiento antes que la transacción empiece por lo que no se
-  puede especificar el nivel de aislamiento directamente cuando empieza la transacción. Se tiene que llamar a
-  [[yii\db\Transaction::setIsolationLevel()]] después de que la transacción haya empezado.
+> puede especificar el nivel de aislamiento directamente cuando empieza la transacción. Se tiene que llamar a
+> [[yii\db\Transaction::setIsolationLevel()]] después de que la transacción haya empezado.
 
 [isolation levels]: https://es.wikipedia.org/wiki/Aislamiento_(ACID)#Niveles_de_aislamiento
-
 
 ### Transacciones Anidadas <span id="nesting-transactions"></span>
 
@@ -434,12 +425,11 @@ try {
 }
 ```
 
-
 ## Replicación y División Lectura-Escritura <span id="read-write-splitting"></span>
 
-Muchos DBMS soportan [replicación de bases de datos](https://es.wikipedia.org/wiki/Replicaci%C3%B3n_(inform%C3%A1tica)) para tener
+Muchos DBMS soportan [replicación de bases de datos](<https://es.wikipedia.org/wiki/Replicaci%C3%B3n_(inform%C3%A1tica)>) para tener
 una mejor disponibilidad de la base de datos y un mejor tiempo de respuesta del servidor. Con la replicación de bases
-de datos, los datos están replicados en los llamados *servidores maestros* (master servers) y *servidores esclavos*
+de datos, los datos están replicados en los llamados _servidores maestros_ (master servers) y _servidores esclavos_
 (slave servers). Todas las escrituras y actualizaciones deben hacerse en el servidor maestro, mientras que las lecturas
 se efectuarán en los servidores esclavos.
 
@@ -491,8 +481,8 @@ $db->createCommand("UPDATE user SET username='demo' WHERE id=1")->execute();
 ```
 
 > Info: Las consultas realizadas llamando a [[yii\db\Command::execute()]] se consideran consultas de escritura,
-  mientras que todas las demás se ejecutan mediante alguno de los métodos "query" de [[yii\db\Command]] son consultas
-  de lectura. Se puede obtener la conexión de esclavo activa mediante `$db->slave`.
+> mientras que todas las demás se ejecutan mediante alguno de los métodos "query" de [[yii\db\Command]] son consultas
+> de lectura. Se puede obtener la conexión de esclavo activa mediante `$db->slave`.
 
 El componente `Connection` soporta el balanceo de carga y la conmutación de errores entre esclavos. Cuando se realiza
 una consulta de lectura por primera vez, el componente `Connection` elegirá un esclavo aleatorio e intentará realizar
@@ -501,8 +491,8 @@ una conexión a este. Si el esclavo se encuentra "muerto", se intentará con otr
 [[yii\db\Connection::serverRetryInterval|certain period of time]].
 
 > Info: En la configuración anterior, se especifica un tiempo de espera (timeout) de conexión de 10 segundos
-  para cada esclavo. Esto significa que si no se puede conectar a un esclavo en 10 segundos, este será considerado
-  como "muerto". Se puede ajustar el parámetro basado en el entorno actual.
+> para cada esclavo. Esto significa que si no se puede conectar a un esclavo en 10 segundos, este será considerado
+> como "muerto". Se puede ajustar el parámetro basado en el entorno actual.
 
 También se pueden configurar múltiples maestros con múltiples esclavos. Por ejemplo,
 
@@ -551,8 +541,8 @@ balanceo de carga y la conmutación de errores entre maestros igual que hace con
 cuando no se encuentra ningún maestro disponible se lanza una excepción.
 
 > Note: cuando se usa la propiedad [[yii\db\Connection::masters|masters]] para configurar uno o múltiples maestros, se
-  ignorarán todas las otras propiedades que especifiquen una conexión de base de datos
-  (ej. `dsn`, `username`, `password`), junto con el mismo objeto `Connection`.
+> ignorarán todas las otras propiedades que especifiquen una conexión de base de datos
+> (ej. `dsn`, `username`, `password`), junto con el mismo objeto `Connection`.
 
 Por defecto. las transacciones usan la conexión del maestro. Y dentro de una transacción, todas las operaciones de DB usarán
 la conexión del maestro. Por ejemplo,
@@ -597,20 +587,20 @@ consultas a la conexión del maestro.
 Yii DAO proporciona todo un conjunto de métodos que permites manipular el esquema de tu base de datos, tal como
 crear nuevas tablas, borrar una columna de una tabla, etc. Estos métodos son listados a continuación:
 
-* [[yii\db\Command::createTable()|createTable()]]: crea una tabla
-* [[yii\db\Command::renameTable()|renameTable()]]: renombra una tabla
-* [[yii\db\Command::dropTable()|dropTable()]]: remueve una tabla
-* [[yii\db\Command::truncateTable()|truncateTable()]]: remueve todas las filas de una tabla
-* [[yii\db\Command::addColumn()|addColumn()]]: añade una columna
-* [[yii\db\Command::renameColumn()|renameColumn()]]: renombra una columna
-* [[yii\db\Command::dropColumn()|dropColumn()]]: remueve una columna
-* [[yii\db\Command::alterColumn()|alterColumn()]]: altera una columna
-* [[yii\db\Command::addPrimaryKey()|addPrimaryKey()]]: añade una clave primaria
-* [[yii\db\Command::dropPrimaryKey()|dropPrimaryKey()]]: remueve una clave primaria
-* [[yii\db\Command::addForeignKey()|addForeignKey()]]: añade una clave ajena
-* [[yii\db\Command::dropForeignKey()|dropForeignKey()]]: remueve una clave ajena
-* [[yii\db\Command::createIndex()|createIndex()]]: crea un indice
-* [[yii\db\Command::dropIndex()|dropIndex()]]: remueve un indice
+- [[yii\db\Command::createTable()|createTable()]]: crea una tabla
+- [[yii\db\Command::renameTable()|renameTable()]]: renombra una tabla
+- [[yii\db\Command::dropTable()|dropTable()]]: remueve una tabla
+- [[yii\db\Command::truncateTable()|truncateTable()]]: remueve todas las filas de una tabla
+- [[yii\db\Command::addColumn()|addColumn()]]: añade una columna
+- [[yii\db\Command::renameColumn()|renameColumn()]]: renombra una columna
+- [[yii\db\Command::dropColumn()|dropColumn()]]: remueve una columna
+- [[yii\db\Command::alterColumn()|alterColumn()]]: altera una columna
+- [[yii\db\Command::addPrimaryKey()|addPrimaryKey()]]: añade una clave primaria
+- [[yii\db\Command::dropPrimaryKey()|dropPrimaryKey()]]: remueve una clave primaria
+- [[yii\db\Command::addForeignKey()|addForeignKey()]]: añade una clave ajena
+- [[yii\db\Command::dropForeignKey()|dropForeignKey()]]: remueve una clave ajena
+- [[yii\db\Command::createIndex()|createIndex()]]: crea un indice
+- [[yii\db\Command::dropIndex()|dropIndex()]]: remueve un indice
 
 Estos métodos puedes ser usados como se muestra a continuación:
 

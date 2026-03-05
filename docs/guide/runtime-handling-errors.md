@@ -1,18 +1,16 @@
-Handling Errors
-===============
+# Handling Errors
 
 Yii includes a built-in [[yii\web\ErrorHandler|error handler]] which makes error handling a much more pleasant
 experience than before. In particular, the Yii error handler does the following to improve error handling:
 
-* All non-fatal PHP errors (e.g. warnings, notices) are converted into catchable exceptions.
-* Exceptions and fatal PHP errors are displayed with detailed call stack information and source code lines
+- All non-fatal PHP errors (e.g. warnings, notices) are converted into catchable exceptions.
+- Exceptions and fatal PHP errors are displayed with detailed call stack information and source code lines
   in debug mode.
-* Supports using a dedicated [controller action](structure-controllers.md#actions) to display errors.
-* Supports different error response formats.
+- Supports using a dedicated [controller action](structure-controllers.md#actions) to display errors.
+- Supports different error response formats.
 
 The [[yii\web\ErrorHandler|error handler]] is enabled by default. You may disable it by defining the constant
 `YII_ENABLE_ERROR_HANDLER` to be `false` in the [entry script](structure-entry-scripts.md) of your application.
-
 
 ## Using Error Handler <span id="using-error-handler"></span>
 
@@ -58,7 +56,6 @@ use yii\web\NotFoundHttpException;
 throw new NotFoundHttpException();
 ```
 
-
 ## Customizing Error Display <span id="customizing-error-display"></span>
 
 The [[yii\web\ErrorHandler|error handler]] adjusts the error display according to the value of the constant `YII_DEBUG`.
@@ -67,18 +64,17 @@ stack information and source code lines to help easier debugging. And when `YII_
 message will be displayed to prevent revealing sensitive information about the application.
 
 > Info: If an exception is a descendant of [[yii\base\UserException]], no call stack will be displayed regardless
-the value of `YII_DEBUG`. This is because such exceptions are considered to be caused by user mistakes and the
-developers do not need to fix anything.
+> the value of `YII_DEBUG`. This is because such exceptions are considered to be caused by user mistakes and the
+> developers do not need to fix anything.
 
 By default, the [[yii\web\ErrorHandler|error handler]] displays errors using two [views](structure-views.md):
 
-* `@yii/views/errorHandler/error.php`: used when errors should be displayed WITHOUT call stack information.
+- `@yii/views/errorHandler/error.php`: used when errors should be displayed WITHOUT call stack information.
   When `YII_DEBUG` is `false`, this is the only error view to be displayed.
-* `@yii/views/errorHandler/exception.php`: used when errors should be displayed WITH call stack information.
+- `@yii/views/errorHandler/exception.php`: used when errors should be displayed WITH call stack information.
 
 You can configure the [[yii\web\ErrorHandler::errorView|errorView]] and [[yii\web\ErrorHandler::exceptionView|exceptionView]]
 properties of the error handler to use your own views to customize the error display.
-
 
 ### Using Error Actions <span id="using-error-actions"></span>
 
@@ -139,13 +135,13 @@ public function actionError()
 You should now create a view file located at `views/site/error.php`. In this view file, you can access
 the following variables if the error action is defined as [[yii\web\ErrorAction]]:
 
-* `name`: the name of the error;
-* `message`: the error message;
-* `exception`: the exception object through which you can retrieve more useful information, such as HTTP status code,
+- `name`: the name of the error;
+- `message`: the error message;
+- `exception`: the exception object through which you can retrieve more useful information, such as HTTP status code,
   error code, error call stack, etc.
 
 > Info: If you are using the [basic project template](start-installation.md) or the [advanced project template](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md),
-the error action and the error view are already defined for you.
+> the error action and the error view are already defined for you.
 
 > Note: If you need to redirect in an error handler, do it the following way:
 >
@@ -153,7 +149,6 @@ the error action and the error view are already defined for you.
 > Yii::$app->getResponse()->redirect($url)->send();
 > return;
 > ```
-
 
 ### Customizing Error Response Format <span id="error-format"></span>
 

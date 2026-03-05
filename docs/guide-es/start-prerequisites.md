@@ -14,7 +14,7 @@ asegúrese de estar familiarizado con
 
 ## Programación orientada a objetos
 
-Se requiere una comprensión básica de la programación orientada a objetos.  Si no está
+Se requiere una comprensión básica de la programación orientada a objetos. Si no está
 familiarizado con ella, diríjase a alguno de los muchos tutoriales disponibles, como
 [el de tuts+](https://code.tutsplus.com/tutorials/object-oriented-php-for-beginners--net-12762).
 

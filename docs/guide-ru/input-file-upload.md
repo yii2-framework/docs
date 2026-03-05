@@ -1,10 +1,8 @@
-Загрузка файлов
-===============
+# Загрузка файлов
 
 Загрузка файлов в Yii, обычно, выполняется при помощи класса [[yii\web\UploadedFile]], который представляет каждый
 загруженный файл в виде объекта `UploadedFile`. Используя [[yii\widgets\ActiveForm]] и [модели](structure-models.md)
 можно легко создать безопасный механизм загрузки файлов.
-
 
 ## Создание моделей <span id="creating-models"></span>
 
@@ -31,7 +29,7 @@ class UploadForm extends Model
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
-    
+
     public function upload()
     {
         if ($this->validate()) {
@@ -44,7 +42,7 @@ class UploadForm extends Model
 }
 ```
 
-В примере выше атрибут `imageFile` используется для хранения экземпляра  загруженного файла. Правило валидации `file`,
+В примере выше атрибут `imageFile` используется для хранения экземпляра загруженного файла. Правило валидации `file`,
 которое, при помощи валидатора [[yii\validators\FileValidator]], проверяет расширение загруженного файла на
 соответствие с `png` или `jpg`. Метод `upload()` выполняет валидацию и сохраняет загруженный файл на сервере.
 
@@ -52,9 +50,8 @@ class UploadForm extends Model
 Подробности в разделе [Встроенные валидаторы](tutorial-core-validators.md#file).
 
 > Tip: При загрузке изображений лучше использовать соответствующий валидатор `image`. Данный валидатор
-реализован классом [[yii\validators\ImageValidator]] и позволяет проверить корректность загруженного
-изображения при помощи [расширения Imagine](https://github.com/yiisoft/yii2-imagine).
-
+> реализован классом [[yii\validators\ImageValidator]] и позволяет проверить корректность загруженного
+> изображения при помощи [расширения Imagine](https://github.com/yiisoft/yii2-imagine).
 
 ## Представление <span id="rendering-file-input"></span>
 
@@ -78,7 +75,7 @@ use yii\widgets\ActiveForm;
 выведет тег `<input type="file">`, позволяющий пользователю выбрать файл для загрузки.
 
 > Tip: начиная с версии 2.0.8, [[yii\widgets\ActiveField::fileInput|fileInput]] автоматически добавляет
-  к форме свойство `enctype`, если в ней есть поле для загрузки файла.
+> к форме свойство `enctype`, если в ней есть поле для загрузки файла.
 
 ## Загрузка <span id="wiring-up"></span>
 
@@ -115,7 +112,6 @@ class SiteController extends Controller
 вызывается метод [[yii\web\UploadedFile::getInstance()]]. Далее всю работу по валидации и сохранению загруженного
 файла на сервере берет на себя модель.
 
-
 ## Загрузка нескольких файлов <span id="uploading-multiple-files"></span>
 
 Для загрузки нескольких файлов достаточно внести в предыдущий код несколько небольших изменений.
@@ -145,10 +141,10 @@ class UploadForm extends Model
             [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
-    
+
     public function upload()
     {
-        if ($this->validate()) { 
+        if ($this->validate()) {
             foreach ($this->imageFiles as $file) {
                 $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
             }
@@ -160,8 +156,8 @@ class UploadForm extends Model
 }
 ```
 
-В представлении, в вызов метода `fileInput()`, нужно добавить параметр `multiple` для того, чтобы поле *input* позволяло выбирать несколько файлов одновременно. Необходимо изменить `imageFiles` на `imageFiles[]` чтобы атрибут передавался в виде массива:
-  
+В представлении, в вызов метода `fileInput()`, нужно добавить параметр `multiple` для того, чтобы поле _input_ позволяло выбирать несколько файлов одновременно. Необходимо изменить `imageFiles` на `imageFiles[]` чтобы атрибут передавался в виде массива:
+
 ```php
 <?php
 use yii\widgets\ActiveForm;

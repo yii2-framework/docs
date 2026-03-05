@@ -1,19 +1,18 @@
-Migracje bazy danych
-====================
+# Migracje bazy danych
 
 W czasie rozwoju i utrzymywania aplikacji zasilanej danymi z bazy danych, struktura tej ostatniej ewoluuje podobnie jak
-sam kod źródłowy. Przykładowo, rozbudowując aplikację konieczne jest dodanie nowej tabeli, lub też już po wydaniu aplikacji 
-na serwerze produkcyjnym przydałby się indeks, aby poprawić wydajność zapytania itd. Zmiana struktury bazy danych często 
-pociąga za sobą zmiany w kodzie źródłowym, dlatego też Yii udostępnia funkcjonalność tak zwanych *migracji bazodanowych*,
-która pozwala na kontrolowanie zmian w bazie danych (*migracji*).
+sam kod źródłowy. Przykładowo, rozbudowując aplikację konieczne jest dodanie nowej tabeli, lub też już po wydaniu aplikacji
+na serwerze produkcyjnym przydałby się indeks, aby poprawić wydajność zapytania itd. Zmiana struktury bazy danych często
+pociąga za sobą zmiany w kodzie źródłowym, dlatego też Yii udostępnia funkcjonalność tak zwanych _migracji bazodanowych_,
+która pozwala na kontrolowanie zmian w bazie danych (_migracji_).
 
 Poniższe kroki pokazują, jak migracje mogą być wykorzystane przez zespół deweloperski w czasie pracy:
 
 1. Tomek tworzy nową migrację (np. dodaje nową tabelę, zmienia definicję kolumny, itp.).
 2. Tomek rejestruje ("commit") nową migrację w systemie kontroli wersji (np. Git, Mercurial).
 3. Mariusz uaktualnia swoje repozytorium z systemu kontroli wersji i otrzymuje nową migrację.
-4. Mariusz dodaje migrację do swojej lokalnej bazy danych, dzięki czemu synchronizuje ją ze zmianami, które wprowadził 
-  Tomek.
+4. Mariusz dodaje migrację do swojej lokalnej bazy danych, dzięki czemu synchronizuje ją ze zmianami, które wprowadził
+   Tomek.
 
 A poniższe kroki opisują w skrócie jak stworzyć nowe wydanie z migracją bazy danych na produkcji:
 
@@ -23,24 +22,23 @@ A poniższe kroki opisują w skrócie jak stworzyć nowe wydanie z migracją baz
 
 Yii udostępnia zestaw narzędzi konsolowych, które pozwalają na:
 
-* utworzenie nowych migracji;
-* dodanie migracji;
-* cofnięcie migracji;
-* ponowne zaaplikowanie migracji;
-* wyświetlenie historii migracji i jej statusu.
+- utworzenie nowych migracji;
+- dodanie migracji;
+- cofnięcie migracji;
+- ponowne zaaplikowanie migracji;
+- wyświetlenie historii migracji i jej statusu.
 
-Powyższe narzędzia są dostępne poprzez komendę `yii migrate`. W tej sekcji opiszemy szczegółowo w jaki sposób z nich 
+Powyższe narzędzia są dostępne poprzez komendę `yii migrate`. W tej sekcji opiszemy szczegółowo w jaki sposób z nich
 korzystać. Możesz również zapoznać się ze sposobem użycia narzędzi w konsoli za pomocą komendy pomocy `yii help migrate`.
 
 > Tip: Migracje mogą modyfikować nie tylko schemat bazy danych, ale również same dane, a także mogą służyć do innych zadań
-  jak tworzenie hierarchi kontroli dostępu dla ról (RBAC) lub czyszczenie pamięci podręcznej.
+> jak tworzenie hierarchi kontroli dostępu dla ról (RBAC) lub czyszczenie pamięci podręcznej.
 
-> Note: Modyfikowanie danych w migracji zwykle jest znacznie prostsze, jeśli użyje się do tego klas 
-  [Active Record](db-active-record.md), dzięki logice już tam zaimplementowanej. Należy jednak pamiętać, że logika 
-  aplikacji jest podatna na częste zmiany, a naturalnym stanem kodu migracji jest jego stałość - w przypadku zmian w 
-  warstwie Active Record aplikacji ryzykujemy zepsucie migracji, które z niej korzystają. Z tego powodu kod migracji
-  powinien być utrzymywany niezależnie od pozostałej logiki aplikacji.
-
+> Note: Modyfikowanie danych w migracji zwykle jest znacznie prostsze, jeśli użyje się do tego klas
+> [Active Record](db-active-record.md), dzięki logice już tam zaimplementowanej. Należy jednak pamiętać, że logika
+> aplikacji jest podatna na częste zmiany, a naturalnym stanem kodu migracji jest jego stałość - w przypadku zmian w
+> warstwie Active Record aplikacji ryzykujemy zepsucie migracji, które z niej korzystają. Z tego powodu kod migracji
+> powinien być utrzymywany niezależnie od pozostałej logiki aplikacji.
 
 ## Tworzenie migracji <span id="creating-migrations"></span>
 
@@ -50,17 +48,17 @@ Aby utworzyć nową migrację, uruchom poniższą komendę:
 yii migrate/create <nazwa>
 ```
 
-Wymagany argument `nazwa` przekazuje zwięzły opis migracji. Przykładowo, jeśli migracja ma dotyczyć utworzenia nowej 
-tabeli o nazwie *news*, możesz użyć jako argumentu `create_news_table` i uruchomić komendę:
+Wymagany argument `nazwa` przekazuje zwięzły opis migracji. Przykładowo, jeśli migracja ma dotyczyć utworzenia nowej
+tabeli o nazwie _news_, możesz użyć jako argumentu `create_news_table` i uruchomić komendę:
 
 ```
 yii migrate/create create_news_table
 ```
 
 > Note: Argument `nazwa` zostanie użyty jako część nazwy klasy nowej migracji i z tego powodu powinien składać się tylko
-  z łacińskich liter, cyfr i/lub znaków podkreślenia.
+> z łacińskich liter, cyfr i/lub znaków podkreślenia.
 
-Powyższa komenda utworzy nowy plik klasy PHP o nazwie podobnej do `m150101_185401_create_news_table.php` w folderze 
+Powyższa komenda utworzy nowy plik klasy PHP o nazwie podobnej do `m150101_185401_create_news_table.php` w folderze
 `@app/migrations`. Plik będzie zawierał poniższy kod, gdzie zadeklarowany jest szkielet klasy `m150101_185401_create_news_table`:
 
 ```php
@@ -95,11 +93,11 @@ class m150101_185401_create_news_table extends Migration
 }
 ```
 
-Każda migracja zdefiniowana jest jako klasa PHP rozszerzająca [[yii\db\Migration]]. Nazwa klasy migracji jest generowana 
+Każda migracja zdefiniowana jest jako klasa PHP rozszerzająca [[yii\db\Migration]]. Nazwa klasy migracji jest generowana
 automatycznie w formacie `m<YYMMDD_HHMMSS>_<Nazwa>`, gdzie
 
-* `<YYMMDD_HHMMSS>` to data i czas UTC wskazujące na moment utworzenia migracji,
-* `<Nazwa>` jest identyczna z wartością argumentu `nazwa` podanego dla komendy.
+- `<YYMMDD_HHMMSS>` to data i czas UTC wskazujące na moment utworzenia migracji,
+- `<Nazwa>` jest identyczna z wartością argumentu `nazwa` podanego dla komendy.
 
 Wewnątrz klasy migracji należy napisać kod w metodzie `up()`, która wprowadzi zmiany w strukturze bazy danych.
 Można również napisać kod w metodzie `down()`, który spowoduje cofnięcie zmian wprowadzonych w `up()`. Metoda `up()` jest
@@ -130,29 +128,29 @@ class m150101_185401_create_news_table extends Migration
 }
 ```
 
-> Info: Nie wszystkie migracje są odwracalne. Dla przykładu, jeśli w `up()` usuwane są wiersze z tabeli, możesz nie być 
-  w stanie przywrócić ich w metodzie `down()`. Może też zdarzyć się, że celowo nie podasz nic w `down()` - cofanie zmian
-  migracji bazy danych nie jest czymś powszechnym - w takim wypadku należy zwrócić `false` w metodzie `down()`, aby 
-  wyraźnie wskazać, że migracja nie jest odwracalna.
+> Info: Nie wszystkie migracje są odwracalne. Dla przykładu, jeśli w `up()` usuwane są wiersze z tabeli, możesz nie być
+> w stanie przywrócić ich w metodzie `down()`. Może też zdarzyć się, że celowo nie podasz nic w `down()` - cofanie zmian
+> migracji bazy danych nie jest czymś powszechnym - w takim wypadku należy zwrócić `false` w metodzie `down()`, aby
+> wyraźnie wskazać, że migracja nie jest odwracalna.
 
-Podstawowa klasa migracji [[yii\db\Migration]] umożliwia połączenie z bazą danych poprzez właściwość 
-[[yii\db\Migration::db|db]]. Możesz użyć jej do modyfikowania schematu bazy za pomocą metod opisanych w sekcji 
+Podstawowa klasa migracji [[yii\db\Migration]] umożliwia połączenie z bazą danych poprzez właściwość
+[[yii\db\Migration::db|db]]. Możesz użyć jej do modyfikowania schematu bazy za pomocą metod opisanych w sekcji
 [Praca ze schematem bazy danych](db-dao.md#database-schema).
 
-Przy tworzeniu tabeli albo kolumny zamiast używać rzeczywistych typów, powinno się stosować *typy abstrakcyjne*, dzięki 
-czemu migracje będą niezależne od pojedynczych silników bazodanowych. Klasa [[yii\db\Schema]] definiuje zestaw stałych, 
-które reprezentują wspierane typy abstrakcyjne. Stałe te nazwane są według schematu `TYPE_<Nazwa>`. Dla przykładu, 
-`TYPE_PK` odnosi się do typu klucza głównego z autoinkrementacją; `TYPE_STRING` do typu łańcucha znaków. Kiedy migracja 
-jest dodawana do konkretnej bazy danych, typy abstrakcyjne są tłumaczone na odpowiadające im typy rzeczywiste. W przypadku 
+Przy tworzeniu tabeli albo kolumny zamiast używać rzeczywistych typów, powinno się stosować _typy abstrakcyjne_, dzięki
+czemu migracje będą niezależne od pojedynczych silników bazodanowych. Klasa [[yii\db\Schema]] definiuje zestaw stałych,
+które reprezentują wspierane typy abstrakcyjne. Stałe te nazwane są według schematu `TYPE_<Nazwa>`. Dla przykładu,
+`TYPE_PK` odnosi się do typu klucza głównego z autoinkrementacją; `TYPE_STRING` do typu łańcucha znaków. Kiedy migracja
+jest dodawana do konkretnej bazy danych, typy abstrakcyjne są tłumaczone na odpowiadające im typy rzeczywiste. W przypadku
 MySQL, `TYPE_PK` jest zamieniony w `int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY`, a `TYPE_STRING` staje się `varchar(255)`.
 
-Możesz łączyć abstrakcyjne typy z dodatkowymi definicjami - w powyższym przykładzie ` NOT NULL` jest dodane do 
+Możesz łączyć abstrakcyjne typy z dodatkowymi definicjami - w powyższym przykładzie ` NOT NULL` jest dodane do
 `Schema::TYPE_STRING`, aby oznaczyć, że kolumna nie może być ustawiona jako `null`.
 
 > Info: Mapowanie typów abstrakcyjnych na rzeczywiste jest określone we właściwości [[yii\db\QueryBuilder::$typeMap|$typeMap]]
-  dla każdej klasy `QueryBuilder` poszczególnych wspieranych silników baz danych.
+> dla każdej klasy `QueryBuilder` poszczególnych wspieranych silników baz danych.
 
-Począwszy od wersji 2.0.6, możesz skorzystać z nowej klasy budowania schematów, która pozwala na znacznie wygodniejszy 
+Począwszy od wersji 2.0.6, możesz skorzystać z nowej klasy budowania schematów, która pozwala na znacznie wygodniejszy
 sposób definiowana kolumn. Dzięki temu migracja z przykładu powyżej może być napisana następująco:
 
 ```php
@@ -180,12 +178,11 @@ class m150101_185401_create_news_table extends Migration
 
 Lista wszystkich metod do definiowania typów kolumn dostępna jest w dokumentacji API dla [[yii\db\SchemaBuilderTrait]].
 
-
 ## Generowanie migracji <span id="generating-migrations"></span>
 
 Począwszy od wersji 2.0.7 konsola migracji pozwala na wygodne utworzenie nowej migracji.
 
-Jeśli nazwa migracji podana jest w jednej z rozpoznawalnych form, np. `create_xxx_table` lub `drop_xxx_table`, wtedy 
+Jeśli nazwa migracji podana jest w jednej z rozpoznawalnych form, np. `create_xxx_table` lub `drop_xxx_table`, wtedy
 wygenerowany plik migracji będzie zawierał dodatkowy kod, w tym przypadku odpowiednio kod tworzenia i usuwania tabeli.
 Poniżej opisane są wszystkie warianty tej funkcjonalności.
 
@@ -296,8 +293,8 @@ class m150811_220037_create_post_table extends Migration
 }
 ```
 
-> Note: Klucz główny jest dodawany automatycznie i nazwany domyślnie `id`. Jeśli chcesz użyć innej nazwy, możesz 
-  zdefiniować go bezpośrednio np. `--fields="name:primaryKey"`.
+> Note: Klucz główny jest dodawany automatycznie i nazwany domyślnie `id`. Jeśli chcesz użyć innej nazwy, możesz
+> zdefiniować go bezpośrednio np. `--fields="name:primaryKey"`.
 
 #### Klucze obce
 
@@ -409,14 +406,14 @@ Umiejscowienie słowa `foreignKey` w definicji kolumny nie ma znaczenia dla gene
 
 wygenerują ten sam kod.
 
-Opcja `foreignKey` może być wzbogacona o parametr w nawiasach, który oznacza nazwę tabeli relacji dla generowanego 
+Opcja `foreignKey` może być wzbogacona o parametr w nawiasach, który oznacza nazwę tabeli relacji dla generowanego
 klucza obcego. Bez tego parametru użyta zostanie nazwa tabeli relacji zgodna z nazwą kolumny.
 
-W przykładzie powyżej `author_id:integer:notNull:foreignKey(user)` wygeneruje kolumnę o nazwie `author_id` z kluczem 
-obcym wskazującym na tabelę `user`, natomiast `category_id:integer:defaultValue(1):foreignKey` wygeneruje kolumnę 
+W przykładzie powyżej `author_id:integer:notNull:foreignKey(user)` wygeneruje kolumnę o nazwie `author_id` z kluczem
+obcym wskazującym na tabelę `user`, natomiast `category_id:integer:defaultValue(1):foreignKey` wygeneruje kolumnę
 `category_id` z kluczem obcym wskazującym na tabelę `category`.
 
-Począwszy od wersji 2.0.11, dla `foreignKey` można podać drugi parametr, oddzielony białym znakiem, z nazwą kolumny 
+Począwszy od wersji 2.0.11, dla `foreignKey` można podać drugi parametr, oddzielony białym znakiem, z nazwą kolumny
 relacji dla generowanego klucza obcego. Jeśli drugi parametr nie jest podany, nazwa kolumny jest pobierana ze schematu tabeli.
 Jeśli schemat nie istnieje , klucz główny nie jest ustawiony lub jest kluczem kompozytowym, używana jest domyślna nazwa `id`.
 
@@ -449,7 +446,7 @@ class m150811_220037_drop_post_table extends Migration
 
 ### Dodawanie kolumny
 
-Jeśli nazwa migracji jest w postaci `add_xxx_column_to_yyy_table`, wtedy plik będzie zawierał wywołania metod `addColumn` 
+Jeśli nazwa migracji jest w postaci `add_xxx_column_to_yyy_table`, wtedy plik będzie zawierał wywołania metod `addColumn`
 i `dropColumn`.
 
 Aby dodać kolumnę:
@@ -610,18 +607,18 @@ class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migra
 ```
 
 Począwszy od wersji 2.0.11, nazwy kolumn kluczy obcych dla tabeli węzła są pobierane ze schematu tabel.
-Jeśli tabela nie jest zdefiniowana w schemacie, lub jej klucz główny nie jest ustawiony lub jest kluczem kompozytowym, 
+Jeśli tabela nie jest zdefiniowana w schemacie, lub jej klucz główny nie jest ustawiony lub jest kluczem kompozytowym,
 używana jest domyślna nazwa `id`.
 
 ### Migracje transakcyjne <span id="transactional-migrations"></span>
 
-Przy wykonywaniu skomplikowanych migracji bazodanowych, bardzo ważnym jest zapewnienie, aby wszystkie ich operacje 
-zakończyły się sukcesem, a w przypadku niepowodzenia nie zostały wprowadzone tylko częściowo, dzięki czemu baza danych 
+Przy wykonywaniu skomplikowanych migracji bazodanowych, bardzo ważnym jest zapewnienie, aby wszystkie ich operacje
+zakończyły się sukcesem, a w przypadku niepowodzenia nie zostały wprowadzone tylko częściowo, dzięki czemu baza danych
 może zachować spójność. Zalecane jest, aby w tym celu wykonywać operacje migracji wewnątrz [transakcji](db-dao.md#performing-transactions).
 
 Najprostszym sposobem implementacji migracji transakcyjnych jest umieszczenie ich kodu w metodach `safeUp()` i `safeDown()`.
 Metody te różnią się od `up()` i `down()` tym, że są wywoływane automatycznie wewnątrz transakcji.
-W rezultacie niepowodzenie wykonania dowolnej z operacji skutkuje automatycznym cofnięciem wszystkich poprzenich udanych 
+W rezultacie niepowodzenie wykonania dowolnej z operacji skutkuje automatycznym cofnięciem wszystkich poprzenich udanych
 operacji.
 
 W poniższym przykładzie oprócz stworzenia tabeli `news` dodatkowo dodajemy pierwszy wiersz jej danych.
@@ -655,58 +652,57 @@ class m150101_185401_create_news_table extends Migration
 }
 ```
 
-Zwróć uwagę na to, że dodając wiele operacji bazodanowych w `safeUp()`, zwykle powinieneś odwrócić kolejność ich 
+Zwróć uwagę na to, że dodając wiele operacji bazodanowych w `safeUp()`, zwykle powinieneś odwrócić kolejność ich
 wykonywania w `safeDown()`. W naszym przykładzie najpierw tworzymy tabelę, a potem dodajemy wiersz w `safeUp()`, natomiast
 w `safeDown()` najpierw kasujemy wiersz, a potem usuwamy tabelę.
 
 > Note: Nie wszystkie silniki baz danych wspierają transakcje i nie wszystkie rodzaje komend bazodanowych można umieszczać
-  w transakcjach. Dla przykładu, zapoznaj się z rozdziałem dokumentacji MySQL 
-  [Statements That Cause an Implicit Commit](https://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html). W przypadku 
-  braku możliwości skorzystania z transakcji, powinieneś użyć `up()` i `down()`.
-
+> w transakcjach. Dla przykładu, zapoznaj się z rozdziałem dokumentacji MySQL
+> [Statements That Cause an Implicit Commit](https://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html). W przypadku
+> braku możliwości skorzystania z transakcji, powinieneś użyć `up()` i `down()`.
 
 ### Metody pozwalające na dostęp do bazy danych <span id="db-accessing-methods"></span>
 
-Bazowa klasa migracji [[yii\db\Migration]] udostępnia zestaw metod, dzięki którym można połączyć się z i manipulować 
+Bazowa klasa migracji [[yii\db\Migration]] udostępnia zestaw metod, dzięki którym można połączyć się z i manipulować
 bazą danych. Metody te są nazwane podobnie jak [metody DAO](db-dao.md) klasy [[yii\db\Command]].
-Przykładowo metoda [[yii\db\Migration::createTable()]] pozwala na stworzenie nowej tabeli, tak jak 
+Przykładowo metoda [[yii\db\Migration::createTable()]] pozwala na stworzenie nowej tabeli, tak jak
 [[yii\db\Command::createTable()]].
 
 Zaletą korzystania z metod [[yii\db\Migration]] jest brak konieczności bezpośredniego tworzenia instancji [[yii\db\Command]],
-a wywołanie każdej z tych metod dodatkowo wyświetli użyteczne informacje na temat operacji bazodanowych i 
+a wywołanie każdej z tych metod dodatkowo wyświetli użyteczne informacje na temat operacji bazodanowych i
 czasu ich wykonywania.
 
 Poniżej znajdziesz listę wspomnianych wcześniej metod:
 
-* [[yii\db\Migration::execute()|execute()]]: wykonywanie komendy SQL
-* [[yii\db\Migration::insert()|insert()]]: dodawanie pojedynczego wiersza
-* [[yii\db\Migration::batchInsert()|batchInsert()]]: dodawanie wielu wierszy
-* [[yii\db\Migration::upsert()|upsert()]]: dodawanie pojedynczego wiersza lub aktualizowanie go, jeśli już istnieje (od 2.0.14)
-* [[yii\db\Migration::update()|update()]]: aktualizowanie wierszy
-* [[yii\db\Migration::delete()|delete()]]: usuwanie wierszy
-* [[yii\db\Migration::createTable()|createTable()]]: tworzenie tabeli
-* [[yii\db\Migration::renameTable()|renameTable()]]: zmiana nazwy tabeli
-* [[yii\db\Migration::dropTable()|dropTable()]]: usuwanie tabeli
-* [[yii\db\Migration::truncateTable()|truncateTable()]]: usuwanie wszystkich wierszy w tabeli
-* [[yii\db\Migration::addColumn()|addColumn()]]: dodawanie kolumny
-* [[yii\db\Migration::renameColumn()|renameColumn()]]: zmiana nazwy kolumny
-* [[yii\db\Migration::dropColumn()|dropColumn()]]: usuwanie kolumny
-* [[yii\db\Migration::alterColumn()|alterColumn()]]: zmiana definicji kolumny
-* [[yii\db\Migration::addPrimaryKey()|addPrimaryKey()]]: dodawanie klucza głównego
-* [[yii\db\Migration::dropPrimaryKey()|dropPrimaryKey()]]: usuwanie klucza głównego
-* [[yii\db\Migration::addForeignKey()|addForeignKey()]]: dodawanie klucza obcego
-* [[yii\db\Migration::dropForeignKey()|dropForeignKey()]]: usuwanie klucza obcego
-* [[yii\db\Migration::createIndex()|createIndex()]]: tworzenie indeksu
-* [[yii\db\Migration::dropIndex()|dropIndex()]]: usuwanie indeksu
-* [[yii\db\Migration::addCommentOnColumn()|addCommentOnColumn()]]: dodawanie komentarza do kolumny
-* [[yii\db\Migration::dropCommentFromColumn()|dropCommentFromColumn()]]: usuwanie komentarza z kolumny
-* [[yii\db\Migration::addCommentOnTable()|addCommentOnTable()]]: dodawanie komentarza do tabeli
-* [[yii\db\Migration::dropCommentFromTable()|dropCommentFromTable()]]: usuwanie komentarza z tabeli
+- [[yii\db\Migration::execute()|execute()]]: wykonywanie komendy SQL
+- [[yii\db\Migration::insert()|insert()]]: dodawanie pojedynczego wiersza
+- [[yii\db\Migration::batchInsert()|batchInsert()]]: dodawanie wielu wierszy
+- [[yii\db\Migration::upsert()|upsert()]]: dodawanie pojedynczego wiersza lub aktualizowanie go, jeśli już istnieje (od 2.0.14)
+- [[yii\db\Migration::update()|update()]]: aktualizowanie wierszy
+- [[yii\db\Migration::delete()|delete()]]: usuwanie wierszy
+- [[yii\db\Migration::createTable()|createTable()]]: tworzenie tabeli
+- [[yii\db\Migration::renameTable()|renameTable()]]: zmiana nazwy tabeli
+- [[yii\db\Migration::dropTable()|dropTable()]]: usuwanie tabeli
+- [[yii\db\Migration::truncateTable()|truncateTable()]]: usuwanie wszystkich wierszy w tabeli
+- [[yii\db\Migration::addColumn()|addColumn()]]: dodawanie kolumny
+- [[yii\db\Migration::renameColumn()|renameColumn()]]: zmiana nazwy kolumny
+- [[yii\db\Migration::dropColumn()|dropColumn()]]: usuwanie kolumny
+- [[yii\db\Migration::alterColumn()|alterColumn()]]: zmiana definicji kolumny
+- [[yii\db\Migration::addPrimaryKey()|addPrimaryKey()]]: dodawanie klucza głównego
+- [[yii\db\Migration::dropPrimaryKey()|dropPrimaryKey()]]: usuwanie klucza głównego
+- [[yii\db\Migration::addForeignKey()|addForeignKey()]]: dodawanie klucza obcego
+- [[yii\db\Migration::dropForeignKey()|dropForeignKey()]]: usuwanie klucza obcego
+- [[yii\db\Migration::createIndex()|createIndex()]]: tworzenie indeksu
+- [[yii\db\Migration::dropIndex()|dropIndex()]]: usuwanie indeksu
+- [[yii\db\Migration::addCommentOnColumn()|addCommentOnColumn()]]: dodawanie komentarza do kolumny
+- [[yii\db\Migration::dropCommentFromColumn()|dropCommentFromColumn()]]: usuwanie komentarza z kolumny
+- [[yii\db\Migration::addCommentOnTable()|addCommentOnTable()]]: dodawanie komentarza do tabeli
+- [[yii\db\Migration::dropCommentFromTable()|dropCommentFromTable()]]: usuwanie komentarza z tabeli
 
 > Info: [[yii\db\Migration]] nie udostępnia metod dla kwerendy danych. Wynika to z tego, że zwykle nie jest potrzebne
-  wyświetlanie dodatkowych informacji na temat pobieranych danych z bazy. Dodatkowo możesz zawsze użyć potężnego
-  [Konstruktora kwerend](db-query-builder.md) do zbudowania i wywołania skomplikowanych kwerend.
-  Użycie konstruktora kwerend w migracji może wyglądać następująco:
+> wyświetlanie dodatkowych informacji na temat pobieranych danych z bazy. Dodatkowo możesz zawsze użyć potężnego
+> [Konstruktora kwerend](db-query-builder.md) do zbudowania i wywołania skomplikowanych kwerend.
+> Użycie konstruktora kwerend w migracji może wyglądać następująco:
 >
 > ```php
 > // uaktualnij kolumnę statusu dla wszystkich użytkowników
@@ -717,7 +713,7 @@ Poniżej znajdziesz listę wspomnianych wcześniej metod:
 
 ## Stosowanie migracji <span id="applying-migrations"></span>
 
-Aby uaktualnić bazę danych do najświeższej wersji jej struktury, należy zastosować wszystkie dostępne nowe migracje, 
+Aby uaktualnić bazę danych do najświeższej wersji jej struktury, należy zastosować wszystkie dostępne nowe migracje,
 korzystając z poniższej komendy:
 
 ```
@@ -733,9 +729,9 @@ Jeśli którakolwiek z migracji nie powiedzie się, komenda zakończy działanie
 Dla każdej udanej migracji komenda doda wiersz do bazy danych w tabeli `migration`, aby oznaczyć fakt zastosowania migracji.
 Pozwoli to na identyfikację, która z migracji została już zastosowana, a która jeszcze nie.
 
-> Info: Narzędzie do migracji automatycznie utworzy tabelę `migration` w bazie danych, wskazaną przez opcję 
-  [[yii\console\controllers\MigrateController::db|db]] komendy. Domyślnie jest to baza danych określona w 
-  [komponencie aplikacji](structure-application-components.md) `db`.
+> Info: Narzędzie do migracji automatycznie utworzy tabelę `migration` w bazie danych, wskazaną przez opcję
+> [[yii\console\controllers\MigrateController::db|db]] komendy. Domyślnie jest to baza danych określona w
+> [komponencie aplikacji](structure-application-components.md) `db`.
 
 Czasem możesz mieć potrzebę zastosowania tylko jednej bądź kilku nowych migracji, zamiast wszystkich na raz.
 Możesz tego dokonać określając liczbę migracji, które chcesz zastosować uruchamiając komendę.
@@ -745,7 +741,7 @@ Przykładowo, poniższa komenda spróbuje zastosować następne trzy dostępne m
 yii migrate 3
 ```
 
-Możesz również dokładnie wskazać konkretną migrację, która powinna być zastosowana na bazie danych, używając komendy 
+Możesz również dokładnie wskazać konkretną migrację, która powinna być zastosowana na bazie danych, używając komendy
 `migrate/to` na jeden z poniższych sposobów:
 
 ```
@@ -755,12 +751,11 @@ yii migrate/to m150101_185401_create_news_table   # używając pełnej nazwy
 yii migrate/to 1392853618                         # używając UNIXowego znacznika czasu
 ```
 
-Jeśli dostępne są niezaaplikowane migracje wcześniejsze niż ta wyraźnie wskazane w komendzie, zostaną one zastosowane 
+Jeśli dostępne są niezaaplikowane migracje wcześniejsze niż ta wyraźnie wskazane w komendzie, zostaną one zastosowane
 automatycznie przed wskazaną migracją.
 
 Jeśli wskazana migracja została już wcześniej zaaplikowana, wszystkie zaaplikowane aplikacje z późniejszą datą zostaną
 cofnięte.
-
 
 ## Cofanie migracji <span id="reverting-migrations"></span>
 
@@ -772,7 +767,6 @@ yii migrate/down 3   # cofa 3 ostatnio dodane migracje
 ```
 
 > Note: Nie wszystkie migracje są odwracalne. Próba cofnięcia takiej migracji spowoduje błąd i zatrzyma cały proces.
-
 
 ## Ponawianie migracji <span id="redoing-migrations"></span>
 
@@ -787,7 +781,7 @@ yii migrate/redo 3      # ponawia ostatnie 3 zastosowane migracje
 
 ## Odświeżanie migracji <span id="refreshing-migrations"></span>
 
-Począwszy od Yii 2.0.13 możliwe jest usunięcie wszystkich tabel i kluczy obcych z bazy danych i zastosowanie wszystkich 
+Począwszy od Yii 2.0.13 możliwe jest usunięcie wszystkich tabel i kluczy obcych z bazy danych i zastosowanie wszystkich
 migracji od początku.
 
 ```
@@ -808,10 +802,9 @@ yii migrate/new 5       # pokazuje pierwsze 5 nowych migracji
 yii migrate/new all     # pokazuje wszystkie nowe migracje
 ```
 
-
 ## Modyfikowanie historii migracji <span id="modifying-migration-history"></span>
 
-Czasem zamiast aplikowania lub odwracania migracji, możesz chcieć po prostu zaznaczyć, że baza danych zostałą już 
+Czasem zamiast aplikowania lub odwracania migracji, możesz chcieć po prostu zaznaczyć, że baza danych zostałą już
 uaktualniona do konkretnej migracji. Może się tak zdarzyć, gdy ręcznie modyfikujesz bazę i nie chcesz, aby migracja(e) z
 tymi zmianami zostały potem ponownie zaaplikowane. Możesz to osiągnąć w następujący sposób:
 
@@ -822,56 +815,54 @@ yii migrate/mark m150101_185401_create_news_table   # używając pełnej nazwy
 yii migrate/mark 1392853618                         # używając UNIXowego znacznika czasu
 ```
 
-Komenda zmodyfikuje tabelę `migration` poprzez dodanie lub usunięcie wierszy, aby zaznaczyć, że baza danych ma już 
+Komenda zmodyfikuje tabelę `migration` poprzez dodanie lub usunięcie wierszy, aby zaznaczyć, że baza danych ma już
 zastosowane migracje aż do tej określonej w komendzie. Migracje nie zostaną faktycznie zastosowane lub usunięte.
-
 
 ## Dostosowywanie migracji <span id="customizing-migrations"></span>
 
 Dostępnych jest kilka opcji pozwalających na dostosowanie komendy migracji do własnych potrzeb.
 
-
 ### Użycie opcji linii komend <span id="using-command-line-options"></span>
 
 Komenda migracji ma kilka opcji, które pozwalają na zmianę jej działąnia:
 
-* `interactive`: boolean (domyślnie `true`), określa czy przeprowadzić migrację w trybie interaktywnym.
+- `interactive`: boolean (domyślnie `true`), określa czy przeprowadzić migrację w trybie interaktywnym.
   Jeśli ustawione jest `true`, użytkownik będzie poproszony o potwierdzenie przed wykonaniem określonych operacji.
   Możesz chcieć zmienić to ustawienie na `false`, jeśli komenda ma być używana w tle.
 
-* `migrationPath`: string|array (domyślnie `@app/migrations`), określa folder, gdzie znajdują się wszystkie pliki migracji.
+- `migrationPath`: string|array (domyślnie `@app/migrations`), określa folder, gdzie znajdują się wszystkie pliki migracji.
   Parametr może być określony jako rzeczywista ścieżka lub [alias](concept-aliases.md).
-  Zwróć uwagę na to, że folder musi istnieć, inaczej okmenda może wywołać błąd. Począwszy od wersji 2.0.12 można tutaj 
+  Zwróć uwagę na to, że folder musi istnieć, inaczej okmenda może wywołać błąd. Począwszy od wersji 2.0.12 można tutaj
   podać tablicę, aby załadować migracje z wielu źródeł.
 
-* `migrationTable`: string (domyślnie `migration`), określa nazwę tabeli w bazie danych, gdzie trzymana będzie historia 
+- `migrationTable`: string (domyślnie `migration`), określa nazwę tabeli w bazie danych, gdzie trzymana będzie historia
   migracji. Tabela będzie automatycznie stworzona, jeśli nie istnieje.
   Możesz również utworzyć ją ręcznie używając struktury `version varchar(255) primary key, apply_time integer`.
 
-* `db`: string (domyślnie `db`), określa identyfikator bazodanowego [komponentu aplikacji](structure-application-components.md).
+- `db`: string (domyślnie `db`), określa identyfikator bazodanowego [komponentu aplikacji](structure-application-components.md).
   Reprezentuje on bazę danych, na której będą zastosowane migracje.
 
-* `templateFile`: string (domyślnie `@yii/views/migration.php`), określa ścieżkę pliku szablonu, używanego do generowania
-  szkieletu plików migracji. Parametr może być określony jako rzeczywista ścieżka lub [alias](concept-aliases.md). 
+- `templateFile`: string (domyślnie `@yii/views/migration.php`), określa ścieżkę pliku szablonu, używanego do generowania
+  szkieletu plików migracji. Parametr może być określony jako rzeczywista ścieżka lub [alias](concept-aliases.md).
   Plik szablonu jest skryptem PHP, w którym możesz użyć predefiniowanej zmiennej `$className`, aby pobrać nazwę klasy
   migracji.
 
-* `generatorTemplateFiles`: array (domyślnie `[
-        'create_table' => '@yii/views/createTableMigration.php',
-        'drop_table' => '@yii/views/dropTableMigration.php',
-        'add_column' => '@yii/views/addColumnMigration.php',
-        'drop_column' => '@yii/views/dropColumnMigration.php',
-        'create_junction' => '@yii/views/createTableMigration.php'
-  ]`), określa pliki szablonów do generowania kodu migracji. Po więcej szczegółów przejdź do 
+- `generatorTemplateFiles`: array (domyślnie `[
+      'create_table' => '@yii/views/createTableMigration.php',
+      'drop_table' => '@yii/views/dropTableMigration.php',
+      'add_column' => '@yii/views/addColumnMigration.php',
+      'drop_column' => '@yii/views/dropColumnMigration.php',
+      'create_junction' => '@yii/views/createTableMigration.php'
+]`), określa pliki szablonów do generowania kodu migracji. Po więcej szczegółów przejdź do
   "[Generowanie migracji](#generating-migrations)".
 
-* `fields`: tablica definicji kolumn w postaci łańcuchów znaków do wygenerowania kodu migracji. Domyślnie `[]`.
-  Format każdej definicji to `NAZWA_KOLUMNY:TYP_KOLUMNY:DEKORATOR_KOLUMNY`. Dla przykładu, 
+- `fields`: tablica definicji kolumn w postaci łańcuchów znaków do wygenerowania kodu migracji. Domyślnie `[]`.
+  Format każdej definicji to `NAZWA_KOLUMNY:TYP_KOLUMNY:DEKORATOR_KOLUMNY`. Dla przykładu,
   `--fields=name:string(12):notNull` generuje kolumnę typu "string" o rozmiarze 12, która nie może mieć wartości `null`.
 
 Poniższy przykład pokazuje jak można użyć tych opcji.
 
-Chcemy zmigrować moduł `forum`, którego pliki migracji znajdują się w folderze `migrations` modułu - używamy następującej 
+Chcemy zmigrować moduł `forum`, którego pliki migracji znajdują się w folderze `migrations` modułu - używamy następującej
 komendy:
 
 ```
@@ -879,10 +870,9 @@ komendy:
 yii migrate --migrationPath=@app/modules/forum/migrations --interactive=0
 ```
 
-
 ### Konfigurowanie komendy globalnie <span id="configuring-command-globally"></span>
 
-Zamiast podawać żmudnie te same opcje za każdym razem, gdy uruchamiamy komendę migracji, można ją skonfigurować w 
+Zamiast podawać żmudnie te same opcje za każdym razem, gdy uruchamiamy komendę migracji, można ją skonfigurować w
 konfiguracji aplikacji:
 
 ```php
@@ -898,7 +888,6 @@ return [
 
 Powyższa konfiguracja powoduje, że z każdym uruchomieniem komendy migracji, tabela `backend_migration` jest używana do
 zapisu historii migracji i nie musisz już określać jej za pomocą opcji linii komend `migrationTable`.
-
 
 ### Migracje w przestrzeni nazw <span id="namespaced-migrations"></span>
 
@@ -922,32 +911,32 @@ return [
 ];
 ```
 
-> Note: Migracje zaaplikowane z różnych przestrzeni nazw będą dodane do **pojedynczej** historii migracji, przez co np. 
-  niemożliwym jest zastosowanie lub cofnięcie migracji z tylko wybranej przestrzeni nazw.
+> Note: Migracje zaaplikowane z różnych przestrzeni nazw będą dodane do **pojedynczej** historii migracji, przez co np.
+> niemożliwym jest zastosowanie lub cofnięcie migracji z tylko wybranej przestrzeni nazw.
 
 Wykonując operacje na migracjach z przestrzeni nazw: dodając nowe, odwracając je, itd., należy podać pełną przestrzeń nazw
-przed nazwą migracji. Zwróć uwagę na to, że odwrotny ukośnik (`\`) jest zwykle uważany za znak specjalny linii komend, 
-zatem musisz odpowiednio zastosować symbol ucieczki, aby uniknąć błędów konsoli i niespodziewanych skutków komendy. 
+przed nazwą migracji. Zwróć uwagę na to, że odwrotny ukośnik (`\`) jest zwykle uważany za znak specjalny linii komend,
+zatem musisz odpowiednio zastosować symbol ucieczki, aby uniknąć błędów konsoli i niespodziewanych skutków komendy.
 Dla przykładu:
 
 ```
 yii migrate/create app\\migrations\\CreateUserTable
 ```
 
-> Note: Migracje, których lokalizacja określona jest poprzez 
-  [[yii\console\controllers\MigrateController::migrationPath|migrationPath]] nie mogą zawierać przestrzeni nazw. Migracje 
-  w przestrzeni nazw mogą być zaaplikowane tylko jeśli są wymienione we właściwości 
-  [[yii\console\controllers\MigrateController::migrationNamespaces]].
+> Note: Migracje, których lokalizacja określona jest poprzez
+> [[yii\console\controllers\MigrateController::migrationPath|migrationPath]] nie mogą zawierać przestrzeni nazw. Migracje
+> w przestrzeni nazw mogą być zaaplikowane tylko jeśli są wymienione we właściwości
+> [[yii\console\controllers\MigrateController::migrationNamespaces]].
 
 Począwszy od wersji 2.0.12 właściwość [[yii\console\controllers\MigrateController::migrationPath|migrationPath]] pozwala
 również na podanie tablicy wymieniającej wszystkie foldery zawierające migracje bez przestrzeni nazw.
 Zmiana ta została wprowadzona dla istniejących projektów, które używają migracji z wielu lokalizacji, głównie z zewnętrznych
-źródeł jak rozszerzenia Yii tworzone przez innych deweloperów, które z tego powodu nie mogą łatwo być zmodyfikowane, aby 
+źródeł jak rozszerzenia Yii tworzone przez innych deweloperów, które z tego powodu nie mogą łatwo być zmodyfikowane, aby
 używać przestrzeni nazw.
 
 #### Generowanie migracji w przestrzeni nazw
 
-Migracje w przestrzeni nazw korzystają z formatu nazw "CamelCase" `M<YYMMDDHHMMSS><Nazwa>` (przykładowo `M190720100234CreateUserTable`). 
+Migracje w przestrzeni nazw korzystają z formatu nazw "CamelCase" `M<YYMMDDHHMMSS><Nazwa>` (przykładowo `M190720100234CreateUserTable`).
 Generując taką migrację pamiętaj, że nazwa tabeli będzie przekonwertowana z formatu "CamelCase" na format "podkreślnikowy".
 Dla przykładu:
 
@@ -973,11 +962,11 @@ To wygeneruje migrację w przestrzeni nazw `app\migrations` tworzącą tabelę `
 
 ### Rozdzielenie migracji <span id="separated-migrations"></span>
 
-Czasem korzystanie z pojedynczej historii migracji dla wszystkich migracji w projekcie jest uciążliwe. Dla przykładu, 
-możesz zainstalować rozszerzenie 'blog', zawierające całkowicie oddzielne funkcjonalności i dostarczające własne migracje, 
+Czasem korzystanie z pojedynczej historii migracji dla wszystkich migracji w projekcie jest uciążliwe. Dla przykładu,
+możesz zainstalować rozszerzenie 'blog', zawierające całkowicie oddzielne funkcjonalności i dostarczające własne migracje,
 które nie powinny wpływać na te dedykowane dla funkcjonalności głównego projektu.
 
-Jeśli chcesz, aby część migracji mogła być zastosowana i śledzona całkowicie niezależnie od pozostałych, możesz skonfigurować 
+Jeśli chcesz, aby część migracji mogła być zastosowana i śledzona całkowicie niezależnie od pozostałych, możesz skonfigurować
 kilka komend migracji, które będą używać różnych przestrzeni nazw i tabeli historii migracji:
 
 ```php
@@ -1015,10 +1004,9 @@ yii migrate-module
 yii migrate-rbac
 ```
 
-
 ## Migrowanie wielu baz danych <span id="migrating-multiple-databases"></span>
 
-Domyślnie migracje są stosowane do jednej bazy danych określonej przez 
+Domyślnie migracje są stosowane do jednej bazy danych określonej przez
 [komponent aplikacji](structure-application-components.md) `db`. Jeśli chcesz, aby były zastosowane do innej bazy, musisz
 zdefiniować opcję `db` w linii komend, jak poniżej,
 
@@ -1028,8 +1016,8 @@ yii migrate --db=db2
 
 Ta komenda zastosuje migracje do bazy `db2`.
 
-Czasem konieczne jest, aby zastosować *niektóre* migracje do jednej bazy, a inne do drugiej. Aby to uzyskać, podczas 
-implementacji klasy migracji należy bezpośrednio wskazać identyfikator komponentu bazy danych, który migracja ma użyć, 
+Czasem konieczne jest, aby zastosować _niektóre_ migracje do jednej bazy, a inne do drugiej. Aby to uzyskać, podczas
+implementacji klasy migracji należy bezpośrednio wskazać identyfikator komponentu bazy danych, który migracja ma użyć,
 jak poniżej:
 
 ```php
@@ -1047,15 +1035,15 @@ class m150101_185401_create_news_table extends Migration
 }
 ```
 
-Ta migracja będzie zastosowana do bazy `db2`, nawet jeśli w opcjach komendy określona będzie inna baza. 
+Ta migracja będzie zastosowana do bazy `db2`, nawet jeśli w opcjach komendy określona będzie inna baza.
 Zwróć uwagę na to, że historia migracji będzie uaktualniona wciąż w bazie danych określonej przez opcję `db` linii komend.
 
-Jeśli masz wiele migracji korzystających z tej samej bazy danych, zalecane jest utworzenie bazowej klasy migracji z 
+Jeśli masz wiele migracji korzystających z tej samej bazy danych, zalecane jest utworzenie bazowej klasy migracji z
 powyższym kodem metody `init()`, a następnie dziedziczenie po niej w każdej kolejnej migracji.
 
-> Tip: Oprócz ustawiania właściwości [[yii\db\Migration::db|db]], możesz również operować na różnych bazach poprzez 
-  tworzenie nowych połączeń bazodanowych w klasach migracji, a następnie korzystanie z [metod DAO](db-dao.md) i tych
-  połączeń.
+> Tip: Oprócz ustawiania właściwości [[yii\db\Migration::db|db]], możesz również operować na różnych bazach poprzez
+> tworzenie nowych połączeń bazodanowych w klasach migracji, a następnie korzystanie z [metod DAO](db-dao.md) i tych
+> połączeń.
 
 Inną strategią migracji wielu baz danych jest utrzymywanie migracji dla różnych baz w różnych folderach migracji. Dzięki
 temu możesz te bazy migrować w osobnych komendach:
@@ -1066,5 +1054,5 @@ yii migrate --migrationPath=@app/migrations/db2 --db=db2
 ...
 ```
 
-Pierwsza komenda zastosuje migracje z folderu `@app/migrations/db1` na bazie `db1`, druga migracje z folderu 
+Pierwsza komenda zastosuje migracje z folderu `@app/migrations/db1` na bazie `db1`, druga migracje z folderu
 `@app/migrations/db2` na bazie `db2`, itd.

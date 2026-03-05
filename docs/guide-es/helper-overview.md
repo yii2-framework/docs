@@ -1,5 +1,4 @@
-Helpers
-=======
+# Helpers
 
 > Note: Esta sección está en desarrollo.
 
@@ -16,12 +15,10 @@ echo Html::encode('Test > test');
 ```
 
 > Note: Para soportar la [personalización de clases helper](#customizing-helper-classes), Yii separa cada clase helper del núcleo
-  en dos clases: una clase base (ej. `BaseArrayHelper`) y una clase concreta (ej. `ArrayHelper`).
-  Cuando uses un helper, deberías sólo usar la versión concreta y nunca usar la clase base.
+> en dos clases: una clase base (ej. `BaseArrayHelper`) y una clase concreta (ej. `ArrayHelper`).
+> Cuando uses un helper, deberías sólo usar la versión concreta y nunca usar la clase base.
 
-
-Clases Helper del núcleo
-------------------------
+## Clases Helper del núcleo
 
 Las siguientes clases helper del núcleo son proporcionadas en los releases de Yii:
 
@@ -39,9 +36,7 @@ Las siguientes clases helper del núcleo son proporcionadas en los releases de Y
 - [Url](helper-url.md)
 - VarDumper
 
-
-Personalizando Las Clases Helper <span id="customizing-helper-classes"></span>
---------------------------------
+## Personalizando Las Clases Helper <span id="customizing-helper-classes"></span>
 
 Para personalizar una clase helper del núcleo (ej. [[yii\helpers\ArrayHelper]]), deberías crear una nueva clase extendiendo
 de los helpers correspondientes a la clase base (ej. [[yii\helpers\BaseArrayHelper]]), incluyendo su namespace. Esta clase

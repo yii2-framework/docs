@@ -1,5 +1,4 @@
-控制台命令
-==========
+# 控制台命令
 
 除了用于构建 Web 应用程序的丰富功能，Yii 中也有一个拥有丰富功能的控制台，
 它们主要用于创建网站后台处理的任务。
@@ -29,9 +28,7 @@
   在 [数据库迁移章节](db-migrations.md) 可获取更多信息。
 - [[yii\console\controllers\ServeController|ServeController]] - Allows you run PHP built-in web server.
 
-
-用法 <span id="usage"></span>
------
+## 用法 <span id="usage"></span>
 
 你可以使用以下语法来执行控制台控制器动作：
 
@@ -43,7 +40,7 @@ yii <route> [--option1=value1 --option2=value2 ... argument1 argument2 ...]
 参数是动作方法的参数。
 
 例如，将 [[yii\console\controllers\MigrateController::actionUp()|MigrateController::actionUp()]]
-限制 5 个数据库迁移并将 [[yii\console\controllers\MigrateController::$migrationTable|MigrateController::$migrationTable]] 
+限制 5 个数据库迁移并将 [[yii\console\controllers\MigrateController::$migrationTable|MigrateController::$migrationTable]]
 设置为 `migrations` 应该这样调用：
 
 ```
@@ -53,9 +50,7 @@ yii migrate/up 5 --migrationTable=migrations
 > Note: 当在控制台使用 `*` 时, 不要忘记像 `"*"` 一样用引号来引起来，
 > 为了防止在 shell 中执行命令时被当成当前目录下的所有文件名。
 
-
-入口脚本 <span id="entry-script"></span>
--------
+## 入口脚本 <span id="entry-script"></span>
 
 控制台应用程序的入口脚本相当于用于 Web 应用程序的 `index.php` 入口文件。
 控制台入口脚本通常被称为 `yii`，位于应用程序的根目录。
@@ -85,9 +80,7 @@ exit($exitCode);
 如果你不需要记录错误信息或者希望提高整体性能，`YII_DEBUG` 常数应定义为 `false`。
 在基本的和高级的两个应用程序模板中，控制台应用程序的入口脚本在默认情况下会启用调试模式，以提供给开发者更好的环境。
 
-
-配置 <span id="configuration"></span>
------
+## 配置 <span id="configuration"></span>
 
 在上面的代码中可以看到，控制台应用程序使用它自己的配置文件，名为 `console.php` 。在该文件里你可以给控制台配置各种
 [应用组件](structure-application-components.md) 和属性。
@@ -101,16 +94,14 @@ exit($exitCode);
 > 命令来升级你的测试数据库，它被配置在每个测试套件。
 > 要动态地更改配置，只需指定一个自定义应用程序的配置文件，
 > 通过 `appconfig`选项来执行命令：
-> 
+>
 > ```
 > yii <route> --appconfig=path/to/config.php ...
 > ```
 
+## 控制台命令完成 <span id="console-command-completion"></span>
 
-控制台命令完成 <span id="console-command-completion"></span>
-------------
-
-自动完成命令参数在使用 shell 时非常有用。 
+自动完成命令参数在使用 shell 时非常有用。
 从版本 2.0.11 开始，`./yii` 命令为 Bash 和 ZSH 提供了自动完成功能。
 
 ### Bash 完成
@@ -124,7 +115,7 @@ exit($exitCode);
 对于临时使用，您可以将文件放入当前目录，并通过 `source yii` 将其包含在当前会话中。
 如果全局安装，您可能需要重新启动终端或`source ~/.bashrc` 来激活它。
 
-查看 [Bash 手册](https://www.gnu.org/software/bash/manual/html_node/Programmable-Completion.html) 
+查看 [Bash 手册](https://www.gnu.org/software/bash/manual/html_node/Programmable-Completion.html)
 了解将完成脚本添加到您的环境的其他方法。
 
 ### ZSH 完成
@@ -154,8 +145,7 @@ autoload -Uz compinit && compinit -i
 exec $SHELL -l
 ```
 
-创建你自己的控制台命令 <span id="create-command"></span>
-------------------
+## 创建你自己的控制台命令 <span id="create-command"></span>
 
 ### 控制台的控制器和行为
 
@@ -192,17 +182,17 @@ use yii\console\Controller;
 class HelloController extends Controller
 {
     public $message;
-    
+
     public function options($actionID)
     {
         return ['message'];
     }
-    
+
     public function optionAliases()
     {
         return ['m' => 'message'];
     }
-    
+
     public function actionIndex()
     {
         echo $this->message . "\n";
@@ -243,7 +233,6 @@ class ExampleController extends \yii\console\Controller
     public function actionAdd(array $name) { ... }
 }
 ```
-
 
 ### 退出代码
 

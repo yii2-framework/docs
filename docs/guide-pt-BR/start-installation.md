@@ -1,5 +1,4 @@
-Instalando o Yii
-================
+# Instalando o Yii
 
 Você pode instalar o Yii de duas maneiras: usando o gerenciador de pacotes [Composer](https://getcomposer.org/)
 ou baixando um arquivo compactado. O primeiro modo é o preferido, já que permite
@@ -12,20 +11,18 @@ Um template de projeto é um projeto funcional do Yii que implementa alguns recu
 Este código é organizado de uma forma recomendada. Portanto, ele pode servir
 como ponto de partida para seus projetos.
 
-Nesta e nas próximas seções, vamos descrever como instalar o *Template Básico
-de Projetos* do Yii e como implementar novas funcionalidades sobre este template.
+Nesta e nas próximas seções, vamos descrever como instalar o _Template Básico
+de Projetos_ do Yii e como implementar novas funcionalidades sobre este template.
 O Yii fornece ainda outro template chamado [Template Avançado de Projetos](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide-pt-BR/README.md) que é melhor usado em um ambiente de desenvolvimento em equipe e para desenvolver
 aplicações com multiplas camadas.
 
 > Info: O Template Básico de Projetos é adequado para o desenvolvimento de
-cerca de 90% das aplicações Web. Ele difere do Template Avançado de
-Projetos principalmente em como o seu código é organizado. Se você é
-novo no Yii, recomendamos fortemente escolher o Template Básico de Projetos
-pela sua simplicidade e por manter suficientes funcionalidades.
+> cerca de 90% das aplicações Web. Ele difere do Template Avançado de
+> Projetos principalmente em como o seu código é organizado. Se você é
+> novo no Yii, recomendamos fortemente escolher o Template Básico de Projetos
+> pela sua simplicidade e por manter suficientes funcionalidades.
 
-
-Instalando via Composer <span id="installing-via-composer"></span>
------------------------
+## Instalando via Composer <span id="installing-via-composer"></span>
 
 ### Instalando o Composer
 
@@ -53,7 +50,6 @@ Você pode atualizar o Composer executando o comando `composer self-update`.
 > Por favor, consulte a [documentação do Composer sobre tokens da API Github](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens)
 > para instruções de como fazer isso.
 
-
 ### Instalando o Yii <span id="installing-from-composer"></span>
 
 Com o Composer instalado, você pode instalar o Yii executando o seguinte comando
@@ -80,22 +76,22 @@ Você pode especificar um nome de diretório diferente se quiser.
 >
 > Note que a versão do Yii em desenvolvimento não deve ser usada em produção visto que pode quebrar seu código funcional.
 
-
-Instalando a partir de um Arquivo Compactado <span id="installing-from-archive-file"></span>
---------------------------------------------
+## Instalando a partir de um Arquivo Compactado <span id="installing-from-archive-file"></span>
 
 A instalação do Yii a partir de um arquivo compactado envolve três passos:
 
-1. Baixe o arquivo compactado em [yiiframework.com](https://www.yiiframework.com/download/).
-2. Descompacte o arquivo baixado em um diretório acessível pela Web.
-3. Modifique o arquivo `config/web.php` informando uma chave secreta no item de
-configuração `cookieValidationKey` (isto é feito automaticamente se você instalar
-o Yii pelo Composer):
+1.  Baixe o arquivo compactado em [yiiframework.com](https://www.yiiframework.com/download/).
+2.  Descompacte o arquivo baixado em um diretório acessível pela Web.
+3.  Modifique o arquivo `config/web.php` informando uma chave secreta no item de
+    configuração `cookieValidationKey` (isto é feito automaticamente se você instalar
+    o Yii pelo Composer):
 
-    ```php
-  // !!! Informe a chave secreta no item a seguir (se estiver vazio) - isto é requerido para a validação do cookie
-  'cookieValidationKey' => 'enter your secret key here',
-  ```
+        ```php
+
+    // !!! Informe a chave secreta no item a seguir (se estiver vazio) - isto é requerido para a validação do cookie
+    'cookieValidationKey' => 'enter your secret key here',
+
+````
 
 
 Outras Opções de Instalação <span id="other-installation-options"></span>
@@ -110,11 +106,11 @@ pequeno ou grande. É especialmente adequado se você acabou de começar a apren
 No entanto, existem outras opções de instalação disponíveis:
 
 * Se você só quer instalar o núcleo (*core*) do framework e gostaria de construir uma aplicação
-  inteira do zero, você pode seguir as instruções em
-  [Construindo uma Aplicação a Partir do Zero](tutorial-start-from-scratch.md).
+inteira do zero, você pode seguir as instruções em
+[Construindo uma Aplicação a Partir do Zero](tutorial-start-from-scratch.md).
 * Se você quiser começar com uma aplicação mais sofisticada, mais adequada ao
-  ambiente de desenvolvimento em equipe, você pode considerar instalar o
-  [Template Avançado de Projetos](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide-pt-BR/README.md).
+ambiente de desenvolvimento em equipe, você pode considerar instalar o
+[Template Avançado de Projetos](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide-pt-BR/README.md).
 
 
 Instalando Recursos Estáticos (Assets) <span id="installing-assets"></span>
@@ -130,19 +126,17 @@ Para evitar que recursos estáticos sejam instalados via Composer, adicione o se
 
 ```json
 "replace": {
-    "bower-asset/jquery": ">=1.11.0",
-    "bower-asset/inputmask": ">=3.2.0",
-    "bower-asset/punycode": ">=1.3.0",
-    "bower-asset/yii2-pjax": ">=2.0.0"
+  "bower-asset/jquery": ">=1.11.0",
+  "bower-asset/inputmask": ">=3.2.0",
+  "bower-asset/punycode": ">=1.3.0",
+  "bower-asset/yii2-pjax": ">=2.0.0"
 },
-```
+````
 
 > Note: caso a instalação de recursos estáticos via Composer seja evitada, caberá a você instalar e resolver conflitos de versão ao instalar recursos estáticos (assets).
 > Esteja preparado para possíveis inconsistências entre arquivos de recursos estáticos de diferentes extensões.
 
-
-Verificando a Instalação <span id="verifying-installation"></span>
-------------------------
+## Verificando a Instalação <span id="verifying-installation"></span>
 
 Após a instalação ser concluída, você pode tanto configurar seu servidor web (veja na próxima seção) como usar o
 [servidor web embutido do PHP](https://www.php.net/manual/pt_BR/features.commandline.webserver.php) executando o seguinte comando de console no diretório `web`:
@@ -152,7 +146,7 @@ php yii serve
 ```
 
 > Note: Por padrão o servidor HTTP vai ouvir na porta 8080. Contudo, se essa porta já estiver em uso ou se você pretende servir múltiplas aplicações desta forma, você pode querer especificar qual porta será usada. Para isso,
-basta adicionar o argumento `--port`:
+> basta adicionar o argumento `--port`:
 
 ```bash
 php yii serve --port=8888
@@ -168,8 +162,8 @@ http://localhost:8080/
 
 Você deverá ver a página de parabenização acima em seu navegador. Se não a vir, por favor, verifique se sua instalação PHP satisfaz os requisitos do Yii. Você pode verificar se os requisitos mínimos são atingidos usando uma das seguintes abordagens:
 
-* Copiar `/requirements.php` para `/web/requirements.php` e então usar um navegador para acessá-lo por meio da URL `http://localhost/requirements.php`
-* Executar os seguintes comandos:
+- Copiar `/requirements.php` para `/web/requirements.php` e então usar um navegador para acessá-lo por meio da URL `http://localhost/requirements.php`
+- Executar os seguintes comandos:
 
   ```bash
   cd basico
@@ -179,9 +173,7 @@ Você deverá ver a página de parabenização acima em seu navegador. Se não a
 Você deve configurar sua instalação PHP de forma a atingir os requisitos mínimos do Yii. A versão mínima do PHP que você deve ter é a 5.4. Mas o ideal seria utilizar a versão mais recente, PHP 7.
 Se sua aplicação precisa de um banco de dados, você também deve instalar a [Extensão PDO PHP](https://www.php.net/manual/pt_BR/pdo.installation.php) e o driver de banco de dados correspondente (tal como `pdo_mysql` para bancos de dados MySQL).
 
-
-Configurando Servidores Web <span id="configuring-web-servers"></span>
-------------------------------
+## Configurando Servidores Web <span id="configuring-web-servers"></span>
 
 > Info: Você pode pular essa subseção por enquanto se estiver fazendo somente um test drive do Yii sem a intenção de publicá-lo em um servidor de produção.
 
@@ -200,16 +192,15 @@ aprenderá como configurar o seu servidor Apache ou Nginx para atingir estes
 objetivos.
 
 > Info: Definindo `basico/web` como a raiz dos documentos, você também evita que
-  usuários finais acessem o código privado de sua aplicação e os arquivos de
-  dados sensíveis que estão armazenados em diretórios no mesmo nível de `basico/web`.
-  Negar o acesso a estes outros diretórios é uma melhoria de segurança.
+> usuários finais acessem o código privado de sua aplicação e os arquivos de
+> dados sensíveis que estão armazenados em diretórios no mesmo nível de `basico/web`.
+> Negar o acesso a estes outros diretórios é uma melhoria de segurança.
 
 > Info: Se a sua aplicação rodará em um ambiente de hospedagem compartilhada
-  onde você não tem permissão para alterar a configuração do seu servidor Web,
-  você ainda pode ajustar a estrutura de sua aplicação para uma melhor segurança.
-  Por favor, consulte a seção [Ambiente de Hospedagem Compartilhada](tutorial-shared-hosting.md)
-  para mais detalhes.
-
+> onde você não tem permissão para alterar a configuração do seu servidor Web,
+> você ainda pode ajustar a estrutura de sua aplicação para uma melhor segurança.
+> Por favor, consulte a seção [Ambiente de Hospedagem Compartilhada](tutorial-shared-hosting.md)
+> para mais detalhes.
 
 ### Configuração do Apache Recomendada <span id="recommended-apache-configuration"></span>
 
@@ -238,7 +229,6 @@ DocumentRoot "caminho/para/basico/web"
     # ... outras configurações ...
 </Directory>
 ```
-
 
 ### Configuração do Nginx Recomendada <span id="recommended-nginx-configuration"></span>
 

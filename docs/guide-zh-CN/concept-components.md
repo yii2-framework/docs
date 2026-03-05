@@ -1,13 +1,12 @@
-组件（Component）
-==============
+# 组件（Component）
 
 组件是 Yii 应用的主要基石。是 [[yii\base\Component]] 类或其子类的实例。
 三个用以区分它和其它类的主要功能有：
 
-* [属性（Property）](concept-properties.md)
-* [事件（Event）](concept-events.md)
-* [行为（Behavior）](concept-behaviors.md)
-  
+- [属性（Property）](concept-properties.md)
+- [事件（Event）](concept-events.md)
+- [行为（Behavior）](concept-behaviors.md)
+
 或单独使用，或彼此配合，这些功能的应用让 Yii 的类变得更加灵活和易用。
 以小部件 [[yii\jui\DatePicker|日期选择器]] 来举例，
 这是个方便你在 [视图](structure-view.md) 中生成一个交互式日期选择器的 UI 组件：
@@ -28,7 +27,7 @@ echo DatePicker::widget([
 
 正是因为组件功能的强大，他们比常规的对象（Object）稍微重量级一点，因为他们要使用额外的内存和 CPU 时间来处理
 [事件](concept-events.md) 和 [行为](concept-behaviors.md) 。
-如果你不需要这两项功能，可以继承 [[yii\base\Object]] 
+如果你不需要这两项功能，可以继承 [[yii\base\Object]]
 而不是 [[yii\base\Component]]。这样组件可以像普通 PHP 对象一样高效，
 同时还支持[属性（Property）](concept-properties.md)功能。
 
@@ -84,7 +83,6 @@ $component = \Yii::createObject([
 
 > Info: 尽管调用 [[Yii::createObject()]] 的方法看起来更加复杂，但这主要因为它更加灵活强大，
 > 它是基于[依赖注入容器](concept-di-container.md)实现的。
-  
 
 [[yii\base\BaseObject]] 类执行时的生命周期如下：
 

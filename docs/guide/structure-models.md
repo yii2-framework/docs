@@ -1,5 +1,4 @@
-Models
-======
+# Models
 
 Models are part of the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) architecture.
 They are objects representing business data, rules and logic.
@@ -7,23 +6,22 @@ They are objects representing business data, rules and logic.
 You can create model classes by extending [[yii\base\Model]] or its child classes. The base class
 [[yii\base\Model]] supports many useful features:
 
-* [Attributes](#attributes): represent the business data and can be accessed like normal object properties
+- [Attributes](#attributes): represent the business data and can be accessed like normal object properties
   or array elements;
-* [Attribute labels](#attribute-labels): specify the display labels for attributes;
-* [Massive assignment](#massive-assignment): supports populating multiple attributes in a single step;
-* [Validation rules](#validation-rules): ensures input data based on the declared validation rules;
-* [Data Exporting](#data-exporting): allows model data to be exported in terms of arrays with customizable formats.
+- [Attribute labels](#attribute-labels): specify the display labels for attributes;
+- [Massive assignment](#massive-assignment): supports populating multiple attributes in a single step;
+- [Validation rules](#validation-rules): ensures input data based on the declared validation rules;
+- [Data Exporting](#data-exporting): allows model data to be exported in terms of arrays with customizable formats.
 
 The `Model` class is also the base class for more advanced models, such as [Active Record](db-active-record.md).
 Please refer to the relevant documentation for more details about these advanced models.
 
 > Info: You are not required to base your model classes on [[yii\base\Model]]. However, because there are many Yii
-  components built to support [[yii\base\Model]], it is usually the preferable base class for a model.
-
+> components built to support [[yii\base\Model]], it is usually the preferable base class for a model.
 
 ## Attributes <span id="attributes"></span>
 
-Models represent business data in terms of *attributes*. Each attribute is like a publicly accessible property
+Models represent business data in terms of _attributes_. Each attribute is like a publicly accessible property
 of a model. The method [[yii\base\Model::attributes()]] specifies what attributes a model class has.
 
 You can access an attribute like accessing a normal object property:
@@ -53,10 +51,9 @@ foreach ($model as $name => $value) {
 }
 ```
 
-
 ### Defining Attributes <span id="defining-attributes"></span>
 
-By default, if your model class extends directly from [[yii\base\Model]], all its *non-static public* member
+By default, if your model class extends directly from [[yii\base\Model]], all its _non-static public_ member
 variables are attributes. For example, the `ContactForm` model class below has four attributes: `name`, `email`,
 `subject` and `body`. The `ContactForm` model is used to represent the input data received from an HTML form.
 
@@ -74,13 +71,11 @@ class ContactForm extends Model
 }
 ```
 
-
 You may override [[yii\base\Model::attributes()]] to define attributes in a different way. The method should
 return the names of the attributes in a model. For example, [[yii\db\ActiveRecord]] does so by returning
 the column names of the associated database table as its attribute names. Note that you may also need to
 override the magic methods such as `__get()`, `__set()` so that the attributes can be accessed like
 normal object properties.
-
 
 ### Attribute Labels <span id="attribute-labels"></span>
 
@@ -148,12 +143,11 @@ You may even conditionally define attribute labels. For example, based on the [s
 is being used in, you may return different labels for the same attribute.
 
 > Info: Strictly speaking, attribute labels are part of [views](structure-views.md). But declaring labels
-  in models is often very convenient and can result in very clean and reusable code.
-
+> in models is often very convenient and can result in very clean and reusable code.
 
 ## Scenarios <span id="scenarios"></span>
 
-A model may be used in different *scenarios*. For example, a `User` model may be used to collect user login inputs,
+A model may be used in different _scenarios_. For example, a `User` model may be used to collect user login inputs,
 but it may also be used for the user registration purpose. In different scenarios, a model may use different
 business rules and logic. For example, the `email` attribute may be required during user registration,
 but not so during user login.
@@ -196,10 +190,10 @@ class User extends ActiveRecord
 ```
 
 > Info: In the above and following examples, the model classes are extending from [[yii\db\ActiveRecord]]
-  because the usage of multiple scenarios usually happens to [Active Record](db-active-record.md) classes.
+> because the usage of multiple scenarios usually happens to [Active Record](db-active-record.md) classes.
 
 The `scenarios()` method returns an array whose keys are the scenario names and values the corresponding
-*active attributes*. An active attribute can be [massively assigned](#massive-assignment) and is subject
+_active attributes_. An active attribute can be [massively assigned](#massive-assignment) and is subject
 to [validation](#validation-rules). In the above example, the `username` and `password` attributes are active
 in the `login` scenario; while in the `register` scenario, `email` is also active besides `username` and `password`.
 
@@ -231,11 +225,10 @@ The scenario feature is primarily used by [validation](#validation-rules) and [m
 You can, however, use it for other purposes. For example, you may declare [attribute labels](#attribute-labels)
 differently based on the current scenario.
 
-
 ## Validation Rules <span id="validation-rules"></span>
 
 When the data for a model is received from end users, it should be validated to make sure it satisfies
-certain rules (called *validation rules*, also known as *business rules*). For example, given a `ContactForm` model,
+certain rules (called _validation rules_, also known as _business rules_). For example, given a `ContactForm` model,
 you may want to make sure all attributes are not empty and the `email` attribute contains a valid email address.
 If the values for some attributes do not satisfy the corresponding business rules, appropriate error messages
 should be displayed to help the user to fix the errors.
@@ -258,7 +251,6 @@ if ($model->validate()) {
     $errors = $model->errors;
 }
 ```
-
 
 To declare validation rules associated with a model, override the [[yii\base\Model::rules()]] method by returning
 the rules that the model attributes should satisfy. The following example shows the validation rules declared
@@ -293,18 +285,17 @@ public function rules()
 
         // username and password are required in "login" scenario
         [['username', 'password'], 'required', 'on' => self::SCENARIO_LOGIN],
-        
+
         [['username'], 'string'], // username must always be a string, this rule applies to all scenarios
     ];
 }
 ```
 
 If you do not specify the `on` property, the rule would be applied in all scenarios. A rule is called
-an *active rule* if it can be applied in the current [[yii\base\Model::scenario|scenario]].
+an _active rule_ if it can be applied in the current [[yii\base\Model::scenario|scenario]].
 
 An attribute will be validated if and only if it is an active attribute declared in `scenarios()` and
 is associated with one or multiple active rules declared in `rules()`.
-
 
 ## Massive Assignment <span id="massive-assignment"></span>
 
@@ -328,10 +319,9 @@ $model->subject = isset($data['subject']) ? $data['subject'] : null;
 $model->body = isset($data['body']) ? $data['body'] : null;
 ```
 
-
 ### Safe Attributes <span id="safe-attributes"></span>
 
-Massive assignment only applies to the so-called *safe attributes* which are the attributes listed in
+Massive assignment only applies to the so-called _safe attributes_ which are the attributes listed in
 [[yii\base\Model::scenarios()]] for the current [[yii\base\Model::scenario|scenario]] of a model.
 For example, if the `User` model has the following scenario declaration, then when the current scenario
 is `login`, only the `username` and `password` can be massively assigned. Any other attributes will
@@ -348,9 +338,9 @@ public function scenarios()
 ```
 
 > Info: The reason that massive assignment only applies to safe attributes is because you want to
-  control which attributes can be modified by end user data. For example, if the `User` model
-  has a `permission` attribute which determines the permission assigned to the user, you would
-  like this attribute to be modifiable by administrators through a backend interface only.
+> control which attributes can be modified by end user data. For example, if the `User` model
+> has a `permission` attribute which determines the permission assigned to the user, you would
+> like this attribute to be modifiable by administrators through a backend interface only.
 
 Because the default implementation of [[yii\base\Model::scenarios()]] will return all scenarios and attributes
 found in [[yii\base\Model::rules()]], if you do not override this method, it means an attribute is safe as long
@@ -368,7 +358,6 @@ public function rules()
     ];
 }
 ```
-
 
 ### Unsafe Attributes <span id="unsafe-attributes"></span>
 
@@ -407,7 +396,6 @@ public function rules()
 
 In this case attributes `username`, `password` and `secret` are required, but `secret` must be assigned explicitly.
 
-
 ## Data Exporting <span id="data-exporting"></span>
 
 Models often need to be exported in different formats. For example, you may want to convert a collection of
@@ -427,15 +415,14 @@ $post = \app\models\Post::findOne(100);
 $array = $post->attributes;
 ```
 
-By default, the [[yii\base\Model::$attributes]] property will return the values of *all* attributes
+By default, the [[yii\base\Model::$attributes]] property will return the values of _all_ attributes
 declared in [[yii\base\Model::attributes()]].
 
 A more flexible and powerful way of converting a model into an array is to use the [[yii\base\Model::toArray()]]
 method. Its default behavior is the same as that of [[yii\base\Model::$attributes]]. However, it allows you
-to choose which data items, called *fields*, to be put in the resulting array and how they should be formatted.
+to choose which data items, called _fields_, to be put in the resulting array and how they should be formatted.
 In fact, it is the default way of exporting models in RESTful Web service development, as described in
 the [Response Formatting](rest-response-formatting.md).
-
 
 ### Fields <span id="fields"></span>
 
@@ -497,7 +484,6 @@ public function fields()
 > you should override `fields()` to filter them out. In the above example, we choose
 > to filter out `auth_key`, `password_hash` and `password_reset_token`.
 
-
 ## Best Practices <span id="best-practices"></span>
 
 Models are the central places to represent business data, rules and logic. They often need to be reused
@@ -506,13 +492,13 @@ in different places. In a well-designed application, models are usually much fat
 
 In summary, models
 
-* may contain attributes to represent business data;
-* may contain validation rules to ensure the data validity and integrity;
-* may contain methods implementing business logic;
-* should NOT directly access request, session, or any other environmental data. These data should be injected
+- may contain attributes to represent business data;
+- may contain validation rules to ensure the data validity and integrity;
+- may contain methods implementing business logic;
+- should NOT directly access request, session, or any other environmental data. These data should be injected
   by [controllers](structure-controllers.md) into models;
-* should avoid embedding HTML or other presentational code - this is better done in [views](structure-views.md);
-* avoid having too many [scenarios](#scenarios) in a single model.
+- should avoid embedding HTML or other presentational code - this is better done in [views](structure-views.md);
+- avoid having too many [scenarios](#scenarios) in a single model.
 
 You may usually consider the last recommendation above when you are developing large complex systems.
 In these systems, models could be very fat because they are used in many places and may thus contain many sets
@@ -520,10 +506,10 @@ of rules and business logic. This often ends up in a nightmare in maintaining th
 because a single touch of the code could affect several different places. To make the model code more maintainable,
 you may take the following strategy:
 
-* Define a set of base model classes that are shared by different [applications](structure-applications.md) or
+- Define a set of base model classes that are shared by different [applications](structure-applications.md) or
   [modules](structure-modules.md). These model classes should contain minimal sets of rules and logic that
   are common among all their usages.
-* In each [application](structure-applications.md) or [module](structure-modules.md) that uses a model,
+- In each [application](structure-applications.md) or [module](structure-modules.md) that uses a model,
   define a concrete model class by extending from the corresponding base model class. The concrete model classes
   should contain rules and logic that are specific for that application or module.
 

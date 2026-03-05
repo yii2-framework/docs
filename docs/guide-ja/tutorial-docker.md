@@ -1,5 +1,4 @@
-Yii と Docker
-=============
+# Yii と Docker
 
 開発および配備の際に Yii アプリケーションを Docker コンテナとして実行することが出来ます。コンテナは隔絶された軽量の仮想マシンのようなもので、そのサービスをホストのポートにマップします。例えば、コンテナ内の 80 番ポートにあるウェブ・サーバが(ローカル)ホストの 8888 番で利用できます。
 
@@ -46,39 +45,38 @@ Compose を使って、データベースやキャッシュなど、アプリケ
 Docker の基本的なコマンド:
 
     docker-compose up -d
-    
+
 スタックにある全てのサービスをバックグラウンドで実行
 
     docker-compose ps
-    
+
 実行中のサービスをリストアップ
 
     docker-compose logs -f
-    
+
 全てのサービスのログを連続的に表示
 
     docker-compose stop
-    
+
 スタックにある全てのサービスを穏やかに停止
 
     docker-compose kill
-    
+
 スタックにある全てのサービスを即座に停止
 
     docker-compose down -v
-    
+
 全てのサービスを停止して削除、**ホスト・ボリュームを使っていない場合のデータ損失に注意**
 
 コンテナの中でのコマンドの実行:
 
     docker-compose run --rm php composer install
-    
+
 新しいコンテナの中で composer install を実行
 
     docker-compose exec php bash
-    
-*実行中の* `php` サービスの中で bash を実行
 
+_実行中の_ `php` サービスの中で bash を実行
 
 ## 高度なトピック
 

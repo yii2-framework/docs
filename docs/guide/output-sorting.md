@@ -1,16 +1,15 @@
-Sorting
-=======
+# Sorting
 
 When displaying multiple rows of data, it is often needed that the data be sorted according to some columns
 specified by end users. Yii uses a [[yii\data\Sort]] object to represent the information about a sorting schema.
-In particular, 
+In particular,
 
-* [[yii\data\Sort::$attributes|attributes]] specifies the *attributes* by which the data can be sorted.
+- [[yii\data\Sort::$attributes|attributes]] specifies the _attributes_ by which the data can be sorted.
   An attribute can be as simple as a [model attribute](structure-models.md#attributes). It can also be a composite
   one by combining multiple model attributes or DB columns. More details will be given in the following.
-* [[yii\data\Sort::$attributeOrders|attributeOrders]] gives the currently requested ordering directions for 
+- [[yii\data\Sort::$attributeOrders|attributeOrders]] gives the currently requested ordering directions for
   each attribute.
-* [[yii\data\Sort::$orders|orders]] gives the ordering directions in terms of the low-level columns.
+- [[yii\data\Sort::$orders|orders]] gives the ordering directions in terms of the low-level columns.
 
 To use [[yii\data\Sort]], first declare which attributes can be sorted. Then retrieve the currently requested
 ordering information from [[yii\data\Sort::$attributeOrders|attributeOrders]] or [[yii\data\Sort::$orders|orders]]
@@ -37,9 +36,9 @@ $articles = Article::find()
     ->all();
 ```
 
-In the above example, two attributes are declared for the [[yii\data\Sort|Sort]] object: `age` and `name`. 
+In the above example, two attributes are declared for the [[yii\data\Sort|Sort]] object: `age` and `name`.
 
-The `age` attribute is a *simple* attribute corresponding to the `age` attribute of the `Article` Active Record class.
+The `age` attribute is a _simple_ attribute corresponding to the `age` attribute of the `Article` Active Record class.
 It is equivalent to the following declaration:
 
 ```php
@@ -51,22 +50,22 @@ It is equivalent to the following declaration:
 ]
 ```
 
-The `name` attribute is a *composite* attribute defined by `first_name` and `last_name` of `Article`. It is declared
+The `name` attribute is a _composite_ attribute defined by `first_name` and `last_name` of `Article`. It is declared
 using the following array structure:
 
 - The `asc` and `desc` elements specify how to sort by the attribute in ascending and descending directions, respectively.
   Their values represent the actual columns and the directions by which the data should be sorted by. You can specify
   one or multiple columns to indicate simple ordering or composite ordering.
-- The `default` element specifies the direction by which the attribute should be sorted when initially requested. 
-  It defaults to ascending order, meaning if it is not sorted before and you request to sort by this attribute, 
+- The `default` element specifies the direction by which the attribute should be sorted when initially requested.
+  It defaults to ascending order, meaning if it is not sorted before and you request to sort by this attribute,
   the data will be sorted by this attribute in ascending order.
 - The `label` element specifies what label should be used when calling [[yii\data\Sort::link()]] to create a sort link.
   If not set, [[yii\helpers\Inflector::camel2words()]] will be called to generate a label from the attribute name.
   Note that it will not be HTML-encoded.
 
 > Info: You can directly feed the value of [[yii\data\Sort::$orders|orders]] to the database query to build
-  its `ORDER BY` clause. Do not use [[yii\data\Sort::$attributeOrders|attributeOrders]] because some
-  attributes may be composite and cannot be recognized by the database query.
+> its `ORDER BY` clause. Do not use [[yii\data\Sort::$attributeOrders|attributeOrders]] because some
+> attributes may be composite and cannot be recognized by the database query.
 
 You can call [[yii\data\Sort::link()]] to generate a hyperlink upon which end users can click to request sorting
 the data by the specified attribute. You may also call [[yii\data\Sort::createUrl()]] to create a sortable URL.

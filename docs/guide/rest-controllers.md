@@ -1,5 +1,4 @@
-Controllers
-===========
+# Controllers
 
 After creating the resource classes and specifying how resource data should be formatted, the next thing
 to do is to create controller actions to expose the resources to end users through RESTful APIs.
@@ -14,16 +13,15 @@ from [[yii\rest\ActiveController]], which will allow you to create powerful REST
 Both [[yii\rest\Controller]] and [[yii\rest\ActiveController]] provide the following features, some of which
 will be described in detail in the next few sections:
 
-* HTTP method validation;
-* [Content negotiation and Data formatting](rest-response-formatting.md);
-* [Authentication](rest-authentication.md);
-* [Rate limiting](rest-rate-limiting.md).
+- HTTP method validation;
+- [Content negotiation and Data formatting](rest-response-formatting.md);
+- [Authentication](rest-authentication.md);
+- [Rate limiting](rest-rate-limiting.md).
 
 [[yii\rest\ActiveController]] in addition provides the following features:
 
-* A set of commonly needed actions: `index`, `view`, `create`, `update`, `delete`, `options`;
-* User authorization in regard to the requested action and resource.
-
+- A set of commonly needed actions: `index`, `view`, `create`, `update`, `delete`, `options`;
+- User authorization in regard to the requested action and resource.
 
 ## Creating Controller Classes <span id="creating-controller"></span>
 
@@ -44,18 +42,17 @@ public function actionView($id)
 }
 ```
 
-
 ## Filters <span id="filters"></span>
 
 Most RESTful API features provided by [[yii\rest\Controller]] are implemented in terms of [filters](structure-filters.md).
 In particular, the following filters will be executed in the order they are listed:
 
-* [[yii\filters\ContentNegotiator|contentNegotiator]]: supports content negotiation, to be explained in
+- [[yii\filters\ContentNegotiator|contentNegotiator]]: supports content negotiation, to be explained in
   the [Response Formatting](rest-response-formatting.md) section;
-* [[yii\filters\VerbFilter|verbFilter]]: supports HTTP method validation;
-* [[yii\filters\auth\AuthMethod|authenticator]]: supports user authentication, to be explained in
+- [[yii\filters\VerbFilter|verbFilter]]: supports HTTP method validation;
+- [[yii\filters\auth\AuthMethod|authenticator]]: supports user authentication, to be explained in
   the [Authentication](rest-authentication.md) section;
-* [[yii\filters\RateLimiter|rateLimiter]]: supports rate limiting, to be explained in
+- [[yii\filters\RateLimiter|rateLimiter]]: supports rate limiting, to be explained in
   the [Rate Limiting](rest-rate-limiting.md) section.
 
 These named filters are declared in the [[yii\rest\Controller::behaviors()|behaviors()]] method.
@@ -95,12 +92,12 @@ public function behaviors()
     // remove authentication filter
     $auth = $behaviors['authenticator'];
     unset($behaviors['authenticator']);
-    
+
     // add CORS filter
     $behaviors['corsFilter'] = [
         'class' => \yii\filters\Cors::class,
     ];
-    
+
     // re-add authentication filter
     $behaviors['authenticator'] = $auth;
     // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
@@ -110,24 +107,22 @@ public function behaviors()
 }
 ```
 
-
 ## Extending `ActiveController` <span id="extending-active-controller"></span>
 
 If your controller class extends from [[yii\rest\ActiveController]], you should set
 its [[yii\rest\ActiveController::modelClass|modelClass]] property to be the name of the resource class
 that you plan to serve through this controller. The class must extend from [[yii\db\ActiveRecord]].
 
-
 ### Customizing Actions <span id="customizing-actions"></span>
 
 By default, [[yii\rest\ActiveController]] provides the following actions:
 
-* [[yii\rest\IndexAction|index]]: list resources page by page;
-* [[yii\rest\ViewAction|view]]: return the details of a specified resource;
-* [[yii\rest\CreateAction|create]]: create a new resource;
-* [[yii\rest\UpdateAction|update]]: update an existing resource;
-* [[yii\rest\DeleteAction|delete]]: delete the specified resource;
-* [[yii\rest\OptionsAction|options]]: return the supported HTTP methods.
+- [[yii\rest\IndexAction|index]]: list resources page by page;
+- [[yii\rest\ViewAction|view]]: return the details of a specified resource;
+- [[yii\rest\CreateAction|create]]: create a new resource;
+- [[yii\rest\UpdateAction|update]]: update an existing resource;
+- [[yii\rest\DeleteAction|delete]]: delete the specified resource;
+- [[yii\rest\OptionsAction|options]]: return the supported HTTP methods.
 
 All these actions are declared through the [[yii\rest\ActiveController::actions()|actions()]] method.
 You may configure these actions or disable some of them by overriding the `actions()` method, like shown the following,
@@ -153,7 +148,6 @@ public function prepareDataProvider()
 ```
 
 Please refer to the class references for individual action classes to learn what configuration options are available.
-
 
 ### Performing Access Check <span id="performing-access-check"></span>
 

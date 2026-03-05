@@ -1,5 +1,4 @@
-Upgrading from Version 1.1
-==========================
+# Upgrading from Version 1.1
 
 There are many differences between versions 1.1 and 2.0 of Yii as the framework was completely rewritten for 2.0.
 As a result, upgrading from version 1.1 is not as trivial as upgrading between minor versions. In this guide you'll
@@ -11,9 +10,7 @@ Please note that Yii 2.0 introduces more new features than are covered in this s
 that you read through the whole definitive guide to learn about them all. Chances are that
 some features you previously had to develop for yourself are now part of the core code.
 
-
-Installation
-------------
+## Installation
 
 Yii 2.0 fully embraces [Composer](https://getcomposer.org/), the de facto PHP package manager. Installation
 of the core framework, as well as extensions, are handled through Composer. Please refer to
@@ -21,9 +18,7 @@ the [Installing Yii](start-installation.md) section to learn how to install Yii 
 create new extensions, or turn your existing 1.1 extensions into 2.0-compatible extensions, please refer to
 the [Creating Extensions](structure-extensions.md#creating-extensions) section of the guide.
 
-
-PHP Requirements
-----------------
+## PHP Requirements
 
 Yii 2.0 requires PHP 5.4 or above, which is a huge improvement over PHP version 5.2 that is required by Yii 1.1.
 As a result, there are many differences on the language level that you should pay attention to.
@@ -40,9 +35,7 @@ Below is a summary of the major changes regarding PHP:
 - [intl](https://www.php.net/manual/en/book.intl.php). Yii 2.0 makes use of the `intl` PHP extension
   to support internationalization features.
 
-
-Namespace
----------
+## Namespace
 
 The most obvious change in Yii 2.0 is the use of namespaces. Almost every core class
 is namespaced, e.g., `yii\web\Request`. The "C" prefix is no longer used in class names.
@@ -52,9 +45,7 @@ indicates that the corresponding class file is `web/Request.php` under the Yii f
 (You can use any core class without explicitly including that class file, thanks to the Yii
 class loader.)
 
-
-Component and Object
---------------------
+## Component and Object
 
 Yii 2.0 breaks the `CComponent` class in 1.1 into two classes: [[yii\base\BaseObject]] and [[yii\base\Component]].
 The [[yii\base\BaseObject|BaseObject]] class is a lightweight base class that allows defining [object properties](concept-properties.md)
@@ -65,9 +56,7 @@ If your class does not need the event or behavior feature, you should consider u
 [[yii\base\BaseObject|BaseObject]] as the base class. This is usually the case for classes that represent basic
 data structures.
 
-
-Object Configuration
---------------------
+## Object Configuration
 
 The [[yii\base\BaseObject|BaseObject]] class introduces a uniform way of configuring objects. Any descendant class
 of [[yii\base\BaseObject|BaseObject]] should declare its constructor (if needed) in the following way so that
@@ -110,9 +99,7 @@ $object = Yii::createObject([
 
 More details about configurations can be found in the [Configurations](concept-configurations.md) section.
 
-
-Events
-------
+## Events
 
 In Yii 1, events were created by defining an `on`-method (e.g., `onBeforeSave`). In Yii 2, you can now use any event name. You trigger an event by calling
 the [[yii\base\Component::trigger()|trigger()]] method:
@@ -132,9 +119,7 @@ $component->on($eventName, $handler);
 
 There are many enhancements to the event features. For more details, please refer to the [Events](concept-events.md) section.
 
-
-Path Aliases
-------------
+## Path Aliases
 
 Yii 2.0 expands the usage of path aliases to both file/directory paths and URLs. Yii 2.0 also now requires
 an alias name to start with the `@` character, to differentiate aliases from normal file/directory paths or URLs.
@@ -151,13 +136,11 @@ directory. Once you've done that, Yii will be able to autoload any class in that
 
 More on path aliases can be found in the [Aliases](concept-aliases.md) section.
 
-
-Views
------
+## Views
 
 The most significant change about views in Yii 2 is that the special variable `$this` in a view no longer refers to
-the current controller or widget. Instead, `$this` now refers to a *view* object, a new concept
-introduced in 2.0. The *view* object is of type [[yii\web\View]], which represents the view part
+the current controller or widget. Instead, `$this` now refers to a _view_ object, a new concept
+introduced in 2.0. The _view_ object is of type [[yii\web\View]], which represents the view part
 of the MVC pattern. If you want to access the controller or widget in a view, you can use `$this->context`.
 
 To render a partial view within another view, you use `$this->render()`, not `$this->renderPartial()`. The call to `render` also now has to be explicitly echoed, as the `render()` method returns the rendering
@@ -173,9 +156,7 @@ To use these template engines, you need to configure the `view` application comp
 [[yii\base\View::$renderers|View::$renderers]] property. Please refer to the [Template Engines](tutorial-template-engines.md)
 section for more details.
 
-
-Models
-------
+## Models
 
 Yii 2.0 uses [[yii\base\Model]] as the base model, similar to `CModel` in 1.1.
 The class `CFormModel` has been dropped entirely. Instead, in Yii 2 you should extend [[yii\base\Model]] to create a form model class.
@@ -205,9 +186,7 @@ if the [[yii\base\Model::rules()|rules()]] method fully specifies the scenarios 
 
 To learn more details about models, please refer to the [Models](structure-models.md) section.
 
-
-Controllers
------------
+## Controllers
 
 Yii 2.0 uses [[yii\web\Controller]] as the base controller class, which is similar to `CController` in Yii 1.1.
 [[yii\base\Action]] is the base class for action classes.
@@ -229,9 +208,7 @@ public function actionView($id)
 
 Please refer to the [Controllers](structure-controllers.md) section for more details about controllers.
 
-
-Widgets
--------
+## Widgets
 
 Yii 2.0 uses [[yii\base\Widget]] as the base widget class, similar to `CWidget` in Yii 1.1.
 
@@ -257,9 +234,7 @@ ActiveForm::end();
 
 Please refer to the [Widgets](structure-widgets.md) section for more details.
 
-
-Themes
-------
+## Themes
 
 Themes work completely differently in 2.0. They are now based on a path mapping mechanism that maps a source
 view file path to a themed view file path. For example, if the path map for a theme is
@@ -272,9 +247,7 @@ application component.
 
 Please refer to the [Theming](output-theming.md) section for more details.
 
-
-Console Applications
---------------------
+## Console Applications
 
 Console applications are now organized as controllers, like Web applications. Console controllers
 should extend from [[yii\console\Controller]], similar to `CConsoleCommand` in 1.1.
@@ -288,9 +261,7 @@ Yii 2.0 supports automatic generation of command help information from comment b
 
 Please refer to the [Console Commands](tutorial-console.md) section for more details.
 
-
-I18N
-----
+## I18N
 
 Yii 2.0 removes the built-in date formatter and number formatter pieces in favor of the [PECL intl PHP module](https://pecl.php.net/package/intl).
 
@@ -300,9 +271,7 @@ sources based on message categories.
 
 Please refer to the [Internationalization](tutorial-i18n.md) section for more details.
 
-
-Action Filters
---------------
+## Action Filters
 
 Action filters are implemented via behaviors now. To define a new, custom filter, extend from [[yii\base\ActionFilter]]. To use a filter, attach the filter class to the controller
 as a behavior. For example, to use the [[yii\filters\AccessControl]] filter, you would have the following
@@ -324,11 +293,9 @@ public function behaviors()
 
 Please refer to the [Filtering](structure-filters.md) section for more details.
 
+## Assets
 
-Assets
-------
-
-Yii 2.0 introduces a new concept called *asset bundle* that replaces the script package concept found in Yii 1.1.
+Yii 2.0 introduces a new concept called _asset bundle_ that replaces the script package concept found in Yii 1.1.
 
 An asset bundle is a collection of asset files (e.g. JavaScript files, CSS files, image files, etc.)
 within a directory. Each asset bundle is represented as a class extending [[yii\web\AssetBundle]].
@@ -338,24 +305,21 @@ contain the references to the JavaScript and CSS files specified in that bundle.
 
 Please refer to the [Managing Assets](structure-assets.md) section for more details.
 
-
-Helpers
--------
+## Helpers
 
 Yii 2.0 introduces many commonly used static helper classes, including.
 
-* [[yii\helpers\Html]]
-* [[yii\helpers\ArrayHelper]]
-* [[yii\helpers\StringHelper]]
-* [[yii\helpers\FileHelper]]
-* [[yii\helpers\Json]]
+- [[yii\helpers\Html]]
+- [[yii\helpers\ArrayHelper]]
+- [[yii\helpers\StringHelper]]
+- [[yii\helpers\FileHelper]]
+- [[yii\helpers\Json]]
 
 Please refer to the [Helper Overview](helper-overview.md) section for more details.
 
-Forms
------
+## Forms
 
-Yii 2.0 introduces the *field* concept for building a form using [[yii\widgets\ActiveForm]]. A field
+Yii 2.0 introduces the _field_ concept for building a form using [[yii\widgets\ActiveForm]]. A field
 is a container consisting of a label, an input, an error message, and/or a hint text.
 A field is represented as an [[yii\widgets\ActiveField|ActiveField]] object.
 Using fields, you can build a form more cleanly than before:
@@ -372,9 +336,7 @@ Using fields, you can build a form more cleanly than before:
 
 Please refer to the [Creating Forms](input-forms.md) section for more details.
 
-
-Query Builder
--------------
+## Query Builder
 
 In 1.1, query building was scattered among several classes, including `CDbCommand`,
 `CDbCriteria`, and `CDbCommandBuilder`. Yii 2.0 represents a DB query in terms of a [[yii\db\Query|Query]] object
@@ -396,9 +358,7 @@ Best of all, such query building methods can also be used when working with [Act
 
 Please refer to the [Query Builder](db-query-builder.md) section for more details.
 
-
-Active Record
--------------
+## Active Record
 
 Yii 2.0 introduces a lot of changes to [Active Record](db-active-record.md). The two most obvious ones involve
 query building and relational query handling.
@@ -465,9 +425,7 @@ version 2.0 anymore. Note that when adding parameters to the constructor you mig
 There are many other changes and enhancements to Active Record. Please refer to
 the [Active Record](db-active-record.md) section for more details.
 
-
-Active Record Behaviors
------------------------
+## Active Record Behaviors
 
 In 2.0, we have dropped the base behavior class `CActiveRecordBehavior`. If you want to create an Active Record Behavior,
 you will have to extend directly from `yii\base\Behavior`. If the behavior class needs to respond to some events
@@ -497,9 +455,7 @@ class MyBehavior extends Behavior
 }
 ```
 
-
-User and IdentityInterface
---------------------------
+## User and IdentityInterface
 
 The `CWebUser` class in 1.1 is now replaced by [[yii\web\User]], and there is no more
 `CUserIdentity` class. Instead, you should implement the [[yii\web\IdentityInterface]] which
@@ -507,9 +463,7 @@ is much more straightforward to use. The advanced project template provides such
 
 Please refer to the [Authentication](security-authentication.md), [Authorization](security-authorization.md), and [Advanced Project Template](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide) sections for more details.
 
-
-URL Management
---------------
+## URL Management
 
 URL management in Yii 2 is similar to that in 1.1. A major enhancement is that URL management now supports optional
 parameters. For example, if you have a rule declared as follows, then it will match
@@ -531,9 +485,7 @@ and actions are now converted to lower case where each word is separated by a hy
 id for the `CamelCaseController` will be `camel-case`.
 See the section about [controller IDs](structure-controllers.md#controller-ids) and [action IDs](structure-controllers.md#action-ids) for more details.
 
-
-Using Yii 1.1 and 2.x together
-------------------------------
+## Using Yii 1.1 and 2.x together
 
 If you have legacy Yii 1.1 code that you want to use together with Yii 2.0, please refer to
 the [Using Yii 1.1 and 2.0 Together](tutorial-yii-integration.md#using-both-yii2-yii1) section.

@@ -1,5 +1,4 @@
-Styl kodowania bazowych plików frameworka Yii 2
-===============================================
+# Styl kodowania bazowych plików frameworka Yii 2
 
 Poniższy styl kodowania jest stosowany w kodzie frameworka Yii 2.x i oficjalnych rozszerzeniach. Jeśli planujesz wysłać prośbę
 o dołączenie kodu do bazowego frameworka, powinieneś rozważyć stosowanie takiego samego stylu. Nie zmuszamy jednak nikogo do
@@ -77,6 +76,7 @@ class Foo
     const DATE_APPROVED = '2012-06-01';
 }
 ```
+
 ### 4.2. Właściwości
 
 - Deklarując publiczne elementy klasy należy używać wprost słowa kluczowego `public`.
@@ -139,12 +139,12 @@ class Foo
 
 ### 4.4 Bloki PHPDoc
 
-  - `@param`, `@var`, `@property` i `@return` muszą deklarować użyte typy `bool`, `int`, `string`, `array` lub `null`.
+- `@param`, `@var`, `@property` i `@return` muszą deklarować użyte typy `bool`, `int`, `string`, `array` lub `null`.
   Można również używać nazw klas jak `Model` lub `ActiveRecord`.
-  - Dla typowanych tablic należy używać `ClassName[]`.
-  - Pierwsza linia bloku PHPDoc musi opisywać cel istnienia metody.
-  - Jeśli metoda sprawdza cokolwiek (`isActive`, `hasClass`, itp.) pierwsza linia powinna zaczynać się od `Checks whether`.
-  - `@return` powinien wyraźnie opisywać co jest zwracane.
+- Dla typowanych tablic należy używać `ClassName[]`.
+- Pierwsza linia bloku PHPDoc musi opisywać cel istnienia metody.
+- Jeśli metoda sprawdza cokolwiek (`isActive`, `hasClass`, itp.) pierwsza linia powinna zaczynać się od `Checks whether`.
+- `@return` powinien wyraźnie opisywać co jest zwracane.
 
 ```php
 /**
@@ -357,8 +357,7 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 });
 ```
 
-Dokumentacja
-------------
+## Dokumentacja
 
 - Należy stosować dokumentację zgodnie ze składnią [phpDoc](https://phpdoc.org/).
 - Kod bez dokumentacji jest niedozwolony.
@@ -411,10 +410,9 @@ Dokumentacja
 class Component extends \yii\base\BaseObject
 ```
 
-
 #### Poziom funkcji / metody
 
-```php
+````php
 /**
   * Returns the list of attached event handlers for an event.
   * You may manipulate the returned [[Vector]] object by adding or removing handlers.
@@ -436,7 +434,7 @@ public function getEventHandlers($name)
     $this->ensureBehaviors();
     return $this->_e[$name];
 }
-```
+````
 
 #### Markdown
 
@@ -464,14 +462,12 @@ Możliwe jest też linkowanie do Przewodnika używając następującej składni:
 [link to guide](guide:file-name.md#subsection)
 ```
 
-
 #### Komentarze
 
 - Komentarze jednolinijkowe powinny zaczynać się od `//` a nie od `#`.
 - Komentarze jednolinijkowe powinny znajdować się w osobnej linii.
 
-Dodatkowe zasady
-----------------
+## Dodatkowe zasady
 
 ### `=== []` vs `empty()`
 

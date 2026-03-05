@@ -1,16 +1,15 @@
-Data Providers (Provedores de Dados)
-==============
+# Data Providers (Provedores de Dados)
 
-Nas seções [Paginação](output-pagination.md) e [Ordenação](output-sorting.md), descrevemos como os usuários finais podem escolher uma determinada página de dados para exibir e ordená-los por determinadas colunas. Uma vez que esta tarefa de paginação e ordenação de dados é muito comum, o Yii fornece um conjunto de classes *data provider* para encapsular estes recursos.
+Nas seções [Paginação](output-pagination.md) e [Ordenação](output-sorting.md), descrevemos como os usuários finais podem escolher uma determinada página de dados para exibir e ordená-los por determinadas colunas. Uma vez que esta tarefa de paginação e ordenação de dados é muito comum, o Yii fornece um conjunto de classes _data provider_ para encapsular estes recursos.
 
 Um data provider é uma classe que implementa
 [[yii\data\DataProviderInterface]]. Ele suporta principalmente a recuperação de dados paginados e ordenados. Geralmente é usado para trabalhar com [widgets de dados](output-data-widgets.md) de modo que os usuários finais possam interativamente paginar e ordenar dados.
 
 O Yii fornece as seguintes classes de data provider:
 
-* [[yii\data\ActiveDataProvider]]: Utilize [[yii\db\Query]] ou [[yii\db\ActiveQuery]] para consultar dados de um database e retorná-los na forma de array ou uma instância de [Active Record](db-active-record.md).
-* [[yii\data\SqlDataProvider]]: executa uma instrução SQL e retorna os dados do banco de dados como array.
-* [[yii\data\ArrayDataProvider]]: pega um grande array e retorna apenas uma parte deste baseado na paginação e ordenação especificada.
+- [[yii\data\ActiveDataProvider]]: Utilize [[yii\db\Query]] ou [[yii\db\ActiveQuery]] para consultar dados de um database e retorná-los na forma de array ou uma instância de [Active Record](db-active-record.md).
+- [[yii\data\SqlDataProvider]]: executa uma instrução SQL e retorna os dados do banco de dados como array.
+- [[yii\data\ArrayDataProvider]]: pega um grande array e retorna apenas uma parte deste baseado na paginação e ordenação especificada.
 
 O uso de todos estes data providers compartilham o seguinte padrão comum:
 
@@ -42,7 +41,6 @@ echo yii\grid\GridView::widget([
 ```
 
 Estes data providers variam principalmente conforme a fonte de dados é especificada. Nas subseções seguintes, vamos explicar o uso detalhado de cada um dos data providers.
-
 
 ## Active Data Provider <span id="active-data-provider"></span>
 
@@ -80,10 +78,9 @@ use yii\db\Query;
 $query = (new Query())->from('post')->where(['status' => 1]);
 ```
 
-> Observação: Se uma query já especificou a cláusula `orderBy, as novas instruções de ordenação dadas por usuários finais (através da configuração `sort`) será acrescentada a cláusula `orderBy` existente. Existindo qualquer uma das cláusulas `limit` e `offset` será substituído pelo request de paginação dos usuários finais (através da configuração `pagination`).
+> Observação: Se uma query já especificou a cláusula `orderBy, as novas instruções de ordenação dadas por usuários finais (através da configuração `sort`) será acrescentada a cláusula `orderBy`existente. Existindo qualquer uma das cláusulas`limit`e`offset`será substituído pelo request de paginação dos usuários finais (através da configuração`pagination`).
 
 Por padrão, [[yii\data\ActiveDataProvider]] utiliza o componente da aplicação `db` como a conexão de banco de dados. Você pode usar uma conexão de banco de dados diferente, configurando a propriedade [[yii\data\ActiveDataProvider::db]].
-
 
 ## SQL Data Provider <span id="sql-data-provider"></span>
 
@@ -121,7 +118,6 @@ $models = $provider->getModels();
 
 > Observação: A propriedade [[yii\data\SqlDataProvider::totalCount|totalCount]] é requerida somente se você precisar paginar os dados. Isto porque a instrução SQL definida por [[yii\data\SqlDataProvider::sql|sql]] será modificada pelo provider para retornar somente a página atual de dados solicitada. O provider ainda precisa saber o número total de dados a fim de calcular corretamente o número de páginas disponíveis.
 
-
 ## Array Data Provider <span id="array-data-provider"></span>
 
 O [[yii\data\ArrayDataProvider]] é melhor usado quando se trabalha com um grande array. O provider permite-lhe retornar uma página dos dados do array ordenados por uma ou várias colunas. Para usar [[yii\data\ArrayDataProvider]], você precisa especificar a propriedade [[yii\data\ArrayDataProvider::allModels|allModels]] como um grande array. Elementos deste array podem ser outros arrays associados (por exemplo, resultados de uma query do [DAO](db-dao.md)) ou objetos (por exemplo, uma instância do [Active Record](db-active-record.md)).
@@ -151,8 +147,7 @@ $provider = new ArrayDataProvider([
 $rows = $provider->getModels();
 ```
 
-> Observação: Comparando o [Active Data Provider](#active-data-provider) com o [SQL Data Provider](#sql-data-provider), o array data provider é menos eficiente porque requer o carregamento de *todo* os dados na memória.
-
+> Observação: Comparando o [Active Data Provider](#active-data-provider) com o [SQL Data Provider](#sql-data-provider), o array data provider é menos eficiente porque requer o carregamento de _todo_ os dados na memória.
 
 ## Trabalhando com Chave de Dados <span id="working-with-keys"></span>
 
@@ -194,12 +189,11 @@ $provider = new ActiveDataProvider([
 ]);
 ```
 
-
 ## Criado Data Provider Personalizado <span id="custom-data-provider"></span>
 
 Para criar sua própria classe de data provider personalizada, você deve implementar o [[yii\data\DataProviderInterface]].
 Um caminho fácil é estender de [[yii\data\BaseDataProvider]], o que lhe permite concentrar-se na lógica principal do data provider. Em particular, você precisa principalmente implementar os seguintes métodos:
-                                                  
+
 - [[yii\data\BaseDataProvider::prepareModels()|prepareModels()]]: prepara o data models que será disponibilizado na página atual e as retorna como um array.
 - [[yii\data\BaseDataProvider::prepareKeys()|prepareKeys()]]: recebe um array de data models disponíveis e retorna chaves que lhes estão associados.
 - [[yii\data\BaseDataProvider::prepareTotalCount()|prepareTotalCount]]: retorna um valor que indica o número total de data models no data provider.
@@ -216,24 +210,24 @@ class CsvDataProvider extends BaseDataProvider
   * @var string nome do arquivo CSV que será lido
   */
   public $filename;
-  
+
   /**
   * @var string|nome da coluna chave ou função que a retorne
   */
   public $key;
-  
+
   /**
   * @var SplFileObject
   */
   protected $fileObject; // SplFileObject é muito conveniente para procurar uma linha específica em um arquivo
-  
+
   /**
   * {@inheritdoc}
   */
   public function init()
   {
       parent::init();
-      
+
       // abre o arquivo
       $this->fileObject = new SplFileObject($this->filename);
   }

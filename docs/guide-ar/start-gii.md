@@ -36,7 +36,6 @@ if (YII_ENV_DEV) {
     في الإعدادت الموجودة في الأعلى، فإن التطبيق سيقوم بتضمين وتفعيل ال gii في حال كانت الحالة الخاصة بالتطبيق هي <a href="../guide/concept-configurations.md#environment-constants">development enviroment</a>، بالإضافة الى ذلك، فإنه يجب تضمين واستخدام ال module <code>gii</code>، والموجود ضمن ال class التالي [[yii\gii\Module]]. 
 </p>
 
-
 <p dir="rtl">
     اذا قمت بالتحقق من ال <a href="../guide/structure-entry-scripts.md">entry script</a> وبالتحديد صفحة ال <code>web/index.php</code> في التطبيق الخاص بك، ستجد هذه الأسطر، والتي يجب أن تجعل من ال <code>YII_ENV_DEV</code> ذات قيمة <code>true</code>.
 </p>
@@ -65,7 +64,6 @@ https://hostname/index.php?r=gii
 ```
 
 ![Gii](../guide/images/start-gii.png)
-
 
 ## <div dir="rtl">إنشاء ال Active Record Class من خلال ال Gii</div> <span id="generating-ar"></span>
 
@@ -104,9 +102,9 @@ https://hostname/index.php?r=gii
     ال CRUD هي اختصار ل Create, Read, Update, And Delete (إنشاء، وقرائة، وتحديث، وحذف)، والتي تمثل أكثر المهمات المطلوبة للتعامل مع البيانات على مواقع الويب. ولإنشاء ال CRUD باستخدام ال Gii، قم باختيار ال "CRUD Generator" (من خلال النقر على الرابط الموجود بالصفحة الرئيسية لل Gii)، وهنا وبالبنسبة للمثال الخاص بال "country"، يمكنك تعبئة ال from بما يلي:
 </p>
 
-* Model Class: `app\models\Country`
-* Search Model Class: `app\models\CountrySearch`
-* Controller Class: `app\controllers\CountryController`
+- Model Class: `app\models\Country`
+- Search Model Class: `app\models\CountrySearch`
+- Controller Class: `app\controllers\CountryController`
 
 ![CRUD Generator](../guide/images/start-gii-crud.png)
 
@@ -146,9 +144,9 @@ https://hostname/index.php?r=country%2Findex
     فيما يلي قائمة بالملفات التي تم إنشاؤها من خلال ال Gii، في حالة رغبتك في التحقق من كيفية عمل هذه الميزات والإطلاع على الشيفرة البرمجية وتخصيصها حسب الرغبة:
 </p>
 
-* Controller: `controllers/CountryController.php`
-* Models: `models/Country.php` and `models/CountrySearch.php`
-* Views: `views/country/*.php`
+- Controller: `controllers/CountryController.php`
+- Models: `models/Country.php` and `models/CountrySearch.php`
+- Views: `views/country/*.php`
 
 <blockquote class="info"><p dir="rtl">
 معلومة: تم تصميم ال Gii لتكون أداة إنشاء شيفرات برمجية قابلة للتخصيص بشكل كبير للغاية. اذا قمت باستخدامه بحكمة،فإنك ستقوم بتسريع وتيرة التطوير الخاصة بالتطبيق الخاص بك. لمزيد من التفاصيل، يرجى الذهاب إلى الجزء الخاص بال  <a href="https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide">Gii</a>. 

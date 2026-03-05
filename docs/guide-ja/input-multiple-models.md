@@ -1,5 +1,4 @@
-複数のモデルのデータを取得する
-==============================
+# 複数のモデルのデータを取得する
 
 複雑なデータを扱う場合には、複数の異なるモデルを使用してユーザの入力を収集する必要があることがあり得ます。
 例えば、ユーザのログイン情報は `user` テーブルに保存されているけれども、ユーザのプロファイル情報は
@@ -30,16 +29,16 @@ class UserController extends Controller
         if (!$user) {
             throw new NotFoundHttpException("ユーザが見つかりませんでした。");
         }
-        
+
         $profile = Profile::findOne($id);
-        
+
         if (!$profile) {
             throw new NotFoundHttpException("ユーザのプロファイルがありません。");
         }
-        
+
         $user->scenario = 'update';
         $profile->scenario = 'update';
-        
+
         if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
             $isValid = $user->validate();
             $isValid = $profile->validate() && $isValid;
@@ -49,7 +48,7 @@ class UserController extends Controller
                 return $this->redirect(['user/view', 'id' => $id]);
             }
         }
-        
+
         return $this->render('update', [
             'user' => $user,
             'profile' => $profile,
@@ -76,7 +75,7 @@ $form = ActiveForm::begin([
     <?= $form->field($user, 'username') ?>
 
     ...other input fields...
-    
+
     <?= $form->field($profile, 'website') ?>
 
     <?= Html::submitButton('更新', ['class' => 'btn btn-primary']) ?>

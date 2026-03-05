@@ -1,5 +1,4 @@
-Events
-======
+# Events
 
 Events allow you to inject custom code into existing code at certain execution points. You can attach custom
 code to an event so that when the event is triggered, the code gets executed automatically. For example,
@@ -9,9 +8,7 @@ track of the messages that are successfully sent, you could then simply attach t
 Yii introduces a base class called [[yii\base\Component]] to support events. If a class needs to trigger
 events, it should extend from [[yii\base\Component]], or from a child class.
 
-
-Event Handlers <span id="event-handlers"></span>
---------------
+## Event Handlers <span id="event-handlers"></span>
 
 An event handler is a [PHP callback](https://www.php.net/manual/en/language.types.callable.php) that gets executed
 when the event it is attached to is triggered. You can use any of the following callbacks:
@@ -35,9 +32,7 @@ Through the `$event` parameter, an event handler may get the following informati
 - [[yii\base\Event::sender|event sender]]: the object whose `trigger()` method was called;
 - [[yii\base\Event::data|custom data]]: the data that is provided when attaching the event handler (to be explained next).
 
-
-Attaching Event Handlers <span id="attaching-event-handlers"></span>
-------------------------
+## Attaching Event Handlers <span id="attaching-event-handlers"></span>
 
 You can attach a handler to an event by calling the [[yii\base\Component::on()]] method. For example:
 
@@ -62,7 +57,6 @@ $foo->on(Foo::EVENT_HELLO, function ($event) {
 You may also attach event handlers through [configurations](concept-configurations.md). For more details, please
 refer to the [Configurations](concept-configurations.md#configuration-format) section.
 
-
 When attaching an event handler, you may provide additional data as the third parameter to [[yii\base\Component::on()]].
 The data will be made available to the handler when the event is triggered and the handler is called. For example:
 
@@ -76,8 +70,7 @@ function function_name($event) {
 }
 ```
 
-Event Handler Order
--------------------
+## Event Handler Order
 
 You may attach one or more handlers to a single event. When an event is triggered, the attached handlers
 will be called in the order that they were attached to the event. If a handler needs to stop the invocation of the
@@ -99,10 +92,9 @@ $foo->on(Foo::EVENT_HELLO, function ($event) {
 }, $data, false);
 ```
 
-Triggering Events <span id="triggering-events"></span>
------------------
+## Triggering Events <span id="triggering-events"></span>
 
-Events are triggered by calling the [[yii\base\Component::trigger()]] method. The method requires an *event name*,
+Events are triggered by calling the [[yii\base\Component::trigger()]] method. The method requires an _event name_,
 and optionally an event object that describes the parameters to be passed to the event handlers. For example:
 
 ```php
@@ -125,8 +117,8 @@ class Foo extends Component
 With the above code, any calls to `bar()` will trigger an event named `hello`.
 
 > Tip: It is recommended to use class constants to represent event names. In the above example, the constant
-  `EVENT_HELLO` represents the `hello` event. This approach has three benefits. First, it prevents typos. Second, it can make events recognizable for IDE
-  auto-completion support. Third, you can tell what events are supported in a class by simply checking its constant declarations.
+> `EVENT_HELLO` represents the `hello` event. This approach has three benefits. First, it prevents typos. Second, it can make events recognizable for IDE
+> auto-completion support. Third, you can tell what events are supported in a class by simply checking its constant declarations.
 
 Sometimes when triggering an event you may want to pass along additional information to the event handlers.
 For example, a mailer may want to pass the message information to the handlers of the `messageSent` event so that the handlers
@@ -163,9 +155,7 @@ class Mailer extends Component
 When the [[yii\base\Component::trigger()]] method is called, it will call all handlers attached to
 the named event.
 
-
-Detaching Event Handlers <span id="detaching-event-handlers"></span>
-------------------------
+## Detaching Event Handlers <span id="detaching-event-handlers"></span>
 
 To detach a handler from an event, call the [[yii\base\Component::off()]] method. For example:
 
@@ -187,23 +177,21 @@ Note that in general you should not try to detach an anonymous function unless y
 somewhere when it is attached to the event. In the above example, it is assumed that the anonymous
 function is stored as a variable `$anonymousFunction`.
 
-To detach *all* handlers from an event, simply call [[yii\base\Component::off()]] without the second parameter:
+To detach _all_ handlers from an event, simply call [[yii\base\Component::off()]] without the second parameter:
 
 ```php
 $foo->off(Foo::EVENT_HELLO);
 ```
 
+## Class-Level Event Handlers <span id="class-level-event-handlers"></span>
 
-Class-Level Event Handlers <span id="class-level-event-handlers"></span>
---------------------------
-
-The above subsections described how to attach a handler to an event on an *instance level*.
-Sometimes, you may want to respond to an event triggered by *every* instance of a class instead of only by
+The above subsections described how to attach a handler to an event on an _instance level_.
+Sometimes, you may want to respond to an event triggered by _every_ instance of a class instead of only by
 a specific instance. Instead of attaching an event handler to every instance, you may attach the handler
-on the *class level* by calling the static method [[yii\base\Event::on()]].
+on the _class level_ by calling the static method [[yii\base\Event::on()]].
 
 For example, an [Active Record](db-active-record.md) object will trigger an [[yii\db\BaseActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]]
-event whenever it inserts a new record into the database. In order to track insertions done by *every*
+event whenever it inserts a new record into the database. In order to track insertions done by _every_
 [Active Record](db-active-record.md) object, you may use the following code:
 
 ```php
@@ -222,7 +210,7 @@ that triggered the event through `$event->sender`.
 
 When an object triggers an event, it will first call instance-level handlers, followed by the class-level handlers.
 
-You may trigger a *class-level* event by calling the static method [[yii\base\Event::trigger()]]. A class-level
+You may trigger a _class-level_ event by calling the static method [[yii\base\Event::trigger()]]. A class-level
 event is not associated with a particular object. As a result, it will cause the invocation of class-level event
 handlers only. For example:
 
@@ -239,7 +227,7 @@ Event::trigger(Foo::class, Foo::EVENT_HELLO);
 Note that, in this case, `$event->sender` is `null` instead of an object instance.
 
 > Note: Because a class-level handler will respond to an event triggered by any instance of that class, or any child
-  classes, you should use it carefully, especially if the class is a low-level base class, such as [[yii\base\BaseObject]].
+> classes, you should use it carefully, especially if the class is a low-level base class, such as [[yii\base\BaseObject]].
 
 To detach a class-level event handler, call [[yii\base\Event::off()]]. For example:
 
@@ -251,9 +239,7 @@ Event::off(Foo::class, Foo::EVENT_HELLO, $handler);
 Event::off(Foo::class, Foo::EVENT_HELLO);
 ```
 
-
-Events using interfaces <span id="interface-level-event-handlers"></span>
--------------
+## Events using interfaces <span id="interface-level-event-handlers"></span>
 
 There is even more abstract way to deal with events. You can create a separated interface for the special event and
 implement it in classes, where you need it.
@@ -327,11 +313,9 @@ Event::off('app\interfaces\DanceEventInterface', DanceEventInterface::EVENT_DANC
 Event::off('app\interfaces\DanceEventInterface', DanceEventInterface::EVENT_DANCE);
 ```
 
+## Global Events <span id="global-events"></span>
 
-Global Events <span id="global-events"></span>
--------------
-
-Yii supports a so-called *global event*, which is actually a trick based on the event mechanism described above.
+Yii supports a so-called _global event_, which is actually a trick based on the event mechanism described above.
 The global event requires a globally accessible Singleton, such as the [application](structure-applications.md) instance itself.
 
 To create the global event, an event sender calls the Singleton's `trigger()` method
@@ -356,9 +340,7 @@ done through the Singleton (e.g. the application instance).
 However, because the namespace of the global events is shared by all parties, you should name the global events
 wisely, such as introducing some sort of namespace (e.g. "frontend.mail.sent", "backend.mail.sent").
 
-
-Wildcard Events <span id="wildcard-events"></span>
----------------
+## Wildcard Events <span id="wildcard-events"></span>
 
 Since 2.0.14 you can setup event handler for multiple events matching wildcard pattern.
 For example:
@@ -399,7 +381,7 @@ Event::on('*', '*', function ($event) {
 ```
 
 > Note: usage wildcards for event handlers setup may reduce the application performance.
-  It is better to be avoided if possible.
+> It is better to be avoided if possible.
 
 In order to detach event handler specified by wildcard pattern, you should repeat same pattern at
 [[yii\base\Component::off()]] or [[yii\base\Event::off()]] invocation. Keep in mind that passing wildcard

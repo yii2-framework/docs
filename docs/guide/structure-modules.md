@@ -1,12 +1,10 @@
-Modules
-=======
+# Modules
 
 Modules are self-contained software units that consist of [models](structure-models.md), [views](structure-views.md),
 [controllers](structure-controllers.md), and other supporting components. End users can access the controllers
 of a module when it is installed in [application](structure-applications.md). For these reasons, modules are
 often viewed as mini-applications. Modules differ from [applications](structure-applications.md) in that
 modules cannot be deployed alone and must reside within applications.
-
 
 ## Creating Modules <span id="creating-modules"></span>
 
@@ -25,7 +23,6 @@ forum/
         default/                 containing view files for DefaultController
             index.php            the index view file
 ```
-
 
 ### Module Classes <span id="module-classes"></span>
 
@@ -79,7 +76,6 @@ return [
 ];
 ```
 
-
 ### Controllers in Modules <span id="controllers-in-modules"></span>
 
 When creating controllers in a module, a convention is to put the controller classes under the `controllers`
@@ -103,7 +99,6 @@ You may customize the namespace of controller classes by configuring the [[yii\b
 property. In case some of the controllers are outside of this namespace, you may make them accessible
 by configuring the [[yii\base\Module::controllerMap]] property, similar to [what you do in an application](structure-applications.md#controller-map).
 
-
 ### Views in Modules <span id="views-in-modules"></span>
 
 Views in a module should be put in the `views` directory within the module's [[yii\base\Module::basePath|base path]].
@@ -116,7 +111,6 @@ A module can specify a [layout](structure-views.md#layouts) that is applied to t
 controllers. The layout should be put in the `views/layouts` directory by default, and you should configure
 the [[yii\base\Module::layout]] property to point to the layout name. If you do not configure the `layout` property,
 the application's layout will be used instead.
-
 
 ### Console commands in Modules <span id="console-commands-in-modules"></span>
 
@@ -164,9 +158,8 @@ the [[yii\base\Application::modules|modules]] property of the application. The f
 > you also need to include it in the [console application configuration](tutorial-console.md#configuration)
 
 The [[yii\base\Application::modules|modules]] property takes an array of module configurations. Each array key
-represents a *module ID* which uniquely identifies the module among all modules in the application, and the corresponding
+represents a _module ID_ which uniquely identifies the module among all modules in the application, and the corresponding
 array value is a [configuration](concept-configurations.md) for creating the module.
-
 
 ### Routes <span id="routes"></span>
 
@@ -179,14 +172,13 @@ only contains the module ID, then the [[yii\base\Module::defaultRoute]] property
 will determine which controller/action should be used. This means a route `forum` would represent the `default`
 controller in the `forum` module.
 
-The URL manager rules for the modules should be added before [[yii\web\UrlManager::parseRequest()]] is fired. That means doing it 
+The URL manager rules for the modules should be added before [[yii\web\UrlManager::parseRequest()]] is fired. That means doing it
 in module's `init()` won't work because module will be initialized when routes were already processed. Thus, the rules
 should be added at [bootstrap stage](structure-extensions.md#bootstrapping-classes). It is a also a good practice
-to wrap module's URL rules with [[\yii\web\GroupUrlRule]].  
+to wrap module's URL rules with [[\yii\web\GroupUrlRule]].
 
-In case a module is used to [version API](rest-versioning.md), its URL rules should be added directly in `urlManager` 
+In case a module is used to [version API](rest-versioning.md), its URL rules should be added directly in `urlManager`
 section of the application config.
-
 
 ### Accessing Modules <span id="accessing-modules"></span>
 
@@ -203,9 +195,9 @@ return `null`. Note that you do not want to manually create a new instance of th
 different from the one created by Yii in response to a request.
 
 > Info: When developing a module, you should not assume the module will use a fixed ID. This is because a module
-  can be associated with an arbitrary ID when used in an application or within another module. In order to get
-  the module ID, you should use the above approach to get the module instance first, and then get the ID via
-  `$module->id`.
+> can be associated with an arbitrary ID when used in an application or within another module. In order to get
+> the module ID, you should use the above approach to get the module instance first, and then get the ID via
+> `$module->id`.
 
 You may also access the instance of a module using the following approaches:
 
@@ -226,7 +218,6 @@ Once you have the module instance, you can access parameters and components regi
 $maxPostCount = $module->params['maxPostCount'];
 ```
 
-
 ### Bootstrapping Modules <span id="bootstrapping-modules"></span>
 
 Some modules may need to be run for every request. The [[yii\debug\Module|debug]] module is such an example.
@@ -246,11 +237,10 @@ For example, the following application configuration makes sure the `debug` modu
 ]
 ```
 
-
 ## Nested Modules <span id="nested-modules"></span>
 
 Modules can be nested in unlimited levels. That is, a module can contain another module which can contain yet
-another module. We call the former *parent module* while the latter *child module*. Child modules must be declared
+another module. We call the former _parent module_ while the latter _child module_. Child modules must be declared
 in the [[yii\base\Module::modules|modules]] property of their parent modules. For example,
 
 ```php
@@ -277,12 +267,12 @@ For example, the route `forum/admin/dashboard/index` represents the `index` acti
 in the `admin` module which is a child module of the `forum` module.
 
 > Info: The [[yii\base\Module::getModule()|getModule()]] method only returns the child module directly belonging
-to its parent. The [[yii\base\Application::loadedModules]] property keeps a list of loaded modules, including both
-direct children and nested ones, indexed by their class names.
+> to its parent. The [[yii\base\Application::loadedModules]] property keeps a list of loaded modules, including both
+> direct children and nested ones, indexed by their class names.
 
 ## Accessing components from within modules
 
-Since version 2.0.13 modules support [tree traversal](concept-service-locator.md#tree-traversal). This allows module 
+Since version 2.0.13 modules support [tree traversal](concept-service-locator.md#tree-traversal). This allows module
 developers to reference (application) components via the service locator that is their module.
 This means that it is preferable to use `$module->get('db')` over `Yii::$app->get('db')`.
 The user of a module is able to specify a specific component to be used for the module in case a different component

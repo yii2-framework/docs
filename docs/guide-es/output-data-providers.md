@@ -1,21 +1,20 @@
-Proveedores de datos
-====================
+# Proveedores de datos
 
 En las secciones sobre [paginación](output-pagination.md) y [ordenación](output-sorting.md) se
 describe como permitir a los usuarios finales elegir que se muestre una página de datos en
-particular, y ordenar los datos por algunas columnas.  Como la tarea de paginar y ordenar datos
-es muy común, Yii proporciona un conjunto de clases *proveedoras de datos* para encapsularla.
+particular, y ordenar los datos por algunas columnas. Como la tarea de paginar y ordenar datos
+es muy común, Yii proporciona un conjunto de clases _proveedoras de datos_ para encapsularla.
 
 Un proveedor de datos es una clase que implementa la interfaz [[yii\data\DataProviderInterface]].
-Básicamente se encarga de obtener datos paginados y ordenados.  Normalmente se usa junto con
+Básicamente se encarga de obtener datos paginados y ordenados. Normalmente se usa junto con
 [_widgets_ de datos](output-data-widgets.md) para que los usuarios finales puedan paginar y
 ordenar datos de forma interactiva.
 
 Yii incluye las siguientes clases proveedoras de datos:
 
-* [[yii\data\ActiveDataProvider]]: usa [[yii\db\Query]] o [[yii\db\ActiveQuery]] para consultar datos de bases de datos y devolverlos como _arrays_ o instancias [Active Record](db-active-record.md).
-* [[yii\data\SqlDataProvider]]: ejecuta una sentencia SQL y devuelve los datos de la base de datos como _arrays_.
-* [[yii\data\ArrayDataProvider]]: toma un _array_ grande y devuelve una rodaja de él basándose en las especificaciones de paginación y ordenación.
+- [[yii\data\ActiveDataProvider]]: usa [[yii\db\Query]] o [[yii\db\ActiveQuery]] para consultar datos de bases de datos y devolverlos como _arrays_ o instancias [Active Record](db-active-record.md).
+- [[yii\data\SqlDataProvider]]: ejecuta una sentencia SQL y devuelve los datos de la base de datos como _arrays_.
+- [[yii\data\ArrayDataProvider]]: toma un _array_ grande y devuelve una rodaja de él basándose en las especificaciones de paginación y ordenación.
 
 El uso de todos estos proveedores de datos comparte el siguiente patrón común:
 
@@ -39,12 +38,12 @@ $totalCount = $provider->getTotalCount();
 Se puede especificar los comportamientos de paginación y ordenación de un proveedor de datos
 configurando sus propiedades [[yii\data\BaseDataProvider::pagination|pagination]] y
 [[yii\data\BaseDataProvider::sort|sort]], que corresponden a las configuraciones para
-[[yii\data\Pagination]] y [[yii\data\Sort]] respectivamente.  También se pueden configurar a
+[[yii\data\Pagination]] y [[yii\data\Sort]] respectivamente. También se pueden configurar a
 `false` para inhabilitar las funciones de paginación y/u ordenación.
 
 Los [_widgets_ de datos](output-data-widgets.md), como [[yii\grid\GridView]], tienen una
 propiedad llamada `dataProvider` que puede tomar una instancia de un proveedor de datos y
-mostrar los datos que proporciona.  Por ejemplo,
+mostrar los datos que proporciona. Por ejemplo,
 
 ```php
 echo yii\grid\GridView::widget([
@@ -53,18 +52,16 @@ echo yii\grid\GridView::widget([
 ```
 
 Estos proveedores de datos varían principalmente en la manera en que se especifica la fuente de
-datos.  En las siguientes secciones se explica el uso detallado de cada uno de estos proveedores
+datos. En las siguientes secciones se explica el uso detallado de cada uno de estos proveedores
 de datos.
-
 
 ## Proveedor de datos activo <span id="active-data-provider"></span>
 
 Para usar [[yii\data\ActiveDataProvider]], hay que configurar su propiedad
 [[yii\data\ActiveDataProvider::query|query]].
-Puede tomar un objeto [[yii\db\Query] o [[yii\db\ActiveQuery]].  En el primer caso, los datos
-devueltos serán _arrays_.  En el segundo, los datos devueltos pueden ser _arrays_ o instancias de
-[Active Record](db-active-record.md).  Por ejemplo:
-
+Puede tomar un objeto [[yii\db\Query] o [[yii\db\ActiveQuery]]. En el primer caso, los datos
+devueltos serán _arrays_. En el segundo, los datos devueltos pueden ser _arrays_ o instancias de
+[Active Record](db-active-record.md). Por ejemplo:
 
 ```php
 use yii\data\ActiveDataProvider;
@@ -98,14 +95,13 @@ $query = (new Query())->from('post')->where(['state' => 1]);
 ```
 
 > Note: Si una consulta ya tiene la cláusula `orderBy`, las nuevas instrucciones de ordenación
-  dadas por los usuarios finales (mediante la configuración de `sort`) se añadirán a la cláusula
-  `orderBy` previa.  Las cláusulas `limit` y `offset` que pueda haber se sobrescribirán por la
-  petición de paginación de los usuarios finales (mediante la configuración de `pagination`).
+> dadas por los usuarios finales (mediante la configuración de `sort`) se añadirán a la cláusula
+> `orderBy` previa. Las cláusulas `limit` y `offset` que pueda haber se sobrescribirán por la
+> petición de paginación de los usuarios finales (mediante la configuración de `pagination`).
 
 Por omisión, [[yii\data\ActiveDataProvider]] usa el componente `db` de la aplicación como
-conexión con la base de datos.  Se puede indicar una conexión con base de datos diferente
+conexión con la base de datos. Se puede indicar una conexión con base de datos diferente
 configurando la propiedad [[yii\data\ActiveDataProvider::db]].
-
 
 ## Proveedor de datos SQL <span id="sql-data-provider"></span>
 
@@ -148,18 +144,17 @@ $models = $provider->getModels();
 ```
 
 > Info: La propiedad [[yii\data\SqlDataProvider::totalCount|totalCount]] se requiere sólo si se
-  necesita paginar los datos.  Esto es porque el proveedor modificará la sentencia SQL
-  especificada vía [[yii\data\SqlDataProvider::sql|sql]] para que devuelva sólo la pagina de
-  datos solicitada.  El proveedor sigue necesitando saber el número total de elementos de datos
-  para calcular correctamente el número de páginas.
-
+> necesita paginar los datos. Esto es porque el proveedor modificará la sentencia SQL
+> especificada vía [[yii\data\SqlDataProvider::sql|sql]] para que devuelva sólo la pagina de
+> datos solicitada. El proveedor sigue necesitando saber el número total de elementos de datos
+> para calcular correctamente el número de páginas.
 
 ## Proveedor de datos de _arrays_ <span id="array-data-provider"></span>
 
 Se recomienda usar [[yii\data\ArrayDataProvider]] cuando se trabaja con un _array_ grande.
 El proveedor permite devolver una página de los datos del _array_ ordenados por una o varias
-columnas.  Para usar [[yii\data\ArrayDataProvider]], hay que especificar la propiedad
-[[yii\data\ArrayDataProvider::allModels|allModels]] como el _array_ grande.  Los elementos
+columnas. Para usar [[yii\data\ArrayDataProvider]], hay que especificar la propiedad
+[[yii\data\ArrayDataProvider::allModels|allModels]] como el _array_ grande. Los elementos
 del _array_ grande pueden ser _arrays_ asociativos (por ejemplo resultados de consultas de
 [DAO](db-dao.md) u objetos (por ejemplo instancias de [Active Record](db-active-record.md).
 Por ejemplo:
@@ -189,9 +184,8 @@ $rows = $provider->getModels();
 ```
 
 > Note: En comparación con [Active Data Provider](#active-data-provider) y
-  [SQL Data Provider](#sql-data-provider), Array Data Provider es menos eficiente porque
-  requiere cargar *todos* los datos en memoria.
-
+> [SQL Data Provider](#sql-data-provider), Array Data Provider es menos eficiente porque
+> requiere cargar _todos_ los datos en memoria.
 
 ## Trabajar con las claves de los datos <span id="working-with-keys"></span>
 
@@ -221,9 +215,9 @@ $ids = $provider->getKeys();
 
 En el ejemplo superior, como se le proporciona a [[yii\data\ActiveDataProvider]] un objeto
 [[yii\db\ActiveQuery]], es lo suficientemente inteligente como para devolver los valores de
-las claves primarias como las claves.  También puede indicar explícitamente cómo se deben
+las claves primarias como las claves. También puede indicar explícitamente cómo se deben
 calcular los valores de la clave configurando [[yii\data\ActiveDataProvider::key]] con un
-nombre de columna o un invocable que calcule los valores de la clave.  Por ejemplo:
+nombre de columna o un invocable que calcule los valores de la clave. Por ejemplo:
 
 ```php
 // Utiliza la columna «slug» como valores de la clave
@@ -241,13 +235,12 @@ $provider = new ActiveDataProvider([
 ]);
 ```
 
-
 ## Creación de un proveedor de datos personalizado <span id="custom-data-provider"></span>
 
 Para crear su propio proveedor de datos personalizado, debe implementar
 [[yii\data\DataProviderInterface]].
 Una manera más fácil es extender [[yii\data\BaseDataProvider]], que le permite centrarse
-en la lógica central del proveedor de datos.  En particular, esencialmente necesita
+en la lógica central del proveedor de datos. En particular, esencialmente necesita
 implementar los siguientes métodos:
 
 - [[yii\data\BaseDataProvider::prepareModels()|prepareModels()]]: prepara los modelos
@@ -366,7 +359,7 @@ Si bien puede construir condiciones para un proveedor de datos activo manualment
 y como se describe en las secciones [Filtering Data](output-data-widgets.md#filtering-data)
 y [Separate Filter Form](output-data-widgets.md#separate-filter-form) de la guía de
 _widgets_ de datos, Yii tiene filtros de datos que son muy útiles si necesita
-condiciones de filtro flexibles.  Los filtros de datos se pueden usar así:
+condiciones de filtro flexibles. Los filtros de datos se pueden usar así:
 
 ```php
 $filter = new ActiveDataFilter([
@@ -416,6 +409,6 @@ class PostSearch extends Model
 }
 ```
 
-Los filtros de datos son bastante flexibles.  Puede personalizar cómo se construyen
+Los filtros de datos son bastante flexibles. Puede personalizar cómo se construyen
 las condiciones y qué operadores se permiten.
 Para más detalles consulte la documentación de la API en [[\yii\data\DataFilter]].

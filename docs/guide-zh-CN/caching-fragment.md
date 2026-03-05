@@ -1,5 +1,4 @@
-片段缓存
-=======
+# 片段缓存
 
 片段缓存指的是缓存页面内容中的某个片段。例如，一个页面显示了逐年销售额的摘要表格，
 可以把表格缓存下来，以消除每次请求都要重新生成表格的耗时。
@@ -24,12 +23,11 @@ if ($this->beginCache($id)) {
 
 和[数据缓存](caching-data.md)一样，每个片段缓存也需要全局唯一的 `$id` 标记。
 
-
 ## 缓存选项 <span id="caching-options"></span>
 
 如果要为片段缓存指定额外配置项，
-请通过向 [[yii\base\View::beginCache()|beginCache()]] 
-方法第二个参数传递配置数组。在框架内部，该数组将被用来配置一个 [[yii\widget\FragmentCache]] 
+请通过向 [[yii\base\View::beginCache()|beginCache()]]
+方法第二个参数传递配置数组。在框架内部，该数组将被用来配置一个 [[yii\widget\FragmentCache]]
 小部件用以实现片段缓存功能。
 
 ### 过期时间（duration） <span id="duration"></span>
@@ -48,7 +46,6 @@ if ($this->beginCache($id, ['duration' => 3600])) {
 ```
 
 如果该选项未设置，则它将采用默认值 60，这意味着缓存的内容将在 60 秒后过期。
-
 
 ### 依赖 <span id="dependencies"></span>
 
@@ -73,7 +70,6 @@ if ($this->beginCache($id, ['dependency' => $dependency])) {
 }
 ```
 
-
 ### 变化 <span id="variations"></span>
 
 缓存的内容可能需要根据一些参数的更改而变化。
@@ -93,7 +89,6 @@ if ($this->beginCache($id, ['variations' => [Yii::$app->language]])) {
 }
 ```
 
-
 ### 开关 <span id="toggling-caching"></span>
 
 有时你可能只想在特定条件下开启片段缓存。例如，一个显示表单的页面，可能只需要在初次请求时缓存表单（通过 GET 请求）。
@@ -109,7 +104,6 @@ if ($this->beginCache($id, ['enabled' => Yii::$app->request->isGet])) {
     $this->endCache();
 }
 ```
-
 
 ## 缓存嵌套 <span id="nested-caching"></span>
 
@@ -141,6 +135,7 @@ if ($this->beginCache($id1)) {
 此时即使内层片段缓存已经失效，它也将继续提供同样的缓存副本。
 因此，你必须谨慎处理缓存嵌套中的过期时间和依赖，
 否则外层的片段很有可能返回的是不符合你预期的失效数据。
+
 > 译注：外层的失效时间应该短于内层，外层的依赖条件应该低于内层，以确保最小的片段，返回的是最新的数据。
 
 ## 动态内容 <span id="dynamic-content"></span>
@@ -176,4 +171,4 @@ if ($this->beginCache($id1)) {
 无论其外层的片段缓存是否被存储。
 
 > Note: 从版本 2.0.14 开始，动态内容 API 通过 [[yii\base\DynamicContentAwareInterface]] 接口及其 [[yii\base\DynamicContentAwareTrait]] 特质开放。
-   举个例子，你可以参考 [[yii\widgets\FragmentCache]] 类。
+>  举个例子，你可以参考 [[yii\widgets\FragmentCache]] 类。

@@ -1,11 +1,10 @@
-Componentes
-===========
+# Componentes
 
 Componente é a parte principal na construção de aplicações Yii. Componentes são instâncias de [[yii\base\Component]], ou uma classe estendida. As três características principais que os componentes fornecem a outras classes são:
 
-* [Propriedades](concept-properties.md)
-* [Eventos](concept-events.md)
-* [Behaviors (Comportamentos)](concept-behaviors.md)
+- [Propriedades](concept-properties.md)
+- [Eventos](concept-events.md)
+- [Behaviors (Comportamentos)](concept-behaviors.md)
 
 Separadamente e combinadas, essas características fazem com que as classes no Yii sejam muito mais customizáveis e fáceis de usar. Por exemplo, o [[yii\jui\DatePicker|widget date picker]], um componente de interface do usuário, pode ser usado na [view (visão)](structure-view.md) para gerar um `date picker` interativo:
 
@@ -29,8 +28,8 @@ Se o seu componente não precisa dessas duas características, você pode consid
 Ao estender a classe de [[yii\base\Component]] ou [[yii\base\BaseObject]], é recomendado que você siga as seguintes convenções:
 
 - Se você sobrescrever o construtor, declare um parâmetro `$config` como último parâmetro do construtor, e em seguida passe este parâmetro para o construtor pai.
-- Sempre chame o construtor pai *no final* do seu construtor reescrito.
-- Se você sobrescrever o método [[yii\base\BaseObject::init()]], certifique-se de chamar a implementação pai do `init` *no início* do seu método `init`.
+- Sempre chame o construtor pai _no final_ do seu construtor reescrito.
+- Se você sobrescrever o método [[yii\base\BaseObject::init()]], certifique-se de chamar a implementação pai do `init` _no início_ do seu método `init`.
 
 Por Exemplo:
 
@@ -74,9 +73,8 @@ $component = \Yii::createObject([
 ], [1, 2]);
 ```
 
-> Informação: Embora a forma de chamar [[Yii::createObject()]] pareça ser mais complicada, ela é mais poderosa porque ela é aplicada no topo de um [container 
-de injeção de dependência](concept-di-container.md).
-  
+> Informação: Embora a forma de chamar [[Yii::createObject()]] pareça ser mais complicada, ela é mais poderosa porque ela é aplicada no topo de um [container
+> de injeção de dependência](concept-di-container.md).
 
 A classe [[yii\base\BaseObject]] impõe o seguinte ciclo de vida do objeto:
 
@@ -85,4 +83,4 @@ A classe [[yii\base\BaseObject]] impõe o seguinte ciclo de vida do objeto:
 3. Pós-inicialização dentro do [[yii\base\BaseObject::init()|init()]]. Você pode sobrescrever este método para executar checagens e normalização das propriedades.
 4. Chamadas de método de objeto.
 
-Os três primeiros passos acontecem dentro do construtor do objeto. Isto significa que uma vez que você instanciar a classe (isto é, um objeto), esse objeto será inicializado adequadamente. 
+Os três primeiros passos acontecem dentro do construtor do objeto. Isto significa que uma vez que você instanciar a classe (isto é, um objeto), esse objeto será inicializado adequadamente.

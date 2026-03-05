@@ -15,19 +15,19 @@ cd micro-app
 
 > Note: 続けるためには Composer についての知識が多少必要です。Composer の使い方をまだ知らない場合は、時間を取って、[Composer Guide](https://getcomposer.org/doc/00-intro.md) を読んでください。
 
-`micro-app` ディレクトリの下に  `composer.json` ファイルを作成し、あなたの好みのエディタを使って、下記を追加します。
+`micro-app` ディレクトリの下に `composer.json` ファイルを作成し、あなたの好みのエディタを使って、下記を追加します。
 
 ```json
 {
-    "require": {
-        "yiisoft/yii2": "~2.0.0"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ]
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
 }
 ```
 
@@ -39,7 +39,7 @@ cd micro-app
 
 `web` ディレクトリを作成して、下記の内容を持つ `index.php` をそこに置きます。
 
-```php 
+```php
 <?php
 
 // 実運用サーバに配備するときは次の2行をコメント・アウトする
@@ -123,7 +123,6 @@ micro-app/
 > これは、あなたがその名前に縛られていないことを示すためです(万一あなたが縛られていると思っている場合を考えて)。
 > そして、[[yii\base\Application::$controllerNamespace|コントローラの名前空間]] を修正し、正しいエイリアスを設定しています。
 
-
 ## REST API を作成する
 
 私たちの "マイクロ・フレームワーク" の使い方を示すために、記事のための簡単な REST API を作成しましょう。
@@ -160,7 +159,7 @@ namespace micro\models;
 use yii\db\ActiveRecord;
 
 class Post extends ActiveRecord
-{ 
+{
     public static function tableName()
     {
         return '{{post}}';

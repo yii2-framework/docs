@@ -1,5 +1,4 @@
-Validation des entrées utilisateur
-==================================
+# Validation des entrées utilisateur
 
 En général, vous ne devriez jamais faire confiance aux données entrées par l'utilisateur et devriez toujours les valider avant de les utiliser.,
 
@@ -21,7 +20,6 @@ if ($model->validate()) {
 }
 ```
 
-
 ## Déclaration de règles <span id="declaring-rules"></span>
 
 Pour que `validate()` fonctionne réellement, vous devez déclarer des règles de validation pour les attributs que vous envisagez de valider. Cela peut être réalisé en redéfinissant la méthode [[yii\base\Model::rules()]]. L'exemple suivant montre comment les règles de validation pour le modèle `ContactForm` sont déclarées :
@@ -40,7 +38,6 @@ public function rules()
 ```
 
 La méthode [[yii\base\Model::rules()|rules()]] doit retourner un tableau de règles, dont chacune est un tableau dans le format suivant :
-
 
 ```php
 [
@@ -66,16 +63,16 @@ La méthode [[yii\base\Model::rules()|rules()]] doit retourner un tableau de rè
 
 Pour chacune des règles vous devez spécifier au moins à quels attributs la règle s'applique et quel est le type de cette règle. Vous pouvez spécifier le type de la règle sous l'une des formes suivantes :
 
-* l'alias d'un validateur du noyau, comme `required`, `in`, `date`, etc. Reportez-vous à la sous-section [Validateurs du noyau](tutorial-core-validators.md) pour une liste complète des validateurs du noyau.
-* le nom d'une méthode de validation dans la classe du modèle, ou une fonction anonyme. Reportez-vous à la sous-section [Inline Validators](#inline-validators) pour plus de détails.
-* un nom de classe de validateur pleinement qualifié. Reportez-vous à la sous-section [Validateurs autonomes](#standalone-validators) pour plus de détails.
+- l'alias d'un validateur du noyau, comme `required`, `in`, `date`, etc. Reportez-vous à la sous-section [Validateurs du noyau](tutorial-core-validators.md) pour une liste complète des validateurs du noyau.
+- le nom d'une méthode de validation dans la classe du modèle, ou une fonction anonyme. Reportez-vous à la sous-section [Inline Validators](#inline-validators) pour plus de détails.
+- un nom de classe de validateur pleinement qualifié. Reportez-vous à la sous-section [Validateurs autonomes](#standalone-validators) pour plus de détails.
 
 Une règle peut être utilisée pour valider un ou plusieurs attributs, et un attribut peut être validé par une ou plusieurs règles. Une règle peut s'appliquer dans certains [scenarios](structure-models.md#scenarios) seulement en spécifiant l'option `on`. Si vous ne spécifiez pas l'option `on`, la règle s'applique à tous les scénarios.
 
 Quand la méthode `validate()` est appelée, elle suit les étapes suivantes pour effectuer l'examen de validation :
 
-1. Détermine quels attributs doivent être validés en obtenant la liste des attributs de [[yii\base\Model::scenarios()]] en utilisant le [[yii\base\Model::scenario|scenario]] courant. Ces attributs sont appelés *attributs actifs*.
-2. Détermine quelles règles de validation doivent être appliquées en obtenant la liste des règles de [[yii\base\Model::rules()]] en utilisant le [[yii\base\Model::scenario|scenario]] courant. Ces règles sont appelées *règles actives*.
+1. Détermine quels attributs doivent être validés en obtenant la liste des attributs de [[yii\base\Model::scenarios()]] en utilisant le [[yii\base\Model::scenario|scenario]] courant. Ces attributs sont appelés _attributs actifs_.
+2. Détermine quelles règles de validation doivent être appliquées en obtenant la liste des règles de [[yii\base\Model::rules()]] en utilisant le [[yii\base\Model::scenario|scenario]] courant. Ces règles sont appelées _règles actives_.
 3. Utilise chacune des règles actives pour valider chacun des attributs qui sont associés à cette règle. Les règles sont évaluées dans l'ordre dans lequel elles sont listées.
 
 Selon les étapes de validation décrites ci-dessus, un attribut est validé si, et seulement si, il est un attribut actif déclaré dans `scenarios()` et est associé à une ou plusieurs règles actives déclarées dans `rules()`.
@@ -101,7 +98,7 @@ Selon les étapes de validation décrites ci-dessus, un attribut est validé si,
 >     unset($rules['password']);
 >     return $rules;
 > }
-
+> ```
 
 ### Personnalisation des messages d'erreur <span id="customizing-error-messages"></span>
 
@@ -120,14 +117,13 @@ public function rules()
 
 Quelques validateurs peuvent prendre en charge des messages d'erreur additionnels pour décrire précisément les différentes causes de non validation. Par exemple, le validateur [[yii\validators\NumberValidator|number]] prend en charge[[yii\validators\NumberValidator::tooBig|tooBig (trop grand)]] et [[yii\validators\NumberValidator::tooSmall|tooSmall (trop petit)]] pour décrire la cause de non validation lorsque la valeur à valider est trop grande ou trop petite, respectivement. Vous pouvez configurer ces messages d'erreur comme vous configureriez d'autres propriétés de validateurs dans une règle de validation.
 
-
 ### Événement de validation <span id="validation-events"></span>
 
 Losque la méthode [[yii\base\Model::validate()]] est appelée, elle appelle deux méthodes que vous pouvez redéfinir pour personnaliser le processus de validation :
 
-* [[yii\base\Model::beforeValidate()]]: la mise en œuvre par défaut déclenche un événement [[yii\base\Model::EVENT_BEFORE_VALIDATE]]. Vous pouvez, soit redéfinir cette méthode, soit répondre à cet événement pour accomplir un travail de pré-traitement (p. ex. normaliser les données entrées) avant que l'examen de validation n'ait lieu. La méthode retourne une valeur booléenne indiquant si l'examen de validation doit avoir lieu ou pas.
+- [[yii\base\Model::beforeValidate()]]: la mise en œuvre par défaut déclenche un événement [[yii\base\Model::EVENT_BEFORE_VALIDATE]]. Vous pouvez, soit redéfinir cette méthode, soit répondre à cet événement pour accomplir un travail de pré-traitement (p. ex. normaliser les données entrées) avant que l'examen de validation n'ait lieu. La méthode retourne une valeur booléenne indiquant si l'examen de validation doit avoir lieu ou pas.
 
-* [[yii\base\Model::afterValidate()]]: la mise en œuvre par défaut déclenche un événement [[yii\base\Model::EVENT_AFTER_VALIDATE]]. Vous pouvez, soit redéfinir cette méthode, soit répondre à cet événement pour accomplir un travail de post-traitement après que l'examen de validation a eu lieu.
+- [[yii\base\Model::afterValidate()]]: la mise en œuvre par défaut déclenche un événement [[yii\base\Model::EVENT_AFTER_VALIDATE]]. Vous pouvez, soit redéfinir cette méthode, soit répondre à cet événement pour accomplir un travail de post-traitement après que l'examen de validation a eu lieu.
 
 ### Validation conditionnelle <span id="conditional-validation"></span>
 
@@ -160,7 +156,6 @@ Si vous avez aussi besoin de la prise en charge côté client de la validation c
     }"]
 ```
 
-
 ### Filtrage des données <span id="data-filtering"></span>
 
 Les entrées utilisateur nécessitent souvent d'être filtrées ou pré-traitées. Par exemple, vous désirez peut-être vous débarrasser des espaces devant et derrière l'entrée `username`. Vous pouvez utiliser les règles de validation pour le faire.
@@ -177,7 +172,6 @@ return [
 Vous pouvez également utiliser le validateur plus général [filter](tutorial-core-validators.md#filter) pour accomplir un filtrage plus complexe des données.
 
 Comme vous le voyez, ces règles de validation ne pratiquent pas un examen de validation proprement dit. Plus exactement, elles traitent les valeurs et les sauvegardent dans les attributs en cours de validation.
-
 
 ### Gestion des entrées vides <span id="handling-empty-inputs"></span>
 
@@ -203,10 +197,9 @@ Par défaut, une entrée est considérée vide si sa valeur est une chaîne de c
 
 > Note: la plupart des validateurs ne traitent pas les entrées vides si leur propriété [[yii\validators\Validator::skipOnEmpty]] prend la valeur par défaut `true` (vrai). Ils sont simplement sautés lors de l'examen de validation si leurs attributs associés reçoivent des entrées vides. Parmi les [validateurs de noyau](tutorial-core-validators.md), seuls les validateurs `captcha`, `default`, `filter`, `required`, et `trim` traitent les entrées vides.
 
-
 ## Validation ad hoc <span id="ad-hoc-validation"></span>
 
-Parfois vous avez besoin de faire une *validation ad hoc* pour des valeurs qui ne sont pas liées à un modèle.
+Parfois vous avez besoin de faire une _validation ad hoc_ pour des valeurs qui ne sont pas liées à un modèle.
 
 Si vous n'avez besoin d'effectuer qu'un seul type de validation (p. ex. valider une adresse de courriel), vous pouvez appeler la méthode [[yii\validators\Validator::validate()|validate()]] du validateur désiré, comme ceci :
 
@@ -243,7 +236,7 @@ public function actionSearch($name, $email)
 
 La méthode [[yii\base\DynamicModel::validateData()]] crée une instance de `DynamicModel`, définit les attributs utilisant les données fournies (`name` et `email` dans cet exemple), puis appelle [[yii\base\Model::validate()]] avec les règles données.
 
-En alternative, vous pouvez utiliser la syntaxe plus *classique* suivante pour effectuer la validation ad hoc :
+En alternative, vous pouvez utiliser la syntaxe plus _classique_ suivante pour effectuer la validation ad hoc :
 
 ```php
 public function actionSearch($name, $email)
@@ -263,11 +256,9 @@ public function actionSearch($name, $email)
 
 Après l'examen de validation, vous pouvez vérifier si la validation a réussi ou pas en appelant la méthode [[yii\base\DynamicModel::hasErrors()|hasErrors()]] et obtenir les erreurs de validation de la propriété [[yii\base\DynamicModel::errors|errors]], comme vous le feriez avec un modèle normal. Vous pouvez aussi accéder aux attributs dynamiques définis via l'instance de modèle, p. ex. `$model->name` et `$model->email`.
 
-
 ## Création de validateurs <span id="creating-validators"></span>
 
 En plus de pouvoir utiliser les [validateurs du noyau](tutorial-core-validators.md) inclus dans les versions publiées de Yii, vous pouvez également créer vos propres validateurs. Vous pouvez créer des validateurs en ligne et des validateurs autonomes.
-
 
 ### Validateurs en ligne <span id="inline-validators"></span>
 
@@ -325,11 +316,9 @@ class MyForm extends Model
 > ]
 > ```
 
-
 ### Validateurs autonomes <span id="standalone-validators"></span>
 
 Un validateur autonome est une classe qui étend la classe [[yii\validators\Validator]] ou une de ses classe filles. Vous pouvez mettre en œuvre sa logique de validation en redéfinissant la méthode [[yii\validators\Validator::validateAttribute()]]. Si un attribut ne réussit pas l'exament de validation, appellez [[yii\base\Model::addError()]] pour sauvegarder le message d'erreur dans le modèle, comme vous le feriez avec des [validateurs en ligne](#inline-validators).
-
 
 Par exemple, le validateur en ligne ci-dessus peut être transformé en une nouvelle classe [[components/validators/CountryValidator]].
 
@@ -377,16 +366,15 @@ class EntryForm extends Model
 }
 ```
 
-
 ## Validation côté client <span id="client-side-validation"></span>
 
-La validation côté client basée sur JavaScript est souhaitable lorsque l'utilisateur fournit les entrées via des formulaires HTML, parce que cela permet à l'utilisateur de détecter plus vite les erreurs et lui apporte ainsi un meilleur ressenti. Vous pouvez utiliser ou implémenter un validateur qui prend en charge la validation côté client *en plus* de la validation côté serveur.
+La validation côté client basée sur JavaScript est souhaitable lorsque l'utilisateur fournit les entrées via des formulaires HTML, parce que cela permet à l'utilisateur de détecter plus vite les erreurs et lui apporte ainsi un meilleur ressenti. Vous pouvez utiliser ou implémenter un validateur qui prend en charge la validation côté client _en plus_ de la validation côté serveur.
 
 > Info: bien que la validation côté client soit souhaitable, ce n'est pas une obligation. Son but principal est d'apporter un meilleur ressenti à l'utilisateur. Comme pour les données venant de l'utilisateur, vous ne devriez jamais faire confiance à la validation côté client. Pour cette raison, vous devez toujours effectuer la validation côté serveur en appelant [[yii\base\Model::validate()]], comme nous l'avons décrit dans les sous-sections précédentes.
 
 ### Utilisation de la validation côté client <span id="using-client-side-validation"></span>
 
-Beaucoup de  [validateurs du noyau](tutorial-core-validators.md) prennent en charge la validation côté client directement. Tout ce que vous avez à faire c'est utiliser [[yii\widgets\ActiveForm]] pour construire vos formulaires HTML. Par exemple, `LoginForm` ci-dessous déclare deux règles : l'une utilise le validateur du noyau [required](tutorial-core-validators.md#required) qui est pris en charge à la fois côté serveur et côté client ; l'autre utilise le validateur en ligne `validatePassword` qui ne prend pas en charge la validation côté client.
+Beaucoup de [validateurs du noyau](tutorial-core-validators.md) prennent en charge la validation côté client directement. Tout ce que vous avez à faire c'est utiliser [[yii\widgets\ActiveForm]] pour construire vos formulaires HTML. Par exemple, `LoginForm` ci-dessous déclare deux règles : l'une utilise le validateur du noyau [required](tutorial-core-validators.md#required) qui est pris en charge à la fois côté serveur et côté client ; l'autre utilise le validateur en ligne `validatePassword` qui ne prend pas en charge la validation côté client.
 
 ```php
 namespace app\models;
@@ -434,7 +422,6 @@ Le formulaire HTML construit par le code suivant contient deux champs de saisie 
 En arrière plan, [[yii\widgets\ActiveForm]] lit les règles de validation déclarées dans le modèle et génère le code JavaScript approprié pour la prise en charge de la validation côté client. Lorsqu'un utilisateur modifie la valeur d'un champ de saisie ou soumet le formulaire, le code JavaScript est appelé.
 
 Si vous désirez inhiber la validation côté client complètement, vous pouvez configurer la propriété [[yii\widgets\ActiveForm::enableClientValidation]] à `false` (faux). Vous pouvez aussi inhiber la validation côté client pour des champs de saisie individuels en configurant leur propriété [[yii\widgets\ActiveField::enableClientValidation]] à `false`. Lorsque `enableClientValidation` est configurée à la fois au niveau du champ et au niveau du formulaire, c'est la première configuration qui prévaut.
-
 
 ### Mise en œuvre de la validation côté client <span id="implementing-client-side-validation"></span>
 
@@ -490,7 +477,7 @@ JS;
 > ]
 > ```
 
-> Tip: si vous avez besoin de travailler à la main avec la validation côté client, c.-à-d. ajouter des champs dynamiquement ou effectuer quelque logique d'interface utilisateur, reportez-vous à [Travail avec ActiveForm via JavaScript](https://github.com/samdark/yii2-cookbook/blob/master/book/forms-activeform-js.md) dans le *Cookbook* de Yii 2.0 .
+> Tip: si vous avez besoin de travailler à la main avec la validation côté client, c.-à-d. ajouter des champs dynamiquement ou effectuer quelque logique d'interface utilisateur, reportez-vous à [Travail avec ActiveForm via JavaScript](https://github.com/samdark/yii2-cookbook/blob/master/book/forms-activeform-js.md) dans le _Cookbook_ de Yii 2.0 .
 
 ### Validation différée <span id="deferred-validation"></span>
 
@@ -562,7 +549,6 @@ JS;
 }
 ```
 
-
 ### Validation AJAX <span id="ajax-validation"></span>
 
 Quelques validations ne peuvent avoir lieu que côté serveur, parce que seul le serveur dispose des informations nécessaires. Par exemple, pour valider l'unicité d'un nom d'utilisateur, il est nécessaire de consulter la table des utilisateurs côté serveur. Vous pouvez utiliser la validation basée sur AJAX dans ce cas. Elle provoquera une requête AJAX en arrière plan pour exécuter l'examen de validation tout en laissant à l'utilisateur le même ressenti que lors d'une validation côté client normale.
@@ -607,4 +593,4 @@ Le code ci-dessus vérifie si la requête courante est une requête AJAX. Si oui
 
 > Info: vous pouvez aussi utiliser la [validation différée](#deferred-validation) pour effectuer une validation AJAX. Néanmoins, la fonctionnalité de validation AJAX décrite ici est plus systématique et nécessite moins de codage.
 
-Quand, à la fois `enableClientValidation` et `enableAjaxValidation` sont définies à  `true`, la requête de validation AJAX est déclenchée seulement après une validation réussie côté client.
+Quand, à la fois `enableClientValidation` et `enableAjaxValidation` sont définies à `true`, la requête de validation AJAX est déclenchée seulement après une validation réussie côté client.

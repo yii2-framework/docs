@@ -1,8 +1,7 @@
-Data Formatting
-===============
+# Data Formatting
 
 To display data in a more readable format for users, you may format them using the `formatter` [application component](structure-application-components.md).
-By default the formatter is implemented by [[yii\i18n\Formatter]] which provides a set of methods to format data as 
+By default the formatter is implemented by [[yii\i18n\Formatter]] which provides a set of methods to format data as
 date/time, numbers, currencies, and other commonly used formats. You can use the formatter like the following,
 
 ```php
@@ -10,19 +9,19 @@ $formatter = \Yii::$app->formatter;
 
 // output: January 1, 2014
 echo $formatter->asDate('2014-01-01', 'long');
-  
+
 // output: 12.50%
 echo $formatter->asPercent(0.125, 2);
-  
+
 // output: <a href="mailto:cebe@example.com">cebe@example.com</a>
-echo $formatter->asEmail('cebe@example.com'); 
+echo $formatter->asEmail('cebe@example.com');
 
 // output: Yes
-echo $formatter->asBoolean(true); 
+echo $formatter->asBoolean(true);
 // it also handles display of null values:
 
 // output: (not set)
-echo $formatter->asDate(null); 
+echo $formatter->asDate(null);
 ```
 
 As you can see, all these methods are named as `asXyz()`, where `Xyz` stands for a supported format. Alternatively,
@@ -32,12 +31,12 @@ For example,
 
 ```php
 // output: January 1, 2014
-echo Yii::$app->formatter->format('2014-01-01', 'date'); 
+echo Yii::$app->formatter->format('2014-01-01', 'date');
 
 // you can also use an array to specify parameters for the format method:
 // `2` is the value for the $decimals parameter of the asPercent()-method.
 // output: 12.50%
-echo Yii::$app->formatter->format(0.125, ['percent', 2]); 
+echo Yii::$app->formatter->format(0.125, ['percent', 2]);
 ```
 
 > Note: The formatter component is designed to format values to be displayed for the end user. If you want
@@ -66,7 +65,6 @@ return [
 ```
 
 Please refer to [[yii\i18n\Formatter]] for the properties that may be configured.
-
 
 ## Formatting Date and Time Values <span id="date-and-time"></span>
 
@@ -124,27 +122,26 @@ The following format shortcuts are supported (the examples assume `en_GB` is the
 Since version 2.0.7 it is also possible to format dates in different calendar systems.
 Please refer to the API documentation of the formatters [[yii\i18n\Formatter::$calendar|$calendar]]-property on how to set a different calendar.
 
-
 ### Time Zones <span id="time-zones"></span>
 
 When formatting date and time values, Yii will convert them to the target [[yii\i18n\Formatter::timeZone|time zone]].
 The value being formatted is assumed to be in UTC, unless a time zone is explicitly given or you have configured
 [[yii\i18n\Formatter::defaultTimeZone]].
 
-In the following examples, we assume the target [[yii\i18n\Formatter::timeZone|time zone]] is set as `Europe/Berlin`. 
+In the following examples, we assume the target [[yii\i18n\Formatter::timeZone|time zone]] is set as `Europe/Berlin`.
 
 ```php
 // formatting a UNIX timestamp as a time
 echo Yii::$app->formatter->asTime(1412599260); // 14:41:00
 
-// formatting a datetime string (in UTC) as a time 
+// formatting a datetime string (in UTC) as a time
 echo Yii::$app->formatter->asTime('2014-10-06 12:41:00'); // 14:41:00
 
 // formatting a datetime string (in CEST) as a time
 echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
 ```
 
-If the [[yii\i18n\Formatter::timeZone|time zone]] is not set explicitly on the formatter component, the 
+If the [[yii\i18n\Formatter::timeZone|time zone]] is not set explicitly on the formatter component, the
 [[yii\base\Application::timeZone|time zone configured in the application]] is used, which is the same time zone
 as set in the PHP configuration.
 
@@ -152,7 +149,7 @@ as set in the PHP configuration.
 > likely that you do not have the latest information in the time zone database installed on your system.
 > You may refer to the [ICU manual](https://unicode-org.github.io/icu/userguide/datetime/timezone/#updating-the-time-zone-data)
 > for details on updating the time zone database. Please also read
-> [Setting up your PHP environment for internationalization](tutorial-i18n.md#setup-environment).  
+> [Setting up your PHP environment for internationalization](tutorial-i18n.md#setup-environment).
 
 ## Formatting Numbers <span id="numbers"></span>
 
@@ -170,12 +167,12 @@ The formatter supports the following output formats that are related with number
 - [[yii\i18n\Formatter::asShortSize()|shortSize]]: is the short version of [[yii\i18n\Formatter::asSize()|size]], e.g. `410 KiB`.
 
 The format for number formatting can be adjusted using the [[yii\i18n\Formatter::decimalSeparator|decimalSeparator]] and
-[[yii\i18n\Formatter::thousandSeparator|thousandSeparator]], both of which take default values according to the 
+[[yii\i18n\Formatter::thousandSeparator|thousandSeparator]], both of which take default values according to the
 active [[yii\i18n\Formatter::locale|locale]].
 
 For more advanced configuration, [[yii\i18n\Formatter::numberFormatterOptions]] and [[yii\i18n\Formatter::numberFormatterTextOptions]]
 can be used to configure the [NumberFormatter class](https://www.php.net/manual/en/class.numberformatter.php) used internally
-to implement the formatter. For example, to adjust the maximum and minimum value of fraction digits, you can configure 
+to implement the formatter. For example, to adjust the maximum and minimum value of fraction digits, you can configure
 the [[yii\i18n\Formatter::numberFormatterOptions]] property like the following:
 
 ```php
@@ -184,7 +181,6 @@ the [[yii\i18n\Formatter::numberFormatterOptions]] property like the following:
     NumberFormatter::MAX_FRACTION_DIGITS => 2,
 ]
 ```
-
 
 ## Other Formats <span id="other"></span>
 
@@ -207,13 +203,11 @@ Besides date/time and number formats, Yii also supports other commonly used form
   as `Yes` and `false` as `No`, translated to the current application language. You can adjust this by configuring
   the [[yii\i18n\Formatter::booleanFormat]] property.
 
-
 ## Null Values <span id="null-values"></span>
 
 Null values are specially formatted. Instead of displaying an empty string, the formatter will convert it into a
 preset string which defaults to `(not set)` translated into the current application language. You can configure the
 [[yii\i18n\Formatter::nullDisplay|nullDisplay]] property to customize this string.
-
 
 ## Localizing Data Format <span id="localizing-data-format"></span>
 
@@ -232,7 +226,7 @@ Yii::$app->formatter->locale = 'ru-RU';
 echo Yii::$app->formatter->asDate('2014-01-01'); // output: 1 января 2014 г.
 ```
 
-By default, the currently active [[yii\i18n\Formatter::locale|locale]] is determined by the value of 
+By default, the currently active [[yii\i18n\Formatter::locale|locale]] is determined by the value of
 [[yii\base\Application::language]]. You may override it by setting the [[yii\i18n\Formatter::locale]] property explicitly.
 
 > Note: The Yii formatter relies on the [PHP intl extension](https://www.php.net/manual/en/book.intl.php) to support
@@ -240,7 +234,7 @@ By default, the currently active [[yii\i18n\Formatter::locale|locale]] is determ
 > formatting results, it is recommended that you use the same ICU version for all your environments. For more details,
 > please refer to [Setting up your PHP environment for internationalization](tutorial-i18n.md#setup-environment).
 >
-> If the intl extension is not installed, the data will not be localized. 
+> If the intl extension is not installed, the data will not be localized.
 >
 > Note that for date values that are before year 1901 or after 2038, they will not be localized on 32-bit systems, even
 > if the intl extension is installed. This is because in this case ICU is using 32-bit UNIX timestamps to date values.

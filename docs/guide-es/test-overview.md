@@ -1,20 +1,18 @@
-Tests
-=====
+# Tests
 
-Las pruebas son una parte importante del desarrollo de software.  Seamos conscientes
+Las pruebas son una parte importante del desarrollo de software. Seamos conscientes
 de ello o no, ralizamos pruebas contínuamente.
 Por ejemplo, cuando escribimos una clase en PHP, podemos depurarla paso a paso o
 simplemente usar declaraciones `echo` o `die` para verificar que la implementación
-funciona conforme a nuestro plan inicial.  En el caso de una aplicación web, introducimos
+funciona conforme a nuestro plan inicial. En el caso de una aplicación web, introducimos
 algunos datos de prueba en los formularios para asegurarnos de que la página interactúa
 con nosotros como esperábamos.
 
 El proceso de testeo se puede automatizar para que cada vez que necesitemos verificar
-algo, solamente necesitemos invocar el código que lo hace por nosotros.  El código que
-verifica que el restulado coincide con lo que habíamos planeado se llama *test* y el proceso
-de su creación y posterior ejecución es conocido como *testeo automatizado*, que es el
+algo, solamente necesitemos invocar el código que lo hace por nosotros. El código que
+verifica que el restulado coincide con lo que habíamos planeado se llama _test_ y el proceso
+de su creación y posterior ejecución es conocido como _testeo automatizado_, que es el
 principal tema de estos capítulos sobre testeo.
-
 
 ## Desarrollo con tests
 
@@ -28,7 +26,7 @@ verificando que se ha logrado el comportamiento pretendido.
 El proceso de desarrollo de una funcionalidad es el siguiente:
 
 - Crear un nuevo test que describe una funcionalidad a implementar.
-- Ejecutar el nuevo test y asegurarse de que falla.  Esto es lo esperado, dado que todavía no hay ninguna implementación.
+- Ejecutar el nuevo test y asegurarse de que falla. Esto es lo esperado, dado que todavía no hay ninguna implementación.
 - Escribir un código sencillo para superar el nuevo test.
 - Ejecutar todos los tests y asegurarse de que se pasan todos.
 - Mejorar el código y asegurarse de que los tests siguen superándose.
@@ -38,7 +36,7 @@ Si se va a cambiar la funcionalidad existente, también hay que cambiar los test
 
 > Tip: Si siente que está perdiendo tiempo haciendo un montón de iteraciones pequeñas
 > y simples, intente cubrir más por cada escenario de test, de modo que haga más cosas antes
-> de ejecutar los tests de nuevo.  Si está depurando demasiado, intente hacer lo contrario.
+> de ejecutar los tests de nuevo. Si está depurando demasiado, intente hacer lo contrario.
 
 La razón para crear los tests antes de hacer ninguna implementación es que eso nos permite
 centrarnos en lo que queremos alcanzar y sumergirnos totalmente en «cómo hacerlo» después.
@@ -48,7 +46,7 @@ cuando toque hacer ajustes a las funcionalidades o componentes menos acoplados.
 Para resumir, las ventajas de este enfoque son las siguientes:
 
 - Le mantiene centrado en una sola cosa en cada momento, lo que resulta en una mejor planificación e implementación.
-- Resulta en más funcionalidades cubiertas por tests, y en mayor detalle.  Es decir, si se superan los tests, lo más problable es que no haya nada roto.
+- Resulta en más funcionalidades cubiertas por tests, y en mayor detalle. Es decir, si se superan los tests, lo más problable es que no haya nada roto.
 
 A largo plazo normalmente tiene como efecto un buen ahorro de tiempo.
 
@@ -59,7 +57,7 @@ y proyectos relativamente complejos, sería excesivo para proyectos más simples
 Hay algunas indicaciones de cuándo es apropiado:
 
 - El proyecto ya es grande y complejo.
-- Los requisitos del proyecto están empezando a hacerse complejos.  El proyecto crece constantemente.
+- Los requisitos del proyecto están empezando a hacerse complejos. El proyecto crece constantemente.
 - El proyecto pretende a ser a largo plazo.
 - El coste de fallar es demasiado alto.
 

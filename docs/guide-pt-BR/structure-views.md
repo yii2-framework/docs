@@ -1,18 +1,16 @@
-Visões (Views)
-===========
+# Visões (Views)
 
 As views fazem parte da arquitetura [MVC](https://pt.wikipedia.org/wiki/MVC).
 São a parte do código responsável por apresentar dados aos usuários finais. Em um aplicação Web,
-views geralmente são criadas em termos de *view templates* (modelos de view)
-  que são arquivos PHP contendo principalmente códigos HTML e
+views geralmente são criadas em termos de _view templates_ (modelos de view)
+que são arquivos PHP contendo principalmente códigos HTML e
 códigos PHP de apresentação.
 Os modelos de view são gerenciados pelo [componente da aplicação](structure-application-components.md)
 [[yii\web\View|view]] que fornece métodos comumente utilizados para facilitar
 a montagem e a renderização da view em si. Para simplificar, geralmente chamamos os modelos de view ou seus arquivos simplesmente
 de view.
 
-
-## Criando Views  <span id="creating-views"></span>
+## Criando Views <span id="creating-views"></span>
 
 Conforme já mencionado, uma view é simplesmente um arquivo PHP
 composto por HTML ou códigos PHP. O código a seguir representa uma view que exibe um formulário
@@ -45,7 +43,7 @@ $this->title = 'Login';
 
 Em uma view, você pode acessar a variável `$this` que referencia o
 [[yii\web\View|componente view]] responsável por gerenciar e renderizar a view
-  em questão.
+em questão.
 
 Além de `$this`, pode haver outras variáveis predefinidas na view, tal como
 `$model` no exemplo acima. Essas variáveis representam
@@ -54,9 +52,8 @@ os dados que foram enviados à view por meio dos
 desencadeiam a [renderização da view ](#rendering-views).
 
 > Dica: As variáveis predefinidas são listadas em um bloco de comentário no inicio
-  de uma view para que possam ser reconhecidas pelas IDEs. Além de ser também
-  uma ótima maneira de documentar suas views.
-
+> de uma view para que possam ser reconhecidas pelas IDEs. Além de ser também
+> uma ótima maneira de documentar suas views.
 
 ### Segurança <span id="security"></span>
 
@@ -93,32 +90,30 @@ use yii\helpers\HtmlPurifier;
 ```
 
 > Dica: Embora o HTMLPurifier faça um excelente trabalho em tornar a saída de dados
-  segura, ele não é rápido. Você deveria considerar guardar em [cache](caching-overview.md)
-  o resultado filtrado se sua aplicação precisa de alta performance.
+> segura, ele não é rápido. Você deveria considerar guardar em [cache](caching-overview.md)
+> o resultado filtrado se sua aplicação precisa de alta performance.
 
-
-### Organizando as Views  <span id="organizing-views"></span>
+### Organizando as Views <span id="organizing-views"></span>
 
 Assim como para os [controllers](structure-controllers.md) e para os
 [models](structure-models.md), existem convenções para organizar as
 views.
 
-* Views renderizadas por um controller deveriam ser colocadas sob o diretório `@app/views/IDdoController` por padrão, onde `IDdoController` refere-se ao [ID do controller](structure-controllers.md#routes).
+- Views renderizadas por um controller deveriam ser colocadas sob o diretório `@app/views/IDdoController` por padrão, onde `IDdoController` refere-se ao [ID do controller](structure-controllers.md#routes).
   Por exemplo, se a classe do controller for `PostController`, o diretório
   será `@app/views/post`; se for `PostCommentController`, o diretório será
   `@app/views/post-comment`. Caso o controller pertença a um
   módulo, o diretório seria `views/IDdoController` sob o [[yii\base\Module::basePath|diretório do módulo]].
-* Views renderizadas em um [widget](structure-widgets.md) deveriam ser
+- Views renderizadas em um [widget](structure-widgets.md) deveriam ser
   colocadas sob o diretório `WidgetPath/views` por padrão, onde `WidgetPath`
   é o diretório o arquivo da classe do widget.
-* Para views renderizadas por outros objetos, é recomendado
+- Para views renderizadas por outros objetos, é recomendado
   que você siga a convenção semelhante à dos widgets.
 
 Você pode personalizar os diretórios padrões das views sobrescrevendo
 o método [[yii\base\ViewContextInterface::getViewPath()]] dos controllers ou dos widgets.
 
-
-## Renderizando Views  <span id="rendering-views"></span>
+## Renderizando Views <span id="rendering-views"></span>
 
 Você pode renderizar views em
 [controllers](structure-controllers.md), em [widgets](structure-widgets.md) ou em qualquer outro lugar chamando os métodos de renderização da view. Esses métodos compartilham uma assinatura similar, como a seguir:
@@ -132,21 +127,20 @@ Você pode renderizar views em
 methodName($view, $params = [])
 ```
 
-
 ### Renderização em Controllers <span id="rendering-in-controllers"></span>
 
 Nos [controllers](structure-controllers.md), você pode chamar os
 seguintes métodos para renderizar as views:
 
-* [[yii\base\Controller::render()|render()]]: renderiza uma [view nomeada](#named-views) e aplica um [layout](#layouts) ao resultado da renderização.
-* [[yii\base\Controller::renderPartial()|renderPartial()]]: renderiza
+- [[yii\base\Controller::render()|render()]]: renderiza uma [view nomeada](#named-views) e aplica um [layout](#layouts) ao resultado da renderização.
+- [[yii\base\Controller::renderPartial()|renderPartial()]]: renderiza
   uma [view nomeada](#named-views) sem qualquer layout.
-* [[yii\web\Controller::renderAjax()|renderAjax()]]: renderiza uma [view nomeada](#named-views) sem qualquer layout
+- [[yii\web\Controller::renderAjax()|renderAjax()]]: renderiza uma [view nomeada](#named-views) sem qualquer layout
   e injeta todos os arquivos JS/CSS registrados. É geralmente utilizado
   em respostas de requisições Web Ajax.
-* [[yii\base\Controller::renderFile()|renderFile()]]: renderiza uma view a partir
+- [[yii\base\Controller::renderFile()|renderFile()]]: renderiza uma view a partir
   de um caminho de arquivo ou a partir de um [alias](concept-aliases.md).
-* [[yii\base\Controller::renderContent()|renderContent()]]: renderiza um conteúdo
+- [[yii\base\Controller::renderContent()|renderContent()]]: renderiza um conteúdo
   estático que será incorporado no [layout](#layouts) selecionado. Este método
   está disponível desde a versão 2.0.1.
 
@@ -177,14 +171,13 @@ class PostController extends Controller
 }
 ```
 
-
 ### Renderização em Widgets <span id="rendering-in-widgets"></span>
 
 Nos [widgets](structure-widgets.md), você pode chamar os seguintes métodos do
 widget para renderizar views:
 
-* [[yii\base\Widget::render()|render()]]: renderiza uma [view nomeada](#named-views).
-* [[yii\base\Widget::renderFile()|renderFile()]]: renderiza uma view a partir de
+- [[yii\base\Widget::render()|render()]]: renderiza uma [view nomeada](#named-views).
+- [[yii\base\Widget::renderFile()|renderFile()]]: renderiza uma view a partir de
   um caminho de arquivo ou a partir de um [alias](concept-aliases.md).
 
 Por exemplo,
@@ -209,17 +202,16 @@ class ListWidget extends Widget
 }
 ```
 
-
-### Renderização em Views  <span id="rendering-in-views"></span>
+### Renderização em Views <span id="rendering-in-views"></span>
 
 Você pode renderizar uma view dentro de outra chamando um dos seguintes
 métodos fornecidos pelo [[yii\base\View|componente view]]:
 
-* [[yii\base\Controller::render()|render()]]: renderiza uma [view nomeada](#named-views).
-* [[yii\web\Controller::renderAjax()|renderAjax()]]: renderiza uma [view nomeada](#named-views) sem qualquer layout
+- [[yii\base\Controller::render()|render()]]: renderiza uma [view nomeada](#named-views).
+- [[yii\web\Controller::renderAjax()|renderAjax()]]: renderiza uma [view nomeada](#named-views) sem qualquer layout
   e injeta todos os arquivos JS/CSS registrados. É geralmente utilizado
   em respostas de requisições Web Ajax.
-* [[yii\base\Controller::renderFile()|renderFile()]]: renderiza uma view a partir
+- [[yii\base\Controller::renderFile()|renderFile()]]: renderiza uma view a partir
   de um caminho de arquivo ou a partir de um [alias](concept-aliases.md).
 
 Por exemplo, no código a seguir, uma view qualquer renderiza outro arquivo
@@ -229,7 +221,6 @@ Lembre-se que `$this` na view referencia o componente [[yii\base\View|view]]:
 ```php
 <?= $this->render('_visao-geral') ?>
 ```
-
 
 ### Renderização em Outros Lugares <span id="rendering-in-other-places"></span>
 
@@ -242,53 +233,51 @@ para renderizar uma view. Por exemplo,
 echo \Yii::$app->view->renderFile('@app/views/site/license.php');
 ```
 
-
 ### Views Nomeadas <span id="named-views"></span>
 
 Ao renderizar uma view, você pode especificá-la usando seu nome, ou o caminho do arquivo, ou um alias. Na maioria dos casos,
-você usará a primeira maneira por ser mais concisa e flexível. Quando especificamos views por nome, chamamos essas views de *views nomeadas*.
+você usará a primeira maneira por ser mais concisa e flexível. Quando especificamos views por nome, chamamos essas views de _views nomeadas_.
 
 Um nome de view é convertido no caminho de arquivo da view correspondente de
 acordo com as seguintes regras:
 
-* Um nome de view pode omitir a extensão do arquivo. Neste caso, o `.php`
+- Um nome de view pode omitir a extensão do arquivo. Neste caso, o `.php`
   será usado como extensão. Por exemplo, a view chamada `sobre` corresponderá ao
   arquivo `sobre.php`.
-* Se o nome da view iniciar com barras duplas `//`, o caminho correspondente
+- Se o nome da view iniciar com barras duplas `//`, o caminho correspondente
   seria `@app/views/ViewName`. Ou seja, a view será localizada sob o
   [[yii\base\Application::viewPath|diretório das views da aplicação]]. Por exemplo,
   `//site/sobre` corresponderá ao `@app/views/site/sobre.php`.
-* Se o nome da view iniciar com uma barra simples `/`, o caminho do arquivo da view
+- Se o nome da view iniciar com uma barra simples `/`, o caminho do arquivo da view
   será formado pelo nome da view com o [[yii\base\Module::viewPath|diretório da view]]
   do [módulo](structure-modules.md) ativo. Se não houver um módulo ativo, o
   `@app/views/ViewName` será usado. Por exemplo, `/usuario/criar` corresponderá
   a `@app/modules/user/views/usuario/criar.php` caso o módulo ativo seja `user`.
   Se não existir um módulo ativo, o caminho do arquivo da view será
   `@app/views/usuario/criar.php`.
-* Se a view for renderizada com um [[yii\base\View::context|contexto]] e
+- Se a view for renderizada com um [[yii\base\View::context|contexto]] e
   que implemente [[yii\base\ViewContextInterface]], o caminho do arquivo
   da view será formado por prefixar o [[yii\base\ViewContextInterface::getViewPath()|diretório da view]] do contexto ao nome da view.
   Isto se aplica principalmente às views renderizadas em controllers e widgets. Por exemplo,
   `sobre` corresponderá a `@app/views/site/sobre.php` caso o contexto seja o controller
   `SiteController`.
-* Se uma view for renderizada dentro de outra, o diretório que contém esta
+- Se uma view for renderizada dentro de outra, o diretório que contém esta
   outra view será usado para formar o caminho de seu arquivo.
   Por exemplo, `item` corresponderá a `@app/views/post/item.php` se ela for
   renderizada dentro da view `@app/views/post/index.php`.
 
 De acordo com as regras acima, chamar `$this->render('exibir')` em um controller `app\controllers\PostController` vai realmente renderizar o arquivo de view
-  `@app/views/post/exibir.php` e, chamar `$this->render('_visaogeral')` nessa view (`exibir.php`) vai renderizar o arquivo de visão `@app/views/post/_visaogeral.php`.
+`@app/views/post/exibir.php` e, chamar `$this->render('_visaogeral')` nessa view (`exibir.php`) vai renderizar o arquivo de visão `@app/views/post/_visaogeral.php`.
 
+### Acessando Dados em Views <span id="accessing-data-in-views"></span>
 
-### Acessando Dados em Views  <span id="accessing-data-in-views"></span>
+Existem duas abordagens para acessar dados em uma view : _push_ e _pull_.
 
-Existem duas abordagens para acessar dados em uma view : *push* e *pull*.
-
-Ao passar os dados como o segundo parâmetro nos métodos de renderização de view, você estará usando a abordagem *push*.
+Ao passar os dados como o segundo parâmetro nos métodos de renderização de view, você estará usando a abordagem _push_.
 Os dados devem ser representados por um array com pares de nome-valor. Quando a
 view estiver sendo renderizada, a função `extract()` do PHP será executada sobre essa array a fim de extrair seus dados em variáveis na view.
 Por exemplo, o renderização da view a seguir, em um controller, disponibilizará (pela
-abordagem *push*) duas variáveis para a view  `relatorio`: `$foo = 1` e `$bar = 2`.
+abordagem _push_) duas variáveis para a view `relatorio`: `$foo = 1` e `$bar = 2`.
 
 ```php
 echo $this->render('relatorio', [
@@ -297,7 +286,7 @@ echo $this->render('relatorio', [
 ]);
 ```
 
-A abordagem *pull* ativamente obtém os dados do
+A abordagem _pull_ ativamente obtém os dados do
 [[yii\base\View|componente view]] ou de outros objetos acessíveis nas views
 (por exemplo, `Yii::$app`). Usando o código a seguir como exemplo, dentro da view você pode acessar seu objeto controller usando a expressão `$this->context`.
 E como resultado, será possível acessar quaisquer propriedades ou
@@ -308,14 +297,13 @@ O ID do controller é: <?= $this->context->id ?>
 ?>
 ```
 
-A abordagem *push* normalmente é a forma preferida de acessar dados nas views
+A abordagem _push_ normalmente é a forma preferida de acessar dados nas views
 por que as torna menos dependentes de objetos de contexto. A
 desvantagem é que você precisa montar manualmente os dados em um array o tempo
 todo, o que poderia se tornar tedioso e propenso a erros se uma view for
 compartilhada e renderizada em lugares diferentes.
 
-
-### Compartilhando Dados entre as Views  <span id="sharing-data-among-views"></span>
+### Compartilhando Dados entre as Views <span id="sharing-data-among-views"></span>
 
 O [[yii\base\View|componente view]] fornece a propriedade
 [[yii\base\View::params|params]] que você pode usar para compartilhar dados entre
@@ -338,7 +326,6 @@ propriedade [[yii\base\View::params|params]]:
 ]) ?>
 ```
 
-
 ## Layouts <span id="layouts"></span>
 
 Layouts são um tipo especial de view que representam as partes comuns
@@ -347,7 +334,6 @@ compartilham o mesmo cabeçalho e rodapé. Embora você possa repetir o mesmo
 cabeçalho e rodapé em todas as view, a melhor maneira é fazer isso apenas uma vez
 no layout e incorporar o resultado da renderização de uma view em um lugar
 apropriado no layout.
-
 
 ### Criando Layouts <span id="creating-layouts"></span>
 
@@ -415,7 +401,6 @@ inseridos nos locais onde eles (os métodos) forem chamados.
   seção `<body>`. Ele dispara o evento [[yii\web\View::EVENT_END_BODY|EVENT_END_BODY]]
   e gera um marcador que será substituído por código HTML que estiver registrado para essa posição (por exemplo, algum código JavaScript).
 
-
 ### Acessando Dados nos Layouts <span id="accessing-data-in-layouts"></span>
 
 Dentro de um layout, você tem acesso a duas variáveis predefinidas: `$this` e
@@ -424,11 +409,10 @@ de uma view que é gerada por chamar o método [[yii\base\Controller::render()|r
 no controller.
 
 Se você quiser acessar outros dados nos layouts, você terá de usar a abordagem
-*pull* conforme descrito na subseção
+_pull_ conforme descrito na subseção
 [Acessando Dados em Views ](#accessing-data-in-views). Se você quiser
 passar os dados do conteúdo da view para um layout, poderá usar o método descrito
 na subseção [Compartilhando Dados entre as Views ](#sharing-data-among-views).
-
 
 ### Usando Layouts <span id="using-layouts"></span>
 
@@ -492,7 +476,6 @@ Na segunda etapa, o Yii determina o real arquivo de layout de acordo com o valor
 
 Se o valor da propriedade layout não tiver uma extensão de arquivo, será usada a extensão `.php` por padrão.
 
-
 ### Layouts Aninhados <span id="nested-layouts"></span>
 
 Às vezes, você pode querer que um layout seja usado dentro de outro. Por
@@ -516,7 +499,6 @@ Como mostrado acima, o conteúdo do layout filho deve ser inserido entre os mét
 pode ser um arquivo de layout ou mesmo um alias.
 
 Usando a abordagem acima, você pode aninhar os layouts em mais de um nível.
-
 
 ### Usando Blocos <span id="using-blocks"></span>
 
@@ -581,8 +563,7 @@ ou exiba um conteúdo padrão se não estiverem.
 ...
 ```
 
-
-## Usando Componentes View  <span id="using-view-components"></span>
+## Usando Componentes View <span id="using-view-components"></span>
 
 Os [[yii\base\View|componentes view]] fornecem muitos recursos. Embora você possa obtê-los por criar instancias individuais de [[yii\base\View]]
 ou de suas classes filhas, na maioria dos casos você usará o
@@ -604,17 +585,16 @@ conforme o exemplo a seguir:
 
 Componentes de view fornecem úteis recursos relacionados. Cada um deles está descrito com mais detalhes em seções separadas:
 
-* [temas](output-theming.md): permite que você desenvolva e altere temas para
+- [temas](output-theming.md): permite que você desenvolva e altere temas para
   o seu site.
-* [fragmento de cache](caching-fragment.md): permite que você guarde em cache um
+- [fragmento de cache](caching-fragment.md): permite que você guarde em cache um
   fragmento de uma página.
-* [manipulação de client scripts](output-client-scripts.md): permite que você registre e renderize CSS e JavaScript.
-* [manipulando asset bundle](structure-assets.md): permite que você registre e renderize [recursos estáticos (asset bundles)](structure-assets.md).
-* [template engines alternativos](tutorial-template-engines.md): permite que você use outros template engines, tais como o [Twig](https://twig.symfony.com/)
+- [manipulação de client scripts](output-client-scripts.md): permite que você registre e renderize CSS e JavaScript.
+- [manipulando asset bundle](structure-assets.md): permite que você registre e renderize [recursos estáticos (asset bundles)](structure-assets.md).
+- [template engines alternativos](tutorial-template-engines.md): permite que você use outros template engines, tais como o [Twig](https://twig.symfony.com/)
   e [Smarty](https://www.smarty.net/).
 
 Você também pode usar os seguintes recursos que, embora simples, são úteis quando estiver desenvolvendo suas páginas.
-
 
 ### Configurando Títulos de Página <span id="setting-page-titles"></span>
 
@@ -636,7 +616,6 @@ E, no layout, certifique-se de ter o seguinte código dentro da seção `<head>`
 ```php
 <title><?= Html::encode($this->title) ?></title>
 ```
-
 
 ### Registrando os Meta Tags <span id="registering-meta-tags"></span>
 
@@ -672,7 +651,6 @@ $this->registerMetaTag(['name' => 'description', 'content' => 'Este é o meu web
 $this->registerMetaTag(['name' => 'description', 'content' => 'Este website é sobre coisas divertidas.'], 'descricao');
 ```
 
-
 ### Registrando Tags Link <span id="registering-link-tags"></span>
 
 Assim como as [meta tags](#registering-meta-tags), as tags link são úteis em muitos
@@ -692,7 +670,12 @@ $this->registerLinkTag([
 O código acima resultará em
 
 ```html
-<link title="Notícias sobre o Yii" rel="alternate" type="application/rss+xml" href="https://www.yiiframework.com/rss.xml/">
+<link
+  title="Notícias sobre o Yii"
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://www.yiiframework.com/rss.xml/"
+/>
 ```
 
 Assim como no método [[yii\web\View::registerMetaTag()|registerMetaTags()]],
@@ -700,8 +683,7 @@ você também pode especificar uma chave quando chamar o método
 [[yii\web\View::registerLinkTag()|registerLinkTag()]] para evitar a criação de
 tags link repetidas.
 
-
-## Eventos da View  <span id="view-events"></span>
+## Eventos da View <span id="view-events"></span>
 
 [[yii\base\View|Componentes view]] disparam vários eventos durante
 o processo de renderização da view. Você pode usar estes eventos para
@@ -732,7 +714,6 @@ Por exemplo, o código a seguir insere a data atual no final do corpo da página
     echo date('Y-m-d');
 });
 ```
-
 
 ## Renderizando Páginas Estáticas <span id="rendering-static-pages"></span>
 
@@ -786,28 +767,27 @@ dentro do diretório `@app/views/site/pages`. Você pode configurar a propriedad
 [[yii\web\ViewAction::viewPrefix]] para alterar o diretório onde as views
 serão procuradas.
 
-
 ## Boas Práticas <span id="best-practices"></span>
 
 Views são responsáveis por apresentar models (modelos) no formato que os
 usuários finais desejam. Em geral, views:
 
-* devem conter principalmente código de apresentação, tal como o HTML, e trechos
+- devem conter principalmente código de apresentação, tal como o HTML, e trechos
   simples de PHP para percorrer, formatar e renderizar dados.
-* não devem conter código de consulta ao banco de dados. Consultas assim devem ser feitas nos models.
-* devem evitar acessar diretamente os dados da requisição, tais como `$_GET` e
+- não devem conter código de consulta ao banco de dados. Consultas assim devem ser feitas nos models.
+- devem evitar acessar diretamente os dados da requisição, tais como `$_GET` e
   `$_POST` pois essa tarefa cabe aos controllers.
   Se os dados da requisição forem necessários, deverão ser fornecidos às views
   pelos controllers.
-* podem ler as propriedades dos models, mas não devem alterá-las.
+- podem ler as propriedades dos models, mas não devem alterá-las.
 
 Para tornar as views mais gerenciáveis, evite criar views muito complexas
 ou que contenham muito código redundante. Você pode usar as seguintes técnicas
 para atingir este objetivo:
 
-* use [layouts](#layouts) para representar as seções de apresentação comuns
+- use [layouts](#layouts) para representar as seções de apresentação comuns
   (por exemplo, cabeçalho e rodapé).
-* divida uma view complicada em varias outras menores. As views
+- divida uma view complicada em varias outras menores. As views
   menores podem ser renderizadas e montadas em uma maior usando os métodos descritos anteriormente.
-* crie e use [widgets](structure-widgets.md) como blocos de construção das views.
-* crie e use as classes helper (auxiliares) para transformar e formatar os dados nas views.
+- crie e use [widgets](structure-widgets.md) como blocos de construção das views.
+- crie e use as classes helper (auxiliares) para transformar e formatar os dados nas views.

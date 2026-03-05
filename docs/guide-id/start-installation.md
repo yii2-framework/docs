@@ -1,25 +1,23 @@
-Instalasi Yii
-==============
+# Instalasi Yii
 
 Anda dapat menginstal Yii dalam dua cara, menggunakan [Composer](https://getcomposer.org/) paket manager atau dengan mengunduh file arsip.
-Yang pertama adalah cara yang lebih disukai, karena memungkinkan Anda untuk menginstal [ekstensi](structure-extensions.md)  baru atau memperbarui Yii dengan hanya menjalankan *command line*.
+Yang pertama adalah cara yang lebih disukai, karena memungkinkan Anda untuk menginstal [ekstensi](structure-extensions.md) baru atau memperbarui Yii dengan hanya menjalankan _command line_.
 
 Hasil instalasi standar Yii baik framework maupun template proyek keduanya akan terunduh dan terpasang.
 Sebuah template proyek adalah proyek Yii yang menerapkan beberapa fitur dasar, seperti login, formulir kontak, dll.
 Kode diatur dalam cara yang direkomendasikan. Oleh karena itu, dapat berfungsi sebagai titik awal yang baik untuk proyek-proyek Anda.
+
     
-Dalam hal ini dan beberapa bagian berikutnya, kita akan menjelaskan cara menginstal Yii dengan apa yang disebut *Template Proyek Dasar* dan
+Dalam hal ini dan beberapa bagian berikutnya, kita akan menjelaskan cara menginstal Yii dengan apa yang disebut _Template Proyek Dasar_ dan
 bagaimana menerapkan fitur baru di atas template ini. Yii juga menyediakan template lain yang disebut
 yang [Template Proyek Lanjutan](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md) yang lebih baik digunakan dalam lingkungan pengembangan tim
 untuk mengembangkan aplikasi dengan beberapa tingkatan.
 
 > Info: Template Proyek Dasar ini cocok untuk mengembangkan 90 persen dari aplikasi Web. Ini berbeda
-  dari Template Proyek Lanjutan terutama dalam bagaimana kode mereka diatur. Jika Anda baru untuk Yii, kami sangat
-  merekomendasikan Anda tetap pada Template Proyek Dasar untuk kesederhanaan dan fungsi yang cukup.
+>   dari Template Proyek Lanjutan terutama dalam bagaimana kode mereka diatur. Jika Anda baru untuk Yii, kami sangat
+>   merekomendasikan Anda tetap pada Template Proyek Dasar untuk kesederhanaan dan fungsi yang cukup.
 
-
-Menginstal melalui Komposer <span id="installing-via-composer"></span>
------------------------
+## Menginstal melalui Komposer <span id="installing-via-composer"></span>
 
 Jika Anda belum memiliki Composer terinstal, Anda dapat melakukannya dengan mengikuti petunjuk di
 [getcomposer.org] (https://getcomposer.org/download/). Pada Linux dan Mac OS X, Anda akan menjalankan perintah berikut:
@@ -48,7 +46,7 @@ Perintah pertama menginstal [komposer aset Plugin](https://github.com/fxpio/comp
 yang memungkinkan mengelola bower dan paket npm melalui Composer. Anda hanya perlu menjalankan perintah ini
 sekali untuk semua. Perintah kedua menginstal Yii dalam sebuah direktori bernama `basic`. Anda dapat memilih nama direktori yang berbeda jika Anda ingin.
 
-> Catatan: Selama instalasi, Composer  dapat meminta login Github Anda. Ini normal karena Komposer
+> Catatan: Selama instalasi, Composer dapat meminta login Github Anda. Ini normal karena Komposer
 > Perlu mendapatkan cukup API rate-limit untuk mengambil informasi paket dari Github. Untuk lebih jelasnya,
 > Silahkan lihat [Documentation Composer](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
@@ -59,27 +57,23 @@ sekali untuk semua. Perintah kedua menginstal Yii dalam sebuah direktori bernama
 > composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
 > ```
 >
-> Perhatikan bahwa versi pengembangan dari Yii tidak boleh digunakan untuk produksi karena kemungkinan dapat *merusak* kode Anda yang sedang berjalan.
+> Perhatikan bahwa versi pengembangan dari Yii tidak boleh digunakan untuk produksi karena kemungkinan dapat _merusak_ kode Anda yang sedang berjalan.
 
-
-Instalasi dari file Arsip <span id="installing-from-archive-file"></span>
--------------------------------
+## Instalasi dari file Arsip <span id="installing-from-archive-file"></span>
 
 Instalasi Yii dari file arsip melibatkan tiga langkah:
 
 1. Download file arsip dari [yiiframework.com](https://www.yiiframework.com/download/).
 2. Uraikan file yang didownload ke folder yang bisa diakses web.
 3. Memodifikasi `config/web.php` dengan memasukkan kunci rahasia untuk `cookieValidationKey`.
-   (Ini dilakukan secara otomatis jika Anda menginstal Yii menggunakan Composer):
+      (Ini dilakukan secara otomatis jika Anda menginstal Yii menggunakan Composer):
 
-  ```php
-  // !!! Isikan nilai key jika kosong - ini diperlukan oleh cookie validation
-  'cookieValidationKey' => 'enter your secret key here',
-  ```
+```php
+// !!! Isikan nilai key jika kosong - ini diperlukan oleh cookie validation
+'cookieValidationKey' => 'enter your secret key here',
+```
 
-
-Pilihan Instalasi lainnya <span id="other-installation-options"></span>
---------------------------
+## Pilihan Instalasi lainnya <span id="other-installation-options"></span>
 
 Petunjuk instalasi di atas menunjukkan cara menginstal Yii, yang juga menciptakan aplikasi Web dasar yang bekerja di luar kotak.
 Pendekatan ini adalah titik awal yang baik untuk sebagian besar proyek, baik kecil atau besar. Hal ini terutama cocok jika Anda hanya
@@ -87,14 +81,12 @@ mulai belajar Yii.
 
 Tetapi ada pilihan instalasi lain yang tersedia:
 
-* Jika Anda hanya ingin menginstal kerangka inti dan ingin membangun seluruh aplikasi dari awal,
-  Anda dapat mengikuti petunjuk seperti yang dijelaskan dalam [Membangun Aplikasi dari Scratch](tutorial-start-from-scratch.md).
-* Jika Anda ingin memulai dengan aplikasi yang lebih canggih, lebih cocok untuk tim lingkungan pengembangan,
-  Anda dapat mempertimbangkan memasang [Template Lanjutan Proyek] (https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md).
+- Jika Anda hanya ingin menginstal kerangka inti dan ingin membangun seluruh aplikasi dari awal,
+    Anda dapat mengikuti petunjuk seperti yang dijelaskan dalam [Membangun Aplikasi dari Scratch](tutorial-start-from-scratch.md).
+- Jika Anda ingin memulai dengan aplikasi yang lebih canggih, lebih cocok untuk tim lingkungan pengembangan,
+    Anda dapat mempertimbangkan memasang [Template Lanjutan Proyek] (https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md).
 
-
-Memverifikasi Instalasi <span id="memverifikasi instalasi"></span>
---------------------------
+## Memverifikasi Instalasi <span id="memverifikasi instalasi"></span>
 
 Setelah instalasi selesai, baik mengkonfigurasi web server Anda (lihat bagian berikutnya) atau menggunakan
 [Built-in web server PHP] (https://www.php.net/manual/en/features.commandline.webserver.php) dengan menjalankan berikut
@@ -105,7 +97,7 @@ php yii serve
 ```
 
 > Catatan: Secara default HTTP-server akan mendengarkan port 8080. Namun jika port yang sudah digunakan atau Anda ingin
-melayani beberapa aplikasi dengan cara ini, Anda mungkin ingin menentukan port apa yang harus digunakan. Cukup tambahkan argumen --port:
+> melayani beberapa aplikasi dengan cara ini, Anda mungkin ingin menentukan port apa yang harus digunakan. Cukup tambahkan argumen --port:
 
 ```bash
 php yii serve --port = 8888
@@ -122,24 +114,22 @@ http://localhost:8080/
 Anda seharusnya melihat halaman "Congratulations!" di browser Anda. Jika tidak, periksa apakah instalasi PHP Anda memenuhi
 persyaratan Yii. Anda dapat memeriksa apakah persyaratan minimumnya cocok dengan menggunakan salah satu pendekatan berikut:
 
-* Copy `/requirements.php` ke `/web/requirements.php` kemudian gunakan browser untuk mengakses melalui `http://localhost/requirements.php`
-* Jalankan perintah berikut:
+- Copy `/requirements.php` ke `/web/requirements.php` kemudian gunakan browser untuk mengakses melalui `http://localhost/requirements.php`
+- Jalankan perintah berikut:
 
-  ```bash
+  `bash
   cd basic
   php requirements.php
-  ```
+  `
 
 Anda harus mengkonfigurasi instalasi PHP Anda sehingga memenuhi persyaratan minimal Yii. Yang paling penting, Anda
 harus memiliki PHP versi 5.4 atau lebih. Anda juga harus menginstal [PDO PHP Ekstensi](https://www.php.net/manual/en/pdo.installation.php)
 dan driver database yang sesuai (seperti `pdo_mysql` untuk database MySQL), jika aplikasi Anda membutuhkan database.
 
-
-Konfigurasi Web Server <span id="configuring-web-servers"></span>
------------------------
+## Konfigurasi Web Server <span id="configuring-web-servers"></span>
 
 > Info: Anda dapat melewati seksi ini untuk saat ini jika Anda hanya menguji sebuah Yii dengan niat
-  penggelaran itu untuk server produksi.
+>   penggelaran itu untuk server produksi.
 
 Aplikasi yang diinstal sesuai dengan petunjuk di atas seharusnya bekerja dengan baik
 pada [Apache HTTP server](https://httpd.apache.org/) atau [Nginx HTTP server](https://nginx.org/), pada
@@ -154,13 +144,12 @@ ingin menyembunyikan `index.php` dari URL, seperti yang dijelaskan pada bagian [
 Dalam bagian ini, Anda akan belajar bagaimana untuk mengkonfigurasi Apache atau Nginx server Anda untuk mencapai tujuan tersebut.
 
 > Info: Dengan menetapkan `basic/web` sebagai akar dokumen, Anda juga mencegah pengguna akhir mengakses
-kode private aplikasi Anda dan file data sensitif yang disimpan dalam direktori sejajar
-dari `basic/web`. Mencegah akses ke folder lainnya adalah sebuah peningkatan keamanan.
+> kode private aplikasi Anda dan file data sensitif yang disimpan dalam direktori sejajar
+> dari `basic/web`. Mencegah akses ke folder lainnya adalah sebuah peningkatan keamanan.
 
 > Info: Jika aplikasi Anda akan berjalan di lingkungan shared hosting di mana Anda tidak memiliki izin
-untuk memodifikasi konfigurasi server Web-nya, Anda mungkin masih menyesuaikan struktur aplikasi Anda untuk keamanan yang lebih baik. Silakan merujuk ke
-yang lebih baik. Lihat bagian [Shared Hosting Lingkungan](tutorial-shared-hosting.md) untuk rincian lebih lanjut.
-
+> untuk memodifikasi konfigurasi server Web-nya, Anda mungkin masih menyesuaikan struktur aplikasi Anda untuk keamanan yang lebih baik. Silakan merujuk ke
+> yang lebih baik. Lihat bagian [Shared Hosting Lingkungan](tutorial-shared-hosting.md) untuk rincian lebih lanjut.
 
 ### Konfigurasi Apache yang Direkomendasikan <span id="recommended-apache-configuration"></span>
 
@@ -183,7 +172,6 @@ DocumentRoot "path/to/basic/web"
     # ...other settings...
 </Directory>
 ```
-
 
 ### Konfigurasi Nginx yang Direkomendasikan<span id="recommended-nginx-configuration"></span>
 

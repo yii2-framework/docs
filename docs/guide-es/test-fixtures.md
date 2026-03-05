@@ -1,11 +1,10 @@
-Fixtures
-========
+# Fixtures
 
 Los fixtures son una parte importante de los tests. Su propósito principal es el de preparar el entorno en una estado fijado/conocido
 de manera que los tests sean repetibles y corran de la manera esperada. Yii provee un framework de fixtures que te permite
 dichos fixtures de manera precisa y usarlo de forma simple.
 
-Un concepto clave en el framework de fixtures de Yii es el llamado *objeto fixture*. Un objeto fixture representa
+Un concepto clave en el framework de fixtures de Yii es el llamado _objeto fixture_. Un objeto fixture representa
 un aspecto particular de un entorno de pruebas y es una instancia de [[yii\test\Fixture]] o heredada de esta. Por ejemplo,
 puedes utilizar `UserFixture` para asegurarte de que la tabla de usuarios de la BD contiene un grupo de datos fijos. Entonces cargas uno o varios
 objetos fixture antes de correr un test y lo descargas cuando el test ha concluido.
@@ -14,9 +13,7 @@ Un fixture puede depender de otros fixtures, especificándolo en su propiedad [[
 Cuando un fixture está siendo cargado, los fixtures de los que depende serán cargados automáticamente ANTES que él;
 y cuando el fixture está siendo descargado, los fixtures dependientes serán descargados DESPUÉS de él.
 
-
-Definir un Fixture
-------------------
+## Definir un Fixture
 
 Para definir un fixture, crea una nueva clase que extienda de [[yii\test\Fixture]] o [[yii\test\ActiveFixture]].
 El primero es más adecuado para fixtures de propósito general, mientras que el último tiene características mejoradas específicamente
@@ -45,7 +42,6 @@ class UserFixture extends ActiveFixture
 >
 > - Mongo DB: [[yii\mongodb\ActiveFixture]]
 > - Elasticsearch: [[yii\elasticsearch\ActiveFixture]] (desde la versión 2.0.2)
-
 
 Los datos para un fixture `ActiveFixture` son usualmente provistos en un archivo ubicado en `FixturePath/data/TableName.php`,
 donde `FixturePath` corresponde al directorio conteniendo el archivo de clase del fixture, y `TableName`
@@ -104,9 +100,7 @@ Arriba te mostramos cómo definir un fixture de BD. Para definir un fixture no r
 (por ej. un fixture acerca de archivos y directorios), puedes extender de la clase base más general
 [[yii\test\Fixture]] y sobrescribir los métodos [[yii\test\Fixture::load()|load()]] y [[yii\test\Fixture::unload()|unload()]].
 
-
-Utilizar Fixtures
------------------
+## Utilizar Fixtures
 
 Si estás utilizando [Codeception](https://codeception.com/) para hacer tests de tu código, deberías considerar el utilizar
 la extensión `yii2-codeception`, que tiene soporte incorporado para la carga y acceso a fixtures.
@@ -165,16 +159,14 @@ foreach ($this->profiles as $row) ...
 > Info: `$this->profiles` es todavía del tipo `UserProfileFixture`. Las características de acceso mostradas arriba son implementadas
 > a través de métodos mágicos de PHP.
 
-
-Definir y Utilizar Fixtures Globales
-------------------------------------
+## Definir y Utilizar Fixtures Globales
 
 Los fixtures descritos arriba son principalmente utilizados para casos de tests individuales. En la mayoría de los casos, puedes necesitar algunos
 fixtures globales que sean aplicados a TODOS o muchos casos de test. Un ejemplo sería [[yii\test\InitDbFixture]], que hace
 dos cosas:
 
-* Realiza alguna tarea de inicialización común al ejectutar un script ubicado en `@app/tests/fixtures/initdb.php`;
-* Deshabilita la comprobación de integridad antes de cargar otros fixtures de BD, y la rehabilita después de que todos los fixtures son descargados.
+- Realiza alguna tarea de inicialización común al ejectutar un script ubicado en `@app/tests/fixtures/initdb.php`;
+- Deshabilita la comprobación de integridad antes de cargar otros fixtures de BD, y la rehabilita después de que todos los fixtures son descargados.
 
 Utilizar fixtures globales es similar a utilizar los no-globales. La única diferencia es que declaras estos fixtures
 en [[yii\codeception\TestCase::globalFixtures()]] en vez de en `fixtures()`. Cuando un caso de test carga fixtures,
@@ -184,9 +176,7 @@ Por defecto, [[yii\codeception\DbTestCase]] ya declara `InitDbFixture` en su mé
 Esto significa que sólo necesitas trabajar con `@app/tests/fixtures/initdb.php` si quieres realizar algún trabajo de inicialización
 antes de cada test. Sino puedes simplemente enfocarte en desarrollar cada caso de test individual y sus fixtures correspondientes.
 
-
-Organizar Clases de Fixtures y Archivos de Datos
-------------------------------------------------
+## Organizar Clases de Fixtures y Archivos de Datos
 
 Por defecto, las clases de fixtures busca los archivos de datos correspondientes dentro de la carpeta `data`, que es una subcarpeta
 de la carpeta conteniendo los archivos de clases de fixtures. Puedes seguir esta convención al trabajar en proyectos simples.
@@ -221,9 +211,7 @@ De esta manera evitarás la colisión de archivos de datos de fixtures entre tes
 Se puede utilizar una jerarquía similar para organizar archivos de clases de fixtures. En vez de utilizar `data` como directorio raíz, podrías
 querer utilizar `fixtures` como directorio raíz para evitar conflictos con los archivos de datos.
 
-
-Resumen
--------
+## Resumen
 
 > Note: Esta sección se encuentra en desarrollo.
 
@@ -232,16 +220,16 @@ de correr tests de unidad relacionados a BD:
 
 1. Usa la herramienta `yii migrate` para actualizar tu base de datos de prueba a la última versión;
 2. Corre el caso de test:
-  - Carga los fixtures: limpia las tablas de la BD relevantes y cargala con los datos de los fixtures;
-  - Realiza el test en sí;
-  - Descarga los fixtures.
-3. Repite el Paso 2 hasta que todos los tests terminen.
 
+- Carga los fixtures: limpia las tablas de la BD relevantes y cargala con los datos de los fixtures;
+- Realiza el test en sí;
+- Descarga los fixtures.
+
+3. Repite el Paso 2 hasta que todos los tests terminen.
 
 **Lo siguiente, a ser limpiado**
 
-Administrar Fixtures
-====================
+# Administrar Fixtures
 
 > Note: Esta sección está en desarrollo.
 >
@@ -252,12 +240,11 @@ de diferentes casos. Con estos datos. utilizar tests se vuelve más eficiente y 
 
 Yii soporta fixtures a través de la herramienta de línea de comandos `yii fixture`. Esta herramienta soporta:
 
-* Cargar fixtures a diferentes almacenamientos: RDBMS, NoSQL, etc;
-* Descargar fixtures de diferentes maneras (usualmente limpiando el almacenamiento);
-* Auto-generar fixtures y poblarlos con datos al azar.
+- Cargar fixtures a diferentes almacenamientos: RDBMS, NoSQL, etc;
+- Descargar fixtures de diferentes maneras (usualmente limpiando el almacenamiento);
+- Auto-generar fixtures y poblarlos con datos al azar.
 
-Formato de Fixtures
--------------------
+## Formato de Fixtures
 
 Los fixtures son objetos con diferentes métodos y configuraciones, inspecciónalos en la [documentación oficial](https://github.com/yiisoft/yii2/blob/master/docs/guide-es/test-fixtures.md).
 Asumamos que tenemos datos de fixtures a cargar:
@@ -282,13 +269,13 @@ return [
     ],
 ];
 ```
+
 Si estamos utilizando un fixture que carga datos en la base de datos, entonces esos registros serán insertados en la tabla `users`. Si estamos utilizando fixtures no sql, por ejemplo de `mongodb`,
 entonces estos datos serán aplicados a la colección mongodb `users`. Para aprender cómo implementar varias estrategias de carga y más, visita la [documentación oficial](https://github.com/yiisoft/yii2/blob/master/docs/guide-es/test-fixtures.md).
 El fixture de ejemplo de arriba fue autogenerado por la extensión `yii2-faker`, lee más acerca de esto en su [sección](#auto-generating-fixtures).
 Los nombres de clase de fixtures no deberían ser en plural.
 
-Cargar fixtures
-----------------
+## Cargar fixtures
 
 Las clases de fixture deberían tener el prefijo `Fixture`. Por defecto los fixtures serán buscados bajo el espacio de nombre `tests\unit\fixtures`, puedes
 modificar este comportamiento con opciones de comando o configuración. Puedes excluir algunos fixtures para carga o descarga especificando `-` antes de su nombre, por ejemplo `-User`.
@@ -330,8 +317,7 @@ yii fixture User --namespace='alias\my\custom\namespace'
 yii fixture User --globalFixtures='some\name\space\Custom'
 ```
 
-Descargar fixtures
-------------------
+## Descargar fixtures
 
 Para descargar un fixture, ejecuta el siguiente comando:
 
@@ -352,8 +338,8 @@ yii fixture/unload "*, -DoNotUnloadThisOne"
 
 Opciones de comando similares como: `namespace`, `globalFixtures` también pueden ser aplicadas a este comando.
 
-Configurar el Comando Globalmente
----------------------------------
+## Configurar el Comando Globalmente
+
 Mientras que las opciones de línea de comandos nos permiten configurar el comando de migración
 en el momento, a veces queremos configurar el comando de una vez y para siempre. Por ejemplo puedes configurar
 diferentes rutas de migración como a continuación:
@@ -371,8 +357,7 @@ diferentes rutas de migración como a continuación:
 ]
 ```
 
-Autogenerando fixtures
-----------------------
+## Autogenerando fixtures
 
 Yii puede también autogenerar fixtures por tí basándose en algún template. Puedes generar tus fixtures con distintos datos en diferentes lenguajes y formatos.
 Esta característica es realizada por la librería [Faker](https://github.com/fzaninotto/Faker) y la extensión `yii2-faker`.

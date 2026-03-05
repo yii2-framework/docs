@@ -1,5 +1,4 @@
-事件（Events）
-============
+# 事件（Events）
 
 事件可以将自定义代码“注入”到现有代码中的特定执行点。
 附加自定义代码到某个事件，当这个事件被触发时，这些代码就会自动执行。
@@ -9,9 +8,7 @@
 Yii 引入了名为 [[yii\base\Component]] 的基类以支持事件。
 如果一个类需要触发事件就应该继承 [[yii\base\Component]] 或其子类。
 
-
-事件处理器（Event Handlers） <span id="event-handlers"></span>
--------------------------
+## 事件处理器（Event Handlers） <span id="event-handlers"></span>
 
 事件处理器是一个[PHP 回调函数](https://www.php.net/manual/zh/language.types.callable.php)，
 当它所附加到的事件被触发时它就会执行。可以使用以下回调函数之一：
@@ -35,9 +32,7 @@ function ($event) {
 - [[yii\base\Event::sender|event sender]]：调用 `trigger()` 方法的对象
 - [[yii\base\Event::data|custom data]]：附加事件处理器时传入的数据，默认为空，后文详述
 
-
-附加事件处理器（Attaching Event Handlers） <span id="attaching-event-handlers"></span>
---------------------------------------
+## 附加事件处理器（Attaching Event Handlers） <span id="attaching-event-handlers"></span>
 
 调用 [[yii\base\Component::on()]] 方法来附加处理器到事件上。如：
 
@@ -62,7 +57,6 @@ $foo->on(Foo::EVENT_HELLO, function ($event) {
 你也可以通过 [配置](concept-configurations.md) 附加事件处理器。 请
 参考 [配置的格式](concept-configurations.md#configuration-format) 小节了解更多.
 
-
 附加事件处理器时可以提供额外数据作为 [[yii\base\Component::on()]] 方法的第三个参数。
 数据在事件被触发和处理器被调用时能被处理器使用。如：
 
@@ -76,8 +70,7 @@ function function_name($event) {
 }
 ```
 
-事件处理器顺序（Event Handler Order）
----------------------------------
+## 事件处理器顺序（Event Handler Order）
 
 可以附加一个或多个处理器到一个事件。当事件被触发，已附加的处理器将按附加次序依次调用。
 如果某个处理器需要停止其后的处理器调用，可以设置 `$event` 参数的 [[yii\base\Event::handled]] 属性为真，
@@ -99,8 +92,7 @@ $foo->on(Foo::EVENT_HELLO, function ($event) {
 }, $data, false);
 ```
 
-触发事件（Triggering Events） <span id="triggering-events"></span>
---------------------------
+## 触发事件（Triggering Events） <span id="triggering-events"></span>
 
 事件通过调用 [[yii\base\Component::trigger()]] 方法触发，此方法须传递*事件名*，
 还可以传递一个事件对象，用来传递参数到事件处理器。如：
@@ -125,8 +117,8 @@ class Foo extends Component
 以上代码当调用 `bar()` ，它将触发名为 `hello` 的事件。
 
 > Tip: 推荐使用类常量来表示事件名。上例中，常量 `EVENT_HELLO` 用来表示 `hello` 。
-  这有两个好处。第一，它可以防止拼写错误并支持 IDE 的自动完成。
-  第二，只要简单检查常量声明就能了解一个类支持哪些事件。
+> 这有两个好处。第一，它可以防止拼写错误并支持 IDE 的自动完成。
+> 第二，只要简单检查常量声明就能了解一个类支持哪些事件。
 
 有时想要在触发事件时同时传递一些额外信息到事件处理器。
 例如，邮件程序要传递消息信息到 `messageSent` 事件的处理器以便处理器了解哪些消息被发送了。
@@ -163,9 +155,7 @@ class Mailer extends Component
 当 [[yii\base\Component::trigger()]] 方法被调用时，
 它将调用所有附加到命名事件（trigger 方法第一个参数）的事件处理器。
 
-
-移除事件处理器（Detaching Event Handlers） <span id="detaching-event-handlers"></span>
---------------------------------------
+## 移除事件处理器（Detaching Event Handlers） <span id="detaching-event-handlers"></span>
 
 从事件移除处理器，调用 [[yii\base\Component::off()]] 方法。如：
 
@@ -193,16 +183,14 @@ $foo->off(Foo::EVENT_HELLO, $anonymousFunction);
 $foo->off(Foo::EVENT_HELLO);
 ```
 
-
-类级别的事件处理器（Class-Level Event Handlers） <span id="class-level-event-handlers"></span>
--------------------------------------------
+## 类级别的事件处理器（Class-Level Event Handlers） <span id="class-level-event-handlers"></span>
 
 以上部分，我们叙述了在*实例级别*如何附加处理器到事件。
 有时想要一个类的*所有*实例而不是一个指定的实例都响应一个被触发的事件，
 并不是一个个附加事件处理器到每个实例，
 而是通过调用静态方法 [[yii\base\Event::on()]] 在*类级别*附加处理器。
 
-例如，[活动记录](db-active-record.md)对象要在每次往数据库新增一条新记录时触发一个 
+例如，[活动记录](db-active-record.md)对象要在每次往数据库新增一条新记录时触发一个
 [[yii\db\BaseActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 事件。
 要追踪每个[活动记录](db-active-record.md)对象的新增记录完成情况，应如下写代码：
 
@@ -216,7 +204,7 @@ Event::on(ActiveRecord::class, ActiveRecord::EVENT_AFTER_INSERT, function ($even
 });
 ```
 
-每当 [[yii\db\BaseActiveRecord|ActiveRecord]] 或其子类的实例触发 
+每当 [[yii\db\BaseActiveRecord|ActiveRecord]] 或其子类的实例触发
 [[yii\db\BaseActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 事件时，
 这个事件处理器都会执行。在这个处理器中，可以通过 `$event->sender` 获取触发事件的对象。
 
@@ -239,7 +227,7 @@ Event::trigger(Foo::class, Foo::EVENT_HELLO);
 注意这种情况下 `$event->sender` 指向触发事件的类名而不是对象实例。
 
 > Note: 因为类级别的处理器响应类和其子类的所有实例触发的事件，
-  必须谨慎使用，尤其是底层的基类，如 [[yii\base\Object]]。
+> 必须谨慎使用，尤其是底层的基类，如 [[yii\base\Object]]。
 
 移除类级别的事件处理器只需调用[[yii\base\Event::off()]]，如：
 
@@ -251,9 +239,7 @@ Event::off(Foo::class, Foo::EVENT_HELLO, $handler);
 Event::off(Foo::class, Foo::EVENT_HELLO);
 ```
 
-
-使用接口事件（Events using interfaces） <span id="interface-level-event-handlers"></span>
------------------------------------
+## 使用接口事件（Events using interfaces） <span id="interface-level-event-handlers"></span>
 
 有更多的抽象方式来处理事件。你可以为特殊的事件创建一个独立的接口，
 然后在你需要的类中实现它。
@@ -291,7 +277,7 @@ class Developer extends Component implements DanceEventInterface
 }
 ```
 
-要处理由这些类触发的 `EVENT_DANCE` ，调用 [[yii\base\Event::on()|Event::on()]] 
+要处理由这些类触发的 `EVENT_DANCE` ，调用 [[yii\base\Event::on()|Event::on()]]
 并将接口类名作为第一个参数:
 
 ```php
@@ -327,9 +313,7 @@ Event::off('app\interfaces\DanceEventInterface', DanceEventInterface::EVENT_DANC
 Event::off('app\interfaces\DanceEventInterface', DanceEventInterface::EVENT_DANCE);
 ```
 
-
-全局事件（Global Events） <span id="global-events"></span>
-----------------------
+## 全局事件（Global Events） <span id="global-events"></span>
 
 所谓*全局事件*实际上是一个基于以上叙述的事件机制的戏法。它需要一个全局可访问的单例，
 如[应用](structure-applications.md)实例。
@@ -356,9 +340,7 @@ Yii::$app->trigger('bar', new Event(['sender' => new Foo]));
 然而，因为全局事件的命名空间由各方共享，应合理命名全局事件，
 如引入一些命名空间（例："frontend.mail.sent", "backend.mail.sent"）。
 
-
-通配符事件（Wildcard Events） <span id="wildcard-events"></span>
---------------------------
+## 通配符事件（Wildcard Events） <span id="wildcard-events"></span>
 
 自 2.0.14 以来，您可以为多个匹配通配符模式的事件设置事件处理程序。
 例如：
@@ -399,7 +381,7 @@ Event::on('*', '*', function ($event) {
 ```
 
 > Note: 事件处理程序设置的使用通配符可能会降低应用程序的性能。
-  如果可能，最好避免。
+> 如果可能，最好避免。
 
 为了移除由通配符模式指定的事件处理程序，您应该在
 [[yii\base\Component::off()]] 或 [[yii\base\Event::off()]] 调用中重复相同的模式。

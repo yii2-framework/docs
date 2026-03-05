@@ -1,5 +1,4 @@
-Trabajar con Passwords
-======================
+# Trabajar con Passwords
 
 La mayoría de los desarrolladores saben que los passwords no deben ser guardados en texto plano, pero muchos desarrolladores aún creen
 que es seguro aplicar a los passowrds hash `md5` o `sha1`. Hubo un tiempo cuando utilizar esos algoritmos de hash mencionados era suficiente,
@@ -12,7 +11,6 @@ dos funciones auxiliares que hacen que `crypt` genere y verifique los hash más 
 
 Cuando un usuario provee un password por primera vez (por ej., en la registración), dicho password necesita ser pasado por un hash:
 
-
 ```php
 $hash = Yii::$app->getSecurity()->generatePasswordHash($password);
 ```
@@ -20,7 +18,6 @@ $hash = Yii::$app->getSecurity()->generatePasswordHash($password);
 El hash puede estar asociado con el atributo del model correspondiente, de manera que pueda ser almacenado en la base de datos para uso posterior.
 
 Cuando un usuario intenta ingresar al sistema, el password enviado debe ser verificado con el password con hash almacenado previamente:
-
 
 ```php
 if (Yii::$app->getSecurity()->validatePassword($password, $hash)) {

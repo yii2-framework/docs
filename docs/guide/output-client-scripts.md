@@ -1,5 +1,4 @@
-Working with Client Scripts
-===========================
+# Working with Client Scripts
 
 Modern web applications, additionally to static HTML pages that are
 rendered and sent to the browser, contain JavaScript that is used
@@ -68,7 +67,7 @@ multiple JS files, which is desirable for high traffic websites.
 ## Registering CSS <span id="register-css"></span>
 
 Similar to JavaScript, you can register CSS using
-[[yii\web\View::registerCss()|registerCss()]] or 
+[[yii\web\View::registerCss()|registerCss()]] or
 [[yii\web\View::registerCssFile()|registerCssFile()]].
 The former registers a block of CSS code while the latter registers an external CSS file.
 
@@ -82,7 +81,9 @@ The code above will result in adding the following to the `<head>` section of th
 
 ```html
 <style>
-body { background: #f00; }
+  body {
+    background: #f00;
+  }
 </style>
 ```
 
@@ -102,20 +103,19 @@ $this->registerCssFile("@web/css/themes/black-and-white.css", [
 
 The above code will add a link to the `/css/themes/black-and-white.css` CSS file to the `<head>` section of the page.
 
-* The first argument specifies the CSS file to be registered.
+- The first argument specifies the CSS file to be registered.
   The `@web` in this example is an [alias for the applications base URL](concept-aliases.md#predefined-aliases).
-* The second argument specifies the HTML attributes for the resulting `<link>` tag. The option `depends`
+- The second argument specifies the HTML attributes for the resulting `<link>` tag. The option `depends`
   is specially handled. It specifies which asset bundles this CSS file depends on. In this case, the dependent
   asset bundle is [[yii\bootstrap\BootstrapAsset|BootstrapAsset]]. This means the CSS file will be added
-  *after* the CSS files from [[yii\bootstrap\BootstrapAsset|BootstrapAsset]].
-* The last argument specifies an ID identifying this CSS file. If it is not provided, the URL of the CSS file will be
+  _after_ the CSS files from [[yii\bootstrap\BootstrapAsset|BootstrapAsset]].
+- The last argument specifies an ID identifying this CSS file. If it is not provided, the URL of the CSS file will be
   used instead.
 
 It is highly recommended to use [asset bundles](structure-assets.md) to register external CSS files rather than
 [[yii\web\View::registerCssFile()|registerCssFile()]]. Using asset bundles allows you to combine and compress
 multiple CSS files, which is desirable for high traffic websites.
 It also provides more flexibility as all asset dependencies of your application are configured in one place.
-
 
 ## Registering asset bundles <span id="asset-bundles"></span>
 
@@ -131,7 +131,6 @@ As for using already defined asset bundles, it's very straightforward:
 In the above code, in the context of a view file, the `AppAsset` bundle is registered on the current view (represented by `$this`).
 When registering asset bundles from within a widget, you would pass the
 [[yii\base\Widget::$view|$view]] of the widget instead (`$this->view`).
-
 
 ## Generating Dynamic Javascript <span id="dynamic-js"></span>
 
@@ -167,7 +166,11 @@ The above code will register a `<script>`-tag containing the JavaScript
 variable definition, e.g.:
 
 ```javascript
-var yiiOptions = {"appName":"My Yii Application","baseUrl":"/basic/web","language":"en"};
+var yiiOptions = {
+  appName: "My Yii Application",
+  baseUrl: "/basic/web",
+  language: "en",
+};
 ```
 
 In your JavaScript code you can now access these like `yiiOptions.baseUrl` or `yiiOptions.language`.
@@ -191,7 +194,7 @@ JS
 The above example code uses PHP
 [Heredoc syntax](https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc) for better readability. This also enables better syntax highlighting in most IDEs so it is the
 preferred way of writing inline JavaScript, especially useful for code that is longer than a single line. The variable `$message` is created in PHP and
-thanks to [[yii\helpers\Json::htmlEncode|Json::htmlEncode]] it contains the 
+thanks to [[yii\helpers\Json::htmlEncode|Json::htmlEncode]] it contains the
 string in valid JS syntax, which can be inserted into the JavaScript code to place the dynamic string in the function call to `alert()`.
 
 > Note: When using Heredoc, be careful with variable naming in JS code
@@ -203,7 +206,7 @@ string in valid JS syntax, which can be inserted into the JavaScript code to pla
 ## The `yii.js` script <span id="yii.js"></span>
 
 > Note: This section has not been written yet. It should contain explanation of the functionality provided by `yii.js`:
-> 
+>
 > - Yii JavaScript Modules
 > - CSRF param handling
 > - `data-confirm` handler

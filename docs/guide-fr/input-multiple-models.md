@@ -1,7 +1,6 @@
-Obtenir des données pour plusieurs modèles
-==========================================
+# Obtenir des données pour plusieurs modèles
 
-Lorsque vous avez affaire à des données complexes, il est possible que vous ayez besoin d'utiliser plusieurs modèles différents pour collecter des saisies de l'utilisateur. Par exemple, en supposant que les informations de connexion de l'utilisateur sont stockées dans la table `user` tandis que les informations de son profil sont stockées dans la table `profil`, vous désirez peut-être collecter les données de l'utilisateur via un modèle `User` et un modèle `Profile`. Avec la prise en charge par Yii des modèles et des formulaires, vous pouvez résoudre ce problème d'une façon qui ne diffère qu'assez peu de celle consistant à utiliser un modèle unique. 
+Lorsque vous avez affaire à des données complexes, il est possible que vous ayez besoin d'utiliser plusieurs modèles différents pour collecter des saisies de l'utilisateur. Par exemple, en supposant que les informations de connexion de l'utilisateur sont stockées dans la table `user` tandis que les informations de son profil sont stockées dans la table `profil`, vous désirez peut-être collecter les données de l'utilisateur via un modèle `User` et un modèle `Profile`. Avec la prise en charge par Yii des modèles et des formulaires, vous pouvez résoudre ce problème d'une façon qui ne diffère qu'assez peu de celle consistant à utiliser un modèle unique.
 
 Dans ce qui suit, nous montrons comment créer un formulaire que permet la collecte de données pour les deux modèles, `User` et `Profile`, à la fois.
 
@@ -25,16 +24,16 @@ class UserController extends Controller
         if (!$user) {
             throw new NotFoundHttpException("The user was not found.");
         }
-        
+
         $profile = Profile::findOne($user->profile_id);
-        
+
         if (!$profile) {
             throw new NotFoundHttpException("The user has no profile.");
         }
-        
+
         $user->scenario = 'update';
         $profile->scenario = 'update';
-        
+
         if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
             $isValid = $user->validate();
             $isValid = $profile->validate() && $isValid;
@@ -44,7 +43,7 @@ class UserController extends Controller
                 return $this->redirect(['user/view', 'id' => $id]);
             }
         }
-        
+
         return $this->render('update', [
             'user' => $user,
             'profile' => $profile,
@@ -67,7 +66,7 @@ $form = ActiveForm::begin([
     <?= $form->field($user, 'username') ?>
 
     ...autres champs de saisie...
-    
+
     <?= $form->field($profile, 'website') ?>
 
     <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>

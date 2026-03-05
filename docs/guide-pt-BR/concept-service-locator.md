@@ -1,14 +1,13 @@
-Service Locator
-===============
+# Service Locator
 
 Um service locator é um objeto que sabe como fornecer todos os tipos de serviços (ou componentes) que uma aplicação pode precisar. Num service locator, existe uma única instância de cada componente, exclusivamente identificados por um ID.
 Você usa o ID para recuperar um componente do service locator.
 
 No Yii, um service locator é simplesmente uma instância da classe [[yii\di\ServiceLocator]] ou de classes que as estendam.
 
-O service locator mais comumente utilizado no Yii é o objeto *application*, que pode ser acessado através de `\Yii::$app`. Os serviços que ele fornece são chamados de *componentes de aplicação*, tais como os componentes `request`, `response`, e `urlManager`. Você pode configurar esses componentes, ou mesmo substituí-los com suas próprias implementações, facilmente através de funcionalidades fornecidas pelo service locator.
+O service locator mais comumente utilizado no Yii é o objeto _application_, que pode ser acessado através de `\Yii::$app`. Os serviços que ele fornece são chamados de _componentes de aplicação_, tais como os componentes `request`, `response`, e `urlManager`. Você pode configurar esses componentes, ou mesmo substituí-los com suas próprias implementações, facilmente através de funcionalidades fornecidas pelo service locator.
 
-Além do objeto *application*, cada objeto *module* também é um service locator.
+Além do objeto _application_, cada objeto _module_ também é um service locator.
 Para usar um service locator, o primeiro passo é registrar os componentes nele. Um componente pode ser registrado com [[yii\di\ServiceLocator::set()]]. O código abaixo mostra os diferentes modos de registrar um componente:
 
 ```php
@@ -49,7 +48,6 @@ Como mostrado acima, [[yii\di\ServiceLocator]] permite-lhe acessar um componente
 
 Você pode utilizar [[yii\di\ServiceLocator::has()]] para checar se um ID de componente já está registrado.
 Se você executar [[yii\di\ServiceLocator::get()]] com um ID inválido, uma exceção será lançada.
-
 
 Uma vez que service locators geralmente são criados com [configurações](concept-configurations.md), uma propriedade chamada [[yii\di\ServiceLocator::setComponents()|components]] é fornecida. Isso permite que você possa configurar e registrar vários componentes de uma só vez. O código a seguir mostra um array de configuração que pode ser utilizado para configurar um service locator (por exemplo. uma [aplicação](structure-applications.md)) com o "db", "cache" e "search" components:
 

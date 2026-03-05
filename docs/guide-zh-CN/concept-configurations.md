@@ -1,5 +1,4 @@
-配置（Configurations）
-====================
+# 配置（Configurations）
 
 在 Yii 中，创建新对象和初始化已存在对象时广泛使用配置。
 配置通常包含被创建对象的类名和一组将要赋值给对象
@@ -34,7 +33,6 @@ Yii::configure($object, $config);
 
 请注意，如果配置一个已存在的对象，那么配置数组中不应该包含指定类名的 `class` 元素。
 
-
 ## 配置的格式（Configuration Format） <span id="configuration-format"></span>
 
 一个配置的格式可以描述为以下形式：
@@ -50,15 +48,15 @@ Yii::configure($object, $config);
 
 其中
 
-* `class` 元素指定了将要创建的对象的完全限定类名。
-* `propertyName` 元素指定了对象属性的初始值。键名是属性名，值是该属性对应的初始值。
+- `class` 元素指定了将要创建的对象的完全限定类名。
+- `propertyName` 元素指定了对象属性的初始值。键名是属性名，值是该属性对应的初始值。
   只有公共成员变量以及通过 getter/setter 定义的
   [属性](concept-properties.md)可以被配置。
-* `on eventName` 元素指定了附加到对象[事件](concept-events.md)上的句柄是什么。
+- `on eventName` 元素指定了附加到对象[事件](concept-events.md)上的句柄是什么。
   请注意，数组的键名由 `on ` 前缀加事件名组成。
   请参考[事件](concept-events.md)章节了解事件句柄格式。
-* `as behaviorName` 元素指定了附加到对象的[行为](concept-behaviors.md)。
-  请注意，数组的键名由 `as ` 前缀加行为名组成。`$behaviorConfig` 
+- `as behaviorName` 元素指定了附加到对象的[行为](concept-behaviors.md)。
+  请注意，数组的键名由 `as ` 前缀加行为名组成。`$behaviorConfig`
   值表示创建行为的配置信息，格式与我们之前描述的配置格式一样。
 
 下面是一个配置了初始化属性值，事件句柄和行为的示例：
@@ -77,19 +75,17 @@ Yii::configure($object, $config);
 ]
 ```
 
-
 ## 使用配置（Using Configurations） <span id="using-configurations"></span>
 
-Yii 中的配置可以用在很多场景。本章开头我们展示了如何使用 [[Yii::creatObject()]] 
+Yii 中的配置可以用在很多场景。本章开头我们展示了如何使用 [[Yii::creatObject()]]
 根据配置信息创建对象。本小节将介绍配置的两种
 主要用法 —— 配置应用与配置小部件。
-
 
 ### 应用的配置（Application Configurations） <span id="application-configurations"></span>
 
 [应用](structure-applications.md)的配置可能是最复杂的配置之一。
 因为 [[yii\web\Application|application]] 类拥有很多可配置的属性和事件。
-更重要的是它的 [[yii\web\Application::components|components]] 
+更重要的是它的 [[yii\web\Application::components|components]]
 属性可以接收配置数组并通过应用注册为组件。
 以下是一个针对[基础应用模板](start-installation.md)的应用配置概要：
 
@@ -157,11 +153,10 @@ $config = [
 请参考 [依赖注入容器](concept-di-container.md) 下面的 [高级应用实例](concept-di-container.md#advanced-practical-usage)
 获取更多 `definitions` 和 `singletons` 配置项和实际使用的例子。
 
-
 ### 小部件的配置（Widget Configurations） <span id="widget-configurations"></span>
 
 使用[小部件](structure-widgets.md)时，常常需要配置以便自定义其属性。
-[[yii\base\Widget::widget()]] 和  [[yii\base\Widget::begin()]] 方法都可以用来创建小部件。
+[[yii\base\Widget::widget()]] 和 [[yii\base\Widget::begin()]] 方法都可以用来创建小部件。
 它们可以接受配置数组：
 
 ```php
@@ -181,7 +176,6 @@ echo Menu::widget([
 `item` 属性也配置成了将要显示的菜单条目。
 
 请注意，代码中已经给出了类名 `yii\widgets\Menu`，配置数组**不应该**再包含 `class` 键。
-
 
 ## 配置文件（Configuration Files） <span id="configuration-files"></span>
 
@@ -235,7 +229,6 @@ $config = require 'path/to/web.php';
 (new yii\web\Application($config))->run();
 ```
 
-
 ## 默认配置（Default Configurations） <span id="default-configurations"></span>
 
 [[Yii::createObject()]] 方法基于[依赖注入容器](concept-di-container.md)实现。
@@ -254,7 +247,6 @@ $config = require 'path/to/web.php';
 
 不使用默认配置的话，你就得在任何使用分页器的地方，
 都配置 `maxButtonCount` 的值。
-
 
 ## 环境常量（Environment Constants） <span id="environment-constants"></span>
 

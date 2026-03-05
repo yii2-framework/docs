@@ -1,5 +1,4 @@
-Classes assistantes
-===================
+# Classes assistantes
 
 > Note: cette section est en cours de développement.
 
@@ -15,9 +14,7 @@ echo Html::encode('Test > test');
 
 > Note: pour prendre en charge la [personnalisation des classes assistantes](#customizing-helper-classes), Yii éclate chacune des classes assistantes du noyau en deux classes : une classe de base (p. ex. `BaseArrayHelper`) et une classe concrète (p. ex. `ArrayHelper`). Lorsque vous utilisez une classe assistante, vous devez utiliser la version concrète uniquement et ne jamais utiliser la classe de base.
 
-
-Classes assistantes du noyau
-----------------------------
+## Classes assistantes du noyau
 
 Les versions de Yii fournissent les classes assistantes du noyau suivantes :
 
@@ -35,9 +32,7 @@ Les versions de Yii fournissent les classes assistantes du noyau suivantes :
 - [Url](helper-url.md)
 - VarDumper
 
-
-Personnalisation des classes assistantes <span id="customizing-helper-classes"></span>
-----------------------------------------
+## Personnalisation des classes assistantes <span id="customizing-helper-classes"></span>
 
 Pour personnaliser une classe assistante du noyau (p. ex. [[yii\helpers\ArrayHelper]]), vous devez créer une nouvelle classe qui étend la classe de base correspondant à la classe assistante (p. ex. [[yii\helpers\ArrayHelper]]), y compris son espace de noms. Cette classe sera ensuite configurée pour remplacer l'implémentation originale de Yii.
 
@@ -59,7 +54,7 @@ class ArrayHelper extends BaseArrayHelper
 
 Sauvegardez votre classe dans un fichier nommé `ArrayHelper.php`. Le fichier peut se trouver dans n'importe quel dossier, par exemple, `@app/components`.
 
-Ensuite, dans le [script d'entrée](structure-entry-scripts.md) de votre application, ajoutez la ligne de code suivante, après l'inclusion du fichier `yii.php` pour dire à la [classe autoloader de Yii](concept-autoloading.md) de charger votre classe personnalisée au lieu de la classe assistance originale de Yii. 
+Ensuite, dans le [script d'entrée](structure-entry-scripts.md) de votre application, ajoutez la ligne de code suivante, après l'inclusion du fichier `yii.php` pour dire à la [classe autoloader de Yii](concept-autoloading.md) de charger votre classe personnalisée au lieu de la classe assistance originale de Yii.
 
 ```php
 Yii::$classMap['yii\helpers\ArrayHelper'] = '@app/components/ArrayHelper.php';

@@ -1,5 +1,4 @@
-Corriendo Aplicaciones
-======================
+# Corriendo Aplicaciones
 
 Después de haber instalado Yii, tienes una aplicación totalmente funcional a la que se puede acceder a través de
 la URL `https://hostname/basic/web/index.php` o `https://hostname/index.php`, dependiendo de tu configuración.
@@ -7,23 +6,21 @@ Esta sección será una introducción a la funcionalidad incluida de la aplicaci
 y cómo la aplicación maneja los requests en general.
 
 > Info: Por simplicidad, en el transcurso de este tutorial "Para Empezar", se asume que has definido `basic/web`
-  como el document root de tu servidor Web, y configurado la URL de acceso a tu aplicación para que sea `https://hostname/index.php`
-  o similar.
-  Dependiendo de tus necesidades, por favor ajusta dichas URLs.
-  
+> como el document root de tu servidor Web, y configurado la URL de acceso a tu aplicación para que sea `https://hostname/index.php`
+> o similar.
+> Dependiendo de tus necesidades, por favor ajusta dichas URLs.
+
 Ten en cuenta que a diferencia del framework en sí, después de que el template de proyecto es instalado, este es todo tuyo. Eres libre de agregar o eliminar
 código modificar todo según tu necesidad.
 
-
-Funcionalidad <span id="functionality"></span>
--------------
+## Funcionalidad <span id="functionality"></span>
 
 La aplicación básica contiene 4 páginas:
 
-* página principal, mostrada cuando se accede a la URL `https://hostname/index.php`,
-* página "Acerca de (About)",
-* la página "Contacto (Contact)", que muestra un formulario de contacto que permite a los usuarios finales contactarse vía email,
-* y la página "Login", que muestra un formulario para loguearse que puede usarse para autenticar usuarios. 
+- página principal, mostrada cuando se accede a la URL `https://hostname/index.php`,
+- página "Acerca de (About)",
+- la página "Contacto (Contact)", que muestra un formulario de contacto que permite a los usuarios finales contactarse vía email,
+- y la página "Login", que muestra un formulario para loguearse que puede usarse para autenticar usuarios.
   Intenta loguearte con "admin/admin", y verás que el elemento "Login" del menú principal cambiará a "Logout".
 
 Estas páginas comparten un encabezado y un pie. El encabezado contiene una barra con el menú principal que permite
@@ -36,9 +33,7 @@ Adicionalmente a la aplicación web, hay un script de consola llamado `yii`, loc
 El script puede ser utilizado para ejecutar tareas de fondo y tareas de mantenimiento de la aplicación, las cuales son descritas
 en la [Sección de Aplicación de Consola](tutorial-console.md).
 
-  
-Estructura de la aplicación <span id="application-structure"></span>
----------------------------
+## Estructura de la aplicación <span id="application-structure"></span>
 
 Los archivos y directorios más importantes en tu aplicación son (asumiendo que la raíz de la aplicación es `basic`):
 
@@ -78,9 +73,7 @@ La [aplicación](structure-applications.md) resuelve la petición (request) con 
 y la envía al resto de los elementos MVC. Los [widgets](structure-widgets.md) son usados en las [vistas](structure-views.md)
 para ayudar a construir elementos de interfaz complejos y dinámicos.
 
-
-Ciclo de Vida de una Petición (Request) <span id="request-lifecycle"></span>
----------------------------------------
+## Ciclo de Vida de una Petición (Request) <span id="request-lifecycle"></span>
 
 El siguiente diagrama muestra cómo una aplicación maneja una petición.
 
@@ -88,9 +81,9 @@ El siguiente diagrama muestra cómo una aplicación maneja una petición.
 
 1. Un usuario realiza una petición al [script de entrada](structure-entry-scripts.md) `web/index.php`.
 2. El script de entrada carga la [configuración](concept-configurations.md) de la aplicación y crea
-  una instancia de la [aplicación](structure-applications.md) para manejar la consulta.
+   una instancia de la [aplicación](structure-applications.md) para manejar la consulta.
 3. La aplicación resuelve la [ruta](runtime-routing.md) solicitada con la ayuda del
-  componente [request](runtime-requests.md) de la aplicación.
+   componente [request](runtime-requests.md) de la aplicación.
 4. La aplicación crea una instancia de un [controlador](structure-controllers.md) para manejar la petición.
 5. El controlador crea una instancia de una [acción](structure-controllers.md) y ejecuta los filtros de dicha acción.
 6. Si alguno de los filtros falla, la acción es cancelada.

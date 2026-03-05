@@ -1,5 +1,4 @@
-Bekerja dengan Form
-==================
+# Bekerja dengan Form
 
 Bagian ini memaparkan bagaimana membuat halaman dengan form untuk mengambil data dari pengguna.
 Halaman akan menampilkan form dengan input field Nama dan Email.
@@ -10,12 +9,11 @@ dua [_view_](structure-views.md), anda juga harus membuat [_model_](structure-mo
 
 Sepanjang tutorial ini, anda akan mempelajari bagaimana cara untuk:
 
-* Membuat sebuah [model](structure-models.md) sebagai representasi data yang diinput oleh pengguna melalui form,
-* Membuat _rules_ untuk memvalidasi data yang telah diinput.
-* Membuat form HTML di dalam [view](structure-views.md).
+- Membuat sebuah [model](structure-models.md) sebagai representasi data yang diinput oleh pengguna melalui form,
+- Membuat _rules_ untuk memvalidasi data yang telah diinput.
+- Membuat form HTML di dalam [view](structure-views.md).
 
-Membuat Model <span id="creating-model"></span>
-----------------
+## Membuat Model <span id="creating-model"></span>
 
 Data yang akan diambil dari pengguna akan direpresentasikan oleh class model `EntryForm` sebagaimana ditunjukkan di bawah dan
 di simpan pada file `models/EntryForm.php`. Silahkan membaca bagian [Class Autoloading](concept-autoloading.md)
@@ -48,14 +46,14 @@ Class di _extends_ dari [[yii\base\Model]], class standar yang disediakan oleh Y
 untuk representasi data dari form.
 
 > Info: [[yii\base\Model]] digunakan sebagai _parent_ untuk class model yang tidak berhubungan dengan database.
-  [[yii\db\ActiveRecord]] normalnya digunakan sebagai _parent_ untuk class model yang berhubungan dengan tabel di database.
+> [[yii\db\ActiveRecord]] normalnya digunakan sebagai _parent_ untuk class model yang berhubungan dengan tabel di database.
 
 Class `EntryForm` terdiri dari dua _public property_, `name` dan `email`, dimana akan digunakan untuk menyimpan
 data yang diinput oleh pengguna. Class ini juga terdapat _method_ yang dinamakan `rules()`, yang akan mengembalikan (_return_) sejumlah
 pengaturan (_rules_) untuk memvalidasi data. Pengaturan validasi (_Validation Rules_) yang di deklarasikan harus mendeskripsikan bahwa
 
-* kedua field, yaitu `name` and `email` wajib di input
-* data `email` harus merupakan alamat email yang valid
+- kedua field, yaitu `name` and `email` wajib di input
+- data `email` harus merupakan alamat email yang valid
 
 Jika anda memiliki objek `EntryForm` yang sudah mengandung data yang di input oleh pengguna, anda boleh memanggil
 method [[yii\base\Model::validate()|validate()]] untuk melaksanakan validasi data. Kegagalan validasi data
@@ -75,9 +73,7 @@ if ($model->validate()) {
 }
 ```
 
-
-Membuat Action <span id="creating-action"></span>
-------------------
+## Membuat Action <span id="creating-action"></span>
 
 Selanjutnya, anda harus membuat `entry` _action_ pada controller `site` yang akan memanfaatkan model yang baru saja dibuat. Proses
 membuat dan menggunakan _action_ dijelaskan pada bagian [Mengatakan Hello](start-hello.md).
@@ -119,21 +115,19 @@ Jika model berhasil dibuat (misal, jika pengguna telah mengirim form HTML), _act
 [[yii\base\Model::validate()|validate()]] untuk memastikan data yang di input tersebut valid.
 
 > Info : _Expression_ `Yii::$app` adalah representasi dari objek [aplikasi](structure-applications.md),
-  dimana objek tersebut adalah _singleton_ yang bebas diakses secara global. Objek tersebut juga merupakan [service locator](concept-service-locator.md) yang
-  menyediakan _components_ seperti `request`, `response`, `db`, dll. untuk mendukung pekerjaan yang spesifik.
-  Pada kode di atas, _component_ `request` dari objek aplikasi digunakan untuk mengakses data `$_POST`.
+> dimana objek tersebut adalah _singleton_ yang bebas diakses secara global. Objek tersebut juga merupakan [service locator](concept-service-locator.md) yang
+> menyediakan _components_ seperti `request`, `response`, `db`, dll. untuk mendukung pekerjaan yang spesifik.
+> Pada kode di atas, _component_ `request` dari objek aplikasi digunakan untuk mengakses data `$_POST`.
 
 Jika tidak ada error, _action_ akan me-_render_ _view_ bernama `entry-confirm` untuk menginformasikan ke pengguna bahwa pengiriman
 data tersebut berhasil. Jika tidak ada data yang dikirim atau data tersebut tidak valid, _view_ `entry` yang akan di _render_,
 dimana form HTML akan ditampilkan, beserta informasi kegagalan pengiriman form tersebut.
 
 > Note: Pada contoh sederhana ini kita hanya me-_render_ halaman konfirmasi jika data yang dikirim tersebut valid. Pada prakteknya,
-  anda harus pertimbangkan untuk menggunakan [[yii\web\Controller::refresh()|refresh()]] atau [[yii\web\Controller::redirect()|redirect()]]
-  untuk mencegah [permasalahan pengiriman form](https://en.wikipedia.org/wiki/Post/Redirect/Get).
+> anda harus pertimbangkan untuk menggunakan [[yii\web\Controller::refresh()|refresh()]] atau [[yii\web\Controller::redirect()|redirect()]]
+> untuk mencegah [permasalahan pengiriman form](https://en.wikipedia.org/wiki/Post/Redirect/Get).
 
-
-Membuat View <span id="creating-views"></span>
---------------
+## Membuat View <span id="creating-views"></span>
 
 Terakhir, buatlah dua file _view_ dengan nama `entry-confirm` dan `entry`. _View_ ini akan di-_render_ oleh _action_ `entry`,
 yang sebelumnya dibahas.
@@ -179,9 +173,7 @@ method [[yii\widgets\ActiveForm::field()|field()]]. Input field yang pertama dip
 dan yang kedua diperuntukkan untuk data "email". Setelah field input, _method_ [[yii\helpers\Html::submitButton()]]
 akan dipanggil untuk me-_render_ tombol pengiriman data.
 
-
-Mari kita uji <span id="trying-it-out"></span>
--------------
+## Mari kita uji <span id="trying-it-out"></span>
 
 Untuk melihat bagaimana prosesnya, gunakan browser anda untuk mengakses URL ini :
 
@@ -199,8 +191,6 @@ yang menampilkan data yang barusan anda input.
 
 ![Konfirmasi penginputan data](images/start-entry-confirmation.png)
 
-
-
 ### Penjelasan <span id="magic-explained"></span>
 
 Anda mungkin bertanya-tanya bagaimana form HTML bekerja dibelakang layar, sepertinya tampak ajaib karna form tersebut mampu
@@ -214,7 +204,7 @@ Javascript pada browser anda, validasi tetap akan dilakukan di sisi server, sepe
 _method_ `actionEntry`. Hal ini memastikan bahwa data akan divalidasi dalam segala kondisi.
 
 > Warning: Validasi melalui sisi klien akan membuat pengalaman pengguna lebih baik. Validasi di sisi server
-  harus selalu dilakukan, walaupun validasi melalui sisi klien digunakan atau tidak.
+> harus selalu dilakukan, walaupun validasi melalui sisi klien digunakan atau tidak.
 
 Label untuk field input dibuat oleh method `field()`, menggunakan nama _property_ dari model.
 Contoh, label `Name` akan dibuat untuk _property_ `name`.
@@ -228,12 +218,10 @@ kode seperti di bawah ini:
 ```
 
 > Info: Yii menyediakan banyak _widget_ untuk membantu anda dalam membangun _view_ yang kompleks dan dinamis.
-  Sebentar lagi anda akan mengetahui, bahwa menulis _widget_ juga sangat mudah. Anda mungkin akan mengganti sebagian besar
-  dari kode _view_ anda menjadi _widget-widget_ yang mampu digunakan ulang untuk menyederhanakan penulisan _view_ ke depannya.
+> Sebentar lagi anda akan mengetahui, bahwa menulis _widget_ juga sangat mudah. Anda mungkin akan mengganti sebagian besar
+> dari kode _view_ anda menjadi _widget-widget_ yang mampu digunakan ulang untuk menyederhanakan penulisan _view_ ke depannya.
 
-
-Rangkuman <span id="summary"></span>
--------
+## Rangkuman <span id="summary"></span>
 
 Pada bagian kali ini, anda telah mengetahui semua bagian dari pola arsitektur MVC. Anda sudah mempelajari bagaimana
 untuk membuat class model sebagai representasi data pengguna dan memvalidasinya.

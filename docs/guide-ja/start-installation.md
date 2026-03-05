@@ -1,5 +1,4 @@
-Yii をインストールする
-======================
+# Yii をインストールする
 
 Yii は二つの方法でインストールすることが出来ます。すなわち、[Composer](https://getcomposer.org/) を使うか、アーカイブ・ファイルをダウンロードするかです。
 前者がお薦めの方法です。と言うのは、一つのコマンドを走らせるだけで、新しい [エクステンション](structure-extensions.md) をインストールしたり、Yii をアップデートしたりすることが出来るからです。
@@ -8,18 +7,16 @@ Yii の標準的なインストールを実行すると、フレームワーク�
 プロジェクト・テンプレートは、いくつかの基本的な機能、例えば、ログインやコンタクト・フォームなどを実装した、動作する Yii アプリケーションです。
 そのコードは推奨される方法に従って編成されています。そのため、プロジェクト・テンプレートは、あなたのプロジェクトのための良い開始点としての役割を果たしうるものです。
 
-ここから続くいくつかのセクションにおいては、いわゆる *ベーシック・プロジェクト・テンプレート* とともに Yii をインストールする方法、
+ここから続くいくつかのセクションにおいては、いわゆる _ベーシック・プロジェクト・テンプレート_ とともに Yii をインストールする方法、
 および、このテンプレートの上に新しい機能を実装する方法を説明します。
 Yii はもう一つ、[アドバンスト・プロジェクト・テンプレート](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide) と呼ばれるテンプレートも提供しています。
 こちらは、チーム開発環境において多層構造のアプリケーションを開発するときに使用する方が望ましいものです。
 
 > Info: ベーシック・プロジェクト・テンプレートは、ウェブ・アプリケーションの 90 パーセントを開発するのに適したものです。
-  アドバンスト・プロジェクト・テンプレートとの主な違いは、コードがどのように編成されているかという点にあります。
-  あなたが Yii は初めてだという場合は、シンプルでありながら十分な機能を持っているベーシック・プロジェクト・テンプレートに留まることを強く推奨します。
+> アドバンスト・プロジェクト・テンプレートとの主な違いは、コードがどのように編成されているかという点にあります。
+> あなたが Yii は初めてだという場合は、シンプルでありながら十分な機能を持っているベーシック・プロジェクト・テンプレートに留まることを強く推奨します。
 
-
-Composer によるインストール <span id="installing-via-composer"></span>
----------------------------
+## Composer によるインストール <span id="installing-via-composer"></span>
 
 ### Composer をインストールする
 
@@ -79,25 +76,21 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 >
 > 開発バージョンは動いているあなたのコードを動かなくするかもしれませんので、本番環境では使うべきでないことに注意してください。
 
-
-アーカイブ・ファイルからインストールする <span id="installing-from-archive-file"></span>
-----------------------------------------
+## アーカイブ・ファイルからインストールする <span id="installing-from-archive-file"></span>
 
 アーカイブ・ファイルから Yii をインストールするには、三つの手順を踏みます。
 
 1. [yiiframework.com](https://www.yiiframework.com/download/) からアーカイブ・ファイルをダウンロードします。
 2. ダウンロードしたファイルをウェブ・アクセス可能なフォルダに展開します。
 3. `config/web.php` ファイルを編集して、`cookieValidationKey` という構成情報の項目に秘密キーを入力します
-  (Composer を使って Yii をインストールするときは、これは自動的に実行されます)。
+   (Composer を使って Yii をインストールするときは、これは自動的に実行されます)。
 
-  ```php
-  // !!! 下記に(もし空白なら)秘密キーを入力する - これはクッキー検証のために必要
-  'cookieValidationKey' => '秘密キーをここに入力',
-  ```
+```php
+// !!! 下記に(もし空白なら)秘密キーを入力する - これはクッキー検証のために必要
+'cookieValidationKey' => '秘密キーをここに入力',
+```
 
-
-他のインストール・オプション <span id="other-installation-options"></span>
-----------------------------
+## 他のインストール・オプション <span id="other-installation-options"></span>
 
 上記のインストール方法の説明は Yii のインストールの仕方を示すものですが、それは同時に、直ちに動作する基本的なウェブ・アプリケーションを作成するものでもあります。
 これは、規模の大小に関わらず、ほとんどのプロジェクトを開始するのに良い方法です。
@@ -105,14 +98,12 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 
 しかし、他のインストール・オプションも利用可能です。
 
-* コア・フレームワークだけをインストールし、アプリケーション全体を一から構築したい場合は、[アプリケーションを一から構築する](tutorial-start-from-scratch.md)
+- コア・フレームワークだけをインストールし、アプリケーション全体を一から構築したい場合は、[アプリケーションを一から構築する](tutorial-start-from-scratch.md)
   で説明されている指示に従うことが出来ます。
-* もっと洗練された、チーム開発環境により適したアプリケーションから開始したい場合は、 
+- もっと洗練された、チーム開発環境により適したアプリケーションから開始したい場合は、
   [アドバンスト・プロジェクト・テンプレート](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide-ja/README.md) をインストールすることを考慮することが出来ます。
 
-
-アセットをインストールする <span id="installing-assets"></span>
---------------------------
+## アセットをインストールする <span id="installing-assets"></span>
 
 Yii は、アセット (CSS および JavaScript) ライブラリのインストールについて [Bower](https://bower.io/) および/または [NPM](https://www.npmjs.com/) のパッケージに依存しています。
 Yii はこれらのライブラリを取得するのに Composer を使って、PHP と CSS/JavaScript のパッケージ・バージョンを同時に解決できるようにしています。
@@ -134,9 +125,7 @@ Composer によるアセットのインストールを抑止するためには�
 > Note: Composer によるアセットのインストールをバイパスする場合は、アセットのインストールとバージョン衝突の解決についてあなたが責任を持たなければなりません。
 > さまざまなエクステンションに由来するアセット・ファイル間で不整合が生じうることを覚悟して下さい。
 
-
-インストールを検証する <span id="verifying-installation"></span>
-----------------------
+## インストールを検証する <span id="verifying-installation"></span>
 
 インストール完了後、あなたのウェブ・サーバを構成してください (次のセクションを参照してください)。
 あるいは、プロジェクトの `web` ディレクトリで次のコマンドを実行して、
@@ -147,7 +136,7 @@ php yii serve
 ```
 
 > Note: デフォルトでは、この HTTP サーバは 8080 ポートをリスンします。しかし、このポートがすでに使われていたり、複数のアプリケーションをこの方法で動かしたい場合は、
-  どのポートを使うかを指定したいと思うでしょう。単に --port 引数を追加して下さい。
+> どのポートを使うかを指定したいと思うでしょう。単に --port 引数を追加して下さい。
 
 ```bash
 php yii serve --port=8888
@@ -164,8 +153,8 @@ http://localhost:8080/
 ブラウザに上のような "おめでとう!" のページが表示されるはずです。もし表示されなかったら、PHP のインストールが Yii の必要条件を満たしているかどうか、チェックしてください。
 最低限の必要条件を満たしているかどうかは、次の方法のどちらかによってチェックすることが出来ます。
 
-* `/requirements.php` を `/web/requirements.php` としてコピーし、ブラウザを使って URL `http://localhost/requirements.php` にアクセスする。
-* 次のコマンドを実行する。
+- `/requirements.php` を `/web/requirements.php` としてコピーし、ブラウザを使って URL `http://localhost/requirements.php` にアクセスする。
+- 次のコマンドを実行する。
 
   ```bash
   cd basic
@@ -176,12 +165,10 @@ Yii の最低必要条件を満たすように PHP のインストールを構�
 最も重要なことは、PHP 5.4 以上でなければならないということです。最新の PHP 7 なら理想的です。
 また、アプリケーションがデータベースを必要とする場合は、[PDO PHP 拡張](https://www.php.net/manual/ja/pdo.installation.php) および対応するデータベース・ドライバ (MySQL データベースのための `pdo_mysql` など) をインストールしなければなりません。
 
-
-ウェブ・サーバを構成する <span id="configuring-web-servers"></span>
-------------------------
+## ウェブ・サーバを構成する <span id="configuring-web-servers"></span>
 
 > Info: もし Yii の試運転をしているだけで、本番サーバに配備する意図がないのであれば、
-  当面、この項は飛ばしても構いません。
+> 当面、この項は飛ばしても構いません。
 
 上記の説明に従ってインストールされたアプリケーションは、[Apache HTTP サーバ](https://httpd.apache.org/)
 と [Nginx HTTP サーバ](https://nginx.org/) のどちらでも、また、Windows、Mac OS X、Linux のどれでも、
@@ -196,12 +183,12 @@ URL でアプリケーションにアクセス出来るようにウェブ・サ�
 この項では、これらの目的を達するために Apache または Nginx サーバをどのように設定すれば良いかを学びます。
 
 > Info: `basic/web` をドキュメント・ルートに設定することは、`basic/web` の兄弟ディレクトリに保存されたプライベートなアプリケーション・コードや
-公開できないデータ・ファイルにエンド・ユーザがアクセスすることを防止することにもなります。
-`basic/web` 以外のフォルダに対するアクセスを拒否することはセキュリティ強化の一つです。
+> 公開できないデータ・ファイルにエンド・ユーザがアクセスすることを防止することにもなります。
+> `basic/web` 以外のフォルダに対するアクセスを拒否することはセキュリティ強化の一つです。
 
 > Info: あなたがウェブ・サーバの設定を修正する権限を持たない共用ホスティング環境でアプリケーションが走る場合であっても、
-セキュリティ強化のためにアプリケーションの構造を調整することがまだ出来ます。
-詳細については、[共有ホスティング環境](tutorial-shared-hosting.md) のセクションを参照してください。
+> セキュリティ強化のためにアプリケーションの構造を調整することがまだ出来ます。
+> 詳細については、[共有ホスティング環境](tutorial-shared-hosting.md) のセクションを参照してください。
 
 > Info: あなたのアプリケーションをリバース・プロキシの背後で動かそうとする場合は、
 > リクエスト・コンポーネントの [信頼できるプロキシとヘッダ](runtime-requests.md#trusted-proxies) を構成する必要があるかもしれません。
@@ -232,7 +219,6 @@ DocumentRoot "path/to/basic/web"
     # ... 他の設定 ...
 </Directory>
 ```
-
 
 ### 推奨される Nginx の構成 <span id="recommended-nginx-configuration"></span>
 
@@ -298,54 +284,50 @@ server {
 
 ```json
 {
-    "listeners": {
-        "*:80": {
-            "pass": "routes/yii"
-        }
-    },
-
-    "routes": {
-        "yii": [
-            {
-                "match": {
-                    "uri": [
-                        "!/assets/*",
-                        "*.php",
-                        "*.php/*"
-                    ]
-                },
-
-                "action": {
-                    "pass": "applications/yii/direct"
-                }
-            },
-            {
-                "action": {
-                    "share": "/path/to/app/web/",
-                    "fallback": {
-                        "pass": "applications/yii/index"
-                    }
-                }
-            }
-        ]
-    },
-
-    "applications": {
-        "yii": {
-            "type": "php",
-            "user": "www-data",
-            "targets": {
-                "direct": {
-                    "root": "/path/to/app/web/"
-                },
-
-                "index": {
-                    "root": "/path/to/app/web/",
-                    "script": "index.php"
-                }
-            }
-        }
+  "listeners": {
+    "*:80": {
+      "pass": "routes/yii"
     }
+  },
+
+  "routes": {
+    "yii": [
+      {
+        "match": {
+          "uri": ["!/assets/*", "*.php", "*.php/*"]
+        },
+
+        "action": {
+          "pass": "applications/yii/direct"
+        }
+      },
+      {
+        "action": {
+          "share": "/path/to/app/web/",
+          "fallback": {
+            "pass": "applications/yii/index"
+          }
+        }
+      }
+    ]
+  },
+
+  "applications": {
+    "yii": {
+      "type": "php",
+      "user": "www-data",
+      "targets": {
+        "direct": {
+          "root": "/path/to/app/web/"
+        },
+
+        "index": {
+          "root": "/path/to/app/web/",
+          "script": "index.php"
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -365,18 +347,20 @@ server {
       <rule name="Hide Yii Index" stopProcessing="true">
         <match url="." ignoreCase="false" />
         <conditions>
-        <add input="{REQUEST_FILENAME}" matchType="IsFile" 
+        <add input="{REQUEST_FILENAME}" matchType="IsFile"
               ignoreCase="false" negate="true" />
-        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" 
+        <add input="{REQUEST_FILENAME}" matchType="IsDirectory"
               ignoreCase="false" negate="true" />
         </conditions>
         <action type="Rewrite" url="index.php" appendQueryString="true" />
-      </rule> 
+      </rule>
     </rules>
   </rewrite>
 </system.webServer>
 </configuration>
 ```
+
 また、IIS 上で PHP を構成するためには、以下にリストした Microsoft の公式リソースが有用でしょう。
-  1. [IIS の最初の Web サイトを構成する方法](https://support.microsoft.com/ja-jp/help/323972/how-to-set-up-your-first-iis-web-site)
-  2. [Configure a PHP Website on IIS](https://docs.microsoft.com/en-us/iis/application-frameworks/scenario-build-a-php-website-on-iis/configure-a-php-website-on-iis)
+
+1. [IIS の最初の Web サイトを構成する方法](https://support.microsoft.com/ja-jp/help/323972/how-to-set-up-your-first-iis-web-site)
+2. [Configure a PHP Website on IIS](https://docs.microsoft.com/en-us/iis/application-frameworks/scenario-build-a-php-website-on-iis/configure-a-php-website-on-iis)

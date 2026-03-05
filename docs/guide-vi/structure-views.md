@@ -1,12 +1,10 @@
-Views (Giao diện)
-=====
+# Views (Giao diện)
 
 Views là phần trong mô hình [MVC](https://vi.wikipedia.org/wiki/MVC).
 Thành phần này chịu trách nhiệm chính trong việc hiển thị dữ liệu tới người dùng. Tại ứng dụng Web, views thường được tạo
-cùng với các *bản mẫu giao diện (view template)* là những file kịch bản của PHP có chứa các mã HTML và mã PHP.
+cùng với các _bản mẫu giao diện (view template)_ là những file kịch bản của PHP có chứa các mã HTML và mã PHP.
 Các file giao diện được quản lý bởi [[yii\web\View|view]] [là thành phần ứng dụng](structure-application-components.md) thành phần này có chứa các phương thức chung
 để các giao diện được đóng gói và xuất bản. Để cho đơn giản, chúng ta thường gọi các bản mẫu giao diện hoặc các file bản mẫu giao diện như một giao diện.
-
 
 ## Tạo mới Views <span id="creating-views"></span>
 
@@ -41,12 +39,11 @@ $this->title = 'Login';
 Tại mỗi view, bạn có thể truy cập biến `$this` tương ứng với class [[yii\web\View|thành phân giao diện]] là để quản lý và xuất bản các bản mẫu giao diện.
 
 Ngoài biến `$this`, ta cũng có thể khai báo thêm các biến ở trong view, như biến `$model` tại ví dụ trên
-. Những biến này có chứa dữ liệu đã được *thêm* vào view bởi [controllers](structure-controllers.md)
+. Những biến này có chứa dữ liệu đã được _thêm_ vào view bởi [controllers](structure-controllers.md)
 hoặc các đối tượng khác được cho vào từ việc [xuất bản view](#rendering-views).
 
 > Mẹo: Các biến được định nghĩa trong ở các dòng comment ở đầu mục của view thường được quản lý bởi các
-  IDEs. Định nghĩa như vậy sẽ có các thông tin về tài liệu mô tả cho views.
-
+> IDEs. Định nghĩa như vậy sẽ có các thông tin về tài liệu mô tả cho views.
 
 ### Bảo mật dữ liệu (Security) <span id="security"></span>
 
@@ -81,25 +78,23 @@ use yii\helpers\HtmlPurifier;
 ```
 
 > Mẹo: Khi dùng trích xuất thông tin an toàn từ đối tượng HTMLPurifier là cách tốt, tuy nhiên nó không được nhanh. Bạn nên xem xét sử dụng kỹ thuật
-  [caching](caching-overview.md) cho việc lưu nội dung nếu ứng dụng có yêu cầu hiệu suất cao.
-
+> [caching](caching-overview.md) cho việc lưu nội dung nếu ứng dụng có yêu cầu hiệu suất cao.
 
 ### Tổ chức Views <span id="organizing-views"></span>
 
 Cũng giống như [controllers](structure-controllers.md) và [models](structure-models.md), có các quy tắc để quản lý các views.
 
-* Với views được xuất bản từ controller, mặc định các view được đặt trong thư mục `@app/views/ControllerID`,
+- Với views được xuất bản từ controller, mặc định các view được đặt trong thư mục `@app/views/ControllerID`,
   với `ControllerID` tương ứng với [controller ID](structure-controllers.md#routes). Chẳng hạn, nếu
   tên class của controller là `PostController`, đường dẫn sẽ là `@app/views/post`; nếu controller là `PostCommentController`,
   thì đường dẫn sẽ là `@app/views/post-comment`. Trong trường hợp controller nằm trong module, thì đường dẫn
   sẽ là `views/ControllerID` và đường dẫn nằm trong [[yii\base\Module::basePath|đường dẫn module]].
-* Với views được xuất bản từ các [widget](structure-widgets.md), mặc định chúng được đặt trong đường dẫn `WidgetPath/views`
+- Với views được xuất bản từ các [widget](structure-widgets.md), mặc định chúng được đặt trong đường dẫn `WidgetPath/views`
   , `WidgetPath` là tên đường dẫn có chứa các lớp của widget.
-* Với views được xuất bản từ các đối tượng khác, thì bạn nên tuân theo quy ước tương tự như đối với các tiện ích widgets.
+- Với views được xuất bản từ các đối tượng khác, thì bạn nên tuân theo quy ước tương tự như đối với các tiện ích widgets.
 
 Bạn có thể tùy biến giá trị mặc định của đường dẫn bằng việc ghi đè phương thức [[yii\base\ViewContextInterface::getViewPath()]]
 của controllers hoặc các widgets.
-
 
 ## Xuất bản View (Rendering )<span id="rendering-views"></span>
 
@@ -115,19 +110,18 @@ khi được gọi phương thức xuất bản tới view. Những phương th�
 methodName($view, $params = [])
 ```
 
-
 ### Xuất bản tại Controllers <span id="rendering-in-controllers"></span>
 
 Trong các [controllers](structure-controllers.md), bạn có thể gọi những phương thức sau trong controller để xuất bản view:
 
-* [[yii\base\Controller::render()|render()]]: xuất bản [tên view](#named-views) và gán vào cùng [layout](#layouts)
+- [[yii\base\Controller::render()|render()]]: xuất bản [tên view](#named-views) và gán vào cùng [layout](#layouts)
   để xuất bản nội dung.
-* [[yii\base\Controller::renderPartial()|renderPartial()]]: xuất bản [tên view](#named-views) không gán layout.
-* [[yii\web\Controller::renderAjax()|renderAjax()]]: xuất bản [tên view](#named-views) không gán layout,
+- [[yii\base\Controller::renderPartial()|renderPartial()]]: xuất bản [tên view](#named-views) không gán layout.
+- [[yii\web\Controller::renderAjax()|renderAjax()]]: xuất bản [tên view](#named-views) không gán layout,
   vào cho vào tất cả các file kịch bản JS/CSS. Xuất bản này thường được dùng để phản hồi các yêu cầu của AJAX Web.
-* [[yii\base\Controller::renderFile()|renderFile()]]: xuất bản một view được mô tả trong các đường dẫn của view hoặc
+- [[yii\base\Controller::renderFile()|renderFile()]]: xuất bản một view được mô tả trong các đường dẫn của view hoặc
   [alias](concept-aliases.md).
-* [[yii\base\Controller::renderContent()|renderContent()]]: xuất bản chuỗi bằng việc nhúng view vào 
+- [[yii\base\Controller::renderContent()|renderContent()]]: xuất bản chuỗi bằng việc nhúng view vào
   [layout](#layouts) hiện tại. Phương thức này có từ phiên bản 2.0.1.
 
 Ví dụ,
@@ -157,13 +151,12 @@ class PostController extends Controller
 }
 ```
 
-
 ### Xuất bản tại các Widget <span id="rendering-in-widgets"></span>
 
 Tại các [widgets](structure-widgets.md), bạn có thể gọi phương thức sau trong widget để xuất bản views.
 
-* [[yii\base\Widget::render()|render()]]: dùng để xuất bản cùng với [tên view](#named-views).
-* [[yii\base\Widget::renderFile()|renderFile()]]: xuất bản view được mô tả với đường dẫn file view hoặc một
+- [[yii\base\Widget::render()|render()]]: dùng để xuất bản cùng với [tên view](#named-views).
+- [[yii\base\Widget::renderFile()|renderFile()]]: xuất bản view được mô tả với đường dẫn file view hoặc một
   [alias (bí danh)](concept-aliases.md).
 
 Ví dụ,
@@ -188,15 +181,14 @@ class ListWidget extends Widget
 }
 ```
 
-
 ### Xuất bản tại Views <span id="rendering-in-views"></span>
 
 Xuất bản view nằm trong view khác bằng việc gọi một phương trong những phương thức sau được cung cấp bởi [[yii\base\View|thành phần view]]:
 
-* [[yii\base\View::render()|render()]]: xuất bản ra [tên view](#named-views).
-* [[yii\web\View::renderAjax()|renderAjax()]]: xuất bản ra [tên view](#named-views) đăng ký cùng với những file kịch bản
+- [[yii\base\View::render()|render()]]: xuất bản ra [tên view](#named-views).
+- [[yii\web\View::renderAjax()|renderAjax()]]: xuất bản ra [tên view](#named-views) đăng ký cùng với những file kịch bản
   JS/CSS. Các file này dùng trong các yêu cầu AJAX Web.
-* [[yii\base\View::renderFile()|renderFile()]]: xuất bản view được mô tả với đường dẫn view hoặc một
+- [[yii\base\View::renderFile()|renderFile()]]: xuất bản view được mô tả với đường dẫn view hoặc một
   [alias](concept-aliases.md).
 
 Ví dụ, đoạn mã sau nằm trong view sẽ xuất bản tên view là `_overview.php` view này nằm cùng đường dẫn như view hiện tại được xuất bản
@@ -205,7 +197,6 @@ Ví dụ, đoạn mã sau nằm trong view sẽ xuất bản tên view là `_ove
 ```php
 <?= $this->render('_overview') ?>
 ```
-
 
 ### Xuất bản vị trí khác <span id="rendering-in-other-places"></span>
 
@@ -217,36 +208,34 @@ Tại những vị trí khác, bạn có thể truy cập thành phần ứng d�
 echo \Yii::$app->view->renderFile('@app/views/site/license.php');
 ```
 
-
 ### Đặt tên Views <span id="named-views"></span>
 
 Khi xuất bản view, bạn có thể chỉ định sử dụng tên view bao gồm tên view hoặc tên file của view qua đường dẫn/bí danh. Trong các trường hợp,
-bạn nên sử dụng các cách trước đây bởi vì nó ngắn gọn và linh hoạt hơn. Chúng ta gọi view được chỉ định sử dụng tên như *tên của views*.
+bạn nên sử dụng các cách trước đây bởi vì nó ngắn gọn và linh hoạt hơn. Chúng ta gọi view được chỉ định sử dụng tên như _tên của views_.
 
 Tên một view được gán vào đường dẫn file tương ứng dựa theo các quy tắc sau:
 
-* Tên một view có thể bỏ qua phần mở rộng file file. Trong trường hợp này, đuôi `.php` sẽ được dùng như một phần mở rộng. Ví dụ,
+- Tên một view có thể bỏ qua phần mở rộng file file. Trong trường hợp này, đuôi `.php` sẽ được dùng như một phần mở rộng. Ví dụ,
   tên view là `about` sẽ tương ứng với tên file là `about.php`.
-* Nếu tên view được bắt đầu với 2 dấu gạch chéo `//`, đường dẫn view tương ứng sẽ là `@app/views/ViewName`.
+- Nếu tên view được bắt đầu với 2 dấu gạch chéo `//`, đường dẫn view tương ứng sẽ là `@app/views/ViewName`.
   Điều này, tên view sẽ không được phép dưới [[yii\base\Application::viewPath|application's view path]].
   Ví dụ, `//site/about` sẽ được cập nhật thành `@app/views/site/about.php`.
-* Nếu tên view được bắt đầu với một dấu gạch chéo `/`, đường dẫn file của view có giá trị tương ứng với tiền tố tên view
+- Nếu tên view được bắt đầu với một dấu gạch chéo `/`, đường dẫn file của view có giá trị tương ứng với tiền tố tên view
   cùng với [[yii\base\Module::viewPath|đường dẫn view]] của [module](structure-modules.md) đang được chọn.
   Nếu không có module được chọn, `@app/views/ViewName` sẽ được dùng. Ví dụ, `/user/create` sẽ có nội dung là
   `@app/modules/user/views/user/create.php`, nếu module được chọn `user`. Nếu không có module chọn,  
   đường dẫn file view sẽ là `@app/views/user/create.php`.
-* Nếu view được xuất bản với [[yii\base\View::context|context]] và context được thực thi từ [[yii\base\ViewContextInterface]],
+- Nếu view được xuất bản với [[yii\base\View::context|context]] và context được thực thi từ [[yii\base\ViewContextInterface]],
   thì đường dẫn file của view được hình thành bằng tiền tố từ [[yii\base\ViewContextInterface::getViewPath()|đường dẫn view]] của
   context tới tên view. Điều này quan trọng khi xuất bản views trong controllers và widgets. Ví dụ,
   `about` sẽ tương ứng tới đường dẫn `@app/views/site/about.php` nếu context có controller là `SiteController`.
-* Nếu view được xuất bản trong các view khác, đường dẫn chứa file view khác sẽ chứa tên view mới
+- Nếu view được xuất bản trong các view khác, đường dẫn chứa file view khác sẽ chứa tên view mới
   tới đường dẫn thực tế của đường dẫn view. Ví dụ, `item` sẽ tương ứng tới `@app/views/post/item.php`
   nếu nó được xuất bản từ view `@app/views/post/index.php`.
 
 Dựa theo những quy tắc trên, khi gọi `$this->render('view')` tại controller `app\controllers\PostController` thì thực ra
 sẽ gọi tớ file view `@app/views/post/view.php` để xuất bản, trong khi đó việc gọi `$this->render('_overview')` tại view sẽ xuất bản
 view file là `@app/views/post/_overview.php`.
-
 
 ### Truy cập dữ liệu tại Views <span id="accessing-data-in-views"></span>
 
@@ -278,7 +267,6 @@ Cách đẩy thường được dùng hơn khi truy cập dữ liệu trong view
 context. Nó có hạn chế hơn khi bạn cần xây dựng dữ liệu thủ công ở các thời điểm, điều này có thể khiển nhẹ và dễ xảy ra lỗi hơn nếu view
 được chia sẻ và xuất bản ở những vị trí khác nhau.
 
-
 ### Chia sẽ dữ liệu giữa các Views <span id="sharing-data-among-views"></span>
 
 Thành phần [[yii\base\View]] cung cấp thuộc tính [[yii\base\View::params|params]] cho bạn có thể
@@ -299,14 +287,12 @@ qua tham số [[yii\base\View::params|params]]:
 ]) ?>
 ```
 
-
 ## Layouts (Bố cục) <span id="layouts"></span>
 
 Layouts là một views đặc biệt và chứa những phần chung của các views khác. Ví dụ, những trang
 của các ứng dụng Web được chia sẻ cùng header và footer. Thay vì bạn lặp lại nội dunng các trang header và footer
 tại mỗi view, thì có cách tốt hơn là bạn chỉ thực hiện một lần ở layout và nhúng nội dung xuất bản của view tại
 vị trí thích hợp trong layout.
-
 
 ### Tạo mới Layouts <span id="creating-layouts"></span>
 
@@ -364,36 +350,34 @@ tại các vị trí mà các phương thức được gọi.
   Phương thức sinh ra các placeholder sẽ được thay thế bằng các đoạn mã HTML (vd. các thẻ link, meta)
   khi trang kết thúc việc xuất bản.
 - [[yii\web\View::beginBody()|beginBody()]]: Phương thức được gọi ở mỗi đầu của section `<body>`.
-  Phương thức triggers tới sự kiện [[yii\web\View::EVENT_BEGIN_BODY|EVENT_BEGIN_BODY]] và sinh các placeholder sẽ được thay 
+  Phương thức triggers tới sự kiện [[yii\web\View::EVENT_BEGIN_BODY|EVENT_BEGIN_BODY]] và sinh các placeholder sẽ được thay
   thế bởi các mã HTML đã đăng ký (vd. JavaScript) nhằm vào phần đầu của body.
 - [[yii\web\View::endBody()|endBody()]]: Phương thức được gọi ở mỗi cuối section `<body>`.
   Phương thức triggers tới sự kiện [[yii\web\View::EVENT_END_BODY|EVENT_END_BODY]] và sinh các placeholder có được thay thế
   bởi các mã HTML đã đăng ký (vd. JavaScript) nhằm vào phần cuối của body.
 
-
 ### Truy cập dữ liệu trong Layouts <span id="accessing-data-in-layouts"></span>
 
 Trong layout, bạn có thể truy cập dữ liệu qua 2 biến đã định nghĩa là: `$this` và `$content`. Thành phần đã được đề
-cập là [[yii\base\View|view]], cũng  giống như những view khác, trong khi dữ liệu cuối cùng được xuất bản ra
+cập là [[yii\base\View|view]], cũng giống như những view khác, trong khi dữ liệu cuối cùng được xuất bản ra
 view dữ liệu này được xuất bản bằng việc gọi phương thức [[yii\base\Controller::render()|render()]] tại controllers.
 
 Nếu bạn muốn truy cập những dữ liệu khác trong layouts, bạn có thể sử dụng phương pháp pull như đã mô tả ở mục
 [Accessing Data in Views](#accessing-data-in-views). Nếu bạn chuyển dữ liệu từ content view
 vào layout, bạn có thể sử dụng phương thức được mô tả trong phần [Sharing Data among Views](#sharing-data-among-views).
 
-
 ### Sử dụng Layout <span id="using-layouts"></span>
 
 Như mô tả ở mục [Xuất bản tại Controllers](#rendering-in-controllers), khi bạn xuất bản view
 bằng việc gọi phương thức [[yii\base\Controller::render()|render()]] tại controller, một layout sẽ được áp dụng
-để xuất bản nội dung result. Mặc định, layout `@app/views/layouts/main.php` sẽ được sử dụng trong việc xuất bản nội dung. 
+để xuất bản nội dung result. Mặc định, layout `@app/views/layouts/main.php` sẽ được sử dụng trong việc xuất bản nội dung.
 
 Bạn có thể sử dụng những layout khác bằng việc cấu hình thuộc tính [[yii\base\Application::layout]] hoặc [[yii\base\Controller::layout]].
 Thuộc tính trước layout được dùng tại tất cả các controller, trong khi đó thuộc tính sau được ghi đè trong mỗi controller.
 Ví dụ, đoạn mã sau thiết lập controller `post` dùng layout `@app/views/layouts/post.php` để
 xuất bản nội dung ra views. Còn tại các controller khác, giả sử rằng thuộc tính `layout` không bị thay đổi, thì controller sử dụng layout mặc định là
 `@app/views/layouts/main.php` vào việc xuất bản nội dung.
-  
+
 ```php
 namespace app\controllers;
 
@@ -402,13 +386,13 @@ use yii\web\Controller;
 class PostController extends Controller
 {
     public $layout = 'post';
-    
+
     // ...
 }
 ```
 
 Với controller thuộc trong module, bạn có thể thiết lập thuộc tính [[yii\base\Module::layout|layout]] trong module để
-thiết lập layout cụ thể cho những controller. 
+thiết lập layout cụ thể cho những controller.
 
 Bởi vì thuộc tính `layout` có thể đã thiết lập ở những vị trí khác như (controllers, modules, application),
 phía nền Yii cũng thực hiện 2 bước để xác định rằnglayout file sẽ được dùng vào controller cụ thể.
@@ -417,11 +401,11 @@ Tại bước đầu tiên, Yii xác định giá trị layout và context modul
 
 - Nếu thuộc tính [[yii\base\Controller::layout]] tại controller có giá trị khác `null`, sẽ dùng nó như giá trị layout và
   thuộc tính [[yii\base\Controller::module|module]] của controller như là một context module.
-- Nếu thuộc tính [[yii\base\Controller::layout]] của controller có giá trị là `null`, tìm kiếm tất cả trong các modules liên quan (bao gồm bên trong ứng dụng) của controller và 
+- Nếu thuộc tính [[yii\base\Controller::layout]] của controller có giá trị là `null`, tìm kiếm tất cả trong các modules liên quan (bao gồm bên trong ứng dụng) của controller và
   tìm kiếm module đầu tiên mà có thuộc tính [[yii\base\Module::layout|layout]] có giá trị khác `null`. Sử dụng nó như module và
   giá trị [[yii\base\Module::layout|layout]] như một context module và chọn lấy giá trị layout.
   Nếu một trong những module không được tìm thấy, đồng nghĩa với việc không có layout nào được chọn.
-  
+
 Tại bước tiếp theo, nó xác định file layout được dùng dựa vào giá trị layout và context module
 được xác định ở bước. Giá trị layout có thể là:
 
@@ -435,7 +419,6 @@ Tại bước tiếp theo, nó xác định file layout được dùng dựa và
 - giá trị là `false`: không có layout nào được áp dụng.
 
 Nếu tên layout không có chứa thông tin phần mở rộng tệp, thì Yii sử dụng đuôi mở rộng là `.php`.
-
 
 ### Layout lồng nhau <span id="nested-layouts"></span>
 
@@ -457,7 +440,6 @@ Như mô tả trên, nội dung layout nên được nằm trong phương thức
 có chỉ định các thông tin của layout cha. Nó có thể dùng cả các file layout hoặc alias.
 
 Việc sử dụng phương pháp trên, bạn có thể lồng các layout theo nhiều cấp độ.
-
 
 ### Sử dụng các khối(Block) <span id="using-blocks"></span>
 
@@ -519,10 +501,9 @@ các khối không được định nghĩa.
 ...
 ```
 
-
 ## Sử dụng các thành phần View <span id="using-view-components"></span>
 
-[[yii\base\View|View components]] cung cấp nhiều tính năng cho  phần giao diện. While you can get view components
+[[yii\base\View|View components]] cung cấp nhiều tính năng cho phần giao diện. While you can get view components
 by creating individual instances of [[yii\base\View]] or its child class, in most cases you will mainly use
 the `view` application component. Bạn có thể cấu hình các component trong mục [application configurations](structure-applications.md#application-configurations)
 như sau:
@@ -541,15 +522,14 @@ như sau:
 
 Các thành phần View cung cấp các tính năng hữu ích được liệt kê dưới, mỗi mô tả có trong các trang chi tiết:
 
-* [theming](output-theming.md): cho phép bạn xây dựng và thay đổi theme cho các trang Web.
-* [fragment caching](caching-fragment.md): cho phép bạn xử lý cache các fragment trong các trang Web.
-* [client script handling](output-client-scripts.md): hỗ trợ đăng ký vào xuất bản các nội dung về CSS và JavaScript.
-* [asset bundle handling](structure-assets.md): hỗ trợ việc đăng ký và xuất bản các [asset bundles](structure-assets.md).
-* [alternative template engines](tutorial-template-engines.md): cho phép bạn sử dụng các bộ giao diện, chẳng hạn như
+- [theming](output-theming.md): cho phép bạn xây dựng và thay đổi theme cho các trang Web.
+- [fragment caching](caching-fragment.md): cho phép bạn xử lý cache các fragment trong các trang Web.
+- [client script handling](output-client-scripts.md): hỗ trợ đăng ký vào xuất bản các nội dung về CSS và JavaScript.
+- [asset bundle handling](structure-assets.md): hỗ trợ việc đăng ký và xuất bản các [asset bundles](structure-assets.md).
+- [alternative template engines](tutorial-template-engines.md): cho phép bạn sử dụng các bộ giao diện, chẳng hạn như
   [Twig](https://twig.symfony.com/), [Smarty](https://www.smarty.net/).
 
 Bạn cũng có thể thường xuyên sử dụng các tính năng nhỏ nhưng hữu ích sau đây khi bạn đang phát triển các trang Web.
-
 
 ### Thiết lập tiêu đề trang <span id="setting-page-titles"></span>
 
@@ -571,7 +551,6 @@ Tiếp đến tại layout, hãy chắc chắn rằng bạn đặt đoạn mã s
 <title><?= Html::encode($this->title) ?></title>
 ```
 
-
 ### Thực hiện đăng ký các thẻ Meta Tags <span id="registering-meta-tags"></span>
 
 Các trang web thường cần tạo các thẻ meta khác nhau cần thiết cho các trang khác nhau. Như các thẻ tiêu đề trang, các thẻ meta
@@ -586,11 +565,11 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'yii, framework, php'
 ?>
 ```
 
-Đoạn mã trên sẽ đăng ký thẻ mata là "keywords" với thành phần của view. Thẻ meta đã đăng ký được hiển thị sau 
+Đoạn mã trên sẽ đăng ký thẻ mata là "keywords" với thành phần của view. Thẻ meta đã đăng ký được hiển thị sau
 việc xuất bản layout được xong. Đoạn mã HTML sau sẽ xuất bản và chèn vào vị trí nơi bạn gọi phương thức
 [[yii\web\View::head()]] tại layout:
 
-```php
+````php
 <meta name="keywords"
 ``` content="yii, framework, php">
 
@@ -603,8 +582,7 @@ Ví dụ, đoạn mã sau sẽ đăng ký 2 thẻ meta là "description". Tuy nh
 ```php
 $this->registerMetaTag(['name' => 'description', 'content' => 'This is my cool website made with Yii!'], 'description');
 $this->registerMetaTag(['name' => 'description', 'content' => 'This website is about funny raccoons.'], 'description');
-```
-
+````
 
 ### Đăng ký các thẻ liên kết (Link Tags) <span id="registering-link-tags"></span>
 
@@ -624,12 +602,16 @@ $this->registerLinkTag([
 Đoạn mã trên sẽ ra kết quả như sau
 
 ```html
-<link title="Live News for Yii" rel="alternate" type="application/rss+xml" href="https://www.yiiframework.com/rss.xml/">
+<link
+  title="Live News for Yii"
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://www.yiiframework.com/rss.xml/"
+/>
 ```
 
 Giống như phương thức [[yii\web\View::registerMetaTag()|registerMetaTag()]], bạn có thể chỉ định từ khóa khi gọi phương thức
 [[yii\web\View::registerLinkTag()|registerLinkTag()]] để tránh tạo ra các thẻ liên kết lặp đi lặp lại.
-
 
 ## Sự kiện View <span id="view-events"></span>
 
@@ -653,7 +635,6 @@ Ví dụ, đoạn mã sau sẽ chèn nội dung ngày hiện tại vào cuối t
     echo date('Y-m-d');
 });
 ```
-
 
 ## Xuất bản các trang tĩnh <span id="rendering-static-pages"></span>
 
@@ -702,22 +683,21 @@ Tham số `GET` là `view` sẽ gọi đến hành động [[yii\web\ViewAction]
 tìm kiếm view này trong thư mục `@app/views/site/pages`. Bạn có thể cấu hình [[yii\web\ViewAction::viewPrefix]]
 để thay đổi thư mục tìm kiếm các view này.
 
-
 ## Bài thực hành <span id="best-practices"></span>
 
 Các View chịu trách nhiệm trong việc hiển thị dữ liệu từ model tới người dùng. Trong các trường hợp, view thường
 
-* nên chứa các mã code hiển thị, như HTML, và các câu lệnh PHP đơn giản để xử lý, định dạng và xuất bản dữ liệu.
-* không nên chứa các mã code có chứa các câu lệnh truy vấn vào CSDL. Những câu lệnh này nên đặt trong các model.
-* nên tranh các câu lệnh điều hướng yêu cầu dữ liệu, như `$_GET`, `$_POST`. Các lệnh này nên xử lý ở các controller.
+- nên chứa các mã code hiển thị, như HTML, và các câu lệnh PHP đơn giản để xử lý, định dạng và xuất bản dữ liệu.
+- không nên chứa các mã code có chứa các câu lệnh truy vấn vào CSDL. Những câu lệnh này nên đặt trong các model.
+- nên tranh các câu lệnh điều hướng yêu cầu dữ liệu, như `$_GET`, `$_POST`. Các lệnh này nên xử lý ở các controller.
   Nếu cấn lấy dữ liệu, chúng nên được đẩy vào view qua controller.
-* nên có đọc các thuộc tính của model, nhưng không được sửa nội dung trong đó.
+- nên có đọc các thuộc tính của model, nhưng không được sửa nội dung trong đó.
 
 Để việc quản lý các view dễ dàng hơn, nên tránh việc tạo các view quá phức tạp hoặc chứa nhiều các mã code dự phòng.
 Bạn có thể tham khảo các thủ thuật sau để đạt việc quản lý view tốt:
 
-* dùng [layouts](#layouts) để hiển thị cho các mục chung (vd. trang header, footer).
-* chia các view phức tạp thành các view nhỏ hơn. Các view nhỏ hơn có thể được hiển thị và lắp ráp thành một view lớn hơn
-bằng các phương thức xuất bản mà chúng tôi đã mô tả.
-* tạo và dùng các [widgets](structure-widgets.md) như việc xây dựng các khối của view.
-* tạo vào dung các lớp helper classes để định dạng và chuyển đổi các nội dung trong view.
+- dùng [layouts](#layouts) để hiển thị cho các mục chung (vd. trang header, footer).
+- chia các view phức tạp thành các view nhỏ hơn. Các view nhỏ hơn có thể được hiển thị và lắp ráp thành một view lớn hơn
+  bằng các phương thức xuất bản mà chúng tôi đã mô tả.
+- tạo và dùng các [widgets](structure-widgets.md) như việc xây dựng các khối của view.
+- tạo vào dung các lớp helper classes để định dạng và chuyển đổi các nội dung trong view.

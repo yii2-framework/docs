@@ -1,7 +1,6 @@
-Cache de Página
-============
+# Cache de Página
 
-O Cache de página é responsável por armazenar em cache o conteúdo de uma página inteira no servidor. Mais tarde, 
+O Cache de página é responsável por armazenar em cache o conteúdo de uma página inteira no servidor. Mais tarde,
 quando a mesma página é requisitada novamente, seu conteúdo será servido do cache em vez de ela ser gerada novamente
 do zero.
 
@@ -28,9 +27,9 @@ public function behaviors()
 }
 ```
 
-O código acima afirma que o cache da página deve ser usado apenas para a ação `index`; o conteúdo da página deve 
+O código acima afirma que o cache da página deve ser usado apenas para a ação `index`; o conteúdo da página deve
 ser armazenado em cache por, no máximo, 60 segundos e deve variar de acordo com a linguagem atual da aplicação;
-e esta página em cache deve ser invalidada se o número total de *posts* for alterado.
+e esta página em cache deve ser invalidada se o número total de _posts_ for alterado.
 
 Como você pode observar, o cache de página é bastante similar ao [cache de fragmentos](caching-fragment.md). Ambos suportam opções como `duration`, `dependencies`, `variations`, e `enabled`. Sua principal diferença é que o cache de página é implementado como um [filtro de ações](structure-filters.md) enquanto que o cache de fragmentos é um [widget](structure-widgets.md).
 

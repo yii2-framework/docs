@@ -1,5 +1,4 @@
-Html ヘルパ
-===========
+# Html ヘルパ
 
 全てのウェブ・アプリケーションは大量の HTML マークアップを生成します。
 マークアップが静的な場合は、[PHP と HTML を一つのファイルに混ぜる](https://www.php.net/manual/ja/language.basic-syntax.phpmode.php) ことによって効率よく生成することが可能ですが、マークアップを動的にするとなると、何らかの助けが無ければ、処理がトリッキーになってきます。
@@ -9,12 +8,10 @@ Yii はそのような手助けを Html ヘルパの形式で提供します。
 > Note: あなたのマークアップがおおむね静的なものである場合は、HTML を直接に使用する方が適切です。
 > 何でもかんでも Html ヘルパの呼び出しでラップする必要はありません。
 
-
 ## 基礎 <span id="basics"></span>
 
 動的な HTML を文字列の連結によって構築していると、あっという間に乱雑なコードになります。
 そのため、Yii はタグのオプションを操作し、それらのオプションに基づいてタグを構築する一連のメソッドを提供します。
-
 
 ### タグを生成する <span id="generating-tags"></span>
 
@@ -41,20 +38,18 @@ Yii はそのような手助けを Html ヘルパの形式で提供します。
 その全ての場合において、いくつか追加の処理がなされることを知っておいてください。
 
 - 値が `null` である場合は、対応する属性はレンダリングされません。
-- 値が真偽値である属性は、[真偽値属性 (boolean attributes)](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes) 
+- 値が真偽値である属性は、[真偽値属性 (boolean attributes)](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes)
   として扱われます。
 - 属性の値は [[yii\helpers\Html::encode()|Html::encode()]] を使って HTML エンコードされます。
 - 属性の値が配列である場合は、次のように処理されます。
-  
-  * 属性が [[yii\helpers\Html::$dataAttributes]] にリストされているデータ属性である場合、例えば `data` や `ng` である場合は、
+  - 属性が [[yii\helpers\Html::$dataAttributes]] にリストされているデータ属性である場合、例えば `data` や `ng` である場合は、
     値の配列にある要素の一つ一つについて、属性のリストがレンダリングされます。
     例えば、`'data' => ['id' => 1, 'name' => 'yii']` は `data-id="1" data-name="yii"` を生成します。
-    また、`'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` は 
+    また、`'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` は
     `data-params='{"id":1,"name":"yii"}' data-status="ok"` を生成します。
     後者の例において、下位の配列に対して JSON 形式が使用されていることに注意してください。
-  * 属性がデータ属性でない場合は、値は JSON エンコードされます。
+  - 属性がデータ属性でない場合は、値は JSON エンコードされます。
     例えば、`['params' => ['id' => 1, 'name' => 'yii']` は `params='{"id":1,"name":"yii"}'` を生成します。
-
 
 ### CSS のクラスとスタイルを形成する <span id="forming-css"></span>
 
@@ -143,7 +138,6 @@ Html::removeCssStyle($options, ['width', 'height']);
 [[yii\helpers\Html::removeCssStyle()|removeCssStyle()]] メソッドは、削除すべきプロパティの配列を受け取ります。
 プロパティが一つだけである場合は、文字列で指定することも出来ます。
 
-
 ### コンテントをエンコードおよびデコードする <span id="encoding-and-decoding-content"></span>
 
 コンテントが適切かつ安全に HTML として表示されるためには、コンテント内の特殊文字がエンコードされなければなりません。
@@ -160,14 +154,12 @@ echo $userName;
 $decodedUserName = Html::decode($userName);
 ```
 
-
 ## フォーム <span id="forms"></span>
 
 フォームのマークアップを扱う仕事は、極めて面倒くさく、エラーを生じがちなものです。
 このため、フォームのマークアップの仕事を助けるための一群のメソッドがあります。
 
 > Note: モデルを扱っており、検証が必要である場合は、[[yii\widgets\ActiveForm|ActiveForm]] を使うことを検討してください。
-
 
 ### フォームを作成する <span id="creating-forms"></span>
 
@@ -188,7 +180,6 @@ $decodedUserName = Html::decode($userName);
 <?= Html::endForm() ?>
 ```
 
-
 ### ボタン <span id="buttons"></span>
 
 ボタンを生成するためには、次のコードを使うことが出来ます。
@@ -201,7 +192,6 @@ $decodedUserName = Html::decode($userName);
 
 最初の引数は、三つのメソッドのどれでも、ボタンのタイトルであり、第二の引数はオプションです。
 タイトルはエンコードされませんので、エンド・ユーザからデータを取得する場合は [[yii\helpers\Html::encode()|Html::encode()]] を使ってエンコードしてください。
-
 
 ### インプット・フィールド <span id="input-fields"></span>
 
@@ -266,7 +256,6 @@ $decodedUserName = Html::decode($userName);
 <?= Html::activeRadioList($user, 'role', ArrayHelper::map($roleModels, 'id', 'name')) ?>
 ```
 
-
 ### ラベルとエラー <span id="labels-and-errors"></span>
 
 インプットと同じように、ラベルを生成するメソッドが二つあります。モデルからデータを取るアクティブなラベルと、データを直接受け入れるアクティブでないラベルです。
@@ -287,7 +276,6 @@ $decodedUserName = Html::decode($userName);
 ```php
 <?= Html::error($post, 'title', ['class' => 'error']) ?>
 ```
-
 
 ### インプットの名前と値 <span id="input-names-and-values"></span>
 
@@ -320,7 +308,6 @@ echo Html::getAttributeValue($post, '[0]authors[0]');
 // dates
 echo Html::getAttributeName('dates[0]');
 ```
-
 
 ## スタイルとスクリプト <span id="styles-and-scripts"></span>
 
@@ -369,7 +356,6 @@ JavaScript ファイルをリンクするためには、次のようにします
 CSS と同じように、最初の引数はインクルードされるファイルへのリンクを指定するものです。オプションを第二の引数として渡すことが出来ます。
 オプションに置いて、`cssFile` のオプションと同じように、`condition` を指定することが出来ます。
 
-
 ## ハイパーリンク <span id="hyperlinks"></span>
 
 ハイパーリンクを手軽に生成できるメソッドがあります。
@@ -389,7 +375,6 @@ CSS と同じように、最初の引数はインクルードされるファイ�
 <?= Html::mailto('連絡先', 'admin@example.com') ?>
 ```
 
-
 ## 画像 <span id="images"></span>
 
 イメージタグを生成するためには次のようにします。
@@ -403,7 +388,6 @@ CSS と同じように、最初の引数はインクルードされるファイ�
 ```
 
 最初の引数は、[エイリアス](concept-aliases.md) 以外にも、ルートとパラメータ、または URL を受け入れることが出来ます。[Url::to()](helper-url.md) と同様です。
-
 
 ## リスト <span id="lists"></span>
 

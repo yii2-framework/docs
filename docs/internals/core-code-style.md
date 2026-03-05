@@ -1,5 +1,4 @@
-Yii 2 Core Framework Code Style
-===============================
+# Yii 2 Core Framework Code Style
 
 The following code style is used for Yii 2.x core and official extensions development. If you want to pull-request code
 into the core, consider using it. We aren't forcing you to use this code style for your application. Feel free to choose
@@ -77,6 +76,7 @@ class Foo
     const DATE_APPROVED = '2012-06-01';
 }
 ```
+
 ### 4.2. Properties
 
 - When declaring public class members specify `public` keyword explicitly.
@@ -140,12 +140,12 @@ class Foo
 
 ### 4.4 PHPDoc blocks
 
-  - `@param`, `@var`, `@property` and `@return` must declare types as `bool`, `int`, `string`, `array` or `null`.
+- `@param`, `@var`, `@property` and `@return` must declare types as `bool`, `int`, `string`, `array` or `null`.
   You can use a class names as well such as `Model` or `ActiveRecord`.
-  - For a typed arrays use `ClassName[]`.
-  - The first line of the PHPDoc must describe the purpose of the method.
-  - If method checks something (`isActive`, `hasClass`, etc) the first line should start with `Checks whether`.
-  - `@return` should explicitly describe what exactly will be returned.
+- For a typed arrays use `ClassName[]`.
+- The first line of the PHPDoc must describe the purpose of the method.
+- If method checks something (`isActive`, `hasClass`, etc) the first line should start with `Checks whether`.
+- `@return` should explicitly describe what exactly will be returned.
 
 ```php
 /**
@@ -173,7 +173,6 @@ class Foo
 - All PHP types and values should be used lowercase. That includes `true`, `false`, `null` and `array`.
 
 Changing type of an existing variable is considered as a bad practice. Try not to write such code unless it is really necessary.
-
 
 ```php
 public function save(Transaction $transaction, $argument2 = 100)
@@ -359,8 +358,7 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 });
 ```
 
-Documentation
--------------
+## Documentation
 
 - Refer to [phpDoc](https://phpdoc.org/) for documentation syntax.
 - Code without documentation is not allowed.
@@ -415,10 +413,9 @@ Documentation
 class Component extends \yii\base\BaseObject
 ```
 
-
 #### Function / method
 
-```php
+````php
 /**
   * Returns the list of attached event handlers for an event.
   * You may manipulate the returned [[Vector]] object by adding or removing handlers.
@@ -440,7 +437,7 @@ public function getEventHandlers($name)
     $this->ensureBehaviors();
     return $this->_e[$name];
 }
-```
+````
 
 #### Markdown
 
@@ -473,10 +470,10 @@ It is also possible to link to the Guide using the following syntax:
 Code examples should use Markdown syntax, but they should not specify the language.
 Specifying a language in code examples may break their display in some IDEs. Here is an example:
 
-```php
+````php
 /**
   * Correct code example:
-  * 
+  *
   * ```
   * $object->doMagic();
   * ```
@@ -487,7 +484,7 @@ function doMagic()
 
 /**
   * Incorrect code example:
-  * 
+  *
   * ```php
   * $object->doMagic();
   * ```
@@ -495,16 +492,14 @@ function doMagic()
 function doMagic()
 {
 }
-```
-
+````
 
 #### Comments
 
 - One-line comments should be started with `//` and not `#`.
 - One-line comment should be on its own line.
 
-Additional rules
-----------------
+## Additional rules
 
 ### `=== []` vs `empty()`
 

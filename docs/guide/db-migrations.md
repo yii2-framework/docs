@@ -1,12 +1,11 @@
-Database Migration
-==================
+# Database Migration
 
 During the course of developing and maintaining a database-driven application, the structure of the database
 being used evolves just like the source code does. For example, during the development of an application,
 a new table may be found necessary; after the application is deployed to production, it may be discovered
 that an index should be created to improve the query performance; and so on. Because a database structure change
-often requires some source code changes, Yii supports the so-called *database migration* feature that allows
-you to keep track of database changes in terms of *database migrations* which are version-controlled together
+often requires some source code changes, Yii supports the so-called _database migration_ feature that allows
+you to keep track of database changes in terms of _database migrations_ which are version-controlled together
 with the source code.
 
 The following steps show how database migration can be used by a team during development:
@@ -15,7 +14,7 @@ The following steps show how database migration can be used by a team during dev
 2. Tim commits the new migration into the source control system (e.g. Git, Mercurial).
 3. Doug updates his repository from the source control system and receives the new migration.
 4. Doug applies the migration to his local development database, thereby synchronizing his database
-  to reflect the changes that Tim has made.
+   to reflect the changes that Tim has made.
 
 And the following steps show how to deploy a new release with database migrations to production:
 
@@ -25,18 +24,18 @@ And the following steps show how to deploy a new release with database migration
 
 Yii provides a set of migration command line tools that allow you to:
 
-* create new migrations;
-* apply migrations;
-* revert migrations;
-* re-apply migrations;
-* show migration history and status.
+- create new migrations;
+- apply migrations;
+- revert migrations;
+- re-apply migrations;
+- show migration history and status.
 
 All these tools are accessible through the command `yii migrate`. In this section we will describe in detail
 how to accomplish various tasks using these tools. You may also get the usage of each tool via the help
 command `yii help migrate`.
 
 > Tip: Migrations could affect not only database schema but adjust existing data to fit new schema, create RBAC
-  hierarchy or clean up cache.
+> hierarchy or clean up cache.
 
 > Note: When manipulating data using a migration you may find that using your [Active Record](db-active-record.md) classes
 > for this might be useful because some of the logic is already implemented there. Keep in mind however, that in contrast
@@ -44,7 +43,6 @@ command `yii help migrate`.
 > So when using Active Record in migration code, changes to the logic in the Active Record layer may accidentally break
 > existing migrations. For this reason migration code should be kept independent of other application logic such
 > as Active Record classes.
-
 
 ## Creating Migrations <span id="creating-migrations"></span>
 
@@ -55,7 +53,7 @@ yii migrate/create <name>
 ```
 
 The required `name` argument gives a brief description about the new migration. For example, if
-the migration is about creating a new table named *news*, you may use the name `create_news_table`
+the migration is about creating a new table named _news_, you may use the name `create_news_table`
 and run the following command:
 
 ```
@@ -63,7 +61,7 @@ yii migrate/create create_news_table
 ```
 
 > Note: Because the `name` argument will be used as part of the generated migration class name,
-  it should only contain letters, digits, and/or underscore characters.
+> it should only contain letters, digits, and/or underscore characters.
 
 The above command will create a new PHP class file named `m150101_185401_create_news_table.php`
 in the `@app/migrations` directory. The file contains the following code which mainly declares
@@ -104,8 +102,8 @@ class m150101_185401_create_news_table extends Migration
 Each database migration is defined as a PHP class extending from [[yii\db\Migration]]. The migration
 class name is automatically generated in the format of `m<YYMMDD_HHMMSS>_<Name>`, where
 
-* `<YYMMDD_HHMMSS>` refers to the UTC datetime at which the migration creation command is executed.
-* `<Name>` is the same as the value of the `name` argument that you provide to the command.
+- `<YYMMDD_HHMMSS>` refers to the UTC datetime at which the migration creation command is executed.
+- `<Name>` is the same as the value of the `name` argument that you provide to the command.
 
 In the migration class, you are expected to write code in the `up()` method that makes changes to the database structure.
 You may also want to write code in the `down()` method to revert the changes made by `up()`. The `up()` method is invoked
@@ -137,15 +135,15 @@ class m150101_185401_create_news_table extends Migration
 ```
 
 > Info: Not all migrations are reversible. For example, if the `up()` method deletes a row of a table, you may
-  not be able to recover this row in the `down()` method. Sometimes, you may be just too lazy to implement
-  the `down()`, because it is not very common to revert database migrations. In this case, you should return
-  `false` in the `down()` method to indicate that the migration is not reversible.
+> not be able to recover this row in the `down()` method. Sometimes, you may be just too lazy to implement
+> the `down()`, because it is not very common to revert database migrations. In this case, you should return
+> `false` in the `down()` method to indicate that the migration is not reversible.
 
 The base migration class [[yii\db\Migration]] exposes a database connection via the [[yii\db\Migration::db|db]]
 property. You can use it to manipulate the database schema using the methods as described in
 [Working with Database Schema](db-dao.md#database-schema).
 
-Rather than using physical types, when creating a table or column you should use *abstract types*
+Rather than using physical types, when creating a table or column you should use _abstract types_
 so that your migrations are independent of specific DBMS. The [[yii\db\Schema]] class defines
 a set of constants to represent the supported abstract types. These constants are named in the format
 of `TYPE_<Name>`. For example, `TYPE_PK` refers to auto-incremental primary key type; `TYPE_STRING`
@@ -157,7 +155,7 @@ You can append additional constraints when using abstract types. In the above ex
 to `Schema::TYPE_STRING` to specify that the column cannot be `null`.
 
 > Info: The mapping between abstract types and physical types is specified by
-  the [[yii\db\QueryBuilder::$typeMap|$typeMap]] property in each concrete `QueryBuilder` class.
+> the [[yii\db\QueryBuilder::$typeMap|$typeMap]] property in each concrete `QueryBuilder` class.
 
 Since version 2.0.6, you can make use of the newly introduced schema builder which provides more convenient way of defining column schema.
 So the migration above could be written like the following:
@@ -188,21 +186,22 @@ class m150101_185401_create_news_table extends Migration
 A list of all available methods for defining the column types is available in the API documentation of [[yii\db\SchemaBuilderTrait]].
 
 > Info: The generated file permissions and ownership will be determined by the current environment. This might lead to
-  inaccessible files. This could, for example, happen when the migration is created within a docker container
-  and the files are edited on the host. In this case the `newFileMode` and/or `newFileOwnership` of the MigrateController
-  can be changed. E.g. in the application config:
-  ```php
-  <?php
-  return [
-      'controllerMap' => [
-          'migrate' => [
-              'class' => 'yii\console\controllers\MigrateController',
-              'newFileOwnership' => '1000:1000', # Default WSL user id
-              'newFileMode' => 0660,
-          ],
-      ],
-  ];
-  ```
+> inaccessible files. This could, for example, happen when the migration is created within a docker container
+> and the files are edited on the host. In this case the `newFileMode` and/or `newFileOwnership` of the MigrateController
+> can be changed. E.g. in the application config:
+
+```php
+<?php
+return [
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'newFileOwnership' => '1000:1000', # Default WSL user id
+            'newFileMode' => 0660,
+        ],
+    ],
+];
+```
 
 ## Generating Migrations <span id="generating-migrations"></span>
 
@@ -685,9 +684,8 @@ in `safeDown()`. In the above example we first create the table and then insert 
 in `safeDown()` we first delete the row and then drop the table.
 
 > Note: Not all DBMS support transactions. And some DB queries cannot be put into a transaction. For some examples,
-  please refer to [implicit commit](https://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html). If this is the case,
-  you should still implement `up()` and `down()`, instead.
-
+> please refer to [implicit commit](https://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html). If this is the case,
+> you should still implement `up()` and `down()`, instead.
 
 ### Database Accessing Methods <span id="db-accessing-methods"></span>
 
@@ -702,30 +700,30 @@ telling you what database operations are done and how long they take.
 
 Below is the list of all these database accessing methods:
 
-* [[yii\db\Migration::execute()|execute()]]: executing a SQL statement
-* [[yii\db\Migration::insert()|insert()]]: inserting a single row
-* [[yii\db\Migration::batchInsert()|batchInsert()]]: inserting multiple rows
-* [[yii\db\Migration::update()|update()]]: updating rows
-* [[yii\db\Migration::upsert()|upsert()]]: inserting a single row or updating it if it exists (since 2.0.14)
-* [[yii\db\Migration::delete()|delete()]]: deleting rows
-* [[yii\db\Migration::createTable()|createTable()]]: creating a table
-* [[yii\db\Migration::renameTable()|renameTable()]]: renaming a table
-* [[yii\db\Migration::dropTable()|dropTable()]]: removing a table
-* [[yii\db\Migration::truncateTable()|truncateTable()]]: removing all rows in a table
-* [[yii\db\Migration::addColumn()|addColumn()]]: adding a column
-* [[yii\db\Migration::renameColumn()|renameColumn()]]: renaming a column
-* [[yii\db\Migration::dropColumn()|dropColumn()]]: removing a column
-* [[yii\db\Migration::alterColumn()|alterColumn()]]: altering a column
-* [[yii\db\Migration::addPrimaryKey()|addPrimaryKey()]]: adding a primary key
-* [[yii\db\Migration::dropPrimaryKey()|dropPrimaryKey()]]: removing a primary key
-* [[yii\db\Migration::addForeignKey()|addForeignKey()]]: adding a foreign key
-* [[yii\db\Migration::dropForeignKey()|dropForeignKey()]]: removing a foreign key
-* [[yii\db\Migration::createIndex()|createIndex()]]: creating an index
-* [[yii\db\Migration::dropIndex()|dropIndex()]]: removing an index
-* [[yii\db\Migration::addCommentOnColumn()|addCommentOnColumn()]]: adding comment to column
-* [[yii\db\Migration::dropCommentFromColumn()|dropCommentFromColumn()]]: dropping comment from column
-* [[yii\db\Migration::addCommentOnTable()|addCommentOnTable()]]: adding comment to table
-* [[yii\db\Migration::dropCommentFromTable()|dropCommentFromTable()]]: dropping comment from table
+- [[yii\db\Migration::execute()|execute()]]: executing a SQL statement
+- [[yii\db\Migration::insert()|insert()]]: inserting a single row
+- [[yii\db\Migration::batchInsert()|batchInsert()]]: inserting multiple rows
+- [[yii\db\Migration::update()|update()]]: updating rows
+- [[yii\db\Migration::upsert()|upsert()]]: inserting a single row or updating it if it exists (since 2.0.14)
+- [[yii\db\Migration::delete()|delete()]]: deleting rows
+- [[yii\db\Migration::createTable()|createTable()]]: creating a table
+- [[yii\db\Migration::renameTable()|renameTable()]]: renaming a table
+- [[yii\db\Migration::dropTable()|dropTable()]]: removing a table
+- [[yii\db\Migration::truncateTable()|truncateTable()]]: removing all rows in a table
+- [[yii\db\Migration::addColumn()|addColumn()]]: adding a column
+- [[yii\db\Migration::renameColumn()|renameColumn()]]: renaming a column
+- [[yii\db\Migration::dropColumn()|dropColumn()]]: removing a column
+- [[yii\db\Migration::alterColumn()|alterColumn()]]: altering a column
+- [[yii\db\Migration::addPrimaryKey()|addPrimaryKey()]]: adding a primary key
+- [[yii\db\Migration::dropPrimaryKey()|dropPrimaryKey()]]: removing a primary key
+- [[yii\db\Migration::addForeignKey()|addForeignKey()]]: adding a foreign key
+- [[yii\db\Migration::dropForeignKey()|dropForeignKey()]]: removing a foreign key
+- [[yii\db\Migration::createIndex()|createIndex()]]: creating an index
+- [[yii\db\Migration::dropIndex()|dropIndex()]]: removing an index
+- [[yii\db\Migration::addCommentOnColumn()|addCommentOnColumn()]]: adding comment to column
+- [[yii\db\Migration::dropCommentFromColumn()|dropCommentFromColumn()]]: dropping comment from column
+- [[yii\db\Migration::addCommentOnTable()|addCommentOnTable()]]: adding comment to table
+- [[yii\db\Migration::dropCommentFromTable()|dropCommentFromTable()]]: dropping comment from table
 
 > Info: [[yii\db\Migration]] does not provide a database query method. This is because you normally do not need
 > to display extra message about retrieving data from a database. It is also because you can use the powerful
@@ -760,8 +758,8 @@ For each migration that has been successfully applied, the command will insert a
 which migrations have been applied and which have not.
 
 > Info: The migration tool will automatically create the `migration` table in the database specified by
-  the [[yii\console\controllers\MigrateController::db|db]] option of the command. By default, the database
-  is specified by the `db` [application component](structure-application-components.md).
+> the [[yii\console\controllers\MigrateController::db|db]] option of the command. By default, the database
+> is specified by the `db` [application component](structure-application-components.md).
 
 Sometimes, you may only want to apply one or a few new migrations, instead of all available migrations.
 You can do so by specifying the number of migrations that you want to apply when running the command.
@@ -786,7 +784,6 @@ migration is applied.
 
 If the specified migration has already been applied before, any later applied migrations will be reverted.
 
-
 ## Reverting Migrations <span id="reverting-migrations"></span>
 
 To revert (undo) one or multiple migrations that have been applied before, you can run the following command:
@@ -797,8 +794,7 @@ yii migrate/down 3   # revert the most 3 recently applied migrations
 ```
 
 > Note: Not all migrations are reversible. Trying to revert such migrations will cause an error and stop the
-  entire reverting process.
-
+> entire reverting process.
 
 ## Redoing Migrations <span id="redoing-migrations"></span>
 
@@ -834,7 +830,6 @@ yii migrate/new 5       # showing the first 5 new migrations
 yii migrate/new all     # showing all new migrations
 ```
 
-
 ## Modifying Migration History <span id="modifying-migration-history"></span>
 
 Instead of actually applying or reverting migrations, sometimes you may simply want to mark that your database
@@ -852,47 +847,45 @@ yii migrate/mark 1392853618                         # using UNIX timestamp
 The command will modify the `migration` table by adding or deleting certain rows to indicate that the database
 has been applied migrations to the specified one. No migrations will be applied or reverted by this command.
 
-
 ## Customizing Migrations <span id="customizing-migrations"></span>
 
 There are several ways to customize the migration command.
-
 
 ### Using Command Line Options <span id="using-command-line-options"></span>
 
 The migration command comes with a few command-line options that can be used to customize its behaviors:
 
-* `interactive`: boolean (defaults to `true`), specifies whether to perform migrations in an interactive mode.
+- `interactive`: boolean (defaults to `true`), specifies whether to perform migrations in an interactive mode.
   When this is `true`, the user will be prompted before the command performs certain actions.
   You may want to set this to `false` if the command is being used in a background process.
 
-* `migrationPath`: string|array (defaults to `@app/migrations`), specifies the directory storing all migration
+- `migrationPath`: string|array (defaults to `@app/migrations`), specifies the directory storing all migration
   class files. This can be specified as either a directory path or a path [alias](concept-aliases.md).
   Note that the directory must exist, or the command may trigger an error. Since version 2.0.12 an array can be
   specified for loading migrations from multiple sources.
 
-* `migrationTable`: string (defaults to `migration`), specifies the name of the database table for storing
+- `migrationTable`: string (defaults to `migration`), specifies the name of the database table for storing
   migration history information. The table will be automatically created by the command if it does not exist.
   You may also manually create it using the structure `version varchar(255) primary key, apply_time integer`.
 
-* `db`: string (defaults to `db`), specifies the ID of the database [application component](structure-application-components.md).
+- `db`: string (defaults to `db`), specifies the ID of the database [application component](structure-application-components.md).
   It represents the database that will be migrated using this command.
 
-* `templateFile`: string (defaults to `@yii/views/migration.php`), specifies the path of the template file
+- `templateFile`: string (defaults to `@yii/views/migration.php`), specifies the path of the template file
   that is used for generating skeleton migration class files. This can be specified as either a file path
   or a path [alias](concept-aliases.md). The template file is a PHP script in which you can use a predefined variable
   named `$className` to get the migration class name.
 
-* `generatorTemplateFiles`: array (defaults to `[
-        'create_table' => '@yii/views/createTableMigration.php',
-        'drop_table' => '@yii/views/dropTableMigration.php',
-        'add_column' => '@yii/views/addColumnMigration.php',
-        'drop_column' => '@yii/views/dropColumnMigration.php',
-        'create_junction' => '@yii/views/createTableMigration.php'
-  ]`), specifies template files for generating migration code. See "[Generating Migrations](#generating-migrations)"
+- `generatorTemplateFiles`: array (defaults to `[
+      'create_table' => '@yii/views/createTableMigration.php',
+      'drop_table' => '@yii/views/dropTableMigration.php',
+      'add_column' => '@yii/views/addColumnMigration.php',
+      'drop_column' => '@yii/views/dropColumnMigration.php',
+      'create_junction' => '@yii/views/createTableMigration.php'
+]`), specifies template files for generating migration code. See "[Generating Migrations](#generating-migrations)"
   for more details.
 
-* `fields`: array of column definition strings used for creating migration code. Defaults to `[]`. The format of each
+- `fields`: array of column definition strings used for creating migration code. Defaults to `[]`. The format of each
   definition is `COLUMN_NAME:COLUMN_TYPE:COLUMN_DECORATOR`. For example, `--fields=name:string(12):notNull` produces
   a string column of size 12 which is not `null`.
 
@@ -906,7 +899,6 @@ command:
 # migrate the migrations in a forum module non-interactively
 yii migrate --migrationPath=@app/modules/forum/migrations --interactive=0
 ```
-
 
 ### Configuring Command Globally <span id="configuring-command-globally"></span>
 
@@ -927,7 +919,6 @@ return [
 With the above configuration, each time you run the migration command, the `backend_migration` table
 will be used to record the migration history. You no longer need to specify it via the `migrationTable`
 command-line option.
-
 
 ### Namespaced Migrations <span id="namespaced-migrations"></span>
 
@@ -952,7 +943,7 @@ return [
 ```
 
 > Note: Migrations applied from different namespaces will create a **single** migration history, e.g. you might be
-  unable to apply or revert migrations from particular namespace only.
+> unable to apply or revert migrations from particular namespace only.
 
 While operating namespaced migrations: creating new, reverting and so on, you should specify full namespace before
 migration name. Note that backslash (`\`) symbol is usually considered a special character in the shell, so you need
@@ -963,8 +954,8 @@ yii migrate/create app\\migrations\\CreateUserTable
 ```
 
 > Note: Migrations specified via [[yii\console\controllers\MigrateController::migrationPath|migrationPath]] can not
-  contain a namespace, namespaced migration can be applied only via [[yii\console\controllers\MigrateController::migrationNamespaces]]
-  property.
+> contain a namespace, namespaced migration can be applied only via [[yii\console\controllers\MigrateController::migrationNamespaces]]
+> property.
 
 Since version 2.0.12 the [[yii\console\controllers\MigrateController::migrationPath|migrationPath]] property
 also accepts an array for specifying multiple directories that contain migrations without a namespace.
@@ -974,8 +965,8 @@ which can not be changed to use namespaces easily when starting to use the new a
 
 #### Generating namespaced migrations
 
-Namespaced migrations follow "CamelCase" naming pattern `M<YYMMDDHHMMSS><Name>` (for example `M190720100234CreateUserTable`). 
-When generating such migration remember that table name will be converted from "CamelCase" format to "underscored". For 
+Namespaced migrations follow "CamelCase" naming pattern `M<YYMMDDHHMMSS><Name>` (for example `M190720100234CreateUserTable`).
+When generating such migration remember that table name will be converted from "CamelCase" format to "underscored". For
 example:
 
 ```
@@ -1042,7 +1033,6 @@ yii migrate-module
 yii migrate-rbac
 ```
 
-
 ## Migrating Multiple Databases <span id="migrating-multiple-databases"></span>
 
 By default, migrations are applied to the same database specified by the `db` [application component](structure-application-components.md).
@@ -1054,7 +1044,7 @@ yii migrate --db=db2
 
 The above command will apply migrations to the `db2` database.
 
-Sometimes it may happen that you want to apply *some* of the migrations to one database, while some others to another
+Sometimes it may happen that you want to apply _some_ of the migrations to one database, while some others to another
 database. To achieve this goal, when implementing a migration class you should explicitly specify the DB component
 ID that the migration would use, like the following:
 
@@ -1080,8 +1070,8 @@ If you have multiple migrations that use the same database, it is recommended th
 with the above `init()` code. Then each migration class can extend from this base class.
 
 > Tip: Besides setting the [[yii\db\Migration::db|db]] property, you can also operate on different databases
-  by creating new database connections to them in your migration classes. You then use the [DAO methods](db-dao.md)
-  with these connections to manipulate different databases.
+> by creating new database connections to them in your migration classes. You then use the [DAO methods](db-dao.md)
+> with these connections to manipulate different databases.
 
 Another strategy that you can take to migrate multiple databases is to keep migrations for different databases in
 different migration paths. Then you can migrate these databases in separate commands like the following:

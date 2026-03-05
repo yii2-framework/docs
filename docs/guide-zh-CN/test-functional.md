@@ -1,5 +1,4 @@
-功能测试
-================
+# 功能测试
 
 功能测试从用户的角度验证场景。它类似于[验收测试](test-acceptance.md)。
 但是它不是通过 HTTP 进行通信，而是填充环境，如（填充）POST 和 GET 参数，
@@ -17,6 +16,6 @@
 ## 运行基本模板和高级模板的测试
 
 如果你使用的是高级模板，请参阅[测试指南](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-testing.md)
-中关于运行测试的更多细节。  
+中关于运行测试的更多细节。
 
 如果你使用的是基本模板，请检查其 [README "testing" 部分](https://github.com/yiisoft/yii2-app-basic/blob/master/README.md#testing)。

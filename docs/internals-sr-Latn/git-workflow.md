@@ -1,13 +1,11 @@
-Git proces rada za Yii 2 saradnike
-===================================
+# Git proces rada za Yii 2 saradnike
 
-Želite da doprinesete Yii razvoju? Divno! Kako bi povećali šanse da vaše izmene budu prihvaćene što pre, molimo da 
+Želite da doprinesete Yii razvoju? Divno! Kako bi povećali šanse da vaše izmene budu prihvaćene što pre, molimo da
 ispratite sledeće korake. Ako ste novi sa Git-om
 i GitHub-om, možda bi želeli da prvo pogledate [GitHub pomoć](https://help.github.com/), [probate Git](https://try.github.com)
 ili naučite nešto novo o [Git internom modelu podataka](https://nfarina.com/post/9868516270/git-is-simpler).
 
-Pripremite vaše razvojno okruženje
-------------------------------------
+## Pripremite vaše razvojno okruženje
 
 Sledeći koraci će napraviti razvojno okruženje za Yii, koje možete koristiti kako bi radili
 na baznom kodu Yii frejmvorka. Ovi se koraci trebaju uraditi samo jednom.
@@ -36,9 +34,9 @@ Sledeći koraci nisu neophodni ako želite da radite samo na prevodima i dokumen
 - pokrenite `composer update` kako bi instalirali neophodne pakete (podrazumeva se da imate [composer instaliran globalno](https://getcomposer.org/doc/00-intro.md#globally)).
 - pokrenite `php build/build dev/app basic` kako bi klonirali "basic" aplikaciju i instalirali composer neophodne pakete "basic" aplikacije.
   Ova komanda će instalirati spoljne composer pakete i ulinkovati yii2 repozitorujum sa trenutnim preuzetim repozitorijumom, tako da imate samo jednu instancu celog instaliranog koda.
-  
+
   Ponovite postupak za "advanced" aplikaciju ako je potrebno, pokretanjem: `php build/build dev/app advanced`.
-  
+
   Ova komanda će se takođe koristiti da bi se osvežili potrebni paketi, ona pokreće `composer update` interno.
 
 **Sada ste spremni za rad na Yii 2 frejmvorku.**
@@ -51,7 +49,7 @@ Možete izvršiti unit testove pokretanjem `phpunit` unutar root direktorijuma r
 
 Neki testovi zahtevaju dodatne baze podataka da budu postavljene i podešene. Možete napraviti `tests/data/config.local.php` fajl kako bi pregazili podešavanja koja su definisana unutar `tests/data/config.php` fajla.
 
-Možete ograničiti testove na grupu testova na kojima radite, na primer, da pokrenete testove za samo validaciju i redis koristite `phpunit --group=validators,redis`. Listu dostupnih grupa možete dobiti pokretanjem `phpunit --list-groups`. 
+Možete ograničiti testove na grupu testova na kojima radite, na primer, da pokrenete testove za samo validaciju i redis koristite `phpunit --group=validators,redis`. Listu dostupnih grupa možete dobiti pokretanjem `phpunit --list-groups`.
 
 ### Ekstenzije
 
@@ -66,16 +64,13 @@ gde je `<extension-name>` ime ekstenzije, na primer `redis`.
 Ako želite da testirate ekstenziju u jednom od aplikacijskih šablona, samo dodajte repozitorijum u `composer.json` aplikacije kao što bi to radili normalno, na primer dodali bi `"yiisoft/yii2-redis": "~2.0.0"` unutar`require` sekcije za "basic" aplikaciju.
 Pokretanjem `php build/build dev/app basic` ćete instalirati ekstenziju i njene neophodne pakete i ulinkovaće se `extensions/redis` direktorijum kako ne bi radili u vendor direktorijumu nego u yii2 repozitorijumu direktno.
 
-
-Rad na bagovima i poboljšanjima
--------------------------------
+## Rad na bagovima i poboljšanjima
 
 Pošto je razvojno okruženje spremno kako je objašnjeno iznad možete započeti rad na nekoj novoj funkcionalnosti ili bagu.
 
 ### 1. Postarajte se da je problem prijavljen za bug na kom radite ako zahteva značajniji rad na ispravljanju
 
 Sve nove funkcionalnosti i bugovi bi trebali imati povezanu temu koju bi koristili kao jedinstvenu tačku za diskusiju i dokumentaciju. Bacite pogled na postojeću listu koja ima temu koja se poklapa sa onim na čemu bi želeli da radite. Ako pronađete da tema već postoji u listi, onda ostavite komentar na toj temi u kome iskažite da želite da radite na tome. Ako ne pronađete postojeću temu/problem koja se poklapa sa onim na čemu bi želeli da radite, molimo da [postavite temu/prijavite problem](report-an-issue.md) ili napravite pull zahtev direktno ako nije komplikovano rešenje. Na ovaj način, tim će moći da pogleda vaše rešenje i dodatno vas uputi.
-
 
 > Za sitne izmene ili dokumentacijske probleme ili za jednostavnije probleme, nije potrebno praviti posebnu temu, pull zahtev je više nego dovoljan u ovom slučaju.
 
@@ -176,9 +171,9 @@ git push origin --delete 999-IME-VASE-GRANE
 Kako bi rano otkrili regresije u Yii kodu prilikom svake integracije na GitHub-u pokreće se [Travis CI](https://travis-ci.com) kako bi se radilo testiranje. Pošto Yii tim ne želi da preoptereti ovaj servis,
 [`[ci skip]`](https://docs.travis-ci.com/user/customizing-the-build/#Skipping-a-build) će biti uključen prilikom svake integracije ako pull zahtev:
 
-* utiče samo na javascript, css i slike,
-* osvežava dokumentaciju,
-* menja samo fiksne stringove (npr. izmene u prevodu)
+- utiče samo na javascript, css i slike,
+- osvežava dokumentaciju,
+- menja samo fiksne stringove (npr. izmene u prevodu)
 
 Na ovaj način će Travis započinjati testiranje samo izmena koje nisu prvenstveno pokrivene testovima.
 

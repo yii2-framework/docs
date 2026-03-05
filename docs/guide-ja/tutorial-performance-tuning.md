@@ -1,10 +1,8 @@
-パフォーマンス・チューニング
-============================
+# パフォーマンス・チューニング
 
 あなたのウェブ・アプリケーションのパフォーマンスに影響を及ぼす要因は数多くあります。
 環境の要因もありますし、あなたのコードに関係する要因もあります。また、Yii そのものに関係する要因もあります。
 このセクションでは要因のほとんどを列挙して、どのようにそれらを修正すればあなたのアプリケーションのパフォーマンスを向上させることが出来るかを説明します。
-
 
 ## PHP 環境を最適化する <span id="optimizing-php"></span>
 
@@ -15,7 +13,6 @@ PHP 環境を正しく構成することは非常に重要です。最大のパ�
   バイト・コード・キャッシュを有効にすること。
   バイト・コード・キャッシュによって、リクエストが入ってくるたびに PHP スクリプトを解析してインクルードする時間の浪費を避けることが出来ます。
 - [`realpath()` キャッシュをチューニングする](https://github.com/samdark/realpath_cache_tuner).
-
 
 ## デバッグ・モードを無効にする <span id="disable-debug"></span>
 
@@ -31,8 +28,7 @@ defined('YII_DEBUG') or define('YII_DEBUG', false);
 ```
 
 > Info: `YII_DEBUG` のデフォルト値は `false` です。
-  従って、アプリケーション・コードの他のどこかでこのデフォルト値を変更していないと確信できるなら、単に上記の行を削除してデバッグ・モードを無効にしても構いません。
-
+> 従って、アプリケーション・コードの他のどこかでこのデフォルト値を変更していないと確信できるなら、単に上記の行を削除してデバッグ・モードを無効にしても構いません。
 
 ## キャッシュのテクニックを使う <span id="using-caching"></span>
 
@@ -40,7 +36,6 @@ defined('YII_DEBUG') or define('YII_DEBUG', false);
 たとえば、あなたのアプリケーションが Markdown 形式のテキスト入力をユーザに許可している場合、解析済みの Markdown のコンテントをキャッシュすることを考慮してください。
 そうすれば、リクエストごとに毎回同じ Markdown テキストの解析を繰り返すことを回避できるでしょう。
 Yii によって提供されているキャッシュのサポートについて学ぶためには [キャッシュ](caching-overview.md) のセクションを参照してください。
-
 
 ## スキーマ・キャッシュを有効にする <span id="enable-schema-caching"></span>
 
@@ -78,14 +73,12 @@ return [
 ];
 ```
 
-
 ## アセットを結合して最小化する <span id="optimizing-assets"></span>
 
 複雑なウェブ・ページでは、多数の CSS や JavaScript のアセット・ファイルをインクルードすることがよくあります。
 HTTP リクエストの回数、および、これらのアセットの全体としてのダウンロード・サイズを削減するために、アセットを単一のファイルに結合して、それを圧縮することを考慮すべきです。
 これによって、ページのロードにかかる時間とサーバの負荷を大きく削減することが出来ます。
 詳細については、[アセット](structure-assets.md) のセクションを参照してください。
-
 
 ## セッションのストレージを最適化する <span id="optimizing-session"></span>
 
@@ -135,7 +128,6 @@ CREATE TABLE session (
 あなたのサーバに [Redis](https://redis.io/) がある場合は、[[yii\redis\Session]] によって redis
 をセッション・ストレージとして使用することを強く推奨します。
 
-
 ## データベースを最適化する <span id="optimizing-databases"></span>
 
 DB クエリの実行とデータベースからのデータ取得がウェブ・アプリケーションのパフォーマンスの主たるボトルネックになることがよくあります。
@@ -152,7 +144,6 @@ DB クエリのパフォーマンスを向上させるための一般的なテ�
 最後にもう一つ大事なことですが、SELECT クエリで LIMIT を使ってください。
 こうすることで、大量のデータが返されて、PHP のために確保されたメモリを使い尽くすということがなくなります。
 
-
 ## プレーンな配列を使う <span id="using-arrays"></span>
 
 [アクティブ・レコード](db-active-record.md) は非常に使い勝手のよいものですが、データベースから大量のデータを取得する必要がある場合は、プレーンな配列を使うほどには効率的ではありません。
@@ -166,7 +157,7 @@ class PostController extends Controller
     public function actionIndex()
     {
         $posts = Post::find()->limit(100)->asArray()->all();
-        
+
         return $this->render('index', ['posts' => $posts]);
     }
 }
@@ -176,7 +167,6 @@ class PostController extends Controller
 `$i` 番目の行の `title` カラムにアクセスするためには、`$posts[$i]['title']` という式を使うことが出来ます。
 
 クエリを構築するのに [DAO](db-dao.md) を使って、データをプレーンな配列に取得することも出来ます。
-
 
 ## Composer オートローダを最適化する <span id="optimizing-autoloader"></span>
 
@@ -191,7 +181,6 @@ composer dumpautoload -o
 [authoritative class maps](https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-a-authoritative-class-maps)
 および [APCu cache](https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-b-apcu-cache) の使用を検討して下さい。
 ただし、この二つの最適化があなたの特定のケースに適切である場合もあれば、そうでない場合もあります。
-
 
 ## オフラインでデータを処理する <span id="processing-data-offline"></span>
 
@@ -208,7 +197,6 @@ composer dumpautoload -o
 
 プッシュの方法では、タスクを管理するのにメッセージ・キュー (例えば、RabbitMQ、ActiveMQ、Amazon SQS など) を使用します。
 新しいタスクがキューに入れられるたびに、タスクを処理するプロセスが起動されたり通知を受けたりして、タスク処理がトリガされます。
-
 
 ## パフォーマンス・プロファイリング <span id="performance-profiling"></span>
 

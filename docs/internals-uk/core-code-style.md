@@ -1,5 +1,4 @@
-Оформлення основного коду фреймворку Yii 2
-==========================================
+# Оформлення основного коду фреймворку Yii 2
 
 Нижченаведений стиль кодування використовується у розробці основного коду Yii 2.x та офіційних розширень. Дотримуйтесь його,
 якщо хочете вносити зміни в основний код. Команда розробників не наполягає на використанні цього стилю для вашого додатка.
@@ -143,7 +142,6 @@ class Foo
 - Усі типи PHP та значення повинні бути у нижньому регістрі. Це включає `true`, `false`, `null` та `array`.
 
 Зміна типу змінної, що вже існує, вважається поганою практикою. Намагайтесь не писати такий код, поки в цьому дійсно нема потреби.
-
 
 ```php
 public function save(Transaction $transaction, $argument2 = 100)
@@ -329,8 +327,7 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 });
 ```
 
-Документація
-------------
+## Документація
 
 - Див. [PHPDoc](https://phpdoc.org/) для довідки про синтаксис документації.
 - Код без документації не допускається.
@@ -385,10 +382,9 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 class Component extends \yii\base\BaseObject
 ```
 
-
 #### Функція / метод
 
-```php
+````php
 /**
   * Returns the list of attached event handlers for an event.
   * You may manipulate the returned [[Vector]] object by adding or removing handlers.
@@ -410,7 +406,7 @@ public function getEventHandlers($name)
     $this->ensureBehaviors();
     return $this->_e[$name];
 }
-```
+````
 
 #### Markdown
 
@@ -438,14 +434,12 @@ public function getEventHandlers($name)
 [link to guide](guide:file-name.md#subsection)
 ```
 
-
 #### Коментарі
 
 - Одно-рядкові коментарі повинні починатись з `//`, а не з `#`.
 - Одно-рядковий коментар повинен бути розміщений на власному рядку.
 
-Додаткові правила
------------------
+## Додаткові правила
 
 ### `=== []` проти `empty()`
 

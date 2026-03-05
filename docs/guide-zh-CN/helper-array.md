@@ -1,9 +1,7 @@
-数组助手类（ArrayHelper）
-======================
+# 数组助手类（ArrayHelper）
 
 除了 [PHP 中丰富的数组函数集](https://www.php.net/manual/zh/book.array.php)，
 Yii 数组助手类提供了额外的静态方法，让你更高效地处理数组。
-
 
 ## 获取值（Getting Values） <span id="getting-values"></span>
 
@@ -53,7 +51,6 @@ $fullName = ArrayHelper::getValue($user, function ($user, $defaultValue) {
 $username = ArrayHelper::getValue($comment, 'user.username', 'Unknown');
 ```
 
-
 ## 设定值（Setting values） <span id="setting-values"></span>
 
 ```php
@@ -101,7 +98,6 @@ ArrayHelper::setValue($array, 'key.in.arr0', ['arr1' => 'val']);
 ]
 ```
 
-
 ## 从数组中获取值（Take a value from an array） <span id="removing-values"></span>
 
 如果你想获得一个值，然后立即从数组中删除它，你可以使用 `remove` 方法：
@@ -113,7 +109,6 @@ $type = ArrayHelper::remove($array, 'type');
 
 执行代码后，`$array` 将包含 `['options' => [1, 2]]` 且 `$type` 将包含 `A`。
 请注意，与 `getValue` 方法不同，`remove` 仅支持简单的键名称。
-
 
 ## 检查键名的存在（Checking Existence of Keys） <span id="checking-existence-of-keys"></span>
 
@@ -156,7 +151,6 @@ $result = ArrayHelper::getColumn($array, function ($element) {
     return $element['id'];
 });
 ```
-
 
 ## 重建数组索引（Re-indexing Arrays） <span id="reindexing-arrays"></span>
 
@@ -263,7 +257,7 @@ $array = [
 ];
 
 $result = ArrayHelper::map($array, 'id', 'name');
-// 结果是： 
+// 结果是：
 // [
 //     '123' => 'aaa',
 //     '124' => 'bbb',
@@ -282,7 +276,6 @@ $result = ArrayHelper::map($array, 'id', 'name', 'class');
 //     ],
 // ]
 ```
-
 
 ## 多维排序（Multidimensional Sorting） <span id="multidimensional-sorting"></span>
 
@@ -316,15 +309,14 @@ ArrayHelper::multisort($data, function($item) {
 });
 ```
 
-第三个参数表示增降顺序。单键排序时，它可以是 `SORT_ASC` 或者 
+第三个参数表示增降顺序。单键排序时，它可以是 `SORT_ASC` 或者
 `SORT_DESC` 之一。如果是按多个键名排序，你可以用一个数组为
 各个键指定不同的顺序。
 
 最后一个参数（译者注：第四个参数）是PHP的排序标识（sort flag），可使用的值和调用 PHP
 [sort()](https://www.php.net/manual/zh/function.sort.php) 函数时传递的值一样。
 
-
-## 检测数组类型（Detecting Array Types） <span id="detecting-array-types"></span> 
+## 检测数组类型（Detecting Array Types） <span id="detecting-array-types"></span>
 
 想知道一个数组是索引数组还是联合数组很方便，这有个例子：
 
@@ -338,7 +330,6 @@ $associative = ['framework' => 'Yii', 'version' => '2.0'];
 echo ArrayHelper::isAssociative($associative);
 ```
 
-
 ## HTML 编码和解码值（HTML Encoding and Decoding Values） <span id="html-encoding-values"></span>
 
 为了将字符串数组中的特殊字符做 HTML 编解码，你可以使用下列方法：
@@ -350,7 +341,6 @@ $decoded = ArrayHelper::htmlDecode($data);
 
 默认情况只会对值做编码（译者注：原文中是编码，应为编解码）。通过给第二个参数传 `false` ，你也可以对键名做编码。
 编码将默认使用应用程序的字符集，你可以通过第三个参数指定该字符集。
-
 
 ## 合并数组（Merging Arrays） <span id="merging-arrays"></span>
 
@@ -418,7 +408,6 @@ $result = ArrayHelper::merge($array1, $array2);
 ]
 ```
 
-
 ## 对象转换为数组（Converting Objects to Arrays） <span id="converting-objects-to-arrays"></span>
 
 你经常要将一个对象或者对象的数组转换成一个数组，常见的情形是，为了通过 REST API 提供数据数组（或其他使用方式），
@@ -451,7 +440,6 @@ $data = ArrayHelper::toArray($posts, [
 
 这上面的转换结果将会是：
 
-
 ```php
 [
     'id' => 123,
@@ -478,7 +466,7 @@ ArrayHelper::isIn('a', ['a']);
 // true
 ArrayHelper::isIn('a', new(ArrayObject['a']));
 
-// true 
+// true
 ArrayHelper::isSubset(new(ArrayObject['a', 'c']), new(ArrayObject['a', 'b', 'c'])
 
 ```

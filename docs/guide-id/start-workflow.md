@@ -1,5 +1,4 @@
-Menjalankan Aplikasi
-====================
+# Menjalankan Aplikasi
 
 Setelah menginstal Yii, Anda memiliki aplikasi Yii yang dapat diakses melalui
 URL `https://hostname/basic/web/index.php` atau `https://hostname/index.php`, tergantung
@@ -7,39 +6,36 @@ pada konfigurasi Anda. Bagian ini akan memperkenalkan fungsi built-in aplikasi,
 bagaimana kode ini disusun, dan bagaimana aplikasi menangani permintaan secara umum.
 
 > Info: Untuk mempermudah, selama tutorial "Mulai", itu diasumsikan bahwa Anda telah menetapkan `basic/web`
-  sebagai root dokumen server Web Anda, dan URL dikonfigurasi untuk mengakses
-  aplikasi Anda untuk menjadi `https://hostname/index.php` atau sesuatu yang serupa.
-  Untuk kebutuhan Anda, silakan menyesuaikan URL sesuai deskripsi kami.
+>   sebagai root dokumen server Web Anda, dan URL dikonfigurasi untuk mengakses
+>   aplikasi Anda untuk menjadi `https://hostname/index.php` atau sesuatu yang serupa.
+>   Untuk kebutuhan Anda, silakan menyesuaikan URL sesuai deskripsi kami.
+
   
 Perhatikan bahwa tidak seperti framework itu sendiri, setelah template proyek diinstal, itu semua milikmu. Anda bebas untuk menambah atau menghapus
 kode dan memodifikasi keseluruhannya sesuai yang Anda butuhkan.
 
-
-Fungsi <span id="functionality"></span>
--------------
+## Fungsi <span id="functionality"></span>
 
 Aplikasi dasar diinstal berisi empat halaman:
 
-* Homepage, ditampilkan saat Anda mengakses URL `https://hostname/index.php`,
-* Halaman "About",
-* Halaman "Contact", yang menampilkan formulir kontak yang memungkinkan pengguna akhir untuk menghubungi Anda melalui email,
-* Dan halaman "Login", yang menampilkan form login yang dapat digunakan untuk otentikasi pengguna akhir. Cobalah masuk
-  dengan "admin/admin", dan Anda akan menemukan item "Login" di menu utama akan berubah menjadi "Logout".
+- Homepage, ditampilkan saat Anda mengakses URL `https://hostname/index.php`,
+- Halaman "About",
+- Halaman "Contact", yang menampilkan formulir kontak yang memungkinkan pengguna akhir untuk menghubungi Anda melalui email,
+- Dan halaman "Login", yang menampilkan form login yang dapat digunakan untuk otentikasi pengguna akhir. Cobalah masuk
+    dengan "admin/admin", dan Anda akan menemukan item "Login" di menu utama akan berubah menjadi "Logout".
 
 Halaman ini berbagi header umum dan footer. header berisi menu bar utama untuk memungkinkan navigasi
 antara halaman yang berbeda.
 
 Anda juga harus melihat toolbar di bagian bawah jendela browser.
-Ini adalah [debugger tool](https://github.com/yiisoft/yii2-debug/blob/master/docs/guide/README.md) yang disediakan oleh Yii 
+Ini adalah [debugger tool](https://github.com/yiisoft/yii2-debug/blob/master/docs/guide/README.md) yang disediakan oleh Yii
 untuk merekam dan menampilkan banyak informasi debug, seperti log pesan, status respon, query database berjalan, dan sebagainya.
 
 Selain itu untuk aplikasi web, ada script konsol yang disebut `yii`, yang terletak di direktori aplikasi dasar.
 Script ini dapat digunakan untuk menjalankan aplikasi background dan tugas pemeliharaan untuk aplikasi, yang diuraikan
 di bagian [Console Application](tutorial-console.md).
 
-
-Struktur aplikasi <span id="application-structure"></span>
----------------------
+## Struktur aplikasi <span id="application-structure"></span>
 
 Direktori yang paling penting dan file dalam aplikasi Anda (dengan asumsi direktori root aplikasi adalah `basic`):
 
@@ -79,9 +75,7 @@ Naskah entri mengambil permintaan masuk dan menciptakan [aplikasi](structure-app
 dan mengirimkan permintaan ke elemen MVC. [Widget](structure-widgets.md) digunakan dalam [view](structure-views.md)
 untuk membantu membangun elemen antarmuka pengguna yang kompleks dan dinamis.
 
-
-Daur Hidup Request <span id="request-lifecycle"></span>
------------------
+## Daur Hidup Request <span id="request-lifecycle"></span>
 
 Diagram berikut menunjukkan bagaimana aplikasi menangani permintaan.
 
@@ -89,9 +83,9 @@ Diagram berikut menunjukkan bagaimana aplikasi menangani permintaan.
 
 1. Pengguna membuat permintaan ke [skrip entri](structure-entry-scripts.md) `web/index.php`.
 2. Naskah entri memuat [konfigurasi](concept-configurations.md) aplikasi dan menciptakan
-   [aplikasi](structure-applications.md) untuk menangani permintaan.
+      [aplikasi](structure-applications.md) untuk menangani permintaan.
 3. Aplikasi menyelesaikan [route](runtime-routing.md) yang diminta dengan bantuan
-   komponen [request](runtime-requests.md) aplikasi.
+      komponen [request](runtime-requests.md) aplikasi.
 4. Aplikasi ini menciptakan [kontroler](structure-controllers.md) untuk menangani permintaan.
 5. Controller menciptakan [action](structure-controllers.md) dan melakukan filter untuk action.
 6. Jika filter gagal, aksi dibatalkan.

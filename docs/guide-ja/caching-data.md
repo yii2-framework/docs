@@ -1,5 +1,4 @@
-データ・キャッシュ
-==================
+# データ・キャッシュ
 
 データ・キャッシュは PHP の変数をキャッシュに格納し、あとでキャッシュからそれらを読み込みます。
 これは、[クエリ・キャッシュ](#query-caching) や [ページ・キャッシュ](caching-page.md) など、
@@ -47,13 +46,12 @@ $data = $cache->getOrSet($key, function () use ($user_id) {
 ```
 
 > Note: [[yii\caching\Cache::getOrSet()|getOrSet()]] メソッドは、有効期限と依存もサポートしています。
-  詳しくは [キャッシュの有効期限](#cache-expiration) と [キャッシュの依存](#cache-dependencies) を参照してください。
-  
+> 詳しくは [キャッシュの有効期限](#cache-expiration) と [キャッシュの依存](#cache-dependencies) を参照してください。
 
 ## キャッシュ・コンポーネント <span id="cache-components"></span>
 
 データ・キャッシュはメモリ、ファイル、データベースなどさまざまなキャッシュ・ストレージを表す、
-いわゆる *キャッシュ・コンポーネント* に依存しています。
+いわゆる _キャッシュ・コンポーネント_ に依存しています。
 
 キャッシュ・コンポーネントは通常グローバルに設定しアクセスできるように
 [アプリケーション・コンポーネント](structure-application-components.md) として登録されます。
@@ -86,7 +84,6 @@ $data = $cache->getOrSet($key, function () use ($user_id) {
 キャッシュを使っているコードに変更を加えることなく、異なるキャッシュ・コンポーネントに入れ替えることができます。
 例えば上記の構成を [[yii\caching\ApcCache|APC キャッシュ]] を使うように変更する場合は以下のようにします:
 
-
 ```php
 'components' => [
     'cache' => [
@@ -96,66 +93,63 @@ $data = $cache->getOrSet($key, function () use ($user_id) {
 ```
 
 > Tip: キャッシュ・コンポーネントは複数登録することができます。`cache` という名前のコンポーネントが、
-  キャッシュに依存する多数のクラスによってデフォルトで使用されます (例えば [[yii\web\UrlManager]] など) 。
-
+> キャッシュに依存する多数のクラスによってデフォルトで使用されます (例えば [[yii\web\UrlManager]] など) 。
 
 ### サポートされているキャッシュ・ストレージ <span id="supported-cache-storage"></span>
 
 Yii はさまざまなキャッシュ・ストレージをサポートしています。以下がその概要です:
 
-* [[yii\caching\ApcCache]]: PHP の [APC](https://www.php.net/manual/ja/book.apc.php) 拡張モジュールを使用します。
+- [[yii\caching\ApcCache]]: PHP の [APC](https://www.php.net/manual/ja/book.apc.php) 拡張モジュールを使用します。
   集中型の重厚なアプリケーションのキャッシュを扱うときには最速の一つとして考えることができます
   (例えば、サーバが一台で、専用のロード・バランサを持っていない、などの場合)。
-* [[yii\caching\DbCache]]: キャッシュされたデータを格納するためにデータベースのテーブルを使用します。
+- [[yii\caching\DbCache]]: キャッシュされたデータを格納するためにデータベースのテーブルを使用します。
   このキャッシュを使用するには [[yii\caching\DbCache::cacheTable]] で指定したテーブルを作成する必要があります。
-* [[yii\caching\ArrayCache]]: 配列に値を保存することによって、現在のリクエストのためだけのキャッシュを提供します。
+- [[yii\caching\ArrayCache]]: 配列に値を保存することによって、現在のリクエストのためだけのキャッシュを提供します。
   ArrayCache のパフォーマンスを高めるために、[[yii\caching\ArrayCache::$serializer]] を `false` に設定して、
-  保存するデータのシリアライズを無効にすることが出来ます。   .
-* [[yii\caching\DummyCache]]: 実際にはキャッシュを行わない、キャッシュのプレースホルダとして働きます。
+  保存するデータのシリアライズを無効にすることが出来ます。 .
+- [[yii\caching\DummyCache]]: 実際にはキャッシュを行わない、キャッシュのプレースホルダとして働きます。
   このコンポーネントの目的は、キャッシュの可用性をチェックする必要があるコードを簡略化することです。
   たとえば、開発中やサーバに実際のキャッシュ・サポートがない場合でも、
   このキャッシュを使用するようにキャッシュ・コンポーネントを構成することができます。
   そして、実際のキャッシュ・サポートが有効になったときに、対応するキャッシュ・コンポーネントに切替えて使用します。
   どちらの場合も、`Yii::$app->cache` が `null` かも知れないと心配せずに、
   データを取得するために同じコード `Yii::$app->cache->get($key)` を使用できます。
-* [[yii\caching\FileCache]]: キャッシュされたデータを保存するために通常のファイルを使用します。
+- [[yii\caching\FileCache]]: キャッシュされたデータを保存するために通常のファイルを使用します。
   これはページ・コンテントなど大きなかたまりのデータに特に適しています。
-* [[yii\caching\MemCache]]: PHP の [Memcache](https://www.php.net/manual/ja/book.memcache.php) と
+- [[yii\caching\MemCache]]: PHP の [Memcache](https://www.php.net/manual/ja/book.memcache.php) と
   [Memcached](https://www.php.net/manual/ja/book.memcached.php) 拡張モジュールを使用します。
   分散型のアプリケーションでキャッシュを扱うときには最速の一つとして考えることができます
   (例えば、複数台のサーバで、ロード・バランサがある、などの場合) 。
-* [[yii\redis\Cache]]: [Redis](https://redis.io/) の key-value ストアに基づいてキャッシュ・コンポーネントを実装しています。
+- [[yii\redis\Cache]]: [Redis](https://redis.io/) の key-value ストアに基づいてキャッシュ・コンポーネントを実装しています。
   (Redis の バージョン 2.6.12 以降が必要とされます) 。
-* [[yii\caching\WinCache]]: PHP の [WinCache](https://iis.net/downloads/microsoft/wincache-extension) エクステンションを使用します。
+- [[yii\caching\WinCache]]: PHP の [WinCache](https://iis.net/downloads/microsoft/wincache-extension) エクステンションを使用します。
   ([参照リンク](https://www.php.net/manual/ja/book.wincache.php))
 
-
 > Tip: 同じアプリケーション内で異なるキャッシュを使用することもできます。
-  一般的なやり方として、小さくとも常に使用されるデータ (例えば、統計データ) を格納する場合はメモリ・ベースのキャッシュ・ストレージを使用し、
-  大きくて使用頻度の低いデータ (例えば、ページ・コンテント) を格納する場合はファイル・ベース、またはデータベースのキャッシュ・ストレージを使用します  。
-
+> 一般的なやり方として、小さくとも常に使用されるデータ (例えば、統計データ) を格納する場合はメモリ・ベースのキャッシュ・ストレージを使用し、
+> 大きくて使用頻度の低いデータ (例えば、ページ・コンテント) を格納する場合はファイル・ベース、またはデータベースのキャッシュ・ストレージを使用します 。
 
 ## キャッシュ API <span id="cache-apis"></span>
 
 すべてのキャッシュ・コンポーネントが同じ基底クラス [[yii\caching\Cache]] を持っているので、以下の API をサポートしています。
 
-* [[yii\caching\Cache::get()|get()]]: 指定されたキーを用いてキャッシュからデータを取得します。
+- [[yii\caching\Cache::get()|get()]]: 指定されたキーを用いてキャッシュからデータを取得します。
   データが見つからないか、もしくは有効期限が切れたり無効になったりしている場合は false を返します。
-* [[yii\caching\Cache::set()|set()]]: キーによって識別されるデータをキャッシュに格納します。
-* [[yii\caching\Cache::add()|add()]]: キーがキャッシュ内で見つからない場合に、キーによって識別されるデータをキャッシュに格納します。
-* [[yii\caching\Cache::getOrSet()|getOrSet()]]: 指定されたキーを用いてキャッシュからデータを取得します。
+- [[yii\caching\Cache::set()|set()]]: キーによって識別されるデータをキャッシュに格納します。
+- [[yii\caching\Cache::add()|add()]]: キーがキャッシュ内で見つからない場合に、キーによって識別されるデータをキャッシュに格納します。
+- [[yii\caching\Cache::getOrSet()|getOrSet()]]: 指定されたキーを用いてキャッシュからデータを取得します。
   取得できなかった場合は、渡されたコールバック関数を実行し、関数の返り値をそのキーでキャッシュに保存し、そしてその値を返します。
-* [[yii\caching\Cache::multiGet()|multiGet()]]: 指定されたキーを用いてキャッシュから複数のデータを取得します。
-* [[yii\caching\Cache::multiSet()|multiSet()]]: キャッシュに複数のデータを格納します。各データはキーによって識別されます。
-* [[yii\caching\Cache::multiAdd()|multiAdd()]]: キャッシュに複数のデータを格納します。
+- [[yii\caching\Cache::multiGet()|multiGet()]]: 指定されたキーを用いてキャッシュから複数のデータを取得します。
+- [[yii\caching\Cache::multiSet()|multiSet()]]: キャッシュに複数のデータを格納します。各データはキーによって識別されます。
+- [[yii\caching\Cache::multiAdd()|multiAdd()]]: キャッシュに複数のデータを格納します。
   各データはキーによって識別されます。もしキャッシュ内にキーがすでに存在する場合はスキップされます。
-* [[yii\caching\Cache::exists()|exists()]]: 指定されたキーがキャッシュ内で見つかったかどうかを示す値を返します。
-* [[yii\caching\Cache::delete()|delete()]]: キャッシュからキーによって識別されるデータを削除します。
-* [[yii\caching\Cache::flush()|flush()]]: キャッシュからすべてのデータを削除します。
+- [[yii\caching\Cache::exists()|exists()]]: 指定されたキーがキャッシュ内で見つかったかどうかを示す値を返します。
+- [[yii\caching\Cache::delete()|delete()]]: キャッシュからキーによって識別されるデータを削除します。
+- [[yii\caching\Cache::flush()|flush()]]: キャッシュからすべてのデータを削除します。
 
 > Note: boolean 型の `false` を直接にキャッシュしてはいけません。
-  なぜなら、[[yii\caching\Cache::get()|get()]] メソッドは、データがキャッシュ内に見つからないことを示すために戻り値として `false` を使用しているからです。
-  代りに、配列内に `false` を置いてキャッシュすることによって、この問題を回避して下さい。
+> なぜなら、[[yii\caching\Cache::get()|get()]] メソッドは、データがキャッシュ内に見つからないことを示すために戻り値として `false` を使用しているからです。
+> 代りに、配列内に `false` を置いてキャッシュすることによって、この問題を回避して下さい。
 
 キャッシュされたデータを取得する際に発生するオーバーヘッドを減らすために、MemCache, APC などのいくつかのキャッシュ・ストレージは、
 バッチ・モードで複数のキャッシュされた値を取得することをサポートしています。
@@ -169,7 +163,6 @@ Yii はさまざまなキャッシュ・ストレージをサポートしてい�
 $cache['var1'] = $value1;  // $cache->set('var1', $value1); と同等
 $value2 = $cache['var2'];  // $value2 = $cache->get('var2'); と同等
 ```
-
 
 ### キャッシュのキー <span id="cache-keys"></span>
 
@@ -195,8 +188,8 @@ $value2 = $cache['var2'];  // $value2 = $cache->get('var2'); と同等
 見ての通り、キーは一意にデータベースのテーブルを指定するために必要なすべての情報を含んでいます。
 
 > Note: [[yii\caching\Cache::multiSet()|multiSet()]] または [[yii\caching\Cache::multiAdd()|multiAdd()]] によってキャッシュに保存される値が持つことが出来るのは、
-文字列または整数のキーだけです。それらより複雑なキーを設定する必要がある場合は、
-[[yii\caching\Cache::set()|set()]] または [[yii\caching\Cache::add()|add()]] によって、値を個別に保存してください。
+> 文字列または整数のキーだけです。それらより複雑なキーを設定する必要がある場合は、
+> [[yii\caching\Cache::set()|set()]] または [[yii\caching\Cache::add()|add()]] によって、値を個別に保存してください。
 
 同じキャッシュ・ストレージが異なるアプリケーションによって使用されているときは、
 キャッシュのキーの競合を避けるために、各アプリケーションではユニークなキーの接頭辞を指定する必要があります。
@@ -212,7 +205,6 @@ $value2 = $cache['var2'];  // $value2 = $cache->get('var2'); と同等
 ```
 
 相互運用性を確保するために、英数字のみを使用する必要があります。
-
 
 ### キャッシュの有効期限 <span id="cache-expiration"></span>
 
@@ -239,10 +231,9 @@ if ($data === false) {
 キャッシュ・コンポーネントの構成で [[yii\caching\Cache::$defaultDuration|defaultDuration]] の値を指定することが出来ます。
 これによって、特定の `duration` パラメータを毎回 [[yii\caching\Cache::set()|set()]] に渡さなくてもよくなります。
 
-
 ### キャッシュの依存 <span id="cache-dependencies"></span>
 
-有効期限の設定に加えて、キャッシュされたデータは、いわゆる *キャッシュの依存* (キャッシュが依存している事物) の変化によって無効にすることもできます。
+有効期限の設定に加えて、キャッシュされたデータは、いわゆる _キャッシュの依存_ (キャッシュが依存している事物) の変化によって無効にすることもできます。
 例えば [[yii\caching\FileDependency]] は、キャッシュがファイルの更新時刻に依存していることを表しています。
 この依存が変化したときは、対応するファイルが更新されたことを意味します。
 その結果、キャッシュ内で見つかった古いファイルのコンテントは、無効とされるべきであり
@@ -277,9 +268,8 @@ $data = $cache->get($key);
   [[yii\caching\TagDependency::invalidate()]] を呼び出すことによって、指定されたタグ (複数可) を持つキャッシュされたデータ・アイテムを無効にすることができます。
 
 > Note: 依存を有するキャッシュについて [[yii\caching\Cache::exists()|exists()]] メソッドを使用することは避けてください。
-  このメソッドは、キャッシュされたデータに関連づけられた依存がある場合でも、依存が変化したかどうかをチェックしません。
-  つまり、[[yii\caching\Cache::exists()|exists()]] が `true` を返しているのに、 [[yii\caching\Cache::get()|get()]] が `false` を返すという場合があり得ます。
-
+> このメソッドは、キャッシュされたデータに関連づけられた依存がある場合でも、依存が変化したかどうかをチェックしません。
+> つまり、[[yii\caching\Cache::exists()|exists()]] が `true` を返しているのに、 [[yii\caching\Cache::get()|get()]] が `false` を返すという場合があり得ます。
 
 ## クエリ・キャッシュ <span id="query-caching"></span>
 
@@ -308,9 +298,9 @@ $result = Customer::getDb()->cache(function ($db) {
 ```
 
 > Info: いくつかの DBMS (例えば [MySQL](https://dev.mysql.com/doc/refman/5.1/ja/query-cache.html))
-  もデータベース・サーバ・サイドのクエリ・キャッシュをサポートしています。
-  どちらのクエリ・キャッシュ・メカニズムを選んでも構いません。
-  前述した Yii のクエリ・キャッシュにはキャッシュの依存を柔軟に指定できるという利点があり、潜在的にはより効率的です。
+> もデータベース・サーバ・サイドのクエリ・キャッシュをサポートしています。
+> どちらのクエリ・キャッシュ・メカニズムを選んでも構いません。
+> 前述した Yii のクエリ・キャッシュにはキャッシュの依存を柔軟に指定できるという利点があり、潜在的にはより効率的です。
 
 2.0.14 以降は、下記のショートカットを使用することが出来ます。
 
@@ -320,21 +310,19 @@ $result = Customer::getDb()->cache(function ($db) {
 User::find()->cache(7200)->all();
 ```
 
-
 ### 構成 <span id="query-caching-configs"></span>
 
 クエリ・キャッシュには [[yii\db\Connection]] を通して設定可能な三つのグローバルなオプションがあります:
 
-* [[yii\db\Connection::enableQueryCache|enableQueryCache]]: クエリ・キャッシュを可能にするかどうか。デフォルトは `true` です。
+- [[yii\db\Connection::enableQueryCache|enableQueryCache]]: クエリ・キャッシュを可能にするかどうか。デフォルトは `true` です。
   実効的にクエリ・キャッシュをオンにするには [[yii\db\Connection::queryCache|queryCache]]
   によって指定される有効なキャッシュを持っている必要があることに注意してください。
-* [[yii\db\Connection::queryCacheDuration|queryCacheDuration]]: これはクエリ結果がキャッシュ内に有効な状態として
+- [[yii\db\Connection::queryCacheDuration|queryCacheDuration]]: これはクエリ結果がキャッシュ内に有効な状態として
   持続できる秒数を表します。
   クエリ・キャッシュを永遠にキャッシュに残したい場合は 0 を指定することができます。
   このプロパティは [[yii\db\Connection::cache()]] が持続時間を指定せず呼び出されたときに使用されるデフォルト値です。
-* [[yii\db\Connection::queryCache|queryCache]]: これはキャッシュ・アプリケーション・コンポーネントの ID を表します。
-デフォルトは `'cache'` です。有効なキャッシュ・コンポーネントが存在する場合にのみ、クエリ・キャッシュが使用可能になります。
-
+- [[yii\db\Connection::queryCache|queryCache]]: これはキャッシュ・アプリケーション・コンポーネントの ID を表します。
+  デフォルトは `'cache'` です。有効なキャッシュ・コンポーネントが存在する場合にのみ、クエリ・キャッシュが使用可能になります。
 
 ### 使い方 <span id="query-caching-usages"></span>
 
@@ -403,7 +391,6 @@ $result = $db->cache(function ($db) {
 });
 ```
 
-
 ### 制約 <span id="query-caching-limitations"></span>
 
 リソース・ハンドラを返すようなクエリにはクエリ・キャッシュは働きません。
@@ -414,17 +401,17 @@ $result = $db->cache(function ($db) {
 例えば Memcache では、各エントリのサイズは 1MB が上限値です。
 そのためクエリ結果のサイズがこの制約を越える場合、キャッシュは失敗します。
 
-
 ## キャッシュのフラッシュ <span id="cache-flushing">
 
 保存されている全てのキャッシュ・データを無効化する必要がある場合は、[[yii\caching\Cache::flush()]] を呼ぶことが出来ます。
 
 コンソールから `yii cache/flush` を呼ぶことによっても、キャッシュをフラッシュすることが出来ます。
-  - `yii cache`: アプリケーションで利用可能なキャッシュのリストを表示します。
-  - `yii cache/flush cache1 cache2`: キャッシュ・コンポーネント `cache1` と `cache2` をフラッシュします
+
+- `yii cache`: アプリケーションで利用可能なキャッシュのリストを表示します。
+- `yii cache/flush cache1 cache2`: キャッシュ・コンポーネント `cache1` と `cache2` をフラッシュします
   (複数のコンポーネント名をスペースで区切って渡すことが出来ます)
-  - `yii cache/flush-all`: アプリケーションの全てのキャッシュ・コンポーネントをフラッシュします。
+- `yii cache/flush-all`: アプリケーションの全てのキャッシュ・コンポーネントをフラッシュします。
 - `yii cache/flush-schema db`: 指定された DB 接続に対する DB スキーマ・キャッシュをクリアします。
 
 > Info: デフォルトでは、コンソール・アプリケーションは独立した構成情報ファイルを使用します。
-正しい結果を得るためには、ウェブとコンソールのアプリケーション構成で同じキャッシュ・コンポーネントを使用していることを確認してください。
+> 正しい結果を得るためには、ウェブとコンソールのアプリケーション構成で同じキャッシュ・コンポーネントを使用していることを確認してください。

@@ -1,5 +1,4 @@
-Rozszerzanie ActiveForm po stronie klienta
-==========================================
+# Rozszerzanie ActiveForm po stronie klienta
 
 Widżet [[yii\widgets\ActiveForm]] posiada szereg wbudowanych metod JavaScript, służących do walidacji po stronie klienta.
 Ich implementacja jest bardzo elastyczna i pozwala na rozszerzanie ich na wiele sposobów.
@@ -9,7 +8,7 @@ Ich implementacja jest bardzo elastyczna i pozwala na rozszerzanie ich na wiele 
 ActiveForm wyzwala serie dedykowanych zdarzeń. Używając poniższego kodu, można przechwycić te zdarzenia i je obsłużyć:
 
 ```javascript
-$('#contact-form').on('beforeSubmit', function (e) {
+$("#contact-form").on("beforeSubmit", function (e) {
   if (!confirm("Wszystko jest w porządku. Wysłać formularz?")) {
     return false;
   }
@@ -35,7 +34,7 @@ gdzie
 - `messages`: asocjacyjna tablica, gdzie kluczami są ID atrybutów, a wartościami tablice opisów błędów dla tych atrybutów.
 - `deferreds`: tablica obiektów kolejkujących. Możesz użyć `deferreds.add(callback)`, aby dodać nową walidację do kolejki.
 
-Jeśli metoda obsługująca zwróci boolean `false`, zatrzyma dalszą walidację formularza. W takim wypadku zdarzenie 
+Jeśli metoda obsługująca zwróci boolean `false`, zatrzyma dalszą walidację formularza. W takim wypadku zdarzenie
 `afterValidate` nie będzie już wyzwalane.
 
 ### `afterValidate`
@@ -63,7 +62,7 @@ Sygnatura metody obsługującej to zdarzenie powinna wyglądać następująco:
 ```javascript
 function (event, attribute, messages, deferreds)
 ```
-      
+
 gdzie
 
 - `event`: obiekt Event.
@@ -71,7 +70,7 @@ gdzie
 - `messages`: tablica, do której możesz dodać opisy błędów walidacji dla wybranego atrybutu.
 - `deferreds`: tablica obiektów kolejki. Możesz użyć `deferreds.add(callback)`, aby dodać nową walidację do kolejki.
 
-Jeśli metoda obsługująca zwróci boolean `false`, zatrzyma dalszą walidację wybranego atrybutu. W takim wypadku zdarzenie 
+Jeśli metoda obsługująca zwróci boolean `false`, zatrzyma dalszą walidację wybranego atrybutu. W takim wypadku zdarzenie
 `afterValidateAttribute` nie będzie już wyzwalane.
 
 ### `afterValidateAttribute`
@@ -105,7 +104,7 @@ gdzie event jest obiektem Event.
 Jeśli metoda obsługująca zwróci boolean `false`, zatrzyma wysyłanie formularza.
 
 ### `ajaxBeforeSend`
-          
+
 `ajaxBeforeSend` jest wyzwalane przed wysłaniem żądania AJAX w przypadku walidacji AJAX-owej.
 
 Sygnatura metody obsługującej to zdarzenie powinna wyglądać następująco:
@@ -138,31 +137,30 @@ gdzie
 
 ## Wysyłanie formularza za pomocą AJAX
 
-Walidacja może być przeprowadzona po stronie klienta lub za pomocą AJAX-a, ale wysyłanie formularza jest domyślnie przeprowadzane 
-za pomocą zwyczajnego żądania. Jeśli chcesz przesłać formularz za pomocą AJAX, możesz to zrobić obsługując zdarzenie `beforeSubmit` 
+Walidacja może być przeprowadzona po stronie klienta lub za pomocą AJAX-a, ale wysyłanie formularza jest domyślnie przeprowadzane
+za pomocą zwyczajnego żądania. Jeśli chcesz przesłać formularz za pomocą AJAX, możesz to zrobić obsługując zdarzenie `beforeSubmit`
 formularza w następujący sposób:
 
 ```javascript
-var $form = $('#formId');
-$form.on('beforeSubmit', function() {
-    var data = $form.serialize();
-    $.ajax({
-        url: $form.attr('action'),
-        type: 'POST',
-        data: data,
-        success: function (data) {
-            // Implementacja pomyślnego statusu
-        },
-        error: function(jqXHR, errMsg) {
-            alert(errMsg);
-        }
-    });
-    return false; // powstrzymuje przed domyślnym sposobem wysłania
+var $form = $("#formId");
+$form.on("beforeSubmit", function () {
+  var data = $form.serialize();
+  $.ajax({
+    url: $form.attr("action"),
+    type: "POST",
+    data: data,
+    success: function (data) {
+      // Implementacja pomyślnego statusu
+    },
+    error: function (jqXHR, errMsg) {
+      alert(errMsg);
+    },
+  });
+  return false; // powstrzymuje przed domyślnym sposobem wysłania
 });
 ```
 
 Aby dowiedzieć się więcej o funkcji jQuery `ajax()`, zapoznaj się z [dokumentacją jQuery](https://api.jquery.com/jQuery.ajax/).
-
 
 ## Dynamiczne dodawanie pól
 
@@ -173,20 +171,22 @@ Aby uruchomić walidację takich pól, należy je zarejestrować za pomocą Java
 Po dodaniu pola do formularza, należy dołączyć je również do listy walidacji:
 
 ```javascript
-$('#contact-form').yiiActiveForm('add', {
-    id: 'address',
-    name: 'address',
-    container: '.field-address',
-    input: '#address',
-    error: '.help-block',
-    validate:  function (attribute, value, messages, deferred, $form) {
-        yii.validation.required(value, messages, {message: "Informacja dotycząca walidacji tutaj"});
-    }
+$("#contact-form").yiiActiveForm("add", {
+  id: "address",
+  name: "address",
+  container: ".field-address",
+  input: "#address",
+  error: ".help-block",
+  validate: function (attribute, value, messages, deferred, $form) {
+    yii.validation.required(value, messages, {
+      message: "Informacja dotycząca walidacji tutaj",
+    });
+  },
 });
 ```
 
 Aby usunąć pole z listy walidacji (aby nie było już sprawdzane), możesz wykonać następujący kod:
 
 ```javascript
-$('#contact-form').yiiActiveForm('remove', 'address');
+$("#contact-form").yiiActiveForm("remove", "address");
 ```

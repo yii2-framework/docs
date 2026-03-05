@@ -1,5 +1,4 @@
-Roteamento
-=======
+# Roteamento
 
 Com as classes de recurso e controller prontas, você pode acessar os recursos utilizando uma URL como `http://localhost/index.php?r=user/create`, semelhante ao que você pode fazer com aplicações Web normais.
 
@@ -33,17 +32,17 @@ Por exemplo, o código acima é mais ou menos equivalente às seguintes regras:
 ]
 ```
 
-E as seguintes URLs (também chamadas de *endpoints*) da API são suportados por esta regra:
+E as seguintes URLs (também chamadas de _endpoints_) da API são suportados por esta regra:
 
-* `GET /users`: lista todos os usuários página por página;
-* `HEAD /users`: mostrar a informações gerais da listagem de usuários;
-* `POST /users`: cria um novo usuário;
-* `GET /users/123`: retorna detalhes do usuário 123;
-* `HEAD /users/123`: mostrar a informações gerais do usuário 123;
-* `PATCH /users/123` and `PUT /users/123`: atualiza o usuário 123;
-* `DELETE /users/123`: deleta o usuário 123;
-* `OPTIONS /users`: exibe os métodos suportados pela URL `/users`;
-* `OPTIONS /users/123`: exibe os métodos suportados pela URL `/users/123`.
+- `GET /users`: lista todos os usuários página por página;
+- `HEAD /users`: mostrar a informações gerais da listagem de usuários;
+- `POST /users`: cria um novo usuário;
+- `GET /users/123`: retorna detalhes do usuário 123;
+- `HEAD /users/123`: mostrar a informações gerais do usuário 123;
+- `PATCH /users/123` and `PUT /users/123`: atualiza o usuário 123;
+- `DELETE /users/123`: deleta o usuário 123;
+- `OPTIONS /users`: exibe os métodos suportados pela URL `/users`;
+- `OPTIONS /users/123`: exibe os métodos suportados pela URL `/users/123`.
 
 Você pode configurar as opções `only` e `except` para listar explicitamente quais ações são suportadas ou quais ações devem ser desativadas, respectivamente. Por exemplo,
 
@@ -67,13 +66,12 @@ Você também pode configurar `patterns` ou `extraPatterns` para redefinir padr�
 ]
 ```
 
-Você deve ter notado que o ID `user` de controller aparece no plural como `users` na extremidade das  URLs. Isto acontece porque [[yii\rest\UrlRule]] pluraliza os IDs de controllers automaticamente na criação de regras de URLs filhas.
+Você deve ter notado que o ID `user` de controller aparece no plural como `users` na extremidade das URLs. Isto acontece porque [[yii\rest\UrlRule]] pluraliza os IDs de controllers automaticamente na criação de regras de URLs filhas.
 Você pode desabilitar este comportamento configurando [[yii\rest\UrlRule::pluralize]] para `false`.
 
 > Observação: A pluralização dos IDs de controllers são feitas pelo método [[yii\helpers\Inflector::pluralize()]]. O método respeita as regras especiais de pluralização. Por exemplo, a palavra `box` será pluralizada para `boxes` em vez de `boxs`.
 
-
-Caso a pluralização automática não encontre uma opção para a palavra requerida, você pode configurar a propriedade [[yii\rest\UrlRule::controller]] para especificar explicitamente como mapear um nome para ser usado como uma URL para um ID de controller. Por exemplo, o seguinte código mapeia o nome `u` para o ID `user` de controller.  
+Caso a pluralização automática não encontre uma opção para a palavra requerida, você pode configurar a propriedade [[yii\rest\UrlRule::controller]] para especificar explicitamente como mapear um nome para ser usado como uma URL para um ID de controller. Por exemplo, o seguinte código mapeia o nome `u` para o ID `user` de controller.
 
 ```php
 [

@@ -1,5 +1,4 @@
-入口脚本
-=============
+# 入口脚本
 
 入口脚本是应用启动流程中的第一环，
 一个应用（不管是网页应用还是控制台应用）只有一个入口脚本。
@@ -15,13 +14,12 @@ Web 应用的入口脚本必须放在终端用户能够访问的目录下，
 
 入口脚本主要完成以下工作：
 
-* 定义全局常量；
-* 注册 [Composer 自动加载器](https://getcomposer.org/doc/01-basic-usage.md#autoloading)；
-* 包含 [[Yii]] 类文件；
-* 加载应用配置；
-* 创建一个[应用](structure-applications.md)实例并配置;
-* 调用 [[yii\base\Application::run()]] 来处理请求。
-
+- 定义全局常量；
+- 注册 [Composer 自动加载器](https://getcomposer.org/doc/01-basic-usage.md#autoloading)；
+- 包含 [[Yii]] 类文件；
+- 加载应用配置；
+- 创建一个[应用](structure-applications.md)实例并配置;
+- 调用 [[yii\base\Application::run()]] 来处理请求。
 
 ## Web 应用 <span id="web-applications"></span>
 
@@ -45,7 +43,6 @@ $config = require __DIR__ . '/../config/web.php';
 // 创建、配置、运行一个应用
 (new yii\web\Application($config))->run();
 ```
-
 
 ## 控制台应用 <span id="console-applications"></span>
 
@@ -79,18 +76,17 @@ $exitCode = $application->run();
 exit($exitCode);
 ```
 
-
 ## 定义常量 <span id="defining-constants"></span>
 
 入口脚本是定义全局常量的最好地方，Yii 支持以下三个常量：
 
-* `YII_DEBUG`：标识应用是否运行在调试模式。当在调试模式下，应用会保留更多日志信息，
+- `YII_DEBUG`：标识应用是否运行在调试模式。当在调试模式下，应用会保留更多日志信息，
   如果抛出异常，会显示详细的错误调用堆栈。
   因此，调试模式主要适合在开发阶段使用，`YII_DEBUG` 默认值为 false。
-* `YII_ENV`：标识应用运行的环境，详情请查阅
+- `YII_ENV`：标识应用运行的环境，详情请查阅
   [配置](concept-configurations.md#environment-constants)章节。
   `YII_ENV` 默认值为 `'prod'`，表示应用运行在线上产品环境。
-* `YII_ENABLE_ERROR_HANDLER`：标识是否启用 Yii 提供的错误处理，
+- `YII_ENABLE_ERROR_HANDLER`：标识是否启用 Yii 提供的错误处理，
   默认为 true。
 
 当定义一个常量时，通常使用类似如下代码来定义：

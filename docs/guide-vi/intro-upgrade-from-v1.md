@@ -1,5 +1,4 @@
-Nâng cấp lên từ phiên bản 1.1
-==========================
+# Nâng cấp lên từ phiên bản 1.1
 
 Có nhiều sự khác biệt giữa các phiên bản 1.1 và 2.0 của Yii khi cấu trúc framework được viết lại hoàn toàn cho 2.0.
 Do vậy, việc nâng cấp từ phiên bản 1.1 không dễ dàng như việc nâng cấp giữa các phiên bản nhỏ. Trong bản hướng dẫn này, bạn sẽ
@@ -7,12 +6,10 @@ thấy sựa khác biệt chính giữa hai phiên bản.
 
 Nếu bạn chưa sử dụng bản Yii 1.1, bạn có thể bỏ qua phần này một cách an toàn và chuyển trực tiếp qua mục "[Getting started](start-installation.md)".
 
-Xin lưu ý rằng Yii 2.0 giới thiệu nhiều tính năng mới hơn so với trong phần tóm tắt này. Do vậy chúng tôi khuyến khíc bạn đọc qua toàn bộ bài hướng dẫn 
+Xin lưu ý rằng Yii 2.0 giới thiệu nhiều tính năng mới hơn so với trong phần tóm tắt này. Do vậy chúng tôi khuyến khíc bạn đọc qua toàn bộ bài hướng dẫn
 để tìm hiểu sâu hơn về Yii 2.0. Rất có thể là một số tính năng mà trước đây bạn phải phát triển cho chính mình nhưng bây giờ là một phần của mã cốt lõi.
 
-
-Cài đặt
-------------
+## Cài đặt
 
 Yii 2.0 được tích hợp hoàn toàn với [Composer](https://getcomposer.org/), trình quản lý các gói cho PHP. Việc cài đặt
 các gói cốt lõi của framework, cũng như các thư viện, được thực hiện qua Composer. Vui lòng tham khảo mục
@@ -20,12 +17,10 @@ các gói cốt lõi của framework, cũng như các thư viện, được th�
 mới, hoặc chuyển các thư viện từ phiên bản 1.1 hiện có của bạn cho tương thích với phiên bản 2.0, thì vui lòng tham khảo
 phần [Tạo các thư viện](structure-extensions.md#creating-extensions) của hướng dẫn.
 
-
-Các yêu cầu về PHP
-----------------
+## Các yêu cầu về PHP
 
 Yii 2.0 yêu cầu PHP 5.4 trở lên, đó là một cải tiến rất lớn so với phiên bản PHP 5.2 được Yii 1.1 yêu cầu.
-Như được liệt kê dưới, có nhiều sự khác biệt về cấp độ ngôn ngữ mà bạn nên chú ý. 
+Như được liệt kê dưới, có nhiều sự khác biệt về cấp độ ngôn ngữ mà bạn nên chú ý.
 Dưới đây là tóm tắt về những thay đổi lớn liên quan đến PHP:
 
 - [Namespaces](https://php.net/manual/en/language.namespaces.php).
@@ -38,34 +33,28 @@ Dưới đây là tóm tắt về những thay đổi lớn liên quan đến PH
 - [Traits](https://php.net/manual/en/language.oop5.traits.php).
 - [intl](https://php.net/manual/en/book.intl.php). Yii 2.0 sử dụng phần mở rộng PHP intl để hỗ trợ các tính năng quốc tế hóa.
 
-
-Không gian tên (Namespace)
----------
+## Không gian tên (Namespace)
 
 Thay đổi rõ ràng nhất trong Yii 2.0 là việc sử dụng các không gian tên. Hầu hết mọi lớp lõi đều được đặt không gian tên, ví dụ:
-, `yii\web\Request`. Tiền tố "C" không còn được sử dụng trong tên lớp. Sơ đồ đặt tên bây giờ theo cấu trúc thư mục. 
+, `yii\web\Request`. Tiền tố "C" không còn được sử dụng trong tên lớp. Sơ đồ đặt tên bây giờ theo cấu trúc thư mục.
 Chẳng hạn, `yii\web\Request` chỉ ra rằng tệp lớp tương ứng là `web/Request.php` trong thư mục khung Yii.
 
 (Bạn có thể sử dụng bất kỳ lớp lõi nào mà không khai báo rõ ràng tệp lớp đó, điều này là nhờ trình tải lớp Yii.)
 
-
-Các Component và Object
---------------------
+## Các Component và Object
 
 Yii 2.0 chia lớp `CComponent` trong 1.1 thành hai lớp: [[yii\base\BaseObject]] và [[yii\base\Component]].
 The [[yii\base\BaseObject|BaseObject]] class is a lightweight base class that allows defining [object properties](concept-properties.md)
-via getters and setters. Lớp [[yii\base\Component|Component]] được kế thừa từ lớp [[yii\base\BaseObject|BaseObject]] và hỗ trợ thêm các 
+via getters and setters. Lớp [[yii\base\Component|Component]] được kế thừa từ lớp [[yii\base\BaseObject|BaseObject]] và hỗ trợ thêm các
 [sự kiện (event)](concept-events.md) và các [hành vi (behaviors)](concept-behaviors.md).
 
-Nếu lớp của bạn không cần tính năng sự kiện hoặc hành vi, bạn nên xem xét sử dụng 
+Nếu lớp của bạn không cần tính năng sự kiện hoặc hành vi, bạn nên xem xét sử dụng
 [[yii\base\BaseObject|BaseObject]] làm lớp cơ sở. Đây thường là trường hợp cho các lớp đại diện cho cấu trúc dữ liệu cơ bản.
 
-
-Object Configuration
---------------------
+## Object Configuration
 
 Lớp [[yii\base\BaseObject|BaseObject]] giới thiệu một cách thống nhất để cấu hình các đối tượng. Bất kỳ các lớp con của
-lớp [[yii\base\BaseObject|BaseObject]] nên khai báo các hàm khởi tạo (constructor) (nếu cần thiết)  theo cách sau để có thể được
+lớp [[yii\base\BaseObject|BaseObject]] nên khai báo các hàm khởi tạo (constructor) (nếu cần thiết) theo cách sau để có thể được
 cấu hình đúng:
 
 ```php
@@ -87,7 +76,7 @@ class MyClass extends \yii\base\BaseObject
 }
 ```
 
-Ở trên, tham số cuối cùng của hàm tạo phải lấy một mảng cấu hình có chứa các cặp tên-giá trị để 
+Ở trên, tham số cuối cùng của hàm tạo phải lấy một mảng cấu hình có chứa các cặp tên-giá trị để
 khởi tạo các thuộc tính ở cuối hàm tạo. Bạn có thể ghi đè phương thức [[yii\base\BaseObject::init()|init()]]
 để thực hiện công việc khởi tạo nên được thực hiện sau khi cấu hình được áp dụng.
 
@@ -104,9 +93,7 @@ $object = Yii::createObject([
 
 Thông tin chi tiết về cấu hình có thể được tìm thấy trong phần [Cấu hình](concept-configurations.md).
 
-
-Sự kiện (Events)
-------
+## Sự kiện (Events)
 
 Trong Yii 1, các sự kiện đã được tạo bằng cách xác định phương thức `on` (ví dụ, `onBeforeSave`). Trong Yii 2, bây giờ bạn có thể sử dụng bất kỳ tên sự kiện
 . Bạn kích hoạt một sự kiện bằng cách gọi phương thức [[yii\base\Component::trigger()|trigger()]]:
@@ -126,9 +113,7 @@ $component->on($eventName, $handler);
 
 Có nhiều cải tiến cho các tính năng sự kiện. Để biết thêm chi tiết, vui lòng tham khảo phần [Sự kiện](concept-events.md).
 
-
-Đường dẫn cho bí danh (Aliases)
-------------
+## Đường dẫn cho bí danh (Aliases)
 
 Yii 2.0 mở rộng việc sử dụng các bí danh đường dẫn cho cả đường dẫn tệp / thư mục và URL. Yii 2.0 hiện cũng yêu cầu một
 tên bí danh để bắt đầu bằng ký tự @, để phân biệt các bí danh với các đường dẫn tệp / thư mục thông thường hoặc URL.
@@ -144,13 +129,11 @@ chẳng hạn như thư viện Zend Framework, bạn có thể định nghĩa m�
 
 Thông tin thêm về các đường dẫn bí danh có thể được tìm thấy trong phần [Bí danh](concept-aliases.md).
 
-
-Giao diện (Views)
------
+## Giao diện (Views)
 
 Thay đổi đáng kể nhất về views trong Yii 2 là biến `$this` trong view không còn đề cập đến
-controller và widget hiện tại. Mà, biến `$this` bây giờ được đề cập tới đối tượng *view*, một khái niệm mới được giới thiệu trong phiên bản 2.0.
-Đối tượng *view* là loại [[yii\web\View]], nó đại diện cho phần view
+controller và widget hiện tại. Mà, biến `$this` bây giờ được đề cập tới đối tượng _view_, một khái niệm mới được giới thiệu trong phiên bản 2.0.
+Đối tượng _view_ là loại [[yii\web\View]], nó đại diện cho phần view
 của mô hình MVC. Nếu bạn muốn truy cập tới controller hoặc widget trong view, bạn có thể sử dụng cú pháp là `$this->context`.
 
 Để được xuất bản một phần view trong một view khác, bạn dụng phương thức `$this->render()`, không phải là `$this->renderPartial()`.
@@ -167,9 +150,7 @@ phổ biến là: Smarty và Twig. Công cụ mẫu của Prado không còn đư
 [[yii\base\View::$renderers|View::$renderers]]. Vui lòng tham khảo mục [Template Engines](tutorial-template-engines.md)
 để biết thêm chi tiết.
 
-
-Dữ liệu (Models)
-------
+## Dữ liệu (Models)
 
 Yii 2.0 dùng [[yii\base\Model]] làm model cơ sở, tương tự như `CModel` trong 1.1.
 Lớp `CFormModel` đã bị loại bỏ hoàn toàn. Thay vào đó, trong Yii 2 bạn nên kế thừa [[yii\base\Model]] để tạo lớp model mẫu.
@@ -200,9 +181,7 @@ nếu trong phương thức [[yii\base\Model::rules()|rules()]] chỉ định đ
 
 Để tìm hiểu thêm về models, vui lòng tham khảo mục [Models](structure-models.md) để biết thêm chi tiết.
 
-
-Điều khiển (Controllers)
------------
+## Điều khiển (Controllers)
 
 Yii 2.0 sử dụng [[yii\web\Controller]] như lớp cơ sở cho controller, tương tự như lớp `CController` trong Yii 1.1.
 [[yii\base\Action]] là lớp cơ sở cho các lớp hành động.
@@ -224,9 +203,7 @@ public function actionView($id)
 
 Vui lòng tham khảo mục [Controllers](structure-controllers.md) để biết thêm chi tiết về controllers.
 
-
-Widgets
--------
+## Widgets
 
 Yii 2.0 sử dụng [[yii\base\Widget]] như lớp cơ sở cho các widget, tương tự như `CWidget` trong Yii 1.1.
 
@@ -252,38 +229,32 @@ ActiveForm::end();
 
 Vui lòng tham khảo mục [Widgets](structure-widgets.md) để biết thêm thông tin.
 
-
-Themes
-------
+## Themes
 
 Themes hoạt động hoàn toàn khác nhau trong 2.0. Bây giờ các theme dựa trên cơ chế ánh xạ tới đường dẫn có liên kết tới nguồn
 đến đường dẫn file cho theme. Ví dụ, nếu đường dẫn liên kết cho theme là `['/web/views' => '/web/themes/basic']`, tiếp đến
-phiên bản cho các file view là `/web/views/site/index.php` sẽ là `/web/themes/basic/site/index.php`. Vì lý do này, các themes 
+phiên bản cho các file view là `/web/views/site/index.php` sẽ là `/web/themes/basic/site/index.php`. Vì lý do này, các themes
 bây giờ có thể được áp dụng vào bất cứ file view, thậm chí một sự kiện được xuất bản bên ngoài của nội dung một controller hoặc một widget.
 
 Ngoài ra, không còn component`CThemeManager`. Thay vào đó, `theme` bây giờ được cấu hình qua thuộc tính của thành phần `view`.
 
 Vui lòng tham khảo mục [Theming](output-theming.md) để biết thêm thông tin chi tiết.
 
-
-Ứng dụng Console
---------------------
+## Ứng dụng Console
 
 Các ứng dụng Console hiện được tổ chức dưới dạng như controllers, như các ứng dụng Web. Các controller của ứng dụng Console
 nên được kế thừa từ [[yii\console\Controller]], tương tự như `CConsoleCommand` trong bản 1.1.
 
 Để chạy lệnh console, nhập `yii <route>`, với `<route>` là viết tắt cho controller route
 (v.d. `sitemap/index`). Các tham số ẩn danh được truyền qua như những tham số tương ứng
-trong phương thức hành động của controller, trong khi các đối số được đặt tên được phân tích cú pháp 
+trong phương thức hành động của controller, trong khi các đối số được đặt tên được phân tích cú pháp
 theo các khai báo trong [[yii\console\Controller::options()]].
 
 Yii 2.0 hỗ trợ tự động xuất nội dung của các lệnh trợ giúp từ các khối bình luận.
 
 Vui lòng tham khảo mục [Console Commands](tutorial-console.md) để biết thêm thông tin chi tiết.
 
-
-I18N
-----
+## I18N
 
 Yii 2.0 loại bỏ các phần định dạng ngày và phần định dạng số tích hợp có lợi cho [PECL intl PHP module](https://pecl.php.net/package/intl).
 
@@ -292,9 +263,7 @@ Thành phần này quản lý một tập hợp các nguồn văn bản, cho ph�
 
 Vui lòng tham khảo mục [Internationalization](tutorial-i18n.md) để biết thêm thông tin chi tiết.
 
-
-Bộ lọc Action
---------------
+## Bộ lọc Action
 
 Bộ lọc Action bây giờ được thực hiện thông qua các hành vi (behaviors. Để xác định một cái mới, tùy biến filter, kế thừa tư [[yii\base\ActionFilter]].
 Để dùng các filter, gắn các lớp filter vào controller
@@ -316,11 +285,9 @@ public function behaviors()
 
 Vui lòng tham khảo mục [Filtering](structure-filters.md) để biết thêm thông tin chi tiết.
 
+## Assets
 
-Assets
-------
-
-Yii 2.0 giới thiệu một khái niệm mới gọi là *asset bundle* thay thế khái niệm gói script được tìm thấy trong Yii 1.1.
+Yii 2.0 giới thiệu một khái niệm mới gọi là _asset bundle_ thay thế khái niệm gói script được tìm thấy trong Yii 1.1.
 
 Một asset bundle là bộ tổng hớp các file asset (v.d. JavaScript files, CSS files, image files, vv.)
 trong một thư mục. Mỗi asset bundle được đại diện như một class kế thừa từ [[yii\web\AssetBundle]].
@@ -330,24 +297,21 @@ có chứa các tham chiếu đến các file JavaScript và CSS files được 
 
 Vui lòng tham khảo mục [Managing Assets](structure-assets.md) để biết thêm thông tin chi tiết.
 
-
-Helpers
--------
+## Helpers
 
 Yii 2.0 giới thiệu thêm nhiều các lớp helper thường được sử dụng, bao gồm.
 
-* [[yii\helpers\Html]]
-* [[yii\helpers\ArrayHelper]]
-* [[yii\helpers\StringHelper]]
-* [[yii\helpers\FileHelper]]
-* [[yii\helpers\Json]]
+- [[yii\helpers\Html]]
+- [[yii\helpers\ArrayHelper]]
+- [[yii\helpers\StringHelper]]
+- [[yii\helpers\FileHelper]]
+- [[yii\helpers\Json]]
 
 Vui lòng tham khảo mục [Helper Overview](helper-overview.md) để biết thêm thông tin chi tiết.
 
-Forms
------
+## Forms
 
-Yii 2.0 giới thiệu khái niệm *field* cho việc xây dựng form sử dụng [[yii\widgets\ActiveForm]]. Một field
+Yii 2.0 giới thiệu khái niệm _field_ cho việc xây dựng form sử dụng [[yii\widgets\ActiveForm]]. Một field
 bao gồm chứa một label, một input, một văn bản báo lỗi (error message), và/hoặc một trợ giúp văn bản (hint text).
 Một field được đại diện như một đối tượng [[yii\widgets\ActiveField|ActiveField]].
 Để sử dụng các field, bạn có thể xây dựng một form gọn gàng hơn trước đây:
@@ -364,9 +328,7 @@ Một field được đại diện như một đối tượng [[yii\widgets\Acti
 
 Vui lòng tham khảo mục [Creating Forms](input-forms.md) để biết thêm thông tin chi tiết.
 
-
-Xây dựng các truy vấn (Query Builder)
--------------
+## Xây dựng các truy vấn (Query Builder)
 
 Trong 1.1, xây dựng truy vấn nằm rải rác trong một số lớp, bao gồm lớp `CDbCommand`,
 `CDbCriteria`, và `CDbCommandBuilder`. Yii 2.0 đại diện cho các truy vấn CSDL nằm trong các khoản của đối tượng [[yii\db\Query|Query]]
@@ -388,9 +350,7 @@ Cách tốt nhất, việc xây dựng các truy vấn có thể được dùng 
 
 Vui lòng tham khảo mục [Query Builder](db-query-builder.md) để biết thêm thông tin chi tiết.
 
-
-Active Record
--------------
+## Active Record
 
 Yii 2.0 giới thiệu rất nhiều thay đổi về [Active Record](db-active-record.md). The two most obvious ones involve
 query building và relational query handling.
@@ -457,9 +417,7 @@ Có một số vấn đề với việc ghi đè hàm tạo của lớp ActiveRe
 Có nhiều thay đổi và cải tiến khác đối với Active Record. Vui lòng tham khảo mục
 [Active Record](db-active-record.md) để biết thêm thông tin chi tiết.
 
-
-Các hành vi trong Active Record
------------------------
+## Các hành vi trong Active Record
 
 Trong 2.0, chúng tôi đã lược bỏ lớp lớp base của hành vi `CActiveRecordBehavior`. Nếu bạn muốn tạo một hành vi cho Active Record,
 bạn cần được kế thừa trực tiếp từ lớp `yii\base\Behavior`. Nếu trong lớp hành vi cần được phản hồi một số sự kiện của lớp cha, bạn
@@ -489,9 +447,7 @@ class MyBehavior extends Behavior
 }
 ```
 
-
-User và IdentityInterface
---------------------------
+## User và IdentityInterface
 
 Lớp `CWebUser` trong 1.1 bây giời được thay thế bởi [[yii\web\User]], và không còn hỗ trợ lớp
 `CUserIdentity` nữa. Thay vì đó, bạn nên hiện thực lớp [[yii\web\IdentityInterface]] để được sử dụng được đơn giản hơn.
@@ -499,9 +455,7 @@ Trong mẫu dự án advanced có tích hợp một vài ví dụ như vậy .
 
 Vui lòng tham khảo mục [Authentication](security-authentication.md), [Authorization](security-authorization.md), và [Mẫu dự án Advanced](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide) để biết thêm thông tin chi tiết.
 
-
-Quản lý các URL
---------------
+## Quản lý các URL
 
 Quản lý các URL trong Yii 2 tương tự như trong 1.1. Một cải tiến lớn cho việc quản lý các URL bây giờ hỗ trợ tùy chọn các
 tham số. Ví dụ, nếu bạn có một quy tắc (rule) được khai báo như sau, tiếp sau đó quy tắc này phù hợp với cả hai
@@ -522,9 +476,7 @@ và actions hiện được chuyển đổi thành ký tự thấp mỗi từ đ
 `CamelCaseController` sẽ là `camel-case`.
 Xem thêm ở mục [định danh controller](structure-controllers.md#controller-ids) và [định danh action](structure-controllers.md#action-ids) để biết thêm thông tin.
 
-
-Dùng Yii 1.1 và 2.x cùng với nhau
-------------------------------
+## Dùng Yii 1.1 và 2.x cùng với nhau
 
 Nếu bạn có các đoạn mã Yii 1.1 trước đây mà bạn muốn sử dụng cùng với Yii 2.0, vui lòng tham khảo mục
 [Using Yii 1.1 and 2.0 Together](tutorial-yii-integration.md#using-both-yii2-yii1).

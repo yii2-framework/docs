@@ -1,5 +1,4 @@
-Trabajar con Scripts del Cliente
-================================
+# Trabajar con Scripts del Cliente
 
 > Note: Esta sección se encuentra en desarrollo.
 
@@ -42,7 +41,6 @@ será agregado DESPUÉS de `jquery.js`. Si esta especificación de dependencia, 
 Como para [[yii\web\View::registerCssFile()|registerCssFile()]], es altamente recomendable que utilices
 [asset bundles](structure-assets.md) para registrar archivos JS externos más que utilizar [[yii\web\View::registerJsFile()|registerJsFile()]].
 
-
 ### Registrar asset bundles
 
 Como mencionamos anteriormente, es preferible utilizar asset bundles en vez de usar CSS y JavaScript directamente. Puedes obtener detalles
@@ -52,8 +50,6 @@ ya definidos es muy sencillo:
 ```php
 \frontend\assets\AppAsset::register($this);
 ```
-
-
 
 ### Registrar CSS
 
@@ -68,7 +64,9 @@ El código anterior dará como resultado que se agregue lo siguiente a la secci�
 
 ```html
 <style>
-body { background: #f00; }
+  body {
+    background: #f00;
+  }
 </style>
 ```
 
@@ -84,14 +82,13 @@ $this->registerCssFile("https://example.com/css/themes/black-and-white.css", [
 
 El código de arriba agregará un link al archivo CSS en la sección head de la página.
 
-* El primer argumento especifica el archivo CSS a ser registrado.
-* El segundo argumento especifica los atributos HTML de la etiqueta `<link>` resultante. La opción `depends`
+- El primer argumento especifica el archivo CSS a ser registrado.
+- El segundo argumento especifica los atributos HTML de la etiqueta `<link>` resultante. La opción `depends`
   es especialmente tratada. Esta especifica de qué asset bundles depende este archivo CSS. En este caso, depende
   del asset bundle [[yii\bootstrap\BootstrapAsset|BootstrapAsset]]. Esto significa que el archivo CSS será agregado
-  *después* de los archivos CSS de [[yii\bootstrap\BootstrapAsset|BootstrapAsset]].
-* El último argumento especifica un ID que identifica al archivo CSS. Si no es provisto, se utilizará la URL
+  _después_ de los archivos CSS de [[yii\bootstrap\BootstrapAsset|BootstrapAsset]].
+- El último argumento especifica un ID que identifica al archivo CSS. Si no es provisto, se utilizará la URL
   del archivo.
-
 
 Es altamente recomendable que ustilices [asset bundles](structure-assets.md) para registrar archivos CSS en vez de
 utilizar [[yii\web\View::registerCssFile()|registerCssFile()]]. Utilizar asset bundles te permite combinar y comprimir

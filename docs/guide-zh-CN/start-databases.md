@@ -1,5 +1,4 @@
-使用数据库
-======================
+# 使用数据库
 
 本章节将介绍如何创建一个从数据表 `country` 中读取国家数据并显示出来的页面。
 为了实现这个目标，你将会配置一个数据库连接，
@@ -8,17 +7,15 @@
 
 贯穿整个章节，你将会学到：
 
-* 配置一个数据库连接
-* 定义一个活动记录类
-* 使用活动记录从数据库中查询数据
-* 以分页方式在视图中显示数据
+- 配置一个数据库连接
+- 定义一个活动记录类
+- 使用活动记录从数据库中查询数据
+- 以分页方式在视图中显示数据
 
 请注意，为了掌握本章你应该具备最基本的数据库知识和使用经验。
 尤其是应该知道如何创建数据库，如何通过数据库终端执行 SQL 语句。
 
-
-准备数据库 <span id="preparing-database"></span>
---------------------
+## 准备数据库 <span id="preparing-database"></span>
 
 首先创建一个名为 `yii2basic` 的数据库，应用将从这个数据库中读取数据。
 你可以创建 SQLite，MySQL，PostregSQL，MSSQL 或 Oracle 数据库，Yii 内置多种数据库支持。简单起见，后面的内容将以 MySQL 为例做演示。
@@ -48,10 +45,9 @@ INSERT INTO `country` VALUES ('US','United States',278357000);
 
 此时便有了一个名为 `yii2basic` 的数据库，在这个数据库中有一个包含三个字段的数据表 `country`，表中有十行数据。
 
-配置数据库连接 <span id="configuring-db-connection"></span>
----------------------------
+## 配置数据库连接 <span id="configuring-db-connection"></span>
 
-开始之前，请确保你已经安装了 PHP [PDO](https://www.php.net/manual/zh/book.pdo.php) 
+开始之前，请确保你已经安装了 PHP [PDO](https://www.php.net/manual/zh/book.pdo.php)
 扩展和你所使用的数据库的 PDO 驱动（例如 MySQL 的 `pdo_mysql`）。
 对于使用关系型数据库来讲，这是基本要求。
 
@@ -77,8 +73,8 @@ return [
 上面配置的数据库连接可以在应用中通过 `Yii::$app->db` 表达式访问。
 
 > Info: `config/db.php` 将被包含在应用配置文件 `config/web.php` 中，
-  后者指定了整个[应用](structure-applications.md)如何初始化。
-  请参考[配置](concept-configurations.md)章节了解更多信息。
+> 后者指定了整个[应用](structure-applications.md)如何初始化。
+> 请参考[配置](concept-configurations.md)章节了解更多信息。
 
 如果想要使用 Yii 没有捆绑支持的数据库，你可以查看以下插件：
 
@@ -87,9 +83,7 @@ return [
 - [Firebird](https://github.com/edgardmessias/yii2-firebird)
 - [MariaDB](https://github.com/sam-it/yii2-mariadb)
 
-
-创建活动记录 <span id="creating-active-record"></span>
--------------------------
+## 创建活动记录 <span id="creating-active-record"></span>
 
 创建一个继承自[活动记录](db-active-record.md)类的类 `Country`，
 把它放在 `models/Country.php` 文件，去代表和读取 `country` 表的数据。
@@ -110,7 +104,7 @@ class Country extends ActiveRecord
 只需要像现在这样，Yii 就能根据类名去猜测对应的数据表名。
 
 > Info: 如果类名和数据表名不能直接对应，
-  可以覆写 [[yii\db\ActiveRecord::tableName()|tableName()]] 方法去显式指定相关表名。
+> 可以覆写 [[yii\db\ActiveRecord::tableName()|tableName()]] 方法去显式指定相关表名。
 
 使用 `Country` 类可以很容易地操作 `country` 表数据，就像这段代码：
 
@@ -132,11 +126,9 @@ $country->save();
 ```
 
 > Info: 活动记录是面向对象、功能强大的访问和操作数据库数据的方式。你可以在[活动记录](db-active-record.md)章节了解更多信息。
-  除此之外你还可以使用另一种更原生的被称做[数据访问对象](db-dao)的方法操作数据库数据。
+> 除此之外你还可以使用另一种更原生的被称做[数据访问对象](db-dao)的方法操作数据库数据。
 
-
-创建动作 <span id="creating-action"></span>
-------------------
+## 创建动作 <span id="creating-action"></span>
 
 为了向最终用户显示国家数据，你需要创建一个操作。相比之前小节掌握的在 `site` 控制器中创建操作，
 在这里为所有和国家有关的数据新建一个控制器更加合理。
@@ -182,17 +174,15 @@ class CountryController extends Controller
 为了限定每个请求所返回的国家数量，查询在 [[yii\data\Pagination]] 对象的帮助下进行分页。
 `Pagination` 对象的使命主要有两点：
 
-* 为 SQL 查询语句设置 `offset` 和 `limit` 从句，
+- 为 SQL 查询语句设置 `offset` 和 `limit` 从句，
   确保每个请求只需返回一页数据（本例中每页是 5 行）。
-* 在视图中显示一个由页码列表组成的分页器，
+- 在视图中显示一个由页码列表组成的分页器，
   这点将在后面的段落中解释。
 
 在代码末尾，`index` 操作渲染一个名为 `index` 的视图，
 并传递国家数据和分页信息进去。
 
-
-创建视图 <span id="creating-view"></span>
----------------
+## 创建视图 <span id="creating-view"></span>
 
 在 `views` 目录下先创建一个名为 `country` 的子目录。
 这个目录存储所有由 `country` 控制器渲染的视图。在 `views/country` 目录下
@@ -221,9 +211,7 @@ use yii\widgets\LinkPager;
 小部件 `LinkPager` 显示一个分页按钮的列表。
 点击任何一个按钮都会跳转到对应的分页。
 
-
-试运行 <span id="trying-it-out"></span>
--------------
+## 试运行 <span id="trying-it-out"></span>
 
 浏览器访问下面的 URL 看看能否工作：
 
@@ -243,21 +231,19 @@ https://hostname/index.php?r=country/index&page=2
 
 在这个场景里，[[yii\data\Pagination|Pagination]] 提供了为数据结果集分页的所有功能：
 
-* 首先 [[yii\data\Pagination|Pagination]] 把 SELECT 的子查询 `LIMIT 5 OFFSET 0` 数据表示成第一页。
+- 首先 [[yii\data\Pagination|Pagination]] 把 SELECT 的子查询 `LIMIT 5 OFFSET 0` 数据表示成第一页。
   因此开头的五条数据会被取出并显示。
-* 然后小部件 [[yii\widgets\LinkPager|LinkPager]] 使用 
+- 然后小部件 [[yii\widgets\LinkPager|LinkPager]] 使用
   [[yii\data\Pagination::createUrl()|Pagination::createUrl()]] 方法生成的 URL 去渲染翻页按钮。
   URL 中包含必要的参数 `page` 才能查询不同的页面编号。
-* 如果你点击按钮 “2”，将会发起一个路由为 `country/index` 的新请求。
+- 如果你点击按钮 “2”，将会发起一个路由为 `country/index` 的新请求。
   [[yii\data\Pagination|Pagination]] 接收到 URL 中
   的 `page` 参数把当前的页码设为 2。
   新的数据库请求将会以 `LIMIT 5 OFFSET 5` 查询并显示。
 
+## 总结 <span id="summary"></span>
 
-总结 <span id="summary"></span>
--------
-
-本章节中你学到了如何使用数据库。你还学到了如何取出并使用 
+本章节中你学到了如何使用数据库。你还学到了如何取出并使用
 [[yii\data\Pagination]] 和 [[yii\widgets\LinkPager]] 显示数据。
 
 下一章中你会学到如何使用 Yii 中强大的代码生成器 [Gii](tool-gii.md)，

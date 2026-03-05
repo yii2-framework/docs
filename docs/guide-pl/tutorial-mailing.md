@@ -1,17 +1,14 @@
-Wysyłanie poczty
-=======
+# Wysyłanie poczty
 
 > Note: Ta sekcja jest w trakcie tworzenia.
 
 Yii wspiera tworzenie oraz wysyłanie wiadomości email, jednakże silnik dostarcza jedynie funkcjonalność składania treści oraz prosty interfejs.
-Mechanizm wysyłania wiadomości powinien być dostarczony przez rozszerzenie, 
+Mechanizm wysyłania wiadomości powinien być dostarczony przez rozszerzenie,
 ponieważ projekty mogą wymagać różnych implementacji, przez co mechanizm jest zależny od zewnętrznych usług i bibliotek.
 
 Dla większości przypadków możesz używać oficjalnego rozszerzenia [yii2-swiftmailer](https://github.com/yiisoft/yii2-swiftmailer).
 
-
-Konfiguracja
--------------
+## Konfiguracja
 
 Konfiguracja tego komponentu zależy od rozszerzenia jakie wybrałeś.
 Generalnie, konfiguracja Twojego komponentu w aplikacji powinna wyglądać tak:
@@ -27,9 +24,8 @@ return [
 ];
 ```
 
+## Podstawowe użycie
 
-Podstawowe użycie
------------
 Kiedy komponent 'mailer' zostanie skonfigurowany, możesz użyć następującego kodu do wysłania wiadomości email:
 
 ```php
@@ -75,9 +71,7 @@ Yii::$app->mailer->sendMultiple($messages);
 
 Niektóre rozszerzenia mailingowe mogą czerpać korzyści z tego sposobu, np. używając pojedyńczych wiadomości sieciowych.
 
-
-Tworzenie treści maila
-----------------------
+## Tworzenie treści maila
 
 Yii pozwala na tworzenie treści aktualnej wiadomości email przez specjalne pliki widoków.
 Domyślnie, pliki te zlokalizowane są w ścieżce '@app/mail'.
@@ -129,9 +123,9 @@ Yii::$app->mailer->compose([
 ```
 
 Jeśli określisz nazwę widoku jako ciąg skalarny, to wynik jego renderowania zostanie użyty jako ciało HTML wiadomości,
-podczas gdy przy użyciu zwykłego teksu zostanie ono utworzone przez usunięcie wszystkich encji HTML z tego widoku. 
+podczas gdy przy użyciu zwykłego teksu zostanie ono utworzone przez usunięcie wszystkich encji HTML z tego widoku.
 
-Wynik renderowania widoku może zostać opakowany w szablon. Szablon możesz ustawić przez właściwość [[yii\mail\BaseMailer::htmlLayout|htmlLayout]] lub 
+Wynik renderowania widoku może zostać opakowany w szablon. Szablon możesz ustawić przez właściwość [[yii\mail\BaseMailer::htmlLayout|htmlLayout]] lub
 [[yii\mail\BaseMailer::textLayout|textLayout]].
 Zadziała to w identyczny sposób co w standardowej aplikacji web.
 Szalony mogą zostać użyte do ustawienia styli CSS, lub innej wspólnej treści:
@@ -168,9 +162,7 @@ use yii\helpers\Html;
 <?php $this->endPage() ?>
 ```
 
-
-Załączniki do wiadomości
----------------
+## Załączniki do wiadomości
 
 Możesz dodać załączniki do wiadomości przez użycie metod `attach()` oraz `attachContent()`:
 
@@ -184,9 +176,7 @@ $message->attach('/path/to/source/file.pdf');
 $message->attachContent('Attachment content', ['fileName' => 'attach.txt', 'contentType' => 'text/plain']);
 ```
 
-
-Osadzanie obrazków
-----------------
+## Osadzanie obrazków
 
 W treści wiadomości możesz osadzać również obrazki przy użyciu metody `embed()`. Metoda ta zwraca ID załącznika,
 który powinien zostać później użyty w tagu 'img'.
@@ -204,27 +194,24 @@ Następnie, w pliku widoku możesz użyć następującego kodu:
 <img src="<?= $message->embed($imageFileName); ?>">
 ```
 
-
-Testowanie i debugowanie
----------------------
+## Testowanie i debugowanie
 
 Deweloperzy często muszą sprawdzić, czy emaile zostały wysłane przez aplikację lub jaka była ich treść.
 Możesz tego dokonać w łatwy sposób, używając dostarczonej przez Yii funkcjonalności, którą aktywujesz przez parametr [[yii\mail\BaseMailer::useFileTransport|useFileTransport]].
-Jeśli zostanie aktywowana, każda wiadomość email będzie zapisywana do lokalnych plików zamiast zostać wysłana. Wszystkie pliki będą zapisane w ścieżce podanej w 
+Jeśli zostanie aktywowana, każda wiadomość email będzie zapisywana do lokalnych plików zamiast zostać wysłana. Wszystkie pliki będą zapisane w ścieżce podanej w
 [[yii\mail\BaseMailer::fileTransportPath|fileTransportPath]], która domyślnie ustawiona jest na '@runtime/mail'.
 
 > Note: możesz albo zapisywać wiadomości do plików, albo wysyłać je do odbiorców, nie można wykonać tych dwóch czynności na raz.
 
 Plik z wiadomością email może zostać otwarty przez standardowy edytor tekstu, dzięki czemu będziesz mógł przeglądać nagłówki oraz treść wiadomości.
 
-> Note: plik wiadomości jest tworzony przy użyciu metody [[yii\mail\MessageInterface::toString()|toString()]], więc jest zależny od aktualnie używanego rozszerzenia mailingowego w 
+> Note: plik wiadomości jest tworzony przy użyciu metody [[yii\mail\MessageInterface::toString()|toString()]], więc jest zależny od aktualnie używanego rozszerzenia mailingowego w
 > Twojej aplikacji.
 
-Tworzenie własnego rozwiązania mailingowego
--------------------------------
+## Tworzenie własnego rozwiązania mailingowego
 
 Aby utworzyć swoje własne rozwiązanie mailingowe, musisz utworzyć dwie klasy: 'Mailer' oraz 'Message'.
 Możesz rozszerzyć klasy [[yii\mail\BaseMailer|BaseMailer]] i [[yii\mail\BaseMessage|BaseMessage]] jako bazowe klasy do tego rozwiązania.
-Zawierają one podstawową logikę mechanizmu mailingu, który został opisany w tej sekcji. 
+Zawierają one podstawową logikę mechanizmu mailingu, który został opisany w tej sekcji.
 Oczywiście ich użycie nie jest obowiązkowe, wystarczy zaimplementowanie interfejsów [[yii\mail\MailerInterface|MailerInterface]] oraz [[yii\mail\MessageInterface|MessageInterface]].
 Następnie musisz zaimplementować wszystkie abstrakcyjne metody do swoich klas.

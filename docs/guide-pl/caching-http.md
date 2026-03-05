@@ -1,5 +1,4 @@
-Pamięć podręczna HTTP
-=====================
+# Pamięć podręczna HTTP
 
 Oprócz pamięci podręcznej tworzonej po stronie serwera, która została opisana w poprzednich rozdziałach, aplikacje mogą również
 skorzystać z pamięci podręcznej tworzonej po stronie klienta, aby zaoszczędzić czas poświęcany na ponowne generowanie i przesyłanie
@@ -9,10 +8,9 @@ Aby skorzystać z tego mechanizmu, należy skonfigurować [[yii\filters\HttpCach
 zwrotka może być zapisana w pamięci podręcznej po stronie klienta. [[yii\filters\HttpCache|HttpCache]] obsługuje tylko żądania typu
 `GET` i `HEAD` i dla tych typów tylko trzy nagłówki HTTP związane z pamięcią podręczną:
 
-* [[yii\filters\HttpCache::lastModified|Last-Modified]]
-* [[yii\filters\HttpCache::etagSeed|Etag]]
-* [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
-
+- [[yii\filters\HttpCache::lastModified|Last-Modified]]
+- [[yii\filters\HttpCache::etagSeed|Etag]]
+- [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
 
 ## Nagłówek `Last-Modified` <span id="last-modified"></span>
 
@@ -54,7 +52,6 @@ o datę ostatniej aktualizacji postów. Przeglądarka, wyświetlając stronę `i
 przez serwer; każda kolejna wizyta, przy założeniu, że żaden post nie został zmodyfikowany w międzyczasie, skutkuje wyświetleniem
 wersji strony przechowywanej w pamięci podręcznej po stronie klienta, zamiast generować ją ponownie przez serwer.
 W rezultacie, renderowanie zawartości po stronie serwera i przesyłanie jej do klienta jest pomijane.
-
 
 ## Nagłowek `ETag` <span id="etag"></span>
 
@@ -106,9 +103,8 @@ Zasobożerne generowanie ETagów może przekreślić cały zysk z użycia `HttpC
 określane przy każdym żądaniu. Z tego powodu należy używać jak najprostszych metod generujących.
 
 > Note: Aby spełnić wymagania [RFC 7232](https://datatracker.ietf.org/doc/html/rfc7232#section-2.4),
-  `HttpCache` przesyła zarówno nagłówek `ETag`, jak i `Last-Modified`, jeśli oba są skonfigurowane.
-  Jeśli klient wysyła nagłówek `If-None-Match` razem z `If-Modified-Since`, tylko pierwszy z nich jest brany pod uwagę.
-
+> `HttpCache` przesyła zarówno nagłówek `ETag`, jak i `Last-Modified`, jeśli oba są skonfigurowane.
+> Jeśli klient wysyła nagłówek `If-None-Match` razem z `If-Modified-Since`, tylko pierwszy z nich jest brany pod uwagę.
 
 ## Nagłówek `Cache-Control` <span id="cache-control"></span>
 
@@ -127,7 +123,6 @@ aby temu zapobiec, `HttpCache` blokuje to automatyczne wysyłanie. Jeśli jednak
 właściwość [[yii\filters\HttpCache::sessionCacheLimiter]]. Powinna ona przyjmować wartość zawierającą łańcuch znaków `public`,
 `private`, `private_no_expire` i `nocache`. Szczegóły dotyczące tego zapisu znajdziesz w dokumentacji PHP dla
 [session_cache_limiter()](https://www.php.net/manual/pl/function.session-cache-limiter.php).
-
 
 ## Korzyści dla SEO <span id="seo-implications"></span>
 

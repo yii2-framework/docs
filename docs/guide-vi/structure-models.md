@@ -1,5 +1,4 @@
-Model
-======
+# Model
 
 Model là phần trong mô hình [MVC](https://vi.wikipedia.org/wiki/MVC).
 Là đối tượng đại diện cho phần dữ liệu, phương thức xử lý và nghiệp vụ logic.
@@ -7,23 +6,22 @@ Là đối tượng đại diện cho phần dữ liệu, phương thức xử l
 Bạn có thể tạo mới các lớp model bằng việc kế thừa từ lớp [[yii\base\Model]] hoặc các lớp con của nó. Lớp cơ sở
 [[yii\base\Model]] hỗ trợ nhiều tính năng như:
 
-* [Thuộc tính (Attributes)](#attributes): đại diện cho các dữ liệu nghiệp vụ và có thể truy cập như các thuộc tính
+- [Thuộc tính (Attributes)](#attributes): đại diện cho các dữ liệu nghiệp vụ và có thể truy cập như các thuộc tính
   hoặc mảng các phần tử;
-* [Attribute labels](#attribute-labels): tên hiển thị cho các thuộc tính;
-* [Gán nhanh (Massive assignment)](#massive-assignment): hỗ trợ nhập dữ liệu cho thuộc tính trong một bước;
-* [Quy tắc xác nhận (Validation rules)](#validation-rules): khai báo các quy tắc và xác thực dữ liệu được nhập vào;
-* [Xuất dữ liệu (Data Exporting)](#data-exporting): cho phép xuất dữ liệu dưới dạng mảng hoặc tuỳ chọn khác.
+- [Attribute labels](#attribute-labels): tên hiển thị cho các thuộc tính;
+- [Gán nhanh (Massive assignment)](#massive-assignment): hỗ trợ nhập dữ liệu cho thuộc tính trong một bước;
+- [Quy tắc xác nhận (Validation rules)](#validation-rules): khai báo các quy tắc và xác thực dữ liệu được nhập vào;
+- [Xuất dữ liệu (Data Exporting)](#data-exporting): cho phép xuất dữ liệu dưới dạng mảng hoặc tuỳ chọn khác.
 
 Lớp `Model` thường dựa trên lớp để thực hiện chức năng nâng cao, chẳng hạn [Active Record](db-active-record.md).
 Vui lòng tham khảo thêm tài liệu để biết thêm thông tin.
 
 > Lưu ý: Model của bạn không phải bắt buộc kế thừa từ lớp [[yii\base\Model]]. Tuy nhiên, vì Yii chứa nhiều thành phần
-  dựng lên và hỗ trợ cho [[yii\base\Model]], vì thế nó là lớp cơ sở cho các lớp Model.
-
+> dựng lên và hỗ trợ cho [[yii\base\Model]], vì thế nó là lớp cơ sở cho các lớp Model.
 
 ## Thuộc tính (Attribute) <span id="attributes"></span>
 
-Model đại diện cho tầng xử lý nghiệp vụ và chứa các *thuộc tính*. Mỗi thuộc tính được truy cập toàn cục như phần tử của 
+Model đại diện cho tầng xử lý nghiệp vụ và chứa các _thuộc tính_. Mỗi thuộc tính được truy cập toàn cục như phần tử của
 model. Phương thức [[yii\base\Model::attributes()]] sẽ mô tả các thuộc tính trong lớp model hiện có.
 
 Bạn có thể truy cập vào thuộc tính như các phần tử của các đối tượng:
@@ -53,10 +51,9 @@ foreach ($model as $name => $value) {
 }
 ```
 
-
 ### Định nghĩa các thuộc tính <span id="defining-attributes"></span>
 
-Mặc định, nếu Model của bạn được kế thừa từ lớp [[yii\base\Model]], và tất cả các biến có phạm vi *toàn cục trong lớp*
+Mặc định, nếu Model của bạn được kế thừa từ lớp [[yii\base\Model]], và tất cả các biến có phạm vi _toàn cục trong lớp_
 . Ví dụ, Model `ContactForm` sau có bốn thuộc tính là: `name`, `email`,
 `subject` và `body`. Model `ContactForm` dùng để nhận dữ liệu từ form HTML.
 
@@ -74,12 +71,10 @@ class ContactForm extends Model
 }
 ```
 
-
 Bạn có thể ghi đè phương thức [[yii\base\Model::attributes()]] để định nghĩa các thuộc tính theo các cách khác. Phương thức nên được trả
 tên của thuộc tính trong Model. Ví dụ, lớp [[yii\db\ActiveRecord]] trả về
 danh sách tên của các cột liên quan tới các bảng trong CSDL như tên các thuộc tính. Bạn có thể ghi đè các phương thức như
 `__get()`, `__set()` để có thể truy cập các thuộc tính như các đối tượng thông thường.
-
 
 ### Nhãn của thuộc tính <span id="attribute-labels"></span>
 
@@ -147,12 +142,11 @@ Bạn có thể gán nhãn cho các thuộc tính. Chẳng hạn, dựa vào [sc
 đã được sử dụng , bạn có thể trả về các nhãn khác nhau cho các thuộc tính khác nhau.
 
 > Lưu ý: Chính xác rằng, nhãn của thuộc tính là một phần của [views](structure-views.md). Tuy nhiên việc khai báo các nhãn
-  vào Model thường rất tiện lợi, code dễ nhìn và tái sử dụng.
-
+> vào Model thường rất tiện lợi, code dễ nhìn và tái sử dụng.
 
 ## Kịch bản (Scenarios) <span id="scenarios"></span>
 
-Model thường được sử dụng ở các *kịch bản* khác nhau  . Ví dụ, Model `User` dùng để xử lý việc đăng nhập,
+Model thường được sử dụng ở các _kịch bản_ khác nhau . Ví dụ, Model `User` dùng để xử lý việc đăng nhập,
 nhưng cũng có thể được dùng ở mục đăng ký. Ở các kịch bản khác nhau, Model có thể được dùng trong các nghiệp vụ
 và xử lý logic khác nhau. Ví dụ,thuộc tính `email` có thể được yêu cầu trong mục đăng ký tài khoản mới,
 nhưng không được yêu cầu khi xử lý đăng nhập.
@@ -195,10 +189,10 @@ class User extends ActiveRecord
 ```
 
 > Lưu ý: Như phần trên và ví dụ vừa rồi, lớp Model được kế thừa từ lớp [[yii\db\ActiveRecord]]
-  bởi vì lớp [Active Record](db-active-record.md) thường được sử dụng nhiều kịch bản.
+> bởi vì lớp [Active Record](db-active-record.md) thường được sử dụng nhiều kịch bản.
 
 Phương thức `scenarios()` trả về một mảng có chứa các khóa là tên các kịch bản và các giá trị tương ứng là các  
-danh sách *thuộc tính được chọn*. An active attribute can be [massively assigned](#massive-assignment) và là đối tượng sẽ được
+danh sách _thuộc tính được chọn_. An active attribute can be [massively assigned](#massive-assignment) và là đối tượng sẽ được
 dùng để [xác thực (validation)](#validation-rules). Chẳng hạn ở ví dụ trên, thuộc tính `username` và `password` sẽ được chọn
 ở kịch bản `login`; còn ở kịch bản `register`, sẽ có thêm thuộc tính `email` ngoài 2 thuộc tính `username` và `password`.
 
@@ -230,11 +224,10 @@ Xây dựng các kịch bản được dùng vào việc [xác thực](#validati
 Tuy nhiên, bạn có thể dùng vào mục đích khác. Chẳng hạn, bạn có thể khai báo các [nhãn thuộc tính](#attribute-labels)
 khác nhau được dựa trên kịch bản hiện tại.
 
-
 ## Các quy tắc xác nhận (Validation Rules) <span id="validation-rules"></span>
 
 Khi dữ liệu cho model được chuyển lên từ người dùng cuối, dữ liệu này cần được xác thực để chắc chắn rằng dữ liệu này là hợp lệ
-  (được gọi là *quy tắc xác nhận*, có thể gọi *business rules*). Ví dụ, cho model `ContactForm`,
+(được gọi là _quy tắc xác nhận_, có thể gọi _business rules_). Ví dụ, cho model `ContactForm`,
 bạn muốn tất cả các thuộc tính không được để trống và thuộc tính `email` phải là địa chỉ email hợp lệ.
 Nếu các giá trị cho các thuộc tính không được thỏa mãn với các quy tắc xác nhận, các thông báo lỗi sẽ được
 được hiển thị để giúp người dùng sửa lỗi.
@@ -257,7 +250,6 @@ if ($model->validate()) {
     $errors = $model->errors;
 }
 ```
-
 
 Các quy tắc xác nhận được gắn vào model, việc ghi đè phương thức [[yii\base\Model::rules()]] cùng với việc trả về
 có chứa các thuộc tính an toàn cần được xác thực. Ví dụ sau đây sẽ cho thấy các quy tắc xác nhận được khai báo cho model
@@ -296,17 +288,16 @@ public function rules()
 ```
 
 Nếu bạn không chỉ định thuộc tính `on`, quy tắc sẽ áp dụng trong tất cả các kịch bản. Một quy tắc được gọi
-một *quy tắc hoạt động* nếu nó được áp dụng với kịch bản hiện tại [[yii\base\Model::scenario|scenario]].
+một _quy tắc hoạt động_ nếu nó được áp dụng với kịch bản hiện tại [[yii\base\Model::scenario|scenario]].
 
 Một thuộc tính được xác nhận nếu và chỉ nếu nó là thuộc tính được kích hoạt với khai báo tại phương thức `scenarios()` và
 được liên kết với một hoặc nhiều quy tắc được khai báo ở phương thức `rules()`.
-
 
 ## Gán nhanh (Massive Assignment) <span id="massive-assignment"></span>
 
 Gán nhanh là cách tiện lợi cho việc nhập dữ liệu vào model từ người dùng với một dòng mã.
 Nó nhập vào các thuộc tính của model bằng việc gán dữ liệu nhập vào qua thuộc tính [[yii\base\Model::$attributes]]
-. 2 đoạn mã sau hoạt động giống nhau , cả 2 đều lấy dữ liệu trong form gửi lên từ người dùng 
+. 2 đoạn mã sau hoạt động giống nhau , cả 2 đều lấy dữ liệu trong form gửi lên từ người dùng
 vào các thuộc tính của model `ContactForm`. Nhanh gọn, cách trên, sẽ dùng gán nhanh, mã của bạn trông sạch và ít lỗi hơn cách sau đó:
 
 ```php
@@ -323,10 +314,9 @@ $model->subject = isset($data['subject']) ? $data['subject'] : null;
 $model->body = isset($data['body']) ? $data['body'] : null;
 ```
 
-
 ### Thuộc tính an toàn (Safe Attributes) <span id="safe-attributes"></span>
 
-Gán nhanh chỉ gán dữ liệu cho những thuộc tính gọi là  *thuộc tính an toàn (safe attributes)* đó là các thuộc tính được liệt kê trong phương thức
+Gán nhanh chỉ gán dữ liệu cho những thuộc tính gọi là _thuộc tính an toàn (safe attributes)_ đó là các thuộc tính được liệt kê trong phương thức
 [[yii\base\Model::scenarios()]] cho thuộc tính [[yii\base\Model::scenario|scenario]] của model.
 Chẳng hạn, nếu model `User` có các kịch bản mô tả như sau, tiếp đến kịch bản
 `login` đang được chọn, thì chỉ thuộc tính `username` và `password` có thể được gán nhanh. Bất kỳ các thuộc tính khác
@@ -343,9 +333,9 @@ public function scenarios()
 ```
 
 > Thông tin: Lý do việc gán nhanh chỉ gán dữ liệu cho các thuộc tính an toàn là bởi vì bạn muốn kiểm soát
-  những thuộc tính có thể được thay đổi bởi người dùng. Chẳng hạn, nếu model `User` 
-  có thuộc tính `permission` nhằm xác định các quyền hạn của người dùng, bạn chỉ muốn
-  thuộc tính này chỉ được thay đổi bởi quản trị viên thông qua giao diện phụ trợ.
+> những thuộc tính có thể được thay đổi bởi người dùng. Chẳng hạn, nếu model `User`
+> có thuộc tính `permission` nhằm xác định các quyền hạn của người dùng, bạn chỉ muốn
+> thuộc tính này chỉ được thay đổi bởi quản trị viên thông qua giao diện phụ trợ.
 
 Bởi vì mặc định phương thức [[yii\base\Model::scenarios()]] sẽ trả về tất cả các kịch bản và thuộc tính
 nằm trong phương thức [[yii\base\Model::rules()]], nếu bạn không ghi đè phương thức này, có nghĩa là một thuộc tính là an toàn
@@ -363,7 +353,6 @@ public function rules()
     ];
 }
 ```
-
 
 ### Thuộc tính không an toàn (Unsafe Attributes) <span id="unsafe-attributes"></span>
 
@@ -402,7 +391,6 @@ public function rules()
 
 Trong trường hợp này các thuộc tính `username`, `password` và `secret` là yêu cầu nhập, nhưng thuộc tính `secret` phải cần được gán trực tiếp.
 
-
 ## Xuất dữ liệu (Data Exporting) <span id="data-exporting"></span>
 
 Các model thường được cần trích xuất ra các định dạng khác nhau. Chẳng hạn, bạn cần chuyển dữ liệu sang của
@@ -422,15 +410,14 @@ $post = \app\models\Post::findOne(100);
 $array = $post->attributes;
 ```
 
-Bởi mặc định, thuộc tính [[yii\base\Model::$attributes]] sẽ trả về các giá trị của *tất cả* các thuộc tính
+Bởi mặc định, thuộc tính [[yii\base\Model::$attributes]] sẽ trả về các giá trị của _tất cả_ các thuộc tính
 được khai báo trong phương thức [[yii\base\Model::attributes()]].
 
 Còn một cách linh hoạt và tiện lợi hơn trong việc chuyển đổi model sang định dạng mảng là sử dụng phương thức [[yii\base\Model::toArray()]]
 . Cách chuyển đổi cũng tương tự như trong cách của thuộc tính [[yii\base\Model::$attributes]]. Tuy nhiên, nó cho phép bạn chọn các dữ liệu
-, được gọi là *fields*, được đặt trong mảng kết quả và chúng được định dạng thế nào.
+, được gọi là _fields_, được đặt trong mảng kết quả và chúng được định dạng thế nào.
 Trong thực tế, đó là cách trích xuất mặc định của các model ở việc phát triển các dịch vụ RESTful Web, như được mô tả trong
 mục [Response Formatting](rest-response-formatting.md).
-
 
 ### Các trường (Fields) <span id="fields"></span>
 
@@ -439,7 +426,7 @@ của model.
 
 Mặc định, tên trường sẽ tương đương với tên thuộc tính. Tuy nhiên, bạn có thể thay đổi bằng việc ghi đè
 qua phương thức [[yii\base\Model::fields()|fields()]] và/hoặc phương thức [[yii\base\Model::extraFields()|extraFields()]]. Cả 2 phương thức
-trả về danh sách các khai báo trường. Các trường được định nghĩa bởi phương thức `fields()` là các trường mặc định, nghĩa là phương thức 
+trả về danh sách các khai báo trường. Các trường được định nghĩa bởi phương thức `fields()` là các trường mặc định, nghĩa là phương thức
 `toArray()` sẽ trả về những trường mặc định. Phương thức `extraFields()` sẽ khai báo thêm các trường bổ sung có thể được trả về
 bởi phương thức `toArray()` miễn là bạn chỉ định chugns qua tham số `$expand`. Chẳng hạn,
 đoạn mã sau sẽ trả về các trường được định nghĩa trong phương thức `fields()` và 2 trường `prettyName` và `fullAddress`
@@ -491,22 +478,21 @@ public function fields()
 > bạn nên ghi đè phương thức `fields()` để lọc chúng ra. Tại ví dụ trên, chúng ta chọn
 > các trường để lọc ra là `auth_key`, `password_hash` và `password_reset_token`.
 
-
 ## Bài thực hành <span id="best-practices"></span>
 
 Các model là phần trung tâm đại diện cho tầng dữ liệu, chứa các quy tắc và logic. Model thường được tái sử dụng
-tại một số nơi khác nhau. Với một ứng dụng được thiết kế tốt, thông thường các model được chú trọng hơn 
+tại một số nơi khác nhau. Với một ứng dụng được thiết kế tốt, thông thường các model được chú trọng hơn
 [controllers](structure-controllers.md).
 
 Tổng hợp mục, models
 
-* có thể chứa các thuộc tính đại diện cho tầng dữ liệu (business data);
-* có thể chứa các quy tắc xác nhận để đảm bảo tính hợp lệ và tính toàn vẹn của dữ liệu;;
-* có thể chứa các phương thức tại tầng logic (business logic);
-* không nên trực tiếp xử lý các yêu cầu, session, hoặc bất cứ dữ liệu môi trường. Những dữ liệu này nên được tiến hành xử lý
+- có thể chứa các thuộc tính đại diện cho tầng dữ liệu (business data);
+- có thể chứa các quy tắc xác nhận để đảm bảo tính hợp lệ và tính toàn vẹn của dữ liệu;;
+- có thể chứa các phương thức tại tầng logic (business logic);
+- không nên trực tiếp xử lý các yêu cầu, session, hoặc bất cứ dữ liệu môi trường. Những dữ liệu này nên được tiến hành xử lý
   bởi [controllers](structure-controllers.md) vào model;
-* tránh việc nhúng mã HTML hoặc các dữ liệu hiển thị - mã này nên được đặt tại [views](structure-views.md);
-* tránh có quá nhiều kịch bản [scenarios](#scenarios) trong một model.
+- tránh việc nhúng mã HTML hoặc các dữ liệu hiển thị - mã này nên được đặt tại [views](structure-views.md);
+- tránh có quá nhiều kịch bản [scenarios](#scenarios) trong một model.
 
 Bạn cần có sự xem xét các đề nghị trên mỗi khi bạn triển khai hệ thống lớn và phức tạp.
 Trong các hệ thống này, cácmodel cần được chú trọng bởi vì chúng được sử dụng ở nhiều nơi và có thể chứa nhiều các quy tắc
@@ -514,10 +500,10 @@ và các xử lý nghiệp vụ. Điều này có sự ảnh hưởng tại ti�
 có thể ảnh hưởng tới nhiều vị trí khác nhau. Để mã code của bạn dễ được bảo trì hơn,
 bạn có thể được thực hiện các chiến lược sau:
 
-* Định nghĩa tập các lớp model cơ sở (base model) lớp này được chia sẻ qua các [ứng dụng](structure-applications.md) hoặc
+- Định nghĩa tập các lớp model cơ sở (base model) lớp này được chia sẻ qua các [ứng dụng](structure-applications.md) hoặc
   [modules](structure-modules.md) khác nhau. Các model này có thể chứa tập các quy tắc và logic có thể được
   dùng rộng rãi ở các lớp cần được sử dụng.
-* Tại mỗi [ứng dụng](structure-applications.md) hoặc [module](structure-modules.md) có dùng model,
+- Tại mỗi [ứng dụng](structure-applications.md) hoặc [module](structure-modules.md) có dùng model,
   ta định nghĩa lớp khung model bằng việc kế thừa từ lớp model cơ sở. Lớp khung model này
   có thể chứa các quy tắc logic được mô tả cụ thể chi ứng dụng hoặc module này.
 

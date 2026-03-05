@@ -1,8 +1,7 @@
-Các thành phần ứng dụng
-======================
+# Các thành phần ứng dụng
 
 Mỗi ứng dụng là hiện thực của [mẫu thiết kế Service Locators](concept-service-locator.md). Mỗi ứng dụng sẽ chứa các thành phần
-được gọi là *thành phần ứng dụng* giúp cung cấp các dịch vụ cho các tiến trình xử lý. Chẳng hạn,
+được gọi là _thành phần ứng dụng_ giúp cung cấp các dịch vụ cho các tiến trình xử lý. Chẳng hạn,
 thành phần `urlManager` đảm nhiệm chức năng cho bộ định tuyến cho các yêu cầu xử lý tới các bộ điều khiển;
 thành phần `db` cung cấp các dịch vụ để giao tiếp với cơ sở dữ liệu (CSDL); và các thành phần khác.
 
@@ -46,10 +45,9 @@ Ví dụ,
 ```
 
 > Lưu ý: Bạn cần đăng ký các thành phần ứng dụng một cách cẩn thận.
-  Các thành phần ứng dụng cũng như các biến có phạm vi toàn cục. Sử dụng quá nhiều các thành phần ứng dụng có thể khiến mã nguồn
-  khó kiểm tra và bảo trì. Cách tốt nhất, bạn nên khởi tạo các thành phần ở phạm vi cục bộ
-  và khi cần thiết có thể thêm vào ứng dụng.
-
+> Các thành phần ứng dụng cũng như các biến có phạm vi toàn cục. Sử dụng quá nhiều các thành phần ứng dụng có thể khiến mã nguồn
+> khó kiểm tra và bảo trì. Cách tốt nhất, bạn nên khởi tạo các thành phần ở phạm vi cục bộ
+> và khi cần thiết có thể thêm vào ứng dụng.
 
 ## Thành phần tải tự động (Bootstrapping) <span id="bootstrapping-components"></span>
 
@@ -73,7 +71,6 @@ Ví dụ, thông tin cấu hình sau sẽ chắc chắn rằng thành phần `lo
 ]
 ```
 
-
 ## Các thành phần ứng dụng chính <span id="core-application-components"></span>
 
 Yii định nghĩa danh sách các thành phần ứng dụng chính cùng với nó là các định danh và thông tin cấu hình. Ví dụ,
@@ -86,34 +83,34 @@ Phần dưới là danh sách các thành phần ứng dụng chính được x�
 như những thành phần ứng dụng khác. Mỗi khi bạn cấu hình các thành phần này,
 nếu bạn không xác định các class, thì giá trị mặc định sẽ được dùng.
 
-* [[yii\web\AssetManager|assetManager]]: quản lý các file tài nguyên (asset) được đóng gói và chia sẽ.
+- [[yii\web\AssetManager|assetManager]]: quản lý các file tài nguyên (asset) được đóng gói và chia sẽ.
   Tham khảo thêm mục [Quản lý các file tài nguyên](structure-assets.md) để biết thêm chi tiết.
-* [[yii\db\Connection|db]]: thực hiện kết nối CSDL và dựa vào thành phần có thể thực hiện các câu lệnh truy vấn dữ liệu.
+- [[yii\db\Connection|db]]: thực hiện kết nối CSDL và dựa vào thành phần có thể thực hiện các câu lệnh truy vấn dữ liệu.
   Lưu ý, khi bạn thiết lập thành phần này, bạn cần phải cung cấp các thông tin về các thuộc tính được yêu cầu
   , như [[yii\db\Connection::dsn]].
   Tham khảo thêm tại mục [Data Access Objects](db-dao.md) để biết thêm thông tin.
-* [[yii\base\Application::errorHandler|errorHandler]]: nắm giữ các ngoại lệ và lỗi của PHP.
+- [[yii\base\Application::errorHandler|errorHandler]]: nắm giữ các ngoại lệ và lỗi của PHP.
   Tham khảo thêm mục [Bắt lỗi](runtime-handling-errors.md) để biết thêm thông tin.
-* [[yii\i18n\Formatter|formatter]]: định dạng dữ liệu mỗi khi gửi tới user. Ví dụ, các số có thể được
+- [[yii\i18n\Formatter|formatter]]: định dạng dữ liệu mỗi khi gửi tới user. Ví dụ, các số có thể được
   hiển thị cùng với các dấu ngăn cách phần ngàn, ngày có thể được định dạng ở dạng ngày dài.
   Tham khảo thêm tại mục [Định dạng dữ liệu](output-formatting.md) để biết thêm thông tin.
-* [[yii\i18n\I18N|i18n]]: hỗ trợ định dạng và dịch đa ngôn ngữ.
+- [[yii\i18n\I18N|i18n]]: hỗ trợ định dạng và dịch đa ngôn ngữ.
   Tham khảo thêm tại mục [Internationalization](tutorial-i18n.md) để biết thêm thông tin.
-* [[yii\log\Dispatcher|log]]: quản lý mục log.
+- [[yii\log\Dispatcher|log]]: quản lý mục log.
   Tham khảo thêm tại mục [Logging](runtime-logging.md) để biết thêm thông tin.
-* [[yii\swiftmailer\Mailer|mail]]: hỗ trợ soạn thảo và gửi email.
+- [[yii\swiftmailer\Mailer|mail]]: hỗ trợ soạn thảo và gửi email.
   Tham khảo thêm tại mục [Mailing](tutorial-mailing.md) để biết thêm thông tin..
-* [[yii\base\Application::response|response]]: represents the response being sent to end users.
+- [[yii\base\Application::response|response]]: represents the response being sent to end users.
   Tham khảo thêm tại mục [Responses](runtime-responses.md) để biết thêm thông tin..
-* [[yii\base\Application::request|request]]: tiếp nhận các yêu cầu từ user.
+- [[yii\base\Application::request|request]]: tiếp nhận các yêu cầu từ user.
   Tham khảo thêm tại mục [Requests](runtime-requests.md) để biết thêm thông tin..
-* [[yii\web\Session|session]]: quản lý các phiên (session). Thành phần này chỉ được kích hoạt với
+- [[yii\web\Session|session]]: quản lý các phiên (session). Thành phần này chỉ được kích hoạt với
   [[yii\web\Application|Ứng dụng Web]].
   Tham khảo thêm tại mục [Sessions and Cookies](runtime-sessions-cookies.md) để biết thêm thông tin..
-* [[yii\web\UrlManager|urlManager]]: xử lý thông tin về URL.
+- [[yii\web\UrlManager|urlManager]]: xử lý thông tin về URL.
   Tham khảo thêm tại mục [URL Parsing and Generation](runtime-routing.md) để biết thêm thông tin..
-* [[yii\web\User|user]]: giúp xác thực người dùng. Thành phần này chỉ được kích hoạt với
+- [[yii\web\User|user]]: giúp xác thực người dùng. Thành phần này chỉ được kích hoạt với
   [[yii\web\Application|Ứng dụng Web]]
   Tham khảo thêm tại mục [Xác thực (Authentication)](security-authentication.md) để biết thêm thông tin..
-* [[yii\web\View|view]]: hỗ trợ giao diện.
+- [[yii\web\View|view]]: hỗ trợ giao diện.
   Tham khảo thêm tại mục[Views](structure-views.md) để biết thêm thông tin..

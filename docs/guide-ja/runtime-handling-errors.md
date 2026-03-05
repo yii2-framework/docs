@@ -1,18 +1,16 @@
-エラー処理
-==========
+# エラー処理
 
 Yii が内蔵している [[yii\web\ErrorHandler|エラー・ハンドラ]] は、エラー処理を従来よりはるかに快適な経験にしてくれます。
 具体的には、Yii のエラー・ハンドラはエラー処理をより良くするために、次のことを行います。
 
-* 致命的でない全ての PHP エラー (警告や通知) は捕捉可能な例外に変換されます。
-* 例外および致命的 PHP エラーは、デバッグ・モードでは、
+- 致命的でない全ての PHP エラー (警告や通知) は捕捉可能な例外に変換されます。
+- 例外および致命的 PHP エラーは、デバッグ・モードでは、
   詳細なコール・スタック情報とソース・コード行とともに表示されます。
-* エラーを表示するために専用の [コントローラ・アクション](structure-controllers.md#actions) を使うことがサポートされています。
-* さまざまなエラー・レスポンス形式をサポートしています。
+- エラーを表示するために専用の [コントローラ・アクション](structure-controllers.md#actions) を使うことがサポートされています。
+- さまざまなエラー・レスポンス形式をサポートしています。
 
 [[yii\web\ErrorHandler|エラー・ハンドラ]] はデフォルトで有効になっています。
 アプリケーションの [エントリ・スクリプト](structure-entry-scripts.md) において、定数 `YII_ENABLE_ERROR_HANDLER` を `false` と定義することによって、これを無効にすることが出来ます。
-
 
 ## エラー・ハンドラを使用する <span id="using-error-handler"></span>
 
@@ -58,7 +56,6 @@ use yii\web\NotFoundHttpException;
 throw new NotFoundHttpException();
 ```
 
-
 ## エラー表示をカスタマイズする <span id="customizing-error-display"></span>
 
 [[yii\web\ErrorHandler|エラー・ハンドラ]] は、定数 `YII_DEBUG` の値に従って、エラー表示を調整します。
@@ -67,18 +64,17 @@ throw new NotFoundHttpException();
 そして、`YII_DEBUG` が `false` のときは、アプリケーションに関する公開できない情報の開示を防ぐために、エラー・メッセージだけが表示されます。
 
 > Info: 例外が [[yii\base\UserException]] の子孫である場合は、`YII_DEBUG` の値の如何にかかわらず、コール・スタックは表示されません。
-これは、この種の例外はユーザの誤操作によって引き起こされるものであり、
-開発者は何も修正する必要がないと考えられるからです。
+> これは、この種の例外はユーザの誤操作によって引き起こされるものであり、
+> 開発者は何も修正する必要がないと考えられるからです。
 
 デフォルトでは、[[yii\web\ErrorHandler|エラー・ハンドラ]] は二つの [ビュー](structure-views.md) を使ってエラーを表示します。
 
-* `@yii/views/errorHandler/error.php`: エラーがコール・スタック情報なしで表示されるべき場合に使用されます。
+- `@yii/views/errorHandler/error.php`: エラーがコール・スタック情報なしで表示されるべき場合に使用されます。
   `YII_DEBUG` が `false` の場合、これが表示される唯一のビューとなります。
-* `@yii/views/errorHandler/exception.php`: エラーがコール・スタック情報と共に表示されるべき場合に使用されます。
+- `@yii/views/errorHandler/exception.php`: エラーがコール・スタック情報と共に表示されるべき場合に使用されます。
 
 エラー表示をカスタマイズするために、エラー・ハンドラの [[yii\web\ErrorHandler::errorView|errorView]] および [[yii\web\ErrorHandler::exceptionView|exceptionView]] プロパティを構成して、
 自分自身のビューを使用することが出来ます。
-
 
 ### エラー・アクションを使う <span id="using-error-actions"></span>
 
@@ -139,13 +135,13 @@ public function actionError()
 次に `views/site/error.php` に配置されるビュー・ファイルを作成しなければなりません。
 エラー・アクションが [[yii\web\ErrorAction]] として定義されている場合は、このビュー・ファイルの中で次の変数にアクセスすることが出来ます。
 
-* `name`: エラーの名前。
-* `message`: エラー・メッセージ。
-* `exception`: 例外オブジェクト。これを通じて、更に有用な情報、例えば、HTTP ステータス・コード、エラー・コード、
+- `name`: エラーの名前。
+- `message`: エラー・メッセージ。
+- `exception`: 例外オブジェクト。これを通じて、更に有用な情報、例えば、HTTP ステータス・コード、エラー・コード、
   エラー・コール・スタックなどにアクセスすることが出来ます。
 
 > Info: あなたが [ベーシック・プロジェクト・テンプレート](start-installation.md) または [アドバンスト・プロジェクト・テンプレート](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide-ja/README.md) を使っている場合は、
-  エラー・アクションとエラー・ビューは、既にあなたのために定義されています。
+> エラー・アクションとエラー・ビューは、既にあなたのために定義されています。
 
 > Note: エラー・ハンドラの中でリダイレクトする必要がある場合は、次のようにしてください。
 >
@@ -153,7 +149,6 @@ public function actionError()
 > Yii::$app->getResponse()->redirect($url)->send();
 > return;
 > ```
-
 
 ### エラーのレスポンス形式をカスタマイズする <span id="error-format"></span>
 

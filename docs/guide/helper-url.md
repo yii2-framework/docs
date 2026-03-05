@@ -1,8 +1,6 @@
-Url Helper
-==========
+# Url Helper
 
 Url helper provides a set of static methods for managing URLs.
-
 
 ## Getting Common URLs <span id="getting-common-urls"></span>
 
@@ -19,7 +17,7 @@ If no parameter is passed, the generated URL is relative. You can either pass `t
 schema or specify a schema explicitly (`https`, `http`).
 
 To get the base URL of the current request use the following:
-  
+
 ```php
 $relativeBaseUrl = Url::base();
 $absoluteBaseUrl = Url::base(true);
@@ -27,7 +25,6 @@ $httpsAbsoluteBaseUrl = Url::base('https');
 ```
 
 The only parameter of the method works exactly the same as for `Url::home()`.
-
 
 ## Creating URLs <span id="creating-urls"></span>
 
@@ -37,7 +34,7 @@ a URL:
 ```php
 $url = Url::toRoute(['product/view', 'id' => 42]);
 ```
-  
+
 You may specify the route as a string, e.g., `site/index`. You may also use an array if you want to specify additional
 query parameters for the URL being created. The array format must be:
 
@@ -61,7 +58,7 @@ route has none (e.g. `site/index` or `index`). A relative route will be converte
   and will be prepended with [[\yii\web\Controller::uniqueId]];
 - If the route has no leading slash (e.g. `site/index`), it is considered to be a route relative to the current module
   and will be prepended with the module's [[\yii\base\Module::uniqueId|uniqueId]].
-  
+
 Starting from version 2.0.2, you may specify a route in terms of an [alias](concept-aliases.md). If this is the case,
 the alias will first be converted into the actual route which will then be turned into an absolute route according
 to the above rules.
@@ -89,7 +86,7 @@ There's another method `Url::to()` that is very similar to [[toRoute()]]. The on
 requires a route to be specified as an array only. If a string is given, it will be treated as a URL.
 
 The first argument could be:
-          
+
 - an array: [[toRoute()]] will be called to generate the URL. For example:
   `['site/index']`, `['post/index', 'page' => 2]`. Please refer to [[toRoute()]] for more details
   on how to specify a route.
@@ -146,14 +143,13 @@ echo Url::current(['src' => null]);
 echo Url::current(['id' => 100]);
 ```
 
-
 ## Remember URLs <span id="remember-urls"></span>
 
 There are cases when you need to remember URL and afterwards use it during processing of the one of sequential requests.
 It can be achieved in the following way:
-  
+
 ```php
-// Remember current URL 
+// Remember current URL
 Url::remember();
 
 // Remember URL specified. See Url::to() for argument format.
@@ -169,11 +165,11 @@ In the next request we can get URL remembered in the following way:
 $url = Url::previous();
 $productUrl = Url::previous('product');
 ```
-                        
+
 ## Checking Relative URLs <span id="checking-relative-urls"></span>
 
 To find out if URL is relative i.e. it doesn't have host info part, you can use the following code:
-                              
+
 ```php
 $isRelative = Url::isRelative('test/it');
 ```

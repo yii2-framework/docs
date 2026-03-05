@@ -1,5 +1,4 @@
-Yii e Docker
-==============
+# Yii e Docker
 
 Para o desenvolvimento e implantação de aplicativos Yii, eles podem ser executados como contêineres Docker. Um contêiner é como uma máquina virtual isolada e leve que mapeia seus serviços para as portas do host, ou seja, um servidor da web em um contêiner na porta 80 está disponível na porta 8888 do seu (local) host.
 
@@ -46,23 +45,23 @@ Com o Compose, você pode configurar e gerenciar todos os serviços necessários
 Os comandos básicos do Docker são
 
     docker-compose up -d
-    
+
 para iniciar todos os serviços em sua pilha, em segundo plano
 
     docker-compose ps
-    
+
 para listar os serviços em execução
 
     docker-compose logs -f
-    
+
 para visualizar os logs de todos os serviços continuamente
 
     docker-compose stop
-    
+
 para interromper todos os serviços em sua pilha de forma elegante
 
     docker-compose kill
-    
+
 para interromper todos os serviços em sua pilha imediatamente
 
     docker-compose down -v
@@ -72,13 +71,12 @@ para parar e remover todos os serviços, **atenção à perda de dados ao não u
 Para executar comandos em um contêiner:
 
     docker-compose run --rm php composer install
-    
+
 executa a instalação do Composer em um novo contêiner
 
     docker-compose exec php bash
-    
-executa um shell bash em um serviço php que está em *execução*.
 
+executa um shell bash em um serviço php que está em _execução_.
 
 ## Tópicos avançados
 

@@ -1,26 +1,24 @@
-Fonctionnement des applications
-===============================
+# Fonctionnement des applications
 
 Après avoir installé Yii, vous obtenez une application Yii fonctionnelle accessible via l'URL `https://hostname/basic/web/index.php` ou `https://hostname/index.php`, en fonction
 de votre configuration. Cette section vous initiera aux fonctionnalités intégrées à l'application,
 à la manière dont le code est organisé et à la gestion des requêtes par l'application.
 
-> Info: pour simplifier, au long de ce tutoriel de démarrage, nous supposerons que `basic/web` est la racine de votre 
-  serveur Web, et que vous avez configuré l'URL pour accéder à votre application comme suit ou de façon similaire : 
-  `https://hostname/index.php`.
-  Pour vos besoins, merci d'ajuster les URLs dans notre description comme il convient.
+> Info: pour simplifier, au long de ce tutoriel de démarrage, nous supposerons que `basic/web` est la racine de votre
+> serveur Web, et que vous avez configuré l'URL pour accéder à votre application comme suit ou de façon similaire :
+> `https://hostname/index.php`.
+> Pour vos besoins, merci d'ajuster les URLs dans notre description comme il convient.
 
-Notez que contrairement au framework lui-même, après avoir installé un modèle de projet, vous êtes entièrement libre d'en disposer. Vous êtes libre d'ajouter ou de supprimer du code selon vos besoins. 
+Notez que contrairement au framework lui-même, après avoir installé un modèle de projet, vous êtes entièrement libre d'en disposer. Vous êtes libre d'ajouter ou de supprimer du code selon vos besoins.
 
-Fonctionnalité <span id="Functionality"></span>
---------------
+## Fonctionnalité <span id="Functionality"></span>
 
 L'application basique installée contient quatre pages :
 
-* La page d'accueil, affichée quand vous accédez à l'URL `https://hostname/index.php`,
-* la page "About" (À Propos),
-* la page "Contact", qui présente un formulaire de contact permettant aux utilisateurs finaux de vous contacter par courriel,
-* et la page "Login" (Connexion), qui présente un formulaire de connexion qui peut être utilisé pour authentifier des utilisateurs finaux. Essayez de vous connecter
+- La page d'accueil, affichée quand vous accédez à l'URL `https://hostname/index.php`,
+- la page "About" (À Propos),
+- la page "Contact", qui présente un formulaire de contact permettant aux utilisateurs finaux de vous contacter par courriel,
+- et la page "Login" (Connexion), qui présente un formulaire de connexion qui peut être utilisé pour authentifier des utilisateurs finaux. Essayez de vous connecter
   avec "admin/admin", et vous verrez l'élément "Login" du menu principal être remplacé par "Logout" (Déconnexion).
 
 Ces pages ont en commun une entête et un pied de page. L'entête contient une barre de menu principal qui permet la navigation
@@ -31,9 +29,7 @@ C'est un [outil de débogage](https://github.com/yiisoft/yii2-debug/blob/master/
 
 En plus de l'application Web, il existe,dans le dossier de base de l'application, un script en console appelé `yii`. Ce script peut être utilisé pour exécuter des tâches de fond et de maintenance pour l'application; ces tâches sont décrites à la section [Applications en console](tutorial-console.md).
 
-
-Structure de l'application <span id="application-structure"></span>
----------------------
+## Structure de l'application <span id="application-structure"></span>
 
 Les répertoires et fichiers les plus importants de votre application sont (en supposant que le répertoire racine de l'application est `basic`) :
 
@@ -71,9 +67,7 @@ L'[application](structure-applications.md) résout la requête avec l'aide de se
 et distribue la requête aux éléments MVC. Les [composants graphiques (widgets)](structure-widgets.md) sont utilisés dans les [vues](structure-views.md)
 pour aider à créer des éléments d'interface complexes et dynamiques.
 
-
-Cycle de vie d'une requête <span id="request-lifecycle"></span>
------------------
+## Cycle de vie d'une requête <span id="request-lifecycle"></span>
 
 Le diagramme suivant présente la manière dont une application traite une requête.
 

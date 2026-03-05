@@ -1,5 +1,4 @@
-Authentication
-==============
+# Authentication
 
 Unlike Web applications, RESTful APIs are usually stateless, which means sessions or cookies should not
 be used. Therefore, each request should come with some sort of authentication credentials because
@@ -10,14 +9,14 @@ via HTTPS to prevent man-in-the-middle (MitM) attacks**.
 
 There are different ways to send an access token:
 
-* [HTTP Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication): the access token
+- [HTTP Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication): the access token
   is sent as the username. This should only be used when an access token can be safely stored
   on the API consumer side. For example, the API consumer is a program running on a server.
-* Query parameter: the access token is sent as a query parameter in the API URL, e.g.,
+- Query parameter: the access token is sent as a query parameter in the API URL, e.g.,
   `https://example.com/users?access-token=xxxxxxxx`. Because most Web servers will keep query
   parameters in server logs, this approach should be mainly used to serve `JSONP` requests which
   cannot use HTTP headers to send access tokens.
-* [OAuth 2](https://oauth.net/2/): the access token is obtained by the consumer from an authorization
+- [OAuth 2](https://oauth.net/2/): the access token is obtained by the consumer from an authorization
   server and sent to the API server via [HTTP Bearer Tokens](https://datatracker.ietf.org/doc/html/rfc6750),
   according to the OAuth2 protocol.
 
@@ -26,10 +25,12 @@ Yii supports all of the above authentication methods. You can also easily create
 To enable authentication for your APIs, do the following steps:
 
 1. Configure the `user` [application component](structure-application-components.md):
-  - Set the [[yii\web\User::enableSession|enableSession]] property to be `false`.
-  - Set the [[yii\web\User::loginUrl|loginUrl]] property to be `null` to show an HTTP 403 error instead of redirecting to the login page. 
+
+- Set the [[yii\web\User::enableSession|enableSession]] property to be `false`.
+- Set the [[yii\web\User::loginUrl|loginUrl]] property to be `null` to show an HTTP 403 error instead of redirecting to the login page.
+
 2. Specify which authentication methods you plan to use by configuring the `authenticator` behavior
-  in your REST controller classes.
+   in your REST controller classes.
 3. Implement [[yii\web\IdentityInterface::findIdentityByAccessToken()]] in your [[yii\web\User::identityClass|user identity class]].
 
 Step 1 is not required but is recommended for RESTful APIs which should be stateless. When [[yii\web\User::enableSession|enableSession]]
@@ -88,7 +89,6 @@ public function behaviors()
 
 Each element in `authMethods` should be an auth method class name or a configuration array.
 
-
 Implementation of `findIdentityByAccessToken()` is application specific. For example, in simple scenarios
 when each user can only have one access token, you may store the access token in an `access_token` column
 in the user table. The method can then be readily implemented in the `User` class as follows,
@@ -115,11 +115,10 @@ and then run the action. The authenticated user identity information can be retr
 If authentication fails, a response with HTTP status 401 will be sent back together with other appropriate headers
 (such as a `WWW-Authenticate` header for HTTP Basic Auth).
 
-
 ## Authorization <span id="authorization"></span>
 
 After a user is authenticated, you probably want to check if he or she has the permission to perform the requested
-action for the requested resource. This process is called *authorization* which is covered in detail in
+action for the requested resource. This process is called _authorization_ which is covered in detail in
 the [Authorization section](security-authorization.md).
 
 If your controllers extend from [[yii\rest\ActiveController]], you may override

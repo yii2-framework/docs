@@ -1,5 +1,4 @@
-Functional Tests
-================
+# Functional Tests
 
 Functional test verifies scenarios from a user's perspective. It is similar to [acceptance test](test-acceptance.md)
 but instead of communicating via HTTP it is filling up environment such as POST and GET parameters and then executes
@@ -17,6 +16,6 @@ Functional testing is implemented with the help of Codeception framework which h
 ## Running basic and advanced template tests
 
 If you've started with advanced template, please refer to ["testing" guide](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-testing.md)
-for more details about running tests.  
+for more details about running tests.
 
 If you've started with basic template, check its [README "testing" section](https://github.com/yiisoft/yii2-app-basic/blob/master/README.md#testing).

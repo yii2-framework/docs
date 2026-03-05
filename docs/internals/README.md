@@ -1,10 +1,8 @@
-Yii Developer Documentation
-===========================
+# Yii Developer Documentation
 
 This directory contains documentation about Yii Framework development and release process.
 
-Contributor Guidelines
-----------------------
+## Contributor Guidelines
 
 - [How to Report an Issue](report-an-issue.md)
 - [Getting started](getting-started.md)
@@ -12,32 +10,26 @@ Contributor Guidelines
 - [Yii 2 Core Framework Code Style](core-code-style.md)
 - [Yii 2 View Code Style](view-code-style.md)
 
-
-Documentation
--------------
+## Documentation
 
 - [Translation Status](translation-status.md) - which documents are ready for translation.
 - [Translation teams](translation-teams.md)
 - [Translation workflow](translation-workflow.md)
 
-
-Framework Development
----------------------
+## Framework Development
 
 - [Pull request quality assurance](pull-request-qa.md)
 - [Automated Tasks](automation.md), like code style fixes, automatic documentation and file generation.
 - [Design Decisions](design-decisions.md) - a FAQ-like list of statements about commonly debated things.
 
-Versioning and Release
-----------------------
+## Versioning and Release
 
 - [Project Organization](project-organization.md)
 - [Yii Versioning](versions.md)
 - [Backwards Compatibility](bc.md)
 - [Releasing a new version](release.md)
 
-Misc
-----
+## Misc
 
 ### Exception Hierarchy
 

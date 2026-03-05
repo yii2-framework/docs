@@ -22,9 +22,9 @@ Add to your `composer.json`.
 
 ```json
 {
-    "require": {
-        "github_username/github_repository-name": "^1.0"
-    }
+  "require": {
+    "github_username/github_repository-name": "^1.0"
+  }
 }
 ```
 

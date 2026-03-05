@@ -1,7 +1,6 @@
-Контроллеры
-===========
+# Контроллеры
 
-После создания классов ресурсов и настройки способа форматирования ресурсных данных следующим шагом 
+После создания классов ресурсов и настройки способа форматирования ресурсных данных следующим шагом
 является создание действий контроллеров для предоставления ресурсов конечным пользователям через RESTful API.
 
 В Yii есть два базовых класса контроллеров для упрощения вашей работы по созданию RESTful-действий:
@@ -14,16 +13,15 @@
 [[yii\rest\Controller]] и [[yii\rest\ActiveController]] имеют следующие возможности, некоторые из которых
 будут подробно описаны в следующих разделах:
 
-* Проверка HTTP-метода;
-* [Согласование содержимого и форматирование данных](rest-response-formatting.md);
-* [Аутентификация](rest-authentication.md);
-* [Ограничение частоты запросов](rest-rate-limiting.md).
+- Проверка HTTP-метода;
+- [Согласование содержимого и форматирование данных](rest-response-formatting.md);
+- [Аутентификация](rest-authentication.md);
+- [Ограничение частоты запросов](rest-rate-limiting.md).
 
 [[yii\rest\ActiveController]], кроме того, предоставляет следующие возможности:
 
-* Набор наиболее часто используемых действий: `index`, `view`, `create`, `update`, `delete` и `options`;
-* Авторизация пользователя для запрашиваемых действия и ресурса.
-
+- Набор наиболее часто используемых действий: `index`, `view`, `create`, `update`, `delete` и `options`;
+- Авторизация пользователя для запрашиваемых действия и ресурса.
 
 ## Создание классов контроллеров <span id="creating-controller"></span>
 
@@ -44,18 +42,17 @@ public function actionView($id)
 }
 ```
 
-
 ## Фильтры <span id="filters"></span>
 
 Большинство возможностей RESTful API, предоставляемых [[yii\rest\Controller]], реализовано на основе [фильтров](structure-filters.md).
 В частности, следующие фильтры будут выполняться в том порядке, в котором они перечислены:
 
-* [[yii\filters\ContentNegotiator|contentNegotiator]]: обеспечивает согласование содержимого, более подробно описан 
+- [[yii\filters\ContentNegotiator|contentNegotiator]]: обеспечивает согласование содержимого, более подробно описан
   в разделе [Форматирование ответа](rest-response-formatting.md);
-* [[yii\filters\VerbFilter|verbFilter]]: обеспечивает проверку HTTP-метода;
-* [[yii\filters\auth\AuthMethod|authenticator]]: обеспечивает аутентификацию пользователя, более подробно описан
+- [[yii\filters\VerbFilter|verbFilter]]: обеспечивает проверку HTTP-метода;
+- [[yii\filters\auth\AuthMethod|authenticator]]: обеспечивает аутентификацию пользователя, более подробно описан
   в разделе [Аутентификация](rest-authentication.md);
-* [[yii\filters\RateLimiter|rateLimiter]]: обеспечивает ограничение частоты запросов, более подробно описан 
+- [[yii\filters\RateLimiter|rateLimiter]]: обеспечивает ограничение частоты запросов, более подробно описан
   в разделе [Ограничение частоты запросов](rest-rate-limiting.md).
 
 Эти именованные фильтры объявлены в методе [[yii\rest\Controller::behaviors()|behaviors()]].
@@ -76,24 +73,22 @@ public function behaviors()
 }
 ```
 
-
 ## Наследование от `ActiveController` <span id="extending-active-controller"></span>
 
 Если ваш класс контроллера наследуется от [[yii\rest\ActiveController]], вам следует установить
 значение его свойства [[yii\rest\ActiveController::modelClass|modelClass]] равным имени класса ресурса,
 который вы планируете обслуживать с помощью этого контроллера. Класс ресурса должен быть унаследован от [[yii\db\ActiveRecord]].
 
-
 ### Настройка действий <span id="customizing-actions"></span>
 
 По умолчанию [[yii\rest\ActiveController]] предоставляет набор из следующих действий:
 
-* [[yii\rest\IndexAction|index]]: постраничный список ресурсов;
-* [[yii\rest\ViewAction|view]]: возвращает подробную информацию об указанном ресурсе;
-* [[yii\rest\CreateAction|create]]: создание нового ресурса;
-* [[yii\rest\UpdateAction|update]]: обновление существующего ресурса;
-* [[yii\rest\DeleteAction|delete]]: удаление указанного ресурса;
-* [[yii\rest\OptionsAction|options]]: возвращает поддерживаемые HTTP-методы.
+- [[yii\rest\IndexAction|index]]: постраничный список ресурсов;
+- [[yii\rest\ViewAction|view]]: возвращает подробную информацию об указанном ресурсе;
+- [[yii\rest\CreateAction|create]]: создание нового ресурса;
+- [[yii\rest\UpdateAction|update]]: обновление существующего ресурса;
+- [[yii\rest\DeleteAction|delete]]: удаление указанного ресурса;
+- [[yii\rest\OptionsAction|options]]: возвращает поддерживаемые HTTP-методы.
 
 Все эти действия объявляются в методе [[yii\rest\ActiveController::actions()|actions()]].
 Вы можете настроить эти действия или отключить какие-то из них, переопределив метод `actions()`, как показано ниже:
@@ -119,7 +114,6 @@ public function prepareDataProvider()
 ```
 
 Чтобы узнать, какие опции доступны для настройки классов отдельных действий, обратитесь к соответствующим разделам справочника классов.
-
 
 ### Выполнение контроля доступа <span id="performing-access-check"></span>
 

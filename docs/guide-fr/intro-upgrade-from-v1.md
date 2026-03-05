@@ -1,5 +1,4 @@
-Mise à jour depuis la version 1.1
-=================================
+# Mise à jour depuis la version 1.1
 
 Il y a beaucoup de différences entre les versions 1.1 et 2.0 de Yii, le framework ayant été complètement réécrit pour
 la 2.0. En conséquence, la mise à jour depuis la version 1.1 n'est pas aussi triviale que la mise à jour entre deux
@@ -12,9 +11,7 @@ Merci de noter que Yii 2.0 introduit plus de nouvelles fonctionnalités que cell
 recommandé de lire tout le guide de référence pour en apprendre davantage. Il y a des chances que certaines
 fonctionnalités, que vous aviez préalablement développées pour vous, fassent désormais partie du code du noyau.
 
-
-Installation
-------------
+## Installation
 
 Yii 2.0 exploite pleinement [Composer](https://getcomposer.org/), le gestionnaire de paquet PHP. L'installation
 du framework, ainsi que des extensions, sont gérées par Composer. Reportez-vous à la section
@@ -22,9 +19,7 @@ du framework, ainsi que des extensions, sont gérées par Composer. Reportez-vou
 créer de nouvelles extensions, ou rendre vos extensions existantes 1.1 compatibles 2.0, reportez-vous à
 la section [Créer des extensions](extend-creating-extensions.md) de ce guide.
 
-
-Pré-requis PHP
---------------
+## Pré-requis PHP
 
 Yii 2.0 requiert PHP 5.4 ou plus, ce qui est une grosse amélioration par rapport à PHP 5.2 qui était requis pour Yii 1.1.
 
@@ -42,9 +37,7 @@ Voici un résumé des principaux changements concernant PHP:
 - [intl](https://www.php.net/manual/fr/book.intl.php). Yii 2.0 utilise l'extension PHP `intl` pour les fonctionnalités
   d'internationalisation.
 
-
-Espaces de noms
----------------
+## Espaces de noms
 
 Le changement le plus évident dans Yii 2.0 est l'utilisation des espaces de noms. La majorité des classes du noyau
 utilise les espace de noms, par exemple, `yii\web\Request`. Le préfixe «C» n'est plus utilisé dans les noms de classe.
@@ -54,9 +47,7 @@ indique que le fichier de classe correspondant est `web/Request.php` dans le dos
 (Vous pouvez utiliser n'importe quelle classe du noyau sans inclure explicitement le fichier correspondant, grâce au
 chargeur de classe de Yii.)
 
-
-Composants et objets
---------------------
+## Composants et objets
 
 Yii 2.0 décompose la classe `CComponent` 1.1 en deux classes: [[yii\base\BaseObject]] et [[yii\base\Component]].
 Le classe [[yii\base\BaseObject|BaseObject]] est une classe de base légère qui permet de définir les
@@ -68,9 +59,7 @@ Si votre classe n'a pas besoin des événements et des comportements, vous devri
 [[yii\base\BaseObject|BaseObject]] comme classe de base. C'est généralement le cas pour les classes qui représentent
 une structure de données basique.
 
-
-Configuration d'objets
----------------------
+## Configuration d'objets
 
 La classe [[yii\base\BaseObject|BaseObject]] introduit une manière uniforme de configurer les objets. Toute sous-classe
 de [[yii\base\BaseObject|BaseObject]] doit déclarer son constructeur (si besoin) de la manière suivante afin qu'elle
@@ -114,11 +103,9 @@ $object = Yii::createObject([
 Plus de détails sur les configurations peuvent être trouvés dans la section
 [Configurations](concept-configurations.md).
 
+## Événements
 
-Événements
-----------
-
-Avec Yii 1, les événements étaient créés par la définition d'une  méthode `on` (par exemple `onBeforeSave`). Avec Yii 2,
+Avec Yii 1, les événements étaient créés par la définition d'une méthode `on` (par exemple `onBeforeSave`). Avec Yii 2,
 vous pouvez maintenant utiliser n'importe quel nom de l'événement. Vous déclenchez un événement en appelant
 la méthode [[yii\base\Component::trigger()|trigger()]] :
 
@@ -134,11 +121,10 @@ $component->on($eventName, $handler);
 // Pour détacher le gestionnaire, utilisez :
 // $component->off($eventName, $handler);
 ```
+
 Il y a de nombreuses améliorations dans la gestion des événements. Pour plus de détails, reportez-vous à la section [Événements](concept-events.md).
 
-
-Alias
------
+## Alias
 
 Yii 2.0 étend l'utilisation des alias aux fichiers/répertoires et aux URL. Yii 2.0 impose maintenant
 aux alias de commencer par le caractère `@`, pour différencier les alias de fichiers/répertoires ou URL.
@@ -155,14 +141,12 @@ d'installation de Zend Framework. Une fois que vous avez fait cela, Yii sera aus
 
 Pour en savoir plus, consultez la section [Alias](concept-aliases.md).
 
-
-Vues
-----
+## Vues
 
 Le changement le plus significatif à propos des vues dans Yii 2 est que la variable spéciale `$this` dans une vue ne fait plus référence au
-contrôleur ou à l'objet graphique. Au lieu de cela, `$this` correspond maintenant à un objet *vue*, un nouveau concept
-introduit dans la version 2.0. L'objet *vue* est de type [[yii\web\View]], et représente la partie vue
-du modèle MVC. Si vous souhaitez accéder au contrôleur ou  à l'objet graphique dans une vue, vous pouvez utiliser `$this->context`.
+contrôleur ou à l'objet graphique. Au lieu de cela, `$this` correspond maintenant à un objet _vue_, un nouveau concept
+introduit dans la version 2.0. L'objet _vue_ est de type [[yii\web\View]], et représente la partie vue
+du modèle MVC. Si vous souhaitez accéder au contrôleur ou à l'objet graphique dans une vue, vous pouvez utiliser `$this->context`.
 
 Pour afficher une vue depuis une autre vue, utilisez `$this->render()`, et non `$this->renderPartial()`. Le résultat retourné par la méthode `render()` doit être explicitement envoyé à la sortie, en effet `render()` retournera la vue au lieu de l'afficher. Par exemple :
 
@@ -175,9 +159,7 @@ deux moteurs de gabarit populaires : Smarty et Twig. Le moteur de gabarit Prado 
 Pour utiliser ces moteurs de gabarit, vous devez configurer le composant `view` de l'application en définissant la propriété
 [[yii\base\View::$renderers|View::$renderers]]. Reportez-vous à la section [Moteur de gabarit](tutorial-template-engines.md) pour en savoir plus.
 
-
-Modèles
--------
+## Modèles
 
 Yii 2.0 utilise la classe [[yii\base\Model]] comme modèle de base, similaire à la classe `CModel` dans la version 1.1.
 La classe `CFormModel` a été supprimée. Vous pouvez, à la place, étendre la classe [[yii\base\Model]] afin de créer une classe modèle pour un formulaire.
@@ -206,9 +188,7 @@ lorsque les scénarios existants sont déclarés via la méthode [[yii\base\Mode
 
 Pour en savoir plus sur les modèles, reportez-vous à la section [Modèles](structure-models.md).
 
-
-Contrôleurs
------------
+## Contrôleurs
 
 Yii 2.0 utilise la classe [[yii\web\Controller]] comme classe de base des contrôleurs, similaire à la classe `CController` dans la version Yii 1.1.
 [[yii\base\Action]] est la classe de base pour les actions.
@@ -230,9 +210,7 @@ public function actionView($id)
 
 Reportez-vous à la section [Contrôleurs](structure-controllers.md) pour plus de détails.
 
-
-Objets graphiques
------------------
+## Objets graphiques
 
 Yii 2.0 utilise la classe [[yii\base\Widget]] comme classe de base pour les objets graphiques, similaire à la classe `CWidget` de Yii 1.1.
 
@@ -258,12 +236,10 @@ ActiveForm::end();
 
 Reportez-vous à la section [Objets graphiques](structure-widgets.md) pour en savoir plus.
 
-
-Thèmes
-------
+## Thèmes
 
 Les thèmes fonctionnent tout à fait différemment dans la version 2.0. Ils sont maintenant basés sur un mécanisme de mise en correspondance de chemin qui met un chemin
-de fichier de vue en correspondance avec un chemin de fichier de vue thématisée. Par exemple, si la mise en correspondance  pour un thème est
+de fichier de vue en correspondance avec un chemin de fichier de vue thématisée. Par exemple, si la mise en correspondance pour un thème est
 `['/web/views' => '/web/themes/basic']`, alors la version thématisée du fichier de vue
 `/web/views/site/index.php` sera `/web/themes/basic/site/index.php`. Pour cette raison, les thèmes peuvent maintenant
 être appliqués à n'importe quel fichier de vue, même une vue utilisée en dehors du contexte d'un contrôleur ou d'un objet graphique.
@@ -273,9 +249,7 @@ de l'application.
 
 Reportez-vous à la section [Thématisation](tutorial-theming.md) pour plus de détails.
 
-
-Applications en ligne de commande
----------------------------------
+## Applications en ligne de commande
 
 Les applications en ligne de commande (console) sont désormais organisées en contrôleurs, comme les applications Web. ces contrôleurs
 doivent étendre la classe [[yii\console\Controller]], similaire à la classe `CConsoleCommand` de la version 1.1.
@@ -289,9 +263,7 @@ Yii 2.0 prend en charge la génération automatique d'aide à partir des blocs d
 
 Reportez-vous à la section [Commandes console](tutorial-console.md) pour plus de détails.
 
-
-I18N
-----
+## I18N
 
 Yii 2.0 supprime les fonctionnalités internes de formatage des dates et des nombres, en faveur du [module PHP PECL intl](https://pecl.php.net/package/intl).
 
@@ -301,12 +273,10 @@ sources de messages en fonction de catégories.
 
 Reportez-vous à la section [Internationalisation](tutorial-i18n.md) pour plus de détails.
 
-
-Filtres d'action
-----------------
+## Filtres d'action
 
 Les filtres d'action sont maintenant implémentés comme des comportements. Pour définir un nouveau filtre personnalisé, étendez la classe [[yii\base\ActionFilter]]. Pour utiliser un filtre, déclarez le
-comme un comportement du contrôleur.  Par exemple, pour utiliser le filtre [[yii\filters\AccessControl]], vous aurez le code suivant dans le contrôleur :
+comme un comportement du contrôleur. Par exemple, pour utiliser le filtre [[yii\filters\AccessControl]], vous aurez le code suivant dans le contrôleur :
 
 ```php
 public function behaviors()
@@ -324,38 +294,32 @@ public function behaviors()
 
 Reportez-vous à la section [Filtres](structure-filters.md) pour plus de détails.
 
+## Ressources
 
-Ressources
-----------
-
-Yii 2.0 introduit un nouveau concept de paquet de ressources (*asset bundle*) qui remplace le concept de gestionnaire de ressources (*asset manager*) de la version 1.1.
+Yii 2.0 introduit un nouveau concept de paquet de ressources (_asset bundle_) qui remplace le concept de gestionnaire de ressources (_asset manager_) de la version 1.1.
 
 Un paquet de ressources est une collection de fichiers (par exemple : fichier JavaScript, CSS, image, etc.)
 dans un dossier. Chaque paquet est représenté par une classe étendant [[yii\web\AssetBundle]].
-En *enregistrant* un paquet de ressources via [[yii\web\AssetBundle::register()]], vous rendez les ressources du paquet accessibles via le Web. Contrairement à Yii 1.1, la page *enregistrant* le paquet
+En _enregistrant_ un paquet de ressources via [[yii\web\AssetBundle::register()]], vous rendez les ressources du paquet accessibles via le Web. Contrairement à Yii 1.1, la page _enregistrant_ le paquet
 contiendra automatiquement les références vers les fichiers déclarés dans le paquet.
 
 Reportez-vous à la section [Assets](structure-assets.md) pour plus de détails.
 
-
-Assistants
-----------
+## Assistants
 
 Yii 2.0 introduit de nombreux assistants couramment utilisés, sous la forme de classes statiques, y compris :
 
-* [[yii\helpers\Html]]
-* [[yii\helpers\ArrayHelper]]
-* [[yii\helpers\StringHelper]]
-* [[yii\helpers\FileHelper]]
-* [[yii\helpers\Json]]
+- [[yii\helpers\Html]]
+- [[yii\helpers\ArrayHelper]]
+- [[yii\helpers\StringHelper]]
+- [[yii\helpers\FileHelper]]
+- [[yii\helpers\Json]]
 
 Reportez-vous à la section [Assistants](helper-overview.md) pour plus de détails.
 
+## Formulaires
 
-Formulaires
------------
-
-Yii 2.0 introduit le concept de *champ* pour la construction d'un formulaire à l'aide de la classe [[yii\widgets\ActiveForm]]. Un champ
+Yii 2.0 introduit le concept de _champ_ pour la construction d'un formulaire à l'aide de la classe [[yii\widgets\ActiveForm]]. Un champ
 est un conteneur constitué d'une étiquette, d'une entrée, d'un message d'erreur, et/ou d'un texte d'aide.
 Un champ est représenté comme un objet de la classe [[yii\widgets\ActiveField|ActiveField]].
 En utilisant des champs, vous pouvez construire un formulaire plus proprement qu'avant:
@@ -372,9 +336,7 @@ En utilisant des champs, vous pouvez construire un formulaire plus proprement qu
 
 Reportez-vous à la section [Créer des formulaires](input-forms.md) pour plus de détails.
 
-
-Constructeur de requêtes
------------------------
+## Constructeur de requêtes
 
 Dans la version 1.1, la construction des requêtes était dispersée dans plusieurs classes, y compris `CDbCommand`,
 `CDbCriteria` et `CDbCommandBuilder`. Avec Yii 2.0, une requête de base de données est représentée par un objet de la classe [[yii\db\Query|Query]]
@@ -396,9 +358,7 @@ De plus, ces méthodes de construction de requête peuvent également être util
 
 Reportez-vous à la section [Constructeur de requête](db-query-builder.md) pour plus de détails.
 
-
-Active Record
--------------
+## Active Record
 
 Yii 2.0 introduit beaucoup de modifications au modèle [Active Record](db-active-record.md). Les deux plus évidentes concernent la construction des requêtes et la manipulation de requêtes relationnelles.
 
@@ -435,7 +395,7 @@ personnalisée :
 $orders = $customer->getOrders()->andWhere('status=1')->all();
 ```
 
-Lors du chargement anticipé (*eager loading*) d'une relation, Yii 2.0 fonctionne différemment de la version 1.1.
+Lors du chargement anticipé (_eager loading_) d'une relation, Yii 2.0 fonctionne différemment de la version 1.1.
 En particulier avec Yii 1.1, une jointure était créée pour sélectionner à la fois l'enregistrement principal et les
 enregistrements liés. Avec Yii 2.0, deux instructions SQL sont exécutées sans utiliser de jointure : la première
 récupère les enregistrements principaux et la seconde récupère les enregistrements liés en filtrant selon les clés
@@ -443,7 +403,7 @@ primaires des enregistrements principaux.
 
 Au lieu de retourner des objets [[yii\db\ActiveRecord|ActiveRecord]], vous pouvez utiliser la méthode
 [[yii\db\ActiveQuery::asArray()|asArray()]] lors de la construction d'une requête pour renvoyer un grand nombre
-d'enregistrements. Ainsi le résultat  sera retourné sous forme de tableaux, ce qui peut réduire considérablement le temps de calcul et la mémoire nécessaires dans le cas d'un grand nombre d'enregistrements. Par exemple:
+d'enregistrements. Ainsi le résultat sera retourné sous forme de tableaux, ce qui peut réduire considérablement le temps de calcul et la mémoire nécessaires dans le cas d'un grand nombre d'enregistrements. Par exemple:
 
 ```php
 $customers = Customer::find()->asArray()->all();
@@ -467,10 +427,9 @@ la méthode [[yii\db\ActiveRecord::instantiate()]].
 Il y a beaucoup d'autres modifications et améliorations à Active Record.
 Reportez-vous à la section [Active Record](db-active-record.md) pour en savoir plus.
 
-Comportement des Enregistrements actifs)
----------------------------------------------------------
+## Comportement des Enregistrements actifs)
 
-Dans la version 2.0, nous avons la classe de base des  *behaviors* (comportements)  `CActiveRecordBehavior`. Si vous voulez créer une classe de comportement d'enregistrement actif (Active Record), vous devez étendre directement la classe `yii\base\Behavior`. Si la classe de comportement doit réagir à certains événements du propriétaire, vous devez redéfinir les méthodes `events()` comme suit :
+Dans la version 2.0, nous avons la classe de base des _behaviors_ (comportements) `CActiveRecordBehavior`. Si vous voulez créer une classe de comportement d'enregistrement actif (Active Record), vous devez étendre directement la classe `yii\base\Behavior`. Si la classe de comportement doit réagir à certains événements du propriétaire, vous devez redéfinir les méthodes `events()` comme suit :
 
 ```php
 namespace app\components;
@@ -495,8 +454,8 @@ class MyBehavior extends Behavior
     }
 }
 ```
-User et IdentityInterface
--------------------------
+
+## User et IdentityInterface
 
 La classe `CWebUser` 1.1 est maintenant remplacée par [[yii\web\User]], et il n'y a plus de classe `CUserIdentity`.
 Au lieu de cela, vous devez implémenter [[yii\web\IdentityInterface]] qui est beaucoup plus simple à utiliser.
@@ -505,9 +464,7 @@ Le modèle de projet avancé fournit un exemple.
 Reportez-vous aux sections [Authentification](security-authentication.md), [Authorisation](security-authorization.md), et
 [Modèle de projet avancé](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide) pour en savoir plus.
 
-
-Gestion des URL
----------------
+## Gestion des URL
 
 La gestion des URL dans Yii 2 est similaire à celle disponible dans la version 1.1. Une amélioration majeure est que la
 gestion des URL prend désormais en charge les paramètres optionnels. Par exemple, si vous avez une règle déclarée comme suit,
@@ -524,10 +481,8 @@ atteindre le même objectif.
 
 Reportez-vous à la section [Documentation de la gestion des URL](runtime-routing.md) pour en savoir plus.
 
+Un changement important dans la convention de nommage pour les routes est que les noms utilisant la _casse en dos de chameau_ des contrôleurs et des actions utilisent désormais uniquement des mots en bas de casse séparés par des tirets, p. ex. l'identifiant du contrôleur Reportez-vous à la section traitant des [Identifiants de contrôleur](structure-controllers.md#controller-ids) et [Identifiants d'action](structure-controllers.md#action-ids) pour plus de détails.
 
-Un changement important dans la convention de nommage pour les routes est que les noms utilisant la *casse en dos de chameau*  des contrôleurs et des actions utilisent désormais uniquement des mots en bas de casse séparés par des tirets, p. ex. l'identifiant du  contrôleur  Reportez-vous à la section traitant des  [Identifiants de contrôleur](structure-controllers.md#controller-ids) et  [Identifiants d'action](structure-controllers.md#action-ids) pour plus de détails.
-
-Utiliser Yii 1.1 et 2.x ensemble
---------------------------------
+## Utiliser Yii 1.1 et 2.x ensemble
 
 Si vous avez du code Yii 1.1 que vous souhaitez réutiliser avec Yii 2, reportez-vous à la section [Utiliser Yii 1.1 et 2.0 ensemble](tutorial-yii-integration.md).

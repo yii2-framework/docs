@@ -1,13 +1,11 @@
-Git workflow for Yii 2 contributors
-===================================
+# Git workflow for Yii 2 contributors
 
 So you want to contribute to Yii? Great! But to increase the chances of your changes being accepted quickly, please
 follow the following steps. If you are new to Git
 and GitHub, you might want to first check out [GitHub help](https://help.github.com/), [try Git](https://try.github.com)
 or learn something about [Git internal data model](https://nfarina.com/post/9868516270/git-is-simpler).
 
-Prepare your development environment
-------------------------------------
+## Prepare your development environment
 
 The following steps will create a development environment for Yii, which you can use to work
 on the core code of Yii framework. These steps only need to be done the first time you contribute.
@@ -42,15 +40,15 @@ If you are going to work with JavaScript:
 - run `npm install` to install JavaScript testing tools and dependencies (assuming you have [Node.js and NPM installed](https://nodejs.org/en/download/package-manager/)).
 
 > Note: JavaScript tests depend on [jsdom](https://github.com/tmpvar/jsdom) library which requires Node.js 4 or newer.
-Using of Node.js 6 or 7 is more preferable.
+> Using of Node.js 6 or 7 is more preferable.
 
 - run `php build/build dev/app basic <fork>` to clone the basic app and install composer dependencies for the basic app.
   `<fork>` is URL of your repository fork such as `git@github.com:my_nickname/yii2-app-basic.git`. If you are core framework contributor you may skip specifying fork.
   This command will install foreign composer packages as normal but will link the yii2 repo to
   the currently checked out repo, so you have one instance of all the code installed.
-  
+
   Do the same for the advanced app if needed: `php build/build dev/app advanced <fork>`.
-  
+
   This command will also be used to update dependencies, it runs `composer update` internally.
 
 > Note: The default git repository Urls clone from github via SSH, you may add the `--useHttp` flag to the `build` command
@@ -119,9 +117,7 @@ a symlink to `extensions/redis` so you are not working in the composer vendor di
 > Note: The default git repository Urls clone from github via SSH, you may add the `--useHttp` flag to the `build` command
 > to use HTTPs instead.
 
-
-Working on bugs and features
-----------------------------
+## Working on bugs and features
 
 Having prepared your develop environment as explained above you can now start working on the feature or bugfix.
 
@@ -147,7 +143,7 @@ You should start at this point for every new contribution to make sure you are w
 ### 3. Create a new branch for your feature based on the current Yii master branch
 
 > That's very important since you will not be able to submit more than one pull request from your account if you'll
-  use master.
+> use master.
 
 Each separate bug fix or change should go in its own branch. Branch names should be descriptive and start with
 the number of the issue that your code relates to. If you aren't fixing any particular issue, just skip number.
@@ -250,9 +246,9 @@ To detect regressions early every merge to the Yii codebase on GitHub will be pi
 [`[ci skip]`](https://docs.travis-ci.com/user/customizing-the-build/#Skipping-a-build) will be included to the merge description if
 the pull request:
 
-* affect javascript, css or image files only,
-* updates the documentation,
-* modify fixed strings only (e.g. translation updates)
+- affect javascript, css or image files only,
+- updates the documentation,
+- modify fixed strings only (e.g. translation updates)
 
 Doing so will save travis from commencing testruns on changes that are not covered by tests in the first place.
 

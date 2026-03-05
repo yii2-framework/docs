@@ -1,5 +1,4 @@
-Работа с несколькими моделями
-=============================
+# Работа с несколькими моделями
 
 Когда имеешь дело со сложными данными, иногда может потребоваться использовать несколько разных моделей для обработки данных, введенных
 пользователем. Для примера, предположим, что информация пользователя для входа хранится в таблице `user`, а данные профиля
@@ -26,14 +25,14 @@ class UserController extends Controller
     {
         $user = User::findOne($id);
         $profile = Profile::findOne($id);
-        
+
         if (!isset($user, $profile)) {
             throw new NotFoundHttpException("The user was not found.");
         }
-        
+
         $user->scenario = 'update';
         $profile->scenario = 'update';
-        
+
         if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
             $isValid = $user->validate();
             $isValid = $profile->validate() && $isValid;
@@ -43,7 +42,7 @@ class UserController extends Controller
                 return $this->redirect(['user/view', 'id' => $id]);
             }
         }
-        
+
         return $this->render('update', [
             'user' => $user,
             'profile' => $profile,
@@ -52,8 +51,8 @@ class UserController extends Controller
 }
 ```
 
-В действии `update`, мы сначала загружаем из базы модели `$user` и `$profile`. Затем мы вызываем метод [[yii\base\Model::load()]] 
-для заполнения этих двух моделей данными, введенными пользователем. В случае успеха мы проверяем модели и сохраняем их. В противном случае 
+В действии `update`, мы сначала загружаем из базы модели `$user` и `$profile`. Затем мы вызываем метод [[yii\base\Model::load()]]
+для заполнения этих двух моделей данными, введенными пользователем. В случае успеха мы проверяем модели и сохраняем их. В противном случае
 мы рендерим представление `update`, которое содержит следующий контент:
 
 ```php
@@ -68,7 +67,7 @@ $form = ActiveForm::begin([
     <?= $form->field($user, 'username') ?>
 
     ...other input fields...
-    
+
     <?= $form->field($profile, 'website') ?>
 
     <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>

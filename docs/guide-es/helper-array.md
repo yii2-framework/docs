@@ -1,9 +1,7 @@
-ArrayHelper
-===========
+# ArrayHelper
 
 Adicionalmente al [rico conjunto de funciones para arrays de PHP](https://www.php.net/manual/es/book.array.php), el array helper de Yii proporciona
 métodos estáticos adicionales permitiendo trabajar con arrays de manera más eficiente.
-
 
 ## Devolviendo Valores <span id="getting-values"></span>
 
@@ -63,7 +61,6 @@ $type = ArrayHelper::remove($array, 'type');
 Después de ejecutar el código el `$array` contendrá `['options' => [1, 2]]` y `$type` debe ser `A`. Tenga en cuenta que a diferencia del método
 `getValue`, `remove` solo soporta nombres clave simples.
 
-
 ## Comprobando la Existencia de Claves <span id="checking-existence-of-keys"></span>
 
 `ArrayHelper::keyExists` funciona de la misma manera que [array_key_exists](https://www.php.net/manual/es/function.array-key-exists.php)
@@ -105,7 +102,6 @@ $result = ArrayHelper::getColumn($array, function ($element) {
     return $element['id'];
 });
 ```
-
 
 ## Re-indexar Arrays <span id="reindexing-arrays"></span>
 
@@ -201,7 +197,7 @@ indexado por `data` en su tercer nivel:
 ## Construyendo Mapas (Maps) <span id="building-maps"></span>
 
 Con el fin de construir un mapa (pareja clave-valor) de un array multidimensional o un array de objetos puedes usar el método `map`.
-Los parámetros `$from` y `$to`  especifican los nombres de las claves o los nombres de las propiedades que serán configuradas en el mapa. Opcionalmente, se puede
+Los parámetros `$from` y `$to` especifican los nombres de las claves o los nombres de las propiedades que serán configuradas en el mapa. Opcionalmente, se puede
 agrupar en el mapa de acuerdo al campo de agrupamiento `$group`. Por ejemplo,
 
 ```php
@@ -231,7 +227,6 @@ $result = ArrayHelper::map($array, 'id', 'name', 'class');
 //     ],
 // ]
 ```
-
 
 ## Ordenamiento Multidimensional <span id="multidimensional-sorting"></span>
 
@@ -272,7 +267,6 @@ direcciones de ordenación.
 El último argumento es un PHP sort flag que toma los mismos valores que los pasados a
 PHP [sort()](https://www.php.net/manual/es/function.sort.php).
 
-
 ## Detectando Tipos de Array <span id="detecting-array-types"></span>
 
 Es muy útil saber si un array es indexado o asociativo. He aquí un ejemplo:
@@ -287,7 +281,6 @@ $associative = ['framework' => 'Yii', 'version' => '2.0'];
 echo ArrayHelper::isAssociative($associative);
 ```
 
-
 ## Codificación y Decodificación de Valores HTML <span id="html-encoding-values"></span>
 
 Con el fin de codificar o decodificar caracteres especiales en un array de strings con entidades HTML puedes usar lo siguiente:
@@ -299,7 +292,6 @@ $decoded = ArrayHelper::htmlDecode($data);
 
 Solo los valores se codifican por defecto. Pasando como segundo argumento `false` puedes codificar un array de claves también.
 La codificación utilizará el charset de la aplicación y podría ser cambiado pasandole un tercer argumento.
-
 
 ## Fusionando Arrays <span id="merging-arrays"></span>
 
@@ -319,7 +311,6 @@ La codificación utilizará el charset de la aplicación y podría ser cambiado 
     */
     public static function merge($a, $b)
 ```
-
 
 ## Convirtiendo Objetos a Arrays <span id="converting-objects-to-arrays"></span>
 
@@ -353,7 +344,6 @@ Cada array de mapeo contiene un conjunto de mapeos. Cada mapeo podría ser:
 
 El resultado de la conversión anterior será:
 
-
 ```php
 [
     'id' => 123,
@@ -381,7 +371,7 @@ ArrayHelper::isIn('a', ['a']);
 // true
 ArrayHelper::isIn('a', new(ArrayObject['a']));
 
-// true 
+// true
 ArrayHelper::isSubset(new(ArrayObject['a', 'c']), new(ArrayObject['a', 'b', 'c'])
 
 ```

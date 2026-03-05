@@ -1,5 +1,4 @@
-使用模板引擎（Using template engines）
-====================================
+# 使用模板引擎（Using template engines）
 
 默认情况下，Yii 使用 PHP 作为其默认的模板引擎语言，但是，你可以配置 Yii 以扩展的方式支持其他的渲染引擎，
 比如 [Twig](https://twig.symfony.com/) 或 [Smarty](https://www.smarty.net/)等。
@@ -41,6 +40,7 @@
 "yiisoft/yii2-smarty": "*",
 "yiisoft/yii2-twig": "*",
 ```
+
 上述代码需要增加到 `composer.json` 的 `require` 节中。在做了上述修改，并保存后，你可以运行 `composer update --prefer-dist` 命令来安装扩展。
 
 对于特定模板引擎的使用详细，请参考其文档：

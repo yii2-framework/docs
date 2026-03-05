@@ -1,5 +1,4 @@
-收集列表输入
-=============
+# 收集列表输入
 
 有时你需要在一个表单中以单一的形式处理多个模型。例如，有多个设置，
 每个设置存储为一个 name-value，并通过 `Setting` [活动记录](db-active-record.md)
@@ -10,6 +9,7 @@
 下面展示了如何在 Yii 中收集列表输入。
 
 在三种不同的情况下，所需处理的略有不同：
+
 - 从数据库中更新一组固定的记录
 - 创建一个动态的新记录集
 - 更新、创建和删除一页记录
@@ -55,11 +55,11 @@ class SettingsController extends Controller
 }
 ```
 
-在上面的代码中，当用模型来从数据库获取数据时，我们使用 [[yii\db\ActiveQuery::indexBy()|indexBy()]] 
-来让模型的主键成为一个数组的索引。其中 [[yii\base\Model::loadMultiple()|Model::loadMultiple()]] 
+在上面的代码中，当用模型来从数据库获取数据时，我们使用 [[yii\db\ActiveQuery::indexBy()|indexBy()]]
+来让模型的主键成为一个数组的索引。其中 [[yii\base\Model::loadMultiple()|Model::loadMultiple()]]
 用于接收以 POST 方式提交的表单数据并填充多个模型，
 [[yii\base\Model::validateMultiple()|Model::validateMultiple()]] 一次验证多个模型。
-正如我们之前验证的模型，使用了 `validateMultiple()`，现在通过传递 `false` 
+正如我们之前验证的模型，使用了 `validateMultiple()`，现在通过传递 `false`
 作为 [[yii\db\ActiveRecord::save()|save()]]的一个参数使其不会重复验证两次。
 
 现在在 `update` 视图的表单：

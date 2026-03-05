@@ -1,10 +1,8 @@
-文件上传
-============
+# 文件上传
 
 在Yii里上传文件通常使用 [[yii\web\UploadedFile]] 类，
 它把每个上传的文件封装成 `UploadedFile` 对象。
 结合 [[yii\widgets\ActiveForm]] 和 [models](structure-models.md)，你可以轻松实现安全的上传文件机制。
-
 
 ## 创建模型 <span id="creating-models"></span>
 
@@ -31,7 +29,7 @@ class UploadForm extends Model
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
-    
+
     public function upload()
     {
         if ($this->validate()) {
@@ -52,9 +50,8 @@ class UploadForm extends Model
 [Core Validatators](tutorial-core-validators.md#file) 章节。
 
 > Tip: 如果你要上传的是一张图片，可以考虑使用 `image` 验证器。
-`image` 验证器是通过 [[yii\validators\ImageValidator]] 实现验证的，确保对应的模型属性
-收到的文件是有效的图片文件，然后才保存，或者使用扩展类 [Imagine Extension](https://github.com/yiisoft/yii2-imagine) 进行处理.
-
+> `image` 验证器是通过 [[yii\validators\ImageValidator]] 实现验证的，确保对应的模型属性
+> 收到的文件是有效的图片文件，然后才保存，或者使用扩展类 [Imagine Extension](https://github.com/yiisoft/yii2-imagine) 进行处理.
 
 ## 渲染文件输入 <span id="rendering-file-input"></span>
 
@@ -78,7 +75,7 @@ use yii\widgets\ActiveForm;
 `fileInput()` 方法会渲染一个 `<input type="file">` 标签，让用户可以选择一个文件上传。
 
 > Tip: 自2.0.8版本开始，当使用文件输入字段时，[[yii\web\widgets\ActiveField::fileInput|fileInput]]
-  会自动向表单添加 `enctype` 选项。
+> 会自动向表单添加 `enctype` 选项。
 
 ## 视图和模型的连接 <span id="wiring-up"></span>
 
@@ -115,7 +112,6 @@ class SiteController extends Controller
 上传的文件用一个 `UploadedFile` 实例表示。然后，我们依靠模型的验证规则确保上传的文件是有效的，
 并将文件保存在服务器上。
 
-
 ## 上传多个文件 <span id="uploading-multiple-files"></span>
 
 将前面所述的代码做一些调整，也可以一次性上传多个文件。
@@ -145,10 +141,10 @@ class UploadForm extends Model
             [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
-    
+
     public function upload()
     {
-        if ($this->validate()) { 
+        if ($this->validate()) {
             foreach ($this->imageFiles as $file) {
                 $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
             }

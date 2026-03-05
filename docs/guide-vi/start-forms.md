@@ -1,5 +1,4 @@
-Làm việc với Forms
-==================
+# Làm việc với Forms
 
 Ở phần này sẽ hướng dẫn làm thế nào để tạo mới trang Web cho phép ứng dụng lấy các thông tin về user từ form.
 Trang này sẽ có chức năng hiển thị form cho user cùng với các input như name (tên người dùng) và email.
@@ -10,13 +9,11 @@ hai giao diện [views](structure-views.md), bạn cần phải tạo ra đối 
 
 Trong phần này, bạn sẽ được tìm hiểu về:
 
-* Tạo đối tượng [model](structure-models.md) nhận thông tin từ user được nhập từ form
-* Khai báo rules để xách minh dữ liệu nhập vào
-* Xây dựng form HTML ở [view](structure-views.md)
+- Tạo đối tượng [model](structure-models.md) nhận thông tin từ user được nhập từ form
+- Khai báo rules để xách minh dữ liệu nhập vào
+- Xây dựng form HTML ở [view](structure-views.md)
 
-
-Tạo Model <span id="creating-model"></span>
-----------------
+## Tạo Model <span id="creating-model"></span>
 
 Dữ liệu của user cần xử lý sẽ đại diện bởi lớp model `EntryForm` sau đây và
 được lưu ở file `models/EntryForm.php`. Tham khảo thêm về phần [Class Autoloading](concept-autoloading.md)
@@ -46,15 +43,15 @@ class EntryForm extends Model
 
 Lớp trên được kế thừa từ lớp [[yii\base\Model]], lớp này được Yii cung cấp , thường được dùng cho việc xử lý dữ liệu từ form.
 
-> Lưu ý: [[yii\base\Model]] là lớp cơ sở cho việc tương tác với các lớp dữ liệu và nó *không* liên quan tới các bảng trong CSDL.
-[[yii\db\ActiveRecord]] là lớp thường được dùng với CSDL mỗi lớp này sẽ tương xứng với các bảng trong CSDL.
+> Lưu ý: [[yii\base\Model]] là lớp cơ sở cho việc tương tác với các lớp dữ liệu và nó _không_ liên quan tới các bảng trong CSDL.
+> [[yii\db\ActiveRecord]] là lớp thường được dùng với CSDL mỗi lớp này sẽ tương xứng với các bảng trong CSDL.
 
 Lớp `EntryForm` chứa hai biến ở phạm vi toàn cục (public), `name` và `email`, Các biến này sẽ được dùng để lưu trữ dữ liệu
 khi người dùng nhập và gửi lên. Lớp này đồng thời chứa phương thức là `rules()`, phương thức này trả về tập quy tắc để xác thực
 dữ liệu. Các quy tắc chứng thực được khai báo ở phần trên với ý nghĩa rằng.
 
-* cả hai giá trị `name` và `email` cần phải có
-* giá trị `email` phải đúng cú pháp là địa chỉ email
+- cả hai giá trị `name` và `email` cần phải có
+- giá trị `email` phải đúng cú pháp là địa chỉ email
 
 Nếu đã có đối tượng `EntryForm` cùng với dữ liệu user đã nhập, bạn có thể sử dụng phương thức
 [[yii\base\Model::validate()|validate()]] để xác thực dữ liệu mỗi khi user gửi lên. Việc xác thực dữ liệu sai sẽ
@@ -74,9 +71,7 @@ if ($model->validate()) {
 }
 ```
 
-
-Tạo Action <span id="creating-action"></span>
-------------------
+## Tạo Action <span id="creating-action"></span>
 
 Tiếp theo, trong controller `site` bạn sẽ tạo action là `entry` action này cần dùng tới model. Quy trình và cách tạo mới action
 đã được hướng dẫn ở mục [Saying Hello](start-hello.md).
@@ -113,25 +108,23 @@ class SiteController extends Controller
 ```
 
 Action này sẽ tạo đối tượng `EntryForm`. Sau khi được khởi tạo, nó sẽ lấy các thông tin thông qua biến
-  `$_POST`, biến này được Yii cung cấp [[yii\web\Request::post()]].
+`$_POST`, biến này được Yii cung cấp [[yii\web\Request::post()]].
 Nếu dữ liệu gửi đến cho model thành công(chẳng hạn., khi user gửi thông tin từ HTML form), action sẽ gọi phương thức
 [[yii\base\Model::validate()|validate()]] để chắc chắn rằng những giá trị được nhập vào là hợp lý.
 
 > Thông tin thêm: Thành phần `Yii::$app` được mô tả ở mục [application](structure-applications.md),
-  Thành phần này là một mẫu thiết kế singleton cho phép truy cập ở toàn cục. Được hoạt động như một [service locator](concept-service-locator.md) that
-  để cung cấp các thành phần như `request`, `response`, `db`, vv. nhằm để hỗ trợ thêm các chức năng đặc biệt.
-  Ở đoạn code trên, component `request`  được khởi tạo bỏi ứng dụng dùng để truy cập dữ liệu từ `$_POST`.
+> Thành phần này là một mẫu thiết kế singleton cho phép truy cập ở toàn cục. Được hoạt động như một [service locator](concept-service-locator.md) that
+> để cung cấp các thành phần như `request`, `response`, `db`, vv. nhằm để hỗ trợ thêm các chức năng đặc biệt.
+> Ở đoạn code trên, component `request` được khởi tạo bỏi ứng dụng dùng để truy cập dữ liệu từ `$_POST`.
 
 Nếu không có lỗi gì, action sẽ trả về (render) view tên là `entry-confirm` để xác nhận dữ liệu được gửi lên.
 . Nếu dữ liệu trống hoặc gặp lỗi, dữ liệu sẽ được gửi về view `entry`, chứa form HTML, cùng với các thông điệp ở việc xác thực bị lỗi.
 
 > Lưu ý: ở bài hướng dẫn này, chúng ta chỉ xác nhận trang khi có dũ liệu hợp lệ. Bài thực hành này,
-  bạn cần lưu ý việc sử dụng các phương thức [[yii\web\Controller::refresh()|refresh()]] hoặc [[yii\web\Controller::redirect()|redirect()]]
-  nhằm để tránh [form resubmission problems](https://en.wikipedia.org/wiki/Post/Redirect/Get).
+> bạn cần lưu ý việc sử dụng các phương thức [[yii\web\Controller::refresh()|refresh()]] hoặc [[yii\web\Controller::redirect()|redirect()]]
+> nhằm để tránh [form resubmission problems](https://en.wikipedia.org/wiki/Post/Redirect/Get).
 
-
-Tạo Views <span id="creating-views"></span>
---------------
+## Tạo Views <span id="creating-views"></span>
 
 Cuối cùng, chúng ta tạo mới 2 tập tin view có tên là `entry-confirm` và `entry`. Những view này sẽ được trả về như được mô tả ở trên từ action `entry`.
 
@@ -149,7 +142,7 @@ use yii\helpers\Html;
 </ul>
 ```
 
-View `entry` sẽ hiển thị một form chứa các mã HTML.  View này được lưu trữ ở tập tin `views/site/entry.php`.
+View `entry` sẽ hiển thị một form chứa các mã HTML. View này được lưu trữ ở tập tin `views/site/entry.php`.
 
 ```php
 <?php
@@ -172,12 +165,10 @@ use yii\widgets\ActiveForm;
 Những [widget](structure-widgets.md) gọi là [[yii\widgets\ActiveForm|ActiveForm]] to
 thường được dùng để xây dựng các Form. Các phương thức `begin()` và `end()` dùng để mở và đóng các tag tương ứng
 . Giữa hai phương thức này, phương thức [[yii\widgets\ActiveForm::field()|field()]] sẽ tạo mới các input của form . Input đầu tiên sẽ dùng cho trường dữ liệu "name",
-và input thức hai sẽ dược dùng cho trường "email". Sau cùng của các input, phương thức [[yii\helpers\Html::submitButton()]] 
+và input thức hai sẽ dược dùng cho trường "email". Sau cùng của các input, phương thức [[yii\helpers\Html::submitButton()]]
 sẽ được gọi và tạo ra nút submit dùng để gửi dữ liệu.
 
-
-Thử xem kết quả <span id="trying-it-out"></span>
--------------
+## Thử xem kết quả <span id="trying-it-out"></span>
 
 Truy cập vào URL sau để xem kết quả:
 
@@ -185,7 +176,7 @@ Truy cập vào URL sau để xem kết quả:
 https://hostname/index.php?r=site/entry
 ```
 
-Bạn sẽ thấy trang Web cùng với việc hiển thị form chứa 2 trường để nhập dữ liệu . Trước mỗi trường nhập liệu, có nhãn được chỉ định những dữ liệu nhập vào . 
+Bạn sẽ thấy trang Web cùng với việc hiển thị form chứa 2 trường để nhập dữ liệu . Trước mỗi trường nhập liệu, có nhãn được chỉ định những dữ liệu nhập vào .
 Nếu bạn không nhập dữ liệu gì vào và nhấn nút submit, hoặc nếu bạn cung cấp địa chỉ email sai, bạn sẽ thấy thông điệp thông báo lỗi ở mỗi trường nhập liệu.
 
 ![Form with Validation Errors](images/start-form-validation.png)
@@ -194,8 +185,6 @@ Sau khi nhập đúng các trường name và địa chỉ email đồng thời 
 cùng với dữ liệu bạn vừa nhập .
 
 ![Confirmation of Data Entry](images/start-entry-confirmation.png)
-
-
 
 ### Thông tin thêm <span id="magic-explained"></span>
 
@@ -210,14 +199,14 @@ javaScript trên trình duyệt, việc xác thực sẽ thực hiện ở phía
 `actionEntry()`. Điều này đảm bảo tính hợp lệ dữ liệu trong mọi trường hợp.
 
 > Cảnh báo: Việc xác thực ở phía client thường cung cấp cho sự trải nghiệm của người dùng tốt hơn. Xác thực phía server
-  thì luôn luôn được thực thi, có thể có hoặc không việc xác thực ở phía client.
+> thì luôn luôn được thực thi, có thể có hoặc không việc xác thực ở phía client.
 
 Các nhãn (label) cho các input được tạo ra bởi phương thức `field()`, sử dụng tên của thuộc tính nằm trong model.
-Chẳng hạn, tên nhãn `Name` sẽ được tạo bởi thuộc tính `name`. 
+Chẳng hạn, tên nhãn `Name` sẽ được tạo bởi thuộc tính `name`.
 
 Bạn có thể sửa tên nhãn ở đoạn code sau:
 
-```php
+````php
 <?= $form->field($model, 'name')->label('Tên của bạn Name') ?>
 <?= $form->field($model, 'email')->label('Địa chỉ Email') ?>
 ```n
@@ -236,3 +225,4 @@ Bạn đã tìm hiểu cách lấy dữ liệu từ user và hiển thị dữ l
 xây dựng ứng dụng, tuy nhiên Yii hỗ trợ các chức năng thật đơn giản bằng việc cung cấp những widget.
 
 Trong phần tiếp theo, bạn sẽ tìm hiều làm thể nào để làm việc với CSDL, điều cần thiết với những ứng dụng.
+````

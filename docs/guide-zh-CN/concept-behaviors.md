@@ -1,5 +1,4 @@
-行为
-===
+# 行为
 
 行为是 [[yii\base\Behavior]] 或其子类的实例。
 行为，也称为 [mixins](https://zh.wikipedia.org/wiki/Mixin)，
@@ -8,9 +7,7 @@
 然后可以像访问组件内定义的方法和属性一样访问它们。
 此外，行为通过组件能响应被触发的[事件](basic-events.md)，从而自定义或调整组件正常执行的代码。
 
-
-定义行为 <span id="defining-behaviors"></span>
-------
+## 定义行为 <span id="defining-behaviors"></span>
 
 要定义行为，通过继承 [[yii\base\Behavior]] 或其子类来建立一个类。如：
 
@@ -53,8 +50,7 @@ class MyBehavior extends Behavior
 > Note: 如果 [[yii\base\Behavior::__get()]] 和/或 [[yii\base\Behavior::__set()]] 行为方法被覆盖，
 > 则需要覆盖 [[yii\base\Behavior::canGetProperty()]] 和/或 [[yii\base\Behavior::canSetProperty()]]。
 
-处理事件
--------
+## 处理事件
 
 如果要让行为响应对应组件的事件触发，
 就应覆写 [[yii\base\Behavior::events()]] 方法，如：
@@ -87,9 +83,9 @@ class MyBehavior extends Behavior
 上例声明了 [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] 事件和它的处理器 `beforeValidate()` 。
 当指定一个事件处理器时，要使用以下格式之一：
 
-* 指向行为类的方法名的字符串，如上例所示；
-* 对象或类名和方法名的数组，如 `[$object, 'methodName']`；
-* 匿名方法。
+- 指向行为类的方法名的字符串，如上例所示；
+- 对象或类名和方法名的数组，如 `[$object, 'methodName']`；
+- 匿名方法。
 
 处理器的格式如下，其中 `$event` 指向事件参数。
 关于事件的更多细节请参考[事件](basic-events.md)：
@@ -99,8 +95,7 @@ function ($event) {
 }
 ```
 
-附加行为 <span id="attaching-behaviors"></span>
-----------
+## 附加行为 <span id="attaching-behaviors"></span>
 
 可以静态或动态地附加行为到[[yii\base\Component|组件]]。前者在实践中更常见。
 
@@ -145,7 +140,6 @@ class User extends ActiveRecord
 
 通过指定行为配置数组相应的键可以给行为关联一个名称。这种行为称为**命名行为**。
 上例中，有两个命名行为：`myBehavior2` 和 `myBehavior4` 。如果行为没有指定名称就是**匿名行为**。
-
 
 要动态附加行为，在对应组件里调用 [[yii\base\Component::attachBehavior()]] 方法即可，如：
 
@@ -192,8 +186,7 @@ $component->attachBehaviors([
 详情请参考
 [配置](concept-configurations.md#configuration-format)章节。
 
-使用行为 <span id="using-behaviors"></span>
--------
+## 使用行为 <span id="using-behaviors"></span>
 
 使用行为，必须像前文描述的一样先把它附加到 [[yii\base\Component|component]] 类或其子类。一旦行为附加到组件，就可以直接使用它。
 
@@ -232,9 +225,7 @@ $behavior = $component->getBehavior('myBehavior');
 $behaviors = $component->getBehaviors();
 ```
 
-
-移除行为 <span id="detaching-behaviors"></span>
--------
+## 移除行为 <span id="detaching-behaviors"></span>
 
 要移除行为，可以调用 [[yii\base\Component::detachBehavior()]] 方法用行为相关联的名字实现：
 
@@ -248,12 +239,10 @@ $component->detachBehavior('myBehavior1');
 $component->detachBehaviors();
 ```
 
-
-使用 `TimestampBehavior` <span id="using-timestamp-behavior"></span>
------------------------
+## 使用 `TimestampBehavior` <span id="using-timestamp-behavior"></span>
 
 最后以 [[yii\behaviors\TimestampBehavior]] 的讲解来结尾，
-这个行为支持在 [[yii\db\ActiveRecord|Active Record]] 
+这个行为支持在 [[yii\db\ActiveRecord|Active Record]]
 存储时自动更新它的时间戳属性。
 
 首先，附加这个行为到计划使用该行为的 [[yii\db\ActiveRecord|Active Record]] 类：
@@ -287,9 +276,9 @@ class User extends ActiveRecord
 
 以上指定的行为数组：
 
-* 当记录插入时，行为将当前时间戳赋值给 
+- 当记录插入时，行为将当前时间戳赋值给
   `created_at` 和 `updated_at` 属性；
-* 当记录更新时，行为将当前时间戳赋值给 `updated_at` 属性。
+- 当记录更新时，行为将当前时间戳赋值给 `updated_at` 属性。
 
 > Note: 对于上述实现使用MySQL数据库，请将列 (`created_at`, `updated_at`) 定义为 int(11) 作为 UNIX 时间戳。
 
@@ -303,7 +292,7 @@ $user->save();
 echo $user->created_at;  // 显示当前时间戳
 ```
 
-[[yii\behaviors\TimestampBehavior|TimestampBehavior]] 行为还提供了一个有用的方法 
+[[yii\behaviors\TimestampBehavior|TimestampBehavior]] 行为还提供了一个有用的方法
 [[yii\behaviors\TimestampBehavior::touch()|touch()]]，
 这个方法能将当前时间戳赋值给指定属性并保存到数据库：
 
@@ -311,8 +300,7 @@ echo $user->created_at;  // 显示当前时间戳
 $user->touch('login_time');
 ```
 
-其它行为
--------
+## 其它行为
 
 有几种内置和外部行为可用：
 
@@ -326,13 +314,11 @@ $user->touch('login_time');
 - [yii2tech\ar\position\PositionBehavior](https://github.com/yii2tech/ar-position) - 允许通过提供重新排序方法来
   管理整数字段中的记录顺序。
 
-比较行为与 Traits <span id="comparison-with-traits"></span>
-----------------------
+## 比较行为与 Traits <span id="comparison-with-traits"></span>
 
 虽然行为类似于 [traits](https://www.php.net/manual/zh/language.oop5.traits.php)，它们都将自己的属性和方法“注入”到主类中，
 但它们在许多方面有所不同。如下所述，他们都有优点和缺点。
 它们更像互补类而非替代类。
-
 
 ### 使用行为的原因 <span id="pros-for-behaviors"></span>
 
@@ -350,7 +336,6 @@ $user->touch('login_time');
 通过优先考虑附加到该组件的行为，
 自动解决冲突。由不同 traits 引起的名称冲突需要通过
 重命名受影响的属性或方法进行手动解决。
-
 
 ### 使用 Traits 的原因 <span id="pros-for-traits"></span>
 

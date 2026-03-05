@@ -1,5 +1,4 @@
-Helpers
-=======
+# Helpers
 
 > Observação: Esta seção está em desenvolvimento.
 
@@ -15,13 +14,11 @@ use yii\helpers\Html;
 echo Html::encode('Test > test');
 ```
 
-> Observação: Para oferecer suporte à [personalização de classes helper](#customizing-helper-classes),  o Yii divide cada classe helper principal
-  em duas classes: uma classe base (ex. `BaseArrayHelper`) e uma classe concreta (ex. `ArrayHelper`).
-  Ao usar um helper, você deve usar apenas a versão concreta e nunca a classe base.
+> Observação: Para oferecer suporte à [personalização de classes helper](#customizing-helper-classes), o Yii divide cada classe helper principal
+> em duas classes: uma classe base (ex. `BaseArrayHelper`) e uma classe concreta (ex. `ArrayHelper`).
+> Ao usar um helper, você deve usar apenas a versão concreta e nunca a classe base.
 
-
-Principais Classes Helper
--------------------
+## Principais Classes Helper
 
 As seguintes classes helper são fornecidas nas versões Yii:
 
@@ -39,13 +36,11 @@ As seguintes classes helper são fornecidas nas versões Yii:
 - [Url](helper-url.md)
 - VarDumper
 
+## Personalização de Classes Helper <span id="customizing-helper-classes"></span>
 
-Personalização de Classes Helper <span id="customizing-helper-classes"></span>
---------------------------
-
-Para personalizar uma classe helper principal (ex. [[yii\helpers\ArrayHelper]]), você deve criar uma nova classe que 
+Para personalizar uma classe helper principal (ex. [[yii\helpers\ArrayHelper]]), você deve criar uma nova classe que
 estende da classe base correspondente ao helper (ex. [[yii\helpers\BaseArrayHelper]]) e nomear a sua classe da mesma
-forma que a classe concreta correspondente (ex. [[yii\helpers\ArrayHelper]]), Essa classe será então configurada para 
+forma que a classe concreta correspondente (ex. [[yii\helpers\ArrayHelper]]), Essa classe será então configurada para
 substituir a implementação original da estrutura.
 
 O exemplo a seguir mostra como personalizar o método [[yii\helpers\ArrayHelper::merge()|merge()]] da classe

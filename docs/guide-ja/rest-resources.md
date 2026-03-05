@@ -1,24 +1,22 @@
-リソース
-========
+# リソース
 
-RESTful API は、つまるところ、*リソース* にアクセスし、それを操作するものです。
+RESTful API は、つまるところ、_リソース_ にアクセスし、それを操作するものです。
 MVC の枠組の中では、リソースは [モデル](structure-models.md) として見ることが出来ます。
 
 リソースをどのように表現すべきかについて制約がある訳ではありませんが、
 Yii においては、通常は、次のような理由によって、リソースを [[yii\base\Model]] またはその子クラス (例えば [[yii\db\ActiveRecord]])
 のオブジェクトとして表現することになります。
 
-* [[yii\base\Model]] は [[yii\base\Arrayable]] インタフェイスを実装しています。
+- [[yii\base\Model]] は [[yii\base\Arrayable]] インタフェイスを実装しています。
   これによって、リソースのデータを RESTful API を通じて公開する仕方をカスタマイズすることが出来ます。
-* [[yii\base\Model]] は [入力値の検証](input-validation.md) をサポートしています。
+- [[yii\base\Model]] は [入力値の検証](input-validation.md) をサポートしています。
   これは、RESTful API がデータ入力をサポートする必要がある場合に役に立ちます。
-* [[yii\db\ActiveRecord]] は DB データのアクセスと操作に対する強力なサポートを提供しています。
+- [[yii\db\ActiveRecord]] は DB データのアクセスと操作に対する強力なサポートを提供しています。
   リソース・データがデータベースに保存されているときは、アクティブ・レコードが最適の選択です。
 
 このセクションでは、主として、[[yii\base\Model]] クラス (またはその子クラス) から拡張したリソース・クラスにおいて、
 RESTful API を通じて返すことが出来るデータを指定する方法を説明します。
 リソース・クラスが [[yii\base\Model]] から拡張したものでない場合は、全てのパブリックなメンバ変数が返されます。
-
 
 ## フィールド <span id="fields"></span>
 
@@ -29,7 +27,7 @@ Yii はこのプロセスを二つのステップに分けます。
 リソース・クラスを開発するときに主として力を注ぐべきなのは、最初のステップです。
 
 [[yii\base\Model::fields()|fields()]] および/または [[yii\base\Model::extraFields()|extraFields()]] をオーバーライドすることによって、
-リソースのどういうデータ (*フィールド* と呼ばれます) を配列表現に入れることが出来るかを指定することが出来ます。
+リソースのどういうデータ (_フィールド_ と呼ばれます) を配列表現に入れることが出来るかを指定することが出来ます。
 この二つのメソッドの違いは、前者が配列表現に含まれるべきフィールドのデフォルトのセットを指定するのに対して、
 後者はエンド・ユーザが `expand` クエリ・パラメータで要求したときに配列に含めることが出来る追加のフィールドを指定する、
 という点にあります。例えば、
@@ -99,7 +97,6 @@ public function fields()
 > `fields()` をオーバーライドして、除去すべきです。上記の例では、`auth_key`、`password_hash`
 > および `password_reset_token` を選んで除去しています。
 
-
 ### `extraFields()` をオーバーライドする<span id="overriding-extra-fields"></span>
 
 デフォルトでは、[[yii\base\Model::extraFields()]] は空の配列を返し、[[yii\db\ActiveRecord::extraFields()]]
@@ -136,7 +133,6 @@ public function extraFields()
     ...
 ]
 ```
-
 
 ## リンク <span id="links"></span>
 
@@ -209,10 +205,9 @@ class UserResource extends Model implements Linkable
 }
 ```
 
-
 ## コレクション <span id="collections"></span>
 
-リソース・オブジェクトは *コレクション* としてグループ化することが出来ます。
+リソース・オブジェクトは _コレクション_ としてグループ化することが出来ます。
 各コレクションは、同じ型のリソースのリストを含みます。
 
 コレクションは配列として表現することも可能ですが、通常は、[データ・プロバイダ](output-data-providers.md) として表現する方がより望ましい方法です。
@@ -242,11 +237,11 @@ class PostController extends Controller
 が現在のページのリソースを取り出して、リソース・オブジェクトの配列としてシリアライズします。
 それだけでなく、[[yii\rest\Serializer]] は次の HTTP ヘッダを使ってページネーション情報もレスポンスに含めます。
 
-* `X-Pagination-Total-Count`: リソースの総数
-* `X-Pagination-Page-Count`: ページ数
-* `X-Pagination-Current-Page`: 現在のページ (1 から始まる)
-* `X-Pagination-Per-Page`: 各ページのリソース数
-* `Link`: クライアントがリソースをページごとにたどることが出来るようにするための一群のナビゲーションリンク
+- `X-Pagination-Total-Count`: リソースの総数
+- `X-Pagination-Page-Count`: ページ数
+- `X-Pagination-Current-Page`: 現在のページ (1 から始まる)
+- `X-Pagination-Per-Page`: 各ページのリソース数
+- `Link`: クライアントがリソースをページごとにたどることが出来るようにするための一群のナビゲーションリンク
 
 REST API におけるコレクションはデータ・プロバイダであるため、データ・プロバイダの全ての機能、すなわち、ページネーションやソーティングを共有しています。
 

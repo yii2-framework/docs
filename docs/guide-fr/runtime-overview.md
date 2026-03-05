@@ -1,7 +1,6 @@
-Vue d'ensemble
-==============
+# Vue d'ensemble
 
-À chaque fois qu'une application Yii prend en charge une requête, elle entreprend un flux de travail similaire. 
+À chaque fois qu'une application Yii prend en charge une requête, elle entreprend un flux de travail similaire.
 
 1. Un utilisateur effectue une requête auprès du [script d'entrée](structure-entry-scripts.md) `web/index.php`.
 2. Le script d'entrée charge la [configuration](concept-configurations.md) de l'application et crée une instance d'[application](structure-applications.md) pour prendre en charge la requête.
@@ -13,9 +12,9 @@ Vue d'ensemble
 8. L'action charge un [modèle](structure-models.md) de données, possiblement à partir d'une base de données.
 9. L'action rend une [vue](structure-views.md), en lui passant le modèle de données.
 10. Le résultat rendu est retourné au composant d'application [response](runtime-responses.md).
-11. Le composant *response* envoye le résultat rendu au navigateur de l'utilisateur. 
-Le diagramme ci-dessous illustre comment une application prend une requête en charge. 
+11. Le composant _response_ envoye le résultat rendu au navigateur de l'utilisateur.
+    Le diagramme ci-dessous illustre comment une application prend une requête en charge.
 
 ![Cycle de vie d'une requête](images/request-lifecycle.png)
 
-Dans cette section, nous décrivons en détails comment se déroulent quelques unes de ces étapes. 
+Dans cette section, nous décrivons en détails comment se déroulent quelques unes de ces étapes.

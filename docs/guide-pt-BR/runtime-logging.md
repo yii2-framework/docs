@@ -1,27 +1,25 @@
-Log
-=======
+# Log
 
-O Yii fornece um poderoso framework de log que é altamente personalizável e extensível. Utilizando este framework, você pode facilmente gerar logs de vários tipos de mensagens, filtrá-las, e salva-las em diferentes meios, tais como arquivos, banco de dados, e-mails. 
+O Yii fornece um poderoso framework de log que é altamente personalizável e extensível. Utilizando este framework, você pode facilmente gerar logs de vários tipos de mensagens, filtrá-las, e salva-las em diferentes meios, tais como arquivos, banco de dados, e-mails.
 
 Usar o Yii framework Log envolve os seguintes passos:
 
-* Registrar [mensagens de log](#log-messages) de vários lugares do seu código;
-* Configurar o [destino de log](#log-targets) na configuração da aplicação para filtrar e exportar mensagens de log;
-* Examinar as mensagens de erro exportadas  (ex.: [Yii debugger](tool-debugger.md)).
+- Registrar [mensagens de log](#log-messages) de vários lugares do seu código;
+- Configurar o [destino de log](#log-targets) na configuração da aplicação para filtrar e exportar mensagens de log;
+- Examinar as mensagens de erro exportadas (ex.: [Yii debugger](tool-debugger.md)).
 
 Nesta seção, vamos descrever principalmente os dois primeiros passos.
-
 
 ## Gravar Mensagens <span id="log-messages"></span>
 
 Gravar mensagens de log é tão simples como chamar um dos seguintes métodos de registro:
 
-* [[Yii::debug()]]: gravar uma mensagem para rastrear como um determinado trecho de código é executado. Isso é principalmente para o uso de desenvolvimento.
-* [[Yii::info()]]: gravar uma mensagem que transmite algumas informações úteis.
-* [[Yii::warning()]]: gravar uma mensagem de aviso que indica que algo inesperado aconteceu.
-* [[Yii::error()]]: gravar um erro fatal que deve ser investigado o mais rápido possível.
+- [[Yii::debug()]]: gravar uma mensagem para rastrear como um determinado trecho de código é executado. Isso é principalmente para o uso de desenvolvimento.
+- [[Yii::info()]]: gravar uma mensagem que transmite algumas informações úteis.
+- [[Yii::warning()]]: gravar uma mensagem de aviso que indica que algo inesperado aconteceu.
+- [[Yii::error()]]: gravar um erro fatal que deve ser investigado o mais rápido possível.
 
-Estes métodos gravam mensagens de log em vários *níveis* e *categorias*. Eles compartilham a mesma assinatura de função `function ($message, $category = 'application')`, onde `$message` significa a mensagem de log a ser gravada, enquanto `$category` é a categoria da mensagem de log. O código no exemplo a seguir registra uma mensagem de rastreamento sob a categoria padrão `application`:
+Estes métodos gravam mensagens de log em vários _níveis_ e _categorias_. Eles compartilham a mesma assinatura de função `function ($message, $category = 'application')`, onde `$message` significa a mensagem de log a ser gravada, enquanto `$category` é a categoria da mensagem de log. O código no exemplo a seguir registra uma mensagem de rastreamento sob a categoria padrão `application`:
 
 ```php
 Yii::debug('start calculating average revenue');
@@ -39,7 +37,6 @@ A constante `__METHOD__` corresponde ao nome do método (prefixado com o caminho
 
 > Observação: Os métodos de registro descritos acima são na verdade atalhos para o método [[yii\log\Logger::log()|log()]] do [[yii\log\Logger|logger object]] que é um singleton acessível através da expressão `Yii::getLogger()`. Quando um determinado número de mensagens são logadas ou quando a aplicação termina, o objeto logger irá chamar um [[yii\log\Dispatcher|message dispatcher]] para enviar mensagens de log gravadas [destinos de log](#log-targets).
 
-
 ## Destinos de Log <span id="log-targets"></span>
 
 Um destino de log é uma instância da classe [[yii\log\Target]] ou uma classe filha. Ele filtra as mensagens de log por seus níveis e categorias e, em seguida, às exportam para algum meio. Por exemplo, um [[yii\log\DbTarget|banco de dados de destino]] exporta as mensagens de log para uma tabela no banco de dados, enquanto um [[yii\log\EmailTarget|e-mail de destino]] exporta as mensagens de log para algum e-mail especificado.
@@ -50,7 +47,7 @@ Você pode registrar vários destinos de log em uma aplicação configurando-os 
 return [
   // o componente  "log" deve ser carregado durante o tempo de inicialização
   'bootstrap' => ['log'],
-  
+
   'components' => [
       'log' => [
           'targets' => [
@@ -76,20 +73,19 @@ return [
 
 > Observação: O componente `log` deve ser carregado durante a [inicialização](runtime-bootstrapping.md) para que ele possa enviar mensagens de log para alvos prontamente. É por isso que ele está listado no array `bootstrap` como mostrado acima.
 
-No código acima, dois destinos de log são registrados na propriedade [[yii\log\Dispatcher::targets]]: 
+No código acima, dois destinos de log são registrados na propriedade [[yii\log\Dispatcher::targets]]:
 
-* o primeiro seleciona mensagens de erro e de advertência e os salva em uma tabela de banco de dados;
-* o segundo seleciona mensagens de erro sob as categorias cujos nomes começam com `yii\db\`, e as envia para os e-mails `admin@example.com` e `developer@example.com`.
+- o primeiro seleciona mensagens de erro e de advertência e os salva em uma tabela de banco de dados;
+- o segundo seleciona mensagens de erro sob as categorias cujos nomes começam com `yii\db\`, e as envia para os e-mails `admin@example.com` e `developer@example.com`.
 
-Yii vem com os seguintes destinos de log preparados. Por favor consulte a documentação da API sobre essas classes para aprender como configurar e usá-los. 
+Yii vem com os seguintes destinos de log preparados. Por favor consulte a documentação da API sobre essas classes para aprender como configurar e usá-los.
 
-* [[yii\log\DbTarget]]: armazena mensagens de log em uma tabela de banco de dados.
-* [[yii\log\EmailTarget]]: envia mensagens de log para um endereço de e-mail pré-definido.
-* [[yii\log\FileTarget]]: salva mensagens de log em arquivos.
-* [[yii\log\SyslogTarget]]: salva mensagens de log para o syslog chamando a função PHP `syslog()`.
+- [[yii\log\DbTarget]]: armazena mensagens de log em uma tabela de banco de dados.
+- [[yii\log\EmailTarget]]: envia mensagens de log para um endereço de e-mail pré-definido.
+- [[yii\log\FileTarget]]: salva mensagens de log em arquivos.
+- [[yii\log\SyslogTarget]]: salva mensagens de log para o syslog chamando a função PHP `syslog()`.
 
 A seguir, vamos descrever as características comuns a todos os destinos de log.
-
 
 ### Filtragem de Mensagem <span id="message-filtering"></span>
 
@@ -97,16 +93,16 @@ Para cada destino de log, você pode configurar suas propriedades [[yii\log\Targ
 
 A propriedade [[yii\log\Target::levels|levels]] é um array que consiste em um ou vários dos seguintes valores:
 
-* `error`: corresponde a mensagens logadas por [[Yii::error()]].
-* `warning`: corresponde a mensagens logadas por [[Yii::warning()]].
-* `info`: corresponde a mensagens logadas por [[Yii::info()]].
-* `trace`: corresponde a mensagens logadas por [[Yii::debug()]].
-* `profile`: corresponde a mensagens logadas por [[Yii::beginProfile()]] e [[Yii::endProfile()]], que será explicado em mais detalhes na subseção [Perfil de Desempenho](#performance-profiling).
+- `error`: corresponde a mensagens logadas por [[Yii::error()]].
+- `warning`: corresponde a mensagens logadas por [[Yii::warning()]].
+- `info`: corresponde a mensagens logadas por [[Yii::info()]].
+- `trace`: corresponde a mensagens logadas por [[Yii::debug()]].
+- `profile`: corresponde a mensagens logadas por [[Yii::beginProfile()]] e [[Yii::endProfile()]], que será explicado em mais detalhes na subseção [Perfil de Desempenho](#performance-profiling).
 
-Se você não especificar a propriedade [[yii\log\Target::levels|levels]], significa que o alvo de log processará mensagens de *qualquer* nível.
+Se você não especificar a propriedade [[yii\log\Target::levels|levels]], significa que o alvo de log processará mensagens de _qualquer_ nível.
 
 A propriedade [[yii\log\Target::categories|categories]] é um array que consiste em categorias de mensagens ou padrões. Um destino de log irá processar apenas mensagens cuja categoria possa ser encontrada ou corresponder a um dos padrões do array. Um padrão de categoria é um prefixo de nome de categoria com um asterisco `*` na sua extremidade. Um nome de categoria corresponde a um padrão de categoria se ela iniciar com o mesmo prefixo do padrão. Por exemplo, `yii\db\Command::execute` e `yii\db\Command::query`
-são usados como nome de categoria para as mensagens de log gravadas na classe [[yii\db\Command]]. Ambos correspondem ao padrão `yii\db\*`. Se você não especificar a propriedade [[yii\log\Target::categories|categories]], significa que o destino de log processará mensagens de *qualquer* categoria.
+são usados como nome de categoria para as mensagens de log gravadas na classe [[yii\db\Command]]. Ambos correspondem ao padrão `yii\db\*`. Se você não especificar a propriedade [[yii\log\Target::categories|categories]], significa que o destino de log processará mensagens de _qualquer_ categoria.
 
 Além de criar uma whitelist de categorias através da propriedade [[yii\log\Target::categories|categories]], você também pode criar uma blacklist de categorias através da propriedade [[yii\log\Target::except|except]]. Se a categoria da mensagem for encontrada ou corresponder a um dos padrões desta propriedade, ela não será processada pelo destino de log.
 
@@ -126,8 +122,7 @@ A próxima configuração de destino de log especifica que o destino deve proces
 ]
 ```
 
-> Observação: Quando uma exceção HTTP  é capturada pelo [error handler](runtime-handling-errors.md), uma mensagem de erro será logada com o nome da categoria no formato de `yii\web\HttpException:ErrorCode`. Por exemplo, o [[yii\web\NotFoundHttpException]] causará uma mensagem de erro da categoria `yii\web\HttpException:404`.
-
+> Observação: Quando uma exceção HTTP é capturada pelo [error handler](runtime-handling-errors.md), uma mensagem de erro será logada com o nome da categoria no formato de `yii\web\HttpException:ErrorCode`. Por exemplo, o [[yii\web\NotFoundHttpException]] causará uma mensagem de erro da categoria `yii\web\HttpException:404`.
 
 ### Formatando Mensagem <span id="message-formatting"></span>
 
@@ -168,7 +163,6 @@ Além de prefixos de mensagens, destinos de mensagens também anexa algumas info
 
 Você pode configurar `logVars` para ser um array vazio para desativar totalmente a inclusão de informações de contexto. Ou se você quiser implementar sua própria maneira de fornecer informações de contexto, você pode sobrescrever o método [[yii\log\Target::getContextMessage()]].
 
-
 ### Nível de Rastreio de Mensagem <span id="trace-level"></span>
 
 Durante o desenvolvimento, é desejável definir de onde cada mensagem de log virá. Isto pode ser conseguido por meio da configuração da propriedade [[yii\log\Dispatcher::traceLevel|traceLevel]] do componente `log` como a seguir:
@@ -189,11 +183,9 @@ A configuração da aplicação acima define o [[yii\log\Dispatcher::traceLevel|
 
 > Observação: Obter informação do call stack não é trivial. Portanto, você deverá usar somente este recurso durante o desenvolvimento ou durante o debug da aplicação.
 
-
 ### Libertação e Exportação de Mensagens <span id="flushing-exporting"></span>
 
 Como já mencionado, mensagens de log são mantidas em um array através do [[yii\log\Logger|objeto logger]]. Para limitar o consumo de memória por este array, o objeto logger irá liberar as mensagens gravadas para os [destinos de log](#log-targets) cada vez que o array acumula um certo número de mensagens de log. Você pode personalizar este número configurando a propriedade [[yii\log\Dispatcher::flushInterval|flushInterval]] do componente `log`:
-
 
 ```php
 return [
@@ -218,7 +210,7 @@ Quando o [[yii\log\Logger|logger object]] libera mensagens de log para os [alvos
 ]
 ```
 
-Devido a configuração de nível, liberação e exportação, por padrão quando você chama `Yii::debug()` ou qualquer outro método de log, você NÃO verá a mensagem de log imediatamente no destino. Isto poderia ser um problema para algumas aplicações console de longa execução. Para fazer cada mensagem de log aparecer imediatamente no destino, você deve configurar ambos [[yii\log\Dispatcher::flushInterval|flushInterval]] e [[yii\log\Target::exportInterval|exportInterval]] para  1, como mostrado a seguir:
+Devido a configuração de nível, liberação e exportação, por padrão quando você chama `Yii::debug()` ou qualquer outro método de log, você NÃO verá a mensagem de log imediatamente no destino. Isto poderia ser um problema para algumas aplicações console de longa execução. Para fazer cada mensagem de log aparecer imediatamente no destino, você deve configurar ambos [[yii\log\Dispatcher::flushInterval|flushInterval]] e [[yii\log\Target::exportInterval|exportInterval]] para 1, como mostrado a seguir:
 
 ```php
 return [
@@ -238,7 +230,6 @@ return [
 ```
 
 > Observação: A frequente liberação e exportação de mensagens irá degradar o desempenho da sua aplicação.
-
 
 ### Alternando Destinos de Log <span id="toggling-log-targets"></span>
 
@@ -268,12 +259,10 @@ return [
 ];
 ```
 
-
 ### Criando Novos Destinos <span id="new-targets"></span>
 
 Criar uma nova classe de destino de log é muito simples. Você primeiramente precisa implementar o método [[yii\log\Target::export()]] enviando o conteúdo do array [[yii\log\Target::messages]] para o meio designado. Você pode chamar o método
 [[yii\log\Target::formatMessage()]] para formatar cada mensagem. Para mais detalhes, você pode consultar qualquer uma das classes de destino de log incluído na versão Yii.
-
 
 ## Perfil de Desempenho<span id="performance-profiling"></span>
 
@@ -307,4 +296,4 @@ onde `myBenchmark` representa um token único de identificação de um bloco de 
 
 Se você esquecer `\Yii::endProfile('block1')` ou trocar a ordem de `\Yii::endProfile('block1')` e `\Yii::endProfile('block2')`, o perfil de desempenho não funcionará.
 
-Para cada bloco de código iniciado com  `beginProfile`, uma mensagem de log com o nível `profile` é registrada. Você pode configurar um [destino de log](#log-targets) para coletar tais mensagens e exportá-las. O [Yii debugger](tool-debugger.md) implementa um painel de perfil de desempenho mostrando os seus resultados.
+Para cada bloco de código iniciado com `beginProfile`, uma mensagem de log com o nível `profile` é registrada. Você pode configurar um [destino de log](#log-targets) para coletar tais mensagens e exportá-las. O [Yii debugger](tool-debugger.md) implementa um painel de perfil de desempenho mostrando os seus resultados.

@@ -1,15 +1,14 @@
-Console applications
-====================
+# Console applications
 
 Besides, the rich features for building web applications, Yii also has full-featured support for console applications
 which are mainly used to create background and maintenance tasks that need to be performed for a website.
 
 The structure of console applications is very similar to a Yii web application. It consists of one
-or more [[yii\console\Controller]] classes, which are often referred to as *commands* in the console environment.
+or more [[yii\console\Controller]] classes, which are often referred to as _commands_ in the console environment.
 Each controller can also have one or more actions, just like web controllers.
 
 Both project templates already have a console application with them.
-You can run it by calling the `yii` script, which is located in the base directory of the repository. 
+You can run it by calling the `yii` script, which is located in the base directory of the repository.
 This will give you a list of available commands when you run it without any further parameters:
 
 ![Running ./yii command for help output](images/tutorial-console-help.png)
@@ -29,9 +28,7 @@ As you can see in the screenshot, Yii has already defined a set of commands that
   Database migrations are described in more detail in the [Database Migration Section](db-migrations.md).
 - [[yii\console\controllers\ServeController|ServeController]] - Allows you run PHP built-in web server.
 
-
-Usage <span id="usage"></span>
------
+## Usage <span id="usage"></span>
 
 You execute a console controller action using the following syntax:
 
@@ -55,9 +52,7 @@ yii migrate/up 5 --migrationTable=migrations
 > Note: When using `*` in console, don't forget to quote it as `"*"` in order to avoid executing it as a shell
 > glob that will be replaced by all file names of the current directory.
 
-
-The entry script <span id="entry-script"></span>
-----------------
+## The entry script <span id="entry-script"></span>
 
 The console application entry script is equivalent to the `index.php` bootstrap file used for the web application.
 The console entry script is typically called `yii`, and located in your application's root directory.
@@ -87,9 +82,7 @@ This script will be created as part of your application; you're free to edit it 
 not want to see a stack trace on error, and/or if you want to improve the overall performance. In both basic and advanced application
 templates, the console application entry script has debugging enabled by default to provide a more developer-friendly environment.
 
-
-Configuration <span id="configuration"></span>
--------------
+## Configuration <span id="configuration"></span>
 
 As can be seen in the code above, the console application uses its own configuration file, named `console.php`. In this file
 you should configure various [application components](structure-application-components.md) and properties for the console application in particular.
@@ -103,17 +96,15 @@ You can see an example of this in the advanced project template.
 > upgrade your test databases, which are configured in each individual test suite. To change the configuration
 > dynamically, simply specify a custom application configuration
 > file via the `appconfig` option when executing the command:
-> 
+>
 > ```
 > yii <route> --appconfig=path/to/config.php ...
 > ```
 
+## Console command completion <span id="console-command-completion"></span>
 
-Console command completion <span id="console-command-completion"></span>
----------------
-
-Auto-completion of command arguments is a useful thing when working with the shell. 
-Since version 2.0.11, the `./yii` command provides auto-completion for the Bash and ZSH out of the box. 
+Auto-completion of command arguments is a useful thing when working with the shell.
+Since version 2.0.11, the `./yii` command provides auto-completion for the Bash and ZSH out of the box.
 
 ### Bash completion
 
@@ -156,15 +147,14 @@ Then reload your shell
 exec $SHELL -l
 ```
 
-Creating your own console commands <span id="create-command"></span>
-----------------------------------
+## Creating your own console commands <span id="create-command"></span>
 
 ### Console Controller and Action
 
 A console command is defined as a controller class extending from [[yii\console\Controller]]. In the controller class,
 you define one or more actions that correspond to sub-commands of the controller. Within each action, you write code that implements the appropriate tasks for that particular sub-command.
 
-When running a command, you need to specify the route to the  controller action. For example,
+When running a command, you need to specify the route to the controller action. For example,
 the route `migrate/create` invokes the sub-command that corresponds to the
 [[yii\console\controllers\MigrateController::actionCreate()|MigrateController::actionCreate()]] action method.
 If a route offered during execution does not contain an action ID, the default action will be executed (as with a web controller).
@@ -194,17 +184,17 @@ use yii\console\Controller;
 class HelloController extends Controller
 {
     public $message;
-    
+
     public function options($actionID)
     {
         return ['message'];
     }
-    
+
     public function optionAliases()
     {
         return ['m' => 'message'];
     }
-    
+
     public function actionIndex()
     {
         echo $this->message . "\n";
@@ -245,7 +235,6 @@ class ExampleController extends \yii\console\Controller
     public function actionAdd(array $name) { ... }
 }
 ```
-
 
 ### Exit Code
 

@@ -1,18 +1,16 @@
-Response Formatting
-===================
+# Response Formatting
 
 When handling a RESTful API request, an application usually takes the following steps that are related
 with response formatting:
 
 1. Determine various factors that may affect the response format, such as media type, language, version, etc.
-  This process is also known as [content negotiation](https://en.wikipedia.org/wiki/Content_negotiation).
+   This process is also known as [content negotiation](https://en.wikipedia.org/wiki/Content_negotiation).
 2. Convert resource objects into arrays, as described in the [Resources](rest-resources.md) section.
-  This is done by [[yii\rest\Serializer]].
+   This is done by [[yii\rest\Serializer]].
 3. Convert arrays into a string in the format as determined by the content negotiation step. This is
-  done by [[yii\web\ResponseFormatterInterface|response formatters]] registered with
-  the [[yii\web\Response::formatters|formatters]] property of the
-  `response` [application component](structure-application-components.md).
-
+   done by [[yii\web\ResponseFormatterInterface|response formatters]] registered with
+   the [[yii\web\Response::formatters|formatters]] property of the
+   `response` [application component](structure-application-components.md).
 
 ## Content Negotiation <span id="content-negotiation"></span>
 
@@ -80,7 +78,6 @@ public function behaviors()
 
 The keys of the `formats` property are the supported MIME types, while the values are the corresponding
 response format names which must be supported in [[yii\web\Response::formatters]].
-
 
 ## Data Serializing <span id="data-serializing"></span>
 

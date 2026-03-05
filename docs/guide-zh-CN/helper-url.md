@@ -1,8 +1,6 @@
-Url 助手类（Url Helper）
-=====================
+# Url 助手类（Url Helper）
 
 Url 帮助类提供一系列的静态方法来帮助管理 URL。
-
 
 ## 获得通用 URL（Getting Common URLs） <span id="getting-common-urls"></span>
 
@@ -20,7 +18,7 @@ $httpsAbsoluteHomeUrl = Url::home('https');
 
 如下代码可以获得当前请求的 base URL：
 
-  ```php
+```php
 $relativeBaseUrl = Url::base();
 $absoluteBaseUrl = Url::base(true);
 $httpsAbsoluteBaseUrl = Url::base('https');
@@ -28,10 +26,9 @@ $httpsAbsoluteBaseUrl = Url::base('https');
 
 这个方法的调用方式和 `Url::home()` 的完全一样。
 
-
 ## 创建 URLs（Creating URLs） <span id="creating-urls"></span>
 
-为了创建一个给定路由的 URL 地址，请使用 `Url::toRoute()`方法。 这个方法使用 [[\yii\web\UrlManager]] 
+为了创建一个给定路由的 URL 地址，请使用 `Url::toRoute()`方法。 这个方法使用 [[\yii\web\UrlManager]]
 来创建一个 URL ：
 
 ```php
@@ -52,7 +49,7 @@ $url = Url::toRoute(['product/view', 'id' => 42]);
 // generates: /index.php?r=site/index&param1=value1#name
 ['site/index', 'param1' => 'value1', '#' => 'name']
 ```
-  
+
 一个路由既可能是绝对的又可能是相对的。一个绝对的路由以前导斜杠开头（如： `/site/index`），
 而一个相对的路由则没有（比如： `site/index` 或者 `index`）。一个相对的路由将会按照如下规则转换为绝对路由：
 
@@ -146,14 +143,13 @@ echo Url::current(['src' => null]);
 echo Url::current(['id' => 100]);
 ```
 
-
 ## 记住 URLs（Remember URLs） <span id="remember-urls"></span>
 
 有时，你需要记住一个 URL 并在后续的请求处理中使用它。
 你可以用以下方式达到这个目的：
-  
+
 ```php
-// 记住当前 URL 
+// 记住当前 URL
 Url::remember();
 
 // 记住指定的 URL。参数格式请参阅 Url::to()。
@@ -169,11 +165,11 @@ Url::remember(['product/view', 'id' => 42], 'product');
 $url = Url::previous();
 $productUrl = Url::previous('product');
 ```
-                        
+
 ## 检查相对 URLs（Checking Relative URLs） <span id="checking-relative-urls"></span>
 
 你可以用如下代码检测一个 URL 是否是相对的（比如，包含主机信息部分）。
-                              
+
 ```php
 $isRelative = Url::isRelative('test/it');
 ```

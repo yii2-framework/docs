@@ -1,13 +1,12 @@
-Components
-==========
+# Components
 
 Components are the main building blocks of Yii applications. Components are instances of [[yii\base\Component]],
 or an extended class. The three main features that components provide to other classes are:
 
-* [Properties](concept-properties.md)
-* [Events](concept-events.md)
-* [Behaviors](concept-behaviors.md)
-  
+- [Properties](concept-properties.md)
+- [Events](concept-events.md)
+- [Behaviors](concept-behaviors.md)
+
 Separately and combined, these features make Yii classes much more customizable and easier to use. For example,
 the included [[yii\jui\DatePicker|date picker widget]], a user interface component, can be used in a [view](structure-views.md)
 to generate an interactive date picker:
@@ -35,10 +34,10 @@ but with added support for [properties](concept-properties.md).
 When extending your class from [[yii\base\Component]] or [[yii\base\BaseObject]], it is recommended that you follow
 these conventions:
 
-- If you override the constructor, specify a `$config` parameter as the constructor's *last* parameter, and then pass this parameter
+- If you override the constructor, specify a `$config` parameter as the constructor's _last_ parameter, and then pass this parameter
   to the parent constructor.
-- Always call the parent constructor *at the end* of your overriding constructor.
-- If you override the [[yii\base\BaseObject::init()]] method, make sure you call the parent implementation of `init()` *at the beginning* of your `init()` method.
+- Always call the parent constructor _at the end_ of your overriding constructor.
+- If you override the [[yii\base\BaseObject::init()]] method, make sure you call the parent implementation of `init()` _at the beginning_ of your `init()` method.
 
 For example:
 
@@ -84,7 +83,6 @@ $component = \Yii::createObject([
 
 > Info: While the approach of calling [[Yii::createObject()]] looks more complicated, it is more powerful because it is
 > implemented on top of a [dependency injection container](concept-di-container.md).
-  
 
 The [[yii\base\BaseObject]] class enforces the following object lifecycle:
 

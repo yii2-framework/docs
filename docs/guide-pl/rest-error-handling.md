@@ -1,11 +1,10 @@
-Obsługa błędów
-==============
+# Obsługa błędów
 
-Podczas obsługi żądania RESTfulowego API, w przypadku wystąpienia błędu w zapytaniu użytkownika lub gdy stanie się coś nieprzewidywanego 
+Podczas obsługi żądania RESTfulowego API, w przypadku wystąpienia błędu w zapytaniu użytkownika lub gdy stanie się coś nieprzewidywanego
 z serwerem, możesz po prostu rzucić wyjątkiem, aby powiadomić użytkownika, że coś poszło nieprawidłowo.
-Jeśli możesz zidentyfikować przyczynę błędu (np. żądany zasób nie istnieje), powinieneś rozważyć rzucenie wyjątkiem razem z odpowiednim kodem statusu HTTP 
-(np. [[yii\web\NotFoundHttpException|NotFoundHttpException]] odpowiada statusowi o kodzie 404). 
-Yii wyśle odpowiedź razem z odpowiadającym jej kodem i treścią statusu HTTP. Yii dołączy również do samej odpowiedzi zserializowaną reprezentację 
+Jeśli możesz zidentyfikować przyczynę błędu (np. żądany zasób nie istnieje), powinieneś rozważyć rzucenie wyjątkiem razem z odpowiednim kodem statusu HTTP
+(np. [[yii\web\NotFoundHttpException|NotFoundHttpException]] odpowiada statusowi o kodzie 404).
+Yii wyśle odpowiedź razem z odpowiadającym jej kodem i treścią statusu HTTP. Yii dołączy również do samej odpowiedzi zserializowaną reprezentację
 wyjątku. Przykładowo:
 
 ```
@@ -25,25 +24,24 @@ Content-Type: application/json; charset=UTF-8
 
 Poniższa lista zawiera kody statusów HTTP, które są używane przez Yii REST framework:
 
-* `200`: OK. Wszystko działa w porządku.
-* `201`: Zasób został poprawnie stworzony w odpowiedzi na żądanie `POST`. Nagłówek `Location` zawiera URL kierujący do nowoutworzonego zasobu.
-* `204`: Żądanie zostało poprawnie przetworzone, ale odpowiedź nie zawiera treści (jak w przypadku żądania `DELETE`).
-* `304`: Zasób nie został zmodyfikowany. Można użyć wersji przetrzymywanej w pamięci podręcznej.
-* `400`: Nieprawidłowe żądanie. Może być spowodowane przez wiele czynników po stronie użytkownika, takich jak przekazanie nieprawidłowych danych JSON,
+- `200`: OK. Wszystko działa w porządku.
+- `201`: Zasób został poprawnie stworzony w odpowiedzi na żądanie `POST`. Nagłówek `Location` zawiera URL kierujący do nowoutworzonego zasobu.
+- `204`: Żądanie zostało poprawnie przetworzone, ale odpowiedź nie zawiera treści (jak w przypadku żądania `DELETE`).
+- `304`: Zasób nie został zmodyfikowany. Można użyć wersji przetrzymywanej w pamięci podręcznej.
+- `400`: Nieprawidłowe żądanie. Może być spowodowane przez wiele czynników po stronie użytkownika, takich jak przekazanie nieprawidłowych danych JSON,
   nieprawidłowych parametrów akcji, itp.
-* `401`: Nieudana autentykacja.
-* `403`: Autoryzowany użytkownik nie ma uprawnień do danego punktu końcowego API.
-* `404`: Żądany zasób nie istnieje.
-* `405`: Niedozwolona metoda. Sprawdź nagłówek `Allow`, aby poznać dozwolone metody HTTP.
-* `415`: Niewspierany typ mediów. Żądany typ zawartości lub numer wersji jest nieprawidłowy.
-* `422`: Nieudana walidacja danych (dla przykładu w odpowiedzi na żądanie `POST`). Sprawdź treść odpowiedzi, aby poznać szczegóły błędu.
-* `429`: Zbyt wiele żądań. Żądanie zostało odrzucone z powodu osiagnięcia limitu użycia.
-* `500`: Wewnętrzny błąd serwera. To może być spowodowane wewnętrznymi błędami programu.
-
+- `401`: Nieudana autentykacja.
+- `403`: Autoryzowany użytkownik nie ma uprawnień do danego punktu końcowego API.
+- `404`: Żądany zasób nie istnieje.
+- `405`: Niedozwolona metoda. Sprawdź nagłówek `Allow`, aby poznać dozwolone metody HTTP.
+- `415`: Niewspierany typ mediów. Żądany typ zawartości lub numer wersji jest nieprawidłowy.
+- `422`: Nieudana walidacja danych (dla przykładu w odpowiedzi na żądanie `POST`). Sprawdź treść odpowiedzi, aby poznać szczegóły błędu.
+- `429`: Zbyt wiele żądań. Żądanie zostało odrzucone z powodu osiagnięcia limitu użycia.
+- `500`: Wewnętrzny błąd serwera. To może być spowodowane wewnętrznymi błędami programu.
 
 ## Modyfikowanie błędnej odpowiedzi <span id="customizing-error-response"></span>
 
-Czasem wymagane może być dostosowanie domyślnego formatu błędnej odpowiedzi. Dla przykładu, zamiast używać różnych statusów HTTP dla oznaczenia różnych błędów, 
+Czasem wymagane może być dostosowanie domyślnego formatu błędnej odpowiedzi. Dla przykładu, zamiast używać różnych statusów HTTP dla oznaczenia różnych błędów,
 można serwować zawsze status 200 i dodawać prawidłowy kod statusu HTTP jako część struktury JSON w odpowiedzi, jak pokazano to poniżej:
 
 ```

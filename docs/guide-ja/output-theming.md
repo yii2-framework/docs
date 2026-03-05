@@ -1,5 +1,4 @@
-テーマ
-======
+# テーマ
 
 テーマは、元のビュー・レンダリングのコードに触れる必要なしに、[ビュー](structure-views.md) のセットを別のセットに置き換えるための方法です。
 テーマを使うとアプリケーションのルック・アンド・フィールを体系的に変更することが出来ます。
@@ -34,7 +33,7 @@ return [
 ```
 
 > Info: テーマではパス・エイリアスがサポートされています。
-  ビューの置換を行う際に、パス・エイリアスは実際のファイル・パスまたは URL に変換されます。
+> ビューの置換を行う際に、パス・エイリアスは実際のファイル・パスまたは URL に変換されます。
 
 [[yii\base\View::theme]] プロパティを通じて [[yii\base\Theme]] オブジェクトにアクセスすることが出来ます。
 例えば、ビュー・ファイルの中では `$this` がビュー・オブジェクトを指すので、次のようなコードを書くことが出来ます。
@@ -56,7 +55,6 @@ $file = $theme->getPath('img/logo.gif');
 あるビューのパスが [[yii\base\Theme::pathMap|pathMap]] 配列のキーのどれかで始っていると、その一致している部分が対応する配列の値によって置き換えられます。
 上記の構成例を使う場合、`@app/views/site/about.php` は `@app/views` というキーに部分一致するため、`@app/themes/basic/site/about.php` に置き換えられることになります。
 
-
 ### モジュールにテーマを適用する <span id="theming-modules"></span>
 
 モジュールにテーマを適用するためには、[[yii\base\Theme::pathMap]] を次のように構成します。
@@ -70,7 +68,6 @@ $file = $theme->getPath('img/logo.gif');
 
 これによって、`@app/modules/blog/views/comment/index.php` に `@app/themes/basic/modules/blog/views/comment/index.php` というテーマを適用することが出来ます。
 
-
 ### ウィジェットにテーマを適用する <span id="theming-widgets"></span>
 
 ウィジェットにテーマを適用するためには、[[yii\base\Theme::pathMap]] を次のように構成します。
@@ -83,7 +80,6 @@ $file = $theme->getPath('img/logo.gif');
 ```
 
 これによって、`@app/widgets/currency/views/index.php` に `@app/themes/basic/widgets/currency/views/index.php` というテーマを適用することが出来ます。
-
 
 ## テーマの継承 <span id="theme-inheritance"></span>
 

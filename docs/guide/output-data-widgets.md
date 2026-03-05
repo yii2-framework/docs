@@ -1,14 +1,11 @@
-Data widgets
-============
+# Data widgets
 
 Yii provides a set of [widgets](structure-widgets.md) that can be used to display data.
 While the [DetailView](#detail-view) widget can be used to display data for a single record,
 [ListView](#list-view) and [GridView](#grid-view) can be used to display a list or table of data records
 providing features like pagination, sorting and filtering.
 
-
-DetailView <span id="detail-view"></span>
-----------
+## DetailView <span id="detail-view"></span>
 
 The [[yii\widgets\DetailView|DetailView]] widget displays the details of a single data [[yii\widgets\DetailView::$model|model]].
 
@@ -28,7 +25,7 @@ echo DetailView::widget([
         'description:html',                                // description attribute formatted as HTML
         [                                                  // the owner name of the model
             'label' => 'Owner',
-            'value' => $model->owner->name,            
+            'value' => $model->owner->name,
             'contentOptions' => ['class' => 'bg-red'],     // HTML attributes to customize value tag
             'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
         ],
@@ -59,8 +56,7 @@ echo DetailView::widget([
 ]);
 ```
 
-ListView <span id="list-view"></span>
---------
+## ListView <span id="list-view"></span>
 
 The [[yii\widgets\ListView|ListView]] widget is used to display data from a [data provider](output-data-providers.md).
 Each data model is rendered using the specified [[yii\widgets\ListView::$itemView|view file]].
@@ -87,7 +83,6 @@ echo ListView::widget([
 
 The `_post` view file could contain the following:
 
-
 ```php
 <?php
 use yii\helpers\Html;
@@ -96,7 +91,7 @@ use yii\helpers\HtmlPurifier;
 <div class="post">
     <h2><?= Html::encode($model->title) ?></h2>
 
-    <?= HtmlPurifier::process($model->text) ?>    
+    <?= HtmlPurifier::process($model->text) ?>
 </div>
 ```
 
@@ -123,9 +118,7 @@ echo ListView::widget([
 
 These are then also available as variables in the view.
 
-
-GridView <span id="grid-view"></span>
---------
+## GridView <span id="grid-view"></span>
 
 Data grid or [[yii\grid\GridView|GridView]] is one of the most powerful Yii widgets. It is extremely useful if you need to quickly build the admin
 section of the system. It takes data from a [data provider](output-data-providers.md) and renders each row using a set of [[yii\grid\GridView::columns|columns]]
@@ -153,7 +146,6 @@ echo GridView::widget([
 
 The above code first creates a data provider and then uses GridView to display every attribute in every row taken from
 the data provider. The displayed table is equipped with sorting and pagination functionality out of the box.
-
 
 ### Grid columns <span id="grid-columns"></span>
 
@@ -184,7 +176,6 @@ echo GridView::widget([
 
 Note that if the [[yii\grid\GridView::columns|columns]] part of the configuration isn't specified,
 Yii tries to show all possible columns of the data provider's model.
-
 
 ### Column classes <span id="column-classes"></span>
 
@@ -222,7 +213,6 @@ You may specify various container HTML options by passing arrays to:
 - [[yii\grid\Column::footerOptions|footerOptions]]
 - [[yii\grid\Column::filterOptions|filterOptions]]
 - [[yii\grid\Column::contentOptions|contentOptions]]
-
 
 #### Data column <span id="data-column"></span>
 
@@ -267,7 +257,7 @@ Use [[yii\grid\DataColumn::filter|filter]] and [[yii\grid\DataColumn::filterInpu
 control HTML for the filter input.
 
 By default, column headers are rendered by [[yii\data\Sort::link]]. It could be adjusted using [[yii\grid\Column::header]].
-To change header text you should set [[yii\grid\DataColumn::$label]] like in the example above. 
+To change header text you should set [[yii\grid\DataColumn::$label]] like in the example above.
 By default the label will be populated from data model. For more details see [[yii\grid\DataColumn::getHeaderCellLabel]].
 
 #### Action column <span id="action-column"></span>
@@ -289,7 +279,7 @@ Available properties you can configure are:
 - [[yii\grid\ActionColumn::controller|controller]] is the ID of the controller that should handle the actions. If not set, it will use the currently active
   controller.
 - [[yii\grid\ActionColumn::template|template]] defines the template used for composing each cell in the action column. Tokens enclosed within curly brackets are
-  treated as controller action IDs (also called *button names* in the context of action column). They will be replaced
+  treated as controller action IDs (also called _button names_ in the context of action column). They will be replaced
   by the corresponding button rendering callbacks specified in [[yii\grid\ActionColumn::$buttons|buttons]]. For example, the token `{view}` will be
   replaced by the result of the callback `buttons['view']`. If a callback cannot be found, the token will be replaced
   with an empty string. The default tokens are `{view} {update} {delete}`.
@@ -350,7 +340,7 @@ Users may click on the checkboxes to select rows of the grid. The selected rows 
 JavaScript code:
 
 ```javascript
-var keys = $('#grid').yiiGridView('getSelectedRows');
+var keys = $("#grid").yiiGridView("getSelectedRows");
 // keys is an array consisting of the keys associated with the selected rows
 ```
 
@@ -368,7 +358,6 @@ echo GridView::widget([
         // ...
 ```
 
-
 ### Sorting data <span id="sorting-data"></span>
 
 > Note: This section is under development.
@@ -381,7 +370,7 @@ For filtering data, the GridView needs a [model](structure-models.md) that repre
 usually taken from the filter fields in the GridView table.
 A common practice when using [active records](db-active-record.md) is to create a search Model class
 that provides needed functionality (it can be generated for you by [Gii](start-gii.md)). This class defines the validation
-rules to show filter controls on the GridView table and to provide a `search()` method that will return the data 
+rules to show filter controls on the GridView table and to provide a `search()` method that will return the data
 provider with an adjusted query that processes the search criteria.
 
 To add the search capability for the `Post` model, we can create a `PostSearch` model like the following example:
@@ -398,7 +387,7 @@ use yii\data\ActiveDataProvider;
 class PostSearch extends Post
 {
     public function rules()
-    { 
+    {
         // only fields in rules() are searchable
         return [
             [['id'], 'integer'],
@@ -506,7 +495,7 @@ and include it in `index.php` view like so:
 ```
 
 > Note: if you use Gii to generate CRUD code, the separate filter form (`_search.php`) is generated by default,
-but is commented in `index.php` view. Uncomment it and it's ready to use!
+> but is commented in `index.php` view. Uncomment it and it's ready to use!
 
 Separate filter form is useful when you need to filter by fields, that are not displayed in GridView
 or for special filtering conditions, like date range. For filtering by date range we can add non DB attributes
@@ -701,8 +690,7 @@ All attributes will be working out of the box. Note that this approach has sever
 - you don't need to specify different sorting and filtering conditions. Everything works out of the box;
 - it can be much faster because of the data size, count of sql queries performed (for each relation you will not need any additional query);
 - since this is just a simple mapping UI on the sql view it lacks some domain logic that is in your entities, so if you have some methods like `isActive`,
-`isDeleted` or others that will influence the UI, you will need to duplicate them in this class too.
-
+  `isDeleted` or others that will influence the UI, you will need to duplicate them in this class too.
 
 ### Multiple GridViews on one page <span id="multiple-gridviews"></span>
 
@@ -776,7 +764,6 @@ yii gii/crud --controllerClass="backend\\controllers\PostController" \
 Which generates a [[yii\widgets\Pjax|Pjax]] widget wrapping the
 [[yii\grid\GridView|GridView]] or [[yii\widgets\ListView|ListView]] widgets.
 
-Further reading
----------------
+## Further reading
 
 - [Rendering Data in Yii 2 with GridView and ListView](https://www.sitepoint.com/rendering-data-in-yii-2-with-gridview-and-listview/) by Arno Slatius.

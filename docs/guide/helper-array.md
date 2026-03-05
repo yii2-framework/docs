@@ -1,9 +1,7 @@
-ArrayHelper
-===========
+# ArrayHelper
 
 Additionally to the [rich set of PHP array functions](https://www.php.net/manual/en/book.array.php), the Yii array helper provides
 extra static methods allowing you to deal with arrays more efficiently.
-
 
 ## Getting Values <span id="getting-values"></span>
 
@@ -53,7 +51,6 @@ Third optional argument is default value which is `null` if not specified. Could
 $username = ArrayHelper::getValue($comment, 'user.username', 'Unknown');
 ```
 
-
 ## Setting values <span id="setting-values"></span>
 
 ```php
@@ -101,7 +98,6 @@ The result will be
 ]
 ```
 
-
 ## Take a value from an array <span id="removing-values"></span>
 
 In case you want to get a value and then immediately remove it from an array you can use `remove` method:
@@ -113,7 +109,6 @@ $type = ArrayHelper::remove($array, 'type');
 
 After executing the code `$array` will contain `['options' => [1, 2]]` and `$type` will be `A`. Note that unlike
 `getValue` method, `remove` supports simple key names only.
-
 
 ## Checking Existence of Keys <span id="checking-existence-of-keys"></span>
 
@@ -156,7 +151,6 @@ $result = ArrayHelper::getColumn($array, function ($element) {
     return $element['id'];
 });
 ```
-
 
 ## Re-indexing Arrays <span id="reindexing-arrays"></span>
 
@@ -283,7 +277,6 @@ $result = ArrayHelper::map($array, 'id', 'name', 'class');
 // ]
 ```
 
-
 ## Multidimensional Sorting <span id="multidimensional-sorting"></span>
 
 `multisort` method helps to sort an array of objects or nested arrays by one or several keys. For example,
@@ -324,7 +317,6 @@ sort direction.
 Last argument is PHP sort flag that could take the same values as the ones passed to
 PHP [sort()](https://www.php.net/manual/en/function.sort.php).
 
-
 ## Detecting Array Types <span id="detecting-array-types"></span>
 
 It is handy to know whether an array is indexed or an associative. Here's an example:
@@ -339,7 +331,6 @@ $associative = ['framework' => 'Yii', 'version' => '2.0'];
 echo ArrayHelper::isAssociative($associative);
 ```
 
-
 ## HTML Encoding and Decoding Values <span id="html-encoding-values"></span>
 
 In order to encode or decode special characters in an array of strings into HTML entities you can use the following:
@@ -351,7 +342,6 @@ $decoded = ArrayHelper::htmlDecode($data);
 
 Only values will be encoded by default. By passing second argument as `false` you can encode array's keys as well.
 Encoding will use application charset and could be changed via third argument.
-
 
 ## Merging Arrays <span id="merging-arrays"></span>
 
@@ -419,7 +409,6 @@ The result will be:
 ]
 ```
 
-
 ## Converting Objects to Arrays <span id="converting-objects-to-arrays"></span>
 
 Often you need to convert an object or an array of objects into an array. The most common case is converting active record
@@ -452,7 +441,6 @@ Each mapping array contains a set of mappings. Each mapping could be:
 
 The result of conversion above for single model will be:
 
-
 ```php
 [
     'id' => 123,
@@ -480,7 +468,7 @@ ArrayHelper::isIn('a', ['a']);
 // true
 ArrayHelper::isIn('a', new ArrayObject(['a']));
 
-// true 
+// true
 ArrayHelper::isSubset(new ArrayObject(['a', 'c']), new ArrayObject(['a', 'b', 'c']));
 ```
 

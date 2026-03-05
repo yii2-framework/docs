@@ -1,5 +1,4 @@
-コントローラ
-============
+# コントローラ
 
 リソース・クラスを作成して、リソース・データをどのようにフォーマットすべきかを指定したら、
 次は、RESTful API を通じてエンド・ユーザにリソースを公開するコントローラ・アクションを作成します。
@@ -14,16 +13,15 @@ Yii は、RESTful アクションを作成する仕事を簡単にするため�
 [[yii\rest\Controller]] と [[yii\rest\ActiveController]] は、ともに、下記の機能を提供します。
 これらのいくつかについては、後続のセクションで詳細に説明します。
 
-* HTTP メソッドのバリデーション
-* [コンテント・ネゴシエーションとデータの書式設定](rest-response-formatting.md)
-* [認証](rest-authentication.md)
-* [レート制限](rest-rate-limiting.md)
+- HTTP メソッドのバリデーション
+- [コンテント・ネゴシエーションとデータの書式設定](rest-response-formatting.md)
+- [認証](rest-authentication.md)
+- [レート制限](rest-rate-limiting.md)
 
 [[yii\rest\ActiveController]] は次の機能を追加で提供します。
 
-* 普通は必要とされる一連のアクション: `index`、`view`、`create`、`update`、`delete`、`options`
-* リクエストされたアクションとリソースに対するユーザへの権限付与
-
+- 普通は必要とされる一連のアクション: `index`、`view`、`create`、`update`、`delete`、`options`
+- リクエストされたアクションとリソースに対するユーザへの権限付与
 
 ## コントローラ・クラスを作成する <span id="creating-controller"></span>
 
@@ -44,18 +42,17 @@ public function actionView($id)
 }
 ```
 
-
 ## フィルタ <span id="filters"></span>
 
 [[yii\rest\Controller]] によって提供される RESTful API 機能のほとんどは [フィルタ](structure-filters.md) の形で実装されています。
 具体的に言うと、次のフィルタがリストされた順に従って実行されます。
 
-* [[yii\filters\ContentNegotiator|contentNegotiator]]: コンテント・ネゴシエーションをサポート。
+- [[yii\filters\ContentNegotiator|contentNegotiator]]: コンテント・ネゴシエーションをサポート。
   [レスポンス形式の設定](rest-response-formatting.md) のセクションで説明します。
-* [[yii\filters\VerbFilter|verbFilter]]: HTTP メソッドのバリデーションをサポート。
-* [[yii\filters\auth\AuthMethod|authenticator]]: ユーザ認証をサポート。
+- [[yii\filters\VerbFilter|verbFilter]]: HTTP メソッドのバリデーションをサポート。
+- [[yii\filters\auth\AuthMethod|authenticator]]: ユーザ認証をサポート。
   [認証](rest-authentication.md) のセクションで説明します。
-* [[yii\filters\RateLimiter|rateLimiter]]: レート制限をサポート。
+- [[yii\filters\RateLimiter|rateLimiter]]: レート制限をサポート。
   [レート制限](rest-rate-limiting.md) のセクションで説明します。
 
 これらの名前付きのフィルタは、[[yii\rest\Controller::behaviors()|behaviors()]] メソッドで宣言されます。
@@ -95,12 +92,12 @@ public function behaviors()
     // 認証フィルタを削除する
     $auth = $behaviors['authenticator'];
     unset($behaviors['authenticator']);
-    
+
     // CORS フィルタを追加する
     $behaviors['corsFilter'] = [
         'class' => \yii\filters\Cors::class,
     ];
-    
+
     // 認証フィルタを再度追加する
     $behaviors['authenticator'] = $auth;
     // CORS プリフライト・リクエスト (HTTP OPTIONS メソッド) の認証を回避する
@@ -110,24 +107,22 @@ public function behaviors()
 }
 ```
 
-
 ## `ActiveController` を拡張する <span id="extending-active-controller"></span>
 
 コントローラを [[yii\rest\ActiveController]] から拡張する場合は、このコントローラを通じて提供しようとしているリソース・クラスの名前を
 [[yii\rest\ActiveController::modelClass|modelClass]] プロパティにセットしなければなりません。
 リソース・クラスは [[yii\db\ActiveRecord]] から拡張しなければなりません。
 
-
 ### アクションをカスタマイズする <span id="customizing-actions"></span>
 
 デフォルトでは、[[yii\rest\ActiveController]] は次のアクションを提供します。
 
-* [[yii\rest\IndexAction|index]]: リソースをページごとにリストする。
-* [[yii\rest\ViewAction|view]]: 指定されたリソースの詳細を返す。
-* [[yii\rest\CreateAction|create]]: 新しいリソースを作成する。
-* [[yii\rest\UpdateAction|update]]: 既存のリソースを更新する。
-* [[yii\rest\DeleteAction|delete]]: 指定されたりソースを削除する。
-* [[yii\rest\OptionsAction|options]]: サポートされている HTTP メソッドを返す。
+- [[yii\rest\IndexAction|index]]: リソースをページごとにリストする。
+- [[yii\rest\ViewAction|view]]: 指定されたリソースの詳細を返す。
+- [[yii\rest\CreateAction|create]]: 新しいリソースを作成する。
+- [[yii\rest\UpdateAction|update]]: 既存のリソースを更新する。
+- [[yii\rest\DeleteAction|delete]]: 指定されたりソースを削除する。
+- [[yii\rest\OptionsAction|options]]: サポートされている HTTP メソッドを返す。
 
 これらのアクションは全て [[yii\rest\ActiveController::actions()|actions()]] メソッドによって宣言されます。
 `actions()` メソッドをオーバーライドすることによって、これらのアクションを構成したり、そのいくつかを無効化したりすることが出来ます。例えば、
@@ -153,7 +148,6 @@ public function prepareDataProvider()
 ```
 
 どういう構成オプションが利用できるかを学ぶためには、個々のアクション・クラスのリファレンスを参照してください。
-
 
 ### アクセス・チェックを実行する <span id="performing-access-check"></span>
 

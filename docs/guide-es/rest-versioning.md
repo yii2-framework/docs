@@ -1,15 +1,14 @@
-Versionado
-==========
+# Versionado
 
-Una buena API ha de ser *versionada*: los cambios y las nuevas características son implementadas en las nuevas versiones del API, en vez de estar continuamente modificando sólo una versión. Al contrario que en las aplicaciones Web, en las cuales tienes total control del código de ambas partes lado del cliente y lado del servidor,
+Una buena API ha de ser _versionada_: los cambios y las nuevas características son implementadas en las nuevas versiones del API, en vez de estar continuamente modificando sólo una versión. Al contrario que en las aplicaciones Web, en las cuales tienes total control del código de ambas partes lado del cliente y lado del servidor,
 las APIs están destinadas a ser usadas por los clientes fuera de tu control. Por esta razón, compatibilidad hacia atrás (BC Backward compatibility)
 de las APIs ha de ser mantenida siempre que sea posible. Si es necesario un cambio que puede romper la BC, debes de introducirla en la nueva versión del API, e incrementar el número de versión. Los clientes que la usan pueden continuar usando la antigua versión de trabajo del API; los nuevos y actualizados clientes pueden obtener la nueva funcionalidad de la nueva versión del API.
 
 > Tip: referirse a [Semántica del versionado](https://semver.org/)
-para más información en el diseño del número de versión del API.
+> para más información en el diseño del número de versión del API.
 
-Una manera común de implementar el versionado de la API es embeber el número de versión en las URLs de la  API.
-Por ejemplo, `https://example.com/v1/users` se refiere al punto final `/users` de la versión 1 de la API. 
+Una manera común de implementar el versionado de la API es embeber el número de versión en las URLs de la API.
+Por ejemplo, `https://example.com/v1/users` se refiere al punto final `/users` de la versión 1 de la API.
 
 Otro método de versionado de la API,
 la cual está ganando predominancia recientemente, es poner el número de versión en las cabeceras de la petición HTTP. Esto se suele hacer típicamente a través la cabecera `Accept`:
@@ -24,9 +23,9 @@ Accept: application/vnd.company.myapp-v1+json
 Ambos métodos tienen sus pros y sus contras, y hay gran cantidad de debates sobre cada uno. Debajo puedes ver una estrategia
 práctica para el versionado de la API que es una mezcla de estos dos métodos:
 
-* Pon cada versión superior de la implementación de la API en un módulo separado cuyo ID es el número de la versión mayor (p.e. `v1`, `v2`).
+- Pon cada versión superior de la implementación de la API en un módulo separado cuyo ID es el número de la versión mayor (p.e. `v1`, `v2`).
   Naturalmente, las URLs de la API contendrán números de versión mayores.
-* Dentro de cada versión mayor (y por lo tanto, dentro del correspondiente módulo), usa la cabecera de HTTP `Accept`
+- Dentro de cada versión mayor (y por lo tanto, dentro del correspondiente módulo), usa la cabecera de HTTP `Accept`
   para determinar el número de la versión menor y escribe código condicional para responder a la menor versión como corresponde.
 
 Para cada módulo sirviendo una versión mayor, el módulo debe incluir las clases de recursos y y controladores

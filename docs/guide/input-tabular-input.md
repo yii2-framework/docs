@@ -1,5 +1,4 @@
-Collecting Tabular Input
-========================
+# Collecting Tabular Input
 
 Sometimes you need to handle multiple models of the same kind in a single form. For example, multiple settings, where
 each setting is stored as a name-value pair and is represented by a `Setting` [active record](db-active-record.md) model.
@@ -10,6 +9,7 @@ In contrast to this, handling different models of different kind, is handled in 
 The following shows how to implement tabular input with Yii.
 
 There are three different situations to cover, which have to be handled slightly different:
+
 - Updating a fixed set of records from the database
 - Creating a dynamic set of new records
 - Updating, creating and deleting of records on one page

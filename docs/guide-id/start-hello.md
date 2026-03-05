@@ -1,12 +1,11 @@
-Katakan Hello
-============
+# Katakan Hello
 
 Bagian ini menjelaskan cara membuat halaman "Hello" baru dalam aplikasi Anda.
 Untuk mencapai tujuan ini, Anda akan membuat [action](structure-controllers.md#creating-actions) dan
 sebuah [view](structure-views.md):
 
-* Aplikasi ini akan mengirimkan permintaan halaman ke `action`.
-* Dan `action` pada gilirannya akan membuat tampilan yang menunjukkan kata "Hello" kepada pengguna akhir.
+- Aplikasi ini akan mengirimkan permintaan halaman ke `action`.
+- Dan `action` pada gilirannya akan membuat tampilan yang menunjukkan kata "Hello" kepada pengguna akhir.
 
 Melalui tutorial ini, Anda akan belajar tiga hal:
 
@@ -14,17 +13,15 @@ Melalui tutorial ini, Anda akan belajar tiga hal:
 2. Cara membuat [view](structure-views.md) untuk menyusun konten respon, dan
 3. bagaimana aplikasi mengirimkan permintaan ke [action](structure-controllers.md#creating-actions).
 
-
-Membuat Action <span id="creating-action"></span>
----------------
+## Membuat Action <span id="creating-action"></span>
 
 Untuk tugas "Hello", Anda akan membuat [action](structure-controllers.md#creating-actions) `say` yang membaca
 parameter `message` dari request dan menampilkan pesan bahwa kembali ke pengguna. Jika request
 tidak memberikan parameter `message`, aksi akan menampilkan pesan "Hello".
 
 > Info: [Action](structure-controllers.md#creating-actions) adalah objek yang pengguna akhir dapat langsung merujuk ke
-  eksekusi. Action dikelompokkan berdasarkan [controllers](structure-controllers.md). Hasil eksekusi
-  action adalah respon yang pengguna akhir akan terima.
+>   eksekusi. Action dikelompokkan berdasarkan [controllers](structure-controllers.md). Hasil eksekusi
+>   action adalah respon yang pengguna akhir akan terima.
 
 Action harus dinyatakan di [controllers](structure-controllers.md). Untuk mempermudah, Anda mungkin
 mendeklarasikan action `say` di` SiteController` yang ada. kontroler ini didefinisikan
@@ -62,16 +59,14 @@ Metode action dalam contoh kita mengambil parameter `$message`, yang nilai defau
 dengan cara yang sama Anda menetapkan nilai default untuk fungsi atau metode apapun argumen di PHP). Ketika aplikasi
 menerima permintaan dan menentukan bahwa action `say` bertanggung jawab untuk penanganan request, aplikasi akan
 mengisi parameter ini dengan parameter bernama sama yang ditemukan dalam request. Dengan kata lain, jika permintaan mencakup
-a parameter `message` dengan nilai` "Goodbye" `, maka variabel `$message` dalam aksi akan ditugaskan nilai itu.
+a parameter `message` dengan nilai`"Goodbye"`, maka variabel `$message` dalam aksi akan ditugaskan nilai itu.
 
 Dalam metode action, [[yii\web\Controller::render()|render()]] dipanggil untuk membuat
 sebuah [view](structure-views.md) dari file bernama `say`. Parameter `message` juga diteruskan ke view
 sehingga dapat digunakan di sana. Hasil render dikembalikan dengan metode tindakan. Hasil yang akan diterima
 oleh aplikasi dan ditampilkan kepada pengguna akhir di browser (sebagai bagian dari halaman HTML yang lengkap).
 
-
-Membuat View <span id="creating-view"></span>
----------------
+## Membuat View <span id="creating-view"></span>
 
 [View](structure-views.md) adalah skrip yang Anda tulis untuk menghasilkan konten respon.
 Untuk "Hello" tugas, Anda akan membuat view `say` yang mencetak parameter `message` yang diterima dari metode aksi:
@@ -95,9 +90,7 @@ Tentu, Anda dapat menempatkan lebih banyak konten di view `say`. konten dapat te
 Nyatanya, view `say` hanyalah sebuah script PHP yang dijalankan oleh metode [[yii\web\Controller::render()|render()]].
 Isi dicetak oleh skrip view akan dikembalikan ke aplikasi sebagai hasil respon ini. Aplikasi ini pada gilirannya akan mengeluarkan hasil ini kepada pengguna akhir.
 
-
-Trying it Out <span id="trying-it-out"></span>
--------------
+## Trying it Out <span id="trying-it-out"></span>
 
 Setelah membuat action dan view, Anda dapat mengakses halaman baru dengan mengakses URL berikut:
 
@@ -113,8 +106,8 @@ Jika Anda menghilangkan parameter `message` dalam URL, Anda akan melihat tampila
 nilai default `"Hello"` akan digunakan sebagai gantinya.
 
 > Info: Halaman baru berbagi header dan footer yang sama dengan halaman lain karena metode [[yii\web\Controller::render()|render()]]
-  otomatis akan menanamkan hasil view `say` kedalam apa yang disebut [layout](structure-views.md#layouts) yang dalam hal ini
-  Kasus terletak di `views/layouts/main.php`.
+>   otomatis akan menanamkan hasil view `say` kedalam apa yang disebut [layout](structure-views.md#layouts) yang dalam hal ini
+>   Kasus terletak di `views/layouts/main.php`.
 
 Parameter `r` di URL di atas memerlukan penjelasan lebih lanjut. Ini adalah singkatan dari [route](runtime-routing.md), sebuah ID unik aplikasi
 yang mengacu pada action. format rute ini adalah `ControllerID/ActionID`. Ketika aplikasi menerima
@@ -125,14 +118,12 @@ akan diselesaikan dengan kontroler kelas `SiteController` dan action `say`. Seba
 metode `SiteController::actionSay()` akan dipanggil untuk menangani permintaan.
 
 > Info: Seperti action, kontroler juga memiliki ID yang unik mengidentifikasi mereka dalam sebuah aplikasi.
-  ID kontroler menggunakan aturan penamaan yang sama seperti ID tindakan. nama kelas controller yang berasal dari
-  kontroler ID dengan menghapus tanda hubung dari ID, memanfaatkan huruf pertama di setiap kata,
-  dan suffixing string yang dihasilkan dengan kata `Controller`. Misalnya, controller ID `post-comment` berkorespondensi
-  dengan nama kelas controller `PostCommentController`.
+>   ID kontroler menggunakan aturan penamaan yang sama seperti ID tindakan. nama kelas controller yang berasal dari
+>   kontroler ID dengan menghapus tanda hubung dari ID, memanfaatkan huruf pertama di setiap kata,
+>   dan suffixing string yang dihasilkan dengan kata `Controller`. Misalnya, controller ID `post-comment` berkorespondensi
+>   dengan nama kelas controller `PostCommentController`.
 
-
-Ringkasan <span id="summary"></span>
--------
+## Ringkasan <span id="summary"></span>
 
 Pada bagian ini, Anda telah menyentuh controller dan melihat bagian dari pola arsitektur MVC.
 Anda menciptakan sebuah action sebagai bagian dari controller untuk menangani permintaan khusus. Dan Anda juga menciptakan view

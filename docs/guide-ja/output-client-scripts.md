@@ -1,5 +1,4 @@
-クライアント・スクリプトを扱う
-==============================
+# クライアント・スクリプトを扱う
 
 今日のウェブ・アプリケーションでは、静的な HTML ページがレンダリングされてブラウザに送信されるだけでなく、
 JavaScript によって、既存の要素を操作したり、新しいコンテントを AJAX でロードしたりして、
@@ -82,7 +81,9 @@ $this->registerCss("body { background: #f00; }");
 
 ```html
 <style>
-body { background: #f00; }
+  body {
+    background: #f00;
+  }
 </style>
 ```
 
@@ -102,20 +103,19 @@ $this->registerCssFile("@web/css/themes/black-and-white.css", [
 
 上記のコードは `/css/themes/black-and-white.css` という CSS ファイルに対するリンクをページの `<head>` セクションに追加します。
 
-* 最初の引数が、登録される CSS ファイルを指定します。
+- 最初の引数が、登録される CSS ファイルを指定します。
   この例における `@web` in this example is an [アプリケーションのベース URL に対するエイリアス](concept-aliases.md#predefined-aliases) です。
-* 二番目の引数は、結果として出力される `<link>` タグの HTML 属性を指定するものです。
+- 二番目の引数は、結果として出力される `<link>` タグの HTML 属性を指定するものです。
   ただし、`depends` というオプションは特別な処理を受けます。これは、この CSS ファイルが依存するアセット・バンドルを指定するものです。
   この例の場合は、[[yii\bootstrap\BootstrapAsset|BootstrapAsset]] が依存するアセット・バンドルです。
   これは、この CSS ファイルが [[yii\bootstrap\BootstrapAsset|BootstrapAsset]] に属する CSS ファイルの*後に*追加されることを意味します。
-* 最後の引数はこの CSS ファイルを特定する ID を指定するものです。
+- 最後の引数はこの CSS ファイルを特定する ID を指定するものです。
   省略された場合は、CSS ファイルの URL が代りに ID として使用されます。
 
 外部 CSS ファイルを登録するのには、 [[yii\web\View::registerCssFile()|registerCssFile()]] を使わずに、
 [アセット・バンドル](structure-assets.md) を使うことが強く推奨されます。アセット・バンドルを使えば、複数の CSS ファイルを結合して圧縮すること
 (アクセスの多いウェブ・サイトではそうすることが望まれます) が可能になります。
 また、アプリケーションの全てのアセットの依存関係を一ヶ所で構成することが出来るため、より大きな柔軟性を得ることが出来ます。
-
 
 ## アセット・バンドルを登録する <span id="asset-bundles"></span>
 
@@ -131,7 +131,6 @@ $this->registerCssFile("@web/css/themes/black-and-white.css", [
 上記のコードでは、ビュー・ファイルのコンテキストにおいて、`AppAsset` バンドルが (`$this` で表される) 現在のビューに対して登録されています。
 ウィジェットの中からアセット・バンドルを登録するときは、ウィジェットの [[yii\base\Widget::$view|$view]]
 を代りに渡します (`$this->view`)。
-
 
 ## 動的な Javascript を生成する <span id="dynamic-js"></span>
 
@@ -167,7 +166,11 @@ $this->registerJs(
 例えば、
 
 ```javascript
-var yiiOptions = {"appName":"My Yii Application","baseUrl":"/basic/web","language":"en"};
+var yiiOptions = {
+  appName: "My Yii Application",
+  baseUrl: "/basic/web",
+  language: "en",
+};
 ```
 
 このようにすれば、あなたの Javascript コードで、これらの構成情報に `yiiOptions.baseUrl` や `yiiOptions.language` のようにしてアクセスすることが出来るようになります。.
@@ -203,7 +206,7 @@ JS
 ## `yii.js` スクリプト <span id="yii.js"></span>
 
 > Note: このセクションはまだ書かれていません。このセクションは、`yii.js` によって提供される以下の機能についての説明を含むはずのものです。
-> 
+>
 > - Yii JavaScript モジュール
 > - CSRF パラメータの処理
 > - `data-confirm` ハンドラ

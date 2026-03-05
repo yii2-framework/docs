@@ -1,5 +1,4 @@
-Styl kodowania widoków Yii 2
-============================
+# Styl kodowania widoków Yii 2
 
 Poniższy styl kodowania jest stosowany w kodzie frameworka Yii 2.x i oficjalnych rozszerzeniach. Nie zmuszamy jednak nikogo do stosowania go we własnych aplikacjach. Wybierz styl, który najbardziej odpowiada Twoim potrzebom.
 

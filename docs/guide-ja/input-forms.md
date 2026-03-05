@@ -1,8 +1,7 @@
-フォームを作成する
-==================
+# フォームを作成する
 
-アクティブ・レコードに基づくフォーム : ActiveForm <span id="activerecord-based-forms-activeform"></span>
------------------------------------------------
+## アクティブ・レコードに基づくフォーム : ActiveForm <span id="activerecord-based-forms-activeform"></span>
+
 Yii においてフォームを使用するときは、主として [[yii\widgets\ActiveForm]] による方法を使います。
 フォームがモデルに基づくものである場合はこの方法を選ぶべきです。
 これに加えて、[[yii\helpers\Html]] にはいくつかの有用なメソッドがあり、どんなフォームでも、ボタンやヘルプ・テキストを追加するのには、通常、それらのメソッドを使います。
@@ -59,6 +58,7 @@ $form = ActiveForm::begin([
 ```
 
 ### `begin()` と `end()` で囲む <span id="wrapping-with-begin-and-end"></span>
+
 上記のコードでは、[[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]] がフォームのインスタンスを作成するとともに、フォームの開始をマークしています。
 [[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]] と [[yii\widgets\ActiveForm::end()|ActiveForm::end()]]
 の間に置かれた全てのコンテントが HTML の `<form>` タグによって囲まれます。
@@ -67,6 +67,7 @@ $form = ActiveForm::begin([
 利用できるオプションの全ては [[yii\widgets\ActiveForm]] の API ドキュメントに記されていますので参照してください。
 
 ### ActiveField <span id="activefield"></span>
+
 フォームの中では、フォームの要素を作成するために、ActiveForm ウィジェットの [[yii\widgets\ActiveForm::field()|ActiveForm::field()]] メソッドが呼ばれています。
 このメソッドは、フォームの要素だけでなく、そのラベルも作成し、適用できる JavaScript の検証メソッドがあれば、それも追加します。[[yii\widgets\ActiveForm::field()|ActiveForm::field()]] メソッドは、
 [[yii\widgets\ActiveField]] のインスタンスを返します。このメソッドの呼び出し結果を直接にエコーすると、結果は通常の (text の) インプットになります。
@@ -112,34 +113,32 @@ echo $form->field($model, 'items[]')->checkboxList(['a' => 'Item A', 'b' => 'Ite
 フォームに HTML タグを追加するためには、素の HTML を使うか、または、上記の例の [[yii\helpers\Html::submitButton()|Html::submitButton()]] のように、
 [[yii\helpers\Html|Html]] ヘルパ・クラスのメソッドを使うことが出来ます。
 
-
 > Tip: あなたのアプリケーションで Twitter Bootstrap CSS を使っている場合は、[[yii\widgets\ActiveForm]] の代りに
 > [[yii\bootstrap\ActiveForm]] を使うのが良いでしょう。
 > 後者は前者の拡張であり、bootstrap CSS フレームワークで使用するための追加のスタイルをサポートしています。
-
 
 > Tip: 必須フィールドをアスタリスク付きのスタイルにするために、次の CSS を使うことが出来ます。
 >
 > ```css
 > div.required label.control-label:after {
->     content: " *";
->     color: red;
+>   content: " *";
+>   color: red;
 > }
 > ```
 
-リストを作る <span id="creating-activeform-lists"></span>
---------------------------
+## リストを作る <span id="creating-activeform-lists"></span>
 
 三種類のリストがあります:
-* ドロップダウン・リスト
-* ラジオ・リスト
-* チェックボックス・リスト
+
+- ドロップダウン・リスト
+- ラジオ・リスト
+- チェックボックス・リスト
 
 リストを作るためには、項目の配列を準備しなければなりません。これは、手作業でやることも出来ます。
 
 ```php
 $items = [
-    1 => '項目 1', 
+    1 => '項目 1',
     2 => '項目 2'
 ]
 ```
@@ -165,7 +164,7 @@ ActiveField の [[\yii\widgets\ActiveField::dropDownList()]] メソッドを使�
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->dropdownList([
-        1 => '項目 1', 
+        1 => '項目 1',
         2 => '項目 2'
     ],
     ['prompt'=>'カテゴリーを選択してください']
@@ -180,7 +179,7 @@ ActiveField の [[\yii\widgets\ActiveField::radioList()]] メソッドを使っ�
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->radioList([
-    1 => 'ラジオ 1', 
+    1 => 'ラジオ 1',
     2 => 'ラジオ 2'
 ]);
 ```
@@ -193,14 +192,12 @@ ActiveField の [[\yii\widgets\ActiveField::checkboxList()]] メソッドを使�
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->checkboxList([
-    1 => 'チェックボックス 1', 
+    1 => 'チェックボックス 1',
     2 => 'チェックボックス 2'
 ]);
 ```
 
-
-Pjax を使う <span id="working-with-pjax"></span>
------------
+## Pjax を使う <span id="working-with-pjax"></span>
 
 [[yii\widgets\Pjax|Pjax]] ウィジェットを使うと、ページ全体をリロードせずに、
 ページの一部分だけを更新することが出来ます。
@@ -227,6 +224,7 @@ Pjax::begin([
     ActiveForm::end();
 Pjax::end();
 ```
+
 > Tip: [[yii\widgets\Pjax|Pjax]] ウィジェット内部のリンクに注意してください。
 > と言うのは、リンクに対するレスポンスもウィジェット内部でレンダリングされるからです。
 > これを防ぐためには、`data-pjax="0"` という HTML 属性を使用します。
@@ -244,8 +242,7 @@ Pjax::end();
 `FormData` クラスに対する [ブラウザのサポート](https://developer.mozilla.org/ja/docs/Web/API/FormData#%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E5%AE%9F%E8%A3%85%E7%8A%B6%E6%B3%81)
 に依存しているということを意味します。
 
-さらに読むべき文書 <span id="further-reading"></span>
-------------------
+## さらに読むべき文書 <span id="further-reading"></span>
 
 次のセクション [入力を検証する](input-validation.md) は、送信されたフォームデータのサーバ・サイドでの検証と、ajax 検証およびクライアント・サイドでの検証を扱います。
 

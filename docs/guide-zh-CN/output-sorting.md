@@ -1,16 +1,15 @@
-排序
-=======
+# 排序
 
 展示多条数据时，通常需要对数据按照用户指定的列进行排序。
 Yii 使用 [[yii\data\Sort]] 对象来代表排序方案的有关信息。
 特别地，
 
-* [[yii\data\Sort::$attributes|attributes]] 指定 *属性*，数据按照其排序。
+- [[yii\data\Sort::$attributes|attributes]] 指定 _属性_，数据按照其排序。
   一个属性可以就是简单的一个 [model attribute](structure-models.md#attributes)，
   也可以是结合了多个 model 属性或者 DB 列的复合属性。下面将给出更多细节。
-* [[yii\data\Sort::$attributeOrders|attributeOrders]] 给出每个属性当前设置的
+- [[yii\data\Sort::$attributeOrders|attributeOrders]] 给出每个属性当前设置的
   排序方向。
-* [[yii\data\Sort::$orders|orders]] 按照低级列的方式给出排序方向。
+- [[yii\data\Sort::$orders|orders]] 按照低级列的方式给出排序方向。
 
 使用 [[yii\data\Sort]]，首先要声明什么属性能进行排序。
 接着从 [[yii\data\Sort::$attributeOrders|attributeOrders]] 或者 [[yii\data\Sort::$orders|orders]] 取得当前设置的排序信息，
@@ -63,10 +62,10 @@ $articles = Article::find()
 - `label` 元素指定了调用 [[yii\data\Sort::link()]] 来创建一个排序链接时应该使用什么标签。
   如果不设置，将调用 [[yii\helpers\Inflector::camel2words()]] 来通过属性名生成一个标签。
   注意，它并不是 HTML编码的。
-  
+
 > Info: 你可以将 [[yii\data\Sort::$orders|orders]] 的值直接提供给数据库查询来构建其 `ORDER BY` 子句。
-  不要使用 [[yii\data\Sort::$attributeOrders|attributeOrders]]，
-  因为一些属性可能是复合的，是不能被数据库查询识别的。
+> 不要使用 [[yii\data\Sort::$attributeOrders|attributeOrders]]，
+> 因为一些属性可能是复合的，是不能被数据库查询识别的。
 
 你可以调用 [[yii\data\Sort::link()]] 来生成一个超链接，用户可以通过点击它来请求按照指定的属性对数据进行排序。
 你也可以调用 [[yii\data\Sort::createUrl()]] 来生成一个可排序的 URL。

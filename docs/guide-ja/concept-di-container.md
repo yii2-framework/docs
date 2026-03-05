@@ -1,22 +1,18 @@
-依存注入コンテナ
-================
+# 依存注入コンテナ
 
 依存注入 (DI) コンテナは、オブジェクトとそれが依存するすべてのオブジェクトを、インスタンス化し、設定する方法を知っているオブジェクトです。
 なぜ DI コンテナが便利なのかは、[Martin Fowler の記事](https://martinfowler.com/articles/injection.html) の説明がわかりやすいでしょう。
 ここでは、主に Yii の提供する DI コンテナの使用方法を説明します。
 
-
-依存注入 <span id="dependency-injection"></span>
---------
+## 依存注入 <span id="dependency-injection"></span>
 
 Yii は [[yii\di\Container]] クラスを通して DI コンテナの機能を提供します。
 これは、次の種類の依存注入をサポートしています:
 
-* コンストラクタ・インジェクション
-* メソッド・インジェクション
-* セッター/プロパティ・インジェクション
-* PHP コーラブル・インジェクション
-
+- コンストラクタ・インジェクション
+- メソッド・インジェクション
+- セッター/プロパティ・インジェクション
+- PHP コーラブル・インジェクション
 
 ### コンストラクタ・インジェクション <span id="constructor-injection"></span>
 
@@ -38,7 +34,6 @@ $foo = $container->get('Foo');
 $bar = new Bar;
 $foo = new Foo($bar);
 ```
-
 
 ### メソッド・インジェクション <span id="method-injection"></span>
 
@@ -104,10 +99,9 @@ $container->get('Foo', [], [
 ```
 
 > Info: [[yii\di\Container::get()]] メソッドは三番目のパラメータを、生成されるオブジェクトに適用されるべき構成情報配列として受け取ります。
-  クラスが [[yii\base\Configurable]] インタフェイスを実装している場合 (例えば、クラスが [[yii\base\BaseObject]] である場合) には、
-  この構成情報配列がクラスのコンストラクタの最後のパラメータとして渡されます。
-  そうでない場合は、構成情報はオブジェクトが生成された *後で* 適用されることになります。
-
+> クラスが [[yii\base\Configurable]] インタフェイスを実装している場合 (例えば、クラスが [[yii\base\BaseObject]] である場合) には、
+> この構成情報配列がクラスのコンストラクタの最後のパラメータとして渡されます。
+> そうでない場合は、構成情報はオブジェクトが生成された _後で_ 適用されることになります。
 
 ### PHP コーラブル・インジェクション <span id="php-callable-injection"></span>
 
@@ -146,9 +140,7 @@ $foo = $container->get('Foo');
 
 このようにすれば、`Foo` クラスを構成しようとする人は、`Foo` がどのように構築されるかを気にする必要はもうなくなります。
 
-
-依存を登録する <span id="registering-dependencies"></span>
---------------
+## 依存を登録する <span id="registering-dependencies"></span>
 
 [[yii\di\Container::set()]] を使って依存を登録することができます。登録には依存の名前だけでなく、依存の定義が必要です。
 依存の名前は、クラス名、インタフェイス名、エイリアス名を指定することができます。
@@ -204,7 +196,7 @@ $container->set('pageCache', new FileCache);
 ```
 
 > Note: 依存の名前が対応する依存の定義と同じである場合は、
-それを DI コンテナに登録する必要はありません。
+> それを DI コンテナに登録する必要はありません。
 
 `set()` を介して登録された依存は、依存が必要とされるたびにインスタンスを生成します。
 [[yii\di\Container::setSingleton()]] を使うと、
@@ -219,8 +211,7 @@ $container->setSingleton('yii\db\Connection', [
 ]);
 ```
 
-依存を解決する <span id="resolving-dependencies"></span>
---------------
+## 依存を解決する <span id="resolving-dependencies"></span>
 
 依存を登録すると、新しいオブジェクトを作成するのに DI コンテナを使用することができます。
 そして、コンテナが自動的に依存をインスタンス化し、新しく作成されたオブジェクトに注入して、
@@ -309,9 +300,7 @@ $finder = new UserFinder($db);
 $lister = new UserLister($finder);
 ```
 
-
-実際の使用方法 <span id="practical-usage"></span>
---------------
+## 実際の使用方法 <span id="practical-usage"></span>
 
 あなたのアプリケーションの [エントリ・スクリプト](structure-entry-scripts.md) で `Yii.php` ファイルをインクルードするとき、
 Yii は DI コンテナを作成します。この DI コンテナは [[Yii::$container]] を介してアクセス可能です。 [[Yii::createObject()]] を呼び出したとき、
@@ -384,17 +373,16 @@ use yii\web\Controller;
 use app\components\BookingInterface;
 
 class HotelController extends Controller
-{    
+{
     public function actionBook($id, BookingInterface $bookingService)
     {
         $result = $bookingService->book($id);
-        // ...    
+        // ...
     }
 }
-``` 
+```
 
-高度な実際の使用方法 <span id="advanced-practical-usage"></span>
---------------------
+## 高度な実際の使用方法 <span id="advanced-practical-usage"></span>
 
 API アプリケーションを開発していて、以下のクラスを持っているとします。
 
@@ -403,7 +391,7 @@ API アプリケーションを開発していて、以下のクラスを持っ�
   生成されるときに、`format` プロパティが `json` に設定されなければならない。
 - `app\storage\FileStorage` および `app\storage\DocumentsReader` クラス。
   何らかのファイルストレージに配置されているドキュメントを操作するロジックを実装する。
-  
+
   ```php
   class FileStorage
   {
@@ -411,7 +399,7 @@ API アプリケーションを開発していて、以下のクラスを持っ�
           // あれやこれや
       }
   }
-  
+
   class DocumentsReader
   {
       public function __construct(FileStorage $fs) {
@@ -420,16 +408,16 @@ API アプリケーションを開発していて、以下のクラスを持っ�
   }
   ```
 
-[[yii\di\Container::setDefinitions()|setDefinitions()]] または [[yii\di\Container::setSingletons()|setSingletons()]] 
+[[yii\di\Container::setDefinitions()|setDefinitions()]] または [[yii\di\Container::setSingletons()|setSingletons()]]
 のメソッドに構成情報の配列を渡して、複数の定義を一度に構成することが可能です。
 これらのメソッドは、構成情報配列を反復して、各アイテムに対し、
 それぞれ [[yii\di\Container::set()|set()]] を呼び出します。
 
 構成情報配列のフォーマットは、
 
-  - `key`: クラス名、インタフェイス名、または、エイリアス名。
+- `key`: クラス名、インタフェイス名、または、エイリアス名。
   このキーが [[yii\di\Container::set()|set()]] メソッドの最初の引数 `$class` として渡されます。
-  - `value`: `$class` と関連づけられる定義。指定できる値は、[[yii\di\Container::set()|set()]] の `$definition`
+- `value`: `$class` と関連づけられる定義。指定できる値は、[[yii\di\Container::set()|set()]] の `$definition`
   パラメータのドキュメントで説明されています。
   [[set()]] メソッドに二番目のパラメータ `$definition` として渡されます。
 
@@ -448,13 +436,13 @@ $container->setDefinitions([
     }
 ]);
 
-$reader = $container->get('app\storage\DocumentsReader'); 
+$reader = $container->get('app\storage\DocumentsReader');
 // 構成情報に書かれている依存とともに DocumentReader オブジェクトが生成されます
 ```
 
 > Tip: バージョン 2.0.11 以降では、アプリケーションの構成情報を使って、宣言的なスタイルでコンテナを構成することが出来ます。
-[構成情報](concept-configurations.md) のガイドの [アプリケーションの構成](concept-configurations.md#application-configurations)
-のセクションを参照してください。
+> [構成情報](concept-configurations.md) のガイドの [アプリケーションの構成](concept-configurations.md#application-configurations)
+> のセクションを参照してください。
 
 これで全部動きますが、`DocumentWriter` クラスを生成する必要がある場合には、`FileStorage` オブジェクトを生成する行をコピペすることになるでしょう。
 もちろん、それが一番スマートな方法ではありません。
@@ -481,7 +469,7 @@ $container->setDefinitions([
     ]
 ]);
 
-$reader = $container->get('app\storage\DocumentsReader'); 
+$reader = $container->get('app\storage\DocumentsReader');
 // 前の例と全く同じオブジェクトが生成されます
 ```
 
@@ -490,7 +478,7 @@ $reader = $container->get('app\storage\DocumentsReader');
 `app\storage\DocumentsWriter` のコンストラクタの最初の引数として渡す、ということを意味しています。
 
 > Note: [[yii\di\Container::setDefinitions()|setDefinitions()]] および [[yii\di\Container::setSingletons()|setSingletons()]]
-  のメソッドは、バージョン 2.0.11 以降で利用できます。
+> のメソッドは、バージョン 2.0.11 以降で利用できます。
 
 構成情報の最適化にかかわるもう一つのステップは、いくつかの依存をシングルトンとして登録することです。
 [[yii\di\Container::set()|set()]] を通じて登録された依存は、必要になるたびに、毎回インスタンス化されます。
@@ -523,21 +511,18 @@ $container->setDefinitions([
 $reader = $container->get('app\storage\DocumentsReader');
 ```
 
-いつ依存を登録するか <span id="when-to-register-dependencies"></span>
---------------------
+## いつ依存を登録するか <span id="when-to-register-dependencies"></span>
 
 依存は、新しいオブジェクトが作成されるとき必要とされるので、それらの登録は可能な限り早期に行われるべきです。
 推奨されるプラクティスは以下のとおりです:
 
-* あなたがアプリケーションの開発者である場合は、アプリケーションの構成情報を使って依存を登録することが出来ます。
+- あなたがアプリケーションの開発者である場合は、アプリケーションの構成情報を使って依存を登録することが出来ます。
   [構成情報](concept-configurations.md) のガイドの [アプリケーションの構成](concept-configurations.md#application-configurations)
   のセクションを読んでください。
-* あなたが再配布可能な [エクステンション](structure-extensions.md) の開発者である場合は、エクステンションのブートストラップ・クラス内で
+- あなたが再配布可能な [エクステンション](structure-extensions.md) の開発者である場合は、エクステンションのブートストラップ・クラス内で
   依存を登録することができます。
 
-
-まとめ <span id="summary"></span>
-------
+## まとめ <span id="summary"></span>
 
 依存注入と [サービス・ロケータ](concept-service-locator.md) はともに、疎結合でよりテストしやすい方法でのソフトウェア構築を可能にする、
 定番のデザインパターンです。

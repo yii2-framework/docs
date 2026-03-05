@@ -1,12 +1,11 @@
-Dizendo "Olá!"
-=====================
+# Dizendo "Olá!"
 
 Esta seção descreve como criar uma nova página de "Olá!" em sua aplicação.
 Para atingir este objetivo, você criará uma [action](structure-controllers.md#creating-actions)
 e uma [view](structure-views.md):
 
-* A aplicação enviará a requisição de página para a action
-* e a action, por sua vez, renderizará a view que mostra a palavra "Olá!" ao usuário final.
+- A aplicação enviará a requisição de página para a action
+- e a action, por sua vez, renderizará a view que mostra a palavra "Olá!" ao usuário final.
 
 Através deste tutorial, você aprenderá três coisas:
 
@@ -14,16 +13,14 @@ Através deste tutorial, você aprenderá três coisas:
 2. como criar uma [view](structure-views.md) para compor o conteúdo da resposta, e
 3. como uma aplicação envia requisições às [actions](structure-controllers.md#creating-actions).
 
-
-Criando uma Action <span id="creating-action"></span>
-----------------
+## Criando uma Action <span id="creating-action"></span>
 
 Para a tarefa "Olá!", você criará uma [action](structure-controllers.md#creating-actions)
 `cumprimentar` que lê um parâmetro `mensagem` da requisição e exibe essa mensagem de volta
 para o usuário. Se a requisição não fornecer um parâmetro `mensagem`, a action exibirá a mensagem padrão "Olá!".
 
 > Info: [Actions](structure-controllers.md#creating-actions) são os objetos que usuários finais podem solicitar diretamente para execução. Actions são
-  agrupadas nos [controllers](structure-controllers.md). O resultado da execução de uma action é a resposta que o usuário final receberá.
+> agrupadas nos [controllers](structure-controllers.md). O resultado da execução de uma action é a resposta que o usuário final receberá.
 
 As actions devem ser declaradas em [controllers](structure-controllers.md). Para manter a simplicidade, você pode declarar a action `cumprimentar` na classe já existente
 `SiteController`. Esse controller está definido no arquivo `controllers/SiteController.php`.
@@ -60,7 +57,7 @@ o ID de action `criar-comentario` corresponde ao método de action `actionCriarC
 
 O método da action em nosso exemplo recebe um parâmetro `$mensagem`, cujo valor
 padrão é "Olá!" (exatamente da mesma forma que você define um valor padrão para
-  qualquer argumento de função ou método no PHP). Quando a aplicação recebe a
+qualquer argumento de função ou método no PHP). Quando a aplicação recebe a
 requisição e determina que a action `cumprimentar` é responsável por tratar a requisição,
 a aplicação vai preencher esse parâmetro com o parâmetro que tiver o mesmo nome
 na requisição. Em outras palavras, se a requisição inclui um parâmetro `mensagem`
@@ -72,9 +69,7 @@ parâmetro `mensagem` também é passado para a view de modo que ele possa ser u
 por ela. O resultado da renderização da view é retornado pelo método da action. Esse resultado
 será recebido pela aplicação e exibido para o usuário final no navegador (como parte de uma página HTML completa).
 
-
-Criando uma View <span id="creating-view"></span>
------------------
+## Criando uma View <span id="creating-view"></span>
 
 As [views](structure-views.md) são scripts que você escreve para gerar o conteúdo de uma resposta.
 Para a tarefa "Olá!", você criará uma view `cumprimentar` que exibe o parâmetro `mensagem` recebido do método da action:
@@ -101,9 +96,7 @@ apenas um script PHP que é executado pelo método [[yii\web\Controller::render(
 O conteúdo impresso pelo script da view será retornado à aplicação como o resultado
 da resposta. A aplicação, por sua vez, retornará esse resultado para o usuário final.
 
-
-Conferindo <span id="trying-it-out"></span>
---------
+## Conferindo <span id="trying-it-out"></span>
 
 Após criar a action e a view, você pode acessar a nova página através da seguinte URL:
 
@@ -120,9 +113,9 @@ Se você omitir o parâmetro `mensagem` na URL, você verá a página exibindo s
 quando ele é omitido, o valor padrão `"Olá!"` é usado em seu lugar.
 
 > Info: A nova página compartilha o mesmo cabeçalho e rodapé de outras páginas
-  porque o método [[yii\web\Controller::render()|render()]] vai automaticamente
-  incluir o resultado da view `cumprimentar` em um [layout](structure-views.md#layouts)
-  que neste caso está localizado em `views/layouts/main.php`.
+> porque o método [[yii\web\Controller::render()|render()]] vai automaticamente
+> incluir o resultado da view `cumprimentar` em um [layout](structure-views.md#layouts)
+> que neste caso está localizado em `views/layouts/main.php`.
 
 O parâmetro `r` na URL acima requer mais explicação. Ele significa [rota](runtime-routing.md),
 um ID único e amplo de uma aplicação que se refere a uma action. O formato da rota
@@ -135,15 +128,13 @@ resolvida como a classe de controller `SiteController` e a action `cumprimentar`
 resultado, o método `SiteController::actionCumprimentar()` será chamado para tratar a requisição.
 
 > Info: Assim como as actions, os controllers também possuem IDs que os identificam
-  de maneira única em uma aplicação. IDs de controllers seguem as mesmas regras de nomenclatura dos IDs de actions. Os nomes das classes de controlllers
-  derivam dos IDs de controllers removendo-se os hífens dos IDs, convertendo a
-  primeira letra de cada palavra em maiúscula, e adicionando o sufixo `Controller`.
-  Por exemplo, o ID de controller `comentario-de-artigo` corresponde ao nome de classe
-  de controller `ComentarioDeArtigoController`.
+> de maneira única em uma aplicação. IDs de controllers seguem as mesmas regras de nomenclatura dos IDs de actions. Os nomes das classes de controlllers
+> derivam dos IDs de controllers removendo-se os hífens dos IDs, convertendo a
+> primeira letra de cada palavra em maiúscula, e adicionando o sufixo `Controller`.
+> Por exemplo, o ID de controller `comentario-de-artigo` corresponde ao nome de classe
+> de controller `ComentarioDeArtigoController`.
 
-
-Resumo <span id="summary"></span>
-------
+## Resumo <span id="summary"></span>
 
 Nesta seção, você teve uma introdução sobre as partes controller e view do padrão de arquitetura MVC. Você criou uma action como parte de um controller para tratar uma requisição específica.
 E você também criou uma view para compor o conteúdo da resposta. Nesse exemplo simples, nenhum modelo (model) foi

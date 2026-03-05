@@ -1,13 +1,11 @@
-Filters
-=======
+# Filters
 
 Filters are objects that run before and/or after [controller actions](structure-controllers.md#actions). For example,
 an access control filter may run before actions to ensure that they are allowed to be accessed by particular end users;
 a content compression filter may run after actions to compress the response content before sending them out to end users.
 
-A filter may consist of a pre-filter (filtering logic applied *before* actions) and/or a post-filter (logic applied
-*after* actions).
-
+A filter may consist of a pre-filter (filtering logic applied _before_ actions) and/or a post-filter (logic applied
+_after_ actions).
 
 ## Using Filters <span id="using-filters"></span>
 
@@ -31,35 +29,34 @@ public function behaviors()
 }
 ```
 
-By default, filters declared in a controller class will be applied to *all* actions in that controller. You can,
+By default, filters declared in a controller class will be applied to _all_ actions in that controller. You can,
 however, explicitly specify which actions the filter should be applied to by configuring the
 [[yii\base\ActionFilter::only|only]] property. In the above example, the `HttpCache` filter only applies to the
 `index` and `view` actions. You can also configure the [[yii\base\ActionFilter::except|except]] property to prevent
 some actions from being filtered.
 
 Besides controllers, you can also declare filters in a [module](structure-modules.md) or [application](structure-applications.md).
-When you do so, the filters will be applied to *all* controller actions belonging to that module or application,
+When you do so, the filters will be applied to _all_ controller actions belonging to that module or application,
 unless you configure the filters' [[yii\base\ActionFilter::only|only]] and [[yii\base\ActionFilter::except|except]]
 properties like described above.
 
 > Note: When declaring filters in modules or applications, you should use [routes](structure-controllers.md#routes)
-  instead of action IDs in the [[yii\base\ActionFilter::only|only]] and [[yii\base\ActionFilter::except|except]] properties.
-  This is because action IDs alone cannot fully specify actions within the scope of a module or application.
+> instead of action IDs in the [[yii\base\ActionFilter::only|only]] and [[yii\base\ActionFilter::except|except]] properties.
+> This is because action IDs alone cannot fully specify actions within the scope of a module or application.
 
 When multiple filters are configured for a single action, they are applied according to the rules described below:
 
-* Pre-filtering
-    - Apply filters declared in the application in the order they are listed in `behaviors()`.
-    - Apply filters declared in the module in the order they are listed in `behaviors()`.
-    - Apply filters declared in the controller in the order they are listed in `behaviors()`.
-    - If any of the filters cancel the action execution, the filters (both pre-filters and post-filters) after it will
-      not be applied.
-* Running the action if it passes the pre-filtering.
-* Post-filtering
-    - Apply filters declared in the controller in the reverse order they are listed in `behaviors()`.
-    - Apply filters declared in the module in the reverse order they are listed in `behaviors()`.
-    - Apply filters declared in the application in the reverse order they are listed in `behaviors()`.
-
+- Pre-filtering
+  - Apply filters declared in the application in the order they are listed in `behaviors()`.
+  - Apply filters declared in the module in the order they are listed in `behaviors()`.
+  - Apply filters declared in the controller in the order they are listed in `behaviors()`.
+  - If any of the filters cancel the action execution, the filters (both pre-filters and post-filters) after it will
+    not be applied.
+- Running the action if it passes the pre-filtering.
+- Post-filtering
+  - Apply filters declared in the controller in the reverse order they are listed in `behaviors()`.
+  - Apply filters declared in the module in the reverse order they are listed in `behaviors()`.
+  - Apply filters declared in the application in the reverse order they are listed in `behaviors()`.
 
 ## Creating Filters <span id="creating-filters"></span>
 
@@ -96,12 +93,10 @@ class ActionTimeFilter extends ActionFilter
 }
 ```
 
-
 ## Core Filters <span id="core-filters"></span>
 
 Yii provides a set of commonly used filters, found primarily under the `yii\filters` namespace. In the following,
 we will briefly introduce these filters.
-
 
 ### [[yii\filters\AccessControl|AccessControl]] <span id="access-control"></span>
 
@@ -138,7 +133,6 @@ public function behaviors()
 
 For more details about access control in general, please refer to the [Authorization](security-authorization.md) section.
 
-
 ### Authentication Method Filters <span id="auth-method-filters"></span>
 
 Authentication method filters are used to authenticate a user using various methods, such as
@@ -165,7 +159,6 @@ public function behaviors()
 
 Authentication method filters are commonly used in implementing RESTful APIs. For more details, please refer to the
 RESTful [Authentication](rest-authentication.md) section.
-
 
 ### [[yii\filters\ContentNegotiator|ContentNegotiator]] <span id="content-negotiator"></span>
 
@@ -225,9 +218,7 @@ use yii\web\Response;
 ```
 
 > Info: In case the preferred content type and language cannot be determined from a request, the first format and
-  language listed in [[formats]] and [[languages]] will be used.
-
-
+> language listed in [[formats]] and [[languages]] will be used.
 
 ### [[yii\filters\HttpCache|HttpCache]] <span id="http-cache"></span>
 
@@ -253,7 +244,6 @@ public function behaviors()
 ```
 
 Please refer to the [HTTP Caching](caching-http.md) section for more details about using HttpCache.
-
 
 ### [[yii\filters\PageCache|PageCache]] <span id="page-cache"></span>
 
@@ -286,13 +276,11 @@ public function behaviors()
 
 Please refer to the [Page Caching](caching-page.md) section for more details about using PageCache.
 
-
 ### [[yii\filters\RateLimiter|RateLimiter]] <span id="rate-limiter"></span>
 
 RateLimiter implements a rate limiting algorithm based on the [leaky bucket algorithm](https://en.wikipedia.org/wiki/Leaky_bucket).
 It is primarily used in implementing RESTful APIs. Please refer to the [Rate Limiting](rest-rate-limiting.md) section
 for details about using this filter.
-
 
 ### [[yii\filters\VerbFilter|VerbFilter]] <span id="verb-filter"></span>
 
@@ -350,11 +338,11 @@ Also check the section on [REST Controllers](rest-controllers.md#cors) if you wa
 
 The Cors filtering could be tuned using the [[yii\filters\Cors::$cors|$cors]] property.
 
-* `cors['Origin']`: array used to define allowed origins. Can be `['*']` (everyone) or `['https://www.myserver.net', 'https://www.myotherserver.com']`. Default to `['*']`.
-* `cors['Access-Control-Request-Method']`: array of allowed verbs like `['GET', 'OPTIONS', 'HEAD']`.  Default to `['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS']`.
-* `cors['Access-Control-Request-Headers']`: array of allowed headers. Can be `['*']` all headers or specific ones `['X-Request-With']`. Default to `['*']`.
-* `cors['Access-Control-Allow-Credentials']`: define if current request can be made using credentials. Can be `true`, `false` or `null` (not set). Default to `null`.
-* `cors['Access-Control-Max-Age']`: define lifetime of pre-flight request. Default to `86400`.
+- `cors['Origin']`: array used to define allowed origins. Can be `['*']` (everyone) or `['https://www.myserver.net', 'https://www.myotherserver.com']`. Default to `['*']`.
+- `cors['Access-Control-Request-Method']`: array of allowed verbs like `['GET', 'OPTIONS', 'HEAD']`. Default to `['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS']`.
+- `cors['Access-Control-Request-Headers']`: array of allowed headers. Can be `['*']` all headers or specific ones `['X-Request-With']`. Default to `['*']`.
+- `cors['Access-Control-Allow-Credentials']`: define if current request can be made using credentials. Can be `true`, `false` or `null` (not set). Default to `null`.
+- `cors['Access-Control-Max-Age']`: define lifetime of pre-flight request. Default to `86400`.
 
 For example, allowing CORS for origin : `https://www.myserver.net` with method `GET`, `HEAD` and `OPTIONS` :
 

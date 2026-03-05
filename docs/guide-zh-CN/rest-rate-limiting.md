@@ -1,5 +1,4 @@
-限流 (Rate Limiting)
-==================
+# 限流 (Rate Limiting)
 
 为防止滥用，你应该考虑对您的 API 限流。
 例如，您可以限制每个用户 10 分钟内最多调用 API 100 次。
@@ -8,13 +7,13 @@
 要启用限流, [[yii\web\User::identityClass|user identity class]] 应该实现 [[yii\filters\RateLimitInterface]]。
 这个接口需要实现以下三个方法：
 
-* `getRateLimit()`：返回允许的请求的最大数目及时间，例如，`[100, 600]` 表示在 600 秒内最多 100 次的 API 调用。
-* `loadAllowance()`：返回剩余的允许的请求和最后一次速率限制检查时
+- `getRateLimit()`：返回允许的请求的最大数目及时间，例如，`[100, 600]` 表示在 600 秒内最多 100 次的 API 调用。
+- `loadAllowance()`：返回剩余的允许的请求和最后一次速率限制检查时
   相应的 UNIX 时间戳数。
-* `saveAllowance()`：保存剩余的允许请求数和当前的 UNIX 时间戳。
+- `saveAllowance()`：保存剩余的允许请求数和当前的 UNIX 时间戳。
 
 你可以在 user 表中使用两列来记录容差和时间戳信息。
-`loadAllowance()` 和 `saveAllowance()` 
+`loadAllowance()` 和 `saveAllowance()`
 可以通过实现对符合当前身份验证的用户的这两列值的读和保存。
 为了提高性能，你也可以考虑使用缓存或 NoSQL 存储这些信息。
 

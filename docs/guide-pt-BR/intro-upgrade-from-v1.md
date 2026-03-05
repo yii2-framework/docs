@@ -1,5 +1,4 @@
-Atualizando a partir da Versão 1.1
-==================================
+# Atualizando a partir da Versão 1.1
 
 Existem muitas diferenças entre as versões 1.1 e 2.0 do Yii, uma vez que o
 framework foi completamente reescrito na 2.0.
@@ -13,9 +12,7 @@ são abordadas neste resumo. Recomenda-se fortemente que você leia o guia defin
 que antes você tinha de desenvolver por conta própria agora façam parte do
 código principal.
 
-
-Instalação
-----------
+## Instalação
 
 O Yii 2.0 utiliza plenamente o [Composer](https://getcomposer.org/), o gerenciador
 de pacotes PHP. Tanto a instalação do núcleo do framework quanto das extensões são feitas através do Composer. Por favor, consulte a seção
@@ -24,9 +21,7 @@ o Yii 2.0. Se você quer criar novas extensões ou tornar compatíveis as suas e
 existentes do 1.1 com o 2.0, por favor consulte a seção [Criando Extensões](structure-extensions.md#creating-extensions)
 do guia.
 
-
-Requisitos do PHP
------------------
+## Requisitos do PHP
 
 O Yii 2.0 requer o PHP 5.4 ou superior, que é uma versão de grande melhoria sobre a versão 5.2, que era exigida pelo Yii 1.1.
 Como resultado, existem muitas diferenças na linguagem às quais você deve dar a devida atenção.
@@ -35,7 +30,7 @@ Segue abaixo um resumo das principais mudanças do PHP:
 - [Namespaces](https://www.php.net/manual/pt_BR/language.namespaces.php).
 - [Funções anônimas](https://www.php.net/manual/pt_BR/functions.anonymous.php).
 - A sintaxe curta de arrays `[...elementos...]` é utilizada ao invés de `array(...elementos...)`.
-- Tags curtas de *echo* `<?=` são usadas nos arquivos de view. É seguro utilizá-las a partir do PHP 5.4.
+- Tags curtas de _echo_ `<?=` são usadas nos arquivos de view. É seguro utilizá-las a partir do PHP 5.4.
 - [Classes e interfaces da SPL](https://www.php.net/manual/pt_BR/book.spl.php).
 - [Late Static Bindings](https://www.php.net/manual/pt_BR/language.oop5.late-static-bindings.php).
 - [Date e Time](https://www.php.net/manual/pt_BR/book.datetime.php).
@@ -43,22 +38,18 @@ Segue abaixo um resumo das principais mudanças do PHP:
 - [intl](https://www.php.net/manual/pt_BR/book.intl.php). O Yii 2.0 utiliza a extensão
   `intl` do PHP para suportar as funcionalidades de internacionalização.
 
-
-Namespace
----------
+## Namespace
 
 A mudança mais óbvia no Yii 2.0 é o uso de namespaces. Praticamente todas as
-classes do *core* possuem namespace, por exemplo, `yii\web\Request`. O prefixo "C"
+classes do _core_ possuem namespace, por exemplo, `yii\web\Request`. O prefixo "C"
 não é mais utilizado nos nomes de classes. O esquema de nomenclatura agora segue
 a estrutura de diretórios. Por exemplo, `yii\web\Request` indica que o arquivo
 da classe correspondente é `web/Request.php` sob a pasta do Yii Framework.
 
-(Você pode utilizar qualquer classe do *core* sem explicitamente incluir o arquivo
+(Você pode utilizar qualquer classe do _core_ sem explicitamente incluir o arquivo
 dessa classe, graças ao carregador de classes do Yii).
 
-
-Component e Object
-------------------
+## Component e Object
 
 O Yii 2.0 divide a classe `CComponent` do 1.1 em duas classes: [[yii\base\BaseObject]]
 e [[yii\base\Component]]. A classe [[yii\base\BaseObject|BaseObject]] é uma classe base
@@ -67,14 +58,11 @@ via getters e setters. A classe [[yii\base\Component|Component]] estende de
 [[yii\base\BaseObject|BaseObject]] e suporta [eventos](concept-events.md) e
 [comportamentos (behaviors)](concept-behaviors.md).
 
-
 Se a sua classe não precisa de eventos nem de comportamentos,
 você deveria considerar utilizar [[yii\base\BaseObject|BaseObject]] como classe base.
 Esse geralmente é o caso de classes que representam estruturas básicas de dados.
 
-
-Configuração de Objetos
------------------------
+## Configuração de Objetos
 
 A classe [[yii\base\BaseObject|BaseObject]] introduz uma maneira uniforme de configurar
 objetos. Qualquer classe descendente de [[yii\base\BaseObject|BaseObject]] deveria
@@ -120,9 +108,7 @@ $object = Yii::createObject([
 Mais detalhes sobre configurações podem ser encontrados na seção de
 [Configurações](concept-configurations.md).
 
-
-Eventos
--------
+## Eventos
 
 No Yii 1 os eventos eram criados definindo-se um método `on`-alguma-coisa
 (por exemplo, `onBeforeSave`). No Yii 2 você pode usar qualquer nome de
@@ -145,11 +131,9 @@ $componente->on($nomeDoEvento, $handler);
 Há muitas melhorias nas funcionalidades de evento. Para mais detalhes,
 por favor, consulte a seção [Eventos](concept-events.md).
 
+## Path Aliases
 
-Path Aliases
-------------
-
-O Yii 2.0 expande o uso de *path aliases* (apelidos de caminhos) tanto para caminhos de arquivos e diretórios como para URLs. Agora ele requer que um nome de alias
+O Yii 2.0 expande o uso de _path aliases_ (apelidos de caminhos) tanto para caminhos de arquivos e diretórios como para URLs. Agora ele requer que um nome de alias
 comece com o caractere `@` para diferenciar entre aliases e caminhos e URLs normais de arquivos e diretórios. Por exemplo, o alias `@yii` se refere ao diretório de
 instalação do Yii. Os path aliases são suportados na maior porte do código do core
 do Yii. Por exemplo, o método [[yii\caching\FileCache::cachePath]] pode receber
@@ -165,21 +149,19 @@ Framework, você pode definir um path alias `@Zend` que se refere ao diretório
 de instalação desse framework. Uma vez que você tenha feito isso, o Yii também
 poderá carregar automaticamente qualquer classe nessa biblioteca do Zend Framework.
 
-Você pode encontrar mais informações sobre *path aliases* na seção [Aliases](concept-aliases.md).
+Você pode encontrar mais informações sobre _path aliases_ na seção [Aliases](concept-aliases.md).
 
-
-Views (Visões)
---------------
+## Views (Visões)
 
 A mudança mais significante das views no Yii 2 é que a variável especial `$this`
 em uma view não se refere mais ao controller ou widget atual. Ao invés disso, `$this` agora se refer[ a um objeto **view**, um novo conceito
-introduzido no 2.0. O objeto *view* é do tipo [[yii\web\View]] e representa a
+introduzido no 2.0. O objeto _view_ é do tipo [[yii\web\View]] e representa a
 parte da visão do padrão MVC. Se você quiser acessar o controller ou
 o widget em uma visão, você pode utilizar `$this->context`.
 
 Para renderizar uma view parcial (partial view) dentro de outra view, você usa
 `$this->render()`, e não `$this->renderPartial()`. Agora a chamada de `render`
-também precisa ser explicitamente impressa com *echo*, uma vez que o métood
+também precisa ser explicitamente impressa com _echo_, uma vez que o métood
 `render()` retorna o resultado da renderização ao invés de exibi-lo diretamente.
 Por exemplo:
 
@@ -195,9 +177,7 @@ definindo a propriedade [[yii\base\View::$renderers|View::$renderers]]. Por favo
 consulte a seção [Template Engines](tutorial-template-engines.md) para mais
 detalhes.
 
-
-Models (Modelos)
-----------------
+## Models (Modelos)
 
 O Yii 2.0 usa o [[yii\base\Model]] como base, semelhante à `CModel` no 1.1.
 A classe `CFormModel` foi removida inteiramente. Ao invés dela, no Yii 2 você
@@ -221,7 +201,7 @@ No código acima, dois cenários são declarados: `backend` e `frontend`. Para o
 cenário `backend`, os atributos `email` e `cargo` são seguros (safe) e podem ser
 atribuídos em massa. Para o cenário `frontend`, `email` pode ser atribuído em
 massa enquanto `cargo` não. Tanto `email` quanto `role` devem ser validados utilizando-se
-*rules* (regras).
+_rules_ (regras).
 
 O método [[yii\base\Model::rules()|rules()]] ainda é usado para declarar regras
 de validação. Perceba que devido à introdução do método [[yii\base\Model::scenarios()|scenarios()]],
@@ -234,15 +214,13 @@ cenários que existirão, e se não houver necessidade para declarar atributos
 
 Para aprender mais sobre models, por favor consulte a seção [Models (Modelos)](basic-models.md).
 
-
-Controllers (Controladores)
----------------------------
+## Controllers (Controladores)
 
 O Yii 2.0 utiliza a [[yii\web\Controller]] como classe base dos controllers de maneira semelhante à `CWebController` no Yii 1.1. A
 [[yii\base\Action]] é a classe base para classes de actions (ações).
 
 O impacto mais óbvio destas mudanças em seu código é que uma action de um controller
-deve sempre retornar o conteúdo que você quer renderizar ao invés de dar *echo* nele:
+deve sempre retornar o conteúdo que você quer renderizar ao invés de dar _echo_ nele:
 
 ```php
 public function actionView($id)
@@ -258,9 +236,7 @@ public function actionView($id)
 
 Por favor, consulte a seção [Controllers (Controladores)](structure-controllers.md) para mais detalhes.
 
-
-Widgets
--------
+## Widgets
 
 O Yii 2.0 usa [[yii\base\Widget]] como a classe base dos widgets, de maneira
 semelhante à `CWidget` no Yii 1.1.
@@ -288,9 +264,7 @@ ActiveForm::end();
 
 Por favor, consulte a seção [Widgets](structure-widgets.md) para mais detalhes.
 
-
-Temas
------
+## Temas
 
 Os temas funcionam de maneira completamente diferente no 2.0. Agora eles se baseiam
 em um mecanismo de mapeamento de caminhos que mapeia um caminho de arquivo de view fonte
@@ -305,9 +279,7 @@ uma propriedade configurável do componente `view` da aplicação.
 
 Por favor, consulte a seção [Temas](tutorial-theming.md) para mais detalhes.
 
-
-Aplicações de Console
----------------------
+## Aplicações de Console
 
 As aplicações de console agora são organizadas como controllers
 assim como as aplicações web. Os controllers de console devem estender de [[yii\console\Controller]],
@@ -322,21 +294,17 @@ O Yii 2.0 suporta a geração automática de informação de ajuda do comando a 
 
 Por favor consulte a seção [Comandos de Console](tutorial-console.md) para mais detalhes.
 
-
-I18N
-----
+## I18N
 
 O Yii 2.0 remove os formatadores de data e número embutidos em favor do módulo
 [intl do PECL do PHP](https://pecl.php.net/package/intl).
 
 A tradução de mensagens agora é realizada pelo componente `i18n` da aplicação.
-Este componente gerencia um conjunto de fontes de mensagens, o  que permite a você usar diferentes fontes de mensagens baseadas em categorias de mensagens.
+Este componente gerencia um conjunto de fontes de mensagens, o que permite a você usar diferentes fontes de mensagens baseadas em categorias de mensagens.
 
 Por favor consulte a seção [Internacionalização](tutorial-i18n.md) para mais detalhes.
 
-
-Action Filters (Filtros de Ação)
---------------------------------
+## Action Filters (Filtros de Ação)
 
 Agora os filtros de ação (action filters) são implementados via comportamentos (behaviors).
 Para definir um novo filtro personalizado, estenda de [[yii\base\ActionFilter]].
@@ -363,45 +331,40 @@ public function behaviors()
 
 Por favor, consulte a seção [Filtragem](structure-filters.md) para mais detalhes.
 
+## Assets
 
-Assets
-------
-
-O Yii 2.0 introduz um novo conceito chamado de *asset bundle* (pacote de recursos estáticos)
+O Yii 2.0 introduz um novo conceito chamado de _asset bundle_ (pacote de recursos estáticos)
 que substitui o conceito de script packages (pacotes de script) encontrado no Yii 1.1.
 
-Um *asset bundle* é uma coleção de arquivos de assets (por exemplo, arquivos JavaScript,
-arquivos CSS, arquivos de imagens, etc.) dentro de um diretório. Cada *asset bundle*
+Um _asset bundle_ é uma coleção de arquivos de assets (por exemplo, arquivos JavaScript,
+arquivos CSS, arquivos de imagens, etc.) dentro de um diretório. Cada _asset bundle_
 é representado por uma classe que estende [[yii\web\AssetBundle]]. Ao registrar
-um *asset bundle* via [[yii\web\AssetBundle::register()]], você torna os assets
+um _asset bundle_ via [[yii\web\AssetBundle::register()]], você torna os assets
 deste pacote acessíveis via Web. Ao contrário do Yii 1, a página que registra o
-*bundle* automaticamente conterá as referências aos arquivos JavaScript e CSS
-especificados naquele *bundle*.
+_bundle_ automaticamente conterá as referências aos arquivos JavaScript e CSS
+especificados naquele _bundle_.
 
 Por favor consulte a seção [Gerenciando Assets](output-assets.md) para mais detalhes.
 
-
-Helpers - Classes Auxiliares
--------
+## Helpers - Classes Auxiliares
 
 O Yii 2.0 introduz muitas classes auxiliares (helpers) estáticas comumente usadas, incluindo:
 
-* [[yii\helpers\Html]]
-* [[yii\helpers\ArrayHelper]]
-* [[yii\helpers\StringHelper]]
-* [[yii\helpers\FileHelper]]
-* [[yii\helpers\Json]]
+- [[yii\helpers\Html]]
+- [[yii\helpers\ArrayHelper]]
+- [[yii\helpers\StringHelper]]
+- [[yii\helpers\FileHelper]]
+- [[yii\helpers\Json]]
 
 Por favor, consulte a seção [Visão Geral](helper-overview.md) dos helpers para mais detalhes.
 
-Forms
------
+## Forms
 
-O Yii 2.0 introduz o conceito de campos (*fields*) para a construção de
-formulários usando [[yii\widgets\ActiveForm]]. Um *field* é um container
-consistindo de um *label*, um *input*, uma mensagem de erro, e/ou um texto
-de ajuda. Um *field* é representado como um objeto [[yii\widgets\ActiveField|ActiveField]].
-Usando *fields* você pode construir um formulário de maneira mais limpa do que antes:
+O Yii 2.0 introduz o conceito de campos (_fields_) para a construção de
+formulários usando [[yii\widgets\ActiveForm]]. Um _field_ é um container
+consistindo de um _label_, um _input_, uma mensagem de erro, e/ou um texto
+de ajuda. Um _field_ é representado como um objeto [[yii\widgets\ActiveField|ActiveField]].
+Usando _fields_ você pode construir um formulário de maneira mais limpa do que antes:
 
 ```php
 <?php $form = yii\widgets\ActiveForm::begin(); ?>
@@ -415,9 +378,7 @@ Usando *fields* você pode construir um formulário de maneira mais limpa do que
 
 Por favor, consulte a seção [Criando um Formulário](input-forms.md) para mais detalhes.
 
-
-Query Builder (Construtor de Consultas)
----------------------------------------
+## Query Builder (Construtor de Consultas)
 
 No 1.1, a construção de consultas estava espalhada por diversas classes, incluindo
 a `CDbCommand`, a `CDbCriteria` e a `CDbCommandBuilder`. O Yii 2.0 representa uma
@@ -441,9 +402,7 @@ E o melhor de tudo, estes métodos de construção de consultas também podem se
 
 Por favor, consulte a seção [Query Builder](db-query-builder.md) para mais detalhes.
 
-
-Active Record
--------------
+## Active Record
 
 O Yii 2.0 introduz várias mudanças ao [Active Record](db-active-record.md). As
 duas mais óbvias envolvem a construção de consultas simples e o tratamento de consultas relacionais.
@@ -477,7 +436,7 @@ class Cliente extends \yii\db\ActiveRecord
 ```
 
 Agora você pode usar `$cliente->pedidos` para acessar os pedidos de um cliente a partir da tabela relacionada.
-Você também pode usar o código a seguir para realizar uma consulta relacional imediata (*on-the-fly*) com uma condição personalizada:
+Você também pode usar o código a seguir para realizar uma consulta relacional imediata (_on-the-fly_) com uma condição personalizada:
 
 ```php
 $pedidos = $cliente->getPedidos()->andWhere('status=1')->all();
@@ -519,9 +478,7 @@ ao construtor você pode ter que sobrescrever o método [[yii\db\ActiveRecord::i
 Existem muitas outras mudanças e melhorias no Active Record. Por favor, consulte
 a seção [Active Record](db-active-record.md) para mais detalhes.
 
-
-Comportamentos (Behaviors) do Active Record
------------------------
+## Comportamentos (Behaviors) do Active Record
 
 No Yii 2, removemos a classe base de behaviors `CActiveRecordBehavior`. Se você quer criar um Active Record Behavior, você terá que estender diretamente de `yii\base\Behavior`. Se a classe behavior class precisa responder a algums eventos da classe que a possui, você deve sobrescrever o método `events()` conforme a seguir:
 
@@ -549,9 +506,7 @@ class MeuComportamento extends Behavior
 }
 ```
 
-
-User e IdentityInterface
-------------------------
+## User e IdentityInterface
 
 A classe `CWebUser` do 1.1 foi substituída pela [[yii\web\User]] e não há
 mais a classe `CUserIdentity`. Em vez disso, você deve implementar a interface
@@ -562,9 +517,7 @@ Por favor, consulte as seções [Autenticação](security-authentication.md),
 [Autorização](security-authorization.md) e [Template Avançado de Projetos](tutorial-advanced-app.md)
 para mais detalhes.
 
-
-Gerenciamento de URLs
----------------------
+## Gerenciamento de URLs
 
 O gerenciamento de URLs no Yii 2 é semelhante ao do 1.1. Uma grande melhoria é que o gerenciamento de URLs agora suporta parâmetros opcionais. Por exemplo,
 se você tiver uma regra declarada como a seguir, ela vai corresponder tanto a `post/popular` quanto a `post/1/popular`. No 1.1, você teria que usar duas
@@ -584,8 +537,6 @@ Uma importante mudança nas convenções de nomes para rotas é que actions e co
 
 Veja as seções [IDs de Controllers](structure-controllers.md#controller-ids) e [IDs de Actions](structure-controllers.md#action-ids) para mais detalhes.
 
-
-Utilizando o Yii 1.1 e o 2.x juntos
------------------------------------
+## Utilizando o Yii 1.1 e o 2.x juntos
 
 Se você tem código legado do Yii 1.1 que você quer utilizar com o Yii 2.0, por favor, consulte a seção [Usando Yii 1.1 e 2.0 juntos](tutorial-yii-integration.md).

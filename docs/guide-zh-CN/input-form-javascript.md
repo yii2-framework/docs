@@ -1,5 +1,4 @@
-在客户端扩展 ActiveForm
-=====================
+# 在客户端扩展 ActiveForm
 
 [[yii\widgets\ActiveForm]] 小部件附带一组用于客户端验证的 JavaScript 方法。
 它的实现非常灵活，可以让你以不同的方式扩展它。
@@ -11,7 +10,7 @@ ActiveForm 触发一系列专用事件。使用类似以下的代码，您可以
 事件并处理它们：
 
 ```javascript
-$('#contact-form').on('beforeSubmit', function (e) {
+$("#contact-form").on("beforeSubmit", function (e) {
   if (!confirm("Everything is correct. Submit?")) {
     return false;
   }
@@ -68,11 +67,11 @@ function (event, messages, errorAttributes)
 ```javascript
 function (event, attribute, messages, deferreds)
 ```
-      
+
 其中
 
 - `event`: 一个 Event 对象。
-- `attribute`: 要验证的属性。 请参阅这个参数的 `attributeDefaults` 
+- `attribute`: 要验证的属性。 请参阅这个参数的 `attributeDefaults`
   结构。
 - `messages`: 可以为其添加指定属性的验证错误消息的数组。
 - `deferreds`: 一个 Deferred 对象数组。你可以使用 `deferreds.add(callback)`
@@ -114,7 +113,7 @@ function (event)
 如果处理返回布尔型“false”，它将停止表单提交。
 
 ### `ajaxBeforeSend`
-          
+
 `ajaxBeforeSend` 事件是在发送用于基于AJAX的验证的AJAX请求之前触发的。
 
 事件处理程序的签名应该是：
@@ -144,7 +143,7 @@ where
 - `event`: 一个 Event 对象。
 - `jqXHR`: 一个 jqXHR 对象
 - `textStatus`: 请求的状态 ("success", "notmodified", "error", "timeout",
-"abort", or "parsererror")。
+  "abort", or "parsererror")。
 
 ## 通过 AJAX 提交表单
 
@@ -153,26 +152,25 @@ where
 通过以下方式处理表单的 `beforeSubmit` 事件做到这一点：
 
 ```javascript
-var $form = $('#formId');
-$form.on('beforeSubmit', function() {
-    var data = $form.serialize();
-    $.ajax({
-        url: $form.attr('action'),
-        type: 'POST',
-        data: data,
-        success: function (data) {
-            // 执行成功
-        },
-        error: function(jqXHR, errMsg) {
-            alert(errMsg);
-        }
-    });
-    return false; // 防止默认提交
+var $form = $("#formId");
+$form.on("beforeSubmit", function () {
+  var data = $form.serialize();
+  $.ajax({
+    url: $form.attr("action"),
+    type: "POST",
+    data: data,
+    success: function (data) {
+      // 执行成功
+    },
+    error: function (jqXHR, errMsg) {
+      alert(errMsg);
+    },
+  });
+  return false; // 防止默认提交
 });
 ```
 
 要了解更多关于 jQuery `ajax()` 函数的信息，请参阅 [jQuery 文档](https://api.jquery.com/jQuery.ajax/)。
-
 
 ## 动态添加字段
 
@@ -183,20 +181,22 @@ $form.on('beforeSubmit', function() {
 您必须自行添加一个字段，然后将其添加到验证列表中：
 
 ```javascript
-$('#contact-form').yiiActiveForm('add', {
-    id: 'address',
-    name: 'address',
-    container: '.field-address',
-    input: '#address',
-    error: '.help-block',
-    validate:  function (attribute, value, messages, deferred, $form) {
-        yii.validation.required(value, messages, {message: "Validation Message Here"});
-    }
+$("#contact-form").yiiActiveForm("add", {
+  id: "address",
+  name: "address",
+  container: ".field-address",
+  input: "#address",
+  error: ".help-block",
+  validate: function (attribute, value, messages, deferred, $form) {
+    yii.validation.required(value, messages, {
+      message: "Validation Message Here",
+    });
+  },
 });
 ```
 
 要从验证列表中删除一个字段，使它不被验证，您可以执行以下操作：
 
 ```javascript
-$('#contact-form').yiiActiveForm('remove', 'address');
+$("#contact-form").yiiActiveForm("remove", "address");
 ```

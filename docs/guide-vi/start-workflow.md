@@ -1,39 +1,34 @@
-Chạy ứng dụng
-====================
+# Chạy ứng dụng
 
 Sau khi cài đặt Yii, ứng dụng Yii của bạn đã được chạy, tùy thuộc vào cấu hình bạn có thể truy cập qua URL `https://hostname/basic/web/index.php`
 hoặc `https://hostname/index.php`. Bài hướng dẫn này sẽ mô tả chức năng của ứng dụng và cách tổ chức code trong ứng dụng,
 và làm thế nào để xử lý các yêu cầu của ứng dụng.
 
 > Lưu ý: Để đơn giản, xuyên suốt các bài hướng dẫn "Getting Started" này, giả sử rằng chúng ta đã thiết lập `basic/web`
-  như thư mục gốc trong máy chủ Web, và cấu hình URL dể truy cập vào ứng dụng của ban thành
-  `https://hostname/index.php` hoặc điều tương tự. Tùy theo yêu cầu của bạn, bạn hãy điều chình 
-  URLs sao cho phù hợp với ứng dụng.
+> như thư mục gốc trong máy chủ Web, và cấu hình URL dể truy cập vào ứng dụng của ban thành
+> `https://hostname/index.php` hoặc điều tương tự. Tùy theo yêu cầu của bạn, bạn hãy điều chình
+> URLs sao cho phù hợp với ứng dụng.
 
+## Chức năng <span id="functionality"></span>
 
-Chức năng <span id="functionality"></span>
--------------
+Mẫu ứng dụng _Basic Application_ bao gồm 4 trang cơ bản:
 
-Mẫu ứng dụng *Basic Application* bao gồm 4 trang cơ bản:
-
-* Trang chủ (homepage), được hiển thị khi bạn truy cập vào URL `https://hostname/index.php`,
-* Trang "About",
-* Trang "Contact", trang hiển thị form contact cho phép user liên hệ với bạn qua email,
-* Trang "Login", trang hiển thị form login cho phép bạn có thể xác thực user. Hãy thử đăng nhập với
+- Trang chủ (homepage), được hiển thị khi bạn truy cập vào URL `https://hostname/index.php`,
+- Trang "About",
+- Trang "Contact", trang hiển thị form contact cho phép user liên hệ với bạn qua email,
+- Trang "Login", trang hiển thị form login cho phép bạn có thể xác thực user. Hãy thử đăng nhập với
   thông tin "admin/admin", và bạn sẽ thấy tên "Login" ở menu chính thay đổi thành "Logout".
 
 Những trang trên đều có cùng phần header và footer. Phần header chứa main menu bar cho phép điều hướng giữa các trang.
 
 Ở dưới cùng của trình duyệt, bạn có thể thấy một thanh công cụ. Đây là một công cụ gỡ lỗi [debugger tool](tool-debugger.md) rất hữu ích
-được cung cấp bởi Yii, bạn có thể ghi lại và hiển thị một lượng lớn các thông tin gỡ lỗi, 
+được cung cấp bởi Yii, bạn có thể ghi lại và hiển thị một lượng lớn các thông tin gỡ lỗi,
 chẳng hạn như thông tin đăng nhập, tình trạng phản ứng, các câu lệnh truy vấn cơ sở dữ liệu, và như vậy.
 
-Ngoài ra, các ứng dụng web có các script từ dòng lệnh (console) tên là *yii*, được nằm ở ứng dụng cơ sở. 
+Ngoài ra, các ứng dụng web có các script từ dòng lệnh (console) tên là _yii_, được nằm ở ứng dụng cơ sở.
 Những script này có thể dùng chạy nền và bảo trì chức năng ứng dụng, thông tin mô tả thêm [Console Application Section](tutorial-console.md).
 
-
-Cấu trúc ứng dụng (Application Structure) <span id="application-structure"></span>
----------------------
+## Cấu trúc ứng dụng (Application Structure) <span id="application-structure"></span>
 
 Những thư mục và tập tin quan trọng nhất của ứng dụng (giả sử thư mục gốc của ứng dụng tên là `basic`):
 
@@ -73,9 +68,7 @@ Các [ứng dụng](structure-applications.md) giải quyết các request cùng
 và gửi các request tới các phần tử trong mô hình MVC. Các [Widgets](structure-widgets.md) sẽ được sử dụng ở [views](structure-views.md)
 để đơn giản hơn việc xây dựng các giao diện phức tạp.
 
-
-Chu trình xứ lý yêu cầu <span id="request-lifecycle"></span>
------------------
+## Chu trình xứ lý yêu cầu <span id="request-lifecycle"></span>
 
 Biểu đồ dưới đây cho thấy làm thế nào một ứng dụng để xử lý các yêu cầu:
 
@@ -83,9 +76,9 @@ Biểu đồ dưới đây cho thấy làm thế nào một ứng dụng để x
 
 1. User tạo yêu cầu (request) tới [mục script](structure-entry-scripts.md) `web/index.php`.
 2. Entry script tải các [cấu hình (configuration)](concept-configurations.md) ứng dụng và tạo mới
-  [ứng dụng](structure-applications.md) để khởi tạo để xử lý yêu cầu.
+   [ứng dụng](structure-applications.md) để khởi tạo để xử lý yêu cầu.
 3. Ứng dụng lấy thông tin [route](runtime-routing.md) được yêu cầu cùng với những thành phần (component)
-  cần xử lý các [request](runtime-requests.md).
+   cần xử lý các [request](runtime-requests.md).
 4. Ứng dụng tạo mới [controller](structure-controllers.md) khởi tạo để xử lý yêu cầu.
 5. Bộ điều khiển (controller) tạo mới các [action (hành động)](structure-controllers.md) khởi tạo và thực hiện các bộ lọc cho các hành động.
 6. Nếu bất kỳ bộ lọc nào bị lỗi, action sẽ bị hủy.

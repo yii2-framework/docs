@@ -1,20 +1,17 @@
-Widgets de datos
-================
+# Widgets de datos
 
 Yii proporciona un conjunto de [widgets](structure-widgets.md) que se pueden usar para mostrar datos.
 Mientras que el _widget_ [DetailView](#detail-view) se puede usar para mostrar los datos de un único
 registro, [ListView](#list-view) y [GridView](#grid-view) se pueden usar para mostrar una lista o
 tabla de registros de datos proporcionando funcionalidades como paginación, ordenación y filtro.
 
-
-DetailView <span id="detail-view"></span>
-----------
+## DetailView <span id="detail-view"></span>
 
 El _widget_ [[yii\widgets\DetailView|DetailView]] muestra los detalles de un único
 [[yii\widgets\DetailView::$model|modelo]] de datos.
 
 Se recomienda su uso para mostrar un modelo en un formato estándar (por ejemplo, cada atributo del
-modelo se muestra como una fila en una tabla).  El modelo puede ser tanto una instancia o subclase
+modelo se muestra como una fila en una tabla). El modelo puede ser tanto una instancia o subclase
 de [[\yii\base\Model]] como un [active record](db-active-record.md) o un _array_ asociativo.
 
 DetailView usa la propiedad [[yii\widgets\DetailView::$attributes|$attributes]] para determinar
@@ -42,11 +39,11 @@ echo DetailView::widget([
 ```
 
 Recuerde que a diferencia de [[yii\widgets\GridView|GridView]], que procesa un conjunto de modelos,
-[[yii\widgets\DetailView|DetailView]] sólo procesa uno.  Así que la mayoría de las veces no hay
+[[yii\widgets\DetailView|DetailView]] sólo procesa uno. Así que la mayoría de las veces no hay
 necesidad de usar funciones anónimas ya que `$model` es el único modelo a mostrar y está disponible
 en la vista como una variable.
 
-Sin embargo, en algunos casos el uso de una función anónima puede ser útil.  Por ejemplo cuando
+Sin embargo, en algunos casos el uso de una función anónima puede ser útil. Por ejemplo cuando
 `visible` está especificado y se desea impedir el cálculo de `value` en case de que evalúe a `false`:
 
 ```php
@@ -64,9 +61,7 @@ echo DetailView::widget([
 ]);
 ```
 
-
-ListView <span id="list-view"></span>
---------
+## ListView <span id="list-view"></span>
 
 El _widget_ [[yii\widgets\ListView|ListView]] se usa para mostrar datos de un
 [proveedor de datos](output-data-providers.md).
@@ -133,13 +128,11 @@ echo ListView::widget([
 
 Entonces éstas también estarán disponibles en la vista como variables.
 
-
-GridView <span id="grid-view"></span>
---------
+## GridView <span id="grid-view"></span>
 
 La cuadrícula de datos o [[yii\grid\GridView|GridView]] es uno de los _widgets_ de Yii
-más potentes.  Es extremadamente útil si necesita construir rápidamente la sección de
-administración del sistema.  Recibe los datos de un [proveedor de datos](output-data-providers.md)
+más potentes. Es extremadamente útil si necesita construir rápidamente la sección de
+administración del sistema. Recibe los datos de un [proveedor de datos](output-data-providers.md)
 y representa cada fila usando un conjunto de [[yii\grid\GridView::columns|columnas]]
 que presentan los datos en forma de tabla.
 
@@ -165,9 +158,8 @@ echo GridView::widget([
 ```
 
 El código anterior primero crea un proveedor de datos y a continuación usa GridView
-para mostrar cada atributo en cada fila tomados del proveedor de datos.  La tabla
+para mostrar cada atributo en cada fila tomados del proveedor de datos. La tabla
 mostrada está equipada de serie con las funcionalidades de ordenación y paginación.
-
 
 ### Columnas de la cuadrícula <span id="grid-columns"></span>
 
@@ -178,7 +170,6 @@ Dependiendo del tipo y ajustes de las columnas éstas pueden presentar los datos
 diferentes maneras.
 La clase predefinida es [[yii\grid\DataColumn]], que representa un atributo del modelo
 por el que se puede ordenar y filtrar.
-
 
 ```php
 echo GridView::widget([
@@ -204,7 +195,6 @@ Observe que si no se especifica la parte [[yii\grid\GridView::columns|columns]] 
 configuración, Yii intenta mostrar todas las columnas posibles del modelo del proveedor
 de datos.
 
-
 ### Clases de columna <span id="column-classes"></span>
 
 Las columnas de la cuadrícula se pueden personalizar usando diferentes clases de columna:
@@ -228,7 +218,7 @@ comunes que puede establecer al configurar las columnas de una cuadrícula.
 - [[yii\grid\Column::header|header]] permite establecer el contenida para la fila cabecera
 - [[yii\grid\Column::footer|footer]] permite establece el contenido de la fila al pie
 - [[yii\grid\Column::visible|visible]] define si la columna debería ser visible.
-- [[yii\grid\Column::content|content]] le permite pasar una función PHP válida que devuelva datos para una fila.  El formato es el siguiente:
+- [[yii\grid\Column::content|content]] le permite pasar una función PHP válida que devuelva datos para una fila. El formato es el siguiente:
 
   ```php
   function ($model, $key, $index, $column) {

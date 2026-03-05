@@ -1,5 +1,4 @@
-Routing
-=======
+# Routing
 
 With resource and controller classes ready, you can access the resources using the URL like
 `http://localhost/index.php?r=user/create`, similar to what you can do with normal Web applications.
@@ -39,15 +38,15 @@ For example, the above code is roughly equivalent to the following rules:
 
 And the following API endpoints are supported by this rule:
 
-* `GET /users`: list all users page by page;
-* `HEAD /users`: show the overview information of user listing;
-* `POST /users`: create a new user;
-* `GET /users/123`: return the details of the user 123;
-* `HEAD /users/123`: show the overview information of user 123;
-* `PATCH /users/123` and `PUT /users/123`: update the user 123;
-* `DELETE /users/123`: delete the user 123;
-* `OPTIONS /users`: show the supported verbs regarding endpoint `/users`;
-* `OPTIONS /users/123`: show the supported verbs regarding endpoint `/users/123`.
+- `GET /users`: list all users page by page;
+- `HEAD /users`: show the overview information of user listing;
+- `POST /users`: create a new user;
+- `GET /users/123`: return the details of the user 123;
+- `HEAD /users/123`: show the overview information of user 123;
+- `PATCH /users/123` and `PUT /users/123`: update the user 123;
+- `DELETE /users/123`: delete the user 123;
+- `OPTIONS /users`: show the supported verbs regarding endpoint `/users`;
+- `OPTIONS /users/123`: show the supported verbs regarding endpoint `/users/123`.
 
 You may configure the `only` and `except` options to explicitly list which actions to support or which
 actions should be disabled, respectively. For example,
@@ -75,15 +74,15 @@ For example, to support a new action `search` by the endpoint `GET /users/search
 
 You may have noticed that the controller ID `user` appears in plural form as `users` in the endpoint URLs.
 This is because [[yii\rest\UrlRule]] automatically pluralizes controller IDs when creating child URL rules.
-You may disable this behavior by setting [[yii\rest\UrlRule::pluralize]] to be `false`. 
+You may disable this behavior by setting [[yii\rest\UrlRule::pluralize]] to be `false`.
 
 > Info: The pluralization of controller IDs is done by [[yii\helpers\Inflector::pluralize()]]. The method respects
-  special pluralization rules. For example, the word `box` will be pluralized as `boxes` instead of `boxs`.
+> special pluralization rules. For example, the word `box` will be pluralized as `boxes` instead of `boxs`.
 
-In case when the automatic pluralization does not meet your requirement, you may also configure the 
-[[yii\rest\UrlRule::controller]] property to explicitly specify how to map a name used in endpoint URLs to 
-a controller ID. For example, the following code maps the name `u` to the controller ID `user`.  
-  
+In case when the automatic pluralization does not meet your requirement, you may also configure the
+[[yii\rest\UrlRule::controller]] property to explicitly specify how to map a name used in endpoint URLs to
+a controller ID. For example, the following code maps the name `u` to the controller ID `user`.
+
 ```php
 [
     'class' => 'yii\rest\UrlRule',

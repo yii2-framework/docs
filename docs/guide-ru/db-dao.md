@@ -1,5 +1,4 @@
-Объекты доступа к данным (DAO)
-==============================
+# Объекты доступа к данным (DAO)
 
 Построенные поверх [PDO](https://www.php.net/manual/ru/book.pdo.php), Yii DAO (объекты доступа к данным) обеспечивают
 объектно-ориентированный API для доступа к реляционным базам данных. Это основа для других, более продвинутых, методов
@@ -20,9 +19,8 @@ Yii DAO из коробки поддерживает следующие базы
 - [Oracle](https://www.oracle.com/database/)
 - [MSSQL](https://www.microsoft.com/en-us/sqlserver/default.aspx): версии 2008 или выше.
 
-
 > Note: Новая версия pdo_oci для PHP 7 на данный момент существует только в форме исходного кода. Используйте
-  [инструкции сообщества по компиляции](https://github.com/yiisoft/yii2/issues/10975#issuecomment-248479268).
+> [инструкции сообщества по компиляции](https://github.com/yiisoft/yii2/issues/10975#issuecomment-248479268).
 
 ## Создание подключения к базе данных <span id="creating-db-connections"></span>
 
@@ -64,15 +62,15 @@ return [
 При настройке подключения, вы должны обязательно указывать Имя Источника Данных (DSN) через параметр [[yii\db\Connection::dsn|dsn]].
 Формат DSN отличается для разных баз данных. Дополнительное описание смотрите в [справочнике PHP](https://www.php.net/manual/ru/pdo.construct.php).
 Ниже представлены несколько примеров:
-  
-* MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
-* SQLite: `sqlite:/path/to/database/file`
-* PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
-* CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
-* MS SQL Server (via sqlsrv driver): `sqlsrv:Server=localhost;Database=mydatabase`
-* MS SQL Server (via dblib driver): `dblib:host=localhost;dbname=mydatabase`
-* MS SQL Server (via mssql driver): `mssql:host=localhost;dbname=mydatabase`
-* Oracle: `oci:dbname=//localhost:1521/mydatabase`
+
+- MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
+- SQLite: `sqlite:/path/to/database/file`
+- PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
+- CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
+- MS SQL Server (via sqlsrv driver): `sqlsrv:Server=localhost;Database=mydatabase`
+- MS SQL Server (via dblib driver): `dblib:host=localhost;dbname=mydatabase`
+- MS SQL Server (via mssql driver): `mssql:host=localhost;dbname=mydatabase`
+- Oracle: `oci:dbname=//localhost:1521/mydatabase`
 
 Заметьте, что если вы подключаетесь к базе данных через ODBC, вам необходимо указать свойство [[yii\db\Connection::driverName]],
 чтобы Yii знал какой тип базы данных используется. Например,
@@ -88,15 +86,15 @@ return [
 ```
 
 Кроме свойства [[yii\db\Connection::dsn|dsn]], вам необходимо указать [[yii\db\Connection::username|username]]
-и [[yii\db\Connection::password|password]]. Смотрите [[yii\db\Connection]] для того, чтоб посмотреть полный список свойств. 
+и [[yii\db\Connection::password|password]]. Смотрите [[yii\db\Connection]] для того, чтоб посмотреть полный список свойств.
 
 > Info: При создании экземпляра соединения к БД, фактическое соединение с базой данных будет установлено только
-  при выполнении первого SQL запроса или при явном вызове метода [[yii\db\Connection::open()|open()]].
+> при выполнении первого SQL запроса или при явном вызове метода [[yii\db\Connection::open()|open()]].
 
 > Tip: Иногда может потребоваться выполнить некоторые запросы сразу после соединения с базой данных, для инициализации
 > переменных окружения. Например, чтобы задать часовой пояс или кодировку. Сделать это можно зарегистрировав обработчик
 > для события [[yii\db\Connection::EVENT_AFTER_OPEN|afterOpen]] в конфигурации приложения:
-> 
+>
 > ```php
 > 'db' => [
 >     // ...
@@ -110,13 +108,13 @@ return [
 ## Выполнение SQL запросов <span id="executing-sql-queries"></span>
 
 После создания экземпляра соединения, вы можете выполнить SQL запрос, выполнив следующие шаги:
-  
+
 1. Создать [[yii\db\Command]] из запроса SQL;
 2. Привязать параметры (не обязательно);
 3. Вызвать один из методов выполнения SQL из [[yii\db\Command]].
 
 Следующий пример показывает различные способы получения данных из базы дынных:
-  
+
 ```php
 // возвращает набор строк. каждая строка - это ассоциативный массив с именами столбцов и значений.
 // если выборка ничего не вернёт, то будет получен пустой массив.
@@ -153,12 +151,12 @@ $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status
           ->queryOne();
 ```
 
-В SQL запрос, вы можете встраивать один или несколько маркеров (например `:id` в примере выше). Маркеры должны быть 
+В SQL запрос, вы можете встраивать один или несколько маркеров (например `:id` в примере выше). Маркеры должны быть
 строкой, начинающейся с двоеточия. Далее вам нужно вызвать один из следующих методов для привязки значений к параметрам:
 
-* [[yii\db\Command::bindValue()|bindValue()]]: привязка одного параметра по значению 
-* [[yii\db\Command::bindValues()|bindValues()]]: привязка нескольких параметров в одном вызове
-* [[yii\db\Command::bindParam()|bindParam()]]: похоже на [[yii\db\Command::bindValue()|bindValue()]], но привязка
+- [[yii\db\Command::bindValue()|bindValue()]]: привязка одного параметра по значению
+- [[yii\db\Command::bindValues()|bindValues()]]: привязка нескольких параметров в одном вызове
+- [[yii\db\Command::bindParam()|bindParam()]]: похоже на [[yii\db\Command::bindValue()|bindValue()]], но привязка
   происходит по ссылке.
 
 Следующий пример показывает альтернативный путь привязки параметров:
@@ -169,7 +167,7 @@ $params = [':id' => $_GET['id'], ':status' => 1];
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
           ->bindValues($params)
           ->queryOne();
-            
+
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
           ->queryOne();
 ```
@@ -250,15 +248,14 @@ Yii::$app->db->createCommand()->batchInsert('user', ['name', 'age'], [
 Обратите внимание, что перечисленные методы лишь создают запрос. Чтобы его выполнить нужно вызывать
 [[yii\db\Command::execute()|execute()]].
 
-
 ## Экранирование имён таблиц и столбцов <span id="quoting-table-and-column-names"></span>
 
 При написании независимого от базы данных кода, правильно экранировать имена таблиц и столбцов довольно трудно, так как
 в разных базах данных правила экранирования разные. Чтоб преодолеть данную проблему вы можете использовать следующий
 синтаксис экранирования используемый в Yii:
 
-* `[[column name]]`: заключайте имя столбца в двойные квадратные скобки; 
-* `{{table name}}`: заключайте имя таблицы в двойные фигурные скобки.
+- `[[column name]]`: заключайте имя столбца в двойные квадратные скобки;
+- `{{table name}}`: заключайте имя таблицы в двойные фигурные скобки.
 
 Yii DAO будет автоматически преобразовывать подобные конструкции в SQL в правильно экранированные имена таблиц и столбцов.
 Например,
@@ -268,7 +265,6 @@ Yii DAO будет автоматически преобразовывать п�
 $count = Yii::$app->db->createCommand("SELECT COUNT([[id]]) FROM {{employee}}")
             ->queryScalar();
 ```
-
 
 ### Использование префиксов таблиц <span id="using-table-prefix"></span>
 
@@ -299,7 +295,6 @@ $count = Yii::$app->db->createCommand("SELECT COUNT([[id]]) FROM {{%employee}}")
             ->queryScalar();
 ```
 
-
 ## Исполнение транзакций <span id="performing-transactions"></span>
 
 Когда вы выполняете несколько зависимых запросов последовательно, вам может потребоваться обернуть их в транзакцию
@@ -327,7 +322,7 @@ try {
     $db->createCommand($sql1)->execute();
     $db->createCommand($sql2)->execute();
     // ... executing other SQL statements ...
-    
+
     $transaction->commit();
 } catch(\Exception $e) {
     $transaction->rollBack();
@@ -337,7 +332,7 @@ try {
 }
 ```
 
-> Note: в коде выше ради совместимости с PHP 5.x и PHP 7.x использованы два блока catch. 
+> Note: в коде выше ради совместимости с PHP 5.x и PHP 7.x использованы два блока catch.
 > `\Exception` реализует интерфейс [`\Throwable` interface](https://www.php.net/manual/ru/class.throwable.php)
 > начиная с PHP 7.0. Если вы используете только PHP 7 и новее, можете пропустить блок с `\Exception`.
 
@@ -359,7 +354,7 @@ $isolationLevel = \yii\db\Transaction::REPEATABLE_READ;
 Yii::$app->db->transaction(function ($db) {
     ....
 }, $isolationLevel);
-  
+
 // или
 
 $transaction = Yii::$app->db->beginTransaction($isolationLevel);
@@ -381,14 +376,13 @@ Yii предоставляет четыре константы для наибо
 На момент написания этой статьи страдали от этого ограничения только MSSQL и SQLite.
 
 > Note: SQLite поддерживает только два уровня изоляции, таким образом вы можете использовать только
-`READ UNCOMMITTED` и `SERIALIZABLE`. Использование других уровней изоляции приведёт к генерации исключения.
+> `READ UNCOMMITTED` и `SERIALIZABLE`. Использование других уровней изоляции приведёт к генерации исключения.
 
 > Note: PostgreSQL не допускает установки уровня изоляции до старта транзакции, так что вы не сможете установить
-уровень изоляции прямо при старте транзакции. Вы можете использовать [[yii\db\Transaction::setIsolationLevel()]] в
-таком случае после старта транзакции.
+> уровень изоляции прямо при старте транзакции. Вы можете использовать [[yii\db\Transaction::setIsolationLevel()]] в
+> таком случае после старта транзакции.
 
 [Уровни изоляции]: https://ru.wikipedia.org/wiki/%D0%A3%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C_%D0%B8%D0%B7%D0%BE%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D0%B8%D0%B9
-
 
 ### Вложенные транзакции <span id="nesting-transactions"></span>
 
@@ -397,7 +391,7 @@ Yii предоставляет четыре константы для наибо
 ```php
 Yii::$app->db->transaction(function ($db) {
     // внешняя транзакция
-    
+
     $db->transaction(function ($db) {
         // внутренняя транзакция
     });
@@ -432,12 +426,11 @@ try {
 }
 ```
 
-
 ## Репликация и разделение запросов на чтение и запись <span id="read-write-splitting"></span>
 
-Многие СУБД поддерживают [репликацию баз данных](https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BF%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F_(%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D0%BA%D0%B0))
+Многие СУБД поддерживают [репликацию баз данных](<https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BF%D0%BB%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F_(%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D0%BA%D0%B0)>)
 для лучшей доступности базы данных и уменьшения времени ответа сервера. С репликацией базы данных, данные копируются
-из *master servers* на *slave servers*. Все вставки и обновления должны происходить на основном сервере, хотя чтение
+из _master servers_ на _slave servers_. Все вставки и обновления должны происходить на основном сервере, хотя чтение
 может производится и с подчинённых серверов.
 
 Чтоб воспользоваться преимуществами репликации и достичь разделения чтения и записи, вам необходимо настроить компонент
@@ -488,8 +481,8 @@ Yii::$app->db->createCommand("UPDATE user SET username='demo' WHERE id=1")->exec
 ```
 
 > Info: Запросы выполненные через [[yii\db\Command::execute()]] определяются как запросы на запись, а все
-  остальные запросы через один из "query" методов [[yii\db\Command]] воспринимаются как запросы на чтение.
-  Вы можете получить текущий статус соединения к подчинённому серверу через `$db->slave`.
+> остальные запросы через один из "query" методов [[yii\db\Command]] воспринимаются как запросы на чтение.
+> Вы можете получить текущий статус соединения к подчинённому серверу через `$db->slave`.
 
 Компонент `Connection` поддерживает балансировку нагрузки и переключение при сбое для подчинённых серверов.
 При выполнении первого запроса на чтение, компонент `Connection` будет случайным образом выбирать подчинённый сервер
@@ -499,8 +492,8 @@ Yii::$app->db->createCommand("UPDATE user SET username='demo' WHERE id=1")->exec
 использоваться в течении [[yii\db\Connection::serverRetryInterval|заданного промежутка времени]].
 
 > Info: В конфигурации выше, таймаут соединения к подчинённому серверу настроен на 10 секунд.
-  Это означает, что если сервер не ответит за 10 секунд, он будет считаться "мёртвым". Вы можете отрегулировать
-  этот параметр исходя из настроек вашей среды.
+> Это означает, что если сервер не ответит за 10 секунд, он будет считаться "мёртвым". Вы можете отрегулировать
+> этот параметр исходя из настроек вашей среды.
 
 Вы также можете настроить несколько основных и несколько подчинённых серверов. Например,
 
@@ -544,13 +537,13 @@ Yii::$app->db->createCommand("UPDATE user SET username='demo' WHERE id=1")->exec
 ]
 ```
 
-Конфигурация выше, определяет два основных и четыре подчинённых серверов. Компонент `Connection` поддерживает 
+Конфигурация выше, определяет два основных и четыре подчинённых серверов. Компонент `Connection` поддерживает
 балансировку нагрузки и переключение при сбое между основными серверами, так же как и между подчинёнными. Различие
 заключается в том, что когда ни к одному из основных серверов не удастся подключиться будет выброшено исключение.
 
 > Note: Когда вы используете свойство [[yii\db\Connection::masters|masters]] для настройки одного или нескольких
-  основных серверов, все остальные свойства для настройки соединения с базой данных (такие как `dsn`, `username`, `password`)
-  будут проигнорированы компонентом `Connection`.
+> основных серверов, все остальные свойства для настройки соединения с базой данных (такие как `dsn`, `username`, `password`)
+> будут проигнорированы компонентом `Connection`.
 
 По умолчанию, транзакции используют соединение с основным сервером. И в рамках транзакции, все операции с БД будут
 использовать соединение с основным сервером. Например,
@@ -592,26 +585,25 @@ $rows = Yii::$app->db->useMaster(function ($db) {
 
 Вы также можете явно установить `$db->enableSlaves` в ложь, чтоб направлять все запросы к соединению с мастером.
 
-
 ## Работа со схемой базы данных <span id="database-schema"></span>
 
 Yii DAO предоставляет целый набор методов для управления схемой базы данных, таких как создание новых таблиц, удаление
 столбцов из таблицы, и т.д. Эти методы описаны ниже:
 
-* [[yii\db\Command::createTable()|createTable()]]: создание таблицы
-* [[yii\db\Command::renameTable()|renameTable()]]: переименование таблицы
-* [[yii\db\Command::dropTable()|dropTable()]]: удаление таблицы
-* [[yii\db\Command::truncateTable()|truncateTable()]]: удаление всех записей в таблице
-* [[yii\db\Command::addColumn()|addColumn()]]: добавление столбца
-* [[yii\db\Command::renameColumn()|renameColumn()]]: переименование столбца
-* [[yii\db\Command::dropColumn()|dropColumn()]]: удаление столбца
-* [[yii\db\Command::alterColumn()|alterColumn()]]: преобразование столбца
-* [[yii\db\Command::addPrimaryKey()|addPrimaryKey()]]: добавление первичного ключа
-* [[yii\db\Command::dropPrimaryKey()|dropPrimaryKey()]]: удаление первичного ключа
-* [[yii\db\Command::addForeignKey()|addForeignKey()]]: добавление внешнего ключа
-* [[yii\db\Command::dropForeignKey()|dropForeignKey()]]: удаление внешнего ключа
-* [[yii\db\Command::createIndex()|createIndex()]]: создания индекса
-* [[yii\db\Command::dropIndex()|dropIndex()]]: удаление индекса
+- [[yii\db\Command::createTable()|createTable()]]: создание таблицы
+- [[yii\db\Command::renameTable()|renameTable()]]: переименование таблицы
+- [[yii\db\Command::dropTable()|dropTable()]]: удаление таблицы
+- [[yii\db\Command::truncateTable()|truncateTable()]]: удаление всех записей в таблице
+- [[yii\db\Command::addColumn()|addColumn()]]: добавление столбца
+- [[yii\db\Command::renameColumn()|renameColumn()]]: переименование столбца
+- [[yii\db\Command::dropColumn()|dropColumn()]]: удаление столбца
+- [[yii\db\Command::alterColumn()|alterColumn()]]: преобразование столбца
+- [[yii\db\Command::addPrimaryKey()|addPrimaryKey()]]: добавление первичного ключа
+- [[yii\db\Command::dropPrimaryKey()|dropPrimaryKey()]]: удаление первичного ключа
+- [[yii\db\Command::addForeignKey()|addForeignKey()]]: добавление внешнего ключа
+- [[yii\db\Command::dropForeignKey()|dropForeignKey()]]: удаление внешнего ключа
+- [[yii\db\Command::createIndex()|createIndex()]]: создания индекса
+- [[yii\db\Command::dropIndex()|dropIndex()]]: удаление индекса
 
 Эти методы могут быть использованы, как указано ниже:
 

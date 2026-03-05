@@ -1,5 +1,4 @@
-Caché de Páginas
-================
+# Caché de Páginas
 
 La caché de páginas se refiere a guardar el contenido de toda una página en el almacenamiento de caché del servidor.
 Posteriormente, cuando la misma página sea requerida de nuevo, su contenido será devuelto desde la caché en vez de

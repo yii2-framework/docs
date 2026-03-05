@@ -1,20 +1,17 @@
-データ・ウィジェット
-====================
+# データ・ウィジェット
 
 Yii はデータを表示するために使うことが出来る一連の [ウィジェット](structure-widgets.md) を提供しています。
 [DetailView](#detail-view) は、単一のレコードのデータを表示するのに使うことが出来ます。
 それに対して、[ListView](#list-view) と [GridView](#grid-view) は、複数のデータ・レコードをリストまたはテーブルで表示することが出来るもので、
 ページネーション、並べ替え、フィルタリングなどの機能を提供するものです。
 
-
-DetailView <span id="detail-view"></span>
-----------
+## DetailView <span id="detail-view"></span>
 
 DetailView は単一のデータ [[yii\widgets\DetailView::$model|モデル]] の詳細を表示します。
 
 モデルを標準的な書式で表示する場合 (例えば、全てのモデル属性をそれぞれテーブルの一行として表示する場合) に最も適しています。
 モデルは [[\yii\base\Model]] またはそのサブ・クラス、例えば [アクティブ・レコード](db-active-record.md) のインスタンスか、連想配列かのどちらかにすることが出来ます。
-  
+
 DetailView は [[yii\widgets\DetailView::$attributes]] プロパティを使って、モデルのどの属性が表示されるべきか、また、どういうフォーマットで表示されるべきかを決定します。
 利用できるフォーマットのオプションについては、[フォーマッタのセクション](output-formatting.md) を参照してください。
 
@@ -59,8 +56,7 @@ echo DetailView::widget([
 ]);
 ```
 
-ListView <span id="list-view"></span>
---------
+## ListView <span id="list-view"></span>
 
 [[yii\widgets\ListView|ListView]] ウィジェットは、[データ・プロバイダ](output-data-providers.md) からのデータを表示するのに使用されます。
 各データ・モデルは指定された [[yii\widgets\ListView::$itemView|ビュー・ファイル]] を使って表示されます。
@@ -87,7 +83,6 @@ echo ListView::widget([
 
 `_post` ビューは次のような内容を含むことが出来ます。
 
-
 ```php
 <?php
 use yii\helpers\Html;
@@ -96,7 +91,7 @@ use yii\helpers\HtmlPurifier;
 <div class="post">
     <h2><?= Html::encode($model->title) ?></h2>
 
-    <?= HtmlPurifier::process($model->text) ?>    
+    <?= HtmlPurifier::process($model->text) ?>
 </div>
 ```
 
@@ -123,9 +118,7 @@ echo ListView::widget([
 
 このようにすると、これらをビューで変数として利用できるようになります。
 
-
-GridView <span id="grid-view"></span>
---------
+## GridView <span id="grid-view"></span>
 
 データ・グリッドすなわち [[yii\grid\GridView|GridView]] は Yii の最も強力なウィジェットの一つです。これは、システムの管理セクションを素速く作らねばならない時に、
 この上なく便利なものです。このウィジェットは [データ・プロバイダ](output-data-providers.md) からデータを受けて、
@@ -153,7 +146,6 @@ echo GridView::widget([
 
 上記のコードは、最初にデータ・プロバイダを作成し、次に GridView を使って、データ・プロバイダから受け取る全ての行の全ての属性を表示するものです。
 表示されるテーブルには、特に何も設定しなくても、並べ替えとページネーションの機能が装備されます。
-
 
 ### グリッドのカラム <span id="grid-columns"></span>
 
@@ -184,7 +176,6 @@ echo GridView::widget([
 
 構成情報の [[yii\grid\GridView::columns|columns]] の部分が指定されない場合は、Yii は、
 データ・プロバイダのモデルの表示可能な全てのカラムを表示しようとすることに注意してください。
-
 
 ### カラム・クラス <span id="column-classes"></span>
 
@@ -222,7 +213,6 @@ Yii によって提供されるカラム・クラスを以下で見ていきま�
 - [[yii\grid\Column::footerOptions|footerOptions]]
 - [[yii\grid\Column::filterOptions|filterOptions]]
 - [[yii\grid\Column::contentOptions|contentOptions]]
-
 
 #### データ・カラム <span id="data-column"></span>
 
@@ -289,7 +279,7 @@ echo GridView::widget([
 - [[yii\grid\ActionColumn::controller|controller]] は、アクションを処理すべきコントローラの ID です。
   設定されていない場合は、現在アクティブなコントローラが使われます。
 - [[yii\grid\ActionColumn::template|template]] は、アクション・カラムの各セルを構成するのに使用されるテンプレートを定義します。
-  波括弧に囲まれたトークンは、コントローラのアクション ID として扱われます (アクション・カラムのコンテキストでは *ボタンの名前* とも呼ばれます)。
+  波括弧に囲まれたトークンは、コントローラのアクション ID として扱われます (アクション・カラムのコンテキストでは _ボタンの名前_ とも呼ばれます)。
   これらは、[[yii\grid\ActionColumn::$buttons|buttons]] によって定義される、対応するボタン表示コールバックによって置き換えられます。
   例えば、`{view}` というトークンは、`buttons['view']` のコールバックの結果によって置き換えられます。
   コールバックが見つからない場合は、トークンは空文字列によって置き換えられます。デフォルトのテンプレートは `{view} {update} {delete}` です。
@@ -350,7 +340,7 @@ echo GridView::widget([
 選択された行は、次の JavaScript コードを呼んで取得することが出来ます。
 
 ```javascript
-var keys = $('#grid').yiiGridView('getSelectedRows');
+var keys = $("#grid").yiiGridView("getSelectedRows");
 // keys は選択された行と関連付けられたキーの配列
 ```
 
@@ -367,7 +357,6 @@ echo GridView::widget([
         ['class' => 'yii\grid\SerialColumn'], // <-- ここ
         // ...
 ```
-
 
 ### データを並べ替える <span id="sorting-data"></span>
 
@@ -506,7 +495,7 @@ use yii\widgets\ActiveForm;
 ```
 
 > Note: Gii を使って CRUD コードを生成する場合、デフォルトで、独立したフィルタ・フォーム (`_search.php`) が生成されます。
-  ただし、`index.php` ビューの中ではコメント・アウトされています。コメントを外せば、すぐに使うことが出来ます。
+> ただし、`index.php` ビューの中ではコメント・アウトされています。コメントを外せば、すぐに使うことが出来ます。
 
 独立したフィルタ・フォームは、グリッド・ビューに表示されないフィールドによってフィルタをかけたり、
 または日付の範囲のような特殊なフィルタ条件を使う必要があったりする場合に便利です。
@@ -701,8 +690,7 @@ class UserView extends ActiveRecord
 - 並べ替えとフィルタリングの条件をいろいろと定義する必要はありません。全てそのままで動きます。
 - データサイズが小さく、実行される SQL クエリの数が少ない (通常なら全てのリレーションについて一つずつ必要になる追加のクエリが要らない) ため、非常に高速になり得ます。
 - これは SQL ビューにかぶせた単純な UI に過ぎないもので、エンティティに含まれるドメイン・ロジックを欠いています。
-従って、`isActive` や `isDeleted` などのような UI に影響するメソッドがある場合は、それらをこのクラスの中に複製する必要があります。
-
+  従って、`isActive` や `isDeleted` などのような UI に影響するメソッドがある場合は、それらをこのクラスの中に複製する必要があります。
 
 ### 一つのページに複数のグリッド・ビュー <span id="multiple-gridviews"></span>
 
@@ -776,7 +764,6 @@ yii gii/crud --controllerClass="backend\\controllers\PostController" \
 これによって、[[yii\grid\GridView|GridView]] または [[yii\widgets\ListView|ListView]]
 を囲む [[yii\widgets\Pjax|Pjax]] ウィジェットが生成されます。
 
-さらに読むべき文書
-------------------
+## さらに読むべき文書
 
 - Arno Slatius による [Rendering Data in Yii 2 with GridView and ListView](https://www.sitepoint.com/rendering-data-in-yii-2-with-gridview-and-listview/)

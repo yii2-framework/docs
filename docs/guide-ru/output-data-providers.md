@@ -1,20 +1,19 @@
-Провайдеры данных
-==============
+# Провайдеры данных
 
-В разделах [Постраничное разделение данных](output-pagination.md) и [Сортировка](output-sorting.md) было описано, 
+В разделах [Постраничное разделение данных](output-pagination.md) и [Сортировка](output-sorting.md) было описано,
 как сделать возможность для конечных пользователей, чтобы они могли выбирать определённую страницу для вывода данных и
 сортировку их по некоторым колонкам.
 
-Провайдер данных это класс, который реализует [[yii\data\DataProviderInterface]]. Такая реализация поддерживает в основном 
+Провайдер данных это класс, который реализует [[yii\data\DataProviderInterface]]. Такая реализация поддерживает в основном
 разбивку на страницы и сортировку. Они обычно используются для работы [виджетов данных](output-data-widgets.md), что позволяет
 конечным пользователям интерактивно использовать сортировку данных и их разбивку на страницы.
 
 В Yii реализованы следующие классы провайдеров данных:
 
-* [[yii\data\ActiveDataProvider]]: использует [[yii\db\Query]] или [[yii\db\ActiveQuery]] для запроса данных из базы данных,
-возвращая их в виде массива или экземпляров [Active Record](db-active-record.md).
-* [[yii\data\SqlDataProvider]]: выполняет запрос SQL к базе данных и возвращает результат в виде массива.
-* [[yii\data\ArrayDataProvider]]: принимает большой массив и возвращает выборку из него с возможностью сортировки и разбивки
+- [[yii\data\ActiveDataProvider]]: использует [[yii\db\Query]] или [[yii\db\ActiveQuery]] для запроса данных из базы данных,
+  возвращая их в виде массива или экземпляров [Active Record](db-active-record.md).
+- [[yii\data\SqlDataProvider]]: выполняет запрос SQL к базе данных и возвращает результат в виде массива.
+- [[yii\data\ArrayDataProvider]]: принимает большой массив и возвращает выборку из него с возможностью сортировки и разбивки
   на страницы.
 
 Использование всех этих провайдеров данных имеет общую закономерность:
@@ -50,14 +49,14 @@ echo yii\grid\GridView::widget([
 ]);
 ```
 
-Эти провайдеры данных в некоторой степени различаются по использовании, в зависимости от источника данных. Далее 
+Эти провайдеры данных в некоторой степени различаются по использовании, в зависимости от источника данных. Далее
 опишем более подробно использование каждого провайдера данных.
 
-## ActiveDataProvider <span id="active-data-provider"></span> 
+## ActiveDataProvider <span id="active-data-provider"></span>
 
 Для использования [[yii\data\ActiveDataProvider]], необходимо настроить его свойство [[yii\data\ActiveDataProvider::query|query]].
-Оно принимает любой объект [[yii\db\Query]] или [[yii\db\ActiveQuery]]. Если использовать первый, то данные будут возвращены в 
-виде массивов, если второй - данные также могут быть возвращены в виде массивов, а также в виде экземпляров 
+Оно принимает любой объект [[yii\db\Query]] или [[yii\db\ActiveQuery]]. Если использовать первый, то данные будут возвращены в
+виде массивов, если второй - данные также могут быть возвращены в виде массивов, а также в виде экземпляров
 [Active Record](db-active-record.md). Например:
 
 ```php
@@ -73,7 +72,7 @@ $provider = new ActiveDataProvider([
     'sort' => [
         'defaultOrder' => [
             'created_at' => SORT_DESC,
-            'title' => SORT_ASC, 
+            'title' => SORT_ASC,
         ]
     ],
 ]);
@@ -87,12 +86,12 @@ $posts = $provider->getModels();
 ```php
 use yii\db\Query;
 
-$query = (new Query())->from('post')->where(['status' => 1]); 
+$query = (new Query())->from('post')->where(['status' => 1]);
 ```
 
 > Note: Если query содержит условия сортировки в `orderBy`, то новые условия, полученные от конечных пользователей
-  (через настройки `sort`) будут добавлены к существующим условиям в `orderBy`. Любые условия в `limit` и `offset` 
-  будут переписаны запросом конечного пользователя к различным страницам (через конфигурацию  `pagination`).
+> (через настройки `sort`) будут добавлены к существующим условиям в `orderBy`. Любые условия в `limit` и `offset`
+> будут переписаны запросом конечного пользователя к различным страницам (через конфигурацию `pagination`).
 
 По умолчанию [[yii\data\ActiveDataProvider]] использует компонент приложения `db` для подключения к базе данных. Можно
 использовать разные базы данных, настроив подключение через конфигурацию свойства [[yii\data\ActiveDataProvider::db]].
@@ -100,8 +99,8 @@ $query = (new Query())->from('post')->where(['status' => 1]);
 ## SqlDataProvider <span id="sql-data-provider"></span>
 
 [[yii\data\SqlDataProvider]] работает с сырыми запросами SQL, которые используются для извлечение необходимых данных.
-Основываясь на спецификации из [[yii\data\SqlDataProvider::sort|sort]] и  [[yii\data\SqlDataProvider::pagination|pagination]],
-провайдер данных будет добавлять конструкции `ORDER BY` и `LIMIT` к SQL-запросу, для возврата только запрошенной 
+Основываясь на спецификации из [[yii\data\SqlDataProvider::sort|sort]] и [[yii\data\SqlDataProvider::pagination|pagination]],
+провайдер данных будет добавлять конструкции `ORDER BY` и `LIMIT` к SQL-запросу, для возврата только запрошенной
 страницы данных с учётом определённой сортировки.
 
 Для использования [[yii\data\SqlDataProvider]], необходимо настроить свойства [[yii\data\SqlDataProvider::sql|sql]] и
@@ -135,15 +134,15 @@ $models = $provider->getModels();
 ```
 
 > Совет: Свойство [[yii\data\SqlDataProvider::totalCount|totalCount]] обязательно только тогда, когда вам нужна разбивка
-на страницы. Всё потому, что запрос SQL [[yii\data\SqlDataProvider::sql|sql]] будет изменяться провайдером данных для возврата
-только текущей запрошенной страницы. Провайдеру необходимо знать общее количество данных в запросе для корректного 
-вычисления разбивки на доступные страницы.
+> на страницы. Всё потому, что запрос SQL [[yii\data\SqlDataProvider::sql|sql]] будет изменяться провайдером данных для возврата
+> только текущей запрошенной страницы. Провайдеру необходимо знать общее количество данных в запросе для корректного
+> вычисления разбивки на доступные страницы.
 
 ## ArrayDataProvider <span id="array-data-provider"></span>
 
 [[yii\data\ArrayDataProvider]] лучше использовать для работы с большим массивом. Этот провайдер помогает вернуть выборку
 из большого массива с сортировкой по одному или нескольким колонкам. Для использования [[yii\data\ArrayDataProvider]]
-необходимо определить свойство [[yii\data\ArrayDataProvider::allModels|allModels]], как большой массив. Элементы в 
+необходимо определить свойство [[yii\data\ArrayDataProvider::allModels|allModels]], как большой массив. Элементы в
 большом массиве могут быть ассоциативными массивами (например, результаты выборки из [DAO](db-dao.md)) или объекты (экземпляры [Active Record](db-active-record.md)). Например:
 
 ```php
@@ -168,16 +167,15 @@ $provider = new ArrayDataProvider([
 
 // получает строки для текущей запрошенной странице
 $rows = $provider->getModels();
-``` 
+```
 
 > Note: По сравнению с [Active Data Provider](#active-data-provider) и [SQL Data Provider](#sql-data-provider),
-ArrayDataProvider менее эффективный, потому что требует загрузки *всех* данных в память.
-
+> ArrayDataProvider менее эффективный, потому что требует загрузки _всех_ данных в память.
 
 ## Принципы работы с ключами данных <span id="working-with-keys"></span>
 
 При возврате данных с помощью провайдера, часто требуется идентификация каждого элемента по уникальному ключу. Например,
-если данные - это какая-то информация по клиенту, то возможно понадобится использовать ID клиента, как ключ для данных по 
+если данные - это какая-то информация по клиенту, то возможно понадобится использовать ID клиента, как ключ для данных по
 каждому клиенту. Провайдер данных через [[yii\data\DataProviderInterface::getModels()]] может вернуть список из ключей
 и соответствующего набора данных. Например,
 
@@ -218,17 +216,16 @@ $provider = new ActiveDataProvider([
 ]);
 ```
 
-
 ## Создание своего провайдера данных <span id="custom-data-provider"></span>
 
-Для создания своих классов провайдера данных, необходимо реализовать [[yii\data\DataProviderInterface]]. Простой способ 
+Для создания своих классов провайдера данных, необходимо реализовать [[yii\data\DataProviderInterface]]. Простой способ
 сделать это - наследовать [[yii\data\BaseDataProvider]], который помогает сфокусироваться на логике ядра провайдера данных.
 В основном необходимо реализовать следующие методы:
-                                                    
+
 - [[yii\data\BaseDataProvider::prepareModels()|prepareModels()]]: подготавливает модели данных, которые будут доступны
   в текущей странице и возвращает их в виде массива.
-- [[yii\data\BaseDataProvider::prepareKeys()|prepareKeys()]]: принимает массив имеющихся в настоящее время моделей 
-данных и возвращает ключи, связанные с ними.
+- [[yii\data\BaseDataProvider::prepareKeys()|prepareKeys()]]: принимает массив имеющихся в настоящее время моделей
+  данных и возвращает ключи, связанные с ними.
 - [[yii\data\BaseDataProvider::prepareTotalCount()|prepareTotalCount]]: возвращает значение, указывающее общее количество
   моделей данных в провайдере данных.
 
@@ -244,29 +241,29 @@ class CsvDataProvider extends BaseDataProvider
     * @var string имя CSV-файла для чтения
     */
     public $filename;
-    
+
     /**
     * @var string|callable имя столбца с ключом или callback-функция, возвращающие его
     */
     public $key;
-    
+
     /**
     * @var SplFileObject
     */
     protected $fileObject; // с помощью SplFileObject очень удобно искать конкретную строку в файле
-    
-  
+
+
     /**
     * {@inheritdoc}
     */
     public function init()
     {
         parent::init();
-        
+
         // открыть файл
         $this->fileObject = new SplFileObject($this->filename);
     }
-  
+
     /**
     * {@inheritdoc}
     */
@@ -274,7 +271,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         $models = [];
         $pagination = $this->getPagination();
-  
+
         if ($pagination === false) {
             // в случае отсутствия разбивки на страницы - прочитать все строки
             while (!$this->fileObject->eof()) {
@@ -286,16 +283,16 @@ class CsvDataProvider extends BaseDataProvider
             $pagination->totalCount = $this->getTotalCount();
             $this->fileObject->seek($pagination->getOffset());
             $limit = $pagination->getLimit();
-  
+
             for ($count = 0; $count < $limit; ++$count) {
                 $models[] = $this->fileObject->fgetcsv();
                 $this->fileObject->next();
             }
         }
-  
+
         return $models;
     }
-  
+
     /**
     * {@inheritdoc}
     */
@@ -303,7 +300,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         if ($this->key !== null) {
             $keys = [];
-  
+
             foreach ($models as $model) {
                 if (is_string($this->key)) {
                     $keys[] = $model[$this->key];
@@ -311,25 +308,25 @@ class CsvDataProvider extends BaseDataProvider
                     $keys[] = call_user_func($this->key, $model);
                 }
             }
-  
+
             return $keys;
         } else {
             return array_keys($models);
         }
     }
-  
+
     /**
     * {@inheritdoc}
     */
     protected function prepareTotalCount()
     {
         $count = 0;
-  
+
         while (!$this->fileObject->eof()) {
             $this->fileObject->next();
             ++$count;
         }
-  
+
         return $count;
     }
 }

@@ -1,5 +1,4 @@
-Running Applications
-====================
+# Running Applications
 
 After installing Yii, you have a working Yii application that can be accessed via
 the URL `https://hostname/basic/web/index.php` or `https://hostname/index.php`, depending
@@ -7,23 +6,21 @@ upon your configuration. This section will introduce the application's built-in 
 how the code is organized, and how the application handles requests in general.
 
 > Info: For simplicity, throughout this "Getting Started" tutorial, it's assumed that you have set `basic/web`
-  as the document root of your Web server, and configured the URL for accessing
-  your application to be `https://hostname/index.php` or something similar.
-  For your needs, please adjust the URLs in our descriptions accordingly.
-  
+> as the document root of your Web server, and configured the URL for accessing
+> your application to be `https://hostname/index.php` or something similar.
+> For your needs, please adjust the URLs in our descriptions accordingly.
+
 Note that unlike framework itself, after project template is installed it's all yours. You're free to add or delete
 code and overall modify it as you need.
 
-
-Functionality <span id="functionality"></span>
--------------
+## Functionality <span id="functionality"></span>
 
 The basic application installed contains four pages:
 
-* the homepage, displayed when you access the URL `https://hostname/index.php`,
-* the "About" page,
-* the "Contact" page, which displays a contact form that allows end users to contact you via email,
-* and the "Login" page, which displays a login form that can be used to authenticate end users. Try logging in
+- the homepage, displayed when you access the URL `https://hostname/index.php`,
+- the "About" page,
+- the "Contact" page, which displays a contact form that allows end users to contact you via email,
+- and the "Login" page, which displays a login form that can be used to authenticate end users. Try logging in
   with "admin/admin", and you will find the "Login" main menu item will change to "Logout".
 
 These pages share a common header and footer. The header contains a main menu bar to allow navigation
@@ -36,9 +33,7 @@ Additionally to the web application, there is a console script called `yii`, whi
 This script can be used to run background and maintenance tasks for the application, which are described
 in the [Console Application Section](tutorial-console.md).
 
-
-Application Structure <span id="application-structure"></span>
----------------------
+## Application Structure <span id="application-structure"></span>
 
 The most important directories and files in your application are (assuming the application's root directory is `basic`):
 
@@ -78,9 +73,7 @@ The [application](structure-applications.md) resolves the request with the help 
 and dispatches the request to the MVC elements. [Widgets](structure-widgets.md) are used in the [views](structure-views.md)
 to help build complex and dynamic user interface elements.
 
-
-Request Lifecycle <span id="request-lifecycle"></span>
------------------
+## Request Lifecycle <span id="request-lifecycle"></span>
 
 The following diagram shows how an application handles a request.
 
@@ -88,9 +81,9 @@ The following diagram shows how an application handles a request.
 
 1. A user makes a request to the [entry script](structure-entry-scripts.md) `web/index.php`.
 2. The entry script loads the application [configuration](concept-configurations.md) and creates
-  an [application](structure-applications.md) instance to handle the request.
+   an [application](structure-applications.md) instance to handle the request.
 3. The application resolves the requested [route](runtime-routing.md) with the help of
-  the [request](runtime-requests.md) application component.
+   the [request](runtime-requests.md) application component.
 4. The application creates a [controller](structure-controllers.md) instance to handle the request.
 5. The controller creates an [action](structure-controllers.md) instance and performs the filters for the action.
 6. If any filter fails, the action is cancelled.

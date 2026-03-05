@@ -1,21 +1,19 @@
-Ресурсы
-=========
+# Ресурсы
 
-RESTful API строятся вокруг доступа к *ресурсам* и управления ими. Вы можете думать о ресурсах как
+RESTful API строятся вокруг доступа к _ресурсам_ и управления ими. Вы можете думать о ресурсах как
 о [моделях](structure-models.md) из [MVC](https://ru.wikipedia.org/wiki/Model-View-Controller).
 
 Хотя не существует никаких ограничений на то, как представить ресурс, в Yii ресурсы обычно представляются
 как объекты [[yii\base\Model]] или дочерние классы (например [[yii\db\ActiveRecord]]), потому как:
 
-* [[yii\base\Model]] реализует интерфейс [[yii\base\Arrayable]], который позволяет задать способ отдачи данных
+- [[yii\base\Model]] реализует интерфейс [[yii\base\Arrayable]], который позволяет задать способ отдачи данных
   ресурса через RESTful API.
-* [[yii\base\Model]] поддерживает [валидацию](input-validation.md), что полезно для RESTful API реализующего ввод данных.
-* [[yii\db\ActiveRecord]] даёт мощную поддержку работы с БД, что актуально если данные ресурса хранятся в ней.
+- [[yii\base\Model]] поддерживает [валидацию](input-validation.md), что полезно для RESTful API реализующего ввод данных.
+- [[yii\db\ActiveRecord]] даёт мощную поддержку работы с БД, что актуально если данные ресурса хранятся в ней.
 
 В этом разделе, мы сосредоточимся на том, как при помощи класса ресурса, наследуемого от [[yii\base\Model]]
 (или дочерних классов) задать какие данные будут возвращаться RESTful API. Если класс ресурса не наследуется от
 [[yii\base\Model]], возвращаются все его public свойства.
-
 
 ## Поля <span id="fields"></span>
 
@@ -42,7 +40,6 @@ http://localhost/users?expand=profile
 // вернёт только id, email и profile, если они объявлены в fields() и extraFields()
 http://localhost/users?fields=id,email&expand=profile
 ```
-
 
 ### Переопределение `fields()` <span id="overriding-fields"></span>
 
@@ -88,7 +85,6 @@ public function fields()
 > только безопасные данные. В противном случае для исключения небезопасных полей необходимо переопределить метод
 > `fields()`. В приведённом выше примере мы исключаем `auth_key`, `password_hash` и `password_reset_token`.
 
-
 ### Переопределение `extraFields()` <span id="overriding-extra-fields"></span>
 
 По умолчанию, [[yii\base\Model::extraFields()]] и [[yii\db\ActiveRecord::extraFields()]] возвращают пустой массив.
@@ -124,7 +120,6 @@ public function extraFields()
 ]
 ```
 
-
 ## Ссылки <span id="links"></span>
 
 Согласно [HATEOAS](https://ru.wikipedia.org/wiki/HATEOAS), расшифровывающемуся как Hypermedia as the Engine of Application State,
@@ -134,7 +129,7 @@ RESTful API должны возвращать достаточно информ�
 
 Поддержку HATEOAS в ваши классы ресурсов можно добавить реализовав интерфейс [[yii\web\Linkable]]. Этот интерфейс
 содержит единственный метод [[yii\web\Linkable::getLinks()|getLinks()]], который возвращает список [[yii\web\Link|ссылок]].
-Обычно вы должны вернуть хотя бы ссылку `self` с  URL самого ресурса:
+Обычно вы должны вернуть хотя бы ссылку `self` с URL самого ресурса:
 
 ```php
 use yii\db\ActiveRecord;
@@ -168,10 +163,9 @@ class User extends ActiveRecord implements Linkable
 }
 ```
 
-
 ## Коллекции <span id="collections"></span>
 
-Объекты ресурсов могут группироваться в *коллекции*. Каждая коллекция содержит список объектов ресурсов одного типа.
+Объекты ресурсов могут группироваться в _коллекции_. Каждая коллекция содержит список объектов ресурсов одного типа.
 
 Несмотря на то, что коллекции можно представить в виде массива, удобнее использовать
 [провайдеры данных](output-data-providers.md) так как они поддерживают сортировку и постраничную разбивку.
@@ -199,10 +193,10 @@ class PostController extends Controller
 При отправке ответа RESTful API, [[yii\rest\Serializer]] сериализует массив объектов ресурсов для текущей страницы.
 Кроме того, он добавит HTTP заголовки, содержащие информацию о страницах:
 
-* `X-Pagination-Total-Count`: общее количество ресурсов;
-* `X-Pagination-Page-Count`: количество страниц;
-* `X-Pagination-Current-Page`: текущая страница (начиная с 1);
-* `X-Pagination-Per-Page`: количество ресурсов на страницу;
-* `Link`: набор ссылок, позволяющий клиенту пройти все страницы ресурсов.
+- `X-Pagination-Total-Count`: общее количество ресурсов;
+- `X-Pagination-Page-Count`: количество страниц;
+- `X-Pagination-Current-Page`: текущая страница (начиная с 1);
+- `X-Pagination-Per-Page`: количество ресурсов на страницу;
+- `Link`: набор ссылок, позволяющий клиенту пройти все страницы ресурсов.
 
 Примеры вы можете найти в разделе «[быстрый старт](rest-quick-start.md#trying-it-out)».

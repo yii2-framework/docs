@@ -1,20 +1,19 @@
-Pagination
-==========
+# Pagination
 
 When there are too much data to be displayed on a single page, a common strategy is to display them in multiple
-pages and on each page only display a small portion of the data. This strategy is known as *pagination*.
+pages and on each page only display a small portion of the data. This strategy is known as _pagination_.
 
 Yii uses a [[yii\data\Pagination]] object to represent the information about a pagination scheme. In particular,
 
-* [[yii\data\Pagination::$totalCount|total count]] specifies the total number of data items. Note that this
+- [[yii\data\Pagination::$totalCount|total count]] specifies the total number of data items. Note that this
   is usually much more than the number of data items needed to display on a single page.
-* [[yii\data\Pagination::$pageSize|page size]] specifies how many data items each page contains. The default
+- [[yii\data\Pagination::$pageSize|page size]] specifies how many data items each page contains. The default
   value is 20.
-* [[yii\data\Pagination::$page|current page]] gives the current page number (zero-based). The default value is 0, meaning the first page.
+- [[yii\data\Pagination::$page|current page]] gives the current page number (zero-based). The default value is 0, meaning the first page.
 
 With a fully specified [[yii\data\Pagination]] object, you can retrieve and display data partially. For example,
 if you are fetching data from a database, you can specify the `OFFSET` and `LIMIT` clause of the DB query with
-the corresponding values provided by the pagination. Below is an example, 
+the corresponding values provided by the pagination. Below is an example,
 
 ```php
 use yii\data\Pagination;
@@ -68,4 +67,4 @@ echo $pagination->createUrl(101);
 ```
 
 > Tip: You can customize the name of the `page` query parameter by configuring the
-  [[yii\data\Pagination::pageParam|pageParam]] property when creating the pagination object.
+> [[yii\data\Pagination::pageParam|pageParam]] property when creating the pagination object.

@@ -1,8 +1,7 @@
-Komponen Aplikasi
-=================
+# Komponen Aplikasi
 
 Objek Aplikasi _(Application)_ adalah [service locators](concept-service-locator.md). Objek ini menampung seperangkat
-apa yang kita sebut sebagai *komponen aplikasi* yang menyediakan berbagai layanan untuk menangani proses _request_. Sebagai contoh,
+apa yang kita sebut sebagai _komponen aplikasi_ yang menyediakan berbagai layanan untuk menangani proses _request_. Sebagai contoh,
 _component_ `urlManager` bertanggung jawab untuk menentukan _route_ dari _request_ menuju _controller_ yang sesuai;
 _component_ `db` menyediakan layanan terkait database; dan sebagainya.
 
@@ -46,10 +45,9 @@ Sebagai contoh,
 ```
 
 > Info: Walaupun anda dapat mendaftarkan _component_ aplikasi sebanyak yang anda inginkan, anda harus bijaksana dalam melakukan hal ini.
-  _Component_ aplikasi seperti layaknya variabel global. Menggunakan _component_ aplikasi yang terlalu banyak dapat berpotensi
-  membuat kode anda menjadi rumit untuk diujicoba dan dikelola. Dalam banyak kasus, anda cukup membuat _component_ lokal
-  dan menggunakannya pada saat diperlukan.
-
+> _Component_ aplikasi seperti layaknya variabel global. Menggunakan _component_ aplikasi yang terlalu banyak dapat berpotensi
+> membuat kode anda menjadi rumit untuk diujicoba dan dikelola. Dalam banyak kasus, anda cukup membuat _component_ lokal
+> dan menggunakannya pada saat diperlukan.
 
 ## _Bootstrap Components_ <span id="bootstrapping-components"></span>
 
@@ -73,7 +71,6 @@ Sebagai contoh, konfigurasi aplikasi di bawah ini memastikan bahwa objek _compon
 ]
 ```
 
-
 ## _Component_ Aplikasi Inti <span id="core-application-components"></span>
 
 Yii menentukan seperangkat _component_ aplikasi inti dengan ID tetap dan konfigurasi default. Sebagai contoh,
@@ -86,34 +83,34 @@ Dibawah ini adalah daftar dari _component_ aplikasi inti. Anda dapat mengatur da
 seperti _component_ aplikasi pada umumnya. Ketika anda mengatur _component_ aplikasi inti,
 jika anda tidak mendefinisikan _class_-nya, maka _class_ default yang akan digunakan.
 
-* [[yii\web\AssetManager|assetManager]]: mengatur bundel aset _(asset bundles)_ dan publikasi aset _(asset publishing)_.
+- [[yii\web\AssetManager|assetManager]]: mengatur bundel aset _(asset bundles)_ dan publikasi aset _(asset publishing)_.
   Harap melihat bagian [Pengelolaan Aset](structure-assets.md) untuk informasi lebih lanjut.
-* [[yii\db\Connection|db]]: merepresentasikan sebuah koneksi database yang bisa anda gunakan untuk melakukan _query_ ke database.
+- [[yii\db\Connection|db]]: merepresentasikan sebuah koneksi database yang bisa anda gunakan untuk melakukan _query_ ke database.
   Sebagai catatan, ketika anda mengatur _component_ ini, anda harus menentukan nama _class_ dari _component_ dan _property_ lain dari
   _component_ yang dibutuhkan, seperti [[yii\db\Connection::dsn]].
   Harap melihat bagian [Data Access Objects](db-dao.md) untuk informasi lebih lanjut.
-* [[yii\base\Application::errorHandler|errorHandler]]: menangani error PHP dan _exception_.
+- [[yii\base\Application::errorHandler|errorHandler]]: menangani error PHP dan _exception_.
   Harap melihat bagian [Menangani Error](runtime-handling-errors.md) untuk informasi lebih lanjut.
-* [[yii\i18n\Formatter|formatter]]: memformat data ketika data tersebut ditampilkan ke pengguna. Sebagai contoh, sebuah angka
+- [[yii\i18n\Formatter|formatter]]: memformat data ketika data tersebut ditampilkan ke pengguna. Sebagai contoh, sebuah angka
   mungkin ditampilkan menggunakan separator ribuan, dan tanggal mungkin diformat dalam format panjang.
   Harap melihat bagian [Memformat Data](output-formatting.md) untuk informasi lebih lanjut.
-* [[yii\i18n\I18N|i18n]]: mendukung penerjemahan dan format pesan _(message)_.
+- [[yii\i18n\I18N|i18n]]: mendukung penerjemahan dan format pesan _(message)_.
   Harap melihat bagian [Internasionalisasi](tutorial-i18n.md) untuk informasi lebih lanjut.
-* [[yii\log\Dispatcher|log]]: mengelola target log.
+- [[yii\log\Dispatcher|log]]: mengelola target log.
   Harap melihat bagian [Log](runtime-logging.md) untuk informasi lebih lanjut.
-* [[yii\swiftmailer\Mailer|mailer]]: mendukung pembuatan dan pengiriman email.
+- [[yii\swiftmailer\Mailer|mailer]]: mendukung pembuatan dan pengiriman email.
   Harap melihat bagian [Mail](tutorial-mailing.md) untuk informasi lebih lanjut.
-* [[yii\base\Application::response|response]]: merepresentasikan _response_ yang dikirimkan ke pengguna.
+- [[yii\base\Application::response|response]]: merepresentasikan _response_ yang dikirimkan ke pengguna.
   Harap melihat bagian [Response](runtime-responses.md) untuk informasi lebih lanjut.
-* [[yii\base\Application::request|request]]: merepresentasikan _request_ yang diterima dari pengguna.
+- [[yii\base\Application::request|request]]: merepresentasikan _request_ yang diterima dari pengguna.
   Harap melihat bagian [Request](runtime-requests.md) untuk informasi lebih lanjut.
-* [[yii\web\Session|session]]: merepresentasikan informasi _session_. _Component_ ini hanya tersedia pada
+- [[yii\web\Session|session]]: merepresentasikan informasi _session_. _Component_ ini hanya tersedia pada
   objek [[yii\web\Application|Aplikasi Web]].
   Harap melihat bagian [Session dan Cookie](runtime-sessions-cookies.md) untuk informasi lebih lanjut.
-* [[yii\web\UrlManager|urlManager]]: mendukung penguraian dan pembuatan URL.
+- [[yii\web\UrlManager|urlManager]]: mendukung penguraian dan pembuatan URL.
   Harap melihat bagian [Route dan Pembuatan URL](runtime-routing.md) untuk informasi lebih lanjut.
-* [[yii\web\User|user]]: merepresentasikan informasi otentikasi dari pengguna. _Component_ ini hanya tersedia pada
+- [[yii\web\User|user]]: merepresentasikan informasi otentikasi dari pengguna. _Component_ ini hanya tersedia pada
   objek [[yii\web\Application|Aplikasi Web]].
   Harap melihat bagian [Otentikasi](security-authentication.md) untuk informasi lebih lanjut.
-* [[yii\web\View|view]]: mendukung proses _render view_.
+- [[yii\web\View|view]]: mendukung proses _render view_.
   Harap melihat bagian [View](structure-views.md) untuk informasi lebih lanjut.

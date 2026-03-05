@@ -1,8 +1,6 @@
-URL Helper
-==========
+# URL Helper
 
 URL helper fornece um conjunto de métodos estáticos para o gerenciamento de URLs.
-
 
 ## Obtendo URLs comuns <span id="getting-common-urls"></span>
 
@@ -17,15 +15,14 @@ $httpsAbsoluteHomeUrl = Url::home('https');
 Se nenhum parâmetro for passado, a URL gerada é relativa. Você pode passar `true` para obter uma URL absoluta para a o esquema corrente ou especificar um esquema explicitamente (`https`, `http`).
 
 Para obter a URL base da requisição corrente, use o seguinte :
-  
+
 ```php
 $relativeBaseUrl = Url::base();
 $absoluteBaseUrl = Url::base(true);
 $httpsAbsoluteBaseUrl = Url::base('https');
 ```
 
-O único parâmetro do metódo funciona exatamente da mesma que em  `Url::home()`.
-
+O único parâmetro do metódo funciona exatamente da mesma que em `Url::home()`.
 
 ## Criando URLs <span id="creating-urls"></span>
 
@@ -34,7 +31,7 @@ Afim de criar ma URL para uma rota utilize o metódo `Url::toRoute()`. O metódo
 ```php
 $url = Url::toRoute(['product/view', 'id' => 42]);
 ```
-  
+
 Você pode especificar uma URL como string, ou seja, `site/index`. Você pode também usar um array se você precisa especificar parâmetros adicionais para a URL a ser criada. O formato do array deve ser:
 
 ```php
@@ -56,7 +53,7 @@ Uma rota pode ser absoluta ou relativa. Uma rota absoluta tem uma barra inicial 
   e serão precedidas por [[\yii\web\Controller::uniqueId]];
 - Se a rota não tem uma barra inicial (e.g. `site/index`), isto é considerado um URL relativa para para o modulo corrente
   e será precedido por [[\yii\base\Module::uniqueId|uniqueId]].
-  
+
 A partir da versão 2.0.2, você pode espeficiar uma rota como um [alias](concept-aliases.md). Se esse é o caso,
 o alias será primeiro convertido para rota atual que irá então ser transformado em uma rota absoluta de acordo
 às regras acima .
@@ -83,8 +80,8 @@ echo Url::toRoute('site/index', 'https');
 Há um outro método `Url::to()` que é muito semelhante a [[toRoute()]]. A única diferença é que este método requer uma rota a ser especificado como apenas como array. Se for dado uma string, ela será tratada como um URL.
 
 O primeiro argumento pode ser:
-          
-- um array: [[toRoute()]]  irá ser chamado para gerar a URL. Por exemplo:
+
+- um array: [[toRoute()]] irá ser chamado para gerar a URL. Por exemplo:
   `['site/index']`, `['post/index', 'page' => 2]`. Por favor consulte [[toRoute()]] para mais detalhes de como especificar uma rota.
 - uma string com inicio `@`: ele é tratado como um alias, e as strings correspondentes ao alias serão devolvidos.
 - uma string vazia: A URL da requisição corrente será retornado;
@@ -137,14 +134,13 @@ echo Url::current(['src' => null]);
 echo Url::current(['id' => 100]);
 ```
 
-
 ## Relembrar URLs <span id="remember-urls"></span>
 
 Há casos em que você precisa se lembrar URL e depois usá-lo durante o processamento de uma das requisições sequenciais.
 Pode ser conseguida da seguinte forma:
-  
+
 ```php
-// Remember current URL 
+// Remember current URL
 Url::remember();
 
 // Remember URL specified. See Url::to() for argument format.
@@ -160,11 +156,11 @@ Na próxima requisição, podemos obter URL lembrada da seguinte forma:
 $url = Url::previous();
 $productUrl = Url::previous('product');
 ```
-                        
+
 ## Verificar URLs relativas <span id="checking-relative-urls"></span>
 
 Para saber se a URL é relativa, ou seja, ele não tem informações do host, você pode usar o seguinte código:
-                              
+
 ```php
 $isRelative = Url::isRelative('test/it');
 ```

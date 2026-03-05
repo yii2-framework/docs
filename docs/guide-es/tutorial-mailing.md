@@ -1,5 +1,4 @@
-Envío de Emails
-===============
+# Envío de Emails
 
 > Note: Esta sección se encuentra en desarrollo.
 
@@ -10,9 +9,7 @@ usualmente depende de servicios y librerías externas.
 
 Para la mayoría de los casos, puedes utilizar la extensión oficial [yii2-swiftmailer](https://github.com/yiisoft/yii2-swiftmailer).
 
-
-Configuración
--------------
+## Configuración
 
 La configuración del componente Mail depende de la extensión que hayas elegido.
 En general, la configuración de tu aplicación debería verse así:
@@ -28,9 +25,7 @@ return [
 ];
 ```
 
-
-Uso Básico
-----------
+## Uso Básico
 
 Una vez configurado el componente 'mailer', puedes utilizar el siguiente código para enviar un correo electrónico:
 
@@ -61,8 +56,8 @@ $message->setTo(Yii::$app->params['adminEmail'])
 ```
 
 > Note: cada extensión 'mailer' viene en dos grandes clases: 'Mailer' y 'Message'. 'Mailer' siempre conoce
-  el nombre de clase especifico de 'Message'. No intentes instanciar el objeto 'Message' directamente -
-  siempre utiliza el método `compose()` para ello.
+> el nombre de clase especifico de 'Message'. No intentes instanciar el objeto 'Message' directamente -
+> siempre utiliza el método `compose()` para ello.
 
 Puedes también enviar varios mensajes al mismo tiempo:
 
@@ -78,9 +73,7 @@ Yii::$app->mailer->sendMultiple($messages);
 
 Algunas extensiones en particular pueden beneficiarse de este enfoque, utilizando mensaje simple de red, etc.
 
-
-Componer el contenido del mensaje
----------------------------------
+## Componer el contenido del mensaje
 
 Yii permite componer el contenido de los mensajes de correo a través de archivos de vista especiales.
 Por defecto, estos archivos deben estar ubicados en la ruta '@app/mail'.
@@ -93,7 +86,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 
-/** 
+/**
   * @var \yii\web\View $this instancia del componente view
   * @var \yii\mail\BaseMessage $message instancia del mensaje de correo recién creado
   */
@@ -170,9 +163,7 @@ use yii\helpers\Html;
 <?php $this->endPage() ?>
 ```
 
-
-Adjuntar archivos
------------------
+## Adjuntar archivos
 
 Puedes adjuntar archivos al mensaje utilizando los métodos `attach()` y `attachContent()`:
 
@@ -186,9 +177,7 @@ $message->attach('/path/to/file.pdf');
 $message->attachContent('Contenido adjunto', ['fileName' => 'attach.txt', 'contentType' => 'text/plain']);
 ```
 
-
-Incrustar imágenes
-------------------
+## Incrustar imágenes
 
 Puedes incrustar imágenes en el mensaje utilizando el método `embed()`. Este método devuelve el id del adjunto,
 que debería ser utilizado como tag 'img'.
@@ -206,9 +195,7 @@ Entonces, dentro de tu archivo de vista, puedes utilizar el siguiente código:
 <img src="<?= $message->embed($imageFileName); ?>">
 ```
 
-
-Testear y depurar
------------------
+## Testear y depurar
 
 Un desarrollador a menudo necesita comprobar qué emails están siendo enviados por la aplicación, cuál es su contenido y otras cosas.
 Yii concede dicha habilidad vía `yii\mail\BaseMailer::useFileTransport`. Si se habilita, esta opción hace que
@@ -221,11 +208,9 @@ Un archivo de mensaje puede ser abierto por un editor de texto común, de modo q
 Este mecanismo en sí puede comprobarse al depurar la aplicación o al ejecutar un test de unidad.
 
 > Note: el archivo de contenido de mensaje es compuesto vía `\yii\mail\MessageInterface::toString()`, por lo que depende de la extensión
-  actual de correo utilizada en tu aplicación.
+> actual de correo utilizada en tu aplicación.
 
-
-Crear tu solución personalizada de correo
------------------------------------------
+## Crear tu solución personalizada de correo
 
 Para crear tu propia solución de correo, necesitas crear 2 clases: una para 'Mailer' y
 otra para 'Message'.

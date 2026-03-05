@@ -1,5 +1,4 @@
-Extensiones
-===========
+# Extensiones
 
 Las extensiones son paquetes de software redistribuibles diseñados especialmente para ser usados en aplicaciones Yii y
 proporcionar características listas para ser usadas. Por ejemplo, la extensión [yiisoft/yii2-debug](tool-debugger.md)
@@ -8,8 +7,8 @@ ayudar a comprender más fácilmente como se han generado las páginas. Se puede
 proceso de desarrollo. También se puede empaquetar código propio para compartir nuestro trabajo con otra gente.
 
 > Info: Usamos el termino "extensión" para referirnos a los paquetes específicos de software Yii. Para
-  propósitos generales los paquetes de software pueden usarse sin Yii, nos referiremos a ellos usando los términos
-  "paquetes" (package) o "librerías" (library).
+> propósitos generales los paquetes de software pueden usarse sin Yii, nos referiremos a ellos usando los términos
+> "paquetes" (package) o "librerías" (library).
 
 ## Uso de Extensiones <span id="using-extensions"></span>
 
@@ -17,7 +16,7 @@ Para usar una extension, primero tenemos que instalarla. La mayoría de extensio
 [Composer](https://getcomposer.org/) que se pueden instalar mediante los dos simples siguientes pasos:
 
 1. modificar el archivo `composer.json` de la aplicación y especificar que extensiones (paquetes Composer) se quieren
-  instalar.
+   instalar.
 2. ejecutar `composer install` para instalar las extensiones especificadas.
 
 Hay que tener en cuenta que es necesaria la instalación de [Composer](https://getcomposer.org/) si no la tenemos
@@ -38,13 +37,13 @@ a continuación:
 
 ```json
 {
-    // ...
+  // ...
 
-    "require": {
-        // ... otras dependencias
+  "require": {
+    // ... otras dependencias
 
-        "yiisoft/yii2-imagine": "~2.0.0"
-    }
+    "yiisoft/yii2-imagine": "~2.0.0"
+  }
 }
 ```
 
@@ -53,8 +52,8 @@ Después de la instalación, debemos encontrar el directorio `yiisoft/yii2-imagi
 instalados.
 
 > Info: La extensión `yiisoft/yii2-imagine` es una extensión del núcleo (core) desarrollada y mantenida por el
-  equipo de desarrollo de Yii. Todas las extensiones del núcleo se hospedan en [Packagist](https://packagist.org/) y
-  son nombradas como `yiisoft/yii2-xyz`, donde `zyz` varia según la extensión.
+> equipo de desarrollo de Yii. Todas las extensiones del núcleo se hospedan en [Packagist](https://packagist.org/) y
+> son nombradas como `yiisoft/yii2-xyz`, donde `zyz` varia según la extensión.
 
 Ahora ya podemos usar las extensiones instaladas como si fueran parte de nuestra aplicación. El siguiente ejemplo
 muestra como se puede usar la clase `yii\imagine\Image` proporcionada por la extensión `yiisoft/yii2-imagine`:
@@ -69,21 +68,20 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 ```
 
 > Info: Las clases de extensiones se cargan automáticamente gracias a
-  [autocarga de clases de Yii](concept-autoloading.md).
+> [autocarga de clases de Yii](concept-autoloading.md).
 
 ### Instalación Manual de Extensiones <span id="installing-extensions-manually"></span>
 
 En algunas ocasiones excepcionales es posible que tengamos que instalar alguna o todas las extensiones manualmente, en lugar de utilizar Composer. Para lograrlo, debemos:
-
 
 1. descargar los archivos de la extensión y descomprimirlos en la carpeta `vendor`.
 2. instalar la clase de autocarga proporcionada por las extensiones, si existe.
 3. descargar e instalar todas las extensiones dependientes como siguiendo estas mismas instrucciones.
 
 Si una extensión no proporciona clase de autocarga pero sigue el estándar
-[PSR-4](https://www.php-fig.org/psr/psr-4/),  se puede usar la clase de autocarga proporcionada por Yii para cargar
+[PSR-4](https://www.php-fig.org/psr/psr-4/), se puede usar la clase de autocarga proporcionada por Yii para cargar
 automáticamente las clases de las extensiones. Todo lo que se tiene que hacer es declarar un
-[alias de raíz (root)](concept-aliases.md#defining-aliases)  para las extensiones del directorio raíz. Por ejemplo,
+[alias de raíz (root)](concept-aliases.md#defining-aliases) para las extensiones del directorio raíz. Por ejemplo,
 asumiendo que tenemos instalada una extensión en el directorio `vendor/mycompany/myext`, y las clases de extensión se
 encuentran en el namespace `myext`, entonces podemos incluir el siguiente código en nuestra configuración de
 aplicación:
@@ -108,12 +106,12 @@ instalarse más fácilmente por los otros usuarios, como se ha descrito en la an
 Más adelante se encuentran los pasos básicos que deben seguirse para crear una extensión como paquete Composer.
 
 1. Crear un proyecto para la extensión y alojarlo en un repositorio con VCS (Sistema de Control de Versiones), como
-  puede ser [github.com](https://github.com). El trabajo de desarrollo y el mantenimiento debe efectuarse en este
-  repositorio.
+   puede ser [github.com](https://github.com). El trabajo de desarrollo y el mantenimiento debe efectuarse en este
+   repositorio.
 2. En el directorio raíz del repositorio debe encontrarse el archivo `composer.json` que es requerido por Composer. Se
-  pueden encontrar más detalles en la siguiente subsección.
+   pueden encontrar más detalles en la siguiente subsección.
 3. Registrar la extensión en un repositorio de Composer como puede ser [Packagist](https://packagist.org/), para que
-  los otros usuarios puedan encontrarlo e instalarla mediante Composer.
+   los otros usuarios puedan encontrarlo e instalarla mediante Composer.
 
 ### `composer.json` <span id="composer-json"></span>
 
@@ -124,41 +122,41 @@ muestra el archivo `composer.json` para la extensión `yiisoft/yii2-imagine`:
 
 ```json
 {
-    // nombre del paquete
-    "name": "yiisoft/yii2-imagine",
+  // nombre del paquete
+  "name": "yiisoft/yii2-imagine",
 
-    // tipo de paquete
-    "type": "yii2-extension",
+  // tipo de paquete
+  "type": "yii2-extension",
 
-    "description": "The Imagine integration for the Yii framework",
-    "keywords": ["yii2", "imagine", "image", "helper"],
-    "license": "BSD-3-Clause",
-    "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?labels=ext%3Aimagine",
-        "forum": "https://forum.yiiframework.com/",
-        "wiki": "https://www.yiiframework.com/wiki/",
-        "irc": "ircs://irc.libera.chat:6697/yii",
-        "source": "https://github.com/yiisoft/yii2"
-    },
-    "authors": [
-        {
-            "name": "Antonio Ramirez",
-            "email": "amigo.cobos@gmail.com"
-        }
-    ],
-
-    // dependencias del paquete
-    "require": {
-        "yiisoft/yii2": "~2.0.0",
-        "imagine/imagine": "v0.5.0"
-    },
-
-    // especificaciones de la autocarga de clases
-    "autoload": {
-        "psr-4": {
-            "yii\\imagine\\": ""
-        }
+  "description": "The Imagine integration for the Yii framework",
+  "keywords": ["yii2", "imagine", "image", "helper"],
+  "license": "BSD-3-Clause",
+  "support": {
+    "issues": "https://github.com/yiisoft/yii2/issues?labels=ext%3Aimagine",
+    "forum": "https://forum.yiiframework.com/",
+    "wiki": "https://www.yiiframework.com/wiki/",
+    "irc": "ircs://irc.libera.chat:6697/yii",
+    "source": "https://github.com/yiisoft/yii2"
+  },
+  "authors": [
+    {
+      "name": "Antonio Ramirez",
+      "email": "amigo.cobos@gmail.com"
     }
+  ],
+
+  // dependencias del paquete
+  "require": {
+    "yiisoft/yii2": "~2.0.0",
+    "imagine/imagine": "v0.5.0"
+  },
+
+  // especificaciones de la autocarga de clases
+  "autoload": {
+    "psr-4": {
+      "yii\\imagine\\": ""
+    }
+  }
 }
 ```
 
@@ -195,15 +193,15 @@ estables de nuestras extensiones.
 
 La mayoría de paquetes JavaScript/CSS se gestionan usando [Bower](https://bower.io/) y/o [NPM](https://www.npmjs.com/),
 en lugar de Composer. Yii utiliza el [Composer asset plugin](https://github.com/fxpio/composer-asset-plugin)
-  para habilitar la gestión de estos tipos de paquetes a través de Composer. Si la extensión depende de un paquete
-  Bower, se puede, simplemente, añadir la dependencia de el archivo `composer.json` como se muestra a continuación:
+para habilitar la gestión de estos tipos de paquetes a través de Composer. Si la extensión depende de un paquete
+Bower, se puede, simplemente, añadir la dependencia de el archivo `composer.json` como se muestra a continuación:
 
 ```json
 {
-    // dependencias del paquete
-    "require": {
-        "bower-asset/jquery": ">=1.11.*"
-    }
+  // dependencias del paquete
+  "require": {
+    "bower-asset/jquery": ">=1.11.*"
+  }
 }
 ```
 
@@ -223,13 +221,13 @@ Composer, debemos especificar la entrada `autoload` en el archivo `composer.json
 
 ```json
 {
-    // ....
+  // ....
 
-    "autoload": {
-        "psr-4": {
-            "yii\\imagine\\": ""
-        }
+  "autoload": {
+    "psr-4": {
+      "yii\\imagine\\": ""
     }
+  }
 }
 ```
 
@@ -266,7 +264,7 @@ responda a un evento `beginRequest` de la aplicación para ajustar alguna config
 indicar a los usuarios de la extensión que añadan nuestro gestor de eventos para que capture `beginRequest`, es mejor
 hacerlo automáticamente.
 
-Para llevarlo a cabo, podemos crear una *clase de bootstrpping* para implementar [[yii\base\BootstrapInterface]]. Por
+Para llevarlo a cabo, podemos crear una _clase de bootstrpping_ para implementar [[yii\base\BootstrapInterface]]. Por
 ejemplo,
 
 ```php
@@ -291,11 +289,11 @@ a continuación,
 
 ```json
 {
-    // ...
+  // ...
 
-    "extra": {
-        "bootstrap": "myname\\mywidget\\MyBootstrapClass"
-    }
+  "extra": {
+    "bootstrap": "myname\\mywidget\\MyBootstrapClass"
+  }
 }
 ```
 
@@ -374,26 +372,26 @@ actualizar la extensión a mediante el repositorio Composer.
 En los lanzamientos de una extensión, además de archivos de código, también se debe considerar la inclusión los puntos
 mencionados a continuación para facilitar a otra gente el uso de nuestra extensión:
 
-* Un archivo léame (readme) en el directorio raíz: describe que hace la extensión y como instalarla y utilizarla.
+- Un archivo léame (readme) en el directorio raíz: describe que hace la extensión y como instalarla y utilizarla.
   Recomendamos que se escriba en formato [Markdown](https://daringfireball.net/projects/markdown/) y llamarlo
   `readme.md`.
-* Un archivo de registro de cambios (changelog) en el directorio raíz: enumera que cambios se realizan en cada
+- Un archivo de registro de cambios (changelog) en el directorio raíz: enumera que cambios se realizan en cada
   lanzamiento. El archivo puede escribirse en formato Markdown y llamarlo `changelog.md`.
-* Un archivo de actualización (upgrade) en el directorio raíz: da instrucciones de como actualizar desde lanzamientos
+- Un archivo de actualización (upgrade) en el directorio raíz: da instrucciones de como actualizar desde lanzamientos
   antiguos de la extensión. El archivo puede escribirse en formato Markdown y llamarlo `upgrade.md`.
-* Tutoriales, demostraciones, capturas de pantalla, etc: son necesarios si nuestra extensión proporciona muchas
+- Tutoriales, demostraciones, capturas de pantalla, etc: son necesarios si nuestra extensión proporciona muchas
   características que no pueden ser detalladas completamente en el archivo `readme`.
-* Documentación de API: el código debe documentarse debidamente para que otras personas puedan leerlo y entenderlo
+- Documentación de API: el código debe documentarse debidamente para que otras personas puedan leerlo y entenderlo
   fácilmente. Más información acerca de documentación de código en
   [archivo de Objetos de clase](https://github.com/yiisoft/yii2/blob/master/framework/base/BaseObject.php)
 
 > Info: Los comentarios de código pueden ser escritos en formato Markdown. La extensión `yiisoft/yii2-apidoc`
-  proporciona una herramienta para generar buena documentación de API basándose en los comentarios del código.
+> proporciona una herramienta para generar buena documentación de API basándose en los comentarios del código.
 
 > Info: Aunque no es un requerimiento, se recomienda que la extensión se adhiera a ciertos estilos de
-  codificación. Se puede hacer referencia a
-  [estilo de código del núcleo del framework](https://github.com/yiisoft/yii2/blob/master/docs/internals/core-code-style.md) para
-  obtener más detalles.
+> codificación. Se puede hacer referencia a
+> [estilo de código del núcleo del framework](https://github.com/yiisoft/yii2/blob/master/docs/internals/core-code-style.md) para
+> obtener más detalles.
 
 ## Extensiones del Núcleo <span id="core-extensions"></span>
 

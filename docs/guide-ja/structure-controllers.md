@@ -1,5 +1,4 @@
-コントローラ
-============
+# コントローラ
 
 コントローラは [MVC](https://ja.wikipedia.org/wiki/Model_View_Controller) アーキテクチャの一部を構成するものです。
 それは [[yii\base\Controller]] を拡張したクラスのオブジェクトであり、リクエストの処理とレスポンスの生成について責任を負います。
@@ -7,10 +6,9 @@
 入ってきたリクエストのデータを分析し、それを [モデル](structure-models.md) に引き渡して、
 モデルが生成した結果を [ビュー](structure-views.md) に投入し、最終的に外に出て行くレスポンスを生成します。
 
-
 ## アクション <span id="actions"></span>
 
-コントローラは、エンド・ユーザがアドレスを指定して実行をリクエストできる最も基本的なユニットである *アクション* から構成されます。
+コントローラは、エンド・ユーザがアドレスを指定して実行をリクエストできる最も基本的なユニットである _アクション_ から構成されます。
 コントローラは一つまたは複数のアクションを持つことが出来ます。
 
 次の例は、`view` と `create` という二つのアクションを持つ `post` コントローラを示すものです。
@@ -61,15 +59,14 @@ class PostController extends Controller
 両方が成功したときは、新しく作成されたモデルの ID を使って `view` アクションにブラウザをリダイレクトします。
 どちらかが失敗したときは、ユーザが必要なデータを入力できるようにするための `create` ビューを表示します。
 
-
 ## ルート <span id="routes"></span>
 
-エンド・ユーザは、いわゆる *ルート* によって、アクションを指定します。ルートは、次の部分からなる文字列です。
+エンド・ユーザは、いわゆる _ルート_ によって、アクションを指定します。ルートは、次の部分からなる文字列です。
 
-* モジュール ID: この部分は、コントローラがアプリケーションではない [モジュール](structure-modules.md) に属する場合にのみ存在します。
-* [コントローラ ID]((#controller-ids): 同じアプリケーション (または、コントローラがモジュールに属する場合は、同じモジュール)
+- モジュール ID: この部分は、コントローラがアプリケーションではない [モジュール](structure-modules.md) に属する場合にのみ存在します。
+- [コントローラ ID]((#controller-ids): 同じアプリケーション (または、コントローラがモジュールに属する場合は、同じモジュール)
   に属する全てのコントローラの中から、コントローラを一意に特定する文字列。
-* [アクション ID](#action-ids): 同じコントローラに属する全てのアクションの中から、アクションを一意に特定する文字列。
+- [アクション ID](#action-ids): 同じコントローラに属する全てのアクションの中から、アクションを一意に特定する文字列。
 
 ルートは次の形式を取ります。
 
@@ -87,7 +84,6 @@ ModuleID/ControllerID/ActionID
 `site` コントローラの中の `index` アクションが実行されます。
 ルートがどのようにしてアクションとして解決されるかについての詳細は、[ルーティングと URL 生成](runtime-routing.md) のセクションを参照してください。
 
-
 ## コントローラを作成する <span id="creating-controllers"></span>
 
 [[yii\web\Application|ウェブ・アプリケーション]] では、コントローラは [[yii\web\Controller]] またはその子クラスから派生させなければなりません。
@@ -104,7 +100,6 @@ class SiteController extends Controller
 }
 ```
 
-
 ### コントローラ ID <span id="controller-ids"></span>
 
 通常、コントローラは特定のタイプのリソースに関するリクエストを処理するように設計されます。
@@ -120,13 +115,12 @@ class SiteController extends Controller
 サブ・ディレクトリの接頭辞として有効な文字は、小文字または大文字の英字、数字、アンダースコア、そして、フォワード・スラッシュです。
 フォワード・スラッシュは、複数レベルのサブ・ディレクトリの区切り文字として使われます (例えば、`panels/admin`)。
 
-
 ### コントローラ・クラスの命名規則 <span id="controller-class-naming"></span>
 
 コントローラ・クラスの名前は下記の手順に従ってコントローラ ID から導出することが出来ます。
 
 1. ハイフンで区切られた各単語の最初の文字を大文字に変える。
-  コントローラ ID がスラッシュを含む場合、この規則は ID の最後のスラッシュの後ろの部分にのみ適用されることに注意。
+   コントローラ ID がスラッシュを含む場合、この規則は ID の最後のスラッシュの後ろの部分にのみ適用されることに注意。
 2. ハイフンを削除し、フォワード・スラッシュを全てバックワード・スラッシュに置き換える。
 3. 接尾辞 `Controller` を追加する。
 4. [[yii\base\Application::controllerNamespace|コントローラ名前空間]] を頭に付ける。
@@ -134,10 +128,10 @@ class SiteController extends Controller
 以下は、[[yii\base\Application::controllerNamespace|コントローラ名前空間]] がデフォルト値 `app\controllers`
 を取っていると仮定したときの、いくつかの例です。
 
-* `article` は `app\controllers\ArticleController` になる。
-* `post-comment` は `app\controllers\PostCommentController` になる。
-* `admin/post-comment` は `app\controllers\admin\PostCommentController` になる。
-* `adminPanels/post-comment` は `app\controllers\adminPanels\PostCommentController` になる。
+- `article` は `app\controllers\ArticleController` になる。
+- `post-comment` は `app\controllers\PostCommentController` になる。
+- `admin/post-comment` は `app\controllers\admin\PostCommentController` になる。
+- `adminPanels/post-comment` は `app\controllers\adminPanels\PostCommentController` になる。
 
 コントローラ・クラスは [オートロード可能](concept-autoloading.md) でなければなりません。
 この理由により、上記の例の `aritcle` コントローラ・クラスは [エイリアス](concept-aliases.md) が
@@ -145,9 +139,8 @@ class SiteController extends Controller
 一方、`admin/post-comment` コントローラは `@app/controllers/admin/PostCommentController.php` というエイリアスのファイルに保存されるべきものとなります。
 
 > Info: 最後の例である `admin/post-comment` は、どうすれば [[yii\base\Application::controllerNamespace|コントローラ名前空間]]
-のサブ・ディレクトリにコントローラを置くことが出来るかを示しています。
-  この方法は、コントローラをいくつかのカテゴリに分けて編成したい、けれども [モジュール](structure-modules.md) は使いたくない、という場合に役立ちます。
-
+> のサブ・ディレクトリにコントローラを置くことが出来るかを示しています。
+> この方法は、コントローラをいくつかのカテゴリに分けて編成したい、けれども [モジュール](structure-modules.md) は使いたくない、という場合に役立ちます。
 
 ### コントローラ・マップ <span id="controller-map"></span>
 
@@ -173,7 +166,6 @@ class SiteController extends Controller
 ]
 ```
 
-
 ### デフォルト・コントローラ <span id="default-controller"></span>
 
 全てのアプリケーションは、それぞれ、[[yii\base\Application::defaultRoute]] プロパティによって指定されるデフォルト・コントローラを持ちます。
@@ -189,11 +181,10 @@ class SiteController extends Controller
 ]
 ```
 
-
 ## アクションを作成する <span id="creating-actions"></span>
 
-アクションは、コントローラ・クラスの中にいわゆる *アクション・メソッド* を定義するだけで簡単に作成することが出来ます。
-アクション・メソッドとは、`action` という語で始まる名前を持つ *public* メソッドのことです。
+アクションは、コントローラ・クラスの中にいわゆる _アクション・メソッド_ を定義するだけで簡単に作成することが出来ます。
+アクション・メソッドとは、`action` という語で始まる名前を持つ _public_ メソッドのことです。
 アクション・メソッドの返り値がエンド・ユーザに送信されるレスポンス・データを表します。次のコードは、`index` と `hello-world` という二つのアクションを定義するものです。
 
 ```php
@@ -215,7 +206,6 @@ class SiteController extends Controller
 }
 ```
 
-
 ### アクション ID <span id="action-ids"></span>
 
 アクションは、たいてい、あるリソースについて特定の操作を実行するように設計されます。
@@ -231,7 +221,6 @@ class SiteController extends Controller
 インライン・アクションは作成するのにより少ない労力を要するため、通常は、アクションを再利用する意図がない場合に推奨されます。
 もう一方のスタンドアロン・アクションは、主として、さまざまなコントローラの中で使われることや、[エクステンション](structure-extensions.md) として再配布されることを目的として作成されます。
 
-
 ### インライン・アクション <span id="inline-actions"></span>
 
 インライン・アクションは、たった今説明したように、アクション・メソッドの形で定義されるアクションを指します。
@@ -244,16 +233,14 @@ class SiteController extends Controller
 
 例えば、`index` は `actionIndex` となり、`hello-world` は `actionHelloWorld` となります。
 
-> Note: アクション・メソッドの名前は、*大文字と小文字を区別* します。
-  `ActionIndex` という名前のメソッドがあっても、それはアクション・メソッドとは見なされず、結果として、`index` アクションに対するリクエストは例外に帰結します。
-  アクション・メソッドが public でなければならない事にも注意してください。
-  private や protected なメソッドがインライン・アクションを定義することはありません。
-
+> Note: アクション・メソッドの名前は、_大文字と小文字を区別_ します。
+> `ActionIndex` という名前のメソッドがあっても、それはアクション・メソッドとは見なされず、結果として、`index` アクションに対するリクエストは例外に帰結します。
+> アクション・メソッドが public でなければならない事にも注意してください。
+> private や protected なメソッドがインライン・アクションを定義することはありません。
 
 インライン・アクションは作成するのにほとんど労力を要さないため、たいていのアクションはインライン・アクションとして定義されます。
 しかし、同じアクションを別の場所で再利用する計画を持っていたり、また、アクションを再配布したいと思っていたりする場合は、
-アクションを *スタンドアロン・アクション* として定義することを検討すべきです。
-
+アクションを _スタンドアロン・アクション_ として定義することを検討すべきです。
 
 ### スタンドアロン・アクション <span id="standalone-actions"></span>
 
@@ -262,7 +249,7 @@ class SiteController extends Controller
 これらは両方ともスタンドアロン・アクションです。
 
 スタンドアロン・アクションを使用するためには、下記のように、コントローラの [[yii\base\Controller::actions()]] メソッドをオーバーライドして、
-*アクション・マップ* の中でスタンドアロン・アクションを宣言しなければなりません。
+_アクション・マップ_ の中でスタンドアロン・アクションを宣言しなければなりません。
 
 ```php
 public function actions()
@@ -302,7 +289,6 @@ class HelloWorldAction extends Action
 }
 ```
 
-
 ### アクションの結果 <span id="action-results"></span>
 
 アクション・メソッド、または、スタンドアロン・アクションの `run()` メソッドの返り値は、重要な意味を持ちます。
@@ -310,9 +296,9 @@ class HelloWorldAction extends Action
 
 返り値は、エンド・ユーザにレスポンスとして送信される [レスポンス](runtime-responses.md) オブジェクトとすることが出来ます。
 
-* [[yii\web\Application|ウェブ・アプリケーション]] では、返り値を [[yii\web\Response::data]] に割り当てられる任意のデータとすることも出来ます。
+- [[yii\web\Application|ウェブ・アプリケーション]] では、返り値を [[yii\web\Response::data]] に割り当てられる任意のデータとすることも出来ます。
   このデータは、後に、レスポンス・ボディを表す文字列へと変換されます。
-* [[yii\console\Application|コンソール・アプリケーション]] では、返り値をコマンド実行の
+- [[yii\console\Application|コンソール・アプリケーション]] では、返り値をコマンド実行の
   [[yii\console\Response::exitStatus|終了ステータス]] を示す整数とすることも出来ます。
 
 これまでに示した例においては、アクションの結果はすべて文字列であり、エンド・ユーザに送信されるレスポンス・ボディとして扱われるものでした。
@@ -328,10 +314,9 @@ public function actionForward()
 }
 ```
 
-
 ### アクション・パラメータ <span id="action-parameters"></span>
 
-インライン・アクションのアクション・メソッドと、スタンドアロン・アクションの `run()` メソッドは、*アクション・パラメータ* と呼ばれるパラメータを取ることが出来ます。
+インライン・アクションのアクション・メソッドと、スタンドアロン・アクションの `run()` メソッドは、_アクション・パラメータ_ と呼ばれるパラメータを取ることが出来ます。
 パラメータの値はリクエストから取得されます。
 [[yii\web\Application|ウェブ・アプリケーション]] では、各アクション・パラメータの値は `$_GET` からパラメータ名をキーとして読み出されます。
 [[yii\console\Application|コンソール・アプリケーション]] では、アクション・パラメータはコマンドライン引数に対応します。
@@ -354,13 +339,13 @@ class PostController extends Controller
 
 アクション・パラメータには、次のように、さまざまなリクエストに応じて異なる値が投入されます。
 
-* `https://hostname/index.php?r=post/view&id=123`: `$id` パラメータには `'123'` という値が入れられます。
+- `https://hostname/index.php?r=post/view&id=123`: `$id` パラメータには `'123'` という値が入れられます。
   一方、`version` というクエリ・パラメータは無いので、`$version` は `null` のままになります。
-* `https://hostname/index.php?r=post/view&id=123&version=2`: `$id` および `$version` パラメータに、
+- `https://hostname/index.php?r=post/view&id=123&version=2`: `$id` および `$version` パラメータに、
   それぞれ、`'123'` と `'2'` が入ります。
-* `https://hostname/index.php?r=post/view`: 必須の `$id` パラメータがリクエストで提供されていないため、
+- `https://hostname/index.php?r=post/view`: 必須の `$id` パラメータがリクエストで提供されていないため、
   [[yii\web\BadRequestHttpException]] 例外が投げられます。
-* `https://hostname/index.php?r=post/view&id[]=123`: `$id` パラメータが予期しない配列値 `['123']` を受け取ろうとするため、
+- `https://hostname/index.php?r=post/view&id[]=123`: `$id` パラメータが予期しない配列値 `['123']` を受け取ろうとするため、
   [[yii\web\BadRequestHttpException]] 例外が投げられます。
 
 アクション・パラメータに配列値を受け取らせたい場合は、次のように、パラメータに `array` の型ヒントを付けなければなりません。
@@ -378,7 +363,6 @@ public function actionView(array $id, $version = null)
 
 上記の例は主としてウェブ・アプリケーションでのアクション・パラメータの動作を示すものです。
 コンソール・アプリケーションについては、[コンソール・コマンド](tutorial-console.md) のセクションで詳細を参照してください。
-
 
 ### デフォルト・アクション <span id="default-action"></span>
 
@@ -405,7 +389,6 @@ class SiteController extends Controller
 }
 ```
 
-
 ## コントローラのライフサイクル <span id="controller-lifecycle"></span>
 
 リクエストを処理するときに、[アプリケーション](structure-applications.md) はリクエストされた [ルート](#routes)
@@ -414,23 +397,30 @@ class SiteController extends Controller
 
 1. コントローラが作成され構成された後、[[yii\base\Controller::init()]] メソッドが呼ばれる。
 2. コントローラは、リクエストされたアクション ID に基いて、アクション・オブジェクトを作成する。
-  * アクション ID が指定されていないときは、[[yii\base\Controller::defaultAction|デフォルト・アクション ID]] が使われる。
-  * アクション ID が [[yii\base\Controller::actions()|アクション・マップ]] の中に見つかった場合は、
-    スタンドアロン・アクションが作成される。
-  * アクション ID に合致するアクション・メソッドが見つかった場合は、インライン・アクションが作成される。
-  * 上記以外の場合は、[[yii\base\InvalidRouteException]] 例外が投げられる。
-3. コントローラは、アプリケーション、(コントローラがモジュールに属する場合は) モジュール、
-  そしてコントローラの `beforeAction()` メソッドをこの順で呼び出す。
-  * どれか一つの呼び出しが `false` を返した場合は、残りのまだ呼ばれていない `beforeAction()` メソッドはスキップされ、
-    アクションの実行はキャンセルされる。
-  * デフォルトでは、それぞれの `beforeAction()` メソッドは、ハンドラをアタッチすることが可能な `beforeAction` イベントをトリガする。
-4. コントローラがアクションを実行する。
-  * アクション・パラメータが解析されて、リクエスト・データからデータが投入される。
-5. コントローラは、コントローラ、(コントローラがモジュールに属する場合は) モジュール、
-    そしてアプリケーションの `afterAction()` メソッドをこの順で呼び出す。
-  * デフォルトでは、それぞれの `afterAction()` メソッドは、ハンドラをアタッチすることが可能な `afterAction` イベントをトリガする。
-6. アプリケーションはアクションの結果を受け取り、それを [レスポンス](runtime-responses.md) に割り当てる。
 
+- アクション ID が指定されていないときは、[[yii\base\Controller::defaultAction|デフォルト・アクション ID]] が使われる。
+- アクション ID が [[yii\base\Controller::actions()|アクション・マップ]] の中に見つかった場合は、
+  スタンドアロン・アクションが作成される。
+- アクション ID に合致するアクション・メソッドが見つかった場合は、インライン・アクションが作成される。
+- 上記以外の場合は、[[yii\base\InvalidRouteException]] 例外が投げられる。
+
+3. コントローラは、アプリケーション、(コントローラがモジュールに属する場合は) モジュール、
+   そしてコントローラの `beforeAction()` メソッドをこの順で呼び出す。
+
+- どれか一つの呼び出しが `false` を返した場合は、残りのまだ呼ばれていない `beforeAction()` メソッドはスキップされ、
+  アクションの実行はキャンセルされる。
+- デフォルトでは、それぞれの `beforeAction()` メソッドは、ハンドラをアタッチすることが可能な `beforeAction` イベントをトリガする。
+
+4. コントローラがアクションを実行する。
+
+- アクション・パラメータが解析されて、リクエスト・データからデータが投入される。
+
+5. コントローラは、コントローラ、(コントローラがモジュールに属する場合は) モジュール、
+   そしてアプリケーションの `afterAction()` メソッドをこの順で呼び出す。
+
+- デフォルトでは、それぞれの `afterAction()` メソッドは、ハンドラをアタッチすることが可能な `afterAction` イベントをトリガする。
+
+6. アプリケーションはアクションの結果を受け取り、それを [レスポンス](runtime-responses.md) に割り当てる。
 
 ## ベスト・プラクティス <span id="best-practices"></span>
 
@@ -440,8 +430,8 @@ class SiteController extends Controller
 
 いくつかのベスト・プラクティスを特に挙げるなら、コントローラは、
 
-* [リクエスト](runtime-requests.md) データにアクセスすることが出来ます。
-* リクエスト・データを使って [モデル](structure-models.md) や他のサービス・コンポーネントのメソッドを呼ぶことが出来ます。
-* [ビュー](structure-views.md) を使ってレスポンスを構成することが出来ます。
-* リクエストされたデータの処理をするべきではありません - データは [モデルのレイヤ](structure-models.md) において処理されるべきです。
-* HTML を埋め込むなどの表示に関わるコードは避けるべきです - 表示は [ビュー](structure-views.md) で行う方が良いです。
+- [リクエスト](runtime-requests.md) データにアクセスすることが出来ます。
+- リクエスト・データを使って [モデル](structure-models.md) や他のサービス・コンポーネントのメソッドを呼ぶことが出来ます。
+- [ビュー](structure-views.md) を使ってレスポンスを構成することが出来ます。
+- リクエストされたデータの処理をするべきではありません - データは [モデルのレイヤ](structure-models.md) において処理されるべきです。
+- HTML を埋め込むなどの表示に関わるコードは避けるべきです - 表示は [ビュー](structure-views.md) で行う方が良いです。

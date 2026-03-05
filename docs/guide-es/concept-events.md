@@ -1,5 +1,4 @@
-Eventos
-=======
+# Eventos
 
 Los eventos permiten inyectar código dentro de otro código existente en ciertos puntos de ejecución. Se pueden adjuntar
 código personalizado a un evento, cuando se lance (triggered), el código se ejecutará automáticamente. Por ejemplo, un
@@ -9,8 +8,7 @@ el correcto envío del mensaje, se puede, simplemente, añadir un código de seg
 Yii introduce una clase base [[yii\base\Component]] para soportar eventos. Si una clase necesita lanzar un evento,
 este debe extender a [[yii\base\Component]] o a una clase hija.
 
-Gestor de Eventos <span id="event-handlers"></span>
------------------
+## Gestor de Eventos <span id="event-handlers"></span>
 
 Un gestor de eventos es una
 [llamada de retorno PHP (PHP callback)](https://www.php.net/manual/es/language.types.callable.php) que se ejecuta cuando se
@@ -39,9 +37,7 @@ Un gestor de eventos puede obtener la siguiente información acerca de un evento
 - [[yii\base\Event::data|custom data]]: los datos que se proporcionan al adjuntar el gestor de eventos
   (se explicará más adelante)
 
-
-Añadir Gestores de Eventos <span id="attaching-event-handlers"></span>
---------------------------
+## Añadir Gestores de Eventos <span id="attaching-event-handlers"></span>
 
 Se puede añadir un gestor a un evento llamando al método [[yii\base\Component::on()]]. Por ejemplo:
 
@@ -80,8 +76,7 @@ function function_name($event) {
 }
 ```
 
-Ordenación de Gestores de Eventos
----------------------------------
+## Ordenación de Gestores de Eventos
 
 Se puede adjuntar uno o más gestores a un único evento. Cuando se lanza un evento, se ejecutarán los gestores adjuntos
 en el orden que se hayan añadido al evento. Si un gestor necesita parar la invocación de los gestores que le siguen,
@@ -104,10 +99,9 @@ $foo->on(Foo::EVENT_HELLO, function ($event) {
 }, $data, false);
 ```
 
-Lanzamiento de Eventos <span id="triggering-events"></span>
-----------------------
+## Lanzamiento de Eventos <span id="triggering-events"></span>
 
-Los eventos se lanzan llamando al método [[yii\base\Component::trigger()]]. El método requiere un *nombre de evento*,
+Los eventos se lanzan llamando al método [[yii\base\Component::trigger()]]. El método requiere un _nombre de evento_,
 y de forma opcional un objeto de evento que describa los parámetros que se enviarán a los gestores de eventos. Por
 ejemplo:
 
@@ -131,9 +125,9 @@ class Foo extends Component
 Con el código anterior, cada llamada a `bar()` lanzará un evento llamado `hello`
 
 > Tip: Se recomienda usar las constantes de clase para representar nombres de eventos. En el anterior ejemplo, la
-  constante `EVENT_HELLO` representa el evento `hello`. Este enfoque proporciona tres beneficios. Primero, previene
-  errores tipográficos. Segundo, puede hacer que los IDEs reconozcan los eventos en las funciones de auto-completado.
-  Tercero, se puede ver que eventos soporta una clase simplemente revisando la declaración de constantes.
+> constante `EVENT_HELLO` representa el evento `hello`. Este enfoque proporciona tres beneficios. Primero, previene
+> errores tipográficos. Segundo, puede hacer que los IDEs reconozcan los eventos en las funciones de auto-completado.
+> Tercero, se puede ver que eventos soporta una clase simplemente revisando la declaración de constantes.
 
 A veces cuando se lanza un evento se puede querer pasar información adicional al gestor de eventos. Por ejemplo, un
 mailer puede querer enviar la información del mensaje para que los gestores del evento `messageSent` para que los
@@ -169,8 +163,7 @@ class Mailer extends Component
 
 Cuando se lanza el método [[yii\base\Component::trigger()]], se ejecutarán todos los gestores adjuntos al evento.
 
-Desadjuntar Gestores de Evento <span id="detaching-event-handlers"></span>
-------------------------------
+## Desadjuntar Gestores de Evento <span id="detaching-event-handlers"></span>
 
 Para desadjuntar un gestor de un evento, se puede ejecutar el método [[yii\base\Component::off()]]. Por ejemplo:
 
@@ -199,17 +192,16 @@ parámetro:
 $foo->off(Foo::EVENT_HELLO);
 ```
 
-Nivel de Clase (Class-Level) Gestores de Eventos <span id="class-level-event-handlers"></span>
-------------------------------------------------
+## Nivel de Clase (Class-Level) Gestores de Eventos <span id="class-level-event-handlers"></span>
 
-En las subsecciones anteriores se ha descrito como adjuntar un gestor a un evento a *nivel de instancia*. A veces, se
-puede querer que un gestor responda todos los eventos de *todos* las instancias de una clase en lugar de una instancia
-especifica. En lugar de adjuntar un gestor de eventos a una instancia, se puede adjuntar un gestor a *nivel de clase*
+En las subsecciones anteriores se ha descrito como adjuntar un gestor a un evento a _nivel de instancia_. A veces, se
+puede querer que un gestor responda todos los eventos de _todos_ las instancias de una clase en lugar de una instancia
+especifica. En lugar de adjuntar un gestor de eventos a una instancia, se puede adjuntar un gestor a _nivel de clase_
 llamando al método estático [[yii\base\Event::on()]].
 
 Por ejemplo, un objeto de tipo [Active Record](db-active-record.md) lanzará un evento
 [[yii\db\BaseActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] cada vez que inserte un nuevo registro en la base
-de datos. Para poder registrar las inserciones efectuadas por *todos* los objetos
+de datos. Para poder registrar las inserciones efectuadas por _todos_ los objetos
 [Active Record](db-active-record.md), se puede usar el siguiente código:
 
 ```php
@@ -229,7 +221,7 @@ obtener el objeto que ha lanzado el evento mediante `$event->sender` en el gesto
 Cuando un objeto lanza un evento, primero llamará los gestores a nivel de instancia, y a continuación los gestores a
 nivel de clase.
 
-Se puede lanzar un evento de tipo *nivel de clase* llamando al método estático [[yii\base\Event::trigger()]]. Un
+Se puede lanzar un evento de tipo _nivel de clase_ llamando al método estático [[yii\base\Event::trigger()]]. Un
 evento de nivel de clase no se asocia a un objeto en particular. Como resultado, esto provocará solamente la
 invocación de los gestores de eventos a nivel de clase.
 
@@ -247,8 +239,8 @@ Tenga en cuenta que en este caso, el `$event->sender` hace referencia al nombre 
 lugar de a la instancia del objeto.
 
 > Note: Debido a que los gestores a nivel de clase responderán a los eventos lanzados por cualquier instancia de la
-clase, o cualquier clase hija, se debe usar con cuidado, especialmente en las clases de bajo nivel (low-level), tales
-como [[yii\base\BaseObject]].
+> clase, o cualquier clase hija, se debe usar con cuidado, especialmente en las clases de bajo nivel (low-level), tales
+> como [[yii\base\BaseObject]].
 
 Para desadjuntar un gestor de eventos a nivel de clase, se tiene que llamar a [[yii\base\Event::off()]]. Por ejemplo:
 
@@ -260,10 +252,9 @@ Event::off(Foo::class, Foo::EVENT_HELLO, $handler);
 Event::off(Foo::class, Foo::EVENT_HELLO);
 ```
 
-Eventos Globales <span id="global-events"></span>
-----------------
+## Eventos Globales <span id="global-events"></span>
 
-Yii soporta los llamados *eventos globales*, que en realidad es un truco basado en el gestor de eventos descrito
+Yii soporta los llamados _eventos globales_, que en realidad es un truco basado en el gestor de eventos descrito
 anteriormente. El evento global requiere un Singleton globalmente accesible, tal como la instancia de
 [aplicación](structure-applications.md) en si misma.
 

@@ -1,11 +1,10 @@
-Tri
-===
+# Tri
 
 Lors de l'affichage de multiples lignes de données, on a souvent besoin des trier les données en fonction des valeurs de certaines colonnes spécifiées par l'utilisateur. Yii utilise l'objet [[yii\data\Sort]] pour représenter les information sur le schéma de triage. En particulier :
 
-* [[yii\data\Sort::$attributes|attributes]] spécifie les *attributs* grâce auxquels les données peuvent être triées. Un attribut peut être aussi simple qu'un [attribut de modèle](structure-models.md#attributes). Il peut aussi être un composite combinant le multiples attributs de modèles ou de colonnes de base de données. Nous apportons des informations plus détaillées dans la suite de cette page.
-* [[yii\data\Sort::$attributeOrders|attributeOrders]] fournit la direction de l'ordre de tri pour chacun des attributs.
-* [[yii\data\Sort::$orders|orders]] fournit les directions de tri en terme de colonnes de bas niveau. 
+- [[yii\data\Sort::$attributes|attributes]] spécifie les _attributs_ grâce auxquels les données peuvent être triées. Un attribut peut être aussi simple qu'un [attribut de modèle](structure-models.md#attributes). Il peut aussi être un composite combinant le multiples attributs de modèles ou de colonnes de base de données. Nous apportons des informations plus détaillées dans la suite de cette page.
+- [[yii\data\Sort::$attributeOrders|attributeOrders]] fournit la direction de l'ordre de tri pour chacun des attributs.
+- [[yii\data\Sort::$orders|orders]] fournit les directions de tri en terme de colonnes de bas niveau.
 
 Pour utiliser [[yii\data\Sort]], commencez par déclarer quels attributs peuvent être triés. Puis retrouvez les informations d'ordre de tri courantes de [[yii\data\Sort::$attributeOrders|attributeOrders]] ou [[yii\data\Sort::$orders|orders]], et utilisez-les pour personnaliser votre requête de données. Par exemple :
 
@@ -30,9 +29,9 @@ $articles = Article::find()
     ->all();
 ```
 
-Dans l'exemple qui précède, deux attributs sont déclarés pour l'objet [[yii\data\Sort|Sort]] : `age` et `name`. 
+Dans l'exemple qui précède, deux attributs sont déclarés pour l'objet [[yii\data\Sort|Sort]] : `age` et `name`.
 
-L'attribut `age` est un attribut *simple* correspondant à l'attribut `age` de la classe d'enregistrement actif `Article`. Il équivaut à la déclaration suivante :
+L'attribut `age` est un attribut _simple_ correspondant à l'attribut `age` de la classe d'enregistrement actif `Article`. Il équivaut à la déclaration suivante :
 
 ```php
 'age' => [
@@ -43,7 +42,7 @@ L'attribut `age` est un attribut *simple* correspondant à l'attribut `age` de l
 ]
 ```
 
-L'attribut `name` est un attribut *composite* défini par `first_name` et `last_name` de la classe `Article`. Il est déclaré en utilisant la structure de tableau suivante :
+L'attribut `name` est un attribut _composite_ défini par `first_name` et `last_name` de la classe `Article`. Il est déclaré en utilisant la structure de tableau suivante :
 
 - Les éléments `asc` et `desc` spécifient comment trier selon l'attribut dans la direction croissante et décroissante, respectivement. Leurs valeurs représentent les colonnes réelles et les directions dans lesquelles les données sont triées. Vous pouvez spécifier une ou plusieurs colonnes pour préciser un tri simple ou un tri composite.
 - L'élément `default` spécifie la direction dans laquelle l'attribut doit être trié lorsqu'il est initialement requis. Sa valeur par défaut est l'ordre croissant, ce qui signifie que si les données n'ont pas été triées auparavant et que vous demandez leur tri par cet attribut, elles sont triées par cette attribut dans la direction croissante.
@@ -55,7 +54,7 @@ Vous pouvez appeler [[yii\data\Sort::link()]] pour générer un hyperlien sur le
 
 ```php
 // spécifie la route que l'URL à créer doit utiliser,
-// si vous ne la spécifiez pas, la route couramment requise est utilisée 
+// si vous ne la spécifiez pas, la route couramment requise est utilisée
 $sort->route = 'article/index';
 
 // affiche des liens conduisant à trier par *name* (nom) et *age*, respectivement

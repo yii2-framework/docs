@@ -1,5 +1,4 @@
-Html helper
-===========
+# Html helper
 
 Every web application generates lots of HTML markup. If the markup is static, it can be done efficiently by
 [mixing PHP and HTML in a single file](https://www.php.net/manual/en/language.basic-syntax.phpmode.php), but when it is
@@ -7,14 +6,12 @@ generated dynamically it starts to get tricky to handle it without extra help. Y
 of an Html helper, which provides a set of static methods for handling commonly used HTML tags, their options, and their content.
 
 > Note: If your markup is nearly static, it's better to use HTML directly. There's no need to wrap absolutely everything
-  in Html helper calls.
-
+> in Html helper calls.
 
 ## Basics <span id="basics"></span>
 
 Since building dynamic HTML by string concatenation can get messy very fast, Yii provides a set of methods to
 manipulate tag options and build tags based on these options.
-
 
 ### Generating Tags <span id="generating-tags"></span>
 
@@ -25,8 +22,8 @@ The code for generating a tag looks like the following:
 ```
 
 The first argument is the tag name. The second one is the content to be enclosed between the start and end tags.
-Note that we are using `Html::encode` &mdash; that's because the content isn't encoded automatically to allow using HTML when needed. 
-The third one is an array of HTML options, or in other words, tag attributes. 
+Note that we are using `Html::encode` &mdash; that's because the content isn't encoded automatically to allow using HTML when needed.
+The third one is an array of HTML options, or in other words, tag attributes.
 In this array the key is the name of the attribute (such as `class`, `href` or `target`), and the value is its value.
 
 The code above will generate the following HTML:
@@ -45,16 +42,14 @@ know about:
   [boolean attributes](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributess).
 - The values of attributes will be HTML-encoded using [[yii\helpers\Html::encode()|Html::encode()]].
 - If the value of an attribute is an array, it will be handled as follows:
-  
-  * If the attribute is a data attribute as listed in [[yii\helpers\Html::$dataAttributes]], such as `data` or `ng`,
+  - If the attribute is a data attribute as listed in [[yii\helpers\Html::$dataAttributes]], such as `data` or `ng`,
     a list of attributes will be rendered, one for each element in the value array. For example,
-    `'data' => ['id' => 1, 'name' => 'yii']` generates `data-id="1" data-name="yii"`; and 
+    `'data' => ['id' => 1, 'name' => 'yii']` generates `data-id="1" data-name="yii"`; and
     `'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` generates
     `data-params='{"id":1,"name":"yii"}' data-status="ok"`. Note that in the latter example JSON format is used
     to render a sub-array.
-  * If the attribute is NOT a data attribute, the value will be JSON-encoded. For example,
+  - If the attribute is NOT a data attribute, the value will be JSON-encoded. For example,
     `['params' => ['id' => 1, 'name' => 'yii']` generates `params='{"id":1,"name":"yii"}'`.
-
 
 ### Forming CSS Classes and Styles <span id="forming-css"></span>
 
@@ -143,7 +138,6 @@ can be converted from one to the other using [[yii\helpers\Html::cssStyleFromArr
 [[yii\helpers\Html::cssStyleToArray()|cssStyleToArray()]]. The [[yii\helpers\Html::removeCssStyle()|removeCssStyle()]]
 method accepts an array of properties to remove. If it's a single property, it can be specified as a string.
 
-
 ### Encoding and Decoding Content <span id="encoding-and-decoding-content"></span>
 
 In order for content to be displayed properly and securely in HTML, special characters in the content should be encoded.
@@ -160,14 +154,12 @@ echo $userName;
 $decodedUserName = Html::decode($userName);
 ```
 
-
 ## Forms <span id="forms"></span>
 
 Dealing with form markup is quite repetitive and error prone. Because of that, there is a group of methods to help
 dealing with them.
 
 > Note: consider using [[yii\widgets\ActiveForm|ActiveForm]] in case you're dealing with models and need validation.
-
 
 ### Creating Forms <span id="creating-forms"></span>
 
@@ -188,7 +180,6 @@ Closing the form tag is simple:
 <?= Html::endForm() ?>
 ```
 
-
 ### Buttons <span id="buttons"></span>
 
 In order to generate buttons, you can use the following code:
@@ -201,7 +192,6 @@ In order to generate buttons, you can use the following code:
 
 The first argument for all three methods is the button title, and the second one is an array of options.
 The title isn't encoded, so if you're displaying data from the end user, encode it with [[yii\helpers\Html::encode()|Html::encode()]].
-
 
 ### Input Fields <span id="input-fields"></span>
 
@@ -266,7 +256,6 @@ If not, use radio list:
 <?= Html::activeRadioList($user, 'role', ArrayHelper::map($roleModels, 'id', 'name')) ?>
 ```
 
-
 ### Labels and Errors <span id="labels-and-errors"></span>
 
 Same as inputs, there are two methods for generating form labels. Active, which takes data from the model, and non-active, which accepts data directly:
@@ -287,7 +276,6 @@ To display an individual error:
 ```php
 <?= Html::error($post, 'title', ['class' => 'error']) ?>
 ```
-
 
 ### Input Names and Values <span id="input-names-and-values"></span>
 
@@ -320,7 +308,6 @@ In order to get the attribute name without suffixes or prefixes, one can use the
 // dates
 echo Html::getAttributeName('dates[0]');
 ```
-
 
 ## Styles and Scripts <span id="styles-and-scripts"></span>
 
@@ -369,7 +356,6 @@ To link a JavaScript file:
 Same as with CSS, the first argument specifies the URL of the file to be included. Options can be passed as the second argument.
 In the options you can specify `condition` in the same way as in the options for `cssFile`.
 
-
 ## Hyperlinks <span id="hyperlinks"></span>
 
 There's a method to generate hyperlinks conveniently:
@@ -389,7 +375,6 @@ If you need to generate `mailto` links, you can use the following code:
 <?= Html::mailto('Contact us', 'admin@example.com') ?>
 ```
 
-
 ## Images <span id="images"></span>
 
 In order to generate an image tag, use the following:
@@ -403,7 +388,6 @@ generates
 ```
 
 Besides [aliases](concept-aliases.md), the first argument can accept routes, parameters and URLs, in the same way [Url::to()](helper-url.md) does.
-
 
 ## Lists <span id="lists"></span>
 

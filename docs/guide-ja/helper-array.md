@@ -1,9 +1,7 @@
-配列ヘルパ
-==========
+# 配列ヘルパ
 
 [PHP の充実した配列関数](https://www.php.net/manual/ja/book.array.php) への追加として、
 Yii の配列ヘルパは、配列をさらに効率的に扱うことを可能にするスタティックなメソッドを提供しています。
-
 
 ## 値を取得する <span id="getting-values"></span>
 
@@ -53,7 +51,6 @@ $fullName = ArrayHelper::getValue($user, function ($user, $defaultValue) {
 $username = ArrayHelper::getValue($comment, 'user.username', 'Unknown');
 ```
 
-
 ## 値を設定する <span id="setting-values"></span>
 
 ```php
@@ -101,7 +98,6 @@ ArrayHelper::setValue($array, 'key.in.arr0', ['arr1' => 'val']);
 ]
 ```
 
-
 ## 配列から値を取り除く <span id="removing-values"></span>
 
 値を取得して、その直後にそれを配列から削除したい場合は、`remove` メソッドを使うことが出来ます。
@@ -113,7 +109,6 @@ $type = ArrayHelper::remove($array, 'type');
 
 このコードを実行した後では、`$array` には `['options' => [1, 2]]` が含まれ、`$type` は `A` となります。
 `getValue` メソッドとは違って、`remove` は単純なキー名だけをサポートすることに注意してください。
-
 
 ## キーの存在をチェックする <span id="checking-existence-of-keys"></span>
 
@@ -156,7 +151,6 @@ $result = ArrayHelper::getColumn($array, function ($element) {
     return $element['id'];
 });
 ```
-
 
 ## 配列を再インデックスする <span id="reindexing-arrays"></span>
 
@@ -283,7 +277,6 @@ $result = ArrayHelper::map($array, 'id', 'name', 'class');
 // ]
 ```
 
-
 ## 多次元配列の並べ替え <span id="multidimensional-sorting"></span>
 
 `multisort` メソッドは、オブジェクトの配列または入れ子にされた配列を、一つまたは複数のキーによって並べ替えることを手助けします。例えば、
@@ -324,7 +317,6 @@ ArrayHelper::multisort($data, function($item) {
 最後の引数は並べ替えのフラグで、
 PHP の [sort()](https://www.php.net/manual/ja/function.sort.php) 関数に渡されるのと同じ値を取ることが出来ます。
 
-
 ## 配列の型を検出する <span id="detecting-array-types"></span>
 
 配列が添字配列であるか連想配列であるかを知ることが出来ると便利です。例を挙げましょう。
@@ -339,7 +331,6 @@ $associative = ['framework' => 'Yii', 'version' => '2.0'];
 echo ArrayHelper::isAssociative($associative);
 ```
 
-
 ## 値を HTML エンコード / デコードする <span id="html-encoding-values"></span>
 
 文字列の配列の中にある特殊文字を HTML エンティティにエンコード、または、HTML エンティティからデコードするために、下記の関数を使うことが出来ます。
@@ -351,7 +342,6 @@ $decoded = ArrayHelper::htmlDecode($data);
 
 デフォルトでは、値だけがエンコードされます。二番目の引数を `false` として渡すことによって、配列のキーもエンコードすることが出来ます。
 エンコードにはアプリケーションの文字セットが使用されますが、三番目の引数によってそれを変更することも出来ます。
-
 
 ## 配列をマージする <span id="merging-arrays"></span>
 
@@ -419,7 +409,6 @@ $result = ArrayHelper::merge($array1, $array2);
 ]
 ```
 
-
 ## オブジェクトを配列に変換する <span id="converting-objects-to-arrays"></span>
 
 オブジェクトまたはオブジェクトの配列を配列に変換する必要があることがよくあります。
@@ -451,7 +440,6 @@ $data = ArrayHelper::toArray($posts, [
 - キー/値 のペア - 配列のキー名にしたい文字列と、値を返すコールバック。
 
 単一のモデルに対する上記の変換の結果は以下のようになります。
-
 
 ```php
 [

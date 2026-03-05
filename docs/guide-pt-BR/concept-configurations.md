@@ -1,8 +1,7 @@
-Configurações
-============
+# Configurações
 
 As configurações são amplamente utilizadas em Yii na criação de novos objetos ou inicializando objetos existentes.
-Configurações geralmente incluem o nome da classe do objeto que está sendo criado, e uma lista de valores iniciais que devem ser atribuídos as  [propriedades](concept-properties.md) do objeto. Configurações também podem incluir uma lista de manipuladores que devem ser anexados aos [eventos](concept-events.md) do objeto e/ou uma lista de [behaviors](concept-behaviors.md) que também deve ser ligado ao objeto.
+Configurações geralmente incluem o nome da classe do objeto que está sendo criado, e uma lista de valores iniciais que devem ser atribuídos as [propriedades](concept-properties.md) do objeto. Configurações também podem incluir uma lista de manipuladores que devem ser anexados aos [eventos](concept-events.md) do objeto e/ou uma lista de [behaviors](concept-behaviors.md) que também deve ser ligado ao objeto.
 
 A seguir, uma configuração é usada para criar e inicializar uma conexão com o banco:
 
@@ -28,7 +27,6 @@ Yii::configure($object, $config);
 
 Note que, neste caso, o array de configuração não deve conter o elemento `class`.
 
-
 ## Formato da Configuração <span id="configuration-format"></span>
 
 O formato de uma configuração pode ser descrita formalmente como:
@@ -44,10 +42,10 @@ O formato de uma configuração pode ser descrita formalmente como:
 
 Onde:
 
-* O elemento `class` determina um nome de classe totalmente qualificado para o objeto que está sendo criado.
-* O elemento `propertyName` determina os valores iniciais para a propriedade nomeada. As chaves são os nomes das propriedades e os valores são os valores iniciais correspondentes. Apenas variáveis públicas e [propriedades](concept-properties.md) definidas por getters/setters podem ser configuradas.
-* O elemento `on eventName` determina quais manipuladores devem ser anexados aos [eventos](concept-events.md) do objeto. Observe que as chaves do array são formadas prefixando a palavra `on `  ao nome do evento. Por favor, consulte a seção [Eventos](concept-events.md) para formatos de manipulador de eventos suportados.
-* O elemento `as behaviorName` determina quais [behaviors](concept-behaviors.md) devem ser anexados ao objeto. Observe que as chaves do  array são formadas prefixando a palavra `as` ao nome do behavior;  O valor, `$behaviorConfig`, representa a configuração para a criação do behavior, como uma configuração normal descrita aqui.
+- O elemento `class` determina um nome de classe totalmente qualificado para o objeto que está sendo criado.
+- O elemento `propertyName` determina os valores iniciais para a propriedade nomeada. As chaves são os nomes das propriedades e os valores são os valores iniciais correspondentes. Apenas variáveis públicas e [propriedades](concept-properties.md) definidas por getters/setters podem ser configuradas.
+- O elemento `on eventName` determina quais manipuladores devem ser anexados aos [eventos](concept-events.md) do objeto. Observe que as chaves do array são formadas prefixando a palavra `on ` ao nome do evento. Por favor, consulte a seção [Eventos](concept-events.md) para formatos de manipulador de eventos suportados.
+- O elemento `as behaviorName` determina quais [behaviors](concept-behaviors.md) devem ser anexados ao objeto. Observe que as chaves do array são formadas prefixando a palavra `as` ao nome do behavior; O valor, `$behaviorConfig`, representa a configuração para a criação do behavior, como uma configuração normal descrita aqui.
 
 Abaixo está um exemplo mostrando uma configuração com valores iniciais de propriedades, manipulador de evento e behaviors:
 
@@ -65,11 +63,9 @@ Abaixo está um exemplo mostrando uma configuração com valores iniciais de pro
 ]
 ```
 
-
 ## Usando Configurações <span id="using-configurations"></span>
 
-Configurações são utilizadas em vários lugares no  Yii. No início desta seção, mostramos como criar um objeto utilizando configuração [[Yii::createObject()]]. Nesta subseção, nós descreveremos a configuração de aplicação e configuração de widget - dois principais usos de configurações.
-
+Configurações são utilizadas em vários lugares no Yii. No início desta seção, mostramos como criar um objeto utilizando configuração [[Yii::createObject()]]. Nesta subseção, nós descreveremos a configuração de aplicação e configuração de widget - dois principais usos de configurações.
 
 ### Configurações da Aplicação <span id="application-configurations"></span>
 
@@ -115,8 +111,7 @@ A configuração não tem uma chave `class`. Isto porque ele é utilizado como u
 (new yii\web\Application($config))->run();
 ```
 
-Mais detalhes sobre a configuração das propriedades  `componentes` de uma aplicação podem ser encontrados na seção [Aplicações](structure-applications.md) e na seção [Service Locator](concept-service-locator.md).
-
+Mais detalhes sobre a configuração das propriedades `componentes` de uma aplicação podem ser encontrados na seção [Aplicações](structure-applications.md) e na seção [Service Locator](concept-service-locator.md).
 
 ### Configurações de Widget <span id="widget-configurations"></span>
 
@@ -136,14 +131,13 @@ echo Menu::widget([
 ]);
 ```
 
-O código acima cria um  widget `Menu` e inicializa suas propriedades `activateItems` com `false`. A propriedade `items` também é configurada com os itens do menu para serem exibidos.
+O código acima cria um widget `Menu` e inicializa suas propriedades `activateItems` com `false`. A propriedade `items` também é configurada com os itens do menu para serem exibidos.
 
 Observe que, como o nome da classe já está dado, o array de configuração não precisa da chave `class`.
 
-
 ## Arquivos de Configuração <span id="configuration-files"></span>
 
-Quando uma configuração é muito complexa, uma prática comum é armazená-la em um ou mais arquivos PHP, conhecidos como *arquivos de configuração*. Um arquivo de configuração retorna um array PHP representando a configuração.
+Quando uma configuração é muito complexa, uma prática comum é armazená-la em um ou mais arquivos PHP, conhecidos como _arquivos de configuração_. Um arquivo de configuração retorna um array PHP representando a configuração.
 Por exemplo, você pode guardar uma configuração da aplicação em um arquivo chamado `web.php`, como a seguir,
 
 ```php
@@ -191,11 +185,10 @@ $config = require 'path/to/web.php';
 (new yii\web\Application($config))->run();
 ```
 
-
 ## Configurações Padrões <span id="default-configurations"></span>
 
 O método [[Yii::createObject()]] é implementado com base em um [container de injeção de dependência](concept-di-container.md).
-Ele permite que você especifique um conjunto do chamado *configurações padrões* que será aplicado a todas as instâncias das classes especificadas quando elas forem criadas usando [[Yii::createObject()]]. As configurações padrões podem ser especificadas executando `Yii::$container->set()` na [inicialização (bootstrapping)](runtime-bootstrapping.md) do código.
+Ele permite que você especifique um conjunto do chamado _configurações padrões_ que será aplicado a todas as instâncias das classes especificadas quando elas forem criadas usando [[Yii::createObject()]]. As configurações padrões podem ser especificadas executando `Yii::$container->set()` na [inicialização (bootstrapping)](runtime-bootstrapping.md) do código.
 
 Por exemplo, se você quiser personalizar [[yii\widgets\LinkPager]] de modo que todas as páginas mostrarão no máximo 5 botões (o valor padrão é 10), você pode utilizar o código abaixo para atingir esse objetivo,
 
@@ -206,7 +199,6 @@ Por exemplo, se você quiser personalizar [[yii\widgets\LinkPager]] de modo que 
 ```
 
 Sem usar as configurações padrão, você teria que configurar `maxButtonCount` em todos os lugares que utilizassem este recurso.
-
 
 ## Constantes de Ambiente <span id="environment-constants"></span>
 

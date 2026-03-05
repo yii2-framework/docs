@@ -1,5 +1,4 @@
-Manejo de errores
-=================
+# Manejo de errores
 
 Cuando se maneja una petición de API RESTful, si ocurre un error en la petición del usuario o si algo inesperado
 ocurre en el servidor, simplemente puedes lanzar una excepción para notificar al usuario que algo erróneo ocurrió.
@@ -26,22 +25,21 @@ Content-Type: application/json; charset=UTF-8
 
 La siguiente lista sumariza los códigos de estado HTTP que son usados por el framework REST:
 
-* `200`: OK. Todo ha funcionado como se esperaba.
-* `201`: El recurso ha creado con éxito en respuesta a la petición `POST`. La cabecera de situación `Location`
+- `200`: OK. Todo ha funcionado como se esperaba.
+- `201`: El recurso ha creado con éxito en respuesta a la petición `POST`. La cabecera de situación `Location`
   contiene la URL apuntando al nuevo recurso creado.
-* `204`: La petición ha sido manejada con éxito y el cuerpo de la respuesta no tiene contenido (como una petición `DELETE`).
-* `304`: El recurso no ha sido modificado. Puede usar la versión en caché.
-* `400`: Petición errónea. Esto puede estar causado por varias acciones de el usuario, como proveer un JSON no válido
+- `204`: La petición ha sido manejada con éxito y el cuerpo de la respuesta no tiene contenido (como una petición `DELETE`).
+- `304`: El recurso no ha sido modificado. Puede usar la versión en caché.
+- `400`: Petición errónea. Esto puede estar causado por varias acciones de el usuario, como proveer un JSON no válido
   en el cuerpo de la petición, proveyendo parámetros de acción no válidos, etc.
-* `401`: Autenticación fallida.
-* `403`: El usuario autenticado no tiene permitido acceder a la API final.
-* `404`: El recurso pedido no existe.
-* `405`: Método no permitido. Por favor comprueba la cabecera `Allow` por los métodos HTTP permitidos.
-* `415`: Tipo de medio no soportado. El tipo de contenido pedido o el número de versión no es válido.
-* `422`: La validación de datos ha fallado (en respuesta a una petición `POST` , por ejemplo). Por favor, comprueba en el cuerpo de la respuesta el mensaje detallado.
-* `429`: Demasiadas peticiones. La petición ha sido rechazada debido a un limitación de rango.
-* `500`: Error interno del servidor. Esto puede estar causado por errores internos del programa.
-
+- `401`: Autenticación fallida.
+- `403`: El usuario autenticado no tiene permitido acceder a la API final.
+- `404`: El recurso pedido no existe.
+- `405`: Método no permitido. Por favor comprueba la cabecera `Allow` por los métodos HTTP permitidos.
+- `415`: Tipo de medio no soportado. El tipo de contenido pedido o el número de versión no es válido.
+- `422`: La validación de datos ha fallado (en respuesta a una petición `POST` , por ejemplo). Por favor, comprueba en el cuerpo de la respuesta el mensaje detallado.
+- `429`: Demasiadas peticiones. La petición ha sido rechazada debido a un limitación de rango.
+- `500`: Error interno del servidor. Esto puede estar causado por errores internos del programa.
 
 ## Personalizar la Respuesta al Error <span id="customizing-error-response"></span>
 

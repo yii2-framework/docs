@@ -1,13 +1,11 @@
-フィルタ
-========
+# フィルタ
 
 フィルタは、[コントローラ・アクション](structure-controllers.md#actions) の前 および/または 後に走るオブジェクトです。
 例えば、アクセス・コントロール・フィルタはアクションの前に走って、アクションが特定のエンド・ユーザだけにアクセスを許可するものであることを保証します。
 また、コンテント圧縮フィルタはアクションの後に走って、レスポンスのコンテントをエンド・ユーザに送出する前に圧縮します。
 
-一つのフィルタは、前フィルタ (アクションの *前* に適用されるフィルタのロジック) および/または
-後フィルタ (アクションの *後* に適用されるロジック) から構成することが出来ます。
-
+一つのフィルタは、前フィルタ (アクションの _前_ に適用されるフィルタのロジック) および/または
+後フィルタ (アクションの _後_ に適用されるロジック) から構成することが出来ます。
 
 ## フィルタを使用する <span id="using-filters"></span>
 
@@ -31,7 +29,7 @@ public function behaviors()
 }
 ```
 
-デフォルトでは、コントローラ・クラスの中で宣言されたフィルタは、そのコントローラの *全て* のアクションに適用されます。
+デフォルトでは、コントローラ・クラスの中で宣言されたフィルタは、そのコントローラの _全て_ のアクションに適用されます。
 しかし、[[yii\base\ActionFilter::only|only]] プロパティを構成することによって、
 フィルタがどのアクションに適用されるべきかを明示的に指定することも出来ます。
 上記の例では、 `HttpCache` フィルタは、`index` と `view` のアクションに対してのみ適用されています。
@@ -40,26 +38,25 @@ public function behaviors()
 コントローラのほかに、[モジュール](structure-modules.md) または [アプリケーション](structure-applications.md)
 でもフィルタを宣言することが出来ます。
 そのようにした場合、[[yii\base\ActionFilter::only|only]] と [[yii\base\ActionFilter::except|except]] のプロパティを上で説明したように構成しない限り、
-そのフィルタは、モジュールまたはアプリケーションに属する *全て* のコントローラ・アクションに適用されます。
+そのフィルタは、モジュールまたはアプリケーションに属する _全て_ のコントローラ・アクションに適用されます。
 
 > Note: モジュールやアプリケーションでフィルタを宣言する場合、[[yii\base\ActionFilter::only|only]] と [[yii\base\ActionFilter::except|except]] のプロパティでは、
-  アクション ID ではなく、[ルート](structure-controllers.md#routes) を使わなければなりません。
-  なぜなら、モジュールやアプリケーションのスコープでは、アクション ID だけでは完全にアクションを指定することが出来ないからです。
+> アクション ID ではなく、[ルート](structure-controllers.md#routes) を使わなければなりません。
+> なぜなら、モジュールやアプリケーションのスコープでは、アクション ID だけでは完全にアクションを指定することが出来ないからです。
 
 一つのアクションに複数のフィルタが構成されている場合、フィルタは下記で説明されている規則に従って適用されます。
 
-* 前フィルタ
-    - アプリケーションで宣言されたフィルタを `behaviors()` にリストされた順に適用する。
-    - モジュールで宣言されたフィルタを `behaviors()` にリストされた順に適用する。
-    - コントローラで宣言されたフィルタを `behaviors()` にリストされた順に適用する。
-    - フィルタのどれかがアクションをキャンセルすると、
-      そのフィルタの後のフィルタ (前フィルタと後フィルタの両方) は適用されない。
-* 前フィルタを通過したら、アクションを走らせる。
-* 後フィルタ
-    - コントローラで宣言されたフィルタを `behaviors()` にリストされた逆順で適用する。
-    - モジュールで宣言されたフィルタを `behaviors()` にリストされた逆順で適用する。
-    - アプリケーションで宣言されたフィルタを `behaviors()` にリストされた逆順で適用する。
-
+- 前フィルタ
+  - アプリケーションで宣言されたフィルタを `behaviors()` にリストされた順に適用する。
+  - モジュールで宣言されたフィルタを `behaviors()` にリストされた順に適用する。
+  - コントローラで宣言されたフィルタを `behaviors()` にリストされた順に適用する。
+  - フィルタのどれかがアクションをキャンセルすると、
+    そのフィルタの後のフィルタ (前フィルタと後フィルタの両方) は適用されない。
+- 前フィルタを通過したら、アクションを走らせる。
+- 後フィルタ
+  - コントローラで宣言されたフィルタを `behaviors()` にリストされた逆順で適用する。
+  - モジュールで宣言されたフィルタを `behaviors()` にリストされた逆順で適用する。
+  - アプリケーションで宣言されたフィルタを `behaviors()` にリストされた逆順で適用する。
 
 ## フィルタを作成する <span id="creating-filters"></span>
 
@@ -96,12 +93,10 @@ class ActionTimeFilter extends ActionFilter
 }
 ```
 
-
 ## コアのフィルタ <span id="core-filters"></span>
 
 Yii はよく使われる一連のフィルタを提供しており、それらは、主として `yii\filters` 名前空間の下にあります。
 以下では、それらのフィルタを簡単に紹介します。
-
 
 ### [[yii\filters\AccessControl|AccessControl]] <span id="access-control"></span>
 
@@ -138,7 +133,6 @@ public function behaviors()
 
 アクセス・コントロール一般についての詳細は [権限](security-authorization.md) のセクションを参照してください。
 
-
 ### 認証メソッド・フィルタ <span id="auth-method-filters"></span>
 
 認証メソッド・フィルタは、[HTTP Basic 認証](https://ja.wikipedia.org/wiki/Basic%E8%AA%8D%E8%A8%BC)、
@@ -165,7 +159,6 @@ public function behaviors()
 
 認証メソッド・フィルタは RESTful API を実装するときに使われるのが通例です。
 詳細については、RESTful の [認証](rest-authentication.md) のセクションを参照してください。
-
 
 ### [[yii\filters\ContentNegotiator|ContentNegotiator]] <span id="content-negotiator"></span>
 
@@ -225,9 +218,7 @@ use yii\web\Response;
 ```
 
 > Info: 望ましいコンテント・タイプと言語がリクエストから決定できない場合は、
-  [[formats]] および [[languages]] に挙げられている最初の形式と言語が使用されます。
-
-
+> [[formats]] および [[languages]] に挙げられている最初の形式と言語が使用されます。
 
 ### [[yii\filters\HttpCache|HttpCache]] <span id="http-cache"></span>
 
@@ -253,7 +244,6 @@ public function behaviors()
 ```
 
 HttpCache に関する詳細は [HTTP キャッシュ](caching-http.md) のセクションを参照してください。
-
 
 ### [[yii\filters\PageCache|PageCache]] <span id="page-cache"></span>
 
@@ -286,13 +276,11 @@ public function behaviors()
 
 PageCache の使用に関する詳細は [ページ・キャッシュ](caching-page.md) のセクションを参照してください。
 
-
 ### [[yii\filters\RateLimiter|RateLimiter]] <span id="rate-limiter"></span>
 
 RateLimiter は [リーキー・バケット・アルゴリズム](https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%BC%E3%82%AD%E3%83%BC%E3%83%90%E3%82%B1%E3%83%83%E3%83%88) に基づいてレート制限のアルゴリズムを実装するものです。
 主として RESTful API を実装するときに使用されます。
 このフィルタの使用に関する詳細は [レート制限](rest-rate-limiting.md) のセクションを参照してください。
-
 
 ### [[yii\filters\VerbFilter|VerbFilter]] <span id="verb-filter"></span>
 
@@ -350,11 +338,11 @@ public function behaviors()
 
 Cors のフィルタリングは [[yii\filters\Cors::$cors|$cors]] プロパティを使ってチューニングすることが出来ます。
 
-* `cors['Origin']`: 許可される生成元を定義するのに使われる配列。`['*']` (すべて) または `['https://www.myserver.net'、'https://www.myotherserver.com']` などが設定可能。デフォルトは `['*']`。
-* `cors['Access-Control-Request-Method']`: 許可される HTTP 動詞の配列。たとえば、`['GET', 'OPTIONS', 'HEAD']`。デフォルトは `['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS']`。
-* `cors['Access-Control-Request-Headers']`: 許可されるヘッダの配列。全てのヘッダを意味する `['*']` または特定のヘッダを示す `['X-Request-With']` が設定可能。デフォルトは `['*']`。
-* `cors['Access-Control-Allow-Credentials']`: 現在のリクエストをクレデンシャルを使ってすることが出来るかどうかを定義。`true`、`false` または `null` (設定なし) が設定可能。デフォルトは `null`。
-* `cors['Access-Control-Max-Age']`: プリフライト・リクエストの寿命を定義。デフォルトは `86400`。
+- `cors['Origin']`: 許可される生成元を定義するのに使われる配列。`['*']` (すべて) または `['https://www.myserver.net'、'https://www.myotherserver.com']` などが設定可能。デフォルトは `['*']`。
+- `cors['Access-Control-Request-Method']`: 許可される HTTP 動詞の配列。たとえば、`['GET', 'OPTIONS', 'HEAD']`。デフォルトは `['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS']`。
+- `cors['Access-Control-Request-Headers']`: 許可されるヘッダの配列。全てのヘッダを意味する `['*']` または特定のヘッダを示す `['X-Request-With']` が設定可能。デフォルトは `['*']`。
+- `cors['Access-Control-Allow-Credentials']`: 現在のリクエストをクレデンシャルを使ってすることが出来るかどうかを定義。`true`、`false` または `null` (設定なし) が設定可能。デフォルトは `null`。
+- `cors['Access-Control-Max-Age']`: プリフライト・リクエストの寿命を定義。デフォルトは `86400`。
 
 次の例は、生成元 `https://www.myserver.net` に対する `GET`、`HEAD` および `OPTIONS` のメソッドによる CORS を許可するものです。
 

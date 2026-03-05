@@ -1,5 +1,4 @@
-Widgets
-=======
+# Widgets
 
 Widgets are reusable building blocks used in [views](structure-views.md) to create complex and configurable user
 interface elements in an object-oriented fashion. For example, a date picker widget may generate a fancy date picker
@@ -17,7 +16,6 @@ There are a good number of widgets bundled with Yii, such as [[yii\widgets\Activ
 [[yii\widgets\Menu|menu]], [jQuery UI widgets](https://www.yiiframework.com/extension/yiisoft/yii2-jui), [Twitter Bootstrap widgets](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap).
 In the following, we will introduce the basic knowledge about widgets. Please refer to the class API documentation
 if you want to learn about the usage of a particular widget.
-
 
 ## Using Widgets <span id="using-widgets"></span>
 
@@ -71,7 +69,6 @@ Note that unlike [[yii\base\Widget::widget()]] which returns the rendering resul
 > [[yii\base\Widget::end()]] is expected to happen in the same view file.
 > Not following this rule may result in unexpected output.
 
-
 ### Configuring global defaults
 
 Global defaults for a widget type could be configured via DI container:
@@ -82,7 +79,6 @@ Global defaults for a widget type could be configured via DI container:
 
 See ["Practical Usage" section in Dependency Injection Container guide](concept-di-container.md#practical-usage) for
 details.
-
 
 ## Creating Widgets <span id="creating-widgets"></span>
 
@@ -132,7 +128,6 @@ use app\components\HelloWidget;
 <?= HelloWidget::widget(['message' => 'Good morning']) ?>
 ```
 
-
 Sometimes, a widget may need to render a big chunk of content. While you can embed the content within the `run()`
 method, a better approach is to put it in a [view](structure-views.md) and call [[yii\base\Widget::render()]] to
 render it. For example,
@@ -176,8 +171,8 @@ As you can see, PHP's output buffer is started in `init()` so that any output be
 can be captured, processed and returned in `run()`.
 
 > Info: When you call [[yii\base\Widget::begin()]], a new instance of the widget will be created and the `init()` method
-  will be called at the end of the widget constructor. When you call [[yii\base\Widget::end()]], the `run()` method
-  will be called whose return result will be echoed by `end()`.
+> will be called at the end of the widget constructor. When you call [[yii\base\Widget::end()]], the `run()` method
+> will be called whose return result will be echoed by `end()`.
 
 The following code shows how to use this new variant of `HelloWidget`:
 
@@ -202,7 +197,6 @@ By default, views for a widget should be stored in files in the `WidgetPath/view
 stands for the directory containing the widget class file. Therefore, the above example will render the view file
 `@app/components/views/hello.php`, assuming the widget class is located under `@app/components`. You may override
 the [[yii\base\Widget::getViewPath()]] method to customize the directory containing the widget view files.
-
 
 ## Best Practices <span id="best-practices"></span>
 

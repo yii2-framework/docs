@@ -1,5 +1,4 @@
-コンソール・アプリケーション
-============================
+# コンソール・アプリケーション
 
 ウェブ・アプリケーションを構築するための豊富な機能に加えて、Yii はコンソール・アプリケーションのためのフル装備のサポートを持っています。
 コンソール・アプリケーションは、主として、ウェブ・サイトのために実行する必要のあるバックグラウンドのタスクやメンテナンスのタスクを作成するために使われるものです。
@@ -29,9 +28,7 @@
   データベースのマイグレーションについては、[データベースのマイグレーションのセクション](db-migrations.md) で詳しく説明されています。
 - [[yii\console\controllers\ServeController|ServeController]] - PHP の内蔵ウェブ・サーバを走らせることが出来ます。
 
-
-使用方法 <span id="usage"></span>
---------
+## 使用方法 <span id="usage"></span>
 
 コンソールのコントローラ・アクションは次の構文を使って実行します。
 
@@ -55,9 +52,7 @@ yii migrate/up 5 --migrationTable=migrations
 > Note: コンソールで `*` を使う場合は、`"*"` として引用符号で囲むことを忘れないでください。
 > これは、`*` をカレント・ディレクトリの全てのファイル名に置き換えられるシェルのグロブとして実行してしまうことを避けるためです。
 
-
-エントリ・スクリプト <span id="entry-script"></span>
-------------------
+## エントリ・スクリプト <span id="entry-script"></span>
 
 コンソール・アプリケーションのエントリ・スクリプトは、ウェブ・アプリケーションで使用されるブートストラップ・ファイル `index.php` に相当するものです。
 コンソールのエントリ・スクリプトは通常は `yii` と呼ばれるもので、アプリケーションのルート・ディレクトリに配置されています。
@@ -87,9 +82,7 @@ exit($exitCode);
 エラー発生時にスタック・トレースを見たくない、または、全体のパフォーマンスを上げたい、という場合は、`YII_DEBUG` 定数を `false` に設定することが出来ます。
 ベーシック・プロジェクト・テンプレートでも、アドバンスト・プロジェクト・テンプレートでも、コンソール・アプリケーションのエントリ・スクリプトは、開発者に優しい環境を提供するために、デフォルトでデバッグを有効にしています。
 
-
-構成情報 <span id="configuration"></span>
---------
+## 構成情報 <span id="configuration"></span>
 
 上記のコードで見るように、コンソール・アプリケーションは、`console.php` という名前のそれ自身の構成情報ファイルを使用します。
 このファイルの中で、さまざまな [アプリケーション・コンポーネント](structure-application-components.md)、取り分け、コンソール・アプリケーションのためのプロパティを構成しなければなりません。
@@ -103,14 +96,12 @@ exit($exitCode);
 > 例えば、`yii migrate` コマンドを使ってテストのデータベースをアップグレードするとき、
 > データベースが個々のテストスイートの中で構成されているような場合です。
 > 構成情報を動的に変更するためには、コマンドを実行するときに `appconfig` オプションを使ってカスタムの構成情報ファイルを指定するだけで大丈夫です。
-> 
+>
 > ```
 > yii <route> --appconfig=path/to/config.php ...
 > ```
 
-
-コンソール・コマンドの補完 <span id="console-command-completion"></span>
---------------------------
+## コンソール・コマンドの補完 <span id="console-command-completion"></span>
 
 シェルで作業をしている場合、コマンド引数の自動補完は便利なものです。
 2.0.11 以降、`./yii` コマンドは、Bash および ZSH のための自動補完を内蔵でサポートしています。
@@ -156,8 +147,7 @@ autoload -Uz compinit && compinit -i
 exec $SHELL -l
 ```
 
-あなた自身のコンソール・コマンドを作成する <span id="create-command"></span>
-------------------------------------------
+## あなた自身のコンソール・コマンドを作成する <span id="create-command"></span>
 
 ### コンソールのコントローラとアクション
 
@@ -194,17 +184,17 @@ use yii\console\Controller;
 class HelloController extends Controller
 {
     public $message;
-    
+
     public function options($actionID)
     {
         return ['message'];
     }
-    
+
     public function optionAliases()
     {
         return ['m' => 'message'];
     }
-    
+
     public function actionIndex()
     {
         echo $this->message . "\n";
@@ -245,7 +235,6 @@ class ExampleController extends \yii\console\Controller
     public function actionAdd(array $name) { ... }
 }
 ```
-
 
 ### 終了コード
 

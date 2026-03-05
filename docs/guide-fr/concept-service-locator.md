@@ -1,11 +1,10 @@
-Localisateur de services
-========================
+# Localisateur de services
 
-Un localisateur de services est un objet que sait comment fournir toutes sortes de services (ou composants) dont une application peut avoir besoin. Dans le localisateur de services, chaque composant existe seulement sous forme d'une unique instance, identifiée de manière unique par un identifiant. Vous utilisez l'identifiant pour retrouver un composant du localisateur de services. 
+Un localisateur de services est un objet que sait comment fournir toutes sortes de services (ou composants) dont une application peut avoir besoin. Dans le localisateur de services, chaque composant existe seulement sous forme d'une unique instance, identifiée de manière unique par un identifiant. Vous utilisez l'identifiant pour retrouver un composant du localisateur de services.
 
 Dans Yii, un localisateur de service est simplement une instance de [[yii\di\ServiceLocator]] ou d'une de ses classes filles.
 
-Le localisateur de service le plus couramment utilisé dans Yii est l'objet *application*, auquel vous avez accès via `\Yii::$app`. Les services qu'il procure, tels les composants `request`, `response` et `urlManager`,  sont appelés *composants d'application*. Vous pouvez configurer ces trois composants, ou même les remplacer facilement avec votre propre implémentation, en utilisant les fonctionnalités procurées par le localisateur de services. 
+Le localisateur de service le plus couramment utilisé dans Yii est l'objet _application_, auquel vous avez accès via `\Yii::$app`. Les services qu'il procure, tels les composants `request`, `response` et `urlManager`, sont appelés _composants d'application_. Vous pouvez configurer ces trois composants, ou même les remplacer facilement avec votre propre implémentation, en utilisant les fonctionnalités procurées par le localisateur de services.
 
 En plus de l'objet application, chaque objet module est aussi un localisateur de services.
 
@@ -37,11 +36,11 @@ $locator->set('search', function () {
 $locator->set('pageCache', new FileCache);
 ```
 
-Une fois qu'un composant a été enregistré, vous pouvez y accéder via son identifiant, d'une des deux manières suivantes : 
+Une fois qu'un composant a été enregistré, vous pouvez y accéder via son identifiant, d'une des deux manières suivantes :
 
 ```php
 $cache = $locator->get('cache');
-// ou en alternative 
+// ou en alternative
 $cache = $locator->cache;
 ```
 
@@ -49,8 +48,7 @@ Comme montré ci-dessus, [[yii\di\ServiceLocator]] vous permet d'accéder à un 
 
 Lorsque vous accédez à un composant pour la première fois, [[yii\di\ServiceLocator]] utilise l'information d'enregistrement du composant pour créer une nouvelle instance du composant et la retourner. Par la suite, si on accède à nouveau au composant, le localisateur de service retourne la même instance.
 
-Vous pouvez utiliser [[yii\di\ServiceLocator::has()]] pour savoir si un identifiant de composant a déjà été enregistré. Si vous appelez [[yii\di\ServiceLocator::get()]] avec un identifiant invalide, une exception est levée. 
-
+Vous pouvez utiliser [[yii\di\ServiceLocator::has()]] pour savoir si un identifiant de composant a déjà été enregistré. Si vous appelez [[yii\di\ServiceLocator::get()]] avec un identifiant invalide, une exception est levée.
 
 Comme les localisateurs de services sont souvent créés avec des [configurations](concept-configurations.md), une propriété accessible en écriture, et nommée [[yii\di\ServiceLocator::setComponents()|components]], est fournie. Cela vous permet de configurer et d'enregistrer plusieurs composants à la fois. Le code suivant montre un tableau de configuration qui peut être utilisé pour configurer un localisateur de services (p. ex. une [application](structure-applications.md)) avec les composants `db`, `cache`, `tz` et `search` :
 
@@ -105,10 +103,10 @@ Cette approche alternative est à utiliser de préférence lorsque vous publiez 
 
 ## Parcours d'un arbre <span id="tree-traversal"></span>
 
-Les modules acceptent les inclusions arbitraires; une application Yii est essentiellement un arbre de modules. Comme chacun de ces modules est un localisateur de services, cela a du sens pour les enfants d'accéder à leur parent. 
+Les modules acceptent les inclusions arbitraires; une application Yii est essentiellement un arbre de modules. Comme chacun de ces modules est un localisateur de services, cela a du sens pour les enfants d'accéder à leur parent.
 Cela permet aux modules d'utiliser `$this->get('db')` au lieu de faire référence au localisateur de services racine `Yii::$app->get('db')`.
 Un bénéficie supplémentaire pour le développeur est de pouvoir redéfinir la configuration dans un module.
 
-Toute requête d'un service à l'intérieur d'un module est passée à son parent dans le cas où le module lui-même est incapable  de la satisfaire.
+Toute requête d'un service à l'intérieur d'un module est passée à son parent dans le cas où le module lui-même est incapable de la satisfaire.
 
 Notez que la configuration depuis des composants dans un module n'est jamais fusionnée avec celle depuis un composant du module parent. Le modèle de localisateur de services nous permet de définir des services nommés mais on ne peut supposer que des services du même nom utilisent les mêmes paramètres de configuration.

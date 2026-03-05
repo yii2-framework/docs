@@ -1,17 +1,15 @@
-Ambiente de Hospedagem Compartilhada
-==========================
+# Ambiente de Hospedagem Compartilhada
 
 Ambientes de hospedagem compartilhada geralmente são muito limitados com relação a configuração e estrutura de diretórios. Ainda assim, na maioria dos casos, você pode executar Yii 2.0 em um ambiente de hospedagem compartilhada com poucos ajustes.
 
-Implantação do Template Básico
----------------------------
+## Implantação do Template Básico
 
 Uma vez que em um ambiente de hospedagem compartilhada geralmente não há apenas um webroot, use o template básico, se puder. Consulte o [Capítulo Instalando o Yii](start-installation.md) e instale o modelo de projeto básico localmente. Depois de ter sua aplicação funcionando localmente, vamos fazer alguns ajustes para que possa ser hospedado em seu servidor de hospedagem compartilhada.
 
 ### Renomear webroot <span id="renaming-webroot"></span>
 
 Ao conectar no seu servidor compartilhado através de FTP ou outros meios, você provavelmente verá algo como a seguir:
-  
+
 ```
 config
 logs
@@ -50,8 +48,7 @@ Se o seu servidor web é Nginx, você não precisa de nenhuma configuração ext
 
 Para executar Yii, o seu servidor web deve atender alguns requisitos. O requisito mínimo é PHP 5.4. Para verificar os requisitos copie o arquivo `requirements.php` da raíz da aplicação para o diretório raíz do servidor web e execute-o através do navegador usando o endereço `https://example.com/requirements.php`. Não se esqueça de apagar o arquivo depois.
 
-Implantação do Template Avançado
----------------------------------
+## Implantação do Template Avançado
 
 A implantação do Template Avançado para a hospedagem compartilhada é um pouco mais complicada do que o Template Básico, porque ele tem duas webroots, que servidores web da hospedagem compartilhada não suportam. Vamos precisar de ajustar a estrutura de diretórios.
 

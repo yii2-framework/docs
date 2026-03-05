@@ -1,5 +1,4 @@
-Trabajando con Formularios
-==========================
+# Trabajando con Formularios
 
 En esta sección, describiremos como crear una nueva página para solicitar información de los usuarios.
 La página mostrará un formulario con un campo de input para el nombre y un campo de input para el email.
@@ -10,13 +9,11 @@ dos [vistas](structure-views.md), también crearás un [modelo](structure-models
 
 A través de este tutorial, aprenderás
 
-* Cómo crear un [modelo](structure-models.md) para representar los datos ingresados por un usuario;
-* Cómo declarar reglas para validar los datos ingresado por los usuarios;
-* Cómo construir un formulario HTML en una [vista](structure-views.md).
+- Cómo crear un [modelo](structure-models.md) para representar los datos ingresados por un usuario;
+- Cómo declarar reglas para validar los datos ingresado por los usuarios;
+- Cómo construir un formulario HTML en una [vista](structure-views.md).
 
-
-Creando un Modelo <span id="creating-model"></span>
------------------
+## Creando un Modelo <span id="creating-model"></span>
 
 Para representar los datos ingresados por un usuario, crea una clase modelo `EntryForm` cómo se muestra abajo y
 guarda la clase en el archivo `models/EntryForm.php`. Por favor, visita la sección [Autocargando Clases](concept-autoloading.md)
@@ -51,17 +48,15 @@ La clase contiene dos miembros públicos, `name` y `email`, que son utilizas par
 los datos ingresados por el usuario. También contiene el método llamado `rules()` que regresa un conjunto
 de reglas utilizadas para validar los datos. Las reglas de validación declaradas arriba indican que
 
-* ambos datos, tanto el `name` como el `email`, son requeridos;
-* el dato `email` debe ser una dirección de correo válida.
+- ambos datos, tanto el `name` como el `email`, son requeridos;
+- el dato `email` debe ser una dirección de correo válida.
 
 Si tienes un objeto `EntryForm` llenado con los datos ingresados por el usuario, puedes llamar
 su [[yii\base\Model::validate()|validate()]] para disparar (trigger) la validación de los datos. Un fallo en la validación
 de los datos se mostrará en la propiedad [[yii\base\Model::hasErrors|hasErrors]], y a través de
 [[yii\base\Model::getErrors|errors]] puedes aprender cuales son los errores de validación que tiene el modelo.
 
-
-Creando una Acción <span id="creating-action"></span>
-------------------
+## Creando una Acción <span id="creating-action"></span>
 
 Luego, crea una acción `entry` en el controlador `site`, como lo hiciste en la sección anterior.
 
@@ -107,13 +102,11 @@ con el usuario que acepta los datos que ha ingresado. De otra manera, la vista `
 mostrada, y mostrará el formulario HTML junto con los mensajes de error de validación (si es que hay alguno).
 
 > Info: La expresión `Yii::$app` representa la instancia de la [aplicación](structure-applications.md)
-  que es un singleton globalmente accesible. También es un [service locator](concept-service-locator.md) (localizador de servicio)
-  que provee los componentes, tales como `request`, `response`, `db`, etc. para soportar funcionalidades específicas.
-  En el código de arriba, el componente `request` es utilizado para acceder los datos `$_POST`.
+> que es un singleton globalmente accesible. También es un [service locator](concept-service-locator.md) (localizador de servicio)
+> que provee los componentes, tales como `request`, `response`, `db`, etc. para soportar funcionalidades específicas.
+> En el código de arriba, el componente `request` es utilizado para acceder los datos `$_POST`.
 
-
-Creando Vistas <span id="creating-views"></span>
---------------
+## Creando Vistas <span id="creating-views"></span>
 
 Finalmente, crea dos vistas llamadas `entry-confirm` y `entry` que sean mostradas por la acción `entry`,
 tal y como fue descrito en la última sub-sección.
@@ -153,15 +146,13 @@ use yii\widgets\ActiveForm;
 ```
 
 La vista utiliza un poderoso [widget](structure-widgets.md) llamado [[yii\widgets\ActiveForm|ActiveForm]] para
-construir el formulario HTML. Los métodos `begin()` y `end()` del widget muestran, respectivamente, las etiquetas de 
+construir el formulario HTML. Los métodos `begin()` y `end()` del widget muestran, respectivamente, las etiquetas de
 apertura y cierre del formulario. Entre las llamadas de los dos métodos, los campos de input son creados por el
 método [[yii\widgets\ActiveForm::field()|field()]]. El primer campo input es del dato "name",
-y el segundo del dato "email". Después de los campos de input, el método [[yii\helpers\Html::submitButton()]] 
+y el segundo del dato "email". Después de los campos de input, el método [[yii\helpers\Html::submitButton()]]
 es llamado para general el botón de submit (enviar).
 
-
-Probándolo <span id="trying-it-out"></span>
-----------
+## Probándolo <span id="trying-it-out"></span>
 
 Para ver cómo funciona, utiliza tu navegador para ir al siguiente URL:
 
@@ -169,8 +160,8 @@ Para ver cómo funciona, utiliza tu navegador para ir al siguiente URL:
 https://hostname/index.php?r=site/entry
 ```
 
-Verás una página que muestra un formulario con dos campos de input. Adelante de cada campo de input, será mostrada también 
-una etiqueta indicando que dato necesitas ingresar. Si haces click en el botón de envío (Submit) sin ingresar nada, 
+Verás una página que muestra un formulario con dos campos de input. Adelante de cada campo de input, será mostrada también
+una etiqueta indicando que dato necesitas ingresar. Si haces click en el botón de envío (Submit) sin ingresar nada,
 o si ingresas una dirección de correo inválida, verás un mensaje de error que se mostrará al lado del campo que tiene problemas.
 
 ![Formulario con Errores de Validación](images/start-form-validation.png)
@@ -180,18 +171,16 @@ mostrando los datos que acabas de ingresar.
 
 ![Confirmación de los Datos de Entrada](images/start-entry-confirmation.png)
 
-
-
 ### Magia Explicada <span id="magic-explained"></span>
 
-Te estarás preguntando cómo funciona toda esa automatización del formulario HTML, porque parece casi mágico que pueda 
+Te estarás preguntando cómo funciona toda esa automatización del formulario HTML, porque parece casi mágico que pueda
 mostrar una etiqueta para cada campo de input y mostrar los mensajes de error si no ingresas los datos correctamente
 sin recargar la página.
 
 Si, la validación de los datos se realiza en el lado del cliente utilizando JavaScript así como también en el lado del servidor.
 [[yii\widgets\ActiveForm]] es lo suficientemente inteligente como para extraer las reglas de validación que has declarado en `EntryForm`,
-convertirlas en código Javascript, y utilizar el JavaScript para realizar la validación de los datos. En caso de que hayas deshabilitado 
-JavaScript en tu navegador, la validación se realizará igualmente en el lado del servidor, como se muestra en 
+convertirlas en código Javascript, y utilizar el JavaScript para realizar la validación de los datos. En caso de que hayas deshabilitado
+JavaScript en tu navegador, la validación se realizará igualmente en el lado del servidor, como se muestra en
 el método `actionEntry()`. Esto garantiza la validez de los datos en cualquier circunstancias.
 
 Las etiquetas de los campos de input son generados por el método `field()` basado en los nombres de las propiedades del modelo.
@@ -204,18 +193,16 @@ el siguiente código:
 ```
 
 > Info: Yii provee muchos widgets para ayudarte a construir rápidamente vistas complejas y dinámicas.
-  Como aprenderás más adelante, escribir un nuevo  widget es extremadamente fácil. Puedes convertir mucho del
-  código de tus vistas en widgets reutilizables para simplificar el desarrollo de las vistas en un futuro.
+> Como aprenderás más adelante, escribir un nuevo widget es extremadamente fácil. Puedes convertir mucho del
+> código de tus vistas en widgets reutilizables para simplificar el desarrollo de las vistas en un futuro.
 
-
-Resumen <span id="summary"></span>
--------
+## Resumen <span id="summary"></span>
 
 En esta sección, has tocado cada parte del patrón de diseño MVC. Ahora has aprendido
 a crear una clase modelo para representar los datos del usuario y validarlos.
 
 También has aprendido como obtener datos de los usuarios y como mostrarlos de vuelta. Esta es una tarea que
-puede tomarte mucho tiempo cuando estás desarrollando una aplicación. Yii provee poderosos widgets 
+puede tomarte mucho tiempo cuando estás desarrollando una aplicación. Yii provee poderosos widgets
 para hacer muy fácil esta tarea.
 
 En la próxima sección, aprenderás como trabajar con bases de datos que son necesarias en casi cualquier aplicación.

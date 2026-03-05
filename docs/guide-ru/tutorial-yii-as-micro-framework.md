@@ -19,15 +19,15 @@ cd micro-app
 
 ```json
 {
-    "require": {
-        "yiisoft/yii2": "~2.0.0"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ]
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
 }
 ```
 
@@ -39,7 +39,7 @@ cd micro-app
 
 Создайте каталог `web` и поместите в него файл `index.php` со следующим содержимым:
 
-```php 
+```php
 <?php
 
 // закомментируйте следующие две строки при использовании в рабочем режиме
@@ -155,7 +155,7 @@ namespace micro\models;
 use yii\db\ActiveRecord;
 
 class Post extends ActiveRecord
-{ 
+{
     public static function tableName()
     {
         return '{{posts}}';

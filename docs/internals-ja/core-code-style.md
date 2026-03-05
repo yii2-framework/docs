@@ -1,5 +1,4 @@
-Yii 2 コア・フレームワーク・コード・スタイル
-=====================================
+# Yii 2 コア・フレームワーク・コード・スタイル
 
 下記のコード・スタイルが Yii 2.x コアと公式エクステンションの開発に用いられています。
 コアに対してコードをプル・リクエストをしたいときは、これを使用することを考慮してください。
@@ -77,6 +76,7 @@ class Foo
     const DATE_APPROVED = '2012-06-01';
 }
 ```
+
 ### 4.2. プロパティ
 
 - Public なクラス・メンバを宣言するときは `public` キーワードを明示的に指定します。
@@ -140,12 +140,12 @@ class Foo
 
 ### 4.4 PHPDoc ブロック
 
-  - `@param`、`@var`、`@property` および `@return` は `bool`、`int`、`string`、`array` または `null` として型を宣言しなければなりません。
+- `@param`、`@var`、`@property` および `@return` は `bool`、`int`、`string`、`array` または `null` として型を宣言しなければなりません。
   `Model` または `ActiveRecord` のようなクラス名を使うことも出来ます。
-  - 型付きの配列に対しては `ClassName[]` を使います。
-  - PHPDoc の最初の行には、メソッドの目的を記述しなければなりません。
-  - メソッドが何かをチェックする (たとえば、`isActive`, `hasClass` など) ものである場合は、最初の行は `Checks whether` で始まらなければなりません。
-  - `@return` は、厳密に何が返されるのかを明示的に記述しなければなりません。
+- 型付きの配列に対しては `ClassName[]` を使います。
+- PHPDoc の最初の行には、メソッドの目的を記述しなければなりません。
+- メソッドが何かをチェックする (たとえば、`isActive`, `hasClass` など) ものである場合は、最初の行は `Checks whether` で始まらなければなりません。
+- `@return` は、厳密に何が返されるのかを明示的に記述しなければなりません。
 
 ```php
 /**
@@ -173,7 +173,6 @@ class Foo
 - PHP の全ての型と値には小文字を使うべきです。このことは、`true`、`false`、`null` および `array` にも当てはまります。
 
 既存の変数の型を変えることは悪いプラクティスであると見なされています。本当に必要でない限り、そのようなコードを書かないように努めましょう。
-
 
 ```php
 public function save(Transaction $transaction, $argument2 = 100)
@@ -359,8 +358,7 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 });
 ```
 
-ドキュメント
-------------
+## ドキュメント
 
 - ドキュメントの文法については [phpDoc](https://phpdoc.org/) を参照してください。
 - ドキュメントの無いコードは許容されません。
@@ -415,10 +413,9 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 class Component extends \yii\base\BaseObject
 ```
 
-
 #### 関数 / メソッド
 
-```php
+````php
 /**
   * Returns the list of attached event handlers for an event.
   * You may manipulate the returned [[Vector]] object by adding or removing handlers.
@@ -440,7 +437,7 @@ public function getEventHandlers($name)
     $this->ensureBehaviors();
     return $this->_e[$name];
 }
-```
+````
 
 #### Markdown
 
@@ -468,14 +465,12 @@ public function getEventHandlers($name)
 [link to guide](guide:file-name.md#subsection)
 ```
 
-
 #### コメント
 
 - 一行コメントは `//` で開始されるべきです。`#` は使いません。
 - 一行コメントはそれ自体で一行を占めるべきです。
 
-追加の規則
-----------
+## 追加の規則
 
 ### `=== []` 対 `empty()`
 

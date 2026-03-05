@@ -1,5 +1,4 @@
-Pruebas unitarias
-=================
+# Pruebas unitarias
 
 Un test unitario se encarga de verificar que una unidad simple de código funcione como se espera.
 Esto decir, dados diferentes parámetros de entrada, el test verifica que el método

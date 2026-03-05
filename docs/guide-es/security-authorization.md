@@ -1,9 +1,7 @@
-Autorización
-============
+# Autorización
 
 Autorización esl el proceso de verificación de que un usuario tenga sugifientes permisos para realizar algo. Yii provee
 dos métodos de autorización: Filtro de Control de Acceso y Control Basado en Roles (ACF y RBAC por sus siglas en inglés).
-
 
 ## Filtro de Control de Acceso <span id="access-control-filter"></span>
 
@@ -63,8 +61,8 @@ y el ACF detendrá la ejecución de la acción.
 
 Cuando el ACF determina que un usuario no está autorizado a acceder a la acción actual, toma las siguientes medidas por defecto:
 
-* Si el usuario es un invitado, llamará a [[yii\web\User::loginRequired()]] para redireccionar el navegador a la pantalla de login.
-* Si el usuario está autenticado, lanzará una excepeción [[yii\web\ForbiddenHttpException]].
+- Si el usuario es un invitado, llamará a [[yii\web\User::loginRequired()]] para redireccionar el navegador a la pantalla de login.
+- Si el usuario está autenticado, lanzará una excepeción [[yii\web\ForbiddenHttpException]].
 
 Puedes personalizar este comportamiento configurando la propiedad [[yii\filters\AccessControl::denyCallback]] como a continuación:
 
@@ -81,38 +79,37 @@ Puedes personalizar este comportamiento configurando la propiedad [[yii\filters\
 Las [[yii\filters\AccessRule|Reglas de Acceso]] soportan varias opciones. Abajo hay un resumen de las mismas.
 También puedes extender de [[yii\filters\AccessRule]] para crear tus propias clases de reglas de acceso personalizadas.
 
-  * [[yii\filters\AccessRule::allow|allow]]: especifica si la regla es de tipo "allow" (permitir) o "deny" (denegar).
+- [[yii\filters\AccessRule::allow|allow]]: especifica si la regla es de tipo "allow" (permitir) o "deny" (denegar).
 
-  * [[yii\filters\AccessRule::actions|actions]]: especifica con qué acciones coinciden con esta regla. Esta debería ser
-un array de IDs de acciones. La comparación es sensible a mayúsculas. Si la opción está vacía o no definida,
-significa que la regla se aplica a todas las acciones.
+- [[yii\filters\AccessRule::actions|actions]]: especifica con qué acciones coinciden con esta regla. Esta debería ser
+  un array de IDs de acciones. La comparación es sensible a mayúsculas. Si la opción está vacía o no definida,
+  significa que la regla se aplica a todas las acciones.
 
-  * [[yii\filters\AccessRule::controllers|controllers]]: especifica con qué controladores coincide
-esta regla. Esta debería ser un array de IDs de controladores. Cada ID de controlador es prefijado con el ID del módulo (si existe).
-La comparación es sensible a mayúsculas. Si la opción está vacía o no definida, significa que la regla se aplica a todos los controladores.
+- [[yii\filters\AccessRule::controllers|controllers]]: especifica con qué controladores coincide
+  esta regla. Esta debería ser un array de IDs de controladores. Cada ID de controlador es prefijado con el ID del módulo (si existe).
+  La comparación es sensible a mayúsculas. Si la opción está vacía o no definida, significa que la regla se aplica a todos los controladores.
 
-  * [[yii\filters\AccessRule::roles|roles]]: especifica con qué roles de usuarios coincide esta regla.
+- [[yii\filters\AccessRule::roles|roles]]: especifica con qué roles de usuarios coincide esta regla.
   Son reconocidos dos roles especiales, y son comprobados vía [[yii\web\User::isGuest]]:
+  - `?`: coincide con el usuario invitado (sin autenticar)
+  - `@`: coincide con el usuario autenticado
 
-    - `?`: coincide con el usuario invitado (sin autenticar)
-    - `@`: coincide con el usuario autenticado
+El utilizar otro nombre de rol invocará una llamada a [[yii\web\User::can()]], que requiere habilitar RBAC
+(a ser descrito en la próxima subsección). Si la opción está vacía o no definida, significa que la regla se aplica a todos los roles.
 
-  El utilizar otro nombre de rol invocará una llamada a [[yii\web\User::can()]], que requiere habilitar RBAC
-  (a ser descrito en la próxima subsección). Si la opción está vacía o no definida, significa que la regla se aplica a todos los roles.
+- [[yii\filters\AccessRule::ips|ips]]: especifica con qué [[yii\web\Request::userIP|dirección IP del cliente]] coincide esta regla.
+  Una dirección IP puede contener el caracter especial `*` al final de manera que coincidan todas las IPs que comiencen igual.
+  Por ejemplo, '192.168.\*' coincide con las direcciones IP en el segmento '192.168.'. Si la opción está vacía o no definida,
+  significa que la regla se aplica a todas las direcciones IP.
 
-  * [[yii\filters\AccessRule::ips|ips]]: especifica con qué [[yii\web\Request::userIP|dirección IP del cliente]] coincide esta regla.
-Una dirección IP puede contener el caracter especial `*` al final de manera que coincidan todas las IPs que comiencen igual.
-Por ejemplo, '192.168.*' coincide con las direcciones IP en el segmento '192.168.'. Si la opción está vacía o no definida,
-significa que la regla se aplica a todas las direcciones IP.
+- [[yii\filters\AccessRule::verbs|verbs]]: especifica con qué método de la solicitud (por ej. `GET`, `POST`) coincide esta regla.
+  La comparación no distingue minúsculas de mayúsculas.
 
-  * [[yii\filters\AccessRule::verbs|verbs]]: especifica con qué método de la solicitud (por ej. `GET`, `POST`) coincide esta regla.
-La comparación no distingue minúsculas de mayúsculas.
+- [[yii\filters\AccessRule::matchCallback|matchCallback]]: especifica una función PHP invocable que debe ser llamada para determinar
+  si la regla debe ser aplicada.
 
-  * [[yii\filters\AccessRule::matchCallback|matchCallback]]: especifica una función PHP invocable que debe ser llamada para determinar
-si la regla debe ser aplicada.
-
-  * [[yii\filters\AccessRule::denyCallback|denyCallback]]: especifica una función PHP invocable que debe ser llamada cuando esta regla
-deniegue el acceso.
+- [[yii\filters\AccessRule::denyCallback|denyCallback]]: especifica una función PHP invocable que debe ser llamada cuando esta regla
+  deniegue el acceso.
 
 Debajo hay un ejemplo que muestra cómo utilizar la opción `matchCallback`, que te permite escribir lógica de comprabación de acceso
 arbitraria:
@@ -149,7 +146,6 @@ class SiteController extends Controller
 }
 ```
 
-
 ## Control de Acceso Basado en Roles (RBAC) <span id="rbac"></span>
 
 El Control de Acceso Basado en Roles (RBAC) provee una simple pero poderosa manera centralizada de control de acceso. Por favos consulta
@@ -164,22 +160,20 @@ es utilizar esos datos de autorización para comprobar el acceso en los lugares 
 
 Para facilitar la próxima descripción, necesitamos primero instroducir algunos conceptos RBAC básicos.
 
-
 ### Conceptos Básicos <span id="basic-concepts"></span>
 
-Un rol representa una colección de *permisos* (por ej. crear posts, actualizar posts). Un rol puede ser asignado
+Un rol representa una colección de _permisos_ (por ej. crear posts, actualizar posts). Un rol puede ser asignado
 a uno o varios usuarios. Para comprobar que un usuario cuenta con determinado permiso, podemos comprobar si el usuario tiene asignado
 un rol que cuente con dicho permiso.
 
-Asociado a cada rol o permiso, puede puede haber una *regla*. Una regla representa una porción de código que será
+Asociado a cada rol o permiso, puede puede haber una _regla_. Una regla representa una porción de código que será
 ejecutada durante la comprobación de acceso para determinar si el rol o permiso correspondiente aplica al usuario actual.
 Por ejemplo, el permiso "actualizar post" puede tener una regla que compruebe que el usuario actual es el autor del post.
 Durante la comprobación de acceso, si el usuario NO es el autor del post, se considerará que el/ella no cuenta con el permiso "actualizar post".
 
 Tanto los roles como los permisos pueden ser organizados en una jerarquía. En particular, un rol puede consistir en otros roles o permisos;
-y un permiso puede consistir en otros permisos. Yii implementa una jerarquía de *orden parcial*, que incluye
-una jerarquía de *árbol* especial. Mientras que un rol puede contener un permiso, esto no sucede al revés.
-
+y un permiso puede consistir en otros permisos. Yii implementa una jerarquía de _orden parcial_, que incluye
+una jerarquía de _árbol_ especial. Mientras que un rol puede contener un permiso, esto no sucede al revés.
 
 ### Configurar RBAC <span id="configuring-rbac"></span>
 
@@ -188,7 +182,6 @@ componente de la aplicación [[yii\base\Application::authManager|authManager]]. 
 [[yii\rbac\PhpManager]] y [[yii\rbac\DbManager]]. El primero utiliza un archivo PHP para almacenar los datos
 de autorización, mientras que el segundo almacena dichos datos en una base de datos. Puedes considerar utilizar el primero si tu aplicación
 no requiere una administración de permisos y roles muy dinámica.
-
 
 #### Utilizar `PhpManager` <span id="using-php-manager"></span>
 
@@ -211,7 +204,6 @@ El `authManager` ahora puede ser accedido vía `\Yii::$app->authManager`.
 Por defecto, [[yii\rbac\PhpManager]] almacena datos RBAC en archivos bajo el directorio `@app/rbac`. Asegúrate de que el directorio
 y todos sus archivos son tienen permiso de escritura para el proceso del servidor Web si la jerarquía de permisos necesita ser modoficada en línea.
 
-
 #### Utilizar `DbManager` <span id="using-db-manager"></span>
 
 El sigiente código muestra cómo configurar `authManager` en la configuración de la aplicación utilizando la clase [[yii\rbac\DbManager]]:
@@ -227,8 +219,9 @@ return [
     ],
 ];
 ```
+
 > Note: si estás utilizando el template yii2-basic-app, existe el archivo de configuración `config/console.php` donde
-  necesita declararse `authManager` adicionalmente a `config/web.php`.
+> necesita declararse `authManager` adicionalmente a `config/web.php`.
 > En el caso de yii2-advanced-app, `authManager` sólo debe declararse en `common/config/main.php`.
 
 `DbManager` utiliza cuatro tablas de la BD para almacenar los datos:
@@ -243,7 +236,6 @@ Antes de continuar, necesitas crear las tablas respectivas en la base de datos. 
 `yii migrate --migrationPath=@yii/rbac/migrations`
 
 El `authManager` puede ahora ser accedido vía `\Yii::$app->authManager`.
-
 
 ### Construir los Datos de Autorización <span id="generating-rbac-data"></span>
 
@@ -304,7 +296,7 @@ class RbacController extends Controller
 ```
 
 > Note: Si estas utilizando el template avanzado, necesitas poner tu `RbacController` dentro del directorio `console/controllers`
-  y cambiar el espacio de nombres a `console\controllers`.
+> y cambiar el espacio de nombres a `console\controllers`.
 
 Después de ejecutar el comando `yii rbac/init`, obtendremos la siguiente jerarquía:
 
@@ -341,7 +333,6 @@ public function signup()
 
 Para aplicaciones que requieren un control de acceso complejo con una actualización constante en los datos de autorización, puede ser necesario
 desarrollar una interfaz especial (por ej. un panel de administración) utilizando las APIs ofrecidas por `authManager`.
-
 
 ### Utilizar Reglas <span id="using-rules"></span>
 
@@ -401,7 +392,6 @@ Ahora tenemos la siguiente jerarquía:
 
 ![RBAC hierarchy with a rule](images/rbac-hierarchy-2.png "RBAC hierarchy with a rule")
 
-
 ### Comprobación de Acceso <span id="access-check"></span>
 
 Con los datos de autorización listos, la comprobación de acceso se hace con una simple llamada al método [[yii\rbac\ManagerInterface::checkAccess()]].
@@ -428,7 +418,6 @@ if (\Yii::$app->user->can('updatePost', ['post' => $post])) {
 
 Aquí es lo que sucede si el usuario actual es John:
 
-
 ![Access check](images/rbac-access-check-2.png "Access check")
 
 Comenzamos desde `updatePost` y pasamos por `updateOwnPost`. Con el fin de pasar la comprobación de acceso, `AuthorRule`
@@ -439,10 +428,9 @@ En caso de Jane es un poco más simple, ya que ella es un "admin":
 
 ![Access check](images/rbac-access-check-3.png "Access check")
 
-
 ### Utilizar Roles por Defecto <span id="using-default-roles"></span>
 
-Un rol por defecto es un rol que esta asignado *implícitamente* a *todos* los usuarios. La llamada a [[yii\rbac\ManagerInterface::assign()]]
+Un rol por defecto es un rol que esta asignado _implícitamente_ a _todos_ los usuarios. La llamada a [[yii\rbac\ManagerInterface::assign()]]
 no es necesaria, y los datos de autorización no contienen su información de asignación.
 
 Un rol por defecto es usualmente asociado con una regla que determina si el rol aplica al usuario siendo verificado.
@@ -455,7 +443,6 @@ cada usuario a un rol RBAC automáticamente. Usemos un ejemplo para mostrar cóm
 Suponga que en la tabla de usuario, usted tiene una columna `group` que utiliza 1 para representar el grupo administrador y 2 al grupo autor.
 Planeas tener dos roles RBAC, `admin` y `author`, para representar los permisos de estos dos grupos, respectivamente.
 Puede configurar los datos RBAC de la siguiente manera,
-
 
 ```php
 namespace app\rbac;

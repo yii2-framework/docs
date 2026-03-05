@@ -1,14 +1,11 @@
-Виджеты для данных
-============
+# Виджеты для данных
 
 Yii предоставляет набор [виджетов](structure-widgets.md), которые могут быть использованы для отображения данных.
 В то время как виджет [DetailView](#detail-view) может быть использован для отображения данных по одной записи, то
 виджеты [ListView](#list-view) и [GridView](#grid-view) могут быть использованы для показа данных в виде списка или
 таблицы с возможностью сортировки, фильтрации и разбивки данных постранично.
 
-
-DetailView <span id="detail-view"></span>
-----------
+## DetailView <span id="detail-view"></span>
 
 Виджет [[yii\widgets\DetailView|DetailView]] отображает детали по данным для одной [[yii\widgets\DetailView::$model|model]].
 
@@ -30,7 +27,7 @@ echo DetailView::widget([
         'description:html',                                // description свойство, как HTML
         [                                                  // name свойство зависимой модели owner
             'label' => 'Owner',
-            'value' => $model->owner->name,            
+            'value' => $model->owner->name,
             'contentOptions' => ['class' => 'bg-red'],     // настройка HTML атрибутов для тега, соответсвующего value
             'captionOptions' => ['tooltip' => 'Tooltip'],  // настройка HTML атрибутов для тега, соответсвующего label
         ],
@@ -39,8 +36,7 @@ echo DetailView::widget([
 ]);
 ```
 
-ListView <span id="list-view"></span>
---------
+## ListView <span id="list-view"></span>
 
 Виджет [[yii\widgets\ListView|ListView]] использует для отображения информации [провайдера данных](output-data-providers.md).
 Каждая модель отображается, используя определённый [[yii\widgets\ListView::$itemView|вид]]. Поскольку провайдер включает
@@ -66,7 +62,6 @@ echo ListView::widget([
 ```
 
 `_post` файл вид, который может содержать следующее:
-
 
 ```php
 <?php
@@ -103,9 +98,7 @@ echo ListView::widget([
 
 Они также станут доступны в виде в качестве переменных.
 
-
-GridView <span id="grid-view"></span>
---------
+## GridView <span id="grid-view"></span>
 
 Таблица данных или GridView - это один из сверхмощных Yii виджетов. Он может быть полезен, если необходимо быстро создать
 административный раздел системы. GridView использует данные, как [провайдер данных](output-data-providers.md) и отображает
@@ -202,7 +195,6 @@ echo GridView::widget([
 - [[yii\grid\Column::filterOptions|filterOptions]]
 - [[yii\grid\Column::contentOptions|contentOptions]]
 
-
 #### DataColumn <span id="data-column"></span>
 
 [[yii\grid\DataColumn|Data column]] используется для отображения и сортировки данных. По умолчанию этот тип
@@ -233,8 +225,8 @@ echo GridView::widget([
 ]);
 ```
 
-В вышеприведённом коде  `text` соответствует [[\yii\i18n\Formatter::asText()]]. В качестве первого аргумента для этого
-метода будет передаваться значение колонки. Во второй колонки описано  `date`, которая соответствует [[\yii\i18n\Formatter::asDate()]].
+В вышеприведённом коде `text` соответствует [[\yii\i18n\Formatter::asText()]]. В качестве первого аргумента для этого
+метода будет передаваться значение колонки. Во второй колонки описано `date`, которая соответствует [[\yii\i18n\Formatter::asDate()]].
 В качестве первого аргумента, опять же, будет передаваться значение колонки, в то время как второй аргумент будет
 'php:Y-m-d'.
 
@@ -268,7 +260,7 @@ echo GridView::widget([
 - [[yii\grid\ActionColumn::controller|controller]] это идентификатор контроллера, который должен обрабатывать действия.
   Если не установлен, то будет использоваться текущий активный контроллер.
 - [[yii\grid\ActionColumn::template|template]] определяет шаблон для каждой ячейки в колонке действия. Маркеры заключённые
-  в фигурные скобки являются ID действием контроллера (также называются *именами кнопок* в контексте колонки действия).
+  в фигурные скобки являются ID действием контроллера (также называются _именами кнопок_ в контексте колонки действия).
   Они могут быть заменены, через свойство [[yii\grid\ActionColumn::$buttons|buttons]]. Например, маркер `{view}` будет
   заменён результатом из функции, определённой в `buttons['view']`. Если такая функция не может быть найдена, то маркер
   заменяется на пустую строку. По умолчанию шаблон имеет вид `{view} {update} {delete}`.
@@ -281,6 +273,7 @@ echo GridView::widget([
       // возвращаем HTML код для кнопки
   }
   ```
+
   где, `$url` - это URL, который будет повешен как ссылка на кнопку, `$model` - это объект модели для текущей строки и
   `$key` - это ключ для модели из провайдера данных.
 
@@ -310,7 +303,7 @@ echo GridView::widget([
 
 [[yii\grid\CheckboxColumn|Checkbox column]] отображает колонку как флаг (сheckbox).
 
-Для добавления CheckboxColumn в виджет GridView, необходимо добавить его в  [[yii\grid\GridView::$columns|columns]]:
+Для добавления CheckboxColumn в виджет GridView, необходимо добавить его в [[yii\grid\GridView::$columns|columns]]:
 
 ```php
 echo GridView::widget([
@@ -328,7 +321,7 @@ echo GridView::widget([
 JavaScript кода:
 
 ```javascript
-var keys = $('#grid').yiiGridView('getSelectedRows');
+var keys = $("#grid").yiiGridView("getSelectedRows");
 // массив ключей для отмеченных строк
 ```
 
@@ -345,7 +338,6 @@ echo GridView::widget([
         ['class' => 'yii\grid\SerialColumn'], // <-- тут
         // ...
 ```
-
 
 ### Сортировка данных
 
@@ -425,7 +417,7 @@ return $this->render('myview', [
 ]);
 ```
 
-и в виде присвоить их  `$dataProvider` и `$searchModel` в виджете GridView:
+и в виде присвоить их `$dataProvider` и `$searchModel` в виджете GridView:
 
 ```php
 echo GridView::widget([
@@ -484,8 +476,8 @@ use yii\widgets\ActiveForm;
 ```
 
 > Note: если вы используете Gii для генерации CRUD кода, отдельная форма фильтрации (`_search.php`)
-генерируется по умолчанию, но закомментирована в представлении `index.php`. Вам остается только раскомментировать
-эту строку и форма готова к использованию!
+> генерируется по умолчанию, но закомментирована в представлении `index.php`. Вам остается только раскомментировать
+> эту строку и форма готова к использованию!
 
 Для фильтра по диапазону дат мы можем добавить дополнительные атрибуты `createdFrom` и `createdTo` в поисковую модель
 (их нет в соответствующей таблице модели):
@@ -584,6 +576,7 @@ $query->andFilterWhere(['LIKE', 'author.name', $this->getAttribute('author.name'
 > ```php
 > $query->joinWith(['author' => function($query) { $query->from(['au' => 'users']); }]);
 > ```
+>
 > Это также возможно вызвать как `$query->joinWith(['author']);`, когда псевдоним определен в определении отношения.
 >
 > Псевдоним должен быть использован в состоянии фильтра, но имя атрибута остается неизменным:
@@ -675,7 +668,7 @@ class UserView extends ActiveRecord
 - вам не надо определять условия сортировок и фильтраций. Всё работает из коробки;
 - это намного быстрее данных, так как некоторые запросы уже выполнены (т.е. для каждой зависимости не нужно выполнять дополнительные запросы)
 - поскольку это простое отображение данных из sql вида, то в модели будет отсутствовать некоторая доменная логика, например
-такие методы как `isActive`, `isDeleted`, необходимо продублировать в классе, который описывает вид.
+  такие методы как `isActive`, `isDeleted`, необходимо продублировать в классе, который описывает вид.
 
 ### Несколько GridViews на одной странице
 

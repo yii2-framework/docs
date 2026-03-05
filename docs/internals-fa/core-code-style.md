@@ -1,15 +1,17 @@
-رعایت اصول و سبک کدنویسی فریمورک Yii2
-===============================
+# رعایت اصول و سبک کدنویسی فریمورک Yii2
+
 <p dir='rtl'>
 سبک کدنویسی که در نسخه 2 فریمورک و extension های رسمی استفاده میشه دارای اصول، قواعد و قانون های خودش هست. پس اگر تصمیم دارید چیزی به هسته اضافه کنید باید این قواعد رو در نظر بگیرید حتی در غیر این صورت هم رعایت این موارد خالی از لطف نیست و توصیه می‌کنم این کارو انجام بدین.
 
 البته که نیاز نیست حتما این موارد رو در برنامه‌های خودتون رعایت کنید و می تونید در این مورد راحت باشید...
+
 </p>
 <p dir='rtl'>
 می‌تونید برای دریافت پیکربندی CodeSniffer اینجا رو مطالعه کنید: https://github.com/yiisoft/yii2-coding-standards
 </p>
 
 ## 1. نگاه کلی
+
 <p dir='rtl'>
 به طور کلی ما از سبک کدنویسی PSR-2 پیروی می‌کنیم:
 
@@ -33,8 +35,8 @@ https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style
 <p dir='rtl'> پسوند فایل‌هایی که شامل کد php هستند باید php. باشد.</p>
 <p dir='rtl'> encoding فایل برای کدهای php باید UTF-8 without BOM باشد.</p>
 
-
 ## 3. نام کلاس‌ها
+
 <p dir='rtl'>
 نام کلاس‌ها باید به صورت StudlyCaps تعریف شوند. به عنوان مثال، `Controller` و `Model`.</p>
 
@@ -59,6 +61,7 @@ class MyClass extends \yii\base\BaseObject implements MyInterface
 ```
 
 ### 4.1. ثابت‌ها
+
 <p dir='rtl'>
 ثابت‌های داخل کلاس تماما باید با حروف بزرگ و گاهی با جداکننده "_" تعریف شوند.<p>
 
@@ -70,6 +73,7 @@ class Foo
     const DATE_APPROVED = '2012-06-01';
 }
 ```
+
 ### 4.2. پراپرتی‌ها
 
 <p dir='rtl'> از کلید واژه های public ،protected و private استفاده کنید.</p>
@@ -158,7 +162,6 @@ class Foo
 <p dir='rtl'> تمام انواع و مقادیر باید با حروف کوچک نوشته شوند مثل true ،false ،null و array.</p>
 <p dir='rtl'> تغییر نوع یک متغیر خیلی بده، به این مثال توجه کنید:</p>
 
-
 ```php
 public function save(Transaction $transaction, $argument2 = 100)
 {
@@ -181,6 +184,7 @@ $str = 'Like this.';
 $str1 = "Hello $username!";
 $str2 = "Hello {$username}!";
 ```
+
 <p dir='rtl'>
 حالت زیر مجاز نیست:</p>
 
@@ -261,8 +265,8 @@ if (empty($result)) {
     // process result
 }
 ```
-<p dir='rtl'>اینطوری بهتره:</p>
 
+<p dir='rtl'>اینطوری بهتره:</p>
 
 ```php
 $result = $this->getResult();
@@ -309,7 +313,7 @@ doIt('a', [
 ]);
 ```
 
-### 5.6  تعریف Anonymous functions (lambda)
+### 5.6 تعریف Anonymous functions (lambda)
 
 <p dir='rtl'> در توابع بی نام بین function/use فضای خالی (space) بذارید:</p>
 
@@ -331,8 +335,7 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 });
 ```
 
-مستند نویسی
--------------
+## مستند نویسی
 
 <p dir='rtl'> https://phpdoc.org رو بخونید و موارد اون رو رعایت کنید.</p>
 <p dir='rtl'> کد بدون مستندات مجاز نیست.</p>
@@ -340,19 +343,19 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 <p dir='rtl'> نیازی به نوشتن return@ ندارید اگر متد شما چیزی برنمی‌گرداند.</p>
 <p dir='rtl'> به مثال‌های زیر توجه کنید:</p>
 
-  ```php
-    <?php
-    /**
-    * Returns the errors for all attribute or a single attribute.
-    * @param string $attribute attribute name. Use null to retrieve errors for all attributes.
-    * @property array An array of errors for all attributes. Empty array is returned if no error.
-    * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
-    * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
-    * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
-    * ...
-    */
-    public function getErrors($attribute = null)
-  ```
+```php
+  <?php
+  /**
+  * Returns the errors for all attribute or a single attribute.
+  * @param string $attribute attribute name. Use null to retrieve errors for all attributes.
+  * @property array An array of errors for all attributes. Empty array is returned if no error.
+  * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
+  * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
+  * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
+  * ...
+  */
+  public function getErrors($attribute = null)
+```
 
 #### فایل
 
@@ -379,10 +382,9 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 class Component extends \yii\base\BaseObject
 ```
 
-
 #### توابع / متد
 
-```php
+````php
 /**
   * Returns the list of attached event handlers for an event.
   * You may manipulate the returned [[Vector]] object by adding or removing handlers.
@@ -404,15 +406,14 @@ class Component extends \yii\base\BaseObject
   $this->ensureBehaviors();
   return $this->_e[$name];
   }
-```
+````
 
 #### نظرات
 
 <p dir='rtl'> از // برای کامنت گذاری استفاده کنید نه از #.</p>
 <p dir='rtl'> در خطوطی که کامنت گذاشتین نباید کد بنویسید، یعنی اون خط برای اون کامنت باید باشه.</p>
 
-قوانین بیشتر
-----------------
+## قوانین بیشتر
 
 <p dir='rtl'> تا جایی که می‌تونید از تابع empty به جای === استفاده کنید.</p>
 <p dir='rtl'> اگر شرایط تو در تویی در کد شما وجود نداره return زود هنگام یا ساده تر بگم return وسط متد مشکلی نخواهد داشت.</p>
@@ -421,9 +422,8 @@ class Component extends \yii\base\BaseObject
 <p dir='rtl'>2) دسترسی به پراپرتی‌های خصوصی باید با self انجام بشه.</p>
 <p dir='rtl'>3) مجاز به استفاده از self برای صدا زدن توابع در مواقعی مثل فراخوانی بازگشتی هستید.</p>
 
+## نیم‌اسپیس‌ها
 
-نیم‌اسپیس‌ها
-----------------
 <p dir='rtl'> از حرف کوچک استفاده کنید.</p>
 <p dir='rtl'> از فرم جمع اسم‌ها برای نشان دادن یک شی استفاده کنید مثل validators.</p>
 <p dir='rtl'> از فرم مفرد اسم‌ها برای قابلیت‌ها و امکانات استفاده کنید مثل web.</p>

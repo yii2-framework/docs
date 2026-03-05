@@ -1,5 +1,4 @@
-ウィジェット
-============
+# ウィジェット
 
 ウィジェットは、[ビュー](structure-views.md) で使用される再利用可能な構成ブロックで、
 複雑かつ構成可能なユーザ・インタフェイス要素をオブジェクト指向の流儀で作成するためのものです。
@@ -17,7 +16,6 @@ use yii\jui\DatePicker;
 例えば、[[yii\widgets\ActiveForm|アクティブ・フォーム]] や、[[yii\widgets\Menu|メニュー]]、[jQuery UI ウィジェット](https://www.yiiframework.com/extension/yiisoft/yii2-jui)、[Twitter Bootstrap ウィジェット](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap) などです。
 下記では、ウィジェットに関する基本的な知識の手引きをします。
 特定のウィジェットの使い方について学ぶ必要がある場合は、クラス API ドキュメントを参照してください。
-
 
 ## ウィジェットを使う <span id="using-widgets"></span>
 
@@ -71,7 +69,6 @@ use yii\helpers\Html;
 > この理由から、[[yii\base\Widget::begin()]] と [[yii\base\Widget::end()]] の呼び出しは、同じビュー・ファイルの中で発生するものと想定されています。
 > この規則に従わない場合は、予期しない出力結果が生じ得ます。
 
-
 ### グローバルなデフォルトを構成する
 
 あるタイプのウィジェットのグローバルなデフォルトを DI コンテナによって構成することが出来ます。
@@ -82,7 +79,6 @@ use yii\helpers\Html;
 
 詳細については [依存注入コンテナのガイドの "実際の使いかた" のセクション](concept-di-container.md#practical-usage)
 を参照してください。
-
 
 ## ウィジェットを作成する <span id="creating-widgets"></span>
 
@@ -132,7 +128,6 @@ use app\components\HelloWidget;
 <?= HelloWidget::widget(['message' => 'おはよう']) ?>
 ```
 
-
 ウィジェットが大きなかたまりのコンテントをレンダーする必要がある場合もあります。
 コンテントを `run()` の中に埋め込むことも出来ますが、もっと良い方法は、コンテントを [view](structure-views.md) に置き、
 [[yii\base\Widget::render()]] を呼んでレンダーする方法です。例えば、
@@ -176,8 +171,8 @@ class HelloWidget extends Widget
 `run()` の中で処理されて返されます。
 
 > Info: [[yii\base\Widget::begin()]] を呼ぶと、ウィジェットの新しいインスタンスが作成され、
-  ウィジェットのコンストラクタの最後で `init()` メソッドが呼ばれます。
-  [[yii\base\Widget::end()]] を呼ぶと、`run()` メソッドが呼ばれて、その返り値が `end()` によって echo されます。
+> ウィジェットのコンストラクタの最後で `init()` メソッドが呼ばれます。
+> [[yii\base\Widget::end()]] を呼ぶと、`run()` メソッドが呼ばれて、その返り値が `end()` によって echo されます。
 
 次のコードは、この `HelloWidget` の新しい変種をどのように使うかを示すものです:
 
@@ -202,7 +197,6 @@ use app\components\HelloWidget;
 ここで `WidgetPath` はウィジェットのクラス・ファイルを含むディレクトリを指します。
 したがって、上記の例では、ウィジェット・クラスが `@app/components` に配置されていると仮定すると、`@app/components/views/hello.php` というビュー・ファイルがレンダリングされることになります。
 [[yii\base\Widget::getViewPath()]] メソッドをオーバーライドして、ウィジェットのビュー・ファイルを含むディレクトリをカスタマイズすることが出来ます。
-
 
 ## ベスト・プラクティス <span id="best-practices"></span>
 

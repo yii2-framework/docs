@@ -1,14 +1,11 @@
-数据小部件
-============
+# 数据小部件
 
 Yii提供了一套数据小部件 [widgets](structure-widgets.md) ，这些小部件可以用于显示数据。
 [DetailView](#detail-view) 小部件能够用于显示一条记录数据，
 [ListView](#list-view) 和 [GridView](#grid-view) 小部件能够用于显示一个拥有分页、
 排序和过滤功能的一个列表或者表格。
 
-
-DetailView <span id="detail-view"></span>
-----------
+## DetailView <span id="detail-view"></span>
 
 [[yii\widgets\DetailView|DetailView]] 小部件显示的是单一 [[yii\widgets\DetailView::$model|model]] 数据的详情。
 
@@ -19,7 +16,7 @@ DetailView使用 [[yii\widgets\DetailView::$attributes|$attributes]] 属性来�
 可用的格式化选项，见 [formatter section](output-formatting.md) 章节。
 
 一个典型的DetailView的使用方法如下：
-  
+
 ```php
 echo DetailView::widget([
     'model' => $model,
@@ -28,7 +25,7 @@ echo DetailView::widget([
         'description:html',                                // description attribute formatted as HTML
         [                                                  // the owner name of the model
             'label' => 'Owner',
-            'value' => $model->owner->name,            
+            'value' => $model->owner->name,
             'contentOptions' => ['class' => 'bg-red'],     // HTML attributes to customize value tag
             'captionOptions' => ['tooltip' => 'Tooltip'],  // HTML attributes to customize label tag
         ],
@@ -59,8 +56,7 @@ echo DetailView::widget([
 ]);
 ```
 
-ListView <span id="list-view"></span>
---------
+## ListView <span id="list-view"></span>
 
 [[yii\widgets\ListView|ListView]] 小部件用于显示数据提供者 [data provider](output-data-providers.md) 提供的数据。
 每个数据模型用指定的视图文件 [[yii\widgets\ListView::$itemView|view file]] 来渲染。
@@ -87,7 +83,6 @@ echo ListView::widget([
 
 `_post` 视图文件可包含如下代码：
 
-
 ```php
 <?php
 use yii\helpers\Html;
@@ -95,8 +90,8 @@ use yii\helpers\HtmlPurifier;
 ?>
 <div class="post">
     <h2><?= Html::encode($model->title) ?></h2>
-    
-    <?= HtmlPurifier::process($model->text) ?>    
+
+    <?= HtmlPurifier::process($model->text) ?>
 </div>
 ```
 
@@ -106,7 +101,7 @@ use yii\helpers\HtmlPurifier;
 - `$index`：整型，是由数据提供者返回的数组中以0起始的数据项的索引。
 - `$widget`：类型是ListView，是小部件的实例。
 
-假如你需要传递附加数据到每一个视图中，你可以像下面这样用 [[yii\widgets\ListView::$viewParams|$viewParams]] 
+假如你需要传递附加数据到每一个视图中，你可以像下面这样用 [[yii\widgets\ListView::$viewParams|$viewParams]]
 属性传递键值对：
 
 ```php
@@ -123,12 +118,10 @@ echo ListView::widget([
 
 在视图中，上述这些附加数据也是可以作为变量来使用的。
 
-
-GridView <span id="grid-view"></span>
---------
+## GridView <span id="grid-view"></span>
 
 数据网格或者说 GridView 小部件是Yii中最强大的部件之一。如果你需要快速建立系统的管理后台，
-GridView 非常有用。它从数据提供者 [data provider](output-data-providers.md) 中取得数据并使用 
+GridView 非常有用。它从数据提供者 [data provider](output-data-providers.md) 中取得数据并使用
 [[yii\grid\GridView::columns|columns]] 属性的一组列配置，在一个表格中渲染每一行数据。
 
 表中的每一行代表一个数据项的数据，并且一列通常表示该项的属性
@@ -154,10 +147,9 @@ echo GridView::widget([
 上面的代码首先创建了一个数据提供者，然后使用GridView显示每一行的每个属性，每一行的数据是从数据提供者取来的。
 展现出来的表格封装了排序以及分页功能。
 
-
 ### 表格列
 
-表格的列是通过 [[yii\grid\Column]] 类来配置的，这个类是通过 GridView 配置项中的 [[yii\grid\GridView::columns|columns]] 
+表格的列是通过 [[yii\grid\Column]] 类来配置的，这个类是通过 GridView 配置项中的 [[yii\grid\GridView::columns|columns]]
 属性配置的。根据列的类别和设置的不同，各列能够以不同方式展示数据。
 默认的列类是 [[yii\grid\DataColumn]]，用于展现模型的某个属性，
 并且可以排序和过滤。
@@ -173,7 +165,7 @@ echo GridView::widget([
         'username',
         // 更复杂的列数据
         [
-            'class' => 'yii\grid\DataColumn', //由于是默认类型，可以省略 
+            'class' => 'yii\grid\DataColumn', //由于是默认类型，可以省略
             'value' => function ($data) {
                 return $data->name; // 如果是数组数据则为 $data['name'] ，例如，使用 SqlDataProvider 的情形。
             },
@@ -184,7 +176,6 @@ echo GridView::widget([
 
 请注意，假如配置中没有指定 [[yii\grid\GridView::columns|columns]] 属性，
 那么 Yii 会试图显示数据提供者的模型中所有可能的列。
-
 
 ### 列类
 
@@ -215,14 +206,13 @@ echo GridView::widget([
       return 'a string';
   }
   ```
-  
+
 你可以传递数组来指定各种容器式的HTML选项：
 
 - [[yii\grid\Column::headerOptions|headerOptions]]
 - [[yii\grid\Column::footerOptions|footerOptions]]
 - [[yii\grid\Column::filterOptions|filterOptions]]
 - [[yii\grid\Column::contentOptions|contentOptions]]
-
 
 #### 数据列 <span id="data-column"></span>
 
@@ -270,7 +260,7 @@ echo GridView::widget([
 要更改头部文本，您应该像上面的示例中那样设置 [[yii\grid\DataColumn::$label]]。
 默认情况下，标签应该从数据模型中填充。更多细节请参阅 [[yii\grid\DataColumn::getHeaderCellLabel]]。
 
-#### 动作列 
+#### 动作列
 
 [[yii\grid\ActionColumn|Action column]] 用于显示一些动作按钮，如每一行的更新、删除操作。
 
@@ -327,7 +317,7 @@ echo GridView::widget([
   ]
   ```
 
-#### 复选框列 
+#### 复选框列
 
 [[yii\grid\CheckboxColumn|Checkbox column]] 显示一个复选框列。
 
@@ -349,11 +339,11 @@ echo GridView::widget([
 JavaScript代码来获得：
 
 ```javascript
-var keys = $('#grid').yiiGridView('getSelectedRows');
+var keys = $("#grid").yiiGridView("getSelectedRows");
 // keys 为一个由与被选行相关联的键组成的数组
 ```
 
-#### 序号列 
+#### 序号列
 
 [[yii\grid\SerialColumn|Serial column]] 渲染行号，以 `1` 起始并自动增长。
 
@@ -367,7 +357,6 @@ echo GridView::widget([
         // ...
 ```
 
-
 ### 数据排序
 
 > Note: 这部分正在开发中。
@@ -376,7 +365,7 @@ echo GridView::widget([
 
 ### 数据过滤
 
-为了过滤数据的 GridView 需要一个模型 [model](structure-models.md) 来 
+为了过滤数据的 GridView 需要一个模型 [model](structure-models.md) 来
 从过滤表单接收数据，以及调整数据提供者的查询对象，以满足搜索条件。
 使用活动记录 [active records](db-active-record.md) 时，通常的做法是
 创建一个能够提供所需功能的搜索模型类（可以使用 [Gii](start-gii.md) 来生成）。
@@ -465,7 +454,6 @@ echo GridView::widget([
 
 大多数时候使用 GridView 标头过滤器就足够了，但是如果你需要一个单独的过滤器表单，你也可以很轻松的去添加。您可以使用以下内容创建部分视图 `_search.php`：
 
-
 ```php
 <?php
 
@@ -505,7 +493,7 @@ use yii\widgets\ActiveForm;
 ```
 
 > Note: 如果使用 Gii 生成 CRUD 代码， 默认情况下会生成单独的过滤器表单（`_search.php`），
-  但是在 `index.php` 视图中已经被注释了。取消注释就可以用了!
+> 但是在 `index.php` 视图中已经被注释了。取消注释就可以用了!
 
 当您需要按字段过滤时，单独的过滤器表单很有用，这些字段不会在 GridView 中显示，也不适用于特殊筛选条件（如日期范围）。
 对于按日期范围过滤，
@@ -600,9 +588,9 @@ $query->andFilterWhere(['LIKE', 'author.name', $this->getAttribute('author.name'
 > 然而，当你的表别名和关联名称不相同的时候，你得注意在哪使用你的别名，在哪使用你的关联名称。
 > 一个简单的规则是在每个构建数据库查询的地方使用别名，而在所有其他和定义相关的诸如：
 > `attributes()` 和 `rules()` 等地方使用关联名称。
-> 
+>
 > 例如，你使用 `au` 作为作者关系表的别名，那么联查语句就要写成像下面这样：
-> 
+>
 > ```php
 > $query->joinWith(['author' => function($query) { $query->from(['au' => 'users']); }]);
 > ```
@@ -614,7 +602,7 @@ $query->andFilterWhere(['LIKE', 'author.name', $this->getAttribute('author.name'
 > ```php
 > $query->andFilterWhere(['LIKE', 'au.name', $this->getAttribute('author.name')]);
 > ```
-> 
+>
 > 排序定义也同样如此：
 >
 > ```php
@@ -625,8 +613,8 @@ $query->andFilterWhere(['LIKE', 'author.name', $this->getAttribute('author.name'
 > ```
 >
 > 同样，当指定使用 [[yii\data\Sort::defaultOrder|defaultOrder]] 来排序的时候，
->你需要使用关联名称替代别名：
-> 
+> 你需要使用关联名称替代别名：
+>
 > ```php
 > $dataProvider->sort->defaultOrder = ['author.name' => SORT_ASC];
 > ```
@@ -636,7 +624,7 @@ $query->andFilterWhere(['LIKE', 'author.name', $this->getAttribute('author.name'
 
 #### SQL 视图用于过滤、排序和显示数据
 
-还有另外一种方法可以更快、更有用的 SQL 视图。例如，我们要在 `GridView` 
+还有另外一种方法可以更快、更有用的 SQL 视图。例如，我们要在 `GridView`
 中显示用户和他们的简介，可以这样创建 SQL 视图：
 
 ```sql
@@ -702,15 +690,14 @@ class UserView extends ActiveRecord
 - 因为在 SQL 视图中这仅仅是一个简单的映射UI，所以在你的实体中，它可能缺乏某方面的逻辑，所以，假如你有一些诸如 `isActive`、`isDeleted` 或者其他影响到 UI 的方法，
   你也需要在这个类中复制他们。
 
-
 ### 单个页面多个网格视图部件
 
 你可以在一个单独页面中使用多个网格视图，但是一些额外的配置是必须的，为的就是它们相互之间不干扰。
 当使用多个网格视图实例的时候，你必须要为生成的排序和分页对象配置不同的参数名，
 以便于每个网格视图有它们各自独立的排序和分页。
-你可以通过设置 [[yii\data\Sort::sortParam|sortParam]] 和 
+你可以通过设置 [[yii\data\Sort::sortParam|sortParam]] 和
 [[yii\data\Pagination::pageParam|pageParam]]，对应于数据提供者的
-[[yii\data\BaseDataProvider::$sort|sort]] 和 
+[[yii\data\BaseDataProvider::$sort|sort]] 和
 [[yii\data\BaseDataProvider::$pagination|pagination]] 实例。
 
 假如我们想要同时显示 `Post` 和 `User` 模型，这两个模型已经在 `$userProvider` 和 `$postProvider` 这两个数据提供者中准备好，
@@ -775,7 +762,6 @@ yii gii/crud --controllerClass="backend\\controllers\PostController" \
 这会生成一个由 [[yii\widgets\Pjax|Pjax]] 小部件包含的
 [[yii\grid\GridView|GridView]] 或者 [[yii\widgets\ListView|ListView]]。
 
-延伸阅读
----------------
+## 延伸阅读
 
 - [Rendering Data in Yii 2 with GridView and ListView](https://www.sitepoint.com/rendering-data-in-yii-2-with-gridview-and-listview/) by Arno Slatius.

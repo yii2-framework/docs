@@ -1,5 +1,4 @@
-Working with Forms
-==================
+# Working with Forms
 
 This section describes how to create a new page with a form for getting data from users.
 The page will display a form with a name input field and an email input field.
@@ -10,13 +9,11 @@ two [views](structure-views.md), you will also create a [model](structure-models
 
 Through this tutorial, you will learn how to:
 
-* create a [model](structure-models.md) to represent the data entered by a user through a form,
-* declare rules to validate the data entered,
-* build an HTML form in a [view](structure-views.md).
+- create a [model](structure-models.md) to represent the data entered by a user through a form,
+- declare rules to validate the data entered,
+- build an HTML form in a [view](structure-views.md).
 
-
-Creating a Model <span id="creating-model"></span>
-----------------
+## Creating a Model <span id="creating-model"></span>
 
 The data to be requested from the user will be represented by an `EntryForm` model class as shown below and
 saved in the file `models/EntryForm.php`. Please refer to the [Class Autoloading](concept-autoloading.md)
@@ -48,15 +45,15 @@ class EntryForm extends Model
 The class extends from [[yii\base\Model]], a base class provided by Yii, commonly used to
 represent form data.
 
-> Info: [[yii\base\Model]] is used as a parent for model classes *not* associated with database tables.
-[[yii\db\ActiveRecord]] is normally the parent for model classes that do correspond to database tables.
+> Info: [[yii\base\Model]] is used as a parent for model classes _not_ associated with database tables.
+> [[yii\db\ActiveRecord]] is normally the parent for model classes that do correspond to database tables.
 
 The `EntryForm` class contains two public members, `name` and `email`, which are used to store
 the data entered by the user. It also contains a method named `rules()`, which returns a set
 of rules for validating the data. The validation rules declared above state that
 
-* both the `name` and `email` values are required
-* the `email` data must be a syntactically valid email address
+- both the `name` and `email` values are required
+- the `email` data must be a syntactically valid email address
 
 If you have an `EntryForm` object populated with the data entered by a user, you may call
 its [[yii\base\Model::validate()|validate()]] method to trigger the data validation routines. A data validation
@@ -76,9 +73,7 @@ if ($model->validate()) {
 }
 ```
 
-
-Creating an Action <span id="creating-action"></span>
-------------------
+## Creating an Action <span id="creating-action"></span>
 
 Next, you'll need to create an `entry` action in the `site` controller that will use the new model. The process
 of creating and using actions was explained in the [Saying Hello](start-hello.md) section.
@@ -120,21 +115,19 @@ If the model is successfully populated (i.e., if the user has submitted the HTML
 [[yii\base\Model::validate()|validate()]] to make sure the values entered are valid.
 
 > Info: The expression `Yii::$app` represents the [application](structure-applications.md) instance,
-  which is a globally accessible singleton. It is also a [service locator](concept-service-locator.md) that
-  provides components such as `request`, `response`, `db`, etc. to support specific functionality.
-  In the above code, the `request` component of the application instance is used to access the `$_POST` data.
+> which is a globally accessible singleton. It is also a [service locator](concept-service-locator.md) that
+> provides components such as `request`, `response`, `db`, etc. to support specific functionality.
+> In the above code, the `request` component of the application instance is used to access the `$_POST` data.
 
 If everything is fine, the action will render a view named `entry-confirm` to confirm the successful submission
 of the data to the user. If no data is submitted or the data contains errors, the `entry` view will
 be rendered, wherein the HTML form will be shown, along with any validation error messages.
 
 > Note: In this very simple example we just render the confirmation page upon valid data submission. In practice,
-  you should consider using [[yii\web\Controller::refresh()|refresh()]] or [[yii\web\Controller::redirect()|redirect()]]
-  to avoid [form resubmission problems](https://en.wikipedia.org/wiki/Post/Redirect/Get).
+> you should consider using [[yii\web\Controller::refresh()|refresh()]] or [[yii\web\Controller::redirect()|redirect()]]
+> to avoid [form resubmission problems](https://en.wikipedia.org/wiki/Post/Redirect/Get).
 
-
-Creating Views <span id="creating-views"></span>
---------------
+## Creating Views <span id="creating-views"></span>
 
 Finally, create two view files named `entry-confirm` and `entry`. These will be rendered by the `entry` action,
 as just described.
@@ -180,9 +173,7 @@ form tags, respectively. Between the two method calls, input fields are created 
 and the second for the "email" data. After the input fields, the [[yii\helpers\Html::submitButton()]] method
 is called to generate a submit button.
 
-
-Trying it Out <span id="trying-it-out"></span>
--------------
+## Trying it Out <span id="trying-it-out"></span>
 
 To see how it works, use your browser to access the following URL:
 
@@ -200,8 +191,6 @@ displaying the data that you just entered.
 
 ![Confirmation of Data Entry](images/start-entry-confirmation.png)
 
-
-
 ### Magic Explained <span id="magic-explained"></span>
 
 You may wonder how the HTML form works behind the scene, because it seems almost magical that it can
@@ -215,12 +204,12 @@ JavaScript on your browser, the validation will still be performed on the server
 the `actionEntry()` method. This ensures data validity in all circumstances.
 
 > Warning: Client-side validation is a convenience that provides for a better user experience. Server-side validation
-  is always required, whether or not client-side validation is in place.
+> is always required, whether or not client-side validation is in place.
 
 The labels for input fields are generated by the `field()` method, using the property names from the model.
-For example, the label `Name` will be generated for the `name` property. 
+For example, the label `Name` will be generated for the `name` property.
 
-You may customize a label within a view using 
+You may customize a label within a view using
 the following code:
 
 ```php
@@ -229,12 +218,10 @@ the following code:
 ```
 
 > Info: Yii provides many such widgets to help you quickly build complex and dynamic views.
-  As you will learn later, writing a new widget is also extremely easy. You may want to turn much of your
-  view code into reusable widgets to simplify view development in future.
+> As you will learn later, writing a new widget is also extremely easy. You may want to turn much of your
+> view code into reusable widgets to simplify view development in future.
 
-
-Summary <span id="summary"></span>
--------
+## Summary <span id="summary"></span>
 
 In this section of the guide, you have touched every part in the MVC architectural pattern. You have learned how
 to create a model class to represent the user data and validate said data.

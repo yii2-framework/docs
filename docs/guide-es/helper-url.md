@@ -1,8 +1,6 @@
-Clase Auxiliar URL (URL Helper)
-===============================
+# Clase Auxiliar URL (URL Helper)
 
 La clase auxiliar URL proporciona un conjunto de métodos estáticos para gestionar URLs.
-
 
 ## Obtener URLs comúnes <span id="getting-common-urls"></span>
 
@@ -27,7 +25,6 @@ $httpsAbsoluteBaseUrl = Url::base('https');
 ```
 
 El único parámetro del método funciona exactamente igual que para `Url::home()`.
-
 
 ## Creación de URLs <span id="creating-urls"></span>
 
@@ -145,7 +142,6 @@ echo Url::current(['src' => null]);
 // /index.php?r=post%2Fview&id=100&src=google
 echo Url::current(['id' => 100]);
 ```
-
 
 ## Recordar URLs <span id="remember-urls"></span>
 

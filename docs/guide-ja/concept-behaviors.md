@@ -1,5 +1,4 @@
-ビヘイビア
-==========
+# ビヘイビア
 
 ビヘイビアは [[yii\base\Behavior]] またその子クラスのインスタンスです。
 ビヘイビアは [ミックスイン](https://ja.wikipedia.org/wiki/Mixin) としても知られ、既存の [[yii\base\Component|component]] クラスの
@@ -8,9 +7,7 @@
 コンポーネント・クラス自体に定義されているかのようにアクセスできるようになります。また、ビヘイビアは、
 コンポーネントによってトリガされた [イベント](concept-events.md) に応答することができるので、ビヘイビアでコンポーネントの通常のコード実行をカスタマイズすることができます。
 
-
-ビヘイビアを定義する <span id="defining-behaviors"></span>
---------------------
+## ビヘイビアを定義する <span id="defining-behaviors"></span>
 
 ビヘイビアを定義するには、 [[yii\base\Behavior]] あるいは子クラスを継承するクラスを作成します。たとえば:
 
@@ -51,10 +48,9 @@ class MyBehavior extends Behavior
 > Tip: ビヘイビア内から、[[yii\base\Behavior::owner]] プロパティを介して、ビヘイビアをアタッチしたコンポーネントにアクセスすることができます。
 
 > Note: ビヘイビアの [[yii\base\Behavior::__get()]] および/または [[yii\base\Behavior::__set()]] メソッドをオーバーライドする場合は、
-同時に [[yii\base\Behavior::canGetProperty()]] および/または [[yii\base\Behavior::canSetProperty()]] もオーバーライドする必要があります。
+> 同時に [[yii\base\Behavior::canGetProperty()]] および/または [[yii\base\Behavior::canSetProperty()]] もオーバーライドする必要があります。
 
-コンポーネントのイベントを処理する
-----------------------------------
+## コンポーネントのイベントを処理する
 
 ビヘイビアが、アタッチされたコンポーネントがトリガするイベントに応答する必要がある場合は、
 [[yii\base\Behavior::events()]] メソッドをオーバーライドしなければなりません。たとえば:
@@ -87,9 +83,9 @@ class MyBehavior extends Behavior
 上の例では [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] イベントがあること、
 そのハンドラ定義である `beforeValidate()` を宣言しています。イベント・ハンドラを指定するときは、以下の表記方法が使えます:
 
-* ビヘイビア・クラスのメソッド名を参照する文字列 (上の例など)
-* オブジェクトまたはクラス名と文字列のメソッド名 (括弧なし) 例 `[$object, 'methodName']`
-* 無名関数
+- ビヘイビア・クラスのメソッド名を参照する文字列 (上の例など)
+- オブジェクトまたはクラス名と文字列のメソッド名 (括弧なし) 例 `[$object, 'methodName']`
+- 無名関数
 
 イベント・ハンドラのシグニチャは次のようにしてください。`$event` はイベントのパラメータを参照します。イベントの詳細については
 [イベント](concept-events.md) セクションを参照してください。
@@ -99,8 +95,7 @@ function ($event) {
 }
 ```
 
-ビヘイビアをアタッチする <span id="attaching-behaviors"></span>
-------------------------
+## ビヘイビアをアタッチする <span id="attaching-behaviors"></span>
 
 [[yii\base\Component|コンポーネント]] へのビヘイビアのアタッチは、静的にも動的にも可能です。実際は、前者のほうがより一般的ですが。
 
@@ -143,9 +138,8 @@ class User extends ActiveRecord
 }
 ```
 
-ビヘイビア構成に対応する配列のキーを指定することによって、ビヘイビアに名前を関連付けることができます。この場合、ビヘイビアは *名前付きビヘイビア* と呼ばれます。上の例では、2つの名前付きビヘイビア​​
-`myBehavior2` と `myBehavior4` があります。ビヘイビアが名前と関連付けられていない場合は、 *無名ビヘイビア* と呼ばれます。
-
+ビヘイビア構成に対応する配列のキーを指定することによって、ビヘイビアに名前を関連付けることができます。この場合、ビヘイビアは _名前付きビヘイビア_ と呼ばれます。上の例では、2つの名前付きビヘイビア​​
+`myBehavior2` と `myBehavior4` があります。ビヘイビアが名前と関連付けられていない場合は、 _無名ビヘイビア_ と呼ばれます。
 
 ビヘイビアを動的にアタッチするには、ビヘイビアがアタッチされるコンポーネントの [[yii\base\Component::attachBehavior()]] メソッドを呼びます:
 
@@ -189,15 +183,14 @@ $component->attachBehaviors([
 ]
 ```
 
-詳しくは [構成情報](concept-configurations.md#configuration-format) 
+詳しくは [構成情報](concept-configurations.md#configuration-format)
 のセクションを参照してください。
 
-ビヘイビアを使用する <span id="using-behaviors"></span>
---------------------
+## ビヘイビアを使用する <span id="using-behaviors"></span>
 
 ビヘイビアを使用するには、まず上記の方法に従って [[yii\base\Component|コンポーネント]] にアタッチします。ビヘイビアがコンポーネントにアタッチされれば、その使用方法はシンプルです。
 
-あなたは、アタッチされているコンポーネントを介して、ビヘイビアの *パブリック* メンバ変数、
+あなたは、アタッチされているコンポーネントを介して、ビヘイビアの _パブリック_ メンバ変数、
 または getter や setter によって定義されたプロパティにアクセスすることができます:
 
 ```php
@@ -206,7 +199,7 @@ echo $component->prop1;
 $component->prop1 = $value;
 ```
 
-また同様に、ビヘイビアの *パブリック*・メソッドも呼ぶことができます:
+また同様に、ビヘイビアの _パブリック_・メソッドも呼ぶことができます:
 
 ```php
 // foo() はビヘイビア・クラス内で定義されたパブリック・メソッド
@@ -217,7 +210,7 @@ $component->foo();
 アタッチされたビヘイビアによって、それらをコンポーネント定義の一部であるかのように使うことができるのです。
 
 もし2つのビヘイビアが同じプロパティやメソッドを定義し、かつ両方とも同じコンポーネントにアタッチされている場合は、
-プロパティやメソッドのアクセス時に、*最初に* コンポーネントにアタッチされたビヘイビアが優先されます。
+プロパティやメソッドのアクセス時に、_最初に_ コンポーネントにアタッチされたビヘイビアが優先されます。
 
 ビヘイビアはコンポーネントにアタッチされるとき、名前と関連付けられているかもしれません。その場合、
 その名前を使用してビヘイビア・オブジェクトにアクセスすることができます:
@@ -232,9 +225,7 @@ $behavior = $component->getBehavior('myBehavior');
 $behaviors = $component->getBehaviors();
 ```
 
-
-ビヘイビアをデタッチする <span id="detaching-behaviors"></span>
-------------------------
+## ビヘイビアをデタッチする <span id="detaching-behaviors"></span>
 
 ビヘイビアをデタッチするには、ビヘイビアに付けられた名前とともに [[yii\base\Component::detachBehavior()]] を呼び出します:
 
@@ -242,15 +233,13 @@ $behaviors = $component->getBehaviors();
 $component->detachBehavior('myBehavior1');
 ```
 
-*全ての* ビヘイビアをデタッチすることもできます:
+_全ての_ ビヘイビアをデタッチすることもできます:
 
 ```php
 $component->detachBehaviors();
 ```
 
-
-`TimestampBehavior` を利用する <span id="using-timestamp-behavior"></span>
-------------------------------
+## `TimestampBehavior` を利用する <span id="using-timestamp-behavior"></span>
 
 しめくくりに、[[yii\behaviors\TimestampBehavior]] を見てみましょう。このビヘイビアは、
 `insert()`、`update()` または `save()` のメソッドを通じて [[yii\db\ActiveRecord|アクティブ・レコード]] モデルが保存されるときに、
@@ -287,9 +276,9 @@ class User extends ActiveRecord
 
 上のビヘイビア構成は、レコードが:
 
-* 挿入されるとき、ビヘイビアは現在の UNIX タイムスタンプを
+- 挿入されるとき、ビヘイビアは現在の UNIX タイムスタンプを
   `created_at` と `updated_at` 属性に割り当てます
-* 更新されるとき、ビヘイビアは現在の UNIX タイムスタンプを `updated_at` 属性に割り当てます
+- 更新されるとき、ビヘイビアは現在の UNIX タイムスタンプを `updated_at` 属性に割り当てます
 
 > Note: 上記の実装が MySQL データベースで動作するようにするためには、`created_at` と `updated_at` のカラムを UNIX タイムスタンプ になるように int(11) として宣言してください。
 
@@ -311,8 +300,7 @@ echo $user->created_at;  // 現在のタイムスタンプが表示される
 $user->touch('login_time');
 ```
 
-その他のビヘイビア
-------------------
+## その他のビヘイビア
 
 その他にも、内蔵または外部ライブラリによって利用できるビヘイビアがいくつかあります。
 
@@ -326,13 +314,11 @@ $user->touch('login_time');
 - [yii2tech\ar\position\PositionBehavior](https://github.com/yii2tech/ar-position) - レコードの順序を整数のフィールドによって管理することが出来るように、
   順序変更メソッドを提供します。
 
-ビヘイビアとトレイトの比較 <span id="comparison-with-traits"></span>
---------------------------
+## ビヘイビアとトレイトの比較 <span id="comparison-with-traits"></span>
 
 ビヘイビアは、主となるクラスにそのプロパティやメソッドを「注入する」という点で [トレイト](https://www.php.net/manual/ja/language.oop5.traits.php)
 に似ていますが、これらは多くの面で異なります。以下に説明するように、それらは互いに長所と短所を持っています。
 それらは代替手段というよりも、むしろ相互補完関係のようなものです。
-
 
 ### ビヘイビアを使う理由 <span id="pros-for-behaviors"></span>
 
@@ -350,7 +336,6 @@ $user->touch('login_time');
 先にコンポーネントにアタッチされたものを優先することで解消されます。
 異なるトレイトによって引き起こされる名前競合の場合は、
 影響を受けるプロパティやメソッドの名前変更による、手動での解決が必要です。
-
 
 ### トレイトを使う理由 <span id="pros-for-traits"></span>
 

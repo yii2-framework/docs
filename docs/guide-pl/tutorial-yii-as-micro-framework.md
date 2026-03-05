@@ -1,9 +1,9 @@
 # Używanie Yii jako mikroframeworka
 
-Yii może być z powodzeniem wykorzystywane bez dodatkowych funkcjonalności dostarczanych przez prosty i zaawansowany szablon aplikacji. Inaczej mówiąc, 
+Yii może być z powodzeniem wykorzystywane bez dodatkowych funkcjonalności dostarczanych przez prosty i zaawansowany szablon aplikacji. Inaczej mówiąc,
 Yii już jest samo w sobie mikroframeworkiem. Do pracy z Yii nie jest wymagane, aby struktura folderów była dokładnie taka, jak pokazana w szablonach.
 
-Jest to szczególnie korzystne, kiedy nie potrzebujesz gotowego kodu szablonów, jak w przypadku assetów luc widoków. Jednym z takich przypadków jest budowa JSON API. 
+Jest to szczególnie korzystne, kiedy nie potrzebujesz gotowego kodu szablonów, jak w przypadku assetów luc widoków. Jednym z takich przypadków jest budowa JSON API.
 W tej sekcji pokażemy jak to zrobić.
 
 ## Instalacja Yii
@@ -21,15 +21,15 @@ Stwórz plik `composer.json` w folderze `micro-app`, używając swojego ulubione
 
 ```json
 {
-    "require": {
-        "yiisoft/yii2": "~2.0.0"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ]
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
 }
 ```
 
@@ -37,12 +37,12 @@ Zapisz plik i uruchom komendę `composer install`. Dzięki temu zainstalujesz fr
 
 ## Tworzenie struktury projektu
 
-Po zainstalowaniu frameworka, czas na utworzenie [punktu wejścia](structure-entry-scripts.md) dla aplikacji. Punkt wejścia to pierwszy plik, który będzie uruchamiany, 
+Po zainstalowaniu frameworka, czas na utworzenie [punktu wejścia](structure-entry-scripts.md) dla aplikacji. Punkt wejścia to pierwszy plik, który będzie uruchamiany,
 podczas startu aplikacji. Ze względów bezpieczeństwa, zalecane jest, aby plik punktu wejścia umieścić w osobnym folderze, który będzie ustawiony jako bazowy folder aplikacji.
 
 Stwórz folder `web` i umieść w nim plik `index.php` z następującą zawartością:
 
-```php 
+```php
 <?php
 
 // zakomentuj poniższe dwie linie przy wydaniu aplikacji na środowisku produkcyjnym
@@ -119,10 +119,9 @@ Inną opcją jest skorzystanie z komendy `yii serve`, która użyje wbudowanego 
 
 Uruchomienie adresu URL aplikacji w przeglądarce powinno zaowocować teraz komunikatem "Hello World!", który jest zwracany w `SiteController::actionIndex()`.
 
-> Info: W naszym przykładzie zmieniliśmy domyślną przestrzeń nazw aplikacji `app` na `micro`, aby zademonstrować, 
+> Info: W naszym przykładzie zmieniliśmy domyślną przestrzeń nazw aplikacji `app` na `micro`, aby zademonstrować,
 > że nie ma potrzeby być ograniczonym przez tę nazwę (w przypadku, gdyby ktoś myślał, że jednak jest). Po zmianie jej na inną,  
 > należy jedynie zmodyfikować odpowiednio [[yii\base\Application::$controllerNamespace|przestrzeń nazw kontrolerów]] i ustawić właściwy alias.
-
 
 ## Tworzenie API REST
 
@@ -158,7 +157,7 @@ namespace micro\models;
 use yii\db\ActiveRecord;
 
 class Post extends ActiveRecord
-{ 
+{
     public static function tableName()
     {
         return '{{posts}}';
@@ -202,7 +201,7 @@ W tym momencie nasze API obsługuje już następujące adresy URL:
 
 Zapoznaj się z poniższymi wskazówkami, które pomogą Ci w dalszym rozwijaniu Twojej aplikacji:
 
-- Aktualnie API rozpoznaje jedynie urlenkodowane dane formularza na wejściu - aby zmienić je w prawdziwe JSON API, 
+- Aktualnie API rozpoznaje jedynie urlenkodowane dane formularza na wejściu - aby zmienić je w prawdziwe JSON API,
   musisz skonfigurować [[yii\web\JsonParser]].
 - Aby uczynić adresy URL, bardziej przyjaznymi dla użytkownika, musisz skonfigurować ruting.
   Zobacz [przewodnik po rutingu REST](rest-routing.md), który wyjaśnia, jak to zrobić.

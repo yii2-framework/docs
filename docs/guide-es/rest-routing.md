@@ -1,5 +1,4 @@
-Enrutamiento
-============
+# Enrutamiento
 
 Con las clases de controlador y recurso preparadas, puedes acceder a los recursos usando una URL como
 `http://localhost/index.php?r=user/create`, parecida a la que usas con aplicaciones Web normales.
@@ -39,15 +38,15 @@ Por ejemplo, el código anterior es equivalente a las siguientes reglas:
 
 Y los siguientes puntos finales del API son mantenidos por esta regla:
 
-* `GET /users`: lista de todos los usuarios página a página;
-* `HEAD /users`: muestra ĺa información resumen del usuario listado;
-* `POST /users`: crea un nuevo usuario;
-* `GET /users/123`: devuelve los detalles del usuario 123;
-* `HEAD /users/123`: muestra la información resumen del usuario 123;
-* `PATCH /users/123` y `PUT /users/123`: actualizan al usuario 123;
-* `DELETE /users/123`: borra el usuario 123;
-* `OPTIONS /users`: muestra los verbos soportados de acuerdo al punto final `/users`;
-* `OPTIONS /users/123`: muestra los verbos soportados de acuerdo al punto final `/users/123`.
+- `GET /users`: lista de todos los usuarios página a página;
+- `HEAD /users`: muestra ĺa información resumen del usuario listado;
+- `POST /users`: crea un nuevo usuario;
+- `GET /users/123`: devuelve los detalles del usuario 123;
+- `HEAD /users/123`: muestra la información resumen del usuario 123;
+- `PATCH /users/123` y `PUT /users/123`: actualizan al usuario 123;
+- `DELETE /users/123`: borra el usuario 123;
+- `OPTIONS /users`: muestra los verbos soportados de acuerdo al punto final `/users`;
+- `OPTIONS /users/123`: muestra los verbos soportados de acuerdo al punto final `/users/123`.
 
 Puedes configurar las opciones `only` y `except` para explícitamente listar cuáles acciones soportar o cuáles
 deshabilitar, respectivamente. Por ejemplo,
@@ -75,15 +74,15 @@ Por ejemplo, para soportar una nueva acción `search` para el punto final `GET /
 
 Puedes haber notado que el ID del controlador `user` aparece en formato plural `users` en los puntos finales de las URLs.
 Esto se debe a que [[yii\rest\UrlRule]] automáticamente pluraliza los IDs de los controladores al crear reglas URL hijas.
-Puedes desactivar este comportamiento definiendo la propiedad [[yii\rest\UrlRule::pluralize]] como `false`. 
+Puedes desactivar este comportamiento definiendo la propiedad [[yii\rest\UrlRule::pluralize]] como `false`.
 
 > Info: La pluralización de los IDs de los controladores es realizada por [[yii\helpers\Inflector::pluralize()]]. Este método respeta
-  reglas especiales de pluralización. Por ejemplo, la palabra `box` (caja) será pluralizada como `boxes` en vez de `boxs`.
+> reglas especiales de pluralización. Por ejemplo, la palabra `box` (caja) será pluralizada como `boxes` en vez de `boxs`.
 
-En caso de que la pluralización automática no encaje en tus requerimientos, puedes además configurar la propiedad 
+En caso de que la pluralización automática no encaje en tus requerimientos, puedes además configurar la propiedad
 [[yii\rest\UrlRule::controller]] para especificar explícitamente cómo mapear un nombre utilizado en un punto final URL
-a un ID de controlador. Por ejemplo, el siguiente código mapea el nombre `u` al ID del controlador `user`.  
-  
+a un ID de controlador. Por ejemplo, el siguiente código mapea el nombre `u` al ID del controlador `user`.
+
 ```php
 [
     'class' => 'yii\rest\UrlRule',

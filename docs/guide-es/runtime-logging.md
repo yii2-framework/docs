@@ -1,17 +1,15 @@
-Registro de anotaciones
-=======================
+# Registro de anotaciones
 
 Yii proporciona un poderoso framework dedicado al registro de anotaciones (logging) que es altamente personalizable y
 extensible. Usando este framework se pueden guardar fácilmente anotaciones (logs) de varios tipos de mensajes,
 filtrarlos, y unificarlos en diferentes destinos que pueden ser archivos, bases de datos o emails.
 
-
 Usar el framework de registro de anotaciones de Yii involucra los siguientes pasos:
 
-* Registrar [mensajes de las anotaciones](#log-messages) en distintos lugares del código;
-* Configurar los [destinos de las anotaciones](#log-targets) en la configuración de la aplicación para filtrar y
+- Registrar [mensajes de las anotaciones](#log-messages) en distintos lugares del código;
+- Configurar los [destinos de las anotaciones](#log-targets) en la configuración de la aplicación para filtrar y
   exportar los mensajes de las anotaciones;
-* Examinar los mensajes filtrados de los las anotaciones exportadas para diferentes destinos
+- Examinar los mensajes filtrados de los las anotaciones exportadas para diferentes destinos
   (ej. [Yii debugger](tool-debugger.md)).
 
 En esta sección, se describirán principalmente los dos primeros pasos.
@@ -20,13 +18,13 @@ En esta sección, se describirán principalmente los dos primeros pasos.
 
 Registrar mensajes de anotación es tan simple como llamar a uno de los siguientes métodos de registro de anotaciones.
 
-* [[Yii::debug()]]: registra un mensaje para trazar el funcionamiento de una sección de código. Se usa principalmente
+- [[Yii::debug()]]: registra un mensaje para trazar el funcionamiento de una sección de código. Se usa principalmente
   para tareas de desarrollo.
-* [[Yii::info()]]: registra un mensaje que transmite información útil.
-* [[Yii::warning()]]: registra un mensaje de advertencia que indica que ha sucedido algo inesperado.
-* [[Yii::error()]]: registra un error fatal que debe ser investigado tan pronto como sea posible.
+- [[Yii::info()]]: registra un mensaje que transmite información útil.
+- [[Yii::warning()]]: registra un mensaje de advertencia que indica que ha sucedido algo inesperado.
+- [[Yii::error()]]: registra un error fatal que debe ser investigado tan pronto como sea posible.
 
-Estos métodos registran mensajes de varios *niveles de severidad* y *categorías*. Comparten el mismo registro de
+Estos métodos registran mensajes de varios _niveles de severidad_ y _categorías_. Comparten el mismo registro de
 función `function ($message, $category = 'application')`, donde `$message` representa el mensaje del registro que
 tiene que ser registrado, mientras que `$category` es la categoría del registro de mensaje. El código del siguiente
 ejemplo registra la huella del mensaje para la categoría `application`:
@@ -36,9 +34,9 @@ Yii::debug('start calculating average revenue');
 ```
 
 > Info: Los mensajes de registro pueden ser tanto cadenas de texto como datos complejos, como arrays u objetos.
-  Es responsabilidad de los [destinos de registros](#log-targets) tratar los mensajes de registro de manera apropiada.
-  De forma predeterminada, si un mensaje de registro no es una cadena de texto, se exporta como si fuera un string
-  llamando a [[yii\helpers\VarDumper::export()]].
+> Es responsabilidad de los [destinos de registros](#log-targets) tratar los mensajes de registro de manera apropiada.
+> De forma predeterminada, si un mensaje de registro no es una cadena de texto, se exporta como si fuera un string
+> llamando a [[yii\helpers\VarDumper::export()]].
 
 Para organizar mejor y filtrar los mensajes de registro, se recomienda especificar una categoría apropiada para cada
 mensaje de registro. Se puede elegir un sistema de nombres jerárquicos por categorías que facilite a los
@@ -55,10 +53,10 @@ se encuentra la constante. Por ejemplo, es igual a la cadena `'app\controllers\R
 linea anterior de código se llamara dentro de este método.
 
 > Info: Los métodos de registro de anotaciones descritos anteriormente en realidad son accesos directos al
-  método [[yii\log\Logger::log()|log()]] del [[yii\log\Logger|logger object]] que es un singleton accesible a través
-  de la expresión `Yii::getLogger()`. Cuando se hayan registrado suficientes mensajes o cuando la aplicación haya
-  finalizado, el objeto de registro llamará [[yii\log\Dispatcher|message dispatcher]] para enviar los mensajes de
-  registro registrados a los [destiinos de registros](#log-targets).
+> método [[yii\log\Logger::log()|log()]] del [[yii\log\Logger|logger object]] que es un singleton accesible a través
+> de la expresión `Yii::getLogger()`. Cuando se hayan registrado suficientes mensajes o cuando la aplicación haya
+> finalizado, el objeto de registro llamará [[yii\log\Dispatcher|message dispatcher]] para enviar los mensajes de
+> registro registrados a los [destiinos de registros](#log-targets).
 
 ## Destino de Registros <span id="log-targets"></span>
 
@@ -101,22 +99,22 @@ return [
 ```
 
 > Note: El componente `log` debe cargarse durante el proceso de [bootstrapping](runtime-bootstrapping.md) para que
-pueda enviar los mensajes de registro a los destinos inmediatamente. Este es el motivo por el que se lista en el
-array `bootstrap` como se muestra más arriba.
+> pueda enviar los mensajes de registro a los destinos inmediatamente. Este es el motivo por el que se lista en el
+> array `bootstrap` como se muestra más arriba.
 
 En el anterior código, se registran dos destinos de registros en la propiedad [[yii\log\Dispatcher::targets]]
 
-* el primer destino gestiona los errores y las advertencias y las guarda en una tabla de la base de datos;
-* el segundo destino gestiona mensajes los mensajes de error de las categorías cuyos nombres empiecen por
+- el primer destino gestiona los errores y las advertencias y las guarda en una tabla de la base de datos;
+- el segundo destino gestiona mensajes los mensajes de error de las categorías cuyos nombres empiecen por
   `yii\db\` y los envía por email a las direcciones `admin@example.com` y `developer@example.com`.
 
 Yii incluye los siguientes destinos. En la API de documentación se pueden referencias a estas clases e
 información de configuración y uso.
 
-* [[yii\log\DbTarget]]: almacena los mensajes de registro en una tabla de la base de datos.
-* [[yii\log\EmailTarget]]: envía los mensajes de registro a direcciones de correo preestablecidas.
-* [[yii\log\FileTarget]]: guarda los menajes de registro en archivos.
-* [[yii\log\SyslogTarget]]: guarda los mensajes de registro en el syslog llamando a la función PHP `syslog()`.
+- [[yii\log\DbTarget]]: almacena los mensajes de registro en una tabla de la base de datos.
+- [[yii\log\EmailTarget]]: envía los mensajes de registro a direcciones de correo preestablecidas.
+- [[yii\log\FileTarget]]: guarda los menajes de registro en archivos.
+- [[yii\log\SyslogTarget]]: guarda los mensajes de registro en el syslog llamando a la función PHP `syslog()`.
 
 A continuación, se describirá las características más comunes de todos los destinos de registros.
 
@@ -128,15 +126,15 @@ deberán procesar sus destinos.
 
 La propiedad [[yii\log\Target::levels|levels]] es un array que consta de uno o varios de los siguientes valores:
 
-* `error`: correspondiente a los mensajes registrados por [[Yii::error()]].
-* `warning`: correspondiente a los mensajes registrados por [[Yii::warning()]].
-* `info`: correspondiente a los mensajes registrados por [[Yii::info()]].
-* `trace`: correspondiente a los mensajes registrados por [[Yii::debug()]].
-* `profile`: correspondiente a los mensajes registrados por [[Yii::beginProfile()]] y [[Yii::endProfile()]], que se
+- `error`: correspondiente a los mensajes registrados por [[Yii::error()]].
+- `warning`: correspondiente a los mensajes registrados por [[Yii::warning()]].
+- `info`: correspondiente a los mensajes registrados por [[Yii::info()]].
+- `trace`: correspondiente a los mensajes registrados por [[Yii::debug()]].
+- `profile`: correspondiente a los mensajes registrados por [[Yii::beginProfile()]] y [[Yii::endProfile()]], que se
   explicará más detalladamente en la subsección [Perfiles](#performance-profiling).
 
 Si no se especifica la propiedad [[yii\log\Target::levels|levels]], significa que el destino procesará los
-mensajes de *cualquier* nivel de severidad.
+mensajes de _cualquier_ nivel de severidad.
 
 La propiedad [[yii\log\Target::categories|categories]] es un array que consta de categorías de mensaje o patrones. El
 destino sólo procesará mensajes de las categorías que se puedan encontrar o si coinciden con algún patrón listado
@@ -146,7 +144,7 @@ de categoría coincide con un patrón si empieza por el mismo prefijo que el pat
 registrados en la clase [[yii\db\Command]], coinciden con el patrón `yii\db\*`.
 
 Si no se especifica la propiedad [[yii\log\Target::categories|categories]], significa que el destino procesará
-los mensajes de *todas* las categorías.
+los mensajes de _todas_ las categorías.
 
 Además añadiendo las categorías en listas blancas (whitelisting) mediante la propiedad
 [[yii\log\Target::categories|categories]], también se pueden añadir ciertas categorías en listas negras (blacklist)
@@ -172,9 +170,9 @@ de advertencia de las categorías que coincidan con alguno de los siguientes pat
 ```
 
 > Info: Cuando se captura una excepción de tipo HTTP por el [gestor de errores](runtime-handling-errors.md), se
-  registrará un mensaje de error con el nombre de categoría con formato `yii\web\HttpException:ErrorCode`. Por
-  ejemplo, la excepción [[yii\web\NotFoundHttpException]] causará un mensaje de error del tipo
-  `yii\web\HttpException:404`.
+> registrará un mensaje de error con el nombre de categoría con formato `yii\web\HttpException:ErrorCode`. Por
+> ejemplo, la excepción [[yii\web\NotFoundHttpException]] causará un mensaje de error del tipo
+> `yii\web\HttpException:404`.
 
 ### Formato de los Mensajes <span id="message-formatting"></span>
 
@@ -251,7 +249,7 @@ mensaje de registro se le añadirán como mucho 3 niveles de la pila de llamadas
 si `YII_DEBUG` está deshabilitado, no se incluirá información de la pila de llamadas.
 
 > Info: Obtener información de la pila de llamadas no es trivial. Por lo tanto, sólo se debe usar esta
-  característica durante el desarrollo o cuando se depura la aplicación.
+> característica durante el desarrollo o cuando se depura la aplicación.
 
 ### Liberación (Flushing) y Exportación de Mensajes <span id="flushing-exporting"></span>
 
@@ -274,7 +272,7 @@ return [
 ```
 
 > Info: También se produce la liberación de mensajes cuando la aplicación finaliza, esto asegura que los
-  destinos de los registros reciban los mensajes de registro.
+> destinos de los registros reciban los mensajes de registro.
 
 Cuando el [[yii\log\Logger|logger object]] libera los mensajes de registro enviándolos a los
 [destinos de registros](#log-targets), estos no se exportan inmediatamente. La exportación de mensajes solo se

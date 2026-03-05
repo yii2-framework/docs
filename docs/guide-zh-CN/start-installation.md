@@ -1,5 +1,4 @@
-安装 Yii
-==============
+# 安装 Yii
 
 你可以通过两种方式安装 Yii：使用 [Composer](https://getcomposer.org/) 或下载一个归档文件。
 推荐使用前者，这样只需执行一条简单的命令就可以安装新的[扩展](structure-extensions.md)或更新 Yii 了。
@@ -14,12 +13,10 @@ Yii当然也提供了其它模板叫
 它是更好应用于在一个团队开发环境中去开发多层级的应用程序。
 
 > Info: 这个基本的应用程序模板是适合于开发90%的Web应用程序。
-  它不同于高级的应用程序模板主要地在如何使它们的代码是有组织的。
-  如果你是刚接触Yii，我们强烈建议你坚持使用简单并有足够的功能的基础的应用程序模板。
+> 它不同于高级的应用程序模板主要地在如何使它们的代码是有组织的。
+> 如果你是刚接触Yii，我们强烈建议你坚持使用简单并有足够的功能的基础的应用程序模板。
 
-
-通过 Composer 安装 <span id="installing-via-composer"></span>
------------------------
+## 通过 Composer 安装 <span id="installing-via-composer"></span>
 
 ### 安装 Composer
 
@@ -79,25 +76,21 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 >
 > 请注意，Yii的开发版本不应该用于生产，因为它可能会破坏您的运行代码。
 
-
-通过归档文件安装 <span id="installing-from-archive-file"></span>
---------------
+## 通过归档文件安装 <span id="installing-from-archive-file"></span>
 
 通过归档文件安装 Yii 包括三个步骤：
 
 1. 从 [yiiframework.com](https://www.yiiframework.com/download/) 下载归档文件。
 2. 将下载的文件解压缩到 Web 访问的文件夹中。
 3. 修改 `config/web.php` 文件，给 `cookieValidationKey` 配置项
-  添加一个密钥（若你通过 Composer 安装，则此步骤会自动完成）：
+   添加一个密钥（若你通过 Composer 安装，则此步骤会自动完成）：
 
-  ```php
-  // !!! 在下面插入一段密钥（若为空） - 以供 cookie validation 的需要
-  'cookieValidationKey' => '在此处输入你的密钥',
-  ```
+```php
+// !!! 在下面插入一段密钥（若为空） - 以供 cookie validation 的需要
+'cookieValidationKey' => '在此处输入你的密钥',
+```
 
-
-其他安装方式 <span id="other-installation-options"></span>
-----------
+## 其他安装方式 <span id="other-installation-options"></span>
 
 上文介绍了两种安装 Yii 的方法，
 安装的同时也会创建一个立即可用的 Web 应用程序。
@@ -105,14 +98,12 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 
 但是其他的安装方式也存在：
 
-* 如果你只想安装核心框架，然后从零开始构建整个属于你自己的应用程序模版，
+- 如果你只想安装核心框架，然后从零开始构建整个属于你自己的应用程序模版，
   可以参考[从头构建自定义模版](tutorial-start-from-scratch.md)一节的介绍。
-* 如果你要开发一个更复杂的应用，可以更好地适用于团队开发环境的，
+- 如果你要开发一个更复杂的应用，可以更好地适用于团队开发环境的，
   你可以考虑安装[高级应用模版](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide-zh-CN/README.md)。
 
-
-安装 Assets <span id="installing-assets"></span>
------------
+## 安装 Assets <span id="installing-assets"></span>
 
 Yii依靠 [Bower](https://bower.io/) 和/或 [NPM](https://www.npmjs.com/) 软件包来安装 asset（CSS 和 JavaScript）库。
 它使用Composer来获取这些库，允许 PHP 和 CSS/JavaScript 包版本同时解析。
@@ -134,20 +125,18 @@ Yii依靠 [Bower](https://bower.io/) 和/或 [NPM](https://www.npmjs.com/) 软�
 > Note: 在通过 Composer 绕过 assets 安装的情况下，您负责 assets 的安装和解决版本冲突。
 > 准备来自不同扩展名的 assets 文件之间的可能不一致。
 
-
-验证安装的结果 <span id="verifying-installation"></span>
-------------
+## 验证安装的结果 <span id="verifying-installation"></span>
 
 当安装完成之后，
 或配置你的Web服务器(看下面的文章)或使用[内置Web Server](https://www.php.net/manual/zh/features.commandline.webserver.php)，
 当在项目 `web` 目录下可以通过下面的命令:
-  
+
 ```bash
 php yii serve
 ```
 
 > Note: 默认情况下Https-server将监听8080。可是如果这个端口已经使用或者你想通过这个方式运行多个应用程序，你可以指定使用哪些端口。
-只加上 --port 参数：
+> 只加上 --port 参数：
 
 ```bash
 php yii serve --port=8888
@@ -164,8 +153,8 @@ http://localhost:8080/
 你应该可以在浏览器中看到如上所示的 “Congratulations!” 页面。如果没有，
 请通过以下任意一种方式，检查当前 PHP 环境是否满足 Yii 最基本需求：
 
-* 复制 `/requirements.php` 到 `/web/requirements.php`，然后通过浏览器访问 URL `http://localhost/requirements.php`
-* 执行如下命令：
+- 复制 `/requirements.php` 到 `/web/requirements.php`，然后通过浏览器访问 URL `http://localhost/requirements.php`
+- 执行如下命令：
 
   ```
   cd basic
@@ -173,15 +162,13 @@ http://localhost:8080/
   ```
 
 你需要配置好 PHP 安装环境，使其符合 Yii 的最小需求。主要是需要 PHP 5.4 或 以上版本。
-如果应用需要用到数据库，那还要安装 [PDO PHP 扩展](https://www.php.net/manual/zh/pdo.installation.php) 
+如果应用需要用到数据库，那还要安装 [PDO PHP 扩展](https://www.php.net/manual/zh/pdo.installation.php)
 和相应的数据库驱动（例如访问 MySQL 数据库所需的 `pdo_mysql`）。
 
-
-配置 Web 服务器 <span id="configuring-web-servers"></span>
------------------------
+## 配置 Web 服务器 <span id="configuring-web-servers"></span>
 
 > Tip: 如果你现在只是要试用 Yii 而不是将其部署到生产环境中，
-  本小节可以跳过。
+> 本小节可以跳过。
 
 通过上述方法安装的应用程序在 Windows，Max OS X，
 Linux 中的 [Apache HTTP 服务器](https://httpd.apache.org/)
@@ -196,12 +183,12 @@ URL `https://www.example.com/index.php` 访问而不是 `https://www.example.com
 你将学到如何配置 Apache 或 Nginx 服务器实现这些目标。
 
 > Info: 将 `basic/web` 设置为文档根目录(document root)，可以防止终端用户访问 `basic/web` 相邻目录中
-的私有应用代码和敏感数据文件。
-禁止对其他目录的访问是一个不错的安全改进。
+> 的私有应用代码和敏感数据文件。
+> 禁止对其他目录的访问是一个不错的安全改进。
 
 > Info: 如果你的应用程序将来要运行在共享虚拟主机环境中，
-没有修改其 Web 服务器配置的权限，你依然可以通过调整应用的结构来提升安全性。
-详情请参考[共享主机环境](tutorial-shared-hosting.md) 一章。
+> 没有修改其 Web 服务器配置的权限，你依然可以通过调整应用的结构来提升安全性。
+> 详情请参考[共享主机环境](tutorial-shared-hosting.md) 一章。
 
 > Info: 如果您在反向代理后面运行Yii应用程序，
 > 则可能需要在请求组件中配置 [Trusted proxies and headers](runtime-requests.md#trusted-proxies)。
@@ -226,11 +213,10 @@ DocumentRoot "path/to/basic/web"
 
     # if $showScriptName is false in UrlManager, do not allow accessing URLs with script name
     RewriteRule ^index.php/ - [L,R=404]
-    
+
     # ...其它设置...
 </Directory>
 ```
-
 
 ### 推荐使用的 Nginx 配置 <span id="recommended-nginx-configuration"></span>
 
@@ -268,7 +254,7 @@ server {
     location ~ ^/assets/.*\.php$ {
         deny all;
     }
-    
+
     location ~ \.php$ {
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;

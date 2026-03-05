@@ -1,5 +1,4 @@
-HTTP キャッシュ
-===============
+# HTTP キャッシュ
 
 これまでのセクションで説明したサーバ・サイドのキャッシュに加えて、ウェブ・アプリケーションは、
 同じページ・コンテントを生成し送信する時間を節約するために、クライアント・サイドでもキャッシュを利用することができます。
@@ -8,10 +7,9 @@ HTTP キャッシュ
 コントローラ・アクションのフィルタとして [[yii\filters\HttpCache]] を設定します。
 [[yii\filters\HttpCache]] は `GET` と `HEAD` リクエストに対してのみ動作し、それらのリクエストに対する 3 種類のキャッシュ関連の HTTP ヘッダを扱うことができます:
 
-* [[yii\filters\HttpCache::lastModified|Last-Modified]]
-* [[yii\filters\HttpCache::etagSeed|Etag]]
-* [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
-
+- [[yii\filters\HttpCache::lastModified|Last-Modified]]
+- [[yii\filters\HttpCache::etagSeed|Etag]]
+- [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
 
 ## `Last-Modified` ヘッダ <span id="last-modified"></span>
 
@@ -54,7 +52,6 @@ public function behaviors()
 もしブラウザが再度同じページにアクセスし、その期間中に投稿に変更がない場合は、サーバはページを再生成せず、
 ブラウザはクライアント・サイドにキャッシュしたものを使用します。
 その結果、サーバ・サイドのレンダリング処理とページ・コンテントの送信は両方ともスキップされます。
-
 
 ## `ETag` ヘッダ <span id="etag"></span>
 
@@ -108,10 +105,9 @@ ETag はリクエスト毎に再評価する必要があるため、負荷の高
 ページのコンテントが変更されたときにキャッシュを無効化するための式は単純なものを指定するようにして下さい。
 
 > Note: [RFC 7232](https://datatracker.ietf.org/doc/html/rfc7232#section-2.4) に準拠して
-  `Etag` と `Last-Modified` ヘッダの両方を設定した場合、
-  `HttpCache` はその両方とも送信します。  また、もし `If-None-Match` ヘッダと
-  `If-Modified-Since` ヘッダの両方を送信した場合は前者のみが尊重されます。
-
+> `Etag` と `Last-Modified` ヘッダの両方を設定した場合、
+> `HttpCache` はその両方とも送信します。 また、もし `If-None-Match` ヘッダと
+> `If-Modified-Since` ヘッダの両方を送信した場合は前者のみが尊重されます。
 
 ## `Cache-Control` ヘッダ <span id="cache-control"></span>
 
@@ -133,7 +129,6 @@ Cache-Control: public, max-age=3600
 このプロパティには `public`、`private`、`private_no_expire`、そして `nocache` などの文字列の値を使用することができます。
 これらの値についての説明は [session_cache_limiter()](https://www.php.net/manual/ja/function.session-cache-limiter.php)
 を参照してください。
-
 
 ## SEO への影響 <span id="seo-implications"></span>
 

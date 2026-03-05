@@ -1,5 +1,4 @@
-データのフォーマット
-====================
+# データのフォーマット
 
 ユーザにとってより読みやすい形式でデータを表示するために、`formatter` [アプリケーション・コンポーネント](structure-application-components.md)
 を使ってデータをフォーマットすることが出来ます。デフォルトでは、フォーマッタは [[yii\i18n\Formatter]] によって実装されており、
@@ -10,19 +9,19 @@ $formatter = \Yii::$app->formatter;
 
 // 出力: January 1, 2014
 echo $formatter->asDate('2014-01-01', 'long');
-  
+
 // 出力: 12.50%
 echo $formatter->asPercent(0.125, 2);
-  
+
 // 出力: <a href="mailto:cebe@example.com">cebe@example.com</a>
-echo $formatter->asEmail('cebe@example.com'); 
+echo $formatter->asEmail('cebe@example.com');
 
 // 出力: Yes
-echo $formatter->asBoolean(true); 
+echo $formatter->asBoolean(true);
 // it also handles display of null values:
 
 // 出力: (not set)
-echo $formatter->asDate(null); 
+echo $formatter->asDate(null);
 ```
 
 ご覧のように、これらのメソッドは全て `asXyz()` という名前を付けられており、`Xyz` がサポートされている形式を表しています。
@@ -32,19 +31,19 @@ echo $formatter->asDate(null);
 
 ```php
 // 出力: January 1, 2014
-echo Yii::$app->formatter->format('2014-01-01', 'date'); 
+echo Yii::$app->formatter->format('2014-01-01', 'date');
 
 // 配列を使ってフォーマット・メソッドのパラメータを指定することも出来ます。
 // `2` は asPercent() メソッドの $decimals パラメータの値です。
 // 出力: 12.50%
-echo Yii::$app->formatter->format(0.125, ['percent', 2]); 
+echo Yii::$app->formatter->format(0.125, ['percent', 2]);
 ```
 
 > Note: フォーマッタ・コンポーネントは、エンド・ユーザへの表示用に値をフォーマットすることを目的に設計されています。
 > ユーザの入力を機械が読み取れる形式にフォーマットしたい場合、また、日付を機械が読み取れる形式にフォーマットしたいだけ、という場合には、
 > フォーマッタは適切なツールではありません。
 > 日付と数値についてユーザ入力を変換するためには、それぞれ、[[yii\validators\DateValidator]] と [[yii\validators\NumberValidator]]
-> を使うことが出来ます。機械が読み取れる日付と時刻のフォーマットの単純な相互変換には、PHP の 
+> を使うことが出来ます。機械が読み取れる日付と時刻のフォーマットの単純な相互変換には、PHP の
 > [date()](https://www.php.net/manual/ja/function.date.php) 関数で十分です。
 
 ## フォーマッタを構成する <span id="configuring-formater"></span>
@@ -66,7 +65,6 @@ return [
 ```
 
 構成可能なプロパティについては、[[yii\i18n\Formatter]] を参照してください。
-
 
 ## 日付と時刻の値をフォーマットする <span id="date-and-time"></span>
 
@@ -122,7 +120,7 @@ echo Yii::$app->formatter->asDate('now', 'php:Y-m-d'); // 2014-10-06
 - `full`: `Monday, 6 October 2014` と `15:58:42 GMT` を出力
 
 > Info: ja_JP ロケールでは、次のようになります。
-> 
+>
 > short: `2014/10/06` と `15:58`
 > medium: `2014/10/06` と `15:58:42`
 > long: `2014年10月6日` と `15:58:42 JST`
@@ -130,7 +128,6 @@ echo Yii::$app->formatter->asDate('now', 'php:Y-m-d'); // 2014-10-06
 
 バージョン 2.0.7 以降では、さまざまな暦法に従って日付をフォーマットすることが可能です。
 通常とは異なる暦法を使用する方法については、フォーマッタの [[yii\i18n\Formatter::$calendar|$calendar]] プロパティの API ドキュメントを参照して下さい。
-
 
 ### タイム・ゾーン <span id="time-zones"></span>
 
@@ -153,7 +150,7 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
 
 > Info:
 > ターゲット・[[yii\i18n\Formatter::timeZone|タイム・ゾーン]] が `Asia/Tokyo` である場合は、次のようになります。
-> 
+>
 > ```php
 > echo Yii::$app->formatter->asTime(1412599260); // 21:41:00
 > echo Yii::$app->formatter->asTime('2014-10-06 12:41:00'); // 21:41:00
@@ -169,7 +166,6 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
 > タイム・ゾーン・データベースの更新についての詳細は、
 > [ICU マニュアル](https://unicode-org.github.io/icu/userguide/datetime/timezone/#updating-the-time-zone-data) で参照することが出来ます。
 > [PHP 環境を国際化のために設定する](tutorial-i18n.md#setup-environment) も参照してください。
-
 
 ## 数値をフォーマットする <span id="numbers"></span>
 
@@ -202,7 +198,6 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
 ]
 ```
 
-
 ## その他のフォーマット <span id="other"></span>
 
 日付/時刻と数値のフォーマット以外にも、Yii はよく使われるフォーマットをサポートしています。その中には、次のものが含まれます。
@@ -224,13 +219,11 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
   デフォルトでは、`true` は `Yes`、`false` は `No` とレンダリングされ、現在のアプリケーションの言語に翻訳されます。
   この動作は [[yii\i18n\Formatter::booleanFormat]] プロパティを構成して調整できます。
 
-
 ## `null` 値 <span id="null-values"></span>
 
-Null 値は特殊な方法でフォーマットされます。空文字列を表示する代りに、フォーマッタは null 値を事前定義された文字列 
+Null 値は特殊な方法でフォーマットされます。空文字列を表示する代りに、フォーマッタは null 値を事前定義された文字列
 (そのデフォルト値は `(not set)` です) に変換し、それを現在のアプリケーションの言語に翻訳します。
 この文字列は [[yii\i18n\Formatter::nullDisplay|nullDisplay]] プロパティを構成してカスタマイズすることが出来ます。
-
 
 ## データのフォーマットをローカライズする <span id="localizing-data-format"></span>
 

@@ -1,8 +1,7 @@
-创建表单
-========
+# 创建表单
 
-基于活动记录（ActiveRecord）的表单：ActiveForm
------------------------
+## 基于活动记录（ActiveRecord）的表单：ActiveForm
+
 在yii中使用表单的主要方式是通过 [[yii\widgets\ActiveForm]]。
 当某个表单是基于一个模型时，应该首选这种方式。
 此外，在 [[yii\helpers\Html]] 中有很多实用的方法为表单添加按钮和帮助文档。
@@ -35,7 +34,7 @@ class LoginForm extends \yii\base\Model
 }
 ```
 
-在控制器中，我们将传递一个模型的实例到视图，其中 [[yii\widgets\ActiveForm|ActiveForm]] 
+在控制器中，我们将传递一个模型的实例到视图，其中 [[yii\widgets\ActiveForm|ActiveForm]]
 小部件用来显示表单：
 
 ```php
@@ -59,6 +58,7 @@ $form = ActiveForm::begin([
 ```
 
 ### 用 `begin()` 和 `end()` 包裹 <span id="wrapping-with-begin-and-end"></span>
+
 在上面的代码中，[[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]] 不仅创建了一个表单实例，同时也标志着表单的开始。
 放在 [[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]] 与 [[yii\widgets\ActiveForm::end()|ActiveForm::end()]]
 之间的所有内容都被包裹在 HTML 的 `<form>` 标签中。
@@ -67,9 +67,10 @@ $form = ActiveForm::begin([
 请参阅 API 文档的 [[yii\widgets\ActiveForm]]。
 
 ### ActiveField <span id="activefield"></span>
+
 为了在表单中创建表单元素与元素的标签，以及任何适用的 JavaScript 验证，[[yii\widgets\ActiveForm::field()|ActiveForm::field()]]
 方法在调用时，会返回一个 [[yii\widgets\ActiveField]] 的实例。
-直接输出该方法时，结果是一个普通的（文本）输入。要自定义输出，可以附加上 [[yii\widgets\ActiveField|ActiveField]] 
+直接输出该方法时，结果是一个普通的（文本）输入。要自定义输出，可以附加上 [[yii\widgets\ActiveField|ActiveField]]
 的其它方法来一起调用：
 
 ```php
@@ -102,7 +103,7 @@ echo $form->field($model, 'uploadFile[]')->fileInput(['multiple'=>'multiple']);
 echo $form->field($model, 'items[]')->checkboxList(['a' => 'Item A', 'b' => 'Item B', 'c' => 'Item C']);
 ```
 
-命名表单元素，如提交按钮时要小心。在 [jQuery 文档](https://api.jquery.com/submit/) 
+命名表单元素，如提交按钮时要小心。在 [jQuery 文档](https://api.jquery.com/submit/)
 中有一些保留的名称，可能会导致冲突：
 
 > 表单和它们的子元素不应该使用与表单的属性冲突的 input name 或 id，
@@ -112,34 +113,32 @@ echo $form->field($model, 'items[]')->checkboxList(['a' => 'Item A', 'b' => 'Ite
 额外的 HTML 标签可以使用纯 HTML 或者 [[yii\helpers\Html|Html]]-辅助类中的方法来添加到表单中，就如上面例子中的
 [[yii\helpers\Html::submitButton()|Html::submitButton()]]。
 
-
-> Tip: 如果你正在你的应用程序中使用 Twitter Bootstrap CSS 你可以使用[[yii\bootstrap\ActiveForm]] 
+> Tip: 如果你正在你的应用程序中使用 Twitter Bootstrap CSS 你可以使用[[yii\bootstrap\ActiveForm]]
 > 来代替 [[yii\widgets\ActiveForm]]。
 > 前者继承自后者并在生成表单字段时使用 Bootstrap 特有的样式。
-
 
 > Tip: 为了设计带星号的表单字段，你可以使用下面的 CSS：
 >
 > ```css
 > div.required label:after {
->     content: " *";
->     color: red;
+>   content: " *";
+>   color: red;
 > }
 > ```
 
-创建下拉列表 <span id="creating-activeform-lists"></span>
-------------
+## 创建下拉列表 <span id="creating-activeform-lists"></span>
 
 有三种类型的列表：
-* 下拉列表
-* 单选列表
-* 复选框列表
+
+- 下拉列表
+- 单选列表
+- 复选框列表
 
 要创建一个列表，你必须准备这些项目。可以手动完成：
 
 ```php
 $items = [
-    1 => 'item 1', 
+    1 => 'item 1',
     2 => 'item 2'
 ]
 ```
@@ -165,7 +164,7 @@ $items = Category::find()
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->dropdownList([
-        1 => 'item 1', 
+        1 => 'item 1',
         2 => 'item 2'
     ],
     ['prompt'=>'Select Category']
@@ -180,7 +179,7 @@ echo $form->field($model, 'category')->dropdownList([
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->radioList([
-    1 => 'radio 1', 
+    1 => 'radio 1',
     2 => 'radio 2'
 ]);
 ```
@@ -193,14 +192,12 @@ echo $form->field($model, 'category')->radioList([
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->checkboxList([
-    1 => 'checkbox 1', 
+    1 => 'checkbox 1',
     2 => 'checkbox 2'
 ]);
 ```
 
-
-与 Pjax 一起工作 <span id="working-with-pjax"></span>
------------------------
+## 与 Pjax 一起工作 <span id="working-with-pjax"></span>
 
 [[yii\widgets\Pjax|Pjax]] 小部件允许您更新某个部分
 而不是重新加载整个页面。
@@ -227,6 +224,7 @@ Pjax::begin([
     ActiveForm::end();
 Pjax::end();
 ```
+
 > Tip: 请小心处理 [[yii\widgets\Pjax|Pjax]] 小部件中的链接，
 > 因为响应也将在小部件内呈现。为了防止这种情况，
 > 使用 `data-pjax="0"` HTML 属性。
@@ -235,17 +233,16 @@ Pjax::end();
 
 在处理 [文件](https://github.com/jquery/jquery/issues/2321) 和
 [提交按钮值](https://github.com/jquery/jquery/issues/2321)
-时使用 `jQuery.serializeArray()` 
+时使用 `jQuery.serializeArray()`
 有已知的问题，这将不会被解决，而是被弃用，
 以支持 HTML5 中引入的 FormData 类。
 
-这意味着对 ajax 或使用  [[yii\widgets\Pjax|Pjax]]
+这意味着对 ajax 或使用 [[yii\widgets\Pjax|Pjax]]
 小部件的文件和提交按钮值的唯一官方支持取决于
 `FormData` 类的
 [浏览器支持](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7)。
 
-延伸阅读 <span id="further-reading"></span>
----------------
+## 延伸阅读 <span id="further-reading"></span>
 
 下一节 [输入验证](input-validation.md) 处理提交的表单数据的服务器端验证，以及 ajax 和客户端验证。
 

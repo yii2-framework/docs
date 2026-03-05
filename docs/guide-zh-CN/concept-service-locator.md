@@ -1,5 +1,4 @@
-服务定位器（Service Locator）
-==========================
+# 服务定位器（Service Locator）
 
 服务定位器是一个了解如何提供各种应用所需的服务（或组件）的对象。在服务定位器中，
 每个组件都只有一个单独的实例，并通过ID 唯一地标识。
@@ -52,13 +51,12 @@ $cache = $locator->cache;
 ```
 
 如上所示， [[yii\di\ServiceLocator]] 允许通过组件 ID 像访问一个属性值那样访问一个组件。
-当你第一次访问某组件时，[[yii\di\ServiceLocator]] 
+当你第一次访问某组件时，[[yii\di\ServiceLocator]]
 会通过该组件的注册信息创建一个该组件的实例，并返回它。
 之后，如果再次访问，则服务定位器会返回同一个实例。
 
 你可以通过 [[yii\di\ServiceLocator::has()]] 检查某组件 ID 是否被注册。
 若你用一个无效的 ID 调用 [[yii\di\ServiceLocator::get()]]，则会抛出一个异常。
-
 
 因为服务定位器，经常会在创建时附带[配置信息](concept-configurations.md)，
 因此我们提供了一个可写的属性，名为 [[yii\di\ServiceLocator::setComponents()|components]]，

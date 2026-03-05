@@ -1,5 +1,4 @@
-Caching
-=======
+# Caching
 
 Caching is a cheap and effective way to improve the performance of a Web application. By storing relatively
 static data in cache and serving it from cache when requested, the application saves the time that would be
@@ -13,7 +12,7 @@ the browser cache.
 
 Yii supports all these caching mechanisms:
 
-* [Data caching](caching-data.md)
-* [Fragment caching](caching-fragment.md)
-* [Page caching](caching-page.md)
-* [HTTP caching](caching-http.md)
+- [Data caching](caching-data.md)
+- [Fragment caching](caching-fragment.md)
+- [Page caching](caching-page.md)
+- [HTTP caching](caching-http.md)

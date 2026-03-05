@@ -1,5 +1,4 @@
-HTTP 缓存
-============
+# HTTP 缓存
 
 除了前面章节讲到的服务器端缓存外， Web 应用还可以利用客户端缓存
 去节省相同页面内容的生成和传输时间。
@@ -8,10 +7,9 @@ HTTP 缓存
 [[yii\filters\HttpCache|HttpCache]] 过滤器仅对 `GET` 和 `HEAD` 请求生效，
 它能为这些请求设置三种与缓存有关的 HTTP 头。
 
-* [[yii\filters\HttpCache::lastModified|Last-Modified]]
-* [[yii\filters\HttpCache::etagSeed|Etag]]
-* [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
-
+- [[yii\filters\HttpCache::lastModified|Last-Modified]]
+- [[yii\filters\HttpCache::etagSeed|Etag]]
+- [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
 
 ## `Last-Modified` 头 <span id="last-modified"></span>
 
@@ -54,7 +52,6 @@ public function behaviors()
 之后客户端浏览器在页面没被修改期间访问该页，
 服务器将不会重新生成页面，浏览器会使用之前客户端缓存下来的内容。
 因此服务端渲染和内容传输都将省去。
-
 
 ## `ETag` 头 <span id="etag"></span>
 
@@ -108,15 +105,14 @@ ETag 相比 `Last-Modified` 能实现更复杂和更精确的缓存策略。
 请试着找出一个最简单的表达式去触发 Etag 失效。
 
 > Note: 为了遵循 [RFC 7232（HTTP 1.1 协议）](https://datatracker.ietf.org/doc/html/rfc7232#section-2.4)，
-如果同时配置了 `ETag` 和 `Last-Modified` 头，`HttpCache` 将会同时发送它们。
-并且如果客户端同时发送 `If-None-Match` 头和 `If-Modified-Since` 头，
-则只有前者会被接受。
-
+> 如果同时配置了 `ETag` 和 `Last-Modified` 头，`HttpCache` 将会同时发送它们。
+> 并且如果客户端同时发送 `If-None-Match` 头和 `If-Modified-Since` 头，
+> 则只有前者会被接受。
 
 ## `Cache-Control` 头 <span id="cache-control"></span>
 
 `Cache-Control` 头指定了页面的常规缓存策略。
-可以通过配置 [[yii\filters\HttpCache::cacheControlHeader]] 
+可以通过配置 [[yii\filters\HttpCache::cacheControlHeader]]
 属性发送相应的头信息。默认发送以下头：
 
 ```
@@ -125,7 +121,7 @@ Cache-Control: public, max-age=3600
 
 ## 会话缓存限制器 <span id="session-cache-limiter"></span>
 
-当页面使 session 时，PHP 将会按照 PHP.INI 
+当页面使 session 时，PHP 将会按照 PHP.INI
 中所设置的 `session.cache_limiter` 值自动发送一些缓存相关的 HTTP 头。
 这些 HTTP 头有可能会干扰你原本设置的 `HttpCache` 或让其失效。
 为了避免此问题，默认情况下 `HttpCache` 禁止自动发送这些头。
@@ -133,7 +129,6 @@ Cache-Control: public, max-age=3600
 该属性接受一个字符串值，包括 `public`，`private`，`private_no_expire`，和 `nocache`。
 请参考 PHP 手册中的[缓存限制器](https://www.php.net/manual/zh/function.session-cache-limiter.php)
 了解这些值的含义。
-
 
 ## SEO 影响 <span id="seo-implications"></span>
 

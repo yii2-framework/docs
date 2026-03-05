@@ -1,5 +1,4 @@
-助手类（Helpers）
-==============
+# 助手类（Helpers）
 
 > Note: 这部分正在开发中。
 
@@ -16,12 +15,10 @@ echo Html::encode('Test > test');
 ```
 
 > Note: 为了支持 [自定义助手类](#customizing-helper-classes)，Yii 将每一个助手类
-  分隔成两个类：一个基类 (例如 `BaseArrayHelper`) 和一个具体的类 (例如 `ArrayHelper`)。
-  当使用助手类时，应该仅使用具体的类版本而不使用基类。
+> 分隔成两个类：一个基类 (例如 `BaseArrayHelper`) 和一个具体的类 (例如 `ArrayHelper`)。
+> 当使用助手类时，应该仅使用具体的类版本而不使用基类。
 
-
-核心助手类（Core Helper Classes）
------------------------------
+## 核心助手类（Core Helper Classes）
 
 Yii 发布版中提供以下核心助手类：
 
@@ -39,9 +36,7 @@ Yii 发布版中提供以下核心助手类：
 - [Url](helper-url.md)
 - VarDumper
 
-
-自定义助手类（Customizing Helper Classes） <span id="customizing-helper-classes"></span>
---------------------------------------
+## 自定义助手类（Customizing Helper Classes） <span id="customizing-helper-classes"></span>
 
 如果想要自定义一个核心助手类 (例如 [[yii\helpers\ArrayHelper]])，你应该创建一个新的类继承
 helpers对应的基类 (例如 [[yii\helpers\BaseArrayHelper]]) 并同样的命

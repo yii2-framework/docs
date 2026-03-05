@@ -1,5 +1,4 @@
-Automation
-==========
+# Automation
 
 There are some tasks that are done automatically when working on Yii:
 

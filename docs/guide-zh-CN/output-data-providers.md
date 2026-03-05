@@ -1,21 +1,19 @@
-数据提供者
-==============
+# 数据提供者
 
 在 [Pagination](output-pagination.md) 和 [Sorting](output-sorting.md) 部分,
 我们已经介绍了如何允许终端用户选择一个特定的数据页面，根据一些字段对它们进行展现与排序。
 因为分页和排序数据的任务是很常见的，所以Yii提供了一组封装好的*data provider*类。
 
 数据提供者是一个实现了 [[yii\data\DataProviderInterface]] 接口的类。
-它主要用于获取分页和数据排序。它经常用在 [data widgets](output-data-widgets.md) 
+它主要用于获取分页和数据排序。它经常用在 [data widgets](output-data-widgets.md)
 小物件里，方便终端用户进行分页与数据排序。
 
 下面的数据提供者类都包含在Yii的发布版本里面：
 
-* [[yii\data\ActiveDataProvider]]：使用 [[yii\db\Query]] 或者 [[yii\db\ActiveQuery]] 从数据库查询数据并且以数组项的方式或者
+- [[yii\data\ActiveDataProvider]]：使用 [[yii\db\Query]] 或者 [[yii\db\ActiveQuery]] 从数据库查询数据并且以数组项的方式或者
   [Active Record](db-active-record.md) 实例的方式返回。
-* [[yii\data\SqlDataProvider]]：执行一段SQL语句并且将数据库数据作为数组返回。
-* [[yii\data\ArrayDataProvider]]：将一个大的数组依据分页和排序规格返回一部分数据。
-
+- [[yii\data\SqlDataProvider]]：执行一段SQL语句并且将数据库数据作为数组返回。
+- [[yii\data\ArrayDataProvider]]：将一个大的数组依据分页和排序规格返回一部分数据。
 
 所有的这些数据提供者遵守以下模式：
 
@@ -36,7 +34,7 @@ $count = $provider->getCount();
 $totalCount = $provider->getTotalCount();
 ```
 
-你可以通过配置 [[yii\data\BaseDataProvider::pagination|pagination]] 和 
+你可以通过配置 [[yii\data\BaseDataProvider::pagination|pagination]] 和
 [[yii\data\BaseDataProvider::sort|sort]]的属性来设定数据提供者的分页和排序行为。
 属性分别对应于 [[yii\data\Pagination]] 和 [[yii\data\Sort]]。
 你也可以对它们配置false来禁用分页和排序特性。
@@ -52,7 +50,6 @@ echo yii\grid\GridView::widget([
 
 这些数据提供者的主要区别在于数据源的指定方式上。在下面的部分，
 我们将详细介绍这些数据提供者的使用方法。
-
 
 ## 活动数据提供者 <span id="active-data-provider"></span>
 
@@ -92,12 +89,11 @@ $query = (new Query())->from('post')->where(['status' => 1]);
 ```
 
 > Note: 假如查询已经指定了 `orderBy` 从句，则终端用户给定的新的排序说明（通过 `sort` 来配置的）
-  将被添加到已经存在的从句中。任何已经存在的 `limit` 和 `offset` 从句都将被终端用户所请求的分页
-  （通过 `pagination` 所配置的）所重写。
+> 将被添加到已经存在的从句中。任何已经存在的 `limit` 和 `offset` 从句都将被终端用户所请求的分页
+> （通过 `pagination` 所配置的）所重写。
 
 默认情况下，[[yii\data\ActiveDataProvider]]使用 `db` 应用组件来作为数据库连接。你可以通过配置 [[yii\data\ActiveDataProvider::db]]
 的属性来使用不同数据库连接。
-
 
 ## SQL数据提供者 <span id="sql-data-provider"></span>
 
@@ -137,10 +133,9 @@ $models = $provider->getModels();
 ```
 
 > Info: [[yii\data\SqlDataProvider::totalCount|totalCount]] 的属性只有你需要
-  分页数据的时候才会用到。这是因为通过 [[yii\data\SqlDataProvider::sql|sql]] 
-  指定的SQL语句将被数据提供者所修改并且只返回当
-  前页面数据。数据提供者为了正确计算可用页面的数量仍旧需要知道数据项的总数。
-
+> 分页数据的时候才会用到。这是因为通过 [[yii\data\SqlDataProvider::sql|sql]]
+> 指定的SQL语句将被数据提供者所修改并且只返回当
+> 前页面数据。数据提供者为了正确计算可用页面的数量仍旧需要知道数据项的总数。
 
 ## 数组数据提供者 <span id="array-data-provider"></span>
 
@@ -176,8 +171,7 @@ $rows = $provider->getModels();
 ```
 
 > Note: 数组数据提供者与 [Active Data Provider](#active-data-provider) 和 [SQL Data Provider](#sql-data-provider) 这两者进行比较的话，
-  会发现数组数据提供者没有后面那两个高效，这是因为数组数据提供者需要加载*所有*的数据到内存中。
-
+> 会发现数组数据提供者没有后面那两个高效，这是因为数组数据提供者需要加载*所有*的数据到内存中。
 
 ## 数据键的使用 <span id="working-with-keys"></span>
 
@@ -222,7 +216,6 @@ $provider = new ActiveDataProvider([
     }
 ]);
 ```
-
 
 ## 创建自定义数据提供者 <span id="custom-data-provider"></span>
 
@@ -357,7 +350,7 @@ $filterCondition = null;
 // 您可以从任何来源加载过滤器。例如：
 // 如果你更喜欢请求体中的 JSON，
 // 使用 Yii::$app->request->getBodyParams() 如下：
-if ($filter->load(\Yii::$app->request->get())) { 
+if ($filter->load(\Yii::$app->request->get())) {
     $filterCondition = $filter->build();
     if ($filterCondition === false) {
         // Serializer would get errors out of it
@@ -380,16 +373,16 @@ return new ActiveDataProvider([
 ```php
 use yii\base\Model;
 
-class PostSearch extends Model 
+class PostSearch extends Model
 {
     public $id;
     public $title;
-    
+
     public function rules()
     {
         return [
             ['id', 'integer'],
-            ['title', 'string', 'min' => 2, 'max' => 200],            
+            ['title', 'string', 'min' => 2, 'max' => 200],
         ];
     }
 }

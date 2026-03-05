@@ -1,11 +1,9 @@
-国际化（Internationalization）
-===========================
+# 国际化（Internationalization）
 
 国际化（I18N）是指在设计软件时，使它可以无需做大的改变就能够适应不同的语言和地区的需要。对于 Web 应用程序，
 这有着特别重要的意义，因为潜在的用户可能会在全球范围内。
 Yii 提供的国际化功能支持全方位信息翻译，
 视图翻译，日期和数字格式化。
-
 
 ## 区域和语言（Locale and Language） <span id="locale-language"></span>
 
@@ -29,22 +27,24 @@ Yii 提供的国际化功能支持全方位信息翻译，
 在 Yii中，我们经常用 “language” 来代表一个区域。
 
 Yii 应用程序使用两种语言：
-* [[yii\base\Application::$sourceLanguage|源语言]]：前者指的是写在代码中的语言，后者是向最终用户显示内容的语言。
-* [[yii\base\Application::$language|目标语言]]：而信息翻译服务主要是将文本消息从原语言翻译到目标语言。
+
+- [[yii\base\Application::$sourceLanguage|源语言]]：前者指的是写在代码中的语言，后者是向最终用户显示内容的语言。
+- [[yii\base\Application::$language|目标语言]]：而信息翻译服务主要是将文本消息从原语言翻译到目标语言。
 
 所谓的消息翻译服务主要将文本消息从源语言转换为目标语言。
 
 ### 配置（Configuration）
+
 可以用类似下面的应用程序配置来配置应用程序语言：
 
 ```php
 return [
     // 设置目标语言为俄语
     'language' => 'ru-RU',
-    
+
     // 设置源语言为英语
     'sourceLanguage' => 'en-US',
-    
+
     ......
 ];
 ```
@@ -68,6 +68,7 @@ return [
 ## 消息翻译（Message Translation） <span id="message-translation"></span>
 
 ### 从源语言到目标语言（From source language to target language）
+
 消息翻译服务用于将一条文本信息从一种语言（通常是 [[yii\base\Application::$sourceLanguage|源语言]] ）
 翻译成另一种语言（通常是 [[yii\base\Application::$language|目标语言]]）。
 
@@ -75,14 +76,15 @@ return [
 否则会返回原始未翻译的信息。
 
 ### 如何实现（How to implement）
+
 为了使用消息翻译服务，需要做如下工作：
 
 1. 调用 [[Yii::t()]] 方法且在其中包含每一条要翻译的消息；
 2. 配置一个或多个消息来源，能在其中找得到要翻译的消息和翻译结果；
 3. 让译者翻译信息并将它们存储在消息来源。
 
-
 #### 1. 包裹一条消息（Wrap a text message）
+
 这个 [[Yii::t()]] 方法的用法如下，
 
 ```php
@@ -93,7 +95,8 @@ echo \Yii::t('app', 'This is a string to translate!');
 第二个参数指需要被翻译的消息。
 
 #### 2. 配置一个或多个消息源（Configure one or multiple message sources）
-这个 [[Yii::t()]] 方法会调用 `i18n` [应用组件](structure-application-components.md) 
+
+这个 [[Yii::t()]] 方法会调用 `i18n` [应用组件](structure-application-components.md)
 来实现翻译工作。这个组件可以在应用程序中按下面的代码来配置，
 
 ```php
@@ -145,23 +148,21 @@ return [
 
 ```
 
-
 ##### 文件映射（File mapping）
 
-[[yii\i18n\PhpMessageSource::fileMap|fileMap]] 来映射一个类别到不同名称的 PHP 文件。 
+[[yii\i18n\PhpMessageSource::fileMap|fileMap]] 来映射一个类别到不同名称的 PHP 文件。
 
 在上面的例子中，类别 `app/error` 被映射到PHP文件 `@app/messages/ru-RU/error.php`（假设 `ru-RU` 为目标语言）。
 如果没有此配置，
 该类别将被映射到 `@app/messages/ru-RU/app/error.php` 。
 
-#####  其他存储类型（Other storage types）
+##### 其他存储类型（Other storage types）
 
 除了在PHP文件中存储消息来源，
 也可以使用下面的消息来源在不同的存储来存储翻译的消息：
 
 - [[yii\i18n\GettextMessageSource]] 使用 GNU Gettext 的 MO 或 PO 文件保存翻译的消息。
 - [[yii\i18n\DbMessageSource]] 使用一个数据库表来存储翻译的消息。
-
 
 ## 消息格式化（Message Formatting） <span id="message-formatting"></span>
 
@@ -193,14 +194,14 @@ echo \Yii::t('app', 'Hello, {username}!', [
 当翻译的消息包含占位符时，应该让占位符保留原样。
 这是因为调用 `Yii::t()` 时，占位符将被实际参数值代替。
 
-你可以使用 *名称占位符* 或者 *位置占位符*，但不能两者都用在同一个消息里。
+你可以使用 _名称占位符_ 或者 _位置占位符_，但不能两者都用在同一个消息里。
 
 前面的例子说明了如何使用名称占位符。即每个占位符的格式为 `{参数名称}` ，你所提供的参数作为关联数组，
 其中数组的键是参数名称（没有大括号），
 数组的值是对应的参数值。
 
 位置占位符是使用基于零的整数序列，在调用 `Yii::t()` 时会参数值根据它们出现位置的顺序分别进行替换。
-在下面的例子中，位置占位符 `{0}`，`{1}` 和 `{2}` 
+在下面的例子中，位置占位符 `{0}`，`{1}` 和 `{2}`
 将分别被 `$price`，`$count` 和 `$subtotal` 所替换。
 
 ```php
@@ -218,7 +219,6 @@ echo \Yii::t('app', 'Price: {0}', $price);
 
 > Tip: 大多数情况下你应该使用名称占位符。
 > 这是因为参数名称可以让翻译者更好的理解要被翻译的消息。
-
 
 ### 格式化参数 <span id="parameter-formatting"></span>
 
@@ -241,14 +241,13 @@ full form: {PlaceholderName, ParameterType, ParameterStyle}
 ```
 
 > Note: 如果您需要使用特殊字符（如 `{`，`}`，`'`，`#`，请使用 `'`：
-> 
+
 ```php
 echo Yii::t('app', "Example of string with ''-escaped characters'': '{' '}' '{test}' {count,plural,other{''count'' value is # '#{}'}}", ['count' => 3]);
 ```
 
 请参阅 [ICU 文档](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classMessageFormat.html)
 关于如何指定这样的占位符的说明。接下来我们会展示一些常用的使用方法。
-
 
 #### 数字（Number） <span id="number"></span>
 
@@ -277,8 +276,7 @@ echo \Yii::t('app', 'Balance: {0, number, ,000,000000}', $sum);
 [ICU API 参考](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classDecimalFormat.html)
 中找到。
 
-
-该值始终根据您翻译的区域设置进行格式设置，即无需更改翻译区域设置即可更改小数或千位分隔符，货币符号等。 
+该值始终根据您翻译的区域设置进行格式设置，即无需更改翻译区域设置即可更改小数或千位分隔符，货币符号等。
 如果你需要定制这些，你可以使用
 [[yii\i18n\Formatter::asDecimal()]] 和 [[yii\i18n\Formatter::asCurrency()]]。
 
@@ -304,7 +302,6 @@ echo \Yii::t('app', 'Today is {0, date, yyyy-MM-dd}', time());
 
 [格式化参考](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classicu_1_1SimpleDateFormat.html#details)。
 
-
 #### 时间（Time） <span id="time"></span>
 
 参数值应该被格式化为一个时间。 例如，
@@ -326,7 +323,6 @@ echo \Yii::t('app', 'It is {0, date, HH:mm}', time());
 ```
 
 [格式化参考](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classicu_1_1SimpleDateFormat.html#details)。
-
 
 #### 拼写（Spellout） <span id="spellout"></span>
 
@@ -405,7 +401,7 @@ echo \Yii::t('app', 'There {n, plural, =0{are no cats} =1{is one cat} other{are 
 ```
 
 在上面的多个规则的参数中， `=0` 意味着 `n` 的值是 0 ，`=1` 意味着 `n` 的值是 1 ， 而 `other` 则是对于其它值，
-`#` 会被 `n` 中的值给替代。 
+`#` 会被 `n` 中的值给替代。
 
 复数形式可以是某些非常复杂的语言。下面以俄罗斯为例，`=1` 完全匹配 `n = 1`，
 而 `one` 匹配 `21` 或 `101`：
@@ -418,14 +414,14 @@ echo \Yii::t('app', 'There {n, plural, =0{are no cats} =1{is one cat} other{are 
 而不是一个原始消息，除非设置应用程序的
 [[yii\base\Application::$sourceLanguage|源语言]] 为 `ru-RU`。
 
-> Note: 除非您将应用程序的 [[yii\base\Application::$sourceLanguage|源语言]] 
+> Note: 除非您将应用程序的 [[yii\base\Application::$sourceLanguage|源语言]]
 > 设置为“RU-RU”，并且从以下语言转换而来，上面的示例俄语消息主要用作翻译的消息，而不是原始消息俄语。
 >
 > 当在 `Yii::t()` 调用中指定的原始消息未找到翻译时，
 > [[yii\base\Application::$sourceLanguage|源语言]] 复数规则将应用于原始消息。
 
 对于字符串如下所示的情况，有一个 `offset` 参数：
-  
+
 ```php
 $likeCount = 2;
 echo Yii::t('app', 'You {likeCount,plural,
@@ -478,7 +474,6 @@ echo \Yii::t('app', '{name} is a {gender} and {gender, select, female{she} male{
 在上面的表达中， `female` 和 `male` 是可能的参数值，
 而 `other` 用于处理不与它们中任何一个相匹配的值。对于每一个可能的参数值，
 应指定一个短语并把它放在在一对大括号中。
-
 
 ### 指定默认翻译（Specifying default message source） <span id="default-message-source"></span>
 
@@ -551,7 +546,7 @@ class Module extends \yii\base\Module
 ```
 
 在上面的例子中，我们使用通配符匹配，然后过滤了所需的文件中的每个类别。取之使用 `fileMap` ，你可以简单地使用类映射的同名文件。
-现在你可以直接使用 `Module::t('validation', 'your custom validation message')` 
+现在你可以直接使用 `Module::t('validation', 'your custom validation message')`
 或 `Module::t('form', 'some form label')`。
 
 ### 翻译小部件消息（Translating widgets messages） <span id="widget-translation"></span>
@@ -605,7 +600,6 @@ class Menu extends Widget
 现在你直接可以使用 `Menu::t('messages', 'new messages {messages}', ['{messages}' => 10])` 。
 
 > Tip: 对于小部件也可以使用 i18n 视图，并一样以控制器的规则来应用它们。
-
 
 ### 翻译框架信息（Translating framework messages） <span id="framework-translation"></span>
 
@@ -678,7 +672,6 @@ class TranslationEventHandler
 > Note: 每个消息源会单独处理它缺少的翻译。如果是使用多个消息源，并希望他们把缺少的翻译以同样的方式来处理，
 > 你应该给它们每一个消息源指定相应的事件处理程序。
 
-
 ### 使用 `message` 命令（Using the `message` command） <span id="message-command"></span>
 
 翻译储存在 [[yii\i18n\PhpMessageSource|php 文件]]，[[yii\i18n\GettextMessageSource|.po 文件] 或者 [[yii\i18n\DbMessageSource|数据库]]。具体见类的附加选项。
@@ -691,8 +684,8 @@ class TranslationEventHandler
 
 打开创建的文件，并按照需求来调整参数。特别注意：
 
-* `languages`: 代表你的应用程序应该被翻译成什么语言的一个数组;
-* `messagePath`: 存储消息文件的路径，这应与配置中 `i18n` 的 `basePath` 参数一致。
+- `languages`: 代表你的应用程序应该被翻译成什么语言的一个数组;
+- `messagePath`: 存储消息文件的路径，这应与配置中 `i18n` 的 `basePath` 参数一致。
 
 您也可以使用 './yii message/config' 命令通过 cli 动态生成带有指定选项的配置文件。
 例如，你可以像下面这样设置 `languages` 和 `messagePath` 参数：
@@ -717,7 +710,6 @@ class TranslationEventHandler
 
 然后你会发现你的文件（如果你已经选择基于文件的翻译）在 `messagePath` 目录。
 
-
 ## 视图的翻译（View Translation） <span id="view-translation"></span>
 
 有时你可能想要翻译一个完整的视图文件，而不是翻译单条文本消息。为了达到这一目的，
@@ -728,13 +720,11 @@ class TranslationEventHandler
 它最终会使用所翻译的 `views/site/ru-RU/index.php`。
 
 > Note: 如果 [[yii\base\Application::$language|目标语言]] 跟 [[yii\base\Application::$sourceLanguage|源语言]] 相同，
-在翻译视图的存在下，将呈现原始视图。
-
+> 在翻译视图的存在下，将呈现原始视图。
 
 ## 格式化日期和数字值（Formatting Date and Number Values） <span id="date-number"></span>
 
 在 [格式化输出数据](output-formatting.md) 一节可获取详细信息。
-
 
 ## 设置 PHP 环境（Setting Up PHP Environment） <span id="setup-environment"></span>
 

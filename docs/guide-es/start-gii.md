@@ -1,5 +1,4 @@
-Generando Código con Gii
-========================
+# Generando Código con Gii
 
 En esta sección, explicaremos cómo utilizar [Gii](tool-gii.md) para generar código que automáticamente
 implementa algunas de las características más comunes de una aplicación. Para lograrlo, todo lo que tienes que hacer es
@@ -7,14 +6,12 @@ ingresar la información de acuerdo a las instrucciones mostradas en la páginas
 
 A lo largo de este tutorial, aprenderás
 
-* Cómo activar Gii en tu aplicación;
-* Cómo utilizar Gii para generar una clase Active Record;
-* Cómo utilizar Gii para generar el código que implementa las operaciones ABM de una tabla de la base de datos.
-* Cómo personalizar el código generado por Gii.
+- Cómo activar Gii en tu aplicación;
+- Cómo utilizar Gii para generar una clase Active Record;
+- Cómo utilizar Gii para generar el código que implementa las operaciones ABM de una tabla de la base de datos.
+- Cómo personalizar el código generado por Gii.
 
-
-Comenzando con Gii <span id="starting-gii"></span>
-------------------
+## Comenzando con Gii <span id="starting-gii"></span>
 
 [Gii](tool-gii.md) está provisto por Yii en forma de [módulo](structure-modules.md). Puedes habilitar Gii
 configurándolo en la propiedad [[yii\base\Application::modules|modules]] de la aplicación. Dependiendo de cómo hayas creado tu aplicación, podrás encontrar que el siguiente código ha sido ya incluido en el archivo de configuración `config/web.php`:
@@ -48,14 +45,12 @@ https://hostname/index.php?r=gii
 
 ![Gii](images/start-gii.png)
 
-
-Generando una Clase Active Record <span id="generating-ar"></span>
----------------------------------
+## Generando una Clase Active Record <span id="generating-ar"></span>
 
 Para poder generar una clase Active Record con Gii, selecciona "Model Generator" (haciendo click en el vínculo que existe en la página inicial del modulo Gii). Después, completa el formulario de la siguiente manera,
 
-* Table Name: `country`
-* Model Class: `Country`
+- Table Name: `country`
+- Model Class: `Country`
 
 ![Model Generator](images/start-gii-model.png)
 
@@ -72,17 +67,15 @@ Para sobrescribir un archivo existente, marca el checkbox que se encuentra al la
 Después, verás una página de confirmación indicando que el código ha sido generado correctamente y tu archivo `models/Country.php`
 ha sido sobrescrito con el nuevo código generado.
 
+## Generando código de ABM (CRUD en inglés) <span id="generating-crud"></span>
 
-Generando código de ABM (CRUD en inglés) <span id="generating-crud"></span>
-----------------------------------------
-
-En computación, CRUD es el acrónimo de Crear, Obtener, Actualizar y Borrar (del inglés: Create, Read, Update y Delete) 
-representando la cuatro funciones con datos más comunes en la mayoría de sitios Web. 
+En computación, CRUD es el acrónimo de Crear, Obtener, Actualizar y Borrar (del inglés: Create, Read, Update y Delete)
+representando la cuatro funciones con datos más comunes en la mayoría de sitios Web.
 El acrónimo ABM es Altas, Bajas y Modificaciones. Para generar un ABM, selecciona "CRUD Generator" y completa el formulario de esta manera:
 
-* Model Class: `app\models\Country`
-* Search Model Class: `app\models\CountrySearch`
-* Controller Class: `app\controllers\CountryController`
+- Model Class: `app\models\Country`
+- Search Model Class: `app\models\CountrySearch`
+- Controller Class: `app\controllers\CountryController`
 
 ![Generador de ABM](images/start-gii-crud.png)
 
@@ -91,9 +84,7 @@ Al hacer click en el botón "Preview" verás la lista de archivos a ser generado
 Si has creado previamente los archivos `controllers/CountryController.php` y
 `views/country/index.php` (en la sección sobre bases de datos de esta guía), asegúrate de seleccionar el checkbox "overwrite" para reemplazarlos. (Las versiones anteriores no disponían de un soporte ABM (CRUD) completo.)
 
-
-Probándolo <span id="trying-it-out"></span>
-----------
+## Probándolo <span id="trying-it-out"></span>
 
 Para ver cómo funciona, accede desde tu navegador a la siguiente URL:
 
@@ -115,17 +106,15 @@ un nuevo país en la base de datos.
 La siguiente es la lista de archivos generados por Gii, en el caso de que quieras inspeccionar cómo el ABM ha sido generado,
 o por si desearas personalizarlos:
 
-* Controlador: `controllers/CountryController.php`
-* Modelos: `models/Country.php` y `models/CountrySearch.php`
-* Vistas: `views/country/*.php`
+- Controlador: `controllers/CountryController.php`
+- Modelos: `models/Country.php` y `models/CountrySearch.php`
+- Vistas: `views/country/*.php`
 
 > Info: Gii está diseñado para ser una herramienta altamente configurable. Utilizándola con sabiduría
-  puede acelerar enormemente la velocidad de desarrollo de tu aplicación. Para más detalles, consulta la
-  sección [Gii](tool-gii.md).
+> puede acelerar enormemente la velocidad de desarrollo de tu aplicación. Para más detalles, consulta la
+> sección [Gii](tool-gii.md).
 
-
-Resumen <span id="summary"></span>
--------
+## Resumen <span id="summary"></span>
 
 En esta sección, has aprendido a utilizar Gii para generar el código que implementa completamente las características
 de un ABM de acuerdo a una determinada tabla de la base de datos.

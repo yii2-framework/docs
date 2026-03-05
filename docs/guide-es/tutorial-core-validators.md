@@ -1,8 +1,7 @@
-Validadores del framework
-=========================
+# Validadores del framework
 
 Yii provee en su núcleo un conjunto de validadores de uso común, que se pueden encontrar principalmente bajo el espacio de nombres (namespace) `yii\validators`.
-En vez de utilizar interminables nombres de clases para los validadores, puedes usar *alias* para especificar el uso de esos validadores del núcleo. Por ejemplo, puedes usar el alias `required` para referirte a la clase [[yii\validators\RequiredValidator]] :
+En vez de utilizar interminables nombres de clases para los validadores, puedes usar _alias_ para especificar el uso de esos validadores del núcleo. Por ejemplo, puedes usar el alias `required` para referirte a la clase [[yii\validators\RequiredValidator]] :
 
 ```php
 public function rules()
@@ -16,7 +15,6 @@ public function rules()
 La propiedad [[yii\validators\Validator::builtInValidators]] declara todos los aliases de los validadores soportados.
 
 A continuación, vamos a describir el uso principal y las propiedades de cada validador del núcleo.
-
 
 ## [[yii\validators\BooleanValidator|boolean]] <span id="boolean"></span>
 
@@ -36,9 +34,7 @@ Este validador comprueba si el valor de la entrada (input) es booleano.
 - `falseValue`: El valor representando `false`. Valor por defecto a `'0'`.
 - `strict`: Si el tipo del valor de la entrada (input) debe corresponder con `trueValue` y `falseValue`. Valor por defecto a `false`.
 
-
-> Note: Ya que los datos enviados con la entrada, vía formularios HTML,son todos cadenas (strings), usted debe normalmente dejar la propiedad  [[yii\validators\BooleanValidator::strict|strict]] a `false`.
-
+> Note: Ya que los datos enviados con la entrada, vía formularios HTML,son todos cadenas (strings), usted debe normalmente dejar la propiedad [[yii\validators\BooleanValidator::strict|strict]] a `false`.
 
 ## [[yii\captcha\CaptchaValidator|captcha]] <span id="captcha"></span>
 
@@ -54,7 +50,6 @@ Este validador es usualmente usado junto con [[yii\captcha\CaptchaAction]] y [[y
 - `captchaAction`: la [ruta](structure-controllers.md#routes) correspondiente a
   [[yii\captcha\CaptchaAction|CAPTCHA action]] que representa (render) la imagen CAPTCHA. Por defecto`'site/captcha'`.
 - `skipOnEmpty`: cuando la validación puede saltarse si la entrada está vacía. Por defecto a `false`, lo caul permite que la entrada sea necesaria (required).
-  
 
 ## [[yii\validators\CompareValidator|compare]] <span id="compare"></span>
 
@@ -70,18 +65,17 @@ Este validador es usualmente usado junto con [[yii\captcha\CaptchaAction]] y [[y
 
 Este validador compara el valor especificado por la entrada con otro valor y, se asegura si su relación es la especificada por la propiedad `operator`.
 
-- `compareAttribute`: El nombre del valor del atributo con el cual debe compararse. Cuando el validador está siendo usado para validar un atributo, el valor por defecto de esta propiedad debe de ser el nombre de el atributo con el sufijo `_repeat`. Por  ejemplo, si el atributo a ser validado es `password`, entonces esta propiedad contiene por defecto `password_repeat`.
+- `compareAttribute`: El nombre del valor del atributo con el cual debe compararse. Cuando el validador está siendo usado para validar un atributo, el valor por defecto de esta propiedad debe de ser el nombre de el atributo con el sufijo `_repeat`. Por ejemplo, si el atributo a ser validado es `password`, entonces esta propiedad contiene por defecto `password_repeat`.
 - `compareValue`: un valor constante con el que el valor de entrada debe ser comparado. Cuando ambos, esta propiedad y `compareAttribute` son especificados, esta preferencia tiene precedencia.
 - `operator`: el operador de comparación. Por defecto vale `==`, permitiendo comprobar si el valor de entrada es igual al de `compareAttribute` o `compareValue`. Los siguientes operadores son soportados:
-    * `==`: comprueba si dos valores son iguales. La comparación se realiza en modo no estricto.
-    * `===`: comprueba si dos valores son iguales. La comparación se realiza en modo estricto.
-    * `!=`: comprueba si dos valores NO son iguales. La comparación se realiza en modo no estricto.
-    * `!==`: comprueba si dos valores NO son iguales. La comparación se realiza en modo estricto.
-    * `>`: comprueba si el valor siendo validado es mayor que el valor con el que se compara.
-    * `>=`: comprueba si el valor siendo validado es mayor o igual que el valor con el que se compara
-    * `<`: comprueba si el valor siendo validado es menor que el valor con el que se compara
-    * `<=`: comprueba si el valor siendo validado es menor o igual que el valor con el que se compara
-
+  - `==`: comprueba si dos valores son iguales. La comparación se realiza en modo no estricto.
+  - `===`: comprueba si dos valores son iguales. La comparación se realiza en modo estricto.
+  - `!=`: comprueba si dos valores NO son iguales. La comparación se realiza en modo no estricto.
+  - `!==`: comprueba si dos valores NO son iguales. La comparación se realiza en modo estricto.
+  - `>`: comprueba si el valor siendo validado es mayor que el valor con el que se compara.
+  - `>=`: comprueba si el valor siendo validado es mayor o igual que el valor con el que se compara
+  - `<`: comprueba si el valor siendo validado es menor que el valor con el que se compara
+  - `<=`: comprueba si el valor siendo validado es menor o igual que el valor con el que se compara
 
 ## [[yii\validators\DateValidator|date]] <span id="date"></span>
 
@@ -94,12 +88,11 @@ Este validador compara el valor especificado por la entrada con otro valor y, se
 Este validador comprueba si el valor de entrada es una fecha, tiempo or fecha/tiempo y tiempo en el formato correcto.
 Opcionalmente, puede convertir el valor de entrada en una fecha/tiempo UNIX y almacenarla en un atributo especificado vía [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]].
 
-- `format`: el formato fecha/tiempo en el que debe estar el valor a ser validado. 
+- `format`: el formato fecha/tiempo en el que debe estar el valor a ser validado.
   Esto tiene que ser un patrón fecha/tiempo descrito en [manual ICU](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax).
   Alternativamente tiene que ser una cadena con el prefijo `php:` representando un formato que ha de ser reconocido por la clase `Datetime` de PHP. Por favor, refiérase a <https://www.php.net/manual/es/datetime.createfromformat.php> sobre los formatos soportados.
   Si no tiene ningún valor, ha de coger el valor de `Yii::$app->formatter->dateFormat`.
 - `timestampAttribute`: el nombre del atributo al cual este validador puede asignar el fecha/hora UNIX convertida desde la entrada fecha/hora.
-
 
 ## [[yii\validators\DefaultValueValidator|default]] <span id="default"></span>
 
@@ -131,7 +124,6 @@ function foo($model, $attribute) {
 
 > Info: Cómo determinar si un valor está vacío o no, es un tópico separado cubierto en la sección [Valores Vacíos](input-validation.md#handling-empty-inputs) .
 
-
 ## [[yii\validators\NumberValidator|double]] <span id="double"></span>
 
 ```php
@@ -146,7 +138,6 @@ Esta validador comprueba si el valor de entrada es un número de tipo doble. Es 
 - `max`: el valor límite superior (incluido) de el valor. Si no tiene valor, significa que no se comprueba el valor superior.
 - `min`: el valor límite inferior (incluido) de el valor. Si no tiene valor, significa que no se comprueba el valor inferior.
 
-
 ## [[yii\validators\EmailValidator|email]] <span id="email"></span>
 
 ```php
@@ -159,18 +150,17 @@ Esta validador comprueba si el valor de entrada es un número de tipo doble. Es 
 Este validador comprueba si el valor de entrada es una dirección válida de email.
 
 - `allowName`: indica cuando permitir el nombre en la dirección de email (p.e. `John Smith <john.smith@example.com>`). Por defecto a `false`.
-- `checkDNS`, comprobar cuando el dominio del email existe y tiene cualquier registro  A o MX.
-  Es necesario ser consciente que esta comprobación puede fallar debido a problemas temporales de  DNS, incluso si el la dirección es válida actualmente.
+- `checkDNS`, comprobar cuando el dominio del email existe y tiene cualquier registro A o MX.
+  Es necesario ser consciente que esta comprobación puede fallar debido a problemas temporales de DNS, incluso si el la dirección es válida actualmente.
   Por defecto a `false`.
 - `enableIDN`, indica cuando el proceso de validación debe tener en cuenta el informe de IDN (internationalized domain names).
-  Por defecto a `false`. Dese cuenta que para poder usar la validación de IDN has de instalar y activar la extensión de PHP `intl`,  o será lanzada una excepción.
-
+  Por defecto a `false`. Dese cuenta que para poder usar la validación de IDN has de instalar y activar la extensión de PHP `intl`, o será lanzada una excepción.
 
 ## [[yii\validators\ExistValidator|exist]] <span id="exist"></span>
 
 ```php
 [
-    // a1 necesita que exista una columna con el atributo "a1" 
+    // a1 necesita que exista una columna con el atributo "a1"
     ['a1', 'exist'],
 
     // a1 necesita existir,pero su valor puede usar a2 para comprobar la existencia
@@ -199,7 +189,6 @@ Este validador comprueba si el valor de entrada puede ser encontrado en una colu
   Esto puede ser una cadena o un array representando la condición de la consulta (referirse a [[yii\db\Query::where()]] sobre el formato de la condición de consulta), o una función anónima con la signatura `function ($query)`, donde `$query` es el objeto [[yii\db\Query|Query]] que puedes modificar en la función.
 - `allowArray`: indica cuando permitir que el valor de entrada sea un array. Por defecto a `false`.Si la propiedad es `true` y la entrada es un array, cada elemento del array debe existir en la columna destino. Nota que esta propiedad no puede ser `true` si estás validando, por el contrario, múltiple columnas poniendo el valor del atributo `targetAttribute` como que es un array.
 
-
 ## [[yii\validators\FileValidator|file]] <span id="file"></span>
 
 ```php
@@ -214,15 +203,14 @@ Este validador comprueba que el fichero subido es el adecuado.
 
 - `extensions`: una lista de extensiones de ficheros que pueden ser subidos. Esto puede ser tanto un array o una cadena conteniendo nombres de extensiones de ficheros separados por un espacio o coma (p.e. "gif, jpg").
   Los nombres de las extensiones no diferencian mayúsculas de minúsculas (case-insensitive). Por defecto a `null`, permitiendo todas los nombres de extensiones de fichero.
-- `mimeTypes`: una lista de tipos de ficheros MIME  que están permitidos subir. Esto puede ser tanto un array como una cadena conteniendo tipos de fichero MIME separados por un espacio o una coma (p.e. "image/jpeg, image/png").
+- `mimeTypes`: una lista de tipos de ficheros MIME que están permitidos subir. Esto puede ser tanto un array como una cadena conteniendo tipos de fichero MIME separados por un espacio o una coma (p.e. "image/jpeg, image/png").
   Los tipos Mime no diferencian mayúsculas de minúsculas (case-insensitive). Por defecto a `null`, permitiendo todos los tipos MIME.
-- `minSize`: el número de bytes mínimo requerido para el fichero subido. El tamaño del fichero ha de ser superior a este valor. Por defecto a `null`, lo que significa sin límite inferior. 
+- `minSize`: el número de bytes mínimo requerido para el fichero subido. El tamaño del fichero ha de ser superior a este valor. Por defecto a `null`, lo que significa sin límite inferior.
 - `maxSize`: El número máximo de bytes del fichero a subir. El tamaño del fichero ha de ser inferior a este valor. Por defecto a `null`, significando no tener límite superior.
 - `maxFiles`: el máximo número de ficheros que determinado atributo puede manejar. Por defecto a 1, lo que significa que la entrada debe de ser sólo un fichero. Si es mayor que 1, entonces la entrada tiene que ser un array conteniendo como máximo el número `maxFiles` de elementos que representan los ficheros a subir.
-- `checkExtensionByMimeType`: cuando comprobar la extensión del fichero por el tipo  MIME. Si la extensión producida por la comprobación del tipo MIME difiere la extensión del fichero subido, el fichero será considerado como no válido. Por defecto a `true`, significando que realiza este tipo de comprobación.
+- `checkExtensionByMimeType`: cuando comprobar la extensión del fichero por el tipo MIME. Si la extensión producida por la comprobación del tipo MIME difiere la extensión del fichero subido, el fichero será considerado como no válido. Por defecto a `true`, significando que realiza este tipo de comprobación.
 
 `FileValidator` es usado con [[yii\web\UploadedFile]]. Por favor, refiérase a la sección [Subida de ficheros](input-file-upload.md) para una completa cobertura sobre la subida de ficheros y llevar a cabo la validación de los ficheros subidos.
-
 
 ## [[yii\validators\FilterValidator|filter]] <span id="filter"></span>
 
@@ -248,7 +236,6 @@ Este validador no valida datos. En su lugar, aplica un filtro sobre el valor de 
 
 > Consejo (Tip): Si quieres recortar los valores de entrada, puedes usar directamente el validador [Recorte (trim)](#trim).
 
-
 ## [[yii\validators\ImageValidator|image]] <span id="image"></span>
 
 ```php
@@ -268,7 +255,6 @@ Este validador comprueba si el valor de entrada representa un fichero de imagen 
 - `minHeight`: el mínimo alto de la imagen. Por defecto a `null`, indicando que no hay límite inferior.
 - `maxHeight`: el máximo alto de la imagen. Por defecto a `null`, indicando que no hay límite superior.
 
-
 ## [[yii\validators\RangeValidator|in]] <span id="in"></span>
 
 ```php
@@ -285,7 +271,6 @@ Este validador comprueba si el valor de entrada puede encontrarse entre determin
 - `not`: cuando el resultado de la validación debe de ser invertido. Por defecto a `false`. Cuando esta propiedad está a `true`, el validador comprueba que el valor de entrada NO ESTÁ en la determinada lista de valores.
 - `allowArray`: si se permite que el valor de entrada sea un array. Cuando es `true` y el valor de entrada es un array, cada elemento en el array debe de ser encontrado en la lista de valores determinada,o la validación fallará.
 
-
 ## [[yii\validators\NumberValidator|integer]] <span id="integer"></span>
 
 ```php
@@ -297,9 +282,8 @@ Este validador comprueba si el valor de entrada puede encontrarse entre determin
 
 Esta validador comprueba si el valor de entrada es un entero.
 
-- `max`: el valor superior  (incluido) . Si no tiene valor, significa que el validador no comprueba el límite superior.
+- `max`: el valor superior (incluido) . Si no tiene valor, significa que el validador no comprueba el límite superior.
 - `min`: el valor inferior (incluido). Si no tiene valor, significa que el validador no comprueba el límite inferior.
-
 
 ## [[yii\validators\RegularExpressionValidator|match]] <span id="match"></span>
 
@@ -315,7 +299,6 @@ Este validador comprueba si el valor de entrada coincide con la expresión regul
 - `pattern`: la expresión regular conla que el valor de entrada debe coincidir. Esta propiedad no puede estar vacía, o se lanzará una excepción.
 - `not`: indica cuando invertir el resultado de la validación. Por defecto a `false`, significando que la validación es exitosa solamente si el valor de entrada coincide con el patrón. Si esta propiedad está a `true`, la validación es exitosa solamente si el valor de entrada NO coincide con el patrón.
 
-
 ## [[yii\validators\NumberValidator|number]] <span id="number"></span>
 
 ```php
@@ -329,7 +312,6 @@ Este validador comprueba si el valor de entrada es un número. Es equivalente al
 
 - `max`: el valor superior límite (incluido) . Si no tiene valor, significa que el validador no comprueba el valor límite superior.
 - `min`: el valor inferior límite (incluido) . Si no tiene valor, significa que el validador no comprueba el valor límite inferior.
-
 
 ## [[yii\validators\RequiredValidator|required]] <span id="required"></span>
 
@@ -345,10 +327,9 @@ El validador comprueba si el valor de entrada es provisto y no está vacío.
 - `requiredValue`: el valor deseado que la entrada debería tener. Si no tiene valor, significa que la entrada no puede estar vacía.
 - `strict`: indica como comprobar los tipos de los datos al validar un valor. Por defecto a `false`.
   Cuando `requiredValue` no tiene valor, si esta propiedad es `true`, el validador comprueba si el valor de entrada no es estrictamente `null`; si la propiedad es `false`, el validador puede usar una regla suelta para determinar si el valor está vacío o no.
-  Cuando `requiredValue` tiene valor, la comparación entre la entrada y  `requiredValue` comprobará tambien los tipos de los datos si esta propiedad es `true`.
+  Cuando `requiredValue` tiene valor, la comparación entre la entrada y `requiredValue` comprobará tambien los tipos de los datos si esta propiedad es `true`.
 
 > Info: Como determinar si un valor está vacío o no es un tópico separado cubierto en la sección [Valores vacíos](input-validation.md#handling-empty-inputs).
-
 
 ## [[yii\validators\SafeValidator|safe]] <span id="safe"></span>
 
@@ -360,7 +341,6 @@ El validador comprueba si el valor de entrada es provisto y no está vacío.
 ```
 
 Este validador no realiza validación de datos. En lugar de ello, es usado para marcar un atributo como seguro [atributos seguros](structure-models.md#safe-attributes).
-
 
 ## [[yii\validators\StringValidator|string]] <span id="string"></span>
 
@@ -374,14 +354,13 @@ Este validador no realiza validación de datos. En lugar de ello, es usado para 
 Este validador comprueba si el valor de entrada es una cadena válida con determinada longitud.
 
 - `length`: especifica la longitud límite de la cadena de entrada a validar. Esto tiene que ser especificado del las siguientes formas:
-    * un entero: la longitud exacta que la cadena debe de tener;
-    * un array de un elemento: la longitud mínima de la cadena de entrada (p.e.`[8]`). Esto puede sobre escribir `min`.
-    * un array de dos elementos: las longitudes mínima y mmáxima de la cadena de entrada (p.e. `[8, 128]`).
+  - un entero: la longitud exacta que la cadena debe de tener;
+  - un array de un elemento: la longitud mínima de la cadena de entrada (p.e.`[8]`). Esto puede sobre escribir `min`.
+  - un array de dos elementos: las longitudes mínima y mmáxima de la cadena de entrada (p.e. `[8, 128]`).
     Esto sobreescribe ambos valores de `min` y `max`.
 - `min`: el mínimo valor de longitud de la cadena de entrada. Si no tiene valor, significa que no hay límite para longitud mínima.
 - `max`: el máximo valor de longitud de la cadena de entrada. Si no tiene valor, significa que no hay límite para longitud máxima.
-- `encoding`: la codificación de la cadena de entrada a ser validada. Si no tiene valor, usará el valor de la aplicación [[yii\base\Application::charset|charset]]  que por defecto es `UTF-8`.
-
+- `encoding`: la codificación de la cadena de entrada a ser validada. Si no tiene valor, usará el valor de la aplicación [[yii\base\Application::charset|charset]] que por defecto es `UTF-8`.
 
 ## [[yii\validators\FilterValidator|trim]] <span id="trim"></span>
 
@@ -393,7 +372,6 @@ Este validador comprueba si el valor de entrada es una cadena válida con determ
 ```
 
 Este validador no realiza validación de datos. En cambio, recorta los espacios que rodean el valor de entrada. Nota que si el valor de entrada es un array, se ignorará este validador.
-
 
 ## [[yii\validators\UniqueValidator|unique]] <span id="unique"></span>
 
@@ -422,8 +400,7 @@ Este validador comprueba si el valor de entrada es único en una columna de una 
 - `targetAttribute`: el nombre de el atributo en `targetClass`que debe de ser usado para validar la unicidad de el valor de entrada. Si no tiene valor, puede usar el nombre del atributo actualmente siendo validado.
   Puedes usar un array para validar la unicidad de múltiples columnas al mismo tiempo. Los valores del array son atributos que pueden ser usados para validar la unicidad, mientras que las claves del array son los atributos que cuyos valores van a ser validados. Si la clave y el valor son el mismo, entonces puedes especificar el valor.
 - `filter`: filtro adicional puede ser aplicado a la consulta de la base de datos usado para comprobar la unicidad del valor de entrada.
-  Esto puede ser una cadena o un array representando la condición adicional a la consulta (Referirse a [[yii\db\Query::where()]] para el formato de la condición de la consulta), o una función anónima de la forma  `function ($query)`, donde `$query` es el objeto [[yii\db\Query|Query]] que puedes modificar en la función.
-
+  Esto puede ser una cadena o un array representando la condición adicional a la consulta (Referirse a [[yii\db\Query::where()]] para el formato de la condición de la consulta), o una función anónima de la forma `function ($query)`, donde `$query` es el objeto [[yii\db\Query|Query]] que puedes modificar en la función.
 
 ## [[yii\validators\UrlValidator|url]] <span id="url"></span>
 

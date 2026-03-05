@@ -1,5 +1,4 @@
-Установка Yii <span id="installing-from-composer"></span>
-==============
+# Установка Yii <span id="installing-from-composer"></span>
 
 Вы можете установить Yii двумя способами: используя [Composer](https://getcomposer.org/) или скачав архив.
 Первый способ предпочтительнее так как позволяет установить новые [расширения](structure-extensions.md)
@@ -7,14 +6,12 @@
 
 > Note: В отличие от Yii 1, после стандартной установки Yii 2 мы получаем как фреймворк, так и шаблон приложения.
 
-
-Установка при помощи Composer <span id="installing-via-composer"></span>
------------------------
+## Установка при помощи Composer <span id="installing-via-composer"></span>
 
 ### Установка Composer
 
 Если Composer еще не установлен это можно сделать по инструкции на
-[getcomposer.org](https://getcomposer.org/download/), или одним из нижеперечисленных способов. На Linux или Mac 
+[getcomposer.org](https://getcomposer.org/download/), или одним из нижеперечисленных способов. На Linux или Mac
 используйте следующую команду:
 
 ```bash
@@ -66,38 +63,33 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 >
 > Старайтесь не использовать нестабильную версию Yii на рабочих серверах потому как она может внезапно поломать код.
 
-
-Установка из архива <span id="installing-from-archive-file"></span>
--------------------------------
+## Установка из архива <span id="installing-from-archive-file"></span>
 
 Установка Yii из архива состоит из трёх шагов:
 
 1. Скачайте архив с [yiiframework.com](https://www.yiiframework.com/download/);
 2. Распакуйте скачанный архив в папку, доступную из Web.
 3. В файле `config/web.php` добавьте секретный ключ в значение `cookieValidationKey` (при установке через Composer
-  это происходит автоматически):
+   это происходит автоматически):
 
 ```php
 // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
 'cookieValidationKey' => 'enter your secret key here',
 ```
 
-Другие опции установки <span id="other-installation-options"></span>
---------------------------
+## Другие опции установки <span id="other-installation-options"></span>
 
 Выше приведены инструкции по установке Yii в виде базового приложения готового к работе.
 Это отличный вариант для небольших проектов или для тех, кто только начинает изучать Yii.
 
 Есть два основных варианта такой установки:
 
-* Если вам нужен только сам фреймворк и вы хотели бы создать приложение с нуля, воспользуйтесь инструкцией, описанной в
-разделе «[Создание приложения с нуля](tutorial-start-from-scratch.md)».
-* Если хотите начать с более продвинутого приложения, хорошо подходящего для работы в команде, используйте
-[шаблон приложения advanced](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md).
+- Если вам нужен только сам фреймворк и вы хотели бы создать приложение с нуля, воспользуйтесь инструкцией, описанной в
+  разделе «[Создание приложения с нуля](tutorial-start-from-scratch.md)».
+- Если хотите начать с более продвинутого приложения, хорошо подходящего для работы в команде, используйте
+  [шаблон приложения advanced](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md).
 
-
-Проверка установки <span id="verifying-installation"></span>
-----------------------
+## Проверка установки <span id="verifying-installation"></span>
 
 После установки приложение будет доступно по следующему URL:
 
@@ -112,8 +104,8 @@ http://localhost/basic/web/index.php
 
 Вы должны увидеть страницу приветствия «Congratulations!». Если нет — проверьте требования Yii одним из способов:
 
-* Браузером перейдите по адресу `http://localhost/basic/requirements.php`
-* Или выполните команду в консоли: 
+- Браузером перейдите по адресу `http://localhost/basic/requirements.php`
+- Или выполните команду в консоли:
 
 ```bash
 cd basic
@@ -122,15 +114,13 @@ php requirements.php
 
 Для корректной работы фреймворка вам необходима установка PHP, соответствующая его минимальным требованиям. Основное
 требование — PHP версии 5.4 и выше. Если ваше приложение работает с базой данных, необходимо установить
-[расширение PHP PDO](https://www.php.net/manual/ru/pdo.installation.php) и соответствующий драйвер 
+[расширение PHP PDO](https://www.php.net/manual/ru/pdo.installation.php) и соответствующий драйвер
 (например, `pdo_mysql` для MySQL).
 
-
-Настройка веб сервера <span id="configuring-web-servers"></span>
------------------------
+## Настройка веб сервера <span id="configuring-web-servers"></span>
 
 > Info: можете пропустить этот подраздел если вы только начали знакомиться с фреймворком и пока не разворачиваете
-  его на рабочем сервере.
+> его на рабочем сервере.
 
 Приложение, установленное по инструкциям, приведённым выше, будет работать сразу как с [Apache](https://httpd.apache.org/),
 так и с [Nginx](https://nginx.org/) под Windows и Linux с установленным PHP 5.4 и выше. Yii 2.0 также совместим с
@@ -143,11 +133,10 @@ php requirements.php
 «[Разбор и генерация URL](runtime-routing.md)». Далее будет показано как настроить Apache и Nginx.
 
 > Info: Устанавливая `basic/web` корневой директорией веб сервера вы защищаете от нежелательного доступа код и данные,
-  находящиеся на одном уровне с `basic/web`. Это делает приложение более защищенным.
+> находящиеся на одном уровне с `basic/web`. Это делает приложение более защищенным.
 
 > Info: Если приложение работает на хостинге где нет доступа к настройкам веб сервера, то можно изменить структуру
-  приложения как описано в разделе «[Работа на Shared хостинге](tutorial-shared-hosting.md)».
-
+> приложения как описано в разделе «[Работа на Shared хостинге](tutorial-shared-hosting.md)».
 
 ### Рекомендуемые настройки Apache <span id="recommended-apache-configuration"></span>
 
@@ -170,7 +159,6 @@ DocumentRoot "path/to/basic/web"
     # ...прочие настройки...
 </Directory>
 ```
-
 
 ### Рекомендуемые настройки Nginx <span id="recommended-nginx-configuration"></span>
 

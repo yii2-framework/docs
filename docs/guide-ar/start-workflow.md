@@ -16,7 +16,6 @@
 ملاحظة: بخلاف إطار العمل نفسه(Yii framework)، بعد تثبيت ال template الخاص بالمشروع، يكون كل شيء في هذا التطبيق يخصك أنت، بحيث تملك الحرية في إضافة أو حذف أو تعديل كل ما تحتاج اليه.
 </p>
 
-
 ## <div dir="rtl">خصائص / وظائف التطبيق المثبت - Functionality</div> <span id="functionality"></span>
 
 <p dir="rtl">
@@ -42,8 +41,6 @@
     بالإضافة إلى ال  web application، يوجد هناك "console script" يسمى ب <code>yii</code>، والذي ستجده في المسار الرئيسي للتطبيق. هذا السكربت يمكن استخدامه لتشغيل المهام التي تعمل في الخفاء (background)  أو لتنفيذ مهام الصيانة (ال maintenance). <br /> ستجد الوصف الخاص بهذا السكربت  
     داخل هذه الصفحة <a href="tutorial-console.md">Console Application Section</a>.
 </p>
-
-
 
 ## <div dir="rtl">هيكلية التطبيق - Application Structure</div> <span id="application-structure"></span>
 

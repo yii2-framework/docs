@@ -1,5 +1,4 @@
-Service Locator
-===============
+# Service Locator
 
 A service locator is an object that knows how to provide all sorts of services (or components) that an application
 might need. Within a service locator, each component exists as only a single instance, uniquely identified by an ID.
@@ -7,8 +6,8 @@ You use the ID to retrieve a component from the service locator.
 
 In Yii, a service locator is simply an instance of [[yii\di\ServiceLocator]] or a child class.
 
-The most commonly used service locator in Yii is the *application* object, which can be accessed through
-`\Yii::$app`. The services it provides are called *application components*, such as the `request`, `response`, and
+The most commonly used service locator in Yii is the _application_ object, which can be accessed through
+`\Yii::$app`. The services it provides are called _application components_, such as the `request`, `response`, and
 `urlManager` components. You may configure these components, or even replace them with your own implementations, easily
 through functionality provided by the service locator.
 
@@ -59,11 +58,10 @@ the service locator will return the same instance.
 You may use [[yii\di\ServiceLocator::has()]] to check if a component ID has already been registered.
 If you call [[yii\di\ServiceLocator::get()]] with an invalid ID, an exception will be thrown.
 
-
 Because service locators are often being created with [configurations](concept-configurations.md),
-a writable property named [[yii\di\ServiceLocator::setComponents()|components]] is provided. This allows you 
+a writable property named [[yii\di\ServiceLocator::setComponents()|components]] is provided. This allows you
 to configure and register multiple components at once. The following code shows a configuration array
-that can be used to configure a service locator (e.g. an [application](structure-applications.md)) with 
+that can be used to configure a service locator (e.g. an [application](structure-applications.md)) with
 the `db`, `cache`, `tz` and `search` components:
 
 ```php

@@ -1,7 +1,6 @@
-Validadores Nativos
-==================
+# Validadores Nativos
 
-O Yii fornece um conjunto de validadores nativos bastante utilizados, encontrados principalmente sob o namespace `yii\validators`. Em vez de usar nomes longos nas classes de validadores, você pode usar *aliases* para especificar o uso desses validadores. Por exemplo, você pode usar o alias `required` para referenciar a classe [[yii\validators\RequiredValidator]]:
+O Yii fornece um conjunto de validadores nativos bastante utilizados, encontrados principalmente sob o namespace `yii\validators`. Em vez de usar nomes longos nas classes de validadores, você pode usar _aliases_ para especificar o uso desses validadores. Por exemplo, você pode usar o alias `required` para referenciar a classe [[yii\validators\RequiredValidator]]:
 
 ```php
 public function rules()
@@ -15,7 +14,6 @@ public function rules()
 A propriedade [[yii\validators\Validator::builtInValidators]] declara todos os aliases de validação suportados.
 
 A seguir, descreveremos o uso principal e as propriedades de cada um desses validadores.
-
 
 ## [[yii\validators\BooleanValidator|boolean]] <span id="boolean"></span>
 
@@ -31,13 +29,11 @@ A seguir, descreveremos o uso principal e as propriedades de cada um desses vali
 
 Este validador verifica se o valor de entrada é um booleano.
 
-- `trueValue`: o valor representando *true*. O padrão é `'1'`.
-- `falseValue`: o valor representando *false*. O padrão é `'0'`.
+- `trueValue`: o valor representando _true_. O padrão é `'1'`.
+- `falseValue`: o valor representando _false_. O padrão é `'0'`.
 - `strict`: se o tipo do valor de entrada deve corresponder ao `trueValue` e `falseValue`. O padrão é `false`.
 
-
 > Observação: Como a entrada de dados enviados através de formulários HTML são todos strings, normalmente deverá deixar a propriedade [[yii\validators\BooleanValidator::strict|strict]] como `false`.
-
 
 ## [[yii\captcha\CaptchaValidator|captcha]] <span id="captcha"></span>
 
@@ -52,8 +48,7 @@ Este validador é geralmente usado junto com [[yii\captcha\CaptchaAction]] e [[y
 - `caseSensitive`: se a comparação da verificação de código for case sensitivo. O padrão é `false`.
 - `captchaAction`: a [rota](structure-controllers.md#routes) correspondente à [[yii\captcha\CaptchaAction|ação CAPTCHA]] que renderiza as imagens. O padrão é `'site/captcha'`.
 - `skipOnEmpty`: se a validação pode ser ignorada se a entrada estiver vazia. O padrão é `false`,
-o que significa que a entrada é obrigatória.
-
+  o que significa que a entrada é obrigatória.
 
 ## [[yii\validators\CompareValidator|compare]] <span id="compare"></span>
 
@@ -72,15 +67,14 @@ Este validador compara o valor de entrada especificado com um outro e certifica 
 - `compareAttribute`: o nome do atributo cujo valor deve ser comparado. Quando o validador está sendo usado para validar um atributo, o valor padrão dessa propriedade seria o nome do atributo com o sufixo `_repeat`. Por exemplo, se o atributo que está sendo validado é `password`, então esta propriedade será por padrão `password_repeat`.
 - `compareValue`: um valor constante com o qual o valor de entrada deve ser comparado. Quando esta propriedade e a propriedade `compareAttribute` forem especificadas, a propriedade `compareValue` terá precedência.
 - `operator`: o operador de comparação. O padrão é `==`, ou seja, verificar se o valor de entrada é igual ao do `compareAttribute` ou `compareValue`. Os seguintes operadores são suportados:
-  * `==`: verifica se dois valores são iguais. A comparação é feita no modo non-strict.
-  * `===`: verifica se dois valores são iguais. A comparação é feita no modo strict.
-  * `!=`: verifica se dois valores NÃO são iguais. A comparação é feita no modo non-strict.
-  * `!==`: verifica se dois valores NÃO são iguais. A comparação é feita no modo strict.
-  * `>`: verifica se o valor que está sendo validado é maior do que o valor que está sendo comparado.
-  * `>=`: verifica se o valor que está sendo validado é maior ou igual ao valor que está sendo comparado.
-  * `<`: verifica se o valor que está sendo validado é menor do que o valor que está sendo comparado.
-  * `<=`: verifica se o valor que está sendo validado menor ou igual ao valor que está sendo comparado.
-
+  - `==`: verifica se dois valores são iguais. A comparação é feita no modo non-strict.
+  - `===`: verifica se dois valores são iguais. A comparação é feita no modo strict.
+  - `!=`: verifica se dois valores NÃO são iguais. A comparação é feita no modo non-strict.
+  - `!==`: verifica se dois valores NÃO são iguais. A comparação é feita no modo strict.
+  - `>`: verifica se o valor que está sendo validado é maior do que o valor que está sendo comparado.
+  - `>=`: verifica se o valor que está sendo validado é maior ou igual ao valor que está sendo comparado.
+  - `<`: verifica se o valor que está sendo validado é menor do que o valor que está sendo comparado.
+  - `<=`: verifica se o valor que está sendo validado menor ou igual ao valor que está sendo comparado.
 
 ## [[yii\validators\DateValidator|date]] <span id="date"></span>
 
@@ -94,13 +88,13 @@ Este validador verifica se o valor de entrada é uma data, hora ou data e hora e
 
 - `format`: o formato date/time que o valor que está sendo validado deve ter. Este pode ser um padrão de data e hora conforme descrito no [ICU manual] (https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax). Alternativamente esta pode ser uma string com o prefixo `php:` representando um formato que pode ser reconhecido pela classe PHP `Datetime`. Por favor, consulte <https://www.php.net/manual/pt_BR/datetime.createfromformat.php> para formatos suportados. Se isso não for definido, ele terá o valor de `Yii::$app->formatter->dateFormat`. Consulte a [[yii\validators\DateValidator::$format|documentação da API]] para mais detalhes.
 
-- `timestampAttribute`: o nome do atributo para que este validador possa atribuir o UNIX  timestamp convertido a partir da entrada de data / hora. Este pode ser o mesmo atributo que está sendo validado. Se este for o caso,  valor original será substituído pelo valor timestamp após a validação. Veja a seção ["Manipulando Datas com DatePicker"] (https://github.com/yiisoft/yii2-jui/blob/master/docs/guide/topics-date-picker.md) para exemplos de uso.
+- `timestampAttribute`: o nome do atributo para que este validador possa atribuir o UNIX timestamp convertido a partir da entrada de data / hora. Este pode ser o mesmo atributo que está sendo validado. Se este for o caso, valor original será substituído pelo valor timestamp após a validação. Veja a seção ["Manipulando Datas com DatePicker"] (https://github.com/yiisoft/yii2-jui/blob/master/docs/guide/topics-date-picker.md) para exemplos de uso.
 
 Desde a versão 2.0.4, um formato e um fuso horário podem ser especificados utilizando os atributos [[yii\validators\DateValidator::$timestampAttributeFormat|$timestampAttributeFormat]] e [[yii\validators\DateValidator::$timestampAttributeTimeZone|$timestampAttributeTimeZone]], respectivamente.
 
 - Desde a versão 2.0.4 também é possível definir um timestamp [[yii\validators\DateValidator::$min|minimum]] ou [[yii\validators\DateValidator::$max|maximum]].
 
-Caso a entrada de dados seja opcional (preenchimento não obrigatório), você também pode querer adicionar um [filtro chamado default](#default) para o validador de data garantir que entradas vazias sejam armazenadas com `NULL`. De outra forma você pode terminar com datas como `0000-00-00` no seu banco de dados ou `1970-01-01` no campo de entrada de um *date picker*.
+Caso a entrada de dados seja opcional (preenchimento não obrigatório), você também pode querer adicionar um [filtro chamado default](#default) para o validador de data garantir que entradas vazias sejam armazenadas com `NULL`. De outra forma você pode terminar com datas como `0000-00-00` no seu banco de dados ou `1970-01-01` no campo de entrada de um _date picker_.
 
 ```php
 [
@@ -108,7 +102,6 @@ Caso a entrada de dados seja opcional (preenchimento não obrigatório), você t
   [['from_date', 'to_date'], 'date'],
 ],
 ```
-
 
 ## [[yii\validators\DefaultValueValidator|default]] <span id="default"></span>
 
@@ -140,7 +133,6 @@ function foo($model, $attribute) {
 
 > Observação: Como determinar se um valor está vazio ou não é um tópico separado descrito na seção [Valores Vazios](input-validation.md#handling-empty-inputs).
 
-
 ## [[yii\validators\NumberValidator|double]] <span id="double"></span>
 
 ```php
@@ -155,7 +147,6 @@ Este validador verifica se o valor de entrada é um double. É equivalente ao va
 - `max`: o limite superior do valor (inclusive). Se não configurado, significa que o validador não verifica o limite superior.
 - `min`: o limite inferior do valor (inclusive). Se não configurado, significa que o validador não verifica o limite inferior.
 
-
 ## [[yii\validators\EachValidator|each]] <span id="each"></span>
 
 > Observação: Este validador está disponível desde a versão 2.0.4.
@@ -167,13 +158,12 @@ Este validador verifica se o valor de entrada é um double. É equivalente ao va
 ]
 ```
 
-Este validador só funciona com um atributo array. Ele valida *todos* os elementos do array com uma regra de validação especificada. No exemplo acima, o atributo `categoryIDs` deve ter um array e cada elemento do array será validado pela regra de validação  `integer`.
+Este validador só funciona com um atributo array. Ele valida _todos_ os elementos do array com uma regra de validação especificada. No exemplo acima, o atributo `categoryIDs` deve ter um array e cada elemento do array será validado pela regra de validação `integer`.
 
 - `rule`: um array especificando as regras de validação. O primeiro elemento do array determina o nome da classe ou o alias do validador. O restante dos pares nome-valor no array são utilizados para configurar o objeto do validador.
 - `allowMessageFromRule`: se pretende usar a mensagem de erro retornada pela regra de validação incorporada. Padrão é `true`. Se for `false`, ele usará `message` como a mensagem de erro.
 
 > Observação: Se o valor do atributo não for um array, a validação será considerada como falha e a `mensagem` será retornada como erro.
-
 
 ## [[yii\validators\EmailValidator|email]] <span id="email"></span>
 
@@ -189,7 +179,6 @@ Este validador verifica se o valor de entrada é um endereço de email válido.
 - `allowName`: permitir nome no endereço de email (ex. `John Smith <john.smith@example.com>`). O padrão é `false`;
 - `checkDNS`, para verificar se o domínio do e-mail existe e tem tanto um A ou registro MX. Esteja ciente de que esta verificação pode falhar devido a problemas de DNS temporários, mesmo se o endereço de e-mail for realmente válido. O padrão é `false`;
 - `enableIDN`, se o processo de validação deve verificar uma conta IDN (internationalized domain names). O padrão é `false`. Observe que para usar a validação IDN você deve instalar e habilitar a extensão PHP `intl`, caso contrário uma exceção será lançada.
-
 
 ## [[yii\validators\ExistValidator|exist]] <span id="exist"></span>
 
@@ -221,9 +210,8 @@ Você pode usar este validador para validar uma ou várias colunas (ex., a combi
 
 - `targetClass`: o nome da classe [Active Record](db-active-record.md) que deve ser usada para procurar o valor de entrada que está sendo validado. Se não for configurada, a atual classe do model (modelo) que está sendo validado será usada.
 - `targetAttribute`: o nome do atributo em `targetClass` que deve ser utilizado para validar a existência do valor de entrada. Se não for configurado, será usado o nome do atual atributo que está sendo validado. Você pode utilizar um array para validar a existência de múltiplas colunas ao mesmo tempo. Os valores do array são os atributos que serão utilizados para validar a existência, enquanto as chaves são os atributos cujos valores devem ser validados. Se a chave e o valor forem os mesmos, você pode especificar apenas o valor.
-- `filter`: filtro adicional para ser aplicado na consulta do banco de dados utilizada para verificar a existência do valor de entrada. Pode ser uma string ou um array representando a condição da consulta adicional (consulte o formato de condição [[yii\db\Query::where()]]), ou uma função anônima com a assinatura `function ($query)`, onde `$query` é o objeto  [[yii\db\Query|Query]] que você pode modificar.
+- `filter`: filtro adicional para ser aplicado na consulta do banco de dados utilizada para verificar a existência do valor de entrada. Pode ser uma string ou um array representando a condição da consulta adicional (consulte o formato de condição [[yii\db\Query::where()]]), ou uma função anônima com a assinatura `function ($query)`, onde `$query` é o objeto [[yii\db\Query|Query]] que você pode modificar.
 - `allowArray`: se permitir que o valor de entrada seja um array. Padrão é `false`. Se esta propriedade for definida como `true` e a entrada for um array, então, cada elemento do array deve existir na coluna destinada. Observe que essa propriedade não pode ser definida como `true` se você estiver validando várias colunas configurando `targetAttribute` como um array.
-
 
 ## [[yii\validators\FileValidator|file]] <span id="file"></span>
 
@@ -245,7 +233,6 @@ Este validador verifica se o dados de entrada é um arquivo válido.
 - `checkExtensionByMimeType`: verificação da extensão do arquivo por tipo MIME do arquivo. Se a extensão produzido pela verificação do tipo MIME difere da extensão do arquivo carregado, o arquivo será considerado inválido. O padrão é `true`, o que significa realizar tal verificação.
 
 `FileValidator` é usado junto com [[yii\web\UploadedFile]]. Consulte a seção [Upload de Arquivos](input-file-upload.md) para mais informações sobre o upload de arquivos e de uma validação sobre os arquivos carregados.
-
 
 ## [[yii\validators\FilterValidator|filter]] <span id="filter"></span>
 
@@ -279,7 +266,6 @@ Este validador não valida dados. Em vez disso, aplica um filtro no valor de ent
 > ['property', 'filter', 'filter' => 'intval'],
 > ```
 
-
 ## [[yii\validators\ImageValidator|image]] <span id="image"></span>
 
 ```php
@@ -299,7 +285,6 @@ Este validador verifica se o valor de entrada representa um arquivo de imagem v�
 - `minHeight`: a altura mínima da imagem. O padrão é `null`, significa não ter limite mínimo.
 - `maxHeight`: a altura máxima da imagem. O padrão é `null`, significa não ter limite máximo.
 
-
 ## [[yii\validators\RangeValidator|in]] <span id="in"></span>
 
 ```php
@@ -313,10 +298,9 @@ Este validador verifica se o valor de entrada pode ser encontrado entre os valor
 
 - `range`: uma lista de determinados valores dentro da qual o valor de entrada deve ser procurado.
 - `strict`: se a comparação entre o valor de entrada e os valores dados devem ser strict
-(o tipo e o valor devem ser idênticos). O padrão é `false`.
+  (o tipo e o valor devem ser idênticos). O padrão é `false`.
 - `not`: se o resultado de validação deve ser invertido. O padrão é `false`. Quando esta propriedade é definida como `true`, o validador verifica se o valor de entrada NÃO está entre os valores da lista fornecida.
 - `allowArray`: para permitir que o valor de entrada seja um array. Quando esta propriedade é marcada como `true` e o valor de entrada é um array, todos os elementos neste array devem ser encontrados na lista de valores fornecida, caso contrário a validação falhará.
-
 
 ## [[yii\validators\NumberValidator|integer]] <span id="integer"></span>
 
@@ -332,7 +316,6 @@ Este validador verifica se o valor de entrada é um inteiro.
 - `max`: limite máximo (inclusive) do valor. Se não for configurado, significa que não tem verificação de limite máximo.
 - `min`: o limite mínimo (inclusive) do valor. Se não for configurado, significa que não tem verificação de limite mínimo.
 
-
 ## [[yii\validators\RegularExpressionValidator|match]] <span id="match"></span>
 
 ```php
@@ -347,7 +330,6 @@ Este validador verifica se o valor de entrada atende a expressão regular especi
 - `pattern`: a expressão regular que o valor de entrada deve corresponder. Esta propriedade deve ser configurada, caso contrário uma exceção será lançada.
 - `not`: para inverter o resultado da validação. O padrão é `false`, significa que a validação terá sucesso apenas se o valor de entrada corresponder ao padrão definido. Se for configurado como `true` a validação terá sucesso apenas se o valor de entrada NÃO corresponder ao padrão definido.
 
-
 ## [[yii\validators\NumberValidator|number]] <span id="number"></span>
 
 ```php
@@ -361,7 +343,6 @@ Este validador verifica se o valor de entrada é um number. É equivalente ao va
 
 - `max`: limite máximo (inclusive) do valor. Se não for configurado, significa que não tem verificação de limite máximo.
 - `min`: o limite mínimo (inclusive) do valor. Se não for configurado, significa que não tem verificação de limite mínimo.
-
 
 ## [[yii\validators\RequiredValidator|required]] <span id="required"></span>
 
@@ -379,7 +360,6 @@ Este validador verifica se o valor de entrada foi fornecido e não está vazio.
 
 > Observação: Como determinar se um valor está vazio ou não é um tópico separado descrito na seção [Valores Vazios](input-validation.md#handling-empty-inputs).
 
-
 ## [[yii\validators\SafeValidator|safe]] <span id="safe"></span>
 
 ```php
@@ -390,7 +370,6 @@ Este validador verifica se o valor de entrada foi fornecido e não está vazio.
 ```
 
 Este validador não executa validação de dados. Em vez disso, ele é usado para marcar um atributo para ser um [atributo seguro](structure-models.md#safe-attributes).
-
 
 ## [[yii\validators\StringValidator|string]] <span id="string"></span>
 
@@ -404,13 +383,12 @@ Este validador não executa validação de dados. Em vez disso, ele é usado par
 Este validador verifica se o valor de entrada é uma string válida com um determinado tamanho.
 
 - `length`: especifica o limite do comprimento da string de entrada que está sendo validada. Este pode ser especificado em uma das seguintes formas:
-  * um inteiro: o comprimento exato que a string deverá ter;
-  * um array de um elemento: o comprimento mínimo da string de entrada (ex. `[8]`). Isso substituirá `min`.
-  * um array de dois elementos: o comprimento mínimo e máximo da string de entrada (ex. `[8, 128]`). Isso substituirá ambos `min` e `max`.
+  - um inteiro: o comprimento exato que a string deverá ter;
+  - um array de um elemento: o comprimento mínimo da string de entrada (ex. `[8]`). Isso substituirá `min`.
+  - um array de dois elementos: o comprimento mínimo e máximo da string de entrada (ex. `[8, 128]`). Isso substituirá ambos `min` e `max`.
 - `min`: o comprimento mínimo da string de entrada. Se não configurado, significa não ter limite para o comprimento mínimo.
 - `max`: o comprimento máximo da string de entrada. Se não configurado, significa não ter limite para o comprimento máximo.
-- `encoding`: a codificação da string de entrada a ser validada. se não configurado, será usado o valor de [[yii\base\Application::charset|charset]] da aplicação que por padrão é  `UTF-8`.
-
+- `encoding`: a codificação da string de entrada a ser validada. se não configurado, será usado o valor de [[yii\base\Application::charset|charset]] da aplicação que por padrão é `UTF-8`.
 
 ## [[yii\validators\FilterValidator|trim]] <span id="trim"></span>
 
@@ -422,7 +400,6 @@ Este validador verifica se o valor de entrada é uma string válida com um deter
 ```
 
 Este validador não executa validação de dados. Em vez disso, ele vai retirar os espaços em branco ao redor do valor de entrada. Observe que se o valor de entrada for um array, ele será ignorado pelo validador.
-
 
 ## [[yii\validators\UniqueValidator|unique]] <span id="unique"></span>
 
@@ -450,7 +427,6 @@ Este validador verifica se o valor de entrada é único na coluna da tabela. Ele
 - `targetClass`: o nome da classe [Active Record](db-active-record.md) que deve ser usada para procurar o valor de input que está sendo validado. Se não for configurado, a classe model atual que está sendo validado será usada.
 - `targetAttribute`: o nome do atributo em `targetClass` que deve ser usado para validar a singularidade do valor de entrada. Se não for configurado, este usará o nome do atributo atual que está sendo validado. Você pode usar um array para validar a singularidade de várias colunas ao mesmo tempo. Os valores do array são os atributos que serão utilizados para validar a singularidade, enquanto as chaves do array são os atributos cujos valores serão validados. Se a chave e o valor forem os mesmos, você pode apenas especificar o valor.
 - `filter`: filtro adicional para ser aplicado na query do banco de dados para validar a singularidade do valor de entrada. Este pode ser uma string ou um array representando a condição adicional da query (consulte o formato de condição [[yii\db\Query::where()]]) ou uma função anônima com a assinatura `function ($query)`, onde `$query` é o objeto [[yii\db\Query|Query]] que você pode modificar na função.
-
 
 ## [[yii\validators\UrlValidator|url]] <span id="url"></span>
 

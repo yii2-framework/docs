@@ -1,5 +1,4 @@
-Autenticación
-=============
+# Autenticación
 
 A diferencia de las aplicaciones Web, las API RESTful son usualmente sin estado (stateless), lo que permite que las sesiones o las cookies
 no sean usadas. Por lo tanto, cada petición debe llevar alguna suerte de credenciales de autenticación,
@@ -10,14 +9,14 @@ vía HTTPS para prevenir ataques tipo "man-in-the-middle" (MitM) **.
 
 Hay muchas maneras de enviar una token (pieza) de acceso:
 
-* [Autenticación Básica HTTP](https://es.wikipedia.org/wiki/Autenticaci%C3%B3n_de_acceso_b%C3%A1sica): la pieza de acceso
+- [Autenticación Básica HTTP](https://es.wikipedia.org/wiki/Autenticaci%C3%B3n_de_acceso_b%C3%A1sica): la pieza de acceso
   es enviada como nombre de usuario. Esto sólo debe de ser usado cuando la pieza de acceso puede ser guardada
   de forma segura en la parte del API del consumidor. Por ejemplo, el API del consumidor es un programa ejecutándose en un servidor.
-* Parámetro de la consulta: la pieza de acceso es enviada como un parámetro de la consulta en la URL de la API, p.e.,
+- Parámetro de la consulta: la pieza de acceso es enviada como un parámetro de la consulta en la URL de la API, p.e.,
   `https://example.com/users?access-token=xxxxxxxx`. Debido que muchos servidores dejan los parámetros de consulta en los logs del servidor,
   esta aproximación suele ser usada principalmente para servir peticiones `JSONP`
   que no usen las cabeceras HTTP para enviar piezas de acceso.
-* [OAuth 2](https://oauth.net/2/): la pieza de acceso es obtenida por el consumidor por medio de una autorización del servidor
+- [OAuth 2](https://oauth.net/2/): la pieza de acceso es obtenida por el consumidor por medio de una autorización del servidor
   y enviada al API del servidor según el protocolo
   OAuth 2 [tokens HTTP del portador](https://datatracker.ietf.org/doc/html/rfc6750).
 
@@ -26,10 +25,12 @@ Yii soporta todos los métodos anteriores de autenticación. Puedes crear nuevos
 Para activar la autenticación para tus APIs, sigue los pasos siguientes:
 
 1. Configura el componente `user` de la aplicación:
-  - Define la propiedad [[yii\web\User::enableSession|enableSession]] como `false`.
-  - Define la propiedad [[yii\web\User::loginUrl|loginUrl]] como `null` para mostrar un error HTTP 403 en vez de redireccionar a la pantalla de login. 
+
+- Define la propiedad [[yii\web\User::enableSession|enableSession]] como `false`.
+- Define la propiedad [[yii\web\User::loginUrl|loginUrl]] como `null` para mostrar un error HTTP 403 en vez de redireccionar a la pantalla de login.
+
 2. Especifica cuál método de autenticación planeas usar configurando el comportamiento (behavior) `authenticator` en tus
-  clases de controladores REST.
+   clases de controladores REST.
 3. Implementa [[yii\web\IdentityInterface::findIdentityByAccessToken()]] en tu [[yii\web\User::identityClass|clase de identidad de usuarios]].
 
 El paso 1 no es necesario pero sí recomendable para las APIs RESTful, pues son sin estado (stateless).
@@ -88,10 +89,9 @@ public function behaviors()
 
 Cada elemento en `authMethods` debe de ser el nombre de una clase de método de autenticación o un array de configuración.
 
-
 La implementación de `findIdentityByAccessToken()` es específico de la aplicación. Por ejemplo, en escenarios simples
 cuando cada usuario sólo puede tener un token de acceso, puedes almacenar este token en la columna `access_token`
-en la tabla de usuario. El método debe de ser inmediatamente implementado en la clase  `User` como sigue,
+en la tabla de usuario. El método debe de ser inmediatamente implementado en la clase `User` como sigue,
 
 ```php
 use yii\db\ActiveRecord;
@@ -115,11 +115,10 @@ y entonces ejecutar la acción. La identidad del usuario autenticado puede ser r
 Si la autenticación falla, una respuesta con estado HTTP 401 será devuelta junto con otras cabeceras apropiadas
 (tal como la cabecera para autenticación básica HTTP `WWW-Authenticate`).
 
-
 ## Autorización <span id="authorization"></span>
 
 Después de que un usuario se ha autenticado, probablementer querrás comprobar si él o ella tiene los permisos para realizar
-la acción solicitada. Este proceso es llamado *autorización (authorization)* y está cubierto en detalle
+la acción solicitada. Este proceso es llamado _autorización (authorization)_ y está cubierto en detalle
 en la [Sección de Autorización](security-authorization.md).
 
 Si tus controladores extienden de [[yii\rest\ActiveController]], puedes sobreescribir

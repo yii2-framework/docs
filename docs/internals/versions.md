@@ -1,5 +1,4 @@
-Yii Versioning
-==============
+# Yii Versioning
 
 This document summarizes the versioning policy of Yii. Our current versioning strategy is
 a variant of [Semantic Versioning](https://semver.org/).
@@ -22,13 +21,12 @@ depending on external technology advancement (such as PHP upgraded from 5.0 to 5
 Backwards compatibility breaking releases, which contain major features and changes that may break BC. Upgrading from
 earlier versions may not be trivial, but a complete upgrade guide will be available.
 
-* Mainly contain new features and bug fixes
-* Contain minor features and bug fixes merged from patch releases.
-* May contain BC-breaking changes which are recorded in a `UPGRADE-2.X.md` file.
-* Release cycle is around 12 months or more.
-* Require pre-releases: `2.X.0-alpha`, `2.X.0-beta`, `2.X.0-rc`.
-* Requires major news releases and marketing effort.
-
+- Mainly contain new features and bug fixes
+- Contain minor features and bug fixes merged from patch releases.
+- May contain BC-breaking changes which are recorded in a `UPGRADE-2.X.md` file.
+- Release cycle is around 12 months or more.
+- Require pre-releases: `2.X.0-alpha`, `2.X.0-beta`, `2.X.0-rc`.
+- Requires major news releases and marketing effort.
 
 ### `2.x.Y`: minor releases
 
@@ -37,14 +35,13 @@ compatibility. However, it is not always possible to keep everything 100% BC-com
 in `UPGRADE.md`. Practically, since 2.0.x is released more frequently, we are also adding minor features
 to it so that users can enjoy them earlier.
 
-* Mainly contain bug fixes and enhancements
-* Should be mostly backwards compatible to ensure worry-free upgrade. Only a few exceptions are allowed which are documented
+- Mainly contain bug fixes and enhancements
+- Should be mostly backwards compatible to ensure worry-free upgrade. Only a few exceptions are allowed which are documented
   in `UPGRADE.md`.
-* Release cycle is around 1 to 2 months.
-* No pre-releases (alpha, beta, RC) needed.
-* Should be merged back to master branch constantly (at least once every week manually).
-* With news announcements. Project site will be updated.
-
+- Release cycle is around 1 to 2 months.
+- No pre-releases (alpha, beta, RC) needed.
+- Should be merged back to master branch constantly (at least once every week manually).
+- With news announcements. Project site will be updated.
 
 ### `2.x.y.Z`: patch releases
 
@@ -52,27 +49,25 @@ Patch releases, which should be 100% BC-compatible, containing bug fixes only.
 No news announcement or project site update (unless it contains major/security issue fixes).
 The release process is mostly automatic.
 
-* Containing bug fixes only, no features included
-* Must be 100% backward compatible to ensure worry-free upgrade. Only exception is security issues that may require breaking BC
-* Release cycle is around 1 to 2 weeks
-* No pre-releases (alpha, beta, RC) needed
-* Should be merged back to master branch on release
-
+- Containing bug fixes only, no features included
+- Must be 100% backward compatible to ensure worry-free upgrade. Only exception is security issues that may require breaking BC
+- Release cycle is around 1 to 2 weeks
+- No pre-releases (alpha, beta, RC) needed
+- Should be merged back to master branch on release
 
 ## Branching policy
 
-* `master` branch is the development branch for the current stable major release, currently `2.0.x` versions.
-* Each new major release will be developed on a branch named after the version number, e.g. `2.1`.
-* Once a new major release `2.n` is ready, create a maintenance branch named `2.(n-1).x` off `master`.
+- `master` branch is the development branch for the current stable major release, currently `2.0.x` versions.
+- Each new major release will be developed on a branch named after the version number, e.g. `2.1`.
+- Once a new major release `2.n` is ready, create a maintenance branch named `2.(n-1).x` off `master`.
   E.g. a `2.0` branch is created if version `2.1.0` is released as stable and will now be developed on `master`
   (cmp. [composer branch naming schema](https://getcomposer.org/doc/02-libraries.md#branches)).
-* Create tags `2.x.y.z` and `2.x.y` branch to mark patch releases. For `2.x.y.0` releases, the `0` will be skipped.
-* Changes on `2.n.x` maintenance branches will be merged back to `master` constantly.
+- Create tags `2.x.y.z` and `2.x.y` branch to mark patch releases. For `2.x.y.0` releases, the `0` will be skipped.
+- Changes on `2.n.x` maintenance branches will be merged back to `master` constantly.
 
 The following image shows an illustration of the branches on changing commit history over time:
 
 ![Branching policy](versions-branches.png)
-
 
 ## Releases
 

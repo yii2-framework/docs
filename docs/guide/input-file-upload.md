@@ -1,10 +1,8 @@
-Uploading Files
-===============
+# Uploading Files
 
 Uploading files in Yii is usually done with the help of [[yii\web\UploadedFile]] which encapsulates each uploaded
 file as an `UploadedFile` object. Combined with [[yii\widgets\ActiveForm]] and [models](structure-models.md),
 you can easily implement a secure file uploading mechanism.
-
 
 ## Creating Models <span id="creating-models"></span>
 
@@ -31,7 +29,7 @@ class UploadForm extends Model
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
-    
+
     public function upload()
     {
         if ($this->validate()) {
@@ -52,9 +50,8 @@ The `file` validator allows you to check file extensions, size, MIME type, etc. 
 the [Core Validators](tutorial-core-validators.md#file) section for more details.
 
 > Tip: If you are uploading an image, you may consider using the `image` validator instead. The `image` validator is
-  implemented via [[yii\validators\ImageValidator]] which verifies if an attribute has received a valid image 
-  that can be then either saved or processed using the [Imagine Extension](https://github.com/yiisoft/yii2-imagine).
-
+> implemented via [[yii\validators\ImageValidator]] which verifies if an attribute has received a valid image
+> that can be then either saved or processed using the [Imagine Extension](https://github.com/yiisoft/yii2-imagine).
 
 ## Rendering File Input <span id="rendering-file-input"></span>
 
@@ -78,7 +75,7 @@ It is important to remember that you add the `enctype` option to the form so tha
 The `fileInput()` call will render a `<input type="file">` tag which will allow users to select a file to upload.
 
 > Tip: since version 2.0.8, [[yii\widgets\ActiveField::fileInput|fileInput]] adds `enctype` option to the form
-  automatically when file input field is used.
+> automatically when file input field is used.
 
 ## Wiring Up <span id="wiring-up"></span>
 
@@ -115,7 +112,6 @@ In the above code, when the form is submitted, the [[yii\web\UploadedFile::getIn
 to represent the uploaded file as an `UploadedFile` instance. We then rely on the model validation to make sure
 the uploaded file is valid and save the file on the server.
 
-
 ## Uploading Multiple Files <span id="uploading-multiple-files"></span>
 
 You can also upload multiple files at once, with some adjustments to the code listed in the previous subsections.
@@ -145,10 +141,10 @@ class UploadForm extends Model
             [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
-    
+
     public function upload()
     {
-        if ($this->validate()) { 
+        if ($this->validate()) {
             foreach ($this->imageFiles as $file) {
                 $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
             }
@@ -162,7 +158,7 @@ class UploadForm extends Model
 
 In the view file, you should add the `multiple` option to the `fileInput()` call so that the file upload field
 can receive multiple files. You also need to change `imageFiles` to `imageFiles[]` so that the attribute values are submitted as an array:
-  
+
 ```php
 <?php
 use yii\widgets\ActiveForm;
@@ -177,8 +173,8 @@ use yii\widgets\ActiveForm;
 <?php ActiveForm::end() ?>
 ```
 
-And finally in the controller action, you should call `UploadedFile::getInstances()` instead of 
-`UploadedFile::getInstance()` to assign an array of `UploadedFile` instances to `UploadForm::imageFiles`. 
+And finally in the controller action, you should call `UploadedFile::getInstances()` instead of
+`UploadedFile::getInstance()` to assign an array of `UploadedFile` instances to `UploadForm::imageFiles`.
 
 ```php
 namespace app\controllers;

@@ -1,5 +1,4 @@
-クエリ・ビルダ
-==============
+# クエリ・ビルダ
 
 [データベース・アクセス・オブジェクト](db-dao.md) の上に構築されているクエリ・ビルダは、SQL クエリをプログラム的に、
 かつ、DBMS の違いを意識せずに作成することを可能にしてくれます。
@@ -25,17 +24,16 @@ $rows = (new \yii\db\Query())
 ここでは、`:last_name` パラメータは `'Smith'` という文字列にバインドされています。
 
 ```sql
-SELECT `id`, `email` 
+SELECT `id`, `email`
 FROM `user`
 WHERE `last_name` = :last_name
 LIMIT 10
 ```
 
 > Info: 通常は、[[yii\db\QueryBuilder]] ではなく、主として [[yii\db\Query]] を使用します。
-  前者は、クエリ・メソッドの一つを呼ぶときに、後者によって黙示的に起動されます。
-  [[yii\db\QueryBuilder]] は、DBMS に依存しない [[yii\db\Query]] オブジェクトから、DBMS に依存する SQL 文を生成する
-  (例えば、テーブルやカラムの名前を DBMS ごとに違う方法で引用符で囲む) 役割を負っているクラスです。
-
+> 前者は、クエリ・メソッドの一つを呼ぶときに、後者によって黙示的に起動されます。
+> [[yii\db\QueryBuilder]] は、DBMS に依存しない [[yii\db\Query]] オブジェクトから、DBMS に依存する SQL 文を生成する
+> (例えば、テーブルやカラムの名前を DBMS ごとに違う方法で引用符で囲む) 役割を負っているクラスです。
 
 ## クエリを構築する <span id="building-queries"></span>
 
@@ -45,7 +43,6 @@ LIMIT 10
 クエリ構築メソッドは、すべて、クエリ・オブジェクトそのものを返しますので、複数の呼び出しをチェーンしてまとめることが出来ます。
 
 以下で、それぞれのクエリ構築メソッドの使用方法を説明しましょう。
-
 
 ### [[yii\db\Query::select()|select()]] <span id="select"></span>
 
@@ -80,13 +77,13 @@ $query->select(['user_id' => 'user.id', 'email']);
 ```
 
 クエリを構築するときに [[yii\db\Query::select()|select()]] メソッドを呼ばなかった場合は、`*` がセレクトされます。
-すなわち、*全て* のカラムが選択されることになります。
+すなわち、_全て_ のカラムが選択されることになります。
 
 カラム名に加えて、DB 式をセレクトすることも出来ます。
 カンマを含む DB 式をセレクトする場合は、自動的に引用符で囲む機能が誤動作しないように、配列形式を使わなければなりません。例えば、
 
 ```php
-$query->select(["CONCAT(first_name, ' ', last_name) AS full_name", 'email']); 
+$query->select(["CONCAT(first_name, ' ', last_name) AS full_name", 'email']);
 ```
 
 生の SQL が使われる場所ではどこでもそうですが、セレクトに DB 式を書く場合には、テーブルやカラムの名前を表すために
@@ -115,7 +112,6 @@ $query->select('user_id')->distinct();
 $query->select(['id', 'username'])
     ->addSelect(['email']);
 ```
-
 
 ### [[yii\db\Query::from()|from()]] <span id="from"></span>
 
@@ -149,11 +145,12 @@ $query->from(['u' => 'public.user', 'p' => 'public.post']);
 ```php
 $subQuery = (new Query())->select('id')->from('user')->where('status=1');
 
-// SELECT * FROM (SELECT `id` FROM `user` WHERE status=1) u 
+// SELECT * FROM (SELECT `id` FROM `user` WHERE status=1) u
 $query->from(['u' => $subQuery]);
 ```
 
 #### プレフィックス
+
 また、デフォルトの [[yii\db\Connection::$tablePrefix|tablePrefix]] を適用することも出来ます。
 実装の仕方は ["データベース・アクセス・オブジェクト" ガイドの "テーブル名を引用符で囲む" のセクション](db-dao.md#quoting-table-and-column-names) にあります。
 
@@ -368,7 +365,6 @@ $query->andWhere(new OrCondition([
 オブジェクト形式を使うことによって、あなた独自の条件を作成したり、デフォルトの条件が作成される方法を変更したりすることが可能になります。
 詳細は [特製の条件や式を追加する](#adding-custom-conditions-and-expressions) のセクションを参照して下さい。
 
-
 #### 条件を追加する <span id="appending-conditions"></span>
 
 [[yii\db\Query::andWhere()|andWhere()]] または [[yii\db\Query::orWhere()|orWhere()]] を使って、既存の条件に別の条件を追加することが出来ます。
@@ -391,7 +387,6 @@ if (!empty($search)) {
 ```sql
 WHERE (`status` = 10) AND (`title` LIKE '%yii%')
 ```
-
 
 #### フィルタ条件 <span id="filter-conditions"></span>
 
@@ -471,7 +466,6 @@ $query->orderBy('id ASC')
     ->addOrderBy('name DESC');
 ```
 
-
 ### [[yii\db\Query::groupBy()|groupBy()]] <span id="group-by"></span>
 
 [[yii\db\Query::groupBy()|groupBy()]] メソッドは SQL クエリの `GROUP BY` 句を指定します。例えば、
@@ -489,7 +483,7 @@ $query->groupBy('id, status');
 ```
 
 > Note: `GROUP BY` が何らかの DB 式を含む場合は、配列形式を使わなければなりません。
-  
+
 [[yii\db\Query::addGroupBy()|addGroupBy()]] を呼んで、`GROUP BY` 句にカラムを追加することが出来ます。
 例えば、
 
@@ -497,7 +491,6 @@ $query->groupBy('id, status');
 $query->groupBy(['id', 'status'])
     ->addGroupBy('age');
 ```
-
 
 ### [[yii\db\Query::having()|having()]] <span id="having"></span>
 
@@ -520,12 +513,11 @@ $query->having(['status' => 1])
     ->andHaving(['>', 'age', 30]);
 ```
 
-
 ### [[yii\db\Query::limit()|limit()]] と [[yii\db\Query::offset()|offset()]] <span id="limit-offset"></span>
 
 [[yii\db\Query::limit()|limit()]] と [[yii\db\Query::offset()|offset()]] のメソッドは、SQL クエリの `LIMIT` 句と `OFFSET` 句を指定します。
 例えば、
-  
+
 ```php
 // ... LIMIT 10 OFFSET 20
 $query->limit(10)->offset(20);
@@ -534,8 +526,7 @@ $query->limit(10)->offset(20);
 無効な上限やオフセット (例えば、負の数) を指定した場合は、無視されます。
 
 > Info: `LIMIT` と `OFFSET` をサポートしていない DBMS (例えば MSSQL) に対しては、
-クエリ・ビルダが `LIMIT`/`OFFSET` の振る舞いをエミュレートする SQL 文を生成します。
-
+> クエリ・ビルダが `LIMIT`/`OFFSET` の振る舞いをエミュレートする SQL 文を生成します。
 
 ### [[yii\db\Query::join()|join()]] <span id="join"></span>
 
@@ -580,7 +571,6 @@ $query->leftJoin(['u' => $subQuery], 'u.id = author_id');
 ```
 
 この場合、サブ・クエリを配列に入れて、配列のキーを使ってエイリアスを指定しなければなりません。
-
 
 ### [[yii\db\Query::union()|union()]] <span id="union"></span>
 
@@ -647,7 +637,7 @@ $rows = (new \yii\db\Query())
     ->select(['id', 'email'])
     ->from('user')
     ->all();
-    
+
 // SELECT * FROM `user` WHERE `username` LIKE `%test%`
 $row = (new \yii\db\Query())
     ->from('user')
@@ -656,10 +646,10 @@ $row = (new \yii\db\Query())
 ```
 
 > Note: [[yii\db\Query::one()|one()]] メソッドはクエリ結果の最初の行だけを返します。このメソッドは `LIMIT 1`
-  を生成された SQL 文に追加しません。このことは、クエリが一つまたは少数の行しか返さないことが判っている場合
-  (例えば、何らかのプライマリ・キーでクエリを発行する場合) は問題になりませんし、むしろ好ましいことです。
-  しかし、クエリ結果が多数のデータ行になる可能性がある場合は、パフォーマンスを向上させるために、明示的に `limit(1)` を呼ぶべきです。例えば、
-  `(new \yii\db\Query())->from('user')->limit(1)->one()`
+> を生成された SQL 文に追加しません。このことは、クエリが一つまたは少数の行しか返さないことが判っている場合
+> (例えば、何らかのプライマリ・キーでクエリを発行する場合) は問題になりませんし、むしろ好ましいことです。
+> しかし、クエリ結果が多数のデータ行になる可能性がある場合は、パフォーマンスを向上させるために、明示的に `limit(1)` を呼ぶべきです。例えば、
+> `(new \yii\db\Query())->from('user')->limit(1)->one()`
 
 上記のメソッドの全ては、オプションで、DB クエリの実行に使用されるべき [[yii\db\Connection|DB 接続]] を表す `$db` パラメータを取ることが出来ます。
 このパラメータを省略した場合は、DB 接続として `db` [アプリケーション・コンポーネント](structure-application-components.md) が使用されます。
@@ -675,9 +665,9 @@ $count = (new \yii\db\Query())
 
 あなたが [[yii\db\Query]] のクエリ・メソッドを呼び出すと、実際には、内部的に次の仕事がなされます。
 
-* [[yii\db\QueryBuilder]] を呼んで、[[yii\db\Query]] の現在の構成に基づいた SQL 文を生成する。
-* 生成された SQL 文で [[yii\db\Command]] オブジェクトを作成する。
-* [[yii\db\Command]] のクエリ・メソッド (例えば [[yii\db\Command::queryAll()|queryAll()]]) を呼んで、SQL 文を実行し、データを取得する。
+- [[yii\db\QueryBuilder]] を呼んで、[[yii\db\Query]] の現在の構成に基づいた SQL 文を生成する。
+- 生成された SQL 文で [[yii\db\Command]] オブジェクトを作成する。
+- [[yii\db\Command]] のクエリ・メソッド (例えば [[yii\db\Command::queryAll()|queryAll()]]) を呼んで、SQL 文を実行し、データを取得する。
 
 場合によっては、[[yii\db\Query]] オブジェクトから構築された SQL 文を調べたり使ったりしたいことがあるでしょう。
 次のコードを使って、その目的を達することが出来ます。
@@ -689,7 +679,7 @@ $command = (new \yii\db\Query())
     ->where(['last_name' => 'Smith'])
     ->limit(10)
     ->createCommand();
-    
+
 // SQL 文を表示する
 echo $command->sql;
 // バインドされるパラメータを表示する
@@ -698,7 +688,6 @@ print_r($command->params);
 // クエリ結果の全ての行を返す
 $rows = $command->queryAll();
 ```
-
 
 ## クエリ結果をインデックスする <span id="indexing-query-results"></span>
 
@@ -737,7 +726,6 @@ $query = (new \yii\db\Query())
 > このことは、クエリの SELECT に含まれるカラム名だけを使うことが出来る、ということを意味します。
 > また、テーブル・プレフィックスを付けてカラムを選択した場合、例えば `customer.id` を選択した場合は、
 > リザルトセットのカラム名は `id` しか含みませんので、テーブルプレフィックス無しで `->indexBy('id')` と呼ぶ必要があります。
-
 
 ## バッチ・クエリ <span id="batch-query"></span>
 
@@ -803,8 +791,8 @@ MySQL のバッチ・クエリの実装は PDO ドライバのライブラリに
 ドライバによって結果セット全体がクライアントのメモリに読み込まれることを防止できないからです。
 
 > Note: `libmysqlclient` が使われている場合 (PHP5 ではそれが普通ですが) は、
-  結果セットに使用されたメモリは PHP のメモリ使用量としてカウントされません。そのため、一見、バッチ・クエリが正しく動作するように見えますが、
-  実際には、データ・セット全体がクライアントのメモリに読み込まれて、クライアントのメモリを使い果たす可能性があります。
+> 結果セットに使用されたメモリは PHP のメモリ使用量としてカウントされません。そのため、一見、バッチ・クエリが正しく動作するように見えますが、
+> 実際には、データ・セット全体がクライアントのメモリに読み込まれて、クライアントのメモリを使い果たす可能性があります。
 
 バッファ・モードを無効化してクライアントのメモリ要求量を削減するためには、PDO 接続のプロパティ
 `PDO::MYSQL_ATTR_USE_BUFFERED_QUERY` を `false` に設定しなければなりません。しかし、そうすると、
@@ -822,8 +810,8 @@ Yii::$app->db->pdo->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 ```
 
 > Note: MyISAM の場合は、バッチ・クエリが継続している間、テーブルがロックされて、
-  他の接続からの書き込みアクセスが遅延または拒絶されることがあります。非バッファ・モードのクエリを使う場合は、
-  カーソルを開いている時間を可能な限り短くするように努めて下さい。
+> 他の接続からの書き込みアクセスが遅延または拒絶されることがあります。非バッファ・モードのクエリを使う場合は、
+> カーソルを開いている時間を可能な限り短くするように努めて下さい。
 
 スキーマがキャッシュされていない場合、またはバッチ・クエリを処理している間に他のクエリを走らせる必要がある場合は、
 独立した非バッファ・モードのデータベース接続を作成することが出来ます。
@@ -867,8 +855,8 @@ $unbufferedDb->close();
 ```
 
 > Note: 非バッファ・モードのクエリは PHP 側でのメモリ消費は少なくなりますが、MySQL サーバの負荷を増加させ得ます。
-特別に巨大なデータに対するアプリの動作については、あなた自身のコードを設計することが推奨されます。
-例えば、[整数のキーで範囲を分割して、非バッファ・モードのクエリでループする](https://github.com/yiisoft/yii2/issues/8420#issuecomment-296109257) など。
+> 特別に巨大なデータに対するアプリの動作については、あなた自身のコードを設計することが推奨されます。
+> 例えば、[整数のキーで範囲を分割して、非バッファ・モードのクエリでループする](https://github.com/yiisoft/yii2/issues/8420#issuecomment-296109257) など。
 
 ### 特製の条件や式を追加する <span id="adding-custom-conditions-and-expressions"></span>
 
@@ -912,12 +900,12 @@ class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
         $this->columns = $columns;
         $this->value = $value;
     }
-    
+
     public static function fromArrayDefinition($operator, $operands)
     {
         throw new InvalidArgumentException('未実装、あとでやる');
     }
-    
+
     public function getColumns() { return $this->columns; }
     public function getValue() { return $this->vaule; }
 }
@@ -944,11 +932,11 @@ class AllGreaterConditionBuilder implements \yii\db\ExpressionBuilderInterface
     * @param ExpressionInterface $condition ビルドすべき条件
     * @param array $params バインディング・パラメータ
     * @return AllGreaterCondition
-    */ 
+    */
     public function build(ExpressionInterface $expression, array &$params = [])
     {
         $value = $condition->getValue();
-        
+
         $conditions = [];
         foreach ($expression->getColumns() as $column) {
             $conditions[] = new SimpleCondition($column, '>', $value);
@@ -1007,7 +995,7 @@ namespace app\db\conditions;
 class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
 {
     // ... 上記の実装を参照
-      
+
     public static function fromArrayDefinition($operator, $operands)
     {
         return new static($operands[0], $operands[1]);

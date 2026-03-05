@@ -1,11 +1,10 @@
-Fixtures
-========
+# Fixtures
 
 Fixtures 是测试中非常重要的一部分。他们的主要目的是建立一个固定/已知的环境状态以确保
 测试可重复并且按照预期方式运行。Yii 提供一个简单可用的 Fixure 框架
 允许你精确的定义你的 Fixtures 。
 
-Yii 的 Fixture 框架的核心概念称之为 *fixture object* 。一个 Fixture object 代表
+Yii 的 Fixture 框架的核心概念称之为 _fixture object_ 。一个 Fixture object 代表
 一个测试环境的某个特定方面，它是 [[yii\test\Fixture]] 或者其子类的实例。
 比如，你可以使用 `UserFixture` 来确保用户DB表包含固定的数据。
 你在运行一个测试之前加载一个或者多个 fixture object，并在结束后卸载他们。
@@ -14,11 +13,9 @@ Yii 的 Fixture 框架的核心概念称之为 *fixture object* 。一个 Fixtur
 当一个 Fixture 被加载前，它依赖的 Fixture 会被自动的加载；同样，当某个 Fixture 被卸载后，
 它依赖的 Fixtures 也会被自动的卸载。
 
+## 定义一个 Fixture
 
-定义一个 Fixture
-------------------
-
-为了定义一个 Fixture，你需要创建一个新的 class 继承自 [[yii\test\Fixture]] 
+为了定义一个 Fixture，你需要创建一个新的 class 继承自 [[yii\test\Fixture]]
 或者 [[yii\test\ActiveFixture]] 。前一个类对于一般用途的 Fixture 比较适合，
 而后者则有一些增强功能专用于与数据库和 ActiveRecord 一起协作。
 
@@ -36,7 +33,7 @@ class UserFixture extends ActiveFixture
 }
 ```
 
-> Tip: 每个 `ActiveFixture` 都会准备一个 DB 表用来测试。你可以通过设置 [[yii\test\ActiveFixture::tableName]] 
+> Tip: 每个 `ActiveFixture` 都会准备一个 DB 表用来测试。你可以通过设置 [[yii\test\ActiveFixture::tableName]]
 > 或 [[yii\test\ActiveFixture::modelClass]] 属性来指定具体的表。如果是后者，
 > 表名会从 `modleClass` 指定的 `ActiveRecord` 中获取。
 
@@ -46,9 +43,8 @@ class UserFixture extends ActiveFixture
 > - Mongo DB：[[yii\mongodb\ActiveFixture]]
 > - Elasticsearch：[[yii\elasticsearch\ActiveFixture]]（从版本 2.0.2 开始）
 
-
 提供给 `ActiveFixture` 的 fixture data 通常放在一个路径为 `FixturePath/data/TableName.php` 的文件中，
-其中 `FixturePath` 代表 Fixture 类所在的路径， 
+其中 `FixturePath` 代表 Fixture 类所在的路径，
 `TableName` 则是和 Fixture 关联的表。在以上的例子中，
 这个文件应该是 `@app/tests/fixtures/data/user.php` 。
 data 文件返回一个包含要被插入用户表中的数据文件，比如：
@@ -100,13 +96,11 @@ class UserProfileFixture extends ActiveFixture
 为确保外键存在， `UserFixture` 会在 `UserProfileFixture` 之前加载，
 同样，也会在其卸载后同步卸载。
 
-在上面，我们展示了如何定义一个 DB 表的 Fixture 。为了定义一个与 DB 无关的 Fixture 
+在上面，我们展示了如何定义一个 DB 表的 Fixture 。为了定义一个与 DB 无关的 Fixture
 （比如一个fixture关于文件和路径的），你可以从一个更通用的基类 [[yii\test\Fixture]] 继承，
 并重写 [[yii\test\Fixture::load()|load()]] 和 [[yii\test\Fixture::unload()|unload()]] 方法。
 
-
-使用 Fixtures
---------------
+## 使用 Fixtures
 
 如果你使用 [CodeCeption](https://codeception.com/) 作为你的 Yii 代码测试框架，
 你需要考虑使用 `yii2-codeception` 扩展，这个扩展包含内置的机制来支持加载和访问 Fixtures。
@@ -125,7 +119,7 @@ namespace app\tests\unit\models;
 use app\tests\fixtures\UserProfileFixture;
 
 class UserProfileTest extends \Codeception\Test\Unit
-{   
+{
     public function _fixtures()
     {
         return [
@@ -143,7 +137,7 @@ class UserProfileTest extends \Codeception\Test\Unit
 
 在测试用例的每个测试方法运行前 `fixtures()` 方法列表返回的 Fixture 会被自动的加载，
 并在结束后自动的卸载。同样，如前面所述，当一个 Fixture 被加载之前，
-所有它依赖的 Fixture 也会被自动的加载。在上面的例子中，因为 `UserProfileFixture` 
+所有它依赖的 Fixture 也会被自动的加载。在上面的例子中，因为 `UserProfileFixture`
 依赖于 `UserFixtrue`，当运行测试类中的任意测试方法时，两个 Fixture，`UserFixture` 和 `UserProfileFixture` 会被依序加载。
 
 当我们通过 `fixtures()` 方法指定需要加载的 Fixture 时，我们既可以使用一个类名，
@@ -169,8 +163,7 @@ $profile = $I->grabFixture('profiles', 'user1');
 foreach ($I->grabFixture('profiles') as $profile) ...
 ```
 
-组织 Fixture 类和相关的数据文件
------------------------------------------
+## 组织 Fixture 类和相关的数据文件
 
 默认情况下，Fixture 类会在其所在的目录下面的 `data` 子目录寻找相关的数据文件。
 在一些简单的项目中，你可以遵循此范例。对于一些大项目，
@@ -208,9 +201,9 @@ data\
 
 Yii 通过 `yii fixture` 命令行工具来支持 fixtures 操作. 这个工具支持:
 
-* 将 fixtures 装载到不同的存储设备，例如：RDBMS, NoSQL 等;
-* 以不同方式卸载 fixtures（通常是清理存储）;
-* 自动生成 fixtures 并用随机数据填充。
+- 将 fixtures 装载到不同的存储设备，例如：RDBMS, NoSQL 等;
+- 以不同方式卸载 fixtures（通常是清理存储）;
+- 自动生成 fixtures 并用随机数据填充。
 
 ### Fixtures 数据格式
 
@@ -235,7 +228,8 @@ return [
         'password' => '$2y$13$kkgpvJ8lnjKo8RuoR30ay.RjDf15bMcHIF7Vz1zz/6viYG5xJExU6',
     ],
 ];
-``` 
+```
+
 如果我们使用 fixture 将数据加载到数据库中，那么这些行将作用到 `users` 表。 如果我们使用的是 nosql 类型的 fixtures，例如 `mongodb` fixture然后这个数据将应用于 `users` mongodb 集合。 要了解有关实现各种加载策略的信息，请参阅官方[文档](https://github.com/yiisoft/yii2/blob/master/docs/guide/test-fixtures.md)。
 
 上面的 fixture 示例是由 `yii2-faker` 扩展自动生成的，在这些[章节](#auto-generating-fixtures)中可以了解更多相关内容。
@@ -338,7 +332,9 @@ Yii 还可以为你自动生成一些基于一些模板的 Fixtures。 你能够
 
 1. 使用 `yii migrate` 工具来让你的测试数据库更新到最新的版本；
 2. 运行一个测试：
-  - 加载 Fixture：清空所有的相关表结构，并用 Fixture 数据填充
-  - 执行真实的测试用例
-  - 卸载 Fixture
+
+- 加载 Fixture：清空所有的相关表结构，并用 Fixture 数据填充
+- 执行真实的测试用例
+- 卸载 Fixture
+
 3. 重复步骤 2 直到所有的测试结束。

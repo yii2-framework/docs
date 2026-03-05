@@ -1,5 +1,4 @@
-Shared Hosting Environment
-==========================
+# Shared Hosting Environment
 
 Shared hosting environments are often quite limited about configuration and directory structure. Still in most cases you
 can run Yii 2.0 on a shared hosting environment with a few adjustments.
@@ -14,7 +13,7 @@ server.
 ### Renaming webroot <span id="renaming-webroot"></span>
 
 Connect to your shared host using FTP or by other means. You will probably see something like the following.
-  
+
 ```
 config
 logs

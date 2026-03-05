@@ -1,5 +1,4 @@
-视图
-=====
+# 视图
 
 视图是 [MVC](https://zh.wikipedia.org/wiki/MVC) 模式中的一部分。
 它是展示数据到终端用户的代码，在网页应用中，
@@ -7,7 +6,6 @@
 主要包含HTML代码和展示类PHP代码，通过[[yii\web\View|view]]应用组件来管理，
 该组件主要提供通用方法帮助视图构造和渲染，
 简单起见，我们称视图模板或视图模板文件为视图。
-
 
 ## 创建视图 <span id="creating-views"></span>
 
@@ -39,16 +37,15 @@ $this->title = 'Login';
 <?php ActiveForm::end(); ?>
 ```
 
-在视图中，可访问 `$this` 指向 [[yii\web\View|view component]] 
+在视图中，可访问 `$this` 指向 [[yii\web\View|view component]]
 来管理和渲染这个视图文件。
 
 除了 `$this`之外，上述示例中的视图有其他预定义变量如 `$model`，
 这些变量代表从[控制器](structure-controllers.md)
-或其他触发[视图渲染](#rendering-views)的对象 *传入* 到视图的数据。
+或其他触发[视图渲染](#rendering-views)的对象 _传入_ 到视图的数据。
 
 > Tip: 将预定义变量列到视图文件头部注释处，
-  这样可被IDE编辑器识别，也是生成视图文档的好方法。
-
+> 这样可被IDE编辑器识别，也是生成视图文档的好方法。
 
 ### 安全 <span id="security"></span>
 
@@ -83,25 +80,23 @@ use yii\helpers\HtmlPurifier;
 ```
 
 > Tip: HTMLPurifier在保证输出数据安全上做的不错，但性能不佳，如果你的应用需要高性能可考虑
-  [缓存](caching-overview.md) 过滤后的结果。
-
+> [缓存](caching-overview.md) 过滤后的结果。
 
 ### 组织视图 <span id="organizing-views"></span>
 
 与 [控制器](structure-controllers.md) 和 [模型](structure-models.md) 类似，在组织视图上有一些约定：
 
-* 控制器渲染的视图文件默认放在 `@app/views/ControllerID` 目录下，
+- 控制器渲染的视图文件默认放在 `@app/views/ControllerID` 目录下，
   其中 `ControllerID` 对应 [控制器 ID](structure-controllers.md#routes),
   例如控制器类为 `PostController`，视图文件目录应为 `@app/views/post`，
   控制器类 `PostCommentController`对应的目录为 `@app/views/post-comment`，
   如果是模块中的控制器，目录应为 [[yii\base\Module::basePath|module directory]] 模块目录下的 `views/ControllerID` 目录；
-* 对于 [小部件](structure-widgets.md) 渲染的视图文件默认放在 `WidgetPath/views` 目录，
+- 对于 [小部件](structure-widgets.md) 渲染的视图文件默认放在 `WidgetPath/views` 目录，
   其中 `WidgetPath` 代表小部件类文件所在的目录；
-* 对于其他对象渲染的视图文件，建议遵循和小部件相似的规则。
+- 对于其他对象渲染的视图文件，建议遵循和小部件相似的规则。
 
-可覆盖控制器或小部件的 [[yii\base\ViewContextInterface::getViewPath()]] 
+可覆盖控制器或小部件的 [[yii\base\ViewContextInterface::getViewPath()]]
 方法来自定义视图文件默认目录。
-
 
 ## 渲染视图 <span id="rendering-views"></span>
 
@@ -117,19 +112,18 @@ use yii\helpers\HtmlPurifier;
 methodName($view, $params = [])
 ```
 
-
 ### 控制器中渲染 <span id="rendering-in-controllers"></span>
 
 在 [控制器](structure-controllers.md) 中，可调用以下控制器方法来渲染视图：
 
-* [[yii\base\Controller::render()|render()]]: 渲染一个 [视图名](#named-views) 并使用一个 [布局](#layouts)
+- [[yii\base\Controller::render()|render()]]: 渲染一个 [视图名](#named-views) 并使用一个 [布局](#layouts)
   返回到渲染结果。
-* [[yii\base\Controller::renderPartial()|renderPartial()]]: 渲染一个 [视图名](#named-views) 并且不使用布局。
-* [[yii\web\Controller::renderAjax()|renderAjax()]]: 渲染一个 [视图名](#named-views) 并且不使用布局，
+- [[yii\base\Controller::renderPartial()|renderPartial()]]: 渲染一个 [视图名](#named-views) 并且不使用布局。
+- [[yii\web\Controller::renderAjax()|renderAjax()]]: 渲染一个 [视图名](#named-views) 并且不使用布局，
   并注入所有注册的JS/CSS脚本和文件，通常使用在响应AJAX网页请求的情况下。
-* [[yii\base\Controller::renderFile()|renderFile()]]: 渲染一个视图文件目录或
+- [[yii\base\Controller::renderFile()|renderFile()]]: 渲染一个视图文件目录或
   [别名](concept-aliases.md)下的视图文件。
-* [[yii\base\Controller::renderContent()|renderContent()]]: renders a static string by embedding it into
+- [[yii\base\Controller::renderContent()|renderContent()]]: renders a static string by embedding it into
   the currently applicable [layout](#layouts). This method is available since version 2.0.1.
 
 例如：
@@ -159,13 +153,12 @@ class PostController extends Controller
 }
 ```
 
-
 ### 小部件中渲染 <span id="rendering-in-widgets"></span>
 
 在 [小部件](structure-widgets.md) 中，可调用以下小部件方法来渲染视图：
 
-* [[yii\base\Widget::render()|render()]]: 渲染一个 [视图名](#named-views).
-* [[yii\base\Widget::renderFile()|renderFile()]]: 渲染一个视图文件目录或
+- [[yii\base\Widget::render()|render()]]: 渲染一个 [视图名](#named-views).
+- [[yii\base\Widget::renderFile()|renderFile()]]: 渲染一个视图文件目录或
   [别名](concept-aliases.md)下的视图文件。
 
 例如：
@@ -190,7 +183,6 @@ class ListWidget extends Widget
 }
 ```
 
-
 ### 视图中渲染 <span id="rendering-in-views"></span>
 
 可以在视图中渲染另一个视图，可以调用[[yii\base\View|view component]]视图组件提供的以下方法：
@@ -198,6 +190,7 @@ class ListWidget extends Widget
 - [[yii\base\View::render()|render()]]: 渲染一个 [视图名](#named-views).
 - [[yii\web\View::renderAjax()|renderAjax()]]: 渲染一个 [视图名](#named-views)
   并注入所有注册的JS/CSS脚本和文件，通常使用在响应AJAX网页请求的情况下。
+
 * [[yii\base\View::renderFile()|renderFile()]]: 渲染一个视图文件目录或
   [别名](concept-aliases.md)下的视图文件。
 
@@ -207,7 +200,6 @@ class ListWidget extends Widget
 ```php
 <?= $this->render('_overview') ?>
 ```
-
 
 ### 其他地方渲染 <span id="rendering-in-other-places"></span>
 
@@ -219,11 +211,10 @@ class ListWidget extends Widget
 echo \Yii::$app->view->renderFile('@app/views/site/license.php');
 ```
 
-
 ### 视图名 <span id="named-views"></span>
 
 渲染视图时，可指定一个视图名或视图文件路径/别名，大多数情况下使用前者因为前者简洁灵活，
-我们称用名字的视图为 *视图名*.
+我们称用名字的视图为 _视图名_.
 
 视图名可以依据以下规则到对应的视图文件路径：
 
@@ -232,10 +223,10 @@ echo \Yii::$app->view->renderFile('@app/views/site/license.php');
 - 视图名以双斜杠 `//` 开头，对应的视图文件路径为 `@app/views/ViewName`，
   也就是说视图文件在 [[yii\base\Application::viewPath|application's view path]] 路径下找，
   例如 `//site/about` 对应到 `@app/views/site/about.php`。
-- 视图名以单斜杠`/`开始，视图文件路径以当前使用[模块](structure-modules.md) 
+- 视图名以单斜杠`/`开始，视图文件路径以当前使用[模块](structure-modules.md)
   的[[yii\base\Module::viewPath|view path]]开始，
   如果不存在模块，使用`@app/views/ViewName`开始，例如，如果当前模块为`user`， `/user/create` 对应成
-  `@app/modules/user/views/user/create.php`, 
+  `@app/modules/user/views/user/create.php`,
   如果不在模块中，`/user/create`对应`@app/views/user/create.php`。
 - 如果 [[yii\base\View::context|context]] 渲染视图 并且上下文实现了 [[yii\base\ViewContextInterface]],
   视图文件路径由上下文的 [[yii\base\ViewContextInterface::getViewPath()|view path]] 开始，
@@ -249,7 +240,6 @@ echo \Yii::$app->view->renderFile('@app/views/site/license.php');
 实际上渲染 `@app/views/post/view.php` 视图文件，当在该视图文件中调用 `$this->render('_overview')`
 会渲染 `@app/views/post/_overview.php` 视图文件。
 
-
 ### 视图中访问数据 <span id="accessing-data-in-views"></span>
 
 在视图中有两种方式访问数据：推送和拉取。
@@ -257,7 +247,7 @@ echo \Yii::$app->view->renderFile('@app/views/site/license.php');
 推送方式是通过视图渲染方法的第二个参数传递数据，
 数据格式应为名称-值的数组，
 视图渲染时，调用PHP `extract()` 方法将该数组转换为视图可访问的变量。
-例如，如下控制器的渲染视图代码推送2个变量到 
+例如，如下控制器的渲染视图代码推送2个变量到
 `report` 视图：`$foo = 1` 和 `$bar = 2`。
 
 ```php
@@ -280,7 +270,6 @@ The controller ID is: <?= $this->context->id ?>
 缺点是需要手动构建数组，有些繁琐，
 在不同地方渲染时容易出错。
 
-
 ### 视图间共享数据 <span id="sharing-data-among-views"></span>
 
 [[yii\base\View|view component]]视图组件提供[[yii\base\View::params|params]]
@@ -302,14 +291,12 @@ $this->params['breadcrumbs'][] = 'About Us';
 ]) ?>
 ```
 
-
 ## 布局 <span id="layouts"></span>
 
 布局是一种特殊的视图，代表多个视图的公共部分，
 例如，大多数Web应用共享相同的页头和页尾，
 在每个视图中重复相同的页头和页尾，更好的方式是将这些公共放到一个布局中，
 渲染内容视图后在合适的地方嵌入到布局中。
-
 
 ### 创建布局 <span id="creating-layouts"></span>
 
@@ -373,7 +360,6 @@ use yii\helpers\Html;
   它触发 [[yii\web\View::EVENT_END_BODY|EVENT_END_BODY]] 事件并生成一个占位符，
   会被注册的HTML代码（如JavaScript）在页面主体结尾处替换。
 
-
 ### 布局中访问数据 <span id="accessing-data-in-layouts"></span>
 
 在布局中可访问两个预定义变量：`$this` 和 `$content`，
@@ -383,7 +369,6 @@ use yii\helpers\Html;
 如果想在布局中访问其他数据，必须使用[视图中访问数据](#accessing-data-in-views)一节介绍的拉取方式，
 如果想从内容视图中传递数据到布局，
 可使用[视图间共享数据](#sharing-data-among-views)一节中的方法。
-
 
 ### 使用布局 <span id="using-layouts"></span>
 
@@ -396,7 +381,7 @@ use yii\helpers\Html;
 例如，如下代码使 `post` 控制器渲染视图时使用 `@app/views/layouts/post.php` 作为布局文件，
 假如 `layout` 属性没改变，
 控制器默认使用 `@app/views/layouts/main.php` 作为布局文件。
-  
+
 ```php
 namespace app\controllers;
 
@@ -405,12 +390,12 @@ use yii\web\Controller;
 class PostController extends Controller
 {
     public $layout = 'post';
-    
+
     // ...
 }
 ```
 
-对于模块中的控制器，可配置模块的 [[yii\base\Module::layout|layout]] 
+对于模块中的控制器，可配置模块的 [[yii\base\Module::layout|layout]]
 属性指定布局文件应用到模块的所有控制器。
 
 由于`layout` 可在不同层级（控制器、模块，应用）配置，
@@ -424,7 +409,7 @@ class PostController extends Controller
   第一个[[yii\base\Module::layout|layout]] 属性不为空的模块，使用该模块作为上下文模块，
   并将它的[[yii\base\Module::layout|layout]] 的值作为布局的值，
   如果都没有找到，表示不使用布局。
-  
+
 第二步，它决定第一步中布局的值和上下文模块对应到实际的布局文件，
 布局的值可为：
 
@@ -438,7 +423,6 @@ class PostController extends Controller
 - 布尔值 `false`: 不使用布局。
 
 布局的值没有包含文件扩展名，默认使用 `.php`作为扩展名。
-
 
 ### 嵌套布局 <span id="nested-layouts"></span>
 
@@ -460,7 +444,6 @@ class PostController extends Controller
 的参数指定父布局，父布局可为布局文件或别名。
 
 使用以上方式可多层嵌套布局。
-
 
 ### 使用数据块 <span id="using-blocks"></span>
 
@@ -522,7 +505,6 @@ class PostController extends Controller
 ...
 ```
 
-
 ## 使用视图组件 <span id="using-view-components"></span>
 
 [[yii\base\View|View components]]视图组件提供许多视图相关特性，
@@ -553,7 +535,6 @@ class PostController extends Controller
 
 开发Web页面时，也可能频繁使用以下实用的小特性。
 
-
 ### 设置页面标题 <span id="setting-page-titles"></span>
 
 每个Web页面应有一个标题，正常情况下标题的标签显示在 [布局](#layouts)中，
@@ -573,7 +554,6 @@ $this->title = 'My page title';
 ```php
 <title><?= Html::encode($this->title) ?></title>
 ```
-
 
 ### 注册Meta元标签 <span id="registering-meta-tags"></span>
 
@@ -604,10 +584,11 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'yii, framework, php'
 例如，如下代码注册两次 "description" 元标签，但是只会渲染第二个。
 
 ```html
-$this->registerMetaTag(['name' => 'description', 'content' => 'This is my cool website made with Yii!'], 'description');
-$this->registerMetaTag(['name' => 'description', 'content' => 'This website is about funny raccoons.'], 'description');
+$this->registerMetaTag(['name' => 'description', 'content' => 'This is my cool
+website made with Yii!'], 'description'); $this->registerMetaTag(['name' =>
+'description', 'content' => 'This website is about funny raccoons.'],
+'description');
 ```
-
 
 ### 注册链接标签 <span id="registering-link-tags"></span>
 
@@ -627,12 +608,16 @@ $this->registerLinkTag([
 上述代码会转换成
 
 ```html
-<link title="Live News for Yii" rel="alternate" type="application/rss+xml" href="https://www.yiiframework.com/rss.xml/">
+<link
+  title="Live News for Yii"
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://www.yiiframework.com/rss.xml/"
+/>
 ```
 
 和 [[yii\web\View::registerMetaTag()|registerMetaTags()]] 类似，
 调用[[yii\web\View::registerLinkTag()|registerLinkTag()]] 指定键来避免生成重复链接标签。
-
 
 ## 视图事件 <span id="view-events"></span>
 
@@ -656,7 +641,6 @@ $this->registerLinkTag([
     echo date('Y-m-d');
 });
 ```
-
 
 ## 渲染静态页面 <span id="rendering-static-pages"></span>
 
@@ -705,22 +689,21 @@ http://localhost/index.php?r=site/page&view=about
 `@app/views/site/pages`目录下寻找该视图，可配置 [[yii\web\ViewAction::viewPrefix]]
 修改搜索视图的目录。
 
-
 ## 最佳实践 <span id="best-practices"></span>
 
 视图负责将模型的数据展示用户想要的格式，总之，视图
 
-* 应主要包含展示代码，如HTML, 和简单的PHP代码来控制、格式化和渲染数据；
-* 不应包含执行数据查询代码，这种代码放在模型中；
-* 应避免直接访问请求数据，如 `$_GET`, `$_POST`，这种应在控制器中执行，
+- 应主要包含展示代码，如HTML, 和简单的PHP代码来控制、格式化和渲染数据；
+- 不应包含执行数据查询代码，这种代码放在模型中；
+- 应避免直接访问请求数据，如 `$_GET`, `$_POST`，这种应在控制器中执行，
   如果需要请求数据，应由控制器推送到视图。
-* 可读取模型属性，但不应修改它们。
+- 可读取模型属性，但不应修改它们。
 
 为使模型更易于维护，避免创建太复杂或包含太多冗余代码的视图，
 可遵循以下方法达到这个目标：
 
-* 使用 [布局](#layouts) 来展示公共代码（如，页面头部、尾部）；
-* 将复杂的视图分成几个小视图，可使用上面描述的渲染方法将这些
+- 使用 [布局](#layouts) 来展示公共代码（如，页面头部、尾部）；
+- 将复杂的视图分成几个小视图，可使用上面描述的渲染方法将这些
   小视图渲染并组装成大视图；
-* 创建并使用 [小部件](structure-widgets.md) 作为视图的数据块；
-* 创建并使用助手类在视图中转换和格式化数据。
+- 创建并使用 [小部件](structure-widgets.md) 作为视图的数据块；
+- 创建并使用助手类在视图中转换和格式化数据。

@@ -1,5 +1,4 @@
-Configurations
-==============
+# Configurations
 
 Configurations are widely used in Yii when creating new objects or initializing existing objects.
 Configurations usually include the class name of the object being created, and a list of initial values
@@ -34,7 +33,6 @@ Yii::configure($object, $config);
 
 Note that, in this case, the configuration array should not contain a `class` element.
 
-
 ## Configuration Format <span id="configuration-format"></span>
 
 The format of a configuration can be formally described as:
@@ -50,16 +48,16 @@ The format of a configuration can be formally described as:
 
 where
 
-* The `class` element specifies a fully qualified class name for the object being created.
-* The `propertyName` elements specify the initial values for the named property. The keys are the property names, and the
+- The `class` element specifies a fully qualified class name for the object being created.
+- The `propertyName` elements specify the initial values for the named property. The keys are the property names, and the
   values are the corresponding initial values. Only public member variables and [properties](concept-properties.md)
   defined by getters/setters can be configured.
-* The `on eventName` elements specify what handlers should be attached to the object's [events](concept-events.md).
+- The `on eventName` elements specify what handlers should be attached to the object's [events](concept-events.md).
   Notice that the array keys are formed by prefixing event names with `on `. Please refer to
   the [Events](concept-events.md) section for supported event handler formats.
-* The `as behaviorName` elements specify what [behaviors](concept-behaviors.md) should be attached to the object.
+- The `as behaviorName` elements specify what [behaviors](concept-behaviors.md) should be attached to the object.
   Notice that the array keys are formed by prefixing behavior names with `as `; the value, `$behaviorConfig`, represents
-  the configuration for creating a behavior, like a normal configuration  described here.
+  the configuration for creating a behavior, like a normal configuration described here.
 
 Below is an example showing a configuration with initial property values, event handlers, and behaviors:
 
@@ -77,13 +75,11 @@ Below is an example showing a configuration with initial property values, event 
 ]
 ```
 
-
 ## Using Configurations <span id="using-configurations"></span>
 
-Configurations are used in many places in Yii. At the beginning of this section, we have shown how to 
+Configurations are used in many places in Yii. At the beginning of this section, we have shown how to
 create an object according to a configuration by using [[Yii::createObject()]]. In this subsection, we will
 describe application configurations and widget configurations - two major usages of configurations.
-
 
 ### Application Configurations <span id="application-configurations"></span>
 
@@ -182,11 +178,10 @@ The `items` property is also configured with menu items to be displayed.
 
 Note that because the class name is already given, the configuration array should NOT have the `class` key.
 
-
 ## Configuration Files <span id="configuration-files"></span>
 
 When a configuration is very complex, a common practice is to store it in one or multiple PHP files, known as
-*configuration files*. A configuration file returns a PHP array representing the configuration.
+_configuration files_. A configuration file returns a PHP array representing the configuration.
 For example, you may keep an application configuration in a file named `web.php`, like the following,
 
 ```php
@@ -235,11 +230,10 @@ $config = require 'path/to/web.php';
 (new yii\web\Application($config))->run();
 ```
 
-
 ## Default Configurations <span id="default-configurations"></span>
 
 The [[Yii::createObject()]] method is implemented based on a [dependency injection container](concept-di-container.md).
-It allows you to specify a set of the so-called *default configurations* which will be applied to ALL instances of
+It allows you to specify a set of the so-called _default configurations_ which will be applied to ALL instances of
 the specified classes when they are being created using [[Yii::createObject()]]. The default configurations
 can be specified by calling `Yii::$container->set()` in the [bootstrapping](runtime-bootstrapping.md) code.
 
@@ -254,7 +248,6 @@ For example, if you want to customize [[yii\widgets\LinkPager]] so that ALL link
 
 Without using default configurations, you would have to configure `maxButtonCount` in every place where you use
 link pagers.
-
 
 ## Environment Constants <span id="environment-constants"></span>
 

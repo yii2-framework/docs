@@ -1,10 +1,8 @@
-ファイルをアップロードする
-==========================
+# ファイルをアップロードする
 
 Yii におけるファイルのアップロードは、通常、アップロードされる個々のファイルを `UploadedFile` としてカプセル化する
 [[yii\web\UploadedFile]] の助けを借りて実行されます。これを [[yii\widgets\ActiveForm]] および [モデル](structure-models.md)
 と組み合わせることで、安全なファイル・アップロード・メカニズムを簡単に実装することが出来ます。
-
 
 ## モデルを作成する <span id="creating-models"></span>
 
@@ -31,7 +29,7 @@ class UploadForm extends Model
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
-    
+
     public function upload()
     {
         if ($this->validate()) {
@@ -52,9 +50,8 @@ class UploadForm extends Model
 詳細については、[コア・バリデータ](tutorial-core-validators.md#file) のセクションを参照してください。
 
 > Tip: 画像をアップロードしようとする場合は、`image` バリデータを代りに使うことを考慮しても構いません。
-  `image` バリデータは [[yii\validators\ImageValidator]] によって実装されており、属性が有効な画像、すなわち、
-  保存したり [Imagine エクステンション](https://github.com/yiisoft/yii2-imagine) を使って処理したりすることが可能な有効な画像を、受け取ったかどうかを検証します。
-
+> `image` バリデータは [[yii\validators\ImageValidator]] によって実装されており、属性が有効な画像、すなわち、
+> 保存したり [Imagine エクステンション](https://github.com/yiisoft/yii2-imagine) を使って処理したりすることが可能な有効な画像を、受け取ったかどうかを検証します。
 
 ## ファイル・インプットをレンダリングする <span id="rendering-file-input"></span>
 
@@ -78,7 +75,7 @@ use yii\widgets\ActiveForm;
 `fileInput()` を呼ぶと `<input type="file">` のタグがレンダリングされて、ユーザがアップロードするファイルを選ぶことが出来るようになります。
 
 > Tip: バージョン 2.0.8 以降では、ファイル・インプットのフィールドが使われているときは、
-  [[yii\widgets\ActiveField::fileInput|fileInput]] がフォームに `enctype` オプションを自動的に追加します。
+> [[yii\widgets\ActiveField::fileInput|fileInput]] がフォームに `enctype` オプションを自動的に追加します。
 
 ## 繋ぎ合せる <span id="wiring-up"></span>
 
@@ -115,7 +112,6 @@ class SiteController extends Controller
 アップロードされたファイルが `UploadedFile` のインスタンスとして表現されます。
 そして、次に、モデルの検証によってアップロードされたファイルが有効なものであることを確かめ、サーバにファイルを保存します。
 
-
 ## 複数のファイルをアップロードする <span id="uploading-multiple-files"></span>
 
 ここまでの項で示したコードに若干の修正を加えれば、複数のファイルを一度にアップロードすることも出来ます。
@@ -145,10 +141,10 @@ class UploadForm extends Model
             [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
-    
+
     public function upload()
     {
-        if ($this->validate()) { 
+        if ($this->validate()) {
             foreach ($this->imageFiles as $file) {
                 $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
             }

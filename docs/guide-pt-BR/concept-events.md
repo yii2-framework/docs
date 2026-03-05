@@ -1,18 +1,16 @@
-Eventos
-=======
+# Eventos
 
 Eventos permitem que você injete código personalizado dentro de outo código existente em determinados pontos de execução. Você pode anexar o código personalizado a um evento de modo que ao acionar o evento, o código é executado automaticamente. Por exemplo, um objeto de e-mail pode disparar um evento `messageSent` quando o envio da mensagem for bem sucedida. Se você quiser acompanhar as mensagens que são enviadas com sucesso, você poderia então simplesmente anexar o código de acompanhamento ao evento `messageSent`.
 O Yii disponibiliza uma classe base chamada [[yii\base\Component]] para dar suporte aos eventos.
 Se sua classe precisar disparar eventos, ela deverá estender de [[yii\base\Component]], ou de uma classe-filha.
 
-
-Manipuladores de Evento <span id="event-handlers"></span>
---------------
+## Manipuladores de Evento <span id="event-handlers"></span>
 
 Um manipulador de evento é uma função [Callback do PHP] (https://www.php.net/manual/pt_BR/language.types.callable.php) que é executada quando o evento é disparado. Você pode usar qualquer um dos seguintes callbacks:
+
 - uma função global do PHP especificada como uma string (sem parênteses), por exemplo, `'trim'`;
 - Um método do objeto especificado como um array, informando o objeto e um nome do método como uma string (sem parênteses), por exemplo `[$object, 'methodName']`;
-- Um método estático da classe especificado como um array informando o nome da classe e nome do método como string (sem parênteses), por exemplo, `['ClassName', 'methodName']`; 
+- Um método estático da classe especificado como um array informando o nome da classe e nome do método como string (sem parênteses), por exemplo, `['ClassName', 'methodName']`;
 - Uma função anônima, por exemplo, `function ($event) { ... }`.
 
 A assinatura de um manipulador de eventos é a seguinte:
@@ -29,9 +27,7 @@ Através do parâmetro `$event`, um manipulador de evento pode receber as seguin
 - [[yii\base\Event::sender|objeto chamador]]: o objeto cujo método `trigger()` foi chamado
 - [[yii\base\Event::data|dados personalizados]]: os dados que são fornecidos ao anexar o manipulador de eventos (a ser explicado a seguir)
 
-
-Anexando manipuladores de eventos <span id="attaching-event-handlers"></span>
-------------------------
+## Anexando manipuladores de eventos <span id="attaching-event-handlers"></span>
 
 Você pode anexar um manipulador para um evento, chamando o método [[yii\base\Component::on()]]. Por exemplo:
 
@@ -68,11 +64,9 @@ function function_name($event) {
 }
 ```
 
+## Ordem dos Manipuladores de Eventos
 
-Ordem dos Manipuladores de Eventos
--------------------
-
-Você pode anexar um ou mais manipuladores para um único evento. Quando o evento é disparado, os manipuladores anexados serão chamados na ordem em que eles foram anexados ao evento. Se o manipulador precisar interromper os eventos subsequentes, pode definir a propriedade [[yii\base\Event::handled]] do parâmetro `$event` para *true*:
+Você pode anexar um ou mais manipuladores para um único evento. Quando o evento é disparado, os manipuladores anexados serão chamados na ordem em que eles foram anexados ao evento. Se o manipulador precisar interromper os eventos subsequentes, pode definir a propriedade [[yii\base\Event::handled]] do parâmetro `$event` para _true_:
 
 ```php
 $foo->on(Foo::EVENT_HELLO, function ($event) {
@@ -84,7 +78,7 @@ Por padrão, um novo manipulador é anexado a fila de manipuladores existente pa
 
 Como resultado, o manipulador será chamado por último quando o evento for disparado.
 
-Para inserir um novo manipulador de evento no início da fila de modo a ser chamado primeiro, você pode chamar o método [[yii\base\Component::on()]], passando *false* para o quarto parâmetro `$append`:
+Para inserir um novo manipulador de evento no início da fila de modo a ser chamado primeiro, você pode chamar o método [[yii\base\Component::on()]], passando _false_ para o quarto parâmetro `$append`:
 
 ```php
 $foo->on(Foo::EVENT_HELLO, function ($event) {
@@ -92,11 +86,9 @@ $foo->on(Foo::EVENT_HELLO, function ($event) {
 }, $data, false);
 ```
 
+## Disparando Eventos <span id="triggering-events"></span>
 
-Disparando Eventos <span id="triggering-events"></span>
------------------
-
-Os eventos são disparados chamando o método [[yii\base\Component::trigger()]]. Este método requer um *nome de evento*, e, opcionalmente, um objeto de evento que descreve os parâmetros a serem passados para os manipuladores de eventos. Por exemplo:
+Os eventos são disparados chamando o método [[yii\base\Component::trigger()]]. Este método requer um _nome de evento_, e, opcionalmente, um objeto de evento que descreve os parâmetros a serem passados para os manipuladores de eventos. Por exemplo:
 
 ```php
 namespace app\components;
@@ -117,9 +109,9 @@ class Foo extends Component
 
 Com o código acima, todas as chamadas para `bar ()` irão disparar um evento chamado `hello`.
 
-> Dica: Recomenda-se usar constantes de classe para representar nomes de eventos. No exemplo acima, a constante `EVENT_HELLO` representa o evento `hello`. Esta abordagem tem três benefícios. Primeiro, previne erros de digitação. Segundo, pode fazer o evento se tornar reconhecível para recursos de *auto-complete* de IDEs. Terceiro, você pode especificar quais eventos são suportados em uma classe, basta verificar suas declarações de constantes.
+> Dica: Recomenda-se usar constantes de classe para representar nomes de eventos. No exemplo acima, a constante `EVENT_HELLO` representa o evento `hello`. Esta abordagem tem três benefícios. Primeiro, previne erros de digitação. Segundo, pode fazer o evento se tornar reconhecível para recursos de _auto-complete_ de IDEs. Terceiro, você pode especificar quais eventos são suportados em uma classe, basta verificar suas declarações de constantes.
 
-Às vezes, quando um evento é disparado você pode querer passar junto informações adicionais para os manipuladores de eventos. Por exemplo, um objeto de e-mail pode querer passar uma informação para o manipulador do evento `messageSent` de modo que os manipuladores podem conhecer os detalhes das mensagens enviadas. Para fazer isso, você pode fornecer um objeto de evento como o segundo parâmetro para o método  [[yii\base\Component::trigger()]]. Este objeto precisa ser uma instância da classe  [[yii\base\Event]] ou de uma classe filha. Por exemplo:
+Às vezes, quando um evento é disparado você pode querer passar junto informações adicionais para os manipuladores de eventos. Por exemplo, um objeto de e-mail pode querer passar uma informação para o manipulador do evento `messageSent` de modo que os manipuladores podem conhecer os detalhes das mensagens enviadas. Para fazer isso, você pode fornecer um objeto de evento como o segundo parâmetro para o método [[yii\base\Component::trigger()]]. Este objeto precisa ser uma instância da classe [[yii\base\Event]] ou de uma classe filha. Por exemplo:
 
 ```php
 namespace app\components;
@@ -149,9 +141,7 @@ class Mailer extends Component
 
 Quando o método [[yii\base\Component::trigger()]] é chamado, ele chamará todos os manipuladores ligados ao evento passado.
 
-
-Desvinculando manipuladores de eventos <span id="detaching-event-handlers"></span>
-------------------------
+## Desvinculando manipuladores de eventos <span id="detaching-event-handlers"></span>
 
 Para retirar um manipulador de um evento, chame o método [[yii\base\Component::off()]]. Por Exemplo:
 
@@ -177,14 +167,12 @@ Para desvincular todos os manipuladores de um evento, simplesmente chame [[yii\b
 $foo->off(Foo::EVENT_HELLO);
 ```
 
+## Manipuladores de Eventos de Classe <span id="class-level-event-handlers"></span>
 
-Manipuladores de Eventos de Classe <span id="class-level-event-handlers"></span>
---------------------------
+As subseções acima descreveram como anexar um manipulador para um evento a _nível de instância_ (objeto).
+Às vezes, você pode querer responder a um evento acionado por _todas_ as instâncias da classe em vez de apenas uma instância específica. Em vez de anexar um manipulador de evento em todas as instâncias, você pode anexar o manipulador a _nível da classe_ chamando o método estático [[yii\base\Event::on()]].
 
-As subseções acima descreveram como anexar um manipulador para um evento a *nível de instância* (objeto).
-Às vezes, você pode querer responder a um evento acionado por *todas* as instâncias da classe em vez de apenas uma instância específica. Em vez de anexar um manipulador de evento em todas as instâncias, você pode anexar o manipulador a *nível da classe* chamando o método estático [[yii\base\Event::on()]].
-
-Por exemplo, um objeto [Active Record](db-active-record.md) irá disparar um evento [[yii\db\BaseActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] sempre que inserir um novo registro no banco de dados. A fim de acompanhar as inserções feitas por *cada* objeto [Active Record](db-active-record.md), você pode usar o seguinte código:
+Por exemplo, um objeto [Active Record](db-active-record.md) irá disparar um evento [[yii\db\BaseActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] sempre que inserir um novo registro no banco de dados. A fim de acompanhar as inserções feitas por _cada_ objeto [Active Record](db-active-record.md), você pode usar o seguinte código:
 
 ```php
 use Yii;
@@ -200,7 +188,7 @@ O manipulador de evento será invocado sempre que uma instância de [[yii\db\Act
 
 Quando um objecto dispara um evento, ele irá primeiro chamar manipuladores de nível de instância, seguido pelos manipuladores de nível de classe.
 
-Você pode disparar um evento de *nível de classe* chamando o método estático [[yii\base\Event::trigger()]]. Um evento de nível de classe não está associado com um objeto particular. Como resultado, ele fará a chamada dos manipuladores de eventos apenas a nível da classe. Por exemplo:
+Você pode disparar um evento de _nível de classe_ chamando o método estático [[yii\base\Event::trigger()]]. Um evento de nível de classe não está associado com um objeto particular. Como resultado, ele fará a chamada dos manipuladores de eventos apenas a nível da classe. Por exemplo:
 
 ```php
 use yii\base\Event;
@@ -226,14 +214,12 @@ Event::off(Foo::class, Foo::EVENT_HELLO, $handler);
 Event::off(Foo::class, Foo::EVENT_HELLO);
 ```
 
+## Eventos Globais <span id="global-events"></span>
 
-Eventos Globais <span id="global-events"></span>
--------------
+O Yii suporta o assim chamado _evento global_, que na verdade é um truque com base no mecanismo de eventos descrito acima.
+O evento global requer um _singleton_ acessível globalmente, tal como a própria instância da [aplicação](structure-applications.md).
 
-O Yii suporta o assim chamado *evento global*, que na verdade é um truque com base no mecanismo de eventos descrito acima.
-O evento global requer um *singleton* acessível globalmente, tal como a própria instância da [aplicação](structure-applications.md).
-
-Para criar o evento global, um evento *remetente* chama o método singleton `trigger()` para disparar o evento, em vez de chamar o método `trigger()` do *remetente* . Da mesma forma, os manipuladores de eventos são anexados ao evento no *singleton* . Por exemplo:
+Para criar o evento global, um evento _remetente_ chama o método singleton `trigger()` para disparar o evento, em vez de chamar o método `trigger()` do _remetente_ . Da mesma forma, os manipuladores de eventos são anexados ao evento no _singleton_ . Por exemplo:
 
 ```php
 use Yii;
@@ -247,4 +233,4 @@ Yii::$app->on('bar', function ($event) {
 Yii::$app->trigger('bar', new Event(['sender' => new Foo]));
 ```
 
-A vantagem de usar eventos globais é que você não precisa de um objeto ao anexar um manipulador para o evento que será acionado pelo objeto. Em vez disso, a inclusão do manipulador e o evento acionado são ambos feitos através do *singleton*. (Por exemplo, uma instância da aplicação). Contudo, já que o namespace dos eventos globais é compartilhado com todos, você deve nomear os eventos globais sabiamente, tais como a introdução de algum tipo de namespace (por exemplo. "frontend.mail.sent", "backend.mail.sent").
+A vantagem de usar eventos globais é que você não precisa de um objeto ao anexar um manipulador para o evento que será acionado pelo objeto. Em vez disso, a inclusão do manipulador e o evento acionado são ambos feitos através do _singleton_. (Por exemplo, uma instância da aplicação). Contudo, já que o namespace dos eventos globais é compartilhado com todos, você deve nomear os eventos globais sabiamente, tais como a introdução de algum tipo de namespace (por exemplo. "frontend.mail.sent", "backend.mail.sent").

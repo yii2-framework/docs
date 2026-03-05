@@ -1,10 +1,8 @@
-性能优化
-========
+# 性能优化
 
 有许多因素影响你的 Web 应用程序的性能。有些是环境，
 有些是你的代码，而其他一些与 Yii 本身有关。
 在本节中，我们将列举这些因素并解释如何通过调整这些因素来提高应用程序的性能。
-
 
 ## 优化你的 PHP 环境 <span id="optimizing-php"></span>
 
@@ -16,14 +14,13 @@
   （PHP 5.4或更早版本）。字节码缓存省去了每次解析和加载 PHP 脚本所带来的开销。
 - [Tune `realpath()` cache](https://github.com/samdark/realpath_cache_tuner).
 
-
 ## 禁用调试模式 <span id="disable-debug"></span>
 
 对于运行在生产环境中的应用程序，你应该禁用调试模式。
 Yii 中使用名为 `YII_DEBUG` 的常量来定义调试模式是否应被激活。
 若启用了调试模式，Yii 将需要额外的时间来产生和记录调试信息。
 
-你可以将下面的代码行放在 [入口脚本](structure-entry-scripts.md) 
+你可以将下面的代码行放在 [入口脚本](structure-entry-scripts.md)
 的开头来禁用调试模式：
 
 ```php
@@ -31,8 +28,7 @@ defined('YII_DEBUG') or define('YII_DEBUG', false);
 ```
 
 > Tip: `YII_DEBUG` 的默认值是 false 。所以如果你确信你不在你应用程序代码中别的地方更改其默认值，
-  你可以简单地删除上述行来禁用调试模式。
-  
+> 你可以简单地删除上述行来禁用调试模式。
 
 ## 使用缓存技术 <span id="using-caching"></span>
 
@@ -40,7 +36,6 @@ defined('YII_DEBUG') or define('YII_DEBUG', false);
 你可以考虑缓存解析后的 Markdown 内容，避免每个请求都重复解析相同的 Markdown 文本。
 请参阅 [缓存](caching-overview.md) 一节，
 了解 Yii 提供的缓存支持。
-
 
 ## 开启 Schema 缓存 <span id="enable-schema-caching"></span>
 
@@ -78,14 +73,12 @@ return [
 ];
 ```
 
-
 ## 合并和压缩资源文件 <span id="optimizing-assets"></span>
 
 一个复杂的网页往往包括许多 CSS 和 JavaScript 资源文件。
 为减少 HTTP 请求的数量和这些资源总下载的大小，应考虑将它们合并成一个单一的文件并压缩。
 这可大大提高页面加载时间，且减少了服务器负载。
 想了解更多细节，请参阅[前端资源](structure-assets.md)部分。
-
 
 ## 优化会话存储 <span id="optimizing-session"></span>
 
@@ -135,7 +128,6 @@ CREATE TABLE session (
 如果您的服务器上有 [Redis](https://redis.io/)，
 强烈建议您使用 [[yii\redis\Session]] 作为会话存储。
 
-
 ## 优化数据库 <span id="optimizing-databases"></span>
 
 执行数据库查询并从数据库中取出数据往往是一个 Web 应用程序主要的性能瓶颈。
@@ -152,7 +144,6 @@ CREATE TABLE session (
 最后，在“SELECT”中使用“LIMIT”查询。
 这可以避免从数据库中取出大量数据。
 
-
 ## 使用普通数组 <span id="using-arrays"></span>
 
 尽管[活动记录](db-active-record.md)对象使用起来非常方便，
@@ -166,7 +157,7 @@ class PostController extends Controller
     public function actionIndex()
     {
         $posts = Post::find()->limit(100)->asArray()->all();
-        
+
         return $this->render('index', ['posts' => $posts]);
     }
 }
@@ -176,7 +167,6 @@ class PostController extends Controller
 第 i 行的 `title` 列，你可以使用表达式 `$post[$i]['title']`。
 
 你也可以使用 [DAO](db-dao.md) 以数组的方式来构建查询和检索数据。
-
 
 ## 优化 Composer 自动加载 <span id="optimizing-autoloader"></span>
 
@@ -191,7 +181,6 @@ composer dumpautoload -o
 [authoritative class maps](https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-a-authoritative-class-maps)
 和 [APCu 缓存](https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-b-apcu-cache)。
 请注意，这两种选择可能适用于您的特定情况，也可能不适合您。
-
 
 ## 处理离线数据 <span id="processing-data-offline"></span>
 
@@ -208,7 +197,6 @@ composer dumpautoload -o
 
 在推中，你可以使用消息队列（如 RabbitMQ ，ActiveMQ ， Amazon SQS 等）来管理任务。
 每当一个新的任务放在队列中，它会启动或者通知任务处理过程去触发任务处理。
-
 
 ## 性能分析 <span id="performance-profiling"></span>
 

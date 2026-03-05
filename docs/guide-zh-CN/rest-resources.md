@@ -1,24 +1,22 @@
-资源
-=========
+# 资源
 
-RESTful 的 API 都是关于访问和操作 *资源*，可将资源看成 MVC 模式中的
+RESTful 的 API 都是关于访问和操作 _资源_，可将资源看成 MVC 模式中的
 [模型](structure-models.md)
 
-在如何代表一个资源没有固定的限定，在 Yii 中通常使用 
+在如何代表一个资源没有固定的限定，在 Yii 中通常使用
 [[yii\base\Model]] 或它的子类（如 [[yii\db\ActiveRecord]]）
 代表资源，是为以下原因：
 
-* [[yii\base\Model]] 实现了 [[yii\base\Arrayable]] 接口，
+- [[yii\base\Model]] 实现了 [[yii\base\Arrayable]] 接口，
   它允许你通过 RESTful API 自定义你想要公开的资源数据。
-* [[yii\base\Model]] 支持 [输入验证](input-validation.md),
+- [[yii\base\Model]] 支持 [输入验证](input-validation.md),
   在你的 RESTful API 需要支持数据输入时非常有用。
-* [[yii\db\ActiveRecord]] 提供了强大的数据库访问和操作方面的支持，
+- [[yii\db\ActiveRecord]] 提供了强大的数据库访问和操作方面的支持，
   如资源数据需要存到数据库它提供了完美的支持。
 
 本节主要描述资源类如何从 [[yii\base\Model]] (或它的子类) 继承
 并指定哪些数据可通过 RESTful API 返回，如果资源类没有
 继承 [[yii\base\Model]] 会将它所有的公开成员变量返回。
-
 
 ## 字段 <span id="fields"></span>
 
@@ -30,7 +28,7 @@ Yii 将这个过程分成两步，首先，资源会被 [[yii\rest\Serializer]] 
 
 通过覆盖 [[yii\base\Model::fields()|fields()]] 和/或
 [[yii\base\Model::extraFields()|extraFields()]] 方法,
-可指定资源中称为 *字段* 的数据放入展现数组中，
+可指定资源中称为 _字段_ 的数据放入展现数组中，
 两个方法的差别为前者指定默认包含到展现数组的字段集合，
 后者指定由于终端用户的请求包含 `expand` 参数哪些额外的字段应被包含到展现数组，例如，
 
@@ -51,7 +49,6 @@ http://localhost/comments?expand=post.author
 // 返回 fields() 方法中的“id”，“email”，以及 extraFields() 方法中的“profile”字段
 http://localhost/users?fields=id,email&expand=profile
 ```
-
 
 ### 覆盖 `fields()` 方法 <span id="overriding-fields"></span>
 
@@ -99,7 +96,6 @@ public function fields()
 > 应覆盖 `fields()` 过滤掉，在上述例子中，我们选择过滤掉 `auth_key`，
 > `password_hash` 和 `password_reset_token`。
 
-
 ### 覆盖 `extraFields()` 方法 <span id="overriding-extra-fields"></span>
 
 [[yii\base\Model::extraFields()]] 默认返回空值，
@@ -137,13 +133,12 @@ public function extraFields()
 ]
 ```
 
-
 ## 链接 <span id="links"></span>
 
-[HATEOAS](https://zh.wikipedia.org/wiki/HATEOAS), 
+[HATEOAS](https://zh.wikipedia.org/wiki/HATEOAS),
 是 Hypermedia as the Engine of Application State的缩写,
 提升 RESTful API 应返回允许终端用户访问的资源操作的信息，
-HATEOAS 的目的是在API中返回包含相关链接信息的资源数据。 
+HATEOAS 的目的是在API中返回包含相关链接信息的资源数据。
 
 资源类通过实现 [[yii\web\Linkable]] 接口来支持 HATEOAS，
 该接口包含方法 [[yii\web\Linkable::getLinks()|getLinks()]] 来返回
@@ -209,10 +204,9 @@ class UserResource extends Model implements Linkable
 }
 ```
 
-
 ## 集合 <span id="collections"></span>
 
-资源对象可以组成 *集合*，
+资源对象可以组成 _集合_，
 每个集合包含一组相同类型的资源对象。
 
 集合可被展现成数组，更多情况下展现成 [data providers](output-data-providers.md)。
@@ -238,15 +232,15 @@ class PostController extends Controller
 }
 ```
 
-当在 RESTful API 响应中发送 data provider 时， 
+当在 RESTful API 响应中发送 data provider 时，
 [[yii\rest\Serializer]] 会取出资源的当前页并组装成资源对象数组，
 [[yii\rest\Serializer]] 也通过如下 HTTP 头包含页码信息：
 
-* `X-Pagination-Total-Count`：资源所有数量；
-* `X-Pagination-Page-Count`：页数；
-* `X-Pagination-Current-Page`：当前页（从 1 开始）；
-* `X-Pagination-Per-Page`：每页资源数量；
-* `Link`：允许客户端一页一页遍历资源的导航链接集合。
+- `X-Pagination-Total-Count`：资源所有数量；
+- `X-Pagination-Page-Count`：页数；
+- `X-Pagination-Current-Page`：当前页（从 1 开始）；
+- `X-Pagination-Per-Page`：每页资源数量；
+- `Link`：允许客户端一页一页遍历资源的导航链接集合。
 
 由于 REST API 中的集合是 data provider，因此它共享所有 data provider 功能，即分页和排序。
 

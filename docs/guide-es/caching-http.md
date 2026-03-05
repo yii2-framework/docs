@@ -1,5 +1,4 @@
-Caché HTTP
-==========
+# Caché HTTP
 
 Además del almacenamiento de caché en el servidor que hemos descrito en secciones anteriores, las aplicaciones Web
 pueden hacer uso de la caché en el lado del cliente para así ahorrar tiempo y recursos para generar y transmitir el
@@ -10,10 +9,9 @@ para aquellas acciones cuyo resultado deba estar almacenado en la caché en el l
 solo funciona en peticiones `GET` y `HEAD`. Puede manejar tres tipos de cabeceras (headers) HTTP relacionadas en este tipo de
 consultas:
 
-* [[yii\filters\HttpCache::lastModified|Last-Modified]]
-* [[yii\filters\HttpCache::etagSeed|Etag]]
-* [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
-
+- [[yii\filters\HttpCache::lastModified|Last-Modified]]
+- [[yii\filters\HttpCache::etagSeed|Etag]]
+- [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
 
 ## La Cabecera `Last-Modified` <span id="last-modified"></span>
 
@@ -57,7 +55,6 @@ navegador visita la página `index` la primera vez, la página será generada en
 navegador visita la misma página de nuevo y no ningún artículo modificado durante el período, el servidor no volverá a
 regenerar la página, y el navegador usará la versión caché del lado del cliente. Como resultado, la representación del
 lado del servidor y la transmisión del contenido de la página son ambos omitidos.
-
 
 ## La Cabecera `ETag` <span id="etag"></span>
 
@@ -111,7 +108,7 @@ introducir una sobrecarga innecesaria, ya que debe ser re-evaluada en cada solic
 expresión sencilla para invalidar la caché si la página ha sido modificada.
 
 > Note: En cumplimiento con [RFC 7232](https://datatracker.ietf.org/doc/html/rfc7232#section-2.4),
-  `HttpCache` enviará ambas cabeceras `ETag` y `Last-Modified` si ambas están configuradas. Y si el clientes envía tanto la cabecera `If-None-Match` como la cabecera `If-Modified-Since`, solo la primera será respetada.
+> `HttpCache` enviará ambas cabeceras `ETag` y `Last-Modified` si ambas están configuradas. Y si el clientes envía tanto la cabecera `If-None-Match` como la cabecera `If-Modified-Since`, solo la primera será respetada.
 
 ## La Cabecera `Cache-Control` <span id="cache-control"></span>
 
@@ -132,7 +129,6 @@ automáticamente el envío de estas cabeceras. Si deseas modificar este comporta
 [[yii\filters\HttpCache::sessionCacheLimiter]]. La propiedad puede tomar un valor de cadena, incluyendo `public`, `private`,
 `private_no_expire`, and `nocache`. Por favor, consulta el manual PHP acerca de [session_cache_limiter()](https://www.php.net/manual/es/function.session-cache-limiter.php)
 para una mejor explicación sobre esos valores.
-
 
 ## Implicaciones SEO <span id="seo-implications"></span>
 

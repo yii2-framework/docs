@@ -1,8 +1,6 @@
-Url
-==========
+# Url
 
 Хелпер Url предоставляет набор статических методов для управления URL.
-
 
 ## Получение общих URL <span id="getting-common-urls"></span>
 
@@ -36,7 +34,7 @@ $httpsAbsoluteBaseUrl = Url::base('https');
 ```php
 $url = Url::toRoute(['product/view', 'id' => 42]);
 ```
-  
+
 Вы можете задать роут строкой, например, `site/index`. А также вы можете использовать массив, если хотите задать
 дополнительные параметры запроса для URL. Формат массива должен быть следующим:
 
@@ -143,7 +141,6 @@ echo Url::current(['src' => null]);
 echo Url::current(['id' => 100]);
 ```
 
-
 ## Запоминание URL <span id="remember-urls"></span>
 
 Существуют задачи, когда вам необходимо запомнить URL и потом использовать его в процессе одного или нескольких
@@ -166,7 +163,7 @@ Url::remember(['product/view', 'id' => 42], 'product');
 $url = Url::previous();
 $productUrl = Url::previous('product');
 ```
-                        
+
 ## Проверить относительность URL <span id="checking-relative-urls"></span>
 
 Чтобы проверить относительный URL или нет (например, если в нем не содержится информации о хосте), вы можете использовать

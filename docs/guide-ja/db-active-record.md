@@ -1,10 +1,9 @@
-アクティブ・レコード
-====================
+# アクティブ・レコード
 
 [アクティブ・レコード](https://ja.wikipedia.org/wiki/Active_Record) は、データベースに保存されているデータにアクセスするために、
 オブジェクト指向のインタフェイスを提供するものです。
 アクティブ・レコード・クラスはデータベース・テーブルと関連付けられます。
-アクティブ・レコードのインスタンスはそのテーブルの行に対応し、アクティブ・レコードのインスタンスの *属性* がその行にある特定のカラムの値を表現します。
+アクティブ・レコードのインスタンスはそのテーブルの行に対応し、アクティブ・レコードのインスタンスの _属性_ がその行にある特定のカラムの値を表現します。
 生の SQL 文を書く代りに、アクティブ・レコードの属性にアクセスしたり、アクティブ・レコードのメソッドを呼んだりして、
 データベース・テーブルに保存さているデータにアクセスしたり、データを操作したりします。
 
@@ -29,24 +28,23 @@ $db->createCommand('INSERT INTO `customer` (`name`) VALUES (:name)', [
 
 Yii は次のリレーショナル・データベースに対して、アクティブ・レコードのサポートを提供しています。
 
-* MySQL 4.1 以降: [[yii\db\ActiveRecord]] による。
-* PostgreSQL 7.3 以降: [[yii\db\ActiveRecord]] による。
-* SQLite 2 および 3: [[yii\db\ActiveRecord]] による。
-* Microsoft SQL Server 2008 以降: [[yii\db\ActiveRecord]] による。
-* Oracle: [[yii\db\ActiveRecord]] による。
-* CUBRID 9.3 以降: [[yii\db\ActiveRecord]] による。(cubrid PDO 拡張の [バグ](http://jira.cubrid.org/browse/APIS-658)
+- MySQL 4.1 以降: [[yii\db\ActiveRecord]] による。
+- PostgreSQL 7.3 以降: [[yii\db\ActiveRecord]] による。
+- SQLite 2 および 3: [[yii\db\ActiveRecord]] による。
+- Microsoft SQL Server 2008 以降: [[yii\db\ActiveRecord]] による。
+- Oracle: [[yii\db\ActiveRecord]] による。
+- CUBRID 9.3 以降: [[yii\db\ActiveRecord]] による。(cubrid PDO 拡張の [バグ](http://jira.cubrid.org/browse/APIS-658)
   のために、値を引用符で囲む機能が動作しません。そのため、サーバだけでなくクライアントも CUBRID 9.3 が必要になります)
-* Sphinx: [[yii\sphinx\ActiveRecord]] による。`yii2-sphinx` エクステンションが必要。
-* ElasticSearch: [[yii\elasticsearch\ActiveRecord]] による。`yii2-elasticsearch` エクステンションが必要。
+- Sphinx: [[yii\sphinx\ActiveRecord]] による。`yii2-sphinx` エクステンションが必要。
+- ElasticSearch: [[yii\elasticsearch\ActiveRecord]] による。`yii2-elasticsearch` エクステンションが必要。
 
 これらに加えて、Yii は次の NoSQL データベースに対しても、アクティブ・レコードの使用をサポートしています。
 
-* Redis 2.6.12 以降: [[yii\redis\ActiveRecord]] による。`yii2-redis` エクステンションが必要。
-* MongoDB 1.3.0 以降: [[yii\mongodb\ActiveRecord]] による。`yii2-mongodb` エクステンションが必要。
+- Redis 2.6.12 以降: [[yii\redis\ActiveRecord]] による。`yii2-redis` エクステンションが必要。
+- MongoDB 1.3.0 以降: [[yii\mongodb\ActiveRecord]] による。`yii2-mongodb` エクステンションが必要。
 
 このチュートリアルでは、主としてリレーショナル・データベースのためのアクティブ・レコードの使用方法を説明します。
 しかし、ここで説明するほとんどの内容は NoSQL データベースのためのアクティブ・レコードにも適用することが出来るものです。
-
 
 ## アクティブ・レコード・クラスを宣言する <span id="declaring-ar-classes"></span>
 
@@ -76,7 +74,7 @@ class Customer extends ActiveRecord
 {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
-    
+
     /**
     * @return string このアクティブ・レコード・クラスと関連付けられるテーブルの名前
     */
@@ -93,8 +91,7 @@ class Customer extends ActiveRecord
 この理由により、私たちは通常 `app\models` 名前空間 (あるいはモデル・クラスを保管するための他の名前空間) の下にアクティブ・レコード・クラスを置きます。
 
 [[yii\db\ActiveRecord]] は [[yii\base\Model]] から拡張していますので、属性、検証規則、データのシリアル化など、
-[モデル](structure-models.md) が持つ *全ての* 機能を継承しています。
-
+[モデル](structure-models.md) が持つ _全ての_ 機能を継承しています。
 
 ## データベースに接続する <span id="db-connection"></span>
 
@@ -131,7 +128,6 @@ class Customer extends ActiveRecord
     }
 }
 ```
-
 
 ## データをクエリする <span id="querying-data"></span>
 
@@ -179,13 +175,13 @@ $customers = Customer::find()
 全てこれらには `customer` テーブルから取得されたデータが投入されます。
 
 > Info: [[yii\db\ActiveQuery]] は [[yii\db\Query]] から拡張しているため、[クエリ・ビルダ](db-query-builder.md)
-  のセクションで説明されたクエリ構築メソッドとクエリ・メソッドの *全て* を使うことが出来ます。
+> のセクションで説明されたクエリ構築メソッドとクエリ・メソッドの _全て_ を使うことが出来ます。
 
 プライマリ・キーの値や一群のカラムの値でクエリをすることはよく行われる仕事ですので、Yii はこの目的のために、
 二つのショートカット・メソッドを提供しています。
 
 - [[yii\db\ActiveRecord::findOne()]]: クエリ結果の最初の行を一つのアクティブ・レコード・インスタンスに投入して返す。
-- [[yii\db\ActiveRecord::findAll()]]: *全ての* クエリ結果をアクティブ・レコード・インスタンスの配列に投入して返す。
+- [[yii\db\ActiveRecord::findAll()]]: _全ての_ クエリ結果をアクティブ・レコード・インスタンスの配列に投入して返す。
 
 どちらのメソッドも、次のパラメータ形式のどれかを取ることが出来ます。
 
@@ -238,10 +234,9 @@ $customers = Customer::findAll([
 > $model = Post::findOne(Yii::$app->request->get('id'));
 > ```
 
-
 > Note: [[yii\db\ActiveRecord::findOne()]] も [[yii\db\ActiveQuery::one()]] も、生成される SQL 文に `LIMIT 1` を追加しません。
-  あなたのクエリが多数のデータ行を返すかもしれない場合は、パフォーマンスを向上させるために、`limit(1)` を明示的に呼ぶべきです。
-  例えば `Customer::find()->limit(1)->one()` のように。
+> あなたのクエリが多数のデータ行を返すかもしれない場合は、パフォーマンスを向上させるために、`limit(1)` を明示的に呼ぶべきです。
+> 例えば `Customer::find()->limit(1)->one()` のように。
 
 クエリ構築メソッドを使う以外に、生の SQL を書いてデータをクエリして結果をアクティブ・レコード・オブジェクトに投入することも出来ます。
 そうするためには [[yii\db\ActiveRecord::findBySql()]] メソッドを呼ぶことが出来ます。
@@ -254,7 +249,6 @@ $customers = Customer::findBySql($sql, [':status' => Customer::STATUS_INACTIVE])
 
 [[yii\db\ActiveRecord::findBySql()|findBySql()]] を呼んだ後は、追加でクエリ構築メソッドを呼び出してはいけません。
 呼んでも無視されます。
-
 
 ## データにアクセスする <span id="accessing-data"></span>
 
@@ -270,21 +264,20 @@ $email = $customer->email;
 ```
 
 > Note: アクティブ・レコードの属性の名前は、関連付けられたテーブルのカラムの名前に従って、大文字と小文字を区別して名付けられます。
-  Yii は、関連付けられたテーブルの全てのカラムに対して、アクティブ・レコードの属性を自動的に定義します。
-  これらの属性は、すべて、再宣言してはいけません。
+> Yii は、関連付けられたテーブルの全てのカラムに対して、アクティブ・レコードの属性を自動的に定義します。
+> これらの属性は、すべて、再宣言してはいけません。
 
 アクティブ・レコードの属性はテーブルのカラムに従って命名されるため、
 テーブルのカラム名がアンダースコアで単語を分ける方法で命名されている場合は、
 `$customer->first_name` のような属性名を使って PHP コードを書くことになります。
 コード・スタイルの一貫性が気になるのであれば、テーブルのカラム名を (例えば camelCase を使う名前に) 変更しなければなりません。
 
-
 ### データ変換 <span id="data-transformation"></span>
 
 入力または表示されるデータの形式が、データベースにデータを保存するときに使われるものと異なる場合がよくあります。
 例えば、データベースでは顧客の誕生日を UNIX タイムスタンプで保存している (まあ、あまり良い設計ではありませんが)
 けれども、ほとんどの場合において誕生日を `'YYYY/MM/DD'` という形式の文字列として操作したい、というような場合です。
-この目的を達するために、次のように、`Customer` アクティブ・レコード・クラスにおいて *データ変換*
+この目的を達するために、次のように、`Customer` アクティブ・レコード・クラスにおいて _データ変換_
 メソッドを定義することが出来ます。
 
 ```php
@@ -296,7 +289,7 @@ class Customer extends ActiveRecord
     {
         return date('Y/m/d', $this->birthday);
     }
-    
+
     public function setBirthdayText($value)
     {
         $this->birthday = strtotime($value);
@@ -310,7 +303,6 @@ class Customer extends ActiveRecord
 > Tip: 上記は、一般にデータの変換を達成するための簡単な方法を示すためのものです。
 > 日付の値については、Yii は、[DateValidator](tutorial-core-validators.md#date) と DatePicker ウィジェットを使用するという、より良い方法を提供しています。
 > DatePicker については、[JUI ウィジェットのセクション](widget-jui#datepicker-date-input) で説明されています。
-
 
 ### データを配列に取得する <span id="data-in-arrays"></span>
 
@@ -327,16 +319,15 @@ $customers = Customer::find()
 ```
 
 > Note: このメソッドはメモリを節約してパフォーマンスを向上させますが、低レベルの DB 抽象レイヤに近いものであり、
-  あなたはアクティブ・レコードの機能のほとんどを失うことになります。非常に重要な違いが、カラムの値のデータ型に現れます。
-  アクティブ・レコード・インスタンスとしてデータを返す場合、カラムの値は実際のカラムの型に従って自動的に型キャストされます。
-  一方、配列としてデータを返す場合は、実際のカラムの型に関係なく、カラムの値は文字列になります。
-  なぜなら、何も処理をしない場合の PDO の結果は文字列だからです。
-
+> あなたはアクティブ・レコードの機能のほとんどを失うことになります。非常に重要な違いが、カラムの値のデータ型に現れます。
+> アクティブ・レコード・インスタンスとしてデータを返す場合、カラムの値は実際のカラムの型に従って自動的に型キャストされます。
+> 一方、配列としてデータを返す場合は、実際のカラムの型に関係なく、カラムの値は文字列になります。
+> なぜなら、何も処理をしない場合の PDO の結果は文字列だからです。
 
 ### データをバッチ・モードで取得する <span id="data-in-batches"></span>
 
 [クエリ・ビルダ](db-query-builder.md) において、大量のデータをデータベースから検索する場合に、メモリ使用量を最小化するために
-*バッチ・クエリ* を使うことが出来るということを説明しました。おなじテクニックをアクティブ・レコードでも使うことが出来ます。例えば、
+_バッチ・クエリ_ を使うことが出来るということを説明しました。おなじテクニックをアクティブ・レコードでも使うことが出来ます。例えば、
 
 ```php
 // 一度に 10 人の顧客を読み出す
@@ -354,7 +345,6 @@ foreach (Customer::find()->with('orders')->each() as $customer) {
     // $customer は 'orders' リレーションを投入された Customer オブジェクト
 }
 ```
-
 
 ## データを保存する <span id="inserting-updating-data"></span>
 
@@ -400,8 +390,7 @@ public function save($runValidation = true, $attributeNames = null)
 ```
 
 > Tip: [[yii\db\ActiveRecord::insert()|insert()]] または [[yii\db\ActiveRecord::update()|update()]] を直接に呼んで、
-  行を挿入または更新することも出来ます。
-
+> 行を挿入または更新することも出来ます。
 
 ### データの検証 <span id="data-validation"></span>
 
@@ -414,12 +403,11 @@ public function save($runValidation = true, $attributeNames = null)
 検証が通らなかった時は単に `false` が返され、[[yii\db\ActiveRecord::errors|errors]] プロパティをチェックして検証エラー・メッセージを取得することが出来ます。
 
 > Tip: データが検証を必要としないことが確実である場合 (例えば、データが信頼できるソースに由来するものである場合) は、
-  検証をスキップするために `save(false)` を呼ぶことが出来ます。
-
+> 検証をスキップするために `save(false)` を呼ぶことが出来ます。
 
 ### 一括代入 <span id="massive-assignment"></span>
 
-通常の [モデル](structure-models.md) と同じように、アクティブ・レコードのインスタンスも  [一括代入機能](structure-models.md#massive-assignment) を享受することが出来ます。
+通常の [モデル](structure-models.md) と同じように、アクティブ・レコードのインスタンスも [一括代入機能](structure-models.md#massive-assignment) を享受することが出来ます。
 この機能を使うと、下記で示されているように、一つの PHP 文で、アクティブ・レコード・インスタンスの複数の属性に値を割り当てることが出来ます。
 ただし、[安全な属性](structure-models.md#safe-attributes) だけが一括代入が可能であることを記憶しておいてください。
 
@@ -435,7 +423,6 @@ $customer->attributes = $values;
 $customer->save();
 ```
 
-
 ### カウンタを更新する <span id="updating-counters"></span>
 
 データベース・テーブルのあるカラムの値を増加・減少させるのは、よくある仕事です。私たちはそのようなカラムをカウンタ・カラムと呼んでいます。
@@ -450,13 +437,12 @@ $post->updateCounters(['view_count' => 1]);
 ```
 
 > Note: カウンタ・カラムを更新するのに [[yii\db\ActiveRecord::save()]] を使うと、不正確な結果になってしまう場合があります。
-  というのは、同じカウンタの値を読み書きする複数のリクエストによって、同一のカウンタが保存される可能性があるからです。
-
+> というのは、同じカウンタの値を読み書きする複数のリクエストによって、同一のカウンタが保存される可能性があるからです。
 
 ### ダーティな属性 <span id="dirty-attributes"></span>
 
-[[yii\db\ActiveRecord::save()|save()]] を呼んでアクティブ・レコード・インスタンスを保存すると、*ダーティな属性* だけが保存されます。
-属性は、DB からロードされた後、または、最後に保存された後にその値が変更されると、*ダーティ* であると見なされます。
+[[yii\db\ActiveRecord::save()|save()]] を呼んでアクティブ・レコード・インスタンスを保存すると、_ダーティな属性_ だけが保存されます。
+属性は、DB からロードされた後、または、最後に保存された後にその値が変更されると、_ダーティ_ であると見なされます。
 ただし、データ検証は、アクティブ・レコード・インスタンスがダーティな属性を持っているかどうかに関係なく実施される
 ことに注意してください。
 
@@ -489,7 +475,6 @@ $customer->loadDefaultValues();
 // $customer->xyz には、"xyz" カラムを定義するときに宣言されたデフォルト値が割り当てられる
 ```
 
-
 ### 属性の型キャスト <span id="attributes-typecasting"></span>
 
 [[yii\db\ActiveRecord]] は、クエリの結果を投入されるときに、[データベース・テーブル・スキーマ](db-dao.md#database-schema)
@@ -497,8 +482,8 @@ $customer->loadDefaultValues();
 アクティブ・レコードのインスタンスでも PHP の integer として投入し、真偽値として宣言されているデータを boolean として投入することが出来るようになっています。
 しかしながら、型キャストのメカニズムには、いくつかの制約があります。
 
-* 浮動小数点数値は変換されず、文字列として表されます。そうしないと精度が失われるおそれがあるからです。
-* 整数値の変換は、あなたが使っているオペレーティング・システムの整数の大きさに依存します。具体的に言うと、
+- 浮動小数点数値は変換されず、文字列として表されます。そうしないと精度が失われるおそれがあるからです。
+- 整数値の変換は、あなたが使っているオペレーティング・システムの整数の大きさに依存します。具体的に言うと、
   'unsigned integer' または 'big integer' として宣言されたカラムの値は、64-bit オペレーティングシステムでのみ PHP の integer に変換されます。
   32-bit オペレーティングシステムでは、文字列として表されます。
 
@@ -509,7 +494,7 @@ HTTP リクエストから値をロードしたり、プロパティにアクセ
 しかし、アクティブ・レコードのインスタンスの属性値は保存の過程において変換されることはありません。
 
 > Tip: アクティブ・レコードの検証や保存の際の属性型キャストを楽にするために
-  [[yii\behaviors\AttributeTypecastBehavior]] を使うことが出来ます。
+> [[yii\behaviors\AttributeTypecastBehavior]] を使うことが出来ます。
 
 2.0.14 以降、Yii のアクティブ・レコードは、JSON や多次元配列のような複雑な型をサポートしています。
 
@@ -557,7 +542,6 @@ Customer::updateAll(['status' => Customer::STATUS_ACTIVE], ['like', 'email', '@e
 Customer::updateAllCounters(['age' => 1]);
 ```
 
-
 ## データを削除する <span id="deleting-data"></span>
 
 一行のデータを削除するためには、最初にその行に対応するアクティブ・レコード・インスタンスを取得して、
@@ -575,8 +559,7 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 ```
 
 > Note: [[yii\db\ActiveRecord::deleteAll()|deleteAll()]] を呼ぶときは、十分に注意深くしてください。
-  なぜなら、条件の指定を間違うと、あなたのテーブルからすべてのデータを完全に消し去ってしまうことになるからです。
-
+> なぜなら、条件の指定を間違うと、あなたのテーブルからすべてのデータを完全に消し去ってしまうことになるからです。
 
 ## アクティブ・レコードのライフサイクル <span id="ar-life-cycles"></span>
 
@@ -589,14 +572,12 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 次に、さまざまなアクティブ・レコードのライフサイクルと、
 そのライフサイクルに含まれるメソッドやイベントを要約します。
 
-
 ### 新しいインスタンスのライフサイクル <span id="new-instance-life-cycle"></span>
 
 `new` 演算子によって新しいアクティブ・レコード・インスタンスを作成する場合は、次のライフサイクルを経ます。
 
 1. クラスのコンストラクタ。
 2. [[yii\db\ActiveRecord::init()|init()]]: [[yii\db\ActiveRecord::EVENT_INIT|EVENT_INIT]] イベントをトリガ。
-
 
 ### データをクエリする際のライフサイクル <span id="querying-data-life-cycle"></span>
 
@@ -607,27 +588,25 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 2. [[yii\db\ActiveRecord::init()|init()]]: [[yii\db\ActiveRecord::EVENT_INIT|EVENT_INIT]] イベントをトリガ。
 3. [[yii\db\ActiveRecord::afterFind()|afterFind()]]: [[yii\db\ActiveRecord::EVENT_AFTER_FIND|EVENT_AFTER_FIND]] イベントをトリガ。
 
-
 ### データを保存する際のライフサイクル <span id="saving-data-life-cycle"></span>
 
 [[yii\db\ActiveRecord::save()|save()]] を呼んでアクティブ・レコード・インスタンスを挿入または更新する場合は、
 次のライフサイクルを経ます。
 
 1. [[yii\db\ActiveRecord::beforeValidate()|beforeValidate()]]: [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] イベントをトリガ。
-  このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合、
-  残りのステップはスキップされる。
+   このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合、
+   残りのステップはスキップされる。
 2. データ検証を実行。データ検証が失敗した場合、3 より後のステップはスキップされる。
 3. [[yii\db\ActiveRecord::afterValidate()|afterValidate()]]: [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]]
-  イベントをトリガ。
+   イベントをトリガ。
 4. [[yii\db\ActiveRecord::beforeSave()|beforeSave()]]: [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]]
-  または [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]] イベントをトリガ。
-  このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合、
-  残りのステップはスキップされる。
+   または [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]] イベントをトリガ。
+   このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合、
+   残りのステップはスキップされる。
 5. 実際のデータの挿入または更新を実行。
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]]
-    または [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]]
-    イベントをトリガ。
-    
+   または [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]]
+   イベントをトリガ。
 
 ### データを削除する際のライフサイクル <span id="deleting-data-life-cycle"></span>
 
@@ -635,24 +614,23 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 次のライフサイクルを経ます。
 
 1. [[yii\db\ActiveRecord::beforeDelete()|beforeDelete()]]: [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]]
-  イベントをトリガ。このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合は、
-  残りのステップはスキップされる。
+   イベントをトリガ。このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合は、
+   残りのステップはスキップされる。
 2. 実際のデータの削除を実行。
 3. [[yii\db\ActiveRecord::afterDelete()|afterDelete()]]: [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]]
-  イベントをトリガ。
-
+   イベントをトリガ。
 
 > Note: 次のメソッドを呼んだ場合は、いずれの場合も、上記のライフサイクルのどれかを開始させることはありません。
 > これらのメソッドは、レコード単位ではなく、データベース上で直接に動作するためです。
 >
-> - [[yii\db\ActiveRecord::updateAll()]] 
+> - [[yii\db\ActiveRecord::updateAll()]]
 > - [[yii\db\ActiveRecord::deleteAll()]]
-> - [[yii\db\ActiveRecord::updateCounters()]] 
-> - [[yii\db\ActiveRecord::updateAllCounters()]] 
+> - [[yii\db\ActiveRecord::updateCounters()]]
+> - [[yii\db\ActiveRecord::updateAllCounters()]]
 
 > Note: パフォーマンスを考慮して、DI(依存注入) はデフォルトではサポートされていません。必要であれば、
 > [[Yii::createObject()]] によってクラスのインスタンス生成をするように [[yii\db\ActiveRecord::instantiate()|instantiate()]] メソッドをオーバーライドして、サポートを追加することが出来ます。
-> 
+>
 > ```php
 > public static function instantiate($row)
 > {
@@ -664,7 +642,6 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 
 [[yii\db\ActiveRecord::refresh()|refresh()]] を呼んでアクティブ・レコード・インスタンスをリフレッシュする際は、リフレッシュが成功してメソッドが `true` を返すと
 [[yii\db\ActiveRecord::EVENT_AFTER_REFRESH|EVENT_AFTER_REFRESH]] イベントがトリガされます。
-
 
 ## トランザクションを扱う <span id="transactional-operations"></span>
 
@@ -724,9 +701,9 @@ class Post extends \yii\db\ActiveRecord
 値はトランザクションで囲まれるべき操作でなくてはなりません。
 いろいろな DB 操作を参照するのには、次の定数を使わなければなりません。
 
-* [[yii\db\ActiveRecord::OP_INSERT|OP_INSERT]]: [[yii\db\ActiveRecord::insert()|insert()]] によって実行される挿入の操作。
-* [[yii\db\ActiveRecord::OP_UPDATE|OP_UPDATE]]: [[yii\db\ActiveRecord::update()|update()]] によって実行される更新の操作。
-* [[yii\db\ActiveRecord::OP_DELETE|OP_DELETE]]: [[yii\db\ActiveRecord::delete()|delete()]] によって実行される削除の操作。
+- [[yii\db\ActiveRecord::OP_INSERT|OP_INSERT]]: [[yii\db\ActiveRecord::insert()|insert()]] によって実行される挿入の操作。
+- [[yii\db\ActiveRecord::OP_UPDATE|OP_UPDATE]]: [[yii\db\ActiveRecord::update()|update()]] によって実行される更新の操作。
+- [[yii\db\ActiveRecord::OP_DELETE|OP_DELETE]]: [[yii\db\ActiveRecord::delete()|delete()]] によって実行される削除の操作。
 
 複数の操作を示すためには、`|` を使って上記の定数を連結してください。
 ショートカット定数 [[yii\db\ActiveRecord::OP_ALL|OP_ALL]] を使って、上記の三つの操作すべてを示すことも出来ます。
@@ -751,13 +728,13 @@ class Post extends \yii\db\ActiveRecord
 楽観的ロックを使用するためには、次のようにします。
 
 1. アクティブ・レコード・クラスと関連付けられている DB テーブルに、各行のバージョン番号を保存するカラムを作成します。
-  カラムは長倍精度整数 (big integer) タイプでなければなりません (MySQL では `BIGINT DEFAULT 0` です)。
+   カラムは長倍精度整数 (big integer) タイプでなければなりません (MySQL では `BIGINT DEFAULT 0` です)。
 2. [[yii\db\ActiveRecord::optimisticLock()]] メソッドをオーバーライドして、このカラムの名前を返すようにします。
 3. あなたのモデル・クラスの中で [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] を実装し、受信したリクエストからその値を自動的に解析できるようにします。
-  [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] が検証を処理すべきですので、バージョンの属性は検証規則から削除します。
+   [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] が検証を処理すべきですので、バージョンの属性は検証規則から削除します。
 4. ユーザ入力を収集するウェブフォームに、更新されるレコードの現在のバージョン番号を保持する隠しフィールドを追加します。
 5. アクティブ・レコードを使って行の更新を行うコントローラ・アクションにおいて、[[\yii\db\StaleObjectException]] 例外を捕捉して、
-  衝突を解決するために必要なビジネス・ロジック (例えば、変更をマージしたり、データの陳腐化を知らせたり) を実装します。
+   衝突を解決するために必要なビジネス・ロジック (例えば、変更をマージしたり、データの陳腐化を知らせたり) を実装します。
 
 例えば、バージョン番号のカラムが `version` と名付けられているとすると、
 次のようなコードによって楽観的ロックを実装することが出来ます。
@@ -809,12 +786,12 @@ public function optimisticLock()
 }
 
 ```
+
 > Note: [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] は、ユーザが正しいバージョン番号を送信したときにだけ
 > レコードが保存されるという事を保証します。そして、そのために、[[\yii\web\Request::getBodyParam()|getBodyParam()]] の結果を直接に解析します。
 > そこで、あなたのモデル・クラスを拡張して、親モデルで第2段階を行い、ビヘイビアのアタッチ(第3段階)を子モデルで行うようにすると便利でしょう。
 > そうすれば、一方を内部使用のためだけのインスタンスとして使うことが出来、他方をエンド・ユーザの入力の受信に責任を持つモデルとしてコントローラと結びつける事が出来ます。
 > もう一つのやり方としては、[[\yii\behaviors\OptimisticLockBehavior::$value|value]] プロパティを構成して独自のロジックを実装することも可能です。
-
 
 ## リレーショナル・データを扱う <span id="relational-data"></span>
 
@@ -824,11 +801,10 @@ public function optimisticLock()
 このリレーションが適切に宣言されていれば、`$customer->orders` という式を使って顧客の注文情報にアクセスすることが出来ます。
 `$customer->orders` は、顧客の注文情報を `Order` アクティブ・レコード・インスタンスの配列として返してくれます。
 
-
 ### リレーションを宣言する <span id="declaring-relations"></span>
 
 アクティブ・レコードを使ってリレーショナル・データを扱うためには、最初に、アクティブ・レコード・クラスの中でリレーションを宣言する必要があります。
-これは、以下のように、関心のあるそれぞれのリレーションについて *リレーション・メソッド* を宣言するだけの簡単な作業です。
+これは、以下のように、関心のあるそれぞれのリレーションについて _リレーション・メソッド_ を宣言するだけの簡単な作業です。
 
 ```php
 class Customer extends ActiveRecord
@@ -855,8 +831,8 @@ class Order extends ActiveRecord
 上記のコードでは、`Customer` クラスのために `orders` リレーションを宣言し、`Order` クラスのために `customer`
 リレーションを宣言しています。
 
-各リレーション・メソッドは `getXyz` という名前にしなければなりません。ここで `xyz` (最初の文字は小文字です) が *リレーション名* と呼ばれます。
-リレーション名は *大文字と小文字を区別する* ことに注意してください。
+各リレーション・メソッドは `getXyz` という名前にしなければなりません。ここで `xyz` (最初の文字は小文字です) が _リレーション名_ と呼ばれます。
+リレーション名は _大文字と小文字を区別する_ ことに注意してください。
 
 リレーションを宣言する際には、次の情報を指定しなければなりません。
 
@@ -874,15 +850,14 @@ class Order extends ActiveRecord
   これを記憶するための簡単な規則は、上の例で見るように、関連するアクティブ・レコードを書いた直後に、それに属するカラムを
   続けて書く、ということです。ご覧のように、`customer_id` は `Order` のプロパティであり、
   `id` は`Customer` のプロパティです。
-  
-> Warning: リレーション名としては `relation` は予約済みで使えません。これを使うと `ArgumentCountError` となります。
 
+> Warning: リレーション名としては `relation` は予約済みで使えません。これを使うと `ArgumentCountError` となります。
 
 ### リレーショナル・データにアクセスする <span id="accessing-relational-data"></span>
 
 リレーションを宣言した後は、リレーション名を通じてリレーショナル・データにアクセスすることが出来ます。
 これは、リレーション・メソッドによって定義されるオブジェクト・[プロパティ](concept-properties.md) にアクセスするのと同様です。
-このため、これを *リレーション・プロパティ* と呼びます。例えば、
+このため、これを _リレーション・プロパティ_ と呼びます。例えば、
 
 ```php
 // SELECT * FROM `customer` WHERE `id` = 123
@@ -894,7 +869,7 @@ $orders = $customer->orders;
 ```
 
 > Info: `xyz` という名前のリレーションを getter メソッド `getXyz()` によって宣言すると、`xyz` を
-  [オブジェクト・プロパティ](concept-properties.md) のようにアクセスすることが出来るようになります。名前は大文字と小文字を区別することに注意してください。
+> [オブジェクト・プロパティ](concept-properties.md) のようにアクセスすることが出来るようになります。名前は大文字と小文字を区別することに注意してください。
 
 リレーションが [[yii\db\ActiveRecord::hasMany()|hasMany()]] によって宣言されている場合は、
 このリレーション・プロパティにアクセスすると、関連付けられたアクティブ・レコード・インスタンスの配列が返されます。
@@ -910,14 +885,13 @@ SQL 文の再実行を強制するためには、まず、リレーション・�
 > 通常のオブジェクト・プロパティでは、プロパティの値はそれを定義する getter メソッドと同じ型を持ちます。
 > しかし、リレーション・プロパティにアクセスすると [[yii\db\ActiveRecord]] のインスタンスまたはその配列が返されるのに対して、
 > リレーション・メソッドは [[yii\db\ActiveQuery]] のインスタンスを返します。
-> 
+>
 > ```php
 > $customer->orders; // `Order` オブジェクトの配列
 > $customer->getOrders(); // ActiveQuery のインスタンス
 > ```
-> 
+>
 > このことは、次のセクションで説明するように、カスタマイズしたクエリを作成するのに役に立ちます。
-
 
 ### 動的なリレーショナル・クエリ <span id="dynamic-relational-query"></span>
 
@@ -961,7 +935,6 @@ $orders = $customer->getBigOrders(200)->all();
 // SELECT * FROM `order` WHERE `customer_id` = 123 AND `subtotal` > 100 ORDER BY `id`
 $orders = $customer->bigOrders;
 ```
-
 
 ### 中間テーブルによるリレーション <span id="junction-table"></span>
 
@@ -1016,7 +989,6 @@ $order = Order::findOne(100);
 $items = $order->items;
 ```
 
-
 ### 複数のテーブルを経由するリレーション定義の連鎖<span id="multi-table-relations"></span>
 
 さらに、[[yii\db\ActiveQuery::via()|via()]] を使ってリレーション定義を連鎖させ、複数のテーブルを経由するリレーションを定義することも可能です。
@@ -1051,13 +1023,12 @@ class Customer extends ActiveRecord
 }
 ```
 
-
 ### レイジー・ローディングとイーガー・ローディング <span id="lazy-eager-loading"></span>
 
 [リレーショナル・データにアクセスする](#accessing-relational-data) において、通常のオブジェクト・プロパティにアクセスするのと同じようにして、
 アクティブ・レコード・インスタンスのリレーション・プロパティにアクセスすることが出来ることを説明しました。
 SQL 文は、リレーション・プロパティに最初にアクセスするときにだけ実行されます。
-このようなリレーショナル・データのアクセス方法を *レイジー・ローディング* と呼びます。例えば、
+このようなリレーショナル・データのアクセス方法を _レイジー・ローディング_ と呼びます。例えば、
 
 ```php
 // SELECT * FROM `customer` WHERE `id` = 123
@@ -1088,7 +1059,7 @@ foreach ($customers as $customer) {
 これは、for ループの中で、異なる `Customer` オブジェクトの `orders` リレーションにアクセスするたびに、
 SQL 文が一つ実行されることになるからです。
 
-このパフォーマンスの問題を解決するために、次に示すように、いわゆる *イーガー・ローディング* の手法を使うことが出来ます。
+このパフォーマンスの問題を解決するために、次に示すように、いわゆる _イーガー・ローディング_ の手法を使うことが出来ます。
 
 ```php
 // SELECT * FROM `customer` LIMIT 100;
@@ -1107,7 +1078,7 @@ foreach ($customers as $customer) {
 [[yii\db\ActiveQuery::with()]] を呼ぶことによって、最初の 100 人の顧客の注文をたった一つの SQL 文で返すように、アクティブ・レコードに指示をしています。
 結果として、実行される SQL 文の数は 101 から 2 に減ります。
 
-イーガー・ローディングは、一つだけでなく、複数のリレーションに対しても使うことが出来ます。さらには、*ネストされたリレーション* でさえ、イーガー・ロードすることが出来ます。
+イーガー・ローディングは、一つだけでなく、複数のリレーションに対しても使うことが出来ます。さらには、_ネストされたリレーション_ でさえ、イーガー・ロードすることが出来ます。
 ネストされたリレーションというのは、関連するアクティブ・レコードの中で宣言されているリレーションです。
 例えば、`Cutomer` が `orders` リレーションによって `Order` と関連しており、`Order` が `items` リレーションによって `Item` と関連している場合です。
 `Customer` に対するクエリを実行するときに、ネストされたリレーションの記法である `orders.items` を使って、`items` をイーガー・ロードすることが出来ます。
@@ -1137,8 +1108,8 @@ $items = $customers[0]->orders[0]->items;
 つまり、`a.b.c.d` を使って [[yii\db\ActiveQuery::with()|with()]] を呼ぶと、`a`、`a.b`、`a.b.c` そして `a.b.c.d` をイーガー・ロードすることになります。
 
 > Info: 一般化して言うと、`N` 個のリレーションのうち `M` 個のリレーションが [中間テーブル](#junction-table) によって定義されている場合、
-  この `N` 個のリレーションをイーガー・ロードしようとすると、合計で `1+M+N` 個の SQL クエリが実行されます。
-  ネストされたリレーション `a.b.c.d` は 4 個のリレーションとして数えられることに注意してください。
+> この `N` 個のリレーションをイーガー・ロードしようとすると、合計で `1+M+N` 個の SQL クエリが実行されます。
+> ネストされたリレーション `a.b.c.d` は 4 個のリレーションとして数えられることに注意してください。
 
 リレーションをイーガー・ロードするときに、対応するリレーショナル・クエリを無名関数を使ってカスタマイズすることが出来ます。
 例えば、
@@ -1171,11 +1142,10 @@ $customers = Customer::find()->with([
 > $orders = Order::find()->select(['id', 'amount', 'customer_id'])->with('customer')->all();
 > ```
 
-
 ### リレーションを使ってテーブルを結合する <span id="joining-with-relations"></span>
 
 > Note: この項で説明されていることは、MySQL、PostgreSQL など、
-  リレーショナル・データベースに対してのみ適用されます。
+> リレーショナル・データベースに対してのみ適用されます。
 
 ここまで説明してきたリレーショナル・クエリは、主たるデータを検索する際に主テーブルのカラムだけを参照するものでした。
 現実には、関連するテーブルのカラムを参照しなければならない場合がよくあります。
@@ -1186,7 +1156,7 @@ $customers = Customer::find()->with([
 // SELECT `customer`.* FROM `customer`
 // LEFT JOIN `order` ON `order`.`customer_id` = `customer`.`id`
 // WHERE `order`.`status` = 1
-// 
+//
 // SELECT * FROM `order` WHERE `customer_id` IN (...)
 $customers = Customer::find()
     ->select('customer.*')
@@ -1197,7 +1167,7 @@ $customers = Customer::find()
 ```
 
 > Note: JOIN SQL 文を含むリレーショナル・クエリを構築する場合は、カラム名の曖昧さを解消することが重要です。
-  カラム名に対応するテーブル名をプレフィクスするのが慣例です。
+> カラム名に対応するテーブル名をプレフィクスするのが慣例です。
 
 しかしながら、もっと良いのは、[[yii\db\ActiveQuery::joinWith()]] を呼んで、既にあるリレーションの宣言を利用するという手法です。
 
@@ -1218,8 +1188,8 @@ $customers = Customer::find()
 リレーションのデータを読み取りたくない場合は、第二のパラメータ `$eagerLoading` を `false` に指定することが出来ます。
 
 > Note: たとえイーガー・ローディングを有効にして [[yii\db\ActiveQuery::joinWith()|joinWith()]] や [[yii\db\ActiveQuery::innerJoinWith()|innerJoinWith()]] を使う場合でも、
-  リレーションのデータを取得するのには `JOIN` クエリの結果は**使われません**。
-  その場合でも、やはり、[イーガー・ローディング](#lazy-eager-loading) のセクションで説明したように、結合されたリレーションごとに追加のクエリが実行されます。
+> リレーションのデータを取得するのには `JOIN` クエリの結果は**使われません**。
+> その場合でも、やはり、[イーガー・ローディング](#lazy-eager-loading) のセクションで説明したように、結合されたリレーションごとに追加のクエリが実行されます。
 
 [[yii\db\ActiveQuery::with()|with()]] と同じように、一つまたは複数のリレーションを結合したり、
 リレーションクエリをその場でカスタマイズしたり、ネストされたリレーションを結合したりすることが出来ます。
@@ -1239,8 +1209,8 @@ $customers = Customer::find()->joinWith([
 
 ```php
 // SELECT `customer`.* FROM `customer`
-// LEFT JOIN `order` ON `order`.`customer_id` = `customer`.`id` AND `order`.`status` = 1 
-// 
+// LEFT JOIN `order` ON `order`.`customer_id` = `customer`.`id` AND `order`.`status` = 1
+//
 // SELECT * FROM `order` WHERE `customer_id` IN (...)
 $customers = Customer::find()->joinWith([
     'orders' => function ($query) {
@@ -1249,13 +1219,13 @@ $customers = Customer::find()->joinWith([
 ])->all();
 ```
 
-上記のクエリは *全ての* 顧客を返し、各顧客について全てのアクティブな注文を返します。
+上記のクエリは _全ての_ 顧客を返し、各顧客について全てのアクティブな注文を返します。
 これは、少なくとも一つのアクティブな注文を持つ顧客を全て返す、という以前の例とは異なっていることに注意してください。
 
 > Info: [[yii\db\ActiveQuery]] が [[yii\db\ActiveQuery::onCondition()|onCondition()]] によって条件を指定された場合、
-  クエリが JOIN 句を含む場合は、条件は `ON` の部分に置かれます。
-  クエリが JOIN 句を含まない場合は、条件は自動的に `WHERE` の部分に追加されます。
-  このようにして、リレーションのテーブルのカラムを含む条件だけが `ON` の部分に置かれます。
+> クエリが JOIN 句を含む場合は、条件は `ON` の部分に置かれます。
+> クエリが JOIN 句を含まない場合は、条件は自動的に `WHERE` の部分に追加されます。
+> このようにして、リレーションのテーブルのカラムを含む条件だけが `ON` の部分に置かれます。
 
 #### リレーションのテーブルのエイリアス <span id="relation-table-aliases"></span>
 
@@ -1334,7 +1304,7 @@ echo $customer2 === $customer ? '同じ' : '異なる';
 
 上記の例において、冗長な最後の SQL 文の実行を避けるためには、下に示すように、
 [[yii\db\ActiveQuery::inverseOf()|inverseOf()]]メソッドを呼ぶことによって、`customer` が
-`orders` の *逆リレーション* であることを Yii に教えておかなければなりません。
+`orders` の _逆リレーション_ であることを Yii に教えておかなければなりません。
 
 ```php
 class Customer extends ActiveRecord
@@ -1363,9 +1333,8 @@ echo $customer2 === $customer ? '同じ' : '異なる';
 ```
 
 > Note: 逆リレーションは [中間テーブル](#junction-table) を含むリレーションについては宣言することが出来ません。
-  つまり、リレーションが [[yii\db\ActiveQuery::via()|via()]] または [[yii\db\ActiveQuery::viaTable()|viaTable()]]
-  によって定義されている場合は、[[yii\db\ActiveQuery::inverseOf()|inverseOf()]] を追加で呼んではいけません。
-
+> つまり、リレーションが [[yii\db\ActiveQuery::via()|via()]] または [[yii\db\ActiveQuery::viaTable()|viaTable()]]
+> によって定義されている場合は、[[yii\db\ActiveQuery::inverseOf()|inverseOf()]] を追加で呼んではいけません。
 
 ## リレーションを保存する <span id="saving-relations"></span>
 
@@ -1414,8 +1383,8 @@ $order->link('items', $item);
 上記のコードによって、`order_item` 中間テーブルに、注文と商品を関連付けるための行が自動的に挿入されます。
 
 > Info: [[yii\db\ActiveRecord::link()|link()]] メソッドは、
-  影響を受けるアクティブ・レコード・インスタンスを保存する際に、データ検証を実行しません。
-  このメソッドを呼ぶ前にすべての入力値を検証することはあなたの責任です。
+> 影響を受けるアクティブ・レコード・インスタンスを保存する際に、データ検証を実行しません。
+> このメソッドを呼ぶ前にすべての入力値を検証することはあなたの責任です。
 
 [[yii\db\ActiveRecord::link()|link()]] の逆の操作が [[yii\db\ActiveRecord::unlink()|unlink()]] です。
 これは、既存の二つのアクティブ・レコード・インスタンスのリレーションを破棄します。例えば、
@@ -1433,8 +1402,7 @@ $customer->unlink('orders', $customer->orders[0]);
 中間テーブルにある外部キーがクリアされるか、または、`$delete` が `true` であるときは、
 中間テーブルにある対応する行が削除されるかします。
 
-
-## DBMS 間のリレーション <span id="cross-database-relations"></span> 
+## DBMS 間のリレーション <span id="cross-database-relations"></span>
 
 アクティブ・レコードは、異なるデータベースをバックエンドに持つアクティブ・レコードの間でリレーションを宣言することを可能にしています。
 データベースは異なるタイプ (例えば、MySQL と PostgreSQL、または、MS SQL と MongoDB) であってもよく、別のサーバで動作していても構いません。
@@ -1477,15 +1445,14 @@ $customers = Customer::find()->with('comments')->all();
 このセクションで説明されたリレーショナル・クエリ機能のほとんどを使用することが出来ます。
 
 > Note: [[yii\db\ActiveQuery::joinWith()]] の使用は、データベース間の JOIN クエリをサポートしているデータベースに限定されます。
-  この理由により、上記の例では `joinWith` メソッドは使用することが出来ません。MongoDB は JOIN をサポートしていないからです。
-
+> この理由により、上記の例では `joinWith` メソッドは使用することが出来ません。MongoDB は JOIN をサポートしていないからです。
 
 ## クエリ・クラスをカスタマイズする <span id="customizing-query-classes"></span>
 
 デフォルトでは、全てのアクティブ・レコードのクエリは [[yii\db\ActiveQuery]] によってサポートされます。
 カスタマイズされたクエリ・クラスをアクティブ・レコードで使用するためには、[[yii\db\ActiveRecord::find()]]
 メソッドをオーバーライドして、カスタマイズされたクエリ・クラスのインスタンスを返すようにしなければなりません。例えば、
-  
+
 ```php
 // file Comment.php
 namespace app\models;
@@ -1531,8 +1498,8 @@ class CommentQuery extends ActiveQuery
 ```
 
 > Note: 新しいクエリ構築メソッドを定義するときには、通常は、既存のどの条件も上書きしないように、
-  [[yii\db\ActiveQuery::onCondition()|onCondition()]] ではなく、[[yii\db\ActiveQuery::andOnCondition()|andOnCondition()]]
-  または [[yii\db\ActiveQuery::orOnCondition()|orOnCondition()]] を呼んで条件を追加しなければなりません。
+> [[yii\db\ActiveQuery::onCondition()|onCondition()]] ではなく、[[yii\db\ActiveQuery::andOnCondition()|andOnCondition()]]
+> または [[yii\db\ActiveQuery::orOnCondition()|orOnCondition()]] を呼んで条件を追加しなければなりません。
 
 このようにすると、次のようなクエリ構築のコードを書くことが出来るようになります。
 
@@ -1542,7 +1509,7 @@ $inactiveComments = Comment::find()->active(false)->all();
 ```
 
 > Tip: 大きなプロジェクトでは、アクティブ・レコード・クラスをクリーンに保つことが出来るように、
-  クエリ関連のコードのほとんどをカスタマイズされたクエリ・クラスに保持することが推奨されます。
+> クエリ関連のコードのほとんどをカスタマイズされたクエリ・クラスに保持することが推奨されます。
 
 この新しいクエリ構築メソッドは、`Comment` に関するリレーションを定義するときや、リレーショナル・クエリを実行するときにも使用することが出来ます。
 
@@ -1573,9 +1540,8 @@ $customers = Customer::find()->with([
 ])->all();
 ```
 
-> Info: Yii 1.1 には、*スコープ* と呼ばれる概念がありました。 Yii 2.0 では、スコープはもはや直接にはサポートされません。
-  同じ目的を達するためには、カスタマイズされたクエリ・クラスとクエリ・メソッドを使わなければなりません。
-
+> Info: Yii 1.1 には、_スコープ_ と呼ばれる概念がありました。 Yii 2.0 では、スコープはもはや直接にはサポートされません。
+> 同じ目的を達するためには、カスタマイズされたクエリ・クラスとクエリ・メソッドを使わなければなりません。
 
 ## 追加のフィールドを選択する
 
@@ -1666,24 +1632,24 @@ $room->volume; // まだ指定されていないため、この値は `null` に
 class Room extends \yii\db\ActiveRecord
 {
     private $_volume;
-    
+
     public function setVolume($volume)
     {
         $this->_volume = (float) $volume;
     }
-    
+
     public function getVolume()
     {
         if (empty($this->length) || empty($this->width) || empty($this->height)) {
             return null;
         }
-        
+
         if ($this->_volume === null) {
             $this->setVolume(
                 $this->length * $this->width * $this->height
             );
         }
-        
+
         return $this->_volume;
     }
 
@@ -1711,7 +1677,7 @@ class Customer extends \yii\db\ActiveRecord
         if ($this->isNewRecord) {
             return null; // プライマリ・キーが null の場合のリレーショナル・クエリを防止
         }
-        
+
         if ($this->_ordersCount === null) {
             $this->setOrdersCount(count($this->orders)); // 要求に応じてリレーションから集約を計算
         }
@@ -1745,7 +1711,7 @@ class Customer extends \yii\db\ActiveRecord
         if ($this->isNewRecord) {
             return null; // プライマリ・キーが null の場合のリレーショナル・クエリを防止
         }
-        
+
         return empty($this->ordersAggregation) ? 0 : $this->ordersAggregation[0]['counted'];
     }
 

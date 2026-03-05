@@ -1,9 +1,8 @@
-データ・プロバイダ
-================
+# データ・プロバイダ
 
 [ページネーション](output-pagination.md) と [並べ替え](output-sorting.md) のセクションにおいて
 、エンド・ユーザが特定のページのデータを選んで表示し、いずれかのカラムによってデータを並べ替えることが出来るようにする方法を説明しました。
-データのページネーションと並べ替えは非常によくあるタスクですから、Yii はこれをカプセル化した一連の *データ・プロバイダ* を提供しています。
+データのページネーションと並べ替えは非常によくあるタスクですから、Yii はこれをカプセル化した一連の _データ・プロバイダ_ を提供しています。
 
 データ・プロバイダは [[yii\data\DataProviderInterface]] を実装するクラスであり、主として、ページ分割され並べ替えられたデータの取得をサポートするものです。
 通常は、[データ・ウィジェット](output-data-widgets.md) と共に使用して、
@@ -11,10 +10,10 @@
 
 Yii のリリースには次のデータ・プロバイダのクラスが含まれています。
 
-* [[yii\data\ActiveDataProvider]]: [[yii\db\Query]] または [[yii\db\ActiveQuery]] を使ってデータベースからデータを取得して、
+- [[yii\data\ActiveDataProvider]]: [[yii\db\Query]] または [[yii\db\ActiveQuery]] を使ってデータベースからデータを取得して、
   配列または [アクティブ・レコード](db-active-record.md)・インスタンスの形式でデータを返します。
-* [[yii\data\SqlDataProvider]]: SQL 文を実行して、データベースのデータを配列として返します。
-* [[yii\data\ArrayDataProvider]]: 大きな配列を受け取り、ページネーションと並べ替えの指定に基づいて、
+- [[yii\data\SqlDataProvider]]: SQL 文を実行して、データベースのデータを配列として返します。
+- [[yii\data\ArrayDataProvider]]: 大きな配列を受け取り、ページネーションと並べ替えの指定に基づいて、
   一部分を切り出して返します。
 
 これら全てのデータ・プロバイダの使用方法は、次の共通のパターンを持っています。
@@ -53,8 +52,7 @@ echo yii\grid\GridView::widget([
 これらのデータ・プロバイダの主たる相異点は、データソースがどのように指定されるかという点にあります。
 次に続く項において、各データ・プロバイダの詳細な使用方法を説明します。
 
-
-## アクティブ・データ・プロバイダ <span id="active-data-provider"></span> 
+## アクティブ・データ・プロバイダ <span id="active-data-provider"></span>
 
 [[yii\data\ActiveDataProvider]] を使用するためには、その [[yii\data\ActiveDataProvider::query|query]] プロパティを構成しなければなりません。
 これは、[[yii\db\Query]] または [[yii\db\ActiveQuery]] のオブジェクトを取ることが出来ます。
@@ -74,7 +72,7 @@ $provider = new ActiveDataProvider([
     'sort' => [
         'defaultOrder' => [
             'created_at' => SORT_DESC,
-            'title' => SORT_ASC, 
+            'title' => SORT_ASC,
         ]
     ],
 ]);
@@ -88,16 +86,15 @@ $posts = $provider->getModels();
 ```php
 use yii\db\Query;
 
-$query = (new Query())->from('post')->where(['status' => 1]); 
+$query = (new Query())->from('post')->where(['status' => 1]);
 ```
 
 > Note: クエリが既に `orderBy` 句を指定しているものである場合、(`sort` の構成を通して) エンド・ユーザによって与えられる並べ替えの指定は、
-  既存の `orderBy` 句に追加されます。一方、`limit` と `offset` の句が存在している場合は、
-  (`pagenation` の構成を通して) エンド・ユーザによって指定されるページネーションのリクエストによって上書きされます。
+> 既存の `orderBy` 句に追加されます。一方、`limit` と `offset` の句が存在している場合は、
+> (`pagenation` の構成を通して) エンド・ユーザによって指定されるページネーションのリクエストによって上書きされます。
 
 デフォルトでは、[[yii\data\ActiveDataProvider]] はデータベース接続として `db` アプリケーション・コンポーネントを使用します。
 [[yii\data\ActiveDataProvider::db]] プロパティを構成すれば、別のデータベース接続を使用することが出来ます。
-
 
 ## SQL データ・プロバイダ <span id="sql-data-provider"></span>
 
@@ -137,10 +134,9 @@ $models = $provider->getModels();
 ```
 
 > Info: [[yii\data\SqlDataProvider::totalCount|totalCount]] プロパティは、データにページネーションを適用しなければならない
-  場合にだけ要求されます。これは、[[yii\data\SqlDataProvider::sql|sql]] によって指定される SQL 文は、
-  現在要求されているページのデータだけを返すように、データ・プロバイダによって修正されてしまうからです。
-  データ・プロバイダは、総ページ数を正しく計算するためには、データ・アイテムの総数を知る必要があります。
-
+> 場合にだけ要求されます。これは、[[yii\data\SqlDataProvider::sql|sql]] によって指定される SQL 文は、
+> 現在要求されているページのデータだけを返すように、データ・プロバイダによって修正されてしまうからです。
+> データ・プロバイダは、総ページ数を正しく計算するためには、データ・アイテムの総数を知る必要があります。
 
 ## 配列データ・プロバイダ <span id="array-data-provider"></span>
 
@@ -173,11 +169,10 @@ $provider = new ArrayDataProvider([
 
 // 現在リクエストされているページの行を返す
 $rows = $provider->getModels();
-``` 
+```
 
 > Note: [アクティブ・データ・プロバイダ](#active-data-provider) および [SQL データ・プロバイダ](#sql-data-provider) と比較すると、
-  配列データ・プロバイダは効率の面では劣ります。何故なら、*全ての* データをメモリにロードしなければならないからです。
-
+> 配列データ・プロバイダは効率の面では劣ります。何故なら、_全ての_ データをメモリにロードしなければならないからです。
 
 ## データのキーを扱う <span id="working-with-keys"></span>
 
@@ -223,13 +218,12 @@ $provider = new ActiveDataProvider([
 ]);
 ```
 
-
 ## カスタム・データ・プロバイダを作成する <span id="custom-data-provider"></span>
 
 あなた自身のカスタム・データ・プロバイダ・クラスを作成するためには、[[yii\data\DataProviderInterface]] を実装しなければなりません。
 [[yii\data\BaseDataProvider]] を拡張するのが比較的簡単な方法です。そうすれば、データ・プロバイダのコアのロジックに集中することが出来ます。
 具体的に言えば、実装する必要があるのは、主として次のメソッドです。
-                                                    
+
 - [[yii\data\BaseDataProvider::prepareModels()|prepareModels()]]: 現在のページで利用できるデータ・モデルを準備して、
   それを配列として返します。
 - [[yii\data\BaseDataProvider::prepareKeys()|prepareKeys()]]: 現在利用できるデータ・モデルの配列を受け取って、
@@ -249,29 +243,29 @@ class CsvDataProvider extends BaseDataProvider
     * @var string 読み出す CSV ファイルの名前
     */
     public $filename;
-    
+
     /**
     * @var string|callable キーカラムの名前またはそれを返すコーラブル
     */
     public $key;
-    
+
     /**
     * @var SplFileObject
     */
     protected $fileObject; // ファイルの特定の行までシークするのに SplFileObject が非常に便利
-    
-  
+
+
     /**
     * {@inheritdoc}
     */
     public function init()
     {
         parent::init();
-        
+
         // ファイルを開く
         $this->fileObject = new SplFileObject($this->filename);
     }
-  
+
     /**
     * {@inheritdoc}
     */
@@ -279,7 +273,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         $models = [];
         $pagination = $this->getPagination();
-  
+
         if ($pagination === false) {
             // ページネーションが無い場合、全ての行を読む
             while (!$this->fileObject->eof()) {
@@ -291,16 +285,16 @@ class CsvDataProvider extends BaseDataProvider
             $pagination->totalCount = $this->getTotalCount();
             $this->fileObject->seek($pagination->getOffset());
             $limit = $pagination->getLimit();
-  
+
             for ($count = 0; $count < $limit; ++$count) {
                 $models[] = $this->fileObject->fgetcsv();
                 $this->fileObject->next();
             }
         }
-  
+
         return $models;
     }
-  
+
     /**
     * {@inheritdoc}
     */
@@ -308,7 +302,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         if ($this->key !== null) {
             $keys = [];
-  
+
             foreach ($models as $model) {
                 if (is_string($this->key)) {
                     $keys[] = $model[$this->key];
@@ -316,25 +310,25 @@ class CsvDataProvider extends BaseDataProvider
                     $keys[] = call_user_func($this->key, $model);
                 }
             }
-  
+
             return $keys;
         } else {
             return array_keys($models);
         }
     }
-  
+
     /**
     * {@inheritdoc}
     */
     protected function prepareTotalCount()
     {
         $count = 0;
-  
+
         while (!$this->fileObject->eof()) {
             $this->fileObject->next();
             ++$count;
         }
-  
+
         return $count;
     }
 }
@@ -357,7 +351,7 @@ $filterCondition = null;
 // どのようなソースからでもフィルタをロードすることが出来ます。例えば、
 // リクエスト・ボディの JSON からロードしたい場合は、
 // 下記のように Yii::$app->request->getBodyParams() を使います。
-if ($filter->load(\Yii::$app->request->get())) { 
+if ($filter->load(\Yii::$app->request->get())) {
     $filterCondition = $filter->build();
     if ($filterCondition === false) {
         // シリアライザがフィルタの抽出でエラーを出すかもしれない
@@ -380,16 +374,16 @@ return new ActiveDataProvider([
 ```php
 use yii\base\Model;
 
-class PostSearch extends Model 
+class PostSearch extends Model
 {
     public $id;
     public $title;
-    
+
     public function rules()
     {
         return [
             ['id', 'integer'],
-            ['title', 'string', 'min' => 2, 'max' => 200],            
+            ['title', 'string', 'min' => 2, 'max' => 200],
         ];
     }
 }

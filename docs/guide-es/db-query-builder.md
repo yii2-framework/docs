@@ -1,5 +1,4 @@
-Constructor de Consultas
-========================
+# Constructor de Consultas
 
 > Note: Esta sección está en desarrollo.
 
@@ -33,8 +32,7 @@ $command = $query->createCommand();
 $rows = $command->queryAll();
 ```
 
-Métodos de Consulta
--------------------
+## Métodos de Consulta
 
 Como se puede observar, primero se debe tratar con [[yii\db\Query]]. En realidad, `Query` sólo se encarga de
 representar diversa información de la consulta. La lógica para generar la consulta se efectúa mediante
@@ -53,8 +51,7 @@ construirán la consulta, la ejecutarán, y devolverán el resultado. Por ejempl
   son `sum($q)`, `average($q)`, `max($q)`, `min($q)`, que soportan las llamadas funciones de agregación. El parámetro
   `$q` es obligatorio en estos métodos y puede ser el nombre de la columna o expresión.
 
-Construcción de Consultas
--------------------------
+## Construcción de Consultas
 
 A continuación se explicará como construir una sentencia SQL que incluya varias clausulas. Para simplificarlo, usamos
 `$query` para representar el objeto [[yii\db\Query]]:
@@ -77,11 +74,11 @@ $query->select(['id', 'name'])
 ```
 
 > Info: Se debe usar siempre el formato array si la clausula `SELECT` contiene expresiones SQL. Esto se debe a
-  que una expresión SQL como `CONCAT(first_name, last_name) AS full_name` puede contener comas. Si se junta con otra
-  cadena de texto de otra columna, puede ser que la expresión se divida en varias partes por comas, esto puede
-  conllevar a errores.
+> que una expresión SQL como `CONCAT(first_name, last_name) AS full_name` puede contener comas. Si se junta con otra
+> cadena de texto de otra columna, puede ser que la expresión se divida en varias partes por comas, esto puede
+> conllevar a errores.
 
-Cuando se especifican columnas, se pueden incluir los prefijos de las tablas o alias de columnas, ej.  `user.id`,
+Cuando se especifican columnas, se pueden incluir los prefijos de las tablas o alias de columnas, ej. `user.id`,
 `user.id AS user_id`. Si se usa un array para especificar las columnas, también se pueden usar las claves del array
 para especificar los alias de columna, ej. `['user_id' => 'user.id', 'user_name' => 'user.name']`.
 
@@ -157,7 +154,7 @@ $query->where('status=:status');
 $query->addParams([':status' => $status]);
 ```
 
-Se pueden establecer múltiples condiciones en `where` usando el *formato hash*.
+Se pueden establecer múltiples condiciones en `where` usando el _formato hash_.
 
 ```php
 $query->where([
@@ -214,7 +211,7 @@ El operando puede ser uno de los siguientes (ver también [[yii\db\QueryInterfac
   finales del rango en el que se encuentra la columna. Por ejemplo, `['between', 'id', 1, 10]` generará
   `id BETWEEN 1 AND 10`.
 
-- `not between`: similar a `between` exceptuando que  `BETWEEN` se reemplaza por `NOT BETWEEN` en la condición
+- `not between`: similar a `between` exceptuando que `BETWEEN` se reemplaza por `NOT BETWEEN` en la condición
   generada.
 
 - `in`: el operando 1 debe ser una columna o una expresión de BD. El operando 2 puede ser un array o un objeto de tipo
@@ -241,8 +238,8 @@ El operando puede ser uno de los siguientes (ver también [[yii\db\QueryInterfac
   automáticamente entre un par de caracteres de porcentaje.
 
 > Note: Cuando se usa PostgreSQL también se puede usar
-[`ilike`](https://www.postgresql.org/docs/8.3/static/functions-matching.html#FUNCTIONS-LIKE) en lugar de `like` para
-filtrar resultados insensibles a mayúsculas (case-insensitive).
+> [`ilike`](https://www.postgresql.org/docs/8.3/static/functions-matching.html#FUNCTIONS-LIKE) en lugar de `like` para
+> filtrar resultados insensibles a mayúsculas (case-insensitive).
 
 - `or like`: similar al operando `like` exceptuando que se usa `OR` para concatenar los predicados `LIKE` cuando haya
   un segundo operando en un array.
@@ -310,7 +307,7 @@ eliminará los valores vacíos de las condiciones proporcionadas. Por lo tanto s
 resultante será `...WHERE username=:username`; y si tanto `$username` como `$email` son "vacías", la consulta no
 tendrá `WHERE`.
 
-Decimos que un valor es *vacío* si es nulo, una cadena de texto vacía, una cadena de texto que consista en espacios en
+Decimos que un valor es _vacío_ si es nulo, una cadena de texto vacía, una cadena de texto que consista en espacios en
 blanco o un array vacío.
 
 También se pueden usar `andFilterWhere()` y `orFilterWhere()` para añadir más condiciones de filtro.
@@ -414,8 +411,7 @@ $anotherQuery->select('id, type, name')->from('user')->limit(10);
 $query->union($anotherQuery);
 ```
 
-Consulta por Lotes
----------------
+## Consulta por Lotes
 
 Cuando se trabaja con grandes cantidades de datos, los métodos como [[yii\db\Query::all()]] no son adecuados ya que
 requieren la carga de todos los datos en memoria. Para mantener los requerimientos de memoria reducidos, Yii

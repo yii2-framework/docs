@@ -1,5 +1,4 @@
-Usar motores de plantillas
-==========================
+# Usar motores de plantillas
 
 Por defecto, Yii utiliza PHP como su lenguaje de plantilla, pero puedes configurar Yii para que soporte otros motores de renderizado, tal como
 [Twig](https://twig.symfony.com/) o [Smarty](https://www.smarty.net/), disponibles como extensiones.
@@ -41,6 +40,7 @@ tu archivo `composer.json` para incluirlos:
 "yiisoft/yii2-smarty": "~2.0.0",
 "yiisoft/yii2-twig": "~2.0.0",
 ```
+
 Ese código será agregado a la sección `require` de `composer.json`. Después de realizar ese cambio y guardar el archivo, puedes instalar estas extensiones ejecutando `composer update --prefer-dist` en la línea de comandos.
 
 Para más detalles acerca del uso concreto de cada motor de plantillas, visita su documentación:

@@ -1,5 +1,4 @@
-HTTP Caching
-============
+# HTTP Caching
 
 Besides server-side caching that we have described in the previous sections, Web applications may
 also exploit client-side caching to save the time for generating and transmitting the same page content.
@@ -8,10 +7,9 @@ To use client-side caching, you may configure [[yii\filters\HttpCache]] as a fil
 actions whose rendering result may be cached on the client-side. [[yii\filters\HttpCache|HttpCache]]
 only works for `GET` and `HEAD` requests. It can handle three kinds of cache-related HTTP headers for these requests:
 
-* [[yii\filters\HttpCache::lastModified|Last-Modified]]
-* [[yii\filters\HttpCache::etagSeed|Etag]]
-* [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
-
+- [[yii\filters\HttpCache::lastModified|Last-Modified]]
+- [[yii\filters\HttpCache::etagSeed|Etag]]
+- [[yii\filters\HttpCache::cacheControlHeader|Cache-Control]]
 
 ## `Last-Modified` Header <span id="last-modified"></span>
 
@@ -54,7 +52,6 @@ the `index` page for the first time, the page will be generated on the server an
 If the browser visits the same page again and there is no post being modified during the period,
 the server will not re-generate the page, and the browser will use the cached version on the client-side.
 As a result, server-side rendering and page content transmission are both skipped.
-
 
 ## `ETag` Header <span id="etag"></span>
 
@@ -108,10 +105,9 @@ since they need to be re-evaluated on every request. Try to find a simple expres
 the cache if the page content has been modified.
 
 > Note: In compliance to [RFC 7232](https://datatracker.ietf.org/doc/html/rfc7232#section-2.4),
-  `HttpCache` will send out both `ETag` and `Last-Modified` headers if they are both configured.
-  And if the client sends both of the `If-None-Match` header and the `If-Modified-Since` header, only the former
-  will be respected.
-
+> `HttpCache` will send out both `ETag` and `Last-Modified` headers if they are both configured.
+> And if the client sends both of the `If-None-Match` header and the `If-Modified-Since` header, only the former
+> will be respected.
 
 ## `Cache-Control` Header <span id="cache-control"></span>
 
@@ -133,7 +129,6 @@ these headers automatically. If you want to change this behavior, you should con
 `public`, `private`, `private_no_expire`, and `nocache`. Please refer to the PHP manual about
 [session_cache_limiter()](https://www.php.net/manual/en/function.session-cache-limiter.php)
 for explanations about these values.
-
 
 ## SEO Implications <span id="seo-implications"></span>
 

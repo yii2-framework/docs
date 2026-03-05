@@ -1,15 +1,12 @@
-Translation teams
-=================
+# Translation teams
 
-Brazilian Portuguese
---------------------
+## Brazilian Portuguese
 
 - **Davidson Alencar, [@davidsonalencar](https://github.com/davidsonalencar), davidson.t.i@gmail.com**
 - [@wbraganca](https://github.com/wbraganca)
 - Alan Michel Willms Quinot, [@alanwillms](https://github.com/alanwillms), dyulax@gmail.com
 
-China
------
+## China
 
 - **Paris Qian Sen 东方孤思子,[@qiansen1386](https://github.com/qiansen1386),qiansen1386@gmail.com**
 - [@AbrahamGreyson 刘阳](https://github.com/AbrahamGreyson)
@@ -20,44 +17,37 @@ China
 - [@riverlet 小河](https://github.com/riverlet)
 - [@yiichina 巡洋舰](https://github.com/yiichina)
 
-Finnish
-------
+## Finnish
 
 - Jani Mikkonen, [@janisto](https://github.com/janisto), janisto@php.net
 
-German
-------
+## German
 
 - Carsten Brandt, [@cebe](https://github.com/cebe), mail@cebe.cc
 
-Italian
--------
+## Italian
 
 - Lorenzo Milesi, [@maxxer](https://github.com/maxxer), maxxer@yetopen.it
 
-Japanese
--------
+## Japanese
 
 - Nobuo Kihara 木原伸夫, [@softark](https://github.com/softark), softark@gmail.com
 - Tomoki Morita, [@jamband](https://github.com/jamband), tmsongbooks215@gmail.com
 - Hisateru Tanaka, [@tanakahisateru](https://github.com/tanakahisateru), tanakahisateru@gmail.com
 
-Russian
--------
+## Russian
 
 - **Alexander Makarov, [@samdark](https://github.com/samdark), sam@rmcreative.ru**
 - [@MUTOgen](https://github.com/MUTOgen)
 - [@prozacUa](https://github.com/prozacUa)
 
-Spanish
--------
+## Spanish
 
 - Luciano Baraglia, [@lucianobaraglia](https://github.com/lucianobaraglia)
 - Marco Da Silva, [@markmarco16](https://github.com/markmarco16), markmarco16@gmail.com
 - Daniel Gómez Pan [@pana1990](https://github.com/pana1990), pana_1990@hotmail.com
 
-Ukrainian
----------
+## Ukrainian
 
 - **Alexandr Bordun [@borales](https://github.com/Borales), admin@yiiframework.com.ua**
 - Roman Bahatyi [@RichWeber](https://github.com/RichWeber), rbagatyi@gmail.com

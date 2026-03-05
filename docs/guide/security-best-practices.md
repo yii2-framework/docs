@@ -1,19 +1,15 @@
-Security best practices
-=======================
+# Security best practices
 
 Below we'll review common security principles and describe how to avoid threats when developing applications using Yii.
 Most of these principles are not unique to Yii alone but apply to website or software development in general,
 so you will also find links for further reading on the general ideas behind these.
 
-
-Basic principles
-----------------
+## Basic principles
 
 There are two main principles when it comes to security no matter which application is being developed:
 
 1. Filter input.
 2. Escape output.
-
 
 ### Filter input
 
@@ -36,7 +32,6 @@ Further reading on the topic:
 - <https://owasp.org/www-community/vulnerabilities/Improper_Data_Validation>
 - <https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet>
 
-
 ### Escape output
 
 Escape output means that depending on context where we're using data it should be escaped i.e. in context of HTML you
@@ -50,9 +45,7 @@ Further reading on the topic:
 - <https://owasp.org/www-community/attacks/Code_Injection>
 - <https://owasp.org/www-community/attacks/xss/>
 
-
-Avoiding SQL injections
------------------------
+## Avoiding SQL injections
 
 SQL injection happens when query text is formed by concatenating unescaped strings such as the following:
 
@@ -93,14 +86,14 @@ $userIDs = $connection
 ```
 
 If data is used to specify column names or table names the best thing to do is to allow only predefined set of values:
-  
+
 ```php
 function actionList($orderBy = null)
 {
     if (!in_array($orderBy, ['name', 'status'])) {
         throw new BadRequestHttpException('Only name and status are allowed to order by.')
     }
-    
+
     // ...
 }
 ```
@@ -119,9 +112,7 @@ Further reading on the topic:
 
 - <https://owasp.org/www-community/attacks/SQL_Injection>
 
-
-Avoiding XSS
-------------
+## Avoiding XSS
 
 XSS or cross-site scripting happens when output isn't escaped properly when outputting HTML to the browser. For example,
 if user can enter his name and instead of `Alexander` he enters `<script>alert('Hello!');</script>`, every page that
@@ -135,7 +126,6 @@ Avoiding XSS is quite easy in Yii. There are generally two cases:
 2. You want data to be outputted as HTML.
 
 If all you need is plain text then escaping is as easy as the following:
-
 
 ```php
 <?= \yii\helpers\Html::encode($username) ?>
@@ -153,9 +143,7 @@ Further reading on the topic:
 
 - <https://owasp.org/www-community/attacks/xss/>
 
-
-Avoiding CSRF
--------------
+## Avoiding CSRF
 
 CSRF is an abbreviation for cross-site request forgery. The idea is that many applications assume that requests coming
 from a user browser are made by the user themselves. This assumption could be false.
@@ -179,7 +167,7 @@ For this reason, Yii applies additional mechanisms to protect against CSRF attac
 In order to avoid CSRF you should always:
 
 1. Follow HTTP specification i.e. GET should not change application state.
-  See [RFC2616](https://www.rfc-editor.org/rfc/rfc9110.html#name-method-definitions) for more details.
+   See [RFC2616](https://www.rfc-editor.org/rfc/rfc9110.html#name-method-definitions) for more details.
 2. Keep Yii CSRF protection enabled.
 
 Sometimes you need to disable CSRF validation per controller and/or action. It could be achieved by setting its property:
@@ -254,23 +242,19 @@ class ContactAction extends Action
 > Warning: Disabling CSRF will allow any site to send POST requests to your site. It is important to implement extra validation such as checking an IP address or a secret token in this case.
 
 > Note: Since version 2.0.21 Yii supports the `sameSite` cookie setting (requires PHP version 7.3.0 or higher).
-  Setting the `sameSite` cookie setting does not make the above obsolete since not all browsers support the setting yet.
-  See the [Sessions and Cookies sameSite option](runtime-sessions-cookies.md#samesite) for more information.
+> Setting the `sameSite` cookie setting does not make the above obsolete since not all browsers support the setting yet.
+> See the [Sessions and Cookies sameSite option](runtime-sessions-cookies.md#samesite) for more information.
 
 Further reading on the topic:
 
 - <https://owasp.org/www-community/attacks/csrf>
 - <https://owasp.org/www-community/SameSite>
 
-
-Avoiding arbitrary object instantiations
-----------------------------------------
+## Avoiding arbitrary object instantiations
 
 Yii [configurations](concept-configurations.md) are associative arrays used by the framework to instantiate new objects through `Yii::createObject($config)`. These arrays specify the class name for instantiation, and it is important to ensure that this class name does not originate from untrusted sources. Otherwise, it can lead to Unsafe Reflection, a vulnerability that allows the execution of malicious code by exploiting the loading of specific classes. Additionally, when you need to dynamically add keys to an object derived from a framework class, such as the base `Component` class, it's essential to validate these dynamic properties using a whitelist approach. This precaution is necessary because the framework might employ `Yii::createObject($config)` within the `__set()` magic method.
 
-
-Avoiding file exposure
-----------------------
+## Avoiding file exposure
 
 By default server webroot is meant to be pointed to `web` directory where `index.php` is. In case of shared hosting
 environments it could be impossible to achieve so we'll end up with all the code, configs and logs in server webroot.
@@ -278,9 +262,7 @@ environments it could be impossible to achieve so we'll end up with all the code
 If it's the case don't forget to deny access to everything except `web`. If it can't be done consider hosting your
 application elsewhere.
 
-
-Avoiding debug info and tools in production
--------------------------------------------
+## Avoiding debug info and tools in production
 
 In debug mode Yii shows quite verbose errors which are certainly helpful for development. The thing is that these
 verbose errors are handy for attacker as well since these could reveal database structure, configuration values and
@@ -297,9 +279,7 @@ Further reading on the topic:
 - <https://owasp.org/www-project-.net/articles/Exception_Handling.md>
 - <https://owasp.org/www-pdf-archive/OWASP_Top_10_2007.pdf> (A6 - Information Leakage and Improper Error Handling)
 
-
-Using secure connection over TLS
---------------------------------
+## Using secure connection over TLS
 
 Yii provides features that rely on cookies and/or PHP sessions. These can be vulnerable in case your connection is
 compromised. The risk is reduced if the app uses secure connection via TLS (often referred to as [SSL](https://en.wikipedia.org/wiki/Transport_Layer_Security)).
@@ -313,12 +293,10 @@ provided by the H5BP project:
 - [Lighttpd](https://github.com/h5bp/server-configs-lighttpd).
 
 > Note: When TLS is configured it is recommended that (session) cookies are sent over TLS exclusively.
-  This is achieved by setting the `secure` flag for sessions and/or cookies.
-  See the [Sessions and Cookies secure flag](runtime-sessions-cookies.md#secure) for more information.
+> This is achieved by setting the `secure` flag for sessions and/or cookies.
+> See the [Sessions and Cookies secure flag](runtime-sessions-cookies.md#secure) for more information.
 
-
-Secure Server configuration
----------------------------
+## Secure Server configuration
 
 The purpose of this section is to highlight risks that need to be considered when creating a
 server configuration for serving a Yii based website. Besides the points covered here there may
@@ -358,7 +336,7 @@ return [
 ```
 
 > Note: you should always prefer web server configuration for 'host header attack' protection instead of the filter usage.
-  [[yii\filters\HostControl]] should be used only if server configuration setup is unavailable.
+> [[yii\filters\HostControl]] should be used only if server configuration setup is unavailable.
 
 ### Configuring SSL peer validation
 
@@ -379,9 +357,10 @@ man-in-the middle type of attacks. Instead, PHP should be configured properly:
 
 1. Download [https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem).
 2. Add the following to your php.ini:
-  ```
-  openssl.cafile="/path/to/cacert.pem"
-  curl.cainfo="/path/to/cacert.pem".
-  ```
+
+```
+openssl.cafile="/path/to/cacert.pem"
+curl.cainfo="/path/to/cacert.pem".
+```
 
 Note that the `cacert.pem` file should be kept up to date.

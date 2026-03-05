@@ -1,8 +1,7 @@
-应用组件
-======================
+# 应用组件
 
 应用主体是[服务定位器](concept-service-locator.md)，
-它部署一组提供各种不同功能的 *应用组件* 来处理请求。
+它部署一组提供各种不同功能的 _应用组件_ 来处理请求。
 例如，`urlManager`组件负责处理网页请求路由到对应的控制器。
 `db`组件提供数据库相关服务等等。
 
@@ -46,10 +45,9 @@
 ```
 
 > Info: 请谨慎注册太多应用组件，
-  应用组件就像全局变量，
-  使用太多可能加大测试和维护的难度。
-  一般情况下可以在需要时再创建本地组件。
-
+> 应用组件就像全局变量，
+> 使用太多可能加大测试和维护的难度。
+> 一般情况下可以在需要时再创建本地组件。
 
 ## 引导启动组件 <span id="bootstrapping-components"></span>
 
@@ -83,10 +81,9 @@
 ]
 ```
 
-
 ## 核心应用组件 <span id="core-application-components"></span>
 
-Yii 定义了一组固定ID和默认配置的 *核心* 组件，
+Yii 定义了一组固定ID和默认配置的 _核心_ 组件，
 例如 [[yii\web\Application::request|request]] 组件
 用来收集用户请求并解析 [路由](runtime-routing.md)；
 [[yii\base\Application::db|db]] 代表一个可以执行数据库操作的数据库连接。
@@ -96,34 +93,34 @@ Yii 定义了一组固定ID和默认配置的 *核心* 组件，
 可以和普通应用组件一样配置和自定义它们。
 当你配置一个核心组件，不指定它的类名的话就会使用Yii默认指定的类。
 
-* [[yii\web\AssetManager|assetManager]]: 管理资源包和资源发布，
+- [[yii\web\AssetManager|assetManager]]: 管理资源包和资源发布，
   详情请参考 [管理资源](output-assets.md) 一节。
-* [[yii\db\Connection|db]]: 代表一个可以执行数据库操作的数据库连接，
+- [[yii\db\Connection|db]]: 代表一个可以执行数据库操作的数据库连接，
   注意配置该组件时必须指定组件类名和其他相关组件属性，
   如[[yii\db\Connection::dsn]]。
   详情请参考 [数据访问对象](db-dao.md) 一节。
-* [[yii\base\Application::errorHandler|errorHandler]]: 处理 PHP 错误和异常，
+- [[yii\base\Application::errorHandler|errorHandler]]: 处理 PHP 错误和异常，
   详情请参考 [错误处理](tutorial-handling-errors.md) 一节。
-* [[yii\i18n\Formatter|formatter]]: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符，
+- [[yii\i18n\Formatter|formatter]]: 格式化输出显示给终端用户的数据，例如数字可能要带分隔符，
   日期使用长格式。
   详情请参考 [格式化输出数据](output-formatting.md) 一节。
-* [[yii\i18n\I18N|i18n]]: 支持信息翻译和格式化。
+- [[yii\i18n\I18N|i18n]]: 支持信息翻译和格式化。
   详情请参考 [国际化](tutorial-i18n.md) 一节。
-* [[yii\log\Dispatcher|log]]: 管理日志对象。
+- [[yii\log\Dispatcher|log]]: 管理日志对象。
   详情请参考 [日志](tutorial-logging.md) 一节。
-* [[yii\swiftmailer\Mailer|mail]]: 支持生成邮件结构并发送，
+- [[yii\swiftmailer\Mailer|mail]]: 支持生成邮件结构并发送，
   详情请参考 [邮件](tutorial-mailing.md) 一节。
-* [[yii\base\Application::response|response]]: 代表发送给用户的响应，
+- [[yii\base\Application::response|response]]: 代表发送给用户的响应，
   详情请参考 [响应](runtime-responses.md) 一节。
-* [[yii\base\Application::request|request]]: 代表从终端用户处接收到的请求，
+- [[yii\base\Application::request|request]]: 代表从终端用户处接收到的请求，
   详情请参考 [请求](runtime-requests.md) 一节。
-* [[yii\web\Session|session]]: 代表会话信息，
+- [[yii\web\Session|session]]: 代表会话信息，
   仅在[[yii\web\Application|Web applications]] 网页应用中可用，
   详情请参考 [Sessions (会话) and Cookies](runtime-sessions-cookies.md) 一节。
-* [[yii\web\UrlManager|urlManager]]: 支持URL地址解析和创建，
+- [[yii\web\UrlManager|urlManager]]: 支持URL地址解析和创建，
   详情请参考 [URL 解析和生成](runtime-url-handling.md) 一节。
-* [[yii\web\User|user]]: 代表认证登录用户信息，
+- [[yii\web\User|user]]: 代表认证登录用户信息，
   仅在[[yii\web\Application|Web applications]] 网页应用中可用，
   详情请参考 [认证](security-authentication.md) 一节。
-* [[yii\web\View|view]]: 支持渲染视图，
+- [[yii\web\View|view]]: 支持渲染视图，
   详情请参考 [Views](structure-views.md) 一节。

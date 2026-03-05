@@ -1,5 +1,4 @@
-Caché de Fragmentos
-===================
+# Caché de Fragmentos
 
 La Caché de Fragmentos se refiere al almacenamiento en caché de un fragmento, o sección, de una página Web. Por ejemplo, si
 una página muestra un sumario de las ventas anuales en una tabla, podrías guardar esta tabla en memoria caché para
@@ -7,7 +6,6 @@ eliminar el tiempo necesario para generar esta tabla en cada petición (request)
 sobre la [caché de datos](caching-data.md).
 
 Para usar la caché de fragmentos, utiliza el siguiente código en tu [vista (view)](structure-views.md):
-
 
 ```php
 if ($this->beginCache($id)) {
@@ -26,7 +24,6 @@ generado será capturado y almacenado en la memoria caché.
 
 Como en la [caché de datos](caching-data.md), un `$id` (clave) único es necesario para identificar un contenido guardado en
 caché.
-
 
 ## Opciones de Caché <span id="caching-options"></span>
 
@@ -52,7 +49,6 @@ if ($this->beginCache($id, ['duration' => 3600])) {
 
 Si la opción no está activada, se tomará el valor por defecto 60, lo que significa que el contenido almacenado en caché expirará en 60 segundos.
 
-
 ### Dependencias <span id="dependencies"></span>
 
 Como en la [caché de datos](caching-data.md#cache-dependencies), el fragmento de contenido que está siendo almacenado en caché
@@ -77,7 +73,6 @@ if ($this->beginCache($id, ['dependency' => $dependency])) {
 }
 ```
 
-
 ### Variaciones <span id="variations"></span>
 
 El contenido almacenado en caché puede variar de acuerdo a ciertos parámetros. Por ejemplo, para una aplicación Web que
@@ -98,7 +93,6 @@ if ($this->beginCache($id, ['variations' => [Yii::$app->language]])) {
 }
 ```
 
-
 ### Alternando el Almacenamiento en Caché <span id="toggling-caching"></span>
 
 Puede que a veces quieras habilitar la caché de fragmentos únicamente cuando ciertas condiciones se cumplan. Por ejemplo,
@@ -115,7 +109,6 @@ if ($this->beginCache($id, ['enabled' => Yii::$app->request->isGet])) {
     $this->endCache();
 }
 ```
-
 
 ## Almacenamiento en Caché Anidada <span id="nested-caching"></span>
 
@@ -145,11 +138,10 @@ if ($this->beginCache($id1)) {
 Existen diferentes opciones de configuración para las cachés anidadas. Por ejemplo, las cachés internas y las cachés
 externas pueden usar diferentes valores de duración. Aún cuando los datos almacenados en la caché externa sean invalidados,
 la caché interna puede todavía proporcionar un fragmento válido. Sin embargo, al revés no es cierto. Si la caché externa
-es evaluada como válida, seguiría proporcionando la misma copia en caché incluso después de que el contenido  en la
+es evaluada como válida, seguiría proporcionando la misma copia en caché incluso después de que el contenido en la
 caché interna haya sido invalidada. Por lo tanto, hay que tener mucho cuidado al configurar el tiempo de duración o las
 dependencias de las cachés anidadas, de lo contrario los fragmentos internos que ya estén obsoletos se pueden seguir
 manteniendo en el fragmento externo.
-
 
 ## Contenido Dinámico <span id="dynamic-content"></span>
 
@@ -158,9 +150,9 @@ relavitamente estático excepto en uno u otro lugar. Por ejemplo, la cabeza de u
 menú principal junto al nombre del usuario actual. Otro problema es que el contenido que está siendo almacenado en caché
 puede que contenga código PHP que debe ser ejecutado en cada petición (por ejemplo, el código para registrar
 un paquete de recursos (asset bundle)). En ambos casos, podríamos resolver el problema con lo que llamamos la
-característica de *contenido dinámico*.
+característica de _contenido dinámico_.
 
-Entendemos *contenido dinámico* como un fragmento de salida que no debería ser guardado en caché incluso si está
+Entendemos _contenido dinámico_ como un fragmento de salida que no debería ser guardado en caché incluso si está
 encerrado dentro de un fragmento de caché. Para hacer el contenido dinámico todo el tiempo, éste ha de ser generado ejecutando
 cierto código PHP en cada petición, incluso si el contenido está siendo mostrado desde la caché.
 

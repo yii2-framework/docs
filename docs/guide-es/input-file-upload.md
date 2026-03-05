@@ -1,14 +1,12 @@
-Subir Archivos
-==============
+# Subir Archivos
 
 Subir archivos en Yii es normalmente realizado con la ayuda de [[yii\web\UploadedFile]], que encapsula cada archivo subido
 en un objeto `UploadedFile`. Combinado con [[yii\widgets\ActiveForm]] y [modelos](structure-models.md),
 puedes fácilmente implementar un mecanismo seguro de subida de archivos.
 
-
 ## Crear Modelos <span id="creating-models"></span>
 
-Al igual que al trabajar con entradas de texto plano, para subir un archivo debes crear una clase de modelo y utilizar un atributo 
+Al igual que al trabajar con entradas de texto plano, para subir un archivo debes crear una clase de modelo y utilizar un atributo
 de dicho modelo para mantener la instancia del archivo subido. Debes también declarar una regla para validar la subida del archivo.
 Por ejemplo,
 
@@ -31,7 +29,7 @@ class UploadForm extends Model
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
-    
+
     public function upload()
     {
         if ($this->validate()) {
@@ -52,9 +50,8 @@ El validador `file` te permite chequear las extensiones, el tamaño, el tipo MIM
 la sección [Validadores del Framework](tutorial-core-validators.md#file) para más detalles.
 
 > Tip: Si estás subiendo una imagen, podrías considerar el utilizar el validador `image`. El validador `image` es
-  implementado a través de [[yii\validators\ImageValidator]], que verifica que un atributo haya recibido una imagen válida 
-  que pueda ser tanto guardada como procesada utilizando la [Extensión Imagine](https://github.com/yiisoft/yii2-imagine).
-
+> implementado a través de [[yii\validators\ImageValidator]], que verifica que un atributo haya recibido una imagen válida
+> que pueda ser tanto guardada como procesada utilizando la [Extensión Imagine](https://github.com/yiisoft/yii2-imagine).
 
 ## Renderizar Campos de Subida de Archivos <span id="rendering-file-input"></span>
 
@@ -78,7 +75,7 @@ Es importante recordad que agregues la opción `enctype` al formulario para que 
 La llamada a `fileInput()` renderizará un tag `<input type="file">` que le permitirá al usuario seleccionar el archivo a subir.
 
 > Tip: desde la versión 2.0.8, [[yii\widgets\ActiveField::fileInput|fileInput]] agrega la opción `enctype` al formulario
-  automáticamente cuando se utiliza una campo de subida de archivo.
+> automáticamente cuando se utiliza una campo de subida de archivo.
 
 ## Uniendo Todo <span id="wiring-up"></span>
 
@@ -115,7 +112,6 @@ En el código anterior, cuando se envía el formulario, el método [[yii\web\Upl
 para representar el archivo subido como una instancia de `UploadedFile`. Entonces dependemos de la validación del modelo
 para asegurarnos que el archivo subido es válido y entonces subirlo al servidor.
 
-
 ## Uploading Multiple Files <span id="uploading-multiple-files"></span>
 
 También puedes subir varios archivos a la vez, con algunos ajustes en el código de las subsecciones previas.
@@ -145,10 +141,10 @@ class UploadForm extends Model
             [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
         ];
     }
-    
+
     public function upload()
     {
-        if ($this->validate()) { 
+        if ($this->validate()) {
             foreach ($this->imageFiles as $file) {
                 $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
             }
@@ -162,7 +158,7 @@ class UploadForm extends Model
 
 En el archivo de la vista, debes agregar la opción `multiple` en la llamada a `fileInput()` de manera que el campo
 pueda recibir varios archivos:
-  
+
 ```php
 <?php
 use yii\widgets\ActiveForm;
@@ -178,7 +174,7 @@ use yii\widgets\ActiveForm;
 ```
 
 Y finalmente en la acción del controlador, debes llamar `UploadedFile::getInstances()` en vez de
-`UploadedFile::getInstance()` para asignar un array de instancias `UploadedFile` a `UploadForm::imageFiles`. 
+`UploadedFile::getInstance()` para asignar un array de instancias `UploadedFile` a `UploadForm::imageFiles`.
 
 ```php
 namespace app\controllers;

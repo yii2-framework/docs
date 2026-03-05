@@ -1,16 +1,15 @@
-並べ替え
-========
+# 並べ替え
 
 複数のデータ行を表示する際に、エンド・ユーザによって指定されるカラムに従ってデータを並べ替えなければならないことがよくあります。
 Yii は [[yii\data\Sort]] オブジェクトを使って並べ替えのスキーマに関する情報を表します。
 具体的に言えば、
 
-* [[yii\data\Sort::$attributes|attributes]] データの並べ替えに使用できる *属性* を指定します。
+- [[yii\data\Sort::$attributes|attributes]] データの並べ替えに使用できる _属性_ を指定します。
   単純で良ければ、[モデルの属性](structure-models.md#attributes) をこの属性とすることが出来ます。
   また、複数のモデル属性や DB のカラムを結合した合成的な属性を指定することも出来ます。詳細については後述します。
-* [[yii\data\Sort::$attributeOrders|attributeOrders]] 各属性について、
+- [[yii\data\Sort::$attributeOrders|attributeOrders]] 各属性について、
   現在リクエストされている並べ替えの方向を指定します。
-* [[yii\data\Sort::$orders|orders]] 並べ替えの方向をカラムを使う低レベルな形式で示します。
+- [[yii\data\Sort::$orders|orders]] 並べ替えの方向をカラムを使う低レベルな形式で示します。
 
 [[yii\data\Sort]] を使用するためには、最初にどの属性が並べ替え可能であるかを宣言します。
 次に、現在リクエストされている並べ替え情報を [[yii\data\Sort::$attributeOrders|attributeOrders]]
@@ -39,7 +38,7 @@ $articles = Article::find()
 
 上記の例では、[[yii\data\Sort|Sort]] オブジェクトに対して二つの属性が宣言されています。すなわち、`age` と `name` です。
 
-`age` 属性は `Article` アクティブ・レコード・クラスの `age` 属性に対応する *単純な* 属性です。
+`age` 属性は `Article` アクティブ・レコード・クラスの `age` 属性に対応する _単純な_ 属性です。
 これは、次の宣言と等価です。
 
 ```php
@@ -51,7 +50,7 @@ $articles = Article::find()
 ]
 ```
 
-`name` 属性は `Article` の `first_name` と `last_name` によって定義される *合成的な* 属性です。
+`name` 属性は `Article` の `first_name` と `last_name` によって定義される _合成的な_ 属性です。
 これは次のような配列構造を使って宣言されています。
 
 - `asc` および `desc` の要素は、それぞれ、この属性を昇順および降順に並べ替える方法を指定します。
@@ -65,8 +64,8 @@ $articles = Article::find()
   ラベルは HTML エンコードされないことに注意してください。
 
 > Info: [[yii\data\Sort::$orders|orders]] の値をデータベースのクエリに直接に供給して、
-  `ORDER BY` 句を構築することが出来ます。データベースのクエリが認識できない合成的な属性が入っている場合があるため、
-  [[yii\data\Sort::$attributeOrders|attributeOrders]] を使ってはいけません。
+> `ORDER BY` 句を構築することが出来ます。データベースのクエリが認識できない合成的な属性が入っている場合があるため、
+> [[yii\data\Sort::$attributeOrders|attributeOrders]] を使ってはいけません。
 
 [[yii\data\Sort::link()]] を呼んでハイパーリンクを生成すれば、それをクリックして、指定した属性によるデータの並べ替えをリクエストすることが出来るようになります。
 [[yii\data\Sort::createUrl()]] を呼んで並べ替えを実行する URL を生成することも出来ます。

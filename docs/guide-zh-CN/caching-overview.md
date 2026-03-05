@@ -1,5 +1,4 @@
-缓存
-=======
+# 缓存
 
 缓存是提升 Web 应用性能简便有效的方式。
 通过将相对静态的数据存储到缓存并在收到请求时取回缓存，
@@ -13,7 +12,7 @@
 
 Yii 支持如上所有缓存机制：
 
-* [数据缓存](caching-data.md)
-* [片段缓存](caching-fragment.md)
-* [页面缓存](caching-page.md)
-* [HTTP 缓存](caching-http.md)
+- [数据缓存](caching-data.md)
+- [片段缓存](caching-fragment.md)
+- [页面缓存](caching-page.md)
+- [HTTP 缓存](caching-http.md)

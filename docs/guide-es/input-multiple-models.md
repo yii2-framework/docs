@@ -1,16 +1,15 @@
-Obtención de datos para los modelos de múltiples
-================================
+# Obtención de datos para los modelos de múltiples
 
 Cuando se trata de algunos datos complejos, es posible que puede que tenga que utilizar varios modelos diferentes para recopilar
-la entrada del usuario. Por ejemplo, suponiendo que la información de inicio de sesión del usuario se almacena en la tabla `user`, 
+la entrada del usuario. Por ejemplo, suponiendo que la información de inicio de sesión del usuario se almacena en la tabla `user`,
 mientras que el perfil de usuario la información se almacena en la tabla `Profile`, es posible que desee para recoger los datos
-de entrada sobre un usuario a través de un modelo `User` y un modelo `Profile`. Con el modelo de Yii y apoyo formulario, 
+de entrada sobre un usuario a través de un modelo `User` y un modelo `Profile`. Con el modelo de Yii y apoyo formulario,
 puede solucionar este problema de una manera que no es mucho diferente de la manipulación de un solo modelo.
 
-En lo que sigue, vamos a mostrar cómo se puede crear un formulario que permitirá recoger datos tanto para los modelos `User` y 
+En lo que sigue, vamos a mostrar cómo se puede crear un formulario que permitirá recoger datos tanto para los modelos `User` y
 `Profile`.
 
-En primer lugar, la acción del controlador para la recogida de los datos del usuario y del perfil se puede escribir de la 
+En primer lugar, la acción del controlador para la recogida de los datos del usuario y del perfil se puede escribir de la
 siguiente manera,
 
 ```php
@@ -31,16 +30,16 @@ class UserController extends Controller
         if (!$user) {
             throw new NotFoundHttpException("The user was not found.");
         }
-        
+
         $profile = Profile::findOne($user->profile_id);
-        
+
         if (!$profile) {
             throw new NotFoundHttpException("The user has no profile.");
         }
-        
+
         $user->scenario = 'update';
         $profile->scenario = 'update';
-        
+
         if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
             $isValid = $user->validate();
             $isValid = $profile->validate() && $isValid;
@@ -50,7 +49,7 @@ class UserController extends Controller
                 return $this->redirect(['user/view', 'id' => $id]);
             }
         }
-        
+
         return $this->render('update', [
             'user' => $user,
             'profile' => $profile,
@@ -75,7 +74,7 @@ $form = ActiveForm::begin([
     <?= $form->field($user, 'username') ?>
 
     ...other input fields...
-    
+
     <?= $form->field($profile, 'website') ?>
 
     <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>

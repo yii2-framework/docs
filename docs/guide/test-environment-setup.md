@@ -1,5 +1,4 @@
-Testing environment setup
-======================
+# Testing environment setup
 
 Yii 2 has officially maintained integration with [`Codeception`](https://github.com/Codeception/Codeception) testing
 framework that allows you to create the following test types:

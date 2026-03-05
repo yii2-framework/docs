@@ -1,5 +1,4 @@
-模型
-======
+# 模型
 
 模型是 [MVC](https://zh.wikipedia.org/wiki/MVC) 模式中的一部分，
 是代表业务数据、规则和逻辑的对象。
@@ -7,23 +6,22 @@
 可通过继承 [[yii\base\Model]] 或它的子类定义模型类，
 基类[[yii\base\Model]]支持许多实用的特性：
 
-* [属性](#attributes): 代表可像普通类属性或数组
+- [属性](#attributes): 代表可像普通类属性或数组
   一样被访问的业务数据;
-* [属性标签](#attribute-labels): 指定属性显示出来的标签;
-* [块赋值](#massive-assignment): 支持一步给许多属性赋值;
-* [验证规则](#validation-rules): 确保输入数据符合所申明的验证规则;
-* [数据导出](#data-exporting): 允许模型数据导出为自定义格式的数组。
+- [属性标签](#attribute-labels): 指定属性显示出来的标签;
+- [块赋值](#massive-assignment): 支持一步给许多属性赋值;
+- [验证规则](#validation-rules): 确保输入数据符合所申明的验证规则;
+- [数据导出](#data-exporting): 允许模型数据导出为自定义格式的数组。
 
 `Model` 类也是更多高级模型如[Active Record 活动记录](db-active-record.md)的基类，
 更多关于这些高级模型的详情请参考相关手册。
 
 > Info: 模型并不强制一定要继承[[yii\base\Model]]，但是由于很多组件支持[[yii\base\Model]]，
-  最好使用它做为模型基类。
-
+> 最好使用它做为模型基类。
 
 ## 属性 <span id="attributes"></span>
 
-模型通过 *属性* 来代表业务数据，每个属性像是模型的公有可访问属性，
+模型通过 _属性_ 来代表业务数据，每个属性像是模型的公有可访问属性，
 [[yii\base\Model::attributes()]] 指定模型所拥有的属性。
 
 可像访问一个对象属性一样访问模型的属性:
@@ -36,8 +34,8 @@ $model->name = 'example';
 echo $model->name;
 ```
 
-也可像访问数组单元项一样访问属性，这要感谢[[yii\base\Model]]支持 
-[ArrayAccess 数组访问](https://www.php.net/manual/en/class.arrayaccess.php) 
+也可像访问数组单元项一样访问属性，这要感谢[[yii\base\Model]]支持
+[ArrayAccess 数组访问](https://www.php.net/manual/en/class.arrayaccess.php)
 和 [ArrayIterator 数组迭代器](https://www.php.net/manual/en/class.arrayiterator.php):
 
 ```php
@@ -53,10 +51,9 @@ foreach ($model as $name => $value) {
 }
 ```
 
-
 ### 定义属性 <span id="defining-attributes"></span>
 
-默认情况下你的模型类直接从[[yii\base\Model]]继承，所有 *non-static public非静态公有* 成员变量都是属性。
+默认情况下你的模型类直接从[[yii\base\Model]]继承，所有 _non-static public非静态公有_ 成员变量都是属性。
 例如，下述`ContactForm` 模型类有四个属性`name`, `email`, `subject` and `body`，
 `ContactForm` 模型用来代表从HTML表单获取的输入数据。
 
@@ -74,13 +71,11 @@ class ContactForm extends Model
 }
 ```
 
-
-另一种方式是可覆盖 [[yii\base\Model::attributes()]] 
+另一种方式是可覆盖 [[yii\base\Model::attributes()]]
 来定义属性，该方法返回模型的属性名。
 例如 [[yii\db\ActiveRecord]] 返回对应数据表列名作为它的属性名，
 注意可能需要覆盖魔术方法如`__get()`,
 `__set()`使属性像普通对象属性被访问。
-
 
 ### 属性标签 <span id="attribute-labels"></span>
 
@@ -97,7 +92,7 @@ $model = new \app\models\ContactForm;
 echo $model->getAttributeLabel('name');
 ```
 
-默认情况下，属性标签通过[[yii\base\Model::generateAttributeLabel()]]方法自动从属性名生成. 
+默认情况下，属性标签通过[[yii\base\Model::generateAttributeLabel()]]方法自动从属性名生成.
 它会自动将驼峰式大小写变量名转换为多个首字母大写的单词，
 例如 `username` 转换为 `Username`，
 `firstName` 转换为 `First Name`。
@@ -148,12 +143,11 @@ public function attributeLabels()
 可对相同的属性返回不同的标签。
 
 > Info: 属性标签是 [视图](structure-views.md)一部分，
-   但是在模型中声明标签通常非常方便，并可形成非常简洁可重用代码。
-
+>  但是在模型中声明标签通常非常方便，并可形成非常简洁可重用代码。
 
 ## 场景 <span id="scenarios"></span>
 
-模型可能在多个 *场景* 下使用，例如 `User` 模块可能会在收集用户登录输入，
+模型可能在多个 _场景_ 下使用，例如 `User` 模块可能会在收集用户登录输入，
 也可能会在用户注册时使用。在不同的场景下，
 模型可能会使用不同的业务规则和逻辑，
 例如 `email` 属性在注册时强制要求有，但在登陆时不需要。
@@ -196,11 +190,11 @@ class User extends ActiveRecord
 ```
 
 > Info: 在上述和下述的例子中，模型类都是继承[[yii\db\ActiveRecord]]，
-  因为多场景的使用通常发生在[Active Record](db-active-record.md) 类中.
+> 因为多场景的使用通常发生在[Active Record](db-active-record.md) 类中.
 
-`scenarios()` 方法返回一个数组，数组的键为场景名，值为对应的 *active attributes活动属性*。
+`scenarios()` 方法返回一个数组，数组的键为场景名，值为对应的 _active attributes活动属性_。
 活动属性可被 [块赋值](#massive-assignment) 并遵循[验证规则](#validation-rules)
-在上述例子中，`username` 和 `password` 在`login`场景中启用，在 `register` 场景中, 
+在上述例子中，`username` 和 `password` 在`login`场景中启用，在 `register` 场景中,
 除了 `username` and `password` 外 `email` 也被启用。
 
 `scenarios()` 方法默认实现会返回所有[[yii\base\Model::rules()]]方法申明的验证规则中的场景，
@@ -231,11 +225,10 @@ class User extends ActiveRecord
 你也可以用于其他目的，
 例如可基于不同的场景定义不同的 [属性标签](#attribute-labels)。
 
-
 ## 验证规则 <span id="validation-rules"></span>
 
 当模型接收到终端用户输入的数据，
-数据应当满足某种规则(称为 *验证规则*, 也称为 *业务规则*)。
+数据应当满足某种规则(称为 _验证规则_, 也称为 _业务规则_)。
 例如假定`ContactForm`模型，你可能想确保所有属性不为空且 `email` 属性包含一个有效的邮箱地址，
 如果某个属性的值不满足对应的业务规则，
 相应的错误信息应显示，以帮助用户修正错误。
@@ -259,7 +252,6 @@ if ($model->validate()) {
 }
 ```
 
-
 通过覆盖 [[yii\base\Model::rules()]] 方法指定模型
 属性应该满足的规则来申明模型相关验证规则。
 下述例子显示`ContactForm`模型申明的验证规则:
@@ -278,7 +270,7 @@ public function rules()
 ```
 
 一条规则可用来验证一个或多个属性，一个属性可对应一条或多条规则。
-更多关于如何申明验证规则的详情请参考 
+更多关于如何申明验证规则的详情请参考
 [验证输入](input-validation.md) 一节.
 
 有时你想一条规则只在某个 [场景](#scenarios) 下应用，为此你可以指定规则的 `on` 属性，
@@ -298,11 +290,10 @@ public function rules()
 ```
 
 如果没有指定 `on` 属性，规则会在所有场景下应用， 在当前[[yii\base\Model::scenario|scenario]]
-下应用的规则称之为 *active rule活动规则*。
+下应用的规则称之为 _active rule活动规则_。
 
 一个属性只会属于`scenarios()`中定义的活动属性且在`rules()`
 申明对应一条或多条活动规则的情况下被验证。
-
 
 ## 块赋值 <span id="massive-assignment"></span>
 
@@ -326,12 +317,11 @@ $model->subject = isset($data['subject']) ? $data['subject'] : null;
 $model->body = isset($data['body']) ? $data['body'] : null;
 ```
 
-
 ### 安全属性 <span id="safe-attributes"></span>
 
 块赋值只应用在模型当前[[yii\base\Model::scenario|scenario]]
 场景[[yii\base\Model::scenarios()]]方法
-列出的称之为 *安全属性* 的属性上，例如，如果`User`模型申明以下场景，
+列出的称之为 _安全属性_ 的属性上，例如，如果`User`模型申明以下场景，
 当当前场景为`login`时候，只有`username` and `password` 可被块赋值，
 其他属性不会被赋值。
 
@@ -346,9 +336,9 @@ public function scenarios()
 ```
 
 > Info: 块赋值只应用在安全属性上，
-  因为你想控制哪些属性会被终端用户输入数据所修改，
-  例如，如果 `User` 模型有一个`permission`属性对应用户的权限，
-  你可能只想让这个属性在后台界面被管理员修改。
+> 因为你想控制哪些属性会被终端用户输入数据所修改，
+> 例如，如果 `User` 模型有一个`permission`属性对应用户的权限，
+> 你可能只想让这个属性在后台界面被管理员修改。
 
 由于默认[[yii\base\Model::scenarios()]]的实现会返回
 [[yii\base\Model::rules()]]所有属性和数据，
@@ -366,7 +356,6 @@ public function rules()
     ];
 }
 ```
-
 
 ### 非安全属性 <span id="unsafe-attributes"></span>
 
@@ -405,7 +394,6 @@ public function rules()
 
 在这种情况下，属性 `username`, `password` 和 `secret` 是必须的，但是 `secret`必须被明确指定。
 
-
 ## 数据导出 <span id="data-exporting"></span>
 
 模型通常要导出成不同格式，例如，你可能想将模型的一个集合转成JSON或Excel格式，
@@ -425,7 +413,7 @@ $post = \app\models\Post::findOne(100);
 $array = $post->attributes;
 ```
 
-[[yii\base\Model::attributes]] 属性会返回 *所有* 
+[[yii\base\Model::attributes]] 属性会返回 _所有_
 [[yii\base\Model::attributes()]] 申明的属性的值。
 
 更灵活和强大的将模型转换为数组的方式是使用 [[yii\base\Model::toArray()]] 方法，
@@ -434,14 +422,13 @@ $array = $post->attributes;
 实际上，它是导出模型到 RESTful 网页服务开发的默认方法，
 详情请参阅[响应格式](rest-response-formatting.md).
 
-
 ### 字段 <span id="fields"></span>
 
 字段是模型通过调用[[yii\base\Model::toArray()]]
 生成的数组的单元名。
 
 默认情况下，字段名对应属性名，但是你可以通过覆盖
-[[yii\base\Model::fields()|fields()]] 和/或 
+[[yii\base\Model::fields()|fields()]] 和/或
 [[yii\base\Model::extraFields()|extraFields()]] 方法来改变这种行为，
 两个方法都返回一个字段定义列表，`fields()` 方法定义的字段是默认字段，
 表示`toArray()`方法默认会返回这些字段。 `extraFields()`方法定义额外可用字段，
@@ -495,7 +482,6 @@ public function fields()
 > 在上述列子中，我们选择过滤掉
 > `auth_key`, `password_hash` and `password_reset_token`。
 
-
 ## 最佳实践 <span id="best-practices"></span>
 
 模型是代表业务数据、规则和逻辑的中心地方，通常在很多地方重用，
@@ -504,13 +490,13 @@ public function fields()
 
 归纳起来，模型
 
-* 可包含属性来展示业务数据;
-* 可包含验证规则确保数据有效和完整;
-* 可包含方法实现业务逻辑;
-* 不应直接访问请求，session和其他环境数据，
+- 可包含属性来展示业务数据;
+- 可包含验证规则确保数据有效和完整;
+- 可包含方法实现业务逻辑;
+- 不应直接访问请求，session和其他环境数据，
   这些数据应该由[控制器](structure-controllers.md)传入到模型;
-* 应避免嵌入HTML或其他展示代码，这些代码最好在 [视图](structure-views.md)中处理;
-* 单个模型中避免太多的 [场景](#scenarios).
+- 应避免嵌入HTML或其他展示代码，这些代码最好在 [视图](structure-views.md)中处理;
+- 单个模型中避免太多的 [场景](#scenarios).
 
 在开发大型复杂系统时应经常考虑最后一条建议，
 在这些系统中，模型会很大并在很多地方使用，因此会包含需要规则集和业务逻辑，
@@ -518,10 +504,10 @@ public function fields()
 因为一个简单修改会影响好多地方，
 为确保模型好维护，最好使用以下策略：
 
-* 定义可被多个 [应用主体](structure-applications.md) 
+- 定义可被多个 [应用主体](structure-applications.md)
   或 [模块](structure-modules.md) 共享的模型基类集合。
   这些模型类应包含通用的最小规则集合和逻辑。
-* 在每个使用模型的 [应用主体](structure-applications.md) 或 [模块](structure-modules.md)中，
+- 在每个使用模型的 [应用主体](structure-applications.md) 或 [模块](structure-modules.md)中，
   通过继承对应的模型基类来定义具体的模型类，
   具体模型类包含应用主体或模块指定的规则和逻辑。
 

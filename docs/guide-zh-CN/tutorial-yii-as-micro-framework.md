@@ -19,15 +19,15 @@ cd micro-app
 
 ```json
 {
-    "require": {
-        "yiisoft/yii2": "~2.0.0"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ]
+  "require": {
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
 }
 ```
 
@@ -39,7 +39,7 @@ cd micro-app
 
 创建一个 `web` 目录并将 `index.php` 放入其中，内容如下：
 
-```php 
+```php
 <?php
 
 // comment out the following two lines when deployed to production
@@ -123,7 +123,6 @@ micro-app/
 > 以表明您不受此名称的限制（如果您是这样认为），
 > 然后调整 [[yii\base\Application::$controllerNamespace|controllers namespace]] 并设置正确的别名。
 
-
 ## 创建一个 REST API
 
 为了演示我们的“微框架”的用法，我们将为帖子创建一个简单的 REST API。
@@ -160,7 +159,7 @@ namespace micro\models;
 use yii\db\ActiveRecord;
 
 class Post extends ActiveRecord
-{ 
+{
     public static function tableName()
     {
         return '{{post}}';

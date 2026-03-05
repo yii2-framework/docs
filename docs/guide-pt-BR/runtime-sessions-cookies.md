@@ -1,13 +1,10 @@
-Sessões e Cookies
-====================
+# Sessões e Cookies
 
 Sessões e cookies permitem que dados sejam persistentes entre várias requisições de usuários. No PHP puro você pode acessá-los através das variáveis globais `$_SESSION` e `$_COOKIE`, respectivamente. Yii encapsula sessões e cookies como objetos e portanto, permite que você possa acessá-los de um modo orientado à objetos com melhorias adicionais úteis.
-
 
 ## Sessões<span id="sessions"></span>
 
 Assim como [requisições](runtime-requests.md) e [respostas](runtime-responses.md), você pode ter acesso a sessões através do [componente de aplicação](structure-application-components.md) `session` que é uma instância de [[yii\web\Session]], por padrão.
-
 
 ### Abrindo e Fechando Sessões <span id="opening-closing-sessions"></span>
 
@@ -30,7 +27,6 @@ $session->destroy();
 ```
 
 Você pode chamar [[yii\web\Session::open()|open()]] and [[yii\web\Session::close()|close()]] várias vezes, sem causar erros; internamente os métodos irão verificar primeiro se a sessão já está aberta.
-
 
 ### Acessando Dados da Sessão <span id="access-session-data"></span>
 
@@ -113,15 +109,14 @@ $session['captcha.lifetime'] = 3600;
 
 Para um melhor desempenho e legibilidade do código, recomendamos a última solução alternativa. Isto é, em vez de armazenar um array como uma variável de sessão única, você armazena cada elemento do array como uma variável de sessão que compartilha o mesmo prefixo de chave com outros elementos do array.
 
-
 ### Armazenamento de Sessão Personalizado <span id="custom-session-storage"></span>
 
 A classe padrão [[yii\web\Session]] armazena dados da sessão como arquivos no servidor. Yii Também fornece as seguintes classes de sessão implementando diferentes formas de armazenamento:
 
-* [[yii\web\DbSession]]: armazena dados de sessão em uma tabela no banco de dados.
-* [[yii\web\CacheSession]]: armazena dados de sessão em um cache com a ajuda de um [cache component](caching-data.md#cache-components) configurado.
-* [[yii\redis\Session]]: armazena dados de sessão utilizando [redis](https://redis.io/) como meio de armazenamento.
-* [[yii\mongodb\Session]]: armazena dados de sessão em um [MongoDB](https://www.mongodb.com/).
+- [[yii\web\DbSession]]: armazena dados de sessão em uma tabela no banco de dados.
+- [[yii\web\CacheSession]]: armazena dados de sessão em um cache com a ajuda de um [cache component](caching-data.md#cache-components) configurado.
+- [[yii\redis\Session]]: armazena dados de sessão utilizando [redis](https://redis.io/) como meio de armazenamento.
+- [[yii\mongodb\Session]]: armazena dados de sessão em um [MongoDB](https://www.mongodb.com/).
 
 Todas essas classes de sessão suportam o mesmo conjunto de métodos da API. Como resultado, você pode mudar para uma classe de armazenamento de sessão diferente, sem a necessidade de modificar o código da aplicação que usa sessões.
 
@@ -151,6 +146,7 @@ CREATE TABLE session
     data BLOB
 )
 ```
+
 onde 'BLOB' refere-se ao tipo BLOB do seu DBMS preferido. Estes são os tipos de BLOB que podem ser usados para alguns SGBD populares:
 
 - MySQL: LONGBLOB
@@ -158,7 +154,6 @@ onde 'BLOB' refere-se ao tipo BLOB do seu DBMS preferido. Estes são os tipos de
 - MSSQL: BLOB
 
 > Observação: De acordo com a configuração `session.hash_function` no php.ini , pode ser necessário ajustar o tamanho da coluna `id`. Por exemplo, se a configuração for `session.hash_function=sha256`, você deve usar um tamanho de 64 em vez de 40.
-
 
 ### Dados Flash <span id="flash-data"></span>
 
@@ -213,11 +208,9 @@ $alerts = $session->getFlash('alerts');
 > ]);
 > ```
 
-
 ## Cookies <span id="cookies"></span>
 
 Yii representa cada cookie como um objeto de [[yii\web\Cookie]]. Ambos, [[yii\web\Request]] e [[yii\web\Response]] mantém uma coleção de cookies através da propriedade chamada `cookies`. A coleção de cookie no primeiro representa os cookies submetidos na requisição, enquanto a coleção de cookie no último representa os cookies que são para serem enviados ao usuário.
-
 
 ### Lendo Cookies <span id="reading-cookies"></span>
 
@@ -245,7 +238,6 @@ if ($cookies->has('language')) ...
 if (isset($cookies['language'])) ...
 ```
 
-
 ### Enviando Cookies <span id="sending-cookies"></span>
 
 Você pode enviar cookies para o usuário final utilizando o seguinte código:
@@ -269,7 +261,6 @@ unset($cookies['language']);
 Além das propriedades [[yii\web\Cookie::name|name]], [[yii\web\Cookie::value|value]] mostradas nos exemplos acima, a classe [[yii\web\Cookie]] também define outras propriedades para representar plenamente todas as informações de cookie disponíveis, tal como [[yii\web\Cookie::domain|domain]], [[yii\web\Cookie::expire|expire]]. Você pode configurar essas propriedades conforme necessário para preparar um cookie e, em seguida, adicioná-lo à coleção de cookie da resposta.
 
 > Observação: Para melhor segurança, o valor padrão de [[yii\web\Cookie::httpOnly]] é definido para `true`. Isso ajuda a reduzir o risco de um script do lado do cliente acessar o cookie protegido (se o browser suporta-lo). Você pode ler o [httpOnly wiki article](https://owasp.org/www-community/HttpOnly) para mais detalhes.
-
 
 ### Validação de Cookie <span id="cookie-validation"></span>
 

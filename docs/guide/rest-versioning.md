@@ -1,15 +1,14 @@
-Versioning
-==========
+# Versioning
 
-A good API is *versioned*: changes and new features are implemented in new versions of the API instead of continually altering just one version. Unlike Web applications, with which you have full control of both the client-side and server-side
+A good API is _versioned_: changes and new features are implemented in new versions of the API instead of continually altering just one version. Unlike Web applications, with which you have full control of both the client-side and server-side
 code, APIs are meant to be used by clients beyond your control. For this reason, backward
-compatibility (BC) of the APIs should be maintained whenever possible. If a change that may break BC is necessary, you should introduce it in new version of the API, and bump up the version number. Existing clients can continue to use the old, working version of the API; and new or upgraded clients can get the new functionality in the new API version. 
+compatibility (BC) of the APIs should be maintained whenever possible. If a change that may break BC is necessary, you should introduce it in new version of the API, and bump up the version number. Existing clients can continue to use the old, working version of the API; and new or upgraded clients can get the new functionality in the new API version.
 
 > Tip: Refer to [Semantic Versioning](https://semver.org/)
-for more information on designing API version numbers.
+> for more information on designing API version numbers.
 
 One common way to implement API versioning is to embed the version number in the API URLs.
-For example, `https://example.com/v1/users` stands for the `/users` endpoint of API version 1. 
+For example, `https://example.com/v1/users` stands for the `/users` endpoint of API version 1.
 
 Another method of API versioning,
 which has gained momentum recently, is to put the version number in the HTTP request headers. This is typically done through the `Accept` header:
@@ -24,9 +23,9 @@ Accept: application/vnd.company.myapp-v1+json
 Both methods have their pros and cons, and there are a lot of debates about each approach. Below you'll see a practical strategy
 for API versioning that is a mix of these two methods:
 
-* Put each major version of API implementation in a separate module whose ID is the major version number (e.g. `v1`, `v2`).
+- Put each major version of API implementation in a separate module whose ID is the major version number (e.g. `v1`, `v2`).
   Naturally, the API URLs will contain major version numbers.
-* Within each major version (and thus within the corresponding module), use the `Accept` HTTP request header
+- Within each major version (and thus within the corresponding module), use the `Accept` HTTP request header
   to determine the minor version number and write conditional code to respond to the minor versions accordingly.
 
 For each module serving a major version, the module should include the resource and controller classes

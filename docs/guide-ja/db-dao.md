@@ -1,5 +1,4 @@
-データベース・アクセス・オブジェクト
-====================================
+# データベース・アクセス・オブジェクト
 
 [PDO](https://www.php.net/manual/ja/book.pdo.php) の上に構築された Yii DAO (データベース・アクセス・オブジェクト) は、
 リレーショナル・データベースにアクセスするためのオブジェクト指向 API を提供するものです。
@@ -20,8 +19,8 @@ Yii 2.0 では、DAO は下記の DBMS のサポートを内蔵しています�
 - [MSSQL](https://www.microsoft.com/en-us/sqlserver/default.aspx): バージョン 2008 以上。
 
 > Note: PHP 7 用の pdo_oci の新しいバージョンは、現在、ソース・コードとしてのみ存在します。
-  [コミュニティによる説明](https://github.com/yiisoft/yii2/issues/10975#issuecomment-248479268) に従ってコンパイルするか、
-  または、[PDO エミュレーション・レイヤ](https://github.com/taq/pdooci) を使って下さい。
+> [コミュニティによる説明](https://github.com/yiisoft/yii2/issues/10975#issuecomment-248479268) に従ってコンパイルするか、
+> または、[PDO エミュレーション・レイヤ](https://github.com/taq/pdooci) を使って下さい。
 
 ## DB 接続を作成する <span id="creating-db-connections"></span>
 
@@ -64,14 +63,14 @@ DB 接続を構成するときは、つねに [[yii\db\Connection::dsn|dsn]] プ
 DSN の形式はデータベースによってさまざまに異なります。
 詳細は [PHP マニュアル](https://www.php.net/manual/ja/function.PDO-construct.php) を参照して下さい。下記にいくつかの例を挙げます。
 
-* MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
-* SQLite: `sqlite:/path/to/database/file`
-* PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
-* CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
-* MS SQL Server (sqlsrv ドライバ経由): `sqlsrv:Server=localhost;Database=mydatabase`
-* MS SQL Server (dblib ドライバ経由): `dblib:host=localhost;dbname=mydatabase`
-* MS SQL Server (mssql ドライバ経由): `mssql:host=localhost;dbname=mydatabase`
-* Oracle: `oci:dbname=//localhost:1521/mydatabase`
+- MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
+- SQLite: `sqlite:/path/to/database/file`
+- PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
+- CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
+- MS SQL Server (sqlsrv ドライバ経由): `sqlsrv:Server=localhost;Database=mydatabase`
+- MS SQL Server (dblib ドライバ経由): `dblib:host=localhost;dbname=mydatabase`
+- MS SQL Server (mssql ドライバ経由): `mssql:host=localhost;dbname=mydatabase`
+- Oracle: `oci:dbname=//localhost:1521/mydatabase`
 
 ODBC 経由でデータベースに接続しようとする場合は、[[yii\db\Connection::driverName]] プロパティを構成して、Yii に実際のデータベースのタイプを知らせなければならないことに注意してください。
 例えば、
@@ -90,13 +89,13 @@ ODBC 経由でデータベースに接続しようとする場合は、[[yii\db\
 構成可能なプロパティの全てのリストは [[yii\db\Connection]] を参照して下さい。
 
 > Info: DB 接続のインスタンスを作成するとき、実際のデータベース接続は、最初の SQL を実行するか、
-  [[yii\db\Connection::open()|open()]] メソッドを明示的に呼ぶかするまでは確立されません。
+> [[yii\db\Connection::open()|open()]] メソッドを明示的に呼ぶかするまでは確立されません。
 
 > Tip: 時として、何らかの環境変数を初期化するために、データベース接続を確立した直後に何かクエリを実行したい場合があるでしょう
 > (例えば、タイムゾーンや文字セットを設定するなどです)。
 > そうするために、データベース接続の [[yii\db\Connection::EVENT_AFTER_OPEN|afterOpen]] イベントに対するイベント・ハンドラを登録することが出来ます。
 > 以下のように、アプリケーションの構成情報に直接にハンドラを登録することが出来ます。
-> 
+>
 > ```php
 > 'db' => [
 >     // ...
@@ -118,7 +117,6 @@ MS SQL Server でバイナリ・データを正しく処理するためには追
     ]
 ],
 ```
-
 
 ## SQL クエリを実行する <span id="executing-sql-queries"></span>
 
@@ -153,8 +151,7 @@ $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
 ```
 
 > Note: 精度を保つために、対応するデータベース・カラムの型が数値である場合でも、
-  データベースから取得されたデータは、全て文字列として表現されます。
-
+> データベースから取得されたデータは、全て文字列として表現されます。
 
 ### パラメータをバインドする <span id="binding-parameters"></span>
 
@@ -172,9 +169,9 @@ SQL 文において、一つまたは複数のパラメータ・プレースホ�
 パラメータ・プレースホルダは、コロンから始まる文字列でなければなりません。
 そして、次に掲げるパラメータをバインドするメソッドの一つを使って、パラメータの値をバインドします。
 
-* [[yii\db\Command::bindValue()|bindValue()]]: 一つのパラメータの値をバインドします。
-* [[yii\db\Command::bindValues()|bindValues()]]: 一回の呼び出しで複数のパラメータの値をバインドします。
-* [[yii\db\Command::bindParam()|bindParam()]]: [[yii\db\Command::bindValue()|bindValue()]] と似ていますが、
+- [[yii\db\Command::bindValue()|bindValue()]]: 一つのパラメータの値をバインドします。
+- [[yii\db\Command::bindValues()|bindValues()]]: 一回の呼び出しで複数のパラメータの値をバインドします。
+- [[yii\db\Command::bindParam()|bindParam()]]: [[yii\db\Command::bindValue()|bindValue()]] と似ていますが、
   パラメータを参照渡しでバインドすることもサポートしています。
 
 次の例はパラメータをバインドする方法の選択肢を示すものです。
@@ -185,7 +182,7 @@ $params = [':id' => $_GET['id'], ':status' => 1];
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
           ->bindValues($params)
           ->queryOne();
-            
+
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
           ->queryOne();
 ```
@@ -225,7 +222,6 @@ $post2 = $command->queryOne();
 > [クエリ・ビルダ](db-query-builder.md) や [アクティブ・レコード](db-active-record.md) のような高レベルの抽象的レイヤーでは、
 > 多くの場所で SQL に変換される値の配列を指定する場合がよくあります。
 > これらの場所では Yii によってパラメータ・バインディングが内部的に実行されますので、パラメータを手動で指定する必要はありません。
-
 
 ### SELECT しないクエリを実行する <span id="non-select-queries"></span>
 
@@ -287,15 +283,14 @@ Yii::$app->db->createCommand()->upsert('pages', [
 上述のメソッド群はクエリを生成するだけであり、実際にそれを実行するためには、常に [[yii\db\Command::execute()|execute()]]
 を呼び出す必要があることに注意してください。
 
-
 ## テーブルとカラムの名前を引用符で囲む <span id="quoting-table-and-column-names"></span>
 
 特定のデータベースに依存しないコードを書くときには、テーブルとカラムの名前を適切に引用符で囲むことが、たいてい、頭痛の種になります。
 データベースによって名前を引用符で囲む規則がさまざまに異なるからです。
 この問題を克服するために、次のように、Yii によって導入された引用符の構文を使用することが出来ます。
 
-* `[[カラム名]]`: 引用符で囲むべきカラム名は、二重角括弧で包む。
-* `{{テーブル名}}`: 引用符で囲むべきテーブル名は、二重波括弧で包む。
+- `[[カラム名]]`: 引用符で囲むべきカラム名は、二重角括弧で包む。
+- `{{テーブル名}}`: 引用符で囲むべきテーブル名は、二重波括弧で包む。
 
 Yii DAO は、このような構文を、DBMS 固有の文法に従って、
 適切な引用符で囲まれたカラム名とテーブル名に自動的に変換します。
@@ -306,7 +301,6 @@ Yii DAO は、このような構文を、DBMS 固有の文法に従って、
 $count = Yii::$app->db->createCommand("SELECT COUNT([[id]]) FROM {{employee}}")
             ->queryScalar();
 ```
-
 
 ### テーブル接頭辞を使う <span id="using-table-prefix"></span>
 
@@ -337,7 +331,6 @@ return [
 $count = Yii::$app->db->createCommand("SELECT COUNT([[id]]) FROM {{%employee}}")
             ->queryScalar();
 ```
-
 
 ## トランザクションを実行する <span id="performing-transactions"></span>
 
@@ -387,7 +380,6 @@ try {
 > `\Exception` は PHP 7.0 以降では、[`\Throwable` インタフェイス](https://www.php.net/manual/ja/class.throwable.php) を実装しています。
 > 従って、あなたのアプリケーションが PHP 7.0 以上しか使わない場合は、`\Exception` の部分を省略することが出来ます。
 
-
 ### 分離レベルを指定する <span id="specifying-isolation-levels"></span>
 
 Yii は、トランザクションの [分離レベル] の設定もサポートしています。デフォルトでは、新しいトランザクションを開始したときは、
@@ -399,7 +391,7 @@ $isolationLevel = \yii\db\Transaction::REPEATABLE_READ;
 Yii::$app->db->transaction(function ($db) {
     ....
 }, $isolationLevel);
-  
+
 // あるいは
 
 $transaction = Yii::$app->db->beginTransaction($isolationLevel);
@@ -421,14 +413,13 @@ DBMS によっては、接続全体に対してのみ分離レベルの設定を
 このチュートリアルを書いている時点では、この制約の影響を受ける DBMS は MSSQL と SQLite だけです。
 
 > Note: SQLite は、二つの分離レベルしかサポートしていません。すなわち、`READ UNCOMMITTED` と `SERIALIZABLE` しか使えません。
-他のレベルを使おうとすると、例外が投げられます。
+> 他のレベルを使おうとすると、例外が投げられます。
 
 > Note: PostgreSQL は、トランザクションを開始する前に分離レベルを指定することを許容していません。
-すなわち、トランザクションを開始するときに、分離レベルを直接に指定することは出来ません。
-この場合、トランザクションを開始した後に [[yii\db\Transaction::setIsolationLevel()]] を呼び出す必要があります。
+> すなわち、トランザクションを開始するときに、分離レベルを直接に指定することは出来ません。
+> この場合、トランザクションを開始した後に [[yii\db\Transaction::setIsolationLevel()]] を呼び出す必要があります。
 
 [分離レベル]: https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E5%88%86%E9%9B%A2%E3%83%AC%E3%83%99%E3%83%AB
-
 
 ### トランザクションを入れ子にする <span id="nesting-transactions"></span>
 
@@ -437,7 +428,7 @@ DBMS によっては、接続全体に対してのみ分離レベルの設定を
 ```php
 Yii::$app->db->transaction(function ($db) {
     // 外側のトランザクション
-    
+
     $db->transaction(function ($db) {
         // 内側のトランザクション
     });
@@ -474,12 +465,11 @@ try {
 }
 ```
 
-
 ## レプリケーションと読み書きの分離 <span id="read-write-splitting"></span>
 
 多くの DBMS は、データベースの可用性とサーバのレスポンス・タイムを向上させるために、
 [データベース・レプリケーション](https://ja.wikipedia.org/wiki/%E3%83%AC%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3#.E3.83.87.E3.83.BC.E3.82.BF.E3.83.99.E3.83.BC.E3.82.B9) をサポートしています。
-データベース・レプリケーションによって、データはいわゆる *マスタ・サーバ* から *スレーブ・サーバ* に複製されます。
+データベース・レプリケーションによって、データはいわゆる _マスタ・サーバ_ から _スレーブ・サーバ_ に複製されます。
 データの書き込みと更新はすべてマスタ・サーバ上で実行されなければなりませんが、データの読み出しはスレーブ・サーバ上でも可能です。
 
 データベース・レプリケーションを活用して読み書きの分離を達成するために、
@@ -530,8 +520,8 @@ Yii::$app->db->createCommand("UPDATE user SET username='demo' WHERE id=1")->exec
 ```
 
 > Info: [[yii\db\Command::execute()]] を呼ぶことで実行されるクエリは、書き込みのクエリと見なされ、
-  [[yii\db\Command]] の "query" メソッドのうちの一つによって実行されるその他すべてのクエリは、読み出しクエリと見なされます。
-  現在アクティブなスレーブ接続は `Yii::$app->db->slave` によって取得することが出来ます。
+> [[yii\db\Command]] の "query" メソッドのうちの一つによって実行されるその他すべてのクエリは、読み出しクエリと見なされます。
+> 現在アクティブなスレーブ接続は `Yii::$app->db->slave` によって取得することが出来ます。
 
 `Connection` コンポーネントは、スレーブ間のロード・バランス調整とフェイルオーバーをサポートしています。
 読み出しクエリを最初に実行するときに、`Connection` コンポーネントはランダムにスレーブを選んで接続を試みま・す。
@@ -541,12 +531,10 @@ Yii::$app->db->createCommand("UPDATE user SET username='demo' WHERE id=1")->exec
 [[yii\db\Connection::serverRetryInterval|一定期間]] はそのサーバへの接続を再試行しないようにすることが出来ます。
 
 > Info: 上記の構成では、すべてのスレーブに対して 10 秒の接続タイムアウトが指定されています。
-  これは、10 秒以内に接続できなければ、そのスレーブは「死んでいる」と見なされることを意味します。
-  このパラメータは、実際の環境に基づいて調整することが出来ます。
-
+> これは、10 秒以内に接続できなければ、そのスレーブは「死んでいる」と見なされることを意味します。
+> このパラメータは、実際の環境に基づいて調整することが出来ます。
 
 複数のマスタと複数のスレーブという構成にすることも可能です。例えば、
-
 
 ```php
 [
@@ -593,9 +581,8 @@ Yii::$app->db->createCommand("UPDATE user SET username='demo' WHERE id=1")->exec
 一つ違うのは、マスタが一つも利用できないときは例外が投げられる、という点です。
 
 > Note: [[yii\db\Connection::masters|masters]] プロパティを使って一つまたは複数のマスタを構成する場合は、
-  データベース接続を定義する `Connection` オブジェクト自体の他のプロパティ
-  (例えば、`dsn`、`username`、`password`) は全て無視されます。
-
+> データベース接続を定義する `Connection` オブジェクト自体の他のプロパティ
+> (例えば、`dsn`、`username`、`password`) は全て無視されます。
 
 デフォルトでは、トランザクションはマスタ接続を使用します。
 そして、トランザクション内では、全ての DB 操作はマスタ接続を使用します。例えば、
@@ -637,26 +624,25 @@ $rows = Yii::$app->db->useMaster(function ($db) {
 
 直接に `Yii::$app->db->enableSlaves` を `false` に設定して、全てのクエリをマスタ接続に向けることも出来ます。
 
-
 ## データベース・スキーマを扱う <span id="database-schema"></span>
 
 Yii DAO は、新しいテーブルを作ったり、テーブルからカラムを削除したりなど、データベース・スキーマを操作することを可能にする一揃いのメソッドを提供しています。
 以下がそのソッドのリストです。
 
-* [[yii\db\Command::createTable()|createTable()]]: テーブルを作成する
-* [[yii\db\Command::renameTable()|renameTable()]]: テーブルの名前を変更する
-* [[yii\db\Command::dropTable()|dropTable()]]: テーブルを削除する
-* [[yii\db\Command::truncateTable()|truncateTable()]]: テーブルの全ての行を削除する
-* [[yii\db\Command::addColumn()|addColumn()]]: カラムを追加する
-* [[yii\db\Command::renameColumn()|renameColumn()]]: カラムの名前を変更する
-* [[yii\db\Command::dropColumn()|dropColumn()]]: カラムを削除する
-* [[yii\db\Command::alterColumn()|alterColumn()]]: カラムを変更する
-* [[yii\db\Command::addPrimaryKey()|addPrimaryKey()]]: プライマリ・キーを追加する
-* [[yii\db\Command::dropPrimaryKey()|dropPrimaryKey()]]: プライマリ・キーを削除する
-* [[yii\db\Command::addForeignKey()|addForeignKey()]]: 外部キーを追加する
-* [[yii\db\Command::dropForeignKey()|dropForeignKey()]]: 外部キーを削除する
-* [[yii\db\Command::createIndex()|createIndex()]]: インデックスを作成する
-* [[yii\db\Command::dropIndex()|dropIndex()]]: インデックスを削除する
+- [[yii\db\Command::createTable()|createTable()]]: テーブルを作成する
+- [[yii\db\Command::renameTable()|renameTable()]]: テーブルの名前を変更する
+- [[yii\db\Command::dropTable()|dropTable()]]: テーブルを削除する
+- [[yii\db\Command::truncateTable()|truncateTable()]]: テーブルの全ての行を削除する
+- [[yii\db\Command::addColumn()|addColumn()]]: カラムを追加する
+- [[yii\db\Command::renameColumn()|renameColumn()]]: カラムの名前を変更する
+- [[yii\db\Command::dropColumn()|dropColumn()]]: カラムを削除する
+- [[yii\db\Command::alterColumn()|alterColumn()]]: カラムを変更する
+- [[yii\db\Command::addPrimaryKey()|addPrimaryKey()]]: プライマリ・キーを追加する
+- [[yii\db\Command::dropPrimaryKey()|dropPrimaryKey()]]: プライマリ・キーを削除する
+- [[yii\db\Command::addForeignKey()|addForeignKey()]]: 外部キーを追加する
+- [[yii\db\Command::dropForeignKey()|dropForeignKey()]]: 外部キーを削除する
+- [[yii\db\Command::createIndex()|createIndex()]]: インデックスを作成する
+- [[yii\db\Command::dropIndex()|dropIndex()]]: インデックスを削除する
 
 これらのメソッドは次のようにして使うことが出来ます。
 

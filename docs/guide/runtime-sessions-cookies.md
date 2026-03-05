@@ -1,17 +1,14 @@
-Sessions and Cookies
-====================
+# Sessions and Cookies
 
 Sessions and cookies allow data to be persisted across multiple user requests. In plain PHP you may access them
 through the global variables `$_SESSION` and `$_COOKIE`, respectively. Yii encapsulates sessions and cookies as objects
 and thus allows you to access them in an object-oriented fashion with additional useful enhancements.
-
 
 ## Sessions <span id="sessions"></span>
 
 Like [requests](runtime-requests.md) and [responses](runtime-responses.md), you can get access to sessions via
 the `session` [application component](structure-application-components.md) which is an instance of [[yii\web\Session]],
 by default.
-
 
 ### Opening and Closing Sessions <span id="opening-closing-sessions"></span>
 
@@ -35,7 +32,6 @@ $session->destroy();
 
 You can call [[yii\web\Session::open()|open()]] and [[yii\web\Session::close()|close()]] multiple times
 without causing errors; internally the methods will first check if the session is already open.
-
 
 ### Accessing Session Data <span id="access-session-data"></span>
 
@@ -70,8 +66,8 @@ foreach ($_SESSION as $name => $value) ...
 ```
 
 > Info: When you access session data through the `session` component, a session will be automatically opened
-if it has not been done so before. This is different from accessing session data through `$_SESSION`, which requires
-an explicit call of `session_start()`.
+> if it has not been done so before. This is different from accessing session data through `$_SESSION`, which requires
+> an explicit call of `session_start()`.
 
 When working with session data that are arrays, the `session` component has a limitation which prevents you from
 directly modifying an array element. For example,
@@ -123,28 +119,27 @@ For better performance and code readability, we recommend the last workaround. T
 an array as a single session variable, you store each array element as a session variable which shares the same
 key prefix with other array elements.
 
-
 ### Custom Session Storage <span id="custom-session-storage"></span>
 
 The default [[yii\web\Session]] class stores session data as files on the server. Yii also provides the following
 session classes implementing different session storage:
 
-* [[yii\web\DbSession]]: stores session data in a database table.
-* [[yii\web\CacheSession]]: stores session data in a cache with the help of a configured [cache component](caching-data.md#cache-components).
-* [[yii\redis\Session]]: stores session data using [redis](https://redis.io/) as the storage medium.
-* [[yii\mongodb\Session]]: stores session data in a [MongoDB](https://www.mongodb.com/).
+- [[yii\web\DbSession]]: stores session data in a database table.
+- [[yii\web\CacheSession]]: stores session data in a cache with the help of a configured [cache component](caching-data.md#cache-components).
+- [[yii\redis\Session]]: stores session data using [redis](https://redis.io/) as the storage medium.
+- [[yii\mongodb\Session]]: stores session data in a [MongoDB](https://www.mongodb.com/).
 
 All these session classes support the same set of API methods. As a result, you can switch to a different
 session storage class without the need to modify your application code that uses sessions.
 
 > Note: If you want to access session data via `$_SESSION` while using custom session storage, you must make
-  sure that the session has already been started by [[yii\web\Session::open()]]. This is because custom session storage
-  handlers are registered within this method.
+> sure that the session has already been started by [[yii\web\Session::open()]]. This is because custom session storage
+> handlers are registered within this method.
 
 > Note: If you use a custom session storage you may need to configure the session garbage collector explicitly.
-  Some installations of PHP (e.g. Debian) use a garbage collector probability of 0 and clean session files
-  offline in a cronjob. This process does not apply to your custom storage so you need to configure
-  [[yii\web\Session::$GCProbability]] to use a non-zero value.
+> Some installations of PHP (e.g. Debian) use a garbage collector probability of 0 and clean session files
+> offline in a cronjob. This process does not apply to your custom storage so you need to configure
+> [[yii\web\Session::$GCProbability]] to use a non-zero value.
 
 To learn how to configure and use these component classes, please refer to their API documentation. Below is
 an example showing how to configure [[yii\web\DbSession]] in the application configuration to use a database table
@@ -180,8 +175,8 @@ where 'BLOB' refers to the BLOB-type of your preferred DBMS. Below are the BLOB 
 - MSSQL: BLOB
 
 > Note: According to the php.ini setting of `session.hash_function`, you may need to adjust
-  the length of the `id` column. For example, if `session.hash_function=sha256`, you should use a
-  length 64 instead of 40.
+> the length of the `id` column. For example, if `session.hash_function=sha256`, you should use a
+> length 64 instead of 40.
 
 Alternatively, this can be accomplished with the following migration:
 
@@ -255,10 +250,10 @@ $alerts = $session->getFlash('alerts');
 ```
 
 > Note: Try not to use [[yii\web\Session::setFlash()]] together with [[yii\web\Session::addFlash()]] for flash data
-  of the same name. This is because the latter method will automatically turn the flash data into an array so that it
-  can append new flash data of the same name. As a result, when you call [[yii\web\Session::getFlash()]], you may
-  find sometimes you are getting an array while sometimes you are getting a string, depending on the order of
-  the invocation of these two methods.
+> of the same name. This is because the latter method will automatically turn the flash data into an array so that it
+> can append new flash data of the same name. As a result, when you call [[yii\web\Session::getFlash()]], you may
+> find sometimes you are getting an array while sometimes you are getting a string, depending on the order of
+> the invocation of these two methods.
 
 > Tip: For displaying Flash messages you can use [[yii\bootstrap\Alert|bootstrap Alert]] widget in the following way:
 >
@@ -268,7 +263,6 @@ $alerts = $session->getFlash('alerts');
 >    'body' => Yii::$app->session->getFlash('postDeleted'),
 > ]);
 > ```
-
 
 ## Cookies <span id="cookies"></span>
 
@@ -306,7 +300,6 @@ if ($cookies->has('language')) ...
 if (isset($cookies['language'])) ...
 ```
 
-
 ### Sending Cookies <span id="sending-cookies"></span>
 
 You can send cookies to end users using the following code:
@@ -328,7 +321,7 @@ unset($cookies['language']);
 ```
 
 Besides the [[yii\web\Cookie::name|name]], [[yii\web\Cookie::value|value]] properties shown in the above
-examples, the [[yii\web\Cookie]] class also defines other properties to fully represent all available cookie 
+examples, the [[yii\web\Cookie]] class also defines other properties to fully represent all available cookie
 information, such as [[yii\web\Cookie::domain|domain]], [[yii\web\Cookie::expire|expire]]. You may configure these
 properties as needed to prepare a cookie and then add it to the response's cookie collection.
 
@@ -340,9 +333,9 @@ on the client-side. This is achieved by signing each cookie with a hash string, 
 tell if a cookie has been modified on the client-side. If so, the cookie will NOT be accessible through the
 [[yii\web\Request::cookies|cookie collection]] of the `request` component.
 
-> Note: Cookie validation only protects cookie values from being modified. If a cookie fails the validation, 
-you may still access it through `$_COOKIE`. This is because third-party libraries may manipulate cookies 
-in their own way, which does not involve cookie validation.
+> Note: Cookie validation only protects cookie values from being modified. If a cookie fails the validation,
+> you may still access it through `$_COOKIE`. This is because third-party libraries may manipulate cookies
+> in their own way, which does not involve cookie validation.
 
 Cookie validation is enabled by default. You can disable it by setting the [[yii\web\Request::enableCookieValidation]]
 property to be `false`, although we strongly recommend you do not do so.
@@ -363,16 +356,16 @@ return [
 ```
 
 > Info: [[yii\web\Request::cookieValidationKey|cookieValidationKey]] is critical to your application's security.
-  It should only be known to people you trust. Do not store it in the version control system.
-  
+> It should only be known to people you trust. Do not store it in the version control system.
+
 ## Security settings
 
 Both [[yii\web\Cookie]] and [[yii\web\Session]] support the following security flags:
 
 ### httpOnly
 
-For better security, the default value of [[yii\web\Cookie::httpOnly]] and the 'httponly' parameter of 
-[[yii\web\Session::cookieParams]] is set to `true`. This helps mitigate the risk of a client-side script accessing 
+For better security, the default value of [[yii\web\Cookie::httpOnly]] and the 'httponly' parameter of
+[[yii\web\Session::cookieParams]] is set to `true`. This helps mitigate the risk of a client-side script accessing
 the protected cookie (if the browser supports it).
 You may read the [HttpOnly wiki article](https://owasp.org/www-community/HttpOnly) for more details.
 
@@ -398,7 +391,7 @@ To use this feature across different PHP versions check the version first. E.g.
 ```
 
 > Note: Since not all browsers support the `sameSite` setting yet, it is still strongly recommended to also include
-  [additional CSRF protection](security-best-practices.md#avoiding-csrf).
+> [additional CSRF protection](security-best-practices.md#avoiding-csrf).
 
 ## Session php.ini settings
 

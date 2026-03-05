@@ -1,15 +1,14 @@
-Komponenty
-==========
+# Komponenty
 
-Komponenty są głównym budulcem aplikacji Yii. Komponenty to instancje klasy [[yii\base\Component|Component]] lub jej potomnych. 
+Komponenty są głównym budulcem aplikacji Yii. Komponenty to instancje klasy [[yii\base\Component|Component]] lub jej potomnych.
 Trzy główne funkcjonalności, które zapewniają komponenty innym klasom to:
 
-* [Właściwości](concept-properties.md)
-* [Eventy (zdarzenia)](concept-events.md)
-* [Behaviory (zachowania)](concept-behaviors.md)
-  
+- [Właściwości](concept-properties.md)
+- [Eventy (zdarzenia)](concept-events.md)
+- [Behaviory (zachowania)](concept-behaviors.md)
+
 Wszystkie razem i każda z tych funkcjonalności osobno zapewnia klasom Yii o wiele większą elastyczność i łatwość użycia. Dla przykładu,
-dołączony [[yii\jui\DatePicker|widżet wybierania daty]], komponent interfejsu użytkownika, może być użyty w [widoku](structure-views.md), 
+dołączony [[yii\jui\DatePicker|widżet wybierania daty]], komponent interfejsu użytkownika, może być użyty w [widoku](structure-views.md),
 aby wygenerować interaktywny kalendarz:
 
 ```php
@@ -26,16 +25,16 @@ echo DatePicker::widget([
 
 Właściwości widżetu są w łatwy sposób konfigurowalne ponieważ jego klasa rozszerza [[yii\base\Component|Component]].
 
-Komponenty zapewniają duże możliwości, ale przez to są też bardziej zasobożerne od standardowych obiektów, ponieważ wymagają dodatkowej pamięci i czasu CPU dla wsparcia 
+Komponenty zapewniają duże możliwości, ale przez to są też bardziej zasobożerne od standardowych obiektów, ponieważ wymagają dodatkowej pamięci i czasu CPU dla wsparcia
 [eventów](concept-events.md) i [behaviorów](concept-behaviors.md) w szczególności.
-Jeśli komponent nie wymaga tych dwóch funkcjonalności, należy rozważyć rozszerzenie jego klasy z [[yii\base\BaseObject|BaseObject]] zamiast [[yii\base\Component|Component]]. 
+Jeśli komponent nie wymaga tych dwóch funkcjonalności, należy rozważyć rozszerzenie jego klasy z [[yii\base\BaseObject|BaseObject]] zamiast [[yii\base\Component|Component]].
 Dzięki temu komponent będzie tak samo wydajny jak standardowy obiekt PHP, ale z dodatkowym wsparciem [właściwości](concept-properties.md).
 
 Rozszerzając klasę [[yii\base\Component|Component]] lub [[yii\base\BaseObject|BaseObject]], zalecane jest aby przestrzegać następującej konwencji:
 
-- Przeciążając konstruktor, dodaj parametr `$config` jako *ostatni* na liście jego argumentów i przekaż go do konstruktora rodzica.
-- Zawsze wywoływuj konstruktor rodzica *na końcu* przeciążanego konstruktora.
-- Przeciążając metodę [[yii\base\BaseObject::init()|init()]], upewnij się, że wywołujesz metodę `init()` rodzica *na początku* własnej implementacji metody `init()`.
+- Przeciążając konstruktor, dodaj parametr `$config` jako _ostatni_ na liście jego argumentów i przekaż go do konstruktora rodzica.
+- Zawsze wywoływuj konstruktor rodzica _na końcu_ przeciążanego konstruktora.
+- Przeciążając metodę [[yii\base\BaseObject::init()|init()]], upewnij się, że wywołujesz metodę `init()` rodzica _na początku_ własnej implementacji metody `init()`.
 
 Przykład:
 
@@ -79,9 +78,8 @@ $component = \Yii::createObject([
 ], [1, 2]);
 ```
 
-> Info: Wersja z wywołaniem [[Yii::createObject()]] wygląda na bardziej skomplikowaną, ale jest o wiele wydajniejsza, ponieważ jej implementację zapewnia 
+> Info: Wersja z wywołaniem [[Yii::createObject()]] wygląda na bardziej skomplikowaną, ale jest o wiele wydajniejsza, ponieważ jej implementację zapewnia
 > [kontener wstrzykiwania zależności](concept-di-container.md).
-  
 
 Klasa [[yii\base\BaseObject|BaseObject]] wymusza następujący cykl życia obiektu:
 

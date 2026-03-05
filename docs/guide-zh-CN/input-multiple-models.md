@@ -1,14 +1,11 @@
-多模型的复合表单
-==================================
+# 多模型的复合表单
 
 当需要处理复杂数据，很可能你需要使用多个不同的模型来收集用户提交的数据。
 举例来说，假设用户登录信息保存在 `user` 表，但是用户基本信息保存在 `profile` 表，
 你可能需要同时使用 `User` 模型和 `Profile` 模型来获取用户登录信息和基本信息。
 使用 Yii 提供的模型和表单支持，解决这样的问题和处理单一模型并不会有太大的区别。
 
-
 下面，我们将为你展示怎样创建一个表单并同时处理 `User` 和 `Profile` 这两个模型。
-
 
 首先，控制器中收集用户提交数据的动作(action)可以按照下面写的这样，
 
@@ -30,16 +27,16 @@ class UserController extends Controller
         if (!$user) {
             throw new NotFoundHttpException("没有找到用户登录信息。");
         }
-        
+
         $profile = Profile::findOne($user->profile_id);
-        
+
         if (!$profile) {
             throw new NotFoundHttpException("没有找到用户基本信息。");
         }
-        
+
         $user->scenario = 'update';
         $profile->scenario = 'update';
-        
+
         if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
             $isValid = $user->validate();
             $isValid = $profile->validate() && $isValid;
@@ -49,7 +46,7 @@ class UserController extends Controller
                 return $this->redirect(['user/view', 'id' => $id]);
             }
         }
-        
+
         return $this->render('update', [
             'user' => $user,
             'profile' => $profile,
@@ -76,7 +73,7 @@ $form = ActiveForm::begin([
     <?= $form->field($user, 'username') ?>
 
     ...other input fields...
-    
+
     <?= $form->field($profile, 'website') ?>
 
     <?= Html::submitButton('更新数据', ['class' => 'btn btn-primary']) ?>

@@ -1,11 +1,10 @@
-Properties
-==========
+# Properties
 
-In PHP, class member variables are also called *properties*. These variables are part of the class definition, and are used
+In PHP, class member variables are also called _properties_. These variables are part of the class definition, and are used
 to represent the state of a class instance (i.e., to differentiate one instance of the class from another).
 In practice, you may often want to handle the reading or writing of properties in special ways. For example,
 you may want to always trim a string when it is being assigned
-to a `label` property. You *could* use the following code to achieve this task:
+to a `label` property. You _could_ use the following code to achieve this task:
 
 ```php
 $object->label = trim($label);
@@ -17,11 +16,11 @@ you would again have to modify every bit of code that assigns a value to `label`
 The repetition of code leads to bugs, and is a practice you want to avoid as much as possible.
 
 To solve this problem, Yii introduces a base class called [[yii\base\BaseObject]] that supports defining properties
-based on *getter* and *setter* class methods. If a class needs that functionality, it should extend from
+based on _getter_ and _setter_ class methods. If a class needs that functionality, it should extend from
 [[yii\base\BaseObject]], or from a child class.
 
 > Info: Nearly every core class in the Yii framework extends from [[yii\base\BaseObject]] or a child class.
-  This means, that whenever you see a getter or setter in a core class, you can use it like a property.
+> This means, that whenever you see a getter or setter in a core class, you can use it like a property.
 
 A getter method is a method whose name starts with the word `get`; a setter method starts with `set`.
 The name after the `get` or `set` prefix defines the name of a property. For example, a getter `getLabel()` and/or
@@ -52,7 +51,7 @@ To be clear, the getter and setter methods create the property `label`, which in
 property named `_label`.
 
 Properties defined by getters and setters can be used like class member variables. The main difference is that
-when such property is being read, the corresponding getter method will be called;  when the property is
+when such property is being read, the corresponding getter method will be called; when the property is
 being assigned a value, the corresponding setter method will be called. For example:
 
 ```php
@@ -63,21 +62,21 @@ $label = $object->label;
 $object->label = 'abc';
 ```
 
-A property defined by a getter without a setter is *read only*. Trying to assign a value to such a property will cause
+A property defined by a getter without a setter is _read only_. Trying to assign a value to such a property will cause
 an [[yii\base\InvalidCallException|InvalidCallException]]. Similarly, a property defined by a setter without a getter
-is *write only*, and trying to read such a property will also cause an exception. It is not common to have write-only
+is _write only_, and trying to read such a property will also cause an exception. It is not common to have write-only
 properties.
 
 There are several special rules for, and limitations on, the properties defined via getters and setters:
 
-* The names of such properties are *case-insensitive*. For example, `$object->label` and `$object->Label` are the same.
+- The names of such properties are _case-insensitive_. For example, `$object->label` and `$object->Label` are the same.
   This is because method names in PHP are case-insensitive.
-* If the name of such a property is the same as a class member variable, the latter will take precedence.
+- If the name of such a property is the same as a class member variable, the latter will take precedence.
   For example, if the above `Foo` class has a member variable `label`, then the assignment `$object->label = 'abc'`
-  will affect the *member variable* `label`; that line would not call the  `setLabel()` setter method.
-* These properties do not support visibility. It makes no difference to the defining getter or setter method if the property is public, protected or private.
-* The properties can only be defined by *non-static* getters and/or setters. Static methods will not be treated in the same manner.
-* A normal call to `property_exists()` does not work to determine magic properties. You should call [[yii\base\BaseObject::canGetProperty()|canGetProperty()]]
+  will affect the _member variable_ `label`; that line would not call the `setLabel()` setter method.
+- These properties do not support visibility. It makes no difference to the defining getter or setter method if the property is public, protected or private.
+- The properties can only be defined by _non-static_ getters and/or setters. Static methods will not be treated in the same manner.
+- A normal call to `property_exists()` does not work to determine magic properties. You should call [[yii\base\BaseObject::canGetProperty()|canGetProperty()]]
   or [[yii\base\BaseObject::canSetProperty()|canSetProperty()]] respectively.
 
 Returning to the problem described at the beginning of this guide, instead of calling `trim()` everywhere a `label` value is assigned,

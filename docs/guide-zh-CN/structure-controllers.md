@@ -1,5 +1,4 @@
-控制器
-===========
+# 控制器
 
 控制器是 [MVC](https://zh.wikipedia.org/wiki/MVC) 模式中的一部分，
 是继承[[yii\base\Controller]]类的对象，负责处理请求和生成响应。
@@ -7,10 +6,9 @@
 接管控制后会分析请求数据并传送到[模型](structure-models.md)，
 传送模型结果到[视图](structure-views.md)，最后生成输出响应信息。
 
-
 ## 动作 <span id="actions"></span>
 
-控制器由 *操作* 组成，它是执行终端用户请求的最基础的单元，
+控制器由 _操作_ 组成，它是执行终端用户请求的最基础的单元，
 一个控制器可有一个或多个操作。
 
 如下示例显示包含两个动作`view` and `create` 的控制器`post`：
@@ -52,24 +50,23 @@ class PostController extends Controller
 }
 ```
 
-在操作 `view` (定义为 `actionView()` 方法)中， 
+在操作 `view` (定义为 `actionView()` 方法)中，
 代码首先根据请求模型ID加载 [模型](structure-models.md)，
 如果加载成功，会渲染名称为`view`的[视图](structure-views.md)并显示，否则会抛出一个异常。
 
-在操作 `create` (定义为 `actionCreate()` 方法)中, 代码相似. 
+在操作 `create` (定义为 `actionCreate()` 方法)中, 代码相似.
 先将请求数据填入[模型](structure-models.md)，
 然后保存模型，如果两者都成功，会跳转到ID为新创建的模型的`view`操作，
 否则显示提供用户输入的`create`视图。
-
 
 ## 路由 <span id="routes"></span>
 
 终端用户通过所谓的*路由*寻找到动作，路由是包含以下部分的字符串：
 
-* 模块ID: 仅存在于控制器属于非应用的[模块](structure-modules.md);
-* 控制器ID: 同应用（或同模块如果为模块下的控制器）
+- 模块ID: 仅存在于控制器属于非应用的[模块](structure-modules.md);
+- 控制器ID: 同应用（或同模块如果为模块下的控制器）
   下唯一标识控制器的字符串;
-* 操作ID: 同控制器下唯一标识操作的字符串。
+- 操作ID: 同控制器下唯一标识操作的字符串。
 
 路由使用如下格式:
 
@@ -83,10 +80,9 @@ ControllerID/ActionID
 ModuleID/ControllerID/ActionID
 ```
 
-如果用户的请求地址为 `https://hostname/index.php?r=site/index`, 
+如果用户的请求地址为 `https://hostname/index.php?r=site/index`,
 会执行`site` 控制器的`index` 操作。
 更多关于处理路由的详情请参阅 [路由](runtime-routing.md) 一节。
-
 
 ## 创建控制器 <span id="creating-controllers"></span>
 
@@ -104,7 +100,6 @@ class SiteController extends Controller
 }
 ```
 
-
 ### 控制器ID <span id="controller-ids"></span>
 
 通常情况下，控制器用来处理请求有关的资源类型，
@@ -120,13 +115,12 @@ class SiteController extends Controller
 控制器命名空间下 `admin`子目录中 `article` 控制器。
 子目录前缀可为英文大小写字母、数字、下划线、正斜杠，其中正斜杠用来区分多级子目录(如 `panels/admin`)。
 
-
 ### 控制器类命名 <span id="controller-class-naming"></span>
 
 控制器ID遵循以下规则衍生控制器类名：
 
 1. 将用正斜杠区分的每个单词第一个字母转为大写。注意如果控制器ID包含正斜杠，
-  只将最后的正斜杠后的部分第一个字母转为大写；
+   只将最后的正斜杠后的部分第一个字母转为大写；
 2. 去掉中横杠，将正斜杠替换为反斜杠;
 3. 增加`Controller`后缀;
 4. 在前面增加[[yii\base\Application::controllerNamespace|controller namespace]]控制器命名空间.
@@ -134,28 +128,27 @@ class SiteController extends Controller
 下面为一些示例，假设[[yii\base\Application::controllerNamespace|controller namespace]]
 控制器命名空间为 `app\controllers`:
 
-* `article` 对应 `app\controllers\ArticleController`;
-* `post-comment` 对应 `app\controllers\PostCommentController`;
-* `admin/post-comment` 对应 `app\controllers\admin\PostCommentController`;
-* `adminPanels/post-comment` 对应 `app\controllers\adminPanels\PostCommentController`.
+- `article` 对应 `app\controllers\ArticleController`;
+- `post-comment` 对应 `app\controllers\PostCommentController`;
+- `admin/post-comment` 对应 `app\controllers\admin\PostCommentController`;
+- `adminPanels/post-comment` 对应 `app\controllers\adminPanels\PostCommentController`.
 
 控制器类必须能被 [自动加载](concept-autoloading.md)，所以在上面的例子中，
-控制器`article` 类应在 [别名](concept-aliases.md) 
+控制器`article` 类应在 [别名](concept-aliases.md)
 为`@app/controllers/ArticleController.php`的文件中定义，
 控制器`admin/post-comment`应在`@app/controllers/admin/PostCommentController.php`文件中。
 
 > Info: 最后一个示例 `admin/post-comment` 表示你可以将控制器放在
-  [[yii\base\Application::controllerNamespace|controller namespace]]控制器命名空间下的子目录中，
-  在你不想用 [模块](structure-modules.md) 的情况下给控制器分类，这种方式很有用。
-
+> [[yii\base\Application::controllerNamespace|controller namespace]]控制器命名空间下的子目录中，
+> 在你不想用 [模块](structure-modules.md) 的情况下给控制器分类，这种方式很有用。
 
 ### 控制器部署 <span id="controller-map"></span>
 
-可通过配置 [[yii\base\Application::controllerMap|controller map]] 
+可通过配置 [[yii\base\Application::controllerMap|controller map]]
 来强制上述的控制器ID和类名对应，
 通常用在使用第三方不能掌控类名的控制器上。
 
-配置 [应用配置](structure-applications.md#application-configurations) 
+配置 [应用配置](structure-applications.md#application-configurations)
 中的[application configuration](structure-applications.md#application-configurations)，如下所示：
 
 ```php
@@ -173,7 +166,6 @@ class SiteController extends Controller
 ]
 ```
 
-
 ### 默认控制器 <span id="default-controller"></span>
 
 每个应用有一个由[[yii\base\Application::defaultRoute]]属性指定的默认控制器；
@@ -189,10 +181,9 @@ class SiteController extends Controller
 ]
 ```
 
-
 ## 创建动作 <span id="creating-actions"></span>
 
-创建操作可简单地在控制器类中定义所谓的 *操作方法* 来完成，操作方法必须是以`action`开头的公有方法。
+创建操作可简单地在控制器类中定义所谓的 _操作方法_ 来完成，操作方法必须是以`action`开头的公有方法。
 操作方法的返回值会作为响应数据发送给终端用户，
 如下代码定义了两个操作 `index` 和 `hello-world`:
 
@@ -215,7 +206,6 @@ class SiteController extends Controller
 }
 ```
 
-
 ### 动作ID <span id="action-ids"></span>
 
 操作通常是用来执行资源的特定操作，因此，
@@ -231,7 +221,6 @@ class SiteController extends Controller
 独立操作相反，主要用于多个控制器重用，
 或重构为[扩展](structure-extensions.md)。
 
-
 ### 内联动作 <span id="inline-actions"></span>
 
 内联动作指的是根据我们刚描述的操作方法。
@@ -245,15 +234,13 @@ class SiteController extends Controller
 例如`index` 转成 `actionIndex`, `hello-world` 转成 `actionHelloWorld`。
 
 > Note: 操作方法的名字*大小写敏感*，如果方法名称为`ActionIndex`不会认为是操作方法，
-  所以请求`index`操作会返回一个异常，
-  也要注意操作方法必须是公有的，
-  私有或者受保护的方法不能定义成内联操作。
-
+> 所以请求`index`操作会返回一个异常，
+> 也要注意操作方法必须是公有的，
+> 私有或者受保护的方法不能定义成内联操作。
 
 因为容易创建，内联操作是最常用的操作，
 但是如果你计划在不同地方重用相同的操作，
 或者你想重新分配一个操作，需要考虑定义它为*独立操作*。
-
 
 ### 独立动作 <span id="standalone-actions"></span>
 
@@ -302,7 +289,6 @@ class HelloWorldAction extends Action
 }
 ```
 
-
 ### 动作结果 <span id="action-results"></span>
 
 操作方法或独立操作的`run()`方法的返回值非常重要，
@@ -310,9 +296,9 @@ class HelloWorldAction extends Action
 
 返回值可为 [响应](runtime-responses.md) 对象，作为响应发送给终端用户。
 
-* 对于[[yii\web\Application|Web applications]]网页应用，返回值可为任意数据, 它赋值给[[yii\web\Response::data]]，
+- 对于[[yii\web\Application|Web applications]]网页应用，返回值可为任意数据, 它赋值给[[yii\web\Response::data]]，
   最终转换为字符串来展示响应内容。
-* 对于[[yii\console\Application|console applications]]控制台应用，返回值可为整数，
+- 对于[[yii\console\Application|console applications]]控制台应用，返回值可为整数，
   表示命令行下执行的 [[yii\console\Response::exitStatus|exit status]] 退出状态。
 
 在上面的例子中，操作结果都为字符串，作为响应数据发送给终端用户，
@@ -327,7 +313,6 @@ public function actionForward()
     return $this->redirect('https://example.com');
 }
 ```
-
 
 ### 动作参数 <span id="action-parameters"></span>
 
@@ -354,13 +339,13 @@ class PostController extends Controller
 
 动作参数会被不同的参数填入，如下所示：
 
-* `https://hostname/index.php?r=post/view&id=123`: `$id` 会填入`'123'`，
+- `https://hostname/index.php?r=post/view&id=123`: `$id` 会填入`'123'`，
   `$version` 仍为 null 空因为没有`version`请求参数;
-* `https://hostname/index.php?r=post/view&id=123&version=2`: 
-  $id` 和 `$version` 分别填入 `'123'` 和 `'2'`；
-* `https://hostname/index.php?r=post/view`: 会抛出[[yii\web\BadRequestHttpException]] 异常
+- `https://hostname/index.php?r=post/view&id=123&version=2`:
+  $id` 和 `$version`分别填入`'123'`和`'2'`；
+- `https://hostname/index.php?r=post/view`: 会抛出[[yii\web\BadRequestHttpException]] 异常
   因为请求没有提供参数给必须赋值参数`$id`；
-* `https://hostname/index.php?r=post/view&id[]=123`: 会抛出[[yii\web\BadRequestHttpException]] 异常
+- `https://hostname/index.php?r=post/view&id[]=123`: 会抛出[[yii\web\BadRequestHttpException]] 异常
   因为 `$id` 参数收到数组值 `['123']` 而不是字符串.
 
 如果你想要一个动作参数来接受数组值，你应该使用 `array` 来提示它，如下所示：
@@ -378,7 +363,6 @@ public function actionView(array $id, $version = null)
 
 上述例子主要描述网页应用的操作参数，对于控制台应用，
 更多详情请参阅[控制台命令](tutorial-console.md)。
-
 
 ### 默认动作 <span id="default-action"></span>
 
@@ -405,7 +389,6 @@ class SiteController extends Controller
 }
 ```
 
-
 ## 控制器生命周期 <span id="controller-lifecycle"></span>
 
 处理一个请求时，[应用主体](structure-applications.md) 会根据请求
@@ -414,23 +397,30 @@ class SiteController extends Controller
 
 1. 在控制器创建和配置后，[[yii\base\Controller::init()]] 方法会被调用。
 2. 控制器根据请求操作ID创建一个操作对象:
-  * 如果操作ID没有指定，会使用[[yii\base\Controller::defaultAction|default action ID]]默认操作ID；
-  * 如果在[[yii\base\Controller::actions()|action map]]找到操作ID，
-    会创建一个独立操作；
-  * 如果操作ID对应操作方法，会创建一个内联操作；
-  * 否则会抛出[[yii\base\InvalidRouteException]]异常。
-3. 控制器按顺序调用应用主体、模块（如果控制器属于模块）、
-  控制器的 `beforeAction()` 方法；
-  * 如果任意一个调用返回false，后面未调用的`beforeAction()`会跳过并且操作执行会被取消；
-    action execution will be cancelled.
-  * 默认情况下每个 `beforeAction()` 方法会触发一个 `beforeAction` 事件，在事件中你可以追加事件处理操作；
-4. 控制器执行操作:
-  * 请求数据解析和填入到操作参数；
-5. 控制器按顺序调用控制器、模块（如果控制器属于模块）、应用主体的 `afterAction()` 方法；
-  * 默认情况下每个 `afterAction()` 方法会触发一个 `afterAction` 事件，
-  在事件中你可以追加事件处理操作；
-6. 应用主体获取操作结果并赋值给[响应](runtime-responses.md).
 
+- 如果操作ID没有指定，会使用[[yii\base\Controller::defaultAction|default action ID]]默认操作ID；
+- 如果在[[yii\base\Controller::actions()|action map]]找到操作ID，
+  会创建一个独立操作；
+- 如果操作ID对应操作方法，会创建一个内联操作；
+- 否则会抛出[[yii\base\InvalidRouteException]]异常。
+
+3. 控制器按顺序调用应用主体、模块（如果控制器属于模块）、
+   控制器的 `beforeAction()` 方法；
+
+- 如果任意一个调用返回false，后面未调用的`beforeAction()`会跳过并且操作执行会被取消；
+  action execution will be cancelled.
+- 默认情况下每个 `beforeAction()` 方法会触发一个 `beforeAction` 事件，在事件中你可以追加事件处理操作；
+
+4. 控制器执行操作:
+
+- 请求数据解析和填入到操作参数；
+
+5. 控制器按顺序调用控制器、模块（如果控制器属于模块）、应用主体的 `afterAction()` 方法；
+
+- 默认情况下每个 `afterAction()` 方法会触发一个 `afterAction` 事件，
+  在事件中你可以追加事件处理操作；
+
+6. 应用主体获取操作结果并赋值给[响应](runtime-responses.md).
 
 ## 最佳实践 <span id="best-practices"></span>
 
@@ -440,8 +430,8 @@ class SiteController extends Controller
 
 归纳起来，控制器
 
-* 可访问 [请求](runtime-requests.md) 数据;
-* 可根据请求数据调用 [模型](structure-models.md) 的方法和其他服务组件;
-* 可使用 [视图](structure-views.md) 构造响应;
-* 不应处理应被[模型](structure-models.md)处理的请求数据;
-* 应避免嵌入HTML或其他展示代码，这些代码最好在 [视图](structure-views.md)中处理.
+- 可访问 [请求](runtime-requests.md) 数据;
+- 可根据请求数据调用 [模型](structure-models.md) 的方法和其他服务组件;
+- 可使用 [视图](structure-views.md) 构造响应;
+- 不应处理应被[模型](structure-models.md)处理的请求数据;
+- 应避免嵌入HTML或其他展示代码，这些代码最好在 [视图](structure-views.md)中处理.

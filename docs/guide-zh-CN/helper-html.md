@@ -1,20 +1,17 @@
-Html 帮助类（Html helper）
-=======================
+# Html 帮助类（Html helper）
 
 任何一个 web 应用程序会生成很多 HTMl 超文本标记。如果超文本标记是静态的，
 那么[将 PHP 和 HTML 混合在一个文件里](https://www.php.net/manual/zh/language.basic-syntax.phpmode.php)
 这种做法是非常高效的。但是，如果这些超文本标记是动态生成的，那么如果没有额外的辅助工具，这个过程将会变得复杂。
-Yii 通过 HTML  帮助类来提供生成超文本标记的方法。这个帮助类包含有一系列的用于处理通用的 HTML 标签和其属性以及内容的静态方法。
+Yii 通过 HTML 帮助类来提供生成超文本标记的方法。这个帮助类包含有一系列的用于处理通用的 HTML 标签和其属性以及内容的静态方法。
 
 > Note: 如果你的超文本标记接近静态的，那么最好是直接使用 HTML。
-没有必要把所有的超文本标记都用 HTML 辅助类来生成。
-
+> 没有必要把所有的超文本标记都用 HTML 辅助类来生成。
 
 ## 基础（Basics） <span id="basics"></span>
 
 由于通过字符串连接来生成动态的 HTML 会很容易变得凌乱，
 Yii 提供了一系列的静态方法来操作标签配置并基于这些配置来创建对应的标签。
-
 
 ### 生成标签（Generating Tags） <span id="generating-tags"></span>
 
@@ -41,20 +38,18 @@ Yii 提供了一系列的静态方法来操作标签配置并基于这些配置�
 有一些额外的处理我们需要知道：
 
 - 如果一个值为 null ，那么对应的属性将不会被渲染。
-- 如果是布尔类型的值的属性，将会被当做 
+- 如果是布尔类型的值的属性，将会被当做
   [布尔属性](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes) 来处理。
 - 属性的值将会用 [[yii\helpers\Html::encode()|Html::encode()]] 方法进行 HTML 转码处理。
 - 如果一个属性的值是一个数组，那么它将会被如下处理：
-    
-    * 如果这个属性是一个如 [[yii\helpers\Html::$dataAttributes]] 所列的数据属性，
-      比如 `data` 或者 `ng`，一系列的属性列表将会被渲染，每个代表值数组中的元素。
-      比如： `'data' => ['id' => 1, 'name' => 'yii']` 将会生成  `data-id="1" data-name="yii"`；
-      `'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` 生成
-      `data-params='{"id":1,"name":"yii"}' data-status="ok"`。
-      注意后者 中，一个子数组被输出为 JSON 。
-    * 如果这个属性不是一个数据属性，那么值将会被 JSON-encoded。比如：`['params' => ['id' => 1, 'name' => 'yii']` 
-      生成 `params='{"id":1,"name":"yii"}'`。
-
+  - 如果这个属性是一个如 [[yii\helpers\Html::$dataAttributes]] 所列的数据属性，
+    比如 `data` 或者 `ng`，一系列的属性列表将会被渲染，每个代表值数组中的元素。
+    比如： `'data' => ['id' => 1, 'name' => 'yii']` 将会生成 `data-id="1" data-name="yii"`；
+    `'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` 生成
+    `data-params='{"id":1,"name":"yii"}' data-status="ok"`。
+    注意后者 中，一个子数组被输出为 JSON 。
+  - 如果这个属性不是一个数据属性，那么值将会被 JSON-encoded。比如：`['params' => ['id' => 1, 'name' => 'yii']`
+    生成 `params='{"id":1,"name":"yii"}'`。
 
 ### 生成 CSS 类和样式（Forming CSS Classes and Styles） <span id="forming-css"></span>
 
@@ -138,11 +133,10 @@ Html::removeCssStyle($options, ['width', 'height']);
 ```
 
 当使用 [[yii\helpers\Html::addCssStyle()|addCssStyle()]] 方法时，你可以指定一个和 CSS 属性相关的名值对的数组，
-也可以直接是一个类似 `width: 100px; height: 200px;` 的字符串。这些格式将会自动的被 
-[[yii\helpers\Html::cssStyleFromArray()|cssStyleFromArray()]] 和[[yii\helpers\Html::cssStyleToArray()|cssStyleToArray()]] 
+也可以直接是一个类似 `width: 100px; height: 200px;` 的字符串。这些格式将会自动的被
+[[yii\helpers\Html::cssStyleFromArray()|cssStyleFromArray()]] 和[[yii\helpers\Html::cssStyleToArray()|cssStyleToArray()]]
 方法进行转换。方法 [[yii\helpers\Html::removeCssStyle()|removeCssStyle()]] 接收一个包含要被移除的属性数组作为参数。
 如果只想移除一个属性，你可以直接传递一个字符串。
-
 
 ### 标签内容的转码和解码（Encoding and Decoding Content） <span id="encoding-and-decoding-content"></span>
 
@@ -160,14 +154,12 @@ echo $userName;
 $decodedUserName = Html::decode($userName);
 ```
 
-
 ## 表单（Forms） <span id="forms"></span>
 
 处理表单标签是大量的重复性劳动并且易错。因此，
 Yii 也提供了一系列的方法来辅助处理表单标签。
 
 > Note: 考虑在处理 models 以及需要验证的情形下，使用 [[yii\widgets\ActiveForm|ActiveForm]] 组件。
-
 
 ### 创建表单（Creating Forms） <span id="creating-forms"></span>
 
@@ -188,7 +180,6 @@ Yii 也提供了一系列的方法来辅助处理表单标签。
 <?= Html::endForm() ?>
 ```
 
-
 ### 按钮（Buttons） <span id="buttons"></span>
 
 你可以用如下代码生成按钮：
@@ -201,7 +192,6 @@ Yii 也提供了一系列的方法来辅助处理表单标签。
 
 上述三个方法的第一个参数为按钮的标题，第二个是标签属性。标题默认没有进行转码，如果标题是由终端用输入的，
 那么请自行用 [[yii\helpers\Html::encode()|Html::encode()]] 方法进行转码。
-
 
 ### 输入栏（Input Fields） <span id="input-fields"></span>
 
@@ -266,10 +256,9 @@ Dropdown list 和 list box 将会如下渲染：
 <?= Html::activeRadioList($user, 'role', ArrayHelper::map($roleModels, 'id', 'name')) ?>
 ```
 
-
 ### Labels 和 Errors（Labels and Errors） <span id="labels-and-errors"></span>
 
-如同 inputs 一样，Yii 也提供了两个方法用于生成表单 label。带 ative  方法用于从 model 中取数据，另外一个则是直接接收数据。
+如同 inputs 一样，Yii 也提供了两个方法用于生成表单 label。带 ative 方法用于从 model 中取数据，另外一个则是直接接收数据。
 
 ```php
 <?= Html::label('User name', 'username', ['class' => 'label username']) ?>
@@ -287,7 +276,6 @@ Dropdown list 和 list box 将会如下渲染：
 ```php
 <?= Html::error($post, 'title', ['class' => 'error']) ?>
 ```
-
 
 ### Input 的名和值（Input Names and Values） <span id="input-names-and-values"></span>
 
@@ -320,7 +308,6 @@ echo Html::getAttributeValue($post, '[0]authors[0]');
 // dates
 echo Html::getAttributeName('dates[0]');
 ```
-
 
 ## 样式表和脚本（Styles and Scripts） <span id="styles-and-scripts"></span>
 
@@ -357,7 +344,7 @@ generates
 
 - `condition` 来让 `<link` 被条件控制注释包裹（ IE hacker ）。
   希望你在未来不再需要条件控制注释。
-- `noscript` 可以被设置为 `true` ，这样 `<link`就会被 `<noscript>`包裹，如此那么这段代码只有在浏览器不支持 
+- `noscript` 可以被设置为 `true` ，这样 `<link`就会被 `<noscript>`包裹，如此那么这段代码只有在浏览器不支持
   JavaScript 或者被用户禁用的时候才会被引入进来。
 
 为了外联 JavaScript 文件：
@@ -368,7 +355,6 @@ generates
 
 这个方法的第一个参数同 CSS 一样用于指定外联链接。第二个参数是一个标签属性数组。
 同 `cssFile` 一样，你可以指定 `condtion` 配置项。
-
 
 ## 超链接（Hyperlinks） <span id="hyperlinks"></span>
 
@@ -389,7 +375,6 @@ generates
 <?= Html::mailto('Contact us', 'admin@example.com') ?>
 ```
 
-
 ## 图片（Images） <span id="images"></span>
 
 为了生成图片标签，你可以如下做：
@@ -403,7 +388,6 @@ generates
 ```
 
 除了 [aliases](concept-aliases.md) 之外，第一个参数可以接受 路由，查询，URLs。同 [Url::to()](helper-url.md) 一样。
-
 
 ## 列表（Lists） <span id="lists"></span>
 

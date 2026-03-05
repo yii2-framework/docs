@@ -1,12 +1,9 @@
-引入第三方代码（Working with Third-Party Code）
-=============================================
+# 引入第三方代码（Working with Third-Party Code）
 
 有时，你可能会需要在 Yii 应用中使用第三方的代码。又或者是你想要在第三方系统中把 Yii 作为类库引用。
 在下面这个板块中，我们向你展示如何实现这些目标。
 
-
-在 Yii 中使用第三方类库（Using Third-Party Libraries in Yii） <span id="using-libs-in-yii"></span>
---------------------------------------------------------
+## 在 Yii 中使用第三方类库（Using Third-Party Libraries in Yii） <span id="using-libs-in-yii"></span>
 
 要想在 Yii 应用中使用第三方类库，
 你主要需要确保这些库中的类文件都可以被正常导入或可以被自动加载。
@@ -61,17 +58,16 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 最悲催的情形是，该类库需要显式导入每个类文件，
 你可以使用以下方法按需导入相关类文件：
 
-* 找出该库内包含哪些类。
-* 在应用的[入口脚本](structure-entry-scripts.md)里的 `Yii::$classMap` 数组中列出这些类，和他们各自对应的文件路径。
+- 找出该库内包含哪些类。
+- 在应用的[入口脚本](structure-entry-scripts.md)里的 `Yii::$classMap` 数组中列出这些类，和他们各自对应的文件路径。
   举例来说，
+
 ```php
 Yii::$classMap['Class1'] = 'path/to/Class1.php';
 Yii::$classMap['Class2'] = 'path/to/Class2.php';
 ```
 
-
-在第三方系统内使用 Yii（Using Yii in Third-Party Systems） <span id="using-yii-in-others"></span>
------------------------------------------------------------
+## 在第三方系统内使用 Yii（Using Yii in Third-Party Systems） <span id="using-yii-in-others"></span>
 
 因为 Yii 提供了很多牛逼的功能，有时，你可能会想要使用它们中的一些功能用来支持开发或完善某些第三方的系统，
 比如：WordPress，Joomla，或是用其他 PHP 框架开发的应用程序。
@@ -117,9 +113,7 @@ new yii\web\Application($yiiConfig); // 不要在这里调用 run() 方法。
 现在，你就可以使用 Yii 提供的绝大多数功能了。
 比如，创建 AR 类，并用它们来操作数据库。
 
-
-配合使用 Yii 2 和 Yii 1（Using Yii 2 with Yii 1） <span id="using-both-yii2-yii1"></span>
-----------------------------------------------
+## 配合使用 Yii 2 和 Yii 1（Using Yii 2 with Yii 1） <span id="using-both-yii2-yii1"></span>
 
 如果你之前使用 Yii 1，大概你也有正在运行的 Yii 1 应用吧。
 不必用 Yii 2 重写整个应用，你也可以通过增添对哪些

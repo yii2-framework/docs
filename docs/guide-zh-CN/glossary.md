@@ -1,5 +1,3 @@
-
-
 ## 排版规范
 
 > Info: 信息
@@ -9,7 +7,6 @@
 > Tip: 提示
 
 > Warning: 警告
-
 
 ## 翻译对照列表
 
@@ -22,7 +19,6 @@
 - Argument 参数
 - Assets 前端资源
 - Authorization 用户认证
-
 
 ### B
 
@@ -48,7 +44,7 @@
 
 ### D
 
-- Database-Transactions  数据库事务
+- Database-Transactions 数据库事务
 - Dependency 依赖
 - Driver 驱动
 - Dependency Injection 依赖注入
@@ -82,7 +78,6 @@
 - Instance 实例
 - inheritance 继承
 - implements 实现
-
 
 ### K
 
@@ -148,8 +143,8 @@
 - Vagrant (开源项目名称，不翻)
 - Vagrant Box (开源项目名称，不翻)
 - View 视图
-- Vendor 供应商 
-- 
+- Vendor 供应商
+-
 
 ### W
 

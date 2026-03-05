@@ -1,9 +1,8 @@
-Pobieranie danych dla wielu modeli
-==================================
+# Pobieranie danych dla wielu modeli
 
 Kiedy mamy do czynienia ze skomplikowanym zestawem danych, jest możliwe, że trzeba będzie użyć wielu różnych modeli, aby pobrać te dane od użytkownika.
 Dla przykładu - zakładając, że dane logowania użytkownika zapisane są w tabeli `user`, podczas gdy dane profilu użytkownika są przechowywane w tabeli `profile`,
-będziesz chciał pobrać dane od użytkownika za pomocą modeli `User` oraz `Profile`. 
+będziesz chciał pobrać dane od użytkownika za pomocą modeli `User` oraz `Profile`.
 Dzięki wsparciu modeli i formularzy przez Yii, możesz rozwiązać ten problem w sposób nie różniący się za bardzo od przetwarzania pojedynczego modelu.
 
 W poniższym przykładzie pokażemy jak utworzyć formularz, który pozwoli Ci na zbieranie danych dla obydwu modeli: `User` oraz `Profile`.
@@ -28,16 +27,16 @@ class UserController extends Controller
         if (!$user) {
             throw new NotFoundHttpException("The user was not found.");
         }
-        
+
         $profile = Profile::findOne($user->profile_id);
-        
+
         if (!$profile) {
             throw new NotFoundHttpException("The user has no profile.");
         }
-        
+
         $user->scenario = 'update';
         $profile->scenario = 'update';
-        
+
         if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
             $isValid = $user->validate();
             $isValid = $profile->validate() && $isValid;
@@ -47,7 +46,7 @@ class UserController extends Controller
                 return $this->redirect(['user/view', 'id' => $id]);
             }
         }
-        
+
         return $this->render('update', [
             'user' => $user,
             'profile' => $profile,
@@ -73,7 +72,7 @@ $form = ActiveForm::begin([
     <?= $form->field($user, 'username') ?>
 
     ...other input fields...
-    
+
     <?= $form->field($profile, 'website') ?>
 
     <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>

@@ -1,5 +1,4 @@
-Tests de aceptación
-===================
+# Tests de aceptación
 
 Un test de aceptación verifica escenarios desde la perspectiva de un usuario.
 Se accede a la aplicación testeada por medio de PhpBrowser o de un navegador de verdad.

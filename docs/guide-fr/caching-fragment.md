@@ -1,5 +1,4 @@
-Mise en cache de fragments
-==========================
+# Mise en cache de fragments
 
 La mise en cache de fragments fait référence à la mise en cache de fragments de pages Web. Par exemple, si une page affiche un résumé des ventes annuelles dans un tableau, vous pouvez stocker ce tableau en cache pour éliminer le temps nécessaire à sa génération à chacune des requêtes. La mise en cache de fragments est construite au-dessus de la [mise en cache de données](caching-data.md).
 
@@ -21,7 +20,6 @@ Autrement, votre logique de génération de contenu sera appelée, et quand [[yi
 
 Comme pour la [mise en cache de données](caching-data.md), un `$id` (identifiant) unique est nécessaire pour identifier un cache de contenu.
 
-
 ## Options de mise en cache <span id="caching-options"></span>
 
 Vous pouvez spécifier des options additionnelles sur la mise en cache de fragments en passant le tableau d'options comme second paramètre à la méthode [[yii\base\View::beginCache()|beginCache()]]. En arrière plan, ce tableau d'options est utilisé pour configurer un composant graphique [[yii\widgets\FragmentCache]] qui met en œuvre la fonctionnalité réelle de mise en cache de fragments.
@@ -41,12 +39,11 @@ if ($this->beginCache($id, ['duration' => 3600])) {
 
 Si cette option n'est pas définie, la valeur utilisée par défaut est 60, ce qui veut dire que le contenu mise en cache expirera au bout de 60 secondes.
 
-
 ### Dépendances <span id="dependencies"></span>
 
 Comme pour la [mise en cache de données](caching-data.md#cache-dependencies), le fragment de contenu mis en cache peut aussi avoir des dépendances. Par exemple, le contenu d'un article affiché dépend du fait que l'article a été modifié ou pas.
 
-Pour spécifier une dépendance, définissez l'option [[yii\widgets\FragmentCache::dependency|dependency]], soit sous forme d'objet [[yii\caching\Dependency]], soit sous forme d'un tableau de configuration pour créer un objet [[yii\caching\Dependency]]. Le code qui suit spécifie que le fragment de contenu dépend du changement de la valeur de la colonne `updated_at` (mis à jour le) : 
+Pour spécifier une dépendance, définissez l'option [[yii\widgets\FragmentCache::dependency|dependency]], soit sous forme d'objet [[yii\caching\Dependency]], soit sous forme d'un tableau de configuration pour créer un objet [[yii\caching\Dependency]]. Le code qui suit spécifie que le fragment de contenu dépend du changement de la valeur de la colonne `updated_at` (mis à jour le) :
 
 ```php
 $dependency = [
@@ -61,7 +58,6 @@ if ($this->beginCache($id, ['dependency' => $dependency])) {
     $this->endCache();
 }
 ```
-
 
 ### Variations <span id="variations"></span>
 
@@ -78,7 +74,6 @@ if ($this->beginCache($id, ['variations' => [Yii::$app->language]])) {
 }
 ```
 
-
 ### Activation désactivation de la mise en cache <span id="toggling-caching"></span>
 
 Parfois, vous désirez activer la mise en cache de fragments seulement lorsque certaines conditions sont rencontrées. Par exemple, pour une page qui affiche un formulaire, vous désirez seulement mettre le formulaire en cache lorsqu'il est initialement demandé (via une requête GET). Tout affichage subséquent du formulaire (via des requêtes POST) ne devrait pas être mise en cache car il contient des données entrées par l'utilisateur. Pour mettre en œuvre ce mécanisme, vous pouvez définir l'option [[yii\widgets\FragmentCache::enabled|enabled]], comme suit :
@@ -91,7 +86,6 @@ if ($this->beginCache($id, ['enabled' => Yii::$app->request->isGet])) {
     $this->endCache();
 }
 ```
-
 
 ## Mises en cache imbriquées <span id="nested-caching"></span>
 
@@ -118,12 +112,11 @@ if ($this->beginCache($id1)) {
 
 Différentes options de mise en cache peuvent être définies pour les caches imbriqués. Par exemple, les caches internes et les caches externes peuvent utiliser des valeurs de durée différentes. Même lorsque les données mises en cache dans le cache externe sont invalidées, le cache interne peut continuer à fournir un fragment interne valide. Néanmoins, le réciproque n'est pas vraie ; si le cache externe est évalué comme valide, il continue à fournir la même copie mise en cache après que le contenu du cache interne a été invalidé. Par conséquent, vous devez être prudent lors de la définition des durées ou des dépendances des caches imbriqués, autrement des fragments internes périmés peuvent subsister dans le fragment externe.
 
-
 ## Contenu dynamique <span id="dynamic-content"></span>
 
-Lors de l'utilisation de la mise en cache de fragments, vous pouvez rencontrer une situation dans laquelle un gros fragment de contenu est relativement statique en dehors de quelques endroits particuliers. Par exemple, l'entête d'une page peut afficher le menu principal avec le nom de l'utilisateur courant. Un autre problème se rencontre lorsque le contenu mis en cache, contient du code PHP qui doit être exécuté à chacune des requêtes (p. ex. le code pour enregistrer un paquet de ressources). Ces deux problèmes peuvent être résolus par une fonctionnalité qu'on appelle *contenu dynamique*.
+Lors de l'utilisation de la mise en cache de fragments, vous pouvez rencontrer une situation dans laquelle un gros fragment de contenu est relativement statique en dehors de quelques endroits particuliers. Par exemple, l'entête d'une page peut afficher le menu principal avec le nom de l'utilisateur courant. Un autre problème se rencontre lorsque le contenu mis en cache, contient du code PHP qui doit être exécuté à chacune des requêtes (p. ex. le code pour enregistrer un paquet de ressources). Ces deux problèmes peuvent être résolus par une fonctionnalité qu'on appelle _contenu dynamique_.
 
-Un contenu dynamique signifie un fragment de sortie qui ne doit jamais être mis en cache même s'il est contenu dans un  fragment mis en cache. Pour faire en sorte que le contenu soit dynamique en permanence, il doit être généré en exécutant un code PHP à chaque requête, même si le contenu l'englobant est servi à partir du cache.
+Un contenu dynamique signifie un fragment de sortie qui ne doit jamais être mis en cache même s'il est contenu dans un fragment mis en cache. Pour faire en sorte que le contenu soit dynamique en permanence, il doit être généré en exécutant un code PHP à chaque requête, même si le contenu l'englobant est servi à partir du cache.
 
 Vous pouvez appeler la fonction [[yii\base\View::renderDynamic()]] dans un fragment mis en cache pour y insérer un contenu dynamique à l'endroit désiré, comme ceci :
 
@@ -140,4 +133,4 @@ if ($this->beginCache($id1)) {
 }
 ```
 
-La méthode [[yii\base\View::renderDynamic()|renderDynamic()]] accepte un morceau de code PHP en paramètre. La valeur retournée est traitée comme un contenu dynamique. Le même code PHP est exécuté à chacune des requêtes, peu importe que le fragment englobant soit servi à partir du cache ou pas. 
+La méthode [[yii\base\View::renderDynamic()|renderDynamic()]] accepte un morceau de code PHP en paramètre. La valeur retournée est traitée comme un contenu dynamique. Le même code PHP est exécuté à chacune des requêtes, peu importe que le fragment englobant soit servi à partir du cache ou pas.

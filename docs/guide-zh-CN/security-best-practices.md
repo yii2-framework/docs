@@ -1,19 +1,15 @@
-最佳安全实践
-=======================
+# 最佳安全实践
 
 下面，我们将会回顾常见的安全原则，并介绍在使用 Yii 开发应用程序时，如何避免潜在安全威胁。
 大多数这些原则并非您独有，而是适用于网站或软件开发，
 因此，您还可以找到有关这些背后的一般概念的进一步阅读的链接。
 
-
-基本准则
-----------------
+## 基本准则
 
 无论是开发何种应用程序，我们都有两条基本的安全准则：
 
 1. 过滤输入
 2. 转义输出
-
 
 ### 过滤输入
 
@@ -36,7 +32,6 @@ if (!in_array($sortBy, ['title', 'created_at', 'status'])) {
 - <https://owasp.org/www-community/vulnerabilities/Improper_Data_Validation>
 - <https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet>
 
-
 ### 转义输出
 
 转义输出的意思是，根据我们使用数据的上下文环境，数据需要被转义。比如：在 HTML 上下文，
@@ -50,9 +45,7 @@ Yii 提供了大量的工具来在不同的上下文执行转义。
 - <https://owasp.org/www-community/attacks/Code_Injection>
 - <https://owasp.org/www-community/attacks/xss/>
 
-
-避免 SQL 注入
------------------------
+## 避免 SQL 注入
 
 SQL 注入发生在查询语句是由连接未转义的字符串生成的场景，比如：
 
@@ -119,9 +112,7 @@ $rowCount = $connection->createCommand($sql)->queryScalar();
 
 - <https://owasp.org/www-community/attacks/SQL_Injection>
 
-
-防止 XSS 攻击
-------------
+## 防止 XSS 攻击
 
 XSS 或者跨站脚本发生在输出 HTML 到浏览器时，输出内容没有正确的转义。
 例如，如果用户可以输入其名称，那么他输入 `<script>alert('Hello!');</script>` 而非其名字 `Alexander`，
@@ -135,7 +126,6 @@ XSS 或者跨站脚本发生在输出 HTML 到浏览器时，输出内容没有�
 2. 你希望数据以 HTML 形式输出。
 
 如果你需要的是纯文本，你可以如下简单的转义：
-
 
 ```php
 <?= \yii\helpers\Html::encode($username) ?>
@@ -153,9 +143,7 @@ XSS 或者跨站脚本发生在输出 HTML 到浏览器时，输出内容没有�
 
 - <https://owasp.org/www-community/attacks/xss/>
 
-
-防止 CSRF 攻击
--------------
+## 防止 CSRF 攻击
 
 CSRF 是跨站请求伪造的缩写。这个攻击思想源自许多应用程序假设来自用户的浏览器请求是由用户自己产生的，
 而事实并非如此。
@@ -168,7 +156,7 @@ CSRF 是跨站请求伪造的缩写。这个攻击思想源自许多应用程序
 
 这是 CSRF 攻击如何运作的基本思路。可以说用户退出并不是一件严重的事情，
 然而这仅仅是一个例子，使用这种方法可以做更多的事情，例如触发付款或者是改变数据。
-想象一下如果某个网站有一个这样的 `https://an.example.com/purse/transfer?to=anotherUser&amount=2000` 网址。 
+想象一下如果某个网站有一个这样的 `https://an.example.com/purse/transfer?to=anotherUser&amount=2000` 网址。
 使用 GET 请求访问它会导致从授权用户账户转账 $2000 给 `anotherUser`。
 我们知道，浏览器将始终发送 GET 请求来加载图像，
 所以我们可以修改代码以仅接受该 URL 上的 POST 请求。
@@ -179,7 +167,7 @@ CSRF 是跨站请求伪造的缩写。这个攻击思想源自许多应用程序
 为了避免 CSRF 攻击，你总是需要：
 
 1. 遵循 HTTP 准则，比如 GET 不应该改变应用的状态。
-  有关详细信息，请参阅 [RFC2616](https://www.rfc-editor.org/rfc/rfc9110.html#name-method-definitions)。
+   有关详细信息，请参阅 [RFC2616](https://www.rfc-editor.org/rfc/rfc9110.html#name-method-definitions)。
 2. 保证 Yii CSRF 保护开启。
 
 有的时候你需要对每个控制器和/或方法使用禁用 CSRF。可以通过设置其属性来实现：
@@ -257,9 +245,7 @@ class ContactAction extends Action
 
 - <https://owasp.org/www-community/attacks/csrf>
 
-
-防止文件暴露
-----------------------
+## 防止文件暴露
 
 默认的服务器 webroot 目录指向包含有 `index.php` 的 `web` 目录。在共享托管环境下，这样是不可能的，
 这样导致了所有的代码，配置，日志都在webroot目录。
@@ -267,9 +253,7 @@ class ContactAction extends Action
 如果是这样，别忘了拒绝除了 `web` 目录以外的目录的访问权限。
 如果没法这样做，考虑将你的应用程序托管在其他地方。
 
-
-在生产环境关闭调试信息和工具
--------------------------------------------
+## 在生产环境关闭调试信息和工具
 
 在调试模式下， Yii 展示了大量的错误信息，这样是对开发有用的。
 同样，这些调试信息对于攻击者而言也是方便其用于破解数据结构，配置值，以及你的部分代码。
@@ -286,9 +270,7 @@ class ContactAction extends Action
 - <https://owasp.org/www-project-.net/articles/Exception_Handling.md>
 - <https://owasp.org/www-pdf-archive/OWASP_Top_10_2007.pdf> (A6 - Information Leakage and Improper Error Handling)
 
-
-使用 TLS 上的安全连接
---------------------------------
+## 使用 TLS 上的安全连接
 
 Yii 提供依赖 cookie 和/或 PHP 会话的功能。如果您的连接受到威胁，这些可能会很容易受到攻击。
 如果应用程序通过 TLS 使用安全连接，则风险会降低。
@@ -301,18 +283,16 @@ Yii 提供依赖 cookie 和/或 PHP 会话的功能。如果您的连接受到�
 - [IIS](https://github.com/h5bp/server-configs-iis)。
 - [Lighttpd](https://github.com/h5bp/server-configs-lighttpd)。
 
+## 安全服务器配置
 
-安全服务器配置
----------------------------
-
-本节的目的是强调在为基于 Yii 的网站提供服务配置时需要考虑的风险。 
+本节的目的是强调在为基于 Yii 的网站提供服务配置时需要考虑的风险。
 除了这里涉及的要点之外，
 可能还有其他与安全相关的配置选项，
 所以不要认为这部分是完整的。
 
 ### 避免 `Host`-header 攻击
 
-像 [[yii\web\UrlManager]] 和 [[yii\helpers\Url]] 这样的类会使用 
+像 [[yii\web\UrlManager]] 和 [[yii\helpers\Url]] 这样的类会使用
 [[yii\web\Request::getHostInfo()|currently requested host name]] 来生成链接。
 如果 Web 服务器配置为独立于 `Host` 标头的值提供相同的站点，这个信息并不可靠，
 并且 [可能由发送HTTP请求的用户伪造](https://www.acunetix.com/vulnerabilities/web/host-header-attack)。
@@ -343,4 +323,4 @@ return [
 ```
 
 > Note: 您应该始更倾向于使用 web 服务器配置 'host header attack' 保护而不是使用过滤器。
-  仅当服务器配置设置不可用时 [[yii\filters\HostControl]] 才应该被使用。
+> 仅当服务器配置设置不可用时 [[yii\filters\HostControl]] 才应该被使用。

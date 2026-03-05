@@ -1,5 +1,4 @@
-Расширение ActiveForm на стороне клиента
-=======================================
+# Расширение ActiveForm на стороне клиента
 
 Виджет [[yii\widgets\ActiveForm]] поставляется с набором JavaScript методов, которые используются для проверки на стороне клиента.
 Его реализация очень гибкая и позволяет расширять его различными способами.
@@ -9,7 +8,7 @@
 ActiveForm запускает серию специальных событий. Используя код, подобный следующему, вы можете подписаться на эти события и обрабатывать их:
 
 ```javascript
-$('#contact-form').on('beforeSubmit', function (e) {
+$("#contact-form").on("beforeSubmit", function (e) {
   if (!confirm("Everything is correct. Submit?")) {
     return false;
   }
@@ -104,7 +103,7 @@ function (event)
 Если обработчик возвращает логическое значение `false`, он остановит отправку формы.
 
 ### `ajaxBeforeSend`
-          
+
 `ajaxBeforeSend` событие инициируется перед отправкой AJAX запроса для проверки основанной на AJAX.
 
 Сигнатура обработчика события должна быть:
@@ -141,25 +140,25 @@ function (event, jqXHR, textStatus)
 Если вы хотите, чтобы форма была отправлена через AJAX, вы можете достичь этого, обработав событие `beforeSubmit` формы следующим образом:
 
 ```javascript
-var $form = $('#formId');
-$form.on('beforeSubmit', function() {
-    var data = $form.serialize();
-    $.ajax({
-        url: $form.attr('action'),
-        type: 'POST',
-        data: data,
-        success: function (data) {
-            // Implement successful
-        },
-        error: function(jqXHR, errMsg) {
-            alert(errMsg);
-        }
-    });
-    return false; // prevent default submit
+var $form = $("#formId");
+$form.on("beforeSubmit", function () {
+  var data = $form.serialize();
+  $.ajax({
+    url: $form.attr("action"),
+    type: "POST",
+    data: data,
+    success: function (data) {
+      // Implement successful
+    },
+    error: function (jqXHR, errMsg) {
+      alert(errMsg);
+    },
+  });
+  return false; // prevent default submit
 });
 ```
-Чтобы узнать больше о jQuery функции `ajax()`, обратитесь к документации [jQuery documentation](https://api.jquery.com/jQuery.ajax/).
 
+Чтобы узнать больше о jQuery функции `ajax()`, обратитесь к документации [jQuery documentation](https://api.jquery.com/jQuery.ajax/).
 
 ## Добавления полей динамически
 
@@ -170,20 +169,22 @@ $form.on('beforeSubmit', function() {
 Вы должны добавить само поле, а затем добавить его в список проверки:
 
 ```javascript
-$('#contact-form').yiiActiveForm('add', {
-    id: 'address',
-    name: 'address',
-    container: '.field-address',
-    input: '#address',
-    error: '.help-block',
-    validate:  function (attribute, value, messages, deferred, $form) {
-        yii.validation.required(value, messages, {message: "Validation Message Here"});
-    }
+$("#contact-form").yiiActiveForm("add", {
+  id: "address",
+  name: "address",
+  container: ".field-address",
+  input: "#address",
+  error: ".help-block",
+  validate: function (attribute, value, messages, deferred, $form) {
+    yii.validation.required(value, messages, {
+      message: "Validation Message Here",
+    });
+  },
 });
 ```
 
 Для удаления поля из списка проверки, чтобы оно не было проверено, выполните следующие действия:
 
 ```javascript
-$('#contact-form').yiiActiveForm('remove', 'address');
+$("#contact-form").yiiActiveForm("remove", "address");
 ```

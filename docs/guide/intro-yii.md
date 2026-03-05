@@ -1,22 +1,17 @@
-What is Yii
-===========
+# What is Yii
 
 Yii is a high performance, component-based PHP framework for rapidly developing modern Web applications.
 The name Yii (pronounced `Yee` or `[ji:]`) means "simple and evolutionary" in Chinese. It can also
 be thought of as an acronym for **Yes It Is**!
 
-
-What is Yii Best for?
----------------------
+## What is Yii Best for?
 
 Yii is a generic Web programming framework, meaning that it can be used for developing all kinds
 of Web applications using PHP. Because of its component-based architecture and sophisticated caching
 support, it is especially suitable for developing large-scale applications such as portals, forums, content
 management systems (CMS), e-commerce projects, RESTful Web services, and so on.
 
-
-How does Yii Compare with Other Frameworks?
--------------------------------------------
+## How does Yii Compare with Other Frameworks?
 
 If you're already familiar with another framework, you may appreciate knowing how Yii compares:
 
@@ -37,18 +32,14 @@ keeps a close eye on the latest Web development trends and on the best practices
 found in other frameworks and projects. The most relevant best practices and features found elsewhere are regularly incorporated into the core framework and exposed
 via simple and elegant interfaces.
 
-
-Yii Versions
-------------
+## Yii Versions
 
 Yii currently has two major versions available: 1.1 and 2.0. Version 1.1 is the old generation and is now in maintenance mode. Version 2.0 is a complete rewrite of Yii, adopting the latest
 technologies and protocols, including Composer, PSR, namespaces, traits, and so forth. Version 2.0 represents the current
 generation of the framework and will receive the main development efforts over the next few years.
 This guide is mainly about version 2.0.
 
-
-Requirements and Prerequisites
-------------------------------
+## Requirements and Prerequisites
 
 Yii 2.0 requires PHP 7.4.0 or above and runs best with the latest version of PHP. You can find more detailed
 requirements for individual features by running the requirement checker included in every Yii release.

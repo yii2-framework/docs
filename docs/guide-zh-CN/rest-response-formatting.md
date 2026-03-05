@@ -1,18 +1,16 @@
-响应格式
-===================
+# 响应格式
 
 当处理一个 RESTful API 请求时，一个应用程序通常需要如下步骤
 来处理响应格式：
 
 1. 确定可能影响响应格式的各种因素，例如媒介类型，语言，版本，等等。
-  这个过程也被称为 [content negotiation](https://zh.wikipedia.org/wiki/%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86)。
+   这个过程也被称为 [content negotiation](https://zh.wikipedia.org/wiki/%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86)。
 2. 资源对象转换为数组，如在 [Resources](rest-resources.md) 部分中所描述的。
-  通过 [[yii\rest\Serializer]] 来完成。
+   通过 [[yii\rest\Serializer]] 来完成。
 3. 通过内容协商步骤将数组转换成字符串。
-  [[yii\web\ResponseFormatterInterface|response formatters]] 通过
-  [[yii\web\Response::formatters|response]] 应用程序
-  组件来注册完成。
-
+   [[yii\web\ResponseFormatterInterface|response formatters]] 通过
+   [[yii\web\Response::formatters|response]] 应用程序
+   组件来注册完成。
 
 ## 内容协商 <span id="content-negotiation"></span>
 
@@ -81,7 +79,6 @@ public function behaviors()
 `formats` 属性的 keys 支持 MIME 类型，而 values 必须在 [[yii\web\Response::formatters]]
 中支持被响应格式名称。
 
-
 ## 数据序列化 <span id="data-serializing"></span>
 
 正如我们上面所描述的，[[yii\rest\Serializer]] 负责转换资源的中间件
@@ -91,7 +88,7 @@ public function behaviors()
 
 你可以通过设置 [[yii\rest\Controller::serializer]] 属性和一个配置数组。
 例如，有时你可能想通过直接在响应主体内包含分页信息来
-简化客户端的开发工作。这样做，按照如下规则配置 [[yii\rest\Serializer::collectionEnvelope]] 
+简化客户端的开发工作。这样做，按照如下规则配置 [[yii\rest\Serializer::collectionEnvelope]]
 属性：
 
 ```php

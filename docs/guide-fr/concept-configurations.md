@@ -1,7 +1,6 @@
-Configurations
-==============
+# Configurations
 
-Les configurations sont très largement utilisées dans Yii lors de la création d'objets ou l'initialisation d'objets existants. Les configurations contiennent généralement le nom de la classe de l'objet en cours de création, et une liste de valeurs initiales qui doivent être assignées aux [propriétés](concept-properties.md) de l'objet. Elles peuvent aussi comprendre une liste de gestionnaires qui doivent être attachés aux [événements](concept-events.md) de l'objet et/ou une liste de [comportements](concept-behaviors.md) qui doivent être attachés à l'objet. 
+Les configurations sont très largement utilisées dans Yii lors de la création d'objets ou l'initialisation d'objets existants. Les configurations contiennent généralement le nom de la classe de l'objet en cours de création, et une liste de valeurs initiales qui doivent être assignées aux [propriétés](concept-properties.md) de l'objet. Elles peuvent aussi comprendre une liste de gestionnaires qui doivent être attachés aux [événements](concept-events.md) de l'objet et/ou une liste de [comportements](concept-behaviors.md) qui doivent être attachés à l'objet.
 
 Dans ce qui suit, une configuration est utilisée pour créer et initialiser une connexion à une base de données :
 
@@ -17,7 +16,7 @@ $config = [
 $db = Yii::createObject($config);
 ```
 
-La méthode [[Yii::createObject()]] prend un tableau de configuration en tant qu'argument et crée un objet en instanciant la classe nommée dans la configuration. Lorsque l'objet est instancié, le reste de la configuration est utilisé pour initialiser les propriétés de l'objet, ses gestionnaires d'événement et ses comportements. 
+La méthode [[Yii::createObject()]] prend un tableau de configuration en tant qu'argument et crée un objet en instanciant la classe nommée dans la configuration. Lorsque l'objet est instancié, le reste de la configuration est utilisé pour initialiser les propriétés de l'objet, ses gestionnaires d'événement et ses comportements.
 
 Si vous disposez déjà d'un objet, vous pouvez utiliser la méthode [[Yii::configure()]] pour initialiser les propriétés de l'objet avec un tableau de configuration :
 
@@ -26,7 +25,6 @@ Yii::configure($object, $config);
 ```
 
 Notez bien que dans ce cas, le tableau de configuration ne doit pas contenir d'élément `class`.
-
 
 ## Format d'une configuration <span id="configuration-format"></span>
 
@@ -43,10 +41,10 @@ Le format d'une configuration peut être formellement décrit comme suit :
 
 où
 
-* L'élément `class` spécifie un nom de classe pleinement qualifié pour l'objet à créer.
-* L'élément `propertyName` spécifie les valeurs initiales d'une propriété nommé property. Les clés sont les noms de propriété et les valeurs correspondantes les valeurs initiales. Seules les variables membres publiques et les [propriétés](concept-properties.md) définies par des méthodes d'obtention (*getters*) et/ou des méthodes d'assignation (*setters*) peuvent être configurées.
-* Les éléments `on eventName` spécifient quels gestionnaires doivent être attachés aux [événements](concept-events.md) de l'objet. Notez que les clés du tableau sont formées en préfixant les noms d'événement par `on`. Reportez-vous à la section [événements](concept-events.md) pour connaître les formats des gestionnaires d'événement pris en charge.
-* L'élément `as behaviorName` spécifie quels [comportements](concept-behaviors.md) doivent être attachés à l'objet. Notez que les clés du tableau sont formées en préfixant les noms de comportement par `as ` ; la valeur `$behaviorConfig` représente la configuration pour la création du comportement, comme une configuration normale décrite ici. 
+- L'élément `class` spécifie un nom de classe pleinement qualifié pour l'objet à créer.
+- L'élément `propertyName` spécifie les valeurs initiales d'une propriété nommé property. Les clés sont les noms de propriété et les valeurs correspondantes les valeurs initiales. Seules les variables membres publiques et les [propriétés](concept-properties.md) définies par des méthodes d'obtention (_getters_) et/ou des méthodes d'assignation (_setters_) peuvent être configurées.
+- Les éléments `on eventName` spécifient quels gestionnaires doivent être attachés aux [événements](concept-events.md) de l'objet. Notez que les clés du tableau sont formées en préfixant les noms d'événement par `on`. Reportez-vous à la section [événements](concept-events.md) pour connaître les formats des gestionnaires d'événement pris en charge.
+- L'élément `as behaviorName` spécifie quels [comportements](concept-behaviors.md) doivent être attachés à l'objet. Notez que les clés du tableau sont formées en préfixant les noms de comportement par `as ` ; la valeur `$behaviorConfig` représente la configuration pour la création du comportement, comme une configuration normale décrite ici.
 
 Ci-dessous, nous présentons un exemple montrant une configuration avec des valeurs initiales de propriétés, des gestionnaires d'événement et des comportements.
 
@@ -64,15 +62,13 @@ Ci-dessous, nous présentons un exemple montrant une configuration avec des vale
 ]
 ```
 
-
 ## Utilisation des configurations <span id="using-configurations"></span>
 
-Les configurations sont utilisées en de nombreux endroits dans Yii. Au début de cette section, nous avons montré comment créer un objet obéissant à une configuration en utilisant la méthode [[Yii::createObject()]]. Dans cette sous-section, nous allons décrire les configurations d'applications et les configurations d'objets graphiques (*widget*) – deux utilisations majeures des configurations.
-
+Les configurations sont utilisées en de nombreux endroits dans Yii. Au début de cette section, nous avons montré comment créer un objet obéissant à une configuration en utilisant la méthode [[Yii::createObject()]]. Dans cette sous-section, nous allons décrire les configurations d'applications et les configurations d'objets graphiques (_widget_) – deux utilisations majeures des configurations.
 
 ### Configurations d'applications <span id="application-configurations"></span>
 
-La configuration d'une [application](structure-applications.md) est probablement l'un des tableaux les plus complexes dans Yii. Cela est dû au fait que la classe [[yii\web\Application|application]] dispose d'un grand nombre de propriétés et événements configurables. De première importance, se trouve sa propriété [[yii\web\Application::components|components]] qui peut recevoir un tableau de configurations pour créer des composants qui sont enregistrés durant l'exécution de l'application. Ce qui suit est un résumé de la configuration de l'application du [modèle de projet *basic*](start-installation.md).
+La configuration d'une [application](structure-applications.md) est probablement l'un des tableaux les plus complexes dans Yii. Cela est dû au fait que la classe [[yii\web\Application|application]] dispose d'un grand nombre de propriétés et événements configurables. De première importance, se trouve sa propriété [[yii\web\Application::components|components]] qui peut recevoir un tableau de configurations pour créer des composants qui sont enregistrés durant l'exécution de l'application. Ce qui suit est un résumé de la configuration de l'application du [modèle de projet _basic_](start-installation.md).
 
 ```php
 $config = [
@@ -133,12 +129,12 @@ $config = [
 ];
 ```
 
-Pour en savoir plus sur les valeurs possibles des tableaux de configuration de   `definitions` et `singletons`  et avoir des exemples de la vie réelle, reportez-vous à la sous-section [Utilisation pratique avancée](concept-di-container.md#advanced-practical-usage) de l'article 
+Pour en savoir plus sur les valeurs possibles des tableaux de configuration de `definitions` et `singletons` et avoir des exemples de la vie réelle, reportez-vous à la sous-section [Utilisation pratique avancée](concept-di-container.md#advanced-practical-usage) de l'article
 [Conteneur d'injection de dépendances](concept-di-container.md).
 
 ### Configurations des objets graphiques <span id="widget-configurations"></span>
 
-Lorsque vous utilisez des [objets graphiques](structure-widgets.md), vous avez souvent besoin d'utiliser des configurations pour personnaliser les propriétés de ces objets graphiques. Les méthodes [[yii\base\Widget::widget()]] et [[yii\base\Widget::begin()]] peuvent toutes deux être utilisées pour créer un objet graphique. Elles acceptent un tableau de configuration, comme celui qui suit : 
+Lorsque vous utilisez des [objets graphiques](structure-widgets.md), vous avez souvent besoin d'utiliser des configurations pour personnaliser les propriétés de ces objets graphiques. Les méthodes [[yii\base\Widget::widget()]] et [[yii\base\Widget::begin()]] peuvent toutes deux être utilisées pour créer un objet graphique. Elles acceptent un tableau de configuration, comme celui qui suit :
 
 ```php
 use yii\widgets\Menu;
@@ -155,11 +151,11 @@ echo Menu::widget([
 
 La configuration ci-dessus crée un objet graphique nommé `Menu` et initialise sa propriété `activateItems` à `false` (faux). La propriété `items` est également configurée avec les items de menu à afficher.
 
-Notez que, comme le nom de classe est déjà donné, le tableau de configuration ne doit PAS contenir de clé `class`. 
+Notez que, comme le nom de classe est déjà donné, le tableau de configuration ne doit PAS contenir de clé `class`.
 
 ## Fichiers de configuration <span id="configuration-files"></span>
 
-Lorsqu'une configuration est très complexe, une pratique courante est de la stocker dans un ou plusieurs fichiers PHP appelés *fichiers de configuration*. Un fichier de configuration retourne un tableau PHP représentant la configuration. Par exemple, vous pouvez conserver une configuration d'application dans un fichier nommé `web.php`, comme celui qui suit :
+Lorsqu'une configuration est très complexe, une pratique courante est de la stocker dans un ou plusieurs fichiers PHP appelés _fichiers de configuration_. Un fichier de configuration retourne un tableau PHP représentant la configuration. Par exemple, vous pouvez conserver une configuration d'application dans un fichier nommé `web.php`, comme celui qui suit :
 
 ```php
 return [
@@ -206,12 +202,11 @@ $config = require 'path/to/web.php';
 (new yii\web\Application($config))->run();
 ```
 
-
 ## Configurations par défaut <span id="default-configurations"></span>
 
-La méthode [[Yii::createObject()]] est implémentée sur la base du [conteneur d'injection de dépendances](concept-di-container.md). Cela vous permet de spécifier un jeu de configurations dites *configurations par défaut* qui seront appliquées à TOUTES les instances des classes spécifiées lors de leur création en utilisant [[Yii::createObject()]]. Les configurations par défaut peuvent être spécifiées en appelant `Yii::$container->set()` dans le code d'[amorçage](runtime-bootstrapping.md).
+La méthode [[Yii::createObject()]] est implémentée sur la base du [conteneur d'injection de dépendances](concept-di-container.md). Cela vous permet de spécifier un jeu de configurations dites _configurations par défaut_ qui seront appliquées à TOUTES les instances des classes spécifiées lors de leur création en utilisant [[Yii::createObject()]]. Les configurations par défaut peuvent être spécifiées en appelant `Yii::$container->set()` dans le code d'[amorçage](runtime-bootstrapping.md).
 
-Par exemple, si vous voulez personnaliser l'objet graphique [[yii\widgets\LinkPager]] de façon à ce que TOUS les fonctions de mise en page (pagers) affichent au plus 5 boutons de page (la valeur par défaut est 10), vous pouvez utiliser le code suivant pour atteindre ce but : 
+Par exemple, si vous voulez personnaliser l'objet graphique [[yii\widgets\LinkPager]] de façon à ce que TOUS les fonctions de mise en page (pagers) affichent au plus 5 boutons de page (la valeur par défaut est 10), vous pouvez utiliser le code suivant pour atteindre ce but :
 
 ```php
 \Yii::$container->set('yii\widgets\LinkPager', [
@@ -220,7 +215,6 @@ Par exemple, si vous voulez personnaliser l'objet graphique [[yii\widgets\LinkPa
 ```
 
 Sans les configurations par défaut, vous devez configurer la propriété `maxButtonCount` partout où vous utilisez un pagineur.
-
 
 ## Constantes d'environment <span id="environment-constants"></span>
 

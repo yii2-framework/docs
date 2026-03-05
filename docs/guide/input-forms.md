@@ -1,8 +1,7 @@
-Creating Forms
-==============
+# Creating Forms
 
-ActiveRecord based forms: ActiveForm
------------------------
+## ActiveRecord based forms: ActiveForm
+
 The primary way of using forms in Yii is through [[yii\widgets\ActiveForm]]. This approach should be preferred when
 the form is based upon a model. Additionally, there are some useful methods in [[yii\helpers\Html]] that are typically
 used for adding buttons and help text to any form.
@@ -59,6 +58,7 @@ $form = ActiveForm::begin([
 ```
 
 ### Wrapping with `begin()` and `end()` <span id="wrapping-with-begin-and-end"></span>
+
 In the above code, [[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]] not only creates a form instance, but also marks the beginning of the form.
 All of the content placed between [[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]] and
 [[yii\widgets\ActiveForm::end()|ActiveForm::end()]] will be wrapped within the HTML `<form>` tag.
@@ -67,6 +67,7 @@ the `begin` method. In this case, an extra CSS class and identifying ID are pass
 For all available options, please refer to the API documentation of [[yii\widgets\ActiveForm]].
 
 ### ActiveField <span id="activefield"></span>
+
 In order to create a form element in the form, along with the element's label, and any applicable JavaScript validation,
 the [[yii\widgets\ActiveForm::field()|ActiveForm::field()]] method is called, which returns an instance of [[yii\widgets\ActiveField]].
 When the result of this method is echoed directly, the result is a regular (text) input.
@@ -112,34 +113,32 @@ are some reserved names that can cause conflicts:
 Additional HTML tags can be added to the form using plain HTML or using the methods from the [[yii\helpers\Html|Html]]-helper
 class like it is done in the above example with [[yii\helpers\Html::submitButton()|Html::submitButton()]].
 
-
 > Tip: If you are using Twitter Bootstrap CSS in your application you may want to use
 > [[yii\bootstrap\ActiveForm]] instead of [[yii\widgets\ActiveForm]]. The former extends from the latter and
 > uses Bootstrap-specific styles when generating form input fields.
-
 
 > Tip: In order to style required fields with asterisks, you can use the following CSS:
 >
 > ```css
 > div.required label.control-label:after {
->     content: " *";
->     color: red;
+>   content: " *";
+>   color: red;
 > }
 > ```
 
-Creating Lists <span id="creating-activeform-lists"></span>
------------------------
+## Creating Lists <span id="creating-activeform-lists"></span>
 
 There are 3 types of lists:
-* Dropdown lists 
-* Radio lists
-* Checkbox lists
+
+- Dropdown lists
+- Radio lists
+- Checkbox lists
 
 To create a list, you have to prepare the items. This can be done manually:
 
 ```php
 $items = [
-    1 => 'item 1', 
+    1 => 'item 1',
     2 => 'item 2'
 ]
 ```
@@ -154,8 +153,8 @@ $items = Category::find()
 ```
 
 These `$items` have to be processed by the different list widgets.
-The value of the form field (and the current active item) will be automatically set 
-by the current value of the `$model`'s attribute. 
+The value of the form field (and the current active item) will be automatically set
+by the current value of the `$model`'s attribute.
 
 #### Creating a drop-down list <span id="creating-activeform-dropdownlist"></span>
 
@@ -165,7 +164,7 @@ We can use ActiveField [[\yii\widgets\ActiveField::dropDownList()]] method to cr
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->dropdownList([
-        1 => 'item 1', 
+        1 => 'item 1',
         2 => 'item 2'
     ],
     ['prompt'=>'Select Category']
@@ -180,7 +179,7 @@ We can use ActiveField [[\yii\widgets\ActiveField::radioList()]] method to creat
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->radioList([
-    1 => 'radio 1', 
+    1 => 'radio 1',
     2 => 'radio 2'
 ]);
 ```
@@ -193,14 +192,12 @@ We can use ActiveField [[\yii\widgets\ActiveField::checkboxList()]] method to cr
 /** @var \yii\widgets\ActiveForm $form */
 
 echo $form->field($model, 'category')->checkboxList([
-    1 => 'checkbox 1', 
+    1 => 'checkbox 1',
     2 => 'checkbox 2'
 ]);
 ```
 
-
-Working with Pjax <span id="working-with-pjax"></span>
------------------------
+## Working with Pjax <span id="working-with-pjax"></span>
 
 The [[yii\widgets\Pjax|Pjax]] widget allows you to update a certain section of a
 page instead of reloading the entire page. You can use it to update only the form
@@ -227,8 +224,9 @@ Pjax::begin([
     ActiveForm::end();
 Pjax::end();
 ```
+
 > Tip: Be careful with the links inside the [[yii\widgets\Pjax|Pjax]] widget since
-> the response  will also be rendered inside the widget. To prevent this, use the
+> the response will also be rendered inside the widget. To prevent this, use the
 > `data-pjax="0"` HTML attribute.
 
 #### Values in Submit Buttons and File Upload
@@ -244,8 +242,7 @@ ajax or using the [[yii\widgets\Pjax|Pjax]] widget depends on the
 [browser support](https://developer.mozilla.org/en-US/docs/Web/API/FormData#browser_compatibility)
 for the `FormData` class.
 
-Further Reading <span id="further-reading"></span>
----------------
+## Further Reading <span id="further-reading"></span>
 
 The next section [Validating Input](input-validation.md) handles the validation of the submitted form data on the server-side as well as ajax and client-side validation.
 

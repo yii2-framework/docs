@@ -1,5 +1,4 @@
-Mailing
-=======
+# Mailing
 
 > Note: This section is under development.
 
@@ -10,9 +9,7 @@ it usually depends on the external services and libraries.
 
 For the most common cases you can use [yii2-symfonymailer](https://www.yiiframework.com/extension/yiisoft/yii2-symfonymailer) official extension.
 
-
-Configuration
--------------
+## Configuration
 
 Mail component configuration depends on the extension you have chosen.
 In general your application configuration should look like:
@@ -32,9 +29,7 @@ return [
 ];
 ```
 
-
-Basic usage
------------
+## Basic usage
 
 Once the `mailer` component is configured, you can use the following code to send an email message:
 
@@ -65,8 +60,8 @@ $message->setTo(Yii::$app->params['adminEmail'])
 ```
 
 > Note: each `mailer` extension comes in 2 major classes: `Mailer` and `Message`. `Mailer` always knows
-  the class name and specific of the `Message`. Do not attempt to instantiate `Message` object directly —
-  always use `compose()` method for it.
+> the class name and specific of the `Message`. Do not attempt to instantiate `Message` object directly —
+> always use `compose()` method for it.
 
 You may also send several messages at once:
 
@@ -82,9 +77,7 @@ Yii::$app->mailer->sendMultiple($messages);
 
 Some particular mail extensions may benefit from this approach, using single network message etc.
 
-
-Composing mail content
-----------------------
+## Composing mail content
 
 Yii allows composition of the actual mail messages content via special view files.
 By default these files should be located at `@app/mail` path.
@@ -173,9 +166,7 @@ use yii\helpers\Html;
 <?php $this->endPage() ?>
 ```
 
-
-File attachment
----------------
+## File attachment
 
 You can add attachments to message using methods `attach()` and `attachContent()`:
 
@@ -189,9 +180,7 @@ $message->attach('/path/to/source/file.pdf');
 $message->attachContent('Attachment content', ['fileName' => 'attach.txt', 'contentType' => 'text/plain']);
 ```
 
-
-Embedding images
-----------------
+## Embedding images
 
 You can embed images into the message content using `embed()` method. This method returns the attachment id,
 which should be then used at `img` tag.
@@ -209,9 +198,7 @@ Then inside the view file you can use the following code:
 <img src="<?= $message->embed($imageFileName); ?>">
 ```
 
-
-Testing and debugging
----------------------
+## Testing and debugging
 
 A developer often has to check, what actual emails are sent by the application, what was their content and so on.
 Such ability is granted by Yii via `yii\mail\BaseMailer::useFileTransport`. If enabled, this option enforces
@@ -224,11 +211,9 @@ A mail message file can be opened by a regular text file editor, so you can brow
 This mechanism may prove itself, while debugging application or running unit test.
 
 > Note: the mail message file content is composed via `\yii\mail\MessageInterface::toString()`, so it depends on the actual
-  mail extension you are using in your application.
+> mail extension you are using in your application.
 
-
-Creating your own mail solution
--------------------------------
+## Creating your own mail solution
 
 In order to create your own custom mail solution, you need to create 2 classes: one for the `Mailer` and
 another one for the `Message`.

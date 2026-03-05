@@ -1,18 +1,16 @@
-Tratamento de Erros
-===============
+# Tratamento de Erros
 
 O Yii inclui um próprio [[yii\web\ErrorHandler|tratamento de erro]] que o torna uma experiência muito mais agradável do que antes. Em particular, o manipulador de erro do Yii faz o seguinte para melhorar o tratamento de erros:
 
-* Todos os erros não-fatais do PHP (ex. advertências, avisos) são convertidas em exceções capturáveis.
+- Todos os erros não-fatais do PHP (ex. advertências, avisos) são convertidas em exceções capturáveis.
 
-* Exceções e erros fatais do PHP são exibidos com detalhes de informação em uma pilha de chamadas (call stack) e linhas de código-fonte no modo de depuração.
+- Exceções e erros fatais do PHP são exibidos com detalhes de informação em uma pilha de chamadas (call stack) e linhas de código-fonte no modo de depuração.
 
-* Suporta o uso de uma [ação do controller](structure-controllers.md#actions) dedicado para exibir erros.
+- Suporta o uso de uma [ação do controller](structure-controllers.md#actions) dedicado para exibir erros.
 
-* Suporta diferentes formatos de resposta de erro.
+- Suporta diferentes formatos de resposta de erro.
 
 O [[yii\web\ErrorHandler|manipulador de erro]] é habilitado por padrão. Você pode desabilitá-lo definindo a constante `YII_ENABLE_ERROR_HANDLER` como `false` no [script de entrada](structure-entry-scripts.md) da aplicação.
-
 
 ## Usando Manipulador de Erro <span id="using-error-handler"></span>
 
@@ -54,20 +52,18 @@ use yii\web\NotFoundHttpException;
 throw new NotFoundHttpException();
 ```
 
-
 ## Personalizando a Exibição de Erro <span id="customizing-error-display"></span>
 
 O [[yii\web\ErrorHandler|manipulador de erro]] ajusta a exibição de erro de acordo com o valor da constante `YII_DEBUG`. Quando `YII_DEBUG` for `True` (significa modo de debug), o manipulador de erro irá exibir exceções com informações detalhadas da pilha de chamadas e linhas do código fonte para ajudar na depuração do erro. E quando `YII_DEBUG` for `false`, apenas a mensagem de erro será exibida para evitar revelar informações relevantes sobre a aplicação.
 
 > Observação: Se uma exceção descende de [[yii\base\UserException]], nenhuma pilha de chamadas será exibido independentemente do valor do `YII_DEBUG`. Isso porque tais exceções são consideradas erros causados pelo usuário não havendo nada a ser corrigido por parte dos programadores.
 
-Por padrão, o [[yii\web\ErrorHandler|manipulador de erro]] mostra os erros utilizando duas  [views](structure-views.md):
+Por padrão, o [[yii\web\ErrorHandler|manipulador de erro]] mostra os erros utilizando duas [views](structure-views.md):
 
-* `@yii/views/errorHandler/error.php`: utilizada quando os erros devem ser exibidos sem informações pilha de chamadas. Quando `YII_DEBUG` for `false`, esta é a única exibição de erro a ser exibida.
+- `@yii/views/errorHandler/error.php`: utilizada quando os erros devem ser exibidos sem informações pilha de chamadas. Quando `YII_DEBUG` for `false`, esta é a única exibição de erro a ser exibida.
 
-* `@yii/views/errorHandler/exception.php`: utilizada quando os erros devem ser exibidos com informações pilha de chamadas. Você pode configurar as propriedades [[yii\web\ErrorHandler::errorView|errorView]] e [[yii\web\ErrorHandler::exceptionView|exceptionView]]
-do manipulador de erros para usar suas próprias views personalizando  a exibição de erro.
-
+- `@yii/views/errorHandler/exception.php`: utilizada quando os erros devem ser exibidos com informações pilha de chamadas. Você pode configurar as propriedades [[yii\web\ErrorHandler::errorView|errorView]] e [[yii\web\ErrorHandler::exceptionView|exceptionView]]
+  do manipulador de erros para usar suas próprias views personalizando a exibição de erro.
 
 ### Usando Ações de Erros <span id="using-error-actions"></span>
 
@@ -124,12 +120,11 @@ public function actionError()
 Agora você deve criar um arquivo de exibição localizado na `views/site/error.php`. Neste arquivo de exibição, você pode acessar as seguintes variáveis se a ação de erro for definida como
 [[yii\web\ErrorAction]]:
 
-* `name`: o nome do erro;
-* `message`: a mensagem de erro;
-* `exception`: o objeto de exceção através do qual você pode recuperar mais informações úteis, como o código de status HTTP, o código de erro, pilha de chamadas de erro, etc.
+- `name`: o nome do erro;
+- `message`: a mensagem de erro;
+- `exception`: o objeto de exceção através do qual você pode recuperar mais informações úteis, como o código de status HTTP, o código de erro, pilha de chamadas de erro, etc.
 
 > Observação: Se você está utilizando o [template básico](start-installation.md) ou o [template avançado](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide-pt-BR/README.md), a ação e a view de erro já estão definidas para você.
-
 
 ### Customizando o Formato da Resposta de Erro <span id="error-format"></span>
 

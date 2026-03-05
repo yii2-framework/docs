@@ -1,5 +1,4 @@
-主题
-=======
+# 主题
 
 主题是一种将当前的一套视图 [views](structure-views.md) 替换为另一套视图，而无需更改视图渲染代码的方法。
 你可以使用主题来系统地更改应用的外观和体验。
@@ -34,7 +33,7 @@ return [
 ```
 
 > Info: 主题支持路径别名。当我们在做视图替换的时候，
-  路径别名将被转换成实际的文件路径或者URL。
+> 路径别名将被转换成实际的文件路径或者URL。
 
 你可以通过 [[yii\base\View::theme]] 属性访问 [[yii\base\Theme]] 对象。例如，在一个视图文件里，你可以写下面的代码，
 因为 `$this` 指向视图对象：
@@ -56,7 +55,6 @@ $file = $theme->getPath('img/logo.gif');
 使用上面配置的例子，因为 `@app/views/site/about.php` 中的起始部分与键 `@app/views` 匹配，
 它将被替换成 `@app/themes/basic/site/about.php`。
 
-
 ## 主题化模块 <span id="theming-modules"></span>
 
 要主题化模块，[[yii\base\Theme::pathMap]] 可以配置成下面这样：
@@ -70,7 +68,6 @@ $file = $theme->getPath('img/logo.gif');
 
 它允许你将 `@app/modules/blog/views/comment/index.php` 主题化成 `@app/themes/basic/modules/blog/views/comment/index.php`。
 
-
 ## 主题化小部件 <span id="theming-widgets"></span>
 
 要主题化小部件，你可以像下面这样配置 [[yii\base\Theme::pathMap]]：
@@ -83,7 +80,6 @@ $file = $theme->getPath('img/logo.gif');
 ```
 
 这将允许你将 `@app/widgets/currency/views/index.php` 主题化成 `@app/themes/basic/widgets/currency/index.php`。
-
 
 ## 主题继承 <span id="theme-inheritance"></span>
 

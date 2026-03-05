@@ -1,7 +1,6 @@
-Yii and Docker
-==============
+# Yii and Docker
 
-For development and deployments Yii applications can be run as Docker containers. A container is like a lightweight isolated virtual machine that maps its services to host's ports, i.e. a webserver in a container on port 80 is available on port 8888 on your (local)host. 
+For development and deployments Yii applications can be run as Docker containers. A container is like a lightweight isolated virtual machine that maps its services to host's ports, i.e. a webserver in a container on port 80 is available on port 8888 on your (local)host.
 
 Containers can solve many issues such as having identical software versions at developer's computer and the server, fast deployments or simulating multi-server architecture while developing.
 
@@ -46,39 +45,38 @@ With Compose you can configure manage all services required for your application
 Basic commands for Docker are
 
     docker-compose up -d
-    
+
 to start all services in your stack, in the background
 
     docker-compose ps
-    
+
 to list running services
 
     docker-compose logs -f
-    
+
 to view logs for all services, continuously
 
     docker-compose stop
-    
+
 to stop all services in your stack, gracefully
 
     docker-compose kill
-    
+
 to stop all services in your stack, immediately
 
     docker-compose down -v
-    
+
 to stop and remove all services, **be aware of data loss when not using host-volumes**
 
 To run commands in a container
 
     docker-compose run --rm php composer install
-    
+
 runs composer installation in a new container
 
     docker-compose exec php bash
-    
-executes a bash in a *running* `php` service
 
+executes a bash in a _running_ `php` service
 
 ## Advanced topics
 

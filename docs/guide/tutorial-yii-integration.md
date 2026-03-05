@@ -1,12 +1,9 @@
-Working with Third-Party Code
-=============================
+# Working with Third-Party Code
 
 From time to time, you may need to use some third-party code in your Yii applications. Or you may want to
 use Yii as a library in some third-party systems. In this section, we will show how to achieve these goals.
 
-
-Using Third-Party Libraries in Yii <span id="using-libs-in-yii"></span>
-----------------------------------
+## Using Third-Party Libraries in Yii <span id="using-libs-in-yii"></span>
 
 To use a third-party library in a Yii application, you mainly need to make sure the classes in the library
 are properly included or can be autoloaded.
@@ -61,17 +58,16 @@ correctly locate and include class files. Simply follow its instruction on how t
 In the worst case when the library requires explicitly including every class file, you can use the following method
 to include the classes on demand:
 
-* Identify which classes the library contains.
-* List the classes and the corresponding file paths in `Yii::$classMap` in the [entry script](structure-entry-scripts.md)
+- Identify which classes the library contains.
+- List the classes and the corresponding file paths in `Yii::$classMap` in the [entry script](structure-entry-scripts.md)
   of the application. For example,
+
 ```php
 Yii::$classMap['Class1'] = 'path/to/Class1.php';
 Yii::$classMap['Class2'] = 'path/to/Class2.php';
 ```
 
-
-Using Yii in Third-Party Systems <span id="using-yii-in-others"></span>
---------------------------------
+## Using Yii in Third-Party Systems <span id="using-yii-in-others"></span>
 
 Because Yii provides many excellent features, sometimes you may want to use some of its features to support
 developing or enhancing 3rd-party systems, such as WordPress, Joomla, or applications developed using other PHP
@@ -87,7 +83,7 @@ composer require yiisoft/yii2
 ```
 
 In case you would like to use only the database abstraction layer or other non-asset related features of Yii,
-you should require a special composer package that prevent Bower and NPM packages installation. See 
+you should require a special composer package that prevent Bower and NPM packages installation. See
 [cebe/assetfree-yii2](https://github.com/cebe/assetfree-yii2) for details.
 
 See also the general [section about installing Yii](start-installation.md#installing-via-composer) for more information
@@ -117,9 +113,7 @@ the `db` [application component](structure-application-components.md) with the D
 Now you can use most features provided by Yii. For example, you can create Active Record classes and use them
 to work with databases.
 
-
-Using Yii 2 with Yii 1 <span id="using-both-yii2-yii1"></span>
-----------------------
+## Using Yii 2 with Yii 1 <span id="using-both-yii2-yii1"></span>
 
 If you were using Yii 1 previously, it is likely you have a running Yii 1 application. Instead of rewriting
 the whole application in Yii 2, you may just want to enhance it using some of the features only available in Yii 2.

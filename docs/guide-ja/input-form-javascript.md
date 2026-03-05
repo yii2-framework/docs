@@ -1,5 +1,4 @@
-クライアント・サイドで ActiveForm を拡張する
-============================================
+# クライアント・サイドで ActiveForm を拡張する
 
 [[yii\widgets\ActiveForm]] ウィジェットは、クライアント・サイドの検証に使う一連の JavaScript メソッドを備えています。
 その実装は非常に柔軟で、様々な方法で拡張することが可能になっています。
@@ -11,7 +10,7 @@ ActiveForm は、一連の専用のイベントを発生させます。
 次のようなコードを使って、これらのイベントを購読して処理することが出来ます。
 
 ```javascript
-$('#contact-form').on('beforeSubmit', function (e) {
+$("#contact-form").on("beforeSubmit", function (e) {
   if (!confirm("全てオーケー。送信しますか?")) {
     return false;
   }
@@ -68,7 +67,7 @@ function (event, messages, errorAttributes)
 ```javascript
 function (event, attribute, messages, deferreds)
 ```
-      
+
 引数は以下の通り:
 
 - `event`: イベントのオブジェクト。
@@ -114,7 +113,7 @@ function (event)
 ハンドラが真偽値 `false` を返すと、フォームの送信は中止されます。
 
 ### `ajaxBeforeSend`
-          
+
 `ajaxBeforeSend` イベントは、AJAX ベースの検証のための AJAX リクエストを送信する前にトリガされます。
 
 イベント・ハンドラのシグニチャは以下の通り:
@@ -144,7 +143,7 @@ function (event, jqXHR, textStatus)
 - `event`: イベントのオブジェクト。
 - `jqXHR`: jqXHR のオブジェクト。
 - `textStatus`: リクエストの状態 ("success", "notmodified", "error", "timeout",
-"abort", または "parsererror")。
+  "abort", または "parsererror")。
 
 ## AJAX でフォームを送信する
 
@@ -153,26 +152,25 @@ function (event, jqXHR, textStatus)
 フォームを AJAX で送信したい場合は、次のように、フォームの `beforeSubmit` イベントを処理することによって達成することが出来ます。
 
 ```javascript
-var $form = $('#formId');
-$form.on('beforeSubmit', function() {
-    var data = $form.serialize();
-    $.ajax({
-        url: $form.attr('action'),
-        type: 'POST',
-        data: data,
-        success: function (data) {
-            // 成功したときの実装
-        },
-        error: function(jqXHR, errMsg) {
-            alert(errMsg);
-        }
-    });
-    return false; // デフォルトの送信を抑止
+var $form = $("#formId");
+$form.on("beforeSubmit", function () {
+  var data = $form.serialize();
+  $.ajax({
+    url: $form.attr("action"),
+    type: "POST",
+    data: data,
+    success: function (data) {
+      // 成功したときの実装
+    },
+    error: function (jqXHR, errMsg) {
+      alert(errMsg);
+    },
+  });
+  return false; // デフォルトの送信を抑止
 });
 ```
 
 jQuery の `ajax()` 関数について更に学習するためには、[jQuery documentation](https://api.jquery.com/jQuery.ajax/) を参照して下さい。
-
 
 ## フィールドを動的に追加する
 
@@ -183,20 +181,22 @@ jQuery の `ajax()` 関数について更に学習するためには、[jQuery d
 フィールドそのものを追加して、そして、検証のリストに追加しなければなりません。
 
 ```javascript
-$('#contact-form').yiiActiveForm('add', {
-    id: 'address',
-    name: 'address',
-    container: '.field-address',
-    input: '#address',
-    error: '.help-block',
-    validate:  function (attribute, value, messages, deferred, $form) {
-        yii.validation.required(value, messages, {message: "Validation Message Here"});
-    }
+$("#contact-form").yiiActiveForm("add", {
+  id: "address",
+  name: "address",
+  container: ".field-address",
+  input: "#address",
+  error: ".help-block",
+  validate: function (attribute, value, messages, deferred, $form) {
+    yii.validation.required(value, messages, {
+      message: "Validation Message Here",
+    });
+  },
 });
 ```
 
 フィールドを検証のリストから削除して検証されないようにするためには、次のようにします。
 
 ```javascript
-$('#contact-form').yiiActiveForm('remove', 'address');
+$("#contact-form").yiiActiveForm("remove", "address");
 ```

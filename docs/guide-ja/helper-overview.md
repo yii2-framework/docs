@@ -1,5 +1,4 @@
-ヘルパ
-======
+# ヘルパ
 
 > Note: このセクションはまだ執筆中です。
 
@@ -19,9 +18,7 @@ echo Html::encode('Test > test');
 > すなわち、基底クラス (例えば `BaseArrayHelper`) と具象クラス (例えば `ArrayHelper`) です。
 > ヘルパを使うときは、具象クラスのみを使うべきであり、基底クラスは決して使ってはいけません。
 
-
-コア・ヘルパ・クラス
---------------------
+## コア・ヘルパ・クラス
 
 以下のコア・ヘルパ・クラスが Yii のリリースにおいて提供されています。
 
@@ -39,9 +36,7 @@ echo Html::encode('Test > test');
 - [Url ヘルパ](helper-url.md)
 - VarDumper
 
-
-ヘルパ・クラスをカスタマイズする <span id="customizing-helper-classes"></span>
-------------------------------
+## ヘルパ・クラスをカスタマイズする <span id="customizing-helper-classes"></span>
 
 コア・ヘルパ・クラス (例えば [[yii\helpers\ArrayHelper]]) をカスタマイズするためには、
 そのヘルパに対応する基底クラス (例えば [[yii\helpers\BaseArrayHelper]]) を拡張するクラスを作成して、名前空間も含めて、

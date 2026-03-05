@@ -1,10 +1,9 @@
-控制器
-===========
+# 控制器
 
 在创建资源类和指定资源格输出式化后，
 下一步就是创建控制器操作将资源通过 RESTful APIs 展现给终端用户。
 
-Yii 提供两个控制器基类来简化创建 RESTful 
+Yii 提供两个控制器基类来简化创建 RESTful
 操作的工作：[[yii\rest\Controller]] 和 [[yii\rest\ActiveController]]，
 两个类的差别是后者提供一系列将资源处理成 [Active Record](db-active-record.md) 的操作。
 因此如果使用 [Active Record](db-active-record.md) 内置的操作会比较方便，可考虑将控制器类
@@ -14,16 +13,15 @@ Yii 提供两个控制器基类来简化创建 RESTful
 [[yii\rest\Controller]] 和 [[yii\rest\ActiveController]] 提供以下功能，
 一些功能在后续章节详细描述：
 
-* HTTP 方法验证；
-* [内容协商和数据格式化](rest-response-formatting.md)；
-* [认证](rest-authentication.md)；
-* [频率限制](rest-rate-limiting.md)。
+- HTTP 方法验证；
+- [内容协商和数据格式化](rest-response-formatting.md)；
+- [认证](rest-authentication.md)；
+- [频率限制](rest-rate-limiting.md)。
 
 [[yii\rest\ActiveController]] 额外提供以下功能：
 
-* 一系列常用动作：`index`，`view`，`create`，`update`，`delete`，`options`；
-* 对动作和资源进行用户认证。
-
+- 一系列常用动作：`index`，`view`，`create`，`update`，`delete`，`options`；
+- 对动作和资源进行用户认证。
 
 ## 创建控制器类 <span id="creating-controller"></span>
 
@@ -34,7 +32,7 @@ Yii 提供两个控制器基类来简化创建 RESTful
 创建新的操作和 Web 应用中创建操作类似，
 唯一的差别是 Web 应用中调用 `render()` 方法渲染一个视图作为返回值，
 对于 RESTful 操作直接返回数据，
-[[yii\rest\Controller::serializer|serializer]] 和 [[yii\web\Response|response object]] 
+[[yii\rest\Controller::serializer|serializer]] 和 [[yii\web\Response|response object]]
 会处理原始数据到请求格式的转换，例如
 
 ```php
@@ -44,18 +42,17 @@ public function actionView($id)
 }
 ```
 
-
 ## 过滤器 <span id="filters"></span>
 
 [[yii\rest\Controller]] 提供的大多数 RESTful API 功能通过[过滤器](structure-filters.md)实现。
 特别是以下过滤器会按顺序执行：
 
-* [[yii\filters\ContentNegotiator|contentNegotiator]]：支持内容协商，
+- [[yii\filters\ContentNegotiator|contentNegotiator]]：支持内容协商，
   在 [响应格式化](rest-response-formatting.md) 一节描述；
-* [[yii\filters\VerbFilter|verbFilter]]：支持 HTTP 方法验证；
-* [[yii\filters\auth\AuthMethod|authenticator]]：支持用户认证，
+- [[yii\filters\VerbFilter|verbFilter]]：支持 HTTP 方法验证；
+- [[yii\filters\auth\AuthMethod|authenticator]]：支持用户认证，
   在[认证](rest-authentication.md)一节描述；
-* [[yii\filters\RateLimiter|rateLimiter]]：支持频率限制，
+- [[yii\filters\RateLimiter|rateLimiter]]：支持频率限制，
   在[频率限制](rest-rate-limiting.md) 一节描述。
 
 这些过滤器都在 [[yii\rest\Controller::behaviors()|behaviors()]] 方法中声明，
@@ -95,12 +92,12 @@ public function behaviors()
     // remove authentication filter
     $auth = $behaviors['authenticator'];
     unset($behaviors['authenticator']);
-    
+
     // add CORS filter
     $behaviors['corsFilter'] = [
         'class' => \yii\filters\Cors::class,
     ];
-    
+
     // re-add authentication filter
     $behaviors['authenticator'] = $auth;
     // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
@@ -110,24 +107,22 @@ public function behaviors()
 }
 ```
 
-
 ## 继承 `ActiveController` <span id="extending-active-controller"></span>
 
 如果你的控制器继承 [[yii\rest\ActiveController]]，
 应设置 [[yii\rest\ActiveController::modelClass|modelClass]] 属性
 为通过该控制器返回给用户的资源类名，该类必须继承 [[yii\db\ActiveRecord]]。
 
-
 ### 自定义动作 <span id="customizing-actions"></span>
 
 [[yii\rest\ActiveController]] 默认提供一下动作：
 
-* [[yii\rest\IndexAction|index]]：按页列出资源；
-* [[yii\rest\ViewAction|view]]：返回指定资源的详情；
-* [[yii\rest\CreateAction|create]]：创建新的资源；
-* [[yii\rest\UpdateAction|update]]：更新一个存在的资源；
-* [[yii\rest\DeleteAction|delete]]：删除指定的资源；
-* [[yii\rest\OptionsAction|options]]：返回支持的 HTTP 方法。
+- [[yii\rest\IndexAction|index]]：按页列出资源；
+- [[yii\rest\ViewAction|view]]：返回指定资源的详情；
+- [[yii\rest\CreateAction|create]]：创建新的资源；
+- [[yii\rest\UpdateAction|update]]：更新一个存在的资源；
+- [[yii\rest\DeleteAction|delete]]：删除指定的资源；
+- [[yii\rest\OptionsAction|options]]：返回支持的 HTTP 方法。
 
 所有这些动作通过 [[yii\rest\ActiveController::actions()|actions()]] 方法申明，可覆盖 `actions()` 方法配置或禁用这些动作，
 如下所示：
@@ -140,7 +135,7 @@ public function actions()
     // 禁用 "delete" 和 "create" 动作
     unset($actions['delete'], $actions['create']);
 
-    // 使用 "prepareDataProvider()" 方法自定义数据 provider 
+    // 使用 "prepareDataProvider()" 方法自定义数据 provider
     $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
 
     return $actions;
@@ -153,7 +148,6 @@ public function prepareDataProvider()
 ```
 
 请参考独立动作类的参考文档学习哪些配置项有用。
-
 
 ### 执行访问检查 <span id="performing-access-check"></span>
 

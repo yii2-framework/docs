@@ -1,8 +1,7 @@
-响应
-=========
+# 响应
 
 当一个应用在处理完一个[请求](runtime-requests.md)后, 这个应用会生成一个 [[yii\web\Response|response]] 响应对象并把这个响应对象发送给终端用户
-这个响应对象包含的信息有 HTTP 状态码，HTTP 头和主体内容等, 
+这个响应对象包含的信息有 HTTP 状态码，HTTP 头和主体内容等,
 从本质上说，网页应用开发最终的目标就是根据不同的请求去构建这些响应对象。
 
 在大多数实际应用情况下，你应该主要地去处理 `response` 这个 [应用组件](structure-application-components.md)，
@@ -10,7 +9,6 @@
 然而，Yii 也允许你创建自己的响应对象并发送给终端用户，这方面在后续会阐述。
 
 在本节，我们将会讲述如何组装和构建响应并把它发送给终端用户。
-
 
 ## 状态码 <span id="status-code"></span>
 
@@ -35,17 +33,17 @@ throw new \yii\web\NotFoundHttpException;
 对于上述的 [[yii\web\NotFoundHttpException]] 对应 HTTP 404 状态码，
 以下为 Yii 预定义的 HTTP 异常：
 
-* [[yii\web\BadRequestHttpException]]：状态码 400。
-* [[yii\web\ConflictHttpException]]：状态码 409。
-* [[yii\web\ForbiddenHttpException]]：状态码 403。
-* [[yii\web\GoneHttpException]]：状态码 410。
-* [[yii\web\MethodNotAllowedHttpException]]：状态码 405。
-* [[yii\web\NotAcceptableHttpException]]：状态码 406。
-* [[yii\web\NotFoundHttpException]]：状态码 404。
-* [[yii\web\ServerErrorHttpException]]：状态码 500。
-* [[yii\web\TooManyRequestsHttpException]]：状态码 429。
-* [[yii\web\UnauthorizedHttpException]]：状态码 401。
-* [[yii\web\UnsupportedMediaTypeHttpException]]：状态码 415。
+- [[yii\web\BadRequestHttpException]]：状态码 400。
+- [[yii\web\ConflictHttpException]]：状态码 409。
+- [[yii\web\ForbiddenHttpException]]：状态码 403。
+- [[yii\web\GoneHttpException]]：状态码 410。
+- [[yii\web\MethodNotAllowedHttpException]]：状态码 405。
+- [[yii\web\NotAcceptableHttpException]]：状态码 406。
+- [[yii\web\NotFoundHttpException]]：状态码 404。
+- [[yii\web\ServerErrorHttpException]]：状态码 500。
+- [[yii\web\TooManyRequestsHttpException]]：状态码 429。
+- [[yii\web\UnauthorizedHttpException]]：状态码 401。
+- [[yii\web\UnsupportedMediaTypeHttpException]]：状态码 415。
 
 如果想抛出的异常不在如上列表中，可创建一个 [[yii\web\HttpException]] 异常，
 带上状态码抛出，如下：
@@ -53,7 +51,6 @@ throw new \yii\web\NotFoundHttpException;
 ```php
 throw new \yii\web\HttpException(402);
 ```
-
 
 ## HTTP 头部 <span id="http-headers"></span>
 
@@ -74,8 +71,7 @@ $values = $headers->remove('Pragma');
 ```
 
 > Info: 头名称是大小写敏感的，在 [[yii\web\Response::send()]] 方法
-  调用前新注册的头信息并不会发送给用户。
-
+> 调用前新注册的头信息并不会发送给用户。
 
 ## 响应主体 <span id="response-body"></span>
 
@@ -101,15 +97,15 @@ $response->data = ['message' => 'hello world'];
 Yii支持以下可直接使用的格式，每个实现了[[yii\web\ResponseFormatterInterface|formatter]] 类，
 可自定义这些格式器或通过配置 [[yii\web\Response::formatters]] 属性来增加格式器。
 
-* [[yii\web\Response::FORMAT_HTML|HTML]]：通过 [[yii\web\HtmlResponseFormatter]] 来实现。
-* [[yii\web\Response::FORMAT_XML|XML]]：通过 [[yii\web\XmlResponseFormatter]] 来实现。
-* [[yii\web\Response::FORMAT_JSON|JSON]]：通过 [[yii\web\JsonResponseFormatter]] 来实现。
-* [[yii\web\Response::FORMAT_JSONP|JSONP]]：通过 [[yii\web\JsonResponseFormatter]] 来实现。
-* [[yii\web\Response::FORMAT_RAW|RAW]]：如果要直接发送响应而不应用任何格式，请使用此格式。
+- [[yii\web\Response::FORMAT_HTML|HTML]]：通过 [[yii\web\HtmlResponseFormatter]] 来实现。
+- [[yii\web\Response::FORMAT_XML|XML]]：通过 [[yii\web\XmlResponseFormatter]] 来实现。
+- [[yii\web\Response::FORMAT_JSON|JSON]]：通过 [[yii\web\JsonResponseFormatter]] 来实现。
+- [[yii\web\Response::FORMAT_JSONP|JSONP]]：通过 [[yii\web\JsonResponseFormatter]] 来实现。
+- [[yii\web\Response::FORMAT_RAW|RAW]]：如果要直接发送响应而不应用任何格式，请使用此格式。
 
-上述响应主体可明确地被设置，但是在大多数情况下是通过[操作](structure-controllers.md) 
+上述响应主体可明确地被设置，但是在大多数情况下是通过[操作](structure-controllers.md)
 方法的返回值隐式地设置，常用场景如下所示：
-  
+
 ```php
 public function actionIndex()
 {
@@ -153,9 +149,8 @@ public function actionInfo()
 ```
 
 > Note: 如果创建你自己的响应对象，将不能在应用配置中设置 `response` 组件，尽管如此，
-  可使用 [依赖注入](concept-di-container.md) 
-  应用通用配置到你新的响应对象。
-
+> 可使用 [依赖注入](concept-di-container.md)
+> 应用通用配置到你新的响应对象。
 
 ## 浏览器跳转 <span id="browser-redirection"></span>
 
@@ -184,18 +179,18 @@ public function actionOld()
 ```
 
 > Info: [[yii\web\Response::redirect()]] 方法默认会设置响应状态码为 302，该状态码会告诉浏览器请求的资源
-  *临时* 放在另一个 URI 地址上，可传递一个 301 状态码告知浏览器请求
-  的资源已经 *永久* 重定向到新的 URId 地址。
+> _临时_ 放在另一个 URI 地址上，可传递一个 301 状态码告知浏览器请求
+> 的资源已经 _永久_ 重定向到新的 URId 地址。
 
 如果当前请求为 AJAX 请求，发送一个 `Location` 头不会自动使浏览器跳转，为解决这个问题，
 [[yii\web\Response::redirect()]] 方法设置一个值为要跳转的URL的 `X-Redirect` 头，
-在客户端可编写 JavaScript 
+在客户端可编写 JavaScript
 代码读取该头部值然后让浏览器跳转对应的 URL。
 
 > Info: Yii 配备了一个 `yii.js` JavaScript 文件提供常用 JavaScript 功能，
-  包括基于 `X-Redirect` 头的浏览器跳转，
-  因此，如果你使用该 JavaScript 文件（通过 [[yii\web\YiiAsset]] 资源包注册），
-  就不需要编写 AJAX 跳转的代码。
+> 包括基于 `X-Redirect` 头的浏览器跳转，
+> 因此，如果你使用该 JavaScript 文件（通过 [[yii\web\YiiAsset]] 资源包注册），
+> 就不需要编写 AJAX 跳转的代码。
 
 ## 发送文件 <span id="sending-files"></span>
 
@@ -217,14 +212,14 @@ public function actionDownload()
 }
 ```
 
-如果不是在操作方法中调用文件发送方法，在后面还应调用 
+如果不是在操作方法中调用文件发送方法，在后面还应调用
 [[yii\web\Response::send()]] 没有其他内容追加到响应中。
 
 ```php
 \Yii::$app->response->sendFile('path/to/file.txt')->send();
 ```
 
-一些浏览器提供特殊的名为 *X-Sendfile* 的文件发送功能，
+一些浏览器提供特殊的名为 _X-Sendfile_ 的文件发送功能，
 原理为将请求跳转到服务器上的文件，
 Web 应用可在服务器发送文件前结束，为使用该功能，
 可调用 [[yii\web\Response::xSendFile()]]，
@@ -236,7 +231,6 @@ Web 应用可在服务器发送文件前结束，为使用该功能，
 - Nginx: [X-Accel-Redirect](https://www.nginx.com/resources/wiki/start/topics/examples/xsendfile/)
 - Cherokee: [X-Sendfile and X-Accel-Redirect](https://www.cherokee-project.com/doc/other_goodies.html#x-sendfile)
 
-
 ## 发送响应 <span id="sending-response"></span>
 
 在 [[yii\web\Response::send()]] 方法调用前响应中的内容不会发送给用户，
@@ -246,8 +240,8 @@ Web 应用可在服务器发送文件前结束，为使用该功能，
 [[yii\web\Response::send()]] 方法使用以下步骤来发送响应：
 
 1. 触发 [[yii\web\Response::EVENT_BEFORE_SEND]] 事件。
-2. 调用 [[yii\web\Response::prepare()]] 来格式化 [[yii\web\Response::data|response data]] 为 
-  [[yii\web\Response::content|response content]]。
+2. 调用 [[yii\web\Response::prepare()]] 来格式化 [[yii\web\Response::data|response data]] 为
+   [[yii\web\Response::content|response content]]。
 3. 触发 [[yii\web\Response::EVENT_AFTER_PREPARE]] 事件。
 4. 调用 [[yii\web\Response::sendHeaders()]] 来发送注册的HTTP头
 5. 调用 [[yii\web\Response::sendContent()]] 来发送响应主体内容

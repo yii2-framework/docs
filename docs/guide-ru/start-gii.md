@@ -1,19 +1,16 @@
-Генерация кода при помощи Gii
-========================
+# Генерация кода при помощи Gii
 
 В этом разделе мы опишем, как использовать [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) для автоматической генерации кода,
 реализующего некоторые общие функции вебсайта. Для достижения этой цели всё, что вам нужно, это просто ввести необходимую информацию в соответствии с инструкциями, отображаемыми на веб-страницах Gii.
 
 В этом руководстве вы узнаете:
 
-* Как активировать Gii в приложении;
-* Как использовать Gii для создания Active Record класса;
-* Как использовать Gii для генерации кода, реализующего CRUD для таблицы БД.
-* Как настроить код, генерируемый Gii.
+- Как активировать Gii в приложении;
+- Как использовать Gii для создания Active Record класса;
+- Как использовать Gii для генерации кода, реализующего CRUD для таблицы БД.
+- Как настроить код, генерируемый Gii.
 
-
-Запускаем Gii <span id="starting-gii"></span>
-------------
+## Запускаем Gii <span id="starting-gii"></span>
 
 [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) представлен в Yii как [модуль](structure-modules.md). Вы можете активировать Gii,
 настроив его в свойстве [[yii\base\Application::modules|modules]]. В зависимости от того, каким образом вы создали приложение, вы можете удостовериться в наличии следующего кода в конфигурационном файле `config/web.php`,
@@ -44,6 +41,7 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 ```
 https://hostname/index.php?r=gii
 ```
+
 > Note: Если вы пытаетесь получить доступ к Gii не с локального хоста, по умолчанию, в целях обеспечения безопасности,
 > доступ будет запрещён. Вы можете изменить настройки Gii, чтобы добавить разрешённые IP адреса, как указано ниже
 
@@ -53,16 +51,15 @@ https://hostname/index.php?r=gii
     'allowedIPs' => ['127.0.0.1', '::1', '192.168.0.*', '192.168.178.20'] // регулируйте в соответствии со своими нуждами
 ],
 ```
+
 ![Gii](images/start-gii.png)
 
-
-Генерация класса Active Record <span id="generating-ar"></span>
----------------------------------
+## Генерация класса Active Record <span id="generating-ar"></span>
 
 Чтобы использовать Gii для генерации класса Active Record, выберите "Генератор модели" (нажав на ссылку на главной странице Gii). И заполните форму следующим образом:
 
-* Имя таблицы: `country`
-* Класс модели : `Country`
+- Имя таблицы: `country`
+- Класс модели : `Country`
 
 ![Генератор модели](images/start-gii-model.png)
 
@@ -76,15 +73,13 @@ https://hostname/index.php?r=gii
 
 После этого вы увидите страницу подтверждения, указывающую на то, что код был успешно сгенерирован. Если файл существовал до этого, вы также увидите сообщение о том, что он был перезаписан заново сгенерированным кодом.
 
-
-Создание CRUD кода <span id="generating-crud"></span>
---------------------
+## Создание CRUD кода <span id="generating-crud"></span>
 
 CRUD расшифровывается как Create, Read, Update и Delete, предоставляющий четыре основные функции, выполняемые над данными на большинстве веб-сайтов. Чтобы создать функциональность CRUD используя Gii, выберите "CRUD Генератор" (нажав на ссылку на главной странице Gii). Для нашей таблицы «country» заполните полученную форму следующим образом:
 
-* Model Class: `app\models\Country`
-* Search Model Class: `app\models\CountrySearch`
-* Controller Class: `app\controllers\CountryController`
+- Model Class: `app\models\Country`
+- Search Model Class: `app\models\CountrySearch`
+- Controller Class: `app\controllers\CountryController`
 
 ![CRUD генератор](images/start-gii-crud.png)
 
@@ -94,9 +89,7 @@ CRUD расшифровывается как Create, Read, Update и Delete, п�
 
 Если вы уже создали файлы `controllers/CountryController.php` и `views/country/index.php` (в разделе о базах данных), установите флажок "overwrite", чтобы заменить их. (Предыдущие версии не поддерживают CRUD полностью)
 
-
-Испытываем в действии <span id="trying-it-out"></span>
--------------
+## Испытываем в действии <span id="trying-it-out"></span>
 
 Чтобы увидеть как всё это работает, перейдите по следующему URL, используя ваш браузер:
 
@@ -115,14 +108,12 @@ https://hostname/index.php?r=country%2Findex
 
 Ниже приведен список файлов, созданных с помощью Gii, в том случае, если вы захотите исследовать реализацию этих функций, или изменить их:
 
-* Контроллер: `controllers/CountryController.php`
-* Модели: `models/Country.php` и `models/CountrySearch.php`
-* Вид: `views/country/*.php`
+- Контроллер: `controllers/CountryController.php`
+- Модели: `models/Country.php` и `models/CountrySearch.php`
+- Вид: `views/country/*.php`
 
 > Info: Gii разработан как тонконастраиваемый и расширяемый инструмент генерации кода. Используя его с умом, вы можете значительно ускорить скорость разработки приложений. Для более подробной информации, пожалуйста, обратитесь к разделу [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide).
 
-
-Заключение <span id="summary"></span>
--------
+## Заключение <span id="summary"></span>
 
 В этом разделе вы узнали, как использовать Gii для генерации кода, реализующего полную функциональность CRUD для данных, хранящихся в таблице базы данных.

@@ -1,5 +1,4 @@
-Shaklar bilan ishlash
-================
+# Shaklar bilan ishlash
 
 Ushbu bo'limda biz foydalanuvchidan ma'lumotlarni qabul qilishni o'rganamiz. Sahifada ma'lumotlarni kiritish uchun ism va emailni kiritish uchun shakl bor. Sahifada kiritilgan ma'lumotlar tasdiqlanishi uchun ko'rsatiladi.
 
@@ -8,15 +7,13 @@ Shu maqsadga erishish uchun biz bitta [amal](structure-controllers.md) va ikkta 
 
 Ushbu qo'lanmada siz quydagilarni o'rganasiz:
 
-* Qandey qilib foydalanuvchi tomonidan kiritilgan ma'lumotlar uchun [modelni](structure-models.md) yaratish mumkin;
-* Qandey qilib ma'lumotlarni tekshirish uchun mantiq yozishimiz mumkin;
-* Qandey qilib HTML-shaklni [ko'rinish](structure-views.md) ichida yaratishimiz mumkin.
+- Qandey qilib foydalanuvchi tomonidan kiritilgan ma'lumotlar uchun [modelni](structure-models.md) yaratish mumkin;
+- Qandey qilib ma'lumotlarni tekshirish uchun mantiq yozishimiz mumkin;
+- Qandey qilib HTML-shaklni [ko'rinish](structure-views.md) ichida yaratishimiz mumkin.
 
+## Model yaratilishi <span id="creating-model"></span>
 
-Model yaratilishi <span id="creating-model"></span>
----------------------------------------------
-
-Fayl `models/EntryForm.php`da `EntryForm` pastda ko'rsatilganidek klassini yarating. U foydalanuvchidan kelgan ma'lumotlar saqlash uchun ishlatiladi. Klasslarni nomlari haqida siz 
+Fayl `models/EntryForm.php`da `EntryForm` pastda ko'rsatilganidek klassini yarating. U foydalanuvchidan kelgan ma'lumotlar saqlash uchun ishlatiladi. Klasslarni nomlari haqida siz
 «[Klasslarni avtoyuklanishi](concept-autoloading.md)» bo'limida o'qishingiz mumkin.
 
 ```php
@@ -46,15 +43,13 @@ Ushbu klass quydagi klassni kengaytiradi [[yii\base\Model]], u esa frameworkni b
 Klass 2-ta ochiq hossa `name` va `email` iborat, ular foydalanuvchilar ma'lumotlarni saqlash uchun ishlatiladi.
 uni yana `rules()` usuli bor, u esa ma'lumotlarni saqlash qoidalarini (tartibini) yozib o'tadi. Yuqorida yozilgan qoidalar quydagicha ta'riflasa bo'ladi:
 
-* Xossalar `name` va`email` to'ldirilishi shart;
-* Xossa`email` ma'lumoti email bo'lishi shart.
+- Xossalar `name` va`email` to'ldirilishi shart;
+- Xossa`email` ma'lumoti email bo'lishi shart.
 
 Agar `EntryForm` nusxasi (obyekt) ma'lumotlar bilan to'ldirilgan bo'lsa, kiritilgan ma'lumotlarni kiritilgan ma'lumotlar ma'lumot qoidalari talabiga to'g'ri kelishini [[yii\base\Model::validate()|validate()]] tekshirishingiz mumkin. Agar ma'lumotlar tekshirishdan o'tmasa [[yii\base\Model::hasErrors|hasErrors]]
 xossasi `true` ga teng bo'lib qoladi. Ushbu xossa: [[yii\base\Model::getErrors|errors]] orqali siz qanaqa xatolar borligini ko'rishingiz mumkin.
 
-
-Amal yaratilishi <span id="creating-action"></span>
-------------------------------------------------
+## Amal yaratilishi <span id="creating-action"></span>
 
 Endi esa huddi pastda ko'rsatilganidek `site` nazoratchisi ichida `entry` amalini yarating.
 
@@ -79,7 +74,7 @@ class SiteController extends Controller
             // $model ichidagi ma'lumotlar tekshirishdan muvaffaqiyatli o'tgan
 
             // endi esa biror $model bilan mantiq...
-  
+
             return $this->render('entry-confirm', ['model' => $model]);
         } else {
             // Sahifaga kirilgan holatda yoki hato mavjud bo'ganida
@@ -98,13 +93,11 @@ Agar hammasi yaxshi o'tsa, amal `entry-confirm` ko'rinishini qaytaradi, u esa fo
 Aks holda esa `entry` ko'rinishi qaytariladi, u esa HTML-shaklni va xatolarni chiqarib beradi, agar ular bor bo'lsa.
 
 > Info: `Yii::$app` yagona global xossasi Yiining nusxasini o'z ichiga oladi
-[ilova](structure-applications.md) (singleton). Bir vaqtni o'zida u [Service Locator](concept-service-locator.md) ham hisoblanadi,
-undan esa quydagi komponentlar bilan foydalanish mumkin  `request`, `response`, `db` va boshqa. Yuqorida ko'rsatilgan kodda `$_POST`
-massivini qabul qilish uchun biz `request` komponentini ishlatdik.
+> [ilova](structure-applications.md) (singleton). Bir vaqtni o'zida u [Service Locator](concept-service-locator.md) ham hisoblanadi,
+> undan esa quydagi komponentlar bilan foydalanish mumkin `request`, `response`, `db` va boshqa. Yuqorida ko'rsatilgan kodda `$_POST`
+> massivini qabul qilish uchun biz `request` komponentini ishlatdik.
 
-
-Ko'rinish yaratilishi <span id="creating-views"></span>
-----------------------------------------------------
+## Ko'rinish yaratilishi <span id="creating-views"></span>
 
 Yakunda biz `entry-confirm` va `entry` ko'rinishlarini yaratamiz, ular esa yuqorida yozilgan `entry` amali orqali ma'lum bir xolatlarda qaytariladi.
 
@@ -147,9 +140,7 @@ Quydagi usular `begin()` va `end()` shaklni ochilish va yopilish teglarini yasay
 kerak bo'lgan maydonlar [[yii\widgets\ActiveForm::field()|field()]] yaratilmoqda . Birinchi "name", ikkinchisi esa "email".
 Keyin esa shaklni ma'lumotlarni jonatish uchun tugma yasalishiga javob beradigan usul [[yii\helpers\Html::submitButton()]] chaqirilmoqda.
 
-
-Keling, sinab ko'raylik <span id="trying-it-out"></span>
---------------------------------------
+## Keling, sinab ko'raylik <span id="trying-it-out"></span>
 
 Ish jarayonida yaratilgan bor narsani ko'rish uchun, browserni ochib quydagi URLni kiritaylik:
 
@@ -167,8 +158,6 @@ Ma'lumot kiritilib jonatilgandan so'ng esa, siz hozirgina kiritilgan ma'lumotlar
 
 ![Kiritilgan tasdiqlangan ma'lumotlar](images/start-entry-confirmation.png)
 
-
-
 ### Bu qandey ishlayapti? <span id="magic-explained"></span>
 
 Siz, bu HTML-shakl aslida qandey qilib ishlayotganini haqida savollar borligi bo'lishi mumkin. Butun jarayon ozgina murakkab ko'rinishi mumkin:
@@ -176,7 +165,7 @@ maydonlar oldida yorlig'lar, ma'lumotlar noto'g'ri kiritilganda hatolar va bular
 
 Ha albatta, ma'lumotlar tekshirishi aslida Javascript tarafida ham Serverda ham amalga oshirilmoqda.
 [[yii\widgets\ActiveForm]] judda yaxshi o'langan, siz `EntryForm`da kirigan qoidalarni olish uchun.
-Ularni Javascript kodga aylantirib va tekshirish jarayonida ishlatiladi. Agar browserda Javascript o'chsa tekshirish 
+Ularni Javascript kodga aylantirib va tekshirish jarayonida ishlatiladi. Agar browserda Javascript o'chsa tekshirish
 server tarafda ham `actionEntry()` usulida ko'rsatilganidek o'tmoqda. Bu esa foydalanuvchi tomonidan kiritilgan ma'lumotlar ishonchli ekanliginini ko'rishimiz mumkin.
 
 Moydonlar uchun yasalgan yorlig'lar xossalar nomlari assosida quydagi usul `field()` orqali yaratilmoqda. Misol uchun, yasalgan `Name` yorlig'i `name` xossasi uchun shaklangan. Siz yorlig'larni quydagicha o'zgartirishingiz mumkin:
@@ -187,11 +176,10 @@ Moydonlar uchun yasalgan yorlig'lar xossalar nomlari assosida quydagi usul `fiel
 ```
 
 > Info: Yiida juda ham ko'p vidjetlar bor, ular sizga tez va murakkab ko'rinishlarni yasashga yordam beradi.
-  Vijetlarni yasash judda oson va sodda ekanligini keyin (oldinda) bilishingiz mumkin. Ko'rinishdagi narsalarni ko'p narsani vijetlarga chiqarsa bo'ladi, 
-  nimaga? keyinchalik ham boshqa joylarda ishlatish uchun, bu esa ishni soddalashtiradi.
+> Vijetlarni yasash judda oson va sodda ekanligini keyin (oldinda) bilishingiz mumkin. Ko'rinishdagi narsalarni ko'p narsani vijetlarga chiqarsa bo'ladi,
+> nimaga? keyinchalik ham boshqa joylarda ishlatish uchun, bu esa ishni soddalashtiradi.
 
-Xulosa <span id="summary"></span>
------------------------------
+## Xulosa <span id="summary"></span>
 
 Bu bo'limda siz MVC-arxitekturasidagi xar bir qismini ishlatib ko'rdingiz.Siz foydalanuvchidan kelgan ma'lumotlarni qabul qilib
 tekshirish uchun, model klasslarini yaratishni o'rgandingiz.

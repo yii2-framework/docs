@@ -1,5 +1,4 @@
-客户端脚本使用
-===========================
+# 客户端脚本使用
 
 现代 Web 应用程序，
 除了呈现并发送到浏览器的静态 HTML 页面外，
@@ -82,7 +81,9 @@ $this->registerCss("body { background: #f00; }");
 
 ```html
 <style>
-body { background: #f00; }
+  body {
+    background: #f00;
+  }
 </style>
 ```
 
@@ -102,20 +103,18 @@ $this->registerCssFile("@web/css/themes/black-and-white.css", [
 
 上面的代码将把 `/css/themes/black-and-white.css` 文件的链接添加到页面的 `<head>` 部分。
 
-* 第一个参数指明被注册的 CSS 文件。
-* 第二个参数指明 `<link>` 标签的 HTML 属性，选项 `depends` 是专门处理
+- 第一个参数指明被注册的 CSS 文件。
+- 第二个参数指明 `<link>` 标签的 HTML 属性，选项 `depends` 是专门处理
   指明 CSS 文件依赖于哪个资源包。在这种情况下，依赖资源包就是
   [[yii\bootstrap\BootstrapAsset|BootstrapAsset]]。这意味着 CSS 文件将
-  被添加在 [[yii\bootstrap\BootstrapAsset|BootstrapAsset]] *之后*。
-* 最后一个参数指明一个 ID 来标识这个 CSS 文件。
+  被添加在 [[yii\bootstrap\BootstrapAsset|BootstrapAsset]] _之后_。
+- 最后一个参数指明一个 ID 来标识这个 CSS 文件。
   如果参数未提供，则将使用 CSS 文件的 URL。
-
 
 我们强烈建议使用 [asset bundles](structure-assets.md) 来注册外部 CSS 文件，
 而非使用 [[yii\web\View::registerCssFile()|registerCssFile()]] 来注册。
 使用资源包允许你合并并且压缩多个 CSS 文件，对于高流量的网站来说，这是比较理想的方式。
 它还提供了更大的灵活性，因为应用程序的所有资源依赖性都在一个位置配置。
-
 
 ## 注册资源包 <span id="asset-bundles"></span>
 
@@ -131,7 +130,6 @@ $this->registerCssFile("@web/css/themes/black-and-white.css", [
 在上面的代码中，在视图文件的上下文中，`AppAsset` 包在当前视图上注册（由 `$this` 表示）。
 从小部件中注册资产包时，您将传递小部件的
 [[yii\base\Widget::$view|$view]] 来替代（`$this->view`）。
-
 
 ## 生成动态 Javascript <span id="dynamic-js"></span>
 
@@ -167,7 +165,11 @@ $this->registerJs(
 例如：
 
 ```javascript
-var yiiOptions = {"appName":"My Yii Application","baseUrl":"/basic/web","language":"en"};
+var yiiOptions = {
+  appName: "My Yii Application",
+  baseUrl: "/basic/web",
+  language: "en",
+};
 ```
 
 在您的 JavaScript 代码中，您现在可以像 `yiiOptions.baseUrl` 或 `yiiOptions.language` 一样访问它们。
@@ -203,7 +205,7 @@ JS
 ## `yii.js` 脚本 <span id="yii.js"></span>
 
 > Note: 本节尚未编写。 它应该包含 `yii.js` 提供的功能的说明：
-> 
+>
 > - Yii JavaScript 模块
 > - CSRF 参数处理
 > - `data-confirm` 处理

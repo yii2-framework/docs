@@ -1,14 +1,10 @@
-Trabalhando com Códigos de Terceiros
-=============================
+# Trabalhando com Códigos de Terceiros
 
 De tempos em tempos, você pode precisar usar algum código de terceiro na sua aplicação Yii. Ou você pode querer utilizar o Yii como uma biblioteca em alguns sistemas de terceiros. Nesta seção, vamos mostrar como fazer isto.
 
-
-Usando Bibliotecas de Terceiros no Yii <span id="using-libs-in-yii"></span>
-----------------------------------
+## Usando Bibliotecas de Terceiros no Yii <span id="using-libs-in-yii"></span>
 
 Para utilizar bibliotecas de terceiros em uma aplicação Yii, você precisa primeiramente garantir que as classes na biblioteca estão devidamente incluídas ou se podem ser carregadas por demanda.
-
 
 ### Usando Pacotes Composer <span id="using-composer-packages"></span>
 
@@ -27,14 +23,13 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
-
 ### Usando Bibliotecas baixadas <span id="using-downloaded-libs"></span>
 
 Se a biblioteca não foi lançada como um pacote Composer, você deve seguir as instruções de instalação para instalá-la. Na maioria dos casos, você precisará baixar manualmente o arquivo de liberação da biblioteca e descompactá-lo no diretório `BasePath/vendor`, onde `BasePath` representa o [caminho base](structure-applications.md#basePath) da sua aplicação.
 
 Se uma biblioteca possui o seu próprio carregador automático, você pode instalá-la no [script de entrada](structure-entry-scripts.md) de sua aplicação. Recomenda-se que a instalação seja feita antes de incluir o arquivo `Yii.php`. Isto porque a classe autoloader Yii pode ter precedência nas classes de carregamento automático da biblioteca a ser instalada.
 
-Se uma biblioteca não oferece um carregador automático de classe, mas seus nomes seguem o padrão [PSR-4](https://www.php-fig.org/psr/psr-4/), você pode usar a classe de autoloader do  Yii para carregar as classes. Tudo que você precisa fazer é apenas declarar um [alias](concept-aliases.md#defining-aliases) para cada namespace raiz utilizados em suas classes. Por exemplo, suponha que você tenha instalado uma biblioteca no diretório `vendor/foo/bar` e as classes de bibliotecas estão sob o namespace raiz `xyz`. Você pode incluir o seguinte código na configuração da sua aplicação:
+Se uma biblioteca não oferece um carregador automático de classe, mas seus nomes seguem o padrão [PSR-4](https://www.php-fig.org/psr/psr-4/), você pode usar a classe de autoloader do Yii para carregar as classes. Tudo que você precisa fazer é apenas declarar um [alias](concept-aliases.md#defining-aliases) para cada namespace raiz utilizados em suas classes. Por exemplo, suponha que você tenha instalado uma biblioteca no diretório `vendor/foo/bar` e as classes de bibliotecas estão sob o namespace raiz `xyz`. Você pode incluir o seguinte código na configuração da sua aplicação:
 
 ```php
 [
@@ -44,23 +39,19 @@ Se uma biblioteca não oferece um carregador automático de classe, mas seus nom
 ]
 ```
 
-
-Se não for nenhuma das opções acima, é provável que a biblioteca necessite fazer um include PHP com algum caminho específico para localizar corretamente os arquivos das classes. Basta seguir as instruções de como configurar o *include path* do PHP.
-
+Se não for nenhuma das opções acima, é provável que a biblioteca necessite fazer um include PHP com algum caminho específico para localizar corretamente os arquivos das classes. Basta seguir as instruções de como configurar o _include path_ do PHP.
 
 No pior dos casos, quando a biblioteca exige explicitamente a inclusão de cada arquivo de classe, você pode usar o seguinte método para incluir as classes por demanda:
 
-* Identificar quais as classes da biblioteca contém.
-* Liste as classes e os caminhos dos arquivos correspondentes em `Yii::$classMap` no [script de entrada](structure-entry-scripts.md) da aplicação. Por exemplo:
+- Identificar quais as classes da biblioteca contém.
+- Liste as classes e os caminhos dos arquivos correspondentes em `Yii::$classMap` no [script de entrada](structure-entry-scripts.md) da aplicação. Por exemplo:
 
 ```php
 Yii::$classMap['Class1'] = 'path/to/Class1.php';
 Yii::$classMap['Class2'] = 'path/to/Class2.php';
 ```
 
-
-Usando o Yii em Sistemas de Terceiros <span id="using-yii-in-others"></span>
---------------------------------
+## Usando o Yii em Sistemas de Terceiros <span id="using-yii-in-others"></span>
 
 Como o Yii fornece muitas características excelentes, algumas vezes você pode querer utilizar algumas destas características como suporte ao desenvolvimento ou melhorias em sistemas de terceiros, tais como WordPress, Joomla ou aplicações desenvolvidas utilizando outros frameworks PHP. Por exemplo, você pode querer utilizar a classe [[yii\helpers\ArrayHelper]] ou usar o recurso de [Active Record](db-active-record.md) em um sistema de terceiros. Para alcançar este objetivo, você primeiramente precisa realizar dois passos: instale o Yii, e o bootstrap Yii.
 
@@ -91,10 +82,8 @@ Como na aplicação Yii, você deve configurar a instância da aplicação com b
 
 Agora você pode usar a maioria dos recursos fornecidos pelo Yii. Por exemplo, você pode criar classes Active Record e usá-las para trabalhar com o banco de dados.
 
+## Usando Yii 2 com Yii 1 <span id="using-both-yii2-yii1"></span>
 
-Usando Yii 2 com Yii 1 <span id="using-both-yii2-yii1"></span>
-----------------------
-        
 Se você estava usando o Yii 1 anteriormente, é provável que você tenha uma aplicação rodando com Yii 1. Em vez de reescrever toda a aplicação em Yii 2, você pode apenas querer melhorá-lo usando apenas alguns dos recursos disponíveis no Yii 2. Isto pode ser alcançado seguindo as instuções a seguir.
 
 > Observação: Yii 2 requer PHP 5.4 ou superior. Você deve certificar-se que o seu servidor e a sua aplicação suportem estes requisitos.
@@ -142,3 +131,4 @@ Isto é tudo! Agora, em qualquer parte do seu código, você pode usar `Yii::$ap
 ```php
 echo get_class(Yii::app()); // retorna'CWebApplication'
 echo get_class(Yii::$app);  // retorna 'yii\web\Application'
+```
