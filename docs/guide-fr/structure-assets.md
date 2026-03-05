@@ -266,9 +266,9 @@ Ajoutez les lignes suivantes au fichier `composer.json` de votre projet pour pr�
 ```
 
 > Note: `fxp/composer-asset-plugin` ralentit significativement la commande `composer update` en comparaison avec asset-packagist.
- 
+  
 ____
- 
+  
 Après avoir configuré Composer pour qu'il prenne en charge Bower et NPM :
 
 1. Modifiez le fichier the `composer.json` de votre application ou extension et listez le paquet dans l'entrée `require`.
@@ -528,7 +528,7 @@ Dans la syntaxe précédente, nous spécifions les syntaxes étendues prises en 
 ## Combinaison et compression de ressources <span id="combining-compressing-assets"></span>
 
 Une page Web peut inclure plusieurs fichiers CSS et/ou JavaScript. Pour réduire le nombre de requêtes HTTP et la taille des fichiers téléchargés, une pratique courante est de combiner et compresser ces fichiers CSS/JavaScript multiples en un ou très peu de fichiers, et d'inclure ces fichiers compressés dans les pages Web à la place des fichiers originaux. 
- 
+  
 > Info: la combinaison et la compression de ressources sont généralement nécessaires lorsqu'une application est dans le mode production. En mode développement, l'utilisation des fichiers CSS/JavaScript originaux est souvent plus pratique pour des raisons de débogage plus facile.
 
 Dans ce qui est présenté ci-dessous, nous introduisons une approche pour combiner et compresser les fichiers de ressources sans avoir besoin de modifier le code existant. 
@@ -557,7 +557,7 @@ Vous avez deux possibilités pour diviser ces paquets de ressources. La premièr
 Utilisez les outils existants (p. ex. [Closure Compiler](https://developers.google.com/closure/compiler/), YUI Compressor](https://github.com/yui/yuicompressor/)) pour combiner et compresser les fichiers CSS et JavaScript dans tous les paquets. Notez que les fichiers doivent être combinés dans l'ordre qui permet de satisfaire toutes les dépendances entre paquets. Par exemple, si le paquet A dépend du paquet B, qui dépend lui-même du paquet C et du paquet D, alors vous devez lister les fichiers de ressources en commençant par C et D, suivi de B et, pour finir, A. 
 
 Après avoir combiné et compressé, nous obtenons un fichier CSS et un fichier JavaScript. Supposons qu'ils s'appellent `all-xyz.css` et `all-xyz.js`, où `xyz` est un horodatage ou une valeur de hachage qui est utilisé pour rendre le nom de fichier unique afin d'éviter les problèmes de mise en cache HTTP.
- 
+  
 Nous en sommes au dernier stade maintenant. Configurez le [[yii\web\AssetManager|gestionnaire de ressources]] dans la configuration de l'application comme indiqué ci-dessous :
 
 
@@ -656,7 +656,7 @@ Les options `jsCompressor` et `cssCompressor` spécifient les commandes de conso
 
 
 Avec le fichier de configuration, vous pouvez exécuter la commande `asset` pour combiner et compresser les fichiers de ressources et générer un nouveau fichier de configuration de paquet de ressources `assets-prod.php`:
- 
+  
 ```
 yii asset assets.php config/assets-prod.php
 ```
@@ -670,7 +670,7 @@ Le fichier de configuration peut être inclus dans la configuration de l'applica
 ### Regroupement des paquets de ressources  <span id="grouping-asset-bundles"></span>
 
 Dans la dernière sous-section présentée, nous avons expliqué comment combiner tous les paquets de ressources en un seul de manière à minimiser les requêtes HTTP pour les fichiers de ressources utilisés par l'application. Ce n'est pas toujours une pratique souhaitable. Par exemple, imaginez que votre application dispose d'une interface utilisateur (*frontend*) et d'une interface d'administration (*backend*), lesquelles utilisent un jeu différent de fichiers CSS et JavaScript. Dans un tel cas, combiner les paquets de ressources des deux interfaces en un seul  n'a pas beaucoup de sens, parce que les paquets de ressources pour l'interface utilisateur ne sont pas utilisés par l'interface d'administration, et parce que cela conduit à un gâchis de bande passante du réseau d'envoyer les ressources de l'interface d'administration lorsqu'une page du l'interface utilisateur est demandée. 
- 
+  
 Pour résoudre ce problème, vous pouvez diviser les paquets de ressources en groupes et combiner les paquets de ressources de chacun des groupes. La configuration suivante montre comment vous pouvez grouper les paquets de ressources :
 ```php
 return [

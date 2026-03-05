@@ -19,7 +19,7 @@ DetailView使用 [[yii\widgets\DetailView::$attributes|$attributes]] 属性来�
 可用的格式化选项，见 [formatter section](output-formatting.md) 章节。
 
 一个典型的DetailView的使用方法如下：
- 
+  
 ```php
 echo DetailView::widget([
     'model' => $model,

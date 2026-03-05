@@ -229,7 +229,7 @@ $provider = new ActiveDataProvider([
 To create your own custom data provider classes, you should implement [[yii\data\DataProviderInterface]].
 An easier way is to extend from [[yii\data\BaseDataProvider]] which allows you to focus on the core data provider
 logic. In particular, you mainly need to implement the following methods:
-                                                   
+                                                    
 - [[yii\data\BaseDataProvider::prepareModels()|prepareModels()]]: prepares the data models that will be made 
   available in the current page and returns them as an array.
 - [[yii\data\BaseDataProvider::prepareKeys()|prepareKeys()]]: accepts an array of currently available data models
@@ -260,7 +260,7 @@ class CsvDataProvider extends BaseDataProvider
     */
     protected $fileObject; // SplFileObject is very convenient for seeking to particular line in a file
     
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -271,7 +271,7 @@ class CsvDataProvider extends BaseDataProvider
         // open file
         $this->fileObject = new SplFileObject($this->filename);
     }
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -279,7 +279,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         $models = [];
         $pagination = $this->getPagination();
- 
+  
         if ($pagination === false) {
             // in case there's no pagination, read all lines
             while (!$this->fileObject->eof()) {
@@ -291,16 +291,16 @@ class CsvDataProvider extends BaseDataProvider
             $pagination->totalCount = $this->getTotalCount();
             $this->fileObject->seek($pagination->getOffset());
             $limit = $pagination->getLimit();
- 
+  
             for ($count = 0; $count < $limit; ++$count) {
                 $models[] = $this->fileObject->fgetcsv();
                 $this->fileObject->next();
             }
         }
- 
+  
         return $models;
     }
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -308,7 +308,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         if ($this->key !== null) {
             $keys = [];
- 
+  
             foreach ($models as $model) {
                 if (is_string($this->key)) {
                     $keys[] = $model[$this->key];
@@ -316,25 +316,25 @@ class CsvDataProvider extends BaseDataProvider
                     $keys[] = call_user_func($this->key, $model);
                 }
             }
- 
+  
             return $keys;
         }
 
         return array_keys($models);
     }
- 
+  
     /**
     * {@inheritdoc}
     */
     protected function prepareTotalCount()
     {
         $count = 0;
- 
+  
         while (!$this->fileObject->eof()) {
             $this->fileObject->next();
             ++$count;
         }
- 
+  
         return $count;
     }
 }

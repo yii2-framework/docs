@@ -93,7 +93,7 @@ $userIDs = $connection
 ```
 
 If data is used to specify column names or table names the best thing to do is to allow only predefined set of values:
- 
+  
 ```php
 function actionList($orderBy = null)
 {

@@ -19,7 +19,7 @@ $httpsAbsoluteHomeUrl = Url::home('https');
 パラメータとして `true` を渡せば、現在のスキーマの絶対 URL を取得することが出来ます。または、スキーマ (`http`, `https`) を明示的に指定しても構いません。
 
 現在のリクエストのベース URL を取得するためには、次のようにします。
- 
+  
 ```php
 $relativeBaseUrl = Url::base();
 $absoluteBaseUrl = Url::base(true);
@@ -151,7 +151,7 @@ echo Url::current(['id' => 100]);
 
 URL を記憶して、後に続く一連のリクエストの一つを処理するときに、記憶した URL を使わなければならないという場合があります。
 これは、次のようにして達成することが出来ます。
- 
+  
 ```php
 // 現在の URL を記憶する
 Url::remember();

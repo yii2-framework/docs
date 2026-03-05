@@ -489,7 +489,7 @@ $query->groupBy('id, status');
 ```
 
 > Note: `GROUP BY` が何らかの DB 式を含む場合は、配列形式を使わなければなりません。
- 
+  
 [[yii\db\Query::addGroupBy()|addGroupBy()]] を呼んで、`GROUP BY` 句にカラムを追加することが出来ます。
 例えば、
 
@@ -525,7 +525,7 @@ $query->having(['status' => 1])
 
 [[yii\db\Query::limit()|limit()]] と [[yii\db\Query::offset()|offset()]] のメソッドは、SQL クエリの `LIMIT` 句と `OFFSET` 句を指定します。
 例えば、
- 
+  
 ```php
 // ... LIMIT 10 OFFSET 20
 $query->limit(10)->offset(20);
@@ -1007,7 +1007,7 @@ namespace app\db\conditions;
 class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
 {
     // ... 上記の実装を参照
-     
+      
     public static function fromArrayDefinition($operator, $operands)
     {
         return new static($operands[0], $operands[1]);

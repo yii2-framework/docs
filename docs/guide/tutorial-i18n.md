@@ -194,7 +194,7 @@ While translating a message containing placeholders, you should leave the placeh
 will be replaced with the actual values when you call `Yii::t()` to translate a message.
 
 You can use either *named placeholders* or *positional placeholders*, but not both, in a single message.
- 
+  
 The previous example shows how you can use named placeholders. That is, each placeholder is written in the format of 
 `{name}`, and you provide an associative array whose keys are the placeholder names
 (without the curly brackets) and whose values are the corresponding values' placeholder to be replaced with.
@@ -276,8 +276,8 @@ echo \Yii::t('app', 'Balance: {0,number,,000,000000}', $sum);
 Characters used in the custom format could be found in
 [ICU API reference](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classDecimalFormat.html) under "Special Pattern Characters"
 section.
- 
- 
+  
+  
 The value is always formatted according to the locale you are translating to i.e. you cannot change decimal or thousands
 separators, currency symbol etc. without changing translation locale. If you need to customize these you can
 use [[yii\i18n\Formatter::asDecimal()]] and [[yii\i18n\Formatter::asCurrency()]].
@@ -425,7 +425,7 @@ Alternatively you can refer to [rules reference at unicode.org](https://cldr.uni
 > [[yii\base\Application::$sourceLanguage|source language]] will be applied to the original message.
 
 There's an `offset` parameter for the cases when the string is like the following:
- 
+  
 ```php
 $likeCount = 2;
 echo Yii::t('app', 'You {likeCount,plural,

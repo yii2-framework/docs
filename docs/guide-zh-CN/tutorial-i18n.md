@@ -425,7 +425,7 @@ echo \Yii::t('app', 'There {n, plural, =0{are no cats} =1{is one cat} other{are 
 > [[yii\base\Application::$sourceLanguage|源语言]] 复数规则将应用于原始消息。
 
 对于字符串如下所示的情况，有一个 `offset` 参数：
- 
+  
 ```php
 $likeCount = 2;
 echo Yii::t('app', 'You {likeCount,plural,

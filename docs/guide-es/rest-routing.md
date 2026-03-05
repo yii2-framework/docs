@@ -83,7 +83,7 @@ Puedes desactivar este comportamiento definiendo la propiedad [[yii\rest\UrlRule
 En caso de que la pluralización automática no encaje en tus requerimientos, puedes además configurar la propiedad 
 [[yii\rest\UrlRule::controller]] para especificar explícitamente cómo mapear un nombre utilizado en un punto final URL
 a un ID de controlador. Por ejemplo, el siguiente código mapea el nombre `u` al ID del controlador `user`.  
- 
+  
 ```php
 [
     'class' => 'yii\rest\UrlRule',

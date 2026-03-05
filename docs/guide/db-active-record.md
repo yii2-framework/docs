@@ -331,7 +331,7 @@ $customers = Customer::find()
   the column values. When you return data in Active Record instances, column values will be automatically typecast
   according to the actual column types; on the other hand when you return data in arrays, column values will be
   strings (since they are the result of PDO without any processing), regardless their actual column types.
-   
+    
 
 ### Retrieving Data in Batches <span id="data-in-batches"></span>
 
@@ -627,7 +627,7 @@ life cycle will happen:
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: triggers
   an [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
   or [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]] event.
-   
+    
 
 ### Deleting Data Life Cycle <span id="deleting-data-life-cycle"></span>
 
@@ -759,7 +759,7 @@ To use optimistic locking,
 4. In the Web form that takes user inputs, add a hidden field to store the current version number of the row being updated.
 5. In the controller action that updates the row using Active Record, try and catch the [[yii\db\StaleObjectException]]
   exception. Implement necessary business logic (e.g. merging the changes, prompting staled data) to resolve the conflict.
-   
+    
 For example, assume the version column is named as `version`. You can implement optimistic locking with the code like
 the following.
 
@@ -1428,7 +1428,7 @@ $customer->unlink('orders', $customer->orders[0]);
 By default, the [[yii\db\ActiveRecord::unlink()|unlink()]] method will set the foreign key value(s) that specify
 the existing relationship to be `null`. You may, however, choose to delete the table row that contains the foreign key value
 by passing the `$delete` parameter as `true` to the method.
- 
+  
 When a junction table is involved in a relation, calling [[yii\db\ActiveRecord::unlink()|unlink()]] will cause
 the foreign keys in the junction table to be cleared, or the deletion of the corresponding row in the junction table
 if `$delete` is `true`.
@@ -1475,7 +1475,7 @@ $customers = Customer::find()->with('comments')->all();
 ```
 
 You can use most of the relational query features that have been described in this section. 
- 
+  
 > Note: Usage of [[yii\db\ActiveQuery::joinWith()|joinWith()]] is limited to databases that allow cross-database JOIN queries.
   For this reason, you cannot use this method in the above example because MongoDB does not support JOIN.
 

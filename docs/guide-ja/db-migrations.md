@@ -247,7 +247,7 @@ class m150811_220037_create_post_table extends Migration
 ```
 
 テーブルのフィールドも直接に生成したい場合は、`--fields` オプションでフィールドを指定します。
- 
+  
 ```
 yii migrate/create create_post_table --fields="title:string,body:text"
 ``` 

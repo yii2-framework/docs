@@ -45,7 +45,7 @@ Yii はそのような手助けを Html ヘルパの形式で提供します。
   として扱われます。
 - 属性の値は [[yii\helpers\Html::encode()|Html::encode()]] を使って HTML エンコードされます。
 - 属性の値が配列である場合は、次のように処理されます。
- 
+  
   * 属性が [[yii\helpers\Html::$dataAttributes]] にリストされているデータ属性である場合、例えば `data` や `ng` である場合は、
     値の配列にある要素の一つ一つについて、属性のリストがレンダリングされます。
     例えば、`'data' => ['id' => 1, 'name' => 'yii']` は `data-id="1" data-name="yii"` を生成します。

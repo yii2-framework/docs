@@ -58,7 +58,7 @@ Dans quelques cas rares, vous désirez installer quelques, ou toutes les, extens
 1. Télécharger les archives des extensions et les décompresser dans le dossier `vendor`.
 2. Installer la classe *autoloader* procurée par les extensions, si elles en possèdent.
 3. Télécharger et installer toutes les extensions dont vos extensions dépendent selon les instructions.
- 
+  
 Si une extension ne possède pas de classe *autoloader* mais obéit à la [norme PSR-4](https://www.php-fig.org/psr/psr-4/), vous pouvez utiliser la classe *autoloader* procurée par Yii pour charger automatiquement les classes d'extension. Tout ce que vous avez à faire, c'est de déclarer un [alias racine](concept-aliases.md#defining-aliases) pour le dossier racine de l'extension. Par exemple, en supposant que vous avez installé une extension dans le dossier `vendor/mycompany/myext`, et que les classes d'extension sont sous l'espace de noms `myext`, alors vous pouvez inclure le code suivant dans la configuration de votre application :
 
 ```php
@@ -291,7 +291,7 @@ Dans les versions de votre extension, en plus des fichiers de code, vous devez e
 * Un fichier *upgrade* (mise à jour) dans le dossier racine du paquet : il donne les instructions sur la manière de mettre l'extension à jour en partant d'une version précédente.   Ce fichier peut être écrit dans le format Markdown et nommé `upgrade.md`.
 * Tutorials, demos, screenshots, etc.: ces derniers sont nécessaires si votre extension fournit de nombreuses fonctionnalités qui ne peuvent être couvertes dans le fichier readme. 
 * Une documentation de l'API : votre code doit être bien documenté pour permettre aux autres personnes de le lire plus facilement et de le comprendre. Vous pouvez faire référence au [fichier de la classe BaseObject](https://github.com/yiisoft/yii2/blob/master/framework/base/BaseObject.php) pour savoir comment documenter votre code. 
- 
+  
 > Info: les commentaires de votre code peuvent être écrits dans le format Markdown. L'extension `yiisoft/yii2-apidoc` vous fournit un outil pour générer une documentation d'API agréable et basée sur les commentaires de votre code. 
 
 > Info: bien que cela ne soit pas une exigence, nous suggérons que votre extension respecte un certain style de codage. Vous pouvez vous reporter au document [style du codage du noyau du framework](https://github.com/yiisoft/yii2/blob/master/docs/internals/core-code-style.md).

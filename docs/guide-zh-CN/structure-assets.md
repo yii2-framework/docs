@@ -275,9 +275,9 @@ composer global require "fxp/composer-asset-plugin:^1.4.1"
 
 > Note: 与 asset-packagist 相比，使用 `fxp/composer-asset-plugin` 的方式，
   会显著减慢 `composer update` 命令的速度。
- 
+  
 ____
- 
+  
 在配置好 Composer 支持使用 Bower 和 NPM 之后：
 
 1. 编辑项目或扩展中的 `composer.json` 文件，在该文件的 `require` 字段中列举出相关包。 
@@ -652,7 +652,7 @@ return [
 一个 Web 页面可以包含很多 CSS 和 JavaScript 文件，为减少 HTTP 请求和这些下载文件的大小，
 通常的方式是在页面中合并并压缩多个 CSS/JavaScript 文件为一个或很少的几个文件，
 并使用压缩后的文件而不是原始文件。
- 
+  
 > Info: 合并和压缩资源通常应用在产品上线模式，
   在开发模式下使用原始的 CSS/JavaScript 更方便调试。
 
@@ -699,7 +699,7 @@ return [
 合并和压缩之后，会得到一个 CSS 文件和一个 JavaScript 文件，
 假定它们的名称为 `all-xyz.css` 和 `all-xyz.js`，
 `xyz` 为使文件名唯一以避免HTTP缓存问题的时间戳或哈希值。
- 
+  
 现在到最后一步了，在应用配置中配置 [[yii\web\AssetManager|asset manager]] 
 资源管理器如下所示：
 
@@ -821,7 +821,7 @@ Yii 默认使用 [Closure Compiler](https://developers.google.com/closure/compil
 
 根据配置文件，可执行 `asset` 命令来合并和压缩资源文件
 并生成一个新的资源包配置文件 `assets-prod.php`：
- 
+  
 ```
 yii asset assets.php config/assets-prod.php
 ```

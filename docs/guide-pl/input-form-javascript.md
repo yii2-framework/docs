@@ -63,7 +63,7 @@ Sygnatura metody obsługującej to zdarzenie powinna wyglądać następująco:
 ```javascript
 function (event, attribute, messages, deferreds)
 ```
-     
+      
 gdzie
 
 - `event`: obiekt Event.
@@ -105,7 +105,7 @@ gdzie event jest obiektem Event.
 Jeśli metoda obsługująca zwróci boolean `false`, zatrzyma wysyłanie formularza.
 
 ### `ajaxBeforeSend`
-         
+          
 `ajaxBeforeSend` jest wyzwalane przed wysłaniem żądania AJAX w przypadku walidacji AJAX-owej.
 
 Sygnatura metody obsługującej to zdarzenie powinna wyglądać następująco:

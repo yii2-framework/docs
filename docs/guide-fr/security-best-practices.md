@@ -69,7 +69,7 @@ $userIDs = $connection
 ```
 
 Si les données sont utilisées pour spécifier des noms de colonne ou des noms de table, la meilleure chose à faire est d'autoriser uniquement des jeux prédéfinis de valeurs : 
- 
+  
 ```php
 function actionList($orderBy = null)
 {

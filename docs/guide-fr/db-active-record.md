@@ -626,7 +626,7 @@ En appelant [[yii\db\ActiveRecord::save()|save()]] pour insérer ou mettre à jo
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: 
   déclenche un événement [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
   ou un événement [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
-   
+    
 
 ### Cycle de vie lors d'une suppression de données <span id="deleting-data-life-cycle"></span>
 
@@ -1414,7 +1414,7 @@ $customer->unlink('orders', $customer->orders[0]);
 
 Par défaut, la méthode [[yii\db\ActiveRecord::unlink()|unlink()]] définit la valeur de la (des) clé(s) étrangères qui spécifie(nt) la relation existante à `null`. 
 Vous pouvez cependant, choisir de supprimer la ligne de la table qui contient la valeur de clé étrangère en passant à la méthode la valeur `true` pour le paramètre `$delete`. 
- 
+  
 
 Lorsqu'une table de jointure est impliquée dans une relation, appeler [[yii\db\ActiveRecord::unlink()|unlink()]] provoque l'effacement des clés étrangères dans la table de jointure, ou l'effacement de la ligne correspondante dans la table de jointure si `#delete` vaut `true`.
 
@@ -1462,7 +1462,7 @@ $customers = Customer::find()->with('comments')->all();
 ```
 
 Vous pouvez utiliser la plupart des fonctionnalités de requêtes relationnelles qui ont été décrites dans cette section.
- 
+  
 > Note : l'utilisation de [[yii\db\ActiveQuery::joinWith()|joinWith()]] est limitée aux bases de données qui permettent les requête JOIN inter bases. 
 Pour cette raison, vous ne pouvez pas utiliser cette méthode dans l'exemple ci-dessus car MongoDB ne prend pas JOIN en charge. 
 
@@ -1472,7 +1472,7 @@ Pour cette raison, vous ne pouvez pas utiliser cette méthode dans l'exemple ci-
 Par défaut, toutes les requêtes d'enregistrement actif sont prises en charge par [[yii\db\ActiveQuery]]. 
 Pour utiliser une classe de requête personnalisée dans une classe d'enregistrement actif, vous devez redéfinir la méthode [[yii\db\ActiveRecord::find()]] et retourner une instance de votre classe de requête personnalisée .
 Par exemple :
- 
+  
 ```php
 namespace app\models;
 

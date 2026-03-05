@@ -45,7 +45,7 @@ know about:
   [boolean attributes](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributess).
 - The values of attributes will be HTML-encoded using [[yii\helpers\Html::encode()|Html::encode()]].
 - If the value of an attribute is an array, it will be handled as follows:
- 
+  
   * If the attribute is a data attribute as listed in [[yii\helpers\Html::$dataAttributes]], such as `data` or `ng`,
     a list of attributes will be rendered, one for each element in the value array. For example,
     `'data' => ['id' => 1, 'name' => 'yii']` generates `data-id="1" data-name="yii"`; and 

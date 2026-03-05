@@ -633,7 +633,7 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 6. Вызывается [[yii\db\ActiveRecord::afterSave()|afterSave()]]: инициируется событие
   [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] или событие
   [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
-   
+    
 
 ### Жизненный цикл удаления данных <span id="deleting-data-life-cycle"></span>
 
@@ -752,7 +752,7 @@ class Customer extends ActiveRecord
 4. В действии контроллера, которое занимается обновлением строки данных с использованием Active Record, оберните в блок
   try...catch код и перехватывайте исключение [[yii\db\StaleObjectException]]. Реализуйте необходимую бизнес-логику
   (например, возможность слияния изменений, подсказку о том, что данные устарели) для разрешения возникшего конфликта.
-   
+    
 Например, предположим, что столбец с версией называется `version`. Вы можете реализовать оптимистическую блокировку с 
 помощью подобного кода:
 
@@ -1367,7 +1367,7 @@ $customer->unlink('orders', $customer->orders[0]);
 По умолчанию метод [[yii\db\ActiveRecord::unlink()|unlink()]] задаст вторичному ключу (или ключам), который определяет
 существующую связь, значение `null`. Однако вы можете запросить удаление строки таблицы, которая содержит значение
 вторичного ключа, передав значение `true` в параметре `$delete` для этого метода.
- 
+  
 Если связь построена на основе промежуточной таблицы, вызов метода [[yii\db\ActiveRecord::unlink()|unlink()]] инициирует
 очистку вторичных ключей в промежуточной таблице, или же удаление соответствующей строки данных в промежуточной таблице,
 если параметр `$delete` равен `true`.
@@ -1425,7 +1425,7 @@ $customers = Customer::find()->with('comments')->all();
 По умолчанию все запросы данных для Active Record поддерживаются с помощью класса [[yii\db\ActiveQuery]]. Для
 использования собственного класса запроса вам необходимо переопределить метод [[yii\db\ActiveRecord::find()]] и
 возвращать из него объект вашего собственного класса запроса. Например:
- 
+  
 ```php
 namespace app\models;
 
@@ -1472,7 +1472,7 @@ class CommentQuery extends ActiveQuery
   выборок не будут перезаписаны.
 
 Это позволит вам писать код построения запросов как показано ниже:
- 
+  
 ```php
 $comments = Comment::find()->active()->all();
 $inactiveComments = Comment::find()->active(false)->all();
@@ -1493,7 +1493,7 @@ class Customer extends \yii\db\ActiveRecord
 $customers = Customer::find()->with('activeComments')->all();
 
 // или по-другому:
- 
+  
 $customers = Customer::find()->with([
     'comments' => function($q) {
         $q->active();

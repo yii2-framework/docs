@@ -116,7 +116,7 @@ Vérifier l'installation <span id="verifying-installation"></span>
 -----------------------
 
 Après l'installation, vous pouvez, soit configurer votre serveur Web (voir section suivante), soit utiliser le [serveur PHP web incorporé](https://www.php.net/manual/fr/features.commandline.webserver.php) en utilisant la commande en console suivante depuis le dossier racine de votre projet :
- 
+  
 ```bash
 php yii serve
 ```

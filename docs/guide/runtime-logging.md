@@ -6,7 +6,7 @@ can easily log various types of messages, filter them, and gather them at differ
 emails. 
 
 Using the Yii logging framework involves the following steps:
- 
+  
 * Record [log messages](#log-messages) at various places in your code;
 * Configure [log targets](#log-targets) in the application configuration to filter and export log messages;
 * Examine the filtered logged messages exported by different targets (e.g. the [Yii debugger](tool-debugger.md)).
@@ -145,7 +145,7 @@ messages of *any* category.
 In addition to specifying allowed categories using the [[yii\log\Target::categories|categories]] property, you may also
 exclude certain categories by the [[yii\log\Target::except|except]] property. If the category of a message
 is found or matches one of the patterns in this property, it will NOT be processed by the target.
- 
+  
 The following target configuration specifies that the target should only process error and warning messages
 under the categories whose names match either `yii\db\*` or `yii\web\HttpException:*`, but not `yii\web\HttpException:404`.
 

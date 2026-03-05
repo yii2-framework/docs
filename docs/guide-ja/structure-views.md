@@ -396,7 +396,7 @@ use yii\helpers\Html;
 例えば、次のコードは、`post` コントローラがビューをレンダリングするときに `@app/views/layouts/post.php` をレイアウトとして使うようにするものです。
 その他のコントローラは、`layout` プロパティに触れられていないと仮定すると、
 引き続きデフォルトの `@app/views/layouts/main.php` をレイアウトとして使います。
- 
+  
 ```php
 namespace app\controllers;
 

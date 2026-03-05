@@ -185,7 +185,7 @@ $params = [':id' => $_GET['id'], ':status' => 1];
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
           ->bindValues($params)
           ->queryOne();
-           
+            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
           ->queryOne();
 ```
@@ -399,7 +399,7 @@ $isolationLevel = \yii\db\Transaction::REPEATABLE_READ;
 Yii::$app->db->transaction(function ($db) {
     ....
 }, $isolationLevel);
- 
+  
 // あるいは
 
 $transaction = Yii::$app->db->beginTransaction($isolationLevel);

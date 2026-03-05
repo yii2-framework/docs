@@ -83,7 +83,7 @@ return [
 Como resultado do código acima, `https://example.com/v1/users` retornará a lista de usuários na versão 1, enquanto `https://example.com/v2/users` retornará a lista de usuários na versão 2.
 
 Graças aos módulos, o código para diferentes versões principais pode ser bem isolado. Entretanto esta abordagem torna possível a reutilização de código entre os módulos através de classes bases comuns e outros recursos partilhados.
- 
+  
 Para lidar com números de subversões, você pode tirar proveito da negociação de conteúdo oferecida pelo behavior [[yii\filters\ContentNegotiator|contentNegotiator]]. O behavior `contentNegotiator` irá configurar a propriedade [[yii\web\Response::acceptParams]] que determinará qual versão é suportada.
 
 Por exemplo, se uma requisição é enviada com o cabeçalho HTTP `Accept: application/json; version=v1`, Após a negociação de conteúdo, [[yii\web\Response::acceptParams]] terá o valor `['version' => 'v1']`.

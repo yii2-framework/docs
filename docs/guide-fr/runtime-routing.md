@@ -4,7 +4,7 @@ Routage et création d'URL
 Lorsqu'une application Yii commence à traiter une URL objet d'une requête, sa première étape consiste à analyser cette URL 
 pour la résoudre en une [route](structure-controllers.md#routes). 
 La route est ensuite utilisée pour instancier l'[action de contrôleur](structure-controllers.md) correspondante pour la prise en charge de la requête. Ce processus est appelé *routage*.
- 
+  
 Le processus inverse du routage, qui consiste à créer une URL à partir d'une route et des paramètres associés de la requête,  
 est appelé *création d'URL*. Lorsque l'URL créée est ensuite requise, le processus de routage est capable de la résoudre en la route originale
   avec les paramètres de requête. 
@@ -14,7 +14,7 @@ Le [[yii\web\UrlManager|gestionnaire d'URL]] fournit la méthode [[yii\web\UrlMa
 une route et les paramètres de requête associés, 
 et la méthode [[yii\web\UrlManager::createUrl()|createUrl()]] pour 
 créer une URL en partant d'une route avec ses paramètres de requête associés. 
- 
+  
 En configurant le composant  `urlManager` dans la configuration de l'application, vous pouvez laisser votre application reconnaître les formats d'URL arbitraires sans modifier le code existant de votre application. 
 Par exemple, vous pouvez utiliser le code suivant pour créer une URL pour l'action `post/view` :
 
@@ -53,7 +53,7 @@ Par exemple, le chemin additionnel dans l'URL `/index.php/post/100` est `/post/1
 Pour utiliser le format d'URL élégantes, 
 vous devez définir un jeu de [[yii\web\UrlManager::rules|règles d'URL]] 
 en cohérence avec les exigences réelles sur la présentation d'une URL. 
- 
+  
 Vous pouvez passer d'un format d'URL à l'autre en inversant la propriété [[yii\web\UrlManager::enablePrettyUrl|enablePrettyUrl]] du  [[yii\web\UrlManager|gestionnaire d'URL]] 
 sans changer quoi que ce soit au code de votre application. 
 
@@ -207,7 +207,7 @@ Dans les quelques sous-sections suivantes, nous expliquons comment configurer le
 
 La méthode [[yii\helpers\Url::to()]] prend aussi en charge la création d'URL qui n'ont **pas** de relation avec des routes particulières. 
 Au lieu de passer un tableau comme premier paramètre, vous devez, dans ce cas,  passer une chaîne de caractères. Par exemple :
- 
+  
 ```php
 use yii\helpers\Url;
 
@@ -370,7 +370,7 @@ et le paramètre `id` dont la valeur est 100 en utilisant la troisième règle�
 - `/index.php/posts/php` provoque la levée d'une exception [[yii\web\NotFoundHttpException]] quand la propriété [[yii\web\UrlManager::enableStrictParsing]]
   est définie à `true`, parce qu'elle ne correspond à aucun des motifs. 
 Si  [[yii\web\UrlManager::enableStrictParsing]] est définie à  `false` (la valeur par défaut), la partie chemin `posts/php` est retournée en tant que route. Cela provoque l'exécution de l'action correspondante si elle existe, ou lève une exception [[yii\web\NotFoundHttpException]] autrement.
- 
+  
 Et quand les règles sont utilisées pour créer des URL : 
 
 - `Url::to(['post/index'])` crée `/index.php/posts` en utilisant la deuxième règle ;
@@ -399,7 +399,7 @@ Par exemple, les règles suivantes incluent les paramètres `controller` et `act
 
 Pour analyser l'URL `/index.php/comment/100/update`, la deuxième règle s'applique et définit le paramètre `controller`  
 comme étant `comment` et le paramètre  `action` comme étant `create`. La route `<controller>/<action>` est par conséquent résolue comme `comment/update`.
- 
+  
 De façon similaire, pour créer une URL à partir de la route `comment/index`, la dernière règle s'applique, ce qui donne l'URL `/index.php/comments`.
 
 > Info: en paramétrant les routes, il est possible de réduire grandement le nombre de règles d'URL, 

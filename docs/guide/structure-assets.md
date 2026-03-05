@@ -277,9 +277,9 @@ will be placed, if you want to publish them using Yii:
 
 > Note: `fxp/composer-asset-plugin` significantly slows down the `composer update` command in comparison
   to asset-packagist.
- 
+  
 ____
- 
+  
 After configuring Composer to support Bower and NPM:
 
 1. Modify the `composer.json` file of your application or extension and list the package in the `require` entry.
@@ -654,7 +654,7 @@ in the commands will be replaced with the source asset file paths and the target
 A Web page can include many CSS and/or JavaScript files. To reduce the number of HTTP requests and the overall
 download size of these files, a common practice is to combine and compress multiple CSS/JavaScript files into 
 one or very few files, and then include these compressed files instead of the original ones in the Web pages.  
- 
+  
 > Info: Combining and compressing assets are usually needed when an application is in production mode. 
   In development mode, using the original CSS/JavaScript files is often more convenient for debugging purposes.
 
@@ -701,7 +701,7 @@ from C and D, followed by B and finally A.
 After combining and compressing, we get one CSS file and one JavaScript file. Assume they are named as 
 `all-xyz.css` and `all-xyz.js`, where `xyz` stands for a timestamp or a hash that is used to make the file name unique
 to avoid HTTP caching problems.
- 
+  
 We are at the last step now. Configure the [[yii\web\AssetManager|asset manager]] as follows in the application
 configuration:
 
@@ -823,7 +823,7 @@ You should install those tools manually or adjust these options to use your favo
 
 With the configuration file, you can run the `asset` command to combine and compress the asset files
 and then generate a new asset bundle configuration file `assets-prod.php`:
- 
+  
 ```
 yii asset assets.php config/assets-prod.php
 ```
@@ -851,7 +851,7 @@ imagine your application has a "front end" as well as a "back end", each of whic
 and CSS files. In this case, combining all asset bundles from both ends into a single one does not make sense, 
 because the asset bundles for the "front end" are not used by the "back end" and it would be a waste of network
 bandwidth to send the "back end" assets when a "front end" page is requested.
- 
+  
 To solve the above problem, you can divide asset bundles into groups and combine asset bundles for each group.
 The following configuration shows how you can group asset bundles: 
 

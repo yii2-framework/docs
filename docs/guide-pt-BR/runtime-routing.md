@@ -5,7 +5,7 @@ Quando uma aplicação Yii começa a processar uma URL requerida, o primeiro pas
 necessário é obter a rota pela análise da URL. A rota é usada para instanciar o 
 [controlador (controller) da ação](structure-controllers.md) correspondente para 
 manipular a requisição. Todo este processo é chamado de *roteamento*.
- 
+  
 O processo inverso do roteamento é chamada de *criação de URL*, onde é criado uma 
 URL a partir de uma determinada rota e seus parâmetros. Quando a URL criada for 
 exigida em outro momento, o processo de roteamento pode resolve-la de volta para 
@@ -64,7 +64,7 @@ representar, em uma adequada [[yii\web\UrlManager::rules|regra de URL]], a rota
 amigável (pretty URL), você precisará escrever um conjunto de 
 [[yii\web\UrlManager::rules|regras de URLs]] de acordo com a necessidade sobre 
 como as URLs devem parecer.
- 
+  
 Você pode alterar entre os dois formatos de URLs, alternando a propriedade 
 [[yii\web\UrlManager::enablePrettyUrl|enablePrettyUrl]] do 
 [[yii\web\UrlManager|gerenciador de URL]] sem alterar qualquer código na aplicação.
@@ -233,7 +233,7 @@ Nas próximas subseções, iremos explicar como configurar o
 O método [[yii\helpers\Url::to()]] também suporta a criação de URLs NÃO relacionadas 
 a uma rota em particular. Neste caso, ao invés de passar um array como seu primeiro 
 parâmetro, você pode passar uma string. Por exemplo,
- 
+  
 ```php
 use yii\helpers\Url;
 
@@ -424,7 +424,7 @@ Quando as regras forem utilizadas para analisar as URLs:
   por não ter correspondido a nenhum dos padrões. Se a propriedade 
   [[yii\web\UrlManager::enableStrictParsing]] for `false` (o valor padrão), o 
   caminho `posts/php` será retornado como uma rota.
- 
+  
 E quando as regras fores utilizadas para criar as URLs:
 
 - `Url::to(['post/index'])` cria `/index.php/posts` usando a segunda regra;
@@ -455,7 +455,7 @@ Para analisar uma URL `/index.php/comment/100/create`, a primeira regra será
 aplicada, na qual foi definida o parâmetro `controller` para ser `comment` e o 
 parâmetro `action` para ser `create`. Sendo assim, a rota `<controller>/<action>` 
 é resolvida como `comment/create`.
- 
+  
 De forma similar, para criar uma URL com a rota `comment/index`, a terceira regra 
 será aplicada, criando um URL `/index.php/comments`.
 

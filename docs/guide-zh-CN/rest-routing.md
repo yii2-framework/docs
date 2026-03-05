@@ -83,7 +83,7 @@
 如果自动复数化不能满足你的需求，你也可以配置
 [[yii\rest\UrlRule::controller]] 属性来明确指定如何将端点URL中使用的名称映射到
 控制器ID。例如，以下代码将名称 `u` 映射到控制器ID `user`。 
- 
+  
 ```php
 [
     'class' => 'yii\rest\UrlRule',

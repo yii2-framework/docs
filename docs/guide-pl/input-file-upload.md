@@ -152,7 +152,7 @@ class UploadForm extends Model
 ```
 
 W pliku widoku, powinieneś dodać opcję `multiple` do wywołania `fileInput()`, aby pole wyboru pliku pozwalało na wybór wielu plików na raz:
- 
+  
 ```php
 <?php
 use yii\widgets\ActiveForm;

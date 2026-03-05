@@ -199,7 +199,7 @@ $provider = new ActiveDataProvider([
 
 Para criar sua própria classe de data provider personalizada, você deve implementar o [[yii\data\DataProviderInterface]].
 Um caminho fácil é estender de [[yii\data\BaseDataProvider]], o que lhe permite concentrar-se na lógica principal do data provider. Em particular, você precisa principalmente implementar os seguintes métodos:
-                                                 
+                                                  
 - [[yii\data\BaseDataProvider::prepareModels()|prepareModels()]]: prepara o data models que será disponibilizado na página atual e as retorna como um array.
 - [[yii\data\BaseDataProvider::prepareKeys()|prepareKeys()]]: recebe um array de data models disponíveis e retorna chaves que lhes estão associados.
 - [[yii\data\BaseDataProvider::prepareTotalCount()|prepareTotalCount]]: retorna um valor que indica o número total de data models no data provider.

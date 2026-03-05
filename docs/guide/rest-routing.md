@@ -83,7 +83,7 @@ You may disable this behavior by setting [[yii\rest\UrlRule::pluralize]] to be `
 In case when the automatic pluralization does not meet your requirement, you may also configure the 
 [[yii\rest\UrlRule::controller]] property to explicitly specify how to map a name used in endpoint URLs to 
 a controller ID. For example, the following code maps the name `u` to the controller ID `user`.  
- 
+  
 ```php
 [
     'class' => 'yii\rest\UrlRule',

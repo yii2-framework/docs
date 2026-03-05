@@ -10,10 +10,10 @@ $formatter = \Yii::$app->formatter;
 
 // 出力: January 1, 2014
 echo $formatter->asDate('2014-01-01', 'long');
- 
+  
 // 出力: 12.50%
 echo $formatter->asPercent(0.125, 2);
- 
+  
 // 出力: <a href="mailto:cebe@example.com">cebe@example.com</a>
 echo $formatter->asEmail('cebe@example.com'); 
 

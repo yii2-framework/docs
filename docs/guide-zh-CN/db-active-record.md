@@ -331,7 +331,7 @@ $customers = Customer::find()
   当您在 Active Record 实例中返回数据时，列值将根据实际列类型，自动类型转换；
   然而，当您以数组返回数据时，列值将为
   字符串（因为它们是没有处理过的 PDO 的结果），不管它们的实际列是什么类型。
-   
+    
 
 ### 批量获取数据（Retrieving Data in Batches） <span id="data-in-batches"></span>
 
@@ -627,7 +627,7 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]：触发
   [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
   或者 [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]] 事件。
-   
+    
 
 ### 删除数据生命周期（Deleting Data Life Cycle） <span id="deleting-data-life-cycle"></span>
 
@@ -748,7 +748,7 @@ class Customer extends ActiveRecord
 4. 在用于用户填写的 Web 表单中，添加一个隐藏字段（hidden field）来存储正在更新的行的当前版本号。
 5. 在使用 Active Record 更新数据的控制器动作中，要捕获（try/catch） [[yii\db\StaleObjectException]] 异常。
   实现一些业务逻辑来解决冲突（例如合并更改，提示陈旧的数据等等）。
-   
+    
 例如，假定版本列被命名为 `version`。您可以使用下面的代码来实现乐观锁。
 
 
@@ -1416,7 +1416,7 @@ $customer->unlink('orders', $customer->orders[0]);
 默认情况下，[[yii\db\ActiveRecord::unlink()|unlink()]] 方法将设置指定的外键值，
 以把现有的关联指定为 `null`。此外，你可以选择通过将 `$delete` 参数设置为`true` 传递给方法，
 删除包含此外键值的表记录行。
- 
+  
 当关联关系中有连接表时，调用 [[yii\db\ActiveRecord::unlink()|unlink()]] 时，
 如果 `$delete` 参数是 `true` 的话，将导致
 连接表中的外键或相应的行被删除。
@@ -1463,7 +1463,7 @@ $customers = Customer::find()->with('comments')->all();
 ```
 
 本节中描述的大多数关联查询功能，你都可以抄一抄。
- 
+  
 > Note: [[yii\db\ActiveQuery::joinWith()|joinWith()]] 这个功能限制于某些数据库是否支持跨数据库 JOIN 查询。
    因此，你再上述的代码里就不能用此方法了，因为 MongoDB 不支持 JOIN 查询。
 

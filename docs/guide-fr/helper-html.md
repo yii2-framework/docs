@@ -39,7 +39,7 @@ Des options sont utilisées dans de nombreuses méthodes de la classe assistante
   [attributs booléens ](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes).
 - Les valeurs des attributs sont encodés HTML à l'aide de la méthode [[yii\helpers\Html::encode()|Html::encode()]].
 - Si la valeur d'un attribut est un tableau, il est géré comme suit :
- 
+  
   * Si l'attribut est un attribut de donnée tel que listé dans [[yii\helpers\Html::$dataAttributes]], tel que `data` ou `ng`,
     une liste d'attributs est rendue, un pour chacun des élément dans le tableau de valeurs. Par exemple, 
     `'data' => ['id' => 1, 'name' => 'yii']` génère `data-id="1" data-name="yii"`; et 

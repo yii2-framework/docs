@@ -52,7 +52,7 @@ LIMIT 10
 [[yii\db\Query::select()|select()]] 方法用来指定 SQL 语句当中的 `SELECT` 子句。
 你可以像下面的例子一样使用一个数组或者字符串来定义需要查询的字段。当 SQL 语句
 是由查询对象生成的时候，被查询的字段名称将会自动的被引号括起来。
- 
+  
 ```php
 $query->select(['id', 'email']);
 
@@ -94,7 +94,7 @@ $query->select(["CONCAT(first_name, ' ', last_name) AS full_name", 'email']);
 
 从 2.0.1 的版本开始你就可以使用子查询了。在定义每一个子查询的时候，
 你应该使用 [[yii\db\Query]] 对象。例如：
- 
+  
 ```php
 $subQuery = (new Query())->select('COUNT(*)')->from('user');
 
@@ -184,7 +184,7 @@ $query->where('YEAR(somedate) = 2015');
 
 千万不要像如下的例子一样直接在条件语句当中嵌入变量，特别是当这些变量来源于终端用户输入的时候，
 因为这样我们的软件将很容易受到 SQL 注入的攻击。
- 
+  
 ```php
 // 危险！千万别这样干，除非你非常的确定 $status 是一个整型数值。
 $query->where("status=$status");
@@ -524,7 +524,7 @@ $query->having(['status' => 1])
 
 [[yii\db\Query::limit()|limit()]] 和 [[yii\db\Query::offset()|offset()]] 是用来指定 SQL 语句当中
 的 `LIMIT` 和 `OFFSET` 子句的。例如，
- 
+  
 ```php
 // ... LIMIT 10 OFFSET 20
 $query->limit(10)->offset(20);
@@ -981,7 +981,7 @@ namespace app\db\conditions;
 class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
 {
     // ... 这里省略其他方法的实现
-     
+      
     public static function fromArrayDefinition($operator, $operands)
     {
         return new static($operands[0], $operands[1]);

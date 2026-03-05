@@ -79,7 +79,7 @@ class SiteController extends Controller
             // $model ichidagi ma'lumotlar tekshirishdan muvaffaqiyatli o'tgan
 
             // endi esa biror $model bilan mantiq...
- 
+  
             return $this->render('entry-confirm', ['model' => $model]);
         } else {
             // Sahifaga kirilgan holatda yoki hato mavjud bo'ganida

@@ -76,7 +76,7 @@ $component = \Yii::createObject([
 
 > Informação: Embora a forma de chamar [[Yii::createObject()]] pareça ser mais complicada, ela é mais poderosa porque ela é aplicada no topo de um [container 
 de injeção de dependência](concept-di-container.md).
- 
+  
 
 A classe [[yii\base\BaseObject]] impõe o seguinte ciclo de vida do objeto:
 

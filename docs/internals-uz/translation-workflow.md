@@ -55,7 +55,7 @@ Barcha o'zgarishlarni quyidagi ko'rinishda olib boramiz [pull request](https://g
 - Shaxsiy qo'shimcha-sharhlarni qo'shish imkoni bor, lekin xaosdan qochish uchun original bitta bo'lishi kerak. Bunga zarurat vaqtida sharh oxiriga 
   "tar. shar." ni qo'shish kerak;
 - Hujjatni umumiy to'g'rilashni o'tkazgandan so'ng mustaqil ravishda faqat ushbu bo'limga tegsihli bo'lgan grammatikadagi, fakt xatoliklardagi o'zgarishlarni kiritish talab darajasida tavsiya etiladi. Boshqa holatlarda gaplarni to'g'rilash, yaxshilash uchun va zarur hollarda o'zgarishlarni markazlashgan tarzda barcha bo'limlar uchun amalga oshirish uchun ularni tahlilga qo'yish zarur.
-   
+    
 
 ### Qo'llanma strukturasi
 
@@ -70,7 +70,7 @@ Tarjima qilish vaqtida hujjatning struktura birligini to'g'ri nomlash muhim. Quy
 - Bob 2 
 - ... 
 - Bob N
- 
+  
 ### Maxsus habarlarni tarjimasi
 
 - Tip → Ko'rsatma 

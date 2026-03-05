@@ -17,7 +17,7 @@ $httpsAbsoluteHomeUrl = Url::home('https');
 Si aucun paramètre n'est passé, l'URL générée est relative. Vous pouvez passer `true` pour obtenir une URL absolue pour le schéma courant ou spécifier un schéma explicitement (`https`, `http`).
 
 Pour obtenir l'URL de base de la requête courante utilisez ceci :
- 
+  
 ```php
 $relativeBaseUrl = Url::base();
 $absoluteBaseUrl = Url::base(true);
@@ -34,7 +34,7 @@ En vue de créer une URL pour une route donnée, utilisez la méthode `Url::toR
 ```php
 $url = Url::toRoute(['product/view', 'id' => 42]);
 ```
- 
+  
 Vous pouvez spécifier la route sous forme de chaîne de caractère, p. ex. `site/index`. Vous pouvez également utiliser un tableau si vous désirez spécifier des paramètres de requête supplémentaires pour l'URL créée. Le format du tableau doit être :
 
 ```php
@@ -78,7 +78,7 @@ echo Url::toRoute('site/index', 'https');
 Il existe une autre méthode `Url::to()` très similaire à  [[toRoute()]]. La seule différence est que cette méthode requiert la spécification d'une route sous forme de tableau seulement. Si une chaîne de caractères est données, elle est traitée comme une URL.
 
 Le premier argument peut être :
-         
+          
 - un tableau : [[toRoute()]] sera appelée pour générer l'URL. Par exemple :
   `['site/index']`, `['post/index', 'page' => 2]`. Reportez-vous à la méthode [[toRoute()]] pour plus de détails sur la manière de spécifier une route.
 - une chaîne de caractères commençant par `@`: elle est traitée commme un alias, et la chaine aliasée correspondante est retournée ;
@@ -155,7 +155,7 @@ $productUrl = Url::previous('product');
 ## Vérification des URL relatives <span id="checking-relative-urls"></span>
 
 Pour savoir si une URL est relative, c.-à-d. n'a pas de partie « hôte », vous pouvez utiliser le code suivant : 
-                             
+                              
 ```php
 $isRelative = Url::isRelative('test/it');
 ```

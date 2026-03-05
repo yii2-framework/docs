@@ -63,7 +63,7 @@ You can then access the DB connection via the expression `Yii::$app->db`.
 When configuring a DB connection, you should always specify its Data Source Name (DSN) via the [[yii\db\Connection::dsn|dsn]] 
 property. The format of DSN varies for different databases. Please refer to the [PHP manual](https://www.php.net/manual/en/pdo.construct.php) 
 for more details. Below are some examples:
- 
+  
 * MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
 * SQLite: `sqlite:/path/to/database/file`
 * PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
@@ -123,13 +123,13 @@ For MS SQL Server additional connection option is needed for proper binary data 
 ## Executing SQL Queries <span id="executing-sql-queries"></span>
 
 Once you have a database connection instance, you can execute a SQL query by taking the following steps:
- 
+  
 1. Create a [[yii\db\Command]] with a plain SQL query;
 2. Bind parameters (optional);
 3. Call one of the SQL execution methods in [[yii\db\Command]].
 
 The following example shows various ways of fetching data from a database:
- 
+  
 ```php
 // return a set of rows. each row is an associative array of column names and values.
 // an empty array is returned if the query returned no results
@@ -185,7 +185,7 @@ $params = [':id' => $_GET['id'], ':status' => 1];
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
           ->bindValues($params)
           ->queryOne();
-           
+            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
           ->queryOne();
 ```
@@ -344,7 +344,7 @@ $count = Yii::$app->db->createCommand("SELECT COUNT([[id]]) FROM {{%employee}}")
 When running multiple related queries in a sequence, you may need to wrap them in a transaction to ensure the integrity
 and consistency of your database. If any of the queries fails, the database will be rolled back to the state as if
 none of these queries were executed.
- 
+  
 The following code shows a typical way of using transactions:
 
 ```php
@@ -399,7 +399,7 @@ $isolationLevel = \yii\db\Transaction::REPEATABLE_READ;
 Yii::$app->db->transaction(function ($db) {
     ....
 }, $isolationLevel);
- 
+  
 // or alternatively
 
 $transaction = Yii::$app->db->beginTransaction($isolationLevel);

@@ -99,7 +99,7 @@ Verificando las Instalación <span id="verifying-installation"></span>
 Una vez finalizada la instalación, o bien configura tu servidor web (mira la sección siguiente) o utiliza
 el [servidor web incluido en PHP](https://www.php.net/manual/es/features.commandline.webserver.php) ejecutando el siguiente
 comando de consola estando parado en el directorio `web` de la aplicación:
- 
+  
 ```bash
 php yii serve
 ```

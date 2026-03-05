@@ -14,7 +14,7 @@ URL管理器在[程序组件](structure-application-components.md)中被注册�
 [[yii\web\UrlManager|URL管理器]] 提供方法 [[yii\web\UrlManager::parseRequest()|parseRequest()]] 来
 解析请求的URL并返回路由信息和参数，
 方法 [[yii\web\UrlManager::createUrl()|createUrl()]] 用来根据提供的路由和参数创建一个可访问的URL。
- 
+  
 在程序配置中配置 `urlManager` 组件，可以让你的应用不改变现有代码的情况下
 识别任意的URL格式。
 例如使用下面的代码创建一个到 `post/view` 控制器的 URL：
@@ -53,7 +53,7 @@ $url = Url::to(['post/view', 'id' => 100]);
 路由为`post/view`，参数`id`为100。
 要使用美化的URL格式，你需要根据实际的需求
 设计一组[[yii\web\UrlManager::rules|URL规则]]来规定URL的样式。
- 
+  
 你可以仅设置[[yii\web\UrlManager|URL管理器]]中的[[yii\web\UrlManager::enablePrettyUrl|开启美化URL]]来切换两种URL格式，
 而不必改动任何程序代码。
 
@@ -207,7 +207,7 @@ echo Url::to(['@posts']);
 
 方法 [[yii\helpers\Url::to()]] 同时支持创建和任何路由不相关的 URL。
 这种情况下，第一个参数不再传入一个数组，而是传入一个字符串。例如：
- 
+  
 ```php
 use yii\helpers\Url;
 
@@ -381,7 +381,7 @@ echo Url::previous();
 - `Url::to(['post/index', 'category' => 'php'])` 生成 `/index.php/post/index?category=php`。
   注意因为没有任何规则适用，将把路由信息当做路径信息来生成URL，
   并且所有参数作为请求查询参数附加到 URL 后面。
-   
+    
 
 ### 参数化路由 <span id="parameterizing-routes"></span>
 

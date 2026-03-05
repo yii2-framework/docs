@@ -81,7 +81,7 @@ Zachowanie to można wyłączyć ustawiając [[yii\rest\UrlRule::pluralize|plura
 W przypadku, gdy mechanizm automatycznego tworzenia formy mnogiej nie spełnia Twoich oczekiwań, możesz również skonfigurować właściwość 
 [[yii\rest\UrlRule::controller|controller]], aby bezpośrednio określić w jaki sposób nazwa użyta w punkcie końcowym URLi ma być zmapowana na ID kontrolera. 
 Dla przykładu, poniższy kod mapuje nazwę `u` na ID kontrolera `user`.  
- 
+  
 ```php
 [
     'class' => 'yii\rest\UrlRule',

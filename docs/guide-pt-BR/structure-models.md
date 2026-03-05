@@ -229,7 +229,7 @@ A implementação padrão do método `scenarios()` retornará todos os cenários
 nas regras de validação declaradas no método [[yii\base\Model::rules()]]. Ao 
 sobrescrever o método `scenarios()`, se quiser introduzir novos cenários, além 
 dos cenários padrão, poderá escrever um código conforme o exemplo a seguir:
- 
+  
 ```php
 namespace app\models;
 

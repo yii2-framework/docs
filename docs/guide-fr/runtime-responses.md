@@ -39,7 +39,7 @@ Lorsque le  [gestionnaire d'erreurs](runtime-handling-errors.md) intercepte l'ex
 * [[yii\web\UnsupportedMediaTypeHttpException]]: code d'état 415.
 
 Si l'exception que vous voulez lever ne fait pas partie de cette liste, vous pouvez en créer une en étendant la classe [[yii\web\HttpException]], ou en en levant une à laquelle vous passez directement le code d'état. Par exemple :
- 
+  
 ```php
 throw new \yii\web\HttpException(402);
 ```
@@ -92,7 +92,7 @@ De base, Yii prend en charge les formats suivants, chacun mis en œuvre par une 
 * [[yii\web\Response::FORMAT_RAW|RAW]]: utilisez ce format si vous voulez envoyer la réponse directement sans lui appliquer aucun formatage. 
 
 Bien que le corps de la réponse puisse être défini explicitement comme montré ci-dessus, dans la plupart des cas, vous pouvez le définir implicitement en utilisant la valeur retournée par les méthodes d'[action](structure-controllers.md). Un cas d'usage courant ressemble à ceci :
- 
+  
 ```php
 public function actionIndex()
 {

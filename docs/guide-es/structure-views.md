@@ -396,7 +396,7 @@ se refiere al layout utilizado por todos los controladores, mientras que el últ
 Por ejemplo, el siguiente código hace que el controlador `post` utilice `@app/views/layouts/post.php` como layout al renderizar sus vistas.
 Otros controladores, asumiendo que su propiedad `layout` no fue modificada,
 utilizarán `@app/views/layouts/main.php` como layout.
- 
+  
 ```php
 namespace app\controllers;
 

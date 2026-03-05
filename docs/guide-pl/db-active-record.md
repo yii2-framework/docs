@@ -48,7 +48,7 @@ W tej sekcji przewodnika opiszemy sposób użycia Active Record dla baz relacyjn
 ## Deklarowanie klas Active Record <span id="declaring-ar-classes"></span>
 
 Na początek zadeklaruj klasę typu Active Record rozszerzając [[yii\db\ActiveRecord|ActiveRecord]].
- 
+  
 ### Deklarowanie nazwy tabeli
 
 Domyślnie każda klasa Active Record jest powiązana ze swoją tabelą w bazie danych.
@@ -300,7 +300,7 @@ $customers = Customer::find()
 > abstrakcji DB, traci się większość funkcjonalności Active Record. Bardzo ważną różnicą jest zwracany typ danych dla wartości kolumn. Kiedy dane zwracane 
 > są jako obiekt Active Record, wartości kolumn są automatycznie odpowiednio rzutowane zgodnie z typem kolumny; przy danych zwracanych jako tablice 
 > wartości kolumn są zawsze typu string (jako rezultat zapytania PDO bez żadnego przetworzenia), niezależnie od typu kolumny.
-   
+    
 
 ### Pobieranie danych seriami <span id="data-in-batches"></span>
 
@@ -554,7 +554,7 @@ Podczas wywołania [[yii\db\ActiveRecord::save()|save()]], w celu dodania lub ua
 5. Proces właściwego dodawania lub aktulizowania danych.
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: uruchamia event [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] lub 
   [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
-   
+    
 
 ### Cykl życia przy usuwaniu danych <span id="deleting-data-life-cycle"></span>
 
@@ -666,7 +666,7 @@ Aby skorzystać z optymistycznej blokady:
   Upewnij się, że atrybut wersji ma dodaną zasadę walidacji i przechodzi poprawnie jej proces.
 4. W akcji kontrolera uaktualniającej wiersz za pomocą Active Record, użyj bloku try-catch, aby wyłapać wyjątek [[yii\db\StaleObjectException|StaleObjectException]]. 
   Zaimplemetuj odpowiednią logikę biznesową (np. scalenie zmian, wyświetlenie komunikatu o nieaktualnej wersji, itp.), aby rozwiązać konflikt.
-   
+    
 Dla przykładu, załóżmy, że kolumna wersji nazywa się `version`. Implementację optymistycznego blokowania można wykonać za pomocą następującego kodu:
 
 ```php
@@ -1244,7 +1244,7 @@ $customer->unlink('orders', $customer->orders[0]);
 
 Domyślnie metoda [[yii\db\ActiveRecord::unlink()|unlink()]] ustawia wartość klucza obcego (lub wielu kluczy obcych), który definiuje istniejącą relację, na `null`. 
 Można jednak zamiast tego wybrać opcję usuwania wiersza tabeli, który zawiera klucz obcy, ustawiając w metodzie parametr `$delete` na `true`.
- 
+  
 Jeśli w relacji użyty jest węzeł, wywołanie [[yii\db\ActiveRecord::unlink()|unlink()]] spowoduje wyczyszczenie kluczy obcych w tabeli węzła lub też 
 usunięcie odpowiadających im wierszy, jeśli `$delete` jest ustawione na `true`.
 
@@ -1290,7 +1290,7 @@ $customers = Customer::find()->with('comments')->all();
 ```
 
 Możesz używać większości funkcjonalności dostępnych dla relacyjnych kwerend opisanych w tym rozdziale. 
- 
+  
 > Note: Użycie [[yii\db\ActiveQuery::joinWith()|joinWith()]] jest ograniczone do baz danych pozwalających na międzybazowe kwerendy JOIN, dlatego też 
 > nie możesz użyć tej metody w powyższym przykładzie, ponieważ MongoDB nie wspiera instrukcji JOIN.
 
@@ -1299,7 +1299,7 @@ Możesz używać większości funkcjonalności dostępnych dla relacyjnych kwere
 
 Domyślnie wszystkie kwerendy Active Record używają klasy [[yii\db\ActiveQuery|ActiveQuery]]. Aby użyć niestandardowej klasy kwerend razem z klasą Active Record, 
 należy nadpisać metodę [[yii\db\ActiveRecord::find()|find()]], aby zwracała instancję żądanej klasy kwerend. Przykład:
- 
+  
 ```php
 // plik Comment.php
 namespace app\models;
@@ -1349,7 +1349,7 @@ class CommentQuery extends ActiveQuery
 > konstruktorze kwerend, dzięki czemu istniejące warunki nie zostaną nadpisane.
 
 Powyższy przykład pozwala na użycie następującego kodu:
- 
+  
 ```php
 $comments = Comment::find()->active()->all();
 $inactiveComments = Comment::find()->active(false)->all();

@@ -27,7 +27,7 @@ O Yii oferece um conjunto de ferramentas de linha de comando que permitem que vo
 Todas estas ferramentas são acessíveis através do comando `yii migrate`. Nesta seção nós iremos descrever em detalhes como realizar várias tarefas usando estas ferramentas. Você também pode descobrir como usar cada ferramenta através do comando de ajuda `yii help migrate`.
 
 > Observação: os migrations (migrações) podem afetar não só o esquema do banco de dados, mas também ajustar os dados existentes para se conformar ao novo esquema, como criar novas hierarquias de RBAC ou limpar dados de cache.
-   
+    
 
 ## Criando Migrações <span id="creating-migrations"></span>
 

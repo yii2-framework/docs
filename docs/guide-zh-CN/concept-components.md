@@ -7,7 +7,7 @@
 * [属性（Property）](concept-properties.md)
 * [事件（Event）](concept-events.md)
 * [行为（Behavior）](concept-behaviors.md)
- 
+  
 或单独使用，或彼此配合，这些功能的应用让 Yii 的类变得更加灵活和易用。
 以小部件 [[yii\jui\DatePicker|日期选择器]] 来举例，
 这是个方便你在 [视图](structure-view.md) 中生成一个交互式日期选择器的 UI 组件：

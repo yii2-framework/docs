@@ -144,7 +144,7 @@ class UploadForm extends Model
 ```
 
 Dans le fichier de vue, vous devez ajouter l'option `multiple` à l'appel de `fileInput()` afin que le champ d'entrée puisse recevoir plusieurs fichiers :
- 
+  
 ```php
 <?php
 use yii\widgets\ActiveForm;

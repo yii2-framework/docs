@@ -58,7 +58,7 @@ $param = $request->getBodyParam('id');
   
 
 ## 请求方法 <span id="request-methods"></span>
- 
+  
 你可以通过 `Yii::$app->request->method` 表达式来获取当前请求使用的HTTP方法。
 这里还提供了一整套布尔属性用于检测当前请求是某种类型。
 例如，

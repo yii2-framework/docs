@@ -49,7 +49,7 @@ associated with the HTTP status 404. The following HTTP exceptions are predefine
 
 If the exception that you want to throw is not among the above list, you may create one by extending
 from [[yii\web\HttpException]], or directly throw it with a status code, for example,
- 
+  
 ```php
 throw new \yii\web\HttpException(402);
 ```
@@ -109,7 +109,7 @@ You can customize these formatters or add new ones by configuring the [[yii\web\
 
 While the response body can be set explicitly as shown above, in most cases you may set it implicitly by the return value
 of [action](structure-controllers.md) methods. A common use case is like the following:
- 
+  
 ```php
 public function actionIndex()
 {

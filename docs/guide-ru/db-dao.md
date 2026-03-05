@@ -64,7 +64,7 @@ return [
 При настройке подключения, вы должны обязательно указывать Имя Источника Данных (DSN) через параметр [[yii\db\Connection::dsn|dsn]].
 Формат DSN отличается для разных баз данных. Дополнительное описание смотрите в [справочнике PHP](https://www.php.net/manual/ru/pdo.construct.php).
 Ниже представлены несколько примеров:
- 
+  
 * MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
 * SQLite: `sqlite:/path/to/database/file`
 * PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
@@ -110,13 +110,13 @@ return [
 ## Выполнение SQL запросов <span id="executing-sql-queries"></span>
 
 После создания экземпляра соединения, вы можете выполнить SQL запрос, выполнив следующие шаги:
- 
+  
 1. Создать [[yii\db\Command]] из запроса SQL;
 2. Привязать параметры (не обязательно);
 3. Вызвать один из методов выполнения SQL из [[yii\db\Command]].
 
 Следующий пример показывает различные способы получения данных из базы дынных:
- 
+  
 ```php
 // возвращает набор строк. каждая строка - это ассоциативный массив с именами столбцов и значений.
 // если выборка ничего не вернёт, то будет получен пустой массив.
@@ -169,7 +169,7 @@ $params = [':id' => $_GET['id'], ':status' => 1];
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
           ->bindValues($params)
           ->queryOne();
-           
+            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
           ->queryOne();
 ```
@@ -359,7 +359,7 @@ $isolationLevel = \yii\db\Transaction::REPEATABLE_READ;
 Yii::$app->db->transaction(function ($db) {
     ....
 }, $isolationLevel);
- 
+  
 // или
 
 $transaction = Yii::$app->db->beginTransaction($isolationLevel);

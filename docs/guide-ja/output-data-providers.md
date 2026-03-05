@@ -229,7 +229,7 @@ $provider = new ActiveDataProvider([
 あなた自身のカスタム・データ・プロバイダ・クラスを作成するためには、[[yii\data\DataProviderInterface]] を実装しなければなりません。
 [[yii\data\BaseDataProvider]] を拡張するのが比較的簡単な方法です。そうすれば、データ・プロバイダのコアのロジックに集中することが出来ます。
 具体的に言えば、実装する必要があるのは、主として次のメソッドです。
-                                                   
+                                                    
 - [[yii\data\BaseDataProvider::prepareModels()|prepareModels()]]: 現在のページで利用できるデータ・モデルを準備して、
   それを配列として返します。
 - [[yii\data\BaseDataProvider::prepareKeys()|prepareKeys()]]: 現在利用できるデータ・モデルの配列を受け取って、
@@ -260,7 +260,7 @@ class CsvDataProvider extends BaseDataProvider
     */
     protected $fileObject; // ファイルの特定の行までシークするのに SplFileObject が非常に便利
     
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -271,7 +271,7 @@ class CsvDataProvider extends BaseDataProvider
         // ファイルを開く
         $this->fileObject = new SplFileObject($this->filename);
     }
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -279,7 +279,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         $models = [];
         $pagination = $this->getPagination();
- 
+  
         if ($pagination === false) {
             // ページネーションが無い場合、全ての行を読む
             while (!$this->fileObject->eof()) {
@@ -291,16 +291,16 @@ class CsvDataProvider extends BaseDataProvider
             $pagination->totalCount = $this->getTotalCount();
             $this->fileObject->seek($pagination->getOffset());
             $limit = $pagination->getLimit();
- 
+  
             for ($count = 0; $count < $limit; ++$count) {
                 $models[] = $this->fileObject->fgetcsv();
                 $this->fileObject->next();
             }
         }
- 
+  
         return $models;
     }
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -308,7 +308,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         if ($this->key !== null) {
             $keys = [];
- 
+  
             foreach ($models as $model) {
                 if (is_string($this->key)) {
                     $keys[] = $model[$this->key];
@@ -316,25 +316,25 @@ class CsvDataProvider extends BaseDataProvider
                     $keys[] = call_user_func($this->key, $model);
                 }
             }
- 
+  
             return $keys;
         } else {
             return array_keys($models);
         }
     }
- 
+  
     /**
     * {@inheritdoc}
     */
     protected function prepareTotalCount()
     {
         $count = 0;
- 
+  
         while (!$this->fileObject->eof()) {
             $this->fileObject->next();
             ++$count;
         }
- 
+  
         return $count;
     }
 }

@@ -109,7 +109,7 @@ Yii支持以下可直接使用的格式，每个实现了[[yii\web\ResponseForma
 
 上述响应主体可明确地被设置，但是在大多数情况下是通过[操作](structure-controllers.md) 
 方法的返回值隐式地设置，常用场景如下所示：
- 
+  
 ```php
 public function actionIndex()
 {

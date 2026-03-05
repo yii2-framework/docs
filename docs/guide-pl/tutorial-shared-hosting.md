@@ -14,7 +14,7 @@ mogła działać na współdzielonym środowisku.
 ### Zmiana nazwy webroota <span id="renaming-webroot"></span>
 
 Połącz się ze swoim współdzielonym hostem za pomocą np. klienta FTP. Prawdopodobnie zobaczysz listę folderów podobną do poniższej.
- 
+  
 ```
 config
 logs

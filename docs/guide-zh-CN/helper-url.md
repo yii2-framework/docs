@@ -151,7 +151,7 @@ echo Url::current(['id' => 100]);
 
 有时，你需要记住一个 URL 并在后续的请求处理中使用它。
 你可以用以下方式达到这个目的：
- 
+  
 ```php
 // 记住当前 URL 
 Url::remember();
@@ -173,7 +173,7 @@ $productUrl = Url::previous('product');
 ## 检查相对 URLs（Checking Relative URLs） <span id="checking-relative-urls"></span>
 
 你可以用如下代码检测一个 URL 是否是相对的（比如，包含主机信息部分）。
-                             
+                              
 ```php
 $isRelative = Url::isRelative('test/it');
 ```

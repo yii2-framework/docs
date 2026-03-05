@@ -68,7 +68,7 @@ function (event, messages, errorAttributes)
 ```javascript
 function (event, attribute, messages, deferreds)
 ```
-     
+      
 其中
 
 - `event`: 一个 Event 对象。
@@ -114,7 +114,7 @@ function (event)
 如果处理返回布尔型“false”，它将停止表单提交。
 
 ### `ajaxBeforeSend`
-         
+          
 `ajaxBeforeSend` 事件是在发送用于基于AJAX的验证的AJAX请求之前触发的。
 
 事件处理程序的签名应该是：

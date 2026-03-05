@@ -396,7 +396,7 @@ The former governs the layout used by all controllers, while the latter override
 For example, the following code makes the `post` controller to use `@app/views/layouts/post.php` as the layout
 when rendering its views. Other controllers, assuming their `layout` property is untouched, will still use the default
 `@app/views/layouts/main.php` as the layout.
- 
+  
 ```php
 namespace app\controllers;
 

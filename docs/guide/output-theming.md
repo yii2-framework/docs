@@ -12,7 +12,7 @@ mainly specify the following properties of [[yii\base\Theme]]:
 - [[yii\base\Theme::baseUrl]]: specifies the base URL of the themed resources.
 - [[yii\base\Theme::pathMap]]: specifies the replacement rules of view files. More details will be given in the following
   subsections.
- 
+  
 For example, if you call `$this->render('about')` in `SiteController`, you will be rendering the view file
 `@app/views/site/about.php`. However, if you enable theming in the following application configuration,
 the view file `@app/themes/basic/site/about.php` will be rendered, instead. 

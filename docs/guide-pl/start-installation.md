@@ -142,7 +142,7 @@ Weryfikacja instalacji <span id="verifying-installation"></span>
 Po zakończeniu instalacji, skonfiguruj swój serwer (zobacz następną sekcję) lub użyj 
 [wbudowanego serwera PHP](https://www.php.net/manual/en/features.commandline.webserver.php), 
 uruchamiając poniższą komendę w konsoli z poziomu folderu `web` w projekcie:
- 
+  
 ```bash
 php yii serve
 ```

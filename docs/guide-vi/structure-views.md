@@ -393,7 +393,7 @@ Thuộc tính trước layout được dùng tại tất cả các controller, t
 Ví dụ, đoạn mã sau thiết lập controller `post` dùng layout `@app/views/layouts/post.php` để
 xuất bản nội dung ra views. Còn tại các controller khác, giả sử rằng thuộc tính `layout` không bị thay đổi, thì controller sử dụng layout mặc định là
 `@app/views/layouts/main.php` vào việc xuất bản nội dung.
- 
+  
 ```php
 namespace app\controllers;
 

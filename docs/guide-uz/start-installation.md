@@ -180,5 +180,5 @@ server {
 ```
 
 Ushbu konfiguratsiya yordamida `php.ini` `cgi.fix_pathinfo=0` ni `stat()` tizimiga keraksiz tizim chaqiruvlariga yo'l qo'ymaslik uchun o'rnating. 
- 
+  
 HTTPS-dan foydalanib, `fastcgi_param HTTPS on;` ni belgilash kerak `fastcgi_param HTTPS on;` Shunday qilib Yii xavfsiz ishlashini aniq belgilashi mumkin. 

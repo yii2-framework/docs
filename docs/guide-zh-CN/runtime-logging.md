@@ -6,7 +6,7 @@ Yii提供了一个强大的日志框架，这个框架具有高度的可定制�
 并且将它们收集到不同的目标，诸如文件，数据库，邮件。
 
 使用Yii日志框架涉及下面的几个步骤：
- 
+  
 * 在你代码里的各个地方记录 [log messages](#log-messages)；
 * 在应用配置里通过配置 [log targets](#log-targets) 来过滤和导出日志消息；
 * 检查由不同的目标导出的已过滤的日志消息（例如：[Yii debugger](tool-debugger.md)）。

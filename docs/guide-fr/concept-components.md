@@ -7,7 +7,7 @@ ou de ses classes filles. Les trois fonctionnalités principales fournies par le
 * [Les propriétés](concept-properties.md) ;
 * [Les événements](concept-events.md) ;
 * [Les comportements](concept-behaviors.md).
- 
+  
 Séparément et en combinaisons, ces fonctionnalités rendent les classes de Yii beaucoup plus personnalisables et faciles à utiliser. Par exemple, l'[[yii\jui\DatePicker|objet graphique de sélection de date]] inclus, un composant d'interface utilisateur, peut être utilisé dans une [vue](structure-views.md) pour générer un sélecteur de date interactif :
 
 ```php

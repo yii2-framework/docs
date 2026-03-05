@@ -83,7 +83,7 @@ RESTful API リクエストのルーティングに [[yii\rest\UrlRule]] を使�
 自動的な複数形化があなたの要求を満たさない場合は、[[yii\rest\UrlRule::controller]] プロパティを構成して、
 エンド・ボイント URL で使用される名前とコントローラ ID の対応を明示的に指定することも可能です。
 例えば、次のコードはエンド・ボイント名 `u` をコントローラ ID `user` に割り当てます。
- 
+  
 ```php
 [
     'class' => 'yii\rest\UrlRule',

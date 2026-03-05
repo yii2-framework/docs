@@ -102,7 +102,7 @@ ACF 自顶向下逐一检查存取规则，直到找到一个与当前
 
   * [[yii\filters\AccessRule::roleParams|roleParams]]：指定将传递给 [[yii\web\User::can()]] 的参数。
   请参阅下面描述RBAC规则的部分，了解如何使用它。 如果此选项为空或未设置，则不传递任何参数。
-   
+    
   * [[yii\filters\AccessRule::ips|ips]]：指定该规则用于匹配哪些 [[yii\web\Request::userIP|客户端IP地址]] 。
   IP 地址可在其末尾包含通配符 `*` 以匹配一批前缀相同的IP地址。
   例如，`192.168.*` 匹配所有 `192.168.` 段的IP地址。

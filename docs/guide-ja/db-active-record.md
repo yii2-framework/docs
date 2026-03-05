@@ -627,7 +627,7 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]]
     または [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]]
     イベントをトリガ。
-   
+    
 
 ### データを削除する際のライフサイクル <span id="deleting-data-life-cycle"></span>
 
@@ -1485,7 +1485,7 @@ $customers = Customer::find()->with('comments')->all();
 デフォルトでは、全てのアクティブ・レコードのクエリは [[yii\db\ActiveQuery]] によってサポートされます。
 カスタマイズされたクエリ・クラスをアクティブ・レコードで使用するためには、[[yii\db\ActiveRecord::find()]]
 メソッドをオーバーライドして、カスタマイズされたクエリ・クラスのインスタンスを返すようにしなければなりません。例えば、
- 
+  
 ```php
 // file Comment.php
 namespace app\models;

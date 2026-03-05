@@ -52,7 +52,7 @@ Dans ce qui suit, nous décrivons l'utilisation de chacune des méthodes de requ
 La méthode [[yii\db\Query::select()|select()]] spécifie le fragment `SELECT` d'une instruction SQL. Vous pouvez spécifier les colonnes à sélectionner soit sous forme de chaînes de caractères, soit sous forme de tableaux, comme ci-après. 
 Les noms des colonnes sélectionnées sont automatiquement entourés des marques de citation lorsque l'instruction SQL
   est générée à partir de l'objet *query* (requête). 
- 
+  
 ```php
 $query->select(['id', 'email']);
 
@@ -94,7 +94,7 @@ de colonne lorsque vous écrivez les expressions de base de données dans `selec
 
 Depuis la version 2.0.1, vous pouvez aussi sélectionner des sous-requêtes. Vous devez spécifier chacune des sous-requêtes en termes d'objet [[yii\db\Query]]. 
 Par exemple :
- 
+  
 ```php
 $subQuery = (new Query())->select('COUNT(*)')->from('user');
 
@@ -182,7 +182,7 @@ $query->where('YEAR(somedate) = 2015');
 ```
 
 N'imbriquez PAS les variables directement dans la condition comme ce qui suit, spécialement si les valeurs des variables proviennent d'entrées utilisateur, parce que cela rendrait votre application SQL sujette aux attaques par injections SQL.
- 
+  
 
 ```php
 // Dangereux! Ne faites PAS cela sauf si vous êtes tout à fait sûr que $status est un entier
@@ -448,7 +448,7 @@ $query->orderBy([
     'name' => SORT_DESC,
 ]);
 ```
- 
+  
 Dans le code ci-dessus, les clés du tableau sont des noms de colonnes, tandis que les valeurs sont les instructions de direction de tri. 
 La constante PHP `SORT_ASC` spécifie un tri ascendant et `SORT_DESC`, un tri descendant.
 
@@ -487,7 +487,7 @@ $query->groupBy('id, status');
 ```
 
 > Note: vous devez utiliser le format tableau si `GROUP BY` fait appel à une expression de base de données.
- 
+  
 Vous pouvez appeler [[yii\db\Query::addGroupBy()|addGroupBy()]] pour ajouter des colonnes au fragment `GROUP BY`. 
 Par exemple :
 
@@ -777,7 +777,7 @@ Cela empêche d'utiliser le curseur pour obtenir les données, parce que cela n'
 
 > Note: lorsque `libmysqlclient` est utilisé (typique de PHP5), la limite mémoire de  PHP ne compte pas la mémoire utilisée par les jeux de résultats. 
 Il peut sembler que les requêtes par lot fonctionnent correctement, mais en réalité l'intégralité du jeu de données est chargé dans la mémoire du client.
- 
+  
 
 Pour désactiver la mise en tampon et réduire les exigences en mémoire client, la propriété connexion à PDOT
 `PDO::MYSQL_ATTR_USE_BUFFERED_QUERY` doit être définie à `false`. Cependant, jusqu'à ce que l'intégralité du jeu de données ait été retrouvé, aucune autre requête ne peut être faite via la même connexion. Cela peut empêcher  `ActiveRecord` 
@@ -977,7 +977,7 @@ namespace app\db\conditions;
 class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
 {
     // ... see the implementation above
-     
+      
     public static function fromArrayDefinition($operator, $operands)
     {
         return new static($operands[0], $operands[1]);

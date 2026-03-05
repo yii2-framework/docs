@@ -396,7 +396,7 @@ use yii\helpers\Html;
 例如，如下代码使 `post` 控制器渲染视图时使用 `@app/views/layouts/post.php` 作为布局文件，
 假如 `layout` 属性没改变，
 控制器默认使用 `@app/views/layouts/main.php` 作为布局文件。
- 
+  
 ```php
 namespace app\controllers;
 

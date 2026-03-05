@@ -12,7 +12,7 @@ Le revers du code ci-dessus est que vous devez appeler `trim()` partout ou vous 
 Pour résoudre ce problème, Yii introduit une classe de base nommée [[yii\base\BaseObject]] qui prend en charge la définition de propriétés sur la base de méthodes d'obtention (*getter*) et de méthode d'assignation (*setters*). Si une classe a besoin de cette fonctionnalité, il suffit qu'elle étende la classe[[yii\base\BaseObject]], ou une de ses classes filles.
 
 > Info: presque toutes les classes du noyau du framework Yii étendent la classe [[yii\base\BaseObject]] ou une de ses classes filles. Cela veut dire, que chaque fois que vous trouvez une méthode d'obtention ou d'assignation dans une classe du noyau, vous pouvez l'utiliser comme une propriété. 
- 
+  
 Une méthode d'obtention est une méthode dont le nom commence par le mot `get` (obtenir) et une méthode d'assignation est une méthode dont le nom commence par le mot `set` (assigner, définir).  Le nom après les mots préfixes `get` ou `set` définit le nom d'une propriété. Par exemple, une méthode d'obtention `getLabel` et/ou une méthode d'assignation `setLabel` obtient et assigne, respectivement, une propriété nommée `label`, comme le montre le code suivant :
 
 ```php

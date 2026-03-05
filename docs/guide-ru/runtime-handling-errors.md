@@ -53,7 +53,7 @@ try {
 
 ```php
 use yii\web\NotFoundHttpException;
- 
+  
 throw new NotFoundHttpException();
 ```
 
@@ -73,7 +73,7 @@ throw new NotFoundHttpException();
 * `@yii/views/errorHandler/error.php`: используется для отображения ошибок БЕЗ стека вызовов.
   При `YII_DEBUG` равной `false` используется только это преставление.
 * `@yii/views/errorHandler/exception.php`: используется для отображения ошибок СО стеком вызовов.
- 
+  
 Вы можете настроить свойства [[yii\web\ErrorHandler::errorView|errorView]] и [[yii\web\ErrorHandler::exceptionView|exceptionView]]
 для того, чтобы использовать свои представления.
   
@@ -138,7 +138,7 @@ public function actionError()
 * `message`: текст ошибки;
 * `exception`: объект исключения, из которого можно получить дополнительную информацию, такую как статус HTTP,
   код ошибки, стек вызовов и т.д.
- 
+  
 > Info: Если вы используете шаблоны приложения [basic](start-installation.md) или [advanced](tutorial-advanced-app.md),
   действие error и файл представления уже созданы за вас.
   

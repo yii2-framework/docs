@@ -51,7 +51,7 @@ class Customer extends ActiveRecord
 {
   const STATUS_INACTIVE = 0;
   const STATUS_ACTIVE = 1;
-   
+    
   /**
     * @return string the name of the table associated with this ActiveRecord class.
     */
@@ -153,7 +153,7 @@ Ambos os métodos pode ter um dos seguintes formatos de parâmetro:
 - Um valor escalar: o valor é tratado como uma chave primária que se deseja procurar. O Yii irá determinar automaticamente que coluna é a chave primária lendo o schema da base de dados.
 - Um array de valores escalar: o array como uma chaves primárias que se deseja procurar.
 - Um array associativo: as chaves são nomes de colunas e os valores são os valores correspondentes as colunas que se deseja procurar. Por favor, consulte o [Hash Format](db-query-builder.md#hash-format) para mais detalhes.
- 
+  
 O código a seguir mostra como estes métodos podem ser usados:
 
 ```php
@@ -221,7 +221,7 @@ class Customer extends ActiveRecord
   {
       return date('Y/m/d', $this->birthday);
   }
-   
+    
   public function setBirthdayText($value)
   {
       $this->birthday = strtotime($value);
@@ -310,7 +310,7 @@ public function save($runValidation = true, $attributeNames = null)
 ```
 
 > Dica: Você pode chamar [[yii\db\ActiveRecord::insert()|insert()]] ou [[yii\db\ActiveRecord::update()|update()]] diretamente para inserir ou atualizar dados.
- 
+  
 
 ### Validação de Dados<span id="data-validation"></span>
 
@@ -600,7 +600,7 @@ Ao declarar uma relação, você deve especificar as seguintes informações:
 - A ligação entre os dois tipos de dados: especifica a(s) coluna(s) por meio do qual os dois tipos de dados se relacionam. Os valores do array são as colunas da tabela primária (representada pela classe Active Record que você declarou as relações), enquanto as chaves do array são as colunas da tabela relacionada.
 
 Uma regra fácil de lembrar é, como você pode ver no exemplo acima, você escreve a coluna que pertence ao Active Record relacionado diretamente ao lado dele. Você pode ver que `customer_id` é uma propriedade de `Order` e `id` é uma propriedade de  `Customer`.
- 
+  
 
 ### Acessando Dados Relacionais <span id="accessing-relational-data"></span>
 
@@ -616,7 +616,7 @@ $orders = $customer->orders;
 ```
 
 > Observação: quando você declara uma relação chamada `xyz` através de um método getter `getXyz()`, você terá acesso a `xyz` como uma [propriedade de objeto](concept-properties.md). Note que o nome é case-sensitive.
- 
+  
 Se a relação for declarada com [[yii\db\ActiveRecord::hasMany()|hasMany()]], acessar esta propriedade irá retornar um array de instâncias de Active Record relacionais; Se a relação for declarada com [[yii\db\ActiveRecord::hasOne()|hasOne()]], acessar esta propriedade irá retornar a instância de Active Record relacional ou `null` se não encontrar dados relacionais.
 
 Quando você acessa uma propriedade de relação pela primeira vez, uma instrução SQL será executada, como mostrado no exemplo acima. Se a mesma propriedade for acessada novamente, o resultado anterior será devolvido sem executar novamente a instrução SQL. Para forçar a execução da instrução SQL, você deve primeiramente remover a configuração da propriedade de relação: `unset($customer->orders)`.

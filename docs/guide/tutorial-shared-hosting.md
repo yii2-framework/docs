@@ -14,7 +14,7 @@ server.
 ### Renaming webroot <span id="renaming-webroot"></span>
 
 Connect to your shared host using FTP or by other means. You will probably see something like the following.
- 
+  
 ```
 config
 logs

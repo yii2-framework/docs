@@ -7,7 +7,7 @@
 
 Yii提供了一个认证框架，它连接了不同的组件以支持登录。欲使用这个框架，
 你主要需要做以下工作：
- 
+  
 * 设置用户组件 [[yii\web\User|user]] ;
 * 创建一个类实现 [[yii\web\IdentityInterface]] 接口。
 

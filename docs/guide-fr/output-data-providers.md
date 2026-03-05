@@ -190,7 +190,7 @@ $provider = new ActiveDataProvider([
 ## Création d'un fournisseur de données personnalisé <span id="custom-data-provider"></span>
 
 Pour créer votre fournisseur de données personnalisé, vous devez implémenter [[yii\data\DataProviderInterface]]. Une manière plus facile est d'étendre [[yii\data\BaseDataProvider]],ce qui vous permet de vous concentrer sur la logique centrale du fournisseur de données. En particulier, vous devez essentiellement implémenter les méthodes suivantes :
- 
+  
 - [[yii\data\BaseDataProvider::prepareModels()|prepareModels()]]: prépare les modèles de données qui seront disponibles dans la page courante et les retourne sous forme de tableau. 
 - [[yii\data\BaseDataProvider::prepareKeys()|prepareKeys()]]: accepte un tableau de modèles de données couramment disponibles et retourne les clés qui leur sont associés.
 - [[yii\data\BaseDataProvider::prepareTotalCount()|prepareTotalCount]]: retourne une valeur indiquant le nombre total de modèles de données dans le fournisseur.
@@ -218,7 +218,7 @@ class CsvDataProvider extends BaseDataProvider
     */
     protected $fileObject; // SplFileObject est très pratique pour rechercher une ligne particulière dans un fichier
     
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -229,7 +229,7 @@ class CsvDataProvider extends BaseDataProvider
         // open file
         $this->fileObject = new SplFileObject($this->filename);
     }
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -237,7 +237,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         $models = [];
         $pagination = $this->getPagination();
- 
+  
         if ($pagination === false) {
             // dans le cas où il n'y a pas de pagination, lit toutes les lignes
             while (!$this->fileObject->eof()) {
@@ -249,16 +249,16 @@ class CsvDataProvider extends BaseDataProvider
             $pagination->totalCount = $this->getTotalCount();
             $this->fileObject->seek($pagination->getOffset());
             $limit = $pagination->getLimit();
- 
+  
             for ($count = 0; $count < $limit; ++$count) {
                 $models[] = $this->fileObject->fgetcsv();
                 $this->fileObject->next();
             }
         }
- 
+  
         return $models;
     }
- 
+  
     /**
     * {@inheritdoc}
     */
@@ -266,7 +266,7 @@ class CsvDataProvider extends BaseDataProvider
     {
         if ($this->key !== null) {
             $keys = [];
- 
+  
             foreach ($models as $model) {
                 if (is_string($this->key)) {
                     $keys[] = $model[$this->key];
@@ -274,25 +274,25 @@ class CsvDataProvider extends BaseDataProvider
                     $keys[] = call_user_func($this->key, $model);
                 }
             }
- 
+  
             return $keys;
         } else {
             return array_keys($models);
         }
     }
- 
+  
     /**
     * {@inheritdoc}
     */
     protected function prepareTotalCount()
     {
         $count = 0;
- 
+  
         while (!$this->fileObject->eof()) {
             $this->fileObject->next();
             ++$count;
         }
- 
+  
         return $count;
     }
 }

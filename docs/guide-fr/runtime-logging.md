@@ -4,7 +4,7 @@ Enregistrements des messages
 Yii fournit une puissante base structurée (framework) d'enregistrement des messages qui est très personnalisable et extensible. En utilisant cette base structurée, vous pouvez facilement enregistrer des types variés de messages, les filtrer et les rassembler dans différentes cibles comme les bases de données et les courriels. 
 
 L'utilisation de la base structurée d'enregistrement des messages de Yii nécessite de suivre les étapes suivantes :
- 
+  
 * Enregistrer les  [messages](#log-messages) à différents endroits de votre code ;
 * Configurer [cibles d'enregistrement](#log-targets) dans la configuration de l'application pour filtrer et exporter les messages enregistrés ; 
 * Examiner les messages enregistrés, filtrés et exportés par les différentes cibles (p. ex. [débogueur de Yii](tool-debugger.md)).
@@ -116,7 +116,7 @@ Si vous ne spécifiez pas la propriété [[yii\log\Target::categories|categories
 
 En plus d'inscrire des catégories en liste blanche via la propriété [[yii\log\Target::categories|categories]], vous pouvez également inscrire certaines catégories
 en liste noire via la propriété [[yii\log\Target::except|except]]. Si la catégorie d'un message est trouvée ou correspond à un des motifs de cette propriété, ce message n'est PAS traité par la cible. 
- 
+  
 La configuration suivante de cible spécifie que la cible  traitera les messages d'erreur ou d'avertissement des catégories dont le nom correspond soit à `yii\db\*`, soit `yii\web\HttpException:*`, mais pas `yii\web\HttpException:404`.
 
 ```php

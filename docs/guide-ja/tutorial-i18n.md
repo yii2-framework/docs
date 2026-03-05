@@ -292,7 +292,7 @@ echo \Yii::t('app', 'Balance: {0,number,,000,000000}', $sum);
 カスタムフォーマットで使用される文字については、
 [ICU API リファレンス](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classDecimalFormat.html) の "Special Pattern Characters"
 のセクションに記述されています。
- 
+  
 数値は常に翻訳先のロケールに従ってフォーマットされます。
 つまり、ロケールを変更せずに、小数点や桁区切りを変更することは出来ません。
 それらをカスタマイズしたい場合は [[yii\i18n\Formatter::asDecimal()]] や [[yii\i18n\Formatter::asCurrency()]] を使うことが出来ます。
@@ -476,7 +476,7 @@ echo \Yii::t('app', 'There {n,plural,=0{are no cats} =1{is one cat} other{are # 
 > [[yii\base\Application::$sourceLanguage|ソース言語]] の複数形規則がオリジナルのメッセージに対して適用されます。
 
 文字列が以下のようなものである場合のために `offset` というパラメータがあります。
- 
+  
 ```php
 $likeCount = 2;
 echo Yii::t('app', 'You {likeCount,plural,

@@ -69,7 +69,7 @@ return [
 配置数据库连接时， 你应该总是通过 [[yii\db\Connection::dsn|dsn]] 属性来指明它的数据源名称 (DSN) 。
 不同的数据库有着不同的 DSN 格式。
 请参考 [PHP manual](https://www.php.net/manual/zh/pdo.construct.php) 来获得更多细节。下面是一些例子：
- 
+  
 * MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
 * SQLite: `sqlite:/path/to/database/file`
 * PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
@@ -117,13 +117,13 @@ return [
 ## 执行 SQL 查询（Executing SQL Queries） <span id="executing-sql-queries"></span>
 
 一旦你拥有了 DB Connection 实例，你可以按照下列步骤来执行 SQL 查询：
- 
+  
 1. 使用纯SQL查询来创建出 [[yii\db\Command]]；
 2. 绑定参数 (可选的)；
 3. 调用 [[yii\db\Command]] 里 SQL 执行方法中的一个。
 
 下列例子展示了几种不同的从数据库取得数据的方法：
- 
+  
 ```php
 // 返回多行. 每行都是列名和值的关联数组.
 // 如果该查询没有结果则返回空数组
@@ -179,7 +179,7 @@ $params = [':id' => $_GET['id'], ':status' => 1];
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
           ->bindValues($params)
           ->queryOne();
-           
+            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
           ->queryOne();
 ```
@@ -338,7 +338,7 @@ $count = Yii::$app->db->createCommand("SELECT COUNT([[id]]) FROM {{%employee}}")
 当顺序地执行多个相关的语句时， 你或许需要将它们包在一个事务中来保证数据库的完整性和一致性。
 如果这些语句中的任何一个失败了，
 数据库将回滚到这些语句执行前的状态。
- 
+  
 下面的代码展示了一个使用事务的典型方法：
 
 ```php
@@ -393,7 +393,7 @@ $isolationLevel = \yii\db\Transaction::REPEATABLE_READ;
 Yii::$app->db->transaction(function ($db) {
     ....
 }, $isolationLevel);
- 
+  
 // or alternatively
 
 $transaction = Yii::$app->db->beginTransaction($isolationLevel);

@@ -311,7 +311,7 @@ Si vous voulez accéder à d'autres données dans les dispositions, vous devez u
 Comme c'est décrit à la sous-section [Rendu des vues dans les contrôleurs](#rendering-in-controllers), lorsque vous rendez une vue en appelant la méthode  [[yii\base\Controller::render()|render()]] dans un contrôleur, une disposition est appliquée au résultat du rendu. Par défaut, la disposition  `@app/views/layouts/main.php` est utilisée. 
 
 Vous pouvez utiliser une disposition différente en configurant soit [[yii\base\Application::layout]], soit [[yii\base\Controller::layout]]. La première gouverne la disposition utilisée par tous les contrôleurs, tandis que la deuxième redéfinit la première pour les contrôleurs individuels. Par exemple, le code suivant fait que le contrôleur `post` utilise `@app/views/layouts/post.php` en tant qu disposition lorsqu'il rend ses vues. Les autres contrôleurs, en supposant que leur propriété  `layout` n'est pas modifiée, continuent d'utiliser la disposition par défaut `@app/views/layouts/main.php`.
- 
+  
 ```php
 namespace app\controllers;
 

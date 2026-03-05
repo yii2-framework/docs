@@ -68,7 +68,7 @@ function (event, messages, errorAttributes)
 ```javascript
 function (event, attribute, messages, deferreds)
 ```
-     
+      
 引数は以下の通り:
 
 - `event`: イベントのオブジェクト。
@@ -114,7 +114,7 @@ function (event)
 ハンドラが真偽値 `false` を返すと、フォームの送信は中止されます。
 
 ### `ajaxBeforeSend`
-         
+          
 `ajaxBeforeSend` イベントは、AJAX ベースの検証のための AJAX リクエストを送信する前にトリガされます。
 
 イベント・ハンドラのシグニチャは以下の通り:

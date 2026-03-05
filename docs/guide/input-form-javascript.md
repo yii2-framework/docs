@@ -68,7 +68,7 @@ The signature of the event handler should be:
 ```javascript
 function (event, attribute, messages, deferreds)
 ```
-     
+      
 where
 
 - `event`: an Event object.
@@ -114,7 +114,7 @@ where event is an Event object.
 If the handler returns a boolean `false`, it will stop form submission.
 
 ### `ajaxBeforeSend`
-         
+          
 `ajaxBeforeSend` event is triggered before sending an AJAX request for AJAX-based validation.
 
 The signature of the event handler should be:

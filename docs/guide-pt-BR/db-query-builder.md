@@ -439,7 +439,7 @@ $rows = (new \yii\db\Query())
   ->select(['id', 'email'])
   ->from('user')
   ->all();
-   
+    
 // SELECT * FROM `user` WHERE `username` LIKE `%test%`
 $row = (new \yii\db\Query())
   ->from('user')
@@ -474,7 +474,7 @@ $command = (new \yii\db\Query())
   ->where(['last_name' => 'Smith'])
   ->limit(10)
   ->createCommand();
-   
+    
 // mostra a instrução SQL 
 echo $command->sql;
 

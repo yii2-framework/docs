@@ -93,7 +93,7 @@ $userIDs = $connection
 ```
 
 データがカラム名やテーブル名を指定するために使われる場合は、事前定義された一連の値だけを許可するのが最善の方法です。
- 
+  
 ```php
 function actionList($orderBy = null)
 {

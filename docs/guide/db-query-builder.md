@@ -52,7 +52,7 @@ In the following, we will describe the usage of each query building method.
 The [[yii\db\Query::select()|select()]] method specifies the `SELECT` fragment of a SQL statement. You can specify 
 columns to be selected in either an array or a string, like the following. The column names being selected will 
 be automatically quoted when the SQL statement is being generated from a query object.
- 
+  
 ```php
 $query->select(['id', 'email']);
 
@@ -94,7 +94,7 @@ for table and column names when writing DB expressions in select.
 
 Starting from version 2.0.1, you may also select sub-queries. You should specify each sub-query in terms of 
 a [[yii\db\Query]] object. For example,
- 
+  
 ```php
 $subQuery = (new Query())->select('COUNT(*)')->from('user');
 
@@ -184,7 +184,7 @@ $query->where('YEAR(somedate) = 2015');
 
 Do NOT embed variables directly in the condition like the following, especially if the variable values come from 
 end user inputs, because this will make your application subject to SQL injection attacks.
- 
+  
 ```php
 // Dangerous! Do NOT do this unless you are very certain $status must be an integer.
 $query->where("status=$status");
@@ -450,7 +450,7 @@ $query->orderBy([
     'name' => SORT_DESC,
 ]);
 ```
- 
+  
 In the above code, the array keys are column names while the array values are the corresponding order by directions.
 The PHP constant `SORT_ASC` specifies ascending sort and `SORT_DESC` descending sort.
 
@@ -489,7 +489,7 @@ $query->groupBy('id, status');
 ```
 
 > Note: You should use the array format if `GROUP BY` involves some DB expression.
- 
+  
 You can call [[yii\db\Query::addGroupBy()|addGroupBy()]] to add additional columns to the `GROUP BY` fragment.
 For example,
 
@@ -1007,7 +1007,7 @@ namespace app\db\conditions;
 class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
 {
     // ... see the implementation above
-     
+      
     public static function fromArrayDefinition($operator, $operands)
     {
         return new static($operands[0], $operands[1]);

@@ -19,7 +19,7 @@ If no parameter is passed, the generated URL is relative. You can either pass `t
 schema or specify a schema explicitly (`https`, `http`).
 
 To get the base URL of the current request use the following:
- 
+  
 ```php
 $relativeBaseUrl = Url::base();
 $absoluteBaseUrl = Url::base(true);
@@ -37,7 +37,7 @@ a URL:
 ```php
 $url = Url::toRoute(['product/view', 'id' => 42]);
 ```
- 
+  
 You may specify the route as a string, e.g., `site/index`. You may also use an array if you want to specify additional
 query parameters for the URL being created. The array format must be:
 
@@ -89,7 +89,7 @@ There's another method `Url::to()` that is very similar to [[toRoute()]]. The on
 requires a route to be specified as an array only. If a string is given, it will be treated as a URL.
 
 The first argument could be:
-         
+          
 - an array: [[toRoute()]] will be called to generate the URL. For example:
   `['site/index']`, `['post/index', 'page' => 2]`. Please refer to [[toRoute()]] for more details
   on how to specify a route.
@@ -151,7 +151,7 @@ echo Url::current(['id' => 100]);
 
 There are cases when you need to remember URL and afterwards use it during processing of the one of sequential requests.
 It can be achieved in the following way:
- 
+  
 ```php
 // Remember current URL 
 Url::remember();
@@ -173,7 +173,7 @@ $productUrl = Url::previous('product');
 ## Checking Relative URLs <span id="checking-relative-urls"></span>
 
 To find out if URL is relative i.e. it doesn't have host info part, you can use the following code:
-                             
+                              
 ```php
 $isRelative = Url::isRelative('test/it');
 ```

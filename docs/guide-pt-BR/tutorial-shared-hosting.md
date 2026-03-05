@@ -11,7 +11,7 @@ Uma vez que em um ambiente de hospedagem compartilhada geralmente não há apena
 ### Renomear webroot <span id="renaming-webroot"></span>
 
 Ao conectar no seu servidor compartilhado através de FTP ou outros meios, você provavelmente verá algo como a seguir:
- 
+  
 ```
 config
 logs
