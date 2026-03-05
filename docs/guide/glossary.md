@@ -46,7 +46,7 @@ Installation is a process of preparing something to work either by following a r
 
 ## module
 
-Module is a sub-application which contains MVC elements by itself, such as models, views, controllers, etc. and can be used withing the main application. Typically by forwarding requests to the module instead of handling it via controllers.
+Module is a sub-application which contains MVC elements by itself, such as models, views, controllers, etc. and can be used within the main application. Typically by forwarding requests to the module instead of handling it via controllers.
 
 # N
 

@@ -112,7 +112,7 @@ micro-app/
 ```
 
 If you have not set up the web server yet, you may want to take a look at [web server configuration file examples](start-installation.md#configuring-web-servers).
-Another options is to use the `yii serve` command which will use the PHP build-in web server. You can run
+Another options is to use the `yii serve` command which will use the PHP built-in web server. You can run
 it from the `micro-app/` directory via:
 
     vendor/bin/yii serve --docroot=./web

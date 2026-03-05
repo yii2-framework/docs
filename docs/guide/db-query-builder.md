@@ -907,7 +907,7 @@ class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
     }
 
     public function getColumns() { return $this->columns; }
-    public function getValue() { return $this->vaule; }
+    public function getValue() { return $this->value; }
 }
 ```
 

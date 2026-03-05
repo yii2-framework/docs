@@ -1,2 +1,3 @@
 [codespell]
-skip = .git,*.lock,node_modules,vendor,docs/guide-ar/*,docs/guide-de/*,docs/guide-es/*,docs/guide-fr/*,docs/guide-id/*,docs/guide-it/*,docs/guide-ja/*,docs/guide-pl/*,docs/guide-pt-BR/*,docs/guide-ru/*,docs/guide-tr/*,docs/guide-uk/*,docs/guide-uz/*,docs/guide-vi/*,docs/guide-zh-CN/*,docs/internals-es/*,docs/internals-fa/*,docs/internals-ja/*,docs/internals-pl/*,docs/internals-pt-BR/*,docs/internals-ru/*,docs/internals-sr-Latn/*,docs/internals-uk/*,docs/internals-uz/*
+skip = .git,*.lock,node_modules,vendor,./docs/guide-*/*,./docs/internals-*/*,docs/guide-*/*,docs/internals-*/*,*/docs/guide-*/*,*/docs/internals-*/*
+ignore-words-list = nd,nin,januar,boxs
