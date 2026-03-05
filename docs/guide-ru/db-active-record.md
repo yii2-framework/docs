@@ -77,8 +77,8 @@ class Customer extends ActiveRecord
     const STATUS_ACTIVE = 1;
     
     /**
-     * @return string название таблицы, сопоставленной с этим ActiveRecord-классом.
-     */
+    * @return string название таблицы, сопоставленной с этим ActiveRecord-классом.
+    */
     public static function tableName()
     {
         return '{{customer}}';
@@ -599,7 +599,7 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 
 1. Вызывается конструктор класса;
 2. Вызывается [[yii\db\ActiveRecord::init()|init()]]:
-   инициируется событие [[yii\db\ActiveRecord::EVENT_INIT|EVENT_INIT]].
+  инициируется событие [[yii\db\ActiveRecord::EVENT_INIT|EVENT_INIT]].
 
 
 ### Жизненный цикл получения данных <span id="querying-data-life-cycle"></span>
@@ -609,9 +609,9 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 
 1. Вызывается конструктор класса.
 2. Вызывается [[yii\db\ActiveRecord::init()|init()]]: инициируется событие
-   [[yii\db\ActiveRecord::EVENT_INIT|EVENT_INIT]].
+  [[yii\db\ActiveRecord::EVENT_INIT|EVENT_INIT]].
 3. Вызывается [[yii\db\ActiveRecord::afterFind()|afterFind()]]: инициируется событие
-   [[yii\db\ActiveRecord::EVENT_AFTER_FIND|EVENT_AFTER_FIND]].
+  [[yii\db\ActiveRecord::EVENT_AFTER_FIND|EVENT_AFTER_FIND]].
 
 
 ### Жизненный цикл сохранения данных <span id="saving-data-life-cycle"></span>
@@ -620,19 +620,19 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 следующий жизненный цикл имеет место:
 
 1. Вызывается [[yii\db\ActiveRecord::beforeValidate()|beforeValidate()]]: инициируется событие 
-   [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]]. Если метод возвращает `false` или свойство
-   события [[yii\base\ModelEvent::isValid]] равно `false`, оставшиеся шаги не выполняются.
+  [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]]. Если метод возвращает `false` или свойство
+  события [[yii\base\ModelEvent::isValid]] равно `false`, оставшиеся шаги не выполняются.
 2. Осуществляется валидация данных. Если валидация закончилась неудачей, после 3-го шага остальные шаги не выполняются.
 3. Вызывается [[yii\db\ActiveRecord::afterValidate()|afterValidate()]]: инициируется событие 
-   [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]].
+  [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]].
 4. Вызывается [[yii\db\ActiveRecord::beforeSave()|beforeSave()]]: инициируется событие 
-   [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] или событие
-   [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]]. Если метод возвращает `false` или свойство события
-   [[yii\base\ModelEvent::isValid]] равно `false`, оставшиеся шаги не выполняются.
+  [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] или событие
+  [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]]. Если метод возвращает `false` или свойство события
+  [[yii\base\ModelEvent::isValid]] равно `false`, оставшиеся шаги не выполняются.
 5. Осуществляется фактическая вставка или обновление данных в базу данных;
 6. Вызывается [[yii\db\ActiveRecord::afterSave()|afterSave()]]: инициируется событие
-   [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] или событие
-   [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
+  [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] или событие
+  [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
    
 
 ### Жизненный цикл удаления данных <span id="deleting-data-life-cycle"></span>
@@ -641,11 +641,11 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 жизненный цикл имеет место:
 
 1. Вызывается [[yii\db\ActiveRecord::beforeDelete()|beforeDelete()]]: инициируется событие
-   [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]]. Если метод возвращает `false` или свойство события
-   [[yii\base\ModelEvent::isValid]] равно `false`, остальные шаги не выполняются.
+  [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]]. Если метод возвращает `false` или свойство события
+  [[yii\base\ModelEvent::isValid]] равно `false`, остальные шаги не выполняются.
 2. Осуществляется фактическое удаление данных из базы данных.
 3. Вызывается [[yii\db\ActiveRecord::afterDelete()|afterDelete()]]: инициируется событие
-   [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]].
+  [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]].
 
 
 > Note: Вызов следующих методов НЕ инициирует ни один из вышеприведённых жизненных циклов:
@@ -744,14 +744,14 @@ class Customer extends ActiveRecord
 Для использования оптимистической блокировки:
 
 1. Создайте столбец в таблице базы данных, ассоциированной с классом Active Record, для сохранения номера версии каждой
-   строки данных. Столбец должен быть типа big integer (в Mysql это будет `BIGINT DEFAULT 0`).
+  строки данных. Столбец должен быть типа big integer (в Mysql это будет `BIGINT DEFAULT 0`).
 2. Переопределите метод [[yii\db\ActiveRecord::optimisticLock()]] таким образом, чтобы он возвращал название этого
-   столбца.
+  столбца.
 3. В веб-форме, которая принимает пользовательский ввод, добавьте скрытое поле для сохранения текущей версии обновляемой
-   строки. Убедитесь, что для вашего атрибута с версией объявлены правила валидации, и валидация проходит успешно.
+  строки. Убедитесь, что для вашего атрибута с версией объявлены правила валидации, и валидация проходит успешно.
 4. В действии контроллера, которое занимается обновлением строки данных с использованием Active Record, оберните в блок
-   try...catch код и перехватывайте исключение [[yii\db\StaleObjectException]]. Реализуйте необходимую бизнес-логику
-   (например, возможность слияния изменений, подсказку о том, что данные устарели) для разрешения возникшего конфликта.
+  try...catch код и перехватывайте исключение [[yii\db\StaleObjectException]]. Реализуйте необходимую бизнес-логику
+  (например, возможность слияния изменений, подсказку о том, что данные устарели) для разрешения возникшего конфликта.
    
 Например, предположим, что столбец с версией называется `version`. Вы можете реализовать оптимистическую блокировку с 
 помощью подобного кода:
@@ -1668,8 +1668,8 @@ class Customer extends \yii\db\ActiveRecord
 class Customer extends \yii\db\ActiveRecord
 {
     /**
-     * Объявляет виртуальное свойство для агрегируемых данных, доступное только на чтение.
-     */
+    * Объявляет виртуальное свойство для агрегируемых данных, доступное только на чтение.
+    */
     public function getOrdersCount()
     {
         if ($this->isNewRecord) {
@@ -1680,16 +1680,16 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     /**
-     * Объявляет обычное отношение 'orders'.
-     */
+    * Объявляет обычное отношение 'orders'.
+    */
     public function getOrders()
     {
         return $this->hasMany(Order::class, ['customer_id' => 'id']);
     }
 
     /**
-     * Объявляет новое отношение, основанное на 'orders', которое предоставляет агрегацию.
-     */
+    * Объявляет новое отношение, основанное на 'orders', которое предоставляет агрегацию.
+    */
     public function getOrdersAggregation()
     {
         return $this->getOrders()

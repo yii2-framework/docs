@@ -11,25 +11,25 @@ Formatter может быть использован двумя различны
 
 1. Напрямую, используя методы форматирования (все методы форматирования имеют префикс `as`):
 
-   ```php
-   echo Yii::$app->formatter->asDate('2014-01-01', 'long'); // выведет: January 1, 2014
-   echo Yii::$app->formatter->asPercent(0.125, 2); // выведет: 12.50%
-   echo Yii::$app->formatter->asEmail('cebe@example.com'); // выведет: <a href="mailto:cebe@example.com">cebe@example.com</a>
-   echo Yii::$app->formatter->asBoolean(true); // выведет: Yes
-   // он также умеет отображать null значения:
-   echo Yii::$app->formatter->asDate(null); // выведет: (not set)
-   ```
+  ```php
+  echo Yii::$app->formatter->asDate('2014-01-01', 'long'); // выведет: January 1, 2014
+  echo Yii::$app->formatter->asPercent(0.125, 2); // выведет: 12.50%
+  echo Yii::$app->formatter->asEmail('cebe@example.com'); // выведет: <a href="mailto:cebe@example.com">cebe@example.com</a>
+  echo Yii::$app->formatter->asBoolean(true); // выведет: Yes
+  // он также умеет отображать null значения:
+  echo Yii::$app->formatter->asDate(null); // выведет: (not set)
+  ```
 
 2. Используя метод [[yii\i18n\Formatter::format()|format()]] и имя формата.
-   Этот метод также используется в виджетах наподобие [[yii\grid\GridView]] и [[yii\widgets\DetailView]], в которых
-   вы можете задать формат отображения данных в колонке через конфигурацию виджета.
+  Этот метод также используется в виджетах наподобие [[yii\grid\GridView]] и [[yii\widgets\DetailView]], в которых
+  вы можете задать формат отображения данных в колонке через конфигурацию виджета.
 
-   ```php
-   echo Yii::$app->formatter->format('2014-01-01', 'date'); // выведет: January 1, 2014
-   // вы также можете использовать массивы для настроек метода форматирования:
-   // `2` это значение для $decimals параметра метода asPercent().
-   echo Yii::$app->formatter->format(0.125, ['percent', 2]); // выведет: 12.50%
-   ```
+  ```php
+  echo Yii::$app->formatter->format('2014-01-01', 'date'); // выведет: January 1, 2014
+  // вы также можете использовать массивы для настроек метода форматирования:
+  // `2` это значение для $decimals параметра метода asPercent().
+  echo Yii::$app->formatter->format(0.125, ['percent', 2]); // выведет: 12.50%
+  ```
 
 Все данные, отображаемые через компонент formatter, будут локализованы, если
 [расширение PHP intl](https://www.php.net/manual/ru/book.intl.php) было установлено. Для этого вы можете настроить свойство
@@ -78,7 +78,7 @@ echo Yii::$app->formatter->asDate('2014-01-01'); // выведет: 1 январ
         'decimalSeparator' => ',',
         'thousandSeparator' => ' ',
         'currencyCode' => 'EUR',
-   ],
+  ],
 ],
 ```
 

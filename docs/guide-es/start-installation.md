@@ -70,12 +70,12 @@ Instalar Yii desde un archivo comprimido involucra tres pasos:
 1. Descargar el archivo desde [yiiframework.com](https://www.yiiframework.com/download/yii2-basic).
 2. Descomprimirlo en un directorio accesible vía Web.
 3. Modificar el archivo `config/web.php` introduciendo una clave secreta para el ítem de configuración `cookieValidationKey`
-   (esto se realiza automáticamente si estás instalando Yii a través de Composer):
+  (esto se realiza automáticamente si estás instalando Yii a través de Composer):
 
-   ```php
-   // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-   'cookieValidationKey' => 'enter your secret key here',
-   ```
+  ```php
+  // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+  'cookieValidationKey' => 'enter your secret key here',
+  ```
 
 
 Otras Opciones de Instalación <span id="other-installation-options"></span>

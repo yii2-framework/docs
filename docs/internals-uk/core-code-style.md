@@ -118,8 +118,8 @@ class Foo
 class Foo
 {
     /**
-     * Документація
-     */
+    * Документація
+    */
     public function bar()
     {
         // код
@@ -349,14 +349,14 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
   ```php
     <?php
     /**
-     * Returns the errors for all attributes or a single attribute.
-     * @param string $attribute attribute name. Use `null` to retrieve errors for all attributes.
-     * @property array An array of errors for all attributes. Empty array is returned if no error.
-     * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
-     * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
-     * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
-     * ...
-     */
+    * Returns the errors for all attributes or a single attribute.
+    * @param string $attribute attribute name. Use `null` to retrieve errors for all attributes.
+    * @property array An array of errors for all attributes. Empty array is returned if no error.
+    * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
+    * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
+    * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
+    * ...
+    */
     public function getErrors($attribute = null)
   ```
 

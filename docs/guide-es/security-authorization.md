@@ -92,13 +92,13 @@ esta regla. Esta debería ser un array de IDs de controladores. Cada ID de contr
 La comparación es sensible a mayúsculas. Si la opción está vacía o no definida, significa que la regla se aplica a todos los controladores.
 
  * [[yii\filters\AccessRule::roles|roles]]: especifica con qué roles de usuarios coincide esta regla.
-   Son reconocidos dos roles especiales, y son comprobados vía [[yii\web\User::isGuest]]:
+  Son reconocidos dos roles especiales, y son comprobados vía [[yii\web\User::isGuest]]:
 
-     - `?`: coincide con el usuario invitado (sin autenticar)
-     - `@`: coincide con el usuario autenticado
+    - `?`: coincide con el usuario invitado (sin autenticar)
+    - `@`: coincide con el usuario autenticado
 
-   El utilizar otro nombre de rol invocará una llamada a [[yii\web\User::can()]], que requiere habilitar RBAC
-   (a ser descrito en la próxima subsección). Si la opción está vacía o no definida, significa que la regla se aplica a todos los roles.
+  El utilizar otro nombre de rol invocará una llamada a [[yii\web\User::can()]], que requiere habilitar RBAC
+  (a ser descrito en la próxima subsección). Si la opción está vacía o no definida, significa que la regla se aplica a todos los roles.
 
  * [[yii\filters\AccessRule::ips|ips]]: especifica con qué [[yii\web\Request::userIP|dirección IP del cliente]] coincide esta regla.
 Una dirección IP puede contener el caracter especial `*` al final de manera que coincidan todas las IPs que comiencen igual.
@@ -362,11 +362,11 @@ class AuthorRule extends Rule
     public $name = 'isAuthor';
 
     /**
-     * @param string|int $user el ID de usuario.
-     * @param Item $item el rol o permiso asociado a la regla
-     * @param array $params parámetros pasados a ManagerInterface::checkAccess().
-     * @return bool un valor indicando si la regla permite al rol o permiso con el que está asociado.
-     */
+    * @param string|int $user el ID de usuario.
+    * @param Item $item el rol o permiso asociado a la regla
+    * @param array $params parámetros pasados a ManagerInterface::checkAccess().
+    * @return bool un valor indicando si la regla permite al rol o permiso con el que está asociado.
+    */
     public function execute($user, $item, $params)
     {
         return isset($params['post']) ? $params['post']->createdBy == $user : false;

@@ -353,7 +353,7 @@ $width = \Yii::$app->params['thumbnail.size'][0];
 
 ```php
 [
-	// Europe/Moscow для России (прим. пер.)
+  // Europe/Moscow для России (прим. пер.)
     'timeZone' => 'America/Los_Angeles',
 ]
 ```

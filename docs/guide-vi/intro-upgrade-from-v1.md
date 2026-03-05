@@ -528,4 +528,3 @@ Dùng Yii 1.1 và 2.x cùng với nhau
 
 Nếu bạn có các đoạn mã Yii 1.1 trước đây mà bạn muốn sử dụng cùng với Yii 2.0, vui lòng tham khảo mục
 [Using Yii 1.1 and 2.0 Together](tutorial-yii-integration.md#using-both-yii2-yii1).
-

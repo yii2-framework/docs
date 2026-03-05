@@ -526,4 +526,3 @@ Usare Yii 1.1 e 2.x insieme
 
 Se hai del vecchio codice scritto per Yii 1.1 che vuoi usare insieme a Yii 2.0, fai riferimento alla sezione
 [Usare Yii 1.1 e 2.0 insieme](tutorial-yii-integration.md).
-

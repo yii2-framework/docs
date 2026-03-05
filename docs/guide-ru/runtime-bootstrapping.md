@@ -11,15 +11,15 @@
 В конструкторе приложения происходит следующий процесс предзагрузки:
 
 1. Вызывается метод [[yii\base\Application::preInit()|preInit()]], который конфигурирует свойства приложения, имеющие
-   наивысший приоритет, такие как [[yii\base\Application::basePath|basePath]];
+  наивысший приоритет, такие как [[yii\base\Application::basePath|basePath]];
 2. Регистрируется [[yii\base\Application::errorHandler|обработчик ошибок]];
 3. Происходит инициализация свойств приложения согласно заданной конфигурации;
 4. Вызывается метод [[yii\base\Application::init()|init()]], который в свою очередь вызывает метод [[yii\base\Application::bootstrap()|bootstrap()]] для
-   запуска компонентов предзагрузки.
-   - Подключается файл манифеста `vendor/yiisoft/extensions.php`;
-   - Создаются и запускаются [компоненты предзагрузки](structure-extensions.md#bootstrapping-classes) объявленные в расширениях;
-   - Создаются и запускаются [компоненты приложения](structure-application-components.md) и/или [модули](structure-modules.md), объявленные
-     в свойстве [предзагрузка](structure-applications.md#bootstrap) приложения.
+  запуска компонентов предзагрузки.
+  - Подключается файл манифеста `vendor/yiisoft/extensions.php`;
+  - Создаются и запускаются [компоненты предзагрузки](structure-extensions.md#bootstrapping-classes) объявленные в расширениях;
+  - Создаются и запускаются [компоненты приложения](structure-application-components.md) и/или [модули](structure-modules.md), объявленные
+    в свойстве [предзагрузка](structure-applications.md#bootstrap) приложения.
 
 Поскольку предзагрузка осуществляется прежде чем будет обработан *каждый* запрос, то очень важно, чтобы этот процесс был легким и максимально оптимизированным.
 

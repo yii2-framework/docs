@@ -26,10 +26,10 @@ Yii soporta todos los métodos anteriores de autenticación. Puedes crear nuevos
 Para activar la autenticación para tus APIs, sigue los pasos siguientes:
 
 1. Configura el componente `user` de la aplicación:
-   - Define la propiedad [[yii\web\User::enableSession|enableSession]] como `false`.
-   - Define la propiedad [[yii\web\User::loginUrl|loginUrl]] como `null` para mostrar un error HTTP 403 en vez de redireccionar a la pantalla de login. 
+  - Define la propiedad [[yii\web\User::enableSession|enableSession]] como `false`.
+  - Define la propiedad [[yii\web\User::loginUrl|loginUrl]] como `null` para mostrar un error HTTP 403 en vez de redireccionar a la pantalla de login. 
 2. Especifica cuál método de autenticación planeas usar configurando el comportamiento (behavior) `authenticator` en tus
-   clases de controladores REST.
+  clases de controladores REST.
 3. Implementa [[yii\web\IdentityInterface::findIdentityByAccessToken()]] en tu [[yii\web\User::identityClass|clase de identidad de usuarios]].
 
 El paso 1 no es necesario pero sí recomendable para las APIs RESTful, pues son sin estado (stateless).

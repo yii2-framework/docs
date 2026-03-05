@@ -119,7 +119,7 @@ exit($exitCode);
 
 放置完成脚本在 `/etc/bash_completion.d/`：
 
-     curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
+    curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
 
 对于临时使用，您可以将文件放入当前目录，并通过 `source yii` 将其包含在当前会话中。
 如果全局安装，您可能需要重新启动终端或`source ~/.bashrc` 来激活它。

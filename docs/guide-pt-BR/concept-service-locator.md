@@ -98,4 +98,3 @@ return [
 ```
 
 Esta abordagem alternativa é mais preferível quando você disponibiliza um componente Yii que encapsula alguma biblioteca de terceiros. Você usa o método estático como mostrado acima para representar a lógica complexa da construção do objeto de terceiros e o usuário do seu componente só precisa chamar o método estático para configurar o componente.
-

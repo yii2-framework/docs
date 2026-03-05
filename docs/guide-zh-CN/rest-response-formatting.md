@@ -5,13 +5,13 @@
 来处理响应格式：
 
 1. 确定可能影响响应格式的各种因素，例如媒介类型，语言，版本，等等。
-   这个过程也被称为 [content negotiation](https://zh.wikipedia.org/wiki/%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86)。
+  这个过程也被称为 [content negotiation](https://zh.wikipedia.org/wiki/%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86)。
 2. 资源对象转换为数组，如在 [Resources](rest-resources.md) 部分中所描述的。
-   通过 [[yii\rest\Serializer]] 来完成。
+  通过 [[yii\rest\Serializer]] 来完成。
 3. 通过内容协商步骤将数组转换成字符串。
-   [[yii\web\ResponseFormatterInterface|response formatters]] 通过
-   [[yii\web\Response::formatters|response]] 应用程序
-   组件来注册完成。
+  [[yii\web\ResponseFormatterInterface|response formatters]] 通过
+  [[yii\web\Response::formatters|response]] 应用程序
+  组件来注册完成。
 
 
 ## 内容协商 <span id="content-negotiation"></span>

@@ -74,8 +74,8 @@ class Customer extends ActiveRecord
     const STATUS_ACTIVE = 1;
     
     /**
-     * @return string nazwa tabeli powiązanej z klasą ActiveRecord.
-     */
+    * @return string nazwa tabeli powiązanej z klasą ActiveRecord.
+    */
     public static function tableName()
     {
         return '{{customer}}';
@@ -545,15 +545,15 @@ Podczas pobierania danych za pomocą jednej z [metod kwerendy](#querying-data), 
 Podczas wywołania [[yii\db\ActiveRecord::save()|save()]], w celu dodania lub uaktualnienia danych instancji Active Record, zachodzi następujący cykl:
 
 1. [[yii\db\ActiveRecord::beforeValidate()|beforeValidate()]]: uruchamia event [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]]. 
-   Jeśli metoda zwróci `false` lub właściwość [[yii\base\ModelEvent::isValid|isValid]] ma wartość `false`, kolejne kroki są pomijane.
+  Jeśli metoda zwróci `false` lub właściwość [[yii\base\ModelEvent::isValid|isValid]] ma wartość `false`, kolejne kroki są pomijane.
 2. Proces walidacji danych. Jeśli proces zakończy się niepowodzeniem, kolejne kroki po kroku 3. są pomijane. 
 3. [[yii\db\ActiveRecord::afterValidate()|afterValidate()]]: uruchamia event [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]].
 4. [[yii\db\ActiveRecord::beforeSave()|beforeSave()]]: uruchamia event [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] lub 
-   [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]]. Jeśli metoda zwróci `false` lub właściwość [[yii\base\ModelEvent::isValid|isValid]] ma 
-   wartość `false`, kolejne kroki są pomijane.
+  [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]]. Jeśli metoda zwróci `false` lub właściwość [[yii\base\ModelEvent::isValid|isValid]] ma 
+  wartość `false`, kolejne kroki są pomijane.
 5. Proces właściwego dodawania lub aktulizowania danych.
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: uruchamia event [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] lub 
-   [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
+  [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
    
 
 ### Cykl życia przy usuwaniu danych <span id="deleting-data-life-cycle"></span>
@@ -561,7 +561,7 @@ Podczas wywołania [[yii\db\ActiveRecord::save()|save()]], w celu dodania lub ua
 Podczas wywołania [[yii\db\ActiveRecord::delete()|delete()]], w celu usunięcia danych instancji Active Record, zachodzi następujący cykl:
 
 1. [[yii\db\ActiveRecord::beforeDelete()|beforeDelete()]]: uruchamia event [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]]. 
-   Jeśli metoda zwróci `false` lub właściwość [[yii\base\ModelEvent::isValid|isValid]] ma wartość `false`, kolejne kroki są pomijane.
+  Jeśli metoda zwróci `false` lub właściwość [[yii\base\ModelEvent::isValid|isValid]] ma wartość `false`, kolejne kroki są pomijane.
 2. Proces właściwego usuwania danych.
 3. [[yii\db\ActiveRecord::afterDelete()|afterDelete()]]: uruchamia event [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]].
 
@@ -660,12 +660,12 @@ zapis wiersza. Optymistyczne blokowanie może być użyte tylko przy aktualizacj
 Aby skorzystać z optymistycznej blokady:
 
 1. Stwórz kolumnę w tabeli bazy danych powiązaną z klasą Active Record do przechowywania numeru wersji każdego wiersza.
-   Kolumna powinna być typu big integer (przykładowo w MySQL `BIGINT DEFAULT 0`).
+  Kolumna powinna być typu big integer (przykładowo w MySQL `BIGINT DEFAULT 0`).
 2. Nadpisz metodę [[yii\db\ActiveRecord::optimisticLock()|optimisticLock()]], aby zwrócić nazwę tej kolumny.
 3. W formularzu pobierającym dane od użytkownika, dodaj ukryte pole, gdzie przechowasz aktualny numer wersji uaktualnianego wiersza. 
-   Upewnij się, że atrybut wersji ma dodaną zasadę walidacji i przechodzi poprawnie jej proces.
+  Upewnij się, że atrybut wersji ma dodaną zasadę walidacji i przechodzi poprawnie jej proces.
 4. W akcji kontrolera uaktualniającej wiersz za pomocą Active Record, użyj bloku try-catch, aby wyłapać wyjątek [[yii\db\StaleObjectException|StaleObjectException]]. 
-   Zaimplemetuj odpowiednią logikę biznesową (np. scalenie zmian, wyświetlenie komunikatu o nieaktualnej wersji, itp.), aby rozwiązać konflikt.
+  Zaimplemetuj odpowiednią logikę biznesową (np. scalenie zmian, wyświetlenie komunikatu o nieaktualnej wersji, itp.), aby rozwiązać konflikt.
    
 Dla przykładu, załóżmy, że kolumna wersji nazywa się `version`. Implementację optymistycznego blokowania można wykonać za pomocą następującego kodu:
 
@@ -1549,8 +1549,8 @@ Przykładowo:
 class Customer extends \yii\db\ActiveRecord
 {
     /**
-     * Deklaracja wirtualnej właściwości tylko do odczytu dla danych sumarycznych.
-     */
+    * Deklaracja wirtualnej właściwości tylko do odczytu dla danych sumarycznych.
+    */
     public function getOrdersCount()
     {
         if ($this->isNewRecord) {
@@ -1561,16 +1561,16 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     /**
-     * Deklaracja zwykłej relacji 'orders'.
-     */
+    * Deklaracja zwykłej relacji 'orders'.
+    */
     public function getOrders()
     {
         return $this->hasMany(Order::class, ['customer_id' => 'id']);
     }
 
     /**
-     * Deklaracja nowej relacji bazującej na 'orders', ale zapewniającej pobranie danych sumarycznych.
-     */
+    * Deklaracja nowej relacji bazującej na 'orders', ale zapewniającej pobranie danych sumarycznych.
+    */
     public function getOrdersAggregation()
     {
         return $this->getOrders()

@@ -37,4 +37,3 @@ public function behaviors()
 
 [フラグメント・キャッシュ](caching-fragment.md) も、[ダイナミック・コンテント](caching-fragment.md#dynamic-content) も、
 ページ・キャッシュと併用することができます。
-

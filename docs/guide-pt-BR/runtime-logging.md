@@ -63,9 +63,9 @@ return [
                   'levels' => ['error'],
                   'categories' => ['yii\db\*'],
                   'message' => [
-                     'from' => ['log@example.com'],
-                     'to' => ['admin@example.com', 'developer@example.com'],
-                     'subject' => 'Database errors at example.com',
+                    'from' => ['log@example.com'],
+                    'to' => ['admin@example.com', 'developer@example.com'],
+                    'subject' => 'Database errors at example.com',
                   ],
               ],
           ],

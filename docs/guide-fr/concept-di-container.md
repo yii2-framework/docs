@@ -464,4 +464,3 @@ Résumé <span id="summary"></span>
 L'injection de dépendances et le [localisateur de services](concept-service-locator.md) sont tous deux des modèles de conception populaires qui permettent des construire des logiciels d'une manière faiblement couplée et plus testable. Nous vous recommandons fortement de lire [l'article de Martin](https://martinfowler.com/articles/injection.html) pour acquérir une compréhension plus profonde de l'injection de dépendances et du localisateur de services. 
 
 Yii implémente son [localisateur de services](concept-service-locator.md) par dessus le conteneur d'injection de dépendances. Lorsqu'un localisateur de services essaye de créer une nouvelle instance d'un objet, il appelle le conteneur d'injection de dépendances. Ce dernier résout les dépendances automatiquement comme c'est expliqué plus haut.
-

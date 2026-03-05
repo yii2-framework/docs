@@ -86,14 +86,14 @@ is as specified by the `operator` property.
   of this property and `compareAttribute` are specified, this property will take precedence.
 - `operator`: the comparison operator. Defaults to `==`, meaning checking if the input value is equal
   to that of `compareAttribute` or `compareValue`. The following operators are supported:
-     * `==`: check if two values are equal. The comparison is done is non-strict mode.
-     * `===`: check if two values are equal. The comparison is done is strict mode.
-     * `!=`: check if two values are NOT equal. The comparison is done is non-strict mode.
-     * `!==`: check if two values are NOT equal. The comparison is done is strict mode.
-     * `>`: check if value being validated is greater than the value being compared with.
-     * `>=`: check if value being validated is greater than or equal to the value being compared with.
-     * `<`: check if value being validated is less than the value being compared with.
-     * `<=`: check if value being validated is less than or equal to the value being compared with.
+    * `==`: check if two values are equal. The comparison is done is non-strict mode.
+    * `===`: check if two values are equal. The comparison is done is strict mode.
+    * `!=`: check if two values are NOT equal. The comparison is done is non-strict mode.
+    * `!==`: check if two values are NOT equal. The comparison is done is strict mode.
+    * `>`: check if value being validated is greater than the value being compared with.
+    * `>=`: check if value being validated is greater than or equal to the value being compared with.
+    * `<`: check if value being validated is less than the value being compared with.
+    * `<=`: check if value being validated is less than or equal to the value being compared with.
 - `type`: The default comparison type is '[[yii\validators\CompareValidator::TYPE_STRING|string]]', which means the values are
   compared byte by byte. When comparing numbers, make sure to set the [[yii\validators\CompareValidator::$type|$type]]
   to '[[yii\validators\CompareValidator::TYPE_NUMBER|number]]' to enable numeric comparison.
@@ -139,11 +139,11 @@ Optionally, it can convert the input value into a UNIX timestamp or other machin
 specified via [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]].
 
 - `format`: the date/time format that the value being validated should be in.
-   This can be a date time pattern as described in the [ICU manual](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax).
-   Alternatively this can be a string prefixed with `php:` representing a format that can be recognized by the PHP
-   `Datetime` class. Please refer to <https://www.php.net/manual/en/datetime.createfromformat.php> on supported formats.
-   If this is not set, it will take the value of `Yii::$app->formatter->dateFormat`.
-   See the [[yii\validators\DateValidator::$format|API documentation]] for more details.
+  This can be a date time pattern as described in the [ICU manual](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax).
+  Alternatively this can be a string prefixed with `php:` representing a format that can be recognized by the PHP
+  `Datetime` class. Please refer to <https://www.php.net/manual/en/datetime.createfromformat.php> on supported formats.
+  If this is not set, it will take the value of `Yii::$app->formatter->dateFormat`.
+  See the [[yii\validators\DateValidator::$format|API documentation]] for more details.
 
 - `timestampAttribute`: the name of the attribute to which this validator may assign the UNIX timestamp
   converted from the input date/time. This can be the same attribute as the one being validated. If this is the case,
@@ -481,9 +481,9 @@ The validator has such configuration options:
 - `ipv4`: whether the validating value can be an IPv4 address. Defaults to `true`.
 - `ipv6`: whether the validating value can be an IPv6 address. Defaults to `true`.
 - `subnet`: whether the address can be an IP with CIDR subnet, like `192.168.10.0/24`
-     * `true` - the subnet is required, addresses without CIDR will be rejected
-     * `false` - the address can not have the CIDR
-     * `null` - the CIDR is optional
+    * `true` - the subnet is required, addresses without CIDR will be rejected
+    * `false` - the address can not have the CIDR
+    * `null` - the CIDR is optional
 
     Defaults to `false`.
 - `normalize`: whether to add the CIDR prefix with the smallest length (32 for IPv4 and 128 for IPv6) to an
@@ -504,11 +504,11 @@ For example, `2008:db0::1` will be expanded to `2008:0db0:0000:0000:0000:0000:00
     For example:
     ```php
     [
-         'client_ip', 'ip', 'ranges' => [
-             '192.168.10.128'
-             '!192.168.10.0/24',
-             'any' // allows any other IP addresses
-         ]
+        'client_ip', 'ip', 'ranges' => [
+            '192.168.10.128'
+            '!192.168.10.0/24',
+            'any' // allows any other IP addresses
+        ]
     ]
     ```
 In this example, access is allowed for all the IPv4 and IPv6 addresses excluding `192.168.10.0/24` subnet.
@@ -580,8 +580,8 @@ This validator checks if the input value matches the specified regular expressio
 - `pattern`: the regular expression that the input value should match. This property must be set,
   or an exception will be thrown.
 - `not`: whether to invert the validation result. Defaults to `false`, meaning the validation succeeds
-   only if the input value matches the pattern. If this is set `true`, the validation is considered
-   successful only if the input value does NOT match the pattern.
+  only if the input value matches the pattern. If this is set `true`, the validation is considered
+  successful only if the input value does NOT match the pattern.
 
 
 ## [[yii\validators\NumberValidator|number]] <span id="number"></span>
@@ -646,11 +646,11 @@ a [safe attribute](structure-models.md#safe-attributes).
 This validator checks if the input value is a valid string with certain length.
 
 - `length`: specifies the length limit of the input string being validated. This can be specified
-   in one of the following forms:
-     * an integer: the exact length that the string should be of;
-     * an array of one element: the minimum length of the input string (e.g. `[8]`). This will overwrite `min`.
-     * an array of two elements: the minimum and maximum lengths of the input string (e.g. `[8, 128]`).
-     This will overwrite both `min` and `max`.
+  in one of the following forms:
+    * an integer: the exact length that the string should be of;
+    * an array of one element: the minimum length of the input string (e.g. `[8]`). This will overwrite `min`.
+    * an array of two elements: the minimum and maximum lengths of the input string (e.g. `[8, 128]`).
+    This will overwrite both `min` and `max`.
 - `min`: the minimum length of the input string. If not set, it means no minimum length limit.
 - `max`: the maximum length of the input string. If not set, it means no maximum length limit.
 - `encoding`: the encoding of the input string to be validated. If not set, it will use the application's

@@ -72,14 +72,14 @@ Este validador compara o valor de entrada especificado com um outro e certifica 
 - `compareAttribute`: o nome do atributo cujo valor deve ser comparado. Quando o validador está sendo usado para validar um atributo, o valor padrão dessa propriedade seria o nome do atributo com o sufixo `_repeat`. Por exemplo, se o atributo que está sendo validado é `password`, então esta propriedade será por padrão `password_repeat`.
 - `compareValue`: um valor constante com o qual o valor de entrada deve ser comparado. Quando esta propriedade e a propriedade `compareAttribute` forem especificadas, a propriedade `compareValue` terá precedência.
 - `operator`: o operador de comparação. O padrão é `==`, ou seja, verificar se o valor de entrada é igual ao do `compareAttribute` ou `compareValue`. Os seguintes operadores são suportados:
-   * `==`: verifica se dois valores são iguais. A comparação é feita no modo non-strict.
-   * `===`: verifica se dois valores são iguais. A comparação é feita no modo strict.
-   * `!=`: verifica se dois valores NÃO são iguais. A comparação é feita no modo non-strict.
-   * `!==`: verifica se dois valores NÃO são iguais. A comparação é feita no modo strict.
-   * `>`: verifica se o valor que está sendo validado é maior do que o valor que está sendo comparado.
-   * `>=`: verifica se o valor que está sendo validado é maior ou igual ao valor que está sendo comparado.
-   * `<`: verifica se o valor que está sendo validado é menor do que o valor que está sendo comparado.
-   * `<=`: verifica se o valor que está sendo validado menor ou igual ao valor que está sendo comparado.
+  * `==`: verifica se dois valores são iguais. A comparação é feita no modo non-strict.
+  * `===`: verifica se dois valores são iguais. A comparação é feita no modo strict.
+  * `!=`: verifica se dois valores NÃO são iguais. A comparação é feita no modo non-strict.
+  * `!==`: verifica se dois valores NÃO são iguais. A comparação é feita no modo strict.
+  * `>`: verifica se o valor que está sendo validado é maior do que o valor que está sendo comparado.
+  * `>=`: verifica se o valor que está sendo validado é maior ou igual ao valor que está sendo comparado.
+  * `<`: verifica se o valor que está sendo validado é menor do que o valor que está sendo comparado.
+  * `<=`: verifica se o valor que está sendo validado menor ou igual ao valor que está sendo comparado.
 
 
 ## [[yii\validators\DateValidator|date]] <span id="date"></span>
@@ -404,9 +404,9 @@ Este validador não executa validação de dados. Em vez disso, ele é usado par
 Este validador verifica se o valor de entrada é uma string válida com um determinado tamanho.
 
 - `length`: especifica o limite do comprimento da string de entrada que está sendo validada. Este pode ser especificado em uma das seguintes formas:
-   * um inteiro: o comprimento exato que a string deverá ter;
-   * um array de um elemento: o comprimento mínimo da string de entrada (ex. `[8]`). Isso substituirá `min`.
-   * um array de dois elementos: o comprimento mínimo e máximo da string de entrada (ex. `[8, 128]`). Isso substituirá ambos `min` e `max`.
+  * um inteiro: o comprimento exato que a string deverá ter;
+  * um array de um elemento: o comprimento mínimo da string de entrada (ex. `[8]`). Isso substituirá `min`.
+  * um array de dois elementos: o comprimento mínimo e máximo da string de entrada (ex. `[8, 128]`). Isso substituirá ambos `min` e `max`.
 - `min`: o comprimento mínimo da string de entrada. Se não configurado, significa não ter limite para o comprimento mínimo.
 - `max`: o comprimento máximo da string de entrada. Se não configurado, significa não ter limite para o comprimento máximo.
 - `encoding`: a codificação da string de entrada a ser validada. se não configurado, será usado o valor de [[yii\base\Application::charset|charset]] da aplicação que por padrão é  `UTF-8`.
@@ -467,5 +467,3 @@ Este validador verifica se o valor de entrada é uma URL válida.
 - `validSchemes`: um array especificando o esquema da URI que deve ser considerada válida. O padrão é `['http', 'https']`, significa que ambas URLs `http` e `https` são considerados como válidos.
 - `defaultScheme`: o esquema padrão da URI para ser anexado à entrada, se a parte do esquema não for informada na entrada. O padrão é `null`, significa que o valor de entrada não será modificado.
 - `enableIDN`: se o validador deve ter uma conta IDN (internationalized domain names). O padrão é `false`. Observe que para usar a validação IDN você tem que instalar e ativar a extenção PHP `intl`, caso contrário uma exceção será lançada.
-
-

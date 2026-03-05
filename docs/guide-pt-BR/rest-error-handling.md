@@ -12,10 +12,10 @@ Transfer-Encoding: chunked
 Content-Type: application/json; charset=UTF-8
 
 {
-   "name": "Not Found Exception",
-   "message": "The requested resource was not found.",
-   "code": 0,
-   "status": 404
+  "name": "Not Found Exception",
+  "message": "The requested resource was not found.",
+  "code": 0,
+  "status": 404
 }
 ```
 
@@ -47,13 +47,13 @@ Transfer-Encoding: chunked
 Content-Type: application/json; charset=UTF-8
 
 {
-   "success": false,
-   "data": {
-       "name": "Not Found Exception",
-       "message": "The requested resource was not found.",
-       "code": 0,
-       "status": 404
-   }
+  "success": false,
+  "data": {
+      "name": "Not Found Exception",
+      "message": "The requested resource was not found.",
+      "code": 0,
+      "status": 404
+  }
 }
 ```
 
@@ -61,25 +61,23 @@ Para atingir este objetivo, você pode responder o evento `beforeSend` do compon
 
 ```php
 return [
-   // ...
-   'components' => [
-       'response' => [
-           'class' => 'yii\web\Response',
-           'on beforeSend' => function ($event) {
-               $response = $event->sender;
-               if ($response->data !== null && Yii::$app->request->get('suppress_response_code')) {
-                   $response->data = [
-                       'success' => $response->isSuccessful,
-                       'data' => $response->data,
-                   ];
-                   $response->statusCode = 200;
-               }
-           },
-       ],
-   ],
+  // ...
+  'components' => [
+      'response' => [
+          'class' => 'yii\web\Response',
+          'on beforeSend' => function ($event) {
+              $response = $event->sender;
+              if ($response->data !== null && Yii::$app->request->get('suppress_response_code')) {
+                  $response->data = [
+                      'success' => $response->isSuccessful,
+                      'data' => $response->data,
+                  ];
+                  $response->statusCode = 200;
+              }
+          },
+      ],
+  ],
 ];
 ```
 
 O código acima formatará a resposta (para ambas as respostas, bem-sucedidas e com falha) como explicado quando `suppress_response_code` é passado como um parâmetro `GET`.
-
-

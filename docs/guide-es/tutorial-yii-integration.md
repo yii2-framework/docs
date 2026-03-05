@@ -189,4 +189,3 @@ mientras `Yii::app()` proporciona la instancia de la aplicación de  Yii 1 :
 echo get_class(Yii::app()); // genera 'CWebApplication'
 echo get_class(Yii::$app);  // genera 'yii\web\Application'
 ```
-

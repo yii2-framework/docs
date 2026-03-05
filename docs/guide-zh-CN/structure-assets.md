@@ -281,12 +281,12 @@ ____
 在配置好 Composer 支持使用 Bower 和 NPM 之后：
 
 1. 编辑项目或扩展中的 `composer.json` 文件，在该文件的 `require` 字段中列举出相关包。 
-   你应该使用 `bower-asset/PackageName`（对于 Bower 包）或者
-   `npm-asset/PackageName` （对于 NPM 包）的方式来引入这些包。
+  你应该使用 `bower-asset/PackageName`（对于 Bower 包）或者
+  `npm-asset/PackageName` （对于 NPM 包）的方式来引入这些包。
 2. 运行 `composer update`
 3. 创建资源类并列出在应用程序或扩展中所需使用的 JavaScript/CSS 文件。
-   你还需要配置 [[yii\web\AssetBundle::sourcePath|sourcePath]] 属性为 `@bower/PackageName` 或 `@npm/PackageName`。
-   这是因为 Composer 会将 Bower 或 NPM 软件包安装在与此别名对应的目录中。
+  你还需要配置 [[yii\web\AssetBundle::sourcePath|sourcePath]] 属性为 `@bower/PackageName` 或 `@npm/PackageName`。
+  这是因为 Composer 会将 Bower 或 NPM 软件包安装在与此别名对应的目录中。
 
 > Note: 某些包可能会将其所有发布文件放在子目录中。在这种情况下，
   你应该把子目录设为 [[yii\web\AssetBundle::sourcePath|sourcePath]] 的值。例如，
@@ -663,11 +663,11 @@ return [
 2. 将这些包分成一个或几个组，注意每个包只能属于其中一个组，
 3. 合并/压缩每个组里 CSS 文件到一个文件，同样方式处理 JavaScript 文件，
 4. 为每个组定义新的资源包：
-   * 设置 [[yii\web\AssetBundle::css|css]] 和 [[yii\web\AssetBundle::js|js]] 
-     属性分别为压缩后的 CSS 和 JavaScript 文件；
-   * 自定义设置每个组内的资源包，设置资源包的 [[yii\web\AssetBundle::css|css]] 
-     和 [[yii\web\AssetBundle::js|js]] 属性为空, 
-     并设置它们的 [[yii\web\AssetBundle::depends|depends]] 属性为每个组新创建的资源包。
+  * 设置 [[yii\web\AssetBundle::css|css]] 和 [[yii\web\AssetBundle::js|js]] 
+    属性分别为压缩后的 CSS 和 JavaScript 文件；
+  * 自定义设置每个组内的资源包，设置资源包的 [[yii\web\AssetBundle::css|css]] 
+    和 [[yii\web\AssetBundle::js|js]] 属性为空, 
+    并设置它们的 [[yii\web\AssetBundle::depends|depends]] 属性为每个组新创建的资源包。
 
 使用这种方式，当在视图中注册资源包时，会自动触发原始包所属的组资源包的注册，
 然后，页面就会包含以合并/压缩的资源文件，

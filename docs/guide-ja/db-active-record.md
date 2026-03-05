@@ -78,8 +78,8 @@ class Customer extends ActiveRecord
     const STATUS_ACTIVE = 1;
     
     /**
-     * @return string このアクティブ・レコード・クラスと関連付けられるテーブルの名前
-     */
+    * @return string このアクティブ・レコード・クラスと関連付けられるテーブルの名前
+    */
     public static function tableName()
     {
         return '{{customer}}';
@@ -614,15 +614,15 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 次のライフサイクルを経ます。
 
 1. [[yii\db\ActiveRecord::beforeValidate()|beforeValidate()]]: [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] イベントをトリガ。
-   このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合、
-   残りのステップはスキップされる。
+  このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合、
+  残りのステップはスキップされる。
 2. データ検証を実行。データ検証が失敗した場合、3 より後のステップはスキップされる。
 3. [[yii\db\ActiveRecord::afterValidate()|afterValidate()]]: [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]]
-   イベントをトリガ。
+  イベントをトリガ。
 4. [[yii\db\ActiveRecord::beforeSave()|beforeSave()]]: [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]]
-   または [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]] イベントをトリガ。
-   このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合、
-   残りのステップはスキップされる。
+  または [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]] イベントをトリガ。
+  このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合、
+  残りのステップはスキップされる。
 5. 実際のデータの挿入または更新を実行。
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]]
     または [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]]
@@ -635,11 +635,11 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 次のライフサイクルを経ます。
 
 1. [[yii\db\ActiveRecord::beforeDelete()|beforeDelete()]]: [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]]
-   イベントをトリガ。このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合は、
-   残りのステップはスキップされる。
+  イベントをトリガ。このメソッドが `false` を返すか、[[yii\base\ModelEvent::isValid]] が `false` であった場合は、
+  残りのステップはスキップされる。
 2. 実際のデータの削除を実行。
 3. [[yii\db\ActiveRecord::afterDelete()|afterDelete()]]: [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]]
-   イベントをトリガ。
+  イベントをトリガ。
 
 
 > Note: 次のメソッドを呼んだ場合は、いずれの場合も、上記のライフサイクルのどれかを開始させることはありません。
@@ -751,13 +751,13 @@ class Post extends \yii\db\ActiveRecord
 楽観的ロックを使用するためには、次のようにします。
 
 1. アクティブ・レコード・クラスと関連付けられている DB テーブルに、各行のバージョン番号を保存するカラムを作成します。
-   カラムは長倍精度整数 (big integer) タイプでなければなりません (MySQL では `BIGINT DEFAULT 0` です)。
+  カラムは長倍精度整数 (big integer) タイプでなければなりません (MySQL では `BIGINT DEFAULT 0` です)。
 2. [[yii\db\ActiveRecord::optimisticLock()]] メソッドをオーバーライドして、このカラムの名前を返すようにします。
 3. あなたのモデル・クラスの中で [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] を実装し、受信したリクエストからその値を自動的に解析できるようにします。
-   [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] が検証を処理すべきですので、バージョンの属性は検証規則から削除します。
+  [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] が検証を処理すべきですので、バージョンの属性は検証規則から削除します。
 4. ユーザ入力を収集するウェブフォームに、更新されるレコードの現在のバージョン番号を保持する隠しフィールドを追加します。
 5. アクティブ・レコードを使って行の更新を行うコントローラ・アクションにおいて、[[\yii\db\StaleObjectException]] 例外を捕捉して、
-   衝突を解決するために必要なビジネス・ロジック (例えば、変更をマージしたり、データの陳腐化を知らせたり) を実装します。
+  衝突を解決するために必要なビジネス・ロジック (例えば、変更をマージしたり、データの陳腐化を知らせたり) を実装します。
 
 例えば、バージョン番号のカラムが `version` と名付けられているとすると、
 次のようなコードによって楽観的ロックを実装することが出来ます。
@@ -1738,8 +1738,8 @@ class Customer extends \yii\db\ActiveRecord
 class Customer extends \yii\db\ActiveRecord
 {
     /**
-     * 読み出し専用の集約データの仮想プロパティを定義
-     */
+    * 読み出し専用の集約データの仮想プロパティを定義
+    */
     public function getOrdersCount()
     {
         if ($this->isNewRecord) {
@@ -1750,16 +1750,16 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     /**
-     * 通常の 'orders' リレーションを宣言
-     */
+    * 通常の 'orders' リレーションを宣言
+    */
     public function getOrders()
     {
         return $this->hasMany(Order::class, ['customer_id' => 'id']);
     }
 
     /**
-     * 集約データを提供する新しいリレーションを 'orders' を元にして宣言
-     */
+    * 集約データを提供する新しいリレーションを 'orders' を元にして宣言
+    */
     public function getOrdersAggregation()
     {
         return $this->getOrders()

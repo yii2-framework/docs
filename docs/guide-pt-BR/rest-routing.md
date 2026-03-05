@@ -9,12 +9,12 @@ Isto pode ser feito facilmente através da configuração do [componente de apli
 
 ```php
 'urlManager' => [
-   'enablePrettyUrl' => true,
-   'enableStrictParsing' => true,
-   'showScriptName' => false,
-   'rules' => [
-       ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-   ],
+  'enablePrettyUrl' => true,
+  'enableStrictParsing' => true,
+  'showScriptName' => false,
+  'rules' => [
+      ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+  ],
 ]
 ```
 
@@ -23,13 +23,13 @@ Por exemplo, o código acima é mais ou menos equivalente às seguintes regras:
 
 ```php
 [
-   'PUT,PATCH users/<id>' => 'user/update',
-   'DELETE users/<id>' => 'user/delete',
-   'GET,HEAD users/<id>' => 'user/view',
-   'POST users' => 'user/create',
-   'GET,HEAD users' => 'user/index',
-   'users/<id>' => 'user/options',
-   'users' => 'user/options',
+  'PUT,PATCH users/<id>' => 'user/update',
+  'DELETE users/<id>' => 'user/delete',
+  'GET,HEAD users/<id>' => 'user/view',
+  'POST users' => 'user/create',
+  'GET,HEAD users' => 'user/index',
+  'users/<id>' => 'user/options',
+  'users' => 'user/options',
 ]
 ```
 
@@ -49,9 +49,9 @@ Você pode configurar as opções `only` e `except` para listar explicitamente q
 
 ```php
 [
-   'class' => 'yii\rest\UrlRule',
-   'controller' => 'user',
-   'except' => ['delete', 'create', 'update'],
+  'class' => 'yii\rest\UrlRule',
+  'controller' => 'user',
+  'except' => ['delete', 'create', 'update'],
 ],
 ```
 
@@ -59,11 +59,11 @@ Você também pode configurar `patterns` ou `extraPatterns` para redefinir padr�
 
 ```php
 [
-   'class' => 'yii\rest\UrlRule',
-   'controller' => 'user',
-   'extraPatterns' => [
-       'GET search' => 'search',
-   ],
+  'class' => 'yii\rest\UrlRule',
+  'controller' => 'user',
+  'extraPatterns' => [
+      'GET search' => 'search',
+  ],
 ]
 ```
 
@@ -77,9 +77,7 @@ Caso a pluralização automática não encontre uma opção para a palavra reque
 
 ```php
 [
-   'class' => 'yii\rest\UrlRule',
-   'controller' => ['u' => 'user'],
+  'class' => 'yii\rest\UrlRule',
+  'controller' => ['u' => 'user'],
 ]
 ```
-
-

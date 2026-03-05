@@ -283,12 +283,12 @@ ____
 After configuring Composer to support Bower and NPM:
 
 1. Modify the `composer.json` file of your application or extension and list the package in the `require` entry.
-   You should use `bower-asset/PackageName` (for Bower packages) or `npm-asset/PackageName` (for NPM packages)
-   to refer to the library.
+  You should use `bower-asset/PackageName` (for Bower packages) or `npm-asset/PackageName` (for NPM packages)
+  to refer to the library.
 2. Run `composer update`
 3. Create an asset bundle class and list the JavaScript/CSS files that you plan to use in your application or extension.
-   You should specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property as `@bower/PackageName` or `@npm/PackageName`.
-   This is because Composer will install the Bower or NPM package in the directory corresponding to this alias.
+  You should specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property as `@bower/PackageName` or `@npm/PackageName`.
+  This is because Composer will install the Bower or NPM package in the directory corresponding to this alias.
 
 > Note: Some packages may put all their distributed files in a subdirectory. If this is the case, you should specify
   the subdirectory as the value of [[yii\web\AssetBundle::sourcePath|sourcePath]]. For example, [[yii\web\JqueryAsset]]
@@ -665,11 +665,11 @@ your existing application code.
 2. Divide these bundles into one or a few groups. Note that each bundle can only belong to a single group.
 3. Combine/compress the CSS files in each group into a single file. Do this similarly for the JavaScript files.
 4. Define a new asset bundle for each group:
-   * Set the [[yii\web\AssetBundle::css|css]] and [[yii\web\AssetBundle::js|js]] properties to be
-     the combined CSS and JavaScript files, respectively.
-   * Customize the asset bundles in each group by setting their [[yii\web\AssetBundle::css|css]] and 
-     [[yii\web\AssetBundle::js|js]] properties to be empty, and setting their [[yii\web\AssetBundle::depends|depends]]
-     property to be the new asset bundle created for the group.
+  * Set the [[yii\web\AssetBundle::css|css]] and [[yii\web\AssetBundle::js|js]] properties to be
+    the combined CSS and JavaScript files, respectively.
+  * Customize the asset bundles in each group by setting their [[yii\web\AssetBundle::css|css]] and 
+    [[yii\web\AssetBundle::js|js]] properties to be empty, and setting their [[yii\web\AssetBundle::depends|depends]]
+    property to be the new asset bundle created for the group.
 
 Using this approach, when you register an asset bundle in a view, it causes the automatic registration of
 the new asset bundle for the group that the original bundle belongs to. And as a result, the combined/compressed 

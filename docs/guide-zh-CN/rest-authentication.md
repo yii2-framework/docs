@@ -26,10 +26,10 @@ Yii 支持上述的认证方式，你也可很方便的创建新的认证方式�
 为你的 APIs 启用认证，做以下步骤：
 
 1. 配置 `user` 应用组件：
-   - 设置 [[yii\web\User::enableSession|enableSession]] 属性为 `false`。
-   - 设置 [[yii\web\User::loginUrl|loginUrl]] 属性为`null` 显示一个HTTP 403 错误而不是跳转到登录界面。
+  - 设置 [[yii\web\User::enableSession|enableSession]] 属性为 `false`。
+  - 设置 [[yii\web\User::loginUrl|loginUrl]] 属性为`null` 显示一个HTTP 403 错误而不是跳转到登录界面。
 2. 在你的REST 控制器类中配置`authenticator` 
-   行为来指定使用哪种认证方式
+  行为来指定使用哪种认证方式
 3. 在你的[[yii\web\User::identityClass|user identity class]] 类中实现 [[yii\web\IdentityInterface::findIdentityByAccessToken()]] 方法。
 
 步骤 1 不是必要的，但是推荐配置，因为 RESTful APIs 应为无状态的，

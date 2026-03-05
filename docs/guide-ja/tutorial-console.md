@@ -121,7 +121,7 @@ bash completion がインストールされていることを確認して下さ�
 
 補完スクリプトを `/etc/bash_completion.d/` に置いて下さい。
 
-     curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
+    curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
 
 一時的な利用の場合は、ファイルをカレント・ディレクトリに置いて、`source yii` でカレント・セッションに読み込みます。
 グローバルにインストールした場合は、ターミナルを再起動するか、`source ~/.bashrc` を実行して、有効化する必要があります。

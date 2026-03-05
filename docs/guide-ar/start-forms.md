@@ -160,7 +160,7 @@ use yii\helpers\Html;
 </ul>
 ```
 <p dir="rtl">
-   صفحة ال <code>entry</code> ستقوم بعرض ال HTML form. هذه الصفحة يجب أن يتم حفظها داخل المسار التالي: <code>views/site/entry.php</code>
+  صفحة ال <code>entry</code> ستقوم بعرض ال HTML form. هذه الصفحة يجب أن يتم حفظها داخل المسار التالي: <code>views/site/entry.php</code>
 </p>
 
 ```php

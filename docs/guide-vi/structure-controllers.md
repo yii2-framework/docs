@@ -356,7 +356,7 @@ Các tham số cho action sẽ được dùng như sau và tương ứng với c
 * `https://hostname/index.php?r=post/view&id=123`: biến `$id` sẽ nhận giá trị là
   `'123'`,  trong khi đó tham số `$version` nhận giá trị null vì không có đối số `version` được truyền lên.
 * `https://hostname/index.php?r=post/view&id=123&version=2`: biến `$id` và `$version` sẽ nhận giá trị tương ứng là
-   `'123'` và `'2'`.
+  `'123'` và `'2'`.
 * `https://hostname/index.php?r=post/view`: ngoại lệ [[yii\web\BadRequestHttpException]] sẽ được gửi ra
   vì tham số `$id` không được gửi lên.
 * `https://hostname/index.php?r=post/view&id[]=123`: xảy ra ngoại lệ [[yii\web\BadRequestHttpException]] lý do vì
@@ -412,21 +412,21 @@ dựa theo các yêu cầu tại [route](#routes). Controller sẽ được xử
 
 1. Phương thức [[yii\base\Controller::init()]] sẽ được gọi sau khi controller được khởi tạo và thiết lập các cấu hình.
 2. Controller sẽ tạo đối tượng action dựa trên các yêu cầu qua các định danh của action:
-   * Nếu định danh của action không được chỉ rõ , thì  [[yii\base\Controller::defaultAction|action mặc định]] sẽ được sử dụng.
-   * Nếu định danh của action được tìm thấy trong phương thức [[yii\base\Controller::actions()|action map]], thì một standalone action
-     sẽ được khởi tạo;
-   * Nếu định danh của action được tìm thấy và khớp với phương thức của action, thì một inline action sẽ được;
-   * Mặt khác hệ thống sẽ gửi ngoại lê [[yii\base\InvalidRouteException]] ra.
+  * Nếu định danh của action không được chỉ rõ , thì  [[yii\base\Controller::defaultAction|action mặc định]] sẽ được sử dụng.
+  * Nếu định danh của action được tìm thấy trong phương thức [[yii\base\Controller::actions()|action map]], thì một standalone action
+    sẽ được khởi tạo;
+  * Nếu định danh của action được tìm thấy và khớp với phương thức của action, thì một inline action sẽ được;
+  * Mặt khác hệ thống sẽ gửi ngoại lê [[yii\base\InvalidRouteException]] ra.
 3. Controller sẽ lần lượt được gọi tại phương thức `beforeAction()` trong ứng dụng, trong module (nếu controller
-   thuộc một module), và trong controller.
-   * Nếu một trong các phương thức không đợc gọi, các phần chưa được gọi trong phương thức `beforeAction()` sẽ được bỏ qua
-     và việc thực hiện action sẽ bị huỷ bỏ.
-   * Mặc định, mỗi phương thức `beforeAction()` sẽ được gán vào sự kiện `beforeAction` tới các action mà bạn cần xử lý.
+  thuộc một module), và trong controller.
+  * Nếu một trong các phương thức không đợc gọi, các phần chưa được gọi trong phương thức `beforeAction()` sẽ được bỏ qua
+    và việc thực hiện action sẽ bị huỷ bỏ.
+  * Mặc định, mỗi phương thức `beforeAction()` sẽ được gán vào sự kiện `beforeAction` tới các action mà bạn cần xử lý.
 4. Controller thực hiện chạy action.
-   * Các tham số của action sẽ được phân tích và gán từ các yêu cầu xử lý.
+  * Các tham số của action sẽ được phân tích và gán từ các yêu cầu xử lý.
 5. Controller sẽ thực hiện tuần tự gọi phương thức `afterAction()` trong Controller, module (nếu Controller
-   là module), và trong ứng dụng.
-   * Mặc định, mỗi phương thức `afterAction()` sẽ gọi tới một sự kiện `afterAction` tới các action mà bạn cần xử lý.
+  là module), và trong ứng dụng.
+  * Mặc định, mỗi phương thức `afterAction()` sẽ gọi tới một sự kiện `afterAction` tới các action mà bạn cần xử lý.
 6. Ứng dụng sẽ nhận kết quả từ các action và chuyển tới thành phần [response](runtime-responses.md).
 
 

@@ -414,21 +414,21 @@ to fulfill the request:
 
 1. The [[yii\base\Controller::init()]] method is called after the controller is created and configured.
 2. The controller creates an action object based on the requested action ID:
-   * If the action ID is not specified, the [[yii\base\Controller::defaultAction|default action ID]] will be used.
-   * If the action ID is found in the [[yii\base\Controller::actions()|action map]], a standalone action
-     will be created;
-   * If the action ID is found to match an action method, an inline action will be created;
-   * Otherwise an [[yii\base\InvalidRouteException]] exception will be thrown.
+  * If the action ID is not specified, the [[yii\base\Controller::defaultAction|default action ID]] will be used.
+  * If the action ID is found in the [[yii\base\Controller::actions()|action map]], a standalone action
+    will be created;
+  * If the action ID is found to match an action method, an inline action will be created;
+  * Otherwise an [[yii\base\InvalidRouteException]] exception will be thrown.
 3. The controller sequentially calls the `beforeAction()` method of the application, the module (if the controller
-   belongs to a module), and the controller.
-   * If one of the calls returns `false`, the rest of the uncalled `beforeAction()` methods will be skipped and the
-     action execution will be cancelled.
-   * By default, each `beforeAction()` method call will trigger a `beforeAction` event to which you can attach a handler.
+  belongs to a module), and the controller.
+  * If one of the calls returns `false`, the rest of the uncalled `beforeAction()` methods will be skipped and the
+    action execution will be cancelled.
+  * By default, each `beforeAction()` method call will trigger a `beforeAction` event to which you can attach a handler.
 4. The controller runs the action.
-   * The action parameters will be analyzed and populated from the request data.
+  * The action parameters will be analyzed and populated from the request data.
 5. The controller sequentially calls the `afterAction()` method of the controller, the module (if the controller
-   belongs to a module), and the application.
-   * By default, each `afterAction()` method call will trigger an `afterAction` event to which you can attach a handler.
+  belongs to a module), and the application.
+  * By default, each `afterAction()` method call will trigger an `afterAction` event to which you can attach a handler.
 6. The application will take the action result and assign it to the [response](runtime-responses.md).
 
 

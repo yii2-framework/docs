@@ -218,7 +218,7 @@ class MyBootstrapClass implements BootstrapInterface
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function () {
-             // do something here
+            // do something here
         });
     }
 }

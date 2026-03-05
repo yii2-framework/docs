@@ -37,4 +37,3 @@ public function behaviors()
 
 你可以在使用页面缓存的同时，
 使用[片段缓存](caching-fragment.md)和[动态内容](caching-fragment.md#dynamic-content)。
-

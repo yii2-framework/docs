@@ -262,13 +262,13 @@ Se sua aplicação ou extensão estiver usando um destes pacotes, é recomendado
 você siga os passos a seguir para gerenciar os assets na biblioteca:
 
 1. Modifique o arquivo de sua aplicação ou extensão e informe os pacotes na 
-   entrada `require`. Você deve usar `bower-asset/PackageName` (para pacotes Bower) 
-   ou `npm-asset/PackageName` (para pacotes NPM) para referenciar à biblioteca.
+  entrada `require`. Você deve usar `bower-asset/PackageName` (para pacotes Bower) 
+  ou `npm-asset/PackageName` (para pacotes NPM) para referenciar à biblioteca.
 2. Crie uma classe asset bundle e informe os arquivos JavaScript/CSS que você 
-   pretende usar em sua aplicação ou extensão. Você deve especificar a propriedade 
-   [[yii\web\AssetBundle::sourcePath|sourcePath]] como `@bower/PackageName` ou 
-   `@npm/PackageName`. Isto porque o Composer irá instalar os pacotes Bower ou 
-   NPM no diretório correspondente a estas alias.
+  pretende usar em sua aplicação ou extensão. Você deve especificar a propriedade 
+  [[yii\web\AssetBundle::sourcePath|sourcePath]] como `@bower/PackageName` ou 
+  `@npm/PackageName`. Isto porque o Composer irá instalar os pacotes Bower ou 
+  NPM no diretório correspondente a estas alias.
 
 > Observação: Alguns pacotes podem colocar todos os seus arquivos distribuídos 
   em um subdiretório. Se este for o caso, você deve especificar o subdiretório 
@@ -415,7 +415,7 @@ chave a chave `jquery.js`.
 
 > Observação: Apenas os assets especificados usando caminhos relativos estão  
   sujeitos ao mapeamento de assets. O caminho dos assets devem ser URLs absolutas 
-   ou caminhos relativos ao caminho da propriedade [[yii\web\AssetManager::basePath]].
+  ou caminhos relativos ao caminho da propriedade [[yii\web\AssetManager::basePath]].
 
 
 ### Publicação de Asset <span id="asset-publishing"></span>
@@ -603,19 +603,19 @@ A seguir, apresentaremos uma abordagem para combinar e comprimir arquivos de
 assets sem precisar modificar o código da aplicação existente.
 
 1. Localize todos os asset bundles em sua aplicação que você deseja combinar e 
-   comprimir.
+  comprimir.
 2. Divida estes bundles em um ou alguns grupos. Observe que cada bundle pode 
-   apenas pertencer a um único grupo.
+  apenas pertencer a um único grupo.
 3. Combinar/Comprimir os arquivos CSS de cada grupo em um único arquivo. Faça 
-   isto de forma semelhante para os arquivos JavaScript.
+  isto de forma semelhante para os arquivos JavaScript.
 4. Defina um novo asset bundle para cada grupo:
-   * Defina as propriedade [[yii\web\AssetBundle::css|css]] e 
-     [[yii\web\AssetBundle::js|js]] com os arquivos CSS e JavaScript combinados, 
-     respectivamente.
-   * Personalize os asset bundles de cada grupo definindo as suas propriedades 
-     [[yii\web\AssetBundle::css|css]] e [[yii\web\AssetBundle::js|js]] como vazias 
-     e definindo a sua propriedade [[yii\web\AssetBundle::depends|depends]] para 
-     ser o novo asset bundle criado para o grupo.
+  * Defina as propriedade [[yii\web\AssetBundle::css|css]] e 
+    [[yii\web\AssetBundle::js|js]] com os arquivos CSS e JavaScript combinados, 
+    respectivamente.
+  * Personalize os asset bundles de cada grupo definindo as suas propriedades 
+    [[yii\web\AssetBundle::css|css]] e [[yii\web\AssetBundle::js|js]] como vazias 
+    e definindo a sua propriedade [[yii\web\AssetBundle::depends|depends]] para 
+    ser o novo asset bundle criado para o grupo.
 
 Usando esta abordagem, quando você registrar um asset bundle em uma view (visão), 
 fará com que registre automaticamente o novo asset bundle do grupo que o bundle 

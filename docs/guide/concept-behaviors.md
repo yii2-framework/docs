@@ -357,4 +357,3 @@ properties or methods.
 Traits are much more efficient than behaviors as behaviors are objects that take both time and memory.
 
 IDEs are more friendly to traits as they are a native language construct.
-

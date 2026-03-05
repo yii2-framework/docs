@@ -96,21 +96,21 @@ criar o módulo (se existir), o controller (controlador) e a ação:
 
 1. Define a aplicação como o módulo atual.
 2. Verifica se o [[yii\base\Module::controllerMap|mapa do controller (controlador)]] 
-   do módulo contém o ID atual. Caso exista, um objeto do controller (controlador) 
-   será criado de acordo com a configuração do controller (controlador) encontrado 
-   no mapa e a etapa 3 e 4 não serão executadas.   
+  do módulo contém o ID atual. Caso exista, um objeto do controller (controlador) 
+  será criado de acordo com a configuração do controller (controlador) encontrado 
+  no mapa e a etapa 3 e 4 não serão executadas.   
 3. Verifica se o ID referência a um módulo listado na propriedade 
-   [[yii\base\Module::modules|modules]] do módulo atual. Caso exista, um módulo 
-   será criado de acordo com as configurações encontradas na lista e a etapa 2 
-   será executada como etapa seguinte do processo, no âmbito de usar o contexto 
-   do módulo recém-criado.
+  [[yii\base\Module::modules|modules]] do módulo atual. Caso exista, um módulo 
+  será criado de acordo com as configurações encontradas na lista e a etapa 2 
+  será executada como etapa seguinte do processo, no âmbito de usar o contexto 
+  do módulo recém-criado.
 4. Trata o ID como um ID do controller (controlador) e cria um objeto do controller 
-   (controlador). Siga para a próxima etapa, como parte restante do processo.
+  (controlador). Siga para a próxima etapa, como parte restante do processo.
 5. O controller (controlador) procura o ID atual em seu 
-   [[yii\base\Controller::actions()|mapa de ações]]. Caso exista, será criado uma 
-   ação de acordo com a configuração encontrada no mapa. Caso contrário, o 
-   controller (controlador) tentará criar uma ação inline que é definida por um 
-   método da ação correspondente ao ID atual.
+  [[yii\base\Controller::actions()|mapa de ações]]. Caso exista, será criado uma 
+  ação de acordo com a configuração encontrada no mapa. Caso contrário, o 
+  controller (controlador) tentará criar uma ação inline que é definida por um 
+  método da ação correspondente ao ID atual.
 
 Nas etapas acima, se ocorrer qualquer erro, uma exceção [[yii\web\NotFoundHttpException]] 
 será lançada, indicando a falha no processo de roteamento.

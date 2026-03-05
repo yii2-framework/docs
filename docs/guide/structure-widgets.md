@@ -219,4 +219,3 @@ which can be utilized to solve the problem.
 When a widget contains view code only, it is very similar to a [view](structure-views.md). In fact, in this case,
 their only difference is that a widget is a redistributable class, while a view is just a plain PHP script
 that you would prefer to keep within your application.
-

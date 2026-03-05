@@ -92,16 +92,16 @@ matches. This should be an array of controller IDs. Each controller ID is prefix
 The comparison is case-sensitive. If this option is empty or not set, it means the rule applies to all controllers.
 
  * [[yii\filters\AccessRule::roles|roles]]: specifies which user roles that this rule matches.
-   Two special roles are recognized, and they are checked via [[yii\web\User::isGuest]]:
+  Two special roles are recognized, and they are checked via [[yii\web\User::isGuest]]:
 
-     - `?`: matches a guest user (not authenticated yet)
-     - `@`: matches an authenticated user
+    - `?`: matches a guest user (not authenticated yet)
+    - `@`: matches an authenticated user
 
-   Using other role names will trigger the invocation of [[yii\web\User::can()]], which requires enabling RBAC
-   (to be described in the next subsection). If this option is empty or not set, it means this rule applies to all roles.
+  Using other role names will trigger the invocation of [[yii\web\User::can()]], which requires enabling RBAC
+  (to be described in the next subsection). If this option is empty or not set, it means this rule applies to all roles.
 
  * [[yii\filters\AccessRule::roleParams|roleParams]]: specifies the parameters that will be passed to [[yii\web\User::can()]].
-   See the section below describing RBAC rules to see how it can be used. If this option is empty or not set, then no parameters will be passed.
+  See the section below describing RBAC rules to see how it can be used. If this option is empty or not set, then no parameters will be passed.
 
  * [[yii\filters\AccessRule::ips|ips]]: specifies which [[yii\web\Request::userIP|client IP addresses]] this rule matches.
 An IP address can contain the wildcard `*` at the end so that it matches IP addresses with the same prefix.
@@ -452,11 +452,11 @@ class AuthorRule extends Rule
     public $name = 'isAuthor';
 
     /**
-     * @param string|int $user the user ID.
-     * @param Item $item the role or permission that this rule is associated with
-     * @param array $params parameters passed to ManagerInterface::checkAccess().
-     * @return bool a value indicating whether the rule permits the role or permission it is associated with.
-     */
+    * @param string|int $user the user ID.
+    * @param Item $item the role or permission that this rule is associated with
+    * @param array $params parameters passed to ManagerInterface::checkAccess().
+    * @return bool a value indicating whether the rule permits the role or permission it is associated with.
+    */
     public function execute($user, $item, $params)
     {
         return isset($params['post']) ? $params['post']->createdBy == $user : false;

@@ -87,11 +87,11 @@ O diagrama a seguir demonstra como uma aplicação trata uma requisição.
 
 1. Um usuário faz uma requisição ao [script de entrada](structure-entry-scripts.md) `web/index.php`.
 2. O script de entrada carrega a [configuração](concept-configurations.md) da
-   aplicação e cria uma instância de [aplicação](structure-applications.md) para
-   tratar a requisição.
+  aplicação e cria uma instância de [aplicação](structure-applications.md) para
+  tratar a requisição.
 3. A aplicação resolve ("traduz") a [rota](runtime-routing.md) solicitada com a ajuda do componente [request](runtime-requests.md) da aplicação.
 4. A aplicação cria uma instância de um [controller](structure-controllers.md)
-   para tratar a requisição.
+  para tratar a requisição.
 5. O controller cria uma instância de uma [action](structure-controllers.md) (ação) e aplica os filtros para a ação.
 6. Se qualquer filtro falhar, a ação é cancelada.
 7. Se todos os filtros passarem, a ação é executada.
@@ -100,4 +100,3 @@ O diagrama a seguir demonstra como uma aplicação trata uma requisição.
 10. O resultado renderizado é retornado pelo componente
     [response](runtime-responses.md) (resposta) da aplicação.
 11. O componente response envia o resultado renderizado para o navegador do usuário.
-

@@ -62,12 +62,12 @@ Việc cài đặt Yii từ một tập tin lưu trữ bao gồm ba bước:
 1. Tải gói cài đặt từ [yiiframework.com](https://www.yiiframework.com/download/).
 2. Giải nén file tải về vào một thư mục Web của ứng dụng cần chạy.
 3. Sửa đồi file `config/web.php`  bởi nhập thông tin secret key `cookieValidationKey` ở mục cấu hình
-   (này được thực hiện tự động nếu bạn đang cài đặt Yii sử dụng Composer):
+  (này được thực hiện tự động nếu bạn đang cài đặt Yii sử dụng Composer):
 
-   ```php
-   // !!! chèn một secret key trong phần sau (nếu rỗng) - Việc này là cần thiết để xác thực cookie trong ứng dụng
-   'cookieValidationKey' => 'Nhập secret key tuỳ chọn vào đây',
-   ```
+  ```php
+  // !!! chèn một secret key trong phần sau (nếu rỗng) - Việc này là cần thiết để xác thực cookie trong ứng dụng
+  'cookieValidationKey' => 'Nhập secret key tuỳ chọn vào đây',
+  ```
 
 
 Các thiết lập cài đặt khác <span id="other-installation-options"></span>

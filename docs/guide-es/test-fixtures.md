@@ -232,9 +232,9 @@ de correr tests de unidad relacionados a BD:
 
 1. Usa la herramienta `yii migrate` para actualizar tu base de datos de prueba a la última versión;
 2. Corre el caso de test:
-   - Carga los fixtures: limpia las tablas de la BD relevantes y cargala con los datos de los fixtures;
-   - Realiza el test en sí;
-   - Descarga los fixtures.
+  - Carga los fixtures: limpia las tablas de la BD relevantes y cargala con los datos de los fixtures;
+  - Realiza el test en sí;
+  - Descarga los fixtures.
 3. Repite el Paso 2 hasta que todos los tests terminen.
 
 

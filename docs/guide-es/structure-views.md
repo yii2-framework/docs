@@ -724,4 +724,3 @@ Puedes utilizar estas técnicas para alcanzar dicha meta:
   utilizando los métodos de renderización antes descritos.
 * crea y utiliza [widgets](structure-widgets.md) como bloques de construcción de la vista.
 * crea y utilizar helpers para transformar y dar formato a los datos en la vista.
-

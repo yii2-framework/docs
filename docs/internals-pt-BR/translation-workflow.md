@@ -15,14 +15,14 @@ para o usuário final, tais como erros de validação.
 Os passos para iniciar a tradução de mensagens são:
 
 1. Com o `console` entre na pasta `yii2/framework`  e execute o seguinte comando:
-   `./yii message/extract @yii/messages/config.php --languages=pt-BR`.
+  `./yii message/extract @yii/messages/config.php --languages=pt-BR`.
 2. As mensagens a serem traduzidas encontram-se no seguinte caminho:
-   `framework/messages/pt-BR/yii.php`. Certifique-se de salvar o arquivo com a
-   codificação UTF-8 (Plain).
+  `framework/messages/pt-BR/yii.php`. Certifique-se de salvar o arquivo com a
+  codificação UTF-8 (Plain).
 3. Após realizar as devidas traduções o passo seguinte é enviar as suas
-   modificações para o respositório do Yii no Github.
-   [Veja aqui](https://github.com/yiisoft/yii2/blob/master/docs/internals/git-workflow.md)
-   os passos necessários para o envio dos arquivos.
+  modificações para o respositório do Yii no Github.
+  [Veja aqui](https://github.com/yiisoft/yii2/blob/master/docs/internals/git-workflow.md)
+  os passos necessários para o envio dos arquivos.
 
 Para manter as traduções sempre atualizadas, certifique-se que seu fork do Yii
 esteja com a última versão. Em seguida, basta executar o comando

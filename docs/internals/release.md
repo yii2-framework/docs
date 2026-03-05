@@ -82,4 +82,3 @@ before.
 - delete `2.1` branch
 
 Now check out `master` and run the release command with the `--version=2.1.0` option. 
-

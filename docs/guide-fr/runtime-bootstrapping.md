@@ -11,9 +11,9 @@ Dans le constructeur de l'application, le travail d'amorçage suivant est effect
 2. Le [[yii\base\Application::errorHandler|gestionnaire d'erreurs]] est enregistré.
 3. Les propriétés qui utilisent la configuration de l'application sont initialisées.
 4. La méthode [[yii\base\Application::init()|init()]] est appelée. À son tour elle appelle la méthode [[yii\base\Application::bootstrap()|bootstrap()]] pour exécuter les composants d'amorçage.
-   - Le fichier de manifeste des extensions `vendor/yiisoft/extensions.php` est inclus.
-   - Les[composants d'amorçage](structure-extensions.md#bootstrapping-classes) déclarés par les extensions sont créés et exécutés
-   - Les [composants d'application(structure-application-components.md) et/ou les [modules](structure-modules.md) déclarés dans la [propriété bootstrap](structure-applications.md#bootstrap) de l'application sont créés et exécutés.
+  - Le fichier de manifeste des extensions `vendor/yiisoft/extensions.php` est inclus.
+  - Les[composants d'amorçage](structure-extensions.md#bootstrapping-classes) déclarés par les extensions sont créés et exécutés
+  - Les [composants d'application(structure-application-components.md) et/ou les [modules](structure-modules.md) déclarés dans la [propriété bootstrap](structure-applications.md#bootstrap) de l'application sont créés et exécutés.
 
 Comme le travail d'amorçage doit être fait avant *chacune* des requêtes, il est très important de conserver ce processus aussi léger et optimisé que possible. 
 

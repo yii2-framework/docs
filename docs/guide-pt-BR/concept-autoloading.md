@@ -63,4 +63,3 @@ O autoloader do Yii é capaz de realizar autoloading de classes de [extensões](
 [documentação do Composer](https://getcomposer.org/doc/04-schema.md#autoload) para mais detalhes sobre especificação de `autoload`.
 
 No caso de você não usar o autoloader do Yii, o autoloader do Composer ainda pode realizar o autoload das classes de extensão para você.
-

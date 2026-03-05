@@ -724,4 +724,3 @@ http://localhost/index.php?r=site/page&view=about
   小视图渲染并组装成大视图；
 * 创建并使用 [小部件](structure-widgets.md) 作为视图的数据块；
 * 创建并使用助手类在视图中转换和格式化数据。
-

@@ -721,4 +721,3 @@ Bạn có thể tham khảo các thủ thuật sau để đạt việc quản l�
 bằng các phương thức xuất bản mà chúng tôi đã mô tả.
 * tạo và dùng các [widgets](structure-widgets.md) như việc xây dựng các khối của view.
 * tạo vào dung các lớp helper classes để định dạng và chuyển đổi các nội dung trong view.
-

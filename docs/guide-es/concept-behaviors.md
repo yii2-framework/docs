@@ -337,4 +337,3 @@ Los Traits son mucho más eficientes que los comportamientos debido a que los ú
 memoria.
 
 Los IDEs (Programas de desarrollo) son más amigables con traits ya que son una construcción del lenguaje nativo.
-

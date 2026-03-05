@@ -81,16 +81,16 @@ $url = Url::to(['post/view', 'id' => 100]);
 
 1. 设置应用系统作为当前的模块。
 2. 检查当前模块中的[[yii\base\Module::controllerMap|控制器映射]]是否存在当前ID。
-   如果存在，根据控制器映射中的定义创建一个控制器实例，
-   跳到步骤5处理路由剩下的部分。
+  如果存在，根据控制器映射中的定义创建一个控制器实例，
+  跳到步骤5处理路由剩下的部分。
 3. 检查ID是否为当前模块下[[yii\base\Module::modules|modules]]定义的子模块
-   如果是，创建对应子模块，
-   跳到步骤2使用刚创建的子模块处理路由下一部分。
+  如果是，创建对应子模块，
+  跳到步骤2使用刚创建的子模块处理路由下一部分。
 4. 将ID作为一个[控制器ID](structure-controllers.md#controller-ids)并创建一个控制器实例，
-   并用来处理路由剩下的部分。
+  并用来处理路由剩下的部分。
 5. 控制器在自己的[[yii\base\Controller::actions()|动作映射]]中查找当前ID。
-   如果找到，根据映射中的定义创建一个动作。
-   如果没找到，控制器将尝试根据[动作ID](structure-controllers.md#action-ids)定义的动作方法创建一个行内动作。
+  如果找到，根据映射中的定义创建一个动作。
+  如果没找到，控制器将尝试根据[动作ID](structure-controllers.md#action-ids)定义的动作方法创建一个行内动作。
 
 在上面的步骤中，如果出现任何错误，系统将抛出一个[[yii\web\NotFoundHttpException]]异常，
 表示路由处理程序出现的错误信息。

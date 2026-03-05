@@ -49,7 +49,7 @@ return [
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
-       ],
+      ],
     ],
 ];
 ```

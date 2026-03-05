@@ -19,7 +19,7 @@ A assinatura de um manipulador de eventos é a seguinte:
 
 ```php
 function ($event) {
-   // $event is an object of yii\base\Event or a child class
+  // $event is an object of yii\base\Event or a child class
 }
 ```
 
@@ -49,7 +49,7 @@ $foo->on(Foo::EVENT_HELLO, ['app\components\Bar', 'methodName']);
 
 // esse manipulador é uma função anônima
 $foo->on(Foo::EVENT_HELLO, function ($event) {
-   // Código ...
+  // Código ...
 });
 ```
 
@@ -64,7 +64,7 @@ Os dados serão disponibilizados para o manipulador quando o evento for disparad
 $foo->on(Foo::EVENT_HELLO, 'function_name', 'abc');
 
 function function_name($event) {
-   echo $event->data;
+  echo $event->data;
 }
 ```
 
@@ -76,7 +76,7 @@ Você pode anexar um ou mais manipuladores para um único evento. Quando o event
 
 ```php
 $foo->on(Foo::EVENT_HELLO, function ($event) {
-   $event->handled = true;
+  $event->handled = true;
 });
 ```
 
@@ -88,7 +88,7 @@ Para inserir um novo manipulador de evento no início da fila de modo a ser cham
 
 ```php
 $foo->on(Foo::EVENT_HELLO, function ($event) {
-   // ...
+  // ...
 }, $data, false);
 ```
 
@@ -106,12 +106,12 @@ use yii\base\Event;
 
 class Foo extends Component
 {
-   const EVENT_HELLO = 'hello';
+  const EVENT_HELLO = 'hello';
 
-   public function bar()
-   {
-       $this->trigger(self::EVENT_HELLO);
-   }
+  public function bar()
+  {
+      $this->trigger(self::EVENT_HELLO);
+  }
 }
 ```
 
@@ -129,21 +129,21 @@ use yii\base\Event;
 
 class MessageEvent extends Event
 {
-   public $message;
+  public $message;
 }
 
 class Mailer extends Component
 {
-   const EVENT_MESSAGE_SENT = 'messageSent';
+  const EVENT_MESSAGE_SENT = 'messageSent';
 
-   public function send($message)
-   {
-       // ...sending $message...
+  public function send($message)
+  {
+      // ...sending $message...
 
-       $event = new MessageEvent;
-       $event->message = $message;
-       $this->trigger(self::EVENT_MESSAGE_SENT, $event);
-   }
+      $event = new MessageEvent;
+      $event->message = $message;
+      $this->trigger(self::EVENT_MESSAGE_SENT, $event);
+  }
 }
 ```
 
@@ -192,7 +192,7 @@ use yii\base\Event;
 use yii\db\ActiveRecord;
 
 Event::on(ActiveRecord::class, ActiveRecord::EVENT_AFTER_INSERT, function ($event) {
-   Yii::debug(get_class($event->sender) . ' is inserted');
+  Yii::debug(get_class($event->sender) . ' is inserted');
 });
 ```
 
@@ -206,7 +206,7 @@ Você pode disparar um evento de *nível de classe* chamando o método estático
 use yii\base\Event;
 
 Event::on(Foo::class, Foo::EVENT_HELLO, function ($event) {
-   var_dump($event->sender);  // displays "null"
+  var_dump($event->sender);  // displays "null"
 });
 
 Event::trigger(Foo::class, Foo::EVENT_HELLO);
@@ -241,7 +241,7 @@ use yii\base\Event;
 use app\components\Foo;
 
 Yii::$app->on('bar', function ($event) {
-   echo get_class($event->sender);  // Mostra na tela "app\components\Foo"
+  echo get_class($event->sender);  // Mostra na tela "app\components\Foo"
 });
 
 Yii::$app->trigger('bar', new Event(['sender' => new Foo]));

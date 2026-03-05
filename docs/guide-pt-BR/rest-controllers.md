@@ -25,7 +25,7 @@ Ao criar uma nova classe de controller, uma convenção na nomenclatura da class
 ```php
 public function actionView($id)
 {
-   return User::findOne($id);
+  return User::findOne($id);
 }
 ```
 
@@ -49,11 +49,11 @@ use yii\filters\auth\HttpBasicAuth;
 
 public function behaviors()
 {
-   $behaviors = parent::behaviors();
-   $behaviors['authenticator'] = [
-       'class' => HttpBasicAuth::class,
-   ];
-   return $behaviors;
+  $behaviors = parent::behaviors();
+  $behaviors['authenticator'] = [
+      'class' => HttpBasicAuth::class,
+  ];
+  return $behaviors;
 }
 ```
 
@@ -79,20 +79,20 @@ Todas essas ações são declaradas através do método [[yii\rest\ActiveControl
 ```php
 public function actions()
 {
-   $actions = parent::actions();
+  $actions = parent::actions();
 
-   // desabilita as ações "delete" e "create"
-   unset($actions['delete'], $actions['create']);
+  // desabilita as ações "delete" e "create"
+  unset($actions['delete'], $actions['create']);
 
-   // customiza a preparação do  data provider com o método "prepareDataProvider()"
-   $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+  // customiza a preparação do  data provider com o método "prepareDataProvider()"
+  $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
 
-   return $actions;
+  return $actions;
 }
 
 public function prepareDataProvider()
 {
-   // preparar e retornar um data provider para a ação "index"
+  // preparar e retornar um data provider para a ação "index"
 }
 ```
 
@@ -118,9 +118,9 @@ Ao disponibilizar recursos por meio de APIs RESTful, muitas vezes você precisa 
 */
 public function checkAccess($action, $model = null, $params = [])
 {
-   // verifica se o usuário pode acessar $action and $model
-   // lança a ForbiddenHttpException se o acesso for negado
-   if ($action === 'update' || $action === 'delete') {
+  // verifica se o usuário pode acessar $action and $model
+  // lança a ForbiddenHttpException se o acesso for negado
+  if ($action === 'update' || $action === 'delete') {
         if ($model->author_id !== \Yii::$app->user->id)
             throw new \yii\web\ForbiddenHttpException(sprintf('You can only %s articles that you\'ve created.', $action));
     }
@@ -130,4 +130,3 @@ public function checkAccess($action, $model = null, $params = [])
 O método `checkAccess()` será chamado pelas ações padrões do [[yii\rest\ActiveController]]. Se você criar novas ações e também desejar executar a verificação de acesso, deve chamar esse método explicitamente nas novas ações.
 
 > Dica: Você pode implementar `checkAccess()` usando o [componente de Role-Based Access Control (RBAC)](security-authorization.md).
-

@@ -15,7 +15,7 @@ Los siguientes pasos muestran cómo una migración puede ser utilizada por un eq
 2. Tim hace un commit con la nueva migración al sistema de control de versiones (por ej. Git, Mercurial).
 3. Doug actualiza su repositorio desde el sistema de control de versiones y recibe la nueva migración.
 4. Doug aplica dicha migración a su base de datos local de desarrollo, de ese modo sincronizando su base de datos
-   y reflejando los cambios que hizo Tim.
+  y reflejando los cambios que hizo Tim.
 
 Los siguientes pasos muestran cómo hacer una puesta en producción con una migración de base de datos:
 
@@ -204,8 +204,8 @@ esto genera
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -214,8 +214,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -238,8 +238,8 @@ genera
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -250,8 +250,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -275,8 +275,8 @@ genera
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -287,8 +287,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -320,8 +320,8 @@ genera
 class m160328_040430_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -368,8 +368,8 @@ class m160328_040430_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         // drops foreign key for table `user`
@@ -522,8 +522,8 @@ genera
 class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post_tag', [
@@ -569,8 +569,8 @@ class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migra
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         // drops foreign key for table `post`

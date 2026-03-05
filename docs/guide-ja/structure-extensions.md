@@ -101,11 +101,11 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 以下は、エクステンションを Composer のパッケージとして作成するために踏む基本的なステップです。
 
 1. エクステンションのためのプロジェクトを作成して、[github.com](https://github.com) などの VCS レポジトリ上でホストします。
-   エクステンションに関する開発と保守の作業はこのレポジトリ上でしなければなりません。
+  エクステンションに関する開発と保守の作業はこのレポジトリ上でしなければなりません。
 2. プロジェクトのルート・ディレクトリに、Composer によって要求される `composer.json` という名前のファイルを作成します。
-   詳細については、次の項を参照してください。
+  詳細については、次の項を参照してください。
 3. エクステンションを [Packagist](https://packagist.org/) などの Composer レポジトリに登録します。
-   そうすると、他のユーザがエクステンションを見つけて Composer を使ってインストールすることが出来るようになります。
+  そうすると、他のユーザがエクステンションを見つけて Composer を使ってインストールすることが出来るようになります。
 
 
 ### `composer.json` <span id="composer-json"></span>
@@ -271,7 +271,7 @@ class MyBootstrapClass implements BootstrapInterface
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function () {
-             // ここで何かをする
+            // ここで何かをする
         });
     }
 }

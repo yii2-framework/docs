@@ -140,4 +140,3 @@ for explanations about these values.
 Search engine bots tend to respect cache headers. Since some crawlers have a limit on how many pages
 per domain they process within a certain time span, introducing caching headers may help indexing your
 site as they reduce the number of pages that need to be processed.
-

@@ -82,7 +82,7 @@ class AppAsset extends AssetBundle
     例えば、`https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js` や
     `//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js` など。
 * [[yii\web\AssetBundle::depends|depends]]: このバンドルが依存しているアセット・バンドルの名前をリストする配列です
-   (バンドルの依存関係については、すぐ後で説明します)。
+  (バンドルの依存関係については、すぐ後で説明します)。
 * [[yii\web\AssetBundle::jsOptions|jsOptions]]: このバンドルにある *全て* の JavaScript ファイルについて、
   それを登録するときに呼ばれる [[yii\web\View::registerJsFile()]] メソッドに渡されるオプションを指定します。
 * [[yii\web\AssetBundle::cssOptions|cssOptions]]: このバンドルにある *全て* の CSS ファイルについて、
@@ -283,12 +283,12 @@ ____
 Composer で Bower と NPM をサポートできるように構成した後は:
 
 1. アプリケーションまたはエクステンションの `composer.json` ファイルを修正して、パッケージを `require` のエントリに入れます。
-   ライブラリを参照するのに、`bower-asset/PackageName` (Bower パッケージ) または `npm-asset/PackageName` (NPM パッケージ)
-   を使わなければなりません。
+  ライブラリを参照するのに、`bower-asset/PackageName` (Bower パッケージ) または `npm-asset/PackageName` (NPM パッケージ)
+  を使わなければなりません。
 2. `composer update` を実行します。
 3. アセット・バンドル・クラスを作成して、アプリケーションまたはエクステンションで使う予定の JavaScript/CSS ファイルをリストに挙げます。
-   [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティは、`@bower/PackageName` または `@npm/PackageName` としなければなりません。
-   これは、Composer が Bower または NPM パッケージを、このエイリアスに対応するディレクトリにインストールするためです。
+  [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティは、`@bower/PackageName` または `@npm/PackageName` としなければなりません。
+  これは、Composer が Bower または NPM パッケージを、このエイリアスに対応するディレクトリにインストールするためです。
 
 > Note: パッケージの中には、全ての配布ファイルをサブ・ディレクトリに置くものがあります。
   その場合には、そのサブ・ディレクトリを [[yii\web\AssetBundle::sourcePath|sourcePath]] の値として指定しなければなりません。
@@ -665,11 +665,11 @@ HTTP リクエストの数とこれらのファイルの全体としてのダウ
 2. これらのバンドルを一個か数個のグループにまとめる。どのバンドルも一つのグループにしか属することが出来ないことに注意。
 3. 各グループの CSS ファイルを一つのファイルに結合/圧縮する。JavaScript ファイルに対しても同様にこれを行う。
 4. 各グループに対して新しいアセット・バンドルを定義する。
-   * [[yii\web\AssetBundle::css|css]] と [[yii\web\AssetBundle::js|js]] のプロパティに、
-     それぞれ、結合された CSS ファイルと JavaScript ファイルをセットする。
-   * 各グループに属する元のアセット・バンドルをカスタマイズして、[[yii\web\AssetBundle::css|css]] と
-     [[yii\web\AssetBundle::js|js]] のプロパティを空にし、[[yii\web\AssetBundle::depends|depends]]
-     プロパティにグループのために作られた新しいバンドルを指定する。
+  * [[yii\web\AssetBundle::css|css]] と [[yii\web\AssetBundle::js|js]] のプロパティに、
+    それぞれ、結合された CSS ファイルと JavaScript ファイルをセットする。
+  * 各グループに属する元のアセット・バンドルをカスタマイズして、[[yii\web\AssetBundle::css|css]] と
+    [[yii\web\AssetBundle::js|js]] のプロパティを空にし、[[yii\web\AssetBundle::depends|depends]]
+    プロパティにグループのために作られた新しいバンドルを指定する。
 
 この方法を使うと、ビューでアセット・バンドルを登録したときに、
 元のバンドルが属するグループのための新しいアセット・バンドルが自動的に登録されるようになります。

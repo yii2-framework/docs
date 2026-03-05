@@ -121,7 +121,7 @@ Make sure bash completion is installed. For most of the installations it is avai
 
 Place the completion script in `/etc/bash_completion.d/`:
 
-     curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
+    curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
 
 For temporary usage you can put the file into the current directory and include it in the current session via `source yii`.
 If globally installed you may need to restart the terminal or `source ~/.bashrc` to activate it.

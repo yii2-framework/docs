@@ -21,11 +21,11 @@ Você pode configurá-lo na configuração da aplicação da seguinte forma:
 
 ```php
 return [
-   'components' => [
-       'errorHandler' => [
-           'maxSourceLines' => 20,
-       ],
-   ],
+  'components' => [
+      'errorHandler' => [
+          'maxSourceLines' => 20,
+      ],
+  ],
 ];
 ```
 
@@ -38,9 +38,9 @@ use Yii;
 use yii\base\ErrorException;
 
 try {
-   10/0;
+  10/0;
 } catch (ErrorException $e) {
-   Yii::warning("Division by zero.");
+  Yii::warning("Division by zero.");
 }
 
 // Continua a execução...
@@ -76,11 +76,11 @@ como a seguir:
 
 ```php
 return [
-   'components' => [
-       'errorHandler' => [
-           'errorAction' => 'site/error',
-       ],
-   ]
+  'components' => [
+      'errorHandler' => [
+          'errorAction' => 'site/error',
+      ],
+  ]
 ];
 ```
 
@@ -96,14 +96,14 @@ use yii\web\Controller;
 
 class SiteController extends Controller
 {
-   public function actions()
-   {
-       return [
-           'error' => [
-               'class' => 'yii\web\ErrorAction',
-           ],
-       ];
-   }
+  public function actions()
+  {
+      return [
+          'error' => [
+              'class' => 'yii\web\ErrorAction',
+          ],
+      ];
+  }
 }
 ```
 
@@ -114,10 +114,10 @@ Além de usar [[yii\web\ErrorAction]], você também pode definir a ação `erro
 ```php
 public function actionError()
 {
-   $exception = Yii::$app->errorHandler->exception;
-   if ($exception !== null) {
-       return $this->render('error', ['exception' => $exception]);
-   }
+  $exception = Yii::$app->errorHandler->exception;
+  if ($exception !== null) {
+      return $this->render('error', ['exception' => $exception]);
+  }
 }
 ```
 
@@ -143,10 +143,10 @@ Transfer-Encoding: chunked
 Content-Type: application/json; charset=UTF-8
 
 {
-   "name": "Not Found Exception",
-   "message": "The requested resource was not found.",
-   "code": 0,
-   "status": 404
+  "name": "Not Found Exception",
+  "message": "The requested resource was not found.",
+  "code": 0,
+  "status": 404
 }
 ```
 
@@ -154,22 +154,22 @@ Você pode personalizar o formato de resposta de erro, respondendo ao evento `be
 
 ```php
 return [
-   // ...
-   'components' => [
-       'response' => [
-           'class' => 'yii\web\Response',
-           'on beforeSend' => function ($event) {
-               $response = $event->sender;
-               if ($response->data !== null) {
-                   $response->data = [
-                       'success' => $response->isSuccessful,
-                       'data' => $response->data,
-                   ];
-                   $response->statusCode = 200;
-               }
-           },
-       ],
-   ],
+  // ...
+  'components' => [
+      'response' => [
+          'class' => 'yii\web\Response',
+          'on beforeSend' => function ($event) {
+              $response = $event->sender;
+              if ($response->data !== null) {
+                  $response->data = [
+                      'success' => $response->isSuccessful,
+                      'data' => $response->data,
+                  ];
+                  $response->statusCode = 200;
+              }
+          },
+      ],
+  ],
 ];
 ```
 
@@ -183,12 +183,12 @@ Transfer-Encoding: chunked
 Content-Type: application/json; charset=UTF-8
 
 {
-   "success": false,
-   "data": {
-       "name": "Not Found Exception",
-       "message": "The requested resource was not found.",
-       "code": 0,
-       "status": 404
-   }
+  "success": false,
+  "data": {
+      "name": "Not Found Exception",
+      "message": "The requested resource was not found.",
+      "code": 0,
+      "status": 404
+  }
 }
 ```

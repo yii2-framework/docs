@@ -72,7 +72,7 @@ For example, the following application configuration makes sure the `log` compon
         },
         function($app){
             // some code
-           return;
+          return;
         }
     ],
     'components' => [

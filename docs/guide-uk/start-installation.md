@@ -72,12 +72,12 @@
 1. Завантажте архів за адресою [yiiframework.com](https://www.yiiframework.com/download/);
 2. Розпакуйте архів в директорію, доступну через Web.
 3. Відредагуйте файл конфігурації `config/web.php` - необхідно ввести таємний ключ до пункту `cookieValidationKey`
-   (це виконується автоматично при вставленні Yii через Composer):
+  (це виконується автоматично при вставленні Yii через Composer):
 
-   ```php
-   // !!! встановити таємний ключ до наступного пункту (якщо порожній) - це необхідно для перевірки кукі
-   'cookieValidationKey' => 'enter your secret key here',
-   ```
+  ```php
+  // !!! встановити таємний ключ до наступного пункту (якщо порожній) - це необхідно для перевірки кукі
+  'cookieValidationKey' => 'enter your secret key here',
+  ```
 
 
 Інші параметри встановлення <span id="other-installation-options"></span>

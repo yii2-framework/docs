@@ -88,9 +88,9 @@ Yii 实现了[模型-视图-控制器 (MVC)](https://wikipedia.org/wiki/Model-vi
 
 1. 用户向[入口脚本](structure-entry-scripts.md) `web/index.php` 发起请求。
 2. 入口脚本加载应用[配置](concept-configurations.md)并创建一个[应用](structure-applications.md)
-   实例去处理请求。
+  实例去处理请求。
 3. 应用通过[请求](runtime-request.md)组件解析请求的
-   [路由](runtime-routing.md)。
+  [路由](runtime-routing.md)。
 4. 应用创建一个[控制器](structure-controllers.md)实例去处理请求。
 5. 控制器创建一个[动作](structure-controllers.md)实例并针对操作执行过滤器。
 6. 如果任何一个过滤器返回失败，则动作取消。
@@ -99,4 +99,3 @@ Yii 实现了[模型-视图-控制器 (MVC)](https://wikipedia.org/wiki/Model-vi
 9. 动作会渲染一个视图，把数据模型提供给它。
 10. 渲染结果返回给[响应](runtime-responses.md)组件。
 11. 响应组件发送渲染结果给用户浏览器。
-

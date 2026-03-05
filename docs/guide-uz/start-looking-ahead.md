@@ -7,16 +7,16 @@ avtomatik tarzda kod yaratishni o'rgandingiz, bu esa HTML-shaklni to'ldirishdek 
 * Qo'llanma
     - To'liq qo'llanma:
       uni nomidan kelib chiqan holda, qo'llanma Yii ni ishlashi haqida, 
-	  to'liq ma'lumot berib uni qandey yaxshiroq qo'llashni yoritib beradi.
-	  Bu Yii haqida juda ham muhim darslik hisoblanadi, ushbu darslikni oqimasdan siz kod yozishga kirishmasangiz to'g'ri bo'ladi.
+    to'liq ma'lumot berib uni qandey yaxshiroq qo'llashni yoritib beradi.
+    Bu Yii haqida juda ham muhim darslik hisoblanadi, ushbu darslikni oqimasdan siz kod yozishga kirishmasangiz to'g'ri bo'ladi.
     - Klasslar tariflari:
       Yiidagi har bir klassni ishlashini yozib o'tadi. 
-	  U bilan siz kod yozganingizda biror bir klassning hossalari yoki usulari to'g'risida ma'lumot olishingiz mumkin.
+    U bilan siz kod yozganingizda biror bir klassning hossalari yoki usulari to'g'risida ma'lumot olishingiz mumkin.
     - Wiki-maqolalar:
       Yii foydalanuvchisi tomonidan o'z tajribasi assosida. 
-	  Ulardan ko'pi Yii retsepti assosida yozilgan bo'lib, ular Yiining ma'lum bir masalalarini hal qilib beradi. 
-	  Shuni aytish keraki ularning sifati qo'lanmadagi yozilgan ma'lumotdaqa yaxshi yoritilib berilgani ham bor
-	  Ularni shunisi yaxshiki ular mavzuni to'liq va amaliy yoritib berib sizga tayyor yechim berishi ham mumkin
+    Ulardan ko'pi Yii retsepti assosida yozilgan bo'lib, ular Yiining ma'lum bir masalalarini hal qilib beradi. 
+    Shuni aytish keraki ularning sifati qo'lanmadagi yozilgan ma'lumotdaqa yaxshi yoritilib berilgani ham bor
+    Ularni shunisi yaxshiki ular mavzuni to'liq va amaliy yoritib berib sizga tayyor yechim berishi ham mumkin
     - Kitoblar
 * [Kengaytmalar](https://www.yiiframework.com/extensions/):
   Yiining foydalanuvchilar tomonidan yaratilgan minglab kengaytmalar ombori bor 

@@ -81,16 +81,16 @@ controller and action:
 
 1. Set the application as the current module.
 2. Check if the [[yii\base\Module::controllerMap|controller map]] of the current module contains the current ID.
-   If so, a controller object will be created according to the controller configuration found in the map,
-   and Step 5 will be taken to handle the rest part of the route.
+  If so, a controller object will be created according to the controller configuration found in the map,
+  and Step 5 will be taken to handle the rest part of the route.
 3. Check if the ID refers to a module listed in the [[yii\base\Module::modules|modules]] property of
-   the current module. If so, a module is created according to the configuration found in the module list,
-   and Step 2 will be taken to handle the next part of the route under the context of the newly created module.
+  the current module. If so, a module is created according to the configuration found in the module list,
+  and Step 2 will be taken to handle the next part of the route under the context of the newly created module.
 4. Treat the ID as a [controller ID](structure-controllers.md#controller-ids) and create a controller object. Do the next step with the rest part of
-   the route.
+  the route.
 5. The controller looks for the current ID in its [[yii\base\Controller::actions()|action map]]. If found,
-   it creates an action according to the configuration found in the map. Otherwise, the controller will
-   attempt to create an inline action which is defined by an action method corresponding to the current [action ID](structure-controllers.md#action-ids).
+  it creates an action according to the configuration found in the map. Otherwise, the controller will
+  attempt to create an inline action which is defined by an action method corresponding to the current [action ID](structure-controllers.md#action-ids).
 
 Among the above steps, if any error occurs, a [[yii\web\NotFoundHttpException]] will be thrown, indicating
 the failure of the routing process.

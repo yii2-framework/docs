@@ -30,7 +30,7 @@ Poniższa lista zawiera kody statusów HTTP, które są używane przez Yii REST 
 * `204`: Żądanie zostało poprawnie przetworzone, ale odpowiedź nie zawiera treści (jak w przypadku żądania `DELETE`).
 * `304`: Zasób nie został zmodyfikowany. Można użyć wersji przetrzymywanej w pamięci podręcznej.
 * `400`: Nieprawidłowe żądanie. Może być spowodowane przez wiele czynników po stronie użytkownika, takich jak przekazanie nieprawidłowych danych JSON,
-   nieprawidłowych parametrów akcji, itp.
+  nieprawidłowych parametrów akcji, itp.
 * `401`: Nieudana autentykacja.
 * `403`: Autoryzowany użytkownik nie ma uprawnień do danego punktu końcowego API.
 * `404`: Żądany zasób nie istnieje.

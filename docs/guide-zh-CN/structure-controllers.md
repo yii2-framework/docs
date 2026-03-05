@@ -126,7 +126,7 @@ class SiteController extends Controller
 控制器ID遵循以下规则衍生控制器类名：
 
 1. 将用正斜杠区分的每个单词第一个字母转为大写。注意如果控制器ID包含正斜杠，
-   只将最后的正斜杠后的部分第一个字母转为大写；
+  只将最后的正斜杠后的部分第一个字母转为大写；
 2. 去掉中横杠，将正斜杠替换为反斜杠;
 3. 增加`Controller`后缀;
 4. 在前面增加[[yii\base\Application::controllerNamespace|controller namespace]]控制器命名空间.
@@ -414,21 +414,21 @@ class SiteController extends Controller
 
 1. 在控制器创建和配置后，[[yii\base\Controller::init()]] 方法会被调用。
 2. 控制器根据请求操作ID创建一个操作对象:
-   * 如果操作ID没有指定，会使用[[yii\base\Controller::defaultAction|default action ID]]默认操作ID；
-   * 如果在[[yii\base\Controller::actions()|action map]]找到操作ID，
-     会创建一个独立操作；
-   * 如果操作ID对应操作方法，会创建一个内联操作；
-   * 否则会抛出[[yii\base\InvalidRouteException]]异常。
+  * 如果操作ID没有指定，会使用[[yii\base\Controller::defaultAction|default action ID]]默认操作ID；
+  * 如果在[[yii\base\Controller::actions()|action map]]找到操作ID，
+    会创建一个独立操作；
+  * 如果操作ID对应操作方法，会创建一个内联操作；
+  * 否则会抛出[[yii\base\InvalidRouteException]]异常。
 3. 控制器按顺序调用应用主体、模块（如果控制器属于模块）、
-   控制器的 `beforeAction()` 方法；
-   * 如果任意一个调用返回false，后面未调用的`beforeAction()`会跳过并且操作执行会被取消；
-     action execution will be cancelled.
-   * 默认情况下每个 `beforeAction()` 方法会触发一个 `beforeAction` 事件，在事件中你可以追加事件处理操作；
+  控制器的 `beforeAction()` 方法；
+  * 如果任意一个调用返回false，后面未调用的`beforeAction()`会跳过并且操作执行会被取消；
+    action execution will be cancelled.
+  * 默认情况下每个 `beforeAction()` 方法会触发一个 `beforeAction` 事件，在事件中你可以追加事件处理操作；
 4. 控制器执行操作:
-   * 请求数据解析和填入到操作参数；
+  * 请求数据解析和填入到操作参数；
 5. 控制器按顺序调用控制器、模块（如果控制器属于模块）、应用主体的 `afterAction()` 方法；
-   * 默认情况下每个 `afterAction()` 方法会触发一个 `afterAction` 事件，
-   在事件中你可以追加事件处理操作；
+  * 默认情况下每个 `afterAction()` 方法会触发一个 `afterAction` 事件，
+  在事件中你可以追加事件处理操作；
 6. 应用主体获取操作结果并赋值给[响应](runtime-responses.md).
 
 

@@ -86,11 +86,11 @@ public function rules()
 当调用 `validate()` 方法时，它将运行以下几个具体的验证步骤：
 
 1. 检查从声明自 [[yii\base\Model::scenarios()]] 方法的场景中所挑选出的当前[[yii\base\Model::scenario|场景]]的信息，
-   从而确定出那些特性需要被验证。这些特性被称为激活特性。
+  从而确定出那些特性需要被验证。这些特性被称为激活特性。
 2. 检查从声明自 [[yii\base\Model::rules()]] 方法的众多规则中所挑选出的适用于当前[[yii\base\Model::scenario|场景]]的规则，
-   从而确定出需要验证哪些规则。这些规则被称为激活规则。
+  从而确定出需要验证哪些规则。这些规则被称为激活规则。
 3. 用每个激活规则去验证每个
-   与之关联的激活特性。
+  与之关联的激活特性。
 
 基于以上验证步骤，有且仅有声明在 `scenarios()` 
 方法里的激活特性，且它还必须与一或多个声明自
@@ -229,9 +229,9 @@ return [
 
 1. 从输入值中去除前后空白。
 2. 确保空输入在数据库中存储为 `null`；我们区分 `未设置` 值和实际值为 `0` 之间的区别。
-   如果值不允许为 `null`，则可以在此处设置另一个默认值。
+  如果值不允许为 `null`，则可以在此处设置另一个默认值。
 3. 如果该值不为空，则验证该值是否为大于0的整数。大多数验证器的
-   [[yii\validators\Validator::$skipOnEmpty|$skipOnEmpty]] 属性都被设置为`true`。
+  [[yii\validators\Validator::$skipOnEmpty|$skipOnEmpty]] 属性都被设置为`true`。
 4. 确保该值为整数类型，例如将字符串 `'42'` 转换为整数 `42`。在这里，我们将 
 [[yii\validators\FilterValidator::$skipOnEmpty|$skipOnEmpty]] 设置为 `true`，默认情况下，在 
 [[yii\validators\FilterValidator|filter]] 验证器里这个属性是 `false`。
@@ -482,12 +482,12 @@ class EntryForm extends Model
 class MigrationForm extends \yii\base\Model
 {
     /**
-     * 一个成年人的最少花销
-     */
+    * 一个成年人的最少花销
+    */
     const MIN_ADULT_FUNDS = 3000;
     /**
-     * 一个孩子的最小花销
-     */
+    * 一个孩子的最小花销
+    */
     const MIN_CHILD_FUNDS = 1500;
 
     public $personalSalary;

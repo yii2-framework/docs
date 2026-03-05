@@ -101,11 +101,11 @@ it can be more easily installed and used by other users, as described in the las
 Below are the basic steps you may follow to create an extension as a Composer package.
 
 1. Create a project for your extension and host it on a VCS repository, such as [github.com](https://github.com).
-   The development and maintenance work for the extension should be done on this repository.
+  The development and maintenance work for the extension should be done on this repository.
 2. Under the root directory of the project, create a file named `composer.json` as required by Composer. Please
-   refer to the next subsection for more details.
+  refer to the next subsection for more details.
 3. Register your extension with a Composer repository, such as [Packagist](https://packagist.org/), so that
-   other users can find and install your extension using Composer.
+  other users can find and install your extension using Composer.
 
 
 ### `composer.json` <span id="composer-json"></span>
@@ -271,7 +271,7 @@ class MyBootstrapClass implements BootstrapInterface
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function () {
-             // do something here
+            // do something here
         });
     }
 }

@@ -10,10 +10,10 @@ ActiveForm запускает серию специальных событий. 
 
 ```javascript
 $('#contact-form').on('beforeSubmit', function (e) {
-	if (!confirm("Everything is correct. Submit?")) {
-		return false;
-	}
-	return true;
+  if (!confirm("Everything is correct. Submit?")) {
+    return false;
+  }
+  return true;
 });
 ```
 
@@ -154,8 +154,8 @@ $form.on('beforeSubmit', function() {
         error: function(jqXHR, errMsg) {
             alert(errMsg);
         }
-     });
-     return false; // prevent default submit
+    });
+    return false; // prevent default submit
 });
 ```
 Чтобы узнать больше о jQuery функции `ajax()`, обратитесь к документации [jQuery documentation](https://api.jquery.com/jQuery.ajax/).

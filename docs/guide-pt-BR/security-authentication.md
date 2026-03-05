@@ -55,47 +55,47 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Localiza uma identidade pelo ID informado
-     *
-     * @param string|int $id o ID a ser localizado
-     * @return IdentityInterface|null o objeto da identidade que corresponde ao ID informado
-     */
+    * Localiza uma identidade pelo ID informado
+    *
+    * @param string|int $id o ID a ser localizado
+    * @return IdentityInterface|null o objeto da identidade que corresponde ao ID informado
+    */
     public static function findIdentity($id)
     {
         return static::findOne($id);
     }
 
     /**
-     * Localiza uma identidade pelo token informado
-     *
-     * @param string $token o token a ser localizado
-     * @return IdentityInterface|null o objeto da identidade que corresponde ao token informado
-     */
+    * Localiza uma identidade pelo token informado
+    *
+    * @param string $token o token a ser localizado
+    * @return IdentityInterface|null o objeto da identidade que corresponde ao token informado
+    */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::findOne(['access_token' => $token]);
     }
 
     /**
-     * @return int|string o ID do usuário atual
-     */
+    * @return int|string o ID do usuário atual
+    */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @return string a chave de autenticação do usuário atual
-     */
+    * @return string a chave de autenticação do usuário atual
+    */
     public function getAuthKey()
     {
         return $this->auth_key;
     }
 
     /**
-     * @param string $authKey
-     * @return bool se a chave de autenticação do usuário atual for válida
-     */
+    * @param string $authKey
+    * @return bool se a chave de autenticação do usuário atual for válida
+    */
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
@@ -180,6 +180,3 @@ A classe [[yii\web\User]] dispara alguns eventos durante os processos de login e
 
 Você pode responder a estes eventos implementando funcionalidades, tais como auditoria de login, estatísticas de usuários on-line. Por exemplo, no manipulador
 [[yii\web\User::EVENT_AFTER_LOGIN|EVENT_AFTER_LOGIN]], você pode registrar o tempo de login e endereço IP na tabela `user`.
-
-
-

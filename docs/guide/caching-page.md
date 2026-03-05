@@ -37,4 +37,3 @@ implemented as an [action filter](structure-filters.md) while fragment caching a
 
 You can use [fragment caching](caching-fragment.md) as well as [dynamic content](caching-fragment.md#dynamic-content)
 together with page caching.
-

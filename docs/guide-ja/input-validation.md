@@ -86,11 +86,11 @@ public function rules()
 `validate()` メソッドが呼ばれると、次のステップを踏んで検証が実行されます。
 
 1. 現在の [[yii\base\Model::scenario|シナリオ]] を使って [[yii\base\Model::scenarios()]] から属性のリストを取得し、どの属性が検証されるべきかを決定します。
-   検証されるべき属性が *アクティブな属性* と呼ばれます。
+  検証されるべき属性が *アクティブな属性* と呼ばれます。
 2. 現在の [[yii\base\Model::scenario|シナリオ]] を使って [[yii\base\Model::rules()]] から規則のリストを取得し、どの検証規則が使用されるべきかを決定します。
-   使用されるべき規則が *アクティブな規則* と呼ばれます。
+  使用されるべき規則が *アクティブな規則* と呼ばれます。
 3. 全てのアクティブな規則を一つずつ使って、その規則に関連付けられた全てのアクティブな属性を一つずつ検証します。
-   検証規則はリストに挙げられている順に評価されます。
+  検証規則はリストに挙げられている順に評価されます。
 
 属性は、上記の検証のステップに従って、`scenarios()` でアクティブな属性であると宣言されており、
 かつ、`rules()` で宣言された一つまたは複数のアクティブな規則と関連付けられている場合に、
@@ -229,12 +229,12 @@ return [
 
 1. 入力値から先頭と末尾のホワイト・スペースをトリムします。
 2. 空の入力値がデータベースで `null` として保存されることを保証します。
-   "not set(未設定)" という値と、実際の値である `0` は区別します。`null` が許されない時は、ここで別のデフォルト値を設定することが出来ます。
+  "not set(未設定)" という値と、実際の値である `0` は区別します。`null` が許されない時は、ここで別のデフォルト値を設定することが出来ます。
 3. 空でない場合は、値は 0 以上の整数であることを検証します。
-   通常のバリデータでは [[yii\validators\Validator::$skipOnEmpty|$skipOnEmpty]] が `true` に設定されています。
+  通常のバリデータでは [[yii\validators\Validator::$skipOnEmpty|$skipOnEmpty]] が `true` に設定されています。
 4. 例えば、文字列 `'42'` は、整数 `42` にキャストして、値が整数型になることを保証します。
-   デフォルトでは `false` である [[yii\validators\FilterValidator|filter]] バリデータの
-   [[yii\validators\FilterValidator::$skipOnEmpty|$skipOnEmpty]] を`true` に設定しています。
+  デフォルトでは `false` である [[yii\validators\FilterValidator|filter]] バリデータの
+  [[yii\validators\FilterValidator::$skipOnEmpty|$skipOnEmpty]] を`true` に設定しています。
 
 ### 空の入力値を扱う <span id="handling-empty-inputs"></span>
 
@@ -485,12 +485,12 @@ class EntryForm extends Model
 class MigrationForm extends \yii\base\Model
 {
     /**
-     * 成人一人のための最低限の生活費
-     */
+    * 成人一人のための最低限の生活費
+    */
     const MIN_ADULT_FUNDS = 3000;
     /**
-     * こども一人のための最低限の生活費
-     */
+    * こども一人のための最低限の生活費
+    */
     const MIN_CHILD_FUNDS = 1500;
 
     public $personalSalary;   // 給与
@@ -807,7 +807,7 @@ public function clientValidateAttribute($model, $attribute, $view)
             var img = new Image();
             img.onload = function() {
                 if (this.width > 150) {
-	                messages.push('画像の幅が大きすぎます。');
+                  messages.push('画像の幅が大きすぎます。');
                 }
                 def.resolve();
             }

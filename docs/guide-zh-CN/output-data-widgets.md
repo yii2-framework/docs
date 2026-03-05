@@ -515,13 +515,13 @@ use yii\widgets\ActiveForm;
 class PostSearch extends Post
 {
     /**
-     * @var string
-     */
+    * @var string
+    */
     public $createdFrom;
 
     /**
-     * @var string
-     */
+    * @var string
+    */
     public $createdTo;
 }
 ```
@@ -658,8 +658,8 @@ class UserView extends ActiveRecord
 {
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public static function tableName()
     {
         return 'vw_user_info';
@@ -671,8 +671,8 @@ class UserView extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function rules()
     {
         return [
@@ -681,8 +681,8 @@ class UserView extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public static function attributeLabels()
     {
         return [

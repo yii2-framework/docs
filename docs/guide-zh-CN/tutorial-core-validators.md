@@ -86,14 +86,14 @@ public function rules()
   当该属性与 `compareAttribute` 属性同时被指定时，该属性优先被使用。
 - `operator`：比对操作符。默认为 `==`，意味着检查输入值是否与 `compareAttribute` 或 `compareValue` 的值相等。
   该属性支持如下操作符：
-     * `==`：检查两值是否相等。比对为非严格模式。
-     * `===`：检查两值是否全等。比对为严格模式。
-     * `!=`：检查两值是否不等。比对为非严格模式。
-     * `!==`：检查两值是否不全等。比对为严格模式。
-     * `>`：检查待测目标值是否大于给定被测值。
-     * `>=`：检查待测目标值是否大于等于给定被测值。
-     * `<`：检查待测目标值是否小于给定被测值。
-     * `<=`：检查待测目标值是否小于等于给定被测值。
+    * `==`：检查两值是否相等。比对为非严格模式。
+    * `===`：检查两值是否全等。比对为严格模式。
+    * `!=`：检查两值是否不等。比对为非严格模式。
+    * `!==`：检查两值是否不全等。比对为严格模式。
+    * `>`：检查待测目标值是否大于给定被测值。
+    * `>=`：检查待测目标值是否大于等于给定被测值。
+    * `<`：检查待测目标值是否小于给定被测值。
+    * `<=`：检查待测目标值是否小于等于给定被测值。
 - `type`: 默认的比对类型是'[[yii\validators\CompareValidator::TYPE_STRING|string]]'，此时将按照字节逐个对比。
   当需要比对的值是数字时，需要设置类型[[yii\validators\CompareValidator::$type|$type]]为
   '[[yii\validators\CompareValidator::TYPE_NUMBER|number]]'，启用数字对比模式。
@@ -139,11 +139,11 @@ public function rules()
 [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]] 所指定的属性里。
 
 - `format`：被验证值的日期/时间格式。
-   这里的值可以是 [ICU manual](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax) 中定义的日期时间格式。
-   另外还可以设置以 `php:` 开头的字符串，用来表示PHP可以识别的日期时间格式。
-   `Datetime` 日期时间类。请参考 <https://www.php.net/manual/zh/datetime.createfromformat.php> 获取更多支持的格式。
-   如果没有设置，默认值将使用 `Yii::$app->formatter->dateFormat` 中的值。
-   请参考 [[yii\validators\DateValidator::$format|API 文档]] 以获取更详细的说明。
+  这里的值可以是 [ICU manual](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax) 中定义的日期时间格式。
+  另外还可以设置以 `php:` 开头的字符串，用来表示PHP可以识别的日期时间格式。
+  `Datetime` 日期时间类。请参考 <https://www.php.net/manual/zh/datetime.createfromformat.php> 获取更多支持的格式。
+  如果没有设置，默认值将使用 `Yii::$app->formatter->dateFormat` 中的值。
+  请参考 [[yii\validators\DateValidator::$format|API 文档]] 以获取更详细的说明。
 
 - `timestampAttribute`：输入的日期时间将被转换为时间戳后设置到的属性的名称。
   可以设置为和被验证的属性相同。如果相同，
@@ -444,9 +444,9 @@ function foo($model, $attribute) {
 - `ipv4`: 是否启用 IPv4 地址检测。默认为 true 。
 - `ipv6`: 是否启用 IPv6 地址检测。默认为 true。
 - `subnet`: 是否启用 CIDR 子网检测，类似 `192.168.10.0/24`
-     * `true` - 子网是必须的，如果不是标准 CIDR 格式将被拒绝
-     * `false` - 地址不能有 CIDR
-     * `null` - CIDR 是可选的
+    * `true` - 子网是必须的，如果不是标准 CIDR 格式将被拒绝
+    * `false` - 地址不能有 CIDR
+    * `null` - CIDR 是可选的
 
     默认值为 false。
 - `normalize`: 是否在地址没有 CIDR 时添加 CIDR 最小值作为后缀 (IPv4 为 32、IPv6 为 128)
@@ -467,11 +467,11 @@ function foo($model, $attribute) {
     例如：
     ```php
     [
-         'client_ip', 'ip', 'ranges' => [
-             '192.168.10.128'
-             '!192.168.10.0/24',
-             'any' // 允许任何其它IP地址
-         ]
+        'client_ip', 'ip', 'ranges' => [
+            '192.168.10.128'
+            '!192.168.10.0/24',
+            'any' // 允许任何其它IP地址
+        ]
     ]
     ```
 在这个例子中，除了 `192.168.10.0/24` 子网之外的所有 IPv4 和 IPv6 地址都被允许。
@@ -610,10 +610,10 @@ IPv4 地址 `192.168.10.128` 同样时允许的，因为这条规则在约束规
 
 - `length`：指定待测输入字符串的长度限制。
   该属性可以被指定为以下格式之一：
-     * 证书：the exact length that the string should be of;
-     * 单元素数组：代表输入字符串的最小长度 (e.g. `[8]`)。这会重写 `min` 属性。
-     * 包含两个元素的数组：代表输入字符串的最小和最大长度(e.g. `[8, 128]`)。
-     这会同时重写 `min` 和 `max` 属性。
+    * 证书：the exact length that the string should be of;
+    * 单元素数组：代表输入字符串的最小长度 (e.g. `[8]`)。这会重写 `min` 属性。
+    * 包含两个元素的数组：代表输入字符串的最小和最大长度(e.g. `[8, 128]`)。
+    这会同时重写 `min` 和 `max` 属性。
 - `min`：输入字符串的最小长度。若不设置，则代表不设下限。
 - `max`：输入字符串的最大长度。若不设置，则代表不设上限。
 - `encoding`：待测字符串的编码方式。若不设置，则使用应用自身的 [[yii\base\Application::charset|charset]] 属性值，

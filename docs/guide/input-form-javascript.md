@@ -12,10 +12,10 @@ events and handle them:
 
 ```javascript
 $('#contact-form').on('beforeSubmit', function (e) {
-	if (!confirm("Everything is correct. Submit?")) {
-		return false;
-	}
-	return true;
+  if (!confirm("Everything is correct. Submit?")) {
+    return false;
+  }
+  return true;
 });
 ```
 
@@ -35,9 +35,9 @@ where
 
 - `event`: an Event object.
 - `messages`: an associative array with keys being attribute IDs and values being error message arrays
-   for the corresponding attributes.
+  for the corresponding attributes.
 - `deferreds`: an array of Deferred objects. You can use `deferreds.add(callback)` to add a new
-   deferred validation.
+  deferred validation.
 
 If the handler returns a boolean `false`, it will stop further form validation after this event. And as
 a result, `afterValidate` event will not be triggered.
@@ -56,7 +56,7 @@ where
 
 - `event`: an Event object.
 - `messages`: an associative array with keys being attribute IDs and values being error message arrays
-   for the corresponding attributes.
+  for the corresponding attributes.
 - `errorAttributes`: an array of attributes that have validation errors. Please refer to
   `attributeDefaults` for the structure of this parameter.
 
@@ -73,10 +73,10 @@ where
 
 - `event`: an Event object.
 - `attribute`: the attribute to be validated. Please refer to `attributeDefaults` for the structure
-   of this parameter.
+  of this parameter.
 - `messages`: an array to which you can add validation error messages for the specified attribute.
 - `deferreds`: an array of Deferred objects. You can use `deferreds.add(callback)` to add
-   a new deferred validation.
+  a new deferred validation.
 
 If the handler returns a boolean `false`, it will stop further validation of the specified attribute.
 And as a result, `afterValidateAttribute` event will not be triggered.
@@ -95,9 +95,9 @@ where
 
 - `event`: an Event object.
 - `attribute`: the attribute being validated. Please refer to `attributeDefaults` for the structure
-   of this parameter.
+  of this parameter.
 - `messages`: an array to which you can add additional validation error messages for the specified
-   attribute.
+  attribute.
 
 ### `beforeSubmit`
 
@@ -166,8 +166,8 @@ $form.on('beforeSubmit', function() {
         error: function(jqXHR, errMsg) {
             alert(errMsg);
         }
-     });
-     return false; // prevent default submit
+    });
+    return false; // prevent default submit
 });
 ```
 

@@ -113,17 +113,17 @@ $posts = $db->createCommand('SELECT * FROM post')
 // retorna una sola fila (la primera fila)
 // `false` es retornado si no hay resultados
 $post = $db->createCommand('SELECT * FROM post WHERE id=1')
-           ->queryOne();
+          ->queryOne();
 
 // retorna una sola columna (la primera columna)
 // un array vacío es retornado si no hay resultados
 $titles = $db->createCommand('SELECT title FROM post')
-             ->queryColumn();
+            ->queryColumn();
 
 // retorna un escalar
 // `false` es retornado si no hay resultados
 $count = $db->createCommand('SELECT COUNT(*) FROM post')
-             ->queryScalar();
+            ->queryScalar();
 ```
 
 > Note: Para preservar la precisión, los datos obtenidos de las bases de datos son todos representados como cadenas, incluso si el tipo de columna correspondiente
@@ -158,9 +158,9 @@ para prevenir los ataques de inyección de SQL. Por ejemplo,
 
 ```php
 $post = $db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValue(':id', $_GET['id'])
-           ->bindValue(':status', 1)
-           ->queryOne();
+          ->bindValue(':id', $_GET['id'])
+          ->bindValue(':status', 1)
+          ->queryOne();
 ```
 
 En la sentencia SQL, puedes incrustar uno o múltiples parámetros placeholders (ej. `:id` en el ejemplo anterior). Un parámetro
@@ -178,11 +178,11 @@ El siguiente ejemplo muestra formas alternativas de vincular parámetros:
 $params = [':id' => $_GET['id'], ':status' => 1];
 
 $post = $db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValues($params)
-           ->queryOne();
+          ->bindValues($params)
+          ->queryOne();
 
 $post = $db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
-           ->queryOne();
+          ->queryOne();
 ```
 
 La vinculación parámetros es implementada mediante [sentencias preparadas (prepared statements)](https://www.php.net/manual/es/mysqli.quickstart.prepared-statements.php).
@@ -223,7 +223,7 @@ en su lugar. Por ejemplo,
 
 ```php
 $db->createCommand('UPDATE post SET status=1 WHERE id=1')
-   ->execute();
+  ->execute();
 ```
 
 El método [[yii\db\Command::execute()]] retorna el número de filas afectadas por la ejecución SQL.

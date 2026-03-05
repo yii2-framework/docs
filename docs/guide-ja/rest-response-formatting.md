@@ -4,11 +4,11 @@
 RESTful API のリクエストを処理するとき、アプリケーションは、通常、レスポンス形式の設定に関して次のステップを踏みます。
 
 1. レスポンス形式に影響しうるさまざまな要因、例えば、メディア・タイプ、言語、バージョンなどを決定します。
-   このプロセスは [コンテント・ネゴシエーション](https://en.wikipedia.org/wiki/Content_negotiation) としても知られるものです。
+  このプロセスは [コンテント・ネゴシエーション](https://en.wikipedia.org/wiki/Content_negotiation) としても知られるものです。
 2. リソース・オブジェクトを配列に変換します。
-   [リソース](rest-resources.md) のセクションで説明したように、この作業は [[yii\rest\Serializer]] によって実行されます。
+  [リソース](rest-resources.md) のセクションで説明したように、この作業は [[yii\rest\Serializer]] によって実行されます。
 3. 配列をコンテント・ネゴシエーションのステップで決定された形式の文字列に変換します。
-   この作業は、`response` [アプリケーション・コンポーネント](structure-application-components.md) の [[yii\web\Response::formatters|formatters]] プロパティに登録された [[yii\web\ResponseFormatterInterface|レスポンス・フォーマッタ]] によって実行されます。
+  この作業は、`response` [アプリケーション・コンポーネント](structure-application-components.md) の [[yii\web\Response::formatters|formatters]] プロパティに登録された [[yii\web\ResponseFormatterInterface|レスポンス・フォーマッタ]] によって実行されます。
 
 ## コンテント・ネゴシエーション <span id="content-negotiation"></span>
 

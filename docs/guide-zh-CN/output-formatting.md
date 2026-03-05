@@ -60,7 +60,7 @@ return [
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
-       ],
+      ],
     ],
 ];
 ```
@@ -197,7 +197,7 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
 - [[yii\i18n\Formatter::asNtext()|ntext]]：这个值将会被格式化用 HTML 编码的纯文本，
   其中新的一行将用换行符来隔开。
 - [[yii\i18n\Formatter::asParagraphs()|paragraphs]]：这个值被格式化为包含在
-   `<p>` 标签中的 HTML 编码的文本段落。
+  `<p>` 标签中的 HTML 编码的文本段落。
 - [[yii\i18n\Formatter::asHtml()|html]]：这个值使用 [[HtmlPurifier]] 来格式化以避免遭受 XSS 攻击。
   你能够设置一切其他选项比如 `['html', ['Attr.AllowedFrameTargets' => ['_blank']]]`。
 - [[yii\i18n\Formatter::asEmail()|email]]：这个值被格式化为 `mailto`-链接。

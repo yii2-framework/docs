@@ -26,8 +26,8 @@ Yii は上記の全ての認証方法をサポートしています。新しい�
 あなたの API に対して認証を有効にするためには、次のステップを実行します。
 
 1. `user` [アプリケーション・コンポーネント](structure-application-components.md) を構成します。
-   - [[yii\web\User::enableSession|enableSession]] プロパティを `false` に設定します。
-   - [[yii\web\User::loginUrl|loginUrl]] プロパティを `null` に設定し、ログインページにリダイレクトする代りに HTTP 403 エラーを表示します。
+  - [[yii\web\User::enableSession|enableSession]] プロパティを `false` に設定します。
+  - [[yii\web\User::loginUrl|loginUrl]] プロパティを `null` に設定し、ログインページにリダイレクトする代りに HTTP 403 エラーを表示します。
 2. REST コントローラ・クラスにおいて、`authenticator` ビヘイビアを構成することによって、
   どの認証方法を使用するかを指定します。
 3. [[yii\web\User::identityClass|ユーザ・アイデンティティ・クラス]] において [[yii\web\IdentityInterface::findIdentityByAccessToken()]] を実装します。

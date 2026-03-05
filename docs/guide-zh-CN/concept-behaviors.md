@@ -357,4 +357,3 @@ $user->touch('login_time');
 Traits 比行为更有效，因为行为是既需要时间又需要内存的对象。
 
 因为 IDE 是一种本地语言结构，所以它们对 Traits 更友好。
-

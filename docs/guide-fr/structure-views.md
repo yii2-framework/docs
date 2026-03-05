@@ -589,4 +589,3 @@ Pour rendre les vues plus gérables, évitez de créer des vues qui sont trop co
 * Diviser une vue complexe en plusieurs vues plus réduites. Les vues plus réduites peuvent être rendue et assemblées dans une plus grande en utilisant les méthodes de rendu que nous avons décrites. 
 * Créer et utiliser des [objets graphiques](structure-widgets.md) en tant que blocs de construction des vues.
 * Créer et utiliser des classes d'aide pour transformer et formater les données dans les vues.
-

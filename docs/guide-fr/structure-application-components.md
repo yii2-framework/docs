@@ -59,7 +59,7 @@ Par exemple, la configuration d'application suivante garantit que le composant `
         },
         function($app){
             // some code
-           return;
+          return;
         }
     ],
     'components' => [

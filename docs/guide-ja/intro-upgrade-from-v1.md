@@ -537,4 +537,3 @@ Yii 1.1 と 2.x を一緒に使う
 
 Yii 2.0 と一緒に使いたい Yii 1.1 のレガシー・コードを持っている場合は、
 [Yii 1.1 と 2.0 を一緒に使う](tutorial-yii-integration.md#using-both-yii2-yii) のセクションを参照してください。
-

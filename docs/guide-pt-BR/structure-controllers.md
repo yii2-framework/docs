@@ -137,8 +137,8 @@ Os nomes da classes dos controllers podem ser derivadas dos IDs dos controllers
 de acordo com as seguintes procedimentos:
 
 1. Colocar em caixa alta a primeira letra de cada palavra separadas por traço.
-   Observe que se o ID do controller possuir barras, a regra é aplicada apenas na
-   parte após a última barra no ID.
+  Observe que se o ID do controller possuir barras, a regra é aplicada apenas na
+  parte após a última barra no ID.
 2. Remover os traços e substituir todas as barras por barras invertidas.
 3. Adicionar `Controller` como sufixo.
 4. Preceder ao [[yii\base\Application::controllerNamespace|namespace do controller]].
@@ -451,17 +451,17 @@ ao seguinte ciclo de vida para concluir a requisição:
 
 1. O método [[yii\base\Controller::init()]] é chamado após o controller ser criado e configurado.
 2. O controller cria um objeto da ação baseada no ID da ação solicitada:
-   * Se o ID da ação não for especificado, o [[yii\base\Controller::defaultAction|ID da ação padrão]] será utilizada.
-   * Se o ID da ação for encontrada no [[yii\base\Controller::actions()|mapeamento das ações]], uma ação standalone será criada;
-   * Se o ID da ação for encontrada para corresponder a um método de ação, uma ação inline será criada;
-   * Caso contrário, uma exceção [[yii\base\InvalidRouteException]] será lançada.
+  * Se o ID da ação não for especificado, o [[yii\base\Controller::defaultAction|ID da ação padrão]] será utilizada.
+  * Se o ID da ação for encontrada no [[yii\base\Controller::actions()|mapeamento das ações]], uma ação standalone será criada;
+  * Se o ID da ação for encontrada para corresponder a um método de ação, uma ação inline será criada;
+  * Caso contrário, uma exceção [[yii\base\InvalidRouteException]] será lançada.
 3. De forma sequencial, o controller chama o método `beforeAction()` da aplicação, o módulo (se o controller pertencer a um módulo) e o controller.
-   * Se uma das chamadas retornar `false`, o restante dos métodos subsequentes `beforeAction()` serão ignoradas e a execução da ação será cancelada.
-   * Por padrão, cada método `beforeAction()` desencadeia a execução de um evento chamado `beforeAction` na qual você pode associar a uma função (handler).
+  * Se uma das chamadas retornar `false`, o restante dos métodos subsequentes `beforeAction()` serão ignoradas e a execução da ação será cancelada.
+  * Por padrão, cada método `beforeAction()` desencadeia a execução de um evento chamado `beforeAction` na qual você pode associar a uma função (handler).
 4. O controller executa a ação:
-   * Os parâmetros da ação serão analizados e populados a partir dos dados obtidos pela requisição;
+  * Os parâmetros da ação serão analizados e populados a partir dos dados obtidos pela requisição;
 5. De forma sequencial, o controller chama o método `afterAction()` do controller, o módulo (se o controller pertencer a um módulo) e a aplicação.
-   * Por padrão, cada método `afterAction()` desencadeia a execução de um evento chamado `afterAction` na qual você pode associar a uma função (handler).
+  * Por padrão, cada método `afterAction()` desencadeia a execução de um evento chamado `afterAction` na qual você pode associar a uma função (handler).
 6. A aplicação obterá o resultado da ação e irá associá-lo na [resposta](runtime-responses.md).
 
 

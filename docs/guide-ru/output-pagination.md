@@ -25,8 +25,8 @@ function actionIndex()
         ->all();
 
     return $this->render('index', [
-         'models' => $models,
-         'pages' => $pages,
+        'models' => $models,
+        'pages' => $pages,
     ]);
 }
 ```

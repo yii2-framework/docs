@@ -118,17 +118,17 @@ $posts = Yii::$app->db->createCommand('SELECT * FROM post')
 // retourne une ligne unique (la première ligne) 
 // retourne false si la requête ne retourne aucun résultat
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=1')
-           ->queryOne();
+          ->queryOne();
 
 // retourne une colonne unique (la première colonne) 
 //retourne un tableau vide si la requête ne retourne aucun résultat
 $titles = Yii::$app->db->createCommand('SELECT title FROM post')
-             ->queryColumn();
+            ->queryColumn();
 
 // retourne une valeur scalaire
 // retourne false si la requête ne retourne aucun résultat
 $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
-             ->queryScalar();
+            ->queryScalar();
 ```
 
 > Note: pour préserver la précision, les données extraites des bases de données sont toutes représentées sous forme de chaînes de caractères, même si les colonnes sont de type numérique.
@@ -140,9 +140,9 @@ Lorsque vous créez une commande de base de données à partir d'une requête SQ
 
 ```php
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValue(':id', $_GET['id'])
-           ->bindValue(':status', 1)
-           ->queryOne();
+          ->bindValue(':id', $_GET['id'])
+          ->bindValue(':status', 1)
+          ->queryOne();
 ```
 
 Dans l'instruction SQL, vous pouvez incorporer une ou plusieurs valeurs à remplacer pour les paramètres (p. ex. `:id` dans l'exemple ci-dessus). Une valeur à remplacer pour un paramètre doit être une chaîne de caractères commençant par le caractère deux-points `:`. Vous pouvez ensuite appeler l'une des méthodes de liaison de paramètres suivantes pour lier les valeurs de paramètre :
@@ -157,11 +157,11 @@ L'exemple suivant montre les manières alternatives de lier des paramètres :
 $params = [':id' => $_GET['id'], ':status' => 1];
 
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValues($params)
-           ->queryOne();
+          ->bindValues($params)
+          ->queryOne();
            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
-           ->queryOne();
+          ->queryOne();
 ```
 
 La liaison des paramètres est implémentée via des [instructions préparées](https://www.php.net/manual/fr/mysqli.quickstart.prepared-statements.php). En plus d'empêcher les attaques par injection SQL, cela peut aussi améliorer la performance en préparant l'instruction SQL une seule fois et l'exécutant de multiples fois avec des paramètres différents. Par exemple :
@@ -201,7 +201,7 @@ Les méthodes `queryXyz()` introduites dans les sections précédentes concernen
 
 ```php
 Yii::$app->db->createCommand('UPDATE post SET status=1 WHERE id=1')
-   ->execute();
+  ->execute();
 ```
 
 La méthode [[yii\db\Command::execute()]] exécute retourne le nombre de lignes affectées par l'exécution de la requête SQL.

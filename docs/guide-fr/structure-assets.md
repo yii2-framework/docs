@@ -272,11 +272,11 @@ ____
 Après avoir configuré Composer pour qu'il prenne en charge Bower et NPM :
 
 1. Modifiez le fichier the `composer.json` de votre application ou extension et listez le paquet dans l'entrée `require`.
-   Vous devez utiliser `bower-asset/PackageName` (pour les paquets Bower) ou `npm-asset/PackageName` (pour les paquets NPM) pour faire référence à la bibliothèque.
+  Vous devez utiliser `bower-asset/PackageName` (pour les paquets Bower) ou `npm-asset/PackageName` (pour les paquets NPM) pour faire référence à la bibliothèque.
 2. Exécutez `composer update`
 3. Créez une classe de paquet de ressources et listez les fichiers JavaScript/CSS que vous envisagez d'utiliser dans votre application ou extension.
-   Vous devez spécifier la propriété [[yii\web\AssetBundle::sourcePath|sourcePath]] comme `@bower/PackageName` ou `@npm/PackageName`.
-   Cela parce que Composer installera le paquet Bower ou NPM dans le dossier correspondant à cet alias.
+  Vous devez spécifier la propriété [[yii\web\AssetBundle::sourcePath|sourcePath]] comme `@bower/PackageName` ou `@npm/PackageName`.
+  Cela parce que Composer installera le paquet Bower ou NPM dans le dossier correspondant à cet alias.
 
 > Note: quelques paquets peuvent placer tous leurs fichiers distribués dans un sous-dossier. Si c'est le cas, vous devez spécifier le sous-dossier en tant que valeur de [[yii\web\AssetBundle::sourcePath|sourcePath]]. Par exemple, utilisez [[yii\web\JqueryAsset]] `@bower/jquery/dist` au lieu de `@bower/jquery`.
 
@@ -537,9 +537,9 @@ Dans ce qui est présenté ci-dessous, nous introduisons une approche pour combi
 2. Diviser ces paquets en un ou quelques groupes. Notez que chaque paquet ne peut appartenir qu'à un seul groupe. 
 3. Combiner/compresser les fichiers CSS de chacun des groupes en un fichier unique. Faire de même avec les fichiers JavaScript. 
 4. Définir un nouveau paquet de ressources pour chacun des groupes : 
-   * Définir les propriétés [[yii\web\AssetBundle::css|css]] et [[yii\web\AssetBundle::js|js]] comme étant les fichiers CSS et JavaScript combinés, respectivement. 
-   * Personnaliser les paquets de ressources dans chacun des groupes en définissant leurs propriétés [[yii\web\AssetBundle::css|css]] et 
-     [[yii\web\AssetBundle::js|js]] comme étant vides, et en définissant leur propriété [[yii\web\AssetBundle::depends|depends]] comme étant le nouveau paquet de ressources créé pour le groupe.
+  * Définir les propriétés [[yii\web\AssetBundle::css|css]] et [[yii\web\AssetBundle::js|js]] comme étant les fichiers CSS et JavaScript combinés, respectivement. 
+  * Personnaliser les paquets de ressources dans chacun des groupes en définissant leurs propriétés [[yii\web\AssetBundle::css|css]] et 
+    [[yii\web\AssetBundle::js|js]] comme étant vides, et en définissant leur propriété [[yii\web\AssetBundle::depends|depends]] comme étant le nouveau paquet de ressources créé pour le groupe.
 
 En utilisant cette approche, lorsque vous enregistrez un paquet de ressources dans une vue, cela engendre un enregistrement automatique du nouveau paquet de ressources pour le groupe auquel le paquet original appartient. Et, en conséquence, les fichiers de ressources combinés/compressés sont inclus dans la page à la place des fichiers originaux. 
 

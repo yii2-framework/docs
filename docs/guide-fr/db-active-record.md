@@ -78,8 +78,8 @@ class Customer extends ActiveRecord
     const STATUS_ACTIVE = 1;
     
     /**
-     * @return string le nom de la table associée à cette classe d'enregistrement actif.
-     */
+    * @return string le nom de la table associée à cette classe d'enregistrement actif.
+    */
     public static function tableName()
     {
         return 'customer';
@@ -613,19 +613,19 @@ En appelant [[yii\db\ActiveRecord::save()|save()]] pour insérer ou mettre à jo
 
 
 1. [[yii\db\ActiveRecord::beforeValidate()|beforeValidate()]]: déclenche un événement [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] . 
-   Si la méthode retourne `false` (faux), ou si [[yii\base\ModelEvent::isValid]] est `false`, les étapes suivantes sont sautées.
+  Si la méthode retourne `false` (faux), ou si [[yii\base\ModelEvent::isValid]] est `false`, les étapes suivantes sont sautées.
 2. Effectue la validation des données. 
-   Si la validation échoue, les étapes après l'étape 3 saut sautées. 
+  Si la validation échoue, les étapes après l'étape 3 saut sautées. 
 3. [[yii\db\ActiveRecord::afterValidate()|afterValidate()]]: 
-   déclenche un événement [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]].
+  déclenche un événement [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]].
 4. [[yii\db\ActiveRecord::beforeSave()|beforeSave()]]: 
-   déclenche un événement [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] 
-   ou un événement [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]]. 
-   Si la méthode retourne `false` ou si [[yii\base\ModelEvent::isValid]] est `false`, les étapes suivantes sont sautées. 
+  déclenche un événement [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] 
+  ou un événement [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]]. 
+  Si la méthode retourne `false` ou si [[yii\base\ModelEvent::isValid]] est `false`, les étapes suivantes sont sautées. 
 5. Effectue l'insertion ou la mise à jour réelle.
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: 
-   déclenche un événement [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
-   ou un événement [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
+  déclenche un événement [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
+  ou un événement [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]].
    
 
 ### Cycle de vie lors d'une suppression de données <span id="deleting-data-life-cycle"></span>
@@ -634,11 +634,11 @@ En appelant [[yii\db\ActiveRecord::delete()|delete()]] pour supprimer une instan
 
 
 1. [[yii\db\ActiveRecord::beforeDelete()|beforeDelete()]]: 
-   déclenche un événement [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]]. 
-   Si la méthode retourne `false` ou si [[yii\base\ModelEvent::isValid]] est `false`, les étapes suivantes sont sautées. 
+  déclenche un événement [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]]. 
+  Si la méthode retourne `false` ou si [[yii\base\ModelEvent::isValid]] est `false`, les étapes suivantes sont sautées. 
 2. Effectue la suppression réelle des données.
 3. [[yii\db\ActiveRecord::afterDelete()|afterDelete()]]: 
-   déclenche un événement [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]].
+  déclenche un événement [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]].
 
 
 > Note : l'appel de l'une des méthodes suivantes n'initie AUCUN des cycles vus ci-dessus parce qu'elles travaillent directement sur la base de données et pas sur la base d'un enregistrement actif :
@@ -744,11 +744,11 @@ La colonne doit être du type *big integer*
 2. Redéfinissez la méthode [[yii\db\ActiveRecord::optimisticLock()]] pour qu'elle retourne le nom de cette colonne.
 3. Dans la classe de votre modèle, mettez en œuvre  [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] pour analyser automatiquement sa valeur des requêtes reçues.
 4. Dans le formulaire Web qui reçoit les entrées de l'utilisateur, ajoutez un champ caché pour stocker le numéro de version courant de la ligne en modification. 
-   Retirez l'attribut version des règles de validation étant donné que [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] s'en charge.
+  Retirez l'attribut version des règles de validation étant donné que [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] s'en charge.
 5. Dans l'action de contrôleur qui met la ligne à jour en utilisant l'enregistrement actif, utiliser une structure *try-catch* pour l'exception [[yii\db\StaleObjectException]]. 
-   Mettez en œuvre la logique requise (p. ex. fusionner les modifications, avertir des données douteuses) pour résoudre le conflit.
+  Mettez en œuvre la logique requise (p. ex. fusionner les modifications, avertir des données douteuses) pour résoudre le conflit.
 Par exemple, supposons que la colonne du numéro de version est nommée `version`. 
-   Vous pouvez mettre en œuvre le verrouillage optimiste avec un code similaire au suivant :
+  Vous pouvez mettre en œuvre le verrouillage optimiste avec un code similaire au suivant :
 
 
 ```php
@@ -881,7 +881,7 @@ $orders = $customer->orders;
 ```
 
 > Info : lorsque vous déclarez une relation nommée `xyz` via une méthode d'obtention `getXyz()`, vous êtes capable d'accéder à `xyz` comme à un [objet property](concept-properties.md). 
-   Notez que le nom est sensible à la casse. 
+  Notez que le nom est sensible à la casse. 
 
 Si une relation est déclarée avec la méthode [[yii\db\ActiveRecord::hasMany()|hasMany()]], l'accès à cette propriété de relation retourne un tableau des instances de l'enregistrement actif en relation ; 
 si une relation est déclarée avec la méthode [[yii\db\ActiveRecord::hasOne()|hasOne()]], l'accès à la propriété de relation retourne l'instance de l'enregistrement actif en relation, ou `null` si aucune donnée en relation n'est trouvée. 
@@ -894,8 +894,8 @@ Pour forcer l'exécution à nouveau de l'instruction SQL, vous devez d'abord ann
 
 
 > Note : bien que ce concept semble similaire à la fonctionnalité [propriété d'objet](concept-properties.md), il y a une différence importante. 
-   Pour les propriétés normales d'objet, la valeur est du même type que la méthode d'obtention de définition. 
-   Une méthode de relation cependant retourne toujours une instance d'[[yii\db\ActiveRecord]] ou un tableau de telles instances.
+  Pour les propriétés normales d'objet, la valeur est du même type que la méthode d'obtention de définition. 
+  Une méthode de relation cependant retourne toujours une instance d'[[yii\db\ActiveRecord]] ou un tableau de telles instances.
 > 
 >
 > ```php
@@ -1725,8 +1725,8 @@ Par exemple :
 class Customer extends \yii\db\ActiveRecord
 {
     /**
-     * Definit une propriété en lecture seule pour les données agrégées.
-     */
+    * Definit une propriété en lecture seule pour les données agrégées.
+    */
     public function getOrdersCount()
     {
         if ($this->isNewRecord) {
@@ -1737,16 +1737,16 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     /**
-     * Déclere une relation 'orders' normale.
-     */
+    * Déclere une relation 'orders' normale.
+    */
     public function getOrders()
     {
         return $this->hasMany(Order::class, ['customer_id' => 'id']);
     }
 
     /**
-     * Déclare une nouvelle relation basée sur 'orders', qui fournit l'agrégation.
-     */
+    * Déclare une nouvelle relation basée sur 'orders', qui fournit l'agrégation.
+    */
     public function getOrdersAggregation()
     {
         return $this->getOrders()
@@ -1764,4 +1764,3 @@ foreach (Customer::find()->with('ordersAggregation')->all() as $customer) {
 
 $customer = Customer::findOne($pk);
 $customer->ordersCount; // fournit les données agrégées à partir de la relation paresseuse chargée
-

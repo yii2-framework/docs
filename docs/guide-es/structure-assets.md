@@ -212,11 +212,11 @@ Si tu aplicación o extensión usa estos paquetes, se recomienda seguir los sigu
  la librería:
 
 1. Modificar el archivo `composer.json` de tu aplicación o extensión e introducir el paquete en la lista `require`.
-   Se debe usar `bower-asset/PackageName` (para paquetes Bower) o `npm-asset/PackageName` (para paquetes NPM) para
-   referenciar la librería.
+  Se debe usar `bower-asset/PackageName` (para paquetes Bower) o `npm-asset/PackageName` (para paquetes NPM) para
+  referenciar la librería.
 2. Crear una clase asset bundle y listar los archivos JavaScript/CSS que se planea usar en la aplicación o extensión.
-   Se debe especificar la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]] como `@bower\PackageName` o
-   `@npm\PackageName`. Esto se debe a que Composer instalará el paquete Bower o NPM en el correspondiente directorio de
+  Se debe especificar la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]] como `@bower\PackageName` o
+  `@npm\PackageName`. Esto se debe a que Composer instalará el paquete Bower o NPM en el correspondiente directorio de
     este alias.
 
 > Note: Algunos paquetes pueden distribuir sus archivos en subdirectorios. Si es el caso, se debe especificar el

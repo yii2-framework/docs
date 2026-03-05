@@ -97,10 +97,10 @@ O Yii já predefine uma gama de aliases para referenciar facilmente caminhos de 
 - `@app`, o [[yii\base\Application::basePath|caminho base]] da aplicação sendo executada no momento.
 - `@runtime`, o [[yii\base\Application::runtimePath|caminho runtime]] da aplicação sendo executada no momento.
 - `@webroot`, o diretório webroot da aplicação sendo executada no momento. Este é determinado baseado no diretório
-   contendo o [script de entrada](structure-entry-scripts.md).
+  contendo o [script de entrada](structure-entry-scripts.md).
 - `@web`, a URL base da aplicacão sendo executada no momento. Esta tem o mesmo valor de [[yii\web\Request::baseUrl]].
 - `@vendor`, o [[yii\base\Application::vendorPath|caminho da pasta vendor do Composer]]. 
-   Seu padrão é `@app/vendor`.
+  Seu padrão é `@app/vendor`.
 - `@bower`, o caminho raiz que contém os [pacotes bower](https://bower.io/). Seu padrão é `@vendor/bower`.
 - `@npm`, o caminho raiz que contém [pacotes npm](https://www.npmjs.com/). Seu padrão é `@vendor/npm`.
 

@@ -133,17 +133,17 @@ $posts = Yii::$app->db->createCommand('SELECT * FROM post')
 // 返回一行 (第一行)
 // 如果该查询没有结果则返回 false
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=1')
-           ->queryOne();
+          ->queryOne();
 
 // 返回一列 (第一列)
 // 如果该查询没有结果则返回空数组
 $titles = Yii::$app->db->createCommand('SELECT title FROM post')
-             ->queryColumn();
+            ->queryColumn();
 
 // 返回一个标量值
 // 如果该查询没有结果则返回 false
 $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
-             ->queryScalar();
+            ->queryScalar();
 ```
 
 > Note: 为了保持精度，即使对应的数据库列类型为数值型，
@@ -157,9 +157,9 @@ $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
 
 ```php
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValue(':id', $_GET['id'])
-           ->bindValue(':status', 1)
-           ->queryOne();
+          ->bindValue(':id', $_GET['id'])
+          ->bindValue(':status', 1)
+          ->queryOne();
 ```
 
 在 SQL 语句中，你可以嵌入一个或多个参数占位符(例如，上述例子中的 `:id` )。 
@@ -177,11 +177,11 @@ $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status
 $params = [':id' => $_GET['id'], ':status' => 1];
 
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValues($params)
-           ->queryOne();
+          ->bindValues($params)
+          ->queryOne();
            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
-           ->queryOne();
+          ->queryOne();
 ```
 
 绑定参数是通过 [预处理语句](https://www.php.net/manual/zh/mysqli.quickstart.prepared-statements.php) 实现的。
@@ -228,7 +228,7 @@ $post2 = $command->queryOne();
 
 ```php
 Yii::$app->db->createCommand('UPDATE post SET status=1 WHERE id=1')
-   ->execute();
+  ->execute();
 ```
 
 [[yii\db\Command::execute()]] 方法返回执行 SQL 所影响到的行数。

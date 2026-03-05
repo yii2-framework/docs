@@ -12,10 +12,10 @@ ActiveForm 触发一系列专用事件。使用类似以下的代码，您可以
 
 ```javascript
 $('#contact-form').on('beforeSubmit', function (e) {
-	if (!confirm("Everything is correct. Submit?")) {
-		return false;
-	}
-	return true;
+  if (!confirm("Everything is correct. Submit?")) {
+    return false;
+  }
+  return true;
 });
 ```
 
@@ -166,8 +166,8 @@ $form.on('beforeSubmit', function() {
         error: function(jqXHR, errMsg) {
             alert(errMsg);
         }
-     });
-     return false; // 防止默认提交
+    });
+    return false; // 防止默认提交
 });
 ```
 

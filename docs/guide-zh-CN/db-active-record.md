@@ -78,8 +78,8 @@ class Customer extends ActiveRecord
     const STATUS_ACTIVE = 1;
     
     /**
-     * @return string Active Record 类关联的数据库表名称
-     */
+    * @return string Active Record 类关联的数据库表名称
+    */
     public static function tableName()
     {
         return '{{customer}}';
@@ -614,19 +614,19 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 会发生以下生命周期：
 
 1. [[yii\db\ActiveRecord::beforeValidate()|beforeValidate()]]：触发 
-   [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] 事件。如果这方法返回 `false` 
-   或者 [[yii\base\ModelEvent::isValid]] 值为 `false`，接下来的步骤都会被跳过。
+  [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] 事件。如果这方法返回 `false` 
+  或者 [[yii\base\ModelEvent::isValid]] 值为 `false`，接下来的步骤都会被跳过。
 2. 执行数据验证。如果数据验证失败，步骤 3 之后的步骤将被跳过。
 3. [[yii\db\ActiveRecord::afterValidate()|afterValidate()]]：触发
-   [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]] 事件。
+  [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]] 事件。
 4. [[yii\db\ActiveRecord::beforeSave()|beforeSave()]]：触发
-   [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] 
-   或者 [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]] 事件。 如果这方法返回 `false` 
-   或者 [[yii\base\ModelEvent::isValid]] 值为 `false`，接下来的步骤都会被跳过。
+  [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] 
+  或者 [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]] 事件。 如果这方法返回 `false` 
+  或者 [[yii\base\ModelEvent::isValid]] 值为 `false`，接下来的步骤都会被跳过。
 5. 执行真正的数据插入或者更新。
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]：触发
-   [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
-   或者 [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]] 事件。
+  [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
+  或者 [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]] 事件。
    
 
 ### 删除数据生命周期（Deleting Data Life Cycle） <span id="deleting-data-life-cycle"></span>
@@ -635,11 +635,11 @@ Customer::deleteAll(['status' => Customer::STATUS_INACTIVE]);
 会发生以下生命周期：
 
 1. [[yii\db\ActiveRecord::beforeDelete()|beforeDelete()]]：触发
-   [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]] 事件。 如果这方法返回 `false` 
-   或者 [[yii\base\ModelEvent::isValid]] 值为 `false`，接下来的步骤都会被跳过。
+  [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]] 事件。 如果这方法返回 `false` 
+  或者 [[yii\base\ModelEvent::isValid]] 值为 `false`，接下来的步骤都会被跳过。
 2. 执行真正的数据删除。
 3. [[yii\db\ActiveRecord::afterDelete()|afterDelete()]]：触发
-   [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]] 事件。
+  [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]] 事件。
 
 
 > Tip: 调用以下方法则不会启动上述的任何生命周期，
@@ -741,13 +741,13 @@ class Customer extends ActiveRecord
 使用乐观锁的步骤，
 
 1. 在与 Active Record 类相关联的 DB 表中创建一个列，以存储每行的版本号。
-   这个列应当是长整型（在 MySQL 中是  `BIGINT DEFAULT 0`）。
+  这个列应当是长整型（在 MySQL 中是  `BIGINT DEFAULT 0`）。
 2. 重写 [[yii\db\ActiveRecord::optimisticLock()]] 方法返回这个列的命名。
 3. 在你的 Model 类里实现 [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] 行为（注：这个行为类在 2.0.16 版本加入），以便从请求参数里自动解析这个列的值。
-   然后从验证规则中删除 version 属性，因为 [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] 已经处理它了.
+  然后从验证规则中删除 version 属性，因为 [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] 已经处理它了.
 4. 在用于用户填写的 Web 表单中，添加一个隐藏字段（hidden field）来存储正在更新的行的当前版本号。
 5. 在使用 Active Record 更新数据的控制器动作中，要捕获（try/catch） [[yii\db\StaleObjectException]] 异常。
-   实现一些业务逻辑来解决冲突（例如合并更改，提示陈旧的数据等等）。
+  实现一些业务逻辑来解决冲突（例如合并更改，提示陈旧的数据等等）。
    
 例如，假定版本列被命名为 `version`。您可以使用下面的代码来实现乐观锁。
 
@@ -1726,8 +1726,8 @@ class Customer extends \yii\db\ActiveRecord
 class Customer extends \yii\db\ActiveRecord
 {
     /**
-     * 为聚合数据定义一个只读的虚拟属性
-     */
+    * 为聚合数据定义一个只读的虚拟属性
+    */
     public function getOrdersCount()
     {
         if ($this->isNewRecord) {
@@ -1738,16 +1738,16 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     /**
-     * 声明一个常规的 'orders' 关联
-     */
+    * 声明一个常规的 'orders' 关联
+    */
     public function getOrders()
     {
         return $this->hasMany(Order::class, ['customer_id' => 'id']);
     }
 
     /**
-     * 基于 'orders' 关联，声明一个用于查询聚合的新关联
-     */
+    * 基于 'orders' 关联，声明一个用于查询聚合的新关联
+    */
     public function getOrdersAggregation()
     {
         return $this->getOrders()

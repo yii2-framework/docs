@@ -49,47 +49,47 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Buscar una identidad por el ID dado.
-     *
-     * @param string|int $id ID que debe buscarse
-     * @return IdentityInterface|null objeto de identidad que coincide con el ID dado.
-     */
+    * Buscar una identidad por el ID dado.
+    *
+    * @param string|int $id ID que debe buscarse
+    * @return IdentityInterface|null objeto de identidad que coincide con el ID dado.
+    */
     public static function findIdentity($id)
     {
         return static::findOne($id);
     }
 
     /**
-     * Buscar una identidad por el token dado..
-     *
-     * @param string $token token que debe buscarse
-     * @return IdentityInterface|null objeto de identidad que coincide con el token dado.
-     */
+    * Buscar una identidad por el token dado..
+    *
+    * @param string $token token que debe buscarse
+    * @return IdentityInterface|null objeto de identidad que coincide con el token dado.
+    */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::findOne(['access_token' => $token]);
     }
 
     /**
-     * @return int|string ID del usuario actual
-     */
+    * @return int|string ID del usuario actual
+    */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @return string|null llave de autenticación del usuario actual
-     */
+    * @return string|null llave de autenticación del usuario actual
+    */
     public function getAuthKey()
     {
         return $this->auth_key;
     }
 
     /**
-     * @param string $authKey
-     * @return bool|null si la llave de autenticación es válida para el usuario actual
-     */
+    * @param string $authKey
+    * @return bool|null si la llave de autenticación es válida para el usuario actual
+    */
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;

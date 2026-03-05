@@ -34,5 +34,3 @@ Quando o limitador de acesso está habilitado, por padrão a cada resposta será
 * `X-Rate-Limit-Reset`, o número de segundos de espera a fim de obter o número máximo de pedidos permitidos.
 
 Você pode desativar esses cabeçalhos, configurando [[yii\filters\RateLimiter::enableRateLimitHeaders]] para `false`, como mostrado no exemplo acima.
-
-

@@ -15,7 +15,7 @@ O código acima é equivalente a seguinte instrução SQL escrita à mão para M
 
 ```php
 $db->createCommand('INSERT INTO `customer` (`name`) VALUES (:name)', [
-   ':name' => 'Qiang',
+  ':name' => 'Qiang',
 ])->execute();
 ```
 
@@ -49,16 +49,16 @@ use yii\db\ActiveRecord;
 
 class Customer extends ActiveRecord
 {
-   const STATUS_INACTIVE = 0;
-   const STATUS_ACTIVE = 1;
+  const STATUS_INACTIVE = 0;
+  const STATUS_ACTIVE = 1;
    
-   /**
+  /**
     * @return string the name of the table associated with this ActiveRecord class.
     */
-   public static function tableName()
-   {
-       return 'customer';
-   }
+  public static function tableName()
+  {
+      return 'customer';
+  }
 }
 ```
 
@@ -73,14 +73,14 @@ Por padrão, o Active Record usa o [componente de aplicação](structure-applica
 
 ```php
 return [
-   'components' => [
-       'db' => [
-           'class' => 'yii\db\Connection',
-           'dsn' => 'mysql:host=localhost;dbname=testdb',
-           'username' => 'demo',
-           'password' => 'demo',
-       ],
-   ],
+  'components' => [
+      'db' => [
+          'class' => 'yii\db\Connection',
+          'dsn' => 'mysql:host=localhost;dbname=testdb',
+          'username' => 'demo',
+          'password' => 'demo',
+      ],
+  ],
 ];
 ```
 
@@ -89,13 +89,13 @@ Se você quiser usar uma conexão de banco de dados diferente do que o component
 ```php
 class Customer extends ActiveRecord
 {
-   // ...
+  // ...
 
-   public static function getDb()
-   {
-       // use the "db2" application component
-       return \Yii::$app->db2;  
-   }
+  public static function getDb()
+  {
+      // use the "db2" application component
+      return \Yii::$app->db2;  
+  }
 }
 ```
 
@@ -116,27 +116,27 @@ A seguir, estão alguns exemplos que mostram como usar Active Query para pesquis
 // retorna um único customer cujo ID é 123
 // SELECT * FROM `customer` WHERE `id` = 123
 $customer = Customer::find()
-   ->where(['id' => 123])
-   ->one();
+  ->where(['id' => 123])
+  ->one();
 
 // retorna todos customers ativos e os ordena por seus IDs
 // SELECT * FROM `customer` WHERE `status` = 1 ORDER BY `id`
 $customers = Customer::find()
-   ->where(['status' => Customer::STATUS_ACTIVE])
-   ->orderBy('id')
-   ->all();
+  ->where(['status' => Customer::STATUS_ACTIVE])
+  ->orderBy('id')
+  ->all();
 
 // retorna a quantidade de customers ativos
 // SELECT COUNT(*) FROM `customer` WHERE `status` = 1
 $count = Customer::find()
-   ->where(['status' => Customer::STATUS_ACTIVE])
-   ->count();
+  ->where(['status' => Customer::STATUS_ACTIVE])
+  ->count();
 
 // retorna todos customers em um array indexado pelos seus IDs
 // SELECT * FROM `customer`
 $customers = Customer::find()
-   ->indexBy('id')
-   ->all();
+  ->indexBy('id')
+  ->all();
 ```
 
 No exemplo acima, `$customer` é um objeto `Customer` enquanto `$customers` é um array de objetos `Customer`. Todos são preenchidos com os dados recuperados da tabela `customer`.
@@ -168,14 +168,14 @@ $customers = Customer::findAll([100, 101, 123, 124]);
 // retorna um customer ativo cujo ID é 123
 // SELECT * FROM `customer` WHERE `id` = 123 AND `status` = 1
 $customer = Customer::findOne([
-   'id' => 123,
-   'status' => Customer::STATUS_ACTIVE,
+  'id' => 123,
+  'status' => Customer::STATUS_ACTIVE,
 ]);
 
 // retorna todos os customers inativos
 // SELECT * FROM `customer` WHERE `status` = 0
 $customers = Customer::findAll([
-   'status' => Customer::STATUS_INACTIVE,
+  'status' => Customer::STATUS_INACTIVE,
 ]);
 ```
 
@@ -215,17 +215,17 @@ Acontece frequentemente que os dados que estão sendo inseridos e/ou exibidos es
 ```php
 class Customer extends ActiveRecord
 {
-   // ...
+  // ...
 
-   public function getBirthdayText()
-   {
-       return date('Y/m/d', $this->birthday);
-   }
+  public function getBirthdayText()
+  {
+      return date('Y/m/d', $this->birthday);
+  }
    
-   public function setBirthdayText($value)
-   {
-       $this->birthday = strtotime($value);
-   }
+  public function setBirthdayText($value)
+  {
+      $this->birthday = strtotime($value);
+  }
 }
 ```
 
@@ -242,8 +242,8 @@ Embora a recuperação de dados através de objetos Active Record seja convenien
 // retorna todos os `customers`
 // cada `customer` retornado é associado a um array
 $customers = Customer::find()
-   ->asArray()
-   ->all();
+  ->asArray()
+  ->all();
 ```
 
 > Observação: Enquanto este método economiza memória e melhora o desempenho, ele é muito próximo a camada de abstração do DB e você vai perder a maioria dos recursos do Active Record. Uma distinção muito importante reside no tipo dos valores de coluna de dados. Quando você retorna dados em uma instância de Active Record, valores de colunas serão automaticamente convertidos de acordo com os tipos de coluna reais; de outra forma quando você retorna dados em arrays, valores de colunas serão strings (uma vez que são o resultado do PDO sem nenhum processamento), independentemente seus tipos de coluna reais.
@@ -256,17 +256,17 @@ No [Query Builder](db-query-builder.md), explicamos que você pode usar *batch q
 ```php
 // descarrega 10 `customers` a cada vez
 foreach (Customer::find()->batch(10) as $customers) {
-   // $customers é um array de 10 ou memos objetos Customer
+  // $customers é um array de 10 ou memos objetos Customer
 }
 
 // descarrega 10 `customers` por vez e faz a iteração deles um por um
 foreach (Customer::find()->each(10) as $customer) {
-   // $customer é um objeto Customer
+  // $customer é um objeto Customer
 }
 
 // batch query com carga antecipada
 foreach (Customer::find()->with('orders')->each() as $customer) {
-   // $customer é um objeto Customer
+  // $customer é um objeto Customer
 }
 ```
 
@@ -301,11 +301,11 @@ Você pode diferenciar os dois estados de uma instância de Active Record verifi
 ```php
 public function save($runValidation = true, $attributeNames = null)
 {
-   if ($this->getIsNewRecord()) {
-       return $this->insert($runValidation, $attributeNames);
-   } else {
-       return $this->update($runValidation, $attributeNames) !== false;
-   }
+  if ($this->getIsNewRecord()) {
+      return $this->insert($runValidation, $attributeNames);
+  } else {
+      return $this->update($runValidation, $attributeNames) !== false;
+  }
 }
 ```
 
@@ -327,8 +327,8 @@ Como um [models](structure-models.md) normal, instância de Active Record també
 
 ```php
 $values = [
-   'name' => 'James',
-   'email' => 'james@example.com',
+  'name' => 'James',
+  'email' => 'james@example.com',
 ];
 
 $customer = new Customer();
@@ -470,22 +470,22 @@ Existem duas formas de usar [transações](db-dao.md#performing-transactions) qu
 $customer = Customer::findOne(123);
 
 Customer::getDb()->transaction(function($db) use ($customer) {
-   $customer->id = 200;
-   $customer->save();
-   // ...outras operações DB...
+  $customer->id = 200;
+  $customer->save();
+  // ...outras operações DB...
 });
 
 // ou como alternativa
 
 $transaction = Customer::getDb()->beginTransaction();
 try {
-   $customer->id = 200;
-   $customer->save();
-   // ...outras operações DB...
-   $transaction->commit();
+  $customer->id = 200;
+  $customer->save();
+  // ...outras operações DB...
+  $transaction->commit();
 } catch(\Exception $e) {
-   $transaction->rollBack();
-   throw $e;
+  $transaction->rollBack();
+  throw $e;
 }
 ```
 
@@ -494,15 +494,15 @@ A segunda maneira é listar as operações de banco de dados que exigem suporte 
 ```php
 class Customer extends ActiveRecord
 {
-   public function transactions()
-   {
-       return [
-           'admin' => self::OP_INSERT,
-           'api' => self::OP_INSERT | self::OP_UPDATE | self::OP_DELETE,
-           // o código acima é equivalente ao código abaixo:
-           // 'api' => self::OP_ALL,
-       ];
-   }
+  public function transactions()
+  {
+      return [
+          'admin' => self::OP_INSERT,
+          'api' => self::OP_INSERT | self::OP_UPDATE | self::OP_DELETE,
+          // o código acima é equivalente ao código abaixo:
+          // 'api' => self::OP_ALL,
+      ];
+  }
 }
 ```
 
@@ -545,19 +545,19 @@ use yii\db\StaleObjectException;
 
 public function actionUpdate($id)
 {
-   $model = $this->findModel($id);
+  $model = $this->findModel($id);
 
-   try {
-       if ($model->load(Yii::$app->request->post()) && $model->save()) {
-           return $this->redirect(['view', 'id' => $model->id]);
-       } else {
-           return $this->render('update', [
-               'model' => $model,
-           ]);
-       }
-   } catch (StaleObjectException $e) {
-       // lógica para resolver o conflito
-   }
+  try {
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          return $this->redirect(['view', 'id' => $model->id]);
+      } else {
+          return $this->render('update', [
+              'model' => $model,
+          ]);
+      }
+  } catch (StaleObjectException $e) {
+      // lógica para resolver o conflito
+  }
 }
 ```
 
@@ -574,18 +574,18 @@ Para trabalhar com dados relacionais usando Active Record, você primeiro precis
 ```php
 class Customer extends ActiveRecord
 {
-   public function getOrders()
-   {
-       return $this->hasMany(Order::class, ['customer_id' => 'id']);
-   }
+  public function getOrders()
+  {
+      return $this->hasMany(Order::class, ['customer_id' => 'id']);
+  }
 }
 
 class Order extends ActiveRecord
 {
-   public function getCustomer()
-   {
-       return $this->hasOne(Customer::class, ['id' => 'customer_id']);
-   }
+  public function getCustomer()
+  {
+      return $this->hasOne(Customer::class, ['id' => 'customer_id']);
+  }
 }
 ```
 
@@ -640,9 +640,9 @@ $customer = Customer::findOne(123);
 
 // SELECT * FROM `order` WHERE `subtotal` > 200 ORDER BY `id`
 $orders = $customer->getOrders()
-   ->where(['>', 'subtotal', 200])
-   ->orderBy('id')
-   ->all();
+  ->where(['>', 'subtotal', 200])
+  ->orderBy('id')
+  ->all();
 ```
 
 Diferente de acessar uma propriedade de relação, cada vez que você executar uma consulta relacional dinâmica através de um método de relação, uma instrução SQL será executada, mesmo que a mesma consulta relacional dinâmica tenha sido executada anteriormente.
@@ -652,12 +652,12 @@ Algumas vezes você pode querer parametrizar uma relação para que possa execut
 ```php
 class Customer extends ActiveRecord
 {
-   public function getBigOrders($threshold = 100)
-   {
-       return $this->hasMany(Order::class, ['customer_id' => 'id'])
-           ->where('subtotal > :threshold', [':threshold' => $threshold])
-           ->orderBy('id');
-   }
+  public function getBigOrders($threshold = 100)
+  {
+      return $this->hasMany(Order::class, ['customer_id' => 'id'])
+          ->where('subtotal > :threshold', [':threshold' => $threshold])
+          ->orderBy('id');
+  }
 }
 ```
 
@@ -681,11 +681,11 @@ Ao declarar tais relações, você chamaria [[yii\db\ActiveQuery::via()|via()]] 
 ```php
 class Order extends ActiveRecord
 {
-   public function getItems()
-   {
-       return $this->hasMany(Item::class, ['id' => 'item_id'])
-           ->viaTable('order_item', ['order_id' => 'id']);
-   }
+  public function getItems()
+  {
+      return $this->hasMany(Item::class, ['id' => 'item_id'])
+          ->viaTable('order_item', ['order_id' => 'id']);
+  }
 }
 ```
 
@@ -694,16 +694,16 @@ ou alternativamente,
 ```php
 class Order extends ActiveRecord
 {
-   public function getOrderItems()
-   {
-       return $this->hasMany(OrderItem::class, ['order_id' => 'id']);
-   }
+  public function getOrderItems()
+  {
+      return $this->hasMany(OrderItem::class, ['order_id' => 'id']);
+  }
 
-   public function getItems()
-   {
-       return $this->hasMany(Item::class, ['id' => 'item_id'])
-           ->via('orderItems');
-   }
+  public function getItems()
+  {
+      return $this->hasMany(Item::class, ['id' => 'item_id'])
+          ->via('orderItems');
+  }
 }
 ```
 
@@ -742,8 +742,8 @@ O uso de lazy loading é muito conveniente. Entretanto, pode haver um problema d
 $customers = Customer::find()->limit(100)->all();
 
 foreach ($customers as $customer) {
-   // SELECT * FROM `order` WHERE `customer_id` = ...
-   $orders = $customer->orders;
+  // SELECT * FROM `order` WHERE `customer_id` = ...
+  $orders = $customer->orders;
 }
 ```
 
@@ -755,13 +755,13 @@ Para resolver este problema de performance, você pode usar o *eager loading*, c
 // SELECT * FROM `customer` LIMIT 100;
 // SELECT * FROM `orders` WHERE `customer_id` IN (...)
 $customers = Customer::find()
-   ->with('orders')
-   ->limit(100)
-   ->all();
+  ->with('orders')
+  ->limit(100)
+  ->all();
 
 foreach ($customers as $customer) {
-   // nenhum SQL é executado
-   $orders = $customer->orders;
+  // nenhum SQL é executado
+  $orders = $customer->orders;
 }
 ```
 
@@ -800,10 +800,10 @@ Ao carregar antecipadamente uma relação, você pode personalizar a consulta re
 // SELECT * FROM `country` WHERE `id` IN (...)
 // SELECT * FROM `order` WHERE `customer_id` IN (...) AND `status` = 1
 $customers = Customer::find()->with([
-   'country',
-   'orders' => function ($query) {
-       $query->andWhere(['status' => Order::STATUS_ACTIVE]);
-   },
+  'country',
+  'orders' => function ($query) {
+      $query->andWhere(['status' => Order::STATUS_ACTIVE]);
+  },
 ])->all();
 ```
 
@@ -831,20 +831,20 @@ As consultas relacionais que temos descrito até agora só fizeram referência a
 // 
 // SELECT * FROM `order` WHERE `customer_id` IN (...)
 $customers = Customer::find()
-   ->select('customer.*')
-   ->leftJoin('order', '`order`.`customer_id` = `customer`.`id`')
-   ->where(['order.status' => Order::STATUS_ACTIVE])
-   ->with('orders')
-   ->all();
+  ->select('customer.*')
+  ->leftJoin('order', '`order`.`customer_id` = `customer`.`id`')
+  ->where(['order.status' => Order::STATUS_ACTIVE])
+  ->with('orders')
+  ->all();
 ```
 
 > Observação: É importante evitar ambiguidade de nomes de colunas ao criar queries com JOIN. Uma prática comum é prefixar os nomes das colunas com os nomes de tabela correspondente. Entretanto, uma melhor abordagem é a de explorar as declarações de relação existente chamando [[yii\db\ActiveQuery::joinWith()]]:
 
 ```php
 $customers = Customer::find()
-   ->joinWith('orders')
-   ->where(['order.status' => Order::STATUS_ACTIVE])
-   ->all();
+  ->joinWith('orders')
+  ->where(['order.status' => Order::STATUS_ACTIVE])
+  ->all();
 ```
 
 Ambas as formas executam o mesmo conjunto de instruções SQL. Embora a última abordagem seja mais elegante. 
@@ -857,11 +857,11 @@ Assim como [[yii\db\ActiveQuery::with()|with()]], você pode juntar uma ou vári
 
 ```php
 $customers = Customer::find()->joinWith([
-   'orders' => function ($query) {
-       $query->andWhere(['>', 'subtotal', 100]);
-   },
+  'orders' => function ($query) {
+      $query->andWhere(['>', 'subtotal', 100]);
+  },
 ])->with('country')
-   ->all();
+  ->all();
 ```
 
 Algumas vezes ao juntar duas tabelas, você pode precisar especificar alguma condição extra na estrutura SQL `ON` do JOIN. Isto pode ser feito chamando o método [[yii\db\ActiveQuery::onCondition()]] como a seguir:
@@ -872,9 +872,9 @@ Algumas vezes ao juntar duas tabelas, você pode precisar especificar alguma con
 // 
 // SELECT * FROM `order` WHERE `customer_id` IN (...)
 $customers = Customer::find()->joinWith([
-   'orders' => function ($query) {
-       $query->onCondition(['order.status' => Order::STATUS_ACTIVE]);
-   },
+  'orders' => function ($query) {
+      $query->onCondition(['order.status' => Order::STATUS_ACTIVE]);
+  },
 ])->all();
 ```
 
@@ -890,18 +890,18 @@ Declarações de relação são geralmente recíprocas entre duas classes de Act
 ```php
 class Customer extends ActiveRecord
 {
-   public function getOrders()
-   {
-       return $this->hasMany(Order::class, ['customer_id' => 'id']);
-   }
+  public function getOrders()
+  {
+      return $this->hasMany(Order::class, ['customer_id' => 'id']);
+  }
 }
 
 class Order extends ActiveRecord
 {
-   public function getCustomer()
-   {
-       return $this->hasOne(Customer::class, ['id' => 'customer_id']);
-   }
+  public function getCustomer()
+  {
+      return $this->hasOne(Customer::class, ['id' => 'customer_id']);
+  }
 }
 ```
 
@@ -928,10 +928,10 @@ Para evitar esta redundância de execução de SQL no exemplo acima, devemos diz
 ```php
 class Customer extends ActiveRecord
 {
-   public function getOrders()
-   {
-       return $this->hasMany(Order::class, ['customer_id' => 'id'])->inverseOf('customer');
-   }
+  public function getOrders()
+  {
+      return $this->hasMany(Order::class, ['customer_id' => 'id'])->inverseOf('customer');
+  }
 }
 ```
 
@@ -1015,31 +1015,31 @@ O Active Record lhe permite declarar relações entre classes Active Record que 
 // Customer está associado a tabela "customer" em um banco de dados relacional (ex. MySQL)
 class Customer extends \yii\db\ActiveRecord
 {
-   public static function tableName()
-   {
-       return 'customer';
-   }
+  public static function tableName()
+  {
+      return 'customer';
+  }
 
-   public function getComments()
-   {
-       // a customer tem muitos comments
-       return $this->hasMany(Comment::class, ['customer_id' => 'id']);
-   }
+  public function getComments()
+  {
+      // a customer tem muitos comments
+      return $this->hasMany(Comment::class, ['customer_id' => 'id']);
+  }
 }
 
 // Comment está associado com a coleção "comment" em um banco de dados MongoDB
 class Comment extends \yii\mongodb\ActiveRecord
 {
-   public static function collectionName()
-   {
-       return 'comment';
-   }
+  public static function collectionName()
+  {
+      return 'comment';
+  }
 
-   public function getCustomer()
-   {
-       // um comment tem um customer
-       return $this->hasOne(Customer::class, ['id' => 'customer_id']);
-   }
+  public function getCustomer()
+  {
+      // um comment tem um customer
+      return $this->hasOne(Customer::class, ['id' => 'customer_id']);
+  }
 }
 
 $customers = Customer::find()->with('comments')->all();
@@ -1062,15 +1062,15 @@ use yii\db\ActiveQuery;
 
 class Comment extends ActiveRecord
 {
-   public static function find()
-   {
-       return new CommentQuery(get_called_class());
-   }
+  public static function find()
+  {
+      return new CommentQuery(get_called_class());
+  }
 }
 
 class CommentQuery extends ActiveQuery
 {
-   // ...
+  // ...
 }
 ```
 
@@ -1083,10 +1083,10 @@ Você pode personalizar uma classe de consulta  de várias formas criativas afim
 ```php
 class CommentQuery extends ActiveQuery
 {
-   public function active($state = true)
-   {
-       return $this->andWhere(['active' => $state]);
-   }
+  public function active($state = true)
+  {
+      return $this->andWhere(['active' => $state]);
+  }
 }
 ```
 
@@ -1104,10 +1104,10 @@ Você também pode usar um novo método de query building  ao definir relações
 ```php
 class Customer extends \yii\db\ActiveRecord
 {
-   public function getActiveComments()
-   {
-       return $this->hasMany(Comment::class, ['customer_id' => 'id'])->active();
-   }
+  public function getActiveComments()
+  {
+      return $this->hasMany(Comment::class, ['customer_id' => 'id'])->active();
+  }
 }
 
 $customers = Customer::find()->with('activeComments')->all();
@@ -1115,9 +1115,9 @@ $customers = Customer::find()->with('activeComments')->all();
 // ou alternativamente
 
 $customers = Customer::find()->with([
-   'comments' => function($q) {
-       $q->active();
-   }
+  'comments' => function($q) {
+      $q->active();
+  }
 ])->all();
 ```
 
@@ -1133,9 +1133,9 @@ Você é capaz de buscar colunas ou valores adicionais da consulta e armazená-l
 ```php
 class Room extends \yii\db\ActiveRecord
 {
-   public $volume;
+  public $volume;
 
-   // ...
+  // ...
 }
 ```
 
@@ -1143,15 +1143,15 @@ Então você precisa criar uma consulta, que calcule o volume da sala e realize 
 
 ```php
 $rooms = Room::find()
-   ->select([
-       '{{room}}.*', // select all columns
-       '([[length]] * [[width]].* [[height]]) AS volume', // calculate a volume
-   ])
-   ->orderBy('volume DESC') // apply sort
-   ->all();
+  ->select([
+      '{{room}}.*', // select all columns
+      '([[length]] * [[width]].* [[height]]) AS volume', // calculate a volume
+  ])
+  ->orderBy('volume DESC') // apply sort
+  ->all();
 
 foreach ($rooms as $room) {
-   echo $room->volume; // contains value calculated by SQL
+  echo $room->volume; // contains value calculated by SQL
 }
 ```
 
@@ -1160,14 +1160,14 @@ Capacidade de selecionar campos extras pode ser extremamente útil para consulta
 ```php
 class Customer extends \yii\db\ActiveRecord
 {
-   public $ordersCount;
+  public $ordersCount;
 
-   // ...
+  // ...
 
-   public function getOrders()
-   {
-       return $this->hasMany(Order::class, ['customer_id' => 'id']);
-   }
+  public function getOrders()
+  {
+      return $this->hasMany(Order::class, ['customer_id' => 'id']);
+  }
 }
 ```
 
@@ -1175,11 +1175,11 @@ Então você pode criar uma consulta que faça um JOIN com 'orders' e calcule a 
 
 ```php
 $customers = Customer::find()
-   ->select([
-       '{{customer}}.*', // select all customer fields
-       'COUNT({{order}}.id) AS ordersCount' // calculate orders count
-   ])
-   ->joinWith('orders') // ensure table junction
-   ->groupBy('{{customer}}.id') // group the result to ensure aggregation function works
-   ->all();
+  ->select([
+      '{{customer}}.*', // select all customer fields
+      'COUNT({{order}}.id) AS ordersCount' // calculate orders count
+  ])
+  ->joinWith('orders') // ensure table junction
+  ->groupBy('{{customer}}.id') // group the result to ensure aggregation function works
+  ->all();
 ```

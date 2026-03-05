@@ -88,12 +88,12 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 1. 从 [yiiframework.com](https://www.yiiframework.com/download/) 下载归档文件。
 2. 将下载的文件解压缩到 Web 访问的文件夹中。
 3. 修改 `config/web.php` 文件，给 `cookieValidationKey` 配置项
-   添加一个密钥（若你通过 Composer 安装，则此步骤会自动完成）：
+  添加一个密钥（若你通过 Composer 安装，则此步骤会自动完成）：
 
-   ```php
-   // !!! 在下面插入一段密钥（若为空） - 以供 cookie validation 的需要
-   'cookieValidationKey' => '在此处输入你的密钥',
-   ```
+  ```php
+  // !!! 在下面插入一段密钥（若为空） - 以供 cookie validation 的需要
+  'cookieValidationKey' => '在此处输入你的密钥',
+  ```
 
 
 其他安装方式 <span id="other-installation-options"></span>

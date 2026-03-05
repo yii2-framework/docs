@@ -219,4 +219,3 @@ use app\components\HelloWidget;
 当一个小部件只包含视图代码，它和[视图](structure-views.md)很相似，
 实际上，在这种情况下，唯一的区别是小部件是可以重用类，
 视图只是应用中使用的普通 PHP 脚本。
-

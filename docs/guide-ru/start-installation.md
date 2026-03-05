@@ -75,7 +75,7 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 1. Скачайте архив с [yiiframework.com](https://www.yiiframework.com/download/);
 2. Распакуйте скачанный архив в папку, доступную из Web.
 3. В файле `config/web.php` добавьте секретный ключ в значение `cookieValidationKey` (при установке через Composer
-   это происходит автоматически):
+  это происходит автоматически):
 
 ```php
 // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

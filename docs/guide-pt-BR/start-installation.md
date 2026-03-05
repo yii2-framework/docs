@@ -93,9 +93,9 @@ configuração `cookieValidationKey` (isto é feito automaticamente se você ins
 o Yii pelo Composer):
 
     ```php
-   // !!! Informe a chave secreta no item a seguir (se estiver vazio) - isto é requerido para a validação do cookie
-   'cookieValidationKey' => 'enter your secret key here',
-   ```
+  // !!! Informe a chave secreta no item a seguir (se estiver vazio) - isto é requerido para a validação do cookie
+  'cookieValidationKey' => 'enter your secret key here',
+  ```
 
 
 Outras Opções de Instalação <span id="other-installation-options"></span>

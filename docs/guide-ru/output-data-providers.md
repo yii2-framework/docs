@@ -241,24 +241,24 @@ use yii\data\BaseDataProvider;
 class CsvDataProvider extends BaseDataProvider
 {
     /**
-     * @var string имя CSV-файла для чтения
-     */
+    * @var string имя CSV-файла для чтения
+    */
     public $filename;
     
     /**
-     * @var string|callable имя столбца с ключом или callback-функция, возвращающие его
-     */
+    * @var string|callable имя столбца с ключом или callback-функция, возвращающие его
+    */
     public $key;
     
     /**
-     * @var SplFileObject
-     */
+    * @var SplFileObject
+    */
     protected $fileObject; // с помощью SplFileObject очень удобно искать конкретную строку в файле
     
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function init()
     {
         parent::init();
@@ -268,8 +268,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareModels()
     {
         $models = [];
@@ -297,8 +297,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareKeys($models)
     {
         if ($this->key !== null) {
@@ -319,8 +319,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareTotalCount()
     {
         $count = 0;

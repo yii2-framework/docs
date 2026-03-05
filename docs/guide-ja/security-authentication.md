@@ -70,47 +70,47 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 与えられた ID によってユーザ識別情報を探す
-     *
-     * @param string|int $id 探すための ID
-     * @return IdentityInterface|null 与えられた ID に合致する Identity オブジェクト
-     */
+    * 与えられた ID によってユーザ識別情報を探す
+    *
+    * @param string|int $id 探すための ID
+    * @return IdentityInterface|null 与えられた ID に合致する Identity オブジェクト
+    */
     public static function findIdentity($id)
     {
         return static::findOne($id);
     }
 
     /**
-     * 与えられたトークンによってユーザ識別情報を探す
-     *
-     * @param string $token 探すためのトークン
-     * @return IdentityInterface|null 与えられたトークンに合致する Identity オブジェクト
-     */
+    * 与えられたトークンによってユーザ識別情報を探す
+    *
+    * @param string $token 探すためのトークン
+    * @return IdentityInterface|null 与えられたトークンに合致する Identity オブジェクト
+    */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::findOne(['access_token' => $token]);
     }
 
     /**
-     * @return int|string 現在のユーザの ID
-     */
+    * @return int|string 現在のユーザの ID
+    */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @return string|null 現在のユーザの認証キー
-     */
+    * @return string|null 現在のユーザの認証キー
+    */
     public function getAuthKey()
     {
         return $this->auth_key;
     }
 
     /**
-     * @param string $authKey
-     * @return bool|null 認証キーが現在のユーザに対して有効か否か
-     */
+    * @param string $authKey
+    * @return bool|null 認証キーが現在のユーザに対して有効か否か
+    */
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;

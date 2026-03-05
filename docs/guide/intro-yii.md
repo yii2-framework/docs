@@ -57,4 +57,3 @@ Using Yii requires basic knowledge of object-oriented programming (OOP), as Yii 
 Yii 2.0 also makes use of the latest features of PHP, such as [namespaces](https://www.php.net/manual/en/language.namespaces.php)
 and [traits](https://www.php.net/manual/en/language.oop5.traits.php). Understanding these concepts will help
 you more easily pick up Yii 2.0.
-

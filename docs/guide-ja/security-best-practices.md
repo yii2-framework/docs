@@ -25,7 +25,7 @@
 ```php
 $sortBy = $_GET['sort'];
 if (!in_array($sortBy, ['title', 'created_at', 'status'])) {
-	throw new Exception('sort の値が不正です。');
+  throw new Exception('sort の値が不正です。');
 }
 ```
 
@@ -179,7 +179,7 @@ CSRF は、クロス・サイト・リクエスト・フォージェリ (cross-s
 CSRF を回避するためには、常に次のことを守らなければなりません。
 
 1. HTTP の規格、すなわち、GET はアプリケーションの状態を変更すべきではない、という規則に従うこと。
-   詳細は [RFC2616](https://www.rfc-editor.org/rfc/rfc9110.html#name-method-definitions) を参照して下さい。
+  詳細は [RFC2616](https://www.rfc-editor.org/rfc/rfc9110.html#name-method-definitions) を参照して下さい。
 2. Yii の CSRF 保護を有効にしておくこと。
 
 場合によっては、コントローラやアクションの単位で CSRF 検証を無効化する必要があることがあるでしょう。これは、そのプロパティを設定することによって達成することが出来ます。

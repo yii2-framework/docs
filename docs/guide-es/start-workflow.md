@@ -88,9 +88,9 @@ El siguiente diagrama muestra cómo una aplicación maneja una petición.
 
 1. Un usuario realiza una petición al [script de entrada](structure-entry-scripts.md) `web/index.php`.
 2. El script de entrada carga la [configuración](concept-configurations.md) de la aplicación y crea
-   una instancia de la [aplicación](structure-applications.md) para manejar la consulta.
+  una instancia de la [aplicación](structure-applications.md) para manejar la consulta.
 3. La aplicación resuelve la [ruta](runtime-routing.md) solicitada con la ayuda del
-   componente [request](runtime-requests.md) de la aplicación.
+  componente [request](runtime-requests.md) de la aplicación.
 4. La aplicación crea una instancia de un [controlador](structure-controllers.md) para manejar la petición.
 5. El controlador crea una instancia de una [acción](structure-controllers.md) y ejecuta los filtros de dicha acción.
 6. Si alguno de los filtros falla, la acción es cancelada.
@@ -99,4 +99,3 @@ El siguiente diagrama muestra cómo una aplicación maneja una petición.
 9. La acción renderiza una vista, pasándole los datos del modelo cargado.
 10. El resultado de la renderización es pasado al componente [response](runtime-responses.md) de la aplicación.
 11. El componente response envía el resultado de la renderización al navegador del usuario.
-

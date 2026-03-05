@@ -139,4 +139,3 @@ para una mejor explicación sobre esos valores.
 Los robots de motores de búsqueda tienden a respetar las cabeceras de caché. Dado que algunos `crawlers` tienen limitado
 el número de páginas que pueden rastrear por dominios dentro de un cierto período de tiempo, la introducción de cabeceras
 de caché pueden ayudar a la indexación del sitio Web y reducir el número de páginas que deben ser procesadas.
-

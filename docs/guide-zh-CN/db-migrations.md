@@ -15,7 +15,7 @@ Yii 提供了一个 *数据库迁移* 功能，该功能可以记录数据库的
 2. Tim 将这个新的迁移对象提交到代码管理系统（例如，Git，Mercurial）。
 3. Doug 从代码管理系统当中更新版本并获取到这个新的迁移对象。
 4. Doug 把这个迁移对象提交到本地的开发数据库当中，
-   这样一来，Doug 同步了 Tim 所做的修改。
+  这样一来，Doug 同步了 Tim 所做的修改。
 
 如下的步骤向我们展示了如何发布一个附带数据库迁移的新版本到生产环境当中：
 
@@ -211,8 +211,8 @@ yii migrate/create create_post
 class m150811_220037_create_post extends Migration
 {
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -221,8 +221,8 @@ class m150811_220037_create_post extends Migration
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -245,8 +245,8 @@ yii migrate/create create_post --fields="title:string,body:text"
 class m150811_220037_create_post extends Migration
 {
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -257,8 +257,8 @@ class m150811_220037_create_post extends Migration
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -282,8 +282,8 @@ yii migrate/create create_post --fields="title:string(12):notNull:unique,body:te
 class m150811_220037_create_post extends Migration
 {
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -294,8 +294,8 @@ class m150811_220037_create_post extends Migration
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -327,8 +327,8 @@ yii migrate/create create_post --fields="author_id:integer:notNull:foreignKey(us
 class m160328_040430_create_post extends Migration
 {
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -375,8 +375,8 @@ class m160328_040430_create_post extends Migration
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function down()
     {
         // drops foreign key for table `user`
@@ -540,8 +540,8 @@ yii migrate/create create_junction_post_and_tag --fields="created_at:dateTime"
 class m160328_041642_create_junction_post_and_tag extends Migration
 {
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function up()
     {
         $this->createTable('post_tag', [
@@ -587,8 +587,8 @@ class m160328_041642_create_junction_post_and_tag extends Migration
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function down()
     {
         // drops foreign key for table `post`

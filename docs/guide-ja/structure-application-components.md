@@ -72,7 +72,7 @@
         },
         function($app){
             // 何らかのコード
-           return;
+          return;
         }
     ],
     'components' => [

@@ -64,7 +64,7 @@ INSERT INTO `country` VALUES ('US','United States',322976000);
 </p>
 
 <blockquote class="note"><p dir="rtl">
-   ملاحظة: يمكنك تقعيل ال PDO مباشرة من خلال الدخول الى php.ini ومن ثم حذف الفاصلة المنقوطة قبل السطر التالي: <code>extension=php_pdo.dll</code>
+  ملاحظة: يمكنك تقعيل ال PDO مباشرة من خلال الدخول الى php.ini ومن ثم حذف الفاصلة المنقوطة قبل السطر التالي: <code>extension=php_pdo.dll</code>
     كما يمكنك تفعيل ال driver المطلوب عن طريق حذف الفاصلة المنقوطة قبل ال driver المقصود مثل: 
 <code>extension=php_pdo_mysql.dll</code>
     ويمكنك الإطلاع على المزيد من هنا: 

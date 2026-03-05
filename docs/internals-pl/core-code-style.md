@@ -127,8 +127,8 @@ class Foo
 class Foo
 {
     /**
-     * Dokumentacja
-     */
+    * Dokumentacja
+    */
     public function bar()
     {
         // code
@@ -140,7 +140,7 @@ class Foo
 ### 4.4 Bloki PHPDoc
 
  - `@param`, `@var`, `@property` i `@return` muszą deklarować użyte typy `bool`, `int`, `string`, `array` lub `null`.
-   Można również używać nazw klas jak `Model` lub `ActiveRecord`.
+  Można również używać nazw klas jak `Model` lub `ActiveRecord`.
  - Dla typowanych tablic należy używać `ClassName[]`.
  - Pierwsza linia bloku PHPDoc musi opisywać cel istnienia metody.
  - Jeśli metoda sprawdza cokolwiek (`isActive`, `hasClass`, itp.) pierwsza linia powinna zaczynać się od `Checks whether`.
@@ -157,7 +157,7 @@ class Foo
  */
  private function inRange($ip, $cidr, $range)
  {
-   // ...
+  // ...
  }
 ```
 
@@ -295,7 +295,7 @@ wygląda lepiej w postaci
 ```php
 $result = $this->getResult();
 if (empty($result)) {
-   return true;
+  return true;
 }
 
 // przetwarzanie wyniku
@@ -375,14 +375,14 @@ Dokumentacja
   ```php
     <?php
     /**
-     * Returns the errors for all attribute or a single attribute.
-     * @param string $attribute attribute name. Use `null` to retrieve errors for all attributes.
-     * @property array An array of errors for all attributes. Empty array is returned if no error.
-     * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
-     * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
-     * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
-     * ...
-     */
+    * Returns the errors for all attribute or a single attribute.
+    * @param string $attribute attribute name. Use `null` to retrieve errors for all attributes.
+    * @property array An array of errors for all attributes. Empty array is returned if no error.
+    * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
+    * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
+    * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
+    * ...
+    */
     public function getErrors($attribute = null)
   ```
 

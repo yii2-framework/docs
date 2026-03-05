@@ -264,11 +264,11 @@ the operator can be one of the following:
 - `not`: requires only operand 1, which will be wrapped in `NOT()`. For example, `['not', 'id=1']` will generate `NOT (id=1)`. Operand 1 may also be an array to describe multiple expressions. For example `['not', ['status' => 'draft', 'name' => 'example']]` will generate `NOT ((status='draft') AND (name='example'))`.
 
 - `between`: operand 1 should be the column name, and operand 2 and 3 should be the
-   starting and ending values of the range that the column is in.
-   For example, `['between', 'id', 1, 10]` will generate `id BETWEEN 1 AND 10`.
-   In case you need to build a condition where value is between two columns (like `11 BETWEEN min_id AND max_id`), 
-   you should use [[yii\db\conditions\BetweenColumnsCondition|BetweenColumnsCondition]]. 
-   See [Conditions – Object Format](#object-format) chapter to learn more about object definition of conditions.
+  starting and ending values of the range that the column is in.
+  For example, `['between', 'id', 1, 10]` will generate `id BETWEEN 1 AND 10`.
+  In case you need to build a condition where value is between two columns (like `11 BETWEEN min_id AND max_id`), 
+  you should use [[yii\db\conditions\BetweenColumnsCondition|BetweenColumnsCondition]]. 
+  See [Conditions – Object Format](#object-format) chapter to learn more about object definition of conditions.
 
 - `not between`: similar to `between` except the `BETWEEN` is replaced with `NOT BETWEEN`
   in the generated condition.
@@ -551,10 +551,10 @@ The [[yii\db\Query::join()|join()]] method takes four parameters:
 - `$type`: join type, e.g., `'INNER JOIN'`, `'LEFT JOIN'`.
 - `$table`: the name of the table to be joined.
 - `$on`: optional, the join condition, i.e., the `ON` fragment. Please refer to [where()](#where) for details
-   about specifying a condition. Note, that the array syntax does **not** work for specifying a column based
-   condition, e.g. `['user.id' => 'comment.userId']` will result in a condition where the user id must be equal
-   to the string `'comment.userId'`. You should use the string syntax instead and specify the condition as
-   `'user.id = comment.userId'`.
+  about specifying a condition. Note, that the array syntax does **not** work for specifying a column based
+  condition, e.g. `['user.id' => 'comment.userId']` will result in a condition where the user id must be equal
+  to the string `'comment.userId'`. You should use the string syntax instead and specify the condition as
+  `'user.id = comment.userId'`.
 - `$params`: optional, the parameters to be bound to the join condition.
 
 You can use the following shortcut methods to specify `INNER JOIN`, `LEFT JOIN` and `RIGHT JOIN`, respectively.
@@ -904,9 +904,9 @@ class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
     private $value;
 
     /**
-     * @param string[] $columns Array of columns that must be greater, than $value
-     * @param mixed $value the value to compare each $column against.
-     */
+    * @param string[] $columns Array of columns that must be greater, than $value
+    * @param mixed $value the value to compare each $column against.
+    */
     public function __construct(array $columns, $value)
     {
         $this->columns = $columns;
@@ -941,10 +941,10 @@ class AllGreaterConditionBuilder implements \yii\db\ExpressionBuilderInterface
     use \yii\db\ExpressionBuilderTrait; // Contains constructor and `queryBuilder` property.
 
     /**
-     * @param ExpressionInterface $condition the condition to be built
-     * @param array $params the binding parameters.
-     * @return AllGreaterCondition
-     */ 
+    * @param ExpressionInterface $condition the condition to be built
+    * @param array $params the binding parameters.
+    * @return AllGreaterCondition
+    */ 
     public function build(ExpressionInterface $expression, array &$params = [])
     {
         $value = $condition->getValue();

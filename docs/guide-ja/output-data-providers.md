@@ -246,24 +246,24 @@ use yii\data\BaseDataProvider;
 class CsvDataProvider extends BaseDataProvider
 {
     /**
-     * @var string 読み出す CSV ファイルの名前
-     */
+    * @var string 読み出す CSV ファイルの名前
+    */
     public $filename;
     
     /**
-     * @var string|callable キーカラムの名前またはそれを返すコーラブル
-     */
+    * @var string|callable キーカラムの名前またはそれを返すコーラブル
+    */
     public $key;
     
     /**
-     * @var SplFileObject
-     */
+    * @var SplFileObject
+    */
     protected $fileObject; // ファイルの特定の行までシークするのに SplFileObject が非常に便利
     
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function init()
     {
         parent::init();
@@ -273,8 +273,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareModels()
     {
         $models = [];
@@ -302,8 +302,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareKeys($models)
     {
         if ($this->key !== null) {
@@ -324,8 +324,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareTotalCount()
     {
         $count = 0;

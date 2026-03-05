@@ -139,17 +139,17 @@ $posts = Yii::$app->db->createCommand('SELECT * FROM post')
 // return a single row (the first row)
 // false is returned if the query has no result
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=1')
-           ->queryOne();
+          ->queryOne();
 
 // return a single column (the first column)
 // an empty array is returned if the query returned no results
 $titles = Yii::$app->db->createCommand('SELECT title FROM post')
-             ->queryColumn();
+            ->queryColumn();
 
 // return a scalar value
 // false is returned if the query has no result
 $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
-             ->queryScalar();
+            ->queryScalar();
 ```
 
 > Note: To preserve precision, the data fetched from databases are all represented as strings, even if the corresponding
@@ -163,9 +163,9 @@ to prevent SQL injection attacks. For example,
 
 ```php
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValue(':id', $_GET['id'])
-           ->bindValue(':status', 1)
-           ->queryOne();
+          ->bindValue(':id', $_GET['id'])
+          ->bindValue(':status', 1)
+          ->queryOne();
 ```
 
 In the SQL statement, you can embed one or multiple parameter placeholders (e.g. `:id` in the above example). A parameter
@@ -183,11 +183,11 @@ The following example shows alternative ways of binding parameters:
 $params = [':id' => $_GET['id'], ':status' => 1];
 
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValues($params)
-           ->queryOne();
+          ->bindValues($params)
+          ->queryOne();
            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
-           ->queryOne();
+          ->queryOne();
 ```
 
 Parameter binding is implemented via [prepared statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php).
@@ -234,7 +234,7 @@ For queries that do not bring back data, you should call the [[yii\db\Command::e
 
 ```php
 Yii::$app->db->createCommand('UPDATE post SET status=1 WHERE id=1')
-   ->execute();
+  ->execute();
 ```
 
 The [[yii\db\Command::execute()]] method returns the number of rows affected by the SQL execution.

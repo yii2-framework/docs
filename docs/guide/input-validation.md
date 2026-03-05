@@ -86,11 +86,11 @@ If you do not specify an `on` option, it means the rule will be applied to all s
 When the `validate()` method is called, it does the following steps to perform validation:
 
 1. Determine which attributes should be validated by getting the attribute list from [[yii\base\Model::scenarios()]]
-   using the current [[yii\base\Model::scenario|scenario]]. These attributes are called *active attributes*.
+  using the current [[yii\base\Model::scenario|scenario]]. These attributes are called *active attributes*.
 2. Determine which validation rules should be used by getting the rule list from [[yii\base\Model::rules()]]
-   using the current [[yii\base\Model::scenario|scenario]]. These rules are called *active rules*.
+  using the current [[yii\base\Model::scenario|scenario]]. These rules are called *active rules*.
 3. Use each active rule to validate each active attribute which is associated with the rule.
-   The validation rules are evaluated in the order they are listed.
+  The validation rules are evaluated in the order they are listed.
 
 According to the above validation steps, an attribute will be validated if and only if it is
 an active attribute declared in `scenarios()` and is associated with one or multiple active rules
@@ -229,12 +229,12 @@ The above code will perform the following operations on the input:
 
 1. Trim whitespace from the input value.
 2. Make sure empty input is stored as `null` in the database; we differentiate between a value being "not set"
-   and the actual value `0`. If `null` is not allowed you can set another default value here.
+  and the actual value `0`. If `null` is not allowed you can set another default value here.
 3. Validate that the value is an integer greater than 0 if it is not empty. Normal validators have
-   [[yii\validators\Validator::$skipOnEmpty|$skipOnEmpty]] set to `true`.
+  [[yii\validators\Validator::$skipOnEmpty|$skipOnEmpty]] set to `true`.
 4. Make sure the value is of type integer, e.g. casting a string `'42'` to integer `42`.
-   Here we set [[yii\validators\FilterValidator::$skipOnEmpty|$skipOnEmpty]] to `true`, which is `false` by default
-   on the [[yii\validators\FilterValidator|filter]] validator.
+  Here we set [[yii\validators\FilterValidator::$skipOnEmpty|$skipOnEmpty]] to `true`, which is `false` by default
+  on the [[yii\validators\FilterValidator|filter]] validator.
 
 ### Handling Empty Inputs <span id="handling-empty-inputs"></span>
 
@@ -485,12 +485,12 @@ Sometimes validators involve multiple attributes. Consider the following form:
 class MigrationForm extends \yii\base\Model
 {
     /**
-     * Minimal funds amount for one adult person
-     */
+    * Minimal funds amount for one adult person
+    */
     const MIN_ADULT_FUNDS = 3000;
     /**
-     * Minimal funds amount for one child
-     */
+    * Minimal funds amount for one child
+    */
     const MIN_CHILD_FUNDS = 1500;
 
     public $personalSalary;

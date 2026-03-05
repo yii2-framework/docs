@@ -28,55 +28,55 @@ Seu código pode ser organizado da seguinte maneira:
 
 ```
 api/
-   common/
-       controllers/
-           UserController.php
-           PostController.php
-       models/
-           User.php
-           Post.php
-   modules/
-       v1/
-           controllers/
-               UserController.php
-               PostController.php
-           models/
-               User.php
-               Post.php
-           Module.php
-       v2/
-           controllers/
-               UserController.php
-               PostController.php
-           models/
-               User.php
-               Post.php
-           Module.php
+  common/
+      controllers/
+          UserController.php
+          PostController.php
+      models/
+          User.php
+          Post.php
+  modules/
+      v1/
+          controllers/
+              UserController.php
+              PostController.php
+          models/
+              User.php
+              Post.php
+          Module.php
+      v2/
+          controllers/
+              UserController.php
+              PostController.php
+          models/
+              User.php
+              Post.php
+          Module.php
 ```
 
 A configuração da sua aplicação seria algo como:
 
 ```php
 return [
-   'modules' => [
-       'v1' => [
-           'class' => 'app\modules\v1\Module',
-       ],
-       'v2' => [
-           'class' => 'app\modules\v2\Module',
-       ],
-   ],
-   'components' => [
-       'urlManager' => [
-           'enablePrettyUrl' => true,
-           'enableStrictParsing' => true,
-           'showScriptName' => false,
-           'rules' => [
-               ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/user', 'v1/post']],
-               ['class' => 'yii\rest\UrlRule', 'controller' => ['v2/user', 'v2/post']],
-           ],
-       ],
-   ],
+  'modules' => [
+      'v1' => [
+          'class' => 'app\modules\v1\Module',
+      ],
+      'v2' => [
+          'class' => 'app\modules\v2\Module',
+      ],
+  ],
+  'components' => [
+      'urlManager' => [
+          'enablePrettyUrl' => true,
+          'enableStrictParsing' => true,
+          'showScriptName' => false,
+          'rules' => [
+              ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/user', 'v1/post']],
+              ['class' => 'yii\rest\UrlRule', 'controller' => ['v2/user', 'v2/post']],
+          ],
+      ],
+  ],
 ];
 ```
 

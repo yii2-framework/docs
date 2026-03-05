@@ -72,10 +72,10 @@ Instalasi Yii dari file arsip melibatkan tiga langkah:
 3. Memodifikasi `config/web.php` dengan memasukkan kunci rahasia untuk `cookieValidationKey`.
    (Ini dilakukan secara otomatis jika Anda menginstal Yii menggunakan Composer):
 
-   ```php
-   // !!! Isikan nilai key jika kosong - ini diperlukan oleh cookie validation
-   'cookieValidationKey' => 'enter your secret key here',
-   ```
+  ```php
+  // !!! Isikan nilai key jika kosong - ini diperlukan oleh cookie validation
+  'cookieValidationKey' => 'enter your secret key here',
+  ```
 
 
 Pilihan Instalasi lainnya <span id="other-installation-options"></span>

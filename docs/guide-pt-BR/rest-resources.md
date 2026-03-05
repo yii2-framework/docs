@@ -47,28 +47,28 @@ Você pode sobrescrever `fields()` para adicionar, remover, renomear ou redefini
 // nos seus campos (Manter compatibilidade da API).
 public function fields()
 {
-   return [
-       // Nome do campo é igual ao nome do atributo
-       'id',
-       // nome do campo é "email", o nome do atributo correspondente é  "email_address"
-       'email' => 'email_address',
-       // nome do campo é "name", seu valor é definido por um PHP callback
-       'name' => function ($model) {
-           return $model->first_name . ' ' . $model->last_name;
-       },
-   ];
+  return [
+      // Nome do campo é igual ao nome do atributo
+      'id',
+      // nome do campo é "email", o nome do atributo correspondente é  "email_address"
+      'email' => 'email_address',
+      // nome do campo é "name", seu valor é definido por um PHP callback
+      'name' => function ($model) {
+          return $model->first_name . ' ' . $model->last_name;
+      },
+  ];
 }
 
 // filtrar alguns campos, melhor usado quando você deseja herdar a implementação do pai
 // e deseja esconder alguns campos confidenciais.
 public function fields()
 {
-   $fields = parent::fields();
+  $fields = parent::fields();
 
-   // remove campos que contém informações confidenciais
-   unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
+  // remove campos que contém informações confidenciais
+  unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
 
-   return $fields;
+  return $fields;
 }
 ```
 
@@ -89,12 +89,12 @@ O formato do retorno dos dados do `extraFields()` é o mesmo de `fields()`. Gera
 ```php
 public function fields()
 {
-   return ['id', 'email'];
+  return ['id', 'email'];
 }
 
 public function extraFields()
 {
-   return ['profile'];
+  return ['profile'];
 }
 ```
 
@@ -102,15 +102,15 @@ o request com `http://localhost/users?fields=id,email&expand=profile` pode retor
 
 ```php
 [
-   {
-       "id": 100,
-       "email": "100@example.com",
-       "profile": {
-           "id": 100,
-           "age": 30,
-       }
-   },
-   ...
+  {
+      "id": 100,
+      "email": "100@example.com",
+      "profile": {
+          "id": 100,
+          "age": 30,
+      }
+  },
+  ...
 ]
 ```
 
@@ -130,12 +130,12 @@ use yii\helpers\Url;
 
 class User extends ActiveRecord implements Linkable
 {
-   public function getLinks()
-   {
-       return [
-           Link::REL_SELF => Url::to(['user/view', 'id' => $this->id], true),
-       ];
-   }
+  public function getLinks()
+  {
+      return [
+          Link::REL_SELF => Url::to(['user/view', 'id' => $this->id], true),
+      ];
+  }
 }
 ```
 
@@ -143,14 +143,14 @@ Quando o objeto `User` for retornado em uma resposta, será composto de um eleme
 
 ```
 {
-   "id": 100,
-   "email": "user@example.com",
-   // ...
-   "_links" => {
-       "self": {
-           "href": "https://example.com/users/100"
-       }
-   }
+  "id": 100,
+  "email": "user@example.com",
+  // ...
+  "_links" => {
+      "self": {
+          "href": "https://example.com/users/100"
+      }
+  }
 }
 ```
 
@@ -170,12 +170,12 @@ use app\models\Post;
 
 class PostController extends Controller
 {
-   public function actionIndex()
-   {
-       return new ActiveDataProvider([
-           'query' => Post::find(),
-       ]);
-   }
+  public function actionIndex()
+  {
+      return new ActiveDataProvider([
+          'query' => Post::find(),
+      ]);
+  }
 }
 ```
 
@@ -188,5 +188,3 @@ Quando um data provider está enviando uma resposta com a API RESTful, o [[yii\r
 * `Link`: Um conjunto de links de navegação, permitindo que o cliente percorra os recursos página por página.
 
 Um exemplo pode ser encontrado na seção [Introdução](rest-quick-start.md#trying-it-out).
-
-

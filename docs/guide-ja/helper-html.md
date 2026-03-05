@@ -46,14 +46,14 @@ Yii はそのような手助けを Html ヘルパの形式で提供します。
 - 属性の値は [[yii\helpers\Html::encode()|Html::encode()]] を使って HTML エンコードされます。
 - 属性の値が配列である場合は、次のように処理されます。
  
-   * 属性が [[yii\helpers\Html::$dataAttributes]] にリストされているデータ属性である場合、例えば `data` や `ng` である場合は、
+  * 属性が [[yii\helpers\Html::$dataAttributes]] にリストされているデータ属性である場合、例えば `data` や `ng` である場合は、
     値の配列にある要素の一つ一つについて、属性のリストがレンダリングされます。
-     例えば、`'data' => ['id' => 1, 'name' => 'yii']` は `data-id="1" data-name="yii"` を生成します。
-     また、`'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` は 
-     `data-params='{"id":1,"name":"yii"}' data-status="ok"` を生成します。
-     後者の例において、下位の配列に対して JSON 形式が使用されていることに注意してください。
-   * 属性がデータ属性でない場合は、値は JSON エンコードされます。
-     例えば、`['params' => ['id' => 1, 'name' => 'yii']` は `params='{"id":1,"name":"yii"}'` を生成します。
+    例えば、`'data' => ['id' => 1, 'name' => 'yii']` は `data-id="1" data-name="yii"` を生成します。
+    また、`'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` は 
+    `data-params='{"id":1,"name":"yii"}' data-status="ok"` を生成します。
+    後者の例において、下位の配列に対して JSON 形式が使用されていることに注意してください。
+  * 属性がデータ属性でない場合は、値は JSON エンコードされます。
+    例えば、`['params' => ['id' => 1, 'name' => 'yii']` は `params='{"id":1,"name":"yii"}'` を生成します。
 
 
 ### CSS のクラスとスタイルを形成する <span id="forming-css"></span>

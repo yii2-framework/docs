@@ -17,24 +17,24 @@ use yii\base\Behavior;
 
 class MyBehavior extends Behavior
 {
-   public $prop1;
+  public $prop1;
 
-   private $_prop2;
+  private $_prop2;
 
-   public function getProp2()
-   {
-       return $this->_prop2;
-   }
+  public function getProp2()
+  {
+      return $this->_prop2;
+  }
 
-   public function setProp2($value)
-   {
-       $this->_prop2 = $value;
-   }
+  public function setProp2($value)
+  {
+      $this->_prop2 = $value;
+  }
 
-   public function foo()
-   {
-       // ...
-   }
+  public function foo()
+  {
+      // ...
+  }
 }
 ```
 
@@ -59,19 +59,19 @@ use yii\base\Behavior;
 
 class MyBehavior extends Behavior
 {
-   // ...
+  // ...
 
-   public function events()
-   {
-       return [
-           ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
-       ];
-   }
+  public function events()
+  {
+      return [
+          ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
+      ];
+  }
 
-   public function beforeValidate($event)
-   {
-       // ...
-   }
+  public function beforeValidate($event)
+  {
+      // ...
+  }
 }
 ```
 
@@ -107,30 +107,30 @@ use app\components\MyBehavior;
 
 class User extends ActiveRecord
 {
-   public function behaviors()
-   {
-       return [
-           // behavior anônimo, somente o nome da classe
-           MyBehavior::class,
+  public function behaviors()
+  {
+      return [
+          // behavior anônimo, somente o nome da classe
+          MyBehavior::class,
 
-           // behavior nomeado, somente o nome da classe
-           'myBehavior2' => MyBehavior::class,
+          // behavior nomeado, somente o nome da classe
+          'myBehavior2' => MyBehavior::class,
 
-           // behavior anônimo, array de configuração
-           [
-               'class' => MyBehavior::class,
-               'prop1' => 'value1',
-               'prop2' => 'value2',
-           ],
+          // behavior anônimo, array de configuração
+          [
+              'class' => MyBehavior::class,
+              'prop1' => 'value1',
+              'prop2' => 'value2',
+          ],
 
-           // behavior nomeado, array de configuração
-           'myBehavior4' => [
-               'class' => MyBehavior::class,
-               'prop1' => 'value1',
-               'prop2' => 'value2',
-           ]
-       ];
-   }
+          // behavior nomeado, array de configuração
+          'myBehavior4' => [
+              'class' => MyBehavior::class,
+              'prop1' => 'value1',
+              'prop2' => 'value2',
+          ]
+      ];
+  }
 }
 ```
 
@@ -149,9 +149,9 @@ $component->attachBehavior('myBehavior2', MyBehavior::class);
 
 // anexando através de um array de configuração
 $component->attachBehavior('myBehavior3', [
-   'class' => MyBehavior::class,
-   'prop1' => 'value1',
-   'prop2' => 'value2',
+  'class' => MyBehavior::class,
+  'prop1' => 'value1',
+  'prop2' => 'value2',
 ]);
 ```
 
@@ -159,8 +159,8 @@ Você pode anexar vários behaviors de uma só vez usando o método [[yii\base\C
 
 ```php
 $component->attachBehaviors([
-   'myBehavior1' => new MyBehavior,  // um behavior nomeado
-   MyBehavior::class,          // um behavior anônimo 
+  'myBehavior1' => new MyBehavior,  // um behavior nomeado
+  MyBehavior::class,          // um behavior anônimo 
 ]);
 ```
 
@@ -168,13 +168,13 @@ Você também pode anexar behaviors através de [configurações](concept-config
 
 ```php
 [
-   'as myBehavior2' => MyBehavior::class,
+  'as myBehavior2' => MyBehavior::class,
 
-   'as myBehavior3' => [
-       'class' => MyBehavior::class,
-       'prop1' => 'value1',
-       'prop2' => 'value2',
-   ],
+  'as myBehavior3' => [
+      'class' => MyBehavior::class,
+      'prop1' => 'value1',
+      'prop2' => 'value2',
+  ],
 ]
 ```
 
@@ -249,20 +249,20 @@ use yii\behaviors\TimestampBehavior;
 
 class User extends ActiveRecord
 {
-   // ...
+  // ...
 
-   public function behaviors()
-   {
-       return [
-           [
-               'class' => TimestampBehavior::class,
-               'attributes' => [
-                   ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                   ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-               ],
-           ],
-       ];
-   }
+  public function behaviors()
+  {
+      return [
+          [
+              'class' => TimestampBehavior::class,
+              'attributes' => [
+                  ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                  ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+              ],
+          ],
+      ];
+  }
 }
 ```
 
@@ -312,4 +312,3 @@ Quando houver nomes conflitantes entre diferentes behaviors anexados ao mesmo co
 Traits são muito mais eficientes do que behaviors, estes são objetos e requerem mais tempo e memória.
 
 IDEs são mais amigáveis com traits por serem nativos do PHP.
-

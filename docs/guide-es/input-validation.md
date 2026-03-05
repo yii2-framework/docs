@@ -86,11 +86,11 @@ Si no especificas una opción `on`, significa que la regla se aplicará en todos
 Cuando el método `validate()` es llamado, este sigue los siguientes pasos para realiza la validación:
 
 1. Determina cuáles atributos deberían ser validados obteniendo la lista de atributos de [[yii\base\Model::scenarios()]]
-   utilizando el [[yii\base\Model::scenario|scenario]] actual. Estos atributos son llamados *atributos activos*.
+  utilizando el [[yii\base\Model::scenario|scenario]] actual. Estos atributos son llamados *atributos activos*.
 2. Determina cuáles reglas de validación deberían ser validados obteniendo la lista de reglas de [[yii\base\Model::rules()]]
-   utilizando el [[yii\base\Model::scenario|scenario]] actual. Estas reglas son llamadas *reglas activas*.
+  utilizando el [[yii\base\Model::scenario|scenario]] actual. Estas reglas son llamadas *reglas activas*.
 3. Utiliza cada regla activa para validar cada atributo activo que esté asociado a la regla.
-   Las reglas de validación son evaluadas en el orden en que están listadas.
+  Las reglas de validación son evaluadas en el orden en que están listadas.
 
 De acuerdo a los pasos de validación mostrados arriba, un atributo será validado si y sólo si
 es un atributo activo declarado en `scenarios()` y está asociado a una o varias reglas activas

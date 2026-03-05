@@ -88,12 +88,12 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 1. [yiiframework.com](https://www.yiiframework.com/download/) からアーカイブ・ファイルをダウンロードします。
 2. ダウンロードしたファイルをウェブ・アクセス可能なフォルダに展開します。
 3. `config/web.php` ファイルを編集して、`cookieValidationKey` という構成情報の項目に秘密キーを入力します
-   (Composer を使って Yii をインストールするときは、これは自動的に実行されます)。
+  (Composer を使って Yii をインストールするときは、これは自動的に実行されます)。
 
-   ```php
-   // !!! 下記に(もし空白なら)秘密キーを入力する - これはクッキー検証のために必要
-   'cookieValidationKey' => '秘密キーをここに入力',
-   ```
+  ```php
+  // !!! 下記に(もし空白なら)秘密キーを入力する - これはクッキー検証のために必要
+  'cookieValidationKey' => '秘密キーをここに入力',
+  ```
 
 
 他のインストール・オプション <span id="other-installation-options"></span>

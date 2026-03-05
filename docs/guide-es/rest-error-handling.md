@@ -28,11 +28,11 @@ La siguiente lista sumariza los códigos de estado HTTP que son usados por el fr
 
 * `200`: OK. Todo ha funcionado como se esperaba.
 * `201`: El recurso ha creado con éxito en respuesta a la petición `POST`. La cabecera de situación `Location`
-   contiene la URL apuntando al nuevo recurso creado.
+  contiene la URL apuntando al nuevo recurso creado.
 * `204`: La petición ha sido manejada con éxito y el cuerpo de la respuesta no tiene contenido (como una petición `DELETE`).
 * `304`: El recurso no ha sido modificado. Puede usar la versión en caché.
 * `400`: Petición errónea. Esto puede estar causado por varias acciones de el usuario, como proveer un JSON no válido
-   en el cuerpo de la petición, proveyendo parámetros de acción no válidos, etc.
+  en el cuerpo de la petición, proveyendo parámetros de acción no válidos, etc.
 * `401`: Autenticación fallida.
 * `403`: El usuario autenticado no tiene permitido acceder a la API final.
 * `404`: El recurso pedido no existe.

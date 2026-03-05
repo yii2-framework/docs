@@ -16,19 +16,19 @@ da aplicação e cria uma instância da [aplicação](structure-applications.md)
 No construtor da aplicação, as seguintes etapas de inicialização serão realizadas:
 
 1. O método [[yii\base\Application::preInit()|preInit()]] é chamado, na qual 
-   algumas propriedades da aplicação de alta prioridade serão configuradas, como 
-   o [[yii\base\Application::basePath|basePath]].
+  algumas propriedades da aplicação de alta prioridade serão configuradas, como 
+  o [[yii\base\Application::basePath|basePath]].
 2. Registra o [[yii\base\Application::errorHandler|manipulador de erro]].
 3. Inicializa as propriedades da aplicação a partir da configuração da aplicação.
 4. O método [[yii\base\Application::init()|init()]] é chamado, que por sua vez 
-   chamará o método [[yii\base\Application::bootstrap()|bootstrap()]] para executar 
-   os componentes de inicialização.
-   - Inclui o arquivo `vendor/yiisoft/extensions.php` de manifesto da extensão.
-   - Cria e executa os [componentes de inicialização](structure-extensions.md#bootstrapping-classes) 
-     declaradas pelas extensões.
-   - Cria e executa os [componentes da aplicação](structure-application-components.md) 
-     e/ou os [módulos](structure-modules.md) declarados na 
-     [propriedade bootstrap](structure-applications.md#bootstrap) da aplicação.
+  chamará o método [[yii\base\Application::bootstrap()|bootstrap()]] para executar 
+  os componentes de inicialização.
+  - Inclui o arquivo `vendor/yiisoft/extensions.php` de manifesto da extensão.
+  - Cria e executa os [componentes de inicialização](structure-extensions.md#bootstrapping-classes) 
+    declaradas pelas extensões.
+  - Cria e executa os [componentes da aplicação](structure-application-components.md) 
+    e/ou os [módulos](structure-modules.md) declarados na 
+    [propriedade bootstrap](structure-applications.md#bootstrap) da aplicação.
 
 Como as etapas de inicialização tem que ser feitos antes da manipulação de *cada* 
 requisição, é muito importante que mantenha este processo limpo e otimizado o 
@@ -52,4 +52,3 @@ complexas, que são divididos em vários arquivos menores. Se este for o caso,
 considere guardar o cache de todo o array da configuração e carregue-o 
 diretamente a partir deste cache antes da criação da instância da aplicação no 
 script de entrada.
-

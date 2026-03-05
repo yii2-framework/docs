@@ -128,8 +128,8 @@ class Foo
 class Foo
 {
     /**
-     * Documentation
-     */
+    * Documentation
+    */
     public function bar()
     {
         // code
@@ -141,7 +141,7 @@ class Foo
 ### 4.4 PHPDoc blocks
 
  - `@param`, `@var`, `@property` and `@return` must declare types as `bool`, `int`, `string`, `array` or `null`.
-   You can use a class names as well such as `Model` or `ActiveRecord`.
+  You can use a class names as well such as `Model` or `ActiveRecord`.
  - For a typed arrays use `ClassName[]`.
  - The first line of the PHPDoc must describe the purpose of the method.
  - If method checks something (`isActive`, `hasClass`, etc) the first line should start with `Checks whether`.
@@ -158,7 +158,7 @@ class Foo
  */
  private function inRange($ip, $cidr, $range)
  {
-   // ...
+  // ...
  }
 ```
 
@@ -297,7 +297,7 @@ is better as
 ```php
 $result = $this->getResult();
 if (empty($result)) {
-   return true;
+  return true;
 }
 
 // process result
@@ -379,14 +379,14 @@ Documentation
   ```php
     <?php
     /**
-     * Returns the errors for all attribute or a single attribute.
-     * @param string $attribute attribute name. Use null to retrieve errors for all attributes.
-     * @property array An array of errors for all attributes. Empty array is returned if no error.
-     * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
-     * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
-     * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
-     * ...
-     */
+    * Returns the errors for all attribute or a single attribute.
+    * @param string $attribute attribute name. Use null to retrieve errors for all attributes.
+    * @property array An array of errors for all attributes. Empty array is returned if no error.
+    * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
+    * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
+    * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
+    * ...
+    */
     public function getErrors($attribute = null)
   ```
 
@@ -533,4 +533,3 @@ Properties allowing to configure component not to do something should accept val
 - use singular form for names representing relevant functionality/features (e.g. web)
 - prefer single word namespaces
 - if single word isn't suitable, use camelCase
-

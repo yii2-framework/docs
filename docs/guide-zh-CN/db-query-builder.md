@@ -550,10 +550,10 @@ $query->join('LEFT JOIN', 'post', 'post.user_id = user.id');
 - `$type`：连接类型，例如，`'INNER JOIN'`，`'LEFT JOIN'`。
 - `$table`：将要连接的表名称。
 - `$on`：可选的，连接条件，即 `ON` 片段。有关指定条件的详细信息，请参阅 [where()](#where)。
-   请注意，数组语法 **不能** 用于指定基于列的条件，
-   例如，`['user.id' => 'comment.userId']` 将导致用户 id 必须等于字符串
-   `'comment.userId'` 的情况。您应该使用字符串语法，并将条件指定为
-   `'user.id = comment.userId'`。
+  请注意，数组语法 **不能** 用于指定基于列的条件，
+  例如，`['user.id' => 'comment.userId']` 将导致用户 id 必须等于字符串
+  `'comment.userId'` 的情况。您应该使用字符串语法，并将条件指定为
+  `'user.id = comment.userId'`。
 - `$params`：可选参数，与连接条件绑定的参数。
 
 你可以分别调用如下的快捷方法来指定 `INNER JOIN`, `LEFT JOIN` 和 `RIGHT JOIN`。
@@ -878,9 +878,9 @@ class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
     private $value;
 
     /**
-     * @param string[] $columns 要大于 $value 的字段名数组
-     * @param mixed $value 每个 $column 要比较的数值
-     */
+    * @param string[] $columns 要大于 $value 的字段名数组
+    * @param mixed $value 每个 $column 要比较的数值
+    */
     public function __construct(array $columns, $value)
     {
         $this->columns = $columns;
@@ -915,10 +915,10 @@ class AllGreaterConditionBuilder implements \yii\db\ExpressionBuilderInterface
     use \yii\db\ExpressionBuilderTrait; // Contains constructor and `queryBuilder` property.
 
     /**
-     * @param ExpressionInterface $condition 要构建的查询条件对象
-     * @param array $params 绑定的参数
-     * @return AllGreaterCondition
-     */ 
+    * @param ExpressionInterface $condition 要构建的查询条件对象
+    * @param array $params 绑定的参数
+    * @return AllGreaterCondition
+    */ 
     public function build(ExpressionInterface $expression, array &$params = [])
     {
         $value = $condition->getValue();

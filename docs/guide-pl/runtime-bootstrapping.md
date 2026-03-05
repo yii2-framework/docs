@@ -11,15 +11,15 @@ i tworzy instancję [aplikacji](structure-applications.md).
 W konstruktorze aplikacji zachodzi następujący proces bootstrappingu:
 
 1. Wywołanie metody [[yii\base\Application::preInit()|preInit()]], która konfiguruje niektóre z właściwości aplikacji o wysokim priorytecie, 
-   takich jak [[yii\base\Application::basePath|basePath]].
+  takich jak [[yii\base\Application::basePath|basePath]].
 2. Rejestracja [[yii\base\Application::errorHandler|obsługi błędów]].
 3. Inicjalizacja właściwości aplikacji za pomocą utworzonej konfiguracji.
 4. Wywołanie metody [[yii\base\Application::init()|init()]], która uruchamia proces bootstrappingu komponentów za pomocą metody 
-   [[yii\base\Application::bootstrap()|bootstrap()]].
-   - Załadowanie pliku manifestu dla rozszerzeń `vendor/yiisoft/extensions.php`.
-   - Utworzenie i uruchomienie [komponentów bootstrapowych](structure-extensions.md#bootstrapping-classes) zadeklarowanych przez rozszerzenia.
-   - Utworzenie i uruchomienie [komponentów aplikacji](structure-application-components.md) i/lub [modułów](structure-modules.md), zadeklarowanych 
-     we [właściwości bootstrapowej](structure-applications.md#bootstrap) aplikacji.
+  [[yii\base\Application::bootstrap()|bootstrap()]].
+  - Załadowanie pliku manifestu dla rozszerzeń `vendor/yiisoft/extensions.php`.
+  - Utworzenie i uruchomienie [komponentów bootstrapowych](structure-extensions.md#bootstrapping-classes) zadeklarowanych przez rozszerzenia.
+  - Utworzenie i uruchomienie [komponentów aplikacji](structure-application-components.md) i/lub [modułów](structure-modules.md), zadeklarowanych 
+    we [właściwości bootstrapowej](structure-applications.md#bootstrap) aplikacji.
 
 Ponieważ proces bootstrappingu jest wykonywany przed obsługą *każdego* żądania, niezwykle istotnym jest, aby był lekki i zoptymalizowany tak bardzo, jak to tylko możliwe.
 

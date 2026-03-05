@@ -101,11 +101,11 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 以下是将扩展创建为一个 Composer 软件包的需遵循的基本步骤。
 
 1. 为你的扩展建一个工程，并将它存放在版本控制代码库中，例如 [github.com](https://github.com) 。
-   扩展的开发和维护都应该在这个代码库中进行。
+  扩展的开发和维护都应该在这个代码库中进行。
 2. 在工程的根目录下，建一个 Composer 所需的名为 `composer.json` 的文件。
-   详情请参考后面的章节。  
+  详情请参考后面的章节。  
 3. 在一个 Composer 代码库中注册你的扩展，比如在 [Packagist](https://packagist.org/) 中，以便其他
-   用户能找到以及用 Composer 安装你的扩展。
+  用户能找到以及用 Composer 安装你的扩展。
 
 
 ### `composer.json` <span id="composer-json"></span>
@@ -271,7 +271,7 @@ class MyBootstrapClass implements BootstrapInterface
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function () {
-             // do something here
+            // do something here
         });
     }
 }

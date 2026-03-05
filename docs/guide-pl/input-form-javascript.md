@@ -10,10 +10,10 @@ ActiveForm wyzwala serie dedykowanych zdarzeń. Używając poniższego kodu, mo�
 
 ```javascript
 $('#contact-form').on('beforeSubmit', function (e) {
-	if (!confirm("Wszystko jest w porządku. Wysłać formularz?")) {
-		return false;
-	}
-	return true;
+  if (!confirm("Wszystko jest w porządku. Wysłać formularz?")) {
+    return false;
+  }
+  return true;
 });
 ```
 
@@ -156,8 +156,8 @@ $form.on('beforeSubmit', function() {
         error: function(jqXHR, errMsg) {
             alert(errMsg);
         }
-     });
-     return false; // powstrzymuje przed domyślnym sposobem wysłania
+    });
+    return false; // powstrzymuje przed domyślnym sposobem wysłania
 });
 ```
 

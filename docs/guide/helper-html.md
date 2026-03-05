@@ -46,14 +46,14 @@ know about:
 - The values of attributes will be HTML-encoded using [[yii\helpers\Html::encode()|Html::encode()]].
 - If the value of an attribute is an array, it will be handled as follows:
  
-   * If the attribute is a data attribute as listed in [[yii\helpers\Html::$dataAttributes]], such as `data` or `ng`,
-     a list of attributes will be rendered, one for each element in the value array. For example,
-     `'data' => ['id' => 1, 'name' => 'yii']` generates `data-id="1" data-name="yii"`; and 
-     `'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` generates
-     `data-params='{"id":1,"name":"yii"}' data-status="ok"`. Note that in the latter example JSON format is used
-     to render a sub-array.
-   * If the attribute is NOT a data attribute, the value will be JSON-encoded. For example,
-     `['params' => ['id' => 1, 'name' => 'yii']` generates `params='{"id":1,"name":"yii"}'`.
+  * If the attribute is a data attribute as listed in [[yii\helpers\Html::$dataAttributes]], such as `data` or `ng`,
+    a list of attributes will be rendered, one for each element in the value array. For example,
+    `'data' => ['id' => 1, 'name' => 'yii']` generates `data-id="1" data-name="yii"`; and 
+    `'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` generates
+    `data-params='{"id":1,"name":"yii"}' data-status="ok"`. Note that in the latter example JSON format is used
+    to render a sub-array.
+  * If the attribute is NOT a data attribute, the value will be JSON-encoded. For example,
+    `['params' => ['id' => 1, 'name' => 'yii']` generates `params='{"id":1,"name":"yii"}'`.
 
 
 ### Forming CSS Classes and Styles <span id="forming-css"></span>

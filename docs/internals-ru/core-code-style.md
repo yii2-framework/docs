@@ -121,8 +121,8 @@ class Foo
 class Foo
 {
     /**
-     * Документация
-     */
+    * Документация
+    */
     public function bar()
     {
         // код

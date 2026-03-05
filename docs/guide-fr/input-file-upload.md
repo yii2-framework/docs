@@ -17,8 +17,8 @@ use yii\web\UploadedFile;
 class UploadForm extends Model
 {
     /**
-     * @var UploadedFile
-     */
+    * @var UploadedFile
+    */
     public $imageFile;
 
     public function rules()
@@ -118,8 +118,8 @@ use yii\web\UploadedFile;
 class UploadForm extends Model
 {
     /**
-     * @var UploadedFile[]
-     */
+    * @var UploadedFile[]
+    */
     public $imageFiles;
 
     public function rules()

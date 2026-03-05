@@ -16,4 +16,3 @@ Notez que plus votre application sera complexe, plus vous devrez en savoir pour 
 ## Ligne de commande et composer
 
 Yii utilise abondamment le gestionnaire de paquet [Composer](https://getcomposer.org/) qui est un standard de fait. Vous devez donc lire et comprendre son [guide](https://getcomposer.org/doc/01-basic-usage.md). Si vous n’êtes pas encore familiarisé avec la ligne de commande, c’est le moment de vous y essayer. Une fois les bases acquises, vous ne saurez plus vous en passer. 
-

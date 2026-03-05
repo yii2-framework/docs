@@ -594,16 +594,16 @@ aplikasi akan melewati proses siklus dibawah ini:
 
 1. Skrip masuk mengambil konfigurasi aplikasi dalam bentuk array.
 2. Skrip masuk membuat objek aplikasi:
-   * [[yii\base\Application::preInit()|preInit()]] dipanggil, dimana akan mengatur beberapa _property_ aplikasi
-     yang sangat penting seperti [[yii\base\Application::basePath|basePath]].
-   * Mendaftarkan [[yii\base\Application::errorHandler|penanganan error]].
-   * Mengatur _property_ aplikasi.
-   * [[yii\base\Application::init()|init()]] dipanggil, yang selanjutnya memanggil
-     [[yii\base\Application::bootstrap()|bootstrap()]] untuk menjalankan proses _bootstrap component_.
+  * [[yii\base\Application::preInit()|preInit()]] dipanggil, dimana akan mengatur beberapa _property_ aplikasi
+    yang sangat penting seperti [[yii\base\Application::basePath|basePath]].
+  * Mendaftarkan [[yii\base\Application::errorHandler|penanganan error]].
+  * Mengatur _property_ aplikasi.
+  * [[yii\base\Application::init()|init()]] dipanggil, yang selanjutnya memanggil
+    [[yii\base\Application::bootstrap()|bootstrap()]] untuk menjalankan proses _bootstrap component_.
 3. Skrip masuk memanggil [[yii\base\Application::run()]] untuk menjalankan aplikasi:
-   * Menjalankan _event_ [[yii\base\Application::EVENT_BEFORE_REQUEST|EVENT_BEFORE_REQUEST]].
-   * Menangani _request_: memproses _request_ menjadi [route](runtime-routing.md) dan parameter-parameternya;
-     membuat objek _module_, _controller_, dan _action_ yang dispesifikasikan oleh _route_; dan menjalankan _action_.
-   * Menjalankan _event_ [[yii\base\Application::EVENT_AFTER_REQUEST|EVENT_AFTER_REQUEST]].
-   * Mengirim _response_ ke pengguna.
+  * Menjalankan _event_ [[yii\base\Application::EVENT_BEFORE_REQUEST|EVENT_BEFORE_REQUEST]].
+  * Menangani _request_: memproses _request_ menjadi [route](runtime-routing.md) dan parameter-parameternya;
+    membuat objek _module_, _controller_, dan _action_ yang dispesifikasikan oleh _route_; dan menjalankan _action_.
+  * Menjalankan _event_ [[yii\base\Application::EVENT_AFTER_REQUEST|EVENT_AFTER_REQUEST]].
+  * Mengirim _response_ ke pengguna.
 4. Skrip masuk mendapatkan _status exit_ dari aplikasi dan menyelesaikan proses penanganan _request_.

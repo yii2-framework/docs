@@ -81,11 +81,11 @@ Jeśli nie dodasz opcji `on` oznacza to, że zasada zostanie użyta w każdym sc
 Wywołanie metody [[yii\base\Model::validate()|validate()]] powoduje podjęcie następujących kroków w celu wykonania walidacji:
 
 1. Określenie, które atrybuty powinny zostać zweryfikowane poprzez pobranie ich listy z metody [[yii\base\Model::scenarios()|scenarios()]], używając aktualnego
-   [[yii\base\Model::scenario|scenariusza]]. Wybrane atrybuty nazywane są *atrybutami aktywnymi*.
+  [[yii\base\Model::scenario|scenariusza]]. Wybrane atrybuty nazywane są *atrybutami aktywnymi*.
 2. Określenie, które zasady walidacji powinny zostać użyte przez pobranie ich listy z metody [[yii\base\Model::rules()|rules()]], używając aktualnego
-   [[yii\base\Model::scenario|scenariusza]]. Wybrane zasady nazywane są *zasadami aktywnymi*.
+  [[yii\base\Model::scenario|scenariusza]]. Wybrane zasady nazywane są *zasadami aktywnymi*.
 3. Użycie każdej aktywnej zasady do walidacji każdego aktywnego atrybutu, który jest powiązany z konkretną zasadą. Zasady walidacji są wykonywane w kolejności,
-   w jakiej zostały zapisane.
+  w jakiej zostały zapisane.
 
 Odnosząc się do powyższych kroków, atrybut zostanie zwalidowany wtedy i tylko wtedy, gdy jest on aktywnym atrybutem zadeklarowanym w
 [[yii\base\Model::scenarios()|scenarios()]] oraz jest powiązany z jedną lub wieloma aktywnymi zasadami zadeklarowanymi w [[yii\base\Model::rules()|rules()]].
@@ -445,12 +445,12 @@ Zdarza się, że walidatory sprawdzają wiele atrybutów jednocześnie. Rozważm
 class MigrationForm extends \yii\base\Model
 {
     /**
-     * Kwota minimalnych funduszy dla jednej dorosłej osoby
-     */
+    * Kwota minimalnych funduszy dla jednej dorosłej osoby
+    */
     const MIN_ADULT_FUNDS = 3000;
     /**
-     * Kwota minimalnych funduszy dla jednego dziecka
-     */
+    * Kwota minimalnych funduszy dla jednego dziecka
+    */
     const MIN_CHILD_FUNDS = 1500;
 
     public $personalSalary;

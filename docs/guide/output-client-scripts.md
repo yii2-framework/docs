@@ -210,4 +210,3 @@ string in valid JS syntax, which can be inserted into the JavaScript code to pla
 > - `data-method` handler
 > - script filtering
 > - redirect handling
-

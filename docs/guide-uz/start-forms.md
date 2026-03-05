@@ -200,4 +200,3 @@ Shuningdek, siz foydalanuvchidan ma'lumotlarni qabul qilish va ularni ko'rsatish
 vaqtni talab qilishi mumkin. Yii esa juda mukammal vidjetlarni taqdim qiladi, ular esa sizga ish jarayonini tezlashtirishni yordam beradi.
 
 Keyingi bo'limda siz ma'lumotlar ombori bilan ishlashni o'rganasiz, bu esa juda ko'p ilovalarda talab qilinadi.
-

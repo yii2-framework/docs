@@ -93,10 +93,10 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 (يتم ذلك تلقائيًا إذا قمت بتثبيت ال Yii باستخدام Composer): </li>
 </ol>
 
-   ```php
-   // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-   'cookieValidationKey' => 'enter your secret key here',
-   ```
+  ```php
+  // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+  'cookieValidationKey' => 'enter your secret key here',
+  ```
 
 
 ### <div dir="rtl">خيارات تثبيت أخرى</div> <span id="other-installation-options"></span>

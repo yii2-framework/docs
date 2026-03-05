@@ -126,17 +126,17 @@ $posts = Yii::$app->db->createCommand('SELECT * FROM post')
 // вернёт одну строку (первую строку)
 // false, если ничего не будет выбрано
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=1')
-           ->queryOne();
+          ->queryOne();
 
 // вернёт один столбец (первый столбец)
 // пустой массив, при отсутствии результата
 $titles = Yii::$app->db->createCommand('SELECT title FROM post')
-             ->queryColumn();
+            ->queryColumn();
 
 // вернёт скалярное значение
 // или false, при отсутствии результата
 $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
-             ->queryScalar();
+            ->queryScalar();
 ```
 
 > Note: Чтобы сохранить точность, данные извлекаются как строки, даже если тип поля в базе данных является числовым.
@@ -148,9 +148,9 @@ $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
 
 ```php
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValue(':id', $_GET['id'])
-           ->bindValue(':status', 1)
-           ->queryOne();
+          ->bindValue(':id', $_GET['id'])
+          ->bindValue(':status', 1)
+          ->queryOne();
 ```
 
 В SQL запрос, вы можете встраивать один или несколько маркеров (например `:id` в примере выше). Маркеры должны быть 
@@ -167,11 +167,11 @@ $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status
 $params = [':id' => $_GET['id'], ':status' => 1];
 
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValues($params)
-           ->queryOne();
+          ->bindValues($params)
+          ->queryOne();
            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
-           ->queryOne();
+          ->queryOne();
 ```
 
 Привязка переменных реализована через [подготавливаемые запросы](https://www.php.net/manual/ru/mysqli.quickstart.prepared-statements.php).
@@ -212,7 +212,7 @@ $post2 = $command->queryOne();
 
 ```php
 Yii::$app->db->createCommand('UPDATE post SET status=1 WHERE id=1')
-   ->execute();
+  ->execute();
 ```
 
 Метод [[yii\db\Command::execute()]] возвращает количество строк обработанных SQL запросом.

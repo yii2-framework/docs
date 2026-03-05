@@ -13,7 +13,7 @@ Poniższe kroki pokazują, jak migracje mogą być wykorzystane przez zespół d
 2. Tomek rejestruje ("commit") nową migrację w systemie kontroli wersji (np. Git, Mercurial).
 3. Mariusz uaktualnia swoje repozytorium z systemu kontroli wersji i otrzymuje nową migrację.
 4. Mariusz dodaje migrację do swojej lokalnej bazy danych, dzięki czemu synchronizuje ją ze zmianami, które wprowadził 
-   Tomek.
+  Tomek.
 
 A poniższe kroki opisują w skrócie jak stworzyć nowe wydanie z migracją bazy danych na produkcji:
 
@@ -204,8 +204,8 @@ generuje
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -214,8 +214,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -238,8 +238,8 @@ generuje
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -250,8 +250,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -275,8 +275,8 @@ generuje
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -287,8 +287,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -320,8 +320,8 @@ generuje
 class m160328_040430_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -368,8 +368,8 @@ class m160328_040430_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         // drops foreign key for table `user`
@@ -529,8 +529,8 @@ generuje
 class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post_tag', [
@@ -576,8 +576,8 @@ class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migra
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         // drops foreign key for table `post`

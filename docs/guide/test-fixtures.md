@@ -338,7 +338,7 @@ of running DB related unit tests:
 
 1. Use the `yii migrate` tool to upgrade your test database to the latest version;
 2. Run a test case:
-   - Load fixtures: clean up the relevant DB tables and populate them with fixture data;
-   - Perform the actual test;
-   - Unload fixtures.
+  - Load fixtures: clean up the relevant DB tables and populate them with fixture data;
+  - Perform the actual test;
+  - Unload fixtures.
 3. Repeat Step 2 until all tests finish.

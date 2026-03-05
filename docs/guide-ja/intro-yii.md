@@ -57,4 +57,3 @@ Yii を使うためには、オブジェクト指向プログラミング (OOP) 
 なぜなら、Yii は純粋な OOP ベースのフレームワークだからです。
 また、Yii 2.0 は [名前空間](https://www.php.net/manual/ja/language.namespaces.php) や [トレイト](https://www.php.net/manual/ja/language.oop5.traits.php) のような PHP の最新の機能を利用しています。
 これらの概念を理解することは、Yii 2.0 を採用することを一層容易にするでしょう。
-

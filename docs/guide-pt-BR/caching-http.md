@@ -132,4 +132,3 @@ para mais explicações sobre estes valores.
 
 Os bots do motor de buscas tendem a respeitar cabeçalhos de cache. Já que alguns rastreadores têm um limite sobre a quantidade de páginas por domínio que eles processam em um certo espaço de tempo, introduzir cabeçalhos de cache podem
 ajudar na indexação do seu site já que eles reduzem o número de páginas que precisam ser processadas.
-

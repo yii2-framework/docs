@@ -247,7 +247,7 @@ The [[yii\web\Response::send()]] method takes the following steps to send out a 
 
 1. Trigger the [[yii\web\Response::EVENT_BEFORE_SEND]] event.
 2. Call [[yii\web\Response::prepare()]] to format [[yii\web\Response::data|response data]] into 
-   [[yii\web\Response::content|response content]].
+  [[yii\web\Response::content|response content]].
 3. Trigger the [[yii\web\Response::EVENT_AFTER_PREPARE]] event.
 4. Call [[yii\web\Response::sendHeaders()]] to send out the registered HTTP headers.
 5. Call [[yii\web\Response::sendContent()]] to send out the response body content.

@@ -16,28 +16,28 @@ use yii\filters\AccessControl;
 
 class SiteController extends Controller
 {
-   public function behaviors()
-   {
-       return [
-           'access' => [
-               'class' => AccessControl::class,
-               'only' => ['login', 'logout', 'signup'],
-               'rules' => [
-                   [
-                       'allow' => true,
-                       'actions' => ['login', 'signup'],
-                       'roles' => ['?'],
-                   ],
-                   [
-                       'allow' => true,
-                       'actions' => ['logout'],
-                       'roles' => ['@'],
-                   ],
-               ],
-           ],
-       ];
-   }
-   // ...
+  public function behaviors()
+  {
+      return [
+          'access' => [
+              'class' => AccessControl::class,
+              'only' => ['login', 'logout', 'signup'],
+              'rules' => [
+                  [
+                      'allow' => true,
+                      'actions' => ['login', 'signup'],
+                      'roles' => ['?'],
+                  ],
+                  [
+                      'allow' => true,
+                      'actions' => ['logout'],
+                      'roles' => ['@'],
+                  ],
+              ],
+          ],
+      ];
+  }
+  // ...
 }
 ```
 
@@ -59,11 +59,11 @@ Você pode personalizar este behavior configurando a propriedade  [[yii\filters\
 
 ```php
 [
-   'class' => AccessControl::class,
-   ...
-   'denyCallback' => function ($rule, $action) {
-       throw new \Exception('Você não está autorizado a acessar esta página');
-   }
+  'class' => AccessControl::class,
+  ...
+  'denyCallback' => function ($rule, $action) {
+      throw new \Exception('Você não está autorizado a acessar esta página');
+  }
 ]
 ```
 
@@ -99,30 +99,30 @@ use yii\filters\AccessControl;
 
 class SiteController extends Controller
 {
-   public function behaviors()
-   {
-       return [
-           'access' => [
-               'class' => AccessControl::class,
-               'only' => ['special-callback'],
-               'rules' => [
-                   [
-                       'actions' => ['special-callback'],
-                       'allow' => true,
-                       'matchCallback' => function ($rule, $action) {
-                           return date('d-m') === '31-10';
-                       }
-                   ],
-               ],
-           ],
-       ];
-   }
+  public function behaviors()
+  {
+      return [
+          'access' => [
+              'class' => AccessControl::class,
+              'only' => ['special-callback'],
+              'rules' => [
+                  [
+                      'actions' => ['special-callback'],
+                      'allow' => true,
+                      'matchCallback' => function ($rule, $action) {
+                          return date('d-m') === '31-10';
+                      }
+                  ],
+              ],
+          ],
+      ];
+  }
 
-   // Match callback chamada! Esta página pode ser acessado somente a cada 31 de outubro
-   public function actionSpecialCallback()
-   {
-       return $this->render('happy-halloween');
-   }
+  // Match callback chamada! Esta página pode ser acessado somente a cada 31 de outubro
+  public function actionSpecialCallback()
+  {
+      return $this->render('happy-halloween');
+  }
 }
 ```
 
@@ -160,13 +160,13 @@ O código a seguir mostra como configurar o `authManager` na configuração da a
 
 ```php
 return [
-   // ...
-   'components' => [
-       'authManager' => [
-           'class' => 'yii\rbac\PhpManager',
-       ],
-       // ...
-   ],
+  // ...
+  'components' => [
+      'authManager' => [
+          'class' => 'yii\rbac\PhpManager',
+      ],
+      // ...
+  ],
 ];
 ```
 
@@ -181,13 +181,13 @@ O código a seguir mostra como configurar o `authManager` na configuração da a
 
 ```php
 return [
-   // ...
-   'components' => [
-       'authManager' => [
-           'class' => 'yii\rbac\DbManager',
-       ],
-       // ...
-   ],
+  // ...
+  'components' => [
+      'authManager' => [
+          'class' => 'yii\rbac\DbManager',
+      ],
+      // ...
+  ],
 ];
 ```
 
@@ -227,37 +227,37 @@ use yii\console\Controller;
 
 class RbacController extends Controller
 {
-   public function actionInit()
-   {
-       $auth = Yii::$app->authManager;
+  public function actionInit()
+  {
+      $auth = Yii::$app->authManager;
 
-       // adciona a permissão "createPost"
-       $createPost = $auth->createPermission('createPost');
-       $createPost->description = 'Create a post';
-       $auth->add($createPost);
+      // adciona a permissão "createPost"
+      $createPost = $auth->createPermission('createPost');
+      $createPost->description = 'Create a post';
+      $auth->add($createPost);
 
-       // adciona a permissão  "updatePost"
-       $updatePost = $auth->createPermission('updatePost');
-       $updatePost->description = 'Update post';
-       $auth->add($updatePost);
+      // adciona a permissão  "updatePost"
+      $updatePost = $auth->createPermission('updatePost');
+      $updatePost->description = 'Update post';
+      $auth->add($updatePost);
 
-       // adciona a role "author" e da a esta role a permissão "createPost"
-       $author = $auth->createRole('author');
-       $auth->add($author);
-       $auth->addChild($author, $createPost);
+      // adciona a role "author" e da a esta role a permissão "createPost"
+      $author = $auth->createRole('author');
+      $auth->add($author);
+      $auth->addChild($author, $createPost);
 
-       // adciona a role "admin" e da a esta role a permissão "updatePost"
-       // bem como as permissões da role "author"
-       $admin = $auth->createRole('admin');
-       $auth->add($admin);
-       $auth->addChild($admin, $updatePost);
-       $auth->addChild($admin, $author);
+      // adciona a role "admin" e da a esta role a permissão "updatePost"
+      // bem como as permissões da role "author"
+      $admin = $auth->createRole('admin');
+      $auth->add($admin);
+      $auth->addChild($admin, $updatePost);
+      $auth->addChild($admin, $author);
 
-       // Atribui roles para usuários. 1 and 2 são IDs retornados por IdentityInterface::getId()
-       // normalmente implementado no seu model User.
-       $auth->assign($author, 2);
-       $auth->assign($admin, 1);
-   }
+      // Atribui roles para usuários. 1 and 2 são IDs retornados por IdentityInterface::getId()
+      // normalmente implementado no seu model User.
+      $auth->assign($author, 2);
+      $auth->assign($admin, 1);
+  }
 }
 ```
 
@@ -273,23 +273,23 @@ conforme abaixo:
 ```php
 public function signup()
 {
-   if ($this->validate()) {
-       $user = new User();
-       $user->username = $this->username;
-       $user->email = $this->email;
-       $user->setPassword($this->password);
-       $user->generateAuthKey();
-       $user->save(false);
+  if ($this->validate()) {
+      $user = new User();
+      $user->username = $this->username;
+      $user->email = $this->email;
+      $user->setPassword($this->password);
+      $user->generateAuthKey();
+      $user->save(false);
 
-       // foram adicionadas as seguintes três linhas:
-       $auth = Yii::$app->authManager;
-       $authorRole = $auth->getRole('author');
-       $auth->assign($authorRole, $user->getId());
+      // foram adicionadas as seguintes três linhas:
+      $auth = Yii::$app->authManager;
+      $authorRole = $auth->getRole('author');
+      $auth->assign($authorRole, $user->getId());
 
-       return $user;
-   }
+      return $user;
+  }
 
-   return null;
+  return null;
 }
 ```
 
@@ -311,18 +311,18 @@ use yii\rbac\Rule;
 */
 class AuthorRule extends Rule
 {
-   public $name = 'isAuthor';
+  public $name = 'isAuthor';
 
-   /**
+  /**
     * @param string|int $user the user ID.
     * @param Item $item the role or permission that this rule is associated with
     * @param array $params parameters passed to ManagerInterface::checkAccess().
     * @return bool a value indicating whether the rule permits the role or permission it is associated with.
     */
-   public function execute($user, $item, $params)
-   {
-       return isset($params['post']) ? $params['post']->createdBy == $user : false;
-   }
+  public function execute($user, $item, $params)
+  {
+      return isset($params['post']) ? $params['post']->createdBy == $user : false;
+  }
 }
 ```
 
@@ -359,7 +359,7 @@ Com os dados de autorização prontos, você pode verificar o acesso simplesment
 
 ```php
 if (\Yii::$app->user->can('createPost')) {
-   // create post
+  // create post
 }
 ```
 
@@ -371,7 +371,7 @@ A fim de verificar se o usuário pode atualizar um post, precisamos passar um pa
 
 ```php
 if (\Yii::$app->user->can('updatePost', ['post' => $post])) {
-   // update post
+  // update post
 }
 ```
 
@@ -411,20 +411,20 @@ use yii\rbac\Rule;
 */
 class UserGroupRule extends Rule
 {
-   public $name = 'userGroup';
+  public $name = 'userGroup';
 
-   public function execute($user, $item, $params)
-   {
-       if (!Yii::$app->user->isGuest) {
-           $group = Yii::$app->user->identity->group;
-           if ($item->name === 'admin') {
-               return $group == 1;
-           } elseif ($item->name === 'author') {
-               return $group == 1 || $group == 2;
-           }
-       }
-       return false;
-   }
+  public function execute($user, $item, $params)
+  {
+      if (!Yii::$app->user->isGuest) {
+          $group = Yii::$app->user->identity->group;
+          if ($item->name === 'admin') {
+              return $group == 1;
+          } elseif ($item->name === 'author') {
+              return $group == 1 || $group == 2;
+          }
+      }
+      return false;
+  }
 }
 
 $auth = Yii::$app->authManager;
@@ -450,18 +450,15 @@ Em seguida, configure `authManager` listando as duas roles [[yii\rbac\BaseManage
 
 ```php
 return [
-   // ...
-   'components' => [
-       'authManager' => [
-           'class' => 'yii\rbac\PhpManager',
-           'defaultRoles' => ['admin', 'author'],
-       ],
-       // ...
-   ],
+  // ...
+  'components' => [
+      'authManager' => [
+          'class' => 'yii\rbac\PhpManager',
+          'defaultRoles' => ['admin', 'author'],
+      ],
+      // ...
+  ],
 ];
 ```
 
 Agora, se você executar uma verificação de acesso, ambas as roles `admin` e `author` serão verificadas através da avaliação das regras associado com elas. se a regra retornar `true`, isso significa que a role se aplica ao usuário atual. A partir da implementação da regra acima, isto significa que se o valor do ‘grupo’ de um usuário for 1, a role `admin` seria aplicável ao usuário; e se o valor do `grupo` for 2, seria a role `author`.
-
-
-

@@ -215,7 +215,7 @@ Par exemple, si vous voulez personnaliser l'objet graphique [[yii\widgets\LinkPa
 
 ```php
 \Yii::$container->set('yii\widgets\LinkPager', [
-   'maxButtonCount' => 5,
+  'maxButtonCount' => 5,
 ]);
 ```
 

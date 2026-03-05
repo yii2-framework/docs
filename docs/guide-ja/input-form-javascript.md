@@ -12,10 +12,10 @@ ActiveForm は、一連の専用のイベントを発生させます。
 
 ```javascript
 $('#contact-form').on('beforeSubmit', function (e) {
-	if (!confirm("全てオーケー。送信しますか?")) {
-		return false;
-	}
-	return true;
+  if (!confirm("全てオーケー。送信しますか?")) {
+    return false;
+  }
+  return true;
 });
 ```
 
@@ -166,8 +166,8 @@ $form.on('beforeSubmit', function() {
         error: function(jqXHR, errMsg) {
             alert(errMsg);
         }
-     });
-     return false; // デフォルトの送信を抑止
+    });
+    return false; // デフォルトの送信を抑止
 });
 ```
 

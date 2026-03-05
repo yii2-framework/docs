@@ -26,9 +26,9 @@ Yii поддерживает все выше перечисленные мето
 Чтобы включить аутентификацию для ваших API, выполните следующие шаги:
 
 1. У [компонента приложения](structure-application-components.md) `user` установите свойство
-   [[yii\web\User::enableSession|enableSession]] равным `false`.
+  [[yii\web\User::enableSession|enableSession]] равным `false`.
 2. Укажите, какие методы аутентификации вы планируете использовать, настроив поведение `authenticator`
-   в ваших классах REST-контроллеров.
+  в ваших классах REST-контроллеров.
 3. Реализуйте метод [[yii\web\IdentityInterface::findIdentityByAccessToken()]] в вашем [[yii\web\User::identityClass|классе UserIdentity]].
 
 Шаг 1 не обязателен, но рекомендуется его всё-таки выполнить, так как RESTful API не должен сохранять информацию о

@@ -380,7 +380,7 @@ $search = 'yii';
 $query->where(['status' => $status]);
 
 if (!empty($search)) {
-   $query->andWhere(['like', 'title', $search]);
+  $query->andWhere(['like', 'title', $search]);
 }
 ```
 
@@ -736,7 +736,7 @@ foreach ($query->batch() as $users) {
 
 // ou si vous voulez itérer les lignes une par une 
 foreach ($query->each() as $user) {
-     //les données sont retrouvées du serveur en lots de 100,
+    //les données sont retrouvées du serveur en lots de 100,
     // $user représente une ligne de données de la table user.
 }
 ```
@@ -877,9 +877,9 @@ class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
     private $value;
 
     /**
-     * @param string[] $columns tableau de colonnes qui doivent être plus grande que $value
-     * @param mixed $value la valeur à laquelle comparer chaque $column
-     */
+    * @param string[] $columns tableau de colonnes qui doivent être plus grande que $value
+    * @param mixed $value la valeur à laquelle comparer chaque $column
+    */
     public function __construct(array $columns, $value)
     {
         $this->columns = $columns;
@@ -913,9 +913,9 @@ class AllGreaterConditionBuilder implements \yii\db\ExpressionBuilderInterface
     use \yii\db\Condition\ExpressionBuilderTrait; // Contient le constructeur et la propriété `queryBuilder`.
 
     /**
-     * @param AllGreaterCondition $condition la condition à élaborer
-     * @param array $params les paramètres de liaison.
-     */ 
+    * @param AllGreaterCondition $condition la condition à élaborer
+    * @param array $params les paramètres de liaison.
+    */ 
     public function build(ConditionInterface $condition, &$params)
     {
         $value = $condition->getValue();

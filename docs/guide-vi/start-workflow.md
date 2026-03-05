@@ -83,9 +83,9 @@ Biểu đồ dưới đây cho thấy làm thế nào một ứng dụng để x
 
 1. User tạo yêu cầu (request) tới [mục script](structure-entry-scripts.md) `web/index.php`.
 2. Entry script tải các [cấu hình (configuration)](concept-configurations.md) ứng dụng và tạo mới
-   [ứng dụng](structure-applications.md) để khởi tạo để xử lý yêu cầu.
+  [ứng dụng](structure-applications.md) để khởi tạo để xử lý yêu cầu.
 3. Ứng dụng lấy thông tin [route](runtime-routing.md) được yêu cầu cùng với những thành phần (component)
-   cần xử lý các [request](runtime-requests.md).
+  cần xử lý các [request](runtime-requests.md).
 4. Ứng dụng tạo mới [controller](structure-controllers.md) khởi tạo để xử lý yêu cầu.
 5. Bộ điều khiển (controller) tạo mới các [action (hành động)](structure-controllers.md) khởi tạo và thực hiện các bộ lọc cho các hành động.
 6. Nếu bất kỳ bộ lọc nào bị lỗi, action sẽ bị hủy.
@@ -94,4 +94,3 @@ Biểu đồ dưới đây cho thấy làm thế nào một ứng dụng để x
 9. Action sẽ tạo mới View, đồng thời cung cấp dữ liệu cho nó .
 10. Kết quả việc tạo mới view sẽ trả vê một thành phần ứng dụng [response](runtime-responses.md) .
 11. Thành phần response gửi kết quả đến trình duyệt của người dùng và hiển thị kết quả.
-

@@ -80,12 +80,12 @@ acción. Empezando por la primera parte de la ruta, la aplicación, sigue los si
 
 1. Establece la aplicación como el modulo actual.
 2. Comprueba si el [[yii\base\Module::controllerMap|controller map]] del modulo actual contiene un ID actual. Si lo 
-   tiene, se creará un objeto controlador de acuerdo con la configuración del controlador encontrado en el mapa, y 
-   se seguirá el Paso 5 para gestionar la parte restante de la ruta. 
+  tiene, se creará un objeto controlador de acuerdo con la configuración del controlador encontrado en el mapa, y 
+  se seguirá el Paso 5 para gestionar la parte restante de la ruta. 
 3. Comprueba si el ID hace referencia a un modulo listado en la propiedad [[yii\base\Module::modules|modules]] del 
-   módulo actual. Si está listado, se crea un modulo de acuerdo con la configuración encontrada en el listado de 
-   módulos, y se seguirá el Paso 2 para gestionar la siguiente parte de la ruta bajo el contexto de la creación de un 
-   nuevo módulo.
+  módulo actual. Si está listado, se crea un modulo de acuerdo con la configuración encontrada en el listado de 
+  módulos, y se seguirá el Paso 2 para gestionar la siguiente parte de la ruta bajo el contexto de la creación de un 
+  nuevo módulo.
 4. Trata el ID como si se tratara de un ID de controlador y crea un objeto controlador. Sigue el siguiente paso con la    parte restante de la ruta.
 5. El controlador busca el ID en su [[yii\base\Controller::actions()|action map]]. Si lo encuentra, crea una acción de    acuerdo con la configuración encontrada en el mapa. De otra forma, el controlador intenta crear una acción en linea    definida por un método de acción correspondiente al ID actual.
 
@@ -117,7 +117,7 @@ aplicación:
 ```php
 [
     // ...
-	'catchAll' => ['site/offline'],
+  'catchAll' => ['site/offline'],
 ];
 ```
 
@@ -362,11 +362,11 @@ Y cuando las se usen las reglas para crear URLs:
   regla;
 - `Url::to(['post/view', 'id' => 100])` genera `/index.php/post/100` usando la segunda regla;
 - `Url::to(['post/view', 'id' => 100, 'source' => 'ad'])` genera `/index.php/post/100?source=ad` usando la segunda 
-   regla. Debido a que el parámetro `source` no se especifica en la regla, se añade como un parámetro de consulta en 
-   la URL generada.
+  regla. Debido a que el parámetro `source` no se especifica en la regla, se añade como un parámetro de consulta en 
+  la URL generada.
 - `Url::to(['post/index', 'category' => 'php'])` genera `/index.php/post/index?category=php` no usa ninguna de las 
-   reglas. Hay que tener en cuenta que si no se aplica ninguna de las reglas, la URL se genera simplemente añadiendo 
-   la parte de información de la ruta y todos los parámetros como parte de la consulta.
+  reglas. Hay que tener en cuenta que si no se aplica ninguna de las reglas, la URL se genera simplemente añadiendo 
+  la parte de información de la ruta y todos los parámetros como parte de la consulta.
 
 
 ### Parametrización de Rutas <span id="parameterizing-routes"></span>

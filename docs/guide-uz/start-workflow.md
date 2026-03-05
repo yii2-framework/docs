@@ -74,4 +74,3 @@ Diagrammada dasturning so'rovni qanday qabul qilib ishlashini ko'rsatadi.
 9. Amal ko'rinish ma'lumotlarini chiqarib beradi (shuningdek modeldan ham).
 10. Shakilangan ma'lumot esa ilovaga [javob](runtime-responses.md) komponentni tariqasida qaytariladi.
 11. "javob" komponentni esa foydalanuvchi browseriga javob qaytaradi.
-

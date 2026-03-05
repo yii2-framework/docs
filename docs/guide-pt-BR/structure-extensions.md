@@ -22,7 +22,7 @@ são distribuídas como pacotes do [Composer](https://getcomposer.org/) que pode
 ser instaladas seguindo dois passos:
 
 1. modifique o arquivo `composer.json` de sua aplicação e especifique quais 
-   extensões (pacotes do Composer) você deseja instalar.
+  extensões (pacotes do Composer) você deseja instalar.
 2. execute `composer install` para instalar as extensões especificadas.
 
 Observe que você pode precisa instalar o [Composer](https://getcomposer.org/) 
@@ -123,14 +123,14 @@ Abaixo estão as básicas etapas que você pode seguir para criar uma extensão 
 um pacote do Composer.
 
 1. Crie uma projeto para sua extensão e guarde-o em um repositório CVS, como o 
-   [github.com](https://github.com). O trabalho de desenvolvimento e de manutenção 
-   deve ser feito neste repositório.
+  [github.com](https://github.com). O trabalho de desenvolvimento e de manutenção 
+  deve ser feito neste repositório.
 2. Sob o diretório root do projeto, crie um arquivo chamado `composer.json` como 
-   o requerido pelo Composer. Por favor, consulte a próxima subseção para mais 
-   detalhes.
+  o requerido pelo Composer. Por favor, consulte a próxima subseção para mais 
+  detalhes.
 3. Registre sua extensão no repositório do Composer, como o 
-   [Packagist](https://packagist.org/), de modo que outros usuário possam achar 
-   e instalar suas extensões usando o Composer.
+  [Packagist](https://packagist.org/), de modo que outros usuário possam achar 
+  e instalar suas extensões usando o Composer.
 
 
 ### `composer.json` <span id="composer-json"></span>
@@ -322,7 +322,7 @@ class MyBootstrapClass implements BootstrapInterface
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function () {
-             // fazer alguma coisa aqui
+            // fazer alguma coisa aqui
         });
     }
 }

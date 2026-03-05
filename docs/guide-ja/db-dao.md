@@ -139,17 +139,17 @@ $posts = Yii::$app->db->createCommand('SELECT * FROM post')
 // 一つの行 (最初の行) を返す。
 // クエリの結果が無かった場合は false が返される。
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=1')
-           ->queryOne();
+          ->queryOne();
 
 // 一つのカラム (最初のカラム) を返す。
 // クエリが結果を返さなかった場合は空の配列が返される。
 $titles = Yii::$app->db->createCommand('SELECT title FROM post')
-             ->queryColumn();
+            ->queryColumn();
 
 // スカラ値を返す。
 // クエリの結果が無かった場合は false が返される。
 $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
-             ->queryScalar();
+            ->queryScalar();
 ```
 
 > Note: 精度を保つために、対応するデータベース・カラムの型が数値である場合でも、
@@ -163,9 +163,9 @@ $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')
 
 ```php
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValue(':id', $_GET['id'])
-           ->bindValue(':status', 1)
-           ->queryOne();
+          ->bindValue(':id', $_GET['id'])
+          ->bindValue(':status', 1)
+          ->queryOne();
 ```
 
 SQL 文において、一つまたは複数のパラメータ・プレースホルダ (例えば、上記のサンプルにおける `:id`) を埋め込むことが出来ます。
@@ -183,11 +183,11 @@ SQL 文において、一つまたは複数のパラメータ・プレースホ�
 $params = [':id' => $_GET['id'], ':status' => 1];
 
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
-           ->bindValues($params)
-           ->queryOne();
+          ->bindValues($params)
+          ->queryOne();
            
 $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
-           ->queryOne();
+          ->queryOne();
 ```
 
 パラメータ・バインディングは [プリペアド・ステートメント](https://www.php.net/manual/ja/mysqli.quickstart.prepared-statements.php) によって実装されています。
@@ -234,7 +234,7 @@ $post2 = $command->queryOne();
 
 ```php
 Yii::$app->db->createCommand('UPDATE post SET status=1 WHERE id=1')
-   ->execute();
+  ->execute();
 ```
 
 [[yii\db\Command::execute()]] メソッドは SQL の実行によって影響を受けた行の数を返します。

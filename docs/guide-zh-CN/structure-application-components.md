@@ -72,7 +72,7 @@
         },
         function($app){
             // 可以写自定义的代码
-           return;
+          return;
         }
     ],
     'components' => [

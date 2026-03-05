@@ -204,24 +204,24 @@ use yii\data\BaseDataProvider;
 class CsvDataProvider extends BaseDataProvider
 {
     /**
-     * @var string name of the CSV file to read
-     */
+    * @var string name of the CSV file to read
+    */
     public $filename;
     
     /**
-     * @var string|callable nom de la colonne clé ou fonction de rappel la retournant
-     */
+    * @var string|callable nom de la colonne clé ou fonction de rappel la retournant
+    */
     public $key;
     
     /**
-     * @var SplFileObject
-     */
+    * @var SplFileObject
+    */
     protected $fileObject; // SplFileObject est très pratique pour rechercher une ligne particulière dans un fichier
     
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function init()
     {
         parent::init();
@@ -231,8 +231,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareModels()
     {
         $models = [];
@@ -260,8 +260,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareKeys($models)
     {
         if ($this->key !== null) {
@@ -282,8 +282,8 @@ class CsvDataProvider extends BaseDataProvider
     }
  
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     protected function prepareTotalCount()
     {
         $count = 0;

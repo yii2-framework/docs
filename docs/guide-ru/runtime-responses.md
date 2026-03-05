@@ -246,7 +246,7 @@ Web-серверов:
 
 1. Инициируется событие [[yii\web\Response::EVENT_BEFORE_SEND]].
 2. Для форматирования [[yii\web\Response::data|данных ответа]] в [[yii\web\Response::content|содержимое ответа]]
-   вызывается метод [[yii\web\Response::prepare()]] .
+  вызывается метод [[yii\web\Response::prepare()]] .
 3. Инициируется событие [[yii\web\Response::EVENT_AFTER_PREPARE]].
 4. Для отправки зарегистрированных HTTP-заголовков вызывается метод [[yii\web\Response::sendHeaders()]].
 5. Для отправки тела ответа вызывается метод [[yii\web\Response::sendContent()]].

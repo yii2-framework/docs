@@ -30,4 +30,3 @@ Le code ci-dessus établit que la mise en cache de pages doit être utilisée un
 Comme vous pouvez le constater, la mise en cache de pages est très similaire à la [mise en cache de fragments](caching-fragment.md). Les deux prennent en charge les options telles que `duration`, `dependencies`, `variations` et `enabled`. La différence principale est que la mise en cache de pages est mis en œuvre comme un [filtre d'action](structure-filters.md) alors que la mise en cache de framgents l'est comme un [composant graphique](structure-widgets.md).
 
 Vous pouvez utiliser la [mise en cache de fragments](caching-fragment.md) ainsi que le [contenu dynamique](caching-fragment.md#dynamic-content) en simultanéité avec la mise en cache de pages.
-

@@ -40,13 +40,13 @@ Des options sont utilisées dans de nombreuses méthodes de la classe assistante
 - Les valeurs des attributs sont encodés HTML à l'aide de la méthode [[yii\helpers\Html::encode()|Html::encode()]].
 - Si la valeur d'un attribut est un tableau, il est géré comme suit :
  
-   * Si l'attribut est un attribut de donnée tel que listé dans [[yii\helpers\Html::$dataAttributes]], tel que `data` ou `ng`,
-     une liste d'attributs est rendue, un pour chacun des élément dans le tableau de valeurs. Par exemple, 
-     `'data' => ['id' => 1, 'name' => 'yii']` génère `data-id="1" data-name="yii"`; et 
-     `'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` génère
-     `data-params='{"id":1,"name":"yii"}' data-status="ok"`. Notez que dans le dernier exemple le format JSON est utilisé pour rendre le sous-tableau.
-   * Si l'attribut n'est PAS un attribut de donnée, la valeur est encodée JSON. Par exemple,
-     `['params' => ['id' => 1, 'name' => 'yii']` génère `params='{"id":1,"name":"yii"}'`.
+  * Si l'attribut est un attribut de donnée tel que listé dans [[yii\helpers\Html::$dataAttributes]], tel que `data` ou `ng`,
+    une liste d'attributs est rendue, un pour chacun des élément dans le tableau de valeurs. Par exemple, 
+    `'data' => ['id' => 1, 'name' => 'yii']` génère `data-id="1" data-name="yii"`; et 
+    `'data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']` génère
+    `data-params='{"id":1,"name":"yii"}' data-status="ok"`. Notez que dans le dernier exemple le format JSON est utilisé pour rendre le sous-tableau.
+  * Si l'attribut n'est PAS un attribut de donnée, la valeur est encodée JSON. Par exemple,
+    `['params' => ['id' => 1, 'name' => 'yii']` génère `params='{"id":1,"name":"yii"}'`.
 
 
 ### Formation des classes et des styles CSS <span id="forming-css"></span>

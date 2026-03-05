@@ -547,4 +547,3 @@ $reader = $container->get('app\storage\DocumentsReader');
 Yii はその [サービス・ロケータ](concept-service-locator.md) を、依存注入 (DI) コンテナの上に実装しています。
 サービス・ロケータは、新しいオブジェクトのインスタンスを作成しようとするとき、DI コンテナに呼び出しを転送します。
 後者は、依存を、上で説明したように自動的に解決します。
-

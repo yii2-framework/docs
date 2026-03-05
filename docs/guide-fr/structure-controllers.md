@@ -338,17 +338,17 @@ Lors du traitement d'une requête, une [application](structure-applications.md) 
 
 1. La méthode [[yii\base\Controller::init()]] est appelée après que le contrôleur est créé et configuré. 
 2. Le contrôleur crée un objet *action* en se basant sur l'identifiant d'action de la requête : 
-   * Si l'identifiant de l'action n'est pas spécifié, l'[[yii\base\Controller::defaultAction|identifiant de l'action par défaut]] est utilisé.
-   * Si l'identifiant de l'action est trouvé dans la [[yii\base\Controller::actions()|table de mise en correspondance des actions]], une action autonome est créée.
-   * Si l'identifiant de l'action est trouvé et qu'il correspond à une méthode d'action, une action en ligne est créée.
-   * Dans les autres cas, une exception [[yii\base\InvalidRouteException]] est levée.
+  * Si l'identifiant de l'action n'est pas spécifié, l'[[yii\base\Controller::defaultAction|identifiant de l'action par défaut]] est utilisé.
+  * Si l'identifiant de l'action est trouvé dans la [[yii\base\Controller::actions()|table de mise en correspondance des actions]], une action autonome est créée.
+  * Si l'identifiant de l'action est trouvé et qu'il correspond à une méthode d'action, une action en ligne est créée.
+  * Dans les autres cas, une exception [[yii\base\InvalidRouteException]] est levée.
 3. Le contrôleur appelle consécutivement la méthode `beforeAction()` de l'application, celle du module (si module si le contrôleur appartient à un module) et celle du contrôleur. 
-   * Si l'un des appels retourne `false`, les appels aux  méthodes `beforeAction()` qui devraient suivre ne sont pas effectués et l'exécution de l'action est annulée.
-   * Par défaut, chacun des appels à la méthode `beforeAction()` déclenche un événement  `beforeAction` auquel vous pouvez attacher un gestionnaire d'événement. 
+  * Si l'un des appels retourne `false`, les appels aux  méthodes `beforeAction()` qui devraient suivre ne sont pas effectués et l'exécution de l'action est annulée.
+  * Par défaut, chacun des appels à la méthode `beforeAction()` déclenche un événement  `beforeAction` auquel vous pouvez attacher un gestionnaire d'événement. 
 4. Le contrôleur exécute l'action.
-   * Les paramètres de l'action sont analysés et définis à partir des données transmises par la requête.
+  * Les paramètres de l'action sont analysés et définis à partir des données transmises par la requête.
 5. Le contrôleur appelle successivement la méthode  `afterAction()` du contrôleur, du module (si le contrôleur appartient à un module) et de l'application.
-   * Par défaut, chacun des appels à la méthode `afterAction()` déclenche un événement `afterAction` auquel vous pouvez attacher un gestionnaire d'événement. 
+  * Par défaut, chacun des appels à la méthode `afterAction()` déclenche un événement `afterAction` auquel vous pouvez attacher un gestionnaire d'événement. 
 6. L'application assigne le résultat de l'action à l'objet [response](runtime-responses.md).
 
 

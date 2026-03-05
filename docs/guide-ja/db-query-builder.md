@@ -551,10 +551,10 @@ $query->join('LEFT JOIN', 'post', 'post.user_id = user.id');
 - `$type`: 結合のタイプ、例えば、`'INNER JOIN'`、`'LEFT JOIN'`。
 - `$table`: 結合されるテーブルの名前。
 - `$on`: オプション。結合条件、すなわち、`ON` 句。
-   条件の指定方法の詳細については、[where()](#where) を参照してください。
-   カラムに基づく条件を指定する場合は、配列記法は**使えない**ことに注意してください。
-   例えば、`['user.id' => 'comment.userId']` は、user の id が `'comment.userId'` という文字列でなければならない、という条件に帰結します。
-   配列記法ではなく文字列記法を使って、`'user.id = comment.userId'` という条件を指定しなければなりません。
+  条件の指定方法の詳細については、[where()](#where) を参照してください。
+  カラムに基づく条件を指定する場合は、配列記法は**使えない**ことに注意してください。
+  例えば、`['user.id' => 'comment.userId']` は、user の id が `'comment.userId'` という文字列でなければならない、という条件に帰結します。
+  配列記法ではなく文字列記法を使って、`'user.id = comment.userId'` という条件を指定しなければなりません。
 - `$params`: オプション。結合条件にバインドされるパラメータ。
 
 `INNER JOIN`、`LEFT JOIN` および `RIGHT JOIN` を指定するためには、それぞれ、次のショートカット・メソッドを使うことが出来ます。
@@ -904,9 +904,9 @@ class AllGreaterCondition implements \yii\db\conditions\ConditionInterface
     private $value;
 
     /**
-     * @param string[] $columns $value よりも大きくなければならないカラムの配列
-     * @param mixed $value 各カラムと比較する値
-     */
+    * @param string[] $columns $value よりも大きくなければならないカラムの配列
+    * @param mixed $value 各カラムと比較する値
+    */
     public function __construct(array $columns, $value)
     {
         $this->columns = $columns;
@@ -941,10 +941,10 @@ class AllGreaterConditionBuilder implements \yii\db\ExpressionBuilderInterface
     use \yii\db\ExpressionBuilderTrait; // コンストラクタと `queryBuilder` プロパティを含む。
 
     /**
-     * @param ExpressionInterface $condition ビルドすべき条件
-     * @param array $params バインディング・パラメータ
-     * @return AllGreaterCondition
-     */ 
+    * @param ExpressionInterface $condition ビルドすべき条件
+    * @param array $params バインディング・パラメータ
+    * @return AllGreaterCondition
+    */ 
     public function build(ExpressionInterface $expression, array &$params = [])
     {
         $value = $condition->getValue();

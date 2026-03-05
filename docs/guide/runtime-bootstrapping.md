@@ -13,17 +13,17 @@ autoloader through its `Yii` class file. The entry script then loads the applica
 In the constructor of the application, the following bootstrapping work is done:
 
 1. [[yii\base\Application::preInit()|preInit()]] is called, which configures some high priority
-   application properties, such as [[yii\base\Application::basePath|basePath]].
+  application properties, such as [[yii\base\Application::basePath|basePath]].
 2. Register the [[yii\base\Application::errorHandler|error handler]].
 3. Initialize application properties using the given application configuration.
 4. [[yii\base\Application::init()|init()]] is called which in turn calls
-   [[yii\base\Application::bootstrap()|bootstrap()]] to run bootstrapping components.
-   - Include the extension manifest file `vendor/yiisoft/extensions.php`.
-   - Create and run [bootstrap components](structure-extensions.md#bootstrapping-classes)
-     declared by extensions.
-   - Create and run [application components](structure-application-components.md) and/or
-     [modules](structure-modules.md) that are declared in the application's
-     [bootstrap property](structure-applications.md#bootstrap).
+  [[yii\base\Application::bootstrap()|bootstrap()]] to run bootstrapping components.
+  - Include the extension manifest file `vendor/yiisoft/extensions.php`.
+  - Create and run [bootstrap components](structure-extensions.md#bootstrapping-classes)
+    declared by extensions.
+  - Create and run [application components](structure-application-components.md) and/or
+    [modules](structure-modules.md) that are declared in the application's
+    [bootstrap property](structure-applications.md#bootstrap).
 
 Because the bootstrapping work has to be done before handling *every* request, it is very important
 to keep this process light and optimize it as much as possible.

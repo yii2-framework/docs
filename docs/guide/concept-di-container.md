@@ -550,4 +550,3 @@ dependency injection and service locator.
 Yii implements its [service locator](concept-service-locator.md) on top of the dependency injection (DI) container.
 When a service locator is trying to create a new object instance, it will forward the call to the DI container.
 The latter will resolve the dependencies automatically as described above.
-

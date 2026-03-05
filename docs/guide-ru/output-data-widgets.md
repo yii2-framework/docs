@@ -294,7 +294,7 @@ echo GridView::widget([
 
  ```php
  function ($model, $key, $index) {
-   return $model->status === 'editable'; // отображать ли кнопку
+  return $model->status === 'editable'; // отображать ли кнопку
  }
  ```
 
@@ -302,7 +302,7 @@ echo GridView::widget([
 
  ```php
  [
-     'update' => \Yii::$app->user->can('update')
+    'update' => \Yii::$app->user->can('update')
  ]
  ```
 
@@ -494,13 +494,13 @@ use yii\widgets\ActiveForm;
 class PostSearch extends Post
 {
     /**
-     * @var string
-     */
+    * @var string
+    */
     public $createdFrom;
 
     /**
-     * @var string
-     */
+    * @var string
+    */
     public $createdTo;
 }
 ```
@@ -635,8 +635,8 @@ class UserView extends ActiveRecord
 {
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public static function tableName()
     {
         return 'vw_user_info';
@@ -648,8 +648,8 @@ class UserView extends ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function rules()
     {
         return [
@@ -658,8 +658,8 @@ class UserView extends ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function attributeLabels()
     {
         return [

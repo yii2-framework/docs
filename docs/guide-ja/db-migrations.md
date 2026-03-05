@@ -15,7 +15,7 @@ Yii はいわゆる *データベース・マイグレーション* 機能を提
 2. Tim が新しいマイグレーションをソース・コントロール・システム (例えば Git や Mercurial) にコミットする。
 3. Doug がソース・コントロール・システムから自分のレポジトリを更新して新しいマイグレーションを受け取る。
 4. Doug がマイグレーションを彼のローカルの開発用データベースに適用して、自分のデータベースの同期を取り、
-   Tim が行った変更を反映する。
+  Tim が行った変更を反映する。
 
 そして、次の一連のステップは、本番環境でデータベース・マイグレーションとともに新しいリリースを配備する方法を示すものです。
 
@@ -227,8 +227,8 @@ yii migrate/create create_post_table
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -237,8 +237,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -261,8 +261,8 @@ yii migrate/create create_post_table --fields="title:string,body:text"
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -273,8 +273,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -298,8 +298,8 @@ yii migrate/create create_post_table --fields="title:string(12):notNull:unique,b
 class m150811_220037_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -310,8 +310,8 @@ class m150811_220037_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         $this->dropTable('post');
@@ -343,8 +343,8 @@ yii migrate/create create_post_table --fields="author_id:integer:notNull:foreign
 class m160328_040430_create_post_table extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post', [
@@ -391,8 +391,8 @@ class m160328_040430_create_post_table extends Migration
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         // drops foreign key for table `user`
@@ -556,8 +556,8 @@ yii migrate/create create_junction_table_for_post_and_tag_tables --fields="creat
 class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migration
 {
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function up()
     {
         $this->createTable('post_tag', [
@@ -603,8 +603,8 @@ class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migra
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function down()
     {
         // drops foreign key for table `post`

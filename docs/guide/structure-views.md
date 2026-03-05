@@ -724,4 +724,3 @@ You may use the following techniques to achieve this goal:
   one using the rendering methods that we have described.
 * create and use [widgets](structure-widgets.md) as building blocks of views.
 * create and use helper classes to transform and format data in views.
-

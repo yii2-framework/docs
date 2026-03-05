@@ -252,7 +252,7 @@ El método [[yii\web\Response::send()]] sigue los siguientes pasos para enviar u
 
 1. Lanza el evento [[yii\web\Response::EVENT_BEFORE_SEND]].
 2. Llama a [[yii\web\Response::prepare()]] para convertir el [[yii\web\Response::data|response data]] en 
-   [[yii\web\Response::content|response content]].
+  [[yii\web\Response::content|response content]].
 3. Lanza el evento [[yii\web\Response::EVENT_AFTER_PREPARE]].
 4. Llama a [[yii\web\Response::sendHeaders()]] para enviar las cabeceras HTTP registradas.
 5. Llama a [[yii\web\Response::sendContent()]] para enviar el contenido del cuerpo de la respuesta.

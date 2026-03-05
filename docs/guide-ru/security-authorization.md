@@ -89,13 +89,13 @@ class SiteController extends Controller
 пустое или не задано, то правило применяется ко всем контроллерам.
 
  * [[yii\filters\AccessRule::roles|roles]]: задаёт роли пользователей, соответствующих этому правилу.
-   Распознаются две специальные роли, которые проверяются с помощью [[yii\web\User::isGuest]]:
+  Распознаются две специальные роли, которые проверяются с помощью [[yii\web\User::isGuest]]:
 
-     - `?`: соответствует гостевому пользователю (не аутентифицирован),
-     - `@`: соответствует аутентифицированному пользователю.
+    - `?`: соответствует гостевому пользователю (не аутентифицирован),
+    - `@`: соответствует аутентифицированному пользователю.
 
-   Использование других имён ролей будет приводить к вызову метода [[yii\web\User::can()]], который требует включения
-   RBAC (будет описано дальше). Если свойство пустое или не задано, то правило применяется ко всем ролям.
+  Использование других имён ролей будет приводить к вызову метода [[yii\web\User::can()]], который требует включения
+  RBAC (будет описано дальше). Если свойство пустое или не задано, то правило применяется ко всем ролям.
 
  * [[yii\filters\AccessRule::ips|ips]]: задаёт [[yii\web\Request::userIP|IP адреса пользователей]], для которых применяется это правило. IP адрес может содержать `*` в конце, так чтобы он соответствовал IP адресу с таким же префиксом.
 Для примера, '192.168.*' соответствует всем IP адресам в сегменте '192.168.'. Если свойство пустое или не задано,
@@ -362,11 +362,11 @@ class AuthorRule extends Rule
     public $name = 'isAuthor';
 
     /**
-     * @param string|int $user the user ID.
-     * @param Item $item the role or permission that this rule is associated width.
-     * @param array $params parameters passed to ManagerInterface::checkAccess().
-     * @return bool a value indicating whether the rule permits the role or permission it is associated with.
-     */
+    * @param string|int $user the user ID.
+    * @param Item $item the role or permission that this rule is associated width.
+    * @param array $params parameters passed to ManagerInterface::checkAccess().
+    * @return bool a value indicating whether the rule permits the role or permission it is associated with.
+    */
     public function execute($user, $item, $params)
     {
         return isset($params['post']) ? $params['post']->createdBy == $user : false;

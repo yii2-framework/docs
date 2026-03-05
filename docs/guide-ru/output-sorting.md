@@ -30,8 +30,8 @@ function actionIndex()
         ->all();
 
     return $this->render('index', [
-         'models' => $models,
-         'sort' => $sort,
+        'models' => $models,
+        'sort' => $sort,
     ]);
 }
 ```

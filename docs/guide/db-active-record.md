@@ -78,8 +78,8 @@ class Customer extends ActiveRecord
     const STATUS_ACTIVE = 1;
     
     /**
-     * @return string the name of the table associated with this ActiveRecord class.
-     */
+    * @return string the name of the table associated with this ActiveRecord class.
+    */
     public static function tableName()
     {
         return '{{customer}}';
@@ -614,19 +614,19 @@ When calling [[yii\db\ActiveRecord::save()|save()]] to insert or update an Activ
 life cycle will happen:
 
 1. [[yii\db\ActiveRecord::beforeValidate()|beforeValidate()]]: triggers 
-   an [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] event. If the method returns `false`
-   or [[yii\base\ModelEvent::isValid]] is `false`, the rest of the steps will be skipped.
+  an [[yii\db\ActiveRecord::EVENT_BEFORE_VALIDATE|EVENT_BEFORE_VALIDATE]] event. If the method returns `false`
+  or [[yii\base\ModelEvent::isValid]] is `false`, the rest of the steps will be skipped.
 2. Performs data validation. If data validation fails, the steps after Step 3 will be skipped. 
 3. [[yii\db\ActiveRecord::afterValidate()|afterValidate()]]: triggers 
-   an [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]] event.
+  an [[yii\db\ActiveRecord::EVENT_AFTER_VALIDATE|EVENT_AFTER_VALIDATE]] event.
 4. [[yii\db\ActiveRecord::beforeSave()|beforeSave()]]: triggers 
-   an [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] 
-   or [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]] event. If the method returns `false`
-   or [[yii\base\ModelEvent::isValid]] is `false`, the rest of the steps will be skipped.
+  an [[yii\db\ActiveRecord::EVENT_BEFORE_INSERT|EVENT_BEFORE_INSERT]] 
+  or [[yii\db\ActiveRecord::EVENT_BEFORE_UPDATE|EVENT_BEFORE_UPDATE]] event. If the method returns `false`
+  or [[yii\base\ModelEvent::isValid]] is `false`, the rest of the steps will be skipped.
 5. Performs the actual data insertion or updating.
 6. [[yii\db\ActiveRecord::afterSave()|afterSave()]]: triggers
-   an [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
-   or [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]] event.
+  an [[yii\db\ActiveRecord::EVENT_AFTER_INSERT|EVENT_AFTER_INSERT]] 
+  or [[yii\db\ActiveRecord::EVENT_AFTER_UPDATE|EVENT_AFTER_UPDATE]] event.
    
 
 ### Deleting Data Life Cycle <span id="deleting-data-life-cycle"></span>
@@ -635,11 +635,11 @@ When calling [[yii\db\ActiveRecord::delete()|delete()]] to delete an Active Reco
 life cycle will happen:
 
 1. [[yii\db\ActiveRecord::beforeDelete()|beforeDelete()]]: triggers
-   an [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]] event. If the method returns `false`
-   or [[yii\base\ModelEvent::isValid]] is `false`, the rest of the steps will be skipped.
+  an [[yii\db\ActiveRecord::EVENT_BEFORE_DELETE|EVENT_BEFORE_DELETE]] event. If the method returns `false`
+  or [[yii\base\ModelEvent::isValid]] is `false`, the rest of the steps will be skipped.
 2. Performs the actual data deletion.
 3. [[yii\db\ActiveRecord::afterDelete()|afterDelete()]]: triggers
-   an [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]] event.
+  an [[yii\db\ActiveRecord::EVENT_AFTER_DELETE|EVENT_AFTER_DELETE]] event.
 
 
 > Note: Calling any of the following methods will NOT initiate any of the above life cycles because they work on the
@@ -752,13 +752,13 @@ respectively.
 To use optimistic locking,
 
 1. Create a column in the DB table associated with the Active Record class to store the version number of each row.
-   The column should be of big integer type (in MySQL it would be `BIGINT DEFAULT 0`).
+  The column should be of big integer type (in MySQL it would be `BIGINT DEFAULT 0`).
 2. Override the [[yii\db\ActiveRecord::optimisticLock()]] method to return the name of this column.
 3. Implement [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] inside your model class to automatically parse its value from received requests.
-   Remove the version attribute from validation rules as [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] should handle it.
+  Remove the version attribute from validation rules as [[\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior]] should handle it.
 4. In the Web form that takes user inputs, add a hidden field to store the current version number of the row being updated.
 5. In the controller action that updates the row using Active Record, try and catch the [[yii\db\StaleObjectException]]
-   exception. Implement necessary business logic (e.g. merging the changes, prompting staled data) to resolve the conflict.
+  exception. Implement necessary business logic (e.g. merging the changes, prompting staled data) to resolve the conflict.
    
 For example, assume the version column is named as `version`. You can implement optimistic locking with the code like
 the following.
@@ -1738,8 +1738,8 @@ For example:
 class Customer extends \yii\db\ActiveRecord
 {
     /**
-     * Defines read-only virtual property for aggregation data.
-     */
+    * Defines read-only virtual property for aggregation data.
+    */
     public function getOrdersCount()
     {
         if ($this->isNewRecord) {
@@ -1750,16 +1750,16 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     /**
-     * Declares normal 'orders' relation.
-     */
+    * Declares normal 'orders' relation.
+    */
     public function getOrders()
     {
         return $this->hasMany(Order::class, ['customer_id' => 'id']);
     }
 
     /**
-     * Declares new relation based on 'orders', which provides aggregation.
-     */
+    * Declares new relation based on 'orders', which provides aggregation.
+    */
     public function getOrdersAggregation()
     {
         return $this->getOrders()

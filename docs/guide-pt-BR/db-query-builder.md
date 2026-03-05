@@ -12,11 +12,11 @@ O código a seguir mostra uma forma habitual de utilizar query builder:
 
 ```php
 $rows = (new \yii\db\Query())
-   ->select(['id', 'email'])
-   ->from('user')
-   ->where(['last_name' => 'Smith'])
-   ->limit(10)
-   ->all();
+  ->select(['id', 'email'])
+  ->from('user')
+  ->where(['last_name' => 'Smith'])
+  ->limit(10)
+  ->all();
 ```
 
 O código acima gera e executa a seguinte instrução SQL, onde o parâmetro `:last_name` está ligado a string `'Smith'`.
@@ -93,7 +93,7 @@ Você pode chamar [[yii\db\Query::addSelect()|addSelect()]] para selecionar colu
 
 ```php
 $query->select(['id', 'username'])
-   ->addSelect(['email']);
+  ->addSelect(['email']);
 ```
 
 
@@ -164,7 +164,7 @@ Ao usar parâmetro, você pode chamar [[yii\db\Query::params()|params()]] ou [[y
 
 ```php
 $query->where('status=:status')
-   ->addParams([':status' => $status]);
+  ->addParams([':status' => $status]);
 ```
 
 
@@ -176,9 +176,9 @@ Formato HASH é mais usado para especificar múltiplos  `AND` - sub-condições 
 ```php
 // ...WHERE (`status` = 10) AND (`type` IS NULL) AND (`id` IN (4, 8, 15))
 $query->where([
-   'status' => 10,
-   'type' => null,
-   'id' => [4, 8, 15],
+  'status' => 10,
+  'type' => null,
+  'id' => [4, 8, 15],
 ]);
 ```
 
@@ -247,7 +247,7 @@ $search = 'yii';
 $query->where(['status' => $status]);
 
 if (!empty($search)) {
-   $query->andWhere(['like', 'title', $search]);
+  $query->andWhere(['like', 'title', $search]);
 }
 ```
 
@@ -265,8 +265,8 @@ Ao construir condições `WHERE` a partir de entradas de usuários finais, você
 ```php
 // $username and $email são inputs dos usuário finais 
 $query->filterWhere([
-   'username' => $username,
-   'email' => $email,
+  'username' => $username,
+  'email' => $email,
 ]);
 ```
 
@@ -282,8 +282,8 @@ O método  [[yii\db\Query::orderBy()|orderBy()]] especifica o fragmento de uma i
 ```php
 // ... ORDER BY `id` ASC, `name` DESC
 $query->orderBy([
-   'id' => SORT_ASC,
-   'name' => SORT_DESC,
+  'id' => SORT_ASC,
+  'name' => SORT_DESC,
 ]);
 ```
 
@@ -299,7 +299,7 @@ Você pode chamar [[yii\db\Query::addOrderBy()|addOrderBy()]] para incluir colun
 
 ```php
 $query->orderBy('id ASC')
-   ->addOrderBy('name DESC');
+  ->addOrderBy('name DESC');
 ```
 
 
@@ -324,7 +324,7 @@ Você pode chamar [[yii\db\Query::addGroupBy()|addGroupBy()]] para incluir colun
 
 ```php
 $query->groupBy(['id', 'status'])
-   ->addGroupBy('age');
+  ->addGroupBy('age');
 ```
 
 
@@ -344,7 +344,7 @@ Você pode chamar [[yii\db\Query::andHaving()|andHaving()]] ou [[yii\db\Query::o
 ```php
 // ... HAVING (`status` = 1) AND (`age` > 30)
 $query->having(['status' => 1])
-   ->andHaving(['>', 'age', 30]);
+  ->andHaving(['>', 'age', 30]);
 ```
 
 
@@ -406,14 +406,14 @@ O método [[yii\db\Query::union()|union()]] especifica o fragmento de uma instru
 
 ```php
 $query1 = (new \yii\db\Query())
-   ->select("id, category_id AS type, name")
-   ->from('post')
-   ->limit(10);
+  ->select("id, category_id AS type, name")
+  ->from('post')
+  ->limit(10);
 
 $query2 = (new \yii\db\Query())
-   ->select('id, type, name')
-   ->from('user')
-   ->limit(10);
+  ->select('id, type, name')
+  ->from('user')
+  ->limit(10);
 
 $query1->union($query2);
 ```
@@ -436,15 +436,15 @@ Você  pode chamar [[yii\db\Query::union()|union()]] múltiplas vezes para acres
 ```php
 // SELECT `id`, `email` FROM `user`
 $rows = (new \yii\db\Query())
-   ->select(['id', 'email'])
-   ->from('user')
-   ->all();
+  ->select(['id', 'email'])
+  ->from('user')
+  ->all();
    
 // SELECT * FROM `user` WHERE `username` LIKE `%test%`
 $row = (new \yii\db\Query())
-   ->from('user')
-   ->where(['like', 'username', 'test'])
-   ->one();
+  ->from('user')
+  ->where(['like', 'username', 'test'])
+  ->one();
 ```
 
 > Observação: O método [[yii\db\Query::one()|one()]] retorna apenas a primeira linha do resultado da query. Ele não adiciona `LIMIT 1` para a geração da sentença SQL. Isso é bom e preferível se você souber que a query retornará apenas uma ou algumas linhas de dados (Ex. se você estiver consultando com algumas chaves primárias). Entretanto, se a query pode retornar muitas linha de dados, você deve chamar `limit(1)` explicitamente para melhorar a performance. Ex., `(new \yii\db\Query())->from('user')->limit(1)->one()`.
@@ -454,9 +454,9 @@ Todos estes métodos query recebem um parâmetro opcional `$db` que representa a
 ```php
 // executes SQL: SELECT COUNT(*) FROM `user` WHERE `last_name`=:last_name
 $count = (new \yii\db\Query())
-   ->from('user')
-   ->where(['last_name' => 'Smith'])
-   ->count();
+  ->from('user')
+  ->where(['last_name' => 'Smith'])
+  ->count();
 ```
 
 Quando você chamar um método de [[yii\db\Query]], ele na verdade faz o seguinte trabalho por baixo dos panos:
@@ -469,11 +469,11 @@ Algumas vezes, você pode querer examinar ou usar a instrução SQL construído 
 
 ```php
 $command = (new \yii\db\Query())
-   ->select(['id', 'email'])
-   ->from('user')
-   ->where(['last_name' => 'Smith'])
-   ->limit(10)
-   ->createCommand();
+  ->select(['id', 'email'])
+  ->from('user')
+  ->where(['last_name' => 'Smith'])
+  ->limit(10)
+  ->createCommand();
    
 // mostra a instrução SQL 
 echo $command->sql;
@@ -493,20 +493,20 @@ Quando você chama [[yii\db\Query::all()|all()]], será retornado um array de li
 ```php
 // retorna [100 => ['id' => 100, 'username' => '...', ...], 101 => [...], 103 => [...], ...]
 $query = (new \yii\db\Query())
-   ->from('user')
-   ->limit(10)
-   ->indexBy('id')
-   ->all();
+  ->from('user')
+  ->limit(10)
+  ->indexBy('id')
+  ->all();
 ```
 
 Para indexar através de valores de expressão, passe uma função anônima para o método [[yii\db\Query::indexBy()|indexBy()]]:
 
 ```php
 $query = (new \yii\db\Query())
-   ->from('user')
-   ->indexBy(function ($row) {
-       return $row['id'] . $row['username'];
-   })->all();
+  ->from('user')
+  ->indexBy(function ($row) {
+      return $row['id'] . $row['username'];
+  })->all();
 ```
 
 A função anônima recebe um parâmetro `$row` que contém os dados da linha atual e deve devolver um valor escalar que irá ser utilizada como índice para o valor da linha atual.
@@ -520,16 +520,16 @@ Ao trabalhar com grandes quantidades de dados, métodos tais como [[yii\db\Query
 use yii\db\Query;
 
 $query = (new Query())
-   ->from('user')
-   ->orderBy('id');
+  ->from('user')
+  ->orderBy('id');
 
 foreach ($query->batch() as $users) {
-   // $users é um array de 100 ou menos linha da tabela user
+  // $users é um array de 100 ou menos linha da tabela user
 }
 
 // ou se você quiser fazer uma iteração da linha uma por uma
 foreach ($query->each() as $user) {
-   // $user representa uma linha de dados a partir da tabela user
+  // $user representa uma linha de dados a partir da tabela user
 }
 ```
 
@@ -539,11 +539,11 @@ Em comparação com o [[yii\db\Query::all()]], o batch query somente carrega 100
 
 ```php
 $query = (new \yii\db\Query())
-   ->from('user')
-   ->indexBy('username');
+  ->from('user')
+  ->indexBy('username');
 
 foreach ($query->batch() as $users) {
-   // $users é indexado pela coluna  "username"
+  // $users é indexado pela coluna  "username"
 }
 
 foreach ($query->each() as $username => $user) {

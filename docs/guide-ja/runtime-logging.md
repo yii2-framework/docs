@@ -84,9 +84,9 @@ return [
                     'levels' => ['error'],
                     'categories' => ['yii\db\*'],
                     'message' => [
-                       'from' => ['log@example.com'],
-                       'to' => ['admin@example.com', 'developer@example.com'],
-                       'subject' => 'example.com で、データベースエラー発生',
+                      'from' => ['log@example.com'],
+                      'to' => ['admin@example.com', 'developer@example.com'],
+                      'subject' => 'example.com で、データベースエラー発生',
                     ],
                 ],
             ],

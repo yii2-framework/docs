@@ -73,14 +73,14 @@ Este validador compara el valor especificado por la entrada con otro valor y, se
 - `compareAttribute`: El nombre del valor del atributo con el cual debe compararse. Cuando el validador está siendo usado para validar un atributo, el valor por defecto de esta propiedad debe de ser el nombre de el atributo con el sufijo `_repeat`. Por  ejemplo, si el atributo a ser validado es `password`, entonces esta propiedad contiene por defecto `password_repeat`.
 - `compareValue`: un valor constante con el que el valor de entrada debe ser comparado. Cuando ambos, esta propiedad y `compareAttribute` son especificados, esta preferencia tiene precedencia.
 - `operator`: el operador de comparación. Por defecto vale `==`, permitiendo comprobar si el valor de entrada es igual al de `compareAttribute` o `compareValue`. Los siguientes operadores son soportados:
-     * `==`: comprueba si dos valores son iguales. La comparación se realiza en modo no estricto.
-     * `===`: comprueba si dos valores son iguales. La comparación se realiza en modo estricto.
-     * `!=`: comprueba si dos valores NO son iguales. La comparación se realiza en modo no estricto.
-     * `!==`: comprueba si dos valores NO son iguales. La comparación se realiza en modo estricto.
-     * `>`: comprueba si el valor siendo validado es mayor que el valor con el que se compara.
-     * `>=`: comprueba si el valor siendo validado es mayor o igual que el valor con el que se compara
-     * `<`: comprueba si el valor siendo validado es menor que el valor con el que se compara
-     * `<=`: comprueba si el valor siendo validado es menor o igual que el valor con el que se compara
+    * `==`: comprueba si dos valores son iguales. La comparación se realiza en modo no estricto.
+    * `===`: comprueba si dos valores son iguales. La comparación se realiza en modo estricto.
+    * `!=`: comprueba si dos valores NO son iguales. La comparación se realiza en modo no estricto.
+    * `!==`: comprueba si dos valores NO son iguales. La comparación se realiza en modo estricto.
+    * `>`: comprueba si el valor siendo validado es mayor que el valor con el que se compara.
+    * `>=`: comprueba si el valor siendo validado es mayor o igual que el valor con el que se compara
+    * `<`: comprueba si el valor siendo validado es menor que el valor con el que se compara
+    * `<=`: comprueba si el valor siendo validado es menor o igual que el valor con el que se compara
 
 
 ## [[yii\validators\DateValidator|date]] <span id="date"></span>
@@ -95,9 +95,9 @@ Este validador comprueba si el valor de entrada es una fecha, tiempo or fecha/ti
 Opcionalmente, puede convertir el valor de entrada en una fecha/tiempo UNIX y almacenarla en un atributo especificado vía [[yii\validators\DateValidator::timestampAttribute|timestampAttribute]].
 
 - `format`: el formato fecha/tiempo en el que debe estar el valor a ser validado. 
-   Esto tiene que ser un patrón fecha/tiempo descrito en [manual ICU](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax).
-   Alternativamente tiene que ser una cadena con el prefijo `php:` representando un formato que ha de ser reconocido por la clase `Datetime` de PHP. Por favor, refiérase a <https://www.php.net/manual/es/datetime.createfromformat.php> sobre los formatos soportados.
-   Si no tiene ningún valor, ha de coger el valor de `Yii::$app->formatter->dateFormat`.
+  Esto tiene que ser un patrón fecha/tiempo descrito en [manual ICU](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax).
+  Alternativamente tiene que ser una cadena con el prefijo `php:` representando un formato que ha de ser reconocido por la clase `Datetime` de PHP. Por favor, refiérase a <https://www.php.net/manual/es/datetime.createfromformat.php> sobre los formatos soportados.
+  Si no tiene ningún valor, ha de coger el valor de `Yii::$app->formatter->dateFormat`.
 - `timestampAttribute`: el nombre del atributo al cual este validador puede asignar el fecha/hora UNIX convertida desde la entrada fecha/hora.
 
 
@@ -374,10 +374,10 @@ Este validador no realiza validación de datos. En lugar de ello, es usado para 
 Este validador comprueba si el valor de entrada es una cadena válida con determinada longitud.
 
 - `length`: especifica la longitud límite de la cadena de entrada a validar. Esto tiene que ser especificado del las siguientes formas:
-     * un entero: la longitud exacta que la cadena debe de tener;
-     * un array de un elemento: la longitud mínima de la cadena de entrada (p.e.`[8]`). Esto puede sobre escribir `min`.
-     * un array de dos elementos: las longitudes mínima y mmáxima de la cadena de entrada (p.e. `[8, 128]`).
-     Esto sobreescribe ambos valores de `min` y `max`.
+    * un entero: la longitud exacta que la cadena debe de tener;
+    * un array de un elemento: la longitud mínima de la cadena de entrada (p.e.`[8]`). Esto puede sobre escribir `min`.
+    * un array de dos elementos: las longitudes mínima y mmáxima de la cadena de entrada (p.e. `[8, 128]`).
+    Esto sobreescribe ambos valores de `min` y `max`.
 - `min`: el mínimo valor de longitud de la cadena de entrada. Si no tiene valor, significa que no hay límite para longitud mínima.
 - `max`: el máximo valor de longitud de la cadena de entrada. Si no tiene valor, significa que no hay límite para longitud máxima.
 - `encoding`: la codificación de la cadena de entrada a ser validada. Si no tiene valor, usará el valor de la aplicación [[yii\base\Application::charset|charset]]  que por defecto es `UTF-8`.
@@ -442,4 +442,3 @@ Este validador comprueba si el valor de entrada es una URL válida.
   Por defecto a `null`, significando que no modifica el valor de entrada.
 - `enableIDN`: Si el validador debe formar parte del registro IDN (internationalized domain names).
   Por defecto a `false`. Nota que para usar la validación IDN tienes que instalar y activar la extensión PHP `intl`, en otro caso una excepción será lanzada.
-

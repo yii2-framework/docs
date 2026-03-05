@@ -690,4 +690,4 @@ para manipular uma requisição, uma aplicação passará pelo seguinte ciclo de
   * Dispara o evento [[yii\base\Application::EVENT_AFTER_REQUEST|EVENT_AFTER_REQUEST]].
   * Envia a resposta para o usuário final.
 4. O script de entrada recebe o status de saída da aplicação e completa o
-   processamento da requisição.
+  processamento da requisição.

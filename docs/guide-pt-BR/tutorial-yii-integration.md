@@ -38,9 +38,9 @@ Se uma biblioteca não oferece um carregador automático de classe, mas seus nom
 
 ```php
 [
-   'aliases' => [
-       '@xyz' => '@vendor/foo/bar',
-   ],
+  'aliases' => [
+      '@xyz' => '@vendor/foo/bar',
+  ],
 ]
 ```
 
@@ -127,7 +127,7 @@ require $yii1path . '/YiiBase.php'; // Yii 1.x
 
 class Yii extends \yii\BaseYii
 {
-   // copie e cole o código de YiiBase (1.x) aqui
+  // copie e cole o código de YiiBase (1.x) aqui
 }
 
 Yii::$classMap = include($yii2path . '/classes.php');
@@ -142,5 +142,3 @@ Isto é tudo! Agora, em qualquer parte do seu código, você pode usar `Yii::$ap
 ```php
 echo get_class(Yii::app()); // retorna'CWebApplication'
 echo get_class(Yii::$app);  // retorna 'yii\web\Application'
-
-

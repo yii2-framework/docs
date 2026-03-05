@@ -111,4 +111,3 @@ Bu bo'limda biz nozaratchilar va ularning ko'rinishlari mavzusini MVC-tuzilmasi 
 Shuningdek siz `yo'nalishlar (route)` tartibi bilan tanishtingiz, bu esa foydalanuvchi so'roviga kerakli nazoratchini topib foydalanuvchiga javob berish jarayonida juda ham muhim o'ringa egadir.
 
 Keyingi bo'limda siz modelar nimaligi va uni qandey yaratish kerakligini va HTML-shaklrar bilan ishlashni o'rganasiz.
-

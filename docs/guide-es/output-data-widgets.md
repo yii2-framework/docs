@@ -242,4 +242,3 @@ Puede indicar varias opciones HTML del contenedor pasando _arrays_ a:
 - [[yii\grid\Column::footerOptions|footerOptions]]
 - [[yii\grid\Column::filterOptions|filterOptions]]
 - [[yii\grid\Column::contentOptions|contentOptions]]
-

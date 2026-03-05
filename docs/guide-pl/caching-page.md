@@ -38,4 +38,3 @@ pamięć podręczna fragmentów jako [widżet](structure-widgets.md).
 
 Oczywiście nic nie stoi na przeszkodzie, aby używać [pamięci podręcznej fragmentów](caching-fragment.md) jak 
 i [zawartości dynamicznej](caching-fragment.md#dynamic-content) w połączeniu z pamięcią podręczną stron.
-

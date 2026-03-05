@@ -13,11 +13,11 @@ Separadamente e combinadas, essas características fazem com que as classes no Y
 use yii\jui\DatePicker;
 
 echo DatePicker::widget([
-   'language' => 'ru',
-   'name'  => 'country',
-   'clientOptions' => [
-       'dateFormat' => 'yy-mm-dd',
-   ],
+  'language' => 'ru',
+  'name'  => 'country',
+  'clientOptions' => [
+      'dateFormat' => 'yy-mm-dd',
+  ],
 ]);
 ```
 
@@ -43,22 +43,22 @@ use yii\base\BaseObject;
 
 class MyClass extends BaseObject
 {
-   public $prop1;
-   public $prop2;
+  public $prop1;
+  public $prop2;
 
-   public function __construct($param1, $param2, $config = [])
-   {
-       // ... initialization before configuration is applied
+  public function __construct($param1, $param2, $config = [])
+  {
+      // ... initialization before configuration is applied
 
-       parent::__construct($config);
-   }
+      parent::__construct($config);
+  }
 
-   public function init()
-   {
-       parent::init();
+  public function init()
+  {
+      parent::init();
 
-       // ... initialization after configuration is applied
-   }
+      // ... initialization after configuration is applied
+  }
 }
 ```
 
@@ -68,9 +68,9 @@ Seguindo essas orientações fará com que seus componentes sejam [configurávei
 $component = new MyClass(1, 2, ['prop1' => 3, 'prop2' => 4]);
 // alternatively
 $component = \Yii::createObject([
-   'class' => MyClass::class,
-   'prop1' => 3,
-   'prop2' => 4,
+  'class' => MyClass::class,
+  'prop1' => 3,
+  'prop2' => 4,
 ], [1, 2]);
 ```
 
@@ -86,4 +86,3 @@ A classe [[yii\base\BaseObject]] impõe o seguinte ciclo de vida do objeto:
 4. Chamadas de método de objeto.
 
 Os três primeiros passos acontecem dentro do construtor do objeto. Isto significa que uma vez que você instanciar a classe (isto é, um objeto), esse objeto será inicializado adequadamente. 
-

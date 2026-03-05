@@ -31,7 +31,7 @@ use yii\rest\ActiveController;
 
 class UserController extends ActiveController
 {
-   public $modelClass = 'app\models\User';
+  public $modelClass = 'app\models\User';
 }
 ```
 
@@ -46,12 +46,12 @@ Em seguida, modifique a configuração do componente `urlManager` na configuraç
 
 ```php
 'urlManager' => [
-   'enablePrettyUrl' => true,
-   'enableStrictParsing' => true,
-   'showScriptName' => false,
-   'rules' => [
-       ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-   ],
+  'enablePrettyUrl' => true,
+  'enableStrictParsing' => true,
+  'showScriptName' => false,
+  'rules' => [
+      ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+  ],
 ]
 ```
 
@@ -64,9 +64,9 @@ Para fazer a API aceitar dados no formato JSON, configure a propriedade [[yii\we
 
 ```php
 'request' => [
-   'parsers' => [
-       'application/json' => 'yii\web\JsonParser',
-   ]
+  'parsers' => [
+      'application/json' => 'yii\web\JsonParser',
+  ]
 ]
 ```
 
@@ -102,21 +102,21 @@ X-Pagination-Page-Count: 50
 X-Pagination-Current-Page: 1
 X-Pagination-Per-Page: 20
 Link: <http://localhost/users?page=1>; rel=self, 
-     <http://localhost/users?page=2>; rel=next, 
-     <http://localhost/users?page=50>; rel=last
+    <http://localhost/users?page=2>; rel=next, 
+    <http://localhost/users?page=50>; rel=last
 Transfer-Encoding: chunked
 Content-Type: application/json; charset=UTF-8
 
 [
-   {
-       "id": 1,
-       ...
-   },
-   {
-       "id": 2,
-       ...
-   },
-   ...
+  {
+      "id": 1,
+      ...
+  },
+  {
+      "id": 2,
+      ...
+  },
+  ...
 ]
 ```
 
@@ -132,22 +132,22 @@ X-Pagination-Page-Count: 50
 X-Pagination-Current-Page: 1
 X-Pagination-Per-Page: 20
 Link: <http://localhost/users?page=1>; rel=self, 
-     <http://localhost/users?page=2>; rel=next, 
-     <http://localhost/users?page=50>; rel=last
+    <http://localhost/users?page=2>; rel=next, 
+    <http://localhost/users?page=50>; rel=last
 Transfer-Encoding: chunked
 Content-Type: application/xml
 
 <?xml version="1.0" encoding="UTF-8"?>
 <response>
-   <item>
-       <id>1</id>
-       ...
-   </item>
-   <item>
-       <id>2</id>
-       ...
-   </item>
-   ...
+  <item>
+      <id>1</id>
+      ...
+  </item>
+  <item>
+      <id>2</id>
+      ...
+  </item>
+  ...
 </response>
 ```
 
@@ -190,4 +190,3 @@ Você pode usar [[yii\rest\UrlRule]] para simplificar o roteamento para suas URL
 
 
 Embora não seja exigido, é recomendável que você desenvolva suas APIs RESTful  como uma aplicação separada, diferente do seu frontend e backend para facilitar a manutenção.
-

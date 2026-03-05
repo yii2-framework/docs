@@ -17,7 +17,7 @@ Para usar una extension, primero tenemos que instalarla. La mayoría de extensio
 [Composer](https://getcomposer.org/) que se pueden instalar mediante los dos simples siguientes pasos:
 
 1. modificar el archivo `composer.json` de la aplicación y especificar que extensiones (paquetes Composer) se quieren
-   instalar.
+  instalar.
 2. ejecutar `composer install` para instalar las extensiones especificadas.
 
 Hay que tener en cuenta que es necesaria la instalación de [Composer](https://getcomposer.org/) si no la tenemos
@@ -108,12 +108,12 @@ instalarse más fácilmente por los otros usuarios, como se ha descrito en la an
 Más adelante se encuentran los pasos básicos que deben seguirse para crear una extensión como paquete Composer.
 
 1. Crear un proyecto para la extensión y alojarlo en un repositorio con VCS (Sistema de Control de Versiones), como
-   puede ser [github.com](https://github.com). El trabajo de desarrollo y el mantenimiento debe efectuarse en este
-   repositorio.
+  puede ser [github.com](https://github.com). El trabajo de desarrollo y el mantenimiento debe efectuarse en este
+  repositorio.
 2. En el directorio raíz del repositorio debe encontrarse el archivo `composer.json` que es requerido por Composer. Se
-   pueden encontrar más detalles en la siguiente subsección.
+  pueden encontrar más detalles en la siguiente subsección.
 3. Registrar la extensión en un repositorio de Composer como puede ser [Packagist](https://packagist.org/), para que
-   los otros usuarios puedan encontrarlo e instalarla mediante Composer.
+  los otros usuarios puedan encontrarlo e instalarla mediante Composer.
 
 ### `composer.json` <span id="composer-json"></span>
 
@@ -280,7 +280,7 @@ class MyBootstrapClass implements BootstrapInterface
     public function bootstrap($app)
     {
         $app->on(Application::EVENT_BEFORE_REQUEST, function () {
-             // do something here
+            // do something here
         });
     }
 }

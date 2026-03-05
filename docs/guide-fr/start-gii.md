@@ -129,4 +129,3 @@ Résumé <span id="summary"></span>
 -------
 
 Dans cette section, vous avez appris à utiliser Gii pour générer le code qui met en œuvre une fonctionnalité CRUD complète pour des contenus stockés dans une table de base de données.
-

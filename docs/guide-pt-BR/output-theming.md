@@ -92,4 +92,3 @@ Algumas vezes você pode querer definir um tema que contém um visual básico da
  
 Neste caso, a view `@app/views/site/index.php` seria tematizada tanto como `@app/themes/christmas/site/index.php` ou
 `@app/themes/basic/site/index.php`, dependendo de qual arquivo de tema existir. Se os dois arquivos existirem, o primeiro terá precedência. Na prática, você iria manter mais arquivos de temas em `@app/themes/basic` e personalizar alguns deles em `@app/themes/christmas`.
-

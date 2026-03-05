@@ -246,24 +246,24 @@ use yii\data\BaseDataProvider;
 class CsvDataProvider extends BaseDataProvider
 {
     /**
-     * @var string 要读取的 CSV 文件的名称
-     */
+    * @var string 要读取的 CSV 文件的名称
+    */
     public $filename;
 
     /**
-     * @var string|callable 键列的名称或返回它的可调用列表
-     */
+    * @var string|callable 键列的名称或返回它的可调用列表
+    */
     public $key;
 
     /**
-     * @var SplFileObject
-     */
+    * @var SplFileObject
+    */
     protected $fileObject; // SplFileObject 非常便于搜索文件中的特定行
 
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     public function init()
     {
         parent::init();
@@ -273,8 +273,8 @@ class CsvDataProvider extends BaseDataProvider
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     protected function prepareModels()
     {
         $models = [];
@@ -302,8 +302,8 @@ class CsvDataProvider extends BaseDataProvider
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     protected function prepareKeys($models)
     {
         if ($this->key !== null) {
@@ -324,8 +324,8 @@ class CsvDataProvider extends BaseDataProvider
     }
 
     /**
-     * @inheritdoc
-     */
+    * @inheritdoc
+    */
     protected function prepareTotalCount()
     {
         $count = 0;

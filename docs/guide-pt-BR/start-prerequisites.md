@@ -16,4 +16,3 @@ Note que, quanto mais complicado for seu projeto ou aplicação, mais você prec
 ## Linha de comando and composer
 
 Yii usa extensivamente o gerenciador de pacotes mais utilizado do PHP, o [Composer](https://getcomposer.org/), então certifique-se de ler e entender seu [guia](https://getcomposer.org/doc/01-basic-usage.md). Se você não tem familiaridade com a linha de comando é hora de começar a experimentar. Quando tiver aprendido o básico, nunca mais vai querer trabalhar sem ela.
-

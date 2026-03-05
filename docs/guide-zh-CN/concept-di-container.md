@@ -531,4 +531,3 @@ $reader = $container->get('app\storage\DocumentsReader');
 Yii 在依赖住入（DI）容器之上实现了它的[服务定位器](concept-service-locator.md)。
 当一个服务定位器尝试创建一个新的对象实例时，它会把调用转发到 DI 容器。
 后者将会像前文所述那样自动解决依赖关系。
-

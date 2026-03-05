@@ -36,4 +36,3 @@ Como você pode observar, o cache de página é bastante similar ao [cache de fr
 
 Você pode usar o [cache de fragmentos](caching-fragment.md) ou [conteúdo dinâmico](caching-fragment.md#dynamic-content)
 em conjunto com o cache de página.
-

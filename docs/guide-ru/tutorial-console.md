@@ -119,7 +119,7 @@ exit($exitCode);
 
 Сохраните скрипт для автодополнения в директорию `/etc/bash_completion.d/`:
 
-     curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
+    curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii -o /etc/bash_completion.d/yii
 
 Для временного использования, вы можете сохранить файл в произвольную директорию и подключить его на время работы сессии,
 вызвав команду `source yii`.

@@ -19,7 +19,7 @@ Filtrer les entrées signifie que les entrées ne doivent jamais être considér
 ```php
 $sortBy = $_GET['sort'];
 if (!in_array($sortBy, ['title', 'created_at', 'status'])) {
-	throw new Exception('Invalid sort value.');
+  throw new Exception('Invalid sort value.');
 }
 ```
 

@@ -724,4 +724,3 @@ http://localhost/index.php?r=site%2Fpage&view=about
   小さなビューをレンダリングして大きなビューを組み上げることが出来る。
 * ビューの構成要素として [ウィジェット](structure-widgets.md) を使う。
 * ビューでデータを変換し書式化するためのヘルパ・クラスを作成して使う。
-

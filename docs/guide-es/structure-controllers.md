@@ -415,21 +415,21 @@ para completar el `request`:
 
 1. El método [[yii\base\Controller::init()]] es llamado después de que el controlador es creado y configurado.
 2. El controlador crea un objecto `action` basado en el ID de acción solicitado:
-   * Si el ID de la acción no es especificado, el [[yii\base\Controller::defaultAction|ID de la acción por defecto]] será utilizado.
-   * Si el ID de la acción es encontrado en el [[yii\base\Controller::actions()|mapeo de acciones]], una acción independiente
-     será creada;
-   * Si el ID de la acción es coincide con un método de acción, una acción en línea será creada;
-   * De otra manera, se lanzará una excepción [[yii\base\InvalidRouteException]].
+  * Si el ID de la acción no es especificado, el [[yii\base\Controller::defaultAction|ID de la acción por defecto]] será utilizado.
+  * Si el ID de la acción es encontrado en el [[yii\base\Controller::actions()|mapeo de acciones]], una acción independiente
+    será creada;
+  * Si el ID de la acción es coincide con un método de acción, una acción en línea será creada;
+  * De otra manera, se lanzará una excepción [[yii\base\InvalidRouteException]].
 3. El controlador llama secuencialmente al método `beforeAction()` de la aplicación, al del módulo (si el controlador
-   pertenece a uno) y al del controlador.
-   * Si alguna de las llamadas devuelve `false`, el resto de los llamados subsiguientes a `beforeAction()` serán saltados y
-     la ejecución de la acción será cancelada.
-   * Por defecto, cada llamada al método `beforeAction()` lanzará un evento `beforeAction` al cual le puedes conectar un manejador.
+  pertenece a uno) y al del controlador.
+  * Si alguna de las llamadas devuelve `false`, el resto de los llamados subsiguientes a `beforeAction()` serán saltados y
+    la ejecución de la acción será cancelada.
+  * Por defecto, cada llamada al método `beforeAction()` lanzará un evento `beforeAction` al cual le puedes conectar un manejador.
 4. El controlador ejecuta la acción:
-   * Los parámetros de la acción serán analizados y poblados con los datos del `request`;
+  * Los parámetros de la acción serán analizados y poblados con los datos del `request`;
 5. El controlador llama secuencialmente al método `afterAction()` del controlador, del módulo (si el controlador
-   pertenece a uno) y de la aplicación.
-   * Por defecto, cada llamada al método `afterAction()` lanzará un evento `afterAction` al cual le puedes conectar un manejador.
+  pertenece a uno) y de la aplicación.
+  * Por defecto, cada llamada al método `afterAction()` lanzará un evento `afterAction` al cual le puedes conectar un manejador.
 6. La aplicación tomará el resultado de la acción y lo asignará al [response](runtime-responses.md).
 
 

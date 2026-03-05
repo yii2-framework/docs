@@ -13,17 +13,17 @@
 在应用主体的构造函数中，会执行以下引导工作：
 
 1. 调用 [[yii\base\Application::preInit()|preInit()]]（预初始化）方法，配置一些高优先级的应用属性，
-   比如 [[yii\base\Application::basePath|basePath]] 属性。
+  比如 [[yii\base\Application::basePath|basePath]] 属性。
 2. 注册[[yii\base\Application::errorHandler|错误处理器（ErrorHandler）]]。
 3. 通过给定的应用配置初始化应用的各属性。
 4. 通过调用 [[yii\base\Application::init()|init()]]（初始化）方法，它会顺次调用
-   [[yii\base\Application::bootstrap()|bootstrap()]] 从而运行引导组件。
-   - 加载扩展清单文件(extension manifest file) `vendor/yiisoft/extensions.php`。
-   - 创建并运行各个扩展声明的 
-     [引导组件（bootstrap components）](structure-extensions.md#bootstrapping-classes)。
-   - 创建并运行各个 [应用组件](structure-application-components.md) 
-     以及在应用的 [Bootstrap 属性](structure-applications.md#bootstrap)中声明的各个
-     [模块（modules）组件](structure-modules.md)（如果有）。
+  [[yii\base\Application::bootstrap()|bootstrap()]] 从而运行引导组件。
+  - 加载扩展清单文件(extension manifest file) `vendor/yiisoft/extensions.php`。
+  - 创建并运行各个扩展声明的 
+    [引导组件（bootstrap components）](structure-extensions.md#bootstrapping-classes)。
+  - 创建并运行各个 [应用组件](structure-application-components.md) 
+    以及在应用的 [Bootstrap 属性](structure-applications.md#bootstrap)中声明的各个
+    [模块（modules）组件](structure-modules.md)（如果有）。
 
 因为引导工作必须在处理**每一次**请求之前都进行一遍，因此让该过程尽可能轻量化就异常重要，
 请尽可能地优化这一步骤。

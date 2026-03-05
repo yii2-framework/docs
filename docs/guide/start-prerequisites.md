@@ -20,4 +20,3 @@ manage that complexity.
 Yii extensively uses de-facto standard PHP package manager, [Composer](https://getcomposer.org/) so make sure you read
 and understand its [guide](https://getcomposer.org/doc/01-basic-usage.md). If you are not familiar with using command line it is time to start trying. Once you
 learn the basics you'll never want to work without it.
-

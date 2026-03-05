@@ -247,7 +247,7 @@ public function actionDownload()
 
 1. [[yii\web\Response::EVENT_BEFORE_SEND]] イベントをトリガする。
 2. [[yii\web\Response::prepare()]] を呼んで [[yii\web\Response::data|レスポンス・データ]] を
-   [[yii\web\Response::content|レスポンス・コンテント]] としてフォーマットする。
+  [[yii\web\Response::content|レスポンス・コンテント]] としてフォーマットする。
 3. [[yii\web\Response::EVENT_AFTER_PREPARE]] イベントをトリガする。
 4. [[yii\web\Response::sendHeaders()]] を呼んで、登録された HTTP ヘッダを送出する。
 5. [[yii\web\Response::sendContent()]] を呼んで、レスポンスのボディ・コンテントを送出する。

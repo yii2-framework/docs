@@ -75,10 +75,10 @@ Les [[yii\filters\AccessRule|règles d'accès]] acceptent beaucoup d'options. Ci
 
  * [[yii\filters\AccessRule::roles|roles]]: spécifie à quels rôles utilisateur cette règle correspond. Deux rôles spéciaux sont reconnus, et ils sont vérifiés via [[yii\web\User::isGuest]]:
 
-     - `?`: correspond à un visiteur non authentifié.
-     - `@`: correspond à un visiteur authentifié.
+    - `?`: correspond à un visiteur non authentifié.
+    - `@`: correspond à un visiteur authentifié.
 
-   L'utilisation d'autres noms de rôle déclenche l'appel de [[yii\web\User::can()]], qui requiert l'activation du contrôle d'accès basé sur les rôles qui sera décrit dans la prochaine sous-section. Si cette option est vide ou non définie, cela signifie que la règle s'applique à tous les rôles.
+  L'utilisation d'autres noms de rôle déclenche l'appel de [[yii\web\User::can()]], qui requiert l'activation du contrôle d'accès basé sur les rôles qui sera décrit dans la prochaine sous-section. Si cette option est vide ou non définie, cela signifie que la règle s'applique à tous les rôles.
 
  * [[yii\filters\AccessRule::ips|ips]]: spécifie à quelles [[yii\web\Request::userIP|adresses IP de client]] cette règle correspond. Une adresse IP peut contenir le caractère générique `*` à la fin pour indiquer que la règle correspond à des adresses IP ayant le même préfixe. Par exemple, '192.168.*' correspond à toutes les adresse IP dans le segment '192.168.'. Si cette option est vide ou non définie, cela signifie que la règle s'applique à toutes les adresses IP.
 
@@ -311,11 +311,11 @@ class AuthorRule extends Rule
     public $name = 'isAuthor';
 
     /**
-     * @param string|int $user l'identifiant de l'utilisateur.
-     * @param Item $item le rôle ou la permission avec laquelle cette règle est associée
-     * @param array $params les paramètres passés à ManagerInterface::checkAccess().
-     * @return bool une valeur indiquant si la règles autorise le rôle ou la permission qui lui est associé.
-     */
+    * @param string|int $user l'identifiant de l'utilisateur.
+    * @param Item $item le rôle ou la permission avec laquelle cette règle est associée
+    * @param array $params les paramètres passés à ManagerInterface::checkAccess().
+    * @return bool une valeur indiquant si la règles autorise le rôle ou la permission qui lui est associé.
+    */
     public function execute($user, $item, $params)
     {
         return isset($params['post']) ? $params['post']->createdBy == $user : false;

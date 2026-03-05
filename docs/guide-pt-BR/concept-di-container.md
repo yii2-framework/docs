@@ -95,7 +95,7 @@ class FooBuilder
             $foo = new Foo(new Bar);
             // ... Outras inicializações...
             return $foo;
-       };        
+      };        
     }
 }
 
@@ -322,4 +322,3 @@ Ambas as injeção de dependência e [service locator](concept-service-locator.m
 O Yii implementa o [service locator](concept-service-locator.md) no topo da injeção dependência container (DI).
 Quando um service locator tenta criar uma nova instância de objeto, ele irá encaminhar a chamada para o container de DI.
 Este último vai resolver as dependências automaticamente tal como descrito acima.
-
