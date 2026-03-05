@@ -12,10 +12,16 @@ jobs:
   vale:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout.
         uses: actions/checkout@v5
 
-      - name: Run Vale
+      - name: Microsoft Style.
+        run: |
+          sudo apt install wget unzip
+          wget https://github.com/errata-ai/Microsoft/releases/latest/download/Microsoft.zip
+          unzip Microsoft.zip -d .github/styles
+
+      - name: Run Vale.
         uses: errata-ai/vale-action@reviewdog
         with:
           fail_on_error: false
