@@ -1,0 +1,3 @@
+[codespell]
+skip = .git,*.lock,node_modules,vendor,./docs/guide-*/*,./docs/internals-*/*,docs/guide-*/*,docs/internals-*/*,*/docs/guide-*/*,*/docs/internals-*/*
+ignore-words-list = nd,nin,januar,boxs

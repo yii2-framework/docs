@@ -14,6 +14,13 @@ trim_trailing_whitespace = true
 indent_size = 2
 
 [*.md]
+indent_style = unset
+indent_size = unset
+trim_trailing_whitespace = false
+
+[*.graphml]
+indent_style = unset
+indent_size = unset
 trim_trailing_whitespace = false
 
 [*.php]

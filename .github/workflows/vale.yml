@@ -1,0 +1,32 @@
+---
+name: vale
+
+on:
+  push:
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  vale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout.
+        uses: actions/checkout@v5
+
+      - name: Microsoft Style.
+        run: |
+          sudo apt install wget unzip
+          wget https://github.com/errata-ai/Microsoft/releases/latest/download/Microsoft.zip
+          unzip Microsoft.zip -d .github/styles
+
+      - name: Run Vale.
+        uses: errata-ai/vale-action@reviewdog
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          fail_on_error: false
+          files: docs/guide
+          filter_mode: nofilter
+          reporter: github-check
