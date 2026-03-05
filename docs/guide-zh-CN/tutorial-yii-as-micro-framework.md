@@ -205,7 +205,7 @@ class PostController extends ActiveController
 从这里开始，您可能需要查看以下指南以进一步开发您的应用程序：
 
 - 该 API 目前仅将 urlencoded 表单数据理解为输入，若使其成为真正的 JSON API，
-  您需要配置 [[yii\web\JsonParser]]。
+   您需要配置 [[yii\web\JsonParser]]。
 - 为了使 URL 更加友好，您需要配置路由。
   请参阅 [关于REST路由的指南](rest-routing.md) 了解如何执行此操作。
 - 请参阅 [预览](start-looking-ahead.md) 部分获取更多参考。

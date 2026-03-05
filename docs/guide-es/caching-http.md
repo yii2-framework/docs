@@ -26,10 +26,10 @@ la página. El formato de la función de llamada de retorno debe ser el siguient
 
 ```php
 /**
- * @param Action $action el objeto acción que se está controlando actualmente
- * @param array $params el valor de la propiedad "params"
- * @return int un sello de tiempo UNIX que representa el tiempo de modificación de la página
- */
+  * @param Action $action el objeto acción que se está controlando actualmente
+  * @param array $params el valor de la propiedad "params"
+  * @return int un sello de tiempo UNIX que representa el tiempo de modificación de la página
+  */
 function ($action, $params)
 ```
 
@@ -71,10 +71,10 @@ El formato de la función de retorno es el siguiente:
 
 ```php
 /**
- * @param Action $action el objeto acción que se está controlando actualmente
- * @param array $params el valor de la propiedad "params"
- * @return string una cadena usada como semilla para la generación del hash de ETag
- */
+  * @param Action $action el objeto acción que se está controlando actualmente
+  * @param array $params el valor de la propiedad "params"
+  * @return string una cadena usada como semilla para la generación del hash de ETag
+  */
 function ($action, $params)
 ```
 

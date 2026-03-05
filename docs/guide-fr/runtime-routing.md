@@ -7,7 +7,7 @@ La route est ensuite utilisée pour instancier l'[action de contrôleur](structu
  
 Le processus inverse du routage, qui consiste à créer une URL à partir d'une route et des paramètres associés de la requête,  
 est appelé *création d'URL*. Lorsque l'URL créée est ensuite requise, le processus de routage est capable de la résoudre en la route originale
- avec les paramètres de requête. 
+  avec les paramètres de requête. 
   
 L'élément central en charge du routage et de la création d'URL est le [[yii\web\UrlManager|gestionnaire d'URL]], qui est enregistré en tant que  [composant d'application](structure-application-components.md) sous le nom `urlManager`. 
 Le [[yii\web\UrlManager|gestionnaire d'URL]] fournit la méthode [[yii\web\UrlManager::parseRequest()|parseRequest()]] pour analyser une requête entrante et la résoudre en 
@@ -136,7 +136,7 @@ La propriété  `catchAll` accepte un tableau dont le premier élément spécifi
 et le reste des éléments des couples clé-valeur pour les paramètres  [liés à l'action](structure-controllers.md#action-parameters).
 
 > Info: le [panneau de débogage] ](https://github.com/yiisoft/yii2-debug/blob/master/docs/guide/README.md) de l'environnement de développement
- ne fonctionne pas lorsque cette propriété est activée.
+  ne fonctionne pas lorsque cette propriété est activée.
 
 
 ## Création d'URL <span id="creating-urls"></span>

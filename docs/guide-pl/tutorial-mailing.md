@@ -91,9 +91,9 @@ use yii\helpers\Url;
 
 
 /**
- * @var \yii\web\View $this instancja komponentu View
- * @var \yii\mail\BaseMessage $message instancja nowo utworzonej wiadomości email
- */
+  * @var \yii\web\View $this instancja komponentu View
+  * @var \yii\mail\BaseMessage $message instancja nowo utworzonej wiadomości email
+  */
 
 ?>
 <h2>Ta wiadomość pozwala Ci odwiedzić stronę główną naszej witryny przez jedno kliknięcie</h2>
@@ -141,10 +141,10 @@ Szalony mogą zostać użyte do ustawienia styli CSS, lub innej wspólnej treśc
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this view component instance
- * @var \yii\mail\MessageInterface $message the message being composed
- * @var string $content main view render result
- */
+  * @var \yii\web\View $this view component instance
+  * @var \yii\mail\MessageInterface $message the message being composed
+  * @var string $content main view render result
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

@@ -378,5 +378,5 @@ server {
 </configuration>
 ```
 また、IIS 上で PHP を構成するためには、以下にリストした Microsoft の公式リソースが有用でしょう。
- 1. [IIS の最初の Web サイトを構成する方法](https://support.microsoft.com/ja-jp/help/323972/how-to-set-up-your-first-iis-web-site)
- 2. [Configure a PHP Website on IIS](https://docs.microsoft.com/en-us/iis/application-frameworks/scenario-build-a-php-website-on-iis/configure-a-php-website-on-iis)
+  1. [IIS の最初の Web サイトを構成する方法](https://support.microsoft.com/ja-jp/help/323972/how-to-set-up-your-first-iis-web-site)
+  2. [Configure a PHP Website on IIS](https://docs.microsoft.com/en-us/iis/application-frameworks/scenario-build-a-php-website-on-iis/configure-a-php-website-on-iis)

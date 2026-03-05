@@ -18,10 +18,10 @@ HTTP кэширование
 
 ```php
 /**
- * @param Action $action объект действия, которое в настоящее время обрабатывается
- * @param array $params значение свойства "params"
- * @return int временная метка UNIX timestamp, возвращающая время последнего изменения страницы
- */
+  * @param Action $action объект действия, которое в настоящее время обрабатывается
+  * @param array $params значение свойства "params"
+  * @return int временная метка UNIX timestamp, возвращающая время последнего изменения страницы
+  */
 function ($action, $params)
 ```
 
@@ -55,10 +55,10 @@ public function behaviors()
 
 ```php
 /**
- * @param Action $action объект действия, которое в настоящее время обрабатывается
- * @param array $params значение свойства "params"
- * @return string строка, используемая как seed для генерации ETag хэша
- */
+  * @param Action $action объект действия, которое в настоящее время обрабатывается
+  * @param array $params значение свойства "params"
+  * @return string строка, используемая как seed для генерации ETag хэша
+  */
 function ($action, $params)
 ```
 

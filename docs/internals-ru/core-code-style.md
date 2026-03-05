@@ -51,8 +51,8 @@ PHP код должен содержать только символы в код
 
 ```php
 /**
- * Документация
- */
+  * Документация
+  */
 class MyClass extends \yii\base\BaseObject implements MyInterface
 {
     // код
@@ -116,8 +116,8 @@ class Foo
 
 ```php
 /**
- * Документация
- */
+  * Документация
+  */
 class Foo
 {
     /**
@@ -348,14 +348,14 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 ```php
 <?php
 /**
- * Returns the errors for all attribute or a single attribute.
- * @param string $attribute attribute name. Use `null` to retrieve errors for all attributes.
- * @property array An array of errors for all attributes. Empty array is returned if no error.
- * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
- * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
- * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
- * ...
- */
+  * Returns the errors for all attribute or a single attribute.
+  * @param string $attribute attribute name. Use `null` to retrieve errors for all attributes.
+  * @property array An array of errors for all attributes. Empty array is returned if no error.
+  * The result is a two-dimensional array. See [[getErrors()]] for detailed description.
+  * @return array errors for all attributes or the specified attribute. Empty array is returned if no error.
+  * Note that when returning errors for all attributes, the result is a two-dimensional array, like the following:
+  * ...
+  */
 public function getErrors($attribute = null)
 ```
 
@@ -364,23 +364,23 @@ public function getErrors($attribute = null)
 ```php
 <?php
 /**
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
+  * @link https://www.yiiframework.com/
+  * @copyright Copyright (c) 2008 Yii Software LLC
+  * @license https://www.yiiframework.com/license/
+  */
 ```
 
 #### Класс
 
 ```php
 /**
- * Component is the base class that provides the *property*, *event* and *behavior* features.
- *
- * @include @yii/docs/base-Component.md
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
+  * Component is the base class that provides the *property*, *event* and *behavior* features.
+  *
+  * @include @yii/docs/base-Component.md
+  *
+  * @author Qiang Xue <qiang.xue@gmail.com>
+  * @since 2.0
+  */
 class Component extends \yii\base\BaseObject
 ```
 
@@ -389,18 +389,18 @@ class Component extends \yii\base\BaseObject
 
 ```php
 /**
- * Returns the list of attached event handlers for an event.
- * You may manipulate the returned [[Vector]] object by adding or removing handlers.
- * For example,
- *
- * ```
- * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
- * ```
- *
- * @param string $name the event name
- * @return Vector list of attached event handlers for the event
- * @throws Exception if the event is not defined
- */
+  * Returns the list of attached event handlers for an event.
+  * You may manipulate the returned [[Vector]] object by adding or removing handlers.
+  * For example,
+  *
+  * ```
+  * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
+  * ```
+  *
+  * @param string $name the event name
+  * @return Vector list of attached event handlers for the event
+  * @throws Exception if the event is not defined
+  */
 public function getEventHandlers($name)
 {
     if (!isset($this->_e[$name])) {
@@ -444,23 +444,23 @@ public function getEventHandlers($name)
 
 ```php
 /**
- * Correct code example:
- * 
- * ```
- * $object->doMagic();
- * ```
- */
+  * Correct code example:
+  * 
+  * ```
+  * $object->doMagic();
+  * ```
+  */
 public function doMagic()
 {
 }
 
 /**
- * Incorrect code example:
- * 
- * ```php
- * $object->doMagic();
- * ```
- */
+  * Incorrect code example:
+  * 
+  * ```php
+  * $object->doMagic();
+  * ```
+  */
 public function doMagic()
 {
 }

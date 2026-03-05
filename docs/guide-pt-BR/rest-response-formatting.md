@@ -65,7 +65,7 @@ public function behaviors()
 
 
 As chaves da propriedade `formats` são os tipos MIME suportados, enquanto os valores são os nomes de formato de resposta correspondentes que devem ser suportados em
- [[yii\web\Response::formatters]].
+  [[yii\web\Response::formatters]].
 
 
 ## Serializando Dados <span id="data-serializing"></span>

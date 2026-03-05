@@ -255,7 +255,7 @@ class ContactAction extends Action
 
 > Note: バージョン 2.0.21 以降、Yii は `sameSite` クッキー設定 (PHP バージョン 7.4.0 以上が必要) をサポートしています。
   ただし、`sameSite` クッキー設定を行えば、上記の CSRF 対策が不要になるということではありません。何故なら、今はまだ全てのブラウザがこの設定をサポートしている訳ではないからです。
- 詳細については [セッションとクッキー - sameSite オプション](runtime-sessions-cookies.md#samesite) を参照して下さい。
+  詳細については [セッションとクッキー - sameSite オプション](runtime-sessions-cookies.md#samesite) を参照して下さい。
 
 このトピックについて更に読むべき文書:
 

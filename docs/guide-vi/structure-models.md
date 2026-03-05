@@ -234,7 +234,7 @@ khác nhau được dựa trên kịch bản hiện tại.
 ## Các quy tắc xác nhận (Validation Rules) <span id="validation-rules"></span>
 
 Khi dữ liệu cho model được chuyển lên từ người dùng cuối, dữ liệu này cần được xác thực để chắc chắn rằng dữ liệu này là hợp lệ
- (được gọi là *quy tắc xác nhận*, có thể gọi *business rules*). Ví dụ, cho model `ContactForm`,
+  (được gọi là *quy tắc xác nhận*, có thể gọi *business rules*). Ví dụ, cho model `ContactForm`,
 bạn muốn tất cả các thuộc tính không được để trống và thuộc tính `email` phải là địa chỉ email hợp lệ.
 Nếu các giá trị cho các thuộc tính không được thỏa mãn với các quy tắc xác nhận, các thông báo lỗi sẽ được
 được hiển thị để giúp người dùng sửa lỗi.

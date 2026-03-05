@@ -6,10 +6,10 @@
 <p dir="rtl">
     التثبيت الإفتراضي لل Yii ينتج عنه بنية تركيبة منظمة ومرتبة للمجلدات والملفات التي بداخلها، ويوفر هذا الكلام بعض المميزات التي يتم إضافتها وإنشائها بشكل تلقائي مثل صفحة تسجيل الدخول، ونموذج اتصل بنا...الخ، هذا الأمر سيشكل نقطة إنطلاق جيدة لبدء العمل على أي مشروع.
 </p>
-    
+
 <p dir="rtl">
     في هذه الصفحة من التوثيق سنقوم بشرح ووصف كيف يمكن تثبيت إطار العمل Yii وبالتحديد Yii2 Basic Project Template.
-    هناك Template آخر موجود بإطار العمل Yii وهو <a href="https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide">Yii2 Advanced Project Template</a>، وهو الأفضل للعمل وإنشاء المشاريع لفريق عمل برمجي، ولتطوير المشاريع متعددة الطبقات(multiple tires). 
+    هناك Template آخر موجود بإطار العمل Yii وهو <a href="https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide">Yii2 Advanced Project Template</a>، وهو الأفضل للعمل وإنشاء المشاريع لفريق عمل برمجي، ولتطوير المشاريع متعددة الطبقات(multiple tires).
 </p>
 
 <blockquote class="info"><p dir="rtl">
@@ -17,26 +17,26 @@
 اذا كنت جديدا في عالم تطوير تطبيقات الويب باستخدام ال Yii، فإننا نوصيك بقوة بأن تستخدم القالب الأساسي في بناء المشروع الخاص بك.
 </p></blockquote>
 
-
 ## <div dir="rtl">تثبيت ال Yii من خلال (Composer)</div> <span id="installing-via-composer"></span>
 
 ### <div dir="rtl">تثبيت ال Composer</div>
 
 <p dir="rtl">
 إن لم يكن لديك Composer مثبت مسبقا، فيمكنك السير بخطوات تثبيته من خلال الدخول الى هذا الرابط <a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a>.
-لتثبيت ال Composer في كل من نظامي Linux و Max OS X، يمكنك تنفيذ الأوامر التالية: 
+لتثبيت ال Composer في كل من نظامي Linux و Max OS X، يمكنك تنفيذ الأوامر التالية:
 </p>
 
 ```bash
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 ```
+
 <p dir="rtl">
-    ولنظام ويندوز يمكنك تثبيت ال <a href="https://getcomposer.org/Composer-Setup.exe">Composer-Setup.exe</a> ومن ثم عمل run 
+    ولنظام ويندوز يمكنك تثبيت ال <a href="https://getcomposer.org/Composer-Setup.exe">Composer-Setup.exe</a> ومن ثم عمل run
 </p>
 
 <p dir="rtl">
-يرجى الدخول الى <a href="https://getcomposer.org/doc/articles/troubleshooting.md">Troubleshooting section of the Composer Documentation</a> في حال واجهتك أي مشاكل متعلقة بال composer, وإذا كنت مستخدمًا جديدًا لل composer، ننصحك أيضًا بقراءة <a href="https://getcomposer.org/doc/01-basic-usage.md">قسم الاستخدام الأساسي</a> على الأقل من التوثيف الخاص بال composer. 
+يرجى الدخول الى <a href="https://getcomposer.org/doc/articles/troubleshooting.md">Troubleshooting section of the Composer Documentation</a> في حال واجهتك أي مشاكل متعلقة بال composer, وإذا كنت مستخدمًا جديدًا لل composer، ننصحك أيضًا بقراءة <a href="https://getcomposer.org/doc/01-basic-usage.md">قسم الاستخدام الأساسي</a> على الأقل من التوثيف الخاص بال composer.
 </p>
 
 <p dir="rtl">
@@ -48,7 +48,7 @@ sudo mv composer.phar /usr/local/bin/composer
 </p>
 
 <blockquote class="note"><p dir="rtl">
-  ملاحظة مهمة: أثناء تثبيت ال Yii ، سيحتاج ال composer إلى طلب(request) الكثير من المعلومات من ال Github Api. يعتمد عدد الطلبات على عدد dependencies التي يمتلكها التطبيق الخاص بك، وقد يكون هذا العدد أكبر من الحد المسموح به من قبل ال Github Api <b>(Github API rate limit)</b>. إذا وصلت الى الحد الأعلى المسموح به من الطلبات، فقد يطلب منك ال composer بيانات تسجيل الدخول إلى Github، وذلك للحصول على رمز (token) للدخول إلى Github Api. اذا كانت عمليات الإتصال سريعة، فقد تصل إلى هذا الحد(limit) قبل أن يتمكن ال composer من التعامل معه ، لذالك نوصي بتكوين رمز الدخول(access token) قبل تثبيت ال Yii. يرجى الرجوع إلى التوثيق الخاص بال Composer والإطلاع على التعليمات الخاصة <a href="https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens">Github API tokens</a> للحصول على الإرشادات اللازمة للقيام بذلك. 
+  ملاحظة مهمة: أثناء تثبيت ال Yii ، سيحتاج ال composer إلى طلب(request) الكثير من المعلومات من ال Github Api. يعتمد عدد الطلبات على عدد dependencies التي يمتلكها التطبيق الخاص بك، وقد يكون هذا العدد أكبر من الحد المسموح به من قبل ال Github Api <b>(Github API rate limit)</b>. إذا وصلت الى الحد الأعلى المسموح به من الطلبات، فقد يطلب منك ال composer بيانات تسجيل الدخول إلى Github، وذلك للحصول على رمز (token) للدخول إلى Github Api. اذا كانت عمليات الإتصال سريعة، فقد تصل إلى هذا الحد(limit) قبل أن يتمكن ال composer من التعامل معه ، لذالك نوصي بتكوين رمز الدخول(access token) قبل تثبيت ال Yii. يرجى الرجوع إلى التوثيق الخاص بال Composer والإطلاع على التعليمات الخاصة <a href="https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens">Github API tokens</a> للحصول على الإرشادات اللازمة للقيام بذلك.
 </p></blockquote>
 
 ### <div dir="rtl">تثبيت ال Yii</div> <span id="installing-from-composer"></span>
@@ -60,6 +60,7 @@ sudo mv composer.phar /usr/local/bin/composer
 ```bash
 composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 ```
+
 <p dir="rtl">
       سطر الأوامر السابق سيقوم بتثبيت أحدث نسخة مستقرة(stable) من إطار العمل Yii داخل مسار جديد اسمه basic، ويمكنك التعديل على سطر الأوامر السابق لتغيير اسم المشروع لأي اسم ترغب فيه.  
 </p>
@@ -76,11 +77,13 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 ```bash
     composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
 ```
+
 <blockquote class="note"><p dir="rtl">
-    ملاحظة: نسخة المطورين من ال Yii يجب أن يتم إستخدامها للمواقع الإلكترونية التي لن تصدر كنسخة نهائية للمستخدم(Not for production) لأن ذلك يمكن أن يسبب بإيقاف المشروع أو الشيفرة البرمجية الخاصة بك. 
+    ملاحظة: نسخة المطورين من ال Yii يجب أن يتم إستخدامها للمواقع الإلكترونية التي لن تصدر كنسخة نهائية للمستخدم(Not for production) لأن ذلك يمكن أن يسبب بإيقاف المشروع أو الشيفرة البرمجية الخاصة بك.
 </p></blockquote>
 
 ### <div dir="rtl">تثبيت ال Yii من خلال ال Archive File</div> <span id="installing-from-archive-file"></span>
+
 --------------------------
 
 <p dir="rtl">
@@ -98,15 +101,15 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
   'cookieValidationKey' => 'enter your secret key here',
   ```
 
-
 ### <div dir="rtl">خيارات تثبيت أخرى</div> <span id="other-installation-options"></span>
+
 --------------------------
 
 <p dir="rtl">
 توضح تعليمات التثبيت أعلاه كيفية تثبيت ال Yii ، والذي يقوم أيضًا بإنشاء تطبيق ويب أساسي(basic).
 هذا النهج هو نقطة انطلاق جيدة لمعظم المشاريع، صغيرة كانت أو كبيرة. خصوصا اذا كنت قد بدأت تعلم ال Yii من وقت قريب.
 <br /><br />
-لكن، هناك خيارات أخرى متاحة لتثبيت ال Yii وهي: 
+لكن، هناك خيارات أخرى متاحة لتثبيت ال Yii وهي:
 </p>
 
 <ul dir="rtl">
@@ -116,8 +119,8 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 </li>
 </ul>
 
-
 ### <div dir="rtl">تثبيت ال Assets</div> <span id="installing-assets"></span>
+
 --------------------------
 
 <p dir="rtl">
@@ -140,12 +143,13 @@ composer create-project --prefer-dist yiisoft/yii2-app-basic basic
 </p></blockquote>
 
 ### <div dir="rtl">التحقق من التثبيت</div> <span id="verifying-installation"></span>
+
 --------------------------
 
 <p dir="rtl">
-    بعد الانتهاء من التثبيت، ستحتاج الى القيام بإعداد خادم الويب الخاص بك(your web server) (انظر القسم التالي) أو قم باستخدام <a href="https://www.php.net/manual/en/features.commandline.webserver.php">built-in PHP web server</a> عن طريق تنفيذ الأمر التالي داخل المسار web في المشروع الخاص بك: 
+    بعد الانتهاء من التثبيت، ستحتاج الى القيام بإعداد خادم الويب الخاص بك(your web server) (انظر القسم التالي) أو قم باستخدام <a href="https://www.php.net/manual/en/features.commandline.webserver.php">built-in PHP web server</a> عن طريق تنفيذ الأمر التالي داخل المسار web في المشروع الخاص بك:
 </p>
- 
+
 ```bash
 php yii serve
 ```
@@ -157,6 +161,7 @@ php yii serve
 ```bash
 php yii serve --port=8888
 ```
+
 <p dir="rtl">
     يمكنك استخدام الرابط الموجود في الأسفل للوصول الى تطبيق ال Yii الذي قمت بتثبيته وتنفيذ الأوامر السابقة عليه.
 </p>
@@ -182,8 +187,8 @@ http://localhost:8080/
     يجب عليك أن تقوم بتثبيت وإعداد ال PHP الخاص بك بحيث تلبي الحد الأدنى من متطلبات ال Yii. الأهم من ذلك يجب أن يكون الإصدار الخاص بال PHP أعلى أو يساوي 5.4. من الناحية المثالية أحدث إصدار  يعمل مع ال Yii هو ال PHP 7. يجب عليك أيضًا تثبيت ال <a href="https://www.php.net/manual/en/pdo.installation.php">PDO PHP Extension</a>.
 </p>
 
-
 ### <div dir="rtl">إعداد ال Web Servers</div> <span id="configuring-web-servers"></span>
+
 -----------------------
 
 <blockquote class="info"><p dir="rtl">
@@ -196,7 +201,7 @@ http://localhost:8080/
 
 <p dir="rtl">
     على ال production server، قد ترغب في إعداد خادم الويب الخاص بك بحيث يمكن الوصول إلى التطبيق
-الخاص بك عبر ال URL التالي <code>https://www.example.com/index.php</code> بدلاً من <code>https://www.example.com/basic/web/index.php</code>. هذا الكلام يتطلب إنشاء إعداد يقوم بتوجيه ال document root الموجود على ال web server الى مجلد ال basic/web، كما قد ترغب أيضا بإخفاء ال <code>index.php</code> من ال URL كما هو موضح في ال <a href="../guide/runtime-routing.md">Routing and URL Creation</a>. في هذا الموضوع ستتعلم كيف يمكنك إعداد ال Apache أو ال Nginx server لتحقيق هذه الأهداف. 
+الخاص بك عبر ال URL التالي <code>https://www.example.com/index.php</code> بدلاً من <code>https://www.example.com/basic/web/index.php</code>. هذا الكلام يتطلب إنشاء إعداد يقوم بتوجيه ال document root الموجود على ال web server الى مجلد ال basic/web، كما قد ترغب أيضا بإخفاء ال <code>index.php</code> من ال URL كما هو موضح في ال <a href="../guide/runtime-routing.md">Routing and URL Creation</a>. في هذا الموضوع ستتعلم كيف يمكنك إعداد ال Apache أو ال Nginx server لتحقيق هذه الأهداف.
 </p>
 
 <blockquote class="info"><p dir="rtl">
@@ -204,7 +209,7 @@ http://localhost:8080/
 </p></blockquote>
 
 <blockquote class="info"><p dir="rtl">
-معلومة: إذا كان سيتم تشغيل التطبيق الخاص بك في بيئة استضافة مشتركة(shared hosting) حيث ليس لديك الصلاحية لتعديل الإعدادات الخاصة بال web server، ستحتاج حينها الى تعديل في البنية الخاصة بالمشروع للحصول على أفضل أمان ممكن. يرجى الرجوع إلى <a href="../guide/tutorial-shared-hosting.md">Shared Hosting Environment</a> لمزيد من المعلومات. 
+معلومة: إذا كان سيتم تشغيل التطبيق الخاص بك في بيئة استضافة مشتركة(shared hosting) حيث ليس لديك الصلاحية لتعديل الإعدادات الخاصة بال web server، ستحتاج حينها الى تعديل في البنية الخاصة بالمشروع للحصول على أفضل أمان ممكن. يرجى الرجوع إلى <a href="../guide/tutorial-shared-hosting.md">Shared Hosting Environment</a> لمزيد من المعلومات.
 </p></blockquote>
 
 <blockquote class="info"><p dir="rtl">
@@ -212,6 +217,7 @@ http://localhost:8080/
 </p></blockquote>
 
 ### <div dir="rtl">الإعدادات الموصى بها لل Apache</div> <span id="recommended-apache-configuration"></span>
+
 -----------------------
 
 <p dir="rtl">
@@ -239,14 +245,13 @@ DocumentRoot "path/to/basic/web"
 </Directory>
 ```
 
-
 ### <div dir="rtl">الإعدادات الموصى بها لل Nginx</div> <span id="recommended-nginx-configuration"></span>
+
 -----------------------
 
 <p dir="rtl">
     لاستخدام <a href="https://wiki.nginx.org/">Nginx</a>، يجب تثبيت PHP على أنه <a href="https://www.php.net/install.fpm">FPM SAPI</a>، ويمكنك استخدام إعدادات ال Nginx التالية، مع الإنتباه على استبدال المسار من  <code>path/to/basic/web</code> الى المسار الفعلي  وصولا إلى <code>basic/web</code> بالإضافة الى إستبدال <code>mysite.test</code> إلى ال hostname الخاص بالتطبيق.
 </p>
-
 
 ```nginx
 server {
@@ -292,6 +297,7 @@ server {
     }
 }
 ```
+
 <p dir="rtl">
     عند استخدامك لهذا الإعداد، يجب عليك أيضًا تعيين <code>cgi.fix_pathinfo = 0</code> في ملف php.ini
     من أجل تجنب العديد من طلبات ال <code>stat()</code>  الغير الضرورية للنظام.

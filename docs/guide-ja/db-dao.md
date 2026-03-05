@@ -111,7 +111,7 @@ MS SQL Server でバイナリ・データを正しく処理するためには追
 
 ```php
 'db' => [
- 'class' => 'yii\db\Connection',
+  'class' => 'yii\db\Connection',
     'dsn' => 'sqlsrv:Server=localhost;Database=mydatabase',
     'attributes' => [
         \PDO::SQLSRV_ATTR_ENCODING => \PDO::SQLSRV_ENCODING_SYSTEM

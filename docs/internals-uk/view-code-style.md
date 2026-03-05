@@ -10,11 +10,11 @@
 
 // Опис вхідних змінних, які передає контролер.
 /**
- * @var \yii\base\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\Post[] $posts
- * @var \app\models\ContactMessage $contactMessage
- */
+  * @var \yii\base\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\Post[] $posts
+  * @var \app\models\ContactMessage $contactMessage
+  */
 // Пустий рядок після є необхідним.
 
 // Декларування класів з просторів імен.

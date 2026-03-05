@@ -199,8 +199,8 @@ esto genera
 
 ```php
 /**
- * Handles the creation for table `post`.
- */
+  * Handles the creation for table `post`.
+  */
 class m150811_220037_create_post_table extends Migration
 {
     /**
@@ -233,8 +233,8 @@ genera
 
 ```php
 /**
- * Handles the creation for table `post`.
- */
+  * Handles the creation for table `post`.
+  */
 class m150811_220037_create_post_table extends Migration
 {
     /**
@@ -270,8 +270,8 @@ genera
 
 ```php
 /**
- * Handles the creation for table `post`.
- */
+  * Handles the creation for table `post`.
+  */
 class m150811_220037_create_post_table extends Migration
 {
     /**
@@ -311,12 +311,12 @@ genera
 
 ```php
 /**
- * Handles the creation for table `post`.
- * Has foreign keys to the tables:
- *
- * - `user`
- * - `category`
- */
+  * Handles the creation for table `post`.
+  * Has foreign keys to the tables:
+  *
+  * - `user`
+  * - `category`
+  */
 class m160328_040430_create_post_table extends Migration
 {
     /**
@@ -513,12 +513,12 @@ genera
 
 ```php
 /**
- * Handles the creation for table `post_tag`.
- * Has foreign keys to the tables:
- *
- * - `post`
- * - `tag`
- */
+  * Handles the creation for table `post_tag`.
+  * Has foreign keys to the tables:
+  *
+  * - `post`
+  * - `tag`
+  */
 class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migration
 {
     /**

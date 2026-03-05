@@ -406,11 +406,11 @@ class HotelController extends Controller
 
 配置数组格式为：
 
- - `key`：类名称，接口名称或别名。 该 key 将作为第一个参数
- `$class` 传递给 [[yii\di\Container::set()|set()]] 方法。
- - `value`：与 `$class` 关联的定义。`$definition` 参数的值可能在 [[yii\di\Container::set()|set()]]
- 文档中描述。`$definition` 将作为第二个参数传递给 [[set()]]
- 方法。
+  - `key`：类名称，接口名称或别名。 该 key 将作为第一个参数
+  `$class` 传递给 [[yii\di\Container::set()|set()]] 方法。
+  - `value`：与 `$class` 关联的定义。`$definition` 参数的值可能在 [[yii\di\Container::set()|set()]]
+  文档中描述。`$definition` 将作为第二个参数传递给 [[set()]]
+  方法。
 
 例如，让我们配置我们的容器以遵循上述要求：
 
@@ -442,10 +442,10 @@ $reader = $container->get('app\storage\DocumentsReader');
 和 [[yii\di\Container::setSingleton()|setSingleton()]] 可以选择将依赖项的构造函数参数作为第三个参数。
 要设置构造函数参数，可以使用以下配置数组格式：
 
- - `key`：类名称，接口名称或别名。该 key 将作为第一个参数
- `$class` 传递给 [[yii\di\Container::set()|set()]] 方法。
- - `value`：两个元素的数组。第一个元素将传递给 [[yii\di\Container::set()|set()]] 方法
- 作为第二个参数 `$definition`，第二个元素为 `$params`。
+  - `key`：类名称，接口名称或别名。该 key 将作为第一个参数
+  `$class` 传递给 [[yii\di\Container::set()|set()]] 方法。
+  - `value`：两个元素的数组。第一个元素将传递给 [[yii\di\Container::set()|set()]] 方法
+  作为第二个参数 `$definition`，第二个元素为 `$params`。
 
 让我们来修改我们的例子：
 
@@ -453,7 +453,7 @@ $reader = $container->get('app\storage\DocumentsReader');
 $container->setDefinitions([
     'tempFileStorage' => [ // 我们为了方便创建了一个别名
         ['class' => 'app\storage\FileStorage'],
-        ['/var/tempfiles'] // 可以从一些配置文件中获取
+         ['/var/tempfiles'] // 可以从一些配置文件中获取
     ],
     'app\storage\DocumentsReader' => [
         ['class' => 'app\storage\DocumentsReader'],

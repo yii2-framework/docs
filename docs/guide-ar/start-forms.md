@@ -2,7 +2,7 @@
 
 <p dir="rtl">
 في هذا الموضوع سنتعلم كيفية إنشاء صفحة تحتوي على form للحصول على البيانات من خلال المستخدمين، وستعرض هذه الصفحة form يحتوي على حقل لإدخال الإسم وحقل إدخال للبريد الإلكتروني.
-وبعد الحصول على المعلومات الخاصة بهذه الحقول من المستخدم، ستقوم الصفحة بطباعة القيم التي تم إدخالها. 
+وبعد الحصول على المعلومات الخاصة بهذه الحقول من المستخدم، ستقوم الصفحة بطباعة القيم التي تم إدخالها.
 </p>
 
 <p dir="rtl">
@@ -22,7 +22,7 @@
 ## <div dir="rtl">إنشاء ال Model</div> <span id="creating-model"></span>
 
 <p dir="rtl">
-    يتم تمثيل البيانات التي يتم طلبها من خلال المستخدم عن طريق ال <code>EntryForm</code> model class  كما هو موضح أدناه، ويتم حفظ هذا الملف داخل المسار models، ويكون إسم ال model ومساره في مثالنا هذا هو  <code>models/EntryForm.php</code>. يرجى الرجوع إلى صفحة ال <a href="../guide/concept-autoloading.md">Class Autoloading</a> للحصول على مزيد من التفاصيل حول طريقة التعامل مع التسمية الخاصة بال class في Yii. 
+    يتم تمثيل البيانات التي يتم طلبها من خلال المستخدم عن طريق ال <code>EntryForm</code> model class  كما هو موضح أدناه، ويتم حفظ هذا الملف داخل المسار models، ويكون إسم ال model ومساره في مثالنا هذا هو  <code>models/EntryForm.php</code>. يرجى الرجوع إلى صفحة ال <a href="../guide/concept-autoloading.md">Class Autoloading</a> للحصول على مزيد من التفاصيل حول طريقة التعامل مع التسمية الخاصة بال class في Yii.
 </p>
 
 ```php
@@ -53,12 +53,12 @@ class EntryForm extends Model
 </p>
 
 <blockquote class="info"><p dir="rtl">
-معلومة: يتم إستخدام ال  [[yii\base\Model]] كأصل لل model class <b>ولا</b> يرتبط بجداول قواعد البيانات. ويستخدم ال  [[yii\db\ActiveRecord]]  بالشكل الإعتيادي ليكون هو الأصل الذي من خلاله يتم الإرتباط بجداول بقواعد البيانات. 
+معلومة: يتم إستخدام ال  [[yii\base\Model]] كأصل لل model class <b>ولا</b> يرتبط بجداول قواعد البيانات. ويستخدم ال  [[yii\db\ActiveRecord]]  بالشكل الإعتيادي ليكون هو الأصل الذي من خلاله يتم الإرتباط بجداول بقواعد البيانات.
 </p></blockquote>
 
 <p dir="rtl">
     يحتوي class ال <code>EntryForm</code> على متغيرين إثنين من نوع Public، هما <code>name</code> و <code>email</code>، واللذان يستخدمان في تخزين البيانات التي أدخلها المستخدم. كما يحتوي أيضًا على method باسم <code>rules()</code>، والتي تُرجع مجموعة
-الشروط الخاصة بالبيانات للتحقق من صحتها. والشيفرة البرمجية الموجودة داخل ال rules method تعني: 
+الشروط الخاصة بالبيانات للتحقق من صحتها. والشيفرة البرمجية الموجودة داخل ال rules method تعني:
 </p>
 
 <ul dir="rtl">
@@ -82,7 +82,6 @@ if ($model->validate()) {
     // Use $model->getErrors()
 }
 ```
-
 
 ## <div dir="rtl">إنشاء Action</div> <span id="creating-action"></span>
 
@@ -120,14 +119,14 @@ class SiteController extends Controller
     }
 }
 ```
+
 <p dir="rtl">
     أولا، يقوم ال action بإنشاء object من ال  <code>EntryForm</code>. ثم يحاول تعبئة البيانات لل object من خلال ال <code>$ _POST</code>، والتي يتم تقديمها في ال Yii من خلال ال [[yii\web\Request::post()]].
 إذا تم ملء ال object بنجاح (على سبيل المثال، إذا قام المستخدم بإدخال البيانات داخل ال form ومن ثم قام بإرسالها(submitted html form))، فسيتم استدعاء ال [[yii\base\Model::validate()|validate()]] من خلال ال action للتأكد من صلاحية القيم المدخلة.
 </p>
 
-
 <blockquote class="info"><p dir="rtl">
-    معلومة: يمثل التعبير Yii::$app ال  <a href="../guide/structure-applications.md">Application</a> instance الذي يمكن الوصول اليه من خلال ال singleton <br />(singleton globally accessible). وهو أيضا  <a href="../guide/concept-service-locator.md">service locator</a>  بحيث يوفر الدعم لل components مثل ال request, response, db..الخ، لدعم وظائف محددة. مثلا في المثال الموجود في الأعلى، فإن ال request هو component من ال application instance والذي يستخدم للوصول الى البيانات الموجودة داخل ال $_POST. 
+    معلومة: يمثل التعبير Yii::$app ال  <a href="../guide/structure-applications.md">Application</a> instance الذي يمكن الوصول اليه من خلال ال singleton <br />(singleton globally accessible). وهو أيضا  <a href="../guide/concept-service-locator.md">service locator</a>  بحيث يوفر الدعم لل components مثل ال request, response, db..الخ، لدعم وظائف محددة. مثلا في المثال الموجود في الأعلى، فإن ال request هو component من ال application instance والذي يستخدم للوصول الى البيانات الموجودة داخل ال $_POST.
 </p></blockquote>
 
 <p dir="rtl">
@@ -141,11 +140,11 @@ class SiteController extends Controller
 ## <div dir="rtl">إنشاء ال views</div> <span id="creating-views"></span>
 
 <p dir="rtl">
-    أخيرا، سنقوم بإنشاء صفحتين لل views الأولى بإسم <code>entry-confirm</code> والثانية <code>entry</code>. وهاتين الصفحتين سيتم جلبهم من خلال ال <code>entry</code> action. 
+    أخيرا، سنقوم بإنشاء صفحتين لل views الأولى بإسم <code>entry-confirm</code> والثانية <code>entry</code>. وهاتين الصفحتين سيتم جلبهم من خلال ال <code>entry</code> action.
 </p>
 
 <p dir="rtl">
-    ال <code>entry-confirm</code> ستقوم بكل بساطة بعرض الإسم والبريد الإلكتروني الذي تم إدخالهم من قبل المستخدم. ويجب حفظ هذه الصفحة بالمسار التالي: <code>views/site/entry-confirm.php</code> 
+    ال <code>entry-confirm</code> ستقوم بكل بساطة بعرض الإسم والبريد الإلكتروني الذي تم إدخالهم من قبل المستخدم. ويجب حفظ هذه الصفحة بالمسار التالي: <code>views/site/entry-confirm.php</code>
 </p>
 
 ```php
@@ -159,6 +158,7 @@ use yii\helpers\Html;
     <li><label>Email</label>: <?= Html::encode($model->email) ?></li>
 </ul>
 ```
+
 <p dir="rtl">
   صفحة ال <code>entry</code> ستقوم بعرض ال HTML form. هذه الصفحة يجب أن يتم حفظها داخل المسار التالي: <code>views/site/entry.php</code>
 </p>
@@ -180,6 +180,7 @@ use yii\widgets\ActiveForm;
 
 <?php ActiveForm::end(); ?>
 ```
+
 <p dir="rtl">
     تستخدم ال view أسلوب مميز لبناء ال Forms، وذلك عن طريق ال <a href="../guide/structure-widgets.md">widget</a> الذي يسمى ب  [[yii\widgets\ActiveForm|ActiveForm]]. إن الأسلوب المستخدم في هذا ال widget يقوم على إستخدام كل من الدالة <code>begin()</code> و <code>end()</code>  لجلب ال opening  وال closing form tags على التوالي (فتحة ال tag، ثم الإغلاق الخاص بهذا ال tag)، وبين الفتحة والإغلاق يمكنك إنشاء الحقول عن طريق إستخدام الدالة [[yii\widgets\ActiveForm::field()|field()]]. في هذا المثال كان الحقل الأول في ال form يشير الى name data، والثاني يشير الى ال email data، وبعد هذه الحقول ستجد الدالة المستخدمة لإنشاء ال Submit button وهي [[yii\helpers\Html::submitButton()]].
 </p>
@@ -187,7 +188,7 @@ use yii\widgets\ActiveForm;
 ## <div dir="rtl">لنجرب المثال</div> <span id="trying-it-out"></span>
 
 <p dir="rtl">
- لتشاهد آلية العمل لهذا المثال، والنتائج المتعلقة به، يمكنك إستخدام المتصفح والدخول الى الرابط التالي:
+  لتشاهد آلية العمل لهذا المثال، والنتائج المتعلقة به، يمكنك إستخدام المتصفح والدخول الى الرابط التالي:
 </p>
 
 ```
@@ -235,13 +236,13 @@ https://hostname/index.php?r=site%2Fentry
 ```
 
 <blockquote class="info"><p dir="rtl">
-    معلومة: يوفر ال Yii العديد من ال widgets لمساعدتك في إنشاء views معقدة وديناميكية بسرعة. كما أنك ستتعلم في وقت لاحق كيف يمكنك إنشاء widget جديد، وستكتشف أن الموضوع سهل وبسيط، مما سيدفعك إلى كتابة الشيفرة البرمجية الخاصة بك داخل ال widget، والذي بدوره سيجعل من هذه الشيفرة قابلة للتطوير والإستخدام في أكثر من مكان في المستقبل. 
+    معلومة: يوفر ال Yii العديد من ال widgets لمساعدتك في إنشاء views معقدة وديناميكية بسرعة. كما أنك ستتعلم في وقت لاحق كيف يمكنك إنشاء widget جديد، وستكتشف أن الموضوع سهل وبسيط، مما سيدفعك إلى كتابة الشيفرة البرمجية الخاصة بك داخل ال widget، والذي بدوره سيجعل من هذه الشيفرة قابلة للتطوير والإستخدام في أكثر من مكان في المستقبل.
 </p></blockquote>
 
 ## <div dir="rtl">الخلاصة</div> <span id="summary"></span>
 
 <p dir="rtl">
-    في هذا الجزء من التوثيق، تحدثنا عن كل جزء في ال MVC architectural pattern، لقد تعلمت الآن كيف يمكنك إنشاء model class ليقوم بتمثيل البيانات الخاصة بالمستخدمين، ومن ثم التحقق منها.   
+    في هذا الجزء من التوثيق، تحدثنا عن كل جزء في ال MVC architectural pattern، لقد تعلمت الآن كيف يمكنك إنشاء model class ليقوم بتمثيل البيانات الخاصة بالمستخدمين، ومن ثم التحقق منها.
 </p>
 
 <p dir="rtl">
@@ -249,5 +250,5 @@ https://hostname/index.php?r=site%2Fentry
 </p>
 
 <p dir="rtl">
-    في الجزء القادم من هذا التوثيق، ستتعلم كيف يمكنك التعامل مع قواعد البيانات، والتي سنحتاجها -غالبا- مع كل تطبيق ستعمل عليه تقريبا. 
+    في الجزء القادم من هذا التوثيق، ستتعلم كيف يمكنك التعامل مع قواعد البيانات، والتي سنحتاجها -غالبا- مع كل تطبيق ستعمل عليه تقريبا.
 </p>

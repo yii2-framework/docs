@@ -44,14 +44,14 @@ https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style
 <p dir='rtl'> آکولاد باز باید در خط بعدی، زیر نام کلاس نوشته شود.</p>
 <p dir='rtl'> تمام کلاس‌ها باید بلاک مستندات مطابق استاندارد PHPDoc داشته باشند.</p>
 <p dir='rtl'> برای تمام کدهای داخل کلاس باید با 4 space فاصله ایجاد کنید.</p>
- <p dir='rtl'> فقط یک کلاس داخل هر فایل php باید موجود باشد.</p>
+  <p dir='rtl'> فقط یک کلاس داخل هر فایل php باید موجود باشد.</p>
 <p dir='rtl'> تمام کلاس‌ها باید namespaced داشته باشند.</p>
 <p dir='rtl'> نام کلاس باید معادل نام فایل و namespace باید مطابق مسیر آن باشد.</p>
 
 ```php
 /**
- * Documentation
- */
+  * Documentation
+  */
 class MyClass extends \yii\base\BaseObject implements MyInterface
 {
     // code
@@ -108,8 +108,8 @@ class Foo
 
 ```php
 /**
- * Documentation
- */
+  * Documentation
+  */
 class Foo
 {
     /**
@@ -134,17 +134,17 @@ class Foo
 
 ```php
 /**
- * Checks whether the IP is in subnet range
- *
- * @param string $ip an IPv4 or IPv6 address
- * @param int $cidr the CIDR lendth
- * @param string $range subnet in CIDR format e.g. `10.0.0.0/8` or `2001:af::/64`
- * @return bool whether the IP is in subnet range
- */
- private function inRange($ip, $cidr, $range)
- {
+  * Checks whether the IP is in subnet range
+  *
+  * @param string $ip an IPv4 or IPv6 address
+  * @param int $cidr the CIDR lendth
+  * @param string $range subnet in CIDR format e.g. `10.0.0.0/8` or `2001:af::/64`
+  * @return bool whether the IP is in subnet range
+  */
+  private function inRange($ip, $cidr, $range)
+  {
   // ...
- }
+  }
 ```
 
 ### 4.5 Constructors
@@ -359,23 +359,23 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 ```php
 <?php
 /**
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
+  * @link https://www.yiiframework.com/
+  * @copyright Copyright (c) 2008 Yii Software LLC
+  * @license https://www.yiiframework.com/license/
+  */
 ```
 
 #### کلاس
 
 ```php
 /**
- * Component is the base class that provides the *property*, *event* and *behavior* features.
- *
- * @include @yii/docs/base-Component.md
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
+  * Component is the base class that provides the *property*, *event* and *behavior* features.
+  *
+  * @include @yii/docs/base-Component.md
+  *
+  * @author Qiang Xue <qiang.xue@gmail.com>
+  * @since 2.0
+  */
 class Component extends \yii\base\BaseObject
 ```
 
@@ -384,11 +384,11 @@ class Component extends \yii\base\BaseObject
 
 ```php
 /**
- * Returns the list of attached event handlers for an event.
- * You may manipulate the returned [[Vector]] object by adding or removing handlers.
- * For example,
- *
- * ```
+  * Returns the list of attached event handlers for an event.
+  * You may manipulate the returned [[Vector]] object by adding or removing handlers.
+  * For example,
+  *
+  * ```
 * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
 * ```
 *

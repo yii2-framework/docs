@@ -78,17 +78,17 @@ class SiteController extends Controller
 [[yii\filters\AccessRule|Правила доступа]] поддерживают набор свойств. Ниже дано краткое описание поддерживаемых опций.
 Вы также можете расширить [[yii\filters\AccessRule]], чтобы создать свой собственный класс правил доступа.
 
- * [[yii\filters\AccessRule::allow|allow]]: задаёт какое это правило, "allow" или "deny".
+  * [[yii\filters\AccessRule::allow|allow]]: задаёт какое это правило, "allow" или "deny".
 
- * [[yii\filters\AccessRule::actions|actions]]: задаёт действия, соответствующие этому правилу.
+  * [[yii\filters\AccessRule::actions|actions]]: задаёт действия, соответствующие этому правилу.
 Значение должно быть массивом идентификаторов действий. Сравнение — регистрозависимо. Если свойство пустое или не задано,
 то правило применяется ко всем действиям.
 
- * [[yii\filters\AccessRule::controllers|controllers]]: задаёт контроллеры, которым соответствует правило.
+  * [[yii\filters\AccessRule::controllers|controllers]]: задаёт контроллеры, которым соответствует правило.
 Значение должно быть массивом с идентификаторами контроллеров. Сравнение регистрозависимо. Если свойство
 пустое или не задано, то правило применяется ко всем контроллерам.
 
- * [[yii\filters\AccessRule::roles|roles]]: задаёт роли пользователей, соответствующих этому правилу.
+  * [[yii\filters\AccessRule::roles|roles]]: задаёт роли пользователей, соответствующих этому правилу.
   Распознаются две специальные роли, которые проверяются с помощью [[yii\web\User::isGuest]]:
 
     - `?`: соответствует гостевому пользователю (не аутентифицирован),
@@ -97,17 +97,17 @@ class SiteController extends Controller
   Использование других имён ролей будет приводить к вызову метода [[yii\web\User::can()]], который требует включения
   RBAC (будет описано дальше). Если свойство пустое или не задано, то правило применяется ко всем ролям.
 
- * [[yii\filters\AccessRule::ips|ips]]: задаёт [[yii\web\Request::userIP|IP адреса пользователей]], для которых применяется это правило. IP адрес может содержать `*` в конце, так чтобы он соответствовал IP адресу с таким же префиксом.
+  * [[yii\filters\AccessRule::ips|ips]]: задаёт [[yii\web\Request::userIP|IP адреса пользователей]], для которых применяется это правило. IP адрес может содержать `*` в конце, так чтобы он соответствовал IP адресу с таким же префиксом.
 Для примера, '192.168.*' соответствует всем IP адресам в сегменте '192.168.'. Если свойство пустое или не задано,
 то правило применяется ко всем IP адресам.
 
- * [[yii\filters\AccessRule::verbs|verbs]]: задаёт http метод (например, `GET`, `POST`), соответствующий правилу.
+  * [[yii\filters\AccessRule::verbs|verbs]]: задаёт http метод (например, `GET`, `POST`), соответствующий правилу.
 Сравнение — регистронезависимо.
 
- * [[yii\filters\AccessRule::matchCallback|matchCallback]]: задаёт PHP колбек, который вызывается для определения,
+  * [[yii\filters\AccessRule::matchCallback|matchCallback]]: задаёт PHP колбек, который вызывается для определения,
 что правило должно быть применено.
 
- * [[yii\filters\AccessRule::denyCallback|denyCallback]]: задаёт PHP колбек, который будет вызван, если доступ будет
+  * [[yii\filters\AccessRule::denyCallback|denyCallback]]: задаёт PHP колбек, который будет вызван, если доступ будет
 запрещён при вызове этого правила.
 
 Ниже показан пример, показывающий использование опции `matchCallback`, которая позволяет писать произвольную
@@ -355,8 +355,8 @@ namespace app\rbac;
 use yii\rbac\Rule;
 
 /**
- * Проверяем authorID на соответствие с пользователем, переданным через параметры
- */
+  * Проверяем authorID на соответствие с пользователем, переданным через параметры
+  */
 class AuthorRule extends Rule
 {
     public $name = 'isAuthor';
@@ -506,8 +506,8 @@ use Yii;
 use yii\rbac\Rule;
 
 /**
- * Checks if user group matches
- */
+  * Checks if user group matches
+  */
 class UserGroupRule extends Rule
 {
     public $name = 'userGroup';

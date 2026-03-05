@@ -105,7 +105,7 @@ Yii 支持一系列缓存存储器，概况如下：
 
 * [[yii\caching\ApcCache]]：使用 PHP [APC](https://www.php.net/manual/zh/book.apcu.php) 扩展。
   这个选项可以认为是集中式应用程序环境中
- （例如：单一服务器，没有独立的负载均衡器等）最快的缓存方案。
+  （例如：单一服务器，没有独立的负载均衡器等）最快的缓存方案。
 * [[yii\caching\DbCache]]：使用一个数据库的表存储缓存数据。要使用这个缓存，
   你必须创建一个与 [[yii\caching\DbCache::cacheTable]] 对应的表。
 * [[yii\caching\ArrayCache]]: 仅通过将值存储在数组中来为当前请求提供缓存。
@@ -125,9 +125,9 @@ Yii 支持一系列缓存存储器，概况如下：
   这个选项被看作分布式应用环境中（例如：多台服务器，有负载均衡等）
   最快的缓存方案。
 * [[yii\redis\Cache]]：实现了一个基于 [Redis](https://redis.io/) 键值对存储器的缓存组件
- （需要 redis 2.6.12 及以上版本的支持 ）。
+  （需要 redis 2.6.12 及以上版本的支持 ）。
 * [[yii\caching\WinCache]]：使用 PHP [WinCache](https://iis.net/downloads/microsoft/wincache-extension)
- （[另可参考](https://www.php.net/manual/zh/book.wincache.php)）扩展.
+  （[另可参考](https://www.php.net/manual/zh/book.wincache.php)）扩展.
 
 
 > Tip: 你可以在同一个应用程序中使用不同的缓存存储器。一个常见的策略是使用基于内存的缓存存储器
@@ -274,7 +274,7 @@ $data = $cache->get($key);
 - [[yii\caching\CallbackDependency]]：如果指定的PHP回调结果发生变化，依赖性将改变。
 - [[yii\caching\FileDependency]]：如果文件的最后修改时间发生变化，则依赖改变。
 - [[yii\caching\TagDependency]]：将缓存的数据项与一个或多个标签相关联。 您可以通过调用
-  [[yii\caching\TagDependency::invalidate()]] 来检查指定标签的缓存数据项是否有效。
+   [[yii\caching\TagDependency::invalidate()]] 来检查指定标签的缓存数据项是否有效。
 
 > Note: 避免对带有缓存依赖的缓存项使用 [[yii\caching\Cache::exists()|exists()]] 方法，
 因为它不检测缓存依赖（如果有的话）是否有效，所以调用 [[yii\caching\Cache::get()|get()]]
@@ -327,9 +327,9 @@ User::find()->cache(7200)->all();
 
 * [[yii\db\Connection::enableQueryCache|enableQueryCache]]：是否打开或关闭查询缓存。
   它默认为 `true`。 请注意，要有效打开查询缓存，
-  您还需要有一个由 [[yii\db\Connection::queryCache|queryCache]] 所指定的有效缓存。
+   您还需要有一个由 [[yii\db\Connection::queryCache|queryCache]] 所指定的有效缓存。
 * [[yii\db\Connection::queryCacheDuration|queryCacheDuration]]：这表示查询结果在缓存中保持有效的秒数。 
-  您可以使用 0 来表示查询结果永久保留在缓存中。
+   您可以使用 0 来表示查询结果永久保留在缓存中。
   该属性是在未指定持续时间的情况下调用 [[yii\db\Connection::cache()]]
   使用的默认值。
 * [[yii\db\Connection::queryCache|queryCache]]：缓存应用组件的 ID。默认为 `'cache'`。
@@ -394,7 +394,7 @@ $result = $db->cache(function ($db) {
 
     // 使用查询缓存的 SQL 查询
 
-    // 对此命令不使用查询缓存
+     // 对此命令不使用查询缓存
     $customer = $db->createCommand('SELECT * FROM customer WHERE id=1')->noCache()->queryOne();
 
     // ...
@@ -420,11 +420,11 @@ $result = $db->cache(function ($db) {
 当你想让所有的缓存数据失效时，可以调用 [[yii\caching\Cache::flush()]]。
 
 冲刷缓存数据，你还可以从控制台调用 `yii cache/flush`。
- - `yii cache`：列出应用中可用的缓存组件
- - `yii cache/flush cache1 cache2`：刷新缓存组件`cache1`，`cache2` 
- (可以传递多个用空格分开的缓存组件）
- - `yii cache/flush-all`：刷新应用中所有的缓存组件
- - `yii cache/flush-schema db`：清除给定连接组件的数据库表结构缓存
+  - `yii cache`：列出应用中可用的缓存组件
+  - `yii cache/flush cache1 cache2`：刷新缓存组件`cache1`，`cache2` 
+  (可以传递多个用空格分开的缓存组件）
+  - `yii cache/flush-all`：刷新应用中所有的缓存组件
+  - `yii cache/flush-schema db`：清除给定连接组件的数据库表结构缓存
 
 > Info: 默认情况下，控制台应用使用独立的配置文件。
 所以，为了上述命令发挥作用，请确保 Web 应用和控制台应用配置相同的缓存组件。

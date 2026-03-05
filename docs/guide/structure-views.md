@@ -21,10 +21,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- * @var \yii\web\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\LoginForm $model
- */
+  * @var \yii\web\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\LoginForm $model
+  */
 
 $this->title = 'Login';
 ?>
@@ -110,10 +110,10 @@ other places by calling view rendering methods. These methods share a similar si
 
 ```
 /**
- * @param string $view view name or file path, depending on the actual rendering method
- * @param array $params the data to be passed to the view
- * @return string rendering result
- */
+  * @param string $view view name or file path, depending on the actual rendering method
+  * @param array $params the data to be passed to the view
+  * @return string rendering result
+  */
 methodName($view, $params = [])
 ```
 
@@ -327,9 +327,9 @@ the code in the layout. In practice, you may want to add more content to it, suc
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this
- * @var string $content
- */
+  * @var \yii\web\View $this
+  * @var string $content
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

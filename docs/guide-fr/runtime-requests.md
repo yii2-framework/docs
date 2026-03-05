@@ -118,7 +118,7 @@ Les types retournés sont classés par ordre de score de qualité. Les types ave
 Les langues retournées sont classées par niveau de préférence. 
 Le premier élément représente la langue préférée. Si votre application prend en charge plusieurs langues et que vous voulez afficher des pages dans la langue préférée de l'utilisateur, vous pouvez utiliser la méthode de négociation de la langue [[yii\web\Request::getPreferredLanguage()]].
 Cette méthode accepte une liste des langues prises en charge par votre application, la compare avec les [[yii\web\Request::acceptableLanguages (langues acceptées)|acceptableLanguages]],
- et retourne la langue la plus appropriée. 
+  et retourne la langue la plus appropriée. 
 
 
 > Tip: vous pouvez également utiliser le filtre [[yii\filters\ContentNegotiator|ContentNegotiator]] pour déterminer dynamiquement quel type de contenu 

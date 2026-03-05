@@ -9,11 +9,11 @@ Poniższy styl kodowania jest stosowany w kodzie frameworka Yii 2.x i oficjalnyc
 
 // Opisz zmienne przekazane z kontrolera w tym miejscu.
 /**
- * @var \yii\base\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\Post[] $posts
- * @var \app\models\ContactMessage $contactMessage
- */
+  * @var \yii\base\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\Post[] $posts
+  * @var \app\models\ContactMessage $contactMessage
+  */
 // Pusta linia poniżej jest wymagana.
 
 // Deklaracje klas z przestrzeniami nazw.

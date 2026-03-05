@@ -65,8 +65,8 @@ yii migrate/up 5 --migrationTable=migrations
 #!/usr/bin/env php
 <?php
 /**
- * Yii console bootstrap file.
- */
+  * Yii console bootstrap file.
+  */
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');

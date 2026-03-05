@@ -129,7 +129,7 @@ $config = require __DIR__ . '/../config/web.php';
             'level' => 3,
         ],
 
-        // 匿名函数
+         // 匿名函数
         function () {
             return new app\components\Profiler();
         }

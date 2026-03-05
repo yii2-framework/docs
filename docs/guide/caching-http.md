@@ -23,10 +23,10 @@ the page modification time. The signature of the PHP callable should be as follo
 
 ```php
 /**
- * @param Action $action the action object that is being handled currently
- * @param array $params the value of the "params" property
- * @return int a UNIX timestamp representing the page modification time
- */
+  * @param Action $action the action object that is being handled currently
+  * @param array $params the value of the "params" property
+  * @return int a UNIX timestamp representing the page modification time
+  */
 function ($action, $params)
 ```
 
@@ -68,10 +68,10 @@ should be as follows,
 
 ```php
 /**
- * @param Action $action the action object that is being handled currently
- * @param array $params the value of the "params" property
- * @return string a string used as the seed for generating an ETag hash
- */
+  * @param Action $action the action object that is being handled currently
+  * @param array $params the value of the "params" property
+  * @return string a string used as the seed for generating an ETag hash
+  */
 function ($action, $params)
 ```
 

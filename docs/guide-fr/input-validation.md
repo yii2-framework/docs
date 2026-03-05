@@ -143,10 +143,10 @@ La propriété [[yii\validators\Validator::when|when]] accepte une fonction de r
 
 ```php
 /**
- * @param Model $model le modèle en cours de validation
- * @param string $attribute l'attribut en cours de validation
- * @return bool `true` si la règle doit être appliqué, `false` si non
- */
+  * @param Model $model le modèle en cours de validation
+  * @param string $attribute l'attribut en cours de validation
+  * @return bool `true` si la règle doit être appliqué, `false` si non
+  */
 function ($model, $attribute)
 ```
 
@@ -275,9 +275,9 @@ Un validateur en ligne est un validateur défini sous forme de méthode de modè
 
 ```php
 /**
- * @param string $attribute l'attribut en cours de validation
- * @param mixed $params la valeur des *paramètres* donnés dans la règle
- */
+  * @param string $attribute l'attribut en cours de validation
+  * @param mixed $params la valeur des *paramètres* donnés dans la règle
+  */
 function ($attribute, $params)
 ```
 

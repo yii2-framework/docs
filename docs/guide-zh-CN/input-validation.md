@@ -151,7 +151,7 @@ public function rules()
 
 * [[yii\base\Model::beforeValidate()]]：在默认的实现中会触发 [[yii\base\Model::EVENT_BEFORE_VALIDATE]] 事件。
   你可以重写该方法或者响应此事件，来在验证开始之前，先进行一些预处理的工作。
- （比如，标准化数据输入）该方法应该返回一个布尔值，用于标明验证是否通过。
+  （比如，标准化数据输入）该方法应该返回一个布尔值，用于标明验证是否通过。
 * [[yii\base\Model::afterValidate()]]：在默认的实现中会触发 [[yii\base\Model::EVENT_AFTER_VALIDATE]] 事件。
   你可以重写该方法或者响应此事件，来在验证结束之后，
   再进行一些收尾的工作。
@@ -174,10 +174,10 @@ public function rules()
 
 ```php
 /**
- * @param Model $model 要验证的模型对象
- * @param string $attribute 待测特性名
- * @return bool 返回是否启用该规则
- */
+  * @param Model $model 要验证的模型对象
+  * @param string $attribute 待测特性名
+  * @return bool 返回是否启用该规则
+  */
 function ($model, $attribute)
 ```
 
@@ -264,7 +264,7 @@ return [
 > Note: 对于绝大多数验证器而言，若其 [[yii\base\Validator::skipOnEmpty]] 属性为默认值
   true，则它们不会对空值进行任何处理。也就是当他们的关联特性接收到空值时，相关验证会被直接略过。在
   [核心验证器](tutorial-core-validators.md) 之中，只有 `captcha`（验证码），`default`（默认值），
- `filter`（滤镜），`required`（必填），以及 `trim`（去首尾空格），这几个验证器会处理空输入。
+  `filter`（滤镜），`required`（必填），以及 `trim`（去首尾空格），这几个验证器会处理空输入。
 
 
 ## 临时验证 <span id="ad-hoc-validation"></span>
@@ -349,11 +349,11 @@ public function actionSearch($name, $email)
 
 ```php
 /**
- * @param string $attribute 当前被验证的特性
- * @param array $params 以名-值对形式提供的额外参数
- * @param \yii\validators\InlineValidator $validator 相关的 InlineValidator 实例。
- * 此参数自版本 2.0.11 起可用。
- */
+  * @param string $attribute 当前被验证的特性
+  * @param array $params 以名-值对形式提供的额外参数
+  * @param \yii\validators\InlineValidator $validator 相关的 InlineValidator 实例。
+  * 此参数自版本 2.0.11 起可用。
+  */
 function ($attribute, $params)
 ```
 

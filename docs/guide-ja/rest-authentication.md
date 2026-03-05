@@ -107,7 +107,7 @@ class User extends ActiveRecord implements IdentityInterface
 ```
 
 上記のように認証が有効化された後は、全ての API リクエストに対して、リクエストされたコントローラ
- `beforeAction()` の段階でユーザを認証することを試みます。
+  `beforeAction()` の段階でユーザを認証することを試みます。
 
 認証が成功すると、コントローラはその他のチェック (レート制限、権限付与など) をしてから、アクションを実行します。
 認証されたユーザのアイデンティティは `Yii::$app->user->identity` によって取得することが出来ます。

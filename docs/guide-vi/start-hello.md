@@ -23,8 +23,8 @@ sẽ lấy các tham số `message` từ request và hiển thị thông điệp
 action sẽ mặc định hiển thị thông điệp  "Hello".
 
 > Info: [Hành động (Actions)](structure-controllers.md#creating-actions) là người dùng cuối có thể truy cập các đối tượng và thực hiện trực tiếp.
- Các Actions được nằm trong [bộ điều khiển (controllers)](structure-controllers.md).
- Các kết quả của một action là người sử dụng cuối cùng nhận được các thông điệp.
+  Các Actions được nằm trong [bộ điều khiển (controllers)](structure-controllers.md).
+  Các kết quả của một action là người sử dụng cuối cùng nhận được các thông điệp.
 
 Các Actions cần phải được khai báo ở [controllers](structure-controllers.md). Để cho đơn giản, bạn có thể khai báo
 action  `say` ở controller `SiteController`. Controller này được khai báo ở trong 

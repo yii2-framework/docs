@@ -21,10 +21,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- * @var \yii\web\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\LoginForm $model
- */
+  * @var \yii\web\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\LoginForm $model
+  */
 
 $this->title = 'Login';
 ?>
@@ -110,10 +110,10 @@ use yii\helpers\HtmlPurifier;
 
 ```
 /**
- * @param string $view 视图名或文件路径，由实际的渲染方法决定
- * @param array $params 传递给视图的数据
- * @return string 渲染结果
- */
+  * @param string $view 视图名或文件路径，由实际的渲染方法决定
+  * @param array $params 传递给视图的数据
+  * @return string 渲染结果
+  */
 methodName($view, $params = [])
 ```
 
@@ -327,9 +327,9 @@ $this->params['breadcrumbs'][] = 'About Us';
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this
- * @var string $content 字符串
- */
+  * @var \yii\web\View $this
+  * @var string $content 字符串
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

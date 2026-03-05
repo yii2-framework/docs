@@ -19,11 +19,11 @@ Você pode configurar a propriedade [[yii\filters\HttpCache::lastModified]] para
 
 ```php
 /**
- * @param Action $action O Objeto da ação que está sendo manipulada no momento
- * @param array $params o valor da propriedade "params"
- * @return int uma data(timestamp) UNIX timestamp representando o tempo da
- * última modificação na página
- */
+  * @param Action $action O Objeto da ação que está sendo manipulada no momento
+  * @param array $params o valor da propriedade "params"
+  * @return int uma data(timestamp) UNIX timestamp representando o tempo da
+  * última modificação na página
+  */
 function ($action, $params)
 ```
 
@@ -64,10 +64,10 @@ A propriedade deve ser um PHP *callable* retornando um conteúdo ou dados serial
 
 ```php
 /**
- * @param Action $action o objeto da ação que está sendo manipulada no momento
- * @param array $params o valor da propriedade "params"
- * @return string uma string usada como um conteúdo para gerar o hash ETag
- */
+  * @param Action $action o objeto da ação que está sendo manipulada no momento
+  * @param array $params o valor da propriedade "params"
+  * @return string uma string usada como um conteúdo para gerar o hash ETag
+  */
 function ($action, $params)
 ```
 

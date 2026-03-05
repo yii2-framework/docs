@@ -56,8 +56,8 @@ PHP コードは BOM 無しの UTF-8 のみを使わなければなりません�
 
 ```php
 /**
- * Documentation
- */
+  * Documentation
+  */
 class MyClass extends \yii\base\BaseObject implements MyInterface
 {
     // コード
@@ -123,8 +123,8 @@ class Foo
 
 ```php
 /**
- * Documentation
- */
+  * Documentation
+  */
 class Foo
 {
     /**
@@ -140,26 +140,26 @@ class Foo
 
 ### 4.4 PHPDoc ブロック
 
- - `@param`、`@var`、`@property` および `@return` は `bool`、`int`、`string`、`array` または `null` として型を宣言しなければなりません。
+  - `@param`、`@var`、`@property` および `@return` は `bool`、`int`、`string`、`array` または `null` として型を宣言しなければなりません。
   `Model` または `ActiveRecord` のようなクラス名を使うことも出来ます。
- - 型付きの配列に対しては `ClassName[]` を使います。
- - PHPDoc の最初の行には、メソッドの目的を記述しなければなりません。
- - メソッドが何かをチェックする (たとえば、`isActive`, `hasClass` など) ものである場合は、最初の行は `Checks whether` で始まらなければなりません。
- - `@return` は、厳密に何が返されるのかを明示的に記述しなければなりません。
+  - 型付きの配列に対しては `ClassName[]` を使います。
+  - PHPDoc の最初の行には、メソッドの目的を記述しなければなりません。
+  - メソッドが何かをチェックする (たとえば、`isActive`, `hasClass` など) ものである場合は、最初の行は `Checks whether` で始まらなければなりません。
+  - `@return` は、厳密に何が返されるのかを明示的に記述しなければなりません。
 
 ```php
 /**
- * Checks whether the IP is in subnet range
- *
- * @param string $ip an IPv4 or IPv6 address
- * @param int $cidr the CIDR lendth
- * @param string $range subnet in CIDR format e.g. `10.0.0.0/8` or `2001:af::/64`
- * @return bool whether the IP is in subnet range
- */
- private function inRange($ip, $cidr, $range)
- {
+  * Checks whether the IP is in subnet range
+  *
+  * @param string $ip an IPv4 or IPv6 address
+  * @param int $cidr the CIDR lendth
+  * @param string $range subnet in CIDR format e.g. `10.0.0.0/8` or `2001:af::/64`
+  * @return bool whether the IP is in subnet range
+  */
+  private function inRange($ip, $cidr, $range)
+  {
   // ...
- }
+  }
 ```
 
 ### 4.5 コンストラクタ
@@ -395,23 +395,23 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 ```php
 <?php
 /**
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
+  * @link https://www.yiiframework.com/
+  * @copyright Copyright (c) 2008 Yii Software LLC
+  * @license https://www.yiiframework.com/license/
+  */
 ```
 
 #### クラス
 
 ```php
 /**
- * Component is the base class that provides the *property*, *event* and *behavior* features.
- *
- * @include @yii/docs/base-Component.md
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
+  * Component is the base class that provides the *property*, *event* and *behavior* features.
+  *
+  * @include @yii/docs/base-Component.md
+  *
+  * @author Qiang Xue <qiang.xue@gmail.com>
+  * @since 2.0
+  */
 class Component extends \yii\base\BaseObject
 ```
 
@@ -420,18 +420,18 @@ class Component extends \yii\base\BaseObject
 
 ```php
 /**
- * Returns the list of attached event handlers for an event.
- * You may manipulate the returned [[Vector]] object by adding or removing handlers.
- * For example,
- *
- * ```
- * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
- * ```
- *
- * @param string $name the event name
- * @return Vector list of attached event handlers for the event
- * @throws Exception if the event is not defined
- */
+  * Returns the list of attached event handlers for an event.
+  * You may manipulate the returned [[Vector]] object by adding or removing handlers.
+  * For example,
+  *
+  * ```
+  * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
+  * ```
+  *
+  * @param string $name the event name
+  * @return Vector list of attached event handlers for the event
+  * @throws Exception if the event is not defined
+  */
 public function getEventHandlers($name)
 {
     if (!isset($this->_e[$name])) {

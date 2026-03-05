@@ -428,20 +428,20 @@ Este validador não executa validação de dados. Em vez disso, ele vai retirar 
 
 ```php
 [
- // a1 precisa ser único na coluna representada pelo atributo  "a1"
- ['a1', 'unique'],
+  // a1 precisa ser único na coluna representada pelo atributo  "a1"
+  ['a1', 'unique'],
 
- // a1 precisa ser único, mas a coluna a2 será usada para verificar a singularidade do valor de a1
- ['a1', 'unique', 'targetAttribute' => 'a2'],
+  // a1 precisa ser único, mas a coluna a2 será usada para verificar a singularidade do valor de a1
+  ['a1', 'unique', 'targetAttribute' => 'a2'],
 
- // a1 e a2 precisam ser únicos, e ambos receberão mensagem de erro
- [['a1', 'a2'], 'unique', 'targetAttribute' => ['a1', 'a2']],
+  // a1 e a2 precisam ser únicos, e ambos receberão mensagem de erro
+  [['a1', 'a2'], 'unique', 'targetAttribute' => ['a1', 'a2']],
 
   // a1 e a2 precisam ser únicos, mas somente ‘a1’ receberá mensagem de erro
- ['a1', 'unique', 'targetAttribute' => ['a1', 'a2']],
+  ['a1', 'unique', 'targetAttribute' => ['a1', 'a2']],
 
- // a1 precisa ser único verificando a singularidade de ambos a2 e a3 (usando o valor de a1)
- ['a1', 'unique', 'targetAttribute' => ['a2', 'a1' => 'a3']],
+  // a1 precisa ser único verificando a singularidade de ambos a2 e a3 (usando o valor de a1)
+  ['a1', 'unique', 'targetAttribute' => ['a2', 'a1' => 'a3']],
 ]
 ```
 

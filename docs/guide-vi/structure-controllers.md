@@ -372,7 +372,7 @@ public function actionView(array $id, $version = null)
 ```
 
 Nếu yêu cầu là `https://hostname/index.php?r=post/view&id[]=123`, thì tham số `$id` sẽ nhận giá trị là
- `['123']`. Nếu yêu cầu là `https://hostname/index.php?r=post/view&id=123`, tham số `$id` sẽ chỉ nhận
+  `['123']`. Nếu yêu cầu là `https://hostname/index.php?r=post/view&id=123`, tham số `$id` sẽ chỉ nhận
 các giá trị trong mảng là giống nhau bởi vì giá trị `'123'` không là mảng và sẽ tự động chuyển vào mảng.
 
 Ở ví dụ trên sẽ hướng dẫn các tham số trong mỗi action hoạt động trong ứng dụng Web. Với ứng dụng console,

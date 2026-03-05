@@ -23,10 +23,10 @@ HTTP 缓存
 
 ```php
 /**
- * @param Action $action 当前处理的动作对象
- * @param array $params “params” 属性的值
- * @return int 页面修改时的 Unix 时间戳
- */
+  * @param Action $action 当前处理的动作对象
+  * @param array $params “params” 属性的值
+  * @return int 页面修改时的 Unix 时间戳
+  */
 function ($action, $params)
 ```
 
@@ -68,10 +68,10 @@ public function behaviors()
 
 ```php
 /**
- * @param Action $action 当前处理的动作对象
- * @param array $params “params” 属性的值
- * @return string 一段种子字符用来生成 ETag 哈希值
- */
+  * @param Action $action 当前处理的动作对象
+  * @param array $params “params” 属性的值
+  * @return string 一段种子字符用来生成 ETag 哈希值
+  */
 function ($action, $params)
 ```
 

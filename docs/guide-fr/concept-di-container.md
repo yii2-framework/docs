@@ -355,10 +355,10 @@ ou [[yii\di\Container::setSingleton()|setSingleton()]] respectivement pour chacu
 
 Le format du tableau de  configurations est :
 
- - `key`: nom de classe, nom d'interface ou alias. La clé est passée à la méthode
- [[yii\di\Container::set()|set()]] comme premier argument `$class`.
- - `value`: la définition associée à `$class`. Les valeurs possibles sont décrites dans la documentation [[yii\di\Container::set()|set()]]
- du paramètre `$definition`. Est passé à la méthode [[set()]] comme deuxième argument `$definition`.
+  - `key`: nom de classe, nom d'interface ou alias. La clé est passée à la méthode
+  [[yii\di\Container::set()|set()]] comme premier argument `$class`.
+  - `value`: la définition associée à `$class`. Les valeurs possibles sont décrites dans la documentation [[yii\di\Container::set()|set()]]
+  du paramètre `$definition`. Est passé à la méthode [[set()]] comme deuxième argument `$definition`.
 
 Par exemple, configurons notre conteneur pour répondre aux exigences mentionnées précédemment :
 
@@ -388,9 +388,9 @@ Tout fonctionne, mais au cas où, nous devons créer une classe  `DocumentWriter
 Comme cela est décrit à la sous-section [Résolution des dépendances](#resolving-dependencies) subsection, [[yii\di\Container::set()|set()]]
 et [[yii\di\Container::setSingleton()|setSingleton()]] peuvent facultativement des paramètres du constructeur de dépendances en tant que troisième argument. Pour définir les paramètres du constructeur, vous pouvez utiliser le format de tableau de configuration suivant :
 
- - `key`: nom de classe, nom d'interface ou alias. La clé est passée à la méthode 
- [[yii\di\Container::set()|set()]] comme premier argument `$class`.
- - `value`: un tableau de deux éléments. Le premier élément est passé à la méthode [[yii\di\Container::set()|set()]] comme deuxième argument `$definition`, le second — comme `$params`.
+  - `key`: nom de classe, nom d'interface ou alias. La clé est passée à la méthode 
+  [[yii\di\Container::set()|set()]] comme premier argument `$class`.
+  - `value`: un tableau de deux éléments. Le premier élément est passé à la méthode [[yii\di\Container::set()|set()]] comme deuxième argument `$definition`, le second — comme `$params`.
 
 Modifions notre exemple :
 

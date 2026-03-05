@@ -163,17 +163,17 @@ RESTful API によってリソースを公開するときには、たいてい�
 
 ```php
 /**
- * 現在のユーザの特権をチェックする。
- *
- * 現在のユーザが指定されたデータ・モデルに対して指定されたアクションを実行する特権を
- * 有するか否かをチェックするためには、このメソッドをオーバーライドしなければなりません。
- * ユーザが権限をもたない場合は、[[ForbiddenHttpException]] が投げられなければなりません。
- *
- * @param string $action 実行されるアクションの ID。
- * @param \yii\base\Model $model アクセスされるモデル。null の場合は、アクセスされる特定のモデルが無いことを意味する。
- * @param array $params 追加のパラメータ
- * @throws ForbiddenHttpException ユーザが権限をもたない場合
- */
+  * 現在のユーザの特権をチェックする。
+  *
+  * 現在のユーザが指定されたデータ・モデルに対して指定されたアクションを実行する特権を
+  * 有するか否かをチェックするためには、このメソッドをオーバーライドしなければなりません。
+  * ユーザが権限をもたない場合は、[[ForbiddenHttpException]] が投げられなければなりません。
+  *
+  * @param string $action 実行されるアクションの ID。
+  * @param \yii\base\Model $model アクセスされるモデル。null の場合は、アクセスされる特定のモデルが無いことを意味する。
+  * @param array $params 追加のパラメータ
+  * @throws ForbiddenHttpException ユーザが権限をもたない場合
+  */
 public function checkAccess($action, $model = null, $params = [])
 {
     // ユーザが $action と $model に対する権限を持つかどうかをチェック

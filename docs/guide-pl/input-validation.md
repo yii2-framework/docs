@@ -150,7 +150,7 @@ Podczas wywołania metody [[yii\base\Model::validate()|validate()]] zostaną wyw
 ### Walidacja warunkowa <span id="conditional-validation"></span>
 
 Aby zwalidować atrybuty tylko wtedy, gdy zostaną spełnione pewne założenia, np. walidacja jednego atrybutu zależy od wartości drugiego atrybutu, możesz użyć właściwości
- [[yii\validators\Validator::when|when]], aby zdefiniować taki warunek. Dla przykładu,
+  [[yii\validators\Validator::when|when]], aby zdefiniować taki warunek. Dla przykładu,
 
 ```php
 [
@@ -164,10 +164,10 @@ Właściwość [[yii\validators\Validator::when|when]] pobiera możliwą do wywo
 
 ```php
 /**
- * @param Model $model model, który podlega walidacji
- * @param string $attribute atrybut, który podlega walidacji
- * @return bool wartość zwrotna; czy reguła powinna zostać zastosowana
- */
+  * @param Model $model model, który podlega walidacji
+  * @param string $attribute atrybut, który podlega walidacji
+  * @return bool wartość zwrotna; czy reguła powinna zostać zastosowana
+  */
 function ($model, $attribute)
 ```
 
@@ -315,13 +315,13 @@ Wbudowany walidator jest zdefiniowaną w modelu metodą lub funkcją anonimową.
 
 ```php
 /**
- * @param string $attribute atrybut podlegający walidacji
- * @param mixed $params wartość parametru podanego w zasadzie walidacji
- * @param \yii\validators\InlineValidator $validator powiązana instancja InlineValidator
- * Ten parametr jest dostępny od wersji 2.0.11.
- * @param mixed $current aktualnie walidowana wartość atrybutu.
- * Ten parametr jest dostępny od wersji 2.0.36.
- */
+  * @param string $attribute atrybut podlegający walidacji
+  * @param mixed $params wartość parametru podanego w zasadzie walidacji
+  * @param \yii\validators\InlineValidator $validator powiązana instancja InlineValidator
+  * Ten parametr jest dostępny od wersji 2.0.11.
+  * @param mixed $current aktualnie walidowana wartość atrybutu.
+  * Ten parametr jest dostępny od wersji 2.0.36.
+  */
 function ($attribute, $params, $validator, $current)
 ```
 

@@ -63,12 +63,12 @@ Autrement, vous devez définir les propriétés [[yii\web\AssetBundle::basePath|
 * [[yii\web\AssetBundle::basePath|basePath ]] (chemin de base): spécifie un dossier accessible du Web qui contient les fichiers de ressources dans ce paquet. 
 Lorsque vous spécifiez la propriété[[yii\web\AssetBundle::sourcePath|sourcePath (chemin des sources)]], le [gestionnaire de ressources](#asset-manager) publie les ressources de ce paquet dans un dossier accessible du Web et redéfinit cette propriété en conséquence. 
 Vous devez définir cette propriété si vos fichiers de ressources sont déjà
- dans un dossier accessible du Web et n'ont pas besoin d'être publiés. 
+  dans un dossier accessible du Web et n'ont pas besoin d'être publiés. 
 Les [alias de chemin](concept-aliases.md) sont utilisables ici.
 * [[yii\web\AssetBundle::baseUrl|baseUrl ]] (URL de base): spécifie l'URL qui correspond au dossier
- [[yii\web\AssetBundle::basePath|basePath]]. 
+  [[yii\web\AssetBundle::basePath|basePath]]. 
 Comme pour  [[yii\web\AssetBundle::basePath|basePath]] (chemin de base),
- si vous spécifiez la propriété [[yii\web\AssetBundle::sourcePath|sourcePath]], le [gestionnaire de ressources](#asset-manager) publie les ressources et redéfinit cette propriété en conséquence. Les [alias de chemin](concept-aliases.md) sont utilisables ici.
+  si vous spécifiez la propriété [[yii\web\AssetBundle::sourcePath|sourcePath]], le [gestionnaire de ressources](#asset-manager) publie les ressources et redéfinit cette propriété en conséquence. Les [alias de chemin](concept-aliases.md) sont utilisables ici.
 * [[yii\web\AssetBundle::css|css]]: un tableau listant les fichiers CSS contenu dans ce paquet de ressources. 
 Notez que seul la barre oblique "/" doit être utilisée en tant que séparateur de dossier. Chaque fichier peut être spécifié en lui-même comme une chaîne de caractères ou dans un tableau avec les balises attributs et leur valeur.
 
@@ -97,7 +97,7 @@ Cela n'est utilisé que si vous spécifiez la propriété  [[yii\web\AssetBundle
 En se basant sur leur emplacement, les ressources peuvent être classifiées comme suit :
 
 * Les ressources sources : les fichiers de ressources qui sont situés avec du code source PHP et qui ne peuvent être accéder directement depuis le Web.
- Afin de pouvoir être utilisées dans une page, elles doivent être copiées dans un dossier accessible du Web et transformées en ressources publiées.
+  Afin de pouvoir être utilisées dans une page, elles doivent être copiées dans un dossier accessible du Web et transformées en ressources publiées.
 Ce processus est appelé *publication des ressources* et il sera décrit en détail bientôt. 
 * Les ressources publiées : les fichiers de ressources sont situés dans un dossier accessible du Web et peuvent par conséquent être accédés directement depuis le Web. 
 * Les ressources externes : les fichiers de ressources sont situés sur un serveur Web différent de celui qui héberge l'application Web. 
@@ -106,7 +106,7 @@ Ce processus est appelé *publication des ressources* et il sera décrit en dét
 Lors de la définition de classes de paquet de ressources, si vous spécifiez la propriété 
 [[yii\web\AssetBundle::sourcePath|sourcePath (chemin des sources)]], cela veut dire que les ressources listées en utilisant des chemins relatifs sont considérées comme des ressources sources. 
 Si vous ne spécifiez pas cette propriété, cela signifie que ces ressources sont des ressources publiées (vous devez en conséquence spécifier  [[yii\web\AssetBundle::basePath (chemin de base)|basePath]] et [[yii\web\AssetBundle::baseUrl|baseUrl (URL de base)]]
- pour faire connaître à Yii l'emplacement où elles se trouvent). 
+  pour faire connaître à Yii l'emplacement où elles se trouvent). 
 
 Il est recommandé de placer les ressources appartenant à une application dans un dossier accessible du Web de manière à éviter une publication non nécessaire de ressources. 
 C'est pourquoi `AppAsset` dans l'exemple précédent spécifie le [[yii\web\AssetBundle::basePath|chemin de base]] 
@@ -142,11 +142,11 @@ Les dépendances entre ressources sont transitives. Cela veut dire que si un paq
 Vous pouvez spécifier les propriétés [[yii\web\AssetBundle::cssOptions|cssOptions]] et [[yii\web\AssetBundle::jsOptions|jsOptions]] 
 pour personnaliser la manière dont les fichiers CSS et JavaScript sont inclus dans une page. 
 Les valeurs de ces propriétés sont passées aux méthodes [[yii\web\View::registerCssFile()]] et  [[yii\web\View::registerJsFile()]], respectivement, lorsqu'elles sont appelées par la
- [vue](structure-views.md) pour inclure les fichiers CSS et JavaScript.
+  [vue](structure-views.md) pour inclure les fichiers CSS et JavaScript.
 
 > Note: les options que vous définissez dans une classe de  paquet de ressources s'appliquent à  *chacun des* fichiers CSS/JavaScript du paquet.
 Si vous voulez utiliser des options différentes entre fichiers, vous devez utiliser le format indiqué [[yii\web\AssetBundle::css|ci-dessus]]
- ou créer des paquets de ressources séparés et utiliser un jeu d'options dans chacun des paquets. 
+  ou créer des paquets de ressources séparés et utiliser un jeu d'options dans chacun des paquets. 
 
 Par exemple, pour inclure un fichier CSS sous condition que le navigateur soit IE9 ou inférieur, vous pouvez utiliser l'option suivante :
 
@@ -175,7 +175,7 @@ public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
 ```
 
 Par défaut, lorsqu'un paquet de ressources est publié, tous les contenus dans le dossier spécifié par la propriété [[yii\web\AssetBundle::sourcePath]]
- sont publiés. 
+  sont publiés. 
 Vous pouvez personnaliser ce comportement en configurant la propriété [[yii\web\AssetBundle::publishOptions|publishOptions]]. 
 Par exemple, pour publier seulement un ou quelques sous-dossiers du dossier spécifié par la propriété [[yii\web\AssetBundle::sourcePath]], 
 vous pouvez procéder comme ceci dans la classe du paquet de ressources :
@@ -616,10 +616,10 @@ La commande génère un fichier `assets.php` dans le dossier courant. Le contenu
 ```php
 <?php
 /**
- * Fichier de configuration pour la commande de console "yii asset".
- * Notez que dans l'environnement console, quelques alias de chemin comme  '@webroot' et '@web' peuvent ne pas exister.
- * Pensez à définir ces alias de chemin manquants. 
- */
+  * Fichier de configuration pour la commande de console "yii asset".
+  * Notez que dans l'environnement console, quelques alias de chemin comme  '@webroot' et '@web' peuvent ne pas exister.
+  * Pensez à définir ces alias de chemin manquants. 
+  */
 return [
     // Ajuste la commande/fonction de rappel pour la compression des fichiers JavaScript :
     'jsCompressor' => 'java -jar compiler.jar --js {from} --js_output_file {to}',

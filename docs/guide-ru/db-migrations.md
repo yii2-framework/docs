@@ -257,12 +257,12 @@ yii migrate/create create_post_table --fields="author_id:integer:notNull:foreign
 
 ```php
 /**
- * Handles the creation for table `post`.
- * Has foreign keys to the tables:
- *
- * - `user`
- * - `category`
- */
+  * Handles the creation for table `post`.
+  * Has foreign keys to the tables:
+  *
+  * - `user`
+  * - `category`
+  */
 class m160328_040430_create_post_table extends Migration
 {
     /**
@@ -456,12 +456,12 @@ yii migrate/create create_junction_table_for_post_and_tag_tables
 
 ```php
 /**
- * Handles the creation for table `post_tag`.
- * Has foreign keys to the tables:
- *
- * - `post`
- * - `tag`
- */
+  * Handles the creation for table `post_tag`.
+  * Has foreign keys to the tables:
+  *
+  * - `post`
+  * - `tag`
+  */
 class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migration
 {
     /**
@@ -798,7 +798,7 @@ return [
             'migrationNamespaces' => [
                 'app\migrations', // Общие миграции приложения
                 'module\migrations', // Миграции одного из модулей проекта
-                'some\extension\migrations', // Миграции одного из расширений
+                 'some\extension\migrations', // Миграции одного из расширений
             ],
         ],
     ],

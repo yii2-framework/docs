@@ -169,8 +169,8 @@ génère
 
 ```php
 /**
- * prend en charge la création de la table `post`.
- */
+  * prend en charge la création de la table `post`.
+  */
 class m150811_220037_create_post_table extends Migration
 {
     /**
@@ -203,8 +203,8 @@ génère
 
 ```php
 /**
- * prend en charge la création de la table `post`.
- */
+  * prend en charge la création de la table `post`.
+  */
 class m150811_220037_create_post_table extends Migration
 {
     /**
@@ -240,8 +240,8 @@ génère
 
 ```php
 /**
- * prend en charge la création de la table `post`.
- */
+  * prend en charge la création de la table `post`.
+  */
 class m150811_220037_create_post_table extends Migration
 {
     /**
@@ -280,12 +280,12 @@ génère
 
 ```php
 /**
- * prend en charge la création de la table `post`.
- * possède des clés étrangères vers les tables
- *
- * - `user`
- * - `category`
- */
+  * prend en charge la création de la table `post`.
+  * possède des clés étrangères vers les tables
+  *
+  * - `user`
+  * - `category`
+  */
 class m160328_040430_create_post_table extends Migration
 {
     /**
@@ -485,12 +485,12 @@ génère
 
 ```php
 /**
- * prend en charge la création de la table `post_tag`.
- * possède des clés étrangères vers les tables:
- *
- * - `post`
- * - `tag`
- */
+  * prend en charge la création de la table `post_tag`.
+  * possède des clés étrangères vers les tables:
+  *
+  * - `post`
+  * - `tag`
+  */
 class m160328_041642_create_junction_table_for_post_and_tag_tables extends Migration
 {
     /**
@@ -828,7 +828,7 @@ return [
             'migrationNamespaces' => [
                 'app\migrations', // Migration ordinaires pour l'ensemble de l'application
                 'module\migrations', // Migrations pour le module de projet spécifique
-                'some\extension\migrations', // Migrations pour l'extension spécifique 
+                 'some\extension\migrations', // Migrations pour l'extension spécifique 
             ],
         ],
     ],

@@ -310,7 +310,7 @@ Quando Registrar Dependência <span id="when-to-register-dependencies"></span>
 Em função de existirem dependências na criação de novos objetos, o seu registo deve ser feito o mais cedo possível. Seguem abaixo algumas práticas recomendadas:
 
 * Se você é o desenvolvedor de uma aplicação, você pode registrar dependências no [script de entrada] (structure-entry-scripts.md) da sua aplicação ou em um script incluído no script de entrada.
- * Se você é um desenvolvedor de [extensão](structure-extensions.md), você pode registrar as dependências no bootstrapping (inicialização) da classe da sua extensão.
+  * Se você é um desenvolvedor de [extensão](structure-extensions.md), você pode registrar as dependências no bootstrapping (inicialização) da classe da sua extensão.
 
 
 Resumo <span id="summary"></span>

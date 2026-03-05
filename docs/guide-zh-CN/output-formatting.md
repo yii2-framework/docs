@@ -160,11 +160,11 @@ echo Yii::$app->formatter->asTime('2014-10-06 14:41:00 CEST'); // 14:41:00
 
 - [[yii\i18n\Formatter::asInteger()|integer]]: 这个变量将被格式化为整形 e.g. `42`.
 - [[yii\i18n\Formatter::asDecimal()|decimal]]: 这个变量将被格式化为带着逗号的指定精度的浮点型，
-  例如：`2,542.123` 或 `2.542,123`。
+   例如：`2,542.123` 或 `2.542,123`。
 - [[yii\i18n\Formatter::asPercent()|percent]]: 这个变量将被格式化为百分比 e.g. `42%`.
 - [[yii\i18n\Formatter::asScientific()|scientific]]: 这个变量将被格式化为科学计数法 e.g. `4.2E4`.
 - [[yii\i18n\Formatter::asCurrency()|currency]]: 这个变量将被格式化为货币，
-  例如：`£420.00`。
+   例如：`£420.00`。
   使用这个方法前请确认是否已经正确配置 [[yii\i18n\Formatter::locale|locale]]
 - [[yii\i18n\Formatter::asSize()|size]]: 这个变量将被格式化为人类可读的字节数 e.g. `410 kibibytes`.
 - [[yii\i18n\Formatter::asShortSize()|shortSize]]: 这个变量将被格式化为人类可读的字节数（缩写） [[yii\i18n\Formatter::asSize()|size]]，例如：`410 KiB`。

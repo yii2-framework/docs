@@ -206,8 +206,8 @@ yii migrate/create create_post
 
 ```php
 /**
- * Handles the creation for table `post`.
- */
+  * Handles the creation for table `post`.
+  */
 class m150811_220037_create_post extends Migration
 {
     /**
@@ -240,8 +240,8 @@ yii migrate/create create_post --fields="title:string,body:text"
 
 ```php
 /**
- * Handles the creation for table `post`.
- */
+  * Handles the creation for table `post`.
+  */
 class m150811_220037_create_post extends Migration
 {
     /**
@@ -277,8 +277,8 @@ yii migrate/create create_post --fields="title:string(12):notNull:unique,body:te
 
 ```php
 /**
- * Handles the creation for table `post`.
- */
+  * Handles the creation for table `post`.
+  */
 class m150811_220037_create_post extends Migration
 {
     /**
@@ -318,12 +318,12 @@ yii migrate/create create_post --fields="author_id:integer:notNull:foreignKey(us
 
 ```php
 /**
- * Handles the creation for table `post`.
- * Has foreign keys to the tables:
- *
- * - `user`
- * - `category`
- */
+  * Handles the creation for table `post`.
+  * Has foreign keys to the tables:
+  *
+  * - `user`
+  * - `category`
+  */
 class m160328_040430_create_post extends Migration
 {
     /**
@@ -531,12 +531,12 @@ yii migrate/create create_junction_post_and_tag --fields="created_at:dateTime"
 
 ```php
 /**
- * Handles the creation for table `post_tag`.
- * Has foreign keys to the tables:
- *
- * - `post`
- * - `tag`
- */
+  * Handles the creation for table `post_tag`.
+  * Has foreign keys to the tables:
+  *
+  * - `post`
+  * - `tag`
+  */
 class m160328_041642_create_junction_post_and_tag extends Migration
 {
     /**
@@ -928,7 +928,7 @@ return [
             'migrationNamespaces' => [
                 'app\migrations', // Common migrations for the whole application
                 'module\migrations', // Migrations for the specific project's module
-                'some\extension\migrations', // Migrations for the specific extension
+                 'some\extension\migrations', // Migrations for the specific extension
             ],
         ],
     ],

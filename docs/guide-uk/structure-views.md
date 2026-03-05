@@ -21,10 +21,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- * @var \yii\web\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\LoginForm $model
- */
+  * @var \yii\web\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\LoginForm $model
+  */
 
 $this->title = 'Вхід';
 ?>
@@ -110,10 +110,10 @@ use yii\helpers\HtmlPurifier;
 
 ```
 /**
- * @param string $view ім’я представлення або шлях до файлу, в залежності від того, який метод формування використовується
- * @param array $params дані, які передаються представленню
- * @return string результат формування
- */
+  * @param string $view ім’я представлення або шлях до файлу, в залежності від того, який метод формування використовується
+  * @param array $params дані, які передаються представленню
+  * @return string результат формування
+  */
 methodName($view, $params = [])
 ```
 
@@ -327,9 +327,9 @@ $this->params['breadcrumbs'][] = 'Про нас';
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this
- * @var string $content
- */
+  * @var \yii\web\View $this
+  * @var string $content
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

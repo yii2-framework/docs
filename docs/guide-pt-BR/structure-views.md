@@ -4,7 +4,7 @@ Visões (Views)
 As views fazem parte da arquitetura [MVC](https://pt.wikipedia.org/wiki/MVC).
 São a parte do código responsável por apresentar dados aos usuários finais. Em um aplicação Web,
 views geralmente são criadas em termos de *view templates* (modelos de view)
- que são arquivos PHP contendo principalmente códigos HTML e
+  que são arquivos PHP contendo principalmente códigos HTML e
 códigos PHP de apresentação.
 Os modelos de view são gerenciados pelo [componente da aplicação](structure-application-components.md)
 [[yii\web\View|view]] que fornece métodos comumente utilizados para facilitar
@@ -25,10 +25,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- * @var \yii\web\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\LoginForm $model
- */
+  * @var \yii\web\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\LoginForm $model
+  */
 
 $this->title = 'Login';
 ?>
@@ -45,7 +45,7 @@ $this->title = 'Login';
 
 Em uma view, você pode acessar a variável `$this` que referencia o
 [[yii\web\View|componente view]] responsável por gerenciar e renderizar a view
- em questão.
+  em questão.
 
 Além de `$this`, pode haver outras variáveis predefinidas na view, tal como
 `$model` no exemplo acima. Essas variáveis representam
@@ -125,10 +125,10 @@ Você pode renderizar views em
 
 ```
 /**
- * @param string $view nome da view ou caminho do arquivo, dependendo do método de renderização
- * @param array $params os dados passados para a view
- * @return string resultado da renderização
- */
+  * @param string $view nome da view ou caminho do arquivo, dependendo do método de renderização
+  * @param array $params os dados passados para a view
+  * @return string resultado da renderização
+  */
 methodName($view, $params = [])
 ```
 
@@ -277,7 +277,7 @@ acordo com as seguintes regras:
   renderizada dentro da view `@app/views/post/index.php`.
 
 De acordo com as regras acima, chamar `$this->render('exibir')` em um controller `app\controllers\PostController` vai realmente renderizar o arquivo de view
- `@app/views/post/exibir.php` e, chamar `$this->render('_visaogeral')` nessa view (`exibir.php`) vai renderizar o arquivo de visão `@app/views/post/_visaogeral.php`.
+  `@app/views/post/exibir.php` e, chamar `$this->render('_visaogeral')` nessa view (`exibir.php`) vai renderizar o arquivo de visão `@app/views/post/_visaogeral.php`.
 
 
 ### Acessando Dados em Views  <span id="accessing-data-in-views"></span>
@@ -368,9 +368,9 @@ como tags no head, menu principal, etc.
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this
- * @var string $content
- */
+  * @var \yii\web\View $this
+  * @var string $content
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

@@ -235,7 +235,7 @@ para ayudar al usuario a corregir estos errores.
 Se puede llamar a [[yii\base\Model::validate()]] para validar los datos recibidos. El método se usará para validar las 
 reglas declaradas en [[yii\base\Model::rules()]] para validar cada atributo relevante. Si no se encuentran errores, se 
 devolverá `true`. De otro modo, este almacenará los errores en la propiedad [[yii\base\Model::errors]] y devolverá falso.
- Por ejemplo:
+  Por ejemplo:
 
 ```php
 $model = new \app\models\ContactForm;
@@ -406,7 +406,7 @@ hecho, es la manera por defecto de exportar modelos en desarrollo de servicios W
 ### Campos <span id="fields"></span>
 
 Un campo es simplemente un elemento nombrado en el array resultante de ejecutar el método [[yii\base\Model::toArray()]]
- de un modelo.
+  de un modelo.
 Por defecto, los nombres de los campos son equivalentes a los nombres de los atributos. Sin embargo, se puede 
 modificar este comportamiento sobrescribiendo el método [[yii\base\Model::fields()|fields()]] y/o el método 
 [[yii\base\Model::extraFields()|extraFields()]]. Ambos métodos deben devolver una lista de las definiciones de los 

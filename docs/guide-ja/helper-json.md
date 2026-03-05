@@ -3,7 +3,7 @@ Json ヘルパ
 
 Json ヘルパは JSON をエンコードおよびデコードする一連の静的メソッドを提供します。
 `[[yii\helpers\Json::encode()]]` メソッドはエンコード・エラーを処理しますが、
- `[[yii\web\JsExpression]]` オブジェクトの形式で表現された JavaScript の式はエンコードしません。
+  `[[yii\web\JsExpression]]` オブジェクトの形式で表現された JavaScript の式はエンコードしません。
 既定ではエンコードは `JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE` のオプションで行われます。
 詳細については [PHP:json_encode](https://www.php.net/manual/ja/function.json-encode.php) を参照して下さい。
 

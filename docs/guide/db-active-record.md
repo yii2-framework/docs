@@ -59,7 +59,7 @@ The [[yii\db\ActiveRecord::tableName()|tableName()]] method returns the table na
 You may override this method if the table is not named after this convention.
 
 Also a default [[yii\db\Connection::$tablePrefix|tablePrefix]] can be applied. For example if
- [[yii\db\Connection::$tablePrefix|tablePrefix]] is `tbl_`, `Customer` becomes `tbl_customer` and `OrderItem` becomes `tbl_order_item`. 
+  [[yii\db\Connection::$tablePrefix|tablePrefix]] is `tbl_`, `Customer` becomes `tbl_customer` and `OrderItem` becomes `tbl_order_item`. 
 
 If a table name is given as `{{%TableName}}`, then the percentage character `%` will be replaced with the table prefix. 
 For example, `{{%post}}` becomes `{{tbl_post}}`. The brackets around the table name are used for

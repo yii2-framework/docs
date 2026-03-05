@@ -113,7 +113,7 @@ class SiteController extends Controller
 ```
 
 Action này sẽ tạo đối tượng `EntryForm`. Sau khi được khởi tạo, nó sẽ lấy các thông tin thông qua biến
- `$_POST`, biến này được Yii cung cấp [[yii\web\Request::post()]].
+  `$_POST`, biến này được Yii cung cấp [[yii\web\Request::post()]].
 Nếu dữ liệu gửi đến cho model thành công(chẳng hạn., khi user gửi thông tin từ HTML form), action sẽ gọi phương thức
 [[yii\base\Model::validate()|validate()]] để chắc chắn rằng những giá trị được nhập vào là hợp lý.
 

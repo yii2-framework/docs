@@ -6,7 +6,7 @@ de votre configuration. Cette section vous initiera aux fonctionnalités intégr
 à la manière dont le code est organisé et à la gestion des requêtes par l'application.
 
 > Info: pour simplifier, au long de ce tutoriel de démarrage, nous supposerons que `basic/web` est la racine de votre 
- serveur Web, et que vous avez configuré l'URL pour accéder à votre application comme suit ou de façon similaire : 
+  serveur Web, et que vous avez configuré l'URL pour accéder à votre application comme suit ou de façon similaire : 
   `https://hostname/index.php`.
   Pour vos besoins, merci d'ajuster les URLs dans notre description comme il convient.
 
@@ -21,7 +21,7 @@ L'application basique installée contient quatre pages :
 * la page "About" (À Propos),
 * la page "Contact", qui présente un formulaire de contact permettant aux utilisateurs finaux de vous contacter par courriel,
 * et la page "Login" (Connexion), qui présente un formulaire de connexion qui peut être utilisé pour authentifier des utilisateurs finaux. Essayez de vous connecter
- avec "admin/admin", et vous verrez l'élément "Login" du menu principal être remplacé par "Logout" (Déconnexion).
+  avec "admin/admin", et vous verrez l'élément "Login" du menu principal être remplacé par "Logout" (Déconnexion).
 
 Ces pages ont en commun une entête et un pied de page. L'entête contient une barre de menu principal qui permet la navigation
 entre les différentes pages.

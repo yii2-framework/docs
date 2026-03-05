@@ -81,17 +81,17 @@ You may customize this behavior by configuring the [[yii\filters\AccessControl::
 [[yii\filters\AccessRule|Access rules]] support many options. Below is a summary of the supported options.
 You may also extend [[yii\filters\AccessRule]] to create your own customized access rule classes.
 
- * [[yii\filters\AccessRule::allow|allow]]: specifies whether this is an "allow" or "deny" rule.
+  * [[yii\filters\AccessRule::allow|allow]]: specifies whether this is an "allow" or "deny" rule.
 
- * [[yii\filters\AccessRule::actions|actions]]: specifies which actions this rule matches. This should
+  * [[yii\filters\AccessRule::actions|actions]]: specifies which actions this rule matches. This should
 be an array of action IDs. The comparison is case-sensitive. If this option is empty or not set,
 it means the rule applies to all actions.
 
- * [[yii\filters\AccessRule::controllers|controllers]]: specifies which controllers this rule
+  * [[yii\filters\AccessRule::controllers|controllers]]: specifies which controllers this rule
 matches. This should be an array of controller IDs. Each controller ID is prefixed with the module ID (if any).
 The comparison is case-sensitive. If this option is empty or not set, it means the rule applies to all controllers.
 
- * [[yii\filters\AccessRule::roles|roles]]: specifies which user roles that this rule matches.
+  * [[yii\filters\AccessRule::roles|roles]]: specifies which user roles that this rule matches.
   Two special roles are recognized, and they are checked via [[yii\web\User::isGuest]]:
 
     - `?`: matches a guest user (not authenticated yet)
@@ -100,21 +100,21 @@ The comparison is case-sensitive. If this option is empty or not set, it means t
   Using other role names will trigger the invocation of [[yii\web\User::can()]], which requires enabling RBAC
   (to be described in the next subsection). If this option is empty or not set, it means this rule applies to all roles.
 
- * [[yii\filters\AccessRule::roleParams|roleParams]]: specifies the parameters that will be passed to [[yii\web\User::can()]].
+  * [[yii\filters\AccessRule::roleParams|roleParams]]: specifies the parameters that will be passed to [[yii\web\User::can()]].
   See the section below describing RBAC rules to see how it can be used. If this option is empty or not set, then no parameters will be passed.
 
- * [[yii\filters\AccessRule::ips|ips]]: specifies which [[yii\web\Request::userIP|client IP addresses]] this rule matches.
+  * [[yii\filters\AccessRule::ips|ips]]: specifies which [[yii\web\Request::userIP|client IP addresses]] this rule matches.
 An IP address can contain the wildcard `*` at the end so that it matches IP addresses with the same prefix.
 For example, '192.168.*' matches all IP addresses in the segment '192.168.'. If this option is empty or not set,
 it means this rule applies to all IP addresses.
 
- * [[yii\filters\AccessRule::verbs|verbs]]: specifies which request method (e.g. `GET`, `POST`) this rule matches.
+  * [[yii\filters\AccessRule::verbs|verbs]]: specifies which request method (e.g. `GET`, `POST`) this rule matches.
 The comparison is case-insensitive.
 
- * [[yii\filters\AccessRule::matchCallback|matchCallback]]: specifies a PHP callable that should be called to determine
+  * [[yii\filters\AccessRule::matchCallback|matchCallback]]: specifies a PHP callable that should be called to determine
 if this rule should be applied.
 
- * [[yii\filters\AccessRule::denyCallback|denyCallback]]: specifies a PHP callable that should be called when this rule
+  * [[yii\filters\AccessRule::denyCallback|denyCallback]]: specifies a PHP callable that should be called when this rule
 will deny the access.
 
 Below is an example showing how to make use of the `matchCallback` option, which allows you to write arbitrary access
@@ -445,8 +445,8 @@ use yii\rbac\Rule;
 use app\models\Post;
 
 /**
- * Checks if authorID matches user passed via params
- */
+  * Checks if authorID matches user passed via params
+  */
 class AuthorRule extends Rule
 {
     public $name = 'isAuthor';
@@ -627,8 +627,8 @@ use Yii;
 use yii\rbac\Rule;
 
 /**
- * Checks if user group matches
- */
+  * Checks if user group matches
+  */
 class UserGroupRule extends Rule
 {
     public $name = 'userGroup';

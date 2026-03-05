@@ -81,17 +81,17 @@ ACF による権限付与のプロセスにおいては、現在の実行コン�
 [[yii\filters\AccessRule|アクセス規則]] は多くのオプションをサポートしています。以下はサポートされているオプションの要約です。
 [[yii\filters\AccessRule]] を拡張して、あなた自身のカスタマイズしたアクセス規則のクラスを作ることも出来ます。
 
- * [[yii\filters\AccessRule::allow|allow]]: これが「許可」の規則であるか、「禁止」の規則であるかを指定します。
+  * [[yii\filters\AccessRule::allow|allow]]: これが「許可」の規則であるか、「禁止」の規則であるかを指定します。
 
- * [[yii\filters\AccessRule::actions|actions]]: どのアクションにこの規則が適用されるかを指定します。
+  * [[yii\filters\AccessRule::actions|actions]]: どのアクションにこの規則が適用されるかを指定します。
   これはアクション ID の配列でなければなりません。比較は大文字と小文字を区別します。
   このオプションが空であるか指定されていない場合は、規則が全てのアクションに適用されることを意味します。
 
- * [[yii\filters\AccessRule::controllers|controllers]]: どのコントローラにこの規則が適用されるかを指定します。これはコントローラ ID の配列でなければなりません。
+  * [[yii\filters\AccessRule::controllers|controllers]]: どのコントローラにこの規則が適用されるかを指定します。これはコントローラ ID の配列でなければなりません。
   コントローラがモジュールに属する場合は、モジュール ID をコントローラ ID の前に付けます。比較は大文字と小文字を区別します。
   このオプションが空であるか指定されていない場合は、規則が全てのコントローラに適用されることを意味します。
 
- * [[yii\filters\AccessRule::roles|roles]]: どのユーザ・ロールにこの規則が適用されるかを指定します。
+  * [[yii\filters\AccessRule::roles|roles]]: どのユーザ・ロールにこの規則が適用されるかを指定します。
   二つの特別なロールが認識されます。これらは、[[yii\web\User::isGuest]] によって判断されます。
 
     - `?`: ゲスト・ユーザ (まだ認証されていないユーザ) を意味します。
@@ -100,21 +100,21 @@ ACF による権限付与のプロセスにおいては、現在の実行コン�
   その他のロール名を使うと、[[yii\web\User::can()]] の呼び出しが惹起されますが、そのためには、RBAC (次のセクションで説明します) を有効にする必要があります。
   このオプションが空であるか指定されていない場合は、規則が全てのロールに適用されることを意味します。
 
- * [[yii\filters\AccessRule::roleParams|roleParams]]: [[yii\web\User::can()]] に渡されるパラメータを指定します。
+  * [[yii\filters\AccessRule::roleParams|roleParams]]: [[yii\web\User::can()]] に渡されるパラメータを指定します。
   パラメータがどのように使われるかは、RBAC 規則を説明する後のセクションを参照して下さい。このオプションが空であるか設定されていない場合は、パラメータは渡されません。
 
- * [[yii\filters\AccessRule::ips|ips]]: どの [[yii\web\Request::userIP|クライアントの IP アドレス]] にこの規則が適用されるかを指定します。
+  * [[yii\filters\AccessRule::ips|ips]]: どの [[yii\web\Request::userIP|クライアントの IP アドレス]] にこの規則が適用されるかを指定します。
   IP アドレスは、最後にワイルドカード `*` を含むことが出来て、同じプレフィクスを持つ IP アドレスに合致させることが出来ます。
   例えば、'192.168.*' は、'192.168.' のセグメントに属する全ての IP アドレスに合致します。
   このオプションが空であるか指定されていない場合は、規則が全ての IP アドレスに適用されることを意味します。
 
- * [[yii\filters\AccessRule::verbs|verbs]]: どのリクエスト・メソッド (HTTP 動詞、例えば `GET` や `POST`) にこの規則が適用されるかを指定します。
+  * [[yii\filters\AccessRule::verbs|verbs]]: どのリクエスト・メソッド (HTTP 動詞、例えば `GET` や `POST`) にこの規則が適用されるかを指定します。
   比較は大文字と小文字を区別しません。
 
- * [[yii\filters\AccessRule::matchCallback|matchCallback]]: この規則が適用されるべきか否かを決定するために呼び出されるべき
+  * [[yii\filters\AccessRule::matchCallback|matchCallback]]: この規則が適用されるべきか否かを決定するために呼び出されるべき
   PHP コーラブルを指定します。
 
- * [[yii\filters\AccessRule::denyCallback|denyCallback]]: この規則がアクセスを禁止する場合に呼び出されるべき
+  * [[yii\filters\AccessRule::denyCallback|denyCallback]]: この規則がアクセスを禁止する場合に呼び出されるべき
   PHP コーラブルを指定します。
 
 下記は、`matchCallback` オプションを利用する方法を示す例です。
@@ -445,8 +445,8 @@ use yii\rbac\Rule;
 use app\models\Post;
 
 /**
- * authorID がパラメータで渡されたユーザと一致するかチェックする
- */
+  * authorID がパラメータで渡されたユーザと一致するかチェックする
+  */
 class AuthorRule extends Rule
 {
     public $name = 'isAuthor';
@@ -627,8 +627,8 @@ use Yii;
 use yii\rbac\Rule;
 
 /**
- * ユーザのグループが合致するかどうかをチェックする
- */
+  * ユーザのグループが合致するかどうかをチェックする
+  */
 class UserGroupRule extends Rule
 {
     public $name = 'userGroup';

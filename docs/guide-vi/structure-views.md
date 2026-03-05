@@ -20,10 +20,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- * @var \yii\web\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\LoginForm $model
- */
+  * @var \yii\web\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\LoginForm $model
+  */
 
 $this->title = 'Login';
 ?>
@@ -108,10 +108,10 @@ khi được gọi phương thức xuất bản tới view. Những phương th�
 
 ```
 /**
- * @param string $view view name or file path, depending on the actual rendering method
- * @param array $params the data to be passed to the view
- * @return string rendering result
- */
+  * @param string $view view name or file path, depending on the actual rendering method
+  * @param array $params the data to be passed to the view
+  * @return string rendering result
+  */
 methodName($view, $params = [])
 ```
 
@@ -324,9 +324,9 @@ vào layout. Tuy nhiên trong thực tế, bạn có thể thêm nhiều nội d
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this
- * @var string $content
- */
+  * @var \yii\web\View $this
+  * @var string $content
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

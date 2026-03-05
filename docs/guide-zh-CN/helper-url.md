@@ -20,7 +20,7 @@ $httpsAbsoluteHomeUrl = Url::home('https');
 
 如下代码可以获得当前请求的 base URL：
 
- ```php
+  ```php
 $relativeBaseUrl = Url::base();
 $absoluteBaseUrl = Url::base(true);
 $httpsAbsoluteBaseUrl = Url::base('https');

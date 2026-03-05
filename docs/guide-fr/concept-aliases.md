@@ -104,7 +104,7 @@ Yii prédéfinit un jeu d'alias pour faire référence à des chemins de fichier
 - `@npm`, le dossier racine des [paquets npm](https://www.npmjs.com/). Valeur par défaut `@vendor/npm`.
 
 L'alias `@yii` est défini lorsque vous incluez le fichier `Yii.php` dans votre [script d'entrée](structure-entry-scripts.md). Les alias restants sont définis dans le constructeur de l'application au moment où la [configuration](concept-configurations.md) de l'application est appliquée.
- .
+  .
 
 
 Alias d'extension <span id="extension-aliases"></span>

@@ -369,8 +369,8 @@ use Yii;
 $foo = new Foo();
 
 $foo->on('foo.event.*', function ($event) {
-    // 触发任何事件，该名称以 'foo.event.' 开头
-    Yii::debug('trigger event: ' . $event->name);
+     // 触发任何事件，该名称以 'foo.event.' 开头
+     Yii::debug('trigger event: ' . $event->name);
 });
 ```
 
@@ -381,8 +381,8 @@ use yii\base\Event;
 use Yii;
 
 Event::on('app\models\*', 'before*', function ($event) {
-    // 触发命名空间 'app\models' 中的任何类的任何事件，名称以 'before' 开头。
-    Yii::debug('trigger event: ' . $event->name . ' for class: ' . get_class($event->sender));
+     // 触发命名空间 'app\models' 中的任何类的任何事件，名称以 'before' 开头。
+     Yii::debug('trigger event: ' . $event->name . ' for class: ' . get_class($event->sender));
 });
 ```
 
@@ -393,8 +393,8 @@ use yii\base\Event;
 use Yii;
 
 Event::on('*', '*', function ($event) {
-    // 触发任何类的任何事件
-    Yii::debug('trigger event: ' . $event->name);
+     // 触发任何类的任何事件
+     Yii::debug('trigger event: ' . $event->name);
 });
 ```
 

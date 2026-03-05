@@ -174,10 +174,10 @@ The [[yii\validators\Validator::when|when]] property takes a PHP callable with t
 
 ```php
 /**
- * @param Model $model the model being validated
- * @param string $attribute the attribute being validated
- * @return bool whether the rule should be applied
- */
+  * @param Model $model the model being validated
+  * @param string $attribute the attribute being validated
+  * @return bool whether the rule should be applied
+  */
 function ($model, $attribute)
 ```
 
@@ -351,13 +351,13 @@ the method/function is:
 
 ```php
 /**
- * @param string $attribute the attribute currently being validated
- * @param mixed $params the value of the "params" given in the rule
- * @param \yii\validators\InlineValidator $validator related InlineValidator instance.
- * This parameter is available since version 2.0.11.
- * @param mixed $current the currently validated value of attribute.
- * This parameter is available since version 2.0.36.
- */
+  * @param string $attribute the attribute currently being validated
+  * @param mixed $params the value of the "params" given in the rule
+  * @param \yii\validators\InlineValidator $validator related InlineValidator instance.
+  * This parameter is available since version 2.0.11.
+  * @param mixed $current the currently validated value of attribute.
+  * This parameter is available since version 2.0.36.
+  */
 function ($attribute, $params, $validator, $current)
 ```
 

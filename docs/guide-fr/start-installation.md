@@ -71,10 +71,10 @@ Installer Yii depuis une archive se fait en trois étapes :
 2. Décompresser l'archive dans un dossier accessible via le Web.
 3. Modifier le fichier `config/web.php` en entrant une clé secrète pour la configuration de `cookieValidationKey` (cela est fait automatiquement si vous installez Yii avec Composer) :
 
- ```php
- // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
- 'cookieValidationKey' => 'enter your secret key here',
- ```
+  ```php
+  // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+  'cookieValidationKey' => 'enter your secret key here',
+  ```
 
 
 Autres options d'installation <span id="other-installation-options"></span>

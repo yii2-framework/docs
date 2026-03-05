@@ -92,7 +92,7 @@ Yii::$app->response->content = 'hello world!';
 
 Si se tiene que dar formato a los datos antes de enviarlo al usuario final, se deben asignar las propiedades 
 [[yii\web\Response::format|format]] y [[yii\web\Response::data|data]]. La propiedad [[yii\web\Response::format|format]]
- especifica que formato debe tener [[yii\web\Response::data|data]]. Por ejemplo:
+  especifica que formato debe tener [[yii\web\Response::data|data]]. Por ejemplo:
 
 ```php
 $response = Yii::$app->response;

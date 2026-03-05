@@ -31,7 +31,7 @@ Còn trên HĐH Windows, bạn có thể tải về và chạy [Composer-Setup.e
 Nếu bạn có bất kỳ thắc mắc hoặc muốn biết thêm và nghiên cứu chuyên sâu về Composer, vui lòng tham khảo [Tài liệu Composer](https://getcomposer.org/doc/) 
 
 Nếu bạn đã cài Composer rồi, hãy chắc chắn rằng bạn đang sử dụng phiên bản mới nhất. Bạn có thể cập nhật Composer bằng cách thực hiện lệnh
- `composer self-update`.
+  `composer self-update`.
 
 Sau khi cài đặt Composer, bạn có thể cài đặt Yii bằng cách chạy lệnh sau ở thư mục Web mà ứng dụng cần chạy:
 
@@ -130,7 +130,7 @@ thay vì https://www.example.com/basic/web/index.php. Cấu hình này đòi h�
 chi tiết trên URL phân tích và tạo ra một chương trình chiếu, bạn sẽ tìm hiểu làm thế nào để cấu hình Apache hoặc Nginx máy chủ để đạt được những mục tiêu này.
 
 > Lưu ý: Thiết lập `basic/web` như thư mục gốc, bạn có thể ngăn chặn người dùng truy cập vào các dữ liệu cá nhân và các thông tin nhạy cảm được lưu trữ
- ở các thư mục con nằm trong `basic/web`. Từ chối truy cập vào các thư mục khác là một cải tiến bảo mật.
+  ở các thư mục con nằm trong `basic/web`. Từ chối truy cập vào các thư mục khác là một cải tiến bảo mật.
 
 > Lưu ý: Bạn nên điều chính cấu trúc ứng dụng của bạn để bảo mật tốt hơn, điều này cần thiếu nếu khi ứng dụng của ban chạy trên những hosting miễn phí, ở môi trường mà bạn
 không có quyền thay đổi các thiết lập ở server Web. Tham khảo thêm ở phần sau để biết thêm chi tiết [Shared Hosting Environment](tutorial-shared-hosting.md).

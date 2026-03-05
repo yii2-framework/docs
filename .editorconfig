@@ -17,6 +17,11 @@ indent_size = 2
 indent_size = 2
 trim_trailing_whitespace = false
 
+[*.graphml]
+indent_style = unset
+indent_size = unset
+trim_trailing_whitespace = false
+
 [*.php]
 ij_php_space_before_short_closure_left_parenthesis = false
 ij_php_space_after_type_cast = true

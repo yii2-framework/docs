@@ -175,7 +175,7 @@ if (YII_ENV_DEV) {
 #### [[yii\web\Application::catchAll|catchAll]] <span id="catchAll"></span>
 
 Thuộc tính này chỉ được hỗ trợ với [[yii\web\Application| ứng dụng Web]]. Nó mô tả một
- [hành động](structure-controllers.md) và nhận xử lý mọi yêu cầu. Thường được sử dụng mỗi khi
+  [hành động](structure-controllers.md) và nhận xử lý mọi yêu cầu. Thường được sử dụng mỗi khi
 ứng dụng đang ở chế độ bảo trì và cần xử lý mọi yêu cầu được gửi tới.
 
 Thông tin được cấu hình bao gồm mảng và chứa thông tin về router và action.
@@ -254,7 +254,7 @@ không gian tên) sẽ là `PostController`, và tên lớp đầy đủ sẽ l�
 
 Các lớp trình điều khiển thường được lưu trữ ở thư mục con của thư mục chính các không gian tên.
 Chẳng hạn, với ID của trình điều khiển `admin/post`, tương ứng với tên lớp đầy đủ sẽ là
- `app\controllers\admin\PostController`.
+  `app\controllers\admin\PostController`.
 
 Điều này khá quan trọng vì các lớp điều khiển có thể được [tải tự động](concept-autoloading.md)
 và các không gian tên của các lớp điều khiển sẽ khớp với giá trị của các thuộc tính. Nếu không thì,

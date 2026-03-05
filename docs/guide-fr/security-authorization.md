@@ -67,26 +67,26 @@ Vous pouvez personnaliser ce comportement en configurant la propriété [[yii\fi
 
 Les [[yii\filters\AccessRule|règles d'accès]] acceptent beaucoup d'options. Ci-dessous, nous présentons un résumé des options acceptées. Vous pouvez aussi étendre la classe  [[yii\filters\AccessRule]] pour créer vos propres classe de règles d'accès.
 
- * [[yii\filters\AccessRule::allow|allow]]: spécifie s'il s'agit d'une règle "allow" (autorise) ou "deny" (refuse).
+  * [[yii\filters\AccessRule::allow|allow]]: spécifie s'il s'agit d'une règle "allow" (autorise) ou "deny" (refuse).
 
- * [[yii\filters\AccessRule::actions|actions]]: spécifie à  quelles actions cette règle correspond. Ce doit être un tableau d'identifiants d'action. La comparaison est sensible à la casse. Si cette option est vide ou non définie, cela signifie que la règle s'applique à toutes les actions.
+  * [[yii\filters\AccessRule::actions|actions]]: spécifie à  quelles actions cette règle correspond. Ce doit être un tableau d'identifiants d'action. La comparaison est sensible à la casse. Si cette option est vide ou non définie, cela signifie que la règle s'applique à toutes les actions.
 
- * [[yii\filters\AccessRule::controllers|controllers]]: spécifie à quels contrôleurs cette règle correspond. Ce doit être un tableau d'identifiants de contrôleurs. Si cette option est vide ou non définie, la règle s'applique à tous les contrôleurs.
+  * [[yii\filters\AccessRule::controllers|controllers]]: spécifie à quels contrôleurs cette règle correspond. Ce doit être un tableau d'identifiants de contrôleurs. Si cette option est vide ou non définie, la règle s'applique à tous les contrôleurs.
 
- * [[yii\filters\AccessRule::roles|roles]]: spécifie à quels rôles utilisateur cette règle correspond. Deux rôles spéciaux sont reconnus, et ils sont vérifiés via [[yii\web\User::isGuest]]:
+  * [[yii\filters\AccessRule::roles|roles]]: spécifie à quels rôles utilisateur cette règle correspond. Deux rôles spéciaux sont reconnus, et ils sont vérifiés via [[yii\web\User::isGuest]]:
 
     - `?`: correspond à un visiteur non authentifié.
     - `@`: correspond à un visiteur authentifié.
 
   L'utilisation d'autres noms de rôle déclenche l'appel de [[yii\web\User::can()]], qui requiert l'activation du contrôle d'accès basé sur les rôles qui sera décrit dans la prochaine sous-section. Si cette option est vide ou non définie, cela signifie que la règle s'applique à tous les rôles.
 
- * [[yii\filters\AccessRule::ips|ips]]: spécifie à quelles [[yii\web\Request::userIP|adresses IP de client]] cette règle correspond. Une adresse IP peut contenir le caractère générique `*` à la fin pour indiquer que la règle correspond à des adresses IP ayant le même préfixe. Par exemple, '192.168.*' correspond à toutes les adresse IP dans le segment '192.168.'. Si cette option est vide ou non définie, cela signifie que la règle s'applique à toutes les adresses IP.
+  * [[yii\filters\AccessRule::ips|ips]]: spécifie à quelles [[yii\web\Request::userIP|adresses IP de client]] cette règle correspond. Une adresse IP peut contenir le caractère générique `*` à la fin pour indiquer que la règle correspond à des adresses IP ayant le même préfixe. Par exemple, '192.168.*' correspond à toutes les adresse IP dans le segment '192.168.'. Si cette option est vide ou non définie, cela signifie que la règle s'applique à toutes les adresses IP.
 
- * [[yii\filters\AccessRule::verbs|verbs]]: spécifie à quelles méthodes de requête (p. ex. `GET`, `POST`) cette règle correspond. La comparaison est insensible à la casse.
+  * [[yii\filters\AccessRule::verbs|verbs]]: spécifie à quelles méthodes de requête (p. ex. `GET`, `POST`) cette règle correspond. La comparaison est insensible à la casse.
 
- * [[yii\filters\AccessRule::matchCallback|matchCallback]]: spécifie une fonction de rappel PHP qui peut être appelée pour déterminer si cette règle s'applique.
+  * [[yii\filters\AccessRule::matchCallback|matchCallback]]: spécifie une fonction de rappel PHP qui peut être appelée pour déterminer si cette règle s'applique.
 
- * [[yii\filters\AccessRule::denyCallback|denyCallback]]: spécifie une fonction de rappel PHP qui peut être appelée lorsqu'une règle refuse l'accès.
+  * [[yii\filters\AccessRule::denyCallback|denyCallback]]: spécifie une fonction de rappel PHP qui peut être appelée lorsqu'une règle refuse l'accès.
 
 Ci-dessous nous présentons un exemple qui montre comment utiliser l'option `matchCallback`, qui vous permet d'écrire une logique d'accès arbitraire :
 
@@ -304,8 +304,8 @@ namespace app\rbac;
 use yii\rbac\Rule;
 
 /**
- * Vérifie si l'identifiant de l'auteur correspond à celui passé en paramètre
- */
+  * Vérifie si l'identifiant de l'auteur correspond à celui passé en paramètre
+  */
 class AuthorRule extends Rule
 {
     public $name = 'isAuthor';
@@ -443,8 +443,8 @@ use Yii;
 use yii\rbac\Rule;
 
 /**
- * Vérifie si le groupe utilisateurs correspond
- */
+  * Vérifie si le groupe utilisateurs correspond
+  */
 class UserGroupRule extends Rule
 {
     public $name = 'userGroup';

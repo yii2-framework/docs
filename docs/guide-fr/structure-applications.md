@@ -52,7 +52,7 @@ La propriété [[yii\base\Application::basePath|basePath]] spécifie le dossier 
 
 Vous pouvez configurer la propriété  [[yii\base\Application::basePath|basePath]] en utilisant un chemin de dossier
 ou un [alias de chemin](concept-aliases.md). Dans les deux cas, le dossier correspondant doit exister,
- sinon une exception est levée. Le chemin doit être normalisé à l'aide de la fonction `realpath()`.
+  sinon une exception est levée. Le chemin doit être normalisé à l'aide de la fonction `realpath()`.
 
 La propriété [[yii\base\Application::basePath|basePath]] est souvent utilisée pour dériver d'autres chemins importants
 (p. ex. le chemin runtime ). À cette fin, un alias nommé `@app` est prédéfini pour représenter ce chemin.

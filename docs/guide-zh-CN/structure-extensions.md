@@ -159,7 +159,7 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 
 每个 Composer 软件包都应当有一个唯一的包名以便能从其他的软件包中识别出来。
 包名的格式为 `vendorName/projectName` 。例如在包名 `yiisoft/yii2-imagine` 中，vendor 名和 project 名分别是
- `yiisoft` 和 `yii2-imagine` 。
+  `yiisoft` 和 `yii2-imagine` 。
 
 不要用 `yiisoft` 作为你的 vendor 名，由于它被 Yii 的核心代码预留使用了。
 
@@ -210,7 +210,7 @@ Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
 #### 类的自动加载 <span id="class-autoloading"></span>
 
 为使你的类能够被 Yii 的类自动加载器或者 Composer 的类自动加载器自动加载，你应当在
- `composer.json` 中指定 `autoload` 条目，如下所示：
+  `composer.json` 中指定 `autoload` 条目，如下所示：
 
 ```json
 {

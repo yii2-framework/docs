@@ -39,7 +39,7 @@ Em particular, os seguintes filtros serão executados na ordem em que estão lis
 * [[yii\filters\VerbFilter|verbFilter]]: suporta validação de métodos HTTP;
 * [[yii\filters\auth\AuthMethod|authenticator]]: suporta autenticação de usuários, que será explicado na seção [Autenticação](rest-authentication.md);
 * [[yii\filters\RateLimiter|rateLimiter]]: suporta limitação de taxa, que será explicado na seção
- [Limitação de taxa](rest-rate-limiting.md).
+  [Limitação de taxa](rest-rate-limiting.md).
 
 Estes filtros são declarados no método [[yii\rest\Controller::behaviors()|behaviors()]].
 Você pode sobrescrever esse método para configurar alguns filtros, desativar outros, ou adicionar seus próprios filtros. Por exemplo, se você precisar somente de autenticação básica de HTTP, poderá utilizar o seguinte código:

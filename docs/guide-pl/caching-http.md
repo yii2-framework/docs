@@ -24,10 +24,10 @@ typu PHP callable i zwracać uniksowy znacznik czasu informujący o czasie modyf
 
 ```php
 /**
- * @param Action $action aktualnie przetwarzany obiekt akcji
- * @param array $params wartość właściwości "params"
- * @return int uniksowy znacznik czasu modyfikacji strony
- */
+  * @param Action $action aktualnie przetwarzany obiekt akcji
+  * @param array $params wartość właściwości "params"
+  * @return int uniksowy znacznik czasu modyfikacji strony
+  */
 function ($action, $params)
 ```
 
@@ -67,10 +67,10 @@ Właściwość powinna być typu PHP callable i zwracać ziarno do wygenerowania
 
 ```php
 /**
- * @param Action $action aktualnie przetwarzany obiekt akcji
- * @param array $params wartość właściwości "params"
- * @return string łańcuch znaków użyty do generowania hasha ETag
- */
+  * @param Action $action aktualnie przetwarzany obiekt akcji
+  * @param array $params wartość właściwości "params"
+  * @return string łańcuch znaków użyty do generowania hasha ETag
+  */
 function ($action, $params)
 ```
 

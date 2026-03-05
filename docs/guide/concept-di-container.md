@@ -430,11 +430,11 @@ or [[yii\di\Container::setSingleton()|setSingleton()]] respectively for each ite
 
 The configuration array format is:
 
- - `key`: class name, interface name or alias name. The key will be passed to the
- [[yii\di\Container::set()|set()]] method as a first argument `$class`.
- - `value`: the definition associated with `$class`. Possible values are described in [[yii\di\Container::set()|set()]]
- documentation for the `$definition` parameter. Will be passed to the [[set()]] method as
- the second argument `$definition`.
+  - `key`: class name, interface name or alias name. The key will be passed to the
+  [[yii\di\Container::set()|set()]] method as a first argument `$class`.
+  - `value`: the definition associated with `$class`. Possible values are described in [[yii\di\Container::set()|set()]]
+  documentation for the `$definition` parameter. Will be passed to the [[set()]] method as
+  the second argument `$definition`.
 
 For example, let's configure our container to follow the aforementioned requirements:
 

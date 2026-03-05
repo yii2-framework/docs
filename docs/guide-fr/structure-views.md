@@ -17,10 +17,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- * @var \yii\web\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\LoginForm $model
- */
+  * @var \yii\web\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\LoginForm $model
+  */
 
 $this->title = 'Login';
 ?>
@@ -90,10 +90,10 @@ Vous pouvez personnaliser ces dossiers par défaut en redéfinissant la méthode
 Vous pouvez rendre les vues dans des [contrôleurs](structure-controllers.md), des [objets graphiques](structure-widgets.md), ou dans d'autres endroits en appelant les méthodes de rendu des vues. Ces méthodes partagent un signature similaire comme montré ci-dessous :
 ```
 /**
- * @param string $view nom de la vue ou chemin du fichier, selon la méthode réelle de rendu
- * @param array $params les données injectées dans la vue
- * @return string le résultat du rendu
- */
+  * @param string $view nom de la vue ou chemin du fichier, selon la méthode réelle de rendu
+  * @param array $params les données injectées dans la vue
+  * @return string le résultat du rendu
+  */
 methodName($view, $params = [])
 ```
 
@@ -265,9 +265,9 @@ L'exemple qui suit montre à quoi ressemble une disposition. Notez que dans un b
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this
- * @var string $content
- */
+  * @var \yii\web\View $this
+  * @var string $content
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

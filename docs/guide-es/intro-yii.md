@@ -21,9 +21,9 @@ servicios web compatibles con la arquitectura REST y muchos más.
 Si estás ya familiarizado con otros framework, puedes apreciar como se compara Yii con ellos:
 
 - Como la mayoría de los framework de PHP, Yii implementa el patrón de diseño MVC (Modelo-Vista-Controlador) y
- promueve la organización de código basada en este patrón.
+  promueve la organización de código basada en este patrón.
 - La filosofía de Yii consiste en escribir el código de manera simple y elegante, sin sobrediseñar nunca por el
- mero hecho de seguir un patrón de diseño determinado.
+  mero hecho de seguir un patrón de diseño determinado.
 - Yii es un framework completo (full stack) que provee muchas características probadas y listas para usar, como los 
 constructores de consultas y la clase ActiveRecord para las bases de datos relacionales y NoSQL, 
 la compatibilidad con la arquitectura REST para desarrollar API, la compatibilidad de caché en varios niveles 

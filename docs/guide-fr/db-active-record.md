@@ -90,7 +90,7 @@ class Customer extends ActiveRecord
 ### Les enregistrements actifs sont appelés "modèles"
 
 Les instances d'une classe d'enregistrement actif (*Active Record*) sont considérées comme des [modèles](structure-models.md).
- Pour cette raison, nous plaçons les classes d'enregistrement actif dans l'espace de noms `app\models`(ou autres espaces de noms prévus pour contenir des classes de modèles). 
+  Pour cette raison, nous plaçons les classes d'enregistrement actif dans l'espace de noms `app\models`(ou autres espaces de noms prévus pour contenir des classes de modèles). 
 
 Comme la classe [[yii\db\ActiveRecord]] étend la classe [[yii\base\Model]], 
 elle hérite de *toutes* les fonctionnalités d'un [modèle](structure-models.md), comme les attributs, les règles de validation, la sérialisation des données, etc.

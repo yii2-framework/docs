@@ -174,10 +174,10 @@ public function rules()
 
 ```php
 /**
- * @param Model $model 検証されるモデル
- * @param string $attribute 検証される属性
- * @return bool 規則が適用されるか否か
- */
+  * @param Model $model 検証されるモデル
+  * @param string $attribute 検証される属性
+  * @return bool 規則が適用されるか否か
+  */
 function ($model, $attribute)
 ```
 
@@ -351,13 +351,13 @@ Yii のリリースに含まれている [コア・バリデータ](tutorial-cor
 
 ```php
 /**
- * @param string $attribute 現在検証されている属性
- * @param mixed $params 規則に与えられる "params" の値
- * @param \yii\validators\InlineValidator $validator 関係する InlineValidator のインスタンス。
- * このパラメータは、バージョン 2.0.11 以降で利用可能。
- * @param mixed $current 現在検証されている属性の値
- * このパラメータは、バージョン 2.0.36 以降で利用可能。
- */
+  * @param string $attribute 現在検証されている属性
+  * @param mixed $params 規則に与えられる "params" の値
+  * @param \yii\validators\InlineValidator $validator 関係する InlineValidator のインスタンス。
+  * このパラメータは、バージョン 2.0.11 以降で利用可能。
+  * @param mixed $current 現在検証されている属性の値
+  * このパラメータは、バージョン 2.0.36 以降で利用可能。
+  */
 function ($attribute, $params, $validator, $current)
 ```
 

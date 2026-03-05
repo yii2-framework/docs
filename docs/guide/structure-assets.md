@@ -220,7 +220,7 @@ ___
 This way will satisfy requirements of the majority of projects, that need NPM or Bower packages.
 
 > Note: Since 2.0.13 both Basic and Advanced application templates are pre-configured to use asset-packagist
- by default, so you can skip this section.
+  by default, so you can skip this section.
 
 In the `composer.json` of your project, add the following lines:
 
@@ -773,10 +773,10 @@ The command generates a file named `assets.php` in the current directory. The co
 ```php
 <?php
 /**
- * Configuration file for the "yii asset" console command.
- * Note that in the console environment, some path aliases like '@webroot' and '@web' may not exist.
- * Please define these missing path aliases.
- */
+  * Configuration file for the "yii asset" console command.
+  * Note that in the console environment, some path aliases like '@webroot' and '@web' may not exist.
+  * Please define these missing path aliases.
+  */
 return [
     // Adjust command/callback for JavaScript files compressing:
     'jsCompressor' => 'java -jar compiler.jar --js {from} --js_output_file {to}',

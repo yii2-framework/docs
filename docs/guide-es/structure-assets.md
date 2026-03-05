@@ -146,7 +146,7 @@ incluidos en una página. Los valores de estas propiedades serán enviadas a los
   usar un conjunto de opciones para cada bundle.
 
 Por ejemplo, para incluir una archivo CSS condicionalmente para navegadores que como IE9 o anteriores, se puede usar la
- siguiente opción:
+  siguiente opción:
 
 ```php
 public $cssOptions = ['condition' => 'lte IE9'];
@@ -167,7 +167,7 @@ public $cssOptions = ['noscript' => true];
 ```
 
 Para incluir un archivo JavaScript en la sección cabecera (head) de una página (por defecto, los archivos JavaScript se
- incluyen al final de la sección cuerpo(body)), se puede usar el siguiente código:
+  incluyen al final de la sección cuerpo(body)), se puede usar el siguiente código:
 
 ```php
 public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
@@ -209,7 +209,7 @@ la opción de publicación `beforeCopy`, solo los subdirectorios `fonts` y `css`
 
 La mayoría de paquetes JavaScript/CSS se gestionan con [Bower](https://bower.io/) y/o [NPM](https://www.npmjs.com/).
 Si tu aplicación o extensión usa estos paquetes, se recomienda seguir los siguientes pasos para gestionar los assets en
- la librería:
+  la librería:
 
 1. Modificar el archivo `composer.json` de tu aplicación o extensión e introducir el paquete en la lista `require`.
   Se debe usar `bower-asset/PackageName` (para paquetes Bower) o `npm-asset/PackageName` (para paquetes NPM) para
@@ -278,7 +278,7 @@ return [
 
 Del mismo modo, se pueden configurar múltiples asset bundles a través de [[yii\web\AssetManager::bundles]]. Las claves
 del array deben ser los nombres de clase (sin la primera barra invertida) de los asset bundles, y los valores del array
- deben ser las correspondientes [configuraciones de arrays](concept-configurations.md).
+  deben ser las correspondientes [configuraciones de arrays](concept-configurations.md).
 
 > Tip: Se puede elegir condicionalmente que assets se van a usar en un asset bundle. El siguiente ejemplo
 muestra como usar `jquery.js` en el entorno de desarrollo y `jquery.min.js` en los otros casos:
@@ -584,10 +584,10 @@ siguiente código:
 ```php
 <?php
 /**
- * Configuration file for the "yii asset" console command.
- * Note that in the console environment, some path aliases like '@webroot' and '@web' may not exist.
- * Please define these missing path aliases.
- */
+  * Configuration file for the "yii asset" console command.
+  * Note that in the console environment, some path aliases like '@webroot' and '@web' may not exist.
+  * Please define these missing path aliases.
+  */
 return [
     // Ajustar comando/callback para comprimir los ficheros JavaScript:
     'jsCompressor' => 'java -jar compiler.jar --js {from} --js_output_file {to}',

@@ -21,10 +21,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- * @var \yii\web\View $this
- * @var \yii\widgets\ActiveForm $form
- * @var \app\models\LoginForm $model
- */
+  * @var \yii\web\View $this
+  * @var \yii\widgets\ActiveForm $form
+  * @var \app\models\LoginForm $model
+  */
 
 $this->title = 'Login';
 ?>
@@ -110,10 +110,10 @@ llamando a los métodos de renderización de vistas. Estos métodos comparten un
 
 ```
 /**
- * @param string $view nombre de la vista o ruta al archivo, dependiendo del método de renderización utilizado
- * @param array $params los datos pasados a la vista
- * @return string el resultado de la renderización
- */
+  * @param string $view nombre de la vista o ruta al archivo, dependiendo del método de renderización utilizado
+  * @param array $params los datos pasados a la vista
+  * @return string el resultado de la renderización
+  */
 methodName($view, $params = [])
 ```
 
@@ -327,9 +327,9 @@ bastante el código del layout. En la práctica, probablemente le agregues más 
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this
- * @var string $content
- */
+  * @var \yii\web\View $this
+  * @var string $content
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

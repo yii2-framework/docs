@@ -56,8 +56,8 @@ The term "class" refers to all classes and interfaces here.
 
 ```php
 /**
- * Documentation
- */
+  * Documentation
+  */
 class MyClass extends \yii\base\BaseObject implements MyInterface
 {
     // code
@@ -123,8 +123,8 @@ class Foo
 
 ```php
 /**
- * Documentation
- */
+  * Documentation
+  */
 class Foo
 {
     /**
@@ -140,26 +140,26 @@ class Foo
 
 ### 4.4 PHPDoc blocks
 
- - `@param`, `@var`, `@property` and `@return` must declare types as `bool`, `int`, `string`, `array` or `null`.
+  - `@param`, `@var`, `@property` and `@return` must declare types as `bool`, `int`, `string`, `array` or `null`.
   You can use a class names as well such as `Model` or `ActiveRecord`.
- - For a typed arrays use `ClassName[]`.
- - The first line of the PHPDoc must describe the purpose of the method.
- - If method checks something (`isActive`, `hasClass`, etc) the first line should start with `Checks whether`.
- - `@return` should explicitly describe what exactly will be returned.
+  - For a typed arrays use `ClassName[]`.
+  - The first line of the PHPDoc must describe the purpose of the method.
+  - If method checks something (`isActive`, `hasClass`, etc) the first line should start with `Checks whether`.
+  - `@return` should explicitly describe what exactly will be returned.
 
 ```php
 /**
- * Checks whether the IP is in subnet range
- *
- * @param string $ip an IPv4 or IPv6 address
- * @param int $cidr the CIDR length
- * @param string $range subnet in CIDR format e.g. `10.0.0.0/8` or `2001:af::/64`
- * @return bool whether the IP is in subnet range
- */
- private function inRange($ip, $cidr, $range)
- {
+  * Checks whether the IP is in subnet range
+  *
+  * @param string $ip an IPv4 or IPv6 address
+  * @param int $cidr the CIDR length
+  * @param string $range subnet in CIDR format e.g. `10.0.0.0/8` or `2001:af::/64`
+  * @return bool whether the IP is in subnet range
+  */
+  private function inRange($ip, $cidr, $range)
+  {
   // ...
- }
+  }
 ```
 
 ### 4.5 Constructors
@@ -395,23 +395,23 @@ Documentation
 ```php
 <?php
 /**
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
+  * @link https://www.yiiframework.com/
+  * @copyright Copyright (c) 2008 Yii Software LLC
+  * @license https://www.yiiframework.com/license/
+  */
 ```
 
 #### Class
 
 ```php
 /**
- * Component is the base class that provides the *property*, *event* and *behavior* features.
- *
- * @include @yii/docs/base-Component.md
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
+  * Component is the base class that provides the *property*, *event* and *behavior* features.
+  *
+  * @include @yii/docs/base-Component.md
+  *
+  * @author Qiang Xue <qiang.xue@gmail.com>
+  * @since 2.0
+  */
 class Component extends \yii\base\BaseObject
 ```
 
@@ -420,18 +420,18 @@ class Component extends \yii\base\BaseObject
 
 ```php
 /**
- * Returns the list of attached event handlers for an event.
- * You may manipulate the returned [[Vector]] object by adding or removing handlers.
- * For example,
- *
- * ```
- * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
- * ```
- *
- * @param string $name the event name
- * @return Vector list of attached event handlers for the event
- * @throws Exception if the event is not defined
- */
+  * Returns the list of attached event handlers for an event.
+  * You may manipulate the returned [[Vector]] object by adding or removing handlers.
+  * For example,
+  *
+  * ```
+  * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
+  * ```
+  *
+  * @param string $name the event name
+  * @return Vector list of attached event handlers for the event
+  * @throws Exception if the event is not defined
+  */
 public function getEventHandlers($name)
 {
     if (!isset($this->_e[$name])) {
@@ -475,23 +475,23 @@ Specifying a language in code examples may break their display in some IDEs. Her
 
 ```php
 /**
- * Correct code example:
- * 
- * ```
- * $object->doMagic();
- * ```
- */
+  * Correct code example:
+  * 
+  * ```
+  * $object->doMagic();
+  * ```
+  */
 function doMagic()
 {
 }
 
 /**
- * Incorrect code example:
- * 
- * ```php
- * $object->doMagic();
- * ```
- */
+  * Incorrect code example:
+  * 
+  * ```php
+  * $object->doMagic();
+  * ```
+  */
 function doMagic()
 {
 }

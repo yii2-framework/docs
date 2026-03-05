@@ -81,17 +81,17 @@ Puedes personalizar este comportamiento configurando la propiedad [[yii\filters\
 Las [[yii\filters\AccessRule|Reglas de Acceso]] soportan varias opciones. Abajo hay un resumen de las mismas.
 También puedes extender de [[yii\filters\AccessRule]] para crear tus propias clases de reglas de acceso personalizadas.
 
- * [[yii\filters\AccessRule::allow|allow]]: especifica si la regla es de tipo "allow" (permitir) o "deny" (denegar).
+  * [[yii\filters\AccessRule::allow|allow]]: especifica si la regla es de tipo "allow" (permitir) o "deny" (denegar).
 
- * [[yii\filters\AccessRule::actions|actions]]: especifica con qué acciones coinciden con esta regla. Esta debería ser
+  * [[yii\filters\AccessRule::actions|actions]]: especifica con qué acciones coinciden con esta regla. Esta debería ser
 un array de IDs de acciones. La comparación es sensible a mayúsculas. Si la opción está vacía o no definida,
 significa que la regla se aplica a todas las acciones.
 
- * [[yii\filters\AccessRule::controllers|controllers]]: especifica con qué controladores coincide
+  * [[yii\filters\AccessRule::controllers|controllers]]: especifica con qué controladores coincide
 esta regla. Esta debería ser un array de IDs de controladores. Cada ID de controlador es prefijado con el ID del módulo (si existe).
 La comparación es sensible a mayúsculas. Si la opción está vacía o no definida, significa que la regla se aplica a todos los controladores.
 
- * [[yii\filters\AccessRule::roles|roles]]: especifica con qué roles de usuarios coincide esta regla.
+  * [[yii\filters\AccessRule::roles|roles]]: especifica con qué roles de usuarios coincide esta regla.
   Son reconocidos dos roles especiales, y son comprobados vía [[yii\web\User::isGuest]]:
 
     - `?`: coincide con el usuario invitado (sin autenticar)
@@ -100,18 +100,18 @@ La comparación es sensible a mayúsculas. Si la opción está vacía o no defin
   El utilizar otro nombre de rol invocará una llamada a [[yii\web\User::can()]], que requiere habilitar RBAC
   (a ser descrito en la próxima subsección). Si la opción está vacía o no definida, significa que la regla se aplica a todos los roles.
 
- * [[yii\filters\AccessRule::ips|ips]]: especifica con qué [[yii\web\Request::userIP|dirección IP del cliente]] coincide esta regla.
+  * [[yii\filters\AccessRule::ips|ips]]: especifica con qué [[yii\web\Request::userIP|dirección IP del cliente]] coincide esta regla.
 Una dirección IP puede contener el caracter especial `*` al final de manera que coincidan todas las IPs que comiencen igual.
 Por ejemplo, '192.168.*' coincide con las direcciones IP en el segmento '192.168.'. Si la opción está vacía o no definida,
 significa que la regla se aplica a todas las direcciones IP.
 
- * [[yii\filters\AccessRule::verbs|verbs]]: especifica con qué método de la solicitud (por ej. `GET`, `POST`) coincide esta regla.
+  * [[yii\filters\AccessRule::verbs|verbs]]: especifica con qué método de la solicitud (por ej. `GET`, `POST`) coincide esta regla.
 La comparación no distingue minúsculas de mayúsculas.
 
- * [[yii\filters\AccessRule::matchCallback|matchCallback]]: especifica una función PHP invocable que debe ser llamada para determinar
+  * [[yii\filters\AccessRule::matchCallback|matchCallback]]: especifica una función PHP invocable que debe ser llamada para determinar
 si la regla debe ser aplicada.
 
- * [[yii\filters\AccessRule::denyCallback|denyCallback]]: especifica una función PHP invocable que debe ser llamada cuando esta regla
+  * [[yii\filters\AccessRule::denyCallback|denyCallback]]: especifica una función PHP invocable que debe ser llamada cuando esta regla
 deniegue el acceso.
 
 Debajo hay un ejemplo que muestra cómo utilizar la opción `matchCallback`, que te permite escribir lógica de comprabación de acceso
@@ -355,8 +355,8 @@ namespace app\rbac;
 use yii\rbac\Rule;
 
 /**
- * Comprueba si authorID coincide con el usuario pasado como parámetro
- */
+  * Comprueba si authorID coincide con el usuario pasado como parámetro
+  */
 class AuthorRule extends Rule
 {
     public $name = 'isAuthor';
@@ -464,8 +464,8 @@ use Yii;
 use yii\rbac\Rule;
 
 /**
- * Comprueba si el grupo coincide
- */
+  * Comprueba si el grupo coincide
+  */
 class UserGroupRule extends Rule
 {
     public $name = 'userGroup';

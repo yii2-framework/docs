@@ -55,12 +55,12 @@ Tương tự, Mã nguồn dưới đây là các dòng lệnh trong mục script
 #!/usr/bin/env php
 <?php
 /**
- * Yii console bootstrap file.
- *
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
+  * Yii console bootstrap file.
+  *
+  * @link https://www.yiiframework.com/
+  * @copyright Copyright (c) 2008 Yii Software LLC
+  * @license https://www.yiiframework.com/license/
+  */
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 
@@ -94,7 +94,7 @@ Entry scripts thích hợp để định nghĩa các hằng ở phạm vi toàn 
   [Cấu hình](concept-configurations.md#environment-constants). Giá trị mặc định của hằng số `YII_ENV` là `'prod'`, có nghĩa là ứng dụng đang chạy là phiển bản sản phẩm
   đã phát hành.
 * `YII_ENABLE_ERROR_HANDLER`: mô tả nơi cho phép được giữ (handler) các lỗi được cung cấp bởi Yii. Giá trị mặc đình của hằng
- số là true.
+  số là true.
 
 Khi định nghĩa các hằng số, chúng ta thường sử dụng đoạn mã như sau:
 

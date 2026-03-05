@@ -19,10 +19,10 @@ Vous pouvez configurer la propriété [[yii\filters\HttpCache::lastModified]] po
 
 ```php
 /**
- * @param Action $action l'objet action qui est actuellement géré
- * @param array $params la valeur de la propriété "params"
- * @return int un horodatage UNIX représentant l'instant de modification de la page
- */
+  * @param Action $action l'objet action qui est actuellement géré
+  * @param array $params la valeur de la propriété "params"
+  * @return int un horodatage UNIX représentant l'instant de modification de la page
+  */
 function ($action, $params)
 ```
 
@@ -55,10 +55,10 @@ Vous pouvez configurer la propriété [[yii\filters\HttpCache::etagSeed]] pour a
 
 ```php
 /**
- * @param Action $action l'objet action qui est actuellement géré
- * @param array $params la valeur de la propriété "params"
- * @return string une chaîne de caractères à utiliser comme nonce (sel) pour la génération d'une valeur de hachage ETag 
- */
+  * @param Action $action l'objet action qui est actuellement géré
+  * @param array $params la valeur de la propriété "params"
+  * @return string une chaîne de caractères à utiliser comme nonce (sel) pour la génération d'une valeur de hachage ETag 
+  */
 function ($action, $params)
 ```
 

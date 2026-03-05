@@ -771,10 +771,10 @@ yii asset/template assets.php
 ```php
 <?php
 /**
- * 为控制台命令"yii asset"使用的配置文件
- * 注意在控制台环境下，一些路径别名如 '@webroot' 和 '@web' 不会存在
- * 请定义不存在的路径别名
- */
+  * 为控制台命令"yii asset"使用的配置文件
+  * 注意在控制台环境下，一些路径别名如 '@webroot' 和 '@web' 不会存在
+  * 请定义不存在的路径别名
+  */
 return [
     // 为JavaScript文件压缩修改 command/callback 
     'jsCompressor' => 'java -jar compiler.jar --js {from} --js_output_file {to}',

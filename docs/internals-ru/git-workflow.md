@@ -91,10 +91,10 @@ git remote add upstream https://github.com/yiisoft/yii2.git
 
 ```php
 /**
- * @return Action<covariant static>|null
- * @phpstan-return Action<covariant static>|null
- * @psalm-return Action<self>|null
- */
+  * @return Action<covariant static>|null
+  * @phpstan-return Action<covariant static>|null
+  * @psalm-return Action<self>|null
+  */
 public function createAction($id)
 {
 ...

@@ -55,12 +55,12 @@ Similarly, the following is the code for the entry script of a console applicati
 #!/usr/bin/env php
 <?php
 /**
- * Yii console bootstrap file.
- *
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
+  * Yii console bootstrap file.
+  *
+  * @link https://www.yiiframework.com/
+  * @copyright Copyright (c) 2008 Yii Software LLC
+  * @license https://www.yiiframework.com/license/
+  */
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');

@@ -55,8 +55,8 @@ PHP код ПОВИНЕН використовувати лише UTF-8 без B
 
 ```php
 /**
- * Документація
- */
+  * Документація
+  */
 class MyClass extends \yii\base\BaseObject implements MyInterface
 {
     // код
@@ -113,8 +113,8 @@ class Foo
 
 ```
 /**
- * Документація
- */
+  * Документація
+  */
 class Foo
 {
     /**
@@ -365,23 +365,23 @@ $mul = array_reduce($numbers, function($r, $x) use($n) {
 ```php
 <?php
 /**
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
+  * @link https://www.yiiframework.com/
+  * @copyright Copyright (c) 2008 Yii Software LLC
+  * @license https://www.yiiframework.com/license/
+  */
 ```
 
 #### Клас
 
 ```php
 /**
- * Component is the base class that provides the *property*, *event* and *behavior* features.
- *
- * @include @yii/docs/base-Component.md
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
+  * Component is the base class that provides the *property*, *event* and *behavior* features.
+  *
+  * @include @yii/docs/base-Component.md
+  *
+  * @author Qiang Xue <qiang.xue@gmail.com>
+  * @since 2.0
+  */
 class Component extends \yii\base\BaseObject
 ```
 
@@ -390,18 +390,18 @@ class Component extends \yii\base\BaseObject
 
 ```php
 /**
- * Returns the list of attached event handlers for an event.
- * You may manipulate the returned [[Vector]] object by adding or removing handlers.
- * For example,
- *
- * ```
- * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
- * ```
- *
- * @param string $name the event name
- * @return Vector list of attached event handlers for the event
- * @throws Exception if the event is not defined
- */
+  * Returns the list of attached event handlers for an event.
+  * You may manipulate the returned [[Vector]] object by adding or removing handlers.
+  * For example,
+  *
+  * ```
+  * $component->getEventHandlers($eventName)->insertAt(0, $eventHandler);
+  * ```
+  *
+  * @param string $name the event name
+  * @return Vector list of attached event handlers for the event
+  * @throws Exception if the event is not defined
+  */
 public function getEventHandlers($name)
 {
     if (!isset($this->_e[$name])) {

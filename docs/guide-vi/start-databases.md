@@ -171,7 +171,7 @@ Lưu nội dung đoạn mã trên vào file `controllers/CountryController.php`.
 
 Hành động `index` sẽ gọi các phương thức `Country::find()`. Đây là phương thức nằm ở Active Record nhằm xây dựng câu lệnh truy vấn và lấy tất cả dữ liệu trong bảng `country`.
 Để hạn chế số lượng dữ liệu mỗi khi gửi yêu cầu, đối tượng [[yii\data\Pagination]] sẽ phân trang dữ liệu.
- Mục đích khi dùng đối tượng `Pagination` là:
+  Mục đích khi dùng đối tượng `Pagination` là:
 
 * Thiết lập điều kiện `offset` và `limit` cho câu lệnh mỗi khi  lấy liệu ra (mỗi lần chỉ hiển thị 5 kết quả).
 * Dữ liệu được nhúng vào view để hiển thị số trang và bao gồm danh sách các button, sẽ được giải thích ở phần sau.

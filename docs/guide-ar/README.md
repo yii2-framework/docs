@@ -1,4 +1,4 @@
- Yii 2.0 الدليل التقني الخاص ببيئة العمل
+Yii 2.0 الدليل التقني الخاص ببيئة العمل
 ===============================
 
 تم تحرير هذا الملف اعتمادا على [الشروط الخاصة بتوثيف ال Yii](https://www.yiiframework.com/doc/terms/).
@@ -7,13 +7,11 @@
 
 2014 (c) Yii Software LLC.
 
-
 المقدمة
 ------------
 
 * [عن بيئة العمل Yii](intro-yii.md)
 * [التحديث من الإصدار 1.1](../guide/intro-upgrade-from-v1.md)
-
 
 البداية من هنا
 ---------------
@@ -26,7 +24,6 @@
 * [التعامل مع قواعد البيانات](start-databases.md)
 * [إنشاء الشيفرة البرمجية من خلال ال gii](start-gii.md)
 * [ماذا الآن - الخطوة القادمة](start-looking-ahead.md)
-
 
 الهيكلية الخاصة بالتطبيق (Application Structure)
 ---------------------
@@ -44,7 +41,6 @@
 * [Assets](../guide/structure-assets.md)
 * [Extensions](../guide/structure-extensions.md)
 
-
 التعامل مع ال requests
 -----------------
 
@@ -56,7 +52,6 @@
 * [Sessions and Cookies](../guide/runtime-sessions-cookies.md)
 * [Handling Errors - التحكم بالأخطاء](../guide/runtime-handling-errors.md)
 * [Logging - تسجيل الحركات](../guide/runtime-logging.md)
-
 
 المفاهيم الرئيسية (Key Concepts)
 ------------
@@ -71,7 +66,6 @@
 * [Service Locator](../guide/concept-service-locator.md)
 * [Dependency Injection Container](../guide/concept-di-container.md)
 
-
 التعامل مع قواعد البيانات
 ----------------------
 
@@ -84,7 +78,6 @@
 * [MongoDB](https://www.yiiframework.com/extension/yiisoft/yii2-mongodb/doc/guide)
 * [ElasticSearch](https://www.yiiframework.com/extension/yiisoft/yii2-elasticsearch/doc/guide)
 
-
 الحصول على البيانات من خلال المستخدمين
 -----------------------
 
@@ -94,7 +87,6 @@
 * [Collecting Tabular Input](../guide/input-tabular-input.md)
 * [Getting Data for Multiple Models](../guide/input-multiple-models.md)
 * [Extending ActiveForm on the Client Side](../guide/input-form-javascript.md)
-
 
 عرض البيانات
 ---------------
@@ -107,7 +99,6 @@
 * [Working with Client Scripts](../guide/output-client-scripts.md)
 * [Theming](../guide/output-theming.md)
 
-
 الامان والحماية
 --------
 
@@ -119,7 +110,6 @@
 * [Auth Clients](https://www.yiiframework.com/extension/yiisoft/yii2-authclient/doc/guide)
 * [Best Practices](../guide/security-best-practices.md)
 
-
 Caching التخزين المؤقت
 -------
 
@@ -128,7 +118,6 @@ Caching التخزين المؤقت
 * [Fragment Caching](../guide/caching-fragment.md)
 * [Page Caching](../guide/caching-page.md)
 * [HTTP Caching](../guide/caching-http.md)
-
 
 RESTful Web Services
 --------------------
@@ -143,14 +132,12 @@ RESTful Web Services
 * [Versioning](../guide/rest-versioning.md)
 * [Error Handling](../guide/rest-error-handling.md)
 
-
 الأدوات المساعدة أثناء تطوير التطبيقات
 -----------------
 
 * [Debug Toolbar and Debugger](https://www.yiiframework.com/extension/yiisoft/yii2-debug/doc/guide)
 * [Generating Code using Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide)
 * [Generating API Documentation](https://www.yiiframework.com/extension/yiisoft/yii2-apidoc)
-
 
 فحص واختبار التطبيقات
 -------
@@ -161,7 +148,6 @@ RESTful Web Services
 * [Functional Tests](../guide/test-functional.md)
 * [Acceptance Tests](../guide/test-acceptance.md)
 * [Fixtures](../guide/test-fixtures.md)
-
 
 مواضيع وعناوين مميزة
 --------------
@@ -179,7 +165,6 @@ RESTful Web Services
 * [Working with Third-Party Code](../guide/tutorial-yii-integration.md)
 * [Using Yii as a micro framework](../guide/tutorial-yii-as-micro-framework.md)
 
-
 Widgets
 -------
 
@@ -193,7 +178,6 @@ Widgets
 * [LinkSorter](https://www.yiiframework.com/doc-2.0/yii-widgets-linksorter.html)
 * [Bootstrap Widgets](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap/doc/guide)
 * [jQuery UI Widgets](https://www.yiiframework.com/extension/yiisoft/yii2-jui/doc/guide)
-
 
 Helpers
 -------

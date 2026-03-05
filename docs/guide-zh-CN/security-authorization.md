@@ -81,17 +81,17 @@ ACF 自顶向下逐一检查存取规则，直到找到一个与当前
 [[yii\filters\AccessRule|Access rules]] 支持很多的选项。下列是所支持选项的总览。
 你可以派生 [[yii\filters\AccessRule]] 来创建自定义的存取规则类。
 
- * [[yii\filters\AccessRule::allow|allow]]： 指定该规则是 "允许" 还是 "拒绝" 。（译者注：true是允许，false是拒绝）
+  * [[yii\filters\AccessRule::allow|allow]]： 指定该规则是 "允许" 还是 "拒绝" 。（译者注：true是允许，false是拒绝）
 
- * [[yii\filters\AccessRule::actions|actions]]：指定该规则用于匹配哪些动作。
+  * [[yii\filters\AccessRule::actions|actions]]：指定该规则用于匹配哪些动作。
   它的值应该是动作方法的ID数组。匹配比较是大小写敏感的。如果该选项为空，或者不使用该选项，
   意味着当前规则适用于所有的动作。
 
- * [[yii\filters\AccessRule::controllers|controllers]]：指定该规则用于匹配哪些控制器。
+  * [[yii\filters\AccessRule::controllers|controllers]]：指定该规则用于匹配哪些控制器。
   它的值应为控制器ID数组。匹配比较是大小写敏感的。如果该选项为空，或者不使用该选项，
   则意味着当前规则适用于所有的动作。（译者注：这个选项一般是在控制器的自定义父类中使用才有意义）
 
- * [[yii\filters\AccessRule::roles|roles]]：指定该规则用于匹配哪些用户角色。
+  * [[yii\filters\AccessRule::roles|roles]]：指定该规则用于匹配哪些用户角色。
   系统自带两个特殊的角色，通过 [[yii\web\User::isGuest]] 来判断：
 
     - `?`： 用于匹配访客用户 （未经认证）
@@ -100,21 +100,21 @@ ACF 自顶向下逐一检查存取规则，直到找到一个与当前
   使用其他角色名时，将触发调用 [[yii\web\User::can()]]，这时要求 RBAC 的支持 （在下一节中阐述）。
   如果该选项为空或者不使用该选项，意味着该规则适用于所有角色。
 
- * [[yii\filters\AccessRule::roleParams|roleParams]]：指定将传递给 [[yii\web\User::can()]] 的参数。
+  * [[yii\filters\AccessRule::roleParams|roleParams]]：指定将传递给 [[yii\web\User::can()]] 的参数。
   请参阅下面描述RBAC规则的部分，了解如何使用它。 如果此选项为空或未设置，则不传递任何参数。
    
- * [[yii\filters\AccessRule::ips|ips]]：指定该规则用于匹配哪些 [[yii\web\Request::userIP|客户端IP地址]] 。
+  * [[yii\filters\AccessRule::ips|ips]]：指定该规则用于匹配哪些 [[yii\web\Request::userIP|客户端IP地址]] 。
   IP 地址可在其末尾包含通配符 `*` 以匹配一批前缀相同的IP地址。
   例如，`192.168.*` 匹配所有 `192.168.` 段的IP地址。
   如果该选项为空或者不使用该选项，意味着该规则适用于所有角色。
 
- * [[yii\filters\AccessRule::verbs|verbs]]：指定该规则用于匹配哪种请求方法（例如`GET`，`POST`）。
+  * [[yii\filters\AccessRule::verbs|verbs]]：指定该规则用于匹配哪种请求方法（例如`GET`，`POST`）。
   这里的匹配大小写不敏感。
 
- * [[yii\filters\AccessRule::matchCallback|matchCallback]]：指定一个PHP回调函数用于
+  * [[yii\filters\AccessRule::matchCallback|matchCallback]]：指定一个PHP回调函数用于
   判定该规则是否满足条件。（译者注：此处的回调函数是匿名函数）
 
- * [[yii\filters\AccessRule::denyCallback|denyCallback]]: 指定一个PHP回调函数，
+  * [[yii\filters\AccessRule::denyCallback|denyCallback]]: 指定一个PHP回调函数，
   当这个规则不满足条件时该函数会被调用。（译者注：此处的回调函数是匿名函数）
 
 以下例子展示了如何使用 `matchCallback` 选项，
@@ -233,7 +233,7 @@ return [
 ];
 ```
 > Note: 如果您使用的是 yii2-basic-app 模板，则有一个 `config/console.php` 配置文件，其中
-  `authManager` 需要另外声明在 `config/web.php`。
+   `authManager` 需要另外声明在 `config/web.php`。
 > 在 yii2-advanced-app 的情况下，`authManager` 只能在 `common/config/main.php` 中声明一次。
 
 `DbManager` 使用4个数据库表存放它的数据：
@@ -445,8 +445,8 @@ use yii\rbac\Rule;
 use app\models\Post;
 
 /**
- * 检查 authorID 是否和通过参数传进来的 user 参数相符
- */
+  * 检查 authorID 是否和通过参数传进来的 user 参数相符
+  */
 class AuthorRule extends Rule
 {
     public $name = 'isAuthor';
@@ -627,8 +627,8 @@ use Yii;
 use yii\rbac\Rule;
 
 /**
- * 检查是否匹配用户的组
- */
+  * 检查是否匹配用户的组
+  */
 class UserGroupRule extends Rule
 {
     public $name = 'userGroup';

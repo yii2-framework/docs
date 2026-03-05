@@ -97,9 +97,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
- * @var \yii\web\View $this ビュー・コンポーネントのインスタンス
- * @var \yii\mail\BaseMessage $message 新しく作成されたメール・メッセージのインスタンス
- */
+  * @var \yii\web\View $this ビュー・コンポーネントのインスタンス
+  * @var \yii\mail\BaseMessage $message 新しく作成されたメール・メッセージのインスタンス
+  */
 
 ?>
 <h2>ワン・クリックで私たちのサイトのホームページを訪問することが出来ます</h2>
@@ -146,10 +146,10 @@ Yii::$app->mailer->compose([
 use yii\helpers\Html;
 
 /**
- * @var \yii\web\View $this ビュー・コンポーネントのインスタンス
- * @var \yii\mail\MessageInterface $message 作成されるメッセージ
- * @var string $content メイン・ビューのレンダリング結果
- */
+  * @var \yii\web\View $this ビュー・コンポーネントのインスタンス
+  * @var \yii\mail\MessageInterface $message 作成されるメッセージ
+  * @var string $content メイン・ビューのレンダリング結果
+  */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

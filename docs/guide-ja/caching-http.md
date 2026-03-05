@@ -23,10 +23,10 @@ HTTP キャッシュ
 
 ```php
 /**
- * @param Action $action 現在扱っているアクション・オブジェクト
- * @param array $params "params" プロパティの値
- * @return int ページの更新時刻を表す UNIX タイムスタンプ
- */
+  * @param Action $action 現在扱っているアクション・オブジェクト
+  * @param array $params "params" プロパティの値
+  * @return int ページの更新時刻を表す UNIX タイムスタンプ
+  */
 function ($action, $params)
 ```
 
@@ -68,10 +68,10 @@ public function behaviors()
 
 ```php
 /**
- * @param Action $action 現在扱っているアクション・オブジェクト
- * @param array $params "params" プロパティの値
- * @return string ETag のハッシュを生成するためのシードとして使用する文字列
- */
+  * @param Action $action 現在扱っているアクション・オブジェクト
+  * @param array $params "params" プロパティの値
+  * @return string ETag のハッシュを生成するためのシードとして使用する文字列
+  */
 function ($action, $params)
 ```
 

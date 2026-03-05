@@ -1465,7 +1465,7 @@ $customers = Customer::find()->with('comments')->all();
 本节中描述的大多数关联查询功能，你都可以抄一抄。
  
 > Note: [[yii\db\ActiveQuery::joinWith()|joinWith()]] 这个功能限制于某些数据库是否支持跨数据库 JOIN 查询。
-  因此，你再上述的代码里就不能用此方法了，因为 MongoDB 不支持 JOIN 查询。
+   因此，你再上述的代码里就不能用此方法了，因为 MongoDB 不支持 JOIN 查询。
 
 
 ## 自定义查询类（Customizing Query Classes） <span id="customizing-query-classes"></span>

@@ -773,10 +773,10 @@ yii asset/template assets.php
 ```php
 <?php
 /**
- * "yii asset" コンソール・コマンドのための構成情報ファイル
- * コンソール環境では、'@webroot' や '@web' のように、存在しないパス・エイリアスがあり得ることに注意してください。
- * これらの欠落したパス・エイリアスは手作業で定義してください。
- */
+  * "yii asset" コンソール・コマンドのための構成情報ファイル
+  * コンソール環境では、'@webroot' や '@web' のように、存在しないパス・エイリアスがあり得ることに注意してください。
+  * これらの欠落したパス・エイリアスは手作業で定義してください。
+  */
 return [
     // JavaScript ファイルの圧縮のためのコマンド/コールバックを調整。
     'jsCompressor' => 'java -jar compiler.jar --js {from} --js_output_file {to}',

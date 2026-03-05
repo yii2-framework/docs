@@ -421,7 +421,7 @@ chave a chave `jquery.js`.
 ### Publicação de Asset <span id="asset-publishing"></span>
 
 Como mencionado anteriormente, se um asset bundle for localizado em um diretório
- que não é acessível pela Web, os seus assets serão copiados para um diretório 
+  que não é acessível pela Web, os seus assets serão copiados para um diretório 
 Web quando o bundle estiver sendo registrado na view (visão). Este processo é 
 chamado de *publicação de asset* e é feito automaticamente pelo 
 [[yii\web\AssetManager|gerenciador de asset]].
@@ -732,10 +732,10 @@ O conteúdo deste arquivo assemelha-se ao seguinte:
 ```php
 <?php
 /**
- * Arquivo de configuração para o comando console "yii asset".
- * Observer que no ambiente de console, alguns caminhos de alias como '@webroot' e o '@web' podem não existir.
- * Por favor, defina os caminhos de alias inexistentes.
- */
+  * Arquivo de configuração para o comando console "yii asset".
+  * Observer que no ambiente de console, alguns caminhos de alias como '@webroot' e o '@web' podem não existir.
+  * Por favor, defina os caminhos de alias inexistentes.
+  */
 return [
     // Ajuste do comando/call-back para a compressão os arquivos JavaScript:
     'jsCompressor' => 'java -jar compiler.jar --js {from} --js_output_file {to}',

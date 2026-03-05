@@ -32,7 +32,7 @@ LIMIT 10
 
 
 > Info: génélalement vous travaillez essentiellement avec [[yii\db\Query]] plutôt qu'avec [[yii\db\QueryBuilder]].
- Le dernier est implicitement invoqué par le premier lorsque vous appelez une des méthodes de requête. [[yii\db\QueryBuilder]] est la classe en charge de la génération des instructions SQL dépendantes du système de gestion de base de données (p. ex. entourer les noms de table/colonne par des marques de citation différemment) à partir d'objets [[yii\db\Query]] indifférents au système de gestion de base de données.
+  Le dernier est implicitement invoqué par le premier lorsque vous appelez une des méthodes de requête. [[yii\db\QueryBuilder]] est la classe en charge de la génération des instructions SQL dépendantes du système de gestion de base de données (p. ex. entourer les noms de table/colonne par des marques de citation différemment) à partir d'objets [[yii\db\Query]] indifférents au système de gestion de base de données.
 
 
 
@@ -40,9 +40,9 @@ LIMIT 10
 ## Construction des requêtes <span id="building-queries"></span>
 
 Pour construire un objet [[yii\db\Query]], vous appelez différentes méthodes de construction de requêtes pour spécifier différentes parties de la requête SQL.
- Les noms de ces méthodes ressemblent aux mots clés de SQL utilisés dans les parties correspondantes de l'instruction SQL.
+  Les noms de ces méthodes ressemblent aux mots clés de SQL utilisés dans les parties correspondantes de l'instruction SQL.
 Par exemple, pour spécifier la partie `FROM` d'une requête SQL, vous appelez la méthode [[yii\db\Query::from()|from()]].
- Toutes les méthodes de construction de requêtes retournent l'objet *query* lui-même, ce qui vous permet d'enchaîner plusieurs appels.
+  Toutes les méthodes de construction de requêtes retournent l'objet *query* lui-même, ce qui vous permet d'enchaîner plusieurs appels.
 
 Dans ce qui suit, nous décrivons l'utilisation de chacune des méthodes de requête.
 
@@ -51,7 +51,7 @@ Dans ce qui suit, nous décrivons l'utilisation de chacune des méthodes de requ
 
 La méthode [[yii\db\Query::select()|select()]] spécifie le fragment `SELECT` d'une instruction SQL. Vous pouvez spécifier les colonnes à sélectionner soit sous forme de chaînes de caractères, soit sous forme de tableaux, comme ci-après. 
 Les noms des colonnes sélectionnées sont automatiquement entourés des marques de citation lorsque l'instruction SQL
- est générée à partir de l'objet *query* (requête). 
+  est générée à partir de l'objet *query* (requête). 
  
 ```php
 $query->select(['id', 'email']);
@@ -342,7 +342,7 @@ Le seul but est de stocker des données de condition et de fournir des obtenteur
 La classe « constructeur de condition » (condition builder) est une classe qui contient la logique qui transforme les données stockées en condition dans une expression SQL.
 
 En interne, les formats décrits plus haut sont implicitement convertis en format objet avant de construire le SQL brut, 
- aussi est-il possible de combiner les formats en une condition unique :
+  aussi est-il possible de combiner les formats en une condition unique :
 
 ```php
 $query->andWhere(new OrCondition([
@@ -715,7 +715,7 @@ qui sont converties en SQL et font partie de la requête, cette méthode ne fait
 ### Requêtes par lots <span id="batch-query"></span>
 
 Lorsque vous travaillez sur de grandes quantités de données, des méthodes telles que [[yii\db\Query::all()]] ne conviennent pas  car elles requièrent le chargement de toutes les données en mémoire du client.
- Pour résoudre cet problème Yii assure la prise en charge de requêtes par lots. 
+  Pour résoudre cet problème Yii assure la prise en charge de requêtes par lots. 
 Le serveur conserve les résultats de la requête, et le client utilise un curseur  pour itérer sur le jeu de résultats un lot à la fois. 
 
 

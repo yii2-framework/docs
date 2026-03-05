@@ -91,10 +91,10 @@ An example of what it should look like:
 
 ```php
 /**
- * @return Action<covariant static>|null
- * @phpstan-return Action<covariant static>|null
- * @psalm-return Action<self>|null
- */
+  * @return Action<covariant static>|null
+  * @phpstan-return Action<covariant static>|null
+  * @psalm-return Action<self>|null
+  */
 public function createAction($id)
 {
 ...

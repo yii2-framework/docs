@@ -195,8 +195,8 @@ estables de nuestras extensiones.
 
 La mayoría de paquetes JavaScript/CSS se gestionan usando [Bower](https://bower.io/) y/o [NPM](https://www.npmjs.com/),
 en lugar de Composer. Yii utiliza el [Composer asset plugin](https://github.com/fxpio/composer-asset-plugin)
- para habilitar la gestión de estos tipos de paquetes a través de Composer. Si la extensión depende de un paquete
- Bower, se puede, simplemente, añadir la dependencia de el archivo `composer.json` como se muestra a continuación:
+  para habilitar la gestión de estos tipos de paquetes a través de Composer. Si la extensión depende de un paquete
+  Bower, se puede, simplemente, añadir la dependencia de el archivo `composer.json` como se muestra a continuación:
 
 ```json
 {

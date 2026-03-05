@@ -174,10 +174,10 @@ La propiedad [[yii\validators\Validator::when|when]] toma un método invocable P
 
 ```php
 /**
- * @param Model $model el modelo siendo validado
- * @param string $attribute al atributo siendo validado
- * @return bool si la regla debe ser aplicada o no
- */
+  * @param Model $model el modelo siendo validado
+  * @param string $attribute al atributo siendo validado
+  * @return bool si la regla debe ser aplicada o no
+  */
 function ($model, $attribute)
 ```
 
@@ -329,9 +329,9 @@ del método/función es:
 
 ```php
 /**
- * @param string $attribute el atributo siendo validado actualmente
- * @param mixed $params el valor de los "parámetros" dados en la regla
- */
+  * @param string $attribute el atributo siendo validado actualmente
+  * @param mixed $params el valor de los "parámetros" dados en la regla
+  */
 function ($attribute, $params)
 ```
 

@@ -254,9 +254,9 @@ $result = Customer::getDb()->cache(function ($db) {
 Lorsque vous avez besoin d'invalider toutes les données stockées dans le cache, vous pouvez appeler [[yii\caching\Cache::flush()]].
 
 Vous pouvez aussi vider le cache depuis la console en appelant `yii cache/flush`.
- - `yii cache`: liste les caches disponibles dans une application
- - `yii cache/flush cache1 cache2`: vide les composants de mise en cache `cache1`, `cache2` (vous pouvez passer de multiples composants en les séparant par une virgule)
- - `yii cache/flush-all`: vide tous les composants de mise en cache de l'application
+  - `yii cache`: liste les caches disponibles dans une application
+  - `yii cache/flush cache1 cache2`: vide les composants de mise en cache `cache1`, `cache2` (vous pouvez passer de multiples composants en les séparant par une virgule)
+  - `yii cache/flush-all`: vide tous les composants de mise en cache de l'application
 
 > Info : les applications en console utilisent un fichier de configuration séparé par défaut. Assurez-vous que vous utilisez le même composant de mise en cache dans les configurations de vos application web et console pour obtenir l'effet correct. 
 
