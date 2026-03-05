@@ -6,5 +6,5 @@ useDefault = true
 [[allowlists]]
 description = "Ignore all docs content"
 paths = [
-    '''(^|/)docs/'''
+    '''(^|/)src/content/docs/'''
 ]
