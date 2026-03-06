@@ -5,7 +5,7 @@ title: "类自动加载（Autoloading）"
 Yii 依靠[类自动加载机制](https://www.php.net/manual/zh/language.oop5.autoload.php)来定位和包含所需的类文件。
 它提供一个高性能且完美支持[PSR-4 标准](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
 的自动加载器。
-该自动加载器会在引入框架文件 `Yii.php` 时安装好。
+该自动加载器会在引入框架文件 `vendor/autoload.php` 时安装好。
 
 > Note: 为了简化叙述，本篇文档中我们只会提及类的自动加载。
 > 不过，要记得文中的描述同样也适用于接口和Trait（特质）的自动加载哦。
@@ -46,10 +46,14 @@ Yii 类自动加载器支持**类映射表**功能，该功能会建立一个从
 如果有，对应的文件路径就直接加载了，省掉了进一步的检查。这让类的自动加载变得超级快。
 事实上所有的 Yii 核心类都是这样加载的。
 
-你可以用 `Yii::$classMap` 方法向映射表中添加类，
+你可以用 Composer classmap 方法向映射表中添加类，
 
-```php
-Yii::$classMap['foo\bar\MyClass'] = 'path/to/MyClass.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/MyClass.php"]
+  }
+}
 ```
 
 [别名](concept-aliases.md)可以被用于指定类文件的路径。你应该在[引导启动](runtime-bootstrapping.md)的过程中设置类映射表，
@@ -62,21 +66,20 @@ Yii::$classMap['foo\bar\MyClass'] = 'path/to/MyClass.php';
 你应该也安装下它们。
 
 当你同时使用其他自动加载器和 Yii 自动加载器时，应该在其他自动加载器安装成功**之后**，
-再包含 `Yii.php` 文件。这将使 Yii 成为第一个响应任何类自动加载请求的自动加载器。
+再包含 `vendor/autoload.php` 文件。这将使 Yii 成为第一个响应任何类自动加载请求的自动加载器。
 举例来说，以下代码提取自[基本应用模版](start-installation.md)的
 [入口脚本](structure-entry-scripts.md) 。
 第一行安装了 Composer 的自动加载器，第二行才是 Yii 的自动加载器：
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 你也可以只使用 Composer 的自动加载，而不用 Yii 的自动加载。
 不过这样做的话，类的加载效率会下降，
 且你必须遵循 Composer 所设定的规则，从而让你的类满足可以被自动加载的要求。
 
-> Info: 若你不想要使用 Yii 的自动加载器，你必须创建一个你自己版本的 `Yii.php` 文件，
+> Info: 若你不想要使用 Yii 的自动加载器，你必须创建一个你自己版本的 `vendor/autoload.php` 文件，
 > 并把它包含进你的[入口脚本](structure-entry-scripts.md)里。
 
 ## 自动加载扩展类 <span id="autoloading-extension-classes"></span>

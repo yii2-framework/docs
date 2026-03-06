@@ -62,11 +62,16 @@ class ArrayHelper extends BaseArrayHelper
 
 Klasę należy zapisać w pliku o nazwie `ArrayHelper.php`, który może znajdować się w dowolnym odpowiednim folderze, np. `@app/components`.
 
-Następnie dopisujemy poniższą linijkę kodu w [skrypcie wejściowym](structure-entry-scripts.md) aplikacji po fragmencie dołączającym plik `yii.php`,
+Następnie dopisujemy poniższą linijkę kodu w [skrypcie wejściowym](structure-entry-scripts.md) aplikacji po fragmencie dołączającym plik `composer.json`,
 dzięki czemu [autoloader klas Yii](concept-autoloading.md) załaduje zmodyfikowaną wersję klasy pomocniczej zamiast oryginalnej:
 
-```php
-Yii::$classMap['yii\helpers\ArrayHelper'] = '@app/components/ArrayHelper.php';
+```json
+{
+  "autoload": {
+    "classmap": ["overrides/yii/helpers/ArrayHelper.php"],
+    "exclude-from-classmap": ["vendor/yiisoft/yii2/helpers/ArrayHelper.php"]
+  }
+}
 ```
 
 Należy pamiętać o tym, że modyfikowanie klasy pomocniczej jest użyteczne tylko w przypadku, gdy chcemy zmienić domyślny sposób działania jej metody.

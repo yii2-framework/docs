@@ -56,10 +56,16 @@ class ArrayHelper extends BaseArrayHelper
 
 Sauvegardez votre classe dans un fichier nommé `ArrayHelper.php`. Le fichier peut se trouver dans n'importe quel dossier, par exemple, `@app/components`.
 
-Ensuite, dans le [script d'entrée](structure-entry-scripts.md) de votre application, ajoutez la ligne de code suivante, après l'inclusion du fichier `yii.php` pour dire à la [classe autoloader de Yii](concept-autoloading.md) de charger votre classe personnalisée au lieu de la classe assistance originale de Yii.
+Ensuite, dans le fichier `composer.json` de votre application, ajoutez la configuration d'autoload suivante
+pour charger votre classe personnalisée au lieu de la classe d'assistance originale de Yii.
 
-```php
-Yii::$classMap['yii\helpers\ArrayHelper'] = '@app/components/ArrayHelper.php';
+```json
+{
+  "autoload": {
+    "classmap": ["overrides/yii/helpers/ArrayHelper.php"],
+    "exclude-from-classmap": ["vendor/yiisoft/yii2/helpers/ArrayHelper.php"]
+  }
+}
 ```
 
 Notez que la personnalisation d'une classe assistante n'est utile que si vous désirez changer le comportement d'une fonction existante de la classe assistante. Si vous désirez ajouter une fonction additionnelle à utiliser dans votre application, le mieux est de créer une classe assistante séparée pour cela.

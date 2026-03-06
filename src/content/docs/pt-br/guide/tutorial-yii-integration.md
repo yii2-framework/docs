@@ -22,14 +22,13 @@ As classes nos pacotes Composer instalados podem ser carregadas automaticamente 
 require __DIR__ . '/../vendor/autoload.php';
 
 // faz o include da classe Yii
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 ### Usando Bibliotecas baixadas <span id="using-downloaded-libs"></span>
 
 Se a biblioteca não foi lançada como um pacote Composer, você deve seguir as instruções de instalação para instalá-la. Na maioria dos casos, você precisará baixar manualmente o arquivo de liberação da biblioteca e descompactá-lo no diretório `BasePath/vendor`, onde `BasePath` representa o [caminho base](structure-applications.md#basePath) da sua aplicação.
 
-Se uma biblioteca possui o seu próprio carregador automático, você pode instalá-la no [script de entrada](structure-entry-scripts.md) de sua aplicação. Recomenda-se que a instalação seja feita antes de incluir o arquivo `Yii.php`. Isto porque a classe autoloader Yii pode ter precedência nas classes de carregamento automático da biblioteca a ser instalada.
+Se uma biblioteca possui o seu próprio carregador automático, você pode instalá-la no [script de entrada](structure-entry-scripts.md) de sua aplicação. Recomenda-se que a instalação seja feita antes de incluir o arquivo `vendor/autoload.php`. Isto porque a classe autoloader Yii pode ter precedência nas classes de carregamento automático da biblioteca a ser instalada.
 
 Se uma biblioteca não oferece um carregador automático de classe, mas seus nomes seguem o padrão [PSR-4](https://www.php-fig.org/psr/psr-4/), você pode usar a classe de autoloader do Yii para carregar as classes. Tudo que você precisa fazer é apenas declarar um [alias](concept-aliases.md#defining-aliases) para cada namespace raiz utilizados em suas classes. Por exemplo, suponha que você tenha instalado uma biblioteca no diretório `vendor/foo/bar` e as classes de bibliotecas estão sob o namespace raiz `xyz`. Você pode incluir o seguinte código na configuração da sua aplicação:
 
@@ -46,11 +45,14 @@ Se não for nenhuma das opções acima, é provável que a biblioteca necessite 
 No pior dos casos, quando a biblioteca exige explicitamente a inclusão de cada arquivo de classe, você pode usar o seguinte método para incluir as classes por demanda:
 
 - Identificar quais as classes da biblioteca contém.
-- Liste as classes e os caminhos dos arquivos correspondentes em `Yii::$classMap` no [script de entrada](structure-entry-scripts.md) da aplicação. Por exemplo:
+- Liste as classes e os caminhos dos arquivos correspondentes em Composer classmap no [script de entrada](structure-entry-scripts.md) da aplicação. Por exemplo:
 
-```php
-Yii::$classMap['Class1'] = 'path/to/Class1.php';
-Yii::$classMap['Class2'] = 'path/to/Class2.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/Class1.php", "path/to/Class2.php"]
+  }
+}
 ```
 
 ## Usando o Yii em Sistemas de Terceiros <span id="using-yii-in-others"></span>
@@ -72,8 +74,6 @@ Caso contrário, você pode fazer o [download](https://www.yiiframework.com/down
 Em seguida, você deve modificar o script de entrada do sistema de terceiros incluindo o seguinte código no início:
 
 ```php
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 $yiiConfig = require __DIR__ . '/../config/yii/web.php';
 new yii\web\Application($yiiConfig); // NÃO execute o método run() aqui
 ```
@@ -121,9 +121,7 @@ class Yii extends \yii\BaseYii
   // copie e cole o código de YiiBase (1.x) aqui
 }
 
-Yii::$classMap = include($yii2path . '/classes.php');
-// registrar o autoloader do Yii 2 através do Yii 1
-Yii::registerAutoloader(['Yii', 'autoload']);
+require(__DIR__ . '/../vendor/autoload.php');
 // criar o contêiner de injeção de dependência
 Yii::$container = new yii\di\Container;
 ```

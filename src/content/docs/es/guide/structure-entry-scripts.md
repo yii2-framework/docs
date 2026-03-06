@@ -38,8 +38,6 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 require __DIR__ . '/../vendor/autoload.php';
 
 // incluir el fichero de clase Yii
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 // cargar la configuración de la aplicación
 $config = require __DIR__ . '/../config/web.php';
 
@@ -68,8 +66,6 @@ defined('YII_DEBUG') or define('YII_DEBUG', true);
 require __DIR__ . '/vendor/autoload.php';
 
 // incluir el fichero de clase Yii
-require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
-
 // cargar la configuración de la aplicación
 $config = require __DIR__ . '/config/console.php';
 

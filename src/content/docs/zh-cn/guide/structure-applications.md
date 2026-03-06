@@ -20,8 +20,6 @@ Yii有两种应用主体: [[yii\web\Application|网页应用主体]] 和
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 // 加载应用主体配置
 $config = require __DIR__ . '/../config/web.php';
 

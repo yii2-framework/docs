@@ -64,12 +64,17 @@ class ArrayHelper extends BaseArrayHelper
 
 将你的类保存在一个名为 `ArrayHelper.php` 的文件中。该文件可以在任何目录，例如 `@app/components`。
 
-接下来，在你的应用程序 [入口脚本](structure-entry-scripts.md) 处，在引入的 `yii.php` 文件后面
+接下来，在你的应用程序 [入口脚本](structure-entry-scripts.md) 处，在引入的 `composer.json` 文件后面
 添加以下代码行，用 [Yii 自动加载器](concept-autoloading.md) 来加载自定义类
 代替框架的原始助手类：
 
-```php
-Yii::$classMap['yii\helpers\ArrayHelper'] = '@app/components/ArrayHelper.php';
+```json
+{
+  "autoload": {
+    "classmap": ["overrides/yii/helpers/ArrayHelper.php"],
+    "exclude-from-classmap": ["vendor/yiisoft/yii2/helpers/ArrayHelper.php"]
+  }
+}
 ```
 
 注意，自定义助手类仅仅用于如果你想要更改助手类中

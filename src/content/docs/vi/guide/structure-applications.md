@@ -20,8 +20,6 @@ Mỗi khi [entry script](structure-entry-scripts.md) tạo ứng dụng mới, n
 
 ```php
 require(__DIR__ . '/../vendor/autoload.php');
-require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
-
 // tải các cấu hình ứng dụng
 $config = require(__DIR__ . '/../config/web.php');
 

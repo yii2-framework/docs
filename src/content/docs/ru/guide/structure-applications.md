@@ -19,8 +19,6 @@ title: "Приложения"
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 // загрузка конфигурации приложения
 $config = require __DIR__ . '/../config/web.php';
 

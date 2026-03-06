@@ -25,9 +25,6 @@ the Composer autoloader:
 ```php
 // install Composer autoloader
 require __DIR__ . '/../vendor/autoload.php';
-
-// include Yii class file
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 ### Using Downloaded Libraries <span id="using-downloaded-libs"></span>
@@ -37,7 +34,7 @@ In most cases, you will need to download a release file manually and unpack it i
 where `BasePath` represents the [base path](structure-applications.md#basePath) of your application.
 
 If a library carries its own class autoloader, you may install it in the [entry script](structure-entry-scripts.md)
-of your application. It is recommended the installation is done before you include the `Yii.php` file so that
+of your application. It is recommended the installation is done before you include the `vendor/autoload.php` file so that
 the Yii class autoloader can take precedence in autoloading classes.
 
 If a library does not provide a class autoloader, but its class naming follows [PSR-4](https://www.php-fig.org/psr/psr-4/),
@@ -61,12 +58,15 @@ In the worst case when the library requires explicitly including every class fil
 to include the classes on demand:
 
 - Identify which classes the library contains.
-- List the classes and the corresponding file paths in `Yii::$classMap` in the [entry script](structure-entry-scripts.md)
+- List the classes and the corresponding file paths in Composer classmap in the [entry script](structure-entry-scripts.md)
   of the application. For example,
 
-```php
-Yii::$classMap['Class1'] = 'path/to/Class1.php';
-Yii::$classMap['Class2'] = 'path/to/Class2.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/Class1.php", "path/to/Class2.php"]
+  }
+}
 ```
 
 ## Using Yii in Third-Party Systems <span id="using-yii-in-others"></span>
@@ -97,8 +97,6 @@ the `BasePath/vendor` directory.
 Next, you should modify the entry script of the 3rd-party system by including the following code at the beginning:
 
 ```php
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 $yiiConfig = require __DIR__ . '/../config/yii/web.php';
 new yii\web\Application($yiiConfig); // Do NOT call run() here
 ```
@@ -156,12 +154,7 @@ class Yii extends \yii\BaseYii
     // copy-paste the code from YiiBase (1.x) here
 }
 
-spl_autoload_unregister(array('YiiBase','autoload'));
-spl_autoload_register(array('Yii','autoload'));
-
-Yii::$classMap = include($yii2path . '/classes.php');
-// register Yii 2 autoloader via Yii 1
-Yii::registerAutoloader(['yii\BaseYii', 'autoload']);
+require(__DIR__ . '/../vendor/autoload.php');
 // create the dependency injection container
 Yii::$container = new yii\di\Container;
 ```

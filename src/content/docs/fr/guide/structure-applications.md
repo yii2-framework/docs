@@ -16,8 +16,6 @@ Lorsqu'un [script d'entrée](structure-entry-scripts.md) crée une application, 
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 // charger la configuration de l'application
 $config = require __DIR__ . '/../config/web.php';
 

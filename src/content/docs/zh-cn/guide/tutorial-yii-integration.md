@@ -25,9 +25,6 @@ title: "引入第三方代码（Working with Third-Party Code）"
 ```php
 // install Composer autoloader （安装 Composer 自动加载器）
 require __DIR__ . '/../vendor/autoload.php';
-
-// include Yii class file （加载 Yii 的类文件）
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 ### 使用下载的类库（Using Downloaded Libraries） <span id="using-downloaded-libs"></span>
@@ -37,7 +34,7 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 这里的 `BasePath` 代指你应用程序自身的 [base path（主目录）](structure-applications.md#basePath)。
 
 若该类库包含他自己的类自动加载器，你可以把它安装到你应用的[入口脚本](structure-entry-scripts.md)里。
-我们推荐你把它的安装代码置于`Yii.php` 的导入之前，
+我们推荐你把它的安装代码置于`vendor/autoload.php` 的导入之前，
 这样 Yii 的官方自动加载器可以拥有更高的优先级。
 
 若一个类库并没有提供自动加载器，但是他的类库命名方式符合 [PSR-4](https://www.php-fig.org/psr/psr-4/) 标准，
@@ -61,12 +58,15 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 你可以使用以下方法按需导入相关类文件：
 
 - 找出该库内包含哪些类。
-- 在应用的[入口脚本](structure-entry-scripts.md)里的 `Yii::$classMap` 数组中列出这些类，和他们各自对应的文件路径。
+- 在应用的[入口脚本](structure-entry-scripts.md)里的 Composer classmap 数组中列出这些类，和他们各自对应的文件路径。
   举例来说，
 
-```php
-Yii::$classMap['Class1'] = 'path/to/Class1.php';
-Yii::$classMap['Class2'] = 'path/to/Class2.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/Class1.php", "path/to/Class2.php"]
+  }
+}
 ```
 
 ## 在第三方系统内使用 Yii（Using Yii in Third-Party Systems） <span id="using-yii-in-others"></span>
@@ -97,8 +97,6 @@ composer require yiisoft/yii2
 之后，你需要修改该第三方应用的入口脚本，在开头位置添加 Yii 的引入代码：
 
 ```php
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 $yiiConfig = require __DIR__ . '/../config/yii/web.php';
 new yii\web\Application($yiiConfig); // 不要在这里调用 run() 方法。
 ```
@@ -156,9 +154,8 @@ class Yii extends \yii\BaseYii
     // copy-paste the code from YiiBase (1.x) here
 }
 
-Yii::$classMap = include($yii2path . '/classes.php');
+require(__DIR__ . '/../vendor/autoload.php');
 // 通过 Yii 1 注册 Yii 2 的类自动加载器
-Yii::registerAutoloader(['Yii', 'autoload']);
 // create the dependency injection container
 Yii::$container = new yii\di\Container;
 ```
