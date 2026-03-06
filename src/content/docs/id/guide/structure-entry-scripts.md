@@ -37,8 +37,6 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 require __DIR__ . '/../vendor/autoload.php';
 
 // memasukkan file class Yii
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 // Mengambil konfigurasi aplikasi
 $config = require __DIR__ . '/../config/web.php';
 
@@ -68,8 +66,6 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 require __DIR__ . '/vendor/autoload.php';
 
 // memasukkan file class Yii
-require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
-
 // Mengambil konfigurasi aplikasi
 $config = require __DIR__ . '/config/console.php';
 

@@ -20,8 +20,6 @@ title: "アプリケーション"
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 // アプリケーションの構成情報を読み込む
 $config = require __DIR__ . '/../config/web.php';
 

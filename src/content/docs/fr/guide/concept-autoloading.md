@@ -2,7 +2,7 @@
 title: "Chargement automatique des classes"
 ---
 
-Yii compte sur le [mécanisme de chargement automatique des classes](https://www.php.net/manual/fr/language.oop5.autoload.php) pour localiser et inclure tous les fichiers de classes requis. Il fournit un chargeur automatique de classes de haute performance qui est conforme à la [norme PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Le chargeur automatique est installé lorsque vous incluez le fichier `Yii.php`.
+Yii compte sur le [mécanisme de chargement automatique des classes](https://www.php.net/manual/fr/language.oop5.autoload.php) pour localiser et inclure tous les fichiers de classes requis. Il fournit un chargeur automatique de classes de haute performance qui est conforme à la [norme PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Le chargeur automatique est installé lorsque vous incluez le fichier `vendor/autoload.php`.
 
 > Note: pour simplifier la description, dans cette section, nous ne parlerons que du chargement automatique des classes. Néanmoins, gardez présent à l'esprit que le contenu que nous décrivons ici s'applique aussi au chargement automatique des interfaces et des traits.
 
@@ -31,10 +31,14 @@ Par exemple, pour charger des classes de l'espace de noms `foo` qui se trouvent 
 
 Le chargeur automatique de classes de Yii prend en charge la fonctionnalité _table de mise en correspondance des classes_, qui met en correspondance les noms de classe avec les chemins de classe de fichiers. Lorsque le chargeur automatique charge une classe, il commence par chercher si la classe existe dans la table de mise en correspondance. Si c'est le cas, le chemin de fichier correspondant est inclus directement sans plus de recherche. Cela rend le chargement des classes très rapide. En fait, toutes les classes du noyau de Yii sont chargées de cette manière.
 
-Vous pouvez ajouter une classe à la table de mise en correspondance des classes, stockée dans `Yii::$classMap`, avec l'instruction :
+Vous pouvez ajouter une classe à la table de mise en correspondance des classes, stockée dans Composer classmap, avec l'instruction :
 
-```php
-Yii::$classMap['foo\bar\MyClass'] = 'path/to/MyClass.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/MyClass.php"]
+  }
+}
 ```
 
 Les [alias](concept-aliases.md) peuvent être utilisés pour spécifier des chemins de fichier de classe. Vous devez définir la table de mise en correspondance dans le processus d'[amorçage](runtime-bootstrapping.md) afin qu'elle soit prête avant l'utilisation de vos classes.
@@ -43,16 +47,15 @@ Les [alias](concept-aliases.md) peuvent être utilisés pour spécifier des chem
 
 Comme Yii utilise Composer comme gestionnaire de dépendances de paquets, il est recommandé que vous installiez aussi le chargeur automatique de Composer. Si vous utilisez des bibliothèques de tierces parties qui ont besoin de leurs propres chargeurs, vous devez installer ces chargeurs également.
 
-Lors de l'utilisation conjointe du chargeur automatique de Yii et d'autres chargeurs automatiques, vous devez inclure le fichier `Yii.php` _après_ que tous les autres chargeurs automatiques sont installés. Cela fait du chargeur automatique de Yii le premier à répondre à une requête de chargement automatique de classe. Par exemple, le code suivant est extrait du [script d'entrée](structure-entry-scripts.md) du [modèle de projet _basic_](start-installation.md). La première ligne installe le chargeur automatique de Composer, tandis que la seconde installe le chargeur automatique de Yii :
+Lors de l'utilisation conjointe du chargeur automatique de Yii et d'autres chargeurs automatiques, vous devez inclure le fichier `vendor/autoload.php` _après_ que tous les autres chargeurs automatiques sont installés. Cela fait du chargeur automatique de Yii le premier à répondre à une requête de chargement automatique de classe. Par exemple, le code suivant est extrait du [script d'entrée](structure-entry-scripts.md) du [modèle de projet _basic_](start-installation.md). La première ligne installe le chargeur automatique de Composer, tandis que la seconde installe le chargeur automatique de Yii :
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 Vous pouvez utiliser le chargeur automatique de Composer seul sans celui de Yii. Néanmoins, en faisant de cette manière, la performance de chargement de vos classes est dégradée et vous devez appliquer les règles de Composer pour que vos classes puissent être chargées automatiquement.
 
-> Info: si vous voulez ne pas utiliser le chargeur automatique de Yii, vous devez créer votre propre version du fichier `Yii.php` et l'inclure dans votre [script d'entrée](structure-entry-scripts.md).
+> Info: si vous voulez ne pas utiliser le chargeur automatique de Yii, vous devez créer votre propre version du fichier `vendor/autoload.php` et l'inclure dans votre [script d'entrée](structure-entry-scripts.md).
 
 ## Chargement automatique des classes d'extension <span id="autoloading-extension-classes"></span>
 

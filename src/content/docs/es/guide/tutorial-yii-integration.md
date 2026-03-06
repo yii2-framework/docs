@@ -27,7 +27,6 @@ para instalar el cargador automático de Composer:
 require __DIR__ . '/../vendor/autoload.php';
 
 // incluir rl fichero de la clase Yii
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 ### Usando librerías Descargadas <span id="using-downloaded-libs"></span>
@@ -37,7 +36,7 @@ En muchos casos, puedes necesitar descargar manualmente el fichero de la versió
 donde `BasePath` representa el [camino base (base path)](structure-applications.md#basePath) de tu aplicación.
 
 Si la librería lleva su propio cargador automático (autoloader), puedes instalarlo en [script de entrada](structure-entry-scripts.md) de tu aplicación.
-Es recomendable que la instalación se termine antes de incluir el fichero `Yii.php` de forma que el cargador automático tenga precedencia al cargar
+Es recomendable que la instalación se termine antes de incluir el fichero `vendor/autoload.php` de forma que el cargador automático tenga precedencia al cargar
 de forma automática las clases.
 
 Si la librería no provee un cargador automático de clases, pero la denominación de sus clases sigue el [PSR-4](https://www.php-fig.org/psr/psr-4/),
@@ -61,12 +60,15 @@ En el caso más grave en el que la librería necesite incluir cada uno de sus fi
 para incluir las clases según se pidan:
 
 - Identificar que clases contiene la librería.
-- Listar las clases y el camino a los archivos correspondientes en `Yii::$classMap` en el script de entrada [script de entrada](structure-entry-scripts.md)
+- Listar las clases y el camino a los archivos correspondientes en Composer classmap en el script de entrada [script de entrada](structure-entry-scripts.md)
   de la aplicación. Por ejemplo,
 
-```php
-Yii::$classMap['Class1'] = 'path/to/Class1.php';
-Yii::$classMap['Class2'] = 'path/to/Class2.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/Class1.php", "path/to/Class2.php"]
+  }
+}
 ```
 
 ## Utilizar Yii en Sistemas de Terceros <span id="using-yii-in-others"></span>
@@ -112,8 +114,6 @@ y desempaquetarla en el directorio `BasePath/vendor`.
 Después, debes de modificar el script de entrada de sistema de terceros para incluir el siguiente código al principio:
 
 ```php
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 $yiiConfig = require __DIR__ . '/../config/yii/web.php';
 new yii\web\Application($yiiConfig); // No ejecutes run() aquí
 ```
@@ -171,9 +171,8 @@ class Yii extends \yii\BaseYii
     // copy-paste the code from YiiBase (1.x) here
 }
 
-Yii::$classMap = include($yii2path . '/classes.php');
+require(__DIR__ . '/../vendor/autoload.php');
 // registrar el autoloader de Yii 2 vía Yii 1
-Yii::registerAutoloader(['Yii', 'autoload']);
 // crear el contenedor de inyección de dependencia
 Yii::$container = new yii\di\Container;
 ```

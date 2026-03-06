@@ -28,7 +28,6 @@ title: "Робота із стороннім кодом"
 require __DIR__ . '/../vendor/autoload.php';
 
 // підключення файлу класа Yii
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 ### Використовуйте завантажені бібліотеки <span id="using-downloaded-libs"></span>
@@ -39,7 +38,7 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 
 Якщо бібліотека використовує свій власний автозавантажувач класів, ви можете підключити його у
 [вхідному скрипті](structure-entry-scripts.md) вашого додатку. Рекомендується підключити його перед тим,
-як буде підключено файл `Yii.php`, щоб автозавантажувач Yii мав приорітет при автоматичному завантаженні класів.
+як буде підключено файл `vendor/autoload.php`, щоб автозавантажувач Yii мав приорітет при автоматичному завантаженні класів.
 
 Якщо бібліотека не надає автозавантажувача класів, але іменування її класів відповідає
 [PSR-4](https://www.php-fig.org/psr/psr-4/) - ви можете використовувати автозавантажувач Yii для завантаження її класів.
@@ -64,12 +63,15 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 для підключення класів за вимогою:
 
 - Визначіть, які класи входять до складу бібліотеки.
-- Перерахуйте класи і шляхи до відповідних файлів в `Yii::$classMap` у [вхідному скрипті](structure-entry-scripts.md)
+- Перерахуйте класи і шляхи до відповідних файлів в Composer classmap у [вхідному скрипті](structure-entry-scripts.md)
   додатку. Наприклад,
 
-```php
-Yii::$classMap['Class1'] = 'path/to/Class1.php';
-Yii::$classMap['Class2'] = 'path/to/Class2.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/Class1.php", "path/to/Class2.php"]
+  }
+}
 ```
 
 ## Використання Yii в сторонніх системах <span id="using-yii-in-others"></span>
@@ -115,8 +117,6 @@ Yii::$classMap['Class2'] = 'path/to/Class2.php';
 Далі вам необхідно змінити вхідний скрипт сторонньої системи помістивши на його початок наступний код:
 
 ```php
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 $yiiConfig = require __DIR__ . '/../config/yii/web.php';
 new yii\web\Application($yiiConfig); // НЕ ВИКЛИКАЙТЕ run() в цьому місці
 ```
@@ -174,9 +174,8 @@ class Yii extends \yii\BaseYii
     // скопіюйте та вставте код з YiiBase (1.x) сюди
 }
 
-Yii::$classMap = include($yii2path . '/classes.php');
+require(__DIR__ . '/../vendor/autoload.php');
 // реєстрація автозавантажувача Yii 2 через Yii 1
-Yii::registerAutoloader(['Yii', 'autoload']);
 // створення контейнера впровадження залежностей
 Yii::$container = new yii\di\Container;
 ```

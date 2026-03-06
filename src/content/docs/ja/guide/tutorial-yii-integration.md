@@ -27,7 +27,6 @@ Composer のオートローダをインストールするための下記の行�
 require __DIR__ . '/../vendor/autoload.php';
 
 // Yii クラス・ファイルをインクルード
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 ### ダウンロードしたライブラリを使う <span id="using-downloaded-libs"></span>
@@ -38,7 +37,7 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 
 ライブラリがそれ自身のオートローダを持っている場合は、それをアプリケーションの [エントリ・スクリプト](structure-entry-scripts.md) でインストールすることが出来ます。
 複数のオートローダ・クラスの中で Yii のクラス・オートローダが優先されるように、
-ライブラリのオートローダは `Yii.php` ファイルをインクルードする前にインストールすることを推奨します。
+ライブラリのオートローダは `vendor/autoload.php` ファイルをインクルードする前にインストールすることを推奨します。
 
 ライブラリがクラスオートローダを提供していない場合でも、クラスの命名規約が [PSR-4](https://www.php-fig.org/psr/psr-4/) に従っている場合は、ライブラリのクラスをオートロードするのに Yii のクラス・オートローダを使うことが出来ます。
 必要なことは、ライブラリのクラスによって使われている全てのルート名前空間に対して [ルート・エイリアス](concept-aliases.md#defining-aliases) を宣言することだけです。
@@ -62,11 +61,14 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 
 - ライブラリに含まれるクラスを特定する。
 - アプリケーションの [エントリ・スクリプト](structure-entry-scripts.md) において、
-  クラスと対応するファイル・パスを `Yii::$classMap` としてリストアップする。例えば、
+  クラスと対応するファイル・パスを Composer classmap としてリストアップする。例えば、
 
-```php
-Yii::$classMap['Class1'] = 'path/to/Class1.php';
-Yii::$classMap['Class2'] = 'path/to/Class2.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/Class1.php", "path/to/Class2.php"]
+  }
+}
 ```
 
 ## サードパーティのシステムで Yii を使う <span id="using-yii-in-others"></span>
@@ -97,8 +99,6 @@ Composer に関する更なる情報や、インストールの過程で出現�
 次に、サードパーティのシステムのエントリ・スクリプトを修正します。次のコードをエントリ・スクリプトの先頭に追加してください。
 
 ```php
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
-
 $yiiConfig = require __DIR__ . '/../config/yii/web.php';
 new yii\web\Application($yiiConfig); // ここで run() を呼ばない
 ```
@@ -156,12 +156,7 @@ class Yii extends \yii\BaseYii
     // YiiBase (1.x) のコードをここにコピー・ペースト
 }
 
-spl_autoload_unregister(array('YiiBase','autoload'));
-spl_autoload_register(array('Yii','autoload'));
-
-Yii::$classMap = include($yii2path . '/classes.php');
-// Yii 2 オートローダを Yii 1 によって登録
-Yii::registerAutoloader(['yii\BaseYii', 'autoload']);
+require(__DIR__ . '/../vendor/autoload.php');
 // 依存注入コンテナを作成
 Yii::$container = new yii\di\Container;
 ```

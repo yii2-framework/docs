@@ -5,14 +5,14 @@ title: "Autoładowanie klas"
 Yii opiera się na [mechanizmie automatycznego ładowania klas](https://www.php.net/manual/pl/language.oop5.autoload.php) służącym do
 zlokalizowania i dołączenia wszystkich wymaganych plików klas. Wbudowany wysoce wydajny autoloader klas, zgodny ze
 [standardem PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md), jest instalowany po załączeniu
-pliku `Yii.php`.
+pliku `vendor/autoload.php`.
 
 > Note: Dla uproszczenia opisów, w tej sekcji zostanie omówione jedynie autoładowanie klas. Należy mieć jednak na uwadze, że poniższe
 > informacje odnoszą się również do autoładowania interfejsów i traitów.
 
 ## Korzystanie z autoloadera Yii <span id="using-yii-autoloader"></span>
 
-Aby skorzystać z autoloadera klas Yii, powinieneś przestrzegać dwóch prostych zasad tworzenia i nazywania własnych klas:
+Aby skorzystać z autoloadera klas Composer, powinieneś przestrzegać dwóch prostych zasad tworzenia i nazywania własnych klas:
 
 - Każda klasa musi znajdować się w [przestrzeni nazw](https://www.php.net/manual/pl/language.namespaces.php) (np. `foo\bar\MyClass`)
 - Każda klasa musi być zapisana jako oddzielny plik, do którego ścieżka określona jest poniższym algorytmem:
@@ -43,10 +43,14 @@ Kiedy autoloader ładuje klasę, najpierw sprawdza czy klasa znajduje się w map
 dołączona od razu, bez dalszej weryfikacji, co jest powodem, dla którego autoładowanie klas jest błyskawiczne. Wszystkie podstawowe
 klasy Yii są autoładowane właśnie w ten sposób.
 
-Możesz dodać klasę do mapy klas, przechowywanej w `Yii::$classMap`, za pomocą instrukcji:
+Możesz dodać klasę do mapy klas, przechowywanej w Composer classmap, za pomocą instrukcji:
 
-```php
-Yii::$classMap['foo\bar\MyClass'] = 'path/to/MyClass.php';
+```json
+{
+  "autoload": {
+    "classmap": ["path/to/MyClass.php"]
+  }
+}
 ```
 
 Do określenia ścieżek plików klas można użyć [aliasów](concept-aliases.md). Zapisywanie mapy klas powinno odbywać się w procesie
@@ -57,20 +61,19 @@ Do określenia ścieżek plików klas można użyć [aliasów](concept-aliases.m
 Ponieważ Yii opiera się głównie na composerze, jako menedżerze pakietów zależności, zalecane jest również zainstalowanie autoloadera
 composera. Jeśli używasz zewnętrznych bibliotek, korzystających z własnych autoloaderów, powinieneś również je zainstalować.
 
-Używając autoloadera Yii razem z innymi autoloaderami, powinieneś dołączyć plik `Yii.php` _po_ wszystkich pozostałych autoloaderach. Dzięki temu
+Używając autoloadera Yii razem z innymi autoloaderami, powinieneś dołączyć plik `vendor/autoload.php` _po_ wszystkich pozostałych autoloaderach. Dzięki temu
 autoloader Yii jako pierwszy odpowie na żądanie autoładowania klasy. Dla przykładu, poniższy kod znajduje się
 w [skrypcie wejściowym](structure-entry-scripts.md) [podstawowego szablonu projektu](start-installation.md). Pierwsza linia jest
 instrukcją instalacji autoloadera composera, a druga instaluje autoloader Yii:
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 ```
 
 Możesz używać jedynie autoloadera composera bez autoloadera Yii, ale wydajność autoładowania klas może być wtedy obniżona i, dodatkowo,
 musisz przestrzegać zasad ustalonych przez composera, aby Twoje klasy mogły być autoładowane.
 
-> Info: Jeśli nie chcesz korzystać z autoloadera Yii, musisz stworzyć swoją własną wersję pliku `Yii.php` i dołączyć ją
+> Info: Jeśli nie chcesz korzystać z autoloadera Yii, musisz stworzyć swoją własną wersję pliku `vendor/autoload.php` i dołączyć ją
 > w [skrypcie wejściowym](structure-entry-scripts.md).
 
 ## Autoładowanie klas rozszerzeń <span id="autoloading-extension-classes"></span>

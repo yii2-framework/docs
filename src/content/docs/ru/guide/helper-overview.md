@@ -60,11 +60,16 @@ class ArrayHelper extends BaseArrayHelper
 Сохраните ваш класс в файле с именем `ArrayHelper.php`. Файл должен находиться в другой директории, например `@app/components`.
 
 Далее, в приложении [входной скрипт](structure-entry-scripts.md), добавьте следующую строчку кода
-после подключения `yii.php` файла, которая сообщит [автозагрузка классов Yii](concept-autoloading.md) загрузить
+после подключения `composer.json` файла, которая сообщит [автозагрузка классов Yii](concept-autoloading.md) загрузить
 ваш класс вместо оригинального helper-класса фреимворка:
 
-```php
-Yii::$classMap['yii\helpers\ArrayHelper'] = '@app/components/ArrayHelper.php';
+```json
+{
+  "autoload": {
+    "classmap": ["overrides/yii/helpers/ArrayHelper.php"],
+    "exclude-from-classmap": ["vendor/yiisoft/yii2/helpers/ArrayHelper.php"]
+  }
+}
 ```
 
 Обратите внимание что пользовательская настройка helper-классов полезна только, если вы хотите изменить поведение существующей функции helper-классов. Если вы хотите добавить дополнительные функции, для использования в вашем приложении, будет лучше создать отдельный helper.
