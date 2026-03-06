@@ -2,7 +2,7 @@
 
 ## 0.1.0 Under development
 
-- chore: Initial commit.
-- feat: Astro Starlight documentation site.
-- fix: Add `package-lock.json` to repository for CI deploy.
-- chore: Align local and CI checks for eslint, codespell, editorconfig, and markdown formatting.
+- chore: initial commit.
+- feat: astro Starlight documentation site.
+- fix: add `package-lock.json` to repository for CI deploy.
+- chore: align local and CI checks for eslint, codespell, editorconfig, and markdown formatting.
