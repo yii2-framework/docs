@@ -2,7 +2,6 @@
 title: "Project Documentation"
 ---
 
-
 This section contains project-level documentation for the Yii2 Framework documentation repository.
 
 - [Installation](installation.md) - How to install and set up the documentation project

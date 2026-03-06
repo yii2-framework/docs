@@ -2,7 +2,6 @@
 title: "Data widgets"
 ---
 
-
 Yii provides a set of [widgets](structure-widgets.md) that can be used to display data.
 While the [DetailView](#detail-view) widget can be used to display data for a single record,
 [ListView](#list-view) and [GridView](#grid-view) can be used to display a list or table of data records

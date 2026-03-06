@@ -2,7 +2,6 @@
 title: "Yii e Docker"
 ---
 
-
 Para o desenvolvimento e implantação de aplicativos Yii, eles podem ser executados como contêineres Docker. Um contêiner é como uma máquina virtual isolada e leve que mapeia seus serviços para as portas do host, ou seja, um servidor da web em um contêiner na porta 80 está disponível na porta 8888 do seu (local) host.
 
 Os contêineres podem resolver muitos problemas, como ter versões idênticas de software no computador do desenvolvedor e no servidor, implantações rápidas ou simulação de arquitetura multi-servidor durante o desenvolvimento.

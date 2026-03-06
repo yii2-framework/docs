@@ -2,7 +2,6 @@
 title: "Trabajar con código de terceros"
 ---
 
-
 De tiempo en tiempo, puede necesitar usar algún código de terceros en sus aplicaciones Yii. O puedes querer
 utilizar Yii como una librería en otros sistemas de terceros. En esta sección, te enseñaremos cómo conseguir estos objetivos.
 

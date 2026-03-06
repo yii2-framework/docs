@@ -2,7 +2,6 @@
 title: "Các thành phần ứng dụng"
 ---
 
-
 Mỗi ứng dụng là hiện thực của [mẫu thiết kế Service Locators](concept-service-locator.md). Mỗi ứng dụng sẽ chứa các thành phần
 được gọi là _thành phần ứng dụng_ giúp cung cấp các dịch vụ cho các tiến trình xử lý. Chẳng hạn,
 thành phần `urlManager` đảm nhiệm chức năng cho bộ định tuyến cho các yêu cầu xử lý tới các bộ điều khiển;

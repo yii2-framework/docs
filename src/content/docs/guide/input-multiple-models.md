@@ -2,7 +2,6 @@
 title: "Getting Data for Multiple Models"
 ---
 
-
 When dealing with some complex data, it is possible that you may need to use multiple different models to collect
 the user input. For example, assuming the user login information is stored in the `user` table while the user profile
 information is stored in the `profile` table, you may want to collect the input data about a user through a `User` model

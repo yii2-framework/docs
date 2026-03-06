@@ -2,7 +2,6 @@
 title: "Tworzenie formularzy"
 ---
 
-
 ## Formularze oparte na ActiveRecord: ActiveForm
 
 Podstawowym sposobem korzystania z formularzy w Yii jest użycie [[yii\widgets\ActiveForm|ActiveForm]]. Ten sposób powinien być używany, jeśli formularz jest bazowany na modelu.

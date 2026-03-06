@@ -2,7 +2,6 @@
 title: "Amorçage"
 ---
 
-
 L'amorçage fait référence au processus de préparation de l'environnement avant qu'une application ne démarre, pour résoudre et traiter une requête d'entrée. L'amorçage se fait en deux endroits : le [script d'entrée](structure-entry-scripts.md) et l'[application](structure-applications.md).
 
 Dans le [script d'entrée](structure-entry-scripts.md), les classes de chargement automatique (_autoloaders_) pour différentes bibliothèques sont enregistrées. Cela inclut la classe de chargement automatique de Composer via son fichier `autoload.php` et la classe de chargement automatique de Yii via son fichier de classe `Yii`. Ensuite, le script d'entrée charge la [configuration](concept-configurations.md) de l'application et crée une instance d'[application](structure-applications.md).

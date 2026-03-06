@@ -2,7 +2,6 @@
 title: "Mirando Hacia Adelante"
 ---
 
-
 Si has leído el capítulo "Comenzando con Yii" completo, has creado una aplicación completa en Yii. En el proceso, has aprendido cómo implementar algunas
 características comúnmente necesitadas, tales como obtener datos del usuario a través de formularios HTML, traer datos desde la base de datos,
 y mostrar datos utilizando paginación. También has aprendido a utilizar [Gii](https://github.com/yiisoft/yii2-gii/blob/master/docs/guide/README.md) para generar

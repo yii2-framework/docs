@@ -2,7 +2,6 @@
 title: "Visões (Views)"
 ---
 
-
 As views fazem parte da arquitetura [MVC](https://pt.wikipedia.org/wiki/MVC).
 São a parte do código responsável por apresentar dados aos usuários finais. Em um aplicação Web,
 views geralmente são criadas em termos de _view templates_ (modelos de view)

@@ -2,7 +2,6 @@
 title: "Vistas"
 ---
 
-
 Las Vistas (views) son una parte de la arquitectura [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador).
 Estas son el código responsable de presentar los datos al usuario final. En una aplicación Web, las vistas son usualmente creadas
 en términos de _templates_ que son archivos PHP que contienen principalmente HTML y PHP.

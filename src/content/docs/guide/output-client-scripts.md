@@ -2,7 +2,6 @@
 title: "Working with Client Scripts"
 ---
 
-
 Modern web applications, additionally to static HTML pages that are
 rendered and sent to the browser, contain JavaScript that is used
 to modify the page in the browser by manipulating existing elements or

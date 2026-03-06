@@ -2,7 +2,6 @@
 title: "Ne bilmeye ihtiyacın var"
 ---
 
-
 Yii'yi öğrenmesi, diğer PHP kütüphaneleri kadar zor olmasada, yine de başlamadan önce öğrenmeniz gereken bazı şeyler var.
 
 ## PHP

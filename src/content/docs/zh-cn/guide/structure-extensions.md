@@ -2,7 +2,6 @@
 title: "扩展"
 ---
 
-
 扩展是专门设计的在 Yii 应用中随时可拿来使用的，
 并可重发布的软件包。例如， [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug)
 扩展在你的应用的每个页面底部添加一个方便用于调试的工具栏，

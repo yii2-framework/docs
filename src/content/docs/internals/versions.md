@@ -2,7 +2,6 @@
 title: "Yii Versioning"
 ---
 
-
 This document summarizes the versioning policy of Yii. Our current versioning strategy is
 a variant of [Semantic Versioning](https://semver.org/).
 

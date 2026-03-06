@@ -2,7 +2,6 @@
 title: "Bootstrapping"
 ---
 
-
 El Bootstrapping hace referencia al proceso de preparar el entorno antes de que una aplicación se inicie para resolver y procesar una petición entrante. El se ejecuta en dos lugares: el [script de entrada](structure-entry-scripts.md) y la [aplicación](structure-applications.md).
 
 En el [script de entrada](structure-entry-scripts.md), se registran los cargadores automáticos de clase para diferentes librerías. Esto incluye el cargador automático de Composer a través de su fichero ‘autoload.php’ y del cargador automático de Yii a través del fichero de clase ‘Yii’. El script de entrada después carga la [configuración](concept-configurations.md) de la aplicación y crea una instancia de la [aplicación](structure-applications.md).

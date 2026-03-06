@@ -2,7 +2,6 @@
 title: "Bootstrapping"
 ---
 
-
 Bootstrapping to proces przygotowania środowiska działania aplikacji przed jej uruchomieniem, w celu przyjęcia i przetworzenia przychodzącego żądania.
 Mechanizm ten zachodzi w dwóch miejscach: [skrypcie wejściowym](structure-entry-scripts.md) i w samej [aplikacji](structure-applications.md).
 

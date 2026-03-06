@@ -2,7 +2,6 @@
 title: "Yii 2 寄稿者のための Git ワークフロー"
 ---
 
-
 で、Yii の開発に貢献したい、と。すばらしい。
 でも、あなたの修正案が速やかに採用されるチャンスを増やすために、以下のステップを踏むようにしてください。
 あなたが git と github については初めてだという場合は、最初に [github help](https://help.github.com/) や [try git](https://try.github.com) を精査したり、

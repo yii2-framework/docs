@@ -2,7 +2,6 @@
 title: "Configuration reference"
 ---
 
-
 ## Overview
 
 ## Basic configuration

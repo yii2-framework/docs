@@ -2,7 +2,6 @@
 title: "Service Locator"
 ---
 
-
 A service locator is an object that knows how to provide all sorts of services (or components) that an application
 might need. Within a service locator, each component exists as only a single instance, uniquely identified by an ID.
 You use the ID to retrieve a component from the service locator.

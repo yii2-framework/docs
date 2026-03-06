@@ -2,7 +2,6 @@
 title: "Sử dụng Gii để sinh code"
 ---
 
-
 Trong phần này sẽ hướng dẫn sử dụng [Gii](tool-gii.md) để tự động sinh code, những mã nguồn tương tự với Web site
 . Sử dụng Gii để tự động tạo mã nguồn thật đơn giản, bạn chỉ việc nhập thông tin đúng theo các hướng dẫn hiển thị trên các trang Web Gii và mã
 nguỗn sẽ được sinh tự động.

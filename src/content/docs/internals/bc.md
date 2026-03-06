@@ -2,7 +2,6 @@
 title: "Backwards Compatibility"
 ---
 
-
 We're strictly not breaking backwards compatibility in patch releases such as `2.x.y.Z` and trying to avoid had to fix
 backwards incompatible changes in minor releases such as `2.x.Y`.
 

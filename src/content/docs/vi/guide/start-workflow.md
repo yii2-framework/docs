@@ -2,7 +2,6 @@
 title: "Chạy ứng dụng"
 ---
 
-
 Sau khi cài đặt Yii, ứng dụng Yii của bạn đã được chạy, tùy thuộc vào cấu hình bạn có thể truy cập qua URL `https://hostname/basic/web/index.php`
 hoặc `https://hostname/index.php`. Bài hướng dẫn này sẽ mô tả chức năng của ứng dụng và cách tổ chức code trong ứng dụng,
 và làm thế nào để xử lý các yêu cầu của ứng dụng.

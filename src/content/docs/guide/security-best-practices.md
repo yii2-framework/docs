@@ -2,7 +2,6 @@
 title: "Security best practices"
 ---
 
-
 Below we'll review common security principles and describe how to avoid threats when developing applications using Yii.
 Most of these principles are not unique to Yii alone but apply to website or software development in general,
 so you will also find links for further reading on the general ideas behind these.

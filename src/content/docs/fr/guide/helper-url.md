@@ -2,7 +2,6 @@
 title: "Classe assistante Url"
 ---
 
-
 La classe assistante Url fournit un jeu de méthodes statiques pour gérer les URL.
 
 ## Obtenir des URL communes <span id="getting-common-urls"></span>

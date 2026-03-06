@@ -2,7 +2,6 @@
 title: "Recursos"
 ---
 
-
 Las APIs RESTful lo son todos para acceder y manipular _recursos (resources)_. Puedes observar los recursos en el paradigma MVC en [Modelos (models)](structure-models.md) .
 
 Mientras que no hay restricción a cómo representar un recurso, en YII usualmente, puedes representar recursos como objetos de la clase [[yii\base\Model]] o sus clases hijas (p.e. [[yii\db\ActiveRecord]]), por las siguientes razones:

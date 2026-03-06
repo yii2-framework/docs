@@ -2,7 +2,6 @@
 title: "Những gì bạn cần biết"
 ---
 
-
 Quá trình học Yii không quá khó cũng như các framework PHP khác nhưng vẫn có một số điều bạn nên học trước khi bắt đầu với Yii.
 
 ## PHP

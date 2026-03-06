@@ -2,7 +2,6 @@
 title: "Walidacja danych wejściowych"
 ---
 
-
 Jedna z głównych zasad mówi, że nigdy nie należy ufać danym otrzymanym od użytkownika oraz że zawsze należy walidować je przed użyciem.
 
 Rozważmy [model](structure-models.md) wypełniony danymi pobranymi od użytkownika. Możemy zweryfikować je poprzez wywołanie metody [[yii\base\Model::validate()|validate()]].

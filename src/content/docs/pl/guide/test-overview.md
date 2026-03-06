@@ -2,7 +2,6 @@
 title: "Testowanie"
 ---
 
-
 Testowanie jest istotnym elementem produkcji każdego oprogramowania. Niezależnie, czy jesteśmy tego świadomi, czy też nie, testy przeprowadzamy nieustannie.
 Dla przykładu, kiedy napiszemy klasę w PHP, możemy debugować ją krok po kroku lub po prostu użyć wyrażeń jak echo lub die, aby sprawdzić, czy implementacja
 działa zgodnie z naszym początkowym planem. W przypadku aplikacji web wprowadzamy testowe dane w formularzach, aby upewnić się, że strona odpowiada tak, jak powinna.

@@ -2,7 +2,6 @@
 title: "Propiedades"
 ---
 
-
 En PHP, las variables miembro de clases también llamadas _propiedades_, son parte de la definición de la clase, y se
 usan para representar el estado de una instancia de la clase (ej. para diferenciar una instancia de clase de otra).
 A la práctica, a menudo, se puede querer gestionar la lectura o escritura de las propiedades de algunos momentos. Por

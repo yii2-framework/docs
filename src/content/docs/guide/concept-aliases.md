@@ -2,7 +2,6 @@
 title: "Aliases"
 ---
 
-
 Aliases are used to represent file paths or URLs so that you don't have to hard-code absolute paths or URLs in your
 project. An alias must start with the `@` character to be differentiated from normal file paths and URLs. Alias defined
 without leading `@` will be prefixed with `@` character.

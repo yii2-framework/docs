@@ -2,7 +2,6 @@
 title: "Bekerja dengan Form"
 ---
 
-
 Bagian ini memaparkan bagaimana membuat halaman dengan form untuk mengambil data dari pengguna.
 Halaman akan menampilkan form dengan input field Nama dan Email.
 Setelah mendapatkan dua data dari pengguna, halaman akan menampilkan kembali data yang diinput pada form sebagai konfirmasi.

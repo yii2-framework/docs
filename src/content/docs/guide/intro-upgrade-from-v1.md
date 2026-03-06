@@ -2,7 +2,6 @@
 title: "Upgrading from Version 1.1"
 ---
 
-
 There are many differences between versions 1.1 and 2.0 of Yii as the framework was completely rewritten for 2.0.
 As a result, upgrading from version 1.1 is not as trivial as upgrading between minor versions. In this guide you'll
 find the major differences between the two versions.

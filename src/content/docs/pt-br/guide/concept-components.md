@@ -2,7 +2,6 @@
 title: "Componentes"
 ---
 
-
 Componente é a parte principal na construção de aplicações Yii. Componentes são instâncias de [[yii\base\Component]], ou uma classe estendida. As três características principais que os componentes fornecem a outras classes são:
 
 - [Propriedades](concept-properties.md)

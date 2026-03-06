@@ -2,7 +2,6 @@
 title: "Temas"
 ---
 
-
 > Note: Esta sección está en desarrollo.
 
 Un tema (theme) es un directorio de archivos y de vistas (views) y layouts. Cada archivo de este directorio

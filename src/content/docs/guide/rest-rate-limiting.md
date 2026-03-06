@@ -2,7 +2,6 @@
 title: "Rate Limiting"
 ---
 
-
 To prevent abuse, you should consider adding _rate limiting_ to your APIs. For example, you may want to limit the API usage
 of each user to be at most 100 API calls within a period of 10 minutes. If too many requests are received from a user
 within the stated period of the time, a response with status code 429 (meaning "Too Many Requests") should be returned.

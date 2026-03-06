@@ -2,7 +2,6 @@
 title: "Error Handling"
 ---
 
-
 When handling a RESTful API request, if there is an error in the user request or if something unexpected
 happens on the server, you may simply throw an exception to notify the user that something went wrong.
 If you can identify the cause of the error (e.g., the requested resource does not exist), you should

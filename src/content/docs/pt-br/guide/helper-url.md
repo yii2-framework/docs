@@ -2,7 +2,6 @@
 title: "URL Helper"
 ---
 
-
 URL helper fornece um conjunto de métodos estáticos para o gerenciamento de URLs.
 
 ## Obtendo URLs comuns <span id="getting-common-urls"></span>

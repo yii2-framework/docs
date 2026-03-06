@@ -2,7 +2,6 @@
 title: "安装 Yii"
 ---
 
-
 你可以通过两种方式安装 Yii：使用 [Composer](https://getcomposer.org/) 或下载一个归档文件。
 推荐使用前者，这样只需执行一条简单的命令就可以安装新的[扩展](structure-extensions.md)或更新 Yii 了。
 

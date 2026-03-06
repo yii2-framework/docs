@@ -2,7 +2,6 @@
 title: "快速入门"
 ---
 
-
 Yii 提供了一整套用来简化实现 RESTful 风格的 Web Service 服务的 API。
 特别是，Yii 支持以下关于 RESTful 风格的 API：
 

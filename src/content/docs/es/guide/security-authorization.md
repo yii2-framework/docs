@@ -2,7 +2,6 @@
 title: "Autorización"
 ---
 
-
 Autorización esl el proceso de verificación de que un usuario tenga sugifientes permisos para realizar algo. Yii provee
 dos métodos de autorización: Filtro de Control de Acceso y Control Basado en Roles (ACF y RBAC por sus siglas en inglés).
 

@@ -2,7 +2,6 @@
 title: "Data Formatting"
 ---
 
-
 To display data in a more readable format for users, you may format them using the `formatter` [application component](structure-application-components.md).
 By default the formatter is implemented by [[yii\i18n\Formatter]] which provides a set of methods to format data as
 date/time, numbers, currencies, and other commonly used formats. You can use the formatter like the following,

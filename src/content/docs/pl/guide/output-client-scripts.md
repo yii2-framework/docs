@@ -2,7 +2,6 @@
 title: "Praca ze skryptami"
 ---
 
-
 > Note: Ta sekcja nie została jeszcze ukończona.
 
 ### Rejestrowanie skryptów

@@ -2,7 +2,6 @@
 title: "Gii でコードを生成する"
 ---
 
-
 このセクションでは、[Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) を使って、ウェブ・サイトの一般的な機能のいくつかを実装するコードを自動的に生成する方法を説明します。
 Gii を使ってコードを自動生成することは、Gii のウェブ・ページに表示される指示に対して正しい情報を入力するだけのことです。
 

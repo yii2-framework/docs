@@ -2,7 +2,6 @@
 title: "Qué necesita saber"
 ---
 
-
 La curva de aprendizaje de Yii no es tan empinada como en otros _frameworks_ en PHP,
 pero todavía hay algunas cosas que debería aprender antes de empezar con Yii.
 

@@ -2,7 +2,6 @@
 title: "Handling Errors"
 ---
 
-
 Yii includes a built-in [[yii\web\ErrorHandler|error handler]] which makes error handling a much more pleasant
 experience than before. In particular, the Yii error handler does the following to improve error handling:
 

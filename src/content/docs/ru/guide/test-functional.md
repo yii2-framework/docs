@@ -2,7 +2,6 @@
 title: "Функциональные тесты"
 ---
 
-
 > Note: Данный раздел находится в разработке.
 
 - [Codeception Functional Tests](https://codeception.com/docs/04-FunctionalTests)

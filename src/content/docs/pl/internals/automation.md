@@ -2,7 +2,6 @@
 title: "Zadania zautomatyzowane"
 ---
 
-
 Istnieją zadania wykonywane automatycznie podczas pracy nad Yii:
 
 - Generowanie mapy klas `classes.php` umieszczonej w folderze głównym frameworka.

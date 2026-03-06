@@ -2,7 +2,6 @@
 title: "路由"
 ---
 
-
 随着资源和控制器类准备，您可以使用 URL 如
 `http://localhost/index.php?r=user/create` 访问资源，类似于你可以用正常的 Web 应用程序做法。
 

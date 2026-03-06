@@ -2,7 +2,6 @@
 title: "Theming"
 ---
 
-
 Theming is a way to replace a set of [views](structure-views.md) with another without the need of touching
 the original view rendering code. You can use theming to systematically change the look and feel of an application.
 

@@ -2,7 +2,6 @@
 title: "Pobieranie danych dla wielu modeli"
 ---
 
-
 Kiedy mamy do czynienia ze skomplikowanym zestawem danych, jest możliwe, że trzeba będzie użyć wielu różnych modeli, aby pobrać te dane od użytkownika.
 Dla przykładu - zakładając, że dane logowania użytkownika zapisane są w tabeli `user`, podczas gdy dane profilu użytkownika są przechowywane w tabeli `profile`,
 będziesz chciał pobrać dane od użytkownika za pomocą modeli `User` oraz `Profile`.

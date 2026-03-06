@@ -2,7 +2,6 @@
 title: "使用模板引擎（Using template engines）"
 ---
 
-
 默认情况下，Yii 使用 PHP 作为其默认的模板引擎语言，但是，你可以配置 Yii 以扩展的方式支持其他的渲染引擎，
 比如 [Twig](https://twig.symfony.com/) 或 [Smarty](https://www.smarty.net/)等。
 

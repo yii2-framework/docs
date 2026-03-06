@@ -2,7 +2,6 @@
 title: "Autenticação"
 ---
 
-
 Autenticação é o processo de verificação da identidade do usuário. Geralmente é usado um identificador (ex. um nome de usuário ou endereço de e-mail) e um token secreto (ex. uma senha ou um token de acesso) para determinar se o usuário é quem ele diz ser. Autenticação é a base do recurso de login.
 
 O Yii fornece um framework de autenticação com vários componentes que dão suporte ao login. Para usar este framework, você precisará primeiramente fazer o seguinte:

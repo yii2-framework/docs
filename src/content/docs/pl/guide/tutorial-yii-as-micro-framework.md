@@ -2,7 +2,6 @@
 title: "Używanie Yii jako mikroframeworka"
 ---
 
-
 Yii może być z powodzeniem wykorzystywane bez dodatkowych funkcjonalności dostarczanych przez prosty i zaawansowany szablon aplikacji. Inaczej mówiąc,
 Yii już jest samo w sobie mikroframeworkiem. Do pracy z Yii nie jest wymagane, aby struktura folderów była dokładnie taka, jak pokazana w szablonach.
 

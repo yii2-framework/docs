@@ -2,7 +2,6 @@
 title: "Unit Tests"
 ---
 
-
 A unit test verifies that a single unit of code is working as expected. That is, given different input parameters,
 the test verifies the class method returns expected results. Unit tests are usually developed by people who write the
 classes being tested.

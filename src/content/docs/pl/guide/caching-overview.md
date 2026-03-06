@@ -2,7 +2,6 @@
 title: "Pamięć podręczna"
 ---
 
-
 Mechanizmy wykorzystujące pamięć podręczną pozwalają na poprawienie wydajności aplikacji sieciowej w tani i efektywny sposób.
 Zapisanie statycznych danych w pamięci podręcznej, zamiast generowania ich od podstaw przy każdym wywołaniu, pozwala na znaczne zaoszczędzenie czasu odpowiedzi aplikacji.
 

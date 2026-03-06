@@ -2,7 +2,6 @@
 title: "认证"
 ---
 
-
 和 Web 应用不同，RESTful APIs 通常是无状态的，
 也就意味着不应使用 sessions 或 cookies，
 因此每个请求应附带某种授权凭证，因为用户授权状态可能没通过 sessions 或 cookies 维护，

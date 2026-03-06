@@ -2,7 +2,6 @@
 title: "创建你自己的应用程序结构"
 ---
 
-
 > 注：本章节正在开发中。
 
 虽然 [basic](https://github.com/yiisoft/yii2-app-basic) 和 [advanced](https://github.com/yiisoft/yii2-app-advanced)

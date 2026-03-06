@@ -2,7 +2,6 @@
 title: "Quick Start"
 ---
 
-
 Yii provides a whole set of tools to simplify the task of implementing RESTful Web Service APIs.
 In particular, Yii supports the following features about RESTful APIs:
 

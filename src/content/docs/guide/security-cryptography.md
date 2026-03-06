@@ -2,7 +2,6 @@
 title: "Cryptography"
 ---
 
-
 In this section we'll review the following security aspects:
 
 - Generating random data

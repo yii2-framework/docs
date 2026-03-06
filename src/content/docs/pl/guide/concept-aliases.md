@@ -2,7 +2,6 @@
 title: "Aliasy"
 ---
 
-
 Aliasy używane są do reprezentowania ścieżek do plików lub adresów URL i pozwalają uniknąć konieczności wielokrotnego definiowania ich w kodzie aplikacji. Alias musi zaczynać się od znaku `@`, dla odróżnienia od zwykłej ścieżki i adresu URL. W przypadku zdefiniowania aliasu bez tego znaku, będzie on automatycznie dodany na początku.
 
 Yii korzysta z wielu predefiniowanych aliasów. Dla przykładu, alias `@yii` reprezentuje ścieżkę instalacji frameworka, a `@web` bazowy adres URL aktualnie uruchomionej aplikacji Web.

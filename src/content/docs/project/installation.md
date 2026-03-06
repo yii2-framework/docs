@@ -2,7 +2,6 @@
 title: "Installation guide"
 ---
 
-
 ## System requirements
 
 - [`PHP`](https://www.php.net/downloads) 8.1 or higher.

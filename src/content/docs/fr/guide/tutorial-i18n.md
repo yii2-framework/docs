@@ -2,7 +2,6 @@
 title: "Internationalisation"
 ---
 
-
 Le terme _Internationalisation_ (I18N) fait référence au processus de conception d'une application logicielle qui permet son adaptation à diverses langues et régions sans intervenir dans le code. Pour des applications Web, la chose est particulièrement importante puisque celle-ci peut concerner des utilisateurs potentiels répartis sur toute la surface de la terre. Yii met à votre disposition tout un arsenal de fonctionnalités qui prennent en charge la traduction des messages et des vues, ainsi que le formatage des nombres et des dates.
 
 ## Locale et Langue <span id="locale-language"></span>

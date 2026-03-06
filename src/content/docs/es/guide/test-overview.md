@@ -2,7 +2,6 @@
 title: "Tests"
 ---
 
-
 Las pruebas son una parte importante del desarrollo de software. Seamos conscientes
 de ello o no, ralizamos pruebas contínuamente.
 Por ejemplo, cuando escribimos una clase en PHP, podemos depurarla paso a paso o

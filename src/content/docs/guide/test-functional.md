@@ -2,7 +2,6 @@
 title: "Functional Tests"
 ---
 
-
 Functional test verifies scenarios from a user's perspective. It is similar to [acceptance test](test-acceptance.md)
 but instead of communicating via HTTP it is filling up environment such as POST and GET parameters and then executes
 application instance right from the code.

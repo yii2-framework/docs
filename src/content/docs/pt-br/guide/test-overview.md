@@ -2,7 +2,6 @@
 title: "Testes"
 ---
 
-
 O teste é uma parte importante do desenvolvimento de software. Se estamos conscientes disso ou não, Realizamos testes continuamente.
 Por exemplo, enquanto escrevemos uma classe PHP, podemos depurá-lo passo a passo ou simplismente usar declarações echo ou die para verificar se a implantação está de acordo com nosso plano inicial.
 No caso de uma aplicação web, estamos entrando em alguns testes de dados em forma de assegurar que a página interage com a gente como esperado.

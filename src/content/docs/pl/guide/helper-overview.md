@@ -2,7 +2,6 @@
 title: "Klasy pomocnicze"
 ---
 
-
 > Note: Ta sekcja jest w trakcie tworzenia.
 
 Yii jest wyposażone w wiele klas upraszczających pisanie często wykorzystywanych zadań w kodzie, takich jak manipulowanie ciągami znaków bądź tablicami, generowanie kodu HTML, itp.

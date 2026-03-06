@@ -2,7 +2,6 @@
 title: "Proces rada u prevođenju"
 ---
 
-
 Yii je preveden na više jezika kako bi bio koristan za internacionalne aplikacije i programere. Dve glavne oblasti u kojima je doprinos veoma poželjan jeste dokumentacija i frejmvork poruke.
 
 ## Frejmvork poruke

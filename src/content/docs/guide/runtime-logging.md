@@ -2,7 +2,6 @@
 title: "Logging"
 ---
 
-
 Yii provides a powerful logging framework that is highly customizable and extensible. Using this framework, you
 can easily log various types of messages, filter them, and gather them at different targets, such as files, databases,
 emails.

@@ -2,7 +2,6 @@
 title: "Automatizacija"
 ---
 
-
 Postoje taskovi koji se rade automatski kada radite sa Yii frejmvorkom:
 
 - Generisanje mape klasa `classes.php` koji se nalazi u rutu frejmvork direktorijuma.

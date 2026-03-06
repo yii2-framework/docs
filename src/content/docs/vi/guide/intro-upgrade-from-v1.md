@@ -2,7 +2,6 @@
 title: "Nâng cấp lên từ phiên bản 1.1"
 ---
 
-
 Có nhiều sự khác biệt giữa các phiên bản 1.1 và 2.0 của Yii khi cấu trúc framework được viết lại hoàn toàn cho 2.0.
 Do vậy, việc nâng cấp từ phiên bản 1.1 không dễ dàng như việc nâng cấp giữa các phiên bản nhỏ. Trong bản hướng dẫn này, bạn sẽ
 thấy sựa khác biệt chính giữa hai phiên bản.

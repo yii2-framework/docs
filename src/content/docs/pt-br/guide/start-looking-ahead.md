@@ -2,7 +2,6 @@
 title: "Seguindo em Frente"
 ---
 
-
 Se você leu toda a seção "Primeiros Passos", você criou uma aplicação Yii
 completa. No processo, você aprendeu como implementar algumas funcionalidades comumente necessárias, tais como obter dados de usuários através de um formulário
 HTML, consultar dados de um banco de dados e exibir os dados de forma paginada.

@@ -2,7 +2,6 @@
 title: "Bootstrapping"
 ---
 
-
 Bootstrapping refers to the process of preparing the environment before an application starts
 to resolve and process an incoming request. Bootstrapping is done in two places:
 the [entry script](structure-entry-scripts.md) and the [application](structure-applications.md).

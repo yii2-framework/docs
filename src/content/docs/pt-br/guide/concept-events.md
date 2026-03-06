@@ -2,7 +2,6 @@
 title: "Eventos"
 ---
 
-
 Eventos permitem que você injete código personalizado dentro de outo código existente em determinados pontos de execução. Você pode anexar o código personalizado a um evento de modo que ao acionar o evento, o código é executado automaticamente. Por exemplo, um objeto de e-mail pode disparar um evento `messageSent` quando o envio da mensagem for bem sucedida. Se você quiser acompanhar as mensagens que são enviadas com sucesso, você poderia então simplesmente anexar o código de acompanhamento ao evento `messageSent`.
 O Yii disponibiliza uma classe base chamada [[yii\base\Component]] para dar suporte aos eventos.
 Se sua classe precisar disparar eventos, ela deverá estender de [[yii\base\Component]], ou de uma classe-filha.

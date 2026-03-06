@@ -2,7 +2,6 @@
 title: "Assets"
 ---
 
-
 Un asset en Yii es un archivo al que se puede hacer referencia en una página Web. Puede ser un archivo CSS, un archivo
 JavaScript, una imagen o un archivo de video, etc. Los assets se encuentran en los directorios públicos de la web y se
 sirven directamente por los servidores Web.

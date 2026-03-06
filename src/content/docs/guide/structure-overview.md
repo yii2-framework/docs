@@ -2,7 +2,6 @@
 title: "Overview"
 ---
 
-
 Yii applications are organized according to the [model-view-controller (MVC)](https://wikipedia.org/wiki/Model-view-controller)
 architectural pattern. [Models](structure-models.md) represent data, business logic and rules; [views](structure-views.md)
 are output representation of models; and [controllers](structure-controllers.md) take input and convert

@@ -2,7 +2,6 @@
 title: "Testing"
 ---
 
-
 Testing is an important part of software development. Whether we are aware of it or not, we conduct testing continuously.
 For example, when we write a class in PHP, we may debug it step by step or simply use `echo` or `die` statements to verify
 the implementation works according to our initial plan. In the case of a web application, we're entering some test data

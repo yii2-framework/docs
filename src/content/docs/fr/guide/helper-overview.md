@@ -2,7 +2,6 @@
 title: "Classes assistantes"
 ---
 
-
 > Note: cette section est en cours de développement.
 
 Yii procure de nombreuses classes qui vous aident à simplifier le code de tâches courantes, telles que la manipulation de chaînes de caractères ou de tableaux, la génération de code HTML, et ainsi de suite. Ces classes assistantes sont organisées dans l'espace de noms `yii\helpers` et sont toutes des classes statiques (ce qui signifie qu'elles ne contiennent que des propriétés et des méthodes statiques et ne doivent jamais être instanciées).

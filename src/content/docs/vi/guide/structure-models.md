@@ -2,7 +2,6 @@
 title: "Model"
 ---
 
-
 Model là phần trong mô hình [MVC](https://vi.wikipedia.org/wiki/MVC).
 Là đối tượng đại diện cho phần dữ liệu, phương thức xử lý và nghiệp vụ logic.
 

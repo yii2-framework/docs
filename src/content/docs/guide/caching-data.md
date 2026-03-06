@@ -2,7 +2,6 @@
 title: "Data Caching"
 ---
 
-
 Data caching is about storing some PHP variables in cache and retrieving it later from cache.
 It is also the foundation for more advanced caching features, such as [query caching](#query-caching)
 and [page caching](caching-page.md).

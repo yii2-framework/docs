@@ -2,7 +2,6 @@
 title: "Authentication"
 ---
 
-
 La autenticación es el proceso de verificar la identidad de un usuario. Usualmente se usa un identificador (ej. un `username` o una dirección de correo electrónico) y una token secreto (ej. una contraseña o un token de acceso) para juzgar si el usuario es quien dice ser. La autenticación es la base de la función de inicio de sesión.
 
 Yii proporciona un marco de autenticación que conecta varios componentes para soportar el inicio de sesión. Para utilizar este marco, usted necesita principalmente hacer el siguiente trabajo:

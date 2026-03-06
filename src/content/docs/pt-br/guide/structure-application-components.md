@@ -2,7 +2,6 @@
 title: "Componentes de Aplicação"
 ---
 
-
 Aplicações são [service locators](concept-service-locator.md). Elas hospedam um
 conjunto de assim chamados _componentes de aplicação_ que fornecem diferentes
 serviços para o processamento de requisições. Por exemplo, o componente

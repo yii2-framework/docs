@@ -2,7 +2,6 @@
 title: "Caché HTTP"
 ---
 
-
 Además del almacenamiento de caché en el servidor que hemos descrito en secciones anteriores, las aplicaciones Web
 pueden hacer uso de la caché en el lado del cliente para así ahorrar tiempo y recursos para generar y transmitir el
 mismo contenido una y otra vez.

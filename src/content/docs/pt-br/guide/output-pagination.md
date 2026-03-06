@@ -2,7 +2,6 @@
 title: "Paginação"
 ---
 
-
 Quando existem muitos dados para serem exibidos em uma única página, uma estratégia comum é mostrá-los em várias páginas e em cada página exibir uma porção pequena dos dados. Esta estratégia é conhecida como _paginação_. O Yii usa o objeto [[yii\data\Pagination]] para representar as informações sobre um esquema de paginação. Em particular,
 
 - [[yii\data\Pagination::$totalCount|contagem total]] especifica o número total de itens de dados. Note que este é geralmente muito maior do que o número de itens de dados necessários para exibir em uma única página.

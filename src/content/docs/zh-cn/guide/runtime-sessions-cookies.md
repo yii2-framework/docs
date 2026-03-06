@@ -2,7 +2,6 @@
 title: "Sessions 和 Cookies"
 ---
 
-
 Sessions 和 cookies 允许数据在多次请求中保持，
 在纯 PHP 中，可以分别使用全局变量 `$_SESSION` 和 `$_COOKIE` 来访问，Yii 将 session 和 cookie 封装成对象并增加一些功能，
 可通过面向对象方式访问它们。

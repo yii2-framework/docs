@@ -2,7 +2,6 @@
 title: "Usage examples"
 ---
 
-
 ## Next steps
 
 - 📚 [Installation Guide](installation.md)

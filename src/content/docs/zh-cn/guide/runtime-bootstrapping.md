@@ -2,7 +2,6 @@
 title: "启动引导（Bootstrapping）"
 ---
 
-
 启动引导是指：在应用开始解析并处理新接受请求之前，一个预先准备环境的过程。
 启动引导会在两个地方具体进行：[入口脚本(Entry Script)](structure-entry-scripts.md)
 和 [应用主体（application）](structure-applications.md)。

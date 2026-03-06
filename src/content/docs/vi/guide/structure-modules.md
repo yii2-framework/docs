@@ -2,7 +2,6 @@
 title: "Modules"
 ---
 
-
 Modules là các đơn vị phần mềm độc lập bao gồm các [models](structure-models.md), [views](structure-views.md),
 [controllers](structure-controllers.md), và các thành phần hỗ trợ khác. Người dùng cuối có thể truy cập các controller
 của module khi các controller đã được cài đặt trong [application](structure-applications.md). Vì những lý do này, thường được xem là

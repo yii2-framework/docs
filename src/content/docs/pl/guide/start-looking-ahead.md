@@ -2,7 +2,6 @@
 title: "Dalsze kroki"
 ---
 
-
 Jeśli przebyłeś już cały dział "Pierwsze kroki", powinieneś mieć utworzoną kompletną aplikację Yii. Podczas tego procesu, nauczyłeś się jak zaimplementować zwykle niezbędne
 funkcjonalności, takie jak zbieranie danych od użytkownika wykorzystując formularz HTML, odczytywanie danych z bazy danych oraz wyświetlanie ich wraz ze stronicowaniem.
 Nauczyłeś się również jak korzystać z [Gii](https://github.com/yiisoft/yii2-gii/blob/master/docs/guide-pl/README.md) i generować kod automatycznie. Używanie Gii zmienia proces

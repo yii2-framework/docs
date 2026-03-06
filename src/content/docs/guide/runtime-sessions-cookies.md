@@ -2,7 +2,6 @@
 title: "Sessions and Cookies"
 ---
 
-
 Sessions and cookies allow data to be persisted across multiple user requests. In plain PHP you may access them
 through the global variables `$_SESSION` and `$_COOKIE`, respectively. Yii encapsulates sessions and cookies as objects
 and thus allows you to access them in an object-oriented fashion with additional useful enhancements.

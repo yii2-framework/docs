@@ -2,7 +2,6 @@
 title: "Guía Definitiva de Yii 2.0"
 ---
 
-
 Este tutorial se publica bajo los [Términos de Documentación Yii](https://www.yiiframework.com/doc/terms/).
 
 Todos los derechos reservados.

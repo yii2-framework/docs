@@ -2,7 +2,6 @@
 title: "Shaklar bilan ishlash"
 ---
 
-
 Ushbu bo'limda biz foydalanuvchidan ma'lumotlarni qabul qilishni o'rganamiz. Sahifada ma'lumotlarni kiritish uchun ism va emailni kiritish uchun shakl bor. Sahifada kiritilgan ma'lumotlar tasdiqlanishi uchun ko'rsatiladi.
 
 Shu maqsadga erishish uchun biz bitta [amal](structure-controllers.md) va ikkta [ko'rinish](structure-views.md) yasashdan tashqari

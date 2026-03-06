@@ -2,7 +2,6 @@
 title: "Travail avec des scripts clients"
 ---
 
-
 > Note: cette section est encore en développement.
 
 ### Enregistrement des scripts

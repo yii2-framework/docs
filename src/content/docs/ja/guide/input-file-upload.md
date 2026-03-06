@@ -2,7 +2,6 @@
 title: "ファイルをアップロードする"
 ---
 
-
 Yii におけるファイルのアップロードは、通常、アップロードされる個々のファイルを `UploadedFile` としてカプセル化する
 [[yii\web\UploadedFile]] の助けを借りて実行されます。これを [[yii\widgets\ActiveForm]] および [モデル](structure-models.md)
 と組み合わせることで、安全なファイル・アップロード・メカニズムを簡単に実装することが出来ます。

@@ -2,7 +2,6 @@
 title: "Git workflow for Yii 2 contributors"
 ---
 
-
 So you want to contribute to Yii? Great! But to increase the chances of your changes being accepted quickly, please
 follow the following steps. If you are new to Git
 and GitHub, you might want to first check out [GitHub help](https://help.github.com/), [try Git](https://try.github.com)

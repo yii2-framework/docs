@@ -2,7 +2,6 @@
 title: "Información General"
 ---
 
-
 Cada vez que una aplicación Yii gestiona una petición, se somete a un flujo de trabajo similar.
 
 1. Un usuario hace una petición al [script de entrada](structure-entry-scripts.md) ‘web/index.php’.

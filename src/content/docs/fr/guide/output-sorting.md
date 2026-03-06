@@ -2,7 +2,6 @@
 title: "Tri"
 ---
 
-
 Lors de l'affichage de multiples lignes de données, on a souvent besoin des trier les données en fonction des valeurs de certaines colonnes spécifiées par l'utilisateur. Yii utilise l'objet [[yii\data\Sort]] pour représenter les information sur le schéma de triage. En particulier :
 
 - [[yii\data\Sort::$attributes|attributes]] spécifie les _attributs_ grâce auxquels les données peuvent être triées. Un attribut peut être aussi simple qu'un [attribut de modèle](structure-models.md#attributes). Il peut aussi être un composite combinant le multiples attributs de modèles ou de colonnes de base de données. Nous apportons des informations plus détaillées dans la suite de cette page.

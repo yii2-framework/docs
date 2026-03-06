@@ -2,7 +2,6 @@
 title: "データ・ウィジェット"
 ---
 
-
 Yii はデータを表示するために使うことが出来る一連の [ウィジェット](structure-widgets.md) を提供しています。
 [DetailView](#detail-view) は、単一のレコードのデータを表示するのに使うことが出来ます。
 それに対して、[ListView](#list-view) と [GridView](#grid-view) は、複数のデータ・レコードをリストまたはテーブルで表示することが出来るもので、

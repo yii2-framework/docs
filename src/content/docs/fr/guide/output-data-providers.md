@@ -2,7 +2,6 @@
 title: "Fournisseurs de données"
 ---
 
-
 Dans les sections [Pagination](output-pagination.md) et [Tri](output-sorting.md), nous avons décrit comment permettre à l'utilisateur de choisir une page particulière de données à afficher et de trier ces données en fonction de certaines colonnes. Comme les tâches de pagination et de tri sont très courantes, Yii met à votre disposition un jeu de classes _fournisseurs de données_ pour les encapsuler.
 
 Un fournisseur de données est une classe qui implémente l'interface [[yii\data\DataProviderInterface]]. Il prend en essentiellement en charge l'extraction de données paginées et triées. Il fonctionne ordinairement avec des [composants graphiques de données](output-data-widgets.md) pour que l'utilisateur final puisse paginer et trier les données de manière interactive.

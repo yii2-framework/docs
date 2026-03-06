@@ -2,7 +2,6 @@
 title: "Modules"
 ---
 
-
 Les modules sont des unités logicielles auto-suffisantes constituées de [modèles](structure-models.md), [vues](structure-views.md),
 [contrôleurs](structure-controllers.md) et autres composants de prise en charge. L'utilisateur final peut accéder aux contrôleurs dans un module lorsqu'il est installé dans une [application](structure-applications.md). Pour ces raisons, les modules sont souvent regardés comme de mini-applications. Les modules diffèrent des [applications](structure-applications.md) par le fait que les modules ne peuvent être déployés seuls et doivent résider dans une application.
 

@@ -2,7 +2,6 @@
 title: "Gestion des erreurs"
 ---
 
-
 Yii inclut un [[yii\web\ErrorHandler|gestionnaire d'erreur]] pré-construit qui rend la gestion des erreurs bien plus agréable qu'auparavant. En particulier, le gestionnaire d'erreurs de Yii possède les fonctionnalités suivantes pour améliorer la gestion des erreurs.
 
 - Toutes les erreurs PHP non fatales (p. ex. avertissements, notifications) sont converties en exceptions susceptibles d'être interceptées.

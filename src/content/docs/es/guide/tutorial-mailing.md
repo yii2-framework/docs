@@ -2,7 +2,6 @@
 title: "Envío de Emails"
 ---
 
-
 > Note: Esta sección se encuentra en desarrollo.
 
 Yii soporta composición y envío de emails. De cualquier modo, el núcleo del framework provee

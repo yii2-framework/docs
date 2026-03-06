@@ -2,7 +2,6 @@
 title: "Project Organization"
 ---
 
-
 This document describes the organization of the Yii 2 development repositories.
 
 1. Individual Core extensions and application templates are maintained in

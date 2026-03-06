@@ -2,7 +2,6 @@
 title: "Crear tu propia estructura de Aplicación"
 ---
 
-
 > Note: Esta sección se encuentra en desarrollo.
 
 Mientras que los templates de proyectos [basic](https://github.com/yiisoft/yii2-app-basic) y [advanced](https://github.com/yiisoft/yii2-app-advanced)

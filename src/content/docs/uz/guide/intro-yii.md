@@ -2,7 +2,6 @@
 title: "Yii nima o`zi?"
 ---
 
-
 Yii – bu tez ishlovchi komponentli PHP freymvork bo'lib, zamonaviy web ilovalarni tez yaratish uchun mo'ljallangan. Yii (`Yi` `[ji:]` kabi talaffuz qilinadi) so'zi xitoy tilida "oddiy va evolyutsiyalovchi" degan ma'noni anglatadi. Shuningdek Yii akronim sifatida qaralganda uning yoyilma matni **Yes It Is** tarzida qaralishi ham mumkin!
 
 ## Yii ko'proq qanday masalalar uchun mos keladi?

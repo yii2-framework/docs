@@ -2,7 +2,6 @@
 title: "Properties"
 ---
 
-
 In PHP, class member variables are also called _properties_. These variables are part of the class definition, and are used
 to represent the state of a class instance (i.e., to differentiate one instance of the class from another).
 In practice, you may often want to handle the reading or writing of properties in special ways. For example,

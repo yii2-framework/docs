@@ -2,7 +2,6 @@
 title: "Git proces rada za Yii 2 saradnike"
 ---
 
-
 Želite da doprinesete Yii razvoju? Divno! Kako bi povećali šanse da vaše izmene budu prihvaćene što pre, molimo da
 ispratite sledeće korake. Ako ste novi sa Git-om
 i GitHub-om, možda bi želeli da prvo pogledate [GitHub pomoć](https://help.github.com/), [probate Git](https://try.github.com)

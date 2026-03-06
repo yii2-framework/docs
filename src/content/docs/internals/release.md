@@ -2,7 +2,6 @@
 title: "Releasing a new version"
 ---
 
-
 The list of steps needed to make a release of the framework has grown over time and became
 hard to manage manually, so we have created a command line tool to ensure no step is forgotten.
 

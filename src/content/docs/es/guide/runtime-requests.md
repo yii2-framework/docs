@@ -2,7 +2,6 @@
 title: "Peticiones"
 ---
 
-
 Las peticiones (requests) hechas a una aplicación son representadas como objetos [[yii\web\Request]] que proporcionan
 información como parámetros de la petición, cabeceras HTTP, cookies, etc. Dada una petición, se puede acceder al
 objeto request correspondiente a través del [componente de aplicación](structure-application-components.md) `request`

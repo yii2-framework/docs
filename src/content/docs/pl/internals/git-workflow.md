@@ -2,7 +2,6 @@
 title: "Cykl produkcyjny Git dla kontrybutorów Yii 2"
 ---
 
-
 Zatem chcesz współtworzyć Yii? Świetnie! Aby przyspieszyć proces akceptacji Twoich modyfikacji, pamiętaj o przestrzeganiu poniższych
 wskazówek. Jeśli pierwszy raz masz do czynienia z repozytorium Git lub GitHubem, zapoznaj się najpierw z
 [dokumentacją pomocy GitHub](https://help.github.com/), witryną [sprawdź Gita](https://try.github.com) lub też poczytaj o

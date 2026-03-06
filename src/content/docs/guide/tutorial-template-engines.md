@@ -2,7 +2,6 @@
 title: "Using template engines"
 ---
 
-
 By default, Yii uses PHP as its template language, but you can configure Yii to support other rendering engines, such as
 [Twig](https://twig.symfony.com/) or [Smarty](https://www.smarty.net/) available as extensions.
 

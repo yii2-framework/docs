@@ -2,7 +2,6 @@
 title: "Roteamento e Criação de URL"
 ---
 
-
 Quando uma aplicação Yii começa a processar uma URL requerida, o primeiro passo
 necessário é obter a rota pela análise da URL. A rota é usada para instanciar o
 [controlador (controller) da ação](structure-controllers.md) correspondente para

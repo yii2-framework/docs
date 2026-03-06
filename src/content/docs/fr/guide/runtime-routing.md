@@ -2,7 +2,6 @@
 title: "Routage et création d'URL"
 ---
 
-
 Lorsqu'une application Yii commence à traiter une URL objet d'une requête, sa première étape consiste à analyser cette URL
 pour la résoudre en une [route](structure-controllers.md#routes).
 La route est ensuite utilisée pour instancier l'[action de contrôleur](structure-controllers.md) correspondante pour la prise en charge de la requête. Ce processus est appelé _routage_.

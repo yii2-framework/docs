@@ -2,7 +2,6 @@
 title: "Panduan Definitif Untuk Yii 2.0"
 ---
 
-
 Tutorial ini dirilis di bawah [Persyaratan Dokumentasi Yii](https://www.yiiframework.com/doc/terms/).
 
 Seluruh hak cipta dilindungi.

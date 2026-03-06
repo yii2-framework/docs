@@ -2,7 +2,6 @@
 title: "Requisições"
 ---
 
-
 As requisições realizadas na aplicação são representadas pelo objeto [[yii\web\Request]]
 que fornece informações como os parâmetros da requisição, cabeçalhos HTTP, cookies
 e etc. Em uma determinada requisição, você pode acessar o objeto da requisição

@@ -2,7 +2,6 @@
 title: "Translation teams"
 ---
 
-
 ## Brazilian Portuguese
 
 - **Davidson Alencar, [@davidsonalencar](https://github.com/davidsonalencar), davidson.t.i@gmail.com**

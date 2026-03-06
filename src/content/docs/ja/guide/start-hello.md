@@ -2,7 +2,6 @@
 title: "こんにちは、と言う"
 ---
 
-
 このセクションでは、アプリケーションに「こんにちは」という新しいページを作成する方法を説明します。
 この目的を達するために、[アクション](structure-controllers.md#creating-actions) と
 [ビュー](structure-views.md) を作成します。

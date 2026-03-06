@@ -2,7 +2,6 @@
 title: "Registro de anotaciones"
 ---
 
-
 Yii proporciona un poderoso framework dedicado al registro de anotaciones (logging) que es altamente personalizable y
 extensible. Usando este framework se pueden guardar fácilmente anotaciones (logs) de varios tipos de mensajes,
 filtrarlos, y unificarlos en diferentes destinos que pueden ser archivos, bases de datos o emails.

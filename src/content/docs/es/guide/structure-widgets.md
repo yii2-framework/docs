@@ -2,7 +2,6 @@
 title: "Widgets"
 ---
 
-
 Los _widgets_ son bloques de código reutilizables que se usan en las [vistas](structure-views.md)
 para crear elementos de interfaz de usuario complejos y configurables, de forma orientada a objetos.
 Por ejemplo, un _widget_ de selección de fecha puede generar un selector de fechas bonito que

@@ -2,7 +2,6 @@
 title: "类自动加载（Autoloading）"
 ---
 
-
 Yii 依靠[类自动加载机制](https://www.php.net/manual/zh/language.oop5.autoload.php)来定位和包含所需的类文件。
 它提供一个高性能且完美支持[PSR-4 标准](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
 的自动加载器。

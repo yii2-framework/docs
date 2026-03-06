@@ -2,7 +2,6 @@
 title: "Acceptance Tests"
 ---
 
-
 Acceptance test verifies scenarios from a user's perspective. The application tested is accessed via either PhpBrowser or
 a real browser. In both cases the browsers are communicating via HTTP so application should be served via web server.
 

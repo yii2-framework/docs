@@ -2,7 +2,6 @@
 title: "Query Builder"
 ---
 
-
 Built on top of [Database Access Objects](db-dao.md), query builder allows you to construct a SQL query
 in a programmatic and DBMS-agnostic way. Compared to writing raw SQL statements, using query builder will help you write
 more readable SQL-related code and generate more secure SQL statements.

@@ -2,7 +2,6 @@
 title: "Diciendo Hola"
 ---
 
-
 Esta sección describe cómo crear la típica página "Hola Mundo" (Hello World en inglés) en tu aplicación.
 Para lograr este objetivo, vas a crear una [acción](structure-controllers.md#creating-actions) y
 una [vista](structure-views.md):

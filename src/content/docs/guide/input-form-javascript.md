@@ -2,7 +2,6 @@
 title: "Extending ActiveForm on the Client Side"
 ---
 
-
 The [[yii\widgets\ActiveForm]] widget comes with a set of JavaScript methods that are used for client validation.
 Its implementation is very flexible and allows you to extend it in different ways.
 In the following these are described.

@@ -2,7 +2,6 @@
 title: "Cos'è Yii"
 ---
 
-
 Yii è un framework PHP ad alte prestazioni, basato su component, per lo sviluppo veloce di applicazioni web moderne.
 Il nome Yii (pronunciato `Yii` o `[ji:]`) significa "semplice ed evoutivo" in cinese. Può anche essere visto come un acronimo di **Yes It Iss** (si lo è)!
 

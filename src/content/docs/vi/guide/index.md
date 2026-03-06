@@ -2,7 +2,6 @@
 title: "The Definitive Guide to Yii 2.0"
 ---
 
-
 Các hướng dẫn được phát hành theo [Các điều khoản về tài liệu Yii](https://www.yiiframework.com/doc/terms/).
 
 Tất cả bản quyền đã được bảo hộ (All Rights Reserved).

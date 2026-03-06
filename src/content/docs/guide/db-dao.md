@@ -2,7 +2,6 @@
 title: "Database Access Objects"
 ---
 
-
 Built on top of [PDO](https://www.php.net/manual/en/book.pdo.php), Yii DAO (Database Access Objects) provides an
 object-oriented API for accessing relational databases. It is the foundation for other more advanced database
 access methods, including [query builder](db-query-builder.md) and [active record](db-active-record.md).

@@ -2,7 +2,6 @@
 title: "クラスのオートローディング"
 ---
 
-
 Yiiは、必要となるすべてのクラス・ファイルを特定してインクルードするにあたり、
 [クラスのオートローディング・メカニズム](https://www.php.net/manual/ja/language.oop5.autoload.php) を頼りにします。
 Yii は、[PSR-4 標準](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) に準拠した、高性能なクラスのオートローダを提供しています。

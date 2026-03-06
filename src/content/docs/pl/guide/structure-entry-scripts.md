@@ -2,7 +2,6 @@
 title: "Skrypty wejściowe"
 ---
 
-
 Skrypty wejściowe są pierwszym krokiem procesu bootstrapowania aplikacji. Aplikacja (zarówno Web
 jak i konsolowa) posiada pojedynczy skrypt wejściowy. Użytkownicy końcowi wysyłają żądania do skryptów
 wejściowych, które inicjują instancje aplikacji i przekazują do nich te żądania.

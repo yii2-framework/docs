@@ -1,7 +1,6 @@
 ---
-title: "Установка Yii <span id=\"installing-from-composer\"></span>"
+title: 'Установка Yii <span id="installing-from-composer"></span>'
 ---
-
 
 Вы можете установить Yii двумя способами: используя [Composer](https://getcomposer.org/) или скачав архив.
 Первый способ предпочтительнее так как позволяет установить новые [расширения](structure-extensions.md)

@@ -2,7 +2,6 @@
 title: "Controllers (Controladores)"
 ---
 
-
 Depois de criar as classes de recursos e especificar como os dados de recursos devem ser formatados, a próxima coisa a fazer é criar ações do controller para expor os recursos para os usuários finais através das APIs RESTful.
 
 O Yii fornece duas classes básicas de controller para simplificar seu trabalho de criar ações RESTful: [[yii\rest\Controller]] e [[yii\rest\ActiveController]]. A diferença entre os dois controllers é que o último fornece um conjunto padrão de ações que são especificamente concebidos para lidar com recursos do [Active Record](db-active-record.md). Então, se você estiver usando [Active Record](db-active-record.md) e está confortável com as ações fornecidas, você pode considerar estender suas classes de controller de [[yii\rest\ActiveController]], que permitirá criar poderosas APIs RESTful com um mínimo de código.

@@ -2,7 +2,6 @@
 title: "Report an Issue"
 ---
 
-
 Please follow the guidelines below when creating an issue so that your issue can be more promptly resolved:
 
 - Provide information including: the version of PHP and Yii, the type of operating system and Web server, browser type and version;

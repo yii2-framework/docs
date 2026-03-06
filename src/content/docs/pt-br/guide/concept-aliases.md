@@ -2,7 +2,6 @@
 title: "Aliases (Apelidos)"
 ---
 
-
 Aliases são usados para representar caminhos de arquivos ou URLs de forma que você não precise acoplar o código usando caminhos absolutos ou URLs em seu projeto. Um alias deve começar com o caractere `@` para se diferenciar de um caminho de arquivo normal ou URL. O Yii já possui vários aliases predefinidos disponíveis.
 Por exemplo, o alias `@yii` representa o local em que o framework Yii foi instalado; `@web` representa a URL base para a aplicação que está sendo executada no momento.
 

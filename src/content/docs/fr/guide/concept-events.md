@@ -2,7 +2,6 @@
 title: "Événements"
 ---
 
-
 Les événement vous permettent d'injecter du code personnalisé dans le code existant à des points précis de son exécution. Vous pouvez attacher du code personnalisé à un événement de façon à ce que, lorsque l'événement est déclenché, le code s'exécute automatiquement. Par exemple, un objet serveur de courriel peut déclencher un événement `messageSent` (message envoyé) quand il réussit à envoyer un message. Si vous voulez conserver une trace des messages dont l'envoi a réussi, vous pouvez simplement attacher le code de conservation de la trace à l'événement `messageSent`.
 
 Yii introduit une classe de base appelée [[yii\base\Component]] pour prendre en charge les événements. Si une classe a besoin de déclencher des événements, elle doit étendre la classe [[yii\base\Component]], ou une de ses classes filles.

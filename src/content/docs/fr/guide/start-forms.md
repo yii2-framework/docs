@@ -2,7 +2,6 @@
 title: "Travailler avec les formulaires"
 ---
 
-
 Cette section décrit la création d'une nouvelle page comprenant un formulaire pour recevoir des données des
 utilisateurs.
 La page affichera un formulaire composé d'un champ de saisie nom et un champ de saisie email.

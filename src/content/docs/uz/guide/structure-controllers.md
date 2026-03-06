@@ -2,7 +2,6 @@
 title: "Kontrolyor"
 ---
 
-
 Kontrolyor [MVC](https://ru.wikipedia.org/wiki/Model-View-Controller) arxitekturasining bir qismi hisoblanadi. Bu [[yii\base\Controller]] klassidan voris qilib yaratilgan klass obyektlaridir, ushbu obyektlar so'rovlarni (request) qayta ishlash va javoblarni (response) tayyorlash uchun mo'ljallangan. [Ilova (application)](structure-applications.md) so'rovlarni qayta ishlagandan so'ng, so'rovlarga mos kontrolyor obyektlarini yaratadi va bu obyektlar kiruvchi ma'lumotlarni tahlil qiladi hamda ushbu ma'lumotlarni [model](structure-models.md)ga jo'natadi so'ng modeldan olingan natijalarni [namoyish (view)](structure-views.md)ga joylashtiradi va oxirgi natijani hosil qiladi.
 
 ## Amallar <span id="actions"></span>

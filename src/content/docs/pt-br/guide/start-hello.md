@@ -1,7 +1,6 @@
 ---
-title: "Dizendo \"Olá!\""
+title: 'Dizendo "Olá!"'
 ---
-
 
 Esta seção descreve como criar uma nova página de "Olá!" em sua aplicação.
 Para atingir este objetivo, você criará uma [action](structure-controllers.md#creating-actions)

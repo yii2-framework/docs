@@ -2,7 +2,6 @@
 title: "Class Autoloading"
 ---
 
-
 Yii relies on the [class autoloading mechanism](https://www.php.net/manual/en/language.oop5.autoload.php)
 to locate and include all required class files. It provides a high-performance class autoloader that is compliant with the
 [PSR-4 standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md).

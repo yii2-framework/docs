@@ -2,7 +2,6 @@
 title: "Responses"
 ---
 
-
 When an application finishes handling a [request](runtime-requests.md), it generates a [[yii\web\Response|response]] object
 and sends it to the end user. The response object contains information such as the HTTP status code, HTTP headers and body.
 The ultimate goal of Web application development is essentially to build such response objects upon various requests.

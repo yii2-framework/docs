@@ -2,7 +2,6 @@
 title: "Application Components"
 ---
 
-
 Applications are [service locators](concept-service-locator.md). They host a set of the so-called
 _application components_ that provide different services for processing requests. For example,
 the `urlManager` component is responsible for routing Web requests to appropriate controllers;

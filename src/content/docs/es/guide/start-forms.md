@@ -2,7 +2,6 @@
 title: "Trabajando con Formularios"
 ---
 
-
 En esta sección, describiremos como crear una nueva página para solicitar información de los usuarios.
 La página mostrará un formulario con un campo de input para el nombre y un campo de input para el email.
 Después de recibir estos datos del usuario, la página le mostrará la información de vuelta al usuario para la confirmación.

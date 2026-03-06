@@ -2,7 +2,6 @@
 title: "Objets graphiques"
 ---
 
-
 Les objets graphiques (_widgets_) sont des blocs de construction réutilisables dans des [vues](structure-views.md) pour créer des éléments d'interface utilisateur complexes et configurables d'une manière orientée objet. Par exemple, un composant d'interface graphique de sélection de date peut générer un sélecteur de date original qui permet aux utilisateurs de sélectionner une date en tant qu'entrée. Tout ce que vous avez besoin de faire, c'est d'insérer le code dans une vue comme indiqué ci-dessous :
 
 ```php

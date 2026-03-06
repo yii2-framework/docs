@@ -2,7 +2,6 @@
 title: "核心验证器（Core Validators）"
 ---
 
-
 Yii 提供一系列常用的核心验证器，位于 `yii\validators` 命名空间之下。
 为了避免使用冗长的类名，你可以直接用**别名**来指定相应的核心验证器。
 比如你可以用 `required` 别名代指 [[yii\validators\RequiredValidator]] 类：

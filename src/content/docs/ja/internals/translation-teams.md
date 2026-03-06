@@ -2,7 +2,6 @@
 title: "翻訳チーム"
 ---
 
-
 ## ブラジルのポルトガル語
 
 - **Davidson Alencar, [@davidsonalencar](https://github.com/davidsonalencar), davidson.t.i@gmail.com**

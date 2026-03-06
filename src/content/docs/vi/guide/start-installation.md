@@ -2,7 +2,6 @@
 title: "Cài đặt Yii"
 ---
 
-
 Bạn có thể cài đặt Yii theo hai cách, dùng trình quản lý gói [Composer](https://getcomposer.org/) hoặc tải toàn bộ mã nguồn Yii về.
 Cách thứ nhất thường được khuyến khích dùng hơn, vì nó cho phép bạn cài đặt thêm các [Gói mở rộng (extensions)](structure-extensions.md) hoặc cập nhật Yii đơn giản chỉ mới một dòng lệnh.
 

@@ -2,7 +2,6 @@
 title: "Vue d'ensemble"
 ---
 
-
 À chaque fois qu'une application Yii prend en charge une requête, elle entreprend un flux de travail similaire.
 
 1. Un utilisateur effectue une requête auprès du [script d'entrée](structure-entry-scripts.md) `web/index.php`.

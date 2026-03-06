@@ -2,7 +2,6 @@
 title: "Database Migration"
 ---
 
-
 During the course of developing and maintaining a database-driven application, the structure of the database
 being used evolves just like the source code does. For example, during the development of an application,
 a new table may be found necessary; after the application is deployed to production, it may be discovered

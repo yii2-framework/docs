@@ -2,7 +2,6 @@
 title: "Aktualizacja z wersji 1.1"
 ---
 
-
 Pomiędzy wersjami 1.1 i 2.0 Yii jest ogrom różnic, ponieważ framework został całkowicie przepisany w 2.0.
 Z tego też powodu aktualizacja z wersji 1.1 nie jest tak trywialnym procesem, jak w przypadku aktualizacji pomiędzy pomniejszymi wersjami.
 W tym przewodniku zapoznasz się z największymi różnicami dwóch głównych wersji.

@@ -2,7 +2,6 @@
 title: "Odczytywanie tablicowych danych wejściowych"
 ---
 
-
 Czasami zachodzi potrzeba obsłużenia wielu modeli tego samego rodzaju w jednym formularzu. Dla przykładu - ustawienia, gdzie każde z nich jest przechowywane jako para klucz-wartość
 i każde z nich jest reprezentowane przez model `Setting` [active record](db-active-record.md).
 Dla kontrastu obsługa wielu modeli różnych rodzajów pokazana jest w sekcji [Pobieranie danych dla wielu modeli](input-multiple-models.md).

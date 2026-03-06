@@ -2,7 +2,6 @@
 title: "Roteamento"
 ---
 
-
 Com as classes de recurso e controller prontas, você pode acessar os recursos utilizando uma URL como `http://localhost/index.php?r=user/create`, semelhante ao que você pode fazer com aplicações Web normais.
 
 Na prática, normalmente você desejará utilizar URLs amigáveis e tirar proveito dos métodos HTTP.

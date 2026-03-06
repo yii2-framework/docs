@@ -2,7 +2,6 @@
 title: "Validadores Nativos"
 ---
 
-
 O Yii fornece um conjunto de validadores nativos bastante utilizados, encontrados principalmente sob o namespace `yii\validators`. Em vez de usar nomes longos nas classes de validadores, você pode usar _aliases_ para especificar o uso desses validadores. Por exemplo, você pode usar o alias `required` para referenciar a classe [[yii\validators\RequiredValidator]]:
 
 ```php

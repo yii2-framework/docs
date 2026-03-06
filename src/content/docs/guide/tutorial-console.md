@@ -2,7 +2,6 @@
 title: "Console applications"
 ---
 
-
 Besides, the rich features for building web applications, Yii also has full-featured support for console applications
 which are mainly used to create background and maintenance tasks that need to be performed for a website.
 

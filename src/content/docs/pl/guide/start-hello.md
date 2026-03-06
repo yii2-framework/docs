@@ -2,7 +2,6 @@
 title: "Witaj świecie"
 ---
 
-
 Ta sekcja opisuje jak utworzyć nową stronę "Witaj" w Twojej aplikacji.
 Aby to osiągnąć, musisz utworzyć [akcję](structure-controllers.md#creating-actions) i [widok](structure-views.md):
 

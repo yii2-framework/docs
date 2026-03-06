@@ -2,7 +2,6 @@
 title: "Views"
 ---
 
-
 Views are part of the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) architecture.
 They are code responsible for presenting data to end users. In a Web application, views are usually created
 in terms of _view templates_ which are PHP script files containing mainly HTML code and presentational PHP code.

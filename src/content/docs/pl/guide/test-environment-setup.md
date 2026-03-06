@@ -2,7 +2,6 @@
 title: "Przygotowanie środowiska testowego"
 ---
 
-
 > Uwaga: Ta sekcja jest w trakcie tworzenia.
 
 Yii 2 jest oficjalnie zintegrowany z [`Codeception`](https://github.com/Codeception/Codeception) - frameworkiem testowym, pozwalającym

@@ -2,7 +2,6 @@
 title: "Inicialização (Bootstrapping)"
 ---
 
-
 A inicialização refere-se ao processo de preparação do ambiente antes que uma
 aplicação comece a resolver e processar um pedido de requisição. A inicialização
 é feita em duas etapas:

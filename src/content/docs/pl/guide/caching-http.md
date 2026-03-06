@@ -2,7 +2,6 @@
 title: "Pamięć podręczna HTTP"
 ---
 
-
 Oprócz pamięci podręcznej tworzonej po stronie serwera, która została opisana w poprzednich rozdziałach, aplikacje mogą również
 skorzystać z pamięci podręcznej tworzonej po stronie klienta, aby zaoszczędzić czas poświęcany na ponowne generowanie i przesyłanie
 identycznej zawartości strony.

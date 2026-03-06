@@ -2,7 +2,6 @@
 title: "Réponses"
 ---
 
-
 Quand une application a terminé la prise en charge d'une [requête](runtime-requests.md), elle génère un objet [[yii\web\Response|response]] et l'envoie à l'utilisateur final. L'objet `response` contient des informations telles que le code d'état HTTP, les entêtes HTTP et le corps. Le but ultime du développement d'applications Web est essentiellement du construire de tels objets `response` pour des requêtes variées.
 
 Dans la plupart des cas, vous devez travailler avec le [composant d'application](structure-application-components.md) `response` qui, par défaut, est une instance de [[yii\web\Response]]. Néanmoins, Yii vous permet également de créer vos propres objets `response` et de les envoyer à l'utilisateur final comme nous l'expliquons dans ce qui suit.

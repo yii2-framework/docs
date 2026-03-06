@@ -2,7 +2,6 @@
 title: "Testy akceptacyjne"
 ---
 
-
 > Uwaga: Ta sekcja jest w trakcie tworzenia.
 
 - [Testy akceptacyjne Codeception](https://codeception.com/docs/03-AcceptanceTests)

@@ -2,7 +2,6 @@
 title: "Extensions"
 ---
 
-
 Extensions are redistributable software packages specifically designed to be used in Yii applications and provide
 ready-to-use features. For example, the [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug) extension adds a handy debug toolbar
 at the bottom of every page in your application to help you more easily grasp how the pages are generated. You can

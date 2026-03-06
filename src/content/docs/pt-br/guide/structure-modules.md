@@ -2,7 +2,6 @@
 title: "Módulos"
 ---
 
-
 Os módulos são unidades independentes de software que são compostos de
 [models (modelos)](structure-models.md), [views (visões)](structure-views.md),
 [controllers (controladores)](structure-controllers.md) e outros componentes de

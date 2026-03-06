@@ -2,7 +2,6 @@
 title: "Zgłaszanie problemów"
 ---
 
-
 Prosimy o przestrzeganie poniższych wskazówek podczas dodawania nowego zgłoszenia, aby ułatwić i przyspieszyć rozwiązanie problemu:
 
 - Uzupełnij zgłoszenie o dodatkowe informacje takie jak: wersja PHP i Yii, rodzaj i wersja systemu operacyjnego, serwera Web oraz przeglądarki internetowej;

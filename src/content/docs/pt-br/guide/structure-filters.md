@@ -2,7 +2,6 @@
 title: "Filtros"
 ---
 
-
 Os filtros são objetos que são executados antes e/ou depois das
 [ações do controller (controlador)](structure-controllers.md#actions). Por exemplo,
 um filtro de controle de acesso pode ser executado antes das ações para garantir

@@ -2,7 +2,6 @@
 title: "Componentes de la Aplicación"
 ---
 
-
 Las aplicaciones son [service locators](concept-service-locators.md) (localizadores de servicios). Ellas albergan
 un grupo de los llamados _componentes de aplicación_ que proveen diferentes servicios para procesar el `request` (petición).
 Por ejemplo, el componente `urlManager` es responsable por rutear Web `requests` (peticiones) a los controladores apropiados;

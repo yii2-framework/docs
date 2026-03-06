@@ -2,7 +2,6 @@
 title: "Como Colaborar Com a Tradução Para o Português do Brasil"
 ---
 
-
 O Yii tem tradução para vários idiomas, incluindo o Português do Brasil. Existem
 duas áreas onde a contribuição para a tradução é muito bem-vindo. A primeira é a
 documentação e a segunda são as mensagens do framework.

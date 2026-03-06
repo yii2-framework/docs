@@ -2,7 +2,6 @@
 title: "Scripts de Entrada"
 ---
 
-
 Los scripts de entrada son el primer eslabón en el proceso de arranque de la aplicación. Una aplicación (ya sea una
 aplicación Web o una aplicación de consola) tiene un único script de entrada. Los usuarios finales hacen peticiones al
 script de entrada que instancia instancias de aplicación y remite la petición a estos.

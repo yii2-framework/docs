@@ -2,7 +2,6 @@
 title: "Views (Giao diện)"
 ---
 
-
 Views là phần trong mô hình [MVC](https://vi.wikipedia.org/wiki/MVC).
 Thành phần này chịu trách nhiệm chính trong việc hiển thị dữ liệu tới người dùng. Tại ứng dụng Web, views thường được tạo
 cùng với các _bản mẫu giao diện (view template)_ là những file kịch bản của PHP có chứa các mã HTML và mã PHP.

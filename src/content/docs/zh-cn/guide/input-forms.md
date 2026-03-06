@@ -2,7 +2,6 @@
 title: "创建表单"
 ---
 
-
 ## 基于活动记录（ActiveRecord）的表单：ActiveForm
 
 在yii中使用表单的主要方式是通过 [[yii\widgets\ActiveForm]]。

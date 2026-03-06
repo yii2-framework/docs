@@ -1,7 +1,6 @@
 ---
-title: "<div dir=\"rtl\">قل مرحبا - Saying Hello</div>"
+title: '<div dir="rtl">قل مرحبا - Saying Hello</div>'
 ---
-
 
 <p dir="rtl">
     في هذا الموضوع سنتعرف على كيفية إنشاء صفحة "Hello" جديدة في التطبيق الذي قمت بتثبيته، ولتحقيق ذلك، يجب عليك القيام بإنشاء <a href="../guide/structure-controllers.md#creating-actions">action</a> و <a href="../guide/structure-views.md">view</a> لهذه الصفحة:

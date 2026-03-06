@@ -2,7 +2,6 @@
 title: "依赖注入容器（Dependency Injection Container）"
 ---
 
-
 依赖注入（Dependency Injection，DI）容器就是一个对象，它知道怎样初始化并配置对象及其依赖的所有对象。
 [Martin 的文章](https://martinfowler.com/articles/injection.html) 已经解释了 DI 容器为什么很有用。
 这里我们主要讲解 Yii 提供的 DI 容器的使用方法。

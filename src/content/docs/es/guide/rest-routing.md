@@ -2,7 +2,6 @@
 title: "Enrutamiento"
 ---
 
-
 Con las clases de controlador y recurso preparadas, puedes acceder a los recursos usando una URL como
 `http://localhost/index.php?r=user/create`, parecida a la que usas con aplicaciones Web normales.
 

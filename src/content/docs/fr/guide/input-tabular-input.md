@@ -2,7 +2,6 @@
 title: "Collecte d'entrées tabulaires"
 ---
 
-
 Il arrive parfois que vous ayez besoin de manipuler plusieurs modèles de même sorte dans un formulaire unique. Par exemple, de multiples réglages où chacun des réglages est stocké sous forme de paire nom-valeur et est représenté par un modèle d'[enregistrement actif](db-active-record.md) `Setting`. Cette sorte de formulaire est aussi appelé « entrées tabulaires ». Par opposition à cela, la manipulation des modèles de différente sortes, est traitée dans la section [Formulaires complexes avec plusieurs modèles](input-multiple-models.md).
 
 Ce qui suit montre comment mettre en œuvre les entrées tabulaires avec Yii.

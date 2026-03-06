@@ -2,7 +2,6 @@
 title: "Flujo de Trabajo de Traducción"
 ---
 
-
 Yii se traduce en muchos idiomas con el fin de ser útil para desarrolladores de aplicaciones e internacionales.
 Dos áreas principales donde la contribución es muy bienvenida son la documentación y los mensajes del framework.
 

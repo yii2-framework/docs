@@ -2,7 +2,6 @@
 title: "Introdução"
 ---
 
-
 O Yii fornece um conjunto de ferramentas para simplificar a tarefa de implementar APIs RESTful Web Service. Em particular, o Yii suporta os seguintes recursos sobre APIs RESTful:
 
 - Prototipagem rápida com suporte para APIs comuns de [Active Record](db-active-record.md);

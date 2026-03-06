@@ -2,7 +2,6 @@
 title: "Apa Itu Yii"
 ---
 
-
 Yii merupakan kerangka kerja berbasis komponen yang berkecepatan tinggi (high performance) yang digunakan untuk kasus
 pengembangan yang cepat pada aplikasi Web Modern. Disebut Yii (diucapkan `Yee` atau `[ji:]`) yang berarti "sederhana dan
 berevolusi" dalam bahasa Cina. Bisa juga dianggap sebagai (akronim) singkatan dari **Yes It Is (Ya, Itu Dia)**!

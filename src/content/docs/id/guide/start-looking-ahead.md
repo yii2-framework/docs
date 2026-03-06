@@ -2,7 +2,6 @@
 title: "Menatap ke Depan"
 ---
 
-
 Jika anda membaca sepanjang bab "Mulai", sekarang anda sudah membuat aplikasi dengan Yii. Pada proses ini, anda sudah mempelajari bagaimana mengimplementasikan fitur-fitur umum
 yang dibutuhkan, seperti mengambil data dari pengguna melalui form HTML, mengambil data dari database, dan
 menampilkan data dengan halaman per halaman. Anda juga sudah mempelajari bagaimana menggunakan [Gii](https://github.com/yiisoft/yii2-gii/blob/master/docs/guide/README.md) untuk membuat

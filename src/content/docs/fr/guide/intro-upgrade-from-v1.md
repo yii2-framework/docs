@@ -2,7 +2,6 @@
 title: "Mise à jour depuis la version 1.1"
 ---
 
-
 Il y a beaucoup de différences entre les versions 1.1 et 2.0 de Yii, le framework ayant été complètement réécrit pour
 la 2.0. En conséquence, la mise à jour depuis la version 1.1 n'est pas aussi triviale que la mise à jour entre deux
 versions mineures. Dans ce guide, vous trouverez les principales différences entre les deux versions.

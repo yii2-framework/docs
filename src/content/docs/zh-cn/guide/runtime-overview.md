@@ -2,7 +2,6 @@
 title: "运行机制概述"
 ---
 
-
 每一次 Yii 应用开始处理 HTTP 请求时，它都会进行一个近似的流程。
 
 1. 用户提交指向 [入口脚本](structure-entry-scripts.md) `web/index.php` 的请求。

@@ -2,7 +2,6 @@
 title: "Uruchamianie aplikacji"
 ---
 
-
 Po zainstalowaniu Yii posiadasz działającą aplikację Yii dostępną pod adresem `https://hostname/basic/web/index.php` lub `https://hostname/index.php`, zależnie od Twojej konfiguracji.
 Ta sekcja wprowadzi Cię do wbudowanych funkcjonalności aplikacji, pokaże jak zorganizowany jest jej kod oraz jak aplikacja obsługuje żądania.
 

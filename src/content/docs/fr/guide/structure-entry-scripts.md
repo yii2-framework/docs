@@ -2,7 +2,6 @@
 title: "Scripts d'entrée"
 ---
 
-
 Le script d'entrée est le premier rencontré dans le processus d'amorçage de l'application. Une application (qu'elle
 soit une application Web ou une application console) a un unique script d'entrée. Les utilisateurs font des
 requêtes au script d'entrée qui instancie un objet _Application_ et lui transmet les requêtes.

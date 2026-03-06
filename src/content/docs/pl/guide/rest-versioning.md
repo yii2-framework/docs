@@ -2,7 +2,6 @@
 title: "Wersjonowanie"
 ---
 
-
 Cechą dobrego API jest jego _wersjonowanie_: zmiany i nowe funkcjonalności powinny być implementowane w nowych wersjach API, zamiast
 ciągłych modyfikacji jednej już istniejącej. W przeciwieństwie do aplikacji Web, nad którymi ma się pełną kontrolę zarówno po stronie
 klienta, jak i serwera, nad API zwykle nie posiada się kontroli po stronie klienta. Z tego powodu niezwykle istotnym jest, aby zachować

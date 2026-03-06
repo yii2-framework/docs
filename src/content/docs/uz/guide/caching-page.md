@@ -2,7 +2,6 @@
 title: "Sahifalarni keshlash"
 ---
 
-
 Sahifalarni keshlash — bu sahifadagi butun ma'lumotni server tomonida keshda saqlashga aytiladi. Keginchalik sahifani serverdan
 talab qilsak bizga sahifadagi ma'lumotni keshdan qaytaradi.
 

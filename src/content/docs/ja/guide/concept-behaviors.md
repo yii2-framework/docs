@@ -2,7 +2,6 @@
 title: "ビヘイビア"
 ---
 
-
 ビヘイビアは [[yii\base\Behavior]] またその子クラスのインスタンスです。
 ビヘイビアは [ミックスイン](https://ja.wikipedia.org/wiki/Mixin) としても知られ、既存の [[yii\base\Component|component]] クラスの
 機能を、クラスの継承を変更せずに拡張することができます。コンポーネントにビヘイビアをアタッチすると、その

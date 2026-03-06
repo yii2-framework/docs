@@ -2,7 +2,6 @@
 title: "Utilisation de mots de passe"
 ---
 
-
 La plupart des développeurs savent que les mots de passe ne peuvent pas être stockés « en clair », mais beaucoup d'entre-eux croient qu'il est toujours sûr des les hacher avec `md5` ou `sha1`. Il fut un temps où utiliser ces algorithmes de hachage était suffisant, mais les matériels modernes font qu'il est désormais possible de casser de tels hachages – même les plus robustes – très rapidement en utilisant des attaques en force brute.
 
 Pour apporter une sécurité améliorée pour les mots de passe des utilisateurs, même dans le pire des scénario (une brèche est ouverte dans votre application), vous devez utiliser des algorithmes de hachage qui résistent aux attaques en force brute. Le choix le meilleur couramment utilisé est `bcrypt`.

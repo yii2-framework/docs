@@ -2,7 +2,6 @@
 title: "Styl kodowania bazowych plików frameworka Yii 2"
 ---
 
-
 Poniższy styl kodowania jest stosowany w kodzie frameworka Yii 2.x i oficjalnych rozszerzeniach. Jeśli planujesz wysłać prośbę
 o dołączenie kodu do bazowego frameworka, powinieneś rozważyć stosowanie takiego samego stylu. Nie zmuszamy jednak nikogo do
 stosowania go we własnych aplikacjach. Wybierz styl, który najbardziej odpowiada Twoim potrzebom.

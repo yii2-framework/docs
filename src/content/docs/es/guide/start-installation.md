@@ -2,7 +2,6 @@
 title: "Instalar Yii"
 ---
 
-
 Puedes instalar Yii de dos maneras, utilizando el administrador de paquetes [Composer](https://getcomposer.org/) o descargando un archivo comprimido.
 La forma recomendada es la primera, ya que te permite instalar nuevas [extensions](structure-extensions.md) o actualizar Yii con sólo ejecutar un comando.
 

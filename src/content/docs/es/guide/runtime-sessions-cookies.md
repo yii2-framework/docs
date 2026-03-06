@@ -2,7 +2,6 @@
 title: "Sesiones (Sessions) y Cookies"
 ---
 
-
 Las sesiones y las cookies permiten la persistencia de datos a través de múltiples peticiones de usuario. En PHP plano, debes acceder a ellos a través de las variables globales `$_SESSION` y `$_COOKIE`, respectivamente. Yii encapsula las sesiones y las cookies como objetos y por lo tanto te permite acceder a ellos de manera orientada a objetos con estupendas mejoras adicionales.
 
 ## Sesiones <span id="sessions"></span>
