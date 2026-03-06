@@ -2,7 +2,6 @@
 title: "Modelos"
 ---
 
-
 Los modelos forman parte de la arquitectura
 [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). Son objetos que representan datos de
 negocio, reglas y lógica.

@@ -2,7 +2,6 @@
 title: "Working with Forms"
 ---
 
-
 This section describes how to create a new page with a form for getting data from users.
 The page will display a form with a name input field and an email input field.
 After getting those two pieces of information from the user, the page will echo the entered values back for confirmation.

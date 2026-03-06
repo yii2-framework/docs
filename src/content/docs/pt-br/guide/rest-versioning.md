@@ -2,7 +2,6 @@
 title: "Versionamento"
 ---
 
-
 Uma boa API é _versionada_: Mudanças e novos recursos são implementados em novas versões da API em vez de alterar continuamente apenas uma versão. Diferente de aplicações Web, com a qual você tem total controle do código de ambos os lados cliente e servidor, APIs são destinadas a ser utilizadas por clientes além de seu controle. Por esta razão, a compatibilidade (BC) entre as APIs deve ser mantida sempre que possível. Se uma mudança que pode quebrar esta compatibilidade é necessária, você deve introduzi-la em uma nova versão de API e subir o número da versão. Os clientes existentes podem continuar a usar a versão antiga da API; e os clientes novos ou atualizados podem obter a nova funcionalidade na nova versão da API.
 
 > Dica: Consulte o artigo [Semantic Versioning](https://semver.org/) para obter mais informações sobre como projetar números de versão da API.

@@ -2,7 +2,6 @@
 title: "Mailing"
 ---
 
-
 > Note: This section is under development.
 
 Yii supports composition and sending of the email messages. However, the framework core provides

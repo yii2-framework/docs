@@ -2,7 +2,6 @@
 title: "模型"
 ---
 
-
 模型是 [MVC](https://zh.wikipedia.org/wiki/MVC) 模式中的一部分，
 是代表业务数据、规则和逻辑的对象。
 

@@ -2,7 +2,6 @@
 title: "フォームを作成する"
 ---
 
-
 ## アクティブ・レコードに基づくフォーム : ActiveForm <span id="activerecord-based-forms-activeform"></span>
 
 Yii においてフォームを使用するときは、主として [[yii\widgets\ActiveForm]] による方法を使います。

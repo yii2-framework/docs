@@ -2,7 +2,6 @@
 title: "Wysyłanie poczty"
 ---
 
-
 > Note: Ta sekcja jest w trakcie tworzenia.
 
 Yii wspiera tworzenie oraz wysyłanie wiadomości email, jednakże silnik dostarcza jedynie funkcjonalność składania treści oraz prosty interfejs.

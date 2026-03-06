@@ -2,7 +2,6 @@
 title: "Visão Geral"
 ---
 
-
 As aplicações do Yii são organizadas de acordo com o padrão de projeto
 [model-view-controller (MVC)](https://pt.wikipedia.org/wiki/MVC)
 (modelo-visão-controlador). Os [models](structure-models.md) representam dados,

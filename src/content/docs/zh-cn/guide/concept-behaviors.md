@@ -2,7 +2,6 @@
 title: "行为"
 ---
 
-
 行为是 [[yii\base\Behavior]] 或其子类的实例。
 行为，也称为 [mixins](https://zh.wikipedia.org/wiki/Mixin)，
 可以无须改变类继承关系即可增强一个已有的 [[yii\base\Component|组件]] 类功能。

@@ -2,7 +2,6 @@
 title: "Instalasi Yii"
 ---
 
-
 Anda dapat menginstal Yii dalam dua cara, menggunakan [Composer](https://getcomposer.org/) paket manager atau dengan mengunduh file arsip.
 Yang pertama adalah cara yang lebih disukai, karena memungkinkan Anda untuk menginstal [ekstensi](structure-extensions.md) baru atau memperbarui Yii dengan hanya menjalankan _command line_.
 

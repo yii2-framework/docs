@@ -2,7 +2,6 @@
 title: "Tests funcionales"
 ---
 
-
 Los tests funcionales verifican escenarios desde la perspectiva de un usuario.
 Son similares a los [tests de aceptación](test-acceptance.md) pero en lugar de
 comunicarse vía HTTP rellena el entorno como parámetros POST y GET y después ejecuta

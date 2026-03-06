@@ -2,7 +2,6 @@
 title: "Pagination"
 ---
 
-
 When there are too much data to be displayed on a single page, a common strategy is to display them in multiple
 pages and on each page only display a small portion of the data. This strategy is known as _pagination_.
 

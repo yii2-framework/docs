@@ -2,7 +2,6 @@
 title: "Recursos"
 ---
 
-
 APIs RESTful tratam de como acessar e manipular _recursos_. Você pode ver recursos como [models](structure-models.md) no paradigma MVC.
 
 Embora não haja restrição na forma de representar um recurso, no Yii você normalmente representaria recursos como objetos de [[yii\base\Model]] ou de uma classe filha (ex. [[yii\db\ActiveRecord]]), pelas seguintes razões:

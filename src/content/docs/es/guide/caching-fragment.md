@@ -2,7 +2,6 @@
 title: "Caché de Fragmentos"
 ---
 
-
 La Caché de Fragmentos se refiere al almacenamiento en caché de un fragmento, o sección, de una página Web. Por ejemplo, si
 una página muestra un sumario de las ventas anuales en una tabla, podrías guardar esta tabla en memoria caché para
 eliminar el tiempo necesario para generar esta tabla en cada petición (request). La caché de fragmentos está construido

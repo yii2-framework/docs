@@ -2,7 +2,6 @@
 title: "Tests de aceptación"
 ---
 
-
 Un test de aceptación verifica escenarios desde la perspectiva de un usuario.
 Se accede a la aplicación testeada por medio de PhpBrowser o de un navegador de verdad.
 En ambos casos los navegadores se comunican vía HTTP así que la aplicación debe ser

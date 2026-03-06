@@ -2,7 +2,6 @@
 title: "Migración de Base de Datos"
 ---
 
-
 Durante el curso de desarrollo y mantenimiento de una aplicación con base de datos, la estructura de dicha base de datos
 evoluciona tanto como el código fuente. Por ejemplo, durante el desarrollo de una aplicación,
 una nueva tabla podría ser necesaria; una vez que la aplicación se encuentra en producción, podría descrubrirse

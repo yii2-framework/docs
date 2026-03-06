@@ -1,7 +1,6 @@
 ---
-title: "Yiini o'rnatish <span id=\"installing-from-composer\"></span>"
+title: 'Yiini o''rnatish <span id="installing-from-composer"></span>'
 ---
-
 
 Siz Yii'ni ikki usulda o'rnatishingiz mumkin: [Composer](https://getcomposer.org/) - dan foydalanishingiz mumkin yoki arxivdan yuklab olib ishlatishingiz mumkin. Birinchi usul afzalroq bo'ladi, chunki u yangi [kengaytmalar](structure-extensions.md) o'rnatish yoki Yii'ni bitta buyruq bilan yangilash imkonini beradi.
 

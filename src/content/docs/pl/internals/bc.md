@@ -2,7 +2,6 @@
 title: "Wsteczna kompatybilność"
 ---
 
-
 Absolutnie nie łamiemy wstecznej kompatybilności w wydaniach - łatach typu `2.x.y.Z` i staramy się unikać koniecznych do wprowadzenia
 zmian niekompatybilnych wstecznie w pomniejszych wydaniach typu `2.x.Y`.
 

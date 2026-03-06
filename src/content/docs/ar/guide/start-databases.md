@@ -1,7 +1,6 @@
 ---
-title: "<div dir=\"rtl\">التعامل مع قواعد البيانات</div>"
+title: '<div dir="rtl">التعامل مع قواعد البيانات</div>'
 ---
-
 
 <p dir="rtl">
     في هذا الجزء التعليمي ستتعلم آلية إنشاء صفحة جديدة تعرض بيانات يتم جلبها من قاعدة البيانات  -في هذا المثال، البيانات تخص ال country-، هذه البيانات سيتم جلبها من جدول موجود في قاعدة البيانات يسمى ب <code>country</code>. لتحقيق هذا المهمة، ستقوم بعمل ال config الخاص بالإتصال بقاعدة بيانات، بالإضافة لإنشاء ال <a href="../guide/db-active-record.md">Active Record</a> class، وتعريف ال <a href="../guide/structure-controllers.md">action</a>، وإنشاء <a href="../guide/structure-views.md">view</a> لهذه الصفحة.

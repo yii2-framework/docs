@@ -2,7 +2,6 @@
 title: "Obsługa błędów"
 ---
 
-
 Podczas obsługi żądania RESTfulowego API, w przypadku wystąpienia błędu w zapytaniu użytkownika lub gdy stanie się coś nieprzewidywanego
 z serwerem, możesz po prostu rzucić wyjątkiem, aby powiadomić użytkownika, że coś poszło nieprawidłowo.
 Jeśli możesz zidentyfikować przyczynę błędu (np. żądany zasób nie istnieje), powinieneś rozważyć rzucenie wyjątkiem razem z odpowiednim kodem statusu HTTP

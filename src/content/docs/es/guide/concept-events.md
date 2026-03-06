@@ -2,7 +2,6 @@
 title: "Eventos"
 ---
 
-
 Los eventos permiten inyectar código dentro de otro código existente en ciertos puntos de ejecución. Se pueden adjuntar
 código personalizado a un evento, cuando se lance (triggered), el código se ejecutará automáticamente. Por ejemplo, un
 objeto mailer puede lanzar el evento `messageSent` cuando se envía un mensaje correctamente. Si se quiere rastrear

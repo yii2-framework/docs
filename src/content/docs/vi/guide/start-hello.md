@@ -2,7 +2,6 @@
 title: "Bắt đầu ứng dụng với lời chào Hello"
 ---
 
-
 Phần này sẽ mô tả làm thế nào để tạo ra một trang Web mới trong ứng dụng của bạn cùng với lời chào "Hello".
 Để đạt được mục tiêu này. bạn sẽ cần tạo mới một [action](structure-controllers.md#creating-actions) và
 một [view](structure-views.md):

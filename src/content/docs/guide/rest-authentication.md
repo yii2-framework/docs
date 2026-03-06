@@ -2,7 +2,6 @@
 title: "Authentication"
 ---
 
-
 Unlike Web applications, RESTful APIs are usually stateless, which means sessions or cookies should not
 be used. Therefore, each request should come with some sort of authentication credentials because
 the user authentication status may not be maintained by sessions or cookies. A common practice is

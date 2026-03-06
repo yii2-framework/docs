@@ -2,7 +2,6 @@
 title: "Versionado"
 ---
 
-
 Una buena API ha de ser _versionada_: los cambios y las nuevas características son implementadas en las nuevas versiones del API, en vez de estar continuamente modificando sólo una versión. Al contrario que en las aplicaciones Web, en las cuales tienes total control del código de ambas partes lado del cliente y lado del servidor,
 las APIs están destinadas a ser usadas por los clientes fuera de tu control. Por esta razón, compatibilidad hacia atrás (BC Backward compatibility)
 de las APIs ha de ser mantenida siempre que sea posible. Si es necesario un cambio que puede romper la BC, debes de introducirla en la nueva versión del API, e incrementar el número de versión. Los clientes que la usan pueden continuar usando la antigua versión de trabajo del API; los nuevos y actualizados clientes pueden obtener la nueva funcionalidad de la nueva versión del API.

@@ -2,7 +2,6 @@
 title: "Html helper"
 ---
 
-
 Every web application generates lots of HTML markup. If the markup is static, it can be done efficiently by
 [mixing PHP and HTML in a single file](https://www.php.net/manual/en/language.basic-syntax.phpmode.php), but when it is
 generated dynamically it starts to get tricky to handle it without extra help. Yii provides such help in the form

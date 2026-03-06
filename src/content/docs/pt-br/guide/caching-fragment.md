@@ -2,7 +2,6 @@
 title: "Cache de Fragmentos"
 ---
 
-
 Cache de fragmentos é responsável por armazenar em cache um fragmento de uma página Web. Por exemplo, se uma
 página exibe o sumario de vendas anuais em uma tabela, você pode armazenar esta tabela em cache para eliminar
 o tempo necessário para gerar esta tabela em cada requisição. O Cache de Fragmentos é construído a partir

@@ -2,7 +2,6 @@
 title: "Extensions"
 ---
 
-
 Les extensions sont des paquets logiciels distribuables, spécialement conçus pour être utilisés dans des applications, et qui procurent des fonctionnalités prêtes à l'emploi. Par exemple, l'extension [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug) ajoute une barre de débogage très pratique au pied de chaque page dans votre application pour vous aider à comprendre plus aisément comment les pages sont générées. Vous pouvez utiliser des extensions pour accélérer votre processus de développement. Vous pouvez aussi empaqueter votre code sous forme d'extensions pour partager votre travail avec d'autres personnes.
 
 > Info: nous utilisons le terme "extension" pour faire référence à des paquets logiciels spécifiques à Yii. Quant aux paquets à but plus général, qui peuvent être utilisés en dehors de Yii, nous y faisons référence en utilisant les termes « paquet » ou « bibliothèque ».

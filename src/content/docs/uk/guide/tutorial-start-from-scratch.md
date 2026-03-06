@@ -2,7 +2,6 @@
 title: "Створення своєї власної структури додатку"
 ---
 
-
 > Note: Цей розділ знаходиться в розробці.
 
 У той час, як [базовий](https://github.com/yiisoft/yii2-app-basic) і [розширений](https://github.com/yiisoft/yii2-app-advanced)

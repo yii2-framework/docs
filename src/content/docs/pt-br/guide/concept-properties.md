@@ -2,7 +2,6 @@
 title: "Propriedades"
 ---
 
-
 No PHP, atributos da classe são sempre chamadas de _propriedades_. Esses atributos fazem parte da definição da classe e são usadas para representar o estado de uma instância da classe (para diferenciar uma instância da classe de outra). Na prática, muitas vezes você pode querer lidar com a leitura ou a escrita de propriedades de maneiras especiais. Por exemplo, você pode querer trimar uma string sempre que for atribuído um valor para a propriedade `label`. Você _poderia_ usar o código a seguir para realizar esta tarefa:
 
 ```php

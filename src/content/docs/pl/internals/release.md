@@ -2,7 +2,6 @@
 title: "Wydawanie nowej wersji"
 ---
 
-
 Lista kroków koniecznych do wykonania podczas wydawania frameworka urosła znacznie w ciągu ostatnich lat i stała się uciążliwa do
 utrzymywania ręcznego, zatem stworzyliśmy narzędzie dostępne z linii komend, aby upewnić się, że żaden z kroków nie zostanie pominięty.
 

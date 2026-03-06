@@ -2,7 +2,6 @@
 title: "Ilovani ishga tushirish"
 ---
 
-
 `https://hostname/basic/web/index.php` o'rnatganingizdan so'ng, asosiy dastur `https://hostname/basic/web/index.php` URL manzilida yoki `https://hostname/index.php` orqali Veb-server sozlamalariga qarab mavjud bo'ladi. Ushbu bo'lim - kodni tashkil qilishning umumiy ta'rifi, o'rnatilgan funksionallik va murojaatlar bilan ishlash.
 
 > Info: Ushbu qo'llanmada Yii `basic/web` katalogiga o'rnatilganini inobatga oladi va u o'z navbatida veb-server sozlamalaridagi ildiz katalogi sifatida o'rnatiladi. Natijada `https://hostname/index.php` URL manziliga kirish orqali `basic/web` joylashgan ilovaga kirishingiz mumkin. Boshlang'ich konfiguratsiya jarayonida batafsil ma'lumotni [Yii-ni o'rnatish bo'limida](start-installation.md) topishingiz mumkin.

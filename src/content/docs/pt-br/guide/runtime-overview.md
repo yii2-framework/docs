@@ -2,7 +2,6 @@
 title: "Visão Geral"
 ---
 
-
 Cada vez que uma aplicação Yii processa uma requisição, ele passa por um fluxo
 de trabalho parecido como o seguinte:
 

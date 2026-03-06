@@ -2,7 +2,6 @@
 title: "Trabalhando com Bancos de Dados"
 ---
 
-
 Esta seção descreverá como criar uma nova página que exibe informações de países obtidos de uma tabela de banco de dados chamada `pais`. Para isso, você
 configurará uma conexão com o banco de dados, criará uma classe de
 [Active Record](db-active-record.md), definirá uma [action](structure-controllers.md) e criará uma [view](structure-views.md).

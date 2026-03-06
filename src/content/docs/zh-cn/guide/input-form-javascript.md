@@ -2,7 +2,6 @@
 title: "在客户端扩展 ActiveForm"
 ---
 
-
 [[yii\widgets\ActiveForm]] 小部件附带一组用于客户端验证的 JavaScript 方法。
 它的实现非常灵活，可以让你以不同的方式扩展它。
 下面我们来看描述。

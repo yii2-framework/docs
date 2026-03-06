@@ -2,7 +2,6 @@
 title: "Das umfassende Handbuch für Yii 2.0"
 ---
 
-
 Dieses Tutorial wurde unter den [Bedingungen der Yii-Dokumentation](https://www.yiiframework.com/doc/terms/) veröffentlicht.
 
 Alle Rechte vorbehalten.

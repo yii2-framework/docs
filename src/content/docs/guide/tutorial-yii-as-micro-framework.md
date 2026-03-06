@@ -2,7 +2,6 @@
 title: "Using Yii as a Micro-framework"
 ---
 
-
 Yii can be easily used without the features included in basic and advanced templates. In other words, Yii is already a micro-framework. It is not required to have the directory structure provided by templates to work with Yii.
 
 This is especially handy when you do not need all the pre-defined template code like assets or views. One of such cases is building a JSON API. In the following sections will show how to do that.

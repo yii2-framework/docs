@@ -2,7 +2,6 @@
 title: "Running Applications"
 ---
 
-
 After installing Yii, you have a working Yii application that can be accessed via
 the URL `https://hostname/basic/web/index.php` or `https://hostname/index.php`, depending
 upon your configuration. This section will introduce the application's built-in functionality,

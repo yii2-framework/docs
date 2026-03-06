@@ -2,7 +2,6 @@
 title: "Json ヘルパ"
 ---
 
-
 Json ヘルパは JSON をエンコードおよびデコードする一連の静的メソッドを提供します。
 `[[yii\helpers\Json::encode()]]` メソッドはエンコード・エラーを処理しますが、
 `[[yii\web\JsExpression]]` オブジェクトの形式で表現された JavaScript の式はエンコードしません。

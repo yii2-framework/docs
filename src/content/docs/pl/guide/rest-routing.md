@@ -2,7 +2,6 @@
 title: "Routing"
 ---
 
-
 Po przygotowaniu klas zasobów i kontrolerów dostęp do nich można uzyskać w ten sam sposób, jak w przypadku zwykłej aplikacji, używając URL np.
 `http://localhost/index.php?r=user/create`.
 

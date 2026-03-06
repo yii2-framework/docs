@@ -2,7 +2,6 @@
 title: "Làm việc với Forms"
 ---
 
-
 Ở phần này sẽ hướng dẫn làm thế nào để tạo mới trang Web cho phép ứng dụng lấy các thông tin về user từ form.
 Trang này sẽ có chức năng hiển thị form cho user cùng với các input như name (tên người dùng) và email.
 Sau khi nhận hai thông tin về user, trang web sẽ hiển thị thông tin tới user.

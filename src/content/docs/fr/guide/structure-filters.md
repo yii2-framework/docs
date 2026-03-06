@@ -2,7 +2,6 @@
 title: "Filtres"
 ---
 
-
 Les filtres sont des objets qui sont exécutés avant et/ou après les [actions de contrôleurs](structure-controllers.md#actions). Par exemple, un filtre de contrôle d'accès peut être exécuté avant les actions pour garantir qu'un utilisateur final particulier est autorisé à y accéder. Un filtre de compression de contenu peut être exécuté après les actions pour compresser la réponse avant de l'envoyer à l'utilisateur final.
 
 Un filtre peut être constitué d''un pré-filtre (logique de filtrage appliquée _avant_ les actions) et/ou un post-filtre (logique appliquée _après_ les actions).

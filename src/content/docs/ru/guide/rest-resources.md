@@ -2,7 +2,6 @@
 title: "Ресурсы"
 ---
 
-
 RESTful API строятся вокруг доступа к _ресурсам_ и управления ими. Вы можете думать о ресурсах как
 о [моделях](structure-models.md) из [MVC](https://ru.wikipedia.org/wiki/Model-View-Controller).
 

@@ -2,7 +2,6 @@
 title: "Design Decisions"
 ---
 
-
 This document lists the design decisions that we have made after extensive discussions. Unless there are very strong
 reasons, these decisions should be kept for consistency. Any change to these decisions should get agreement among
 the core developers.

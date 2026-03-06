@@ -2,7 +2,6 @@
 title: "Migrações de Dados (Migrations)"
 ---
 
-
 Durante o curso de desenvolvimento e manutenção de uma aplicação orientada a banco de dados, a estrutura de banco sendo usada evolui ao mesmo tempo em que o código. Por exemplo, durante o desenvolvimento de uma aplicação, a criação de uma nova tabela pode ser necessária; após ser feito o deploy da aplicação em produção, pode ser descoberto que um índice deveria ser criado para melhorar a performance de alguma query; entre outros. Como a mudança de uma estrutura de banco de dados normalmente necessita de alguma mudança no código, o Yii suporta a então chamada funcionalidade de _migração de dados_ que permite que você mantenha um registro das mudanças feitas no banco de dados em termos de _migrações de dados_ que são versionadas em conjunto com o código fonte da aplicação.
 
 Os seguintes passos mostram como uma migração de dados pode ser usada pela equipe durante o desenvolvimento:

@@ -2,7 +2,6 @@
 title: "Applications"
 ---
 
-
 Les Applications sont des objets qui gouvernent la structure d'ensemble et le cycle de vie des systèmes mettant en œuvre Yii.
 Chacun des systèmes mettant en œuvre Yii contient un objet _Application_ unique qui est créé par le [Script d'entrée](structure-entry-scripts.md) et est globalement accessible à l'aide de l'expression `\Yii::$app`.
 

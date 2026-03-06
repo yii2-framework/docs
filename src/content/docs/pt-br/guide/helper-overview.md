@@ -2,7 +2,6 @@
 title: "Helpers"
 ---
 
-
 > Observação: Esta seção está em desenvolvimento.
 
 O Yii oferece muitas classes que ajudam a simplificar as tarefas comuns de codificação, como manipulação de string ou de array,

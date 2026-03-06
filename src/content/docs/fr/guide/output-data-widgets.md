@@ -2,7 +2,6 @@
 title: "Composants graphiques d'affichage de données"
 ---
 
-
 Yii fournit un jeu de [composants graphiques](structure-widgets.md) utilisables pour afficher des données. Tandis que le componsant graphique [DetailView](#detail-view) (vue détaillée) peut être utilisé pour afficher un enregistrement unique, les composants graphiques [ListView](#list-view) (vue en liste) et [GridView](#grid-view) (vue en grille) peuvent être utilisés pour afficher plusieurs enregistrements en liste ou en grille assortis de fonctionnalités telles que la pagination, le tri et le filtrage.
 
 ## Vue détaillée (classe _DetailView_) <span id="detail-view"></span>

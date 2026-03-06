@@ -2,7 +2,6 @@
 title: "Tworzenie własnej struktury aplikacji"
 ---
 
-
 > Note: Ta sekcja jest w trakcie tworzenia.
 
 [Podstawowy](https://github.com/yiisoft/yii2-app-basic) i [zaawansowany](https://github.com/yiisoft/yii2-app-advanced) szablon projektu jest w pełni wystarczający w większości

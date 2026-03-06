@@ -2,7 +2,6 @@
 title: "概要"
 ---
 
-
 Yii のアプリケーションは [モデル・ビュー・コントローラ (MVC)](https://ja.wikipedia.org/wiki/Model_View_Controller) アーキテクチャ・パターンに従って編成されています。
 [モデル](structure-models.md) は、データ、ビジネス・ロジック、規則を表現します。
 [ビュー](structure-views.md) は、モデルの出力表現です。

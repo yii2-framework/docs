@@ -2,7 +2,6 @@
 title: "Ứng dụng"
 ---
 
-
 Mỗi ứng dụng là một đối tượng giúp quản lý tổng thể cấu trúc và vòng đời của ứng dụng Yii.
 Mỗi ứng dụng Yii đều chứa một đối tượng ứng dụng, đối tượng này được khởi tạo tại mục
 [entry script](structure-entry-scripts.md) và đồng thời được truy cập qua biểu thức `\Yii::$app`.

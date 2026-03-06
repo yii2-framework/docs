@@ -2,7 +2,6 @@
 title: "Autenticación"
 ---
 
-
 A diferencia de las aplicaciones Web, las API RESTful son usualmente sin estado (stateless), lo que permite que las sesiones o las cookies
 no sean usadas. Por lo tanto, cada petición debe llevar alguna suerte de credenciales de autenticación,
 porque la autenticación del usuario no puede ser mantenida por las sesiones o las cookies. Una práctica común

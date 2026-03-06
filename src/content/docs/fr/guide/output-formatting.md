@@ -2,7 +2,6 @@
 title: "Formatage des données"
 ---
 
-
 Pour afficher des données dans un format plus facile à lire par les utilisateurs, vous pouvez les formater en utilisant le [composant d'application](structure-application-components.md) `formatter`. Par défaut, le formateur est mis en œuvre par [[yii\i18n\Formatter]] qui fournit un jeu de méthodes pour formater des données telles que des dates, des temps, des nombres, des monnaies et autres données couramment utilisées. Vous pouvez utiliser le formateur de la manière indiquée ci-dessous :
 
 ```php

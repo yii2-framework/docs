@@ -2,7 +2,6 @@
 title: "Extensões"
 ---
 
-
 As extensões são pacotes de software redistribuíveis especialmente projetadas
 para serem usadas em aplicações Yii e fornecem recursos prontos para o uso. Por
 exemplo, a extensão [yiisoft/yii2-debug](tool-debugger.md) adiciona uma barra de

@@ -2,7 +2,6 @@
 title: "Guía Breve"
 ---
 
-
 Yii ofrece todo un conjunto de herramientas para simplificar la tarea de implementar un
 servicio web APIs RESTful.
 En particular, Yii soporta las siguientes características sobre APIs RESTful;

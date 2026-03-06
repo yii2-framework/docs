@@ -2,7 +2,6 @@
 title: "Yii Documentation Style Guide"
 ---
 
-
 Guidelines to go by when writing or editing any Yii documentation.
 
 _This needs to be expanded._

@@ -2,7 +2,6 @@
 title: "Behaviory"
 ---
 
-
 Behaviory są instancjami klasy [[yii\base\Behavior]] lub jej pochodnych. Behaviory, zwane także
 [domieszkami](<https://pl.wikipedia.org/wiki/Domieszka_(programowanie_obiektowe)>), pozwalają na wzbogacenie funkcjonalności
 już istniejącej klasy [[yii\base\Component|komponentu]] bez konieczności modyfikacji jej struktury dziedziczenia.  

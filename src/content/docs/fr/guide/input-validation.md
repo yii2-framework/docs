@@ -2,7 +2,6 @@
 title: "Validation des entrées utilisateur"
 ---
 
-
 En général, vous ne devriez jamais faire confiance aux données entrées par l'utilisateur et devriez toujours les valider avant de les utiliser.,
 
 Étant donné un [modèle](structure-models.md) rempli par les données entrées par l'utilisateur, il est possible de valider ces entrées en appelant la méthode [[yii\base\Model::validate()]]. La méthode retourne une valeur booléenne qui indique si la validation a réussi ou pas. Si ce n'est pas le cas, vous pouvez obtenir les messages d'erreur depuis la propriété [[yii\base\Model::errors]]. Par exemple :

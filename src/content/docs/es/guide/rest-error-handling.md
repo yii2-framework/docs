@@ -2,7 +2,6 @@
 title: "Manejo de errores"
 ---
 
-
 Cuando se maneja una petición de API RESTful, si ocurre un error en la petición del usuario o si algo inesperado
 ocurre en el servidor, simplemente puedes lanzar una excepción para notificar al usuario que algo erróneo ocurrió.
 Si puedes identificar la causa del error (p.e., el recurso solicitado no existe), debes considerar lanzar una excepción

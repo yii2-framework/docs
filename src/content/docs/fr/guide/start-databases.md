@@ -2,7 +2,6 @@
 title: "Travailler avec des bases de données"
 ---
 
-
 Cette section décrit comment créer une nouvelle page qui affiche des données pays récupérées dans une table de base
 de données nommée `country`. Pour ce faire, vous allez configurer une connexion à une base de données, créer une
 classe [Active Record](db-active-record.md), définir une [action](structure-controllers.md), et créer une

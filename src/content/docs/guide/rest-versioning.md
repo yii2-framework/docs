@@ -2,7 +2,6 @@
 title: "Versioning"
 ---
 
-
 A good API is _versioned_: changes and new features are implemented in new versions of the API instead of continually altering just one version. Unlike Web applications, with which you have full control of both the client-side and server-side
 code, APIs are meant to be used by clients beyond your control. For this reason, backward
 compatibility (BC) of the APIs should be maintained whenever possible. If a change that may break BC is necessary, you should introduce it in new version of the API, and bump up the version number. Existing clients can continue to use the old, working version of the API; and new or upgraded clients can get the new functionality in the new API version.

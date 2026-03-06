@@ -2,7 +2,6 @@
 title: "Propriétés"
 ---
 
-
 En PHP, les variables membres des classes sont aussi appelées _propriétés_. Ces variables font partie de la définition de la classe et sont utilisées pour représenter l'état d'une instance de cette classe (c.-à-d. à différentier une instance de la classe d'une autre). En pratique, vous désirez souvent gérer la lecture et l'écriture de ces propriété d'une manière particulière. Par exemple, vous pouvez désirer qu'une chaîne de caractères soit toujours nettoyée avant de l'assigner à une propriété `label`. Vous _pouvez_ utiliser le code suivant pour arriver à cette fin :
 
 ```php

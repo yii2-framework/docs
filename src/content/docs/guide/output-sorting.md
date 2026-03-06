@@ -2,7 +2,6 @@
 title: "Sorting"
 ---
 
-
 When displaying multiple rows of data, it is often needed that the data be sorted according to some columns
 specified by end users. Yii uses a [[yii\data\Sort]] object to represent the information about a sorting schema.
 In particular,

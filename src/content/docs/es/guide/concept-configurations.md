@@ -2,7 +2,6 @@
 title: "Configuración"
 ---
 
-
 Las configuraciones se utilizan ampliamente en Yii al crear nuevos objetos o inicializar los objetos existentes. Las configuraciones por lo general incluyen el nombre de la clase del objeto que se está creando, y una lista de los valores iniciales que deberían ser asignadas a las del [propiedades](concept-properties.md) objeto. Las configuraciones también pueden incluir una lista de manipuladores que deban imponerse a del objeto [eventos](concept-events.md) y/o una lista de [comportamientos](concept-behaviors.md) que también ha de atribuirse al objeto.
 
 A continuación, una configuración que se utiliza para crear e inicializar una conexión a base de datos:

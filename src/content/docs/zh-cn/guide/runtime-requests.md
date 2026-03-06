@@ -2,7 +2,6 @@
 title: "请求"
 ---
 
-
 一个应用的请求是用 [[yii\web\Request]] 对象来表示的，该对象提供了诸如
 请求参数（译者注：通常是GET参数或者POST参数）、HTTP头、cookies等信息。
 默认情况下，对于一个给定的请求，你可以通过 `request` [application component](structure-application-components.md) 应用组件（[[yii\web\Request]] 类的实例）

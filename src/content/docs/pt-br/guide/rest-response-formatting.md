@@ -2,7 +2,6 @@
 title: "Formatando Respostas"
 ---
 
-
 Ao manipular uma requisição da API RESTful, a aplicação normalmente realiza as seguintes etapas que estão relacionadas com a formatação da resposta:
 
 1. Determinar diversos fatores que podem afetar o formato da resposta, tais como tipo de mídia, idioma, versão, etc. Este processo também é conhecido como [negociação de conteúdo (_content negotiation_)](https://en.wikipedia.org/wiki/Content_negotiation).

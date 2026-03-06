@@ -2,7 +2,6 @@
 title: "Routing and URL Creation"
 ---
 
-
 When a Yii application starts processing a requested URL, the first step it takes is to parse the URL
 into a [route](structure-controllers.md#routes). The route is then used to instantiate the corresponding
 [controller action](structure-controllers.md) to handle the request. This whole process is called _routing_.

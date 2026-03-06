@@ -2,7 +2,6 @@
 title: "A"
 ---
 
-
 ## alias
 
 Alias is a string that's used by Yii to refer to the class or directory such as `@app/vendor`.

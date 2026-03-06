@@ -2,7 +2,6 @@
 title: "文件上传"
 ---
 
-
 在Yii里上传文件通常使用 [[yii\web\UploadedFile]] 类，
 它把每个上传的文件封装成 `UploadedFile` 对象。
 结合 [[yii\widgets\ActiveForm]] 和 [models](structure-models.md)，你可以轻松实现安全的上传文件机制。

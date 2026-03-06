@@ -2,7 +2,6 @@
 title: "Widgets"
 ---
 
-
 Os widgets são blocos de construção reutilizáveis usados nas
 [views (visões)](structure-views.md) para criar e configurar complexos elementos
 de interface do usuário sob uma modelagem orientada a objetos. Por exemplo, um

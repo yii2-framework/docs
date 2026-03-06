@@ -2,7 +2,6 @@
 title: "Creating your own Application structure"
 ---
 
-
 > Note: This section is under development.
 
 While the [basic](https://github.com/yiisoft/yii2-app-basic) and [advanced](https://github.com/yiisoft/yii2-app-advanced)

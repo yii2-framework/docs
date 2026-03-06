@@ -2,7 +2,6 @@
 title: "Obtenir des données pour plusieurs modèles"
 ---
 
-
 Lorsque vous avez affaire à des données complexes, il est possible que vous ayez besoin d'utiliser plusieurs modèles différents pour collecter des saisies de l'utilisateur. Par exemple, en supposant que les informations de connexion de l'utilisateur sont stockées dans la table `user` tandis que les informations de son profil sont stockées dans la table `profil`, vous désirez peut-être collecter les données de l'utilisateur via un modèle `User` et un modèle `Profile`. Avec la prise en charge par Yii des modèles et des formulaires, vous pouvez résoudre ce problème d'une façon qui ne diffère qu'assez peu de celle consistant à utiliser un modèle unique.
 
 Dans ce qui suit, nous montrons comment créer un formulaire que permet la collecte de données pour les deux modèles, `User` et `Profile`, à la fois.

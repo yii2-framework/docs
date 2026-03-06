@@ -2,7 +2,6 @@
 title: "Przewodnik po Yii 2.0"
 ---
 
-
 Ten poradnik udostępniony jest na [Warunkach dokumentacji Yii](https://www.yiiframework.com/doc/terms/).
 
 Wszelkie prawa zastrzeżone.

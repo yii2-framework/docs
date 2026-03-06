@@ -2,7 +2,6 @@
 title: "Usar motores de plantillas"
 ---
 
-
 Por defecto, Yii utiliza PHP como su lenguaje de plantilla, pero puedes configurar Yii para que soporte otros motores de renderizado, tal como
 [Twig](https://twig.symfony.com/) o [Smarty](https://www.smarty.net/), disponibles como extensiones.
 

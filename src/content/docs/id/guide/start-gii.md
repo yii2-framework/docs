@@ -2,7 +2,6 @@
 title: "Membuat Kode menggunakan Gii"
 ---
 
-
 Bagian ini akan menjelaskan bagaimana cara menggunakan [Gii](https://github.com/yiisoft/yii2-gii/blob/master/docs/guide/README.md) untuk membuat kode secara otomatis
 yang mengimplementasikan fitur-fitur yang bersifat umum dalam sebuah web site. Menggunakan Gii untuk membuat kode sesederhana menginput informasi yang sesuai per satu instruksi seperti yang diterangkan pada halaman web Gii.
 

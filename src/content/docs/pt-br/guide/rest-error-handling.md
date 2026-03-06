@@ -2,7 +2,6 @@
 title: "Tratamento de Erros"
 ---
 
-
 Ao manusear uma requisição da API RESTful, se existir um erro na requisição do usuário ou se alguma coisa inesperada acontecer no servidor, você pode simplesmente lançar uma exceção para notificar o usuário de que algo deu errado.
 Se você puder identificar a causa do erro (ex., o recurso requisitado não existe), você deve considerar lançar uma exceção juntamente com um código de status HTTP adequado (ex., [[yii\web\NotFoundHttpException]] representa um código de status 404). O Yii enviará a resposta juntamente com o código e o texto do status HTTP correspondente. O Yii também incluirá a representação serializada da exceção no corpo da resposta. Por exemplo:
 

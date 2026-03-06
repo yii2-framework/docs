@@ -2,7 +2,6 @@
 title: "Log"
 ---
 
-
 O Yii fornece um poderoso framework de log que é altamente personalizável e extensível. Utilizando este framework, você pode facilmente gerar logs de vários tipos de mensagens, filtrá-las, e salva-las em diferentes meios, tais como arquivos, banco de dados, e-mails.
 
 Usar o Yii framework Log envolve os seguintes passos:

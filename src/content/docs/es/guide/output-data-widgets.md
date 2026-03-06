@@ -2,7 +2,6 @@
 title: "Widgets de datos"
 ---
 
-
 Yii proporciona un conjunto de [widgets](structure-widgets.md) que se pueden usar para mostrar datos.
 Mientras que el _widget_ [DetailView](#detail-view) se puede usar para mostrar los datos de un único
 registro, [ListView](#list-view) y [GridView](#grid-view) se pueden usar para mostrar una lista o

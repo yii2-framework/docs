@@ -2,7 +2,6 @@
 title: "Cykl tworzenia tłumaczenia"
 ---
 
-
 Yii jest przetłumaczony na wiele języków, dzięki czemu może być używany przez międzynarodowe grono deweloperów. Dwa główne obszary,
 gdzie kontrybucje tłumaczeń są mile widziane, to dokumentacja i komunikaty frameworka.
 

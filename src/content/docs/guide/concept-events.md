@@ -2,7 +2,6 @@
 title: "Events"
 ---
 
-
 Events allow you to inject custom code into existing code at certain execution points. You can attach custom
 code to an event so that when the event is triggered, the code gets executed automatically. For example,
 a mailer object may trigger a `messageSent` event when it successfully sends a message. If you want to keep

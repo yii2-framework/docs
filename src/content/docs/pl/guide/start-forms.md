@@ -2,7 +2,6 @@
 title: "Praca z formularzami"
 ---
 
-
 Ta sekcja opisuje jak utworzyć nową stronę z formularzem pobierającym dane od użytkownika.
 Strona będzie wyświetlała formularz z dwoma polami do uzupełnienia: `nazwa` oraz `email`.
 Po otrzymaniu tych dwóch danych od użytkownika, wyświetlimy z powrotem wprowadzone wartości w celu ich potwierdzenia.

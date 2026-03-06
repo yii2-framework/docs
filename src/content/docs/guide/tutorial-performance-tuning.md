@@ -2,7 +2,6 @@
 title: "Performance Tuning"
 ---
 
-
 There are many factors affecting the performance of your Web application. Some are environmental, some are related
 with your code, while some others are related with Yii itself. In this section, we will enumerate most of these
 factors and explain how you can improve your application performance by adjusting these factors.

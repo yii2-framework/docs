@@ -2,7 +2,6 @@
 title: "あなた自身のアプリケーション構造を作成する"
 ---
 
-
 > Note: このセクションはまだ執筆中です。
 
 [ベーシック](https://github.com/yiisoft/yii2-app-basic) と [アドバンスト](https://github.com/yiisoft/yii2-app-advanced)

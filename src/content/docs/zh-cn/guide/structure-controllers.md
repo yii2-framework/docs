@@ -2,7 +2,6 @@
 title: "控制器"
 ---
 
-
 控制器是 [MVC](https://zh.wikipedia.org/wiki/MVC) 模式中的一部分，
 是继承[[yii\base\Controller]]类的对象，负责处理请求和生成响应。
 具体来说，控制器从[应用主体](structure-applications.md)

@@ -2,7 +2,6 @@
 title: "Skrip Masuk"
 ---
 
-
 Skrip masuk adalah langkah pertama pada proses _bootstrap_ aplikasi. Dalam sebuah aplikasi (apakah
 itu aplikasi web atau aplikasi konsol) memiliki satu skrip masuk. Pengguna mengirim _request_ ke
 skrip masuk dimana skrip tersebut membangun objek aplikasi dan meneruskan _request_ ke objek tersebut.

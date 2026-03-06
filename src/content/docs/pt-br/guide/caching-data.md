@@ -2,7 +2,6 @@
 title: "Cache de Dados"
 ---
 
-
 O Cache de Dados é responsável por armazenar uma ou mais variáveis PHP em um arquivo temporário para
 ser recuperado posteriormente.
 Este também é a fundação para funcionalidades mais avançadas do cache, como [cache de consulta](#query-caching)

@@ -2,7 +2,6 @@
 title: "Requêtes"
 ---
 
-
 Les requêtes faites à l'application sont représentées en terme d'objets [[yii\web\Request]] qui fournissent des informations telles que les paramètres de requête, les entêtes HTTP, les cookies, etc.
 Pour une requête donnée, vous avez accès au [composant d'application](structure-application-components.md)`request` qui, par défaut, est une instance de [[yii\web\Request]].
 Dans cette section, nous décrivons comment utiliser ce composant dans vos applications.

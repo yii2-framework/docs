@@ -2,7 +2,6 @@
 title: "Menjalankan Aplikasi"
 ---
 
-
 Setelah menginstal Yii, Anda memiliki aplikasi Yii yang dapat diakses melalui
 URL `https://hostname/basic/web/index.php` atau `https://hostname/index.php`, tergantung
 pada konfigurasi Anda. Bagian ini akan memperkenalkan fungsi built-in aplikasi,

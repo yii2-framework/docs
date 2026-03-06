@@ -2,7 +2,6 @@
 title: "Mise en cache de données"
 ---
 
-
 La mise en cache de données consiste à stocker quelques variables PHP dans un cache et à les y retrouver plus tard.
 C'est également la base pour des fonctionnalités de mise en cache plus avancées, comme la [mise en cache de requêtes](#query-caching) et la [mise en cache de pages](caching-page.md).
 

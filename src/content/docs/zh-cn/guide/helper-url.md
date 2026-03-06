@@ -2,7 +2,6 @@
 title: "Url 助手类（Url Helper）"
 ---
 
-
 Url 帮助类提供一系列的静态方法来帮助管理 URL。
 
 ## 获得通用 URL（Getting Common URLs） <span id="getting-common-urls"></span>

@@ -2,7 +2,6 @@
 title: "モデル"
 ---
 
-
 モデルは [MVC](https://ja.wikipedia.org/wiki/Model_View_Controller) アーキテクチャの一部を成すものです。
 これは、ビジネスのデータ、規則、ロジックを表現するオブジェクトです。
 

@@ -2,7 +2,6 @@
 title: "Decyzje projektowe"
 ---
 
-
 Ten dokument zawiera listę decyzji projektowych, które podjęliśmy po długich debatach. O ile nie ma bardzo ważnych powodów ku temu,
 aby działać inaczej, postanowienia te powinny być zawsze w mocy, dla zachowania spójności. Każda zmiana poniższych decyzji
 powinna być najpierw zatwierdzona przez głównych deweloperów.

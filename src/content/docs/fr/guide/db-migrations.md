@@ -2,7 +2,6 @@
 title: "Migrations de base de données"
 ---
 
-
 Durant la période de développement et de maintenance d'une application s'appuyant sur une base de données, la structure de la base de données évolue tout comme le code source. Par exemple, durant développement une nouvelle table peut devenir nécessaire ; après que l'application est déployée en production, on peut s'apercevoir qu'un index doit être créé pour améliorer la performance des requêtes ; et ainsi de suite. Comme un changement dans la base de données nécessite souvent des changements dans le code, Yii prend en charge une fonctionnalité qu'on appelle _migrations de base de données_. Cette fonctionnalité permet de conserver la trace des changements de la base de données en termes de _migrations de base de données_ dont les versions sont contrôlées avec celles du code.
 
 Les étapes suivantes montrent comment des migrations de base de données peuvent être utilisées par une équipe durant la phase de développement :

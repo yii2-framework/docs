@@ -2,7 +2,6 @@
 title: "Enregistrement actif (_Active Record_)"
 ---
 
-
 L'[enregistrement actif](https://fr.wikipedia.org/wiki/Active_record) fournit une interface orientée objet pour accéder aux données stockées dans une base de données et les manipuler.
 Une classe d'enregistrement actif (ActiveRecord) est associée à une table de base de données, une instance de cette classe représente une ligne de cette table, et un _attribut_ d'une instance d'enregistrement actif représente la valeur d'une colonne particulière dans cette ligne.
 Au lieu d'écrire des instructions SQL brutes,

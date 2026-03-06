@@ -2,7 +2,6 @@
 title: "数据小部件"
 ---
 
-
 Yii提供了一套数据小部件 [widgets](structure-widgets.md) ，这些小部件可以用于显示数据。
 [DetailView](#detail-view) 小部件能够用于显示一条记录数据，
 [ListView](#list-view) 和 [GridView](#grid-view) 小部件能够用于显示一个拥有分页、

@@ -2,7 +2,6 @@
 title: "Obtención de datos para los modelos de múltiples"
 ---
 
-
 Cuando se trata de algunos datos complejos, es posible que puede que tenga que utilizar varios modelos diferentes para recopilar
 la entrada del usuario. Por ejemplo, suponiendo que la información de inicio de sesión del usuario se almacena en la tabla `user`,
 mientras que el perfil de usuario la información se almacena en la tabla `Profile`, es posible que desee para recoger los datos

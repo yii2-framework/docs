@@ -2,7 +2,6 @@
 title: "Internationalization"
 ---
 
-
 Internationalization (I18N) refers to the process of designing a software application so that it can be adapted to
 various languages and regions without engineering changes. For Web applications, this is of particular importance
 because the potential users may be worldwide. Yii offers a full spectrum of I18N features that support message

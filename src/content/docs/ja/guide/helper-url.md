@@ -2,7 +2,6 @@
 title: "Url ヘルパ"
 ---
 
-
 Url ヘルパは URL を管理するための一連のスタティック・メソッドを提供します。
 
 ## よく使う URL を取得する <span id="getting-common-urls"></span>

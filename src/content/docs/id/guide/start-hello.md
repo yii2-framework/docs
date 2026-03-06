@@ -2,7 +2,6 @@
 title: "Katakan Hello"
 ---
 
-
 Bagian ini menjelaskan cara membuat halaman "Hello" baru dalam aplikasi Anda.
 Untuk mencapai tujuan ini, Anda akan membuat [action](structure-controllers.md#creating-actions) dan
 sebuah [view](structure-views.md):

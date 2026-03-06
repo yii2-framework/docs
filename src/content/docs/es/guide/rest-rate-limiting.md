@@ -2,7 +2,6 @@
 title: "Limitando el rango (rate)"
 ---
 
-
 Para prevenir el abuso, puedes considerar añadir un _límitación del rango (rate limiting)_ para tus APIs. Por ejemplo,
 puedes querer limitar el uso del API de cada usuario a un máximo de 100 llamadas al API dentro de un periodo de 10 minutos.
 Si se reciben demasiadas peticiones de un usuario dentro del periodo de tiempo declarado, deveríá devolverse una respuesta con código de estado 429 (que significa "Demasiadas peticiones").

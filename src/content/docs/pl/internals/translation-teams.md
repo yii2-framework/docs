@@ -2,7 +2,6 @@
 title: "Ekipy tłumaczące"
 ---
 
-
 ## Chiński
 
 - **Paris Qian Sen 东方孤思子,[@qiansen1386](https://github.com/qiansen1386),qiansen1386@gmail.com**

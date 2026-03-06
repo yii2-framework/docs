@@ -2,7 +2,6 @@
 title: "Автозагрузка классов"
 ---
 
-
 Поиск и подключение файлов классов в Yii реализовано при помощи
 [автозагрузки классов](https://www.php.net/manual/ru/language.oop5.autoload.php). Фреймворк предоставляет свой быстрый,
 совместимый с [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)

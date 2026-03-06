@@ -2,7 +2,6 @@
 title: "Controllers"
 ---
 
-
 Controllers are part of the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) architecture.
 They are objects of classes extending from [[yii\base\Controller]] and are responsible for processing requests and
 generating responses. In particular, after taking over the control from [applications](structure-applications.md),

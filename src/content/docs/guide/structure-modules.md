@@ -2,7 +2,6 @@
 title: "Modules"
 ---
 
-
 Modules are self-contained software units that consist of [models](structure-models.md), [views](structure-views.md),
 [controllers](structure-controllers.md), and other supporting components. End users can access the controllers
 of a module when it is installed in [application](structure-applications.md). For these reasons, modules are

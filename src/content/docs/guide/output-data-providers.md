@@ -2,7 +2,6 @@
 title: "Data Providers"
 ---
 
-
 In the [Pagination](output-pagination.md) and [Sorting](output-sorting.md) sections, we have described how to
 allow end users to choose a particular page of data to display and sort them by some columns. Because the task
 of paginating and sorting data is very common, Yii provides a set of _data provider_ classes to encapsulate it.

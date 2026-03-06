@@ -2,7 +2,6 @@
 title: "Limit użycia"
 ---
 
-
 W celu zapobiegnięcia nadużyciom, powinno się rozważyć wprowadzenie _limitu użycia_ swojego API. Może to być na przykład ograniczenie
 do maksymalnie 100 zapytań do API dla każdego użytkownika w czasie 10 minut. Jeśli użytkownik przekroczy ten limit w zadanym czasie,
 należy zwrócić odpowiedź ze statusem 429 (oznaczającym "Zbyt dużo zapytań").

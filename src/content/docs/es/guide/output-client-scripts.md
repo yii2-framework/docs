@@ -2,7 +2,6 @@
 title: "Trabajar con Scripts del Cliente"
 ---
 
-
 > Note: Esta sección se encuentra en desarrollo.
 
 ### Registrar scripts

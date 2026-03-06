@@ -2,7 +2,6 @@
 title: "Looking Ahead"
 ---
 
-
 If you've read through the entire "Getting Started" chapter, you have now created a complete Yii application. In the process, you have learned how to implement some commonly
 needed features, such as getting data from users via an HTML form, fetching data from a database, and
 displaying data in a paginated fashion. You have also learned how to use [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) to generate

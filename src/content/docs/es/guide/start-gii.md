@@ -2,7 +2,6 @@
 title: "Generando Código con Gii"
 ---
 
-
 En esta sección, explicaremos cómo utilizar [Gii](tool-gii.md) para generar código que automáticamente
 implementa algunas de las características más comunes de una aplicación. Para lograrlo, todo lo que tienes que hacer es
 ingresar la información de acuerdo a las instrucciones mostradas en la páginas web de Gii.

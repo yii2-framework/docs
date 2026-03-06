@@ -2,7 +2,6 @@
 title: "Rozszerzanie ActiveForm po stronie klienta"
 ---
 
-
 Widżet [[yii\widgets\ActiveForm]] posiada szereg wbudowanych metod JavaScript, służących do walidacji po stronie klienta.
 Ich implementacja jest bardzo elastyczna i pozwala na rozszerzanie ich na wiele sposobów.
 

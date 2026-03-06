@@ -2,7 +2,6 @@
 title: "Le constructeur de requêtes"
 ---
 
-
 Construit sur la base des [objets d'accès aux bases de données (DAO)](db-dao.md), le constructeur de requêtes vous permet de construire des requêtes SQL par programme qui sont indifférentes au système de gestion de base de données utilisé. Comparé à l'écriture d'instructions SQL brutes, l'utilisation du constructeur de requêtes vous aide à écrire du code relatif à SQL plus lisible et à générer des instructions SQL plus sûres.
 
 L'utilisation du constructeur de requêtes comprend ordinairement deux étapes :

@@ -2,7 +2,6 @@
 title: "Saying Hello"
 ---
 
-
 This section describes how to create a new "Hello" page in your application.
 To achieve this goal, you will create an [action](structure-controllers.md#creating-actions) and
 a [view](structure-views.md):

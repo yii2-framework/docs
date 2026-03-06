@@ -2,7 +2,6 @@
 title: "Development"
 ---
 
-
 This document describes development workflows and maintenance tasks for the project.
 
 ## Sync Metadata

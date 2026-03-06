@@ -2,7 +2,6 @@
 title: "Helpers"
 ---
 
-
 > Note: This section is under development.
 
 Yii provides many classes that help simplify common coding tasks, such as string or array manipulations,

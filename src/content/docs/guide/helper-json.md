@@ -2,7 +2,6 @@
 title: "Json Helper"
 ---
 
-
 Json helper provides a set of static methods for encoding and decoding JSON.
 It handles encoding errors and the `[[yii\helpers\Json::encode()]]` method will not encode a JavaScript expression that is represented in
 terms of a `[[yii\web\JsExpression]]` object.

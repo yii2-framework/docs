@@ -2,7 +2,6 @@
 title: "Enrutamiento y Creación de URLS"
 ---
 
-
 Cuando una aplicación Yii empieza a procesar una URL solicitada, lo primero que hace es convertir la URL en una
 [ruta](structure-controllers.md#routes). Luego se usa la ruta para instanciar la
 [acción de controlador](structure-controllers.md) correspondiente para gestionar la petición. A este proceso se

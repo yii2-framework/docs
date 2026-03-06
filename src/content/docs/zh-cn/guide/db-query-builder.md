@@ -2,7 +2,6 @@
 title: "查询构建器"
 ---
 
-
 查询构建器建立在 [Database Access Objects](db-dao.md) 基础之上，可让你创建
 程序化的、DBMS无关的SQL语句。相比于原生的SQL语句，查询构建器可以帮你
 写出可读性更强的SQL相关的代码，并生成安全性更强的SQL语句。

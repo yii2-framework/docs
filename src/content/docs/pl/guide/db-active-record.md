@@ -2,7 +2,6 @@
 title: "Active Record"
 ---
 
-
 [Active Record](https://en.wikipedia.org/wiki/Active_record_pattern) zapewnia zorientowany obiektowo interfejs dostępu i manipulacji danymi
 zapisanymi w bazie danych. Klasa typu Active Record jest powiązana z tabelą bazodanową, a instacja tej klasy odpowiada pojedynczemu wierszowi
 w tabeli - _atrybut_ obiektu Active Record reprezentuje wartość konkretnej kolumny w tym wierszu. Zamiast pisać bezpośrednie kwerendy bazy danych,

@@ -2,7 +2,6 @@
 title: "Cache"
 ---
 
-
 Cache é uma maneira simples e eficiente de melhorar o desempenho de uma aplicação Web. Ao gravar dados relativamente
 estáticos em cache e servindo os do cache quando requisitados, a aplicação economiza o tempo que seria necessário para renderizar as informações do zero todas as vezes.
 

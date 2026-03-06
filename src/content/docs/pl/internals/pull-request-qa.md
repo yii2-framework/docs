@@ -2,7 +2,6 @@
 title: "Zapewnienie jakości kodu w prośbie o połączenie"
 ---
 
-
 Podczas sprawdzania czy PR może być scalony lub nie, następujące kryteria powinny być również wzięte pod uwagę:
 
 - Powinno istnieć zgłoszenie powiązane z PR lub PR powinien zawierać dobry opis tego, co dodaje lub zmienia.

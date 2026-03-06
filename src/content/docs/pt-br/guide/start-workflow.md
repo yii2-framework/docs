@@ -2,7 +2,6 @@
 title: "Executando Aplicações"
 ---
 
-
 Após instalar o Yii, você tem uma aplicação Yii funcional que pode ser acessada
 pela URL `https://hostname/basico/web/index.php` ou `https://hostname/index.php`,
 dependendo de sua configuração. Esta seção introduzirá a funcionalidade embutida

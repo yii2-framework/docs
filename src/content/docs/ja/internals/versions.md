@@ -2,7 +2,6 @@
 title: "Yii バージョン規約"
 ---
 
-
 この文書は Yii のバージョン付与ポリシーを要約するものです。
 私たちの現在のバージョン付与戦略は、[Semantic Versioning](https://semver.org/) の一変種です。
 

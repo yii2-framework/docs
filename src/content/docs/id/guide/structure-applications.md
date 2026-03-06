@@ -2,7 +2,6 @@
 title: "Aplikasi"
 ---
 
-
 Aplikasi _(Application)_ adalah objek yang mengelola semua struktur dan siklus dari sistem aplikasi Yii.
 Setiap aplikasi sistem Yii mengandung satu objek aplikasi yang dibuat dalam
 [skrip masuk](structure-entry-scripts.md) dan mampu diakses secara global melalui _expression_ `\Yii::$app`.

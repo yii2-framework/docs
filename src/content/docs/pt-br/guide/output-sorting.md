@@ -2,7 +2,6 @@
 title: "Ordenação"
 ---
 
-
 Ao exibir várias linhas de dados, muitas vezes é necessário que os dados sejam ordenados de acordo com algumas colunas especificadas pelos usuários finais. O Yii utiliza um objeto [[yii\data\Sort]] para representar as informações sobre um esquema de ordenação. Em particular,
 
 - [[yii\data\Sort::$attributes|attributes]] especifica os _atributos_ através dos quais os dados podem ser ordenados.

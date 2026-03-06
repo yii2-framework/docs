@@ -2,7 +2,6 @@
 title: "Upgrade dari Versi 1.1"
 ---
 
-
 Ada banyak perbedaan antara versi 1.1 dan 2.0 karena Yii Framework benar-benar ditulis ulang di versi 2.0.
 Akibatnya, upgrade dari versi 1.1 tidak mudah seperti upgrade untuk versi minor. Dalam panduan ini Anda akan
 menemukan perbedaan utama antara dua versi.

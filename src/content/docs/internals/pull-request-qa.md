@@ -2,7 +2,6 @@
 title: "Pull request quality assurance"
 ---
 
-
 When checking if PR could be merged or not the following criteria should be considered among others:
 
 - There should be either an issue linked to PR or PR should have a good description on what is it fixing or adding.

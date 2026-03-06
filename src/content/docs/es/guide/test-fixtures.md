@@ -2,7 +2,6 @@
 title: "Fixtures"
 ---
 
-
 Los fixtures son una parte importante de los tests. Su propósito principal es el de preparar el entorno en una estado fijado/conocido
 de manera que los tests sean repetibles y corran de la manera esperada. Yii provee un framework de fixtures que te permite
 dichos fixtures de manera precisa y usarlo de forma simple.

@@ -2,7 +2,6 @@
 title: "资源"
 ---
 
-
 RESTful 的 API 都是关于访问和操作 _资源_，可将资源看成 MVC 模式中的
 [模型](structure-models.md)
 

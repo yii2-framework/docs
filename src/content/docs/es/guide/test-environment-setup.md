@@ -2,7 +2,6 @@
 title: "Preparación del entorno de pruebas"
 ---
 
-
 Yii 2 ha mantenido oficialmente integración con el _framework_ de testeo [`Codeception`](https://github.com/Codeception/Codeception),
 que le permite crear los siguientes tipos de tests:
 

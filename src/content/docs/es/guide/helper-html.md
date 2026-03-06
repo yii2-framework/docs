@@ -2,7 +2,6 @@
 title: "Clase auxiliar Html (Html helper)"
 ---
 
-
 Todas las aplicaciones web generan grandes cantidades de marcado HTML (HTML markup). Si el marcado es estático, se
 puede realizar de forma efectiva
 [mezclando PHP y HTML en un mismo archivo](https://www.php.net/manual/es/language.basic-syntax.phpmode.php) pero cuando se

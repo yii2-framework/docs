@@ -2,7 +2,6 @@
 title: "Html 帮助类（Html helper）"
 ---
 
-
 任何一个 web 应用程序会生成很多 HTMl 超文本标记。如果超文本标记是静态的，
 那么[将 PHP 和 HTML 混合在一个文件里](https://www.php.net/manual/zh/language.basic-syntax.phpmode.php)
 这种做法是非常高效的。但是，如果这些超文本标记是动态生成的，那么如果没有额外的辅助工具，这个过程将会变得复杂。

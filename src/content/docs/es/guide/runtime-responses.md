@@ -2,7 +2,6 @@
 title: "Respuestas"
 ---
 
-
 Cuando una aplicación finaliza la gestión de una [petición (request)](runtime-requests.md), genera un objeto
 [[yii\web\Response|response]] y lo envía al usuario final. El objeto response contiene información tal como el código
 de estado (status code) HTTP, las cabeceras (headers) HTTP y el cuerpo (body). El objetivo final del desarrollo de una

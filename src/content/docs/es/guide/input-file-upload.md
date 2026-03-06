@@ -2,7 +2,6 @@
 title: "Subir Archivos"
 ---
 
-
 Subir archivos en Yii es normalmente realizado con la ayuda de [[yii\web\UploadedFile]], que encapsula cada archivo subido
 en un objeto `UploadedFile`. Combinado con [[yii\widgets\ActiveForm]] y [modelos](structure-models.md),
 puedes fácilmente implementar un mecanismo seguro de subida de archivos.

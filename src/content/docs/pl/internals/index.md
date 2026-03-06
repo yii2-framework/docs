@@ -2,7 +2,6 @@
 title: "Dokumentacja dewelopera Yii"
 ---
 
-
 Ten folder zawiera dokumentację dotyczącą procesu rozwoju i powstawania nowych wydań frameworka Yii.
 
 ## Wskazówki dla kontrybutorów

@@ -2,7 +2,6 @@
 title: "Команды переводчиков"
 ---
 
-
 ## Бразильский португальский
 
 - **Davidson Alencar, [@davidsonalencar](https://github.com/davidsonalencar), davidson.t.i@gmail.com**

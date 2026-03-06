@@ -2,7 +2,6 @@
 title: "Paginación"
 ---
 
-
 Cuando hay muchos datos a mostrar en una sola página, una estrategia común es mostrarlos en varias
 páginas y en cada una de ellas mostrar sólo una pequeña porción de datos. Esta estrategia es conocida como _paginación_.
 

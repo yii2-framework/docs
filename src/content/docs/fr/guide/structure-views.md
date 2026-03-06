@@ -2,7 +2,6 @@
 title: "Vues"
 ---
 
-
 Les vues font partie du modèle d'architecture [MVC](https://fr.wikipedia.org/wiki/Mod%C3%A8le-vue-contr%C3%B4leur) (Modèle Vue Contrôleur).
 Elles sont chargées de présenter les données à l'utilisateur final. Dans une application Web, les vues sont ordinairement créées en termes de _modèles de vue_ qui sont des script PHP contenant principalement du code HTML et du code PHP relatif à la présentation.
 

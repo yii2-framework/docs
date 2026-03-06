@@ -2,7 +2,6 @@
 title: "Meilleures pratiques de sécurité"
 ---
 
-
 Ci-dessous, nous passons en revue les principes de sécurité courants et décrivons comment éviter les menaces lorsque vous développez une application Yii.
 
 ## Principes de base

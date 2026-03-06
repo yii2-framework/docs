@@ -2,7 +2,6 @@
 title: "Constructor de Consultas"
 ---
 
-
 > Note: Esta sección está en desarrollo.
 
 Yii proporciona una capa de acceso básico a bases de datos como se describe en la sección

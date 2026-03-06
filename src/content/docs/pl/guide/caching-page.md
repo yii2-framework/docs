@@ -2,7 +2,6 @@
 title: "Pamięć podręczna stron"
 ---
 
-
 Pamięć podręczna stron odnosi się do zapisu zawartości całej strony po stronie serwera. Kiedy zostanie ona ponownie wywołana,
 zawartość zostanie wyświetlona od razu z pamięci podręcznej zamiast generować ją ponownie od podstaw.
 

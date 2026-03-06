@@ -2,7 +2,6 @@
 title: "Cryptographie"
 ---
 
-
 Dans cette section nous allons passer en revue les aspects suivants relatifs à la sécurité :
 
 - Génération de données aléatoires

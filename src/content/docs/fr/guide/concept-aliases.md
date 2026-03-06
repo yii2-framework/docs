@@ -2,7 +2,6 @@
 title: "Alias"
 ---
 
-
 Les alias sont utilisés pour représenter des chemins de fichier ou des URL de façon à ce que vous n'ayez pas besoin d'écrire ces chemins ou ces URL en entier dans votre code. Un alias doit commencer par le caractère arobase `@` pour être différentié des chemins de fichier et des URL normaux. Les alias définis sans ce caractère de tête `@` sont automatiquement préfixés avec ce dernier.
 
 Yii possèdent de nombreux alias pré-définis déjà disponibles. Par exemple, l'alias `@yii` représente le chemin d'installation de la base structurée de développement PHP (_framework_), Yii ; L'alias `@web` représente l'URL de base de l'application Web en cours d'exécution.

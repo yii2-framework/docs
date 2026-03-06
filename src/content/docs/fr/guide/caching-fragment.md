@@ -2,7 +2,6 @@
 title: "Mise en cache de fragments"
 ---
 
-
 La mise en cache de fragments fait référence à la mise en cache de fragments de pages Web. Par exemple, si une page affiche un résumé des ventes annuelles dans un tableau, vous pouvez stocker ce tableau en cache pour éliminer le temps nécessaire à sa génération à chacune des requêtes. La mise en cache de fragments est construite au-dessus de la [mise en cache de données](caching-data.md).
 
 Pour utiliser la mise en cache de fragments, utilisez la construction qui suit dans une [vue](structure-views.md):

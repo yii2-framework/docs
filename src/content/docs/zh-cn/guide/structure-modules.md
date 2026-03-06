@@ -2,7 +2,6 @@
 title: "模块"
 ---
 
-
 模块是独立的软件单元，由[模型](structure-models.md)，[视图](structure-views.md)，
 [控制器](structure-controllers.md)和其他支持组件组成，
 终端用户可以访问在[应用主体](structure-applications.md)中已安装的模块的控制器，

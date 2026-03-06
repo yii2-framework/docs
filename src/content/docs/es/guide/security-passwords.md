@@ -2,7 +2,6 @@
 title: "Trabajar con Passwords"
 ---
 
-
 La mayoría de los desarrolladores saben que los passwords no deben ser guardados en texto plano, pero muchos desarrolladores aún creen
 que es seguro aplicar a los passowrds hash `md5` o `sha1`. Hubo un tiempo cuando utilizar esos algoritmos de hash mencionados era suficiente,
 pero el hardware moderno hace posible que ese tipo de hash e incluso más fuertes, puedan revertirse rápidamente utilizando ataques de fuerza bruta.

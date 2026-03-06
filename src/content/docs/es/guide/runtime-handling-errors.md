@@ -2,7 +2,6 @@
 title: "Gestión de Errores"
 ---
 
-
 Yii incluye un [[yii\web\ErrorHandler|error handler]] que permite una gestión de errores mucho más práctica que
 anteriormente. En particular, el gestor de errores de Yii hace lo siguiente para mejorar la gestión de errores:
 

@@ -2,7 +2,6 @@
 title: "Entry Scripts"
 ---
 
-
 Entry script là tiến trình đầu tiên của ứng dụng. Một ứng dụng (hoặc
 ứng dụng Web hoặc ứng dụng console) đều có một entry script. Người dùng đầu cuối tạo các request tới entry script, entry script
 sẽ khởi tạo ứng dụng và nhanh chóng chuyển các yêu cầu tới chúng.

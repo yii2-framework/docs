@@ -2,7 +2,6 @@
 title: "Validación de Entrada"
 ---
 
-
 Como regla básica, nunca debes confiar en los datos recibidos de un usuario final y deberías validarlo siempre
 antes de ponerlo en uso.
 

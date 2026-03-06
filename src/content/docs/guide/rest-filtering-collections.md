@@ -2,7 +2,6 @@
 title: "Filtering Collections"
 ---
 
-
 Resource collection can be filtered using [[yii\data\DataFilter]] component since 2.0.13. It allows validating and
 building the filter conditions passed via request, and, with the help of its extended version [[yii\data\ActiveDataFilter]],
 using them in a format suitable for [[yii\db\QueryInterface::where()]].

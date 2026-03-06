@@ -2,7 +2,6 @@
 title: "Classe assistante ArrayHelper"
 ---
 
-
 En plus du jeu riche de [fonctions de tableaux](https://www.php.net/manual/fr/book.array.php) qu'offre PHP, la classe assistante traitant les tableaux dans Yii fournit des méthodes statiques supplémentaires qui vous permettent de traiter les tableaux avec plus d'efficacité.
 
 ## Obtention de valeurs <span id="getting-values"></span>

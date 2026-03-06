@@ -2,7 +2,6 @@
 title: "Collecting Tabular Input"
 ---
 
-
 Sometimes you need to handle multiple models of the same kind in a single form. For example, multiple settings, where
 each setting is stored as a name-value pair and is represented by a `Setting` [active record](db-active-record.md) model.
 This kind of form is also often referred to as "tabular input".

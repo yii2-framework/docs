@@ -2,7 +2,6 @@
 title: "Url Helper"
 ---
 
-
 Url helper provides a set of static methods for managing URLs.
 
 ## Getting Common URLs <span id="getting-common-urls"></span>

@@ -2,7 +2,6 @@
 title: "Pamięć podręczna fragmentów"
 ---
 
-
 Pamięć podręczna fragmentów dotyczy zapisywania w pamięci podręcznej części strony Web. Dla przykładu, jeśli strona wyświetla podsumowanie danych rocznej sprzedaży w postaci tabeli,
 można tę tabelę zapisać w pamięci podręcznej, aby wyeliminować konieczność generowania jej za każdym razem od nowa. Mechanizm pamięci podręcznej fragmentów zbudowany jest w oparciu
 o [pamięć podręczną danych](caching-data.md).

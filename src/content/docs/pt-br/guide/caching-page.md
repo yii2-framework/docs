@@ -2,7 +2,6 @@
 title: "Cache de Página"
 ---
 
-
 O Cache de página é responsável por armazenar em cache o conteúdo de uma página inteira no servidor. Mais tarde,
 quando a mesma página é requisitada novamente, seu conteúdo será servido do cache em vez de ela ser gerada novamente
 do zero.

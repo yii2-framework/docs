@@ -2,7 +2,6 @@
 title: "Полное руководство по Yii 2.0"
 ---
 
-
 Данное руководство выпущено в соответствии с [положениями о документации Yii](https://www.yiiframework.com/doc/terms/).
 
 All Rights Reserved.

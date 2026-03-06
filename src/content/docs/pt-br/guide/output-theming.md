@@ -2,7 +2,6 @@
 title: "Temas"
 ---
 
-
 Tema é uma forma de substituir um conjunto de [views](structure-views.md) por outras, sem a necessidade de tocar no código de renderização de view original. Você pode usar tema para alterar sistematicamente a aparência de uma aplicação.
 
 Para usar tema, você deve configurar a propriedade [[yii\base\View::theme|theme]] da `view (visão)` da aplicação.

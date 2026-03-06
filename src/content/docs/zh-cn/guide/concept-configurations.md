@@ -2,7 +2,6 @@
 title: "配置（Configurations）"
 ---
 
-
 在 Yii 中，创建新对象和初始化已存在对象时广泛使用配置。
 配置通常包含被创建对象的类名和一组将要赋值给对象
 [属性](concept-properties.md)的初始值。

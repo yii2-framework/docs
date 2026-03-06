@@ -2,7 +2,6 @@
 title: "What do you need to know"
 ---
 
-
 The Yii learning curve is not as steep as other PHP frameworks but still there are some things you should learn before starting with Yii.
 
 ## PHP

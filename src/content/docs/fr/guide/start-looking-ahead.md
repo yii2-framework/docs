@@ -2,7 +2,6 @@
 title: "En savoir plus"
 ---
 
-
 Si vous avez entièrement lu la section "Mise en Route", vous avez maintenant créé une application Yii complète. Ce faisant, vous avez appris comment mettre en œuvre des fonctionnalités couramment utilisées, telles que recueillir des données d'un utilisateur via un formulaire HTML, chercher des données dans une base de données, et afficher des données
 de manière paginée. Vous avez également appris à utiliser [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) pour générer du code automatiquement.
 Utiliser Gii pour générer du code rend le gros de votre processus de développement Web aussi simple que de remplir de

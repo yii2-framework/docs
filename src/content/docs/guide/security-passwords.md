@@ -2,7 +2,6 @@
 title: "Working with Passwords"
 ---
 
-
 Most developers know that passwords cannot be stored in plain text, but many developers believe it's still safe to hash
 passwords using `md5` or `sha1`. There was a time when using the aforementioned hashing algorithms was sufficient,
 but modern hardware makes it possible to crack such hashes and even stronger ones very quickly using brute force attacks.

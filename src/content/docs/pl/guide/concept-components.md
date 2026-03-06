@@ -2,7 +2,6 @@
 title: "Komponenty"
 ---
 
-
 Komponenty są głównym budulcem aplikacji Yii. Komponenty to instancje klasy [[yii\base\Component|Component]] lub jej potomnych.
 Trzy główne funkcjonalności, które zapewniają komponenty innym klasom to:
 

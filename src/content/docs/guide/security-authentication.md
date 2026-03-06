@@ -2,7 +2,6 @@
 title: "Authentication"
 ---
 
-
 Authentication is the process of verifying the identity of a user. It usually uses an identifier
 (e.g. a username or an email address) and a secret token (e.g. a password or an access token) to judge
 if the user is the one whom he claims as. Authentication is the basis of the login feature.

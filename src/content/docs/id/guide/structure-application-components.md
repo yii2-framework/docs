@@ -2,7 +2,6 @@
 title: "Komponen Aplikasi"
 ---
 
-
 Objek Aplikasi _(Application)_ adalah [service locators](concept-service-locator.md). Objek ini menampung seperangkat
 apa yang kita sebut sebagai _komponen aplikasi_ yang menyediakan berbagai layanan untuk menangani proses _request_. Sebagai contoh,
 _component_ `urlManager` bertanggung jawab untuk menentukan _route_ dari _request_ menuju _controller_ yang sesuai;

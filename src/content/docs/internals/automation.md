@@ -2,7 +2,6 @@
 title: "Automation"
 ---
 
-
 There are some tasks that are done automatically when working on Yii:
 
 - Generation of the classmap `classes.php` located under the framework root directory.

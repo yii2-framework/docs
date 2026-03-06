@@ -2,7 +2,6 @@
 title: "Aplicaciones"
 ---
 
-
 Las `Applications` (aplicaciones) son objetos que gobiernan la estructura total y el ciclo de vida de las aplicaciones
 hechas en Yii.
 Cada aplicación Yii contiene un objeto `Application` que es creado en el [script de entrada](structure-entry-scripts.md)

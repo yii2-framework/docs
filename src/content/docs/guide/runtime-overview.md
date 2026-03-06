@@ -2,7 +2,6 @@
 title: "Overview"
 ---
 
-
 Each time when a Yii application handles a request, it undergoes a similar workflow.
 
 1. A user makes a request to the [entry script](structure-entry-scripts.md) `web/index.php`.

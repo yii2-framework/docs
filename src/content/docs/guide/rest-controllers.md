@@ -2,7 +2,6 @@
 title: "Controllers"
 ---
 
-
 After creating the resource classes and specifying how resource data should be formatted, the next thing
 to do is to create controller actions to expose the resources to end users through RESTful APIs.
 

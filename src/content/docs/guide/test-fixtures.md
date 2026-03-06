@@ -2,7 +2,6 @@
 title: "Fixtures"
 ---
 
-
 Fixtures are an important part of testing. Their main purpose is to set up the environment in a fixed/known state
 so that your tests are repeatable and run in an expected way. Yii provides a fixture framework that allows
 you to define your fixtures precisely and use them easily both when running your tests with Codeception

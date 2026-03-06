@@ -2,7 +2,6 @@
 title: "Testy jednostkowe"
 ---
 
-
 > Uwaga: Ta sekcja jest w trakcie tworzenia.
 
 Test jednostkowy weryfikuje poprawność działania pojedynczej jednostki kodu. W programowaniu zorientowanym obiektowo

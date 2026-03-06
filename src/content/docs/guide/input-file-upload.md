@@ -2,7 +2,6 @@
 title: "Uploading Files"
 ---
 
-
 Uploading files in Yii is usually done with the help of [[yii\web\UploadedFile]] which encapsulates each uploaded
 file as an `UploadedFile` object. Combined with [[yii\widgets\ActiveForm]] and [models](structure-models.md),
 you can easily implement a secure file uploading mechanism.

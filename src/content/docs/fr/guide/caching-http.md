@@ -2,7 +2,6 @@
 title: "Mise en cache HTTP"
 ---
 
-
 En plus de la mise en cache côté serveur que nous avons décrite dans les sections précédentes, les applications Web peuvent aussi exploiter la mise en cache côté client pour économiser le temps de génération et de transfert d'un contenu de page inchangé.
 
 Pour utiliser la mise en cache côté client, vous pouvez configurer [[yii\filters\HttpCache]] comme un filtre pour des actions de contrôleur dont le résultat rendu peut être mis en cache du côté du client. [[yii\filters\HttpCache|HttpCache]]

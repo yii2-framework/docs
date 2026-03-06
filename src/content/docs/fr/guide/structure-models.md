@@ -2,7 +2,6 @@
 title: "Modèles"
 ---
 
-
 Les modèles font partie du modèle d'architecture [MVC](https://fr.wikipedia.org/wiki/Mod%C3%A8le-vue-contr%C3%B4leur) (Modèle Vue Contrôleur).
 Ces objets représentent les données à traiter, les règles et la logique de traitement.
 

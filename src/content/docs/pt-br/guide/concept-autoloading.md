@@ -2,7 +2,6 @@
 title: "Autoloading de Classes"
 ---
 
-
 O Yii baseia-se no [mecanismo de autoloading de classe](https://www.php.net/manual/pt_BR/language.oop5.autoload.php) para localizar e incluir todos os arquivos de classe necessários. Ele fornece um autoloader de alto desempenho que é compatível com o
 [PSR-4 standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md).
 O autoloader é instalado quando o arquivo `Yii.php` é incluído.

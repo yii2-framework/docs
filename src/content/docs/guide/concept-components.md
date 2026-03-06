@@ -2,7 +2,6 @@
 title: "Components"
 ---
 
-
 Components are the main building blocks of Yii applications. Components are instances of [[yii\base\Component]],
 or an extended class. The three main features that components provide to other classes are:
 

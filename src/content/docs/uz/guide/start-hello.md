@@ -2,7 +2,6 @@
 title: "«Salomlashamiz»"
 ---
 
-
 Ushbu bo'limda biz "Salom" so'zlari bilan yangi sahifani qanday yaratishni ko'rib chiqamiz. Siz masalani hal qilish jarayonida
 [nazoratchi amalini](structure-controllers.md) va [ko`rinishi](structure-views.md):ni yaratasiz
 

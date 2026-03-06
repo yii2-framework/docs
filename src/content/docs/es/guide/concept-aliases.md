@@ -2,7 +2,6 @@
 title: "Alias"
 ---
 
-
 Loa alias son utilizados para representar rutas o URLs de manera que no tengas que escribir explícitamente rutas absolutas o URLs en tu
 proyecto. Un alias debe comenzar con el signo `@` para ser diferenciado de una ruta normal de archivo y de URLs. Los alias definidos
 sin el `@` del principio, serán prefijados con el signo `@`.

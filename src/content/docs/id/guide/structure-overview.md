@@ -2,7 +2,6 @@
 title: "Tinjauan"
 ---
 
-
 Aplikasi Yii diorganisir berdasarkan pola arsitektur [model-view-controller (MVC)](https://id.wikipedia.org/wiki/MVC).
 [Model](structure-models.md) merepresentasikan data, pengaturan dan proses bisnis; [view](structure-views.md)
 adalah output yang merepresentasikan model; dan [controller](structure-controllers.md) mengelola input dan merubahnya

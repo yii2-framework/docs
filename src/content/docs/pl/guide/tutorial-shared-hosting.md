@@ -2,7 +2,6 @@
 title: "Współdzielone środowisko hostujące"
 ---
 
-
 Współdzielone środowiska hostujące są często ograniczone, jeśli chodzi o możliwości ich konfiguracji i struktury folderów. Pomimo to, wciąż, w większości przypadków,
 możesz w takim środowisku uruchomić Yii 2.0 po kilku drobnych modyfikacjach.
 

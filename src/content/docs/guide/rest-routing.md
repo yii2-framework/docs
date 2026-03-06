@@ -2,7 +2,6 @@
 title: "Routing"
 ---
 
-
 With resource and controller classes ready, you can access the resources using the URL like
 `http://localhost/index.php?r=user/create`, similar to what you can do with normal Web applications.
 

@@ -2,7 +2,6 @@
 title: "Trabalhando com Formulários"
 ---
 
-
 Esta seção descreve como criar uma nova página com um formulário para receber
 dados dos usuários. A página exibirá um formulário com um campo para o nome e outro para o e-mail. Depois de obter essas duas informações do usuário, a página exibirá os valores inseridos de volta para confirmação.
 

@@ -2,7 +2,6 @@
 title: "数据格式器（Data Formatting）"
 ---
 
-
 你可以使用 `formatter` [application component](structure-application-components.md) 来格式化数据。
 默认 `fomatter` 由 [[yii\i18n\Formatter]] 来实现，这个组件提供了一系列关于日期/时间，数字，货币等的格式化方法。
 使用方法如下：

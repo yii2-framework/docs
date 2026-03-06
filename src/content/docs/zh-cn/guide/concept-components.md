@@ -2,7 +2,6 @@
 title: "组件（Component）"
 ---
 
-
 组件是 Yii 应用的主要基石。是 [[yii\base\Component]] 类或其子类的实例。
 三个用以区分它和其它类的主要功能有：
 

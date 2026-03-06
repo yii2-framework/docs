@@ -1,7 +1,6 @@
 ---
-title: "<div dir=\"rtl\">تثبيت ال Yii</div>"
+title: '<div dir="rtl">تثبيت ال Yii</div>'
 ---
-
 
 <p dir="rtl">يمكنك تثبيت ال Yii بطريقتين ، الأولى باستخدام مدير الحزم <a href="https://getcomposer.org">Composer</a> أو عن طريق تنزيل Archive File. الطريقة الأولى هي الطريقة المفضلة للعمل، ، لأنها تتيح لك تثبيت [<a href="../guide/structure-extensions.md">extensions</a> - ملحقات أو اضافات] جديدة، أو تحديث إطار العمل Yii ببساطة عن طريق تشغيل أمر واحد فقط.
 </p>

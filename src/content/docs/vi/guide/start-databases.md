@@ -2,7 +2,6 @@
 title: "Làm việc với CSDL"
 ---
 
-
 Phần này sẽ hướng dẫn làm thế nào để tạo mới trang có chức năng hiển thị dữ liệu các thành phố (country) và được lấy
 từ bảng `country` nằm trong cơ sở dữ liệu. Để thực hành tốt bài hướng dẫn, bạn cần cấu hình các kết nối tới CSDL,
 tạo class [Active Record](db-active-record.md), taọ một [action](structure-controllers.md),

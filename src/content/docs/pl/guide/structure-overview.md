@@ -2,7 +2,6 @@
 title: "Struktura aplikacji"
 ---
 
-
 Aplikacja Yii jest zorganizowana według wzorca architektonicznego [model-widok-kontroler (MVC)](https://pl.wikipedia.org/wiki/Model-View-Controller).
 [Modele](structure-models.md) reprezentują dane, logikę biznesową i zasady walidacji, [widoki](structure-views.md)
 są odpowiedzialne za wyświetlanie informacji związanych z modelami, a [kontrolery](structure-controllers.md) przyjmują dane wejściowe

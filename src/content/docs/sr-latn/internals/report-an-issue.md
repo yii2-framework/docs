@@ -2,7 +2,6 @@
 title: "Prijavite problem"
 ---
 
-
 Molimo da ispratite smernice ispod kada prijavljujete problem kako bi vaš problem bio što pre razrešen:
 
 - Priložite informacije uključujući: verziju PHP-a i Yii-a, tip operativnog sistema i web servera, tip brauzera i njegovu verziju;

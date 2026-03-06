@@ -2,7 +2,6 @@
 title: "Silniki szablonów"
 ---
 
-
 Yii domyślnie używa PHP jako języka szablonów, ale nic nie stoi na przeszkodzie, aby skonfigurować wsparcie dla innych silników renderujących widok,
 takich jak [Twig](https://twig.symfony.com/) lub [Smarty](https://www.smarty.net/), dostępnych w postaci rozszerzeń.
 

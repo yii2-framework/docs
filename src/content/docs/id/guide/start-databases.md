@@ -2,7 +2,6 @@
 title: "Bekerja dengan Database"
 ---
 
-
 Bagian ini akan memaparkan bagaimana membuat halaman yang menampilkan daftar data negara yang diambil dari
 tabel `country` pada database. Untuk menyelesaikan tugas ini, anda akan melakukan konfigurasi koneksi ke database,
 membuat class [Active Record](db-active-record.md), membuat [action](structure-controllers.md),

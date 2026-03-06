@@ -2,7 +2,6 @@
 title: "Limitador de Acesso"
 ---
 
-
 Para prevenir abusos, você pode considerar a utilização de um _limitador de acesso_ nas suas APIs. Por exemplo, você pode querer limitar o uso da API para cada usuário em no máximo 100 chamadas a cada 10 minutos. Se o número de solicitações recebidas por usuário ultrapassar este limite, uma resposta com status 429 (significa "Muitas Requisições") deve ser retornada.
 
 Para habilitar o limitador de acesso, a [[yii\web\User::identityClass|classe de identidade do usuário]] deve implementar [[yii\filters\RateLimitInterface]]. Esta interface requer a implementação de três métodos:

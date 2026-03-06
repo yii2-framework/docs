@@ -2,7 +2,6 @@
 title: "Caching"
 ---
 
-
 Caching is a cheap and effective way to improve the performance of a Web application. By storing relatively
 static data in cache and serving it from cache when requested, the application saves the time that would be
 required to generate the data from scratch every time.

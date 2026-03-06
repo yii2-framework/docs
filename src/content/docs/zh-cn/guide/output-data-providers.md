@@ -2,7 +2,6 @@
 title: "数据提供者"
 ---
 
-
 在 [Pagination](output-pagination.md) 和 [Sorting](output-sorting.md) 部分,
 我们已经介绍了如何允许终端用户选择一个特定的数据页面，根据一些字段对它们进行展现与排序。
 因为分页和排序数据的任务是很常见的，所以Yii提供了一组封装好的*data provider*类。

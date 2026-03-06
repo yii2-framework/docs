@@ -2,7 +2,6 @@
 title: "Wersjonowanie Yii"
 ---
 
-
 Ten dokument podsumowuje politykę wersjonowania Yii. Naszą aktualną strategię wersjonowania jest wariant [wersjonowania semantycznego](https://semver.org/).
 
 Główni programiści Yii wiele razy już zgadzali się i podkreślali, że ważnym jest utrzymanie wydań 2.0.x kompatybilnych

@@ -2,7 +2,6 @@
 title: "Wysyłanie plików"
 ---
 
-
 Przesyłanie plików w Yii jest zazwyczaj wykonywane przy użyciu klasy [[yii\web\UploadedFile|UploadedFile]], która hermetyzuje każdy przesłany plik jako obiekt `UploadedFile`.
 W połączeniu z [[yii\widgets\ActiveForm|ActiveForm]] oraz [modelem](structure-models.md), możesz w łatwy sposób zaimplementować bezpieczny mechanizm przesyłania plików.
 

@@ -2,7 +2,6 @@
 title: "Création de formulaires"
 ---
 
-
 La manière primaire d'utiliser des formulaires dans Yii de faire appel aux [[yii\widgets\ActiveForm]]. Cette approche doit être privilégiée lorsque le formulaire est basé sur un modèle. En plus, il existe quelques méthodes utiles dans [[yii\helpers\Html]] qui sont typiquement utilisées pour ajouter des boutons et des textes d'aides de toute forme.
 
 Un formulaire, qui est affiché du côté client, possède dans la plupart des cas, un [modèle](structure-models.md) correspondant qui est utilisé pour valider ses entrées du côté serveur (lisez la section [Validation des entrées](input-validation.md) pour plus de détails sur la validation). Lors de la création de formulaires basés sur un modèle, la première étape est de définir le modèle lui-même. Le modèle peut être soit basé sur une classe d'[enregistrement actif](db-active-record.md) représentant quelques données de la base de données, soit sur une classe de modèle générique qui étend la classe [[yii\base\Model]]) pour capturer des entrées arbitraires, par exemple un formulaire de connexion. Dans l'exemple suivant, nous montrons comment utiliser un modèle générique pour un formulaire de connexion :

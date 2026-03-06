@@ -2,7 +2,6 @@
 title: "Praca z bazami danych"
 ---
 
-
 Ta sekcja opisuje jak utworzyć nową stronę, która będzie wyświetlała dane krajów pobrane z tabeli bazy danych o nazwie `country`.
 Aby to osiągnąć, musisz skonfigurować swoje połączenie z bazą danych, utworzyć klasę [Active Record](db-active-record.md), zdefiniować [akcję](structure-controllers.md) oraz utworzyć
 [widok](structure-views.md).

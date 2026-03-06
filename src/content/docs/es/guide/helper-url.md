@@ -2,7 +2,6 @@
 title: "Clase Auxiliar URL (URL Helper)"
 ---
 
-
 La clase auxiliar URL proporciona un conjunto de métodos estáticos para gestionar URLs.
 
 ## Obtener URLs comúnes <span id="getting-common-urls"></span>

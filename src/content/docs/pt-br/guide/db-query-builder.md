@@ -2,7 +2,6 @@
 title: "Query Builder (Construtor de Consulta)"
 ---
 
-
 Desenvolvido à partir do [Database Access Objects](db-dao.md), o query builder permite que você construa uma instrução SQL em um programático e independente de banco de dados. Comparado a escrever instruções SQL à mão, usar query builder lhe ajudará a escrever um código SQL relacional mais legível e gerar declarações SQL mais seguras.
 
 Usar query builder geralmente envolve dois passos:

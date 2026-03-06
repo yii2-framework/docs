@@ -2,7 +2,6 @@
 title: "测试环境设置"
 ---
 
-
 Yii 2 官方兼容 [`Codeception`](https://github.com/Codeception/Codeception) 测试框架，
 你可以创建以下类型的测试：
 

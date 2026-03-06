@@ -2,7 +2,6 @@
 title: "テンプレートエンジンを使う"
 ---
 
-
 デフォルトでは、Yii は PHP をテンプレート言語として使いますが、[Twig](https://twig.symfony.com/) や
 [Smarty](https://www.smarty.net/) などの他のレンダリング・エンジンをサポートするように Yii を構成することが出来ます。
 

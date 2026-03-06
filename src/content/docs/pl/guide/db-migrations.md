@@ -2,7 +2,6 @@
 title: "Migracje bazy danych"
 ---
 
-
 W czasie rozwoju i utrzymywania aplikacji zasilanej danymi z bazy danych, struktura tej ostatniej ewoluuje podobnie jak
 sam kod źródłowy. Przykładowo, rozbudowując aplikację konieczne jest dodanie nowej tabeli, lub też już po wydaniu aplikacji
 na serwerze produkcyjnym przydałby się indeks, aby poprawić wydajność zapytania itd. Zmiana struktury bazy danych często

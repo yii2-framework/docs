@@ -2,7 +2,6 @@
 title: "Filters"
 ---
 
-
 Filters are objects that run before and/or after [controller actions](structure-controllers.md#actions). For example,
 an access control filter may run before actions to ensure that they are allowed to be accessed by particular end users;
 a content compression filter may run after actions to compress the response content before sending them out to end users.

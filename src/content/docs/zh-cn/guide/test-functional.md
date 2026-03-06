@@ -2,7 +2,6 @@
 title: "功能测试"
 ---
 
-
 功能测试从用户的角度验证场景。它类似于[验收测试](test-acceptance.md)。
 但是它不是通过 HTTP 进行通信，而是填充环境，如（填充）POST 和 GET 参数，
 然后直接在代码里执行 Application 实例。

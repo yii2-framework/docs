@@ -2,7 +2,6 @@
 title: "Pagination"
 ---
 
-
 Lorsqu'il y a trop de données à afficher sur une seule page, une stratégie courante consiste à les afficher en de multiples pages, et sur chacune des pages, à n'afficher qu'une fraction réduite des données. Cette stratégie est connue sous le nom de _pagination_.
 
 Yii utilise un objet [[yii\data\Pagination]] pour représenter les informations d'un schéma de pagination. En particulier :

@@ -2,7 +2,6 @@
 title: "说声 Hello"
 ---
 
-
 本章描述了如何在你的应用中创建一个新的 “Hello” 页面。为了实现这一目标，
 将会创建一个[操作](structure-controllers.md#creating-actions)
 和一个[视图](structure-views.md)：

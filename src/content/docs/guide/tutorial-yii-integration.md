@@ -2,7 +2,6 @@
 title: "Working with Third-Party Code"
 ---
 
-
 From time to time, you may need to use some third-party code in your Yii applications. Or you may want to
 use Yii as a library in some third-party systems. In this section, we will show how to achieve these goals.
 

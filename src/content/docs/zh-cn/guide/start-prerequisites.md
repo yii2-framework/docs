@@ -2,7 +2,6 @@
 title: "你需要了解什么（What do you need to know）"
 ---
 
-
 Yii 的学习曲线并不像其他 PHP 框架那样陡峭，但仍然需要一些基础知识。
 
 ## PHP

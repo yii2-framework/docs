@@ -2,7 +2,6 @@
 title: "Organizacja projektu"
 ---
 
-
 W tym dokumencie opisana jest organizacja repozytoriów deweloperskich Yii 2.
 
 1. Poszczególne bazowe rozszerzenia i szablony projektów są utrzymywane w oddzielnych _niezależnych_ projektach na GitHubie

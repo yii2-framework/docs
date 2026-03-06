@@ -2,7 +2,6 @@
 title: "路由"
 ---
 
-
 当[入口脚本](structure-entry-scripts.md)在调用 [[yii\web\Application::run()|run()]]
 方法时，它进行的第一个操作就是解析输入的请求，然后实例化对应的[控制器动作](structure-controllers.md)处理这个请求。
 该过程就被称为*引导路由（routing）*。

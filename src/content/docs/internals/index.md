@@ -2,7 +2,6 @@
 title: "Yii Developer Documentation"
 ---
 
-
 This directory contains documentation about Yii Framework development and release process.
 
 ## Contributor Guidelines

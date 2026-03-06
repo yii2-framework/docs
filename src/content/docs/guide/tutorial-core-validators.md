@@ -2,7 +2,6 @@
 title: "Core Validators"
 ---
 
-
 Yii provides a set of commonly used core validators, found primarily under the `yii\validators` namespace.
 Instead of using lengthy validator class names, you may use _aliases_ to specify the use of these core
 validators. For example, you can use the alias `required` to refer to the [[yii\validators\RequiredValidator]] class:

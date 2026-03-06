@@ -2,7 +2,6 @@
 title: "Proveedores de datos"
 ---
 
-
 En las secciones sobre [paginación](output-pagination.md) y [ordenación](output-sorting.md) se
 describe como permitir a los usuarios finales elegir que se muestre una página de datos en
 particular, y ordenar los datos por algunas columnas. Como la tarea de paginar y ordenar datos

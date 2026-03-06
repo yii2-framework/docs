@@ -2,7 +2,6 @@
 title: "Komponenty aplikacji"
 ---
 
-
 Aplikacje są [lokatorami usług](concept-service-locator.md). Posiadają one zestawy _komponentów aplikacji_,
 które zajmują się dostarczaniem różnych serwisów do obsługi żądań. Dla przykładu,
 komponent `urlManager` jest odpowiedzialny za przekierowania żądań do odpowiednich kontrolerów,

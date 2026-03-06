@@ -2,7 +2,6 @@
 title: "Behaviors"
 ---
 
-
 Behaviors are instances of [[yii\base\Behavior]], or of a child class. Behaviors, also known
 as [mixins](https://en.wikipedia.org/wiki/Mixin), allow you to enhance the functionality
 of an existing [[yii\base\Component|component]] class without needing to change the class's inheritance.

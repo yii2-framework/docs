@@ -2,7 +2,6 @@
 title: "Mise en cache de pages"
 ---
 
-
 La mise en cache de pages fait référence à la mise en cache du contenu d'une page entière du côté serveur. Plus tard, lorsque la même page est demandée à nouveau, son contenu est servi à partir du cache plutôt que d'être régénéré entièrement.
 
 La mise en cache de pages est prise en charge par [[yii\filters\PageCache]], un [filtre d'action](structure-filters.md). On peut l'utiliser de la manière suivante dans une classe contrôleur :

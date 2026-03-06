@@ -2,7 +2,6 @@
 title: "Testy funkcjonalne"
 ---
 
-
 > Uwaga: Ta sekcja jest w trakcie tworzenia.
 
 - [Testy funkcjonalne Codeception](https://codeception.com/docs/04-FunctionalTests)

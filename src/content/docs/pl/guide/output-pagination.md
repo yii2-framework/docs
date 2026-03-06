@@ -2,7 +2,6 @@
 title: "Paginacja"
 ---
 
-
 Kiedy danych jest zbyt dużo, aby wyświetlić je w całości na jednej stronie, zwykle stosuje się mechanizm podziału na wiele stron,
 z których każda prezentuje tylko część danych na raz. Mechanizm ten nazywamy _paginacją_.
 

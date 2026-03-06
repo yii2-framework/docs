@@ -2,7 +2,6 @@
 title: "1.1 dan keyingi yangilanishlar"
 ---
 
-
 Yii 2.0 talqini uchun batamom boshqatdan yozilganligi bois 1.1 va 2.0 talqinlar orasida ko'p farqlar mavjud.
 Shu tufayli 1.1 dan keyingi yangilanishlar minor talqinlar (talqinlarning bir biridan 1-xonasidan keyingi xonalaridagi sonlari farq qiladiganlari) orasidagi yangilanishlar kabi sodda ko'rinishda bo'lmaydi.
 Ushbu qo'llanmada ikki talqin orasidagi asossiy farq yangilanishlari keltirilgan.

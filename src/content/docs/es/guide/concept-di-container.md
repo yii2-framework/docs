@@ -2,7 +2,6 @@
 title: "Contenedor de Inyección de Dependencias"
 ---
 
-
 Un contenedor de Inyección de Dependencias (ID), es un objeto que sabe como instancias y configurar objetos y sus
 objetos dependientes. El [articulo de Martin](https://martinfowler.com/articles/injection.html) contiene una buena
 explicación de porque son útiles los contenedores de ID. A continuación explicaremos como usar el contenedor de ID que
