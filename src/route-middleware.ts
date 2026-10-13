@@ -1,5 +1,6 @@
 import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
 import { getCollection } from 'astro:content';
+import { isReferenceRoute } from '../plugins/reference-id.mjs';
 import { buildDate, DOCS_VERSION, PROJECT_NAME } from './site-meta.mjs';
 
 type SidebarEntry =
@@ -42,13 +43,19 @@ function firstLink(entry: SidebarEntry): string | undefined {
   return undefined;
 }
 
-let entryIds: Promise<Set<string>> | undefined;
+let entryTitles: Promise<Map<string, string>> | undefined;
 
-/** Returns the ids of all `docs` entries (loaded once per build; `getEntry` would log a warning for a miss). */
-function docsIds(): Promise<Set<string>> {
-  entryIds ??= getCollection('docs').then((entries) => new Set(entries.map((entry) => entry.id)));
+/** Returns the titles of all `docs` entries by id (loaded once per build; `getEntry` would warn for a miss). */
+function docsTitles(): Promise<Map<string, string>> {
+  entryTitles ??= getCollection('docs')
+    .then((entries) => new Map(entries.map((entry) => [entry.id, entry.data.title])));
 
-  return entryIds;
+  return entryTitles;
+}
+
+/** Returns the ids of all `docs` entries. */
+async function docsIds(): Promise<Set<string>> {
+  return new Set((await docsTitles()).keys());
 }
 
 /** Serializes JSON for an inline `<script>`: `<` is escaped so the content cannot close the element. */
@@ -78,6 +85,21 @@ export const onRequest = defineRouteMiddleware(async (context) => {
   ];
 
   if (trail.length === 0 && pageUrl !== homeUrl) {
+    // API reference type pages are not in the sidebar: their trail is the chain of namespace pages above them.
+    if (isReferenceRoute(route.id, route.locale)) {
+      const titles = await docsTitles();
+      const parts = route.entry.id.split('/');
+
+      for (let length = 1; length < parts.length; length++) {
+        const id = parts.slice(0, length).join('/');
+        const name = titles.get(id);
+
+        if (name !== undefined) {
+          crumbs.push({ name, item: new URL(`${id}/`, homeUrl).href });
+        }
+      }
+    }
+
     crumbs.push({ name: title, item: pageUrl });
   }
 
@@ -120,6 +142,12 @@ export const onRequest = defineRouteMiddleware(async (context) => {
       { tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
       { tag: 'meta', attrs: { name: 'twitter:image', content: image } },
     );
+  }
+
+  // The API reference is English only: its type pages have no locale copies, so drop the hreflang alternates.
+  if (isReferenceRoute(route.id, route.locale)) {
+    route.head = route.head.filter((entry) => !(entry.tag === 'link' && entry.attrs?.rel === 'alternate'
+      && typeof entry.attrs?.hreflang === 'string'));
   }
 
   route.head.push(

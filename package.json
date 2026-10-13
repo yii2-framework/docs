@@ -5,9 +5,10 @@
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
-        "prebuild": "node scripts/sync.mjs",
+        "prebuild": "node scripts/sync.mjs && php tools/bin/reference",
         "build": "astro build",
         "preview": "astro preview",
+        "reference": "php tools/bin/reference",
         "astro": "astro",
         "descriptions": "node scripts/add-descriptions.mjs",
         "sync": "node scripts/sync.mjs",

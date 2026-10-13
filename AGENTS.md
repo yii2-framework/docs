@@ -16,11 +16,12 @@ Instructions for AI agents that use the Yii documentation published from this re
    and a link to its Markdown version, grouped like the site navigation.
 2. Fetch only the pages the task needs, using their Markdown URLs.
 3. Use the bundles only when the index is not enough:
-   - <https://yii2-framework.github.io/docs/llms-small.txt>: all English pages, notes, tips and info blocks removed
-     (warnings kept).
-   - <https://yii2-framework.github.io/docs/llms-full.txt>: all English pages.
+   - <https://yii2-framework.github.io/docs/llms-small.txt>: all English guide pages, notes, tips and info blocks
+     removed (warnings kept).
+   - <https://yii2-framework.github.io/docs/llms-full.txt>: all English guide pages. Neither file contains the API
+     reference (about 10 MB); see "API reference" below.
    - `https://yii2-framework.github.io/docs/_llms-txt/<group>.txt`: one sidebar group, for example
-     `getting-started.txt`.
+     `getting-started.txt`; `api.txt` holds the whole API reference.
 
 ## Markdown URLs
 
@@ -33,8 +34,8 @@ Prefer the Markdown version of any page: append `index.md` to the page URL.
 
 - Each HTML page links its Markdown version with `<link rel="alternate" type="text/markdown">`.
 - Links between pages in the Markdown versions already point to Markdown URLs.
-- `[[yii\...]]` references in the text name framework classes and members (for example
-  `[[yii\base\Component::on()]]`). They are not links yet.
+- References to framework classes and members in the guide (`[[yii\base\Component::on()]]` in the sources) are
+  links to the API reference; the few targets the reference does not document are plain code.
 - `llms*.txt` contain English pages only. Translations exist for some pages under a locale prefix (`/docs/ja/...`).
 
 ## Extension guides
@@ -47,15 +48,27 @@ Prefer the Markdown version of any page: append `index.md` to the page URL.
 - Markdown URLs work the same way: `https://yii2-framework.github.io/docs/extensions/bootstrap6/installation/index.md`.
 - The bundle `https://yii2-framework.github.io/docs/_llms-txt/extensions.txt` holds all extension guides.
 
+## API reference
+
+Generated from the PHPDoc of `yiisoft/yii2` (branch `22.0`) and of each extension on every build.
+
+- Framework: <https://yii2-framework.github.io/docs/api/> (namespaces), one page per class, interface, trait and
+  enum, for example `https://yii2-framework.github.io/docs/api/yii/base/widget/` (Markdown: append `index.md`).
+  The path is the namespace and class name in lower case.
+- Extensions: `https://yii2-framework.github.io/docs/extensions/<package>/reference/`, for example
+  `https://yii2-framework.github.io/docs/extensions/bootstrap6/reference/alert/`.
+- Each page lists the properties (type, default, description, defining class), methods (signature, parameters,
+  return value, exceptions), events, constants and enum cases. Stable anchors: `#property-<name>`,
+  `#method-<name>`, `#event-<NAME>`, `#const-<NAME>`, `#case-<NAME>`.
+- Machine-readable catalogs, one JSON object per package with every type keyed by its fully qualified name:
+  <https://yii2-framework.github.io/docs/reference/yii2.json> (framework) and
+  `https://yii2-framework.github.io/docs/reference/<package>.json` (`bootstrap6`, `filepond`, `localeurls`). Schema:
+  <https://yii2-framework.github.io/docs/reference/reference.schema.json>. Prefer a catalog entry over a page when only
+  the signature, types and defaults matter.
+
 ## Coming next
 
-- API reference generated from the framework PHPDoc: `https://yii2-framework.github.io/docs/api/` (not published yet).
-- Extension API references: `https://yii2-framework.github.io/docs/extensions/<package>/reference/` (not published
-  yet).
 - Agent skills: `skills/<name>/SKILL.md` in this repository (not published yet).
-
-Until then, read the framework source (`yiisoft/yii2`, branch `22.0`) at <https://github.com/yiisoft/yii2/tree/22.0>
-for exact signatures.
 
 ## Limits
 

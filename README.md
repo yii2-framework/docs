@@ -58,11 +58,30 @@ npm run sync:local    # use each package's `localPath` checkout instead (working
 npm run test:sync     # self-tests of the sync script
 ```
 
-`npm run build` runs the sync first (`prebuild`), so CI clones the packages; `SYNC_LOCAL=1 npm run build` uses the
+`npm run build` runs the sync and `tools/bin/reference` first (`prebuild`, so PHP and
+`composer install --working-dir tools` are needed), so CI clones the packages; `SYNC_LOCAL=1 npm run build` uses the
 local checkouts. The deploy workflow also runs nightly to pick up package changes. A package whose repository does
 not contain it yet (its `composer.json` name differs from `packagist` in the manifest) is skipped with a
 `[sync] skipped <name>` warning and left out of the sidebar; `bootstrap6` is in that state until it is pushed, so CI
 shows its docs only after the push. `node scripts/sync.mjs --strict` fails on any skip.
+
+## API reference
+
+`tools/` is a Composer project (PHP 8.2 or later) that generates the API reference with
+[yii2-apidoc](https://github.com/yiisoft/yii2-apidoc): one Markdown page per type under `src/content/docs/api/`
+(framework, upstream `yiisoft/yii2` branch `22.0`) and `src/content/docs/extensions/<name>/reference/`, the catalogs
+`public/reference/<name>.json` and the link map `.cache/reference/links.json` used to turn the guide's
+`[[yii\...]]` references into links. All of it is build output (`.gitignore`).
+
+```bash
+composer install --working-dir tools
+npm run sync && npm run reference   # or `npm run build`, whose prebuild runs both
+composer test --working-dir tools   # PHPUnit
+```
+
+The framework is an entry of `packages.json` with `"type": "framework"`: the sync clones only its `framework/`
+directory (or, with `sync:local`, exports branch `22.0` of the `localPath` clone with `git archive`, without
+switching its checkout). Gaps of yii2-apidoc worked around in `tools/src/` are listed in `tools/UPSTREAM.md`.
 
 ## Our social networks
 

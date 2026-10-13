@@ -33,3 +33,9 @@
   `[[yii\base\Widget::$id]]`, `[[...|label]]`, in every locale and in raw HTML paragraphs) to links to the generated
   API reference (`plugins/remark-yii-links.mjs`, link map from `tools/bin/reference`), also in the Markdown version
   of each page; unknown targets become inline code in an `api-unresolved` span instead of literal `[[...]]` text.
+- feat: publish the API reference on the site: `prebuild` runs `tools/bin/reference` after the sync, a collapsed "API
+  reference" sidebar group lists the framework namespaces and each extension gets a "Reference" sub-group; type pages
+  get Open Graph images and JSON-LD breadcrumbs along their namespaces, no locale fallback copies (English only; the
+  language picker and `hreflang` alternates are hidden there), and `_llms-txt/api.txt`; `llms-full.txt` and
+  `llms-small.txt` leave the reference out (about 10 MB) and `llms.txt` says where to find it; `AGENTS.md`, the
+  "AI agents" page and the README document the reference and the `reference/<package>.json` catalogs.

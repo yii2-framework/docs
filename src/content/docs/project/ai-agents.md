@@ -1,6 +1,6 @@
 ---
 title: "Using the documentation with AI agents"
-description: "How coding agents and AI assistants read this site: llms.txt, a Markdown version of every page, the Copy and Open in buttons, and the planned skills."
+description: "How coding agents and AI assistants read this site: llms.txt, a Markdown version of every page, the API reference and its JSON catalogs, the Copy and Open in buttons, and the planned skills."
 ---
 
 This site publishes every page in a form that coding agents can load with few tokens. The content is the
@@ -14,11 +14,25 @@ and a link to its Markdown version. An agent reads it first and then fetches onl
 | File | Contents |
 | --- | --- |
 | [`llms.txt`](https://yii2-framework.github.io/docs/llms.txt) | Index: one line per page, grouped like the sidebar. |
-| [`llms-small.txt`](https://yii2-framework.github.io/docs/llms-small.txt) | All English pages in one file, with notes, tips and info blocks removed (warnings kept). |
-| [`llms-full.txt`](https://yii2-framework.github.io/docs/llms-full.txt) | All English pages in one file. Use it only when the index is not enough. |
-| `_llms-txt/<group>.txt` | One file per sidebar group, for example [`getting-started.txt`](https://yii2-framework.github.io/docs/_llms-txt/getting-started.txt). |
+| [`llms-small.txt`](https://yii2-framework.github.io/docs/llms-small.txt) | All English pages except the API reference in one file, with notes, tips and info blocks removed (warnings kept). |
+| [`llms-full.txt`](https://yii2-framework.github.io/docs/llms-full.txt) | All English pages except the API reference in one file. Use it only when the index is not enough. |
+| `_llms-txt/<group>.txt` | One file per sidebar group, for example [`getting-started.txt`](https://yii2-framework.github.io/docs/_llms-txt/getting-started.txt); [`api.txt`](https://yii2-framework.github.io/docs/_llms-txt/api.txt) holds the whole API reference. |
 
 Translations are available on the site, but these files contain the English pages only.
+
+## API reference and reference.json
+
+The [API reference](https://yii2-framework.github.io/docs/api/) is generated from the PHPDoc of the framework
+(`yiisoft/yii2`, branch `22.0`) and of each extension: one page per class, interface, trait and enum with its
+properties, methods, events, constants and enum cases, under stable anchors such as `#property-options` and
+`#method-widget`. Class references in the guide link to it.
+
+For agents, each package also has a JSON catalog in which a class costs a few hundred tokens instead of a page:
+[`reference/yii2.json`](https://yii2-framework.github.io/docs/reference/yii2.json) for the framework and
+`reference/<package>.json` for the extensions (`bootstrap6`, `filepond`, `localeurls`), described by
+[`reference.schema.json`](https://yii2-framework.github.io/docs/reference/reference.schema.json). Each type entry
+lists its kind, parents, properties (type, default, description), methods (signature, parameters, return value,
+exceptions), events, constants and enum cases.
 
 ## Markdown version of each page
 
@@ -50,7 +64,6 @@ Each page declares the documented version and the build date in `<meta name="doc
   the site.
 - Agent skills for Yii and its extensions are planned in the `skills/` directory of the
   [documentation repository](https://github.com/yii2-framework/docs).
-- The API reference (`/docs/api/`) is planned and is not published yet.
 
 ## Extension guides
 

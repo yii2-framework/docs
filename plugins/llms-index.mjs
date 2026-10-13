@@ -2,6 +2,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { contentPathToSlug, markdownUrl } from './markdown-links.mjs';
+import { REFERENCE_ID } from './reference-id.mjs';
 
 const CONTENT_DIR = fileURLToPath(new URL('../src/content/docs/', import.meta.url));
 
@@ -139,7 +140,8 @@ export function sidebarGroups(sidebar, pages) {
  */
 export function llmsTxtDetails(groups, pages, { site, base, intro }) {
   const listed = new Set(groups.flatMap((group) => group.slugs));
-  const unlisted = [...pages.keys()].filter((slug) => !listed.has(slug)).sort();
+  // Type pages of the API reference are listed by their namespace pages (and the `api` bundle), not one by one.
+  const unlisted = [...pages.keys()].filter((slug) => !listed.has(slug) && !REFERENCE_ID.test(slug)).sort();
   const sections = [intro];
   const line = (slug) => {
     const page = pages.get(slug);
