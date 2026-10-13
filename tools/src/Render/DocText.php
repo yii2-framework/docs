@@ -65,18 +65,30 @@ final class DocText
 
     /**
      * Returns the text as one Markdown line for a table cell: newlines collapsed and `|` escaped.
+     *
+     * @param bool $count Whether unresolved references are counted; `false` for a text the page renders twice.
      */
-    public function cell(?string $text, ?TypeDoc $context, string $page, string $package): string
+    public function cell(?string $text, ?TypeDoc $context, string $page, string $package, bool $count = true): string
+    {
+        return str_replace('|', '\|', $this->inline($text, $context, $page, $package, $count));
+    }
+
+    /**
+     * Returns the text as one Markdown line outside tables: newlines collapsed, fence lines dropped.
+     *
+     * @param bool $count Whether unresolved references are counted; `false` for a text the page renders twice.
+     */
+    public function inline(?string $text, ?TypeDoc $context, string $page, string $package, bool $count = true): string
     {
         $lines = [];
 
-        foreach (explode("\n", $this->convert($text, $context, $page, $package, false)) as $line) {
+        foreach (explode("\n", $this->convert($text, $context, $page, $package, false, $count)) as $line) {
             if (preg_match(self::FENCE, $line) !== 1 && trim($line) !== '') {
                 $lines[] = trim($line);
             }
         }
 
-        return str_replace('|', '\|', implode(' ', $lines));
+        return implode(' ', $lines);
     }
 
     /**
@@ -136,8 +148,15 @@ final class DocText
         return $text;
     }
 
-    private function convert(?string $text, ?TypeDoc $context, string $page, string $package, bool $plain): string
-    {
+    private function convert(
+        ?string $text,
+        ?TypeDoc $context,
+        string $page,
+        string $package,
+        bool $plain,
+        bool $count = true,
+    ): string {
+        $count = $count && !$plain;
         $text = trim(str_replace(["\r\n", "\r"], "\n", (string) $text));
 
         if ($text === '') {
@@ -169,7 +188,7 @@ final class DocText
                 $line = str_repeat('#', min(6, strlen($heading[1]) + 3)) . $heading[2];
             }
 
-            $output[] = $this->line($line, $context, $page, $package, $plain);
+            $output[] = $this->line($line, $context, $page, $package, $plain, $count);
         }
 
         // An unclosed fence (a docblock slip) would swallow the rest of the page: close it.
@@ -183,8 +202,14 @@ final class DocText
     /**
      * Converts one prose line: inline code is kept, the rest is escaped and its references are resolved.
      */
-    private function line(string $line, ?TypeDoc $context, string $page, string $package, bool $plain): string
-    {
+    private function line(
+        string $line,
+        ?TypeDoc $context,
+        string $page,
+        string $package,
+        bool $plain,
+        bool $count,
+    ): string {
         $parts = preg_split('/(`+)(.+?)(?<!`)\1(?!`)/', $line, -1, PREG_SPLIT_DELIM_CAPTURE);
 
         if ($parts === false) {
@@ -192,21 +217,21 @@ final class DocText
         }
 
         $result = '';
-        $count = count($parts);
+        $total = count($parts);
 
-        for ($i = 0; $i < $count; $i += 3) {
+        for ($i = 0; $i < $total; $i += 3) {
             $prose = $parts[$i];
 
             if (!$plain) {
                 $prose = (string) preg_replace('/<(?!https?:\/\/[^\s>]+>)/', '&lt;', $prose);
             }
 
-            $prose = $this->guideLinks($prose, $page, $package, $plain);
+            $prose = $this->guideLinks($prose, $page, $package, $plain, $count);
 
             $prose = (string) preg_replace('/\{@inherit[dD]oc\}/', '', $prose);
             $result .= (string) preg_replace_callback(
                 self::REFERENCE,
-                fn(array $match): string => $this->reference($match, $context, $page, $package, $plain),
+                fn(array $match): string => $this->reference($match, $context, $page, $package, $plain, $count),
                 $prose,
             );
 
@@ -221,15 +246,21 @@ final class DocText
     /**
      * @param array<int, string> $match
      */
-    private function reference(array $match, ?TypeDoc $context, string $page, string $package, bool $plain): string
-    {
+    private function reference(
+        array $match,
+        ?TypeDoc $context,
+        string $page,
+        string $package,
+        bool $plain,
+        bool $count,
+    ): string {
         $isTag = ($match[1] ?? '') !== '';
         $target = trim($isTag ? ($match[2] ?? '') : ($match[4] ?? ''));
         $title = trim($isTag ? ($match[3] ?? '') : ($match[5] ?? ''));
 
         // Misses are counted once, for the pages; `reference.json` renders a subset of the same texts.
         if ($target === '') {
-            if (!$plain) {
+            if ($count) {
                 $this->stats->unresolved($package, $match[0], (string) $context?->name);
             }
 
@@ -239,7 +270,7 @@ final class DocText
         $resolution = $this->resolver->resolve($target, $context);
 
         if ($resolution === null) {
-            if (!$plain) {
+            if ($count) {
                 $this->stats->unresolved($package, $target, (string) $context?->name);
             }
 
@@ -284,17 +315,17 @@ final class DocText
      * Rewrites `[text](guide:page#anchor)` to a relative link to `guide/page.md`, or to the absolute guide URL in plain
      * output. A missing guide page is counted and points to the guide index.
      */
-    private function guideLinks(string $prose, string $page, string $package, bool $plain): string
+    private function guideLinks(string $prose, string $page, string $package, bool $plain, bool $count): string
     {
         return (string) preg_replace_callback(
             '/\]\(guide:([A-Za-z0-9._-]+)(#[^)\s]*)?\)/',
-            function (array $match) use ($page, $package, $plain): string {
+            function (array $match) use ($page, $package, $plain, $count): string {
                 $name = (string) preg_replace('/\.md$/', '', $match[1]);
                 $target = 'guide/' . $name . '.md';
                 $hash = $match[2] ?? '';
 
                 if (!is_file($this->contentDir . '/' . $target)) {
-                    if (!$plain) {
+                    if ($count) {
                         $this->stats->unresolved($package, 'guide:' . $name, $page);
                     }
 

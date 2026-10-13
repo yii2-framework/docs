@@ -241,7 +241,7 @@ final class ReferenceCommand
             }
         }
 
-        $typeRenderer = new TypePageRenderer($site);
+        $typeRenderer = new TypePageRenderer($site, array_values($data));
         $sizes = [];
 
         foreach ($data as $name => $type) {

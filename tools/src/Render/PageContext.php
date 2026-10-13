@@ -7,16 +7,22 @@ namespace Yii2Docs\Tools\Render;
 use yii\apidoc\models\TypeDoc;
 use Yii2Docs\Tools\Source\Package;
 
+use function ctype_upper;
 use function explode;
 use function ltrim;
 use function preg_match;
 use function preg_replace_callback;
+use function preg_split;
+use function rtrim;
 use function str_contains;
 use function str_starts_with;
 use function strlen;
 use function strrpos;
 use function substr;
 use function trim;
+
+use const PREG_SPLIT_DELIM_CAPTURE;
+use const PREG_SPLIT_NO_EMPTY;
 
 /**
  * Binds the text and link helpers to one page (content path, package) and one docblock context type.
@@ -41,10 +47,52 @@ final class PageContext
 
     /**
      * Returns docblock text as one table-cell line.
+     *
+     * @param bool $count Whether unresolved references are counted; `false` for a text the page renders twice.
      */
-    public function cell(?string $text): string
+    public function cell(?string $text, bool $count = true): string
     {
-        return $this->site->text->cell($text, $this->type, $this->path, $this->package->name);
+        return $this->site->text->cell($text, $this->type, $this->path, $this->package->name, $count);
+    }
+
+    /**
+     * Returns docblock text as one Markdown line outside tables.
+     */
+    public function inline(?string $text): string
+    {
+        return $this->site->text->inline($text, $this->type, $this->path, $this->package->name);
+    }
+
+    /**
+     * Returns a PHP type as Markdown: each documented or PHP built-in class name links to its page, the rest stays
+     * inline code (`array<string, ` + link + `>`).
+     *
+     * @param bool $cell Whether the result goes into a table cell (`|` escaped inside the code spans).
+     */
+    public function type(string $type, bool $cell = true): string
+    {
+        $parts = preg_split(
+            '/([A-Za-z_]\w*(?:\\\\[A-Za-z_]\w*)*)/',
+            trim($type),
+            -1,
+            PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY,
+        );
+        $result = '';
+        $code = '';
+
+        foreach ($parts === false ? [] : $parts as $part) {
+            $link = str_contains($part, '\\') || ctype_upper($part[0]) ? $this->link($part) : null;
+
+            if ($link === null) {
+                $code .= $part;
+                continue;
+            }
+
+            $result .= $this->codeRun($code, $cell) . $link;
+            $code = '';
+        }
+
+        return trim($result . $this->codeRun($code, $cell));
     }
 
     /**
@@ -72,6 +120,14 @@ final class PageContext
             );
         }
 
+        return $this->link($name) ?? DocText::code($name);
+    }
+
+    /**
+     * Returns a link to the page of a type (documented or PHP built-in), or `null` when the type has no page.
+     */
+    private function link(string $name): ?string
+    {
         $path = $this->site->pages->typePath($name);
 
         if ($path !== null) {
@@ -89,7 +145,21 @@ final class PageContext
             return '[' . DocText::code($resolution->label) . '](' . $resolution->externalUrl . ')';
         }
 
-        return DocText::code($name);
+        return null;
+    }
+
+    /**
+     * Returns a run of a type between links as inline code; surrounding spaces stay outside the code span.
+     */
+    private function codeRun(string $code, bool $cell): string
+    {
+        if (trim($code) === '') {
+            return $code === '' ? '' : ' ';
+        }
+
+        $span = $cell ? DocText::cellCode($code) : DocText::code($code);
+
+        return ($code !== ltrim($code) ? ' ' : '') . $span . ($code !== rtrim($code) ? ' ' : '');
     }
 
     private function namespaceOf(string $name): string

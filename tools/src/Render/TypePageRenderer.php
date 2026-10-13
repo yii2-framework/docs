@@ -8,21 +8,33 @@ use yii\apidoc\models\TypeDoc;
 use Yii2Docs\Tools\Model\TypeReader;
 use Yii2Docs\Tools\Source\Package;
 
+use function array_fill_keys;
 use function array_filter;
+use function array_keys;
 use function array_map;
+use function array_values;
+use function count;
 use function implode;
 use function in_array;
+use function ltrim;
 use function rtrim;
 use function sprintf;
+use function str_replace;
+use function strcasecmp;
 use function trim;
 use function ucfirst;
+use function usort;
 
 /**
- * Renders one Markdown page per type: frontmatter, declaration, relations, summary and description, then the
- * properties, methods, events, constants and enum cases with stable anchors ({@see Anchor}).
+ * Renders one Markdown page per type in the layout of the yiiframework.com API reference: breadcrumb, a metadata
+ * table headed by the kind and the full name, the long relations in collapsed `<details>` blocks, summary and
+ * description, summary tables of all members (inherited ones included, with a "Defined by" column), then one card per
+ * native property and method with its full documentation.
  *
- * Native members are documented in full; inherited members are listed in one-line rows that link to the page of the
- * defining type.
+ * HTML wrappers (`<div class="api-...">`, `<details>`, `<span class="api-...">`) only add styling hooks; their content
+ * is Markdown separated from the tags by blank lines. Signatures are `php wrap` code blocks (Expressive Code wraps
+ * long lines instead of scrolling). Member anchors ({@see Anchor}) are `<span id>` elements: on the
+ * detail heading for native methods and for native properties with details, in the summary row otherwise.
  *
  * @phpstan-import-type TypeData from TypeReader
  * @phpstan-import-type MethodData from TypeReader
@@ -30,8 +42,43 @@ use function ucfirst;
  */
 final class TypePageRenderer
 {
-    public function __construct(private readonly Site $site)
+    /**
+     * Relations shown in collapsed blocks: summary format for one and for several entries.
+     */
+    private const RELATIONS = [
+        'subclasses' => ['%d subclass', '%d subclasses'],
+        'implementedBy' => ['Implemented by %d type', 'Implemented by %d types'],
+        'usedBy' => ['Used by %d type', 'Used by %d types'],
+    ];
+    private const VISIBILITY_ORDER = ['public' => 0, 'protected' => 1];
+
+    private readonly Breadcrumbs $breadcrumbs;
+    /**
+     * @var array<string, array<string, true>> Member anchors of each type page, by fully qualified type name.
+     */
+    private readonly array $anchors;
+
+    /**
+     * @param list<TypeData> $types All rendered types: an inherited member links to its definer's page only when
+     * that page lists the member (apidoc assigns some virtual properties to interfaces and traits that do not).
+     */
+    public function __construct(private readonly Site $site, array $types = [])
     {
+        $this->breadcrumbs = new Breadcrumbs($site->pages);
+        $anchors = [];
+
+        foreach ($types as $type) {
+            $ids = [
+                ...array_map(Anchor::property(...), array_keys($type['properties'])),
+                ...array_map(Anchor::method(...), array_keys($type['methods'])),
+                ...array_map(Anchor::event(...), array_keys($type['events'])),
+                ...array_map(Anchor::constant(...), array_keys($type['constants'])),
+                ...array_map(Anchor::enumCase(...), array_keys($type['cases'])),
+            ];
+            $anchors[$type['name']] = array_fill_keys($ids, true);
+        }
+
+        $this->anchors = $anchors;
     }
 
     /**
@@ -65,7 +112,8 @@ final class TypePageRenderer
             '',
         ];
 
-        $out = [...$out, ...$this->header($data, $page), ''];
+        $out = [...$out, ...$this->breadcrumbs->block($package, $data['namespace'], $path, $data['shortName'])];
+        $out = [...$out, ...$this->header($data, $page), ...$this->relations($data, $page)];
 
         if ($data['summary'] !== '') {
             $out[] = $page->markdown($data['summary']);
@@ -77,86 +125,116 @@ final class TypePageRenderer
             $out[] = '';
         }
 
-        $out = [...$out, ...$this->see($data['see'], $page)];
+        if ($data['see'] !== []) {
+            $out[] = 'See also: ' . implode(', ', array_map($page->seeLink(...), $data['see'])) . '.';
+            $out[] = '';
+        }
+
+        $withDetails = $this->propertiesWithDetails($data);
+
         $out = [...$out, ...$this->cases($data, $page)];
-        $out = [...$out, ...$this->properties($data, $page)];
+        $out = [...$out, ...$this->properties($data, $page, $withDetails)];
         $out = [...$out, ...$this->methods($data, $page)];
         $out = [...$out, ...$this->events($data, $page)];
         $out = [...$out, ...$this->constants($data, $page)];
+        $out = [...$out, ...$this->propertyDetails($data, $page, $withDetails)];
+        $out = [...$out, ...$this->methodDetails($data, $page)];
 
         return rtrim(implode("\n", $out)) . "\n";
     }
 
     /**
+     * Returns the metadata table: kind badge and full name as the header row, then the facts of the type.
+     *
      * @param TypeData $data
      *
      * @return list<string>
      */
     private function header(array $data, PageContext $page): array
     {
-        $declaration = implode(' ', [...$data['modifiers'], $data['kind'], $data['name']]);
-
-        if ($data['backingType'] !== null) {
-            $declaration .= ': ' . $data['backingType'];
-        }
-
-        $lines = [DocText::code($declaration), ''];
-        $items = [];
+        $kind = implode(' ', [...$data['modifiers'], $data['kind']]);
+        $rows = [];
 
         if ($data['parents'] !== []) {
-            $items[] = 'Extends: ' . implode(' » ', array_map($page->typeLink(...), $data['parents']));
+            $rows['Extends'] = implode(' » ', array_map($page->typeLink(...), $data['parents']));
         }
 
         if ($data['implements'] !== []) {
             $label = $data['kind'] === 'interface' ? 'Extends' : 'Implements';
-            $items[] = $label . ': ' . implode(', ', array_map($page->typeLink(...), $data['implements']));
+            $rows[$label] = implode(', ', array_map($page->typeLink(...), $data['implements']));
         }
 
         if ($data['traits'] !== []) {
-            $items[] = 'Uses traits: ' . implode(', ', array_map($page->typeLink(...), $data['traits']));
+            $rows['Uses traits'] = implode(', ', array_map($page->typeLink(...), $data['traits']));
         }
 
-        $relations = ['subclasses' => 'Subclasses', 'implementedBy' => 'Implemented by', 'usedBy' => 'Used by'];
-
-        foreach ($relations as $key => $label) {
-            if ($data[$key] !== []) {
-                $items[] = $label . ': ' . implode(', ', array_map($page->typeLink(...), $data[$key]));
-            }
+        if ($data['backingType'] !== null) {
+            $rows['Backed by'] = $page->type($data['backingType']);
         }
 
         if ($data['since'] !== null) {
-            $items[] = 'Available since: ' . $data['since'];
+            $rows['Since'] = $data['since'];
         }
 
         if ($data['deprecated'] !== null) {
-            $items[] = 'Deprecated' . $this->deprecationText($data['deprecated'], $page);
+            $rows['Deprecated'] = $this->deprecation($data['deprecated'], $page, true);
         }
 
-        $items[] = sprintf(
-            'Source: [%s](%s)',
-            DocText::code($data['file']),
+        $rows['Source'] = sprintf(
+            '[%s](%s)',
+            DocText::cellCode($data['file']),
             Site::sourceUrl($page->package, $data['file'], 'blob', $data['line']),
         );
 
-        foreach ($items as $item) {
-            $lines[] = '- ' . $item;
+        $lines = [
+            '<div class="api-meta">',
+            '',
+            sprintf(
+                '| <span class="api-badge api-badge-%s">%s</span> | %s |',
+                $data['kind'],
+                $kind,
+                DocText::cellCode($data['name']),
+            ),
+            '| --- | --- |',
+        ];
+
+        foreach ($rows as $label => $value) {
+            $lines[] = '| ' . $label . ' | ' . $value . ' |';
         }
 
-        return $lines;
+        return [...$lines, '', '</div>', ''];
     }
 
     /**
-     * @param list<string> $see
+     * Returns the subclasses, implementing types and using types as collapsed lists whose summary states the count.
+     *
+     * @param TypeData $data
      *
      * @return list<string>
      */
-    private function see(array $see, PageContext $page): array
+    private function relations(array $data, PageContext $page): array
     {
-        if ($see === []) {
-            return [];
+        $lines = [];
+
+        foreach (self::RELATIONS as $key => [$one, $many]) {
+            $count = count($data[$key]);
+
+            if ($count === 0) {
+                continue;
+            }
+
+            $lines[] = '<details class="api-relations">';
+            $lines[] = '<summary>' . sprintf($count === 1 ? $one : $many, $count) . '</summary>';
+            $lines[] = '';
+
+            foreach ($data[$key] as $name) {
+                $lines[] = '- ' . $page->typeLink($name);
+            }
+
+            $lines = [...$lines, '', '</details>', ''];
         }
 
-        return ['See also: ' . implode(', ', array_map($page->seeLink(...), $see)) . '.', ''];
+        return $lines;
     }
 
     /**
@@ -170,7 +248,14 @@ final class TypePageRenderer
             return [];
         }
 
-        $lines = ['## Cases', '', '| Case | Value | Description |', '| --- | --- | --- |'];
+        $lines = [
+            '## Cases',
+            '',
+            '<div class="api-summary">',
+            '',
+            '| Case | Value | Description |',
+            '| --- | --- | --- |',
+        ];
 
         foreach ($data['cases'] as $case) {
             $lines[] = sprintf(
@@ -182,15 +267,36 @@ final class TypePageRenderer
             );
         }
 
-        return [...$lines, ''];
+        return [...$lines, '', '</div>', ''];
     }
 
     /**
+     * Returns the names of the native properties documented beyond their summary (they get a detail card).
+     *
      * @param TypeData $data
      *
      * @return list<string>
      */
-    private function properties(array $data, PageContext $page): array
+    private function propertiesWithDetails(array $data): array
+    {
+        $names = [];
+
+        foreach ($data['properties'] as $name => $property) {
+            if ($property['definedBy'] === $data['name'] && trim($property['description']) !== '') {
+                $names[] = (string) $name;
+            }
+        }
+
+        return $names;
+    }
+
+    /**
+     * @param TypeData $data
+     * @param list<string> $withDetails
+     *
+     * @return list<string>
+     */
+    private function properties(array $data, PageContext $page, array $withDetails): array
     {
         if ($data['properties'] === []) {
             return [];
@@ -199,47 +305,40 @@ final class TypePageRenderer
         $lines = [
             '## Properties',
             '',
-            '| Property | Type | Description |',
-            '| --- | --- | --- |',
+            '<div class="api-summary">',
+            '',
+            '| Property | Type | Description | Defined by |',
+            '| --- | --- | --- | --- |',
         ];
-        $details = [];
 
-        foreach ($data['properties'] as $name => $property) {
-            $native = $property['definedBy'] === $data['name'];
-            $flags = $this->propertyFlags($property);
-            $notes = $this->notes($property['since'], $property['deprecated'], $page);
-            $definer = $this->site->type($property['definedBy']);
-            $context = new PageContext($this->site, $page->package, $page->path, $definer ?? $page->type);
-
+        foreach ($this->byVisibility($data['properties']) as $property) {
+            $name = ltrim($property['name'], '$');
+            $context = $this->definerContext($property['definedBy'], $page);
             $default = $property['default'] === null
                 ? ''
                 : ' Default: ' . DocText::cellCode($property['default']) . '.';
+            $label = in_array($name, $withDetails, true)
+                ? '[' . DocText::cellCode($property['name']) . '](#' . Anchor::property($name) . ')'
+                : $this->memberLabel(
+                    $data['name'],
+                    $property['definedBy'],
+                    $property['name'],
+                    Anchor::property($name),
+                    $page,
+                );
 
             $lines[] = sprintf(
-                '| %s%s%s | %s | %s |',
-                $this->anchor(Anchor::property($name)),
-                DocText::cellCode($property['name']),
-                $flags === [] ? '' : ' ' . implode(', ', $flags),
-                $property['type'] === null ? '' : DocText::cellCode($property['type']),
-                trim($context->cell($property['summary']) . $default . $notes
-                    . $this->definedBy($native, $property['definedBy'], $page)),
+                '| %s%s | %s | %s | %s |',
+                $label,
+                $this->flags($this->propertyFlags($property)),
+                $property['type'] === null ? '' : $page->type($property['type']),
+                trim($context->cell($property['summary'], !in_array($name, $withDetails, true)) . $default
+                    . $this->notes($property['since'], $property['deprecated'], $page)),
+                $this->definedBy($data['name'], $property['definedBy'], $page),
             );
-
-            if ($native && trim($property['description']) !== '') {
-                $details[] = '#### ' . $property['name'];
-                $details[] = '';
-                $details[] = $page->markdown($property['description']);
-                $details[] = '';
-            }
         }
 
-        $lines[] = '';
-
-        if ($details !== []) {
-            $lines = [...$lines, '### Property details', '', ...$details];
-        }
-
-        return $lines;
+        return [...$lines, '', '</div>', ''];
     }
 
     /**
@@ -285,41 +384,61 @@ final class TypePageRenderer
             return [];
         }
 
-        $name = $data['name'];
-        $native = array_filter($data['methods'], static fn(array $method): bool => $method['definedBy'] === $name);
-        $inherited = array_filter($data['methods'], static fn(array $method): bool => $method['definedBy'] !== $name);
-        $lines = ['## Methods', ''];
+        $lines = [
+            '## Methods',
+            '',
+            '<div class="api-summary">',
+            '',
+            '| Method | Description | Defined by |',
+            '| --- | --- | --- |',
+        ];
 
-        foreach ($this->order($native) as $method) {
-            $lines = [...$lines, ...$this->method($method, $page)];
+        foreach ($this->order($data['methods']) as $method) {
+            $anchor = Anchor::method($method['name']);
+            $native = $method['definedBy'] === $data['name'];
+            $context = $this->definerContext($method['definedBy'], $page);
+            $label = $native
+                ? '[' . DocText::cellCode($method['name'] . '()') . '](#' . $anchor . ')'
+                : $this->anchor($anchor)
+                    . $this->inheritedLink($data['name'], $method['definedBy'], $method['name'] . '()', $anchor, $page);
+            $deprecated = $method['deprecated'] === null ? '' : ' **Deprecated**.';
+
+            $lines[] = sprintf(
+                '| %s%s | %s | %s |',
+                $label,
+                $this->flags($this->methodFlags($method)),
+                trim($context->cell($method['summary'], !$native) . $deprecated),
+                $this->definedBy($data['name'], $method['definedBy'], $page),
+            );
         }
 
-        if ($inherited !== []) {
-            $lines[] = '### Inherited methods';
-            $lines[] = '';
-            $lines[] = '| Method | Description |';
-            $lines[] = '| --- | --- |';
-
-            foreach ($inherited as $method) {
-                $definer = $this->site->type($method['definedBy']);
-                $context = new PageContext($this->site, $page->package, $page->path, $definer ?? $page->type);
-
-                $lines[] = sprintf(
-                    '| %s%s | %s |',
-                    $this->anchor(Anchor::method($method['name'])),
-                    $page->memberLink($method['definedBy'], $method['name'] . '()', Anchor::method($method['name'])),
-                    trim($context->cell($method['summary']) . $this->definedBy(false, $method['definedBy'], $page)),
-                );
-            }
-
-            $lines[] = '';
-        }
-
-        return $lines;
+        return [...$lines, '', '</div>', ''];
     }
 
     /**
-     * Sorts native methods: the constructor first, then public, then protected, each alphabetically (input order).
+     * @param MethodData $method
+     *
+     * @return list<string>
+     */
+    private function methodFlags(array $method): array
+    {
+        $flags = [];
+
+        if ($method['visibility'] !== 'public') {
+            $flags[] = $method['visibility'];
+        }
+
+        foreach (['static', 'abstract', 'final'] as $flag) {
+            if ($method[$flag]) {
+                $flags[] = $flag;
+            }
+        }
+
+        return $flags;
+    }
+
+    /**
+     * Sorts methods: the constructor first, then public, then protected, each alphabetically.
      *
      * @param array<string, MethodData> $methods
      *
@@ -327,23 +446,218 @@ final class TypePageRenderer
      */
     private function order(array $methods): array
     {
-        $result = [];
+        $list = array_values($methods);
 
-        foreach (['__construct'] as $first) {
-            if (isset($methods[$first])) {
-                $result[] = $methods[$first];
+        usort($list, static function (array $a, array $b): int {
+            if (($a['name'] === '__construct') !== ($b['name'] === '__construct')) {
+                return $a['name'] === '__construct' ? -1 : 1;
             }
+
+            return (self::VISIBILITY_ORDER[$a['visibility']] ?? 2) <=> (self::VISIBILITY_ORDER[$b['visibility']] ?? 2)
+                ?: strcasecmp($a['name'], $b['name']);
+        });
+
+        return $list;
+    }
+
+    /**
+     * Sorts properties: public first, then protected, keeping the input order inside each group.
+     *
+     * @param array<string, PropertyData> $properties
+     *
+     * @return list<PropertyData>
+     */
+    private function byVisibility(array $properties): array
+    {
+        $list = array_values($properties);
+
+        usort(
+            $list,
+            static fn(array $a, array $b): int => (self::VISIBILITY_ORDER[$a['visibility']] ?? 2)
+                <=> (self::VISIBILITY_ORDER[$b['visibility']] ?? 2),
+        );
+
+        return $list;
+    }
+
+    /**
+     * @param TypeData $data
+     *
+     * @return list<string>
+     */
+    private function events(array $data, PageContext $page): array
+    {
+        if ($data['events'] === []) {
+            return [];
         }
 
-        foreach (['public', 'protected'] as $visibility) {
-            foreach ($methods as $name => $method) {
-                if ($name !== '__construct' && $method['visibility'] === $visibility) {
-                    $result[] = $method;
-                }
-            }
+        $lines = [
+            '## Events',
+            '',
+            '<div class="api-summary">',
+            '',
+            '| Event | Type | Description | Defined by |',
+            '| --- | --- | --- | --- |',
+        ];
+
+        foreach ($data['events'] as $event) {
+            $context = $this->definerContext($event['definedBy'], $page);
+            $value = $event['value'] === null ? '' : ' Event name: ' . DocText::cellCode($event['value']) . '.';
+
+            $lines[] = sprintf(
+                '| %s | %s | %s | %s |',
+                $this->memberLabel(
+                    $data['name'],
+                    $event['definedBy'],
+                    $event['name'],
+                    Anchor::event($event['name']),
+                    $page,
+                ),
+                $event['type'] === null ? '' : $page->type($event['type']),
+                trim($context->cell($event['summary']) . $value . $this->notes($event['since'], null, $page)),
+                $this->definedBy($data['name'], $event['definedBy'], $page),
+            );
         }
 
-        return $result;
+        return [...$lines, '', '</div>', ''];
+    }
+
+    /**
+     * @param TypeData $data
+     *
+     * @return list<string>
+     */
+    private function constants(array $data, PageContext $page): array
+    {
+        if ($data['constants'] === []) {
+            return [];
+        }
+
+        $lines = [
+            '## Constants',
+            '',
+            '<div class="api-summary">',
+            '',
+            '| Constant | Value | Description | Defined by |',
+            '| --- | --- | --- | --- |',
+        ];
+
+        foreach ($data['constants'] as $constant) {
+            $context = $this->definerContext($constant['definedBy'], $page);
+
+            $lines[] = sprintf(
+                '| %s | %s | %s | %s |',
+                $this->memberLabel(
+                    $data['name'],
+                    $constant['definedBy'],
+                    $constant['name'],
+                    Anchor::constant($constant['name']),
+                    $page,
+                ),
+                $constant['value'] === null ? '' : DocText::cellCode($constant['value']),
+                trim(
+                    $context->cell($constant['summary'])
+                    . $this->notes($constant['since'], $constant['deprecated'], $page),
+                ),
+                $this->definedBy($data['name'], $constant['definedBy'], $page),
+            );
+        }
+
+        return [...$lines, '', '</div>', ''];
+    }
+
+    /**
+     * Returns one card per native property with a description beyond its summary.
+     *
+     * @param TypeData $data
+     * @param list<string> $withDetails
+     *
+     * @return list<string>
+     */
+    private function propertyDetails(array $data, PageContext $page, array $withDetails): array
+    {
+        if ($withDetails === []) {
+            return [];
+        }
+
+        $lines = ['## Property details', ''];
+
+        foreach ($this->byVisibility($data['properties']) as $property) {
+            $name = ltrim($property['name'], '$');
+
+            if (!in_array($name, $withDetails, true)) {
+                continue;
+            }
+
+            $declaration = implode(' ', array_filter([
+                $property['visibility'],
+                $property['static'] ? 'static' : '',
+                $property['readonly'] && !$property['virtual'] ? 'readonly' : '',
+                (string) $property['type'],
+                $property['name'],
+            ]));
+
+            if ($property['default'] !== null) {
+                $declaration .= ' = ' . $property['default'];
+            }
+
+            $facts = [];
+
+            if ($property['access'] !== 'read-write') {
+                $facts['Access'] = ucfirst($property['access']) . ' (virtual property).';
+            }
+
+            $facts = [...$facts, ...$this->lifecycleFacts($property['since'], $property['deprecated'], $page)];
+
+            $lines = [
+                ...$lines,
+                '<div class="api-member">',
+                '',
+                sprintf('### %s %s', $property['name'], $this->anchor(Anchor::property($name))),
+                '',
+                '```php wrap',
+                $declaration,
+                '```',
+                '',
+            ];
+
+            if ($property['summary'] !== '') {
+                $lines[] = $page->markdown($property['summary']);
+                $lines[] = '';
+            }
+
+            $lines[] = $page->markdown($property['description']);
+            $lines[] = '';
+
+            $lines = [...$lines, ...$this->facts($facts), '</div>', ''];
+        }
+
+        return $lines;
+    }
+
+    /**
+     * Returns one card per native method: heading, signature, text and the labelled facts.
+     *
+     * @param TypeData $data
+     *
+     * @return list<string>
+     */
+    private function methodDetails(array $data, PageContext $page): array
+    {
+        $name = $data['name'];
+        $native = array_filter($data['methods'], static fn(array $method): bool => $method['definedBy'] === $name);
+
+        if ($native === []) {
+            return [];
+        }
+
+        $lines = ['## Method details', ''];
+
+        foreach ($this->order($native) as $method) {
+            $lines = [...$lines, ...$this->method($method, $page)];
+        }
+
+        return $lines;
     }
 
     /**
@@ -354,9 +668,11 @@ final class TypePageRenderer
     private function method(array $method, PageContext $page): array
     {
         $lines = [
+            '<div class="api-member">',
+            '',
             sprintf('### %s() %s', $method['name'], $this->anchor(Anchor::method($method['name']))),
             '',
-            '```php',
+            '```php wrap',
             $this->signature($method),
             '```',
             '',
@@ -372,48 +688,93 @@ final class TypePageRenderer
             $lines[] = '';
         }
 
+        $facts = [];
+
         if ($method['params'] !== []) {
-            $lines[] = '| Parameter | Type | Description |';
-            $lines[] = '| --- | --- | --- |';
+            $rows = ['| Parameter | Type | Description |', '| --- | --- | --- |'];
 
             foreach ($method['params'] as $param) {
-                $lines[] = sprintf(
+                $rows[] = sprintf(
                     '| %s | %s | %s |',
-                    DocText::cellCode($param['name']),
-                    $param['type'] === null ? '' : DocText::cellCode($param['type']),
+                    DocText::cellCode(($param['variadic'] ? '...' : '') . $param['name']),
+                    $param['type'] === null ? '' : $page->type($param['type']),
                     $page->cell($param['description']),
                 );
             }
 
-            $lines[] = '';
+            $facts['Parameters'] = implode("\n", $rows);
         }
 
         if ($method['returnType'] !== null && !in_array($method['returnType'], ['void', 'never'], true)) {
-            $return = $page->cell($method['return']);
-            $lines[] = 'Returns ' . DocText::code($method['returnType']) . ($return === '' ? '.' : ': ' . $return);
-            $lines[] = '';
+            $return = $page->inline($method['return']);
+            $facts['Returns'] = $page->type($method['returnType'], false) . ($return === '' ? '' : ': ' . $return);
         }
 
         if ($method['throws'] !== []) {
-            $lines[] = 'Throws:';
-            $lines[] = '';
+            $throws = [];
 
             foreach ($method['throws'] as $throw) {
-                $description = $page->cell($throw['description']);
-                $lines[] = '- ' . $page->typeLink($throw['type']) . ($description === '' ? '' : ': ' . $description);
+                $description = $page->inline($throw['description']);
+                $throws[] = '- ' . $page->typeLink($throw['type']) . ($description === '' ? '' : ': ' . $description);
             }
 
-            $lines[] = '';
+            $facts['Throws'] = implode("\n", $throws);
         }
 
-        $notes = trim($this->notes($method['since'], $method['deprecated'], $page));
+        $facts = [...$facts, ...$this->lifecycleFacts($method['since'], $method['deprecated'], $page)];
 
-        if ($notes !== '') {
-            $lines[] = $notes;
-            $lines[] = '';
+        if ($method['see'] !== []) {
+            $facts['See also'] = implode("\n", array_map(
+                static fn(string $link): string => '- ' . $link,
+                array_map($page->seeLink(...), $method['see']),
+            ));
         }
 
-        return [...$lines, ...$this->see($method['see'], $page)];
+        return [...$lines, ...$this->facts($facts), '</div>', ''];
+    }
+
+    /**
+     * Returns the "Since" and "Deprecated" facts of a member.
+     *
+     * @param array{version: string|null, reason: string}|null $deprecated
+     *
+     * @return array<string, string>
+     */
+    private function lifecycleFacts(?string $since, ?array $deprecated, PageContext $page): array
+    {
+        $facts = [];
+
+        if ($since !== null && $since !== '') {
+            $facts['Since'] = $since;
+        }
+
+        if ($deprecated !== null) {
+            $facts['Deprecated'] = $this->deprecation($deprecated, $page, false);
+        }
+
+        return $facts;
+    }
+
+    /**
+     * Returns the labelled facts block of a member card: a bold label paragraph followed by its Markdown content.
+     *
+     * @param array<string, string> $facts Markdown content by label.
+     *
+     * @return list<string>
+     */
+    private function facts(array $facts): array
+    {
+        if ($facts === []) {
+            return [];
+        }
+
+        $lines = ['<div class="api-facts">', ''];
+
+        foreach ($facts as $label => $content) {
+            $lines = [...$lines, '**' . $label . '**', '', $content, ''];
+        }
+
+        return [...$lines, '</div>', ''];
     }
 
     /**
@@ -452,78 +813,6 @@ final class TypePageRenderer
     }
 
     /**
-     * @param TypeData $data
-     *
-     * @return list<string>
-     */
-    private function events(array $data, PageContext $page): array
-    {
-        if ($data['events'] === []) {
-            return [];
-        }
-
-        $lines = [
-            '## Events',
-            '',
-            '| Event | Type | Description |',
-            '| --- | --- | --- |',
-        ];
-
-        foreach ($data['events'] as $event) {
-            $native = $event['definedBy'] === $data['name'];
-            $definer = $this->site->type($event['definedBy']);
-            $context = new PageContext($this->site, $page->package, $page->path, $definer ?? $page->type);
-
-            $value = $event['value'] === null ? '' : ' Event name: ' . DocText::cellCode($event['value']) . '.';
-
-            $lines[] = sprintf(
-                '| %s%s | %s | %s |',
-                $this->anchor(Anchor::event($event['name'])),
-                DocText::cellCode($event['name']),
-                $event['type'] === null ? '' : $page->typeLink($event['type'], true),
-                trim($context->cell($event['summary']) . $value . $this->notes($event['since'], null, $page)
-                    . $this->definedBy($native, $event['definedBy'], $page)),
-            );
-        }
-
-        return [...$lines, ''];
-    }
-
-    /**
-     * @param TypeData $data
-     *
-     * @return list<string>
-     */
-    private function constants(array $data, PageContext $page): array
-    {
-        if ($data['constants'] === []) {
-            return [];
-        }
-
-        $lines = ['## Constants', '', '| Constant | Value | Description |', '| --- | --- | --- |'];
-
-        foreach ($data['constants'] as $constant) {
-            $native = $constant['definedBy'] === $data['name'];
-            $definer = $this->site->type($constant['definedBy']);
-            $context = new PageContext($this->site, $page->package, $page->path, $definer ?? $page->type);
-
-            $lines[] = sprintf(
-                '| %s%s | %s | %s |',
-                $this->anchor(Anchor::constant($constant['name'])),
-                DocText::cellCode($constant['name']),
-                $constant['value'] === null ? '' : DocText::cellCode($constant['value']),
-                trim(
-                    $context->cell($constant['summary'])
-                    . $this->notes($constant['since'], $constant['deprecated'], $page)
-                    . $this->definedBy($native, $constant['definedBy'], $page),
-                ),
-            );
-        }
-
-        return [...$lines, ''];
-    }
-
-    /**
      * Returns " Since x." and " Deprecated ..." notes for a table cell.
      *
      * @param array{version: string|null, reason: string}|null $deprecated
@@ -544,23 +833,91 @@ final class TypePageRenderer
     }
 
     /**
+     * Returns a deprecation as a sentence (`Since 2.0.14: use X.`) for a table cell or a fact paragraph.
+     *
      * @param array{version: string|null, reason: string} $deprecated
      */
-    private function deprecationText(array $deprecated, PageContext $page): string
+    private function deprecation(array $deprecated, PageContext $page, bool $cell): string
+    {
+        $text = trim($this->deprecationText($deprecated, $page, $cell));
+
+        return $text === '' ? 'Yes.' : ucfirst($text) . '.';
+    }
+
+    /**
+     * @param array{version: string|null, reason: string} $deprecated
+     */
+    private function deprecationText(array $deprecated, PageContext $page, bool $cell = true): string
     {
         $version = (string) $deprecated['version'];
         $text = $version !== '' ? ' since ' . $version : '';
-        $reason = rtrim($page->cell($deprecated['reason']), '.');
+        $reason = rtrim($cell ? $page->cell($deprecated['reason']) : $page->inline($deprecated['reason']), '.');
 
         return $text . ($reason === '' ? '' : ': ' . $reason);
     }
 
     /**
-     * Returns " Defined by X." for an inherited member, or `''` for a member of the page type.
+     * Returns the first cell of a summary row: the member anchor, then the name, linked to the defining type's page for
+     * an inherited member.
      */
-    private function definedBy(bool $native, string $definer, PageContext $page): string
+    private function memberLabel(
+        string $owner,
+        string $definer,
+        string $name,
+        string $anchor,
+        PageContext $page,
+    ): string {
+        return $this->anchor($anchor) . $this->inheritedLink($owner, $definer, $name, $anchor, $page);
+    }
+
+    /**
+     * Returns a member name linked to its anchor on the defining type's page, or as inline code for a member of the
+     * page type or a definer page without that anchor.
+     */
+    private function inheritedLink(
+        string $owner,
+        string $definer,
+        string $name,
+        string $anchor,
+        PageContext $page,
+    ): string {
+        if ($definer === $owner || ($this->anchors !== [] && !isset($this->anchors[$definer][$anchor]))) {
+            return DocText::cellCode($name);
+        }
+
+        return $page->memberLink($definer, $name, $anchor);
+    }
+
+    /**
+     * Returns the "Defined by" cell: a link to the defining type, or its plain name for a member of the page type.
+     */
+    private function definedBy(string $owner, string $definer, PageContext $page): string
     {
-        return $native ? '' : ' Defined by ' . $page->typeLink($definer) . '.';
+        return $definer === $owner ? DocText::cellCode(Site::shortName($owner)) : $page->typeLink($definer);
+    }
+
+    /**
+     * Returns the page context of the type that defines a member, so its docblock references resolve from there.
+     */
+    private function definerContext(string $definer, PageContext $page): PageContext
+    {
+        $type = $this->site->type($definer);
+
+        return new PageContext($this->site, $page->package, $page->path, $type ?? $page->type);
+    }
+
+    /**
+     * @param list<string> $flags
+     */
+    private function flags(array $flags): string
+    {
+        $result = '';
+
+        foreach ($flags as $flag) {
+            $result .= ' <span class="api-flag">' . $flag . '</span>';
+        }
+
+        return $result;
     }
 
     private function anchor(string $id): string

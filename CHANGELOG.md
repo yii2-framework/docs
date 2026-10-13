@@ -51,3 +51,10 @@
 - fix(reference): keep the reference tables readable: properties, events, constants and inherited methods use three
   columns (default value, event name and defining class move into the description), and inline code in table cells
   other than the first wraps (`src/styles/custom.css`).
+- feat(reference): redesign the type and namespace pages after the yiiframework.com layout: breadcrumb to the
+  namespace pages (and the extension reference root), a metadata table headed by a kind badge and the full name,
+  subclasses and implementations in collapsed `<details>`, summary tables of all properties, methods, events,
+  constants and enum cases with a "Defined by" column and linked types, then one card per native property and method
+  (signature, text, parameters, return, throws, since, see also); styles scoped to reference pages by a
+  `MarkdownContent` override, `<wbr>` after `\`, `|` and `,` in table code (`plugins/rehype-reference-wbr.mjs`)
+  instead of mid-word breaks, and the `index.md` copies and `_llms-txt/api.txt` stay free of the styling HTML.

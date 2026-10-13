@@ -8,6 +8,7 @@ import { remarkYiiLinks } from './plugins/remark-yii-links.mjs';
 import { invalidateContentCacheOnLinkChange } from './plugins/yii-links.mjs';
 import { rehypeFixLinks } from './plugins/rehype-fix-links.mjs';
 import { rehypeHeadingIdsV5 } from './plugins/rehype-heading-ids-v5.mjs';
+import { rehypeReferenceWbr } from './plugins/rehype-reference-wbr.mjs';
 import { englishPages, llmsTxtDetails, sidebarGroups } from './plugins/llms-index.mjs';
 import { llmsSmallTrim } from './plugins/llms-small-trim.mjs';
 import { llmsFullBudget } from './plugins/llms-full-budget.mjs';
@@ -326,7 +327,8 @@ const llmsTxtOptions = {
   demote: REFERENCE_GLOBS,
   exclude: REFERENCE_GLOBS,
   // Starlight's "Section titled" heading anchors are noise for agents; keep line breaks so headings stay headings.
-  customSelectors: { all: ['.sl-anchor-link'] },
+  // `wbr`: the API reference's break opportunities would become zero-width spaces inside code.
+  customSelectors: { all: ['.sl-anchor-link', 'wbr'] },
   minify: { whitespace: false },
 };
 
@@ -353,7 +355,8 @@ export default defineConfig({
       // remarkYiiLinks: `[[yii\...]]` references to the generated API reference (.cache/reference/links.json).
       remarkPlugins: [remarkAutoTitle, remarkYiiLinks],
       // rehypeHeadingIdsV5 must run before Astro's own rehypeHeadingIds (and Starlight's plugins) to keep Astro 5 IDs.
-      rehypePlugins: [rehypeHeadingIdsV5, [rehypeFixLinks, { base }]],
+      // rehypeReferenceWbr: break opportunities in the table code of API reference pages (HTML only).
+      rehypePlugins: [rehypeHeadingIdsV5, [rehypeFixLinks, { base }], rehypeReferenceWbr],
     }),
   },
   integrations: [
@@ -367,6 +370,7 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css'],
       components: {
         LanguageSelect: './src/components/LanguageSelect.astro',
+        MarkdownContent: './src/components/MarkdownContent.astro',
         SocialIcons: './src/components/SocialIcons.astro',
       },
       defaultLocale: 'root',

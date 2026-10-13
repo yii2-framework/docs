@@ -1,5 +1,7 @@
 import { getCollection } from 'astro:content';
 import { markdownUrl, resolveMarkdownLink } from './markdown-links.mjs';
+import { REFERENCE_ID } from './reference-id.mjs';
+import { cleanReferenceMarkdown } from './reference-markdown.mjs';
 import { rewriteApiLinksInLine } from './yii-links.mjs';
 
 const CONTENT_PREFIX = 'src/content/docs/';
@@ -117,7 +119,8 @@ export function rewriteMarkdown(body, sourceRelative, base, hasEntry = () => tru
 
 /**
  * Markdown renderer for `starlight-llm-actions` (`renderMarkdown: { module }`): returns the body only; the route
- * prepends `# <title>` and `> <description>`.
+ * prepends `# <title>` and `> <description>`. Generated API reference pages lose their HTML styling hooks first
+ * (see `cleanReferenceMarkdown()`).
  *
  * @param {{ id: string, filePath?: string, body?: string }} entry
  */
@@ -130,8 +133,10 @@ export default async function renderMarkdown(entry) {
   }
 
   const ids = await entryIds();
+  const sourceRelative = filePath.slice(CONTENT_PREFIX.length);
+  const body = REFERENCE_ID.test(sourceRelative) ? cleanReferenceMarkdown(entry.body ?? '') : entry.body ?? '';
 
-  return rewriteMarkdown(entry.body ?? '', filePath.slice(CONTENT_PREFIX.length), import.meta.env.BASE_URL,
+  return rewriteMarkdown(body, sourceRelative, import.meta.env.BASE_URL,
     (slug) => ids.has(slug === '' ? 'index' : slug));
 }
 

@@ -28,6 +28,14 @@ class Widget extends BaseObject
      * @var string
      */
     public $name;
+    /**
+     * View that renders the widget.
+     *
+     * Defaults to the application view when not set.
+     *
+     * @var \yii\web\View|null
+     */
+    public $view;
 
     /**
      * Begins a widget.

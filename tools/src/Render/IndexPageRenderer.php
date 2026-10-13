@@ -14,7 +14,6 @@ use function rtrim;
 use function sprintf;
 use function str_starts_with;
 use function strlen;
-use function strrpos;
 use function substr;
 use function trim;
 
@@ -22,7 +21,8 @@ use const SORT_STRING;
 
 /**
  * Renders the index pages: `api/index.md` (framework namespaces and the extension references), one page per
- * namespace listing its types with one-line summaries, and the root page of each extension reference.
+ * namespace with its breadcrumb ({@see Breadcrumbs}), sub-namespaces and one table per kind of type (modifiers as
+ * flags, one-line summaries), and the root page of each extension reference.
  *
  * @phpstan-import-type TypeData from TypeReader
  */
@@ -55,7 +55,10 @@ final class IndexPageRenderer
             : sprintf('%s of the %s namespace.', $this->counts($types), $display);
         $label = $isRoot ? 'Overview' : ($package->isFramework() ? $display : $this->relative($package, $namespace));
 
-        $out = $this->frontmatter($package, $title, $description, $label);
+        $out = [
+            ...$this->frontmatter($package, $title, $description, $label),
+            ...(new Breadcrumbs($this->site->pages))->block($package, $namespace, $path, null),
+        ];
 
         if ($isRoot) {
             $out[] = sprintf(
@@ -70,17 +73,6 @@ final class IndexPageRenderer
             );
             $out[] = '';
         }
-
-        $out[] = '- Namespace: ' . DocText::code($display);
-
-        $parent = $this->parentNamespace($package, $namespace);
-
-        if ($parent !== null) {
-            $out[] = '- Parent: [' . DocText::code($parent === '' ? 'Global namespace' : $parent) . ']('
-                . $this->site->pages->relative($path, $this->site->pages->namespacePath($package, $parent)) . ')';
-        }
-
-        $out[] = '';
 
         if ($children !== []) {
             $out[] = '## Namespaces';
@@ -110,10 +102,17 @@ final class IndexPageRenderer
 
                 $page = new PageContext($this->site, $package, $path, $this->site->type($type['name']));
                 $typePath = (string) $this->site->pages->typePath($type['name']);
+                $flags = '';
+
+                foreach ($type['modifiers'] as $modifier) {
+                    $flags .= ' <span class="api-flag">' . $modifier . '</span>';
+                }
+
                 $rows[] = sprintf(
-                    '| [%s](%s) | %s |',
+                    '| [%s](%s)%s | %s |',
                     DocText::cellCode($type['shortName']),
                     $this->site->pages->relative($path, $typePath),
+                    $flags,
                     $page->cell($type['summary']),
                 );
             }
@@ -242,27 +241,6 @@ final class IndexPageRenderer
         }
 
         return $parts === [] ? 'No types' : ucfirst(implode(', ', $parts));
-    }
-
-    private function parentNamespace(Package $package, string $namespace): ?string
-    {
-        if ($package->isFramework()) {
-            if ($namespace === '') {
-                return null;
-            }
-
-            $position = strrpos($namespace, '\\');
-
-            return $position === false ? null : substr($namespace, 0, $position);
-        }
-
-        if ($namespace === $package->namespace) {
-            return null;
-        }
-
-        $position = strrpos($namespace, '\\');
-
-        return $position === false ? null : substr($namespace, 0, $position);
     }
 
     private function relative(Package $package, string $namespace): string

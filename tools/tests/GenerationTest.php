@@ -29,8 +29,8 @@ use function unlink;
 use const JSON_THROW_ON_ERROR;
 
 /**
- * End-to-end tests for {@see ReferenceCommand} on the fixture framework and package under `tests/fixtures`: pages,
- * anchors, table escaping, enum rendering, model repairs, `reference.json` against its schema and the link map.
+ * End-to-end tests for {@see ReferenceCommand} on the fixture framework and package under `tests/fixtures`: page
+ * layout, anchors, table escaping, enum rendering, model repairs, `reference.json` against its schema and the link map.
  *
  * @author Wilmer Arambula <terabytesoftw@gmail.com>
  * @since 0.1
@@ -102,10 +102,11 @@ final class GenerationTest extends TestCase
         $page = $this->page('extensions/pkg/reference/enum/Theme.md');
 
         self::assertStringContainsString(
-            '`enum vendor\pkg\enum\Theme: string`',
+            '| <span class="api-badge api-badge-enum">enum</span> | `vendor\pkg\enum\Theme` |',
             $page,
-            'Declaration with backing type.',
+            'Kind badge and full name.',
         );
+        self::assertStringContainsString("\n| Backed by | `string` |\n", $page, 'Backing type row.');
         self::assertStringContainsString('## Cases', $page, 'Cases section.');
         self::assertStringContainsString(
             "| <span id=\"case-PRIMARY\"></span>`PRIMARY` | `'primary'` | Applies the primary color. |",
@@ -118,14 +119,20 @@ final class GenerationTest extends TestCase
     {
         $page = $this->page('extensions/pkg/reference/item/Item.md');
 
-        self::assertStringContainsString('`final readonly class vendor\pkg\item\Item`', $page, 'Modifiers in order.');
         self::assertStringContainsString(
-            '| <span id="property-label"></span>`$label` readonly, constructor | `string` | Label of the item. |',
+            '<span class="api-badge api-badge-class">final readonly class</span>',
+            $page,
+            'Modifiers in order.',
+        );
+        self::assertStringContainsString(
+            '| <span id="property-label"></span>`$label` <span class="api-flag">readonly</span> '
+            . '<span class="api-flag">constructor</span> | `string` | Label of the item. | `Item` |',
             $page,
             'Required property: no default, `@param` text.',
         );
         self::assertStringContainsString(
-            '`$options` readonly, constructor | `array<string, mixed>` | HTML attributes of the item. Default: `[]`. |',
+            '<span class="api-flag">constructor</span> | `array<string, mixed>` | HTML attributes of the item. '
+            . 'Default: `[]`. |',
             $page,
             'Generic type from `@param`.',
         );
@@ -152,9 +159,9 @@ final class GenerationTest extends TestCase
         );
         self::assertStringContainsString('`$rows` | `list<int>` | Rows of the alert. |', $page, 'Typed, no default.');
         self::assertStringContainsString(
-            'Defined by [`yii\base\Widget`](../../../api/yii/base/Widget.md). |',
+            'Default: `[]`. | [`yii\base\Widget`](../../../api/yii/base/Widget.md) |',
             $page,
-            'Inherited member names its definer.',
+            'Defined by cell must link the framework definer.',
         );
     }
 
@@ -188,7 +195,7 @@ final class GenerationTest extends TestCase
     {
         $page = $this->page('api/yii/base/Widget.md');
 
-        foreach (['## Properties', '## Methods', '## Events', '## Constants'] as $section) {
+        foreach (['## Properties', '## Methods', '## Events', '## Constants', '## Method details'] as $section) {
             self::assertStringContainsString("\n$section\n", $page, "Section $section.");
         }
 
@@ -209,12 +216,101 @@ final class GenerationTest extends TestCase
             $page,
             'Throws entry.',
         );
-        self::assertStringContainsString('`$className` read-only', $page, 'Inherited virtual property flag.');
         self::assertStringContainsString(
-            '**Deprecated** since 2.0.14: Use [`begin()`](Widget.md#method-begin) with a callback.',
+            '[`$className`](BaseObject.md#property-className) <span class="api-flag">read-only</span>',
             $page,
-            'Deprecation note with resolved reference.',
+            'Inherited virtual property flag.',
         );
+        self::assertStringContainsString(
+            "**Deprecated**\n\nSince 2.0.14: Use [`begin()`](Widget.md#method-begin) with a callback.",
+            $page,
+            'Deprecation fact with resolved reference.',
+        );
+    }
+
+    public function testTypePageHeaderHasBreadcrumbMetadataTableAndCollapsedRelations(): void
+    {
+        $page = $this->page('api/yii/base/Widget.md');
+
+        self::assertStringContainsString(
+            "<div class=\"api-crumbs\">\n\n[API reference](../../index.md) › [yii](../index.md) › [base](index.md) › "
+            . "Widget\n\n</div>",
+            $page,
+            'Breadcrumb with blank lines inside the wrapper.',
+        );
+        self::assertStringContainsString(
+            "| <span class=\"api-badge api-badge-class\">class</span> | `yii\\base\\Widget` |\n| --- | --- |\n"
+            . "| Extends | [`BaseObject`](BaseObject.md) |\n| Implements | [`Configurable`](Configurable.md) |\n"
+            . "| Since | 2.0 |\n",
+            $page,
+            'Metadata rows in order.',
+        );
+        self::assertStringContainsString(
+            "<details class=\"api-relations\">\n<summary>1 subclass</summary>\n\n"
+            . "- [`vendor\\pkg\\Alert`](../../../extensions/pkg/reference/Alert.md)\n\n</details>",
+            $page,
+            'Collapsed relation list with its count.',
+        );
+        self::assertStringContainsString(
+            '[API reference](../../../api/index.md) › [Pkg](index.md) › Alert',
+            $this->page('extensions/pkg/reference/Alert.md'),
+            'Extension breadcrumb must pass through the package root.',
+        );
+    }
+
+    public function testSummaryTablesLinkNativeMembersToDetailsAndInheritedMembersToDefiner(): void
+    {
+        $page = $this->page('api/yii/base/Widget.md');
+
+        self::assertStringContainsString(
+            "## Methods\n\n<div class=\"api-summary\">\n\n| Method | Description | Defined by |\n| --- | --- | --- |\n",
+            $page,
+            'Summary table wrapped with blank lines.',
+        );
+
+        self::assertStringContainsString(
+            '| [`begin()`](#method-begin) <span class="api-flag">static</span> | Begins a widget. | `Widget` |',
+            $page,
+            'Native method row.',
+        );
+        self::assertStringContainsString(
+            '| [`end()`](#method-end) <span class="api-flag">static</span> | Ends a widget. **Deprecated**. '
+            . '| `Widget` |',
+            $page,
+            'Deprecated marker in the summary.',
+        );
+        self::assertStringContainsString(
+            '| <span id="method-getClassName"></span>[`getClassName()`](BaseObject.md#method-getClassName) | '
+            . 'Returns the class name. | [`BaseObject`](BaseObject.md) |',
+            $page,
+            'Inherited row keeps its anchor and links the definer.',
+        );
+        self::assertStringContainsString(
+            '| [`$view`](#property-view) | [`yii\web\View`](../web/View.md)`\|null` | View that renders the widget. '
+            . 'Default: `null`. | `Widget` |',
+            $page,
+            'Linked type with escaped pipe; name links the card.',
+        );
+    }
+
+    public function testMemberCardsHoldSignatureTextAndLabelledFacts(): void
+    {
+        $page = $this->page('api/yii/base/Widget.md');
+
+        self::assertStringContainsString(
+            "## Property details\n\n<div class=\"api-member\">\n\n### \$view <span id=\"property-view\"></span>\n\n"
+            . "```php wrap\npublic yii\\web\\View|null \$view = null\n```\n\nView that renders the widget.\n\n"
+            . "Defaults to the application view when not set.\n\n</div>",
+            $page,
+            'Property card with declaration and description.',
+        );
+        self::assertStringContainsString(
+            "<div class=\"api-facts\">\n\n**Parameters**\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n"
+            . "| `\$config` | `array` | Name-value pairs. |\n\n**Returns**\n\n`static`: The widget.\n\n**Throws**\n\n",
+            $page,
+            'Facts block: label paragraph, then content.',
+        );
+        self::assertStringNotContainsString('<span id="property-view"></span>[', $page, 'Anchor sits on the card.');
     }
 
     public function testTypeNamedLikeSiblingNamespaceAndIndexPagesExist(): void
@@ -233,6 +329,21 @@ final class GenerationTest extends TestCase
             '| [`Theme`](Theme.md) | Represents the theme colors. |',
             $this->page('extensions/pkg/reference/enum/index.md'),
             'Namespace page lists types with summaries.',
+        );
+        self::assertStringContainsString(
+            '[API reference](../../index.md) › [yii](../index.md) › base' . "\n",
+            $this->page('api/yii/base/index.md'),
+            'Namespace breadcrumb ends with the unlinked namespace.',
+        );
+        self::assertStringContainsString(
+            '| [`Alert`](Alert.md) <span class="api-flag">final</span> | Renders an alert. |',
+            $this->page('extensions/pkg/reference/index.md'),
+            'Modifier flag in the type row.',
+        );
+        self::assertStringNotContainsString(
+            '- Namespace:',
+            $this->page('api/yii/base/index.md'),
+            'Bullet header must be gone.',
         );
     }
 
