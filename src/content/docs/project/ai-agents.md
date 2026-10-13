@@ -14,7 +14,7 @@ and a link to its Markdown version. An agent reads it first and then fetches onl
 | File | Contents |
 | --- | --- |
 | [`llms.txt`](https://yii2-framework.github.io/docs/llms.txt) | Index: one line per page, grouped like the sidebar. |
-| [`llms-small.txt`](https://yii2-framework.github.io/docs/llms-small.txt) | All English pages in one file, with notes, tips and whitespace removed. |
+| [`llms-small.txt`](https://yii2-framework.github.io/docs/llms-small.txt) | All English pages in one file, with notes, tips and info blocks removed (warnings kept). |
 | [`llms-full.txt`](https://yii2-framework.github.io/docs/llms-full.txt) | All English pages in one file. Use it only when the index is not enough. |
 | `_llms-txt/<group>.txt` | One file per sidebar group, for example [`getting-started.txt`](https://yii2-framework.github.io/docs/_llms-txt/getting-started.txt). |
 

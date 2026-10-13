@@ -6,6 +6,7 @@ import { remarkAutoTitle } from './plugins/remark-auto-title.mjs';
 import { rehypeFixLinks } from './plugins/rehype-fix-links.mjs';
 import { rehypeHeadingIdsV5 } from './plugins/rehype-heading-ids-v5.mjs';
 import { englishPages, llmsTxtDetails, sidebarGroups } from './plugins/llms-index.mjs';
+import { llmsSmallTrim } from './plugins/llms-small-trim.mjs';
 import starlightLlmActions from 'starlight-llm-actions';
 import starlightLlmsTxt from 'starlight-llms-txt';
 import { buildDate, DOCS_VERSION, PROJECT_NAME } from './src/site-meta.mjs';
@@ -296,5 +297,7 @@ export default defineConfig({
         starlightLlmActions(llmActionsOptions),
       ],
     }),
+    // Runs after starlight-llms-txt has written llms-small.txt: drops notes, tips and info blockquotes.
+    llmsSmallTrim(),
   ],
 });

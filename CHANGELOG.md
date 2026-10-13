@@ -14,3 +14,4 @@
 - feat: serve a Markdown version of every page at `<page>/index.md` with `starlight-llm-actions` (links rewritten to Markdown URLs, `<link rel="alternate" type="text/markdown">`, Copy/View as Markdown and Open in buttons).
 - feat: add JSON-LD (`TechArticle`, `BreadcrumbList`), `docs:version`/`docs:build-date` meta tags and generated Open Graph images (`astro-og-canvas`) to every page.
 - docs: add `AGENTS.md` for agents that use the site and the "Using the documentation with AI agents" page.
+- fix: drop note, tip and info blockquotes from `llms-small.txt` (warnings and page descriptions kept; `llms-full.txt` and the group bundles unchanged) and vendor the Noto Sans font of the Open Graph images under `src/assets/fonts/` (OFL) so builds no longer fetch it from api.fontsource.org.

@@ -16,7 +16,8 @@ Instructions for AI agents that use the Yii documentation published from this re
    and a link to its Markdown version, grouped like the site navigation.
 2. Fetch only the pages the task needs, using their Markdown URLs.
 3. Use the bundles only when the index is not enough:
-   - <https://yii2-framework.github.io/docs/llms-small.txt>: all English pages, notes and tips removed.
+   - <https://yii2-framework.github.io/docs/llms-small.txt>: all English pages, notes, tips and info blocks removed
+     (warnings kept).
    - <https://yii2-framework.github.io/docs/llms-full.txt>: all English pages.
    - `https://yii2-framework.github.io/docs/_llms-txt/<group>.txt`: one sidebar group, for example
      `getting-started.txt`.
