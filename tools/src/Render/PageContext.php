@@ -12,6 +12,7 @@ use function ltrim;
 use function preg_match;
 use function preg_replace_callback;
 use function str_contains;
+use function str_starts_with;
 use function strlen;
 use function strrpos;
 use function substr;
@@ -55,8 +56,8 @@ final class PageContext
     }
 
     /**
-     * Returns a link to a type page labelled with its short name, or inline code with the full name when the type is
-     * not documented. Composite types (`yii\web\View|null`) are linked name by name when `$composite` is `true`.
+     * Returns a link to a type page labelled with its short name (full name outside the namespace of the page type),
+     * or inline code with the full name when the type is not documented. Composite types (`yii\web\View|null`) are linked name by name when `$composite` is `true`.
      */
     public function typeLink(string $name, bool $composite = false): string
     {
@@ -74,8 +75,11 @@ final class PageContext
 
         if ($path !== null) {
             $href = $this->site->pages->relative($this->path, $path);
+            // Short names are ambiguous across namespaces (`yii\base\Widget`, `yii2\extensions\bootstrap6\Widget`).
+            $sameNamespace = $this->type !== null && $this->type->namespace === $this->namespaceOf($name);
+            $label = $sameNamespace ? Site::shortName($name) : $name;
 
-            return '[' . DocText::code(Site::shortName($name)) . '](' . $href . ')';
+            return '[' . DocText::code($label) . '](' . $href . ')';
         }
 
         $resolution = $this->site->resolver->resolve($name, null);
@@ -85,6 +89,13 @@ final class PageContext
         }
 
         return DocText::code($name);
+    }
+
+    private function namespaceOf(string $name): string
+    {
+        $position = strrpos($name, '\\');
+
+        return $position === false ? '' : substr($name, 0, $position);
     }
 
     /**
@@ -106,6 +117,11 @@ final class PageContext
      */
     public function seeLink(string $see): string
     {
+        // A Markdown link written as the reference (`@see [Memcache::set()](https://...)`) is kept as written.
+        if (str_starts_with($see, '[')) {
+            return $this->cell($see);
+        }
+
         [$target] = explode(' ', $see, 2);
         $description = trim(substr($see, strlen($target)));
 

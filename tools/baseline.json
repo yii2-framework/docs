@@ -4,22 +4,22 @@
         "bootstrap6": {
             "errors": 223,
             "warnings": 274,
-            "unresolvedLinks": 9
+            "unresolvedLinks": 7
         },
         "filepond": {
             "errors": 10,
             "warnings": 46,
-            "unresolvedLinks": 0
+            "unresolvedLinks": 4
         },
         "localeurls": {
             "errors": 7,
             "warnings": 3,
-            "unresolvedLinks": 3
+            "unresolvedLinks": 2
         },
         "yii2": {
             "errors": 1257,
             "warnings": 266,
-            "unresolvedLinks": 81
+            "unresolvedLinks": 57
         }
     }
 }

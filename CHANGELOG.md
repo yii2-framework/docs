@@ -44,3 +44,7 @@
   `tools/baseline.json`, and `postbuild` (`scripts/check-site.mjs`) fails on literal `[[` in the English guide or
   broken links in the reference pages; new `tools` workflow runs PHPUnit and PHPStan for `tools/`; `npm test` runs
   the Node tests.
+- fix(reference): close a code fence a docblock leaves open (it swallowed the rest of `yii\console\widgets\Table`),
+  count empty `{@see}` tags as unresolved instead of printing them, keep Markdown links written as `@see` targets,
+  count unresolved links once per page text (baseline lowered accordingly), and label links to types of another
+  namespace with their full name (`yii\base\Widget` next to `yii2\extensions\bootstrap6\Widget`).

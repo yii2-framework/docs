@@ -37,7 +37,7 @@ use const PREG_SPLIT_DELIM_CAPTURE;
 final class DocText
 {
     private const FENCE = '/^\s*(`{3,}|~{3,})/';
-    private const REFERENCE = '/\{@(see|link)\s+([^\s}]*)(?:\s+([^}]*))?\}|\[\[([^\]|]*)(?:\|([^\]]*))?\]\]/';
+    private const REFERENCE = '/\{@(see|link)(?:\s+([^\s}]*))?(?:\s+([^}]*))?\}|\[\[([^\]|]*)(?:\|([^\]]*))?\]\]/';
 
     /**
      * @param string $contentDir Absolute `src/content/docs` directory, to check that `guide:` targets exist.
@@ -172,6 +172,11 @@ final class DocText
             $output[] = $this->line($line, $context, $page, $package, $plain);
         }
 
+        // An unclosed fence (a docblock slip) would swallow the rest of the page: close it.
+        if ($fence !== null) {
+            $output[] = $fence;
+        }
+
         return rtrim(implode("\n", $output));
     }
 
@@ -219,11 +224,14 @@ final class DocText
     private function reference(array $match, ?TypeDoc $context, string $page, string $package, bool $plain): string
     {
         $isTag = ($match[1] ?? '') !== '';
-        $target = trim($isTag ? $match[2] : ($match[4] ?? ''));
+        $target = trim($isTag ? ($match[2] ?? '') : ($match[4] ?? ''));
         $title = trim($isTag ? ($match[3] ?? '') : ($match[5] ?? ''));
 
+        // Misses are counted once, for the pages; `reference.json` renders a subset of the same texts.
         if ($target === '') {
-            $this->stats->unresolved($package, $match[0], (string) $context?->name);
+            if (!$plain) {
+                $this->stats->unresolved($package, $match[0], (string) $context?->name);
+            }
 
             return $title;
         }
@@ -231,7 +239,9 @@ final class DocText
         $resolution = $this->resolver->resolve($target, $context);
 
         if ($resolution === null) {
-            $this->stats->unresolved($package, $target, (string) $context?->name);
+            if (!$plain) {
+                $this->stats->unresolved($package, $target, (string) $context?->name);
+            }
 
             return $title !== '' ? $title : self::code($target);
         }
@@ -284,7 +294,9 @@ final class DocText
                 $hash = $match[2] ?? '';
 
                 if (!is_file($this->contentDir . '/' . $target)) {
-                    $this->stats->unresolved($package, 'guide:' . $name, $page);
+                    if (!$plain) {
+                        $this->stats->unresolved($package, 'guide:' . $name, $page);
+                    }
 
                     return '](' . $this->pages->url('guide/index.md') . ')';
                 }

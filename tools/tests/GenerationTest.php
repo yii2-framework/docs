@@ -201,6 +201,11 @@ final class GenerationTest extends TestCase
             'Throws entry.',
         );
         self::assertStringContainsString('`$className` read-only', $page, 'Inherited virtual property flag.');
+        self::assertStringContainsString(
+            '**Deprecated** since 2.0.14: Use [`begin()`](Widget.md#method-begin) with a callback.',
+            $page,
+            'Deprecation note with resolved reference.',
+        );
     }
 
     public function testTypeNamedLikeSiblingNamespaceAndIndexPagesExist(): void

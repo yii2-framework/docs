@@ -47,6 +47,7 @@ class Widget extends BaseObject
      * Ends a widget.
      *
      * @return static the widget.
+     * @deprecated 2.0.14 Use [[begin()]] with a callback.
      */
     public static function end()
     {

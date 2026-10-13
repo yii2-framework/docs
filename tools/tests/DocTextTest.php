@@ -6,7 +6,13 @@ namespace Yii2Docs\Tools\Tests;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Yii2Docs\Tools\Link\LinkResolver;
+use Yii2Docs\Tools\Link\LinkStats;
+use Yii2Docs\Tools\Model\ReferenceContext;
 use Yii2Docs\Tools\Render\DocText;
+use Yii2Docs\Tools\Render\PageMap;
+
+use function sys_get_temp_dir;
 
 /**
  * Unit tests for the static Markdown helpers of {@see DocText}.
@@ -54,5 +60,21 @@ final class DocTextTest extends TestCase
             'Text must end after the first sentence.',
         );
         self::assertSame('No period', DocText::firstSentence('No period'), 'Text without a period must be kept.');
+    }
+
+    public function testUnclosedFenceIsClosed(): void
+    {
+        $text = new DocText(
+            new LinkResolver(new ReferenceContext()),
+            new PageMap('/docs/', 'https://example.org'),
+            new LinkStats(),
+            sys_get_temp_dir(),
+        );
+
+        self::assertSame(
+            "Example:\n\n```\necho 1;\n```",
+            $text->markdown("Example:\n\n```\necho 1;", null, 'api/x/Y.md', 'yii2'),
+            'Open fence must be closed.',
+        );
     }
 }
