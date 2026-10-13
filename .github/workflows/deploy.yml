@@ -6,7 +6,7 @@ on:
     branches: [main]
   # Nightly rebuild: `npm run build` re-syncs the extension guides (scripts/sync.mjs) from their repositories.
   schedule:
-    - cron: '0 3 * * *'
+    - cron: "0 3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -37,11 +37,22 @@ jobs:
       - name: Install the reference generator.
         run: composer install --no-dev --prefer-dist --no-interaction --no-progress --working-dir tools
 
+      # tools/bin/demos (run by `prebuild` after the sync) installs one Composer project per package with demos in
+      # .cache/demos/<package>/ (Yii 22.0 and the package from their synced checkouts); the downloads of the other
+      # dependencies come from this cache. Packages without sources in this build are skipped.
+      - name: Cache Composer downloads.
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer
+          key: composer-${{ runner.os }}-${{ hashFiles('tools/composer.lock', 'tools/demos/composer.json') }}
+          restore-keys: composer-${{ runner.os }}-
+
       # `npm run build` runs `prebuild` first: scripts/sync.mjs clones the packages of packages.json, then
       # tools/bin/reference writes the API reference and fails when apidoc errors, warnings or unresolved links grow
-      # beyond tools/baseline.json. `postbuild` (scripts/check-site.mjs) fails on literal [[ in the guide or broken
-      # links in the reference; scripts/llms-sizes.mjs adds the token sizes to llms.txt and fails on missing,
-      # unlisted or oversized _llms-txt bundles.
+      # beyond tools/baseline.json, and tools/bin/demos renders the package examples into public/demos/. `postbuild`
+      # (scripts/check-site.mjs) fails on literal [[ in the guide, broken links in the reference or missing demo
+      # pages; scripts/llms-sizes.mjs adds the token sizes to llms.txt and fails on missing, unlisted or oversized
+      # _llms-txt bundles.
       - name: Build with Astro.
         uses: withastro/action@v5
 

@@ -28,7 +28,8 @@
             "examples",
             "migration",
             "testing"
-        ]
+        ],
+        "demos": true
     },
     {
         "name": "filepond",

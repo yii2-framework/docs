@@ -5,12 +5,13 @@
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
-        "prebuild": "node scripts/sync.mjs && php tools/bin/reference --baseline tools/baseline.json",
+        "prebuild": "node scripts/sync.mjs && php tools/bin/reference --baseline tools/baseline.json && php tools/bin/demos",
         "build": "astro build",
         "postbuild": "node scripts/check-site.mjs && node scripts/llms-sizes.mjs",
         "preview": "astro preview",
         "reference": "php tools/bin/reference",
         "astro": "astro",
+        "demos": "php tools/bin/demos",
         "descriptions": "node scripts/add-descriptions.mjs",
         "sync": "node scripts/sync.mjs",
         "sync:local": "node scripts/sync.mjs --local",
@@ -38,5 +39,8 @@
         "unified": "11.0.5",
         "unist-util-remove": "4.0.0",
         "unist-util-visit": "5.1.0"
+    },
+    "devDependencies": {
+        "bootstrap": "6.0.0-alpha.1"
     }
 }

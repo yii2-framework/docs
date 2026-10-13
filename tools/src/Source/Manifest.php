@@ -118,6 +118,8 @@ final class Manifest
                 trim(self::field($entry, 'namespace', $manifestFile), '\\'),
                 $sourceDir,
                 $srcDir,
+                (string) realpath($checkout),
+                is_string($entry['docsDir'] ?? null) ? trim($entry['docsDir'], '/') : '',
             );
 
             if ($package->isFramework()) {

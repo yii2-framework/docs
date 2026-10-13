@@ -1,0 +1,9 @@
+/* Layout of the demo pages (public/demos/<package>/<slug>.html), loaded after Bootstrap's stylesheet. */
+body {
+    margin: 0;
+    padding: 1rem;
+}
+
+#demo {
+    display: flow-root;
+}

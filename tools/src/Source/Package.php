@@ -25,6 +25,8 @@ final class Package
      * @param string $namespace Root namespace of the package, without leading or trailing backslashes.
      * @param string $sourceDir Absolute directory that holds the PHP sources (`<checkout>/<srcDir>`).
      * @param string $srcDir Source directory relative to the repository root (`framework`, `src`).
+     * @param string $checkoutDir Absolute directory of the checkout (repository root), or an empty string when unknown.
+     * @param string $docsDir Guides directory relative to the repository root (`docs`), or an empty string for none.
      */
     public function __construct(
         public readonly string $name,
@@ -36,6 +38,8 @@ final class Package
         public readonly string $namespace,
         public readonly string $sourceDir,
         public readonly string $srcDir,
+        public readonly string $checkoutDir = '',
+        public readonly string $docsDir = '',
     ) {
     }
 
