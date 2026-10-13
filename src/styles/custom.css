@@ -1,0 +1,7 @@
+/*
+ * API reference tables (and other tables): long PHP types and defaults wrap inside their cell instead of widening the
+ * table, so the description column keeps a readable width. Names in the first column stay whole.
+ */
+.sl-markdown-content td:not(:first-child) code {
+    overflow-wrap: anywhere;
+}

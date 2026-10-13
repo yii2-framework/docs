@@ -57,7 +57,8 @@ final class PageContext
 
     /**
      * Returns a link to a type page labelled with its short name (full name outside the namespace of the page type),
-     * or inline code with the full name when the type is not documented. Composite types (`yii\web\View|null`) are linked name by name when `$composite` is `true`.
+     * or inline code with the full name when the type is not documented. Composite types (`yii\web\View|null`) are
+     * linked name by name when `$composite` is `true`.
      */
     public function typeLink(string $name, bool $composite = false): string
     {

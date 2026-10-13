@@ -48,3 +48,6 @@
   count empty `{@see}` tags as unresolved instead of printing them, keep Markdown links written as `@see` targets,
   count unresolved links once per page text (baseline lowered accordingly), and label links to types of another
   namespace with their full name (`yii\base\Widget` next to `yii2\extensions\bootstrap6\Widget`).
+- fix(reference): keep the reference tables readable: properties, events, constants and inherited methods use three
+  columns (default value, event name and defining class move into the description), and inline code in table cells
+  other than the first wraps (`src/styles/custom.css`).

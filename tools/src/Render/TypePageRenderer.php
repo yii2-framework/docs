@@ -199,8 +199,8 @@ final class TypePageRenderer
         $lines = [
             '## Properties',
             '',
-            '| Property | Type | Default | Description | Defined by |',
-            '| --- | --- | --- | --- | --- |',
+            '| Property | Type | Description |',
+            '| --- | --- | --- |',
         ];
         $details = [];
 
@@ -211,15 +211,18 @@ final class TypePageRenderer
             $definer = $this->site->type($property['definedBy']);
             $context = new PageContext($this->site, $page->package, $page->path, $definer ?? $page->type);
 
+            $default = $property['default'] === null
+                ? ''
+                : ' Default: ' . DocText::cellCode($property['default']) . '.';
+
             $lines[] = sprintf(
-                '| %s%s%s | %s | %s | %s | %s |',
+                '| %s%s%s | %s | %s |',
                 $this->anchor(Anchor::property($name)),
                 DocText::cellCode($property['name']),
                 $flags === [] ? '' : ' ' . implode(', ', $flags),
                 $property['type'] === null ? '' : DocText::cellCode($property['type']),
-                $property['default'] === null ? '' : DocText::cellCode($property['default']),
-                trim($context->cell($property['summary']) . $notes),
-                $native ? Site::shortName($data['name']) : $page->typeLink($property['definedBy']),
+                trim($context->cell($property['summary']) . $default . $notes
+                    . $this->definedBy($native, $property['definedBy'], $page)),
             );
 
             if ($native && trim($property['description']) !== '') {
@@ -294,19 +297,18 @@ final class TypePageRenderer
         if ($inherited !== []) {
             $lines[] = '### Inherited methods';
             $lines[] = '';
-            $lines[] = '| Method | Description | Defined by |';
-            $lines[] = '| --- | --- | --- |';
+            $lines[] = '| Method | Description |';
+            $lines[] = '| --- | --- |';
 
             foreach ($inherited as $method) {
                 $definer = $this->site->type($method['definedBy']);
                 $context = new PageContext($this->site, $page->package, $page->path, $definer ?? $page->type);
 
                 $lines[] = sprintf(
-                    '| %s%s | %s | %s |',
+                    '| %s%s | %s |',
                     $this->anchor(Anchor::method($method['name'])),
                     $page->memberLink($method['definedBy'], $method['name'] . '()', Anchor::method($method['name'])),
-                    trim($context->cell($method['summary'])),
-                    $page->typeLink($method['definedBy']),
+                    trim($context->cell($method['summary']) . $this->definedBy(false, $method['definedBy'], $page)),
                 );
             }
 
@@ -463,8 +465,8 @@ final class TypePageRenderer
         $lines = [
             '## Events',
             '',
-            '| Event | Value | Type | Description | Defined by |',
-            '| --- | --- | --- | --- | --- |',
+            '| Event | Type | Description |',
+            '| --- | --- | --- |',
         ];
 
         foreach ($data['events'] as $event) {
@@ -472,14 +474,15 @@ final class TypePageRenderer
             $definer = $this->site->type($event['definedBy']);
             $context = new PageContext($this->site, $page->package, $page->path, $definer ?? $page->type);
 
+            $value = $event['value'] === null ? '' : ' Event name: ' . DocText::cellCode($event['value']) . '.';
+
             $lines[] = sprintf(
-                '| %s%s | %s | %s | %s | %s |',
+                '| %s%s | %s | %s |',
                 $this->anchor(Anchor::event($event['name'])),
                 DocText::cellCode($event['name']),
-                $event['value'] === null ? '' : DocText::cellCode($event['value']),
                 $event['type'] === null ? '' : $page->typeLink($event['type'], true),
-                trim($context->cell($event['summary']) . $this->notes($event['since'], null, $page)),
-                $native ? Site::shortName($data['name']) : $page->typeLink($event['definedBy']),
+                trim($context->cell($event['summary']) . $value . $this->notes($event['since'], null, $page)
+                    . $this->definedBy($native, $event['definedBy'], $page)),
             );
         }
 
@@ -497,7 +500,7 @@ final class TypePageRenderer
             return [];
         }
 
-        $lines = ['## Constants', '', '| Constant | Value | Description | Defined by |', '| --- | --- | --- | --- |'];
+        $lines = ['## Constants', '', '| Constant | Value | Description |', '| --- | --- | --- |'];
 
         foreach ($data['constants'] as $constant) {
             $native = $constant['definedBy'] === $data['name'];
@@ -505,15 +508,15 @@ final class TypePageRenderer
             $context = new PageContext($this->site, $page->package, $page->path, $definer ?? $page->type);
 
             $lines[] = sprintf(
-                '| %s%s | %s | %s | %s |',
+                '| %s%s | %s | %s |',
                 $this->anchor(Anchor::constant($constant['name'])),
                 DocText::cellCode($constant['name']),
                 $constant['value'] === null ? '' : DocText::cellCode($constant['value']),
                 trim(
                     $context->cell($constant['summary'])
-                    . $this->notes($constant['since'], $constant['deprecated'], $page),
+                    . $this->notes($constant['since'], $constant['deprecated'], $page)
+                    . $this->definedBy($native, $constant['definedBy'], $page),
                 ),
-                $native ? Site::shortName($data['name']) : $page->typeLink($constant['definedBy']),
             );
         }
 
@@ -550,6 +553,14 @@ final class TypePageRenderer
         $reason = rtrim($page->cell($deprecated['reason']), '.');
 
         return $text . ($reason === '' ? '' : ': ' . $reason);
+    }
+
+    /**
+     * Returns " Defined by X." for an inherited member, or `''` for a member of the page type.
+     */
+    private function definedBy(bool $native, string $definer, PageContext $page): string
+    {
+        return $native ? '' : ' Defined by ' . $page->typeLink($definer) . '.';
     }
 
     private function anchor(string $id): string

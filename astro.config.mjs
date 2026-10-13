@@ -364,6 +364,7 @@ export default defineConfig({
         dark: './src/assets/logo-dark.svg',
         replacesTitle: true,
       },
+      customCss: ['./src/styles/custom.css'],
       components: {
         LanguageSelect: './src/components/LanguageSelect.astro',
         SocialIcons: './src/components/SocialIcons.astro',

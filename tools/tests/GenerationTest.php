@@ -120,12 +120,12 @@ final class GenerationTest extends TestCase
 
         self::assertStringContainsString('`final readonly class vendor\pkg\item\Item`', $page, 'Modifiers in order.');
         self::assertStringContainsString(
-            '| <span id="property-label"></span>`$label` readonly, constructor | `string` |  | Label of the item. |',
+            '| <span id="property-label"></span>`$label` readonly, constructor | `string` | Label of the item. |',
             $page,
             'Required property: no default, `@param` text.',
         );
         self::assertStringContainsString(
-            '`$options` readonly, constructor | `array<string, mixed>` | `[]` | HTML attributes of the item. |',
+            '`$options` readonly, constructor | `array<string, mixed>` | HTML attributes of the item. Default: `[]`. |',
             $page,
             'Generic type from `@param`.',
         );
@@ -135,7 +135,11 @@ final class GenerationTest extends TestCase
     {
         $page = $this->page('extensions/pkg/reference/Alert.md');
 
-        self::assertStringContainsString('| Theme color of the alert. |', $page, 'Summary above `@var` must be kept.');
+        self::assertStringContainsString(
+            '| Theme color of the alert. Default: `null`. |',
+            $page,
+            'Summary above `@var` must be kept.',
+        );
         self::assertStringContainsString(
             '[`View::POS_END`](../../../api/yii/web/View.md#const-POS_END)',
             $page,
@@ -146,7 +150,12 @@ final class GenerationTest extends TestCase
             $page,
             'Inherited method must link to its definer.',
         );
-        self::assertStringContainsString('`$rows` | `list<int>` |  |', $page, 'Typed property without default.');
+        self::assertStringContainsString('`$rows` | `list<int>` | Rows of the alert. |', $page, 'Typed, no default.');
+        self::assertStringContainsString(
+            'Defined by [`yii\base\Widget`](../../../api/yii/base/Widget.md). |',
+            $page,
+            'Inherited member names its definer.',
+        );
     }
 
     public function testTablesEscapePipesAndProseEscapesAngleBrackets(): void
