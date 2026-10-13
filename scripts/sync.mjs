@@ -707,6 +707,19 @@ export function packageNameMismatch(dir, expected) {
 }
 
 /**
+ * Returns the page names listed in a manifest `order` that the package does not have, in `order` sequence.
+ *
+ * @param {string[]} order Page names from `packages.json`, without `.md`.
+ * @param {string[]} markdown Guide files found in the docs directory, relative to it.
+ * @returns {string[]}
+ */
+export function missingOrderPages(order, markdown) {
+  const names = new Set(markdown.map((file) => file.replace(/\.md$/i, '').toLowerCase()));
+
+  return order.filter((name) => !names.has(name));
+}
+
+/**
  * Syncs one package into `src/content/docs/extensions/<name>/`; a framework entry only gets its sources.
  *
  * @returns {{ pages: number, images: number, source: string, dir: string, commit: string }
@@ -739,6 +752,12 @@ function syncPackage(pkg, useLocal) {
   const blobBase = pkg.repo.replace(/\.git$/, '').replace(/\/$/, '');
   const rewrite = linkRewriter({ sourceDir: dir, blobBase, ref: pkg.ref, docsDir, pages, images });
   const order = pkg.order ?? DEFAULT_ORDER;
+
+  // A stale `order` entry (a guide the package removed) only costs a sidebar slot: warn, do not fail the build.
+  for (const name of pkg.order === undefined ? [] : missingOrderPages(pkg.order, markdown)) {
+    process.stderr.write(`[sync] ${pkg.name}: "order" lists "${name}", but ${docsDir}/${name}.md does not exist.\n`);
+  }
+
   const outDir = path.join(OUTPUT_DIR, pkg.name);
   const generatedFrom = `${blobBase}@${pkg.ref}`;
   const rank = (name) => {

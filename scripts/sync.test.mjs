@@ -5,7 +5,14 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { after, describe, test } from 'node:test';
-import { convertPage, linkRewriter, packageNameMismatch, packageSection, validateManifest } from './sync.mjs';
+import {
+  convertPage,
+  linkRewriter,
+  missingOrderPages,
+  packageNameMismatch,
+  packageSection,
+  validateManifest,
+} from './sync.mjs';
 
 const work = mkdtempSync(path.join(tmpdir(), 'sync-test-'));
 
@@ -194,5 +201,18 @@ describe('packageSection', () => {
     ));
     assert.ok(!lines.some((line) => line.includes('packagist.org')));
     assert.ok(!lines.some((line) => line.includes('CHANGELOG.md')));
+  });
+});
+
+describe('missingOrderPages', () => {
+  test('lists the ordered pages without a guide file', () => {
+    assert.deepEqual(
+      missingOrderPages(['installation', 'development', 'testing'], ['installation.md', 'Testing.md', 'examples.md']),
+      ['development'],
+    );
+  });
+
+  test('returns nothing when every ordered page exists', () => {
+    assert.deepEqual(missingOrderPages(['installation'], ['installation.md', 'examples.md']), []);
   });
 });

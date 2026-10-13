@@ -68,12 +68,6 @@
         "namespace": "yii\\template",
         "localPath": "../../yii2-extensions/template",
         "packagist": "yii2-extensions/template",
-        "order": [
-            "installation",
-            "configuration",
-            "examples",
-            "testing",
-            "development"
-        ]
+        "order": ["installation", "configuration", "examples", "testing"]
     }
 ]

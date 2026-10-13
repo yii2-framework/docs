@@ -36,3 +36,4 @@
 - feat(demos): `--strict` also fails on skipped snippets, so every example of a package with demos must render.
 - feat: sync the `template` guides; `status: "template"` links "Use this template" instead of Packagist on the landing page.
 - docs: drop the stale `composer sync-metadata` section from the development page (the script no longer exists).
+- fix: drop the template's removed `development` guide from `packages.json`; the sync warns about `order` pages that do not exist.
