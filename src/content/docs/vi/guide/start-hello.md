@@ -1,6 +1,6 @@
 ---
 title: "Bắt đầu ứng dụng với lời chào Hello"
-description: "Phần này sẽ mô tả làm thế nào để tạo ra một trang Web mới trong ứng dụng của bạn cùng với lời chào \"Hello\". Để đạt được mục tiêu này."
+description: 'Phần này sẽ mô tả làm thế nào để tạo ra một trang Web mới trong ứng dụng của bạn cùng với lời chào "Hello". Để đạt được mục tiêu này.'
 ---
 
 Phần này sẽ mô tả làm thế nào để tạo ra một trang Web mới trong ứng dụng của bạn cùng với lời chào "Hello".

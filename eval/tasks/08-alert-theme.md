@@ -9,15 +9,16 @@ checks:
   - php-lint
   - strict-types
   - 'grep:Alert::(widget|begin)\('
-  - 'grep:Theme::SUCCESS'
+  - "grep:Theme::SUCCESS"
   - 'no-forbidden:yii\\bootstrap5|alert alert-|alert-success|''theme''\s*=>\s*''success'''
   - app-boot
-  - 'app-render:resources/views/site/_saved.php'
-  - 'html:theme-success'
-  - 'html:Saved'
+  - "app-render:resources/views/site/_saved.php"
+  - "html:theme-success"
+  - "html:Saved"
   - 'html:Your post was saved\.'
   - 'html:data-bs-dismiss="alert"'
 ---
+
 The application is a Yii 22.0 application that uses the `yii2-extensions/bootstrap6` package.
 
 Write the view partial `resources/views/site/_saved.php` that shows a dismissible success alert with the heading

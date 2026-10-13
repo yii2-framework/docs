@@ -176,16 +176,16 @@ Widgets take arrays. Item lists accept arrays, strings, and the immutable item o
 `yii2\extensions\bootstrap6\item`; mix them freely. Prefer the objects: they validate on creation and offer typed
 chaining. Each `with*()` returns a new instance; the original is unchanged (`final readonly class`).
 
-| Object | Used by | Constructors | Chaining methods |
-| --- | --- | --- | --- |
-| `NavItem` | `Nav::$items` | `to($label, $url = '#')`, `menu($label, $items)` | `withActive`, `withItems` |
-| `MenuItem` | `Menu`, `NavItem` | `link`, `button`, `submenu`, `header`, `text`, `divider` | `withActive`, `withType` |
-| `TabItem` | `Tabs::$items` | `to($label, $content = null)`, `link`, `menu` | `withContent`, `withActive` |
-| `BreadcrumbLink` | `Breadcrumbs::$links` | `to($label, $url = null)` | `withActive`, `withUrl`, `withTemplate` |
-| `AccordionItem` | `Accordion::$items` | `to($label, $content)` | `withOpen`, `withBodyOptions`, `withVisible` |
-| `CarouselItem` | `Carousel::$items` | `to($content)` | `withContent`, `withOptions` |
-| `StepItem` | `Stepper::$items` | `to($label, $description = null)` | `withActive`, `withUrl`, `withTheme` |
-| `ProgressBar` | `Progress::$bars` | `to($percent, $label = '')` | `withStriped`, `withAnimated`, `withTheme` |
+| Object           | Used by               | Constructors                                             | Chaining methods                             |
+| ---------------- | --------------------- | -------------------------------------------------------- | -------------------------------------------- |
+| `NavItem`        | `Nav::$items`         | `to($label, $url = '#')`, `menu($label, $items)`         | `withActive`, `withItems`                    |
+| `MenuItem`       | `Menu`, `NavItem`     | `link`, `button`, `submenu`, `header`, `text`, `divider` | `withActive`, `withType`                     |
+| `TabItem`        | `Tabs::$items`        | `to($label, $content = null)`, `link`, `menu`            | `withContent`, `withActive`                  |
+| `BreadcrumbLink` | `Breadcrumbs::$links` | `to($label, $url = null)`                                | `withActive`, `withUrl`, `withTemplate`      |
+| `AccordionItem`  | `Accordion::$items`   | `to($label, $content)`                                   | `withOpen`, `withBodyOptions`, `withVisible` |
+| `CarouselItem`   | `Carousel::$items`    | `to($content)`                                           | `withContent`, `withOptions`                 |
+| `StepItem`       | `Stepper::$items`     | `to($label, $description = null)`                        | `withActive`, `withUrl`, `withTheme`         |
+| `ProgressBar`    | `Progress::$bars`     | `to($percent, $label = '')`                              | `withStriped`, `withAnimated`, `withTheme`   |
 
 Parameter types: `$label`, `$content`, `$description` are `string|Stringable` (`TabItem::to()` `$content` and
 `StepItem::to()` `$description` also accept `null`); `$url` is `array|string|null`; `$items` is `array` (`array|string`
@@ -221,19 +221,19 @@ Leave `active` as `null` so `Nav` detects the active item from the route. Assign
 Enums live in `yii2\extensions\bootstrap6\enum`. Properties typed with an enum also accept the case value as a
 `string`; an unknown string throws `yii\base\InvalidConfigException`.
 
-| Enum | Cases |
-| --- | --- |
-| `Theme` | `PRIMARY`, `SECONDARY`, `SUCCESS`, `DANGER`, `WARNING`, `INFO`, `ACCENT`, `INVERSE` |
-| `Size` | `XS`, `SM`, `LG`, `XL` |
-| `ButtonVariant` | `SOLID`, `OUTLINE`, `SUBTLE`, `TEXT`, `STYLED`, `LINK`, `ICON` |
-| `Breakpoint` | `SM`, `MD`, `LG`, `XL`, `XXL` (`2xl`); method `prefix($class)` |
-| `Placement` | `TOP`, `BOTTOM`, `LEFT`, `RIGHT` with `_START` / `_END`; logical `START`, `END` (menus) |
-| `DialogSize` | `SM`, `LG`, `XL`, `FULLSCREEN` |
-| `DrawerPlacement` | `START`, `END`, `TOP`, `BOTTOM` |
-| `NavStyle` | `TABS`, `PILLS`, `PILLS_VERTICAL`, `UNDERLINE` |
-| `NavLayout` | `FILL`, `JUSTIFIED`, `VERTICAL` |
-| `CarouselEnds` | `LOOP`, `WRAP`, `STOP` |
-| `MenuItemType` | `LINK`, `BUTTON`, `SUBMENU`, `HEADER`, `TEXT`, `DIVIDER` |
+| Enum              | Cases                                                                                   |
+| ----------------- | --------------------------------------------------------------------------------------- |
+| `Theme`           | `PRIMARY`, `SECONDARY`, `SUCCESS`, `DANGER`, `WARNING`, `INFO`, `ACCENT`, `INVERSE`     |
+| `Size`            | `XS`, `SM`, `LG`, `XL`                                                                  |
+| `ButtonVariant`   | `SOLID`, `OUTLINE`, `SUBTLE`, `TEXT`, `STYLED`, `LINK`, `ICON`                          |
+| `Breakpoint`      | `SM`, `MD`, `LG`, `XL`, `XXL` (`2xl`); method `prefix($class)`                          |
+| `Placement`       | `TOP`, `BOTTOM`, `LEFT`, `RIGHT` with `_START` / `_END`; logical `START`, `END` (menus) |
+| `DialogSize`      | `SM`, `LG`, `XL`, `FULLSCREEN`                                                          |
+| `DrawerPlacement` | `START`, `END`, `TOP`, `BOTTOM`                                                         |
+| `NavStyle`        | `TABS`, `PILLS`, `PILLS_VERTICAL`, `UNDERLINE`                                          |
+| `NavLayout`       | `FILL`, `JUSTIFIED`, `VERTICAL`                                                         |
+| `CarouselEnds`    | `LOOP`, `WRAP`, `STOP`                                                                  |
+| `MenuItemType`    | `LINK`, `BUTTON`, `SUBMENU`, `HEADER`, `TEXT`, `DIVIDER`                                |
 
 `IconSet` (final, `BaseObject`) holds the SVG icons the widgets draw: `accordionChevron`, `comboboxCaret`, and
 `menuItemCheck`, each `string|Stringable`. Widgets read it through `Yii::createObject(IconSet::class)`. Replace an
@@ -297,25 +297,25 @@ ActiveForm::end();
 2. `nativeValidation` renders `data-bs-validate` (`:user-invalid` styling); `'valid'` also styles valid fields.
 3. Switches use `checkbox(['switch' => true])`; the v5 `switchTemplate` is gone.
 4. Register `LinkPager` for grids once: `'container' => ['definitions' => [\yii\widgets\LinkPager::class =>
-   \yii2\extensions\bootstrap6\LinkPager::class]]`.
+\yii2\extensions\bootstrap6\LinkPager::class]]`.
 
 **Verify:** submit an invalid form and find `is-invalid` on the control and `invalid-feedback` text beside it.
 
 ## Step 8: Avoid the common mistakes and migrate from Bootstrap 5
 
-| Mistake | Correct |
-| --- | --- |
-| `btn btn-primary`, `alert alert-danger` | `Button` / `Alert` with `theme`; markup `btn-solid theme-primary` |
-| `data-bs-toggle="modal"`, `.modal` | `Dialog` with `toggleButton` (`<dialog>`, `data-bs-toggle="dialog"`) |
-| `offcanvas`, `dropdown-menu` | `Drawer`, `Menu` / `ButtonMenu` |
-| `navbar-expand-lg`, `d-md-none`, `col-md-6` | `lg:navbar-expand`, `md:d-none`, `md:col-6` (`Breakpoint::prefix()`) |
-| `mb-3` for 1rem spacing | `mb-5`; the spacer scale changed |
-| `new bootstrap.Modal(el)` in an inline script | `importJs()` and `bootstrap.Dialog.getOrCreateInstance(el)` |
-| `$item->withActive(true);` and discarding the result | `$item = $item->withActive(true);` |
-| `Toast` that never appears | Call `show()` on the instance; the widget only creates it |
-| `Popover` content between `begin()` and `end()` as the popover body | That content is the trigger; set `content` |
-| `clientOptions` on a standalone `Menu` | Set them on `ButtonMenu` or the toggle element |
-| `yii\bootstrap5\*` classes | `yii2\extensions\bootstrap6\*`; run the renames from `docs/migration.md` |
+| Mistake                                                             | Correct                                                                  |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `btn btn-primary`, `alert alert-danger`                             | `Button` / `Alert` with `theme`; markup `btn-solid theme-primary`        |
+| `data-bs-toggle="modal"`, `.modal`                                  | `Dialog` with `toggleButton` (`<dialog>`, `data-bs-toggle="dialog"`)     |
+| `offcanvas`, `dropdown-menu`                                        | `Drawer`, `Menu` / `ButtonMenu`                                          |
+| `navbar-expand-lg`, `d-md-none`, `col-md-6`                         | `lg:navbar-expand`, `md:d-none`, `md:col-6` (`Breakpoint::prefix()`)     |
+| `mb-3` for 1rem spacing                                             | `mb-5`; the spacer scale changed                                         |
+| `new bootstrap.Modal(el)` in an inline script                       | `importJs()` and `bootstrap.Dialog.getOrCreateInstance(el)`              |
+| `$item->withActive(true);` and discarding the result                | `$item = $item->withActive(true);`                                       |
+| `Toast` that never appears                                          | Call `show()` on the instance; the widget only creates it                |
+| `Popover` content between `begin()` and `end()` as the popover body | That content is the trigger; set `content`                               |
+| `clientOptions` on a standalone `Menu`                              | Set them on `ButtonMenu` or the toggle element                           |
+| `yii\bootstrap5\*` classes                                          | `yii2\extensions\bootstrap6\*`; run the renames from `docs/migration.md` |
 
 Migration from `yiisoft/yii2-bootstrap5`: remove the old package, require this one, replace the namespace, then apply
 the renames: `Modal` to `Dialog`, `Offcanvas` to `Drawer`, `Dropdown` to `Menu`, `ButtonDropdown` to `ButtonMenu`. The

@@ -20,13 +20,14 @@ checks:
   - 'no-forbidden:<\?=\s*\$model->(title|body)\s*;?\s*\?>'
   - app-boot
   - app-migrate
-  - 'app-render:resources/views/post/update.php'
-  - 'html:<form'
+  - "app-render:resources/views/post/update.php"
+  - "html:<form"
   - 'html:name="Post\[title\]"'
   - 'html:<textarea[^>]*name="Post\[body\]"'
   - 'html:&lt;script&gt;alert\(1\)&lt;/script&gt;'
   - 'no-html:<script>alert\(1\)</script>'
 ---
+
 The application is a Yii 22.0 application created from the basic project template. It has the ActiveRecord model
 `app\models\Post` with the attributes `id`, `title`, and `body`.
 

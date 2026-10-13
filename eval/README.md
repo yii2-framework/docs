@@ -54,19 +54,19 @@ eval/out/<UTC timestamp>/
 
 ## Checks
 
-| Check | Passes when |
-| --- | --- |
-| `outputs` | every path in `outputs` exists and is not empty |
-| `php-lint` | every `*.php` passes `php -l` |
-| `strict-types` | every `*.php` declares `strict_types=1` |
-| `grep:<ERE>` | the extended regular expression matches at least one output file |
-| `no-forbidden:<ERE>` | the expression matches no output file |
-| `app-boot` | with the seeds and outputs copied into `eval/app`, `./yii help` exits 0 (see the note below) |
-| `app-migrate` | `migrate`, `migrate/down 1`, and `migrate` succeed (SQLite) |
-| `app-probe:<probe>:<arg>` | `lib/probe.php` passes: `controller-filters`, `rest-no-ratelimit`, `active-record` |
-| `app-render:<view>` | the view renders without an exception; `$model` is a `Post` whose title is an XSS payload |
-| `app-static` | PHPStan level 5 (`EVAL_PHPSTAN_LEVEL`) reports nothing on the output files under `src/` and `config/` |
-| `html:<ERE>`, `no-html:<ERE>` | the rendered HTML matches, or does not match, the expression |
+| Check                         | Passes when                                                                                           |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `outputs`                     | every path in `outputs` exists and is not empty                                                       |
+| `php-lint`                    | every `*.php` passes `php -l`                                                                         |
+| `strict-types`                | every `*.php` declares `strict_types=1`                                                               |
+| `grep:<ERE>`                  | the extended regular expression matches at least one output file                                      |
+| `no-forbidden:<ERE>`          | the expression matches no output file                                                                 |
+| `app-boot`                    | with the seeds and outputs copied into `eval/app`, `./yii help` exits 0 (see the note below)          |
+| `app-migrate`                 | `migrate`, `migrate/down 1`, and `migrate` succeed (SQLite)                                           |
+| `app-probe:<probe>:<arg>`     | `lib/probe.php` passes: `controller-filters`, `rest-no-ratelimit`, `active-record`                    |
+| `app-render:<view>`           | the view renders without an exception; `$model` is a `Post` whose title is an XSS payload             |
+| `app-static`                  | PHPStan level 5 (`EVAL_PHPSTAN_LEVEL`) reports nothing on the output files under `src/` and `config/` |
+| `html:<ERE>`, `no-html:<ERE>` | the rendered HTML matches, or does not match, the expression                                          |
 
 `app-boot` also reports `composer static` as `app-boot:composer-static`; it is skipped while the pristine app fails
 it (the template archive omits `phpstan.neon`), and `app-static` replaces it.
@@ -80,14 +80,14 @@ A task passes when none of its checks fails; skipped checks (for example, no app
 
    ```yaml
    ---
-   id: NN-slug                # equals the file name
+   id: NN-slug # equals the file name
    title: Short title
-   skill: yii2-framework      # a directory under skills/
-   context:                   # optional: index.md URLs to list in the prompt
+   skill: yii2-framework # a directory under skills/
+   context: # optional: index.md URLs to list in the prompt
      - https://yii2-framework.github.io/docs/guide/<page>/index.md
-   outputs:                   # files the agent must write, relative to the app root
+   outputs: # files the agent must write, relative to the app root
      - src/controllers/FooController.php
-   seed:                      # optional: directories under eval/seed/ copied into the app first
+   seed: # optional: directories under eval/seed/ copied into the app first
      - post
    checks:
      - outputs
@@ -98,6 +98,7 @@ A task passes when none of its checks fails; skipped checks (for example, no app
 
    Quote values that contain `:`, `'`, `\`, or `#` with single quotes (`''` is a literal quote). Double quotes are
    not supported.
+
 2. Write the prompt as a user would: state the goal, the constraints, and the files to write. Never name the class,
    method, or option that the checks look for.
 3. Add a reference solution in `eval/fixtures/pass/<id>/files/` and, ideally, a wrong one in

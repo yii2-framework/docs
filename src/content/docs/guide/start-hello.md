@@ -1,6 +1,6 @@
 ---
 title: "Saying Hello"
-description: "This section describes how to create a new \"Hello\" page in your application."
+description: 'This section describes how to create a new "Hello" page in your application.'
 ---
 
 This section describes how to create a new "Hello" page in your application.

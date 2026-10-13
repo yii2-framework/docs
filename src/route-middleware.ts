@@ -1,20 +1,21 @@
-import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
-import { getCollection } from 'astro:content';
-import { isReferenceRoute } from '../plugins/reference-id.mjs';
-import { buildDate, DOCS_VERSION, PROJECT_NAME } from './site-meta.mjs';
+/* eslint-disable n/no-missing-import -- Astro virtual modules and sibling .mjs files are resolved by Vite. */
+import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
+import { getCollection } from "astro:content";
+import { isReferenceRoute } from "../plugins/reference-id.mjs";
+import { buildDate, DOCS_VERSION, PROJECT_NAME } from "./site-meta.mjs";
 
 type SidebarEntry =
-  | { type: 'link'; label: string; href: string; isCurrent: boolean }
-  | { type: 'group'; label: string; entries: SidebarEntry[] };
+  | { type: "link"; label: string; href: string; isCurrent: boolean }
+  | { type: "group"; label: string; entries: SidebarEntry[] };
 
 /** Returns the chain of sidebar entries that leads to the current page, outermost first. */
 function currentPath(entries: SidebarEntry[]): SidebarEntry[] | null {
   for (const entry of entries) {
-    if (entry.type === 'link' && entry.isCurrent) {
+    if (entry.type === "link" && entry.isCurrent) {
       return [entry];
     }
 
-    if (entry.type === 'group') {
+    if (entry.type === "group") {
       const inner = currentPath(entry.entries);
 
       if (inner) {
@@ -28,7 +29,7 @@ function currentPath(entries: SidebarEntry[]): SidebarEntry[] | null {
 
 /** Returns the first link of a sidebar group, used as the URL of its breadcrumb item. */
 function firstLink(entry: SidebarEntry): string | undefined {
-  if (entry.type === 'link') {
+  if (entry.type === "link") {
     return entry.href;
   }
 
@@ -47,8 +48,9 @@ let entryTitles: Promise<Map<string, string>> | undefined;
 
 /** Returns the titles of all `docs` entries by id (loaded once per build; `getEntry` would warn for a miss). */
 function docsTitles(): Promise<Map<string, string>> {
-  entryTitles ??= getCollection('docs')
-    .then((entries) => new Map(entries.map((entry) => [entry.id, entry.data.title])));
+  entryTitles ??= getCollection("docs").then(
+    (entries) => new Map(entries.map((entry) => [entry.id, entry.data.title])),
+  );
 
   return entryTitles;
 }
@@ -60,7 +62,7 @@ async function docsIds(): Promise<Set<string>> {
 
 /** Serializes JSON for an inline `<script>`: `<` is escaped so the content cannot close the element. */
 function scriptJson(value: unknown): string {
-  return JSON.stringify(value).replace(/</g, '\\u003c');
+  return JSON.stringify(value).replace(/</g, "\\u003c");
 }
 
 /**
@@ -69,18 +71,24 @@ function scriptJson(value: unknown): string {
 export const onRequest = defineRouteMiddleware(async (context) => {
   const route = context.locals.starlightRoute;
   const site = context.site ?? new URL(context.url.origin);
-  const homeUrl = new URL(import.meta.env.BASE_URL.replace(/\/?$/, '/'), site).href;
+  const homeUrl = new URL(import.meta.env.BASE_URL.replace(/\/?$/, "/"), site)
+    .href;
   const pageUrl = new URL(context.url.pathname, site).href;
   const date = buildDate();
   const { title, description } = route.entry.data;
-  const modified = route.lastUpdated ? route.lastUpdated.toISOString().slice(0, 10) : date;
+  const modified = route.lastUpdated
+    ? route.lastUpdated.toISOString().slice(0, 10)
+    : date;
 
   const trail = currentPath(route.sidebar as SidebarEntry[]) ?? [];
   const crumbs = [
     { name: PROJECT_NAME, item: homeUrl },
     ...trail.map((entry, index) => ({
       name: entry.label,
-      item: index === trail.length - 1 ? pageUrl : new URL(firstLink(entry) ?? pageUrl, site).href,
+      item:
+        index === trail.length - 1
+          ? pageUrl
+          : new URL(firstLink(entry) ?? pageUrl, site).href,
     })),
   ];
 
@@ -88,10 +96,10 @@ export const onRequest = defineRouteMiddleware(async (context) => {
     // API reference type pages are not in the sidebar: their trail is the chain of namespace pages above them.
     if (isReferenceRoute(route.id, route.locale)) {
       const titles = await docsTitles();
-      const parts = route.entry.id.split('/');
+      const parts = route.entry.id.split("/");
 
       for (let length = 1; length < parts.length; length++) {
-        const id = parts.slice(0, length).join('/');
+        const id = parts.slice(0, length).join("/");
         const name = titles.get(id);
 
         if (name !== undefined) {
@@ -105,19 +113,19 @@ export const onRequest = defineRouteMiddleware(async (context) => {
 
   const graph = [
     {
-      '@type': 'TechArticle',
+      "@type": "TechArticle",
       headline: title,
       ...(description ? { description } : {}),
       inLanguage: route.entryMeta.lang,
       url: pageUrl,
       version: DOCS_VERSION,
       dateModified: modified,
-      isPartOf: { '@type': 'WebSite', name: PROJECT_NAME, url: homeUrl },
+      isPartOf: { "@type": "WebSite", name: PROJECT_NAME, url: homeUrl },
     },
     {
-      '@type': 'BreadcrumbList',
+      "@type": "BreadcrumbList",
       itemListElement: crumbs.map((crumb, index) => ({
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: index + 1,
         name: crumb.name,
         item: crumb.item,
@@ -127,36 +135,46 @@ export const onRequest = defineRouteMiddleware(async (context) => {
 
   // Open Graph image: generated for English pages (src/pages/og); translations use the image of the English slug.
   const { id } = route.entry;
-  const unprefixed = route.locale && (id === route.locale || id.startsWith(`${route.locale}/`))
-    ? id.slice(route.locale.length + 1)
-    : id;
-  const englishId = unprefixed === '' ? 'index' : unprefixed;
+  const unprefixed =
+    route.locale && (id === route.locale || id.startsWith(`${route.locale}/`))
+      ? id.slice(route.locale.length + 1)
+      : id;
+  const englishId = unprefixed === "" ? "index" : unprefixed;
 
   // Pages that exist only in a translation have no image.
-  if (route.entry.id !== '404' && (await docsIds()).has(englishId)) {
+  if (route.entry.id !== "404" && (await docsIds()).has(englishId)) {
     const image = new URL(`og/${englishId}.png`, homeUrl).href;
 
     route.head.push(
-      { tag: 'meta', attrs: { property: 'og:image', content: image } },
-      { tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
-      { tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
-      { tag: 'meta', attrs: { name: 'twitter:image', content: image } },
+      { tag: "meta", attrs: { property: "og:image", content: image } },
+      { tag: "meta", attrs: { property: "og:image:width", content: "1200" } },
+      { tag: "meta", attrs: { property: "og:image:height", content: "630" } },
+      { tag: "meta", attrs: { name: "twitter:image", content: image } },
     );
   }
 
   // The API reference is English only: its type pages have no locale copies, so drop the hreflang alternates.
   if (isReferenceRoute(route.id, route.locale)) {
-    route.head = route.head.filter((entry) => !(entry.tag === 'link' && entry.attrs?.rel === 'alternate'
-      && typeof entry.attrs?.hreflang === 'string'));
+    route.head = route.head.filter(
+      (entry) =>
+        !(
+          entry.tag === "link" &&
+          entry.attrs?.rel === "alternate" &&
+          typeof entry.attrs?.hreflang === "string"
+        ),
+    );
   }
 
   route.head.push(
-    { tag: 'meta', attrs: { name: 'docs:version', content: DOCS_VERSION } },
-    { tag: 'meta', attrs: { name: 'docs:build-date', content: date } },
+    { tag: "meta", attrs: { name: "docs:version", content: DOCS_VERSION } },
+    { tag: "meta", attrs: { name: "docs:build-date", content: date } },
     {
-      tag: 'script',
-      attrs: { type: 'application/ld+json' },
-      content: scriptJson({ '@context': 'https://schema.org', '@graph': graph }),
+      tag: "script",
+      attrs: { type: "application/ld+json" },
+      content: scriptJson({
+        "@context": "https://schema.org",
+        "@graph": graph,
+      }),
     },
   );
 });

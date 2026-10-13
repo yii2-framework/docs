@@ -16,12 +16,13 @@ checks:
   - 'no-forbidden:yii\\bootstrap5|Modal::|data-bs-toggle="modal"|class="modal'
   - app-boot
   - app-migrate
-  - 'app-render:resources/views/post/_delete.php'
-  - 'html:<dialog'
+  - "app-render:resources/views/post/_delete.php"
+  - "html:<dialog"
   - 'html:data-bs-toggle="dialog"'
   - 'html:method="post"'
   - 'no-html:<script>alert\(1\)</script>'
 ---
+
 The application is a Yii 22.0 application that uses the `yii2-extensions/bootstrap6` package.
 
 Write the view partial `resources/views/post/_delete.php`. It receives `$model`, an `app\models\Post` whose `title`

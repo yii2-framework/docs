@@ -12,18 +12,19 @@ checks:
   - outputs
   - php-lint
   - strict-types
-  - 'grep:composer create-project'
-  - 'grep:yiisoft/yii2-app-basic:[^[:space:]]*22'
+  - "grep:composer create-project"
+  - "grep:yiisoft/yii2-app-basic:[^[:space:]]*22"
   - 'grep:(--stability[= ]dev|-s dev|22\.0@dev)'
-  - 'grep:migrate'
+  - "grep:migrate"
   - 'grep:mysql:host=127\.0\.0\.1;dbname=blog'
-  - 'grep:utf8mb4'
-  - 'grep:DB_PASSWORD'
-  - 'no-forbidden:yiisoft/yii2-app-basic([[:space:]]|$)'
-  - 'no-forbidden:yii2-framework/yii2'
+  - "grep:utf8mb4"
+  - "grep:DB_PASSWORD"
+  - "no-forbidden:yiisoft/yii2-app-basic([[:space:]]|$)"
+  - "no-forbidden:yii2-framework/yii2"
   - app-boot
   - app-static
 ---
+
 Create a new Yii 22.0 web application in a directory named `blog` from the official basic project template. Then
 configure its database connection for MySQL: host `127.0.0.1`, database `blog`, user `blog`, charset `utf8mb4`, and
 the password read from the `DB_PASSWORD` environment variable.

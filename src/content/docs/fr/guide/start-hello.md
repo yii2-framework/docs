@@ -1,6 +1,6 @@
 ---
 title: "Hello World"
-description: "Cette section decrit la méthode pour créer une nouvelle page \"Hello\" dans votre application."
+description: 'Cette section decrit la méthode pour créer une nouvelle page "Hello" dans votre application.'
 ---
 
 Cette section decrit la méthode pour créer une nouvelle page "Hello" dans votre application.

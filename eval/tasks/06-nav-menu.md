@@ -11,15 +11,16 @@ checks:
   - 'grep:Nav::widget\('
   - 'grep:NavItem::to\('
   - 'grep:NavItem::menu\('
-  - 'grep:MenuItem::'
+  - "grep:MenuItem::"
   - 'no-forbidden:yii\\bootstrap5'
   - 'no-forbidden:dropdown-menu|data-bs-toggle="dropdown"|class="nav-link'
   - app-boot
-  - 'app-render:resources/views/layouts/_nav.php'
+  - "app-render:resources/views/layouts/_nav.php"
   - 'html:class="nav nav-pills'
   - 'html:aria-disabled="true"'
   - 'html:https://yii2-framework\.github\.io/docs/api/'
 ---
+
 The application is a Yii 22.0 application that uses the `yii2-extensions/bootstrap6` package.
 
 Write the view partial `resources/views/layouts/_nav.php` that renders the main navigation as pills with these

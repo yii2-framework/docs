@@ -14,15 +14,16 @@ checks:
   - php-lint
   - strict-types
   - 'grep:namespace app\\controllers;'
-  - 'grep:AccessControl'
-  - 'grep:VerbFilter'
-  - 'grep:NotFoundHttpException'
+  - "grep:AccessControl"
+  - "grep:VerbFilter"
+  - "grep:NotFoundHttpException"
   - 'no-forbidden:\$_(GET|POST|REQUEST)\['
   - 'no-forbidden:createCommand\([^)]*["'']\s*\.'
   - app-boot
   - 'app-probe:controller-filters:app\controllers\PostController'
   - app-static
 ---
+
 The application is a Yii 22.0 application created from the basic project template: namespace `app\`, classes under
 `src/`, views under `resources/views/`. It has an ActiveRecord model `app\models\Post` with the attributes `id`,
 `title`, and `body`.

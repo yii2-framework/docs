@@ -14,11 +14,11 @@ checks:
   - strict-types
   - 'grep:namespace app\\models;'
   - 'grep:namespace app\\migrations;'
-  - 'grep:function tableName'
-  - 'grep:function rules'
-  - 'grep:function attributeLabels'
-  - 'grep:function safeUp'
-  - 'grep:function safeDown'
+  - "grep:function tableName"
+  - "grep:function rules"
+  - "grep:function attributeLabels"
+  - "grep:function safeUp"
+  - "grep:function safeDown"
   - 'grep:\{\{%post\}\}'
   - 'no-forbidden:function (up|down)\('
   - app-boot
@@ -26,6 +26,7 @@ checks:
   - 'app-probe:active-record:app\models\Post'
   - app-static
 ---
+
 The application is a Yii 22.0 application created from the basic project template: namespace `app\`, classes under
 `src/`. Add a blog post entity backed by the table `post` with these columns:
 

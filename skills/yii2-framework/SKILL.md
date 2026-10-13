@@ -281,17 +281,17 @@ Only changes listed in the `22.0 under development` section of
 `https://raw.githubusercontent.com/yiisoft/yii2/22.0/framework/CHANGELOG.md` are included. The upstream
 `UPGRADE.md` has no 22.0 section yet, so read that changelog before a migration; more changes may land.
 
-| Area | 22.0 behavior |
-| --- | --- |
-| PHP | `>=8.3`. HHVM and `PHP_VERSION_ID` fallbacks are removed. |
-| Autoload | Composer only. `Yii::autoload()`, `Yii::$classMap`, and `classes.php` are removed. |
-| jQuery | Extracted to `yiisoft/yii2-jquery`; register `\yii\jquery\Bootstrap` in `bootstrap`. |
-| CSS | The framework is CSS-agnostic: widgets have no Bootstrap class defaults. |
-| Assets | Bower is replaced by npm: the `@npm` alias points to `node_modules`. |
-| Cache | `ApcCache` is renamed `ApcuCache`; XCache and ZendDataCache are removed. |
-| Databases | CUBRID removed. Pagination needs SQL Server 2019+, Oracle 12.1+, MariaDB 10.6+, PostgreSQL 13+. |
-| Models | Anonymous models must define `formName()` explicitly. |
-| Actions | Standalone: `Module::$actionNamespace` and `$actionMap` dispatch `yii\web\Action` without a controller. |
+| Area      | 22.0 behavior                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| PHP       | `>=8.3`. HHVM and `PHP_VERSION_ID` fallbacks are removed.                                               |
+| Autoload  | Composer only. `Yii::autoload()`, `Yii::$classMap`, and `classes.php` are removed.                      |
+| jQuery    | Extracted to `yiisoft/yii2-jquery`; register `\yii\jquery\Bootstrap` in `bootstrap`.                    |
+| CSS       | The framework is CSS-agnostic: widgets have no Bootstrap class defaults.                                |
+| Assets    | Bower is replaced by npm: the `@npm` alias points to `node_modules`.                                    |
+| Cache     | `ApcCache` is renamed `ApcuCache`; XCache and ZendDataCache are removed.                                |
+| Databases | CUBRID removed. Pagination needs SQL Server 2019+, Oracle 12.1+, MariaDB 10.6+, PostgreSQL 13+.         |
+| Models    | Anonymous models must define `formName()` explicitly.                                                   |
+| Actions   | Standalone: `Module::$actionNamespace` and `$actionMap` dispatch `yii\web\Action` without a controller. |
 
 Register the jQuery layer in `config/web.php`, and replace runtime class maps with `autoload.psr-4` followed by
 `composer dump-autoload`:

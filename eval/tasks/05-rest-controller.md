@@ -15,13 +15,14 @@ checks:
   - php-lint
   - strict-types
   - 'grep:namespace app\\controllers\\api;'
-  - 'grep:ActiveController'
-  - 'grep:modelClass'
-  - 'grep:rateLimiter'
+  - "grep:ActiveController"
+  - "grep:modelClass"
+  - "grep:rateLimiter"
   - app-boot
   - 'app-probe:rest-no-ratelimit:app\controllers\api\PostController'
   - app-static
 ---
+
 The application is a Yii 22.0 application created from the basic project template. It has the ActiveRecord model
 `app\models\Post`.
 

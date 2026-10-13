@@ -1,6 +1,6 @@
 ---
 title: "En savoir plus"
-description: "Si vous avez entièrement lu la section \"Mise en Route\", vous avez maintenant créé une application Yii complète."
+description: 'Si vous avez entièrement lu la section "Mise en Route", vous avez maintenant créé une application Yii complète.'
 ---
 
 Si vous avez entièrement lu la section "Mise en Route", vous avez maintenant créé une application Yii complète. Ce faisant, vous avez appris comment mettre en œuvre des fonctionnalités couramment utilisées, telles que recueillir des données d'un utilisateur via un formulaire HTML, chercher des données dans une base de données, et afficher des données

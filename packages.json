@@ -22,7 +22,13 @@
         "namespace": "yii2\\extensions\\bootstrap6",
         "localPath": "../../yii2-extensions/bootstrap6",
         "packagist": "yii2-extensions/bootstrap6",
-        "order": ["installation", "configuration", "examples", "migration", "testing"]
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "testing"
+        ]
     },
     {
         "name": "filepond",
