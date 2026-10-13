@@ -1,16 +1,22 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { unified } from '@astrojs/markdown-remark';
 import { remarkAutoTitle } from './plugins/remark-auto-title.mjs';
 import { rehypeFixLinks } from './plugins/rehype-fix-links.mjs';
+import { rehypeHeadingIdsV5 } from './plugins/rehype-heading-ids-v5.mjs';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://yii2-framework.github.io',
   base: '/docs',
   markdown: {
-    remarkPlugins: [remarkAutoTitle],
-    rehypePlugins: [rehypeFixLinks],
+    // Astro 7 defaults to the Satteri processor; the remark/rehype plugins below require the unified pipeline.
+    processor: unified({
+      remarkPlugins: [remarkAutoTitle],
+      // rehypeHeadingIdsV5 must run before Astro's own rehypeHeadingIds (and Starlight's plugins) to keep Astro 5 IDs.
+      rehypePlugins: [rehypeHeadingIdsV5, rehypeFixLinks],
+    }),
   },
   integrations: [
     starlight({
@@ -235,7 +241,7 @@ export default defineConfig({
         },
         {
           label: 'Internals',
-          autogenerate: { directory: 'internals' },
+          items: [{ autogenerate: { directory: 'internals' } }],
         },
       ],
     }),
