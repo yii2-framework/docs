@@ -29,5 +29,6 @@
 - feat: lean `llms.txt` with token sizes, absolute URLs, 60-character descriptions and bundles per topic and API namespace (30k tokens max).
 - feat: readable site theme: Atkinson Hyperlegible fonts, 17px text, 56rem column, 15rem "On this page" panel, soft dark and light palettes.
 - ci: replace Super Linter with the `yii2-framework/actions` quality and security reusable workflows and their configs.
+- ci: harden the workflows for zizmor: actions pinned by commit, job-level permissions with comments, no credential persistence.
 - feat(demos): render each package's `docs/examples.md` with a Yii app into static demo pages (`tools/bin/demos`, run by `prebuild`).
 - feat: show live widget demos with Preview, PHP and HTML tabs on the extension example pages (`<docs-demo>` iframes).

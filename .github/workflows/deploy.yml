@@ -9,10 +9,9 @@ on:
     - cron: "0 3 * * *"
   workflow_dispatch:
 
+# The build job only reads the repository; the deploy job declares the Pages permissions it needs.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -20,14 +19,17 @@ concurrency:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout.
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       # tools/bin/reference (run by `prebuild`) generates the API reference with yii2-apidoc.
       - name: Set up PHP.
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
           php-version: "8.3"
           extensions: mbstring
@@ -41,7 +43,7 @@ jobs:
       # .cache/demos/<package>/ (Yii 22.0 and the package from their synced checkouts); the downloads of the other
       # dependencies come from this cache. Packages without sources in this build are skipped.
       - name: Cache Composer downloads.
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.cache/composer
           key: composer-${{ runner.os }}-${{ hashFiles('tools/composer.lock', 'tools/demos/composer.json') }}
@@ -54,15 +56,20 @@ jobs:
       # pages; scripts/llms-sizes.mjs adds the token sizes to llms.txt and fails on missing, unlisted or oversized
       # _llms-txt bundles.
       - name: Build with Astro.
-        uses: withastro/action@v6
+        uses: withastro/action@3eafd002e65cc31b4f0eae0bb05450d521562247 # v6.1.3
 
   deploy:
+    name: Deploy
     needs: build
     runs-on: ubuntu-latest
+    # Deploying to GitHub Pages writes the deployment and mints the OIDC token that authenticates it.
+    permissions:
+      pages: write # Creates the GitHub Pages deployment.
+      id-token: write # Mints the OIDC token that authenticates the deployment.
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages.
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
