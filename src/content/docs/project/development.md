@@ -58,8 +58,8 @@ The examples page of an extension package (`docs/examples.md` in the package rep
   registered. Assets are published from this repository's `node_modules` (`bootstrap@6.0.0-alpha.1` is a
   devDependency) to `public/demos/assets/` under stable names. Output: `public/demos/<package>/<slug>.html` and the
   catalog `.cache/demos/<package>.json` (slug, title, snippet hash, source line, status, reason, assets), both
-  git-ignored. `--strict` exits with 1 when a snippet fails, and `prebuild` passes it, so a failing snippet fails
-  the build; `--help` lists the options.
+  git-ignored. `--strict` exits with 1 when a snippet fails or is skipped, and `prebuild` passes it, so such a
+  snippet fails the build; `--help` lists the options.
 - **Page integration**: `plugins/remark-demos.mjs` pairs each `php` code block of the examples page with its demo
   (by a hash of the code) and replaces it, with the `html` block that follows, by a `<docs-demo>` block: Preview (an
   `<iframe>` of the demo page, so Bootstrap's CSS never reaches the site), PHP and HTML tabs, defined by

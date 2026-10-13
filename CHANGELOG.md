@@ -33,3 +33,4 @@
 - feat(demos): render each package's `docs/examples.md` with a Yii app into static demo pages (`tools/bin/demos`, run by `prebuild`).
 - feat: show live widget demos with Preview, PHP and HTML tabs on the extension example pages (`<docs-demo>` iframes).
 - feat(demos): fail the build when an example snippet fails (`tools/bin/demos --strict` in `prebuild`); all 64 bootstrap6 examples render.
+- feat(demos): `--strict` also fails on skipped snippets, so every example of a package with demos must render.

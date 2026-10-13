@@ -90,7 +90,7 @@ final class DemosCommand
             --local              Use the localPath checkouts of packages.json instead of .cache/sources.json.
             --package=<names>    Comma-separated package names (default: every package with examples).
             --base=<path>        Site base path (default: /docs/).
-            --strict             Exit with 1 when a snippet fails.
+            --strict             Exit with 1 when a snippet fails or is skipped.
             --no-install         Do not run Composer (use the installed .cache/demos/<package>/vendor).
             --help               Show this help.
         TXT;
@@ -108,7 +108,7 @@ final class DemosCommand
      *
      * @param list<string> $args Command-line arguments without the script name.
      *
-     * @return int Exit code: 0 on success, 1 on an error or (with `--strict`) a failed snippet.
+     * @return int Exit code: 0 on success, 1 on an error or (with `--strict`) a failed or skipped snippet.
      */
     public function run(array $args): int
     {
@@ -174,6 +174,7 @@ final class DemosCommand
         );
         $failed = 0;
         $rendered = 0;
+        $skipped = 0;
 
         foreach ($manifest->packages as $package) {
             if ($package->isFramework() || ($selected !== [] && !in_array($package->name, $selected, true))) {
@@ -211,6 +212,7 @@ final class DemosCommand
             $catalog = self::readJson("$cacheDir/{$package->name}.json");
             $counts = is_array($catalog['counts'] ?? null) ? $catalog['counts'] : [];
             $failed += is_int($counts['failed'] ?? null) ? $counts['failed'] : 0;
+            $skipped += is_int($counts['skipped'] ?? null) ? $counts['skipped'] : 0;
             $rendered += is_int($counts['rendered'] ?? null) ? $counts['rendered'] : 0;
 
             fwrite(STDOUT, sprintf(
@@ -224,9 +226,10 @@ final class DemosCommand
             ));
 
             foreach (is_array($catalog['demos'] ?? null) ? $catalog['demos'] : [] as $demo) {
-                if (is_array($demo) && ($demo['status'] ?? null) === 'failed') {
+                if (is_array($demo) && in_array($demo['status'] ?? null, ['failed', 'skipped'], true)) {
                     fwrite(STDOUT, sprintf(
-                        "[demos]   failed %s (%s:%d): %s\n",
+                        "[demos]   %s %s (%s:%d): %s\n",
+                        $demo['status'],
                         $demo['slug'] ?? '?',
                         $catalog['source'] ?? 'examples.md',
                         $demo['line'] ?? 0,
@@ -237,13 +240,29 @@ final class DemosCommand
         }
 
         fwrite(STDOUT, sprintf(
-            "[demos] %d pages, %d failed snippets in %.1f s.\n",
+            "[demos] %d pages, %d failed and %d skipped snippets in %.1f s.\n",
             $rendered,
             $failed,
+            $skipped,
             microtime(true) - $start,
         ));
 
-        return $options['strict'] && $failed > 0 ? 1 : 0;
+        return self::exitCode($options['strict'], $failed, $skipped);
+    }
+
+    /**
+     * Returns the exit code of a run: `1` when `--strict` is set and a snippet failed or was skipped, else `0`.
+     *
+     * A skipped snippet (a `begin()` without `end()`, a configuration array, a class body or a script without its
+     * target) is a documentation fragment that produced no demo; under `--strict` every example must render.
+     *
+     * @param bool $strict Whether `--strict` was given.
+     * @param int $failed Number of snippets that threw while rendering.
+     * @param int $skipped Number of snippets that produced no demo.
+     */
+    public static function exitCode(bool $strict, int $failed, int $skipped): int
+    {
+        return $strict && ($failed > 0 || $skipped > 0) ? 1 : 0;
     }
 
     /**
