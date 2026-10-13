@@ -9,15 +9,15 @@ This document describes development workflows and maintenance tasks for the proj
 
 The examples page of an extension package (`docs/examples.md` in the package repository, synced to
 `src/content/docs/extensions/<package>/examples.md`) shows a live demo of each PHP snippet when the package has
-`"demos": true` in `packages.json` (Bootstrap 6 only for now).
+`"demos": true` in `packages.json` (Bootstrap 6 and FilePond).
 
 - **Renderer**: `tools/bin/demos` (run by `prebuild` after `tools/bin/reference`, or `npm run demos`) writes one
   Composer project per package in `.cache/demos/<package>/` from `tools/demos/composer.json`, with Yii 22.0 and the
   package installed as `path` repositories from their synced checkouts and no Composer plugins, then renders the
   snippets in a separate PHP process. Each snippet runs in a fresh `yii\web\View` (`$this` in the snippet, widget ids
   from `w0`); the view lays out the page with the CSS, the module scripts and the script blocks the snippet
-  registered. Assets are published from this repository's `node_modules` (`bootstrap@6.0.0-alpha.1` is a
-  devDependency) to `public/demos/assets/` under stable names. Output: `public/demos/<package>/<slug>.html` and the
+  registered. Assets are published from this repository's `node_modules` (`bootstrap`, and `filepond`, its plugins
+  and `cropperjs`, are exact devDependencies) to `public/demos/assets/` under stable names. Output: `public/demos/<package>/<slug>.html` and the
   catalog `.cache/demos/<package>.json` (slug, title, snippet hash, source line, status, reason, assets), both
   git-ignored. `--strict` exits with 1 when a snippet fails or is skipped, and `prebuild` passes it, so such a
   snippet fails the build; `--help` lists the options.
@@ -44,7 +44,8 @@ Every `php` block runs as a demo, so write each one as code that works in a view
 - A block that throws or raises a warning is reported as failed (`[demos] ... failed <slug> (docs/examples.md:<line>)`)
   and fails the build; fix the example in the package repository.
 
-To add a package, write its `docs/examples.md` in this style, set `"demos": true` in `packages.json` and run
+To add a package, write its `docs/examples.md` in this style, add the npm packages its asset bundles publish from
+`@npm` as exact devDependencies, set `"demos": true` in `packages.json` and run
 `SYNC_LOCAL=1 npm run build` (or `npm run sync:local && php tools/bin/demos`).
 
 ## Theme

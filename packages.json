@@ -42,7 +42,8 @@
         "namespace": "yii2\\extensions\\filepond",
         "localPath": "../../yii2-extensions/filepond",
         "packagist": "yii2-extensions/filepond",
-        "order": ["installation", "configuration", "examples", "testing"]
+        "order": ["installation", "configuration", "examples", "testing"],
+        "demos": true
     },
     {
         "name": "localeurls",

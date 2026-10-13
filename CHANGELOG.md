@@ -37,3 +37,4 @@
 - feat: sync the `template` guides; `status: "template"` links "Use this template" instead of Packagist on the landing page.
 - docs: drop the stale `composer sync-metadata` section from the development page (the script no longer exists).
 - fix: drop the template's removed `development` guide from `packages.json`; the sync warns about `order` pages that do not exist.
+- feat(demos): render the FilePond examples as live demos; `filepond`, its plugins and `cropperjs` are exact devDependencies.
