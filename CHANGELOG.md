@@ -32,3 +32,4 @@
 - ci: harden the workflows for zizmor: actions pinned by commit, job-level permissions with comments, no credential persistence.
 - feat(demos): render each package's `docs/examples.md` with a Yii app into static demo pages (`tools/bin/demos`, run by `prebuild`).
 - feat: show live widget demos with Preview, PHP and HTML tabs on the extension example pages (`<docs-demo>` iframes).
+- feat(demos): fail the build when an example snippet fails (`tools/bin/demos --strict` in `prebuild`); all 64 bootstrap6 examples render.

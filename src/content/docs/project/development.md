@@ -58,7 +58,8 @@ The examples page of an extension package (`docs/examples.md` in the package rep
   registered. Assets are published from this repository's `node_modules` (`bootstrap@6.0.0-alpha.1` is a
   devDependency) to `public/demos/assets/` under stable names. Output: `public/demos/<package>/<slug>.html` and the
   catalog `.cache/demos/<package>.json` (slug, title, snippet hash, source line, status, reason, assets), both
-  git-ignored. `--strict` exits with 1 when a snippet fails; `--help` lists the options.
+  git-ignored. `--strict` exits with 1 when a snippet fails, and `prebuild` passes it, so a failing snippet fails
+  the build; `--help` lists the options.
 - **Page integration**: `plugins/remark-demos.mjs` pairs each `php` code block of the examples page with its demo
   (by a hash of the code) and replaces it, with the `html` block that follows, by a `<docs-demo>` block: Preview (an
   `<iframe>` of the demo page, so Bootstrap's CSS never reaches the site), PHP and HTML tabs, defined by
@@ -80,7 +81,7 @@ Every `php` block runs as a demo, so write each one as code that works in a view
 - Root-relative images (`/img/user.png`) are replaced by a placeholder in the demo page; links and form submissions
   do not navigate.
 - A block that throws or raises a warning is reported as failed (`[demos] ... failed <slug> (docs/examples.md:<line>)`)
-  and keeps its code blocks on the page.
+  and fails the build; fix the example in the package repository.
 
 To add a package, write its `docs/examples.md` in this style, set `"demos": true` in `packages.json` and run
 `SYNC_LOCAL=1 npm run build` (or `npm run sync:local && php tools/bin/demos`).
