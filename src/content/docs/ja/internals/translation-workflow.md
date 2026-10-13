@@ -43,4 +43,4 @@ php build translation "../docs/guide" "../docs/guide-ru" "Russian guide translat
 
 このコマンドが composer に関して不平を言うようであれば、ソースのルート・ディレクトリで `composer install` を実行してください。
 
-ドキュメントの文法の情報およびスタイル・ガイドに関して、[documentation_style_guide.md](../documentation_style_guide.md) を参照して下さい。
+ドキュメントの文法の情報およびスタイル・ガイドに関して、[documentation_style_guide.md](../project/documentation-style-guide.md) を参照して下さい。

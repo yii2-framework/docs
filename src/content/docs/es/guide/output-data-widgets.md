@@ -18,7 +18,7 @@ de [[\yii\base\Model]] como un [active record](db-active-record.md) o un _array_
 
 DetailView usa la propiedad [[yii\widgets\DetailView::$attributes|$attributes]] para determinar
 qué atributos del modelo se deben mostrar y cómo se deben formatear.
-En la [sección sobre formateadores](output-formatting.html) se pueden ver las opciones de formato
+En la [sección sobre formateadores](output-formatting.md) se pueden ver las opciones de formato
 disponibles.
 
 Un uso típico de DetailView sería así:

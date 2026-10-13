@@ -6,7 +6,7 @@ title: "使用表单"
 该页将显示一个包含 name 输入框和 email 输入框的表单。
 当提交这两部分信息后，页面将会显示用户所输入的信息。
 
-为了实现这个目标，除了创建一个[操作](structure-controllers.md)和两个[视图](structure-views)外，
+为了实现这个目标，除了创建一个[操作](structure-controllers.md)和两个[视图](structure-views.md)外，
 还需要创建一个[模型](structure-models.md)。
 
 通过本教程，你将会学到：

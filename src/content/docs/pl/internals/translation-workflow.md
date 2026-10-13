@@ -42,4 +42,4 @@ php build translation "../docs/guide" "../docs/guide-pl" "Raport tłumaczeń dla
 
 Jeśli zobaczysz komunikaty związane z composerem, uruchom `composer install` w źródłowym folderze.
 
-Aby zapoznać się z informacjami na temat składni dokumentacji i stylu użytego w przewodniku, przejdź do [documentation_style_guide.md](../documentation_style_guide.md).
+Aby zapoznać się z informacjami na temat składni dokumentacji i stylu użytego w przewodniku, przejdź do [documentation_style_guide.md](../project/documentation-style-guide.md).
