@@ -38,3 +38,4 @@
 - docs: drop the stale `composer sync-metadata` section from the development page (the script no longer exists).
 - fix: drop the template's removed `development` guide from `packages.json`; the sync warns about `order` pages that do not exist.
 - feat(demos): render the FilePond examples as live demos; `filepond`, its plugins and `cropperjs` are exact devDependencies.
+- docs(eval): add a weekly cadence: report only for three runs, then a gate of 7 of 8 tasks and no task failing twice in a row.

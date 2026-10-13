@@ -52,6 +52,34 @@ eval/out/<UTC timestamp>/
 
 `eval/out/`, `eval/app/`, and `eval/.cache/` are ignored by Git.
 
+## Cadence
+
+The evaluation runs on the maintainer's machine with the Claude Code subscription; there is no CI job, because a
+CI run would need an API key.
+
+1. Run all tasks once a week, and also after a change to `skills/`, to the `llms.txt` generation, or to a guide page
+   that a task lists in `context`:
+
+   ```bash
+   eval/run.sh --model sonnet
+   ```
+
+   While the public site does not serve `index.md` pages, build the site and keep `npm run preview` running first
+   (see Prerequisites).
+
+2. Record the run in `internal/research/eval-runs/<YYYY-MM-DD>.md` (git-ignored, template in the README of that
+   directory): the totals and the task table of `summary.md`, the cost, and a triage line for every failed task.
+3. Phase 1, report only: until three full runs are recorded, the results are a report and block nothing.
+4. Phase 2, gate: from the fourth run on, a run passes when at least 7 of the 8 tasks pass on Sonnet and no task
+   fails in two consecutive runs.
+5. Triage every failed task as one of:
+   - documentation gap: fix the guide page, the PHPDoc behind the API reference, or the skill;
+   - task or check defect: fix `eval/` and record why (a wrong reference solution, a check that is too strict);
+   - model error: record it only.
+
+   Never weaken a task to make it pass. When a task flips between pass and fail, re-run only that task twice
+   (`--task <id>`) before acting.
+
 ## Checks
 
 | Check                         | Passes when                                                                                           |
