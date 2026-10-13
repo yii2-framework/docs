@@ -56,5 +56,24 @@
         "localPath": "../../yii2-extensions/localeurls",
         "packagist": "yii2-extensions/localeurls",
         "order": ["installation", "configuration", "examples", "testing"]
+    },
+    {
+        "name": "template",
+        "title": "Extension template",
+        "repo": "https://github.com/yii2-extensions/template",
+        "ref": "main",
+        "status": "template",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii\\template",
+        "localPath": "../../yii2-extensions/template",
+        "packagist": "yii2-extensions/template",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "testing",
+            "development"
+        ]
     }
 ]

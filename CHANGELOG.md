@@ -34,3 +34,4 @@
 - feat: show live widget demos with Preview, PHP and HTML tabs on the extension example pages (`<docs-demo>` iframes).
 - feat(demos): fail the build when an example snippet fails (`tools/bin/demos --strict` in `prebuild`); all 64 bootstrap6 examples render.
 - feat(demos): `--strict` also fails on skipped snippets, so every example of a package with demos must render.
+- feat: sync the `template` guides; `status: "template"` links "Use this template" instead of Packagist on the landing page.

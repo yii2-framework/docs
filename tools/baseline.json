@@ -16,6 +16,11 @@
             "warnings": 3,
             "unresolvedLinks": 2
         },
+        "template": {
+            "errors": 0,
+            "warnings": 2,
+            "unresolvedLinks": 0
+        },
         "yii2": {
             "errors": 1257,
             "warnings": 266,

@@ -38,6 +38,9 @@ const CACHE_DIR = path.join(ROOT, '.cache', 'packages');
 const SOURCES_FILE = path.join(ROOT, '.cache', 'sources.json');
 const REQUIRED_KEYS = ['name', 'title', 'repo', 'ref', 'srcDir', 'namespace', 'localPath', 'packagist'];
 const TYPES = ['package', 'framework'];
+// `published`: on Packagist; `unpublished`: not released yet; `template`: a GitHub template repository, which users
+// copy with "Use this template" instead of installing it with Composer.
+const STATUSES = ['published', 'unpublished', 'template'];
 // Sidebar order of the pages when the manifest has no `order`; the landing page is always first.
 const DEFAULT_ORDER = ['installation', 'configuration', 'examples', 'migration', 'testing'];
 const IMAGE = /\.(avif|gif|jpe?g|png|svg|webp)$/i;
@@ -105,8 +108,8 @@ export function validateManifest(manifest, file) {
       errors.push(`${where}: "repo" must be an https:// (or file:// for tests) URL.`);
     }
 
-    if (entry.status !== undefined && typeof entry.status !== 'string') {
-      errors.push(`${where}: "status" must be a string.`);
+    if (entry.status !== undefined && !STATUSES.includes(entry.status)) {
+      errors.push(`${where}: "status" must be one of ${STATUSES.join(', ')}.`);
     }
 
     if (entry.order !== undefined
@@ -644,6 +647,30 @@ export function convertPage(source, options) {
   return `${frontmatter({ title, description, order, label, editUrl, generatedFrom })}\n\n${body}\n`;
 }
 
+/**
+ * Returns the "Package" section appended to the landing page: repository, Composer package (or, for a template
+ * repository, the GitHub link that creates a repository from it) and changelog.
+ *
+ * @param {{ packagist: string, status?: string }} pkg Manifest entry.
+ * @param {string} blobBase `https://github.com/<owner>/<repo>` without a trailing slash.
+ * @param {string} ref
+ * @param {boolean} changelog Whether the package has a `CHANGELOG.md`.
+ * @returns {string[]}
+ */
+export function packageSection(pkg, blobBase, ref, changelog) {
+  return [
+    '',
+    '## Package',
+    '',
+    `- Source code and issues: [${blobBase.replace(/^https:\/\/github\.com\//, '')}](${blobBase}). `
+      + 'Star the repository if the package is useful to you.',
+    pkg.status === 'template'
+      ? `- Template repository: [create a package from it](${blobBase}/generate) on GitHub.`
+      : `- Composer package: [${pkg.packagist}](https://packagist.org/packages/${pkg.packagist}).`,
+    ...(changelog ? [`- Changelog: [CHANGELOG.md](${blobBase}/blob/${ref}/CHANGELOG.md).`] : []),
+  ];
+}
+
 /** Lists files under `dir` recursively, as POSIX paths relative to `dir`, sorted. */
 function listFiles(dir, base = dir) {
   return readdirSync(dir).sort().flatMap((name) => {
@@ -719,16 +746,7 @@ function syncPackage(pkg, useLocal) {
 
     return index === -1 ? 100 + markdown.map((file) => file.replace(/\.md$/i, '')).indexOf(name) : index + 1;
   };
-  const changelog = existsSync(path.join(dir, 'CHANGELOG.md'));
-  const extra = [
-    '',
-    '## Package',
-    '',
-    `- Source code and issues: [${blobBase.replace(/^https:\/\/github\.com\//, '')}](${blobBase}). `
-      + 'Star the repository if the package is useful to you.',
-    `- Composer package: [${pkg.packagist}](https://packagist.org/packages/${pkg.packagist}).`,
-    ...(changelog ? [`- Changelog: [CHANGELOG.md](${blobBase}/blob/${pkg.ref}/CHANGELOG.md).`] : []),
-  ];
+  const extra = packageSection(pkg, blobBase, pkg.ref, existsSync(path.join(dir, 'CHANGELOG.md')));
 
   mkdirSync(outDir, { recursive: true });
 

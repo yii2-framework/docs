@@ -5,7 +5,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { after, describe, test } from 'node:test';
-import { convertPage, linkRewriter, packageNameMismatch, validateManifest } from './sync.mjs';
+import { convertPage, linkRewriter, packageNameMismatch, packageSection, validateManifest } from './sync.mjs';
 
 const work = mkdtempSync(path.join(tmpdir(), 'sync-test-'));
 
@@ -77,6 +77,13 @@ describe('validateManifest', () => {
   test('rejects duplicates and an empty manifest', () => {
     assert.throws(() => validateManifest([valid, valid], 'packages.json'), /duplicate name "demo"/);
     assert.throws(() => validateManifest([], 'packages.json'), /non-empty array/);
+  });
+
+  test('accepts the known statuses only', () => {
+    const template = { ...valid, status: 'template' };
+
+    assert.deepEqual(validateManifest([template], 'packages.json'), [template]);
+    assert.throws(() => validateManifest([{ ...valid, status: 'draft' }], 'packages.json'), /"status" must be one of/);
   });
 });
 
@@ -166,5 +173,26 @@ describe('convertPage', () => {
 
     assert.doesNotMatch(page, /poser\.pugx\.org|styleci|## Quality code/);
     assert.match(page, /\n## Next\n\nRead on\.\n/);
+  });
+});
+
+describe('packageSection', () => {
+  const base = 'https://github.com/o/demo';
+
+  test('a published package links Packagist and the changelog', () => {
+    const lines = packageSection({ packagist: 'o/demo', status: 'published' }, base, 'main', true);
+
+    assert.ok(lines.includes('- Composer package: [o/demo](https://packagist.org/packages/o/demo).'));
+    assert.ok(lines.includes('- Changelog: [CHANGELOG.md](https://github.com/o/demo/blob/main/CHANGELOG.md).'));
+  });
+
+  test('a template repository links "Use this template" instead of Packagist', () => {
+    const lines = packageSection({ packagist: 'o/demo', status: 'template' }, base, 'main', false);
+
+    assert.ok(lines.includes(
+      '- Template repository: [create a package from it](https://github.com/o/demo/generate) on GitHub.',
+    ));
+    assert.ok(!lines.some((line) => line.includes('packagist.org')));
+    assert.ok(!lines.some((line) => line.includes('CHANGELOG.md')));
   });
 });

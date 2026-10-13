@@ -68,6 +68,10 @@ not contain it yet (its `composer.json` name differs from `packagist` in the man
 `[sync] skipped <name>` warning and left out of the sidebar; `bootstrap6` is in that state until it is pushed, so CI
 shows its docs only after the push. `node scripts/sync.mjs --strict` fails on any skip.
 
+The `status` of a manifest entry is `published` (on Packagist), `unpublished` (not released yet) or `template` (a GitHub
+template repository, such as `yii2-extensions/template`: its landing page links "Use this template" instead of
+Packagist).
+
 ## API reference
 
 `tools/` is a Composer project (PHP 8.2 or later) that generates the API reference with
