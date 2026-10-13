@@ -312,7 +312,9 @@ const llmsTxtOptions = {
     site,
     base,
     bundles,
-    intro: `Yii ${DOCS_VERSION}. Links are relative to ${site}. Every page has a Markdown version at its URL followed `
+    absolute: true,
+    descriptionLength: 60,
+    intro: `Yii ${DOCS_VERSION}. Every page has a Markdown version at its URL followed `
       + 'by `index.md` (linked below); prefer it over the HTML. Sizes are approximate (4 bytes per token): read single '
       + 'pages; a bundle (`_llms-txt/<name>.txt`, at most about 30k tokens) holds a topic or a namespace group. '
       + `API reference: one page per type at \`${base}/api/<namespace>/<type>/index.md\` (lower case, for example `

@@ -14,7 +14,7 @@ Instructions for AI agents that use the Yii documentation published from this re
 
 1. Fetch <https://yii2-framework.github.io/docs/llms.txt> (about 9k tokens). It lists every English page with a
    short description, a link to its Markdown version and its approximate size in tokens, grouped like the site
-   navigation. Its links are relative to `https://yii2-framework.github.io`.
+   navigation.
 2. Fetch only the pages the task needs, using their Markdown URLs.
 3. Use a bundle only when several pages of one topic are needed. Each bundle
    `https://yii2-framework.github.io/docs/_llms-txt/<name>.txt` holds at most about 30k tokens (a single larger page
