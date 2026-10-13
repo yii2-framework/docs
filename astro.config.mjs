@@ -6,6 +6,7 @@ import { unified } from '@astrojs/markdown-remark';
 import { remarkAutoTitle } from './plugins/remark-auto-title.mjs';
 import { remarkYiiLinks } from './plugins/remark-yii-links.mjs';
 import { invalidateContentCacheOnLinkChange } from './plugins/yii-links.mjs';
+import { invalidateContentCacheOnDemoChange, remarkDemos } from './plugins/remark-demos.mjs';
 import { rehypeFixLinks } from './plugins/rehype-fix-links.mjs';
 import { rehypeHeadingIdsV5 } from './plugins/rehype-heading-ids-v5.mjs';
 import { rehypeReferenceWbr } from './plugins/rehype-reference-wbr.mjs';
@@ -276,6 +277,8 @@ const sidebar = [
 
 // Rendered guide pages embed reference URLs: rebuild them when tools/bin/reference changed the link map.
 invalidateContentCacheOnLinkChange();
+// The examples pages embed the demos of tools/bin/demos: rebuild them when a catalog changed.
+invalidateContentCacheOnDemoChange();
 
 // One build date for the config and the route middleware (see src/site-meta.mjs).
 process.env.DOCS_BUILD_DATE = buildDate();
@@ -328,7 +331,8 @@ const llmsTxtOptions = {
   exclude: REFERENCE_GLOBS,
   // Starlight's "Section titled" heading anchors are noise for agents; keep line breaks so headings stay headings.
   // `wbr`: the API reference's break opportunities would become zero-width spaces inside code.
-  customSelectors: { all: ['.sl-anchor-link', 'wbr'] },
+  // `.docs-demo-tabs`, `.docs-demo-preview`: the tabs and the iframe of the live demos (their code blocks stay).
+  customSelectors: { all: ['.sl-anchor-link', 'wbr', '.docs-demo-tabs', '.docs-demo-preview'] },
   minify: { whitespace: false },
 };
 
@@ -353,7 +357,8 @@ export default defineConfig({
     // Astro 7 defaults to the Satteri processor; the remark/rehype plugins below require the unified pipeline.
     processor: unified({
       // remarkYiiLinks: `[[yii\...]]` references to the generated API reference (.cache/reference/links.json).
-      remarkPlugins: [remarkAutoTitle, remarkYiiLinks],
+      // remarkDemos: live demos on the extension examples pages (.cache/demos/<package>.json, tools/bin/demos).
+      remarkPlugins: [remarkAutoTitle, remarkYiiLinks, remarkDemos],
       // rehypeHeadingIdsV5 must run before Astro's own rehypeHeadingIds (and Starlight's plugins) to keep Astro 5 IDs.
       // rehypeReferenceWbr: break opportunities in the table code of API reference pages (HTML only).
       rehypePlugins: [rehypeHeadingIdsV5, [rehypeFixLinks, { base }], rehypeReferenceWbr],
@@ -367,7 +372,7 @@ export default defineConfig({
         dark: './src/assets/logo-dark.svg',
         replacesTitle: true,
       },
-      customCss: ['./src/styles/theme.css', './src/styles/custom.css'],
+      customCss: ['./src/styles/theme.css', './src/styles/custom.css', './src/styles/demos.css'],
       components: {
         LanguageSelect: './src/components/LanguageSelect.astro',
         MarkdownContent: './src/components/MarkdownContent.astro',

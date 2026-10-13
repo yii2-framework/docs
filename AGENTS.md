@@ -27,6 +27,7 @@ Instructions for AI agents that use the Yii documentation published from this re
    A group larger than the limit is split into consecutive chunks: the first keeps the group name, the next ones are
    named after their first page, namespace or type (`working-with-databases-active-record.txt`,
    `api-yii2-db.txt` then `api-yii2-db-activerecord.txt`).
+
 4. `llms-full.txt` (about 360k tokens, every English page except the API reference) and `llms-small.txt` (the same
    without notes and tips) are for indexing tools. Do not read them whole.
 
@@ -34,10 +35,10 @@ Instructions for AI agents that use the Yii documentation published from this re
 
 Prefer the Markdown version of any page: append `index.md` to the page URL.
 
-| HTML | Markdown |
-| --- | --- |
+| HTML                                                             | Markdown                                                                 |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | `https://yii2-framework.github.io/docs/guide/structure-widgets/` | `https://yii2-framework.github.io/docs/guide/structure-widgets/index.md` |
-| `https://yii2-framework.github.io/docs/ja/guide/start-hello/` | `https://yii2-framework.github.io/docs/ja/guide/start-hello/index.md` |
+| `https://yii2-framework.github.io/docs/ja/guide/start-hello/`    | `https://yii2-framework.github.io/docs/ja/guide/start-hello/index.md`    |
 
 - Each HTML page links its Markdown version with `<link rel="alternate" type="text/markdown">`.
 - Links between pages in the Markdown versions already point to Markdown URLs.
@@ -55,6 +56,10 @@ Prefer the Markdown version of any page: append `index.md` to the page URL.
 - Markdown URLs work the same way: `https://yii2-framework.github.io/docs/extensions/bootstrap6/installation/index.md`.
 - The bundles `https://yii2-framework.github.io/docs/_llms-txt/extensions-<package>.txt` hold the guides of one package
   (split by topic when larger); `api-<package>*.txt` hold its API reference.
+- Live demos: the examples page of a package with demos (Bootstrap 6) shows each PHP snippet rendered by a Yii 22.0
+  application. Every demo is a static HTML page at `https://yii2-framework.github.io/docs/demos/<package>/<slug>.html`
+  (for example `.../demos/bootstrap6/alert-1.html`) with the widget markup, the CSS and the module scripts it
+  registered. The Markdown version of the examples page keeps the PHP and HTML code blocks and has no demo markup.
 
 ## API reference
 

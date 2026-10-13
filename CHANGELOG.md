@@ -75,3 +75,14 @@
   Fontsource, no network at build), 17px body text with line height 1.7, a 56rem text column centred next to a fixed
   15rem "On this page" panel, warm low-contrast dark and light palettes with a blue accent (WCAG AA contrast), and
   rounded inline code chips.
+- feat(demos): render the examples page of an extension package with a Yii 22.0 application into static demo pages:
+  `tools/bin/demos` (run by `prebuild`) installs a Composer project per package with `"demos": true` in
+  `packages.json` (`.cache/demos/<package>/`, Yii 22.0 and the package as `path` repositories from their synced
+  checkouts, no Composer plugins), runs each `php` snippet of `docs/examples.md` in a fresh view and writes
+  `public/demos/<package>/<slug>.html` with the CSS and module scripts it registered (`bootstrap@6.0.0-alpha.1` from
+  npm, published to `public/demos/assets/`) and the catalog `.cache/demos/<package>.json`; packages without sources
+  are skipped; the deploy workflow caches Composer downloads.
+- feat: show live widget demos with Preview, PHP and HTML tabs on the extension example pages
+  (`plugins/remark-demos.mjs`, `<docs-demo>` element in `src/components/DocsDemo.astro`, `src/styles/demos.css`): the
+  preview is an `<iframe>` of the demo page that follows the site theme and fits its content; the per-page Markdown
+  and the `llms` bundles keep the code blocks only, and `scripts/check-site.mjs` fails on missing demo pages or assets.

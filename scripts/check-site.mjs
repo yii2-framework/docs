@@ -6,6 +6,9 @@
 //    and the unresolved targets (top 20) are reported, not gated.
 // 2. Links of the generated API reference (`api/`, `extensions/<package>/reference/`): every internal `href`/`src`
 //    must point to a built file and every fragment to an `id` on the target page.
+// 3. Live demos: every `<iframe src>` under `/docs/demos/` (written by plugins/remark-demos.mjs) and every
+//    base-absolute script, stylesheet and image of the demo pages (`demos/<package>/<slug>.html`, written by
+//    tools/bin/demos) must exist in `dist/`.
 //
 // Usage: node scripts/check-site.mjs [--dist=dist] [--links=<prefix>,<prefix>...]
 
@@ -142,6 +145,60 @@ export function checkLinks(dist, files) {
   return { checked, broken };
 }
 
+/**
+ * Checks the live demos: the `<iframe>` sources under `<base>demos/` of the given pages and the base-absolute
+ * `src`/`href` attributes of the demo pages themselves (`demos/<package>/<slug>.html`).
+ *
+ * @returns {{ frames: number, pages: number, assets: number, broken: string[] }}
+ */
+export function checkDemos(dist, files) {
+  const exists = (url) => existsSync(path.join(dist, decodeURIComponent(new URL(url, 'http://site').pathname)
+    .slice(BASE.length)));
+  let frames = 0;
+  let assets = 0;
+  const broken = [];
+
+  for (const file of files.filter((name) => !name.startsWith('demos/'))) {
+    const html = readFileSync(path.join(dist, file), 'utf8');
+
+    if (!html.includes('<iframe')) {
+      continue;
+    }
+
+    for (const [, raw] of html.matchAll(/<iframe\b[^>]*\ssrc="([^"]*)"/g)) {
+      const src = decode(raw);
+
+      if (src.startsWith(`${BASE}demos/`)) {
+        frames++;
+
+        if (!exists(src)) {
+          broken.push(`${file}: ${src} (missing demo page)`);
+        }
+      }
+    }
+  }
+
+  const pages = files.filter((name) => name.startsWith('demos/'));
+
+  for (const file of pages) {
+    const html = readFileSync(path.join(dist, file), 'utf8');
+
+    for (const [, raw] of html.matchAll(/\s(?:src|href)="([^"]*)"/g)) {
+      const url = decode(raw);
+
+      if (url.startsWith(BASE)) {
+        assets++;
+
+        if (!exists(url)) {
+          broken.push(`${file}: ${url} (missing)`);
+        }
+      }
+    }
+  }
+
+  return { frames, pages: pages.length, assets, broken };
+}
+
 function main(argv) {
   const dist = path.resolve(ROOT, argv.find((arg) => arg.startsWith('--dist='))?.slice(7) ?? 'dist');
   const prefixes = (argv.find((arg) => arg.startsWith('--links='))?.slice(8) ?? 'api/,extensions/')
@@ -177,6 +234,16 @@ function main(argv) {
   if (links.broken.length > 0) {
     failed = true;
     process.stderr.write(`[check-site] FAIL: broken links:\n  ${links.broken.slice(0, 40).join('\n  ')}\n`);
+  }
+
+  const demos = checkDemos(dist, files);
+
+  process.stdout.write(`[check-site] demo iframes: ${demos.frames}, demo pages: ${demos.pages}, demo assets `
+    + `checked: ${demos.assets}, broken: ${demos.broken.length}.\n`);
+
+  if (demos.broken.length > 0) {
+    failed = true;
+    process.stderr.write(`[check-site] FAIL: broken demos:\n  ${demos.broken.slice(0, 40).join('\n  ')}\n`);
   }
 
   return failed ? 1 : 0;
