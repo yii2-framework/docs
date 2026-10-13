@@ -18,9 +18,9 @@ usage() {
     cat <<'USAGE'
 Usage: eval/check.sh <run-dir> [--task <id>]... [--out <dir>]
 
-  <run-dir>     Directory with one <task-id>/files/ tree per task (an eval/out/<timestamp> run or a fixture set).
-  --task <id>   Check only this task (repeatable). Default: every task directory found in <run-dir>.
-  --out <dir>   Where to write results.tsv, summary.md, summary.json, and logs. Default: <run-dir>.
+    <run-dir>     Directory with one <task-id>/files/ tree per task (an eval/out/<timestamp> run or a fixture set).
+    --task <id>   Check only this task (repeatable). Default: every task directory found in <run-dir>.
+    --out <dir>   Where to write results.tsv, summary.md, summary.json, and logs. Default: <run-dir>.
 
 Exit code: 0 when every selected task passes, 1 when a check fails, 2 on usage errors.
 USAGE
@@ -32,19 +32,38 @@ SELECTED=()
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --task) SELECTED+=("${2:?--task needs a value}"); shift ;;
-        --out) OUT_DIR="${2:?--out needs a value}"; shift ;;
-        -h | --help) usage; exit 0 ;;
-        -*) echo "Unknown option: $1" >&2; usage >&2; exit 2 ;;
+        --task)
+            SELECTED+=("${2:?--task needs a value}")
+            shift
+            ;;
+        --out)
+            OUT_DIR="${2:?--out needs a value}"
+            shift
+            ;;
+        -h | --help)
+            usage
+            exit 0
+            ;;
+        -*)
+            echo "Unknown option: $1" >&2
+            usage >&2
+            exit 2
+            ;;
         *)
-            [[ -z "${RUN_DIR}" ]] || { echo "Only one run directory is accepted." >&2; exit 2; }
+            [[ -z "${RUN_DIR}" ]] || {
+                echo "Only one run directory is accepted." >&2
+                exit 2
+            }
             RUN_DIR="$1"
             ;;
     esac
     shift
 done
 
-[[ -n "${RUN_DIR}" && -d "${RUN_DIR}" ]] || { usage >&2; exit 2; }
+[[ -n "${RUN_DIR}" && -d "${RUN_DIR}" ]] || {
+    usage >&2
+    exit 2
+}
 RUN_DIR="$(cd "${RUN_DIR}" && pwd)"
 OUT_DIR="${OUT_DIR:-${RUN_DIR}}"
 mkdir -p "${OUT_DIR}"
@@ -66,7 +85,10 @@ if [[ ${#SELECTED[@]} -eq 0 ]]; then
     done < <(find "${RUN_DIR}" -mindepth 1 -maxdepth 1 -type d -name '[0-9][0-9]-*' | sort)
 fi
 
-[[ ${#SELECTED[@]} -gt 0 ]] || { echo "No task directories in ${RUN_DIR}." >&2; exit 2; }
+[[ ${#SELECTED[@]} -gt 0 ]] || {
+    echo "No task directories in ${RUN_DIR}." >&2
+    exit 2
+}
 
 # Appends one result row: task, check, status (pass|fail|skip), one-line detail.
 record() {
@@ -211,7 +233,7 @@ check_task() {
 
                 app_check "${task}" "${check}" "${kind}" "${arg}" "${logs}"
                 if [[ "${kind}" == app-render ]]; then
-                    render_state=done
+                    render_state="done"
                 fi
                 ;;
             html | no-html)

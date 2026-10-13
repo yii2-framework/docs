@@ -24,15 +24,15 @@ usage() {
     cat <<'USAGE'
 Usage: eval/run.sh [--task <id>]... [--model <alias>] [--dry-run] [options]
 
-  --task <id>          Run only this task (repeatable), e.g. 08-alert-theme. Default: every task.
-  --model <alias>      Model passed to `claude --model` (default: sonnet).
-  --effort <level>     Optional `claude --effort` value (low, medium, high, xhigh, max).
-  --budget-usd <n>     `claude --max-budget-usd` cap per task (default: 1.00).
-  --timeout <seconds>  Wall-clock limit per task (default: 900).
-  --docs-base <base>   auto (default), public, local, or a URL ending in /docs/. `local` rewrites the public
-                       documentation URLs in the prompt to the preview server (EVAL_LOCAL_BASE).
-  --dry-run            Assemble prompt.md and command.txt per task; do not call the model or the checker.
-  --no-check           Skip eval/check.sh after the model runs.
+    --task <id>         Run only this task (repeatable), e.g. 08-alert-theme. Default: every task.
+    --model <alias>     Model passed to `claude --model` (default: sonnet).
+    --effort <level>    Optional `claude --effort` value (low, medium, high, xhigh, max).
+    --budget-usd <n>    `claude --max-budget-usd` cap per task (default: 1.00).
+    --timeout <seconds> Wall-clock limit per task (default: 900).
+    --docs-base <base>  auto (default), public, local, or a URL ending in /docs/. `local` rewrites the public
+                        documentation URLs in the prompt to the preview server (EVAL_LOCAL_BASE).
+    --dry-run           Assemble prompt.md and command.txt per task; do not call the model or the checker.
+    --no-check          Skip eval/check.sh after the model runs.
 
 Results: eval/out/<UTC timestamp>/<task-id>/{prompt.md,command.txt,result.json,stderr.log,meta.json,files/}
 and eval/out/<UTC timestamp>/summary.{md,json} from check.sh.
@@ -41,22 +41,50 @@ USAGE
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --task) SELECTED+=("${2:?--task needs a value}"); shift ;;
-        --model) MODEL="${2:?--model needs a value}"; shift ;;
-        --effort) EFFORT="${2:?--effort needs a value}"; shift ;;
-        --budget-usd) BUDGET_USD="${2:?--budget-usd needs a value}"; shift ;;
-        --timeout) TIMEOUT_SECONDS="${2:?--timeout needs a value}"; shift ;;
-        --docs-base) DOCS_BASE="${2:?--docs-base needs a value}"; shift ;;
+        --task)
+            SELECTED+=("${2:?--task needs a value}")
+            shift
+            ;;
+        --model)
+            MODEL="${2:?--model needs a value}"
+            shift
+            ;;
+        --effort)
+            EFFORT="${2:?--effort needs a value}"
+            shift
+            ;;
+        --budget-usd)
+            BUDGET_USD="${2:?--budget-usd needs a value}"
+            shift
+            ;;
+        --timeout)
+            TIMEOUT_SECONDS="${2:?--timeout needs a value}"
+            shift
+            ;;
+        --docs-base)
+            DOCS_BASE="${2:?--docs-base needs a value}"
+            shift
+            ;;
         --dry-run) DRY_RUN=1 ;;
         --no-check) RUN_CHECK=0 ;;
-        -h | --help) usage; exit 0 ;;
-        *) echo "Unknown option: $1" >&2; usage >&2; exit 2 ;;
+        -h | --help)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            usage >&2
+            exit 2
+            ;;
     esac
     shift
 done
 
 for tool in php rsync curl timeout; do
-    command -v "${tool}" >/dev/null || { echo "Missing required tool: ${tool}" >&2; exit 1; }
+    command -v "${tool}" >/dev/null || {
+        echo "Missing required tool: ${tool}" >&2
+        exit 1
+    }
 done
 
 if [[ ${DRY_RUN} -eq 0 ]] && ! command -v "${CLAUDE_BIN}" >/dev/null; then
@@ -71,7 +99,10 @@ if [[ ${#SELECTED[@]} -eq 0 ]]; then
 fi
 
 for task in "${SELECTED[@]}"; do
-    [[ -f "${TASKS_DIR}/${task}.md" ]] || { echo "Unknown task: ${task}" >&2; exit 2; }
+    [[ -f "${TASKS_DIR}/${task}.md" ]] || {
+        echo "Unknown task: ${task}" >&2
+        exit 2
+    }
 done
 
 http_ok() {
@@ -93,7 +124,10 @@ case "${DOCS_BASE}" in
     public) DOCS_BASE="${PUBLIC_BASE}" ;;
     local) DOCS_BASE="${LOCAL_BASE}" ;;
     http://* | https://*) [[ "${DOCS_BASE}" == */ ]] || DOCS_BASE="${DOCS_BASE}/" ;;
-    *) echo "Invalid --docs-base: ${DOCS_BASE}" >&2; exit 2 ;;
+    *)
+        echo "Invalid --docs-base: ${DOCS_BASE}" >&2
+        exit 2
+        ;;
 esac
 
 # Resolves llms.txt: the local build first, then the preview server, then the public site.
@@ -111,7 +145,10 @@ else
         fi
     done
 fi
-[[ -n "${LLMS_TEXT}" ]] || { echo "llms.txt not found (dist/, ${LOCAL_BASE}, ${PUBLIC_BASE})." >&2; exit 1; }
+[[ -n "${LLMS_TEXT}" ]] || {
+    echo "llms.txt not found (dist/, ${LOCAL_BASE}, ${PUBLIC_BASE})." >&2
+    exit 1
+}
 
 rebase() {
     if [[ "${DOCS_BASE}" == "${PUBLIC_BASE}" ]]; then
@@ -177,6 +214,7 @@ FOOTER
 # Writes meta.json for one task from the CLI result (if any) and the measured wall time.
 write_meta() {
     local task_dir="$1" exit_code="$2" wall="$3" work="$4"
+    # shellcheck disable=SC2016 # PHP code, not shell expansion
     php -r '
         [, $dir, $exit, $wall, $model, $base, $llms, $dry, $work] = $argv;
         $file = "$dir/result.json";
@@ -208,7 +246,10 @@ for task in "${SELECTED[@]}"; do
     task_dir="${RUN_DIR}/${task}"
     mkdir -p "${task_dir}"
     skill="$(php "${EVAL_DIR}/lib/task.php" "${task_file}" skill)"
-    [[ -f "${SKILLS_DIR}/${skill}/SKILL.md" ]] || { echo "Missing skill: ${skill}" >&2; exit 1; }
+    [[ -f "${SKILLS_DIR}/${skill}/SKILL.md" ]] || {
+        echo "Missing skill: ${skill}" >&2
+        exit 1
+    }
 
     assemble_prompt "${task_file}" "${skill}" >"${task_dir}/prompt.md"
 
@@ -242,6 +283,7 @@ for task in "${SELECTED[@]}"; do
     (cd "${work}" && timeout "${TIMEOUT_SECONDS}" "${command[@]}" <"${task_dir}/prompt.md" \
         >"${task_dir}/result.json" 2>"${task_dir}/stderr.log") || exit_code=$?
     end="$(date +%s.%N)"
+    # shellcheck disable=SC2016 # PHP code, not shell expansion
     wall="$(php -r 'printf("%.1f", $argv[2] - $argv[1]);' "${start}" "${end}")"
 
     mkdir -p "${task_dir}/files"

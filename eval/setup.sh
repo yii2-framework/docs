@@ -19,10 +19,10 @@ usage() {
     cat <<'USAGE'
 Usage: eval/setup.sh [--force]
 
-  --force   Delete eval/app and eval/.cache/app-pristine and rebuild them.
+    --force   Delete eval/app and eval/.cache/app-pristine and rebuild them.
 
 Environment:
-  BOOTSTRAP6_PATH   Local clone of yii2-extensions/bootstrap6 used when Packagist has no release
+    BOOTSTRAP6_PATH   Local clone of yii2-extensions/bootstrap6 used when Packagist has no release
                     (default: ../yii2-extensions/bootstrap6 next to the yii2-framework directory).
 USAGE
 }
@@ -30,14 +30,24 @@ USAGE
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --force) FORCE=1 ;;
-        -h | --help) usage; exit 0 ;;
-        *) echo "Unknown option: $1" >&2; usage >&2; exit 2 ;;
+        -h | --help)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            usage >&2
+            exit 2
+            ;;
     esac
     shift
 done
 
 for tool in php composer rsync; do
-    command -v "${tool}" >/dev/null || { echo "Missing required tool: ${tool}" >&2; exit 1; }
+    command -v "${tool}" >/dev/null || {
+        echo "Missing required tool: ${tool}" >&2
+        exit 1
+    }
 done
 
 if [[ ${FORCE} -eq 1 ]]; then
@@ -95,6 +105,7 @@ elif [[ ${bootstrap6_status} -ne 0 ]]; then
     bootstrap6_source=none
 fi
 
+# shellcheck disable=SC2016 # PHP code, not shell expansion
 bootstrap6_assets="$(php -r '
     $f = $argv[1];
     echo is_file($f) ? (json_decode((string) file_get_contents($f), true)["version"] ?? "unknown") : "missing";
