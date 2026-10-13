@@ -9,8 +9,8 @@ license: BSD-3-Clause
 
 This skill applies to the Yii 22.0 line (`yiisoft/yii2` `^22.0@dev`, branch `22.0`), which requires PHP 8.3 and loads
 classes only through Composer. The Yii 2.0 API is largely unchanged; this skill gives the conventions to follow and
-the places where 22.0 differs. Guide pages live at `https://yii2-framework.github.io/docs/guide/<slug>/`; add `.md`
-for the Markdown source. Fetch `https://yii2-framework.github.io/docs/llms.txt` to find pages not named here.
+the places where 22.0 differs. Guide pages live at `https://yii2-framework.github.io/docs/guide/<slug>/`; append
+`index.md` for the Markdown version. Fetch `https://yii2-framework.github.io/docs/llms.txt` to find pages not named here.
 
 ## Workflow
 

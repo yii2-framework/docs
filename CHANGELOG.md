@@ -39,3 +39,5 @@
 - fix: drop the template's removed `development` guide from `packages.json`; the sync warns about `order` pages that do not exist.
 - feat(demos): render the FilePond examples as live demos; `filepond`, its plugins and `cropperjs` are exact devDependencies.
 - docs(eval): add a weekly cadence: report only for three runs, then a gate of 7 of 8 tasks and no task failing twice in a row.
+- docs(skills): add install instructions (`npx skills add yii2-framework/docs`) to README, `AGENTS.md`, the AI agents page and `skills/README.md`.
+- fix(skills): the framework skill points to the `index.md` Markdown URLs instead of a `.md` suffix.

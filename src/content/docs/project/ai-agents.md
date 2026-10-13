@@ -1,6 +1,6 @@
 ---
 title: "Using the documentation with AI agents"
-description: "How coding agents and AI assistants read this site: llms.txt, a Markdown version of every page, the API reference and its JSON catalogs, the Copy and Open in buttons, and the planned skills."
+description: "How coding agents and AI assistants read this site: llms.txt, a Markdown version of every page, the API reference and its JSON catalogs, the Copy and Open in buttons, and the agent skills."
 ---
 
 This site publishes every page in a form that coding agents can load with few tokens. The content is the
@@ -63,8 +63,15 @@ Each page declares the documented version and the build date in `<meta name="doc
 
 - [`AGENTS.md`](https://github.com/yii2-framework/docs/blob/main/AGENTS.md) in the repository tells agents how to use
   the site.
-- Agent skills for Yii and its extensions are planned in the `skills/` directory of the
-  [documentation repository](https://github.com/yii2-framework/docs).
+- Agent skills give a coding agent the conventions for common tasks and link the pages of this site:
+  [`yii2-framework`](https://github.com/yii2-framework/docs/blob/main/skills/yii2-framework/SKILL.md) (create or
+  change a Yii 22.0 application) and
+  [`yii2-bootstrap6-widgets`](https://github.com/yii2-framework/docs/blob/main/skills/yii2-bootstrap6-widgets/SKILL.md)
+  (Bootstrap 6 UI with the `yii2-extensions/bootstrap6` widgets). Install them with
+  `npx skills add yii2-framework/docs`, or one of them with `--skill <name>`.
+- A weekly evaluation gives a coding agent only `llms.txt` and one skill per task, asks it to solve eight canonical
+  tasks and checks its files in a Yii 22.0 application; a failing task leads to a fix in the documentation or the
+  skill ([`eval/README.md`](https://github.com/yii2-framework/docs/blob/main/eval/README.md#cadence)).
 
 ## Extension guides
 

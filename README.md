@@ -34,6 +34,23 @@ The documentation is deployed at **[yii2-framework.github.io/docs](https://yii2-
 - [Guide](https://yii2-framework.github.io/docs/guide/start-prerequisites/) - The Definitive Guide to Yii 2.0
 - [Internals](https://yii2-framework.github.io/docs/internals/) - Framework internals documentation
 
+## Agent skills
+
+Agent skills are instruction files that coding agents (Claude Code, Codex, Cursor, GitHub Copilot and others) load
+when a task matches their description. This repository publishes two of them under [`skills/`](skills/):
+
+- [`yii2-framework`](skills/yii2-framework/SKILL.md): create or change a Yii 22.0 application (setup, controllers,
+  ActiveRecord, forms, tests).
+- [`yii2-bootstrap6-widgets`](skills/yii2-bootstrap6-widgets/SKILL.md): render Bootstrap 6 UI with the
+  `yii2-extensions/bootstrap6` widgets.
+
+```bash
+npx skills add yii2-framework/docs                          # choose the skills and agents interactively
+npx skills add yii2-framework/docs --skill yii2-framework   # one skill
+```
+
+[`skills/README.md`](skills/README.md) explains how the skills are maintained and evaluated.
+
 ## Local Development
 
 ```bash

@@ -79,9 +79,17 @@ Generated from the PHPDoc of `yiisoft/yii2` (branch `22.0`) and of each extensio
   <https://yii2-framework.github.io/docs/reference/reference.schema.json>. Prefer a catalog entry over a page when only
   the signature, types and defaults matter.
 
-## Coming next
+## Agent skills
 
-- Agent skills: `skills/<name>/SKILL.md` in this repository (not published yet).
+Two skills in [`skills/`](skills/) give the conventions for common tasks and link the pages above:
+
+- [`yii2-framework`](skills/yii2-framework/SKILL.md): create or change a Yii 22.0 application (setup, controllers,
+  ActiveRecord, migrations, forms, tests, differences from Yii 2.0).
+- [`yii2-bootstrap6-widgets`](skills/yii2-bootstrap6-widgets/SKILL.md): render Bootstrap 6 UI with the
+  `yii2-extensions/bootstrap6` widgets, item objects and enums.
+
+Install them with `npx skills add yii2-framework/docs` (add `--skill <name>` for one), or read the `SKILL.md` file
+directly.
 
 ## Limits
 
