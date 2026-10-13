@@ -66,3 +66,7 @@
   and `api-<package>*.txt` instead of `api.txt`; `extensions.txt` is gone too); the table padding of remark-stringify
   is collapsed in the bundles, `llms-full.txt` and `llms-small.txt`, whose first lines now say they are for indexing
   tools.
+- feat: readable site theme (`src/styles/theme.css`): Atkinson Hyperlegible Next and Mono fonts (OFL, bundled from
+  Fontsource, no network at build), 17px body text with line height 1.7, a 56rem text column centred next to a fixed
+  15rem "On this page" panel, warm low-contrast dark and light palettes with a blue accent (WCAG AA contrast), and
+  rounded inline code chips.

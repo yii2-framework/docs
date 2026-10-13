@@ -43,3 +43,25 @@ Run this command in the following scenarios:
 - Ensure you have committed any custom configuration changes before running this command.
 - Review the updated files after syncing to ensure they work with your specific project needs.
 - Some projects may require customizations after syncing configuration files.
+
+## Theme
+
+The site theme lives in `src/styles/theme.css`, registered in `customCss` in `astro.config.mjs` before
+`src/styles/custom.css`. Starlight keeps its own styles in CSS cascade layers; files in `customCss` are unlayered, so
+their rules override Starlight without `!important`.
+
+- **Fonts**: Atkinson Hyperlegible Next (text) and Atkinson Hyperlegible Mono (code), both under the SIL Open Font
+  License, installed from npm (`@fontsource-variable/atkinson-hyperlegible-next`,
+  `@fontsource-variable/atkinson-hyperlegible-mono`). Vite bundles the `woff2` files into `dist/_astro/`; the build
+  fetches nothing from the network. Each font is split by `unicode-range`, so a page downloads only the subsets it
+  uses, and Starlight falls back to the system fonts for scripts they do not cover.
+- **Type and layout**: `--sl-text-*` and `--sl-line-height` set the type scale (17px body text, line height 1.7);
+  `--sl-content-width` (56rem) and `--sl-sidebar-width` (17rem) set the text column and the left sidebar; on screens
+  of 72rem and wider, `--toc-width` (15rem) fixes the "On this page" panel and the text column is centred in the
+  remaining space.
+- **Colours**: the `:root[data-theme='dark']` and `:root[data-theme='light']` blocks set Starlight's grey scale
+  (`--sl-color-white` to `--sl-color-black`, text to background), the accent (`--sl-color-accent-low`,
+  `--sl-color-accent`, `--sl-color-accent-high`) and the inline code background (`--sl-color-bg-inline-code`). Code
+  blocks follow these colours through Starlight's default Expressive Code themes. After changing a colour, check that
+  body text, links, headings, the sidebar and the table of contents keep a contrast ratio of at least 4.5:1 (WCAG
+  AA) in both themes.
