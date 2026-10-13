@@ -7,12 +7,13 @@ Instructions for AI agents that use the Yii documentation published from this re
 ## Version
 
 - The documentation covers **Yii 22.0** (`yii2-framework`), the PHP framework.
-- Every page states the version and the build date: `<meta name="docs:version">` and `<meta name="docs:build-date">`
-  in HTML, and the header of `llms.txt`.
+- HTML pages state the version and build date in `<meta name="docs:version">` and `<meta name="docs:build-date">`.
+  The `llms.txt` header also states them; the Markdown page body does not include these metadata fields.
 
 ## Where to start
 
-1. Fetch <https://yii2-framework.github.io/docs/llms.txt> (about 9k tokens). It lists every English page with a
+1. If the task names a page, fetch its Markdown directly. Otherwise, fetch
+   <https://yii2-framework.github.io/docs/llms.txt> (about 9k tokens). It lists every English page with a
    short description, a link to its Markdown version and its approximate size in tokens, grouped like the site
    navigation.
 2. Fetch only the pages the task needs, using their Markdown URLs.
@@ -88,8 +89,9 @@ Two skills in [`skills/`](skills/) give the conventions for common tasks and lin
 - [`yii2-bootstrap6-widgets`](skills/yii2-bootstrap6-widgets/SKILL.md): render Bootstrap 6 UI with the
   `yii2-extensions/bootstrap6` widgets, item objects and enums.
 
-Install them with `npx skills add yii2-framework/docs` (add `--skill <name>` for one), or read the `SKILL.md` file
-directly.
+Install from the application directory using the local-checkout or verified public-source instructions in
+[`skills/README.md`](skills/README.md). Public installation requires the skills to exist on the default branch.
+Read the `SKILL.md` file directly when native skill loading is unavailable; this does not test client activation.
 
 ## Limits
 

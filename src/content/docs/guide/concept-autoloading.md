@@ -1,92 +1,86 @@
 ---
 title: "Class Autoloading"
-description: "Yii relies on the class autoloading mechanism to locate and include all required class files."
+description: "Load Yii 22.0 application and extension classes through Composer with PSR-4 mappings."
 ---
 
-Yii relies on the [class autoloading mechanism](https://www.php.net/manual/en/language.oop5.autoload.php)
-to locate and include all required class files. It provides a high-performance class autoloader that is compliant with the
-[PSR-4 standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md).
-The autoloader is installed when you include the `vendor/autoload.php` file.
-
-> Note: For simplicity of description, in this section we will only talk about autoloading of classes. However, keep in
-> mind that the content we are describing here applies to autoloading of interfaces and traits as well.
-
-## Using the Yii Autoloader <span id="using-yii-autoloader"></span>
-
-To make use of the Yii class autoloader, you should follow two simple rules when creating and naming your classes:
-
-- Each class must be under a [namespace](https://www.php.net/manual/en/language.namespaces.php) (e.g. `foo\bar\MyClass`)
-- Each class must be saved in an individual file whose path is determined by the following algorithm:
-
-```php
-// $className is a fully qualified class name without the leading backslash
-$classFile = Yii::getAlias('@' . str_replace('\\', '/', $className) . '.php');
-```
-
-For example, if a class name and namespace is `foo\bar\MyClass`, the [alias](concept-aliases.md) for the corresponding class file path
-would be `@foo/bar/MyClass.php`. In order for this alias to be resolvable into a file path,
-either `@foo` or `@foo/bar` must be a [root alias](concept-aliases.md#defining-aliases).
-
-When using the [Basic Project Template](start-installation.md), you may put your classes under the top-level
-namespace `app` so that they can be autoloaded by Yii without the need of defining a new alias. This is because
-`@app` is a [predefined alias](concept-aliases.md#predefined-aliases), and a class name like `app\components\MyClass`
-can be resolved into the class file `AppBasePath/components/MyClass.php`, according to the algorithm just described.
-
-In the [Advanced Project Template](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md), each tier has its own root alias. For example,
-the front-end tier has a root alias `@frontend`, while the back-end tier root alias is `@backend`. As a result,
-you may put the front-end classes under the namespace `frontend` while the back-end classes are under `backend`. This will
-allow these classes to be autoloaded by the Composer autoloader.
-
-To add a custom namespace to the autoloader you need to define an alias for the base directory of the namespace using [[Yii::setAlias()]].
-For example to load classes in the `foo` namespace that are located in the `path/to/foo` directory you will call `Yii::setAlias('@foo', 'path/to/foo')`.
-
-## Class Map <span id="class-map"></span>
-
-The Yii class autoloader supports the _class map_ feature, which maps class names to the corresponding class file paths.
-When the autoloader is loading a class, it will first check if the class is found in the map. If so, the corresponding
-file path will be included directly without further checks. This makes class autoloading super fast. In fact,
-all core Yii classes are autoloaded this way.
-
-You may add a class to the class map, stored in Composer classmap, using:
-
-```json
-{
-  "autoload": {
-    "classmap": ["path/to/MyClass.php"]
-  }
-}
-```
-
-[Aliases](concept-aliases.md) can be used to specify class file paths. You should set the class map in the
-[bootstrapping](runtime-bootstrapping.md) process so that the map is ready before your classes are used.
-
-## Using Other Autoloaders <span id="using-other-autoloaders"></span>
-
-Because Yii embraces Composer as a package dependency manager, it is recommended that you also install
-the Composer autoloader. If you are using 3rd-party libraries that have their own autoloaders, you should
-also install those.
-
-When using the Composer autoloader together with other autoloaders, you should include the `vendor/autoload.php` file
-_after_ all other autoloaders are installed. This will make the Composer autoloader the first one responding to
-any class autoloading request. For example, the following code is extracted from
-the [entry script](structure-entry-scripts.md) of the [Basic Project Template](start-installation.md). The first
-line installs the Composer autoloader, while the second line installs the Composer autoloader:
+Yii 22.0 uses [Composer's autoloader](https://getcomposer.org/doc/01-basic-usage.md#autoloading) for framework,
+application, and extension classes. The [entry script](structure-entry-scripts.md) loads it once:
 
 ```php
 require __DIR__ . '/../vendor/autoload.php';
 ```
 
-You may use the Composer autoloader alone without the Composer autoloader. However, by doing so, the performance
-of your class autoloading may be degraded, and you must follow the rules set by Composer in order for your classes
-to be autoloadable.
+This path applies to `public/index.php` in the [Basic Project Template](start-installation.md). The console entry
+script `yii`, in the project root, uses `__DIR__ . '/vendor/autoload.php'`.
 
-> Info: If you do not want to use the Composer autoloader, you must create your own version of the `vendor/autoload.php` file
-> and include it in your [entry script](structure-entry-scripts.md).
+## Using Composer <span id="using-yii-autoloader"></span>
+
+The template maps the `app` namespace to `src/` in its `composer.json`:
+
+```json
+{
+  "autoload": {
+    "psr-4": {
+      "app\\": "src/"
+    }
+  }
+}
+```
+
+For example, `app\components\Greeting` belongs in `src/components/Greeting.php`:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace app\components;
+
+final class Greeting
+{
+    public function message(string $name): string
+    {
+        return 'Hello, ' . $name;
+    }
+}
+```
+
+Namespace segments and file names must match the mapping, including their case. After adding or changing an
+autoload mapping, regenerate the autoloader from the application root:
+
+```bash
+composer dump-autoload
+```
+
+[Yii aliases](concept-aliases.md) resolve paths used by Yii components. They do not register namespaces with
+Composer: `Yii::setAlias('@example', $path)` alone cannot make an `example\MyClass` class autoloadable.
+
+> Note: Yii 22.0 removed `Yii::autoload()` and `Yii::$classMap`. When migrating an application, move its namespace
+> mappings to Composer instead of registering the Yii 2.0 autoloader.
+
+## Class Map <span id="class-map"></span>
+
+For classes that do not follow PSR-4, add file or directory paths to Composer's `classmap` configuration:
+
+```json
+{
+  "autoload": {
+    "classmap": ["legacy/"]
+  }
+}
+```
+
+These are filesystem paths relative to `composer.json`, not Yii aliases. Run `composer dump-autoload` after changing
+the configuration or adding classes to a mapped directory. See [Composer's autoload schema](https://getcomposer.org/doc/04-schema.md#autoload).
+
+## Using Other Autoloaders <span id="using-other-autoloaders"></span>
+
+Prefer Composer packages with their own autoload configuration. If a library requires a separate autoloader,
+follow that library's initialization instructions and keep the Composer autoloader installed for Yii and the
+application. Do not generate or maintain `vendor/autoload.php` by hand.
 
 ## Autoloading Extension Classes <span id="autoloading-extension-classes"></span>
 
-The Composer autoloader is capable of autoloading [extension](structure-extensions.md) classes. The sole requirement
-is that an extension specifies the `autoload` section correctly in its `composer.json` file. Please refer to the
-[Composer documentation](https://getcomposer.org/doc/04-schema.md#autoload) for more details about specifying `autoload`.
-
-In case you do not use the Composer autoloader, the Composer autoloader can still autoload extension classes for you.
+An [extension](structure-extensions.md) declares its namespace mappings in its own `composer.json`. Installing it
+with Composer adds those mappings to the application's autoloader. Follow the package's Yii 22.0 installation
+instructions for any additional bootstrapping or asset setup; a namespace alias is not a substitute for installation.

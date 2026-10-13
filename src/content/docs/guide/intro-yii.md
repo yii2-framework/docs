@@ -37,17 +37,20 @@ via simple and elegant interfaces.
 
 ## Yii Versions
 
-Yii currently has two major versions available: 1.1 and 2.0. Version 1.1 is the old generation and is now in maintenance mode. Version 2.0 is a complete rewrite of Yii, adopting the latest
-technologies and protocols, including Composer, PSR, namespaces, traits, and so forth. Version 2.0 represents the current
-generation of the framework and will receive the main development efforts over the next few years.
-This guide is mainly about version 2.0.
+This guide covers Yii 22.0 (`yiisoft/yii2`, branch `22.0`), the development line of the Yii 2 framework.
+It retains the component and MVC architecture while requiring PHP 8.3 and using Composer for class autoloading.
+The framework's own autoloader and class map from Yii 2.0 are removed.
+
+Use the version constraints in [Installing Yii](start-installation.md). Installing the template without a version
+constraint can select the older Yii 2.0 line, whose requirements and application layout differ from this guide.
 
 ## Requirements and Prerequisites
 
-Yii 2.0 requires PHP 8.2.0 or above and runs best with the latest version of PHP. You can find more detailed
-requirements for individual features by running the requirement checker included in every Yii release.
+Yii 22.0 requires PHP 8.3 or newer and the `mbstring` extension. The Basic Project Template also needs Composer 2,
+Node.js and npm for assets, and `pdo_sqlite` for its default database. Run the template's `requirements.php` checker
+and `composer check-platform-reqs` to check your installation.
 
 Using Yii requires basic knowledge of object-oriented programming (OOP), as Yii is a pure OOP-based framework.
-Yii 2.0 also makes use of the latest features of PHP, such as [namespaces](https://www.php.net/manual/en/language.namespaces.php)
+Yii uses PHP features such as [namespaces](https://www.php.net/manual/en/language.namespaces.php)
 and [traits](https://www.php.net/manual/en/language.oop5.traits.php). Understanding these concepts will help
-you more easily pick up Yii 2.0.
+you more easily pick up Yii.

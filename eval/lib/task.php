@@ -11,8 +11,8 @@ declare(strict_types=1);
  *   php task.php <task-file> --json    prints the frontmatter as JSON
  *
  * Supported frontmatter subset: `key: value` scalars and `key:` followed by `  - item` lists. Values may be plain or
- * single-quoted (`''` escapes a quote), so check patterns keep their backslashes verbatim. Exit code 1 means the file
- * is malformed or the field is missing.
+ * single-quoted (`''` escapes a quote), or JSON-compatible double-quoted strings. Use single quotes for check
+ * patterns to keep their backslashes verbatim. Exit code 1 means the file is malformed or the field is missing.
  */
 
 if ($argc !== 3) {
@@ -28,7 +28,7 @@ if ($source === false || preg_match('/\A---\n(.*?)\n---\n(.*)\z/s', $source, $pa
 }
 
 /**
- * Unquotes a single-quoted YAML scalar; plain scalars are returned trimmed.
+ * Unquotes a supported YAML scalar; plain scalars are returned trimmed.
  */
 function scalar(string $value): string
 {
@@ -39,7 +39,17 @@ function scalar(string $value): string
     }
 
     if ($value !== '' && $value[0] === '"') {
-        throw new InvalidArgumentException("double-quoted scalars are not supported: {$value}");
+        try {
+            $decoded = json_decode($value, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            throw new InvalidArgumentException("invalid double-quoted scalar: {$value}", 0, $e);
+        }
+
+        if (!is_string($decoded)) {
+            throw new InvalidArgumentException("expected a string scalar: {$value}");
+        }
+
+        return $decoded;
     }
 
     return $value;

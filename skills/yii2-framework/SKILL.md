@@ -1,7 +1,8 @@
 ---
 name: yii2-framework
 description: Use when creating or changing a Yii 22.0 app, including setup, controllers, ActiveRecord, forms, tests.
-guide: https://yii2-framework.github.io/docs/llms.txt
+metadata:
+  guide: https://yii2-framework.github.io/docs/llms.txt
 license: BSD-3-Clause
 ---
 
@@ -32,13 +33,14 @@ views, SQLite, Codeception):
 ```bash
 composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic:^22.0 basic
 cd basic
+mkdir -p runtime
 ./yii migrate
 ./yii serve --docroot=public
 ```
 
-Requirements: PHP `>=8.3` and Composer 2. The packages are in development (`^22.0@dev`), so keep
-`--stability=dev`. Without `:^22.0` Composer may select the Yii 2.0 template, as the guide page does. To add the
-framework to an existing project, run `composer require yiisoft/yii2:^22.0@dev`.
+Requirements: PHP `>=8.3`, `mbstring`, `pdo_sqlite`, Composer 2, and Node.js/npm for the template assets. The packages
+are in development (`^22.0@dev`), so keep `--stability=dev`. Without `:^22.0` Composer may select the Yii 2.0 template.
+To add the framework to an existing project, run `composer require yiisoft/yii2:^22.0@dev`.
 
 Single-page alternatives (PHP `>=8.3`, `yiisoft/yii2` `^22.0@dev`, `yii2-extensions/inertia` `^0.6`):
 
@@ -311,19 +313,31 @@ Guides: `concept-autoloading`, `intro-upgrade-from-v1`.
 
 1. `declare(strict_types=1);` after `<?php` in every PHP file; PER 3.0 and PSR-12 (the template configures ECS).
 2. Typed properties, parameters, return types; English identifiers, comments, messages.
-3. The template tests with Codeception 5 (suites `unit`, `functional`, `acceptance`, PHP built-in server).
+3. Follow the application's test setup. The template source uses Codeception 5 (suites `unit`, `functional`,
+   `acceptance`, PHP built-in server).
 
 Write one test per rule: an invalid save, an access denial, and a successful save.
 
-**Verify** with the scripts of the template `composer.json`, in this order:
+**Verify:** inspect `composer.json`, `composer run-script --list`, installed tools, and their configuration first.
+The `--prefer-dist` template archive excludes `tests/`, `ecs.php`, `phpstan*.neon*`, and `codeception.yml`, even though
+its Composer scripts name these tools. Do not assume a fresh application contains a ready-to-run test setup.
 
 ```bash
 find src config -name '*.php' -print0 | xargs -0 -n1 php -l
-composer ecs      # ./vendor/bin/ecs --fix (rewrites files)
-composer static   # ./vendor/bin/phpstan --memory-limit=512M (level max)
+composer validate
+composer check-platform-reqs
+```
+
+Run the following scripts only when their dependencies, configuration, and suites exist in the application:
+
+```bash
+composer ecs      # ./vendor/bin/ecs --fix (rewrites files; review the diff)
+composer static   # ./vendor/bin/phpstan --memory-limit=512M
 composer tests    # vendor/bin/codecept run --env php-builtin --coverage-xml
 ```
 
-All four succeed.
+Use the application's existing tools and conventions. When setting up new checks, obtain the relevant template
+configuration from the matching source revision or configure the tools for this application. Test the behavior
+changed by the task and report actual results. Identify skipped checks and their missing prerequisites explicitly.
 
-Guides: `test-overview`, `test-unit`.
+Guides: `start-installation#development-checks`, `test-overview`, `test-unit`.

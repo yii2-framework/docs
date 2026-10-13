@@ -41,3 +41,8 @@
 - docs(eval): add a weekly cadence: report only for three runs, then a gate of 7 of 8 tasks and no task failing twice in a row.
 - docs(skills): add install instructions (`npx skills add yii2-framework/docs`) to README, `AGENTS.md`, the AI agents page and `skills/README.md`.
 - fix(skills): the framework skill points to the `index.md` Markdown URLs instead of a `.md` suffix.
+- docs: align the Yii 22.0 application setup, Composer autoloading, and skill checks with the basic template.
+- feat: add a useful landing page and Yii2, Extensions, and AI navigation while preserving page URLs and topic bundle names.
+- docs: clarify skill installation, focused reading, and documented versus tested support for five coding agents.
+- fix(eval): accept the double-quoted check names used by the evaluation tasks.
+- feat: keep the landing page behind the logo and start all sidebar groups closed on each page load.

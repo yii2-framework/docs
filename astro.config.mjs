@@ -77,21 +77,21 @@ function extensionsGroup() {
   }];
 }
 
-const sidebar = [
-  {
-    label: 'Project',
-    collapsed: true,
-    items: [
-      { label: 'Overview', slug: 'project' },
-      { label: 'Installation', slug: 'project/installation' },
-      { label: 'Configuration', slug: 'project/configuration' },
-      { label: 'Examples', slug: 'project/examples' },
-      { label: 'Testing', slug: 'project/testing' },
-      { label: 'Development', slug: 'project/development' },
-      { label: 'Documentation Style Guide', slug: 'project/documentation-style-guide' },
-      { label: 'Using the Docs with AI Agents', slug: 'project/ai-agents' },
-    ],
-  },
+const projectGroup = {
+  label: 'Project',
+  collapsed: true,
+  items: [
+    { label: 'Overview', slug: 'project' },
+    { label: 'Installation', slug: 'project/installation' },
+    { label: 'Configuration', slug: 'project/configuration' },
+    { label: 'Examples', slug: 'project/examples' },
+    { label: 'Testing', slug: 'project/testing' },
+    { label: 'Development', slug: 'project/development' },
+    { label: 'Documentation Style Guide', slug: 'project/documentation-style-guide' },
+  ],
+};
+
+const guideGroups = [
   {
     label: 'Introduction',
     items: [
@@ -267,13 +267,47 @@ const sidebar = [
       { label: 'Glossary', slug: 'guide/glossary' },
     ],
   },
-  ...extensionsGroup(),
-  ...apiReferenceGroup(pages),
-  {
-    label: 'Internals',
-    items: [{ autogenerate: { directory: 'internals' } }],
-  },
 ];
+
+const extensions = extensionsGroup();
+const reference = apiReferenceGroup(pages);
+const aiGroup = {
+  label: 'AI',
+  items: [{ label: 'Build with an agent', slug: 'project/ai-agents' }],
+};
+const internalsGroup = {
+  label: 'Internals',
+  items: [{ autogenerate: { directory: 'internals' } }],
+};
+
+const sidebar = [
+  {
+    label: 'Yii2',
+    items: [
+      ...guideGroups,
+      ...reference,
+    ],
+  },
+  ...extensions,
+  aiGroup,
+  { label: 'Contributing', collapsed: true, items: [projectGroup, internalsGroup] },
+];
+
+/** @param {NonNullable<Parameters<typeof starlight>[0]['sidebar']>} items */
+function collapseSidebar(items) {
+  for (const item of items) {
+    if (typeof item === 'string') continue;
+
+    if ('items' in item) {
+      item.collapsed = true;
+      collapseSidebar(item.items);
+    } else if ('autogenerate' in item) {
+      item.autogenerate.collapsed = true;
+    }
+  }
+}
+
+collapseSidebar(sidebar);
 
 // Rendered guide pages embed reference URLs: rebuild them when tools/bin/reference changed the link map.
 invalidateContentCacheOnLinkChange();
@@ -283,9 +317,8 @@ invalidateContentCacheOnDemoChange();
 // One build date for the config and the route middleware (see src/site-meta.mjs).
 process.env.DOCS_BUILD_DATE = buildDate();
 
-// llms.txt: one list per sidebar group (the sidebar is the source of truth), each line linking the page's Markdown,
-// then the group's bundles.
-const groups = sidebarGroups(sidebar, pages);
+// Reuse the navigation's topic groups, without its visual wrappers: existing bundle names stay stable.
+const groups = sidebarGroups([...guideGroups, ...extensions, ...reference, aiGroup, projectGroup, internalsGroup], pages);
 
 // Page ids of the generated API reference, as starlight-llms-txt globs.
 const REFERENCE_GLOBS = ['api', 'api/**', 'extensions/*/reference', 'extensions/*/reference/**'];
@@ -374,6 +407,7 @@ export default defineConfig({
       },
       customCss: ['./src/styles/theme.css', './src/styles/custom.css', './src/styles/demos.css'],
       components: {
+        Sidebar: './src/components/Sidebar.astro',
         LanguageSelect: './src/components/LanguageSelect.astro',
         MarkdownContent: './src/components/MarkdownContent.astro',
         SocialIcons: './src/components/SocialIcons.astro',

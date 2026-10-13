@@ -1,7 +1,8 @@
 ---
 name: yii2-bootstrap6-widgets
 description: Use when rendering Bootstrap 6 UI in Yii2 views with yii2-extensions/bootstrap6 widgets, forms, or assets.
-guide: https://yii2-framework.github.io/docs/extensions/bootstrap6/
+metadata:
+  guide: https://yii2-framework.github.io/docs/extensions/bootstrap6/
 license: BSD-3-Clause
 ---
 

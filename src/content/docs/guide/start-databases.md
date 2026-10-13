@@ -54,8 +54,8 @@ Before proceeding, make sure you have installed both the [PDO](https://www.php.n
 the PDO driver for the database you are using (e.g. `pdo_mysql` for MySQL). This is a basic requirement
 if your application uses a relational database.
 
-With those installed, open the file `config/db.php` and change the parameters to be correct for your database. By default,
-the file contains the following:
+The Yii 22.0 Basic Project Template uses SQLite by default. This tutorial uses a separate MySQL database for its
+examples. With `pdo_mysql` installed, adapt `config/db.php` to that database, for example:
 
 ```php
 <?php
@@ -89,7 +89,7 @@ If you need to work with databases support for which isn't bundled with Yii, che
 ## Creating an Active Record <span id="creating-active-record"></span>
 
 To represent and fetch the data in the `country` table, create an [Active Record](db-active-record.md)-derived
-class named `Country`, and save it in the file `models/Country.php`.
+class named `Country`, and save it in the file `src/models/Country.php`.
 
 ```php
 <?php
@@ -171,9 +171,10 @@ class CountryController extends Controller
 }
 ```
 
-Save the above code in the file `controllers/CountryController.php`.
+Save the above code in the file `src/controllers/CountryController.php`.
 
-First, The `index` action calls `Country::find()`. This [find()](<https://www.yiiframework.com/doc/api/2.0/yii-db-activerecord#find()-detail>) method creates a [ActiveQuery](https://www.yiiframework.com/doc/api/2.0/yii-db-activequery) query object, which provides methods to access data from the `country` table.
+First, the `index` action calls `Country::find()`. This [[yii\db\ActiveRecord::find()]] method creates an
+[[yii\db\ActiveQuery]] object, which provides methods to access data from the `country` table.
 
 To limit the number of countries returned in each request, the query object is paginated with the help of a
 [[yii\data\Pagination]] object. The `Pagination` object serves two purposes:
@@ -190,8 +191,8 @@ information to it.
 
 ## Creating a View <span id="creating-view"></span>
 
-Under the `views` directory, first create a sub-directory named `country`. This folder will be used to hold all the
-views rendered by the `country` controller. Within the `views/country` directory, create a file named `index.php`
+Under the `resources/views` directory, first create a sub-directory named `country`. This folder will be used to hold all the
+views rendered by the `country` controller. Within the `resources/views/country` directory, create a file named `index.php`
 containing the following:
 
 ```php

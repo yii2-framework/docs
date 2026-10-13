@@ -9,21 +9,30 @@ This directory is the canonical source of the agent skills for Yii 22.0 and its 
 
 ## Install
 
+Run the installer from the application's root directory. For a local documentation checkout:
+
 ```bash
-npx skills add yii2-framework/docs                                    # pick skills and agents interactively
-npx skills add yii2-framework/docs --skill yii2-bootstrap6-widgets    # one skill
-npx skills add yii2-framework/docs --list                             # list the skills, install nothing
+npx skills@1.7.2 add /absolute/path/to/docs --list
+npx skills@1.7.2 add /absolute/path/to/docs --skill yii2-framework
 ```
 
-The [`skills` CLI](https://github.com/vercel-labs/skills) reads the default branch and copies the selected skills
-into the directory of each agent (`.claude/skills/`, `.agents/skills/` and others).
+Choose a client when prompted, or select it explicitly with `--agent`; keep the default project scope. Add `yii2-bootstrap6-widgets` only for an application using that
+extension; the basic template uses Bootstrap 5.
+
+For the public repository, first run `npx skills@1.7.2 add yii2-framework/docs --list`. Install from that source only
+when it lists the desired skill: the installer reads the default branch, not unpublished local work. Otherwise,
+use the local checkout. Do not install these application skills as framework-maintenance instructions.
+
+The [AI guide](../src/content/docs/project/ai-agents.md) gives manual installation paths, client-specific activation,
+and the distinction between installer verification and native client testing. The
+[`skills` CLI](https://github.com/vercel-labs/skills) version verified locally is 1.7.2.
 
 ## Layout and frontmatter
 
 - One directory per skill: `skills/<name>/SKILL.md`. The CLI also finds them with `npx skills add <path> --list`
   on a local checkout, which is the quickest check after a change.
 - Frontmatter keys: `name` (kebab-case, equal to the directory name), `description` (one sentence that says when to
-  use the skill), `license: BSD-3-Clause`, and `guide` (the documentation entry point the skill builds on).
+  use the skill), `license: BSD-3-Clause`, and `metadata.guide` (the documentation entry point the skill builds on).
 - The body is a workflow of numbered steps for one task family; it names real classes, methods and commands only,
   and links the guide pages instead of repeating them.
 

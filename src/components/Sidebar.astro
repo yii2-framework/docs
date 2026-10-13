@@ -1,0 +1,14 @@
+---
+// Keep Starlight's native details/summary controls, styles, and mobile footer.
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+---
+
+<Default />
+
+<script is:inline data-astro-rerun aria-hidden="true">
+  // Starlight opens active groups and restores stored state while rendering the menu.
+  // Close them once afterwards; subsequent mouse, touch, and keyboard toggles stay native.
+  document.currentScript?.closest('nav')?.querySelectorAll('details').forEach((group) => {
+    group.open = false;
+  });
+</script>

@@ -12,24 +12,27 @@ can be accessed by end users. They are often named as `index.php`, but can also 
 provided Web servers can locate them.
 
 Entry scripts for console applications are usually stored under the [base path](structure-applications.md)
-of applications and are named as `yii` (with the `.php` suffix). They should be made executable
+of applications and are named `yii` (without a `.php` suffix). They should be made executable
 so that users can run console applications through the command `./yii <route> [arguments] [options]`.
 
 Entry scripts mainly do the following work:
 
 - Define global constants;
 - Register [Composer autoloader](https://getcomposer.org/doc/01-basic-usage.md#autoloading);
-- Include the [[Yii]] class file;
 - Load application configuration;
 - Create and configure an [application](structure-applications.md) instance;
 - Call [[yii\base\Application::run()]] to process the incoming request.
 
 ## Web Applications <span id="web-applications"></span>
 
-The following is the code in the entry script for the [Basic Web Project Template](start-installation.md).
+The following minimal entry script follows the [Basic Project Template](start-installation.md) layout. Save it as
+`public/index.php`. Composer loads the framework classes, including `Yii`; no separate `Yii.php` include is needed.
+The template also runs its requirement checker in development mode.
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');

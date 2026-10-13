@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-    <strong>The Definitive Guide to Yii 2.0</strong><br>
+    <strong>The Definitive Guide to Yii 22.0</strong><br>
     <em>Built with <a href="https://starlight.astro.build">Astro Starlight</a></em>
 </p>
 
@@ -31,7 +31,7 @@
 
 The documentation is deployed at **[yii2-framework.github.io/docs](https://yii2-framework.github.io/docs/)**.
 
-- [Guide](https://yii2-framework.github.io/docs/guide/start-prerequisites/) - The Definitive Guide to Yii 2.0
+- [Guide](https://yii2-framework.github.io/docs/guide/start-prerequisites/) - The Definitive Guide to Yii 22.0
 - [Internals](https://yii2-framework.github.io/docs/internals/) - Framework internals documentation
 
 ## Agent skills
@@ -44,12 +44,10 @@ when a task matches their description. This repository publishes two of them und
 - [`yii2-bootstrap6-widgets`](skills/yii2-bootstrap6-widgets/SKILL.md): render Bootstrap 6 UI with the
   `yii2-extensions/bootstrap6` widgets.
 
-```bash
-npx skills add yii2-framework/docs                          # choose the skills and agents interactively
-npx skills add yii2-framework/docs --skill yii2-framework   # one skill
-```
-
-[`skills/README.md`](skills/README.md) explains how the skills are maintained and evaluated.
+Install from your application's directory using the [skill installation instructions](skills/README.md). They cover
+local checkouts and checking availability on the public default branch before installation. The
+[AI guide](https://yii2-framework.github.io/docs/project/ai-agents/) documents Codex, Claude Code, OpenCode, GitHub
+Copilot in VS Code, and Amp, with a distinction between documented support and actual verification.
 
 ## Local Development
 
