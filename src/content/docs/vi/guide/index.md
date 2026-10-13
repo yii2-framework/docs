@@ -1,5 +1,6 @@
 ---
 title: "The Definitive Guide to Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Các hướng dẫn được phát hành theo [Các điều khoản về tài liệu Yii](https://www.yiiframework.com/doc/terms/).

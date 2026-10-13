@@ -1,5 +1,6 @@
 ---
 title: "Controladores"
+description: "Después de crear las clases de recursos y especificar cómo debe ser el formato de datos de recursos, el siguiente paso es crear acciones del controlador..."
 ---
 
 Después de crear las clases de recursos y especificar cómo debe ser el formato de datos de recursos, el siguiente paso

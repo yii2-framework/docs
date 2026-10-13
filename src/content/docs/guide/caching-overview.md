@@ -1,5 +1,6 @@
 ---
 title: "Caching"
+description: "Caching is a cheap and effective way to improve the performance of a Web application."
 ---
 
 Caching is a cheap and effective way to improve the performance of a Web application. By storing relatively

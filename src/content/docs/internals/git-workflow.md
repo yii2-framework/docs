@@ -1,5 +1,6 @@
 ---
 title: "Git workflow for Yii 2 contributors"
+description: "So you want to contribute to Yii? Great! But to increase the chances of your changes being accepted quickly, please follow the following steps."
 ---
 
 So you want to contribute to Yii? Great! But to increase the chances of your changes being accepted quickly, please

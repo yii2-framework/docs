@@ -1,5 +1,6 @@
 ---
 title: "URL Helper"
+description: "URL helper fornece um conjunto de métodos estáticos para o gerenciamento de URLs."
 ---
 
 URL helper fornece um conjunto de métodos estáticos para o gerenciamento de URLs.

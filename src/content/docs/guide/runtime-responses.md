@@ -1,5 +1,6 @@
 ---
 title: "Responses"
+description: "When an application finishes handling a request, it generates a response object and sends it to the end user."
 ---
 
 When an application finishes handling a [request](runtime-requests.md), it generates a [[yii\web\Response|response]] object

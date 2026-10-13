@@ -1,5 +1,6 @@
 ---
 title: "Testing environment setup"
+description: "Yii 2 has officially maintained integration with Codeception testing framework that allows you to create the following test types."
 ---
 
 Yii 2 has officially maintained integration with [`Codeception`](https://github.com/Codeception/Codeception) testing

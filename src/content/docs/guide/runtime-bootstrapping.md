@@ -1,5 +1,6 @@
 ---
 title: "Bootstrapping"
+description: "Bootstrapping refers to the process of preparing the environment before an application starts to resolve and process an incoming request."
 ---
 
 Bootstrapping refers to the process of preparing the environment before an application starts

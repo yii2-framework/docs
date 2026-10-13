@@ -1,5 +1,6 @@
 ---
 title: "Recursos"
+description: "APIs RESTful tratam de como acessar e manipular recursos. Você pode ver recursos como models no paradigma MVC."
 ---
 
 APIs RESTful tratam de como acessar e manipular _recursos_. Você pode ver recursos como [models](structure-models.md) no paradigma MVC.

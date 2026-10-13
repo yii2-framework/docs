@@ -1,5 +1,6 @@
 ---
 title: "Crear tu propia estructura de Aplicación"
+description: "Mientras que los templates de proyectos basic y advanced son grandiosos para la mayoría de tus necesidades, podrías querer crear tu propio template de..."
 ---
 
 > Note: Esta sección se encuentra en desarrollo.

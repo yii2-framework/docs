@@ -1,5 +1,6 @@
 ---
 title: "Routing and URL Creation"
+description: "When a Yii application starts processing a requested URL, the first step it takes is to parse the URL into a route."
 ---
 
 When a Yii application starts processing a requested URL, the first step it takes is to parse the URL

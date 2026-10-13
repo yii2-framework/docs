@@ -1,5 +1,6 @@
 ---
 title: "Models (Modelos)"
+description: "Os models (modelos) fazem parte da arquitetura MVC. Eles representam os dados, as regras e a lógica de negócio."
 ---
 
 Os models (modelos) fazem parte da arquitetura [MVC](https://pt.wikipedia.org/wiki/MVC).

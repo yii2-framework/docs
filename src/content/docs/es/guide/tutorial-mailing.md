@@ -1,5 +1,6 @@
 ---
 title: "Envío de Emails"
+description: "Yii soporta composición y envío de emails. De cualquier modo, el núcleo del framework provee sólo la funcionalidad de composición y una interfaz básica."
 ---
 
 > Note: Esta sección se encuentra en desarrollo.

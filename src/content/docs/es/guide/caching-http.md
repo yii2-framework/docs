@@ -1,5 +1,6 @@
 ---
 title: "Caché HTTP"
+description: "Además del almacenamiento de caché en el servidor que hemos descrito en secciones anteriores, las aplicaciones Web pueden hacer uso de la caché en el lado..."
 ---
 
 Además del almacenamiento de caché en el servidor que hemos descrito en secciones anteriores, las aplicaciones Web

@@ -1,5 +1,6 @@
 ---
 title: "Yii 2.0 için Açıklayıcı Rehber"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Bu döküman, [Yii Dökümantasyon Koşulları](https://www.yiiframework.com/doc/terms/) altında yayınlandı.

@@ -1,5 +1,6 @@
 ---
 title: "Class Autoloading"
+description: "Yii relies on the class autoloading mechanism to locate and include all required class files."
 ---
 
 Yii relies on the [class autoloading mechanism](https://www.php.net/manual/en/language.oop5.autoload.php)

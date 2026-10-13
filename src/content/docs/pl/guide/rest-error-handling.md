@@ -1,5 +1,6 @@
 ---
 title: "Obsługa błędów"
+description: "Podczas obsługi żądania RESTfulowego API, w przypadku wystąpienia błędu w zapytaniu użytkownika lub gdy stanie się coś nieprzewidywanego z serwerem, możesz..."
 ---
 
 Podczas obsługi żądania RESTfulowego API, w przypadku wystąpienia błędu w zapytaniu użytkownika lub gdy stanie się coś nieprzewidywanego

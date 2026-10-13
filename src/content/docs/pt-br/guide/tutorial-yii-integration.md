@@ -1,5 +1,6 @@
 ---
 title: "Trabalhando com Códigos de Terceiros"
+description: "De tempos em tempos, você pode precisar usar algum código de terceiro na sua aplicação Yii."
 ---
 
 De tempos em tempos, você pode precisar usar algum código de terceiro na sua aplicação Yii. Ou você pode querer utilizar o Yii como uma biblioteca em alguns sistemas de terceiros. Nesta seção, vamos mostrar como fazer isto.

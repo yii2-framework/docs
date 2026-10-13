@@ -1,5 +1,6 @@
 ---
 title: "Dokumentacja dewelopera Yii"
+description: "Ten folder zawiera dokumentację dotyczącą procesu rozwoju i powstawania nowych wydań frameworka Yii."
 ---
 
 Ten folder zawiera dokumentację dotyczącą procesu rozwoju i powstawania nowych wydań frameworka Yii.

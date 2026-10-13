@@ -1,5 +1,6 @@
 ---
 title: "Yii Developer Documentation"
+description: "This directory contains documentation about Yii Framework development and release process."
 ---
 
 This directory contains documentation about Yii Framework development and release process.

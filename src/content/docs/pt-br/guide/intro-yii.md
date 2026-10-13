@@ -1,5 +1,6 @@
 ---
 title: "O que é o Yii"
+description: "Yii é um framework PHP de alta performance baseado em componentes para desenvolvimento rápido de aplicações web modernas."
 ---
 
 Yii é um framework PHP de alta performance baseado em componentes para desenvolvimento rápido de aplicações web modernas.

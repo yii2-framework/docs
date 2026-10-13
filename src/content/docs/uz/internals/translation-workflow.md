@@ -1,5 +1,6 @@
 ---
 title: "O'zbekchaga tarjima qilish bilan qanday ishlash kerak"
+description: "Yii juda ko'p tillarga tarjima qilinayabdi shu jumladan o'zbekchaga ham. Tarjima qo'llanma va habarlarni o'z ichiga oladi."
 ---
 
 Yii juda ko'p tillarga tarjima qilinayabdi shu jumladan o'zbekchaga ham. Tarjima qo'llanma va habarlarni o'z ichiga oladi.

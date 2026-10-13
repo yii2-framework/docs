@@ -1,5 +1,6 @@
 ---
 title: "Bezpieczeństwo"
+description: "Spełnienie wymogów bezpieczeństwa jest podstawą sukcesu i długiej żywotności każdej aplikacji."
 ---
 
 Spełnienie wymogów bezpieczeństwa jest podstawą sukcesu i długiej żywotności każdej aplikacji. Niestety, wielu deweloperów idzie

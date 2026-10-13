@@ -1,5 +1,6 @@
 ---
 title: "Przygotowanie środowiska testowego"
+description: "Yii 2 jest oficjalnie zintegrowany z Codeception - frameworkiem testowym, pozwalającym na utworzenie testów następujących typów."
 ---
 
 > Uwaga: Ta sekcja jest w trakcie tworzenia.

@@ -1,5 +1,6 @@
 ---
 title: "Shaklar bilan ishlash"
+description: "Ushbu bo'limda biz foydalanuvchidan ma'lumotlarni qabul qilishni o'rganamiz. Sahifada ma'lumotlarni kiritish uchun ism va emailni kiritish uchun shakl bor."
 ---
 
 Ushbu bo'limda biz foydalanuvchidan ma'lumotlarni qabul qilishni o'rganamiz. Sahifada ma'lumotlarni kiritish uchun ism va emailni kiritish uchun shakl bor. Sahifada kiritilgan ma'lumotlar tasdiqlanishi uchun ko'rsatiladi.

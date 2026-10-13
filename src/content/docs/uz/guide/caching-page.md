@@ -1,5 +1,6 @@
 ---
 title: "Sahifalarni keshlash"
+description: "Sahifalarni keshlash — bu sahifadagi butun ma'lumotni server tomonida keshda saqlashga aytiladi."
 ---
 
 Sahifalarni keshlash — bu sahifadagi butun ma'lumotni server tomonida keshda saqlashga aytiladi. Keginchalik sahifani serverdan

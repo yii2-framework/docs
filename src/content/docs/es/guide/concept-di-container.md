@@ -1,5 +1,6 @@
 ---
 title: "Contenedor de Inyección de Dependencias"
+description: "Un contenedor de Inyección de Dependencias (ID), es un objeto que sabe como instancias y configurar objetos y sus objetos dependientes."
 ---
 
 Un contenedor de Inyección de Dependencias (ID), es un objeto que sabe como instancias y configurar objetos y sus

@@ -1,5 +1,6 @@
 ---
 title: "Configuration reference"
+description: "Configuration reference for the documentation project (template page)."
 ---
 
 ## Overview

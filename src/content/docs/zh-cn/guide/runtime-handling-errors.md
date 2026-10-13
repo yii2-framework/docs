@@ -1,5 +1,6 @@
 ---
 title: "错误处理"
+description: "Yii 内置了一个error handler错误处理器，它使错误处理更方便， Yii错误处理器做以下工作来提升错误处理效果。"
 ---
 
 Yii 内置了一个[[yii\web\ErrorHandler|error handler]]错误处理器，它使错误处理更方便，

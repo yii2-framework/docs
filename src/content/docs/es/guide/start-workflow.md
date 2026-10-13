@@ -1,5 +1,6 @@
 ---
 title: "Corriendo Aplicaciones"
+description: "Después de haber instalado Yii, tienes una aplicación totalmente funcional a la que se puede acceder a través de la URL https://hostname/basic/web/index.php..."
 ---
 
 Después de haber instalado Yii, tienes una aplicación totalmente funcional a la que se puede acceder a través de

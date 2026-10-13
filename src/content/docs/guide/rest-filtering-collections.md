@@ -1,5 +1,6 @@
 ---
 title: "Filtering Collections"
+description: "Resource collection can be filtered using DataFilter component since 2.0.13."
 ---
 
 Resource collection can be filtered using [[yii\data\DataFilter]] component since 2.0.13. It allows validating and

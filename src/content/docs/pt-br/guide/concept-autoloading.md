@@ -1,5 +1,6 @@
 ---
 title: "Autoloading de Classes"
+description: "O Yii baseia-se no mecanismo de autoloading de classe para localizar e incluir todos os arquivos de classe necessários."
 ---
 
 O Yii baseia-se no [mecanismo de autoloading de classe](https://www.php.net/manual/pt_BR/language.oop5.autoload.php) para localizar e incluir todos os arquivos de classe necessários. Ele fornece um autoloader de alto desempenho que é compatível com o

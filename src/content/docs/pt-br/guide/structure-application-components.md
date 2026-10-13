@@ -1,5 +1,6 @@
 ---
 title: "Componentes de Aplicação"
+description: "Aplicações são service locators. Elas hospedam um conjunto de assim chamados componentes de aplicação que fornecem diferentes serviços para o processamento..."
 ---
 
 Aplicações são [service locators](concept-service-locator.md). Elas hospedam um

@@ -1,5 +1,6 @@
 ---
 title: "Quick Start"
+description: "Yii provides a whole set of tools to simplify the task of implementing RESTful Web Service APIs."
 ---
 
 Yii provides a whole set of tools to simplify the task of implementing RESTful Web Service APIs.

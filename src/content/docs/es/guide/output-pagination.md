@@ -1,5 +1,6 @@
 ---
 title: "Paginación"
+description: "Cuando hay muchos datos a mostrar en una sola página, una estrategia común es mostrarlos en varias páginas y en cada una de ellas mostrar sólo una pequeña..."
 ---
 
 Cuando hay muchos datos a mostrar en una sola página, una estrategia común es mostrarlos en varias

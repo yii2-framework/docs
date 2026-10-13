@@ -1,5 +1,6 @@
 ---
 title: "Ressources"
+description: "Une ressource dans Yii est un fichier qui peut être référencé dans une page Web."
 ---
 
 Une ressource dans Yii est un fichier qui peut être référencé dans une page Web. Ça peut être un fichier CSS, un fichier JavaScript, une image, un fichier vidéo, etc.

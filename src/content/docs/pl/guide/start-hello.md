@@ -1,5 +1,6 @@
 ---
 title: "Witaj świecie"
+description: "Ta sekcja opisuje jak utworzyć nową stronę \"Witaj\" w Twojej aplikacji."
 ---
 
 Ta sekcja opisuje jak utworzyć nową stronę "Witaj" w Twojej aplikacji.

@@ -1,5 +1,6 @@
 ---
 title: "Walidacja danych wejściowych"
+description: "Jedna z głównych zasad mówi, że nigdy nie należy ufać danym otrzymanym od użytkownika oraz że zawsze należy walidować je przed użyciem."
 ---
 
 Jedna z głównych zasad mówi, że nigdy nie należy ufać danym otrzymanym od użytkownika oraz że zawsze należy walidować je przed użyciem.

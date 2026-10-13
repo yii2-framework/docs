@@ -1,5 +1,6 @@
 ---
 title: "Looking Ahead"
+description: "Nếu bạn đã đọc và thực hành các bài viết trong chuyên mục \"Getting Started\", thì bạn có thể xây dựng ứng dụng Yii hoàn chỉnh."
 ---
 
 Nếu bạn đã đọc và thực hành các bài viết trong chuyên mục "Getting Started", thì bạn có thể xây dựng ứng dụng Yii hoàn chỉnh. Trong những phần trước, bạn đã được tìm hiều để thực hiện một số chức năng cơ bản

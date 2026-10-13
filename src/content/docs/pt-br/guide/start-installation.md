@@ -1,5 +1,6 @@
 ---
 title: "Instalando o Yii"
+description: "Você pode instalar o Yii de duas maneiras: usando o gerenciador de pacotes Composer ou baixando um arquivo compactado."
 ---
 
 Você pode instalar o Yii de duas maneiras: usando o gerenciador de pacotes [Composer](https://getcomposer.org/)

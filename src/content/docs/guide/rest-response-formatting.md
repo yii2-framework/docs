@@ -1,5 +1,6 @@
 ---
 title: "Response Formatting"
+description: "When handling a RESTful API request, an application usually takes the following steps that are related with response formatting."
 ---
 
 When handling a RESTful API request, an application usually takes the following steps that are related

@@ -1,5 +1,6 @@
 ---
 title: "Sorting"
+description: "When displaying multiple rows of data, it is often needed that the data be sorted according to some columns specified by end users."
 ---
 
 When displaying multiple rows of data, it is often needed that the data be sorted according to some columns

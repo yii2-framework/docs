@@ -1,5 +1,6 @@
 ---
 title: "Flujo de Trabajo de Traducción"
+description: "Yii se traduce en muchos idiomas con el fin de ser útil para desarrolladores de aplicaciones e internacionales."
 ---
 
 Yii se traduce en muchos idiomas con el fin de ser útil para desarrolladores de aplicaciones e internacionales.

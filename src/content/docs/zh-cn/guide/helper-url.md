@@ -1,5 +1,6 @@
 ---
 title: "Url 助手类（Url Helper）"
+description: "Url 帮助类提供一系列的静态方法来帮助管理 URL。"
 ---
 
 Url 帮助类提供一系列的静态方法来帮助管理 URL。

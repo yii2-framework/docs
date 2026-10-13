@@ -1,5 +1,6 @@
 ---
 title: "Dependency Injection Container"
+description: "A dependency injection (DI) container is an object that knows how to instantiate and configure objects and all their dependent objects."
 ---
 
 A dependency injection (DI) container is an object that knows how to instantiate and configure objects and

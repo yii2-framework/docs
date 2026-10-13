@@ -1,5 +1,6 @@
 ---
 title: "Menatap ke Depan"
+description: "Jika anda membaca sepanjang bab \"Mulai\", sekarang anda sudah membuat aplikasi dengan Yii."
 ---
 
 Jika anda membaca sepanjang bab "Mulai", sekarang anda sudah membuat aplikasi dengan Yii. Pada proses ini, anda sudah mempelajari bagaimana mengimplementasikan fitur-fitur umum

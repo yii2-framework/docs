@@ -1,5 +1,6 @@
 ---
 title: "Controllers (Controladores)"
+description: "Os controllers (controladores) fazem parte da arquitetura MVC."
 ---
 
 Os controllers (controladores) fazem parte da arquitetura [MVC](https://pt.wikipedia.org/wiki/MVC).

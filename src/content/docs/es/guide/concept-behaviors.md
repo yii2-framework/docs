@@ -1,5 +1,6 @@
 ---
 title: "Comportamientos"
+description: "Comportamientos son instancias de Behavior o sus clases \"hija\"."
 ---
 
 Comportamientos son instancias de [[yii\base\Behavior]] o sus clases "hija". Comportamientos, también conocido como

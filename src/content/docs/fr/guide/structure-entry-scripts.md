@@ -1,5 +1,6 @@
 ---
 title: "Scripts d'entrée"
+description: "Le script d'entrée est le premier rencontré dans le processus d'amorçage de l'application."
 ---
 
 Le script d'entrée est le premier rencontré dans le processus d'amorçage de l'application. Une application (qu'elle

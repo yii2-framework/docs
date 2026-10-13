@@ -1,5 +1,6 @@
 ---
 title: "Mise en cache de pages"
+description: "La mise en cache de pages fait référence à la mise en cache du contenu d'une page entière du côté serveur."
 ---
 
 La mise en cache de pages fait référence à la mise en cache du contenu d'une page entière du côté serveur. Plus tard, lorsque la même page est demandée à nouveau, son contenu est servi à partir du cache plutôt que d'être régénéré entièrement.

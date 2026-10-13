@@ -1,5 +1,6 @@
 ---
 title: "Formato de Respuesta"
+description: "Cuando se maneja una petición al API RESTful, una aplicación realiza usualmente los siguientes pasos que están relacionados con el formato de la respuesta."
 ---
 
 Cuando se maneja una petición al API RESTful, una aplicación realiza usualmente los siguientes pasos que están relacionados

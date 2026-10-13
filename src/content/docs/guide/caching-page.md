@@ -1,5 +1,6 @@
 ---
 title: "Page Caching"
+description: "Page caching refers to caching the content of a whole page on the server-side."
 ---
 
 Page caching refers to caching the content of a whole page on the server-side. Later when the same page

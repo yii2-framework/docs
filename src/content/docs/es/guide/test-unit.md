@@ -1,5 +1,6 @@
 ---
 title: "Pruebas unitarias"
+description: "Un test unitario se encarga de verificar que una unidad simple de código funcione como se espera."
 ---
 
 Un test unitario se encarga de verificar que una unidad simple de código funcione como se espera.

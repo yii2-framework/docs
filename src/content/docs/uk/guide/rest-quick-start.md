@@ -1,5 +1,6 @@
 ---
 title: "Швидкий старт"
+description: "Yii включає повноцінний набір засобів для спрощеної реалізації RESTful API."
 ---
 
 Yii включає повноцінний набір засобів для спрощеної реалізації [RESTful API](https://ru.wikipedia.org/wiki/REST).

@@ -1,5 +1,6 @@
 ---
 title: "Fonctionnement des applications"
+description: "Après avoir installé Yii, vous obtenez une application Yii fonctionnelle accessible via l'URL https://hostname/basic/web/index.php ou..."
 ---
 
 Après avoir installé Yii, vous obtenez une application Yii fonctionnelle accessible via l'URL `https://hostname/basic/web/index.php` ou `https://hostname/index.php`, en fonction

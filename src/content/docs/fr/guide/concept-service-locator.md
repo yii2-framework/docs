@@ -1,5 +1,6 @@
 ---
 title: "Localisateur de services"
+description: "Un localisateur de services est un objet que sait comment fournir toutes sortes de services (ou composants) dont une application peut avoir besoin."
 ---
 
 Un localisateur de services est un objet que sait comment fournir toutes sortes de services (ou composants) dont une application peut avoir besoin. Dans le localisateur de services, chaque composant existe seulement sous forme d'une unique instance, identifiée de manière unique par un identifiant. Vous utilisez l'identifiant pour retrouver un composant du localisateur de services.

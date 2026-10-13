@@ -1,5 +1,6 @@
 ---
 title: "Classe assistante Url"
+description: "La classe assistante Url fournit un jeu de méthodes statiques pour gérer les URL."
 ---
 
 La classe assistante Url fournit un jeu de méthodes statiques pour gérer les URL.

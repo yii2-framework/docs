@@ -1,5 +1,6 @@
 ---
 title: "Làm việc với CSDL"
+description: "Phần này sẽ hướng dẫn làm thế nào để tạo mới trang có chức năng hiển thị dữ liệu các thành phố (country) và được lấy từ bảng country nằm trong cơ sở dữ liệu."
 ---
 
 Phần này sẽ hướng dẫn làm thế nào để tạo mới trang có chức năng hiển thị dữ liệu các thành phố (country) và được lấy

@@ -1,5 +1,6 @@
 ---
 title: "数据格式器（Data Formatting）"
+description: "你可以使用 formatter application component 来格式化数据。 默认 fomatter 由 Formatter 来实现，这个组件提供了一系列关于日期/时间，数字，货币等的格式化方法。"
 ---
 
 你可以使用 `formatter` [application component](structure-application-components.md) 来格式化数据。

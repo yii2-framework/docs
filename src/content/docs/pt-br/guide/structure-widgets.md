@@ -1,5 +1,6 @@
 ---
 title: "Widgets"
+description: "Os widgets são blocos de construção reutilizáveis usados nas views (visões) para criar e configurar complexos elementos de interface do usuário sob uma..."
 ---
 
 Os widgets são blocos de construção reutilizáveis usados nas

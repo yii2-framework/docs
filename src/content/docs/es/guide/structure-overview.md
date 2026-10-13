@@ -1,5 +1,6 @@
 ---
 title: "Información general"
+description: "Las aplicaciones realizadas con Yii están organizadas de acuerdo al patrón de diseño modelo-vista-controlador (MVC)."
 ---
 
 Las aplicaciones realizadas con Yii están organizadas de acuerdo al patrón de diseño [modelo-vista-controlador (MVC)](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). Los

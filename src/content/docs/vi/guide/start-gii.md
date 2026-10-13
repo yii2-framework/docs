@@ -1,5 +1,6 @@
 ---
 title: "Sử dụng Gii để sinh code"
+description: "Trong phần này sẽ hướng dẫn sử dụng Gii để tự động sinh code, những mã nguồn tương tự với Web site ."
 ---
 
 Trong phần này sẽ hướng dẫn sử dụng [Gii](tool-gii.md) để tự động sinh code, những mã nguồn tương tự với Web site

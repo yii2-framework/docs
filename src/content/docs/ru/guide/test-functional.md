@@ -1,5 +1,6 @@
 ---
 title: "Функциональные тесты"
+description: "Следуйте инструкциям в apps/advanced/tests/README.md и apps/basic/tests/README.md."
 ---
 
 > Note: Данный раздел находится в разработке.

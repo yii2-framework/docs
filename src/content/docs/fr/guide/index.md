@@ -1,5 +1,6 @@
 ---
 title: "Guide définitif pour Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Ce guide est soumis aux [Conditions de la Documentation de Yii](https://www.yiiframework.com/doc/terms/).

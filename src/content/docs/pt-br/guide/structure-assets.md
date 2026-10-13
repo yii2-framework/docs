@@ -1,5 +1,6 @@
 ---
 title: "Assets"
+description: "Um asset no Yii é um arquivo que pode ser referenciado em uma página Web."
 ---
 
 Um asset no Yii é um arquivo que pode ser referenciado em uma página Web. Pode

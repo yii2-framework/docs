@@ -1,5 +1,6 @@
 ---
 title: "Installation guide"
+description: "System requirements and Composer installation steps for the project (template page)."
 ---
 
 ## System requirements

@@ -1,5 +1,6 @@
 ---
 title: "Komponenty aplikacji"
+description: "Aplikacje są lokatorami usług. Posiadają one zestawy komponentów aplikacji, które zajmują się dostarczaniem różnych serwisów do obsługi żądań."
 ---
 
 Aplikacje są [lokatorami usług](concept-service-locator.md). Posiadają one zestawy _komponentów aplikacji_,

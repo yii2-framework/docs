@@ -1,5 +1,6 @@
 ---
 title: "Database Access Objects"
+description: "Built on top of PDO, Yii DAO (Database Access Objects) provides an object-oriented API for accessing relational databases."
 ---
 
 Built on top of [PDO](https://www.php.net/manual/en/book.pdo.php), Yii DAO (Database Access Objects) provides an

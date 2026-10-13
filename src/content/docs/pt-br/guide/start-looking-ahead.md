@@ -1,5 +1,6 @@
 ---
 title: "Seguindo em Frente"
+description: "Se você leu toda a seção \"Primeiros Passos\", você criou uma aplicação Yii completa."
 ---
 
 Se você leu toda a seção "Primeiros Passos", você criou uma aplicação Yii

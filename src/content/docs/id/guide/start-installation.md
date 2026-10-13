@@ -1,5 +1,6 @@
 ---
 title: "Instalasi Yii"
+description: "Anda dapat menginstal Yii dalam dua cara, menggunakan Composer paket manager atau dengan mengunduh file arsip."
 ---
 
 Anda dapat menginstal Yii dalam dua cara, menggunakan [Composer](https://getcomposer.org/) paket manager atau dengan mengunduh file arsip.

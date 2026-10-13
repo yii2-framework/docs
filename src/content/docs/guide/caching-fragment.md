@@ -1,5 +1,6 @@
 ---
 title: "Fragment Caching"
+description: "Fragment caching refers to caching a fragment of a Web page."
 ---
 
 Fragment caching refers to caching a fragment of a Web page. For example, if a page displays a summary of

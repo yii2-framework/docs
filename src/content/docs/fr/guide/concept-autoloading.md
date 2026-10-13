@@ -1,5 +1,6 @@
 ---
 title: "Chargement automatique des classes"
+description: "Yii compte sur le mécanisme de chargement automatique des classes pour localiser et inclure tous les fichiers de classes requis."
 ---
 
 Yii compte sur le [mécanisme de chargement automatique des classes](https://www.php.net/manual/fr/language.oop5.autoload.php) pour localiser et inclure tous les fichiers de classes requis. Il fournit un chargeur automatique de classes de haute performance qui est conforme à la [norme PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Le chargeur automatique est installé lorsque vous incluez le fichier `vendor/autoload.php`.

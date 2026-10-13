@@ -1,5 +1,6 @@
 ---
 title: "Cache de Página"
+description: "O Cache de página é responsável por armazenar em cache o conteúdo de uma página inteira no servidor."
 ---
 
 O Cache de página é responsável por armazenar em cache o conteúdo de uma página inteira no servidor. Mais tarde,

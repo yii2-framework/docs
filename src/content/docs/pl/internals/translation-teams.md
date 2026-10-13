@@ -1,5 +1,6 @@
 ---
 title: "Ekipy tłumaczące"
+description: "Members of the teams that translate the Yii documentation, grouped by language."
 ---
 
 ## Chiński

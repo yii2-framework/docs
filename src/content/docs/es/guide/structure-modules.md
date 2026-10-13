@@ -1,5 +1,6 @@
 ---
 title: "Módulos"
+description: "Los módulos son unidades de software independientes que consisten en modelos, vistas, controladores, y otros componentes de apoyo."
 ---
 
 Los módulos son unidades de software independientes que consisten en [modelos](structure-models.md),

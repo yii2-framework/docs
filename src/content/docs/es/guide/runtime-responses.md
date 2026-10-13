@@ -1,5 +1,6 @@
 ---
 title: "Respuestas"
+description: "Cuando una aplicación finaliza la gestión de una petición (request), genera un objeto response y lo envía al usuario final."
 ---
 
 Cuando una aplicación finaliza la gestión de una [petición (request)](runtime-requests.md), genera un objeto

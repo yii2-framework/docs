@@ -1,5 +1,6 @@
 ---
 title: "Autorização"
+description: "Autorização é o processo que verifica se um usuário tem permissão para fazer alguma coisa."
 ---
 
 Autorização é o processo que verifica se um usuário tem permissão para fazer alguma coisa. O Yii fornece dois métodos de autorização: Filtro de Controle de Acesso (ACF) e Controle de Acesso Baseado em Role (RBAC).

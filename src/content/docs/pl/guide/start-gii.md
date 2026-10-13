@@ -1,5 +1,6 @@
 ---
 title: "Generowanie kodu za pomocą Gii"
+description: "Ta sekcja opisuje jak używać Gii do automatycznego generowania kodu, który implementuje podstawowe funkcjonalności do aplikacji Web."
 ---
 
 Ta sekcja opisuje jak używać [Gii](https://github.com/yiisoft/yii2-gii/blob/master/docs/guide/README.md) do automatycznego generowania kodu, który implementuje podstawowe

@@ -1,5 +1,6 @@
 ---
 title: "El Almacenamiento en Caché"
+description: "El almacenamiento en caché es una forma económica y eficaz para mejorar el rendimiento de una aplicación web."
 ---
 
 El almacenamiento en caché es una forma económica y eficaz para mejorar el rendimiento de una aplicación web. Mediante

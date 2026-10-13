@@ -1,5 +1,6 @@
 ---
 title: "Trabajar con código de terceros"
+description: "De tiempo en tiempo, puede necesitar usar algún código de terceros en sus aplicaciones Yii."
 ---
 
 De tiempo en tiempo, puede necesitar usar algún código de terceros en sus aplicaciones Yii. O puedes querer

@@ -1,5 +1,6 @@
 ---
 title: "Aplicações"
+description: "Aplicações são objetos que regem a estrutura e ciclo de vida gerais de aplicações em Yii."
 ---
 
 Aplicações são objetos que regem a estrutura e ciclo de vida gerais de

@@ -1,5 +1,6 @@
 ---
 title: "Data Providers (Provedores de Dados)"
+description: "Nas seções Paginação e Ordenação, descrevemos como os usuários finais podem escolher uma determinada página de dados para exibir e ordená-los por..."
 ---
 
 Nas seções [Paginação](output-pagination.md) e [Ordenação](output-sorting.md), descrevemos como os usuários finais podem escolher uma determinada página de dados para exibir e ordená-los por determinadas colunas. Uma vez que esta tarefa de paginação e ordenação de dados é muito comum, o Yii fornece um conjunto de classes _data provider_ para encapsular estes recursos.

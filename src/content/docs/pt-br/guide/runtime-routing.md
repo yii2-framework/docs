@@ -1,5 +1,6 @@
 ---
 title: "Roteamento e Criação de URL"
+description: "Quando uma aplicação Yii começa a processar uma URL requerida, o primeiro passo necessário é obter a rota pela análise da URL."
 ---
 
 Quando uma aplicação Yii começa a processar uma URL requerida, o primeiro passo

@@ -1,5 +1,6 @@
 ---
 title: "组件（Component）"
+description: "组件是 Yii 应用的主要基石。是 Component 类或其子类的实例。"
 ---
 
 组件是 Yii 应用的主要基石。是 [[yii\base\Component]] 类或其子类的实例。

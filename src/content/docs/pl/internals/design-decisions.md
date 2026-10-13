@@ -1,5 +1,6 @@
 ---
 title: "Decyzje projektowe"
+description: "Ten dokument zawiera listę decyzji projektowych, które podjęliśmy po długich debatach."
 ---
 
 Ten dokument zawiera listę decyzji projektowych, które podjęliśmy po długich debatach. O ile nie ma bardzo ważnych powodów ku temu,

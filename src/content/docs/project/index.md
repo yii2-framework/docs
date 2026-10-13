@@ -1,5 +1,6 @@
 ---
 title: "Project Documentation"
+description: "This section contains project-level documentation for the Yii2 Framework documentation repository."
 ---
 
 This section contains project-level documentation for the Yii2 Framework documentation repository.

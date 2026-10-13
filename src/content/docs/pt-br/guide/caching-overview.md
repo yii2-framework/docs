@@ -1,5 +1,6 @@
 ---
 title: "Cache"
+description: "Cache é uma maneira simples e eficiente de melhorar o desempenho de uma aplicação Web."
 ---
 
 Cache é uma maneira simples e eficiente de melhorar o desempenho de uma aplicação Web. Ao gravar dados relativamente

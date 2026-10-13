@@ -1,5 +1,6 @@
 ---
 title: "Theming"
+description: "Theming is a way to replace a set of views with another without the need of touching the original view rendering code."
 ---
 
 Theming is a way to replace a set of [views](structure-views.md) with another without the need of touching

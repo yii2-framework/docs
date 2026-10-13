@@ -1,5 +1,6 @@
 ---
 title: "Installing Yii"
+description: "You can install Yii in two ways, using the Composer package manager or by downloading an archive file."
 ---
 
 You can install Yii in two ways, using the [Composer](https://getcomposer.org/) package manager or by downloading an archive file.

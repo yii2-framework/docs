@@ -1,5 +1,6 @@
 ---
 title: "Generating Code with Gii"
+description: "This section will describe how to use Gii to automatically generate code that implements some common Web site features."
 ---
 
 This section will describe how to use [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) to automatically generate code

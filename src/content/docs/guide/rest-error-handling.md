@@ -1,5 +1,6 @@
 ---
 title: "Error Handling"
+description: "When handling a RESTful API request, if there is an error in the user request or if something unexpected happens on the server, you may simply throw an..."
 ---
 
 When handling a RESTful API request, if there is an error in the user request or if something unexpected

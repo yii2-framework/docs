@@ -1,5 +1,6 @@
 ---
 title: "Повний посібник з Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Даний посібник випущено відповідно до [положень про документацію Yii](https://www.yiiframework.com/doc/terms/).

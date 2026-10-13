@@ -1,5 +1,6 @@
 ---
 title: "Cache de Fragmentos"
+description: "Cache de fragmentos é responsável por armazenar em cache um fragmento de uma página Web."
 ---
 
 Cache de fragmentos é responsável por armazenar em cache um fragmento de uma página Web. Por exemplo, se uma

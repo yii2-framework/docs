@@ -1,5 +1,6 @@
 ---
 title: "Console applications"
+description: "Besides, the rich features for building web applications, Yii also has full-featured support for console applications which are mainly used to create..."
 ---
 
 Besides, the rich features for building web applications, Yii also has full-featured support for console applications

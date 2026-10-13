@@ -1,5 +1,6 @@
 ---
 title: "Trabajar con Bases de Datos"
+description: "En esta sección, explicaremos cómo crear una nueva página para mostrar datos de países traídos de una tabla de la base de datos llamada country."
 ---
 
 En esta sección, explicaremos cómo crear una nueva página para mostrar datos de países traídos de una tabla de la

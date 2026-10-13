@@ -1,5 +1,6 @@
 ---
 title: "Aktualizacja z wersji 1.1"
+description: "Pomiędzy wersjami 1.1 i 2.0 Yii jest ogrom różnic, ponieważ framework został całkowicie przepisany w 2.0."
 ---
 
 Pomiędzy wersjami 1.1 i 2.0 Yii jest ogrom różnic, ponieważ framework został całkowicie przepisany w 2.0.

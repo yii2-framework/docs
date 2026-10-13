@@ -1,5 +1,6 @@
 ---
 title: "Виконання додатків"
+description: "Після встановлення Yii, базовий додаток буде доступний або по URL https://hostname/basic/web/index.php, або по https://hostname/index.php, в залежності від..."
 ---
 
 Після встановлення Yii, базовий додаток буде доступний або по URL `https://hostname/basic/web/index.php`,

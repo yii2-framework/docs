@@ -1,5 +1,6 @@
 ---
 title: "Ambiente de Hospedagem Compartilhada"
+description: "Ambientes de hospedagem compartilhada geralmente são muito limitados com relação a configuração e estrutura de diretórios."
 ---
 
 Ambientes de hospedagem compartilhada geralmente são muito limitados com relação a configuração e estrutura de diretórios. Ainda assim, na maioria dos casos, você pode executar Yii 2.0 em um ambiente de hospedagem compartilhada com poucos ajustes.

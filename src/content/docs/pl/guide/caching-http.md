@@ -1,5 +1,6 @@
 ---
 title: "Pamięć podręczna HTTP"
+description: "Oprócz pamięci podręcznej tworzonej po stronie serwera, która została opisana w poprzednich rozdziałach, aplikacje mogą również skorzystać z pamięci..."
 ---
 
 Oprócz pamięci podręcznej tworzonej po stronie serwera, która została opisana w poprzednich rozdziałach, aplikacje mogą również

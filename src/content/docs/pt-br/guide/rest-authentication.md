@@ -1,5 +1,6 @@
 ---
 title: "Autenticação"
+description: "Ao contrário de aplicações Web, APIs RESTful são geralmente stateless, o que significa que as sessões ou os cookies não devem ser utilizados."
 ---
 
 Ao contrário de aplicações Web, APIs RESTful são geralmente stateless, o que significa que as sessões ou os cookies não devem ser utilizados. Portanto, cada requisição deve vir com algum tipo de credencial de autenticação pois o estado de autenticação do usuário não pode ser mantido por sessões ou cookies. Uma prática comum é enviar um token de acesso secreto com cada solicitação para autenticar o usuário. Uma vez que um token de acesso pode ser utilizado para identificar de forma exclusiva e autenticar um usuário. **Solicitações de API devem sempre ser enviadas via HTTPS para evitar ataques man-in-the-middle (MitM)**.

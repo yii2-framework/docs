@@ -1,5 +1,6 @@
 ---
 title: "Translation workflow"
+description: "Yii is translated in many languages in order to be useful for international applications and developers."
 ---
 
 Yii is translated in many languages in order to be useful for international applications and developers. Two main areas

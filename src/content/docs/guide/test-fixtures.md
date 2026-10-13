@@ -1,5 +1,6 @@
 ---
 title: "Fixtures"
+description: "Fixtures are an important part of testing."
 ---
 
 Fixtures are an important part of testing. Their main purpose is to set up the environment in a fixed/known state

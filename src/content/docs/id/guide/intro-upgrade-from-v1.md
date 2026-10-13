@@ -1,5 +1,6 @@
 ---
 title: "Upgrade dari Versi 1.1"
+description: "Ada banyak perbedaan antara versi 1.1 dan 2.0 karena Yii Framework benar-benar ditulis ulang di versi 2.0."
 ---
 
 Ada banyak perbedaan antara versi 1.1 dan 2.0 karena Yii Framework benar-benar ditulis ulang di versi 2.0.

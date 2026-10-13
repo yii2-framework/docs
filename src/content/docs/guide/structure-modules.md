@@ -1,5 +1,6 @@
 ---
 title: "Modules"
+description: "Modules are self-contained software units that consist of models, views, controllers, and other supporting components."
 ---
 
 Modules are self-contained software units that consist of [models](structure-models.md), [views](structure-views.md),

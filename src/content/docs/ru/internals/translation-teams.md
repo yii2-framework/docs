@@ -1,5 +1,6 @@
 ---
 title: "Команды переводчиков"
+description: "Members of the teams that translate the Yii documentation, grouped by language."
 ---
 
 ## Бразильский португальский

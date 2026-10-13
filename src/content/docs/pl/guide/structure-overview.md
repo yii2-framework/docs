@@ -1,5 +1,6 @@
 ---
 title: "Struktura aplikacji"
+description: "Aplikacja Yii jest zorganizowana według wzorca architektonicznego model-widok-kontroler (MVC)."
 ---
 
 Aplikacja Yii jest zorganizowana według wzorca architektonicznego [model-widok-kontroler (MVC)](https://pl.wikipedia.org/wiki/Model-View-Controller).

@@ -1,5 +1,6 @@
 ---
 title: "Tổng quan về kiến trúc ứng dụng"
+description: "Các ứng dụng Yii được tổ chức dựa theo mẫu thiết kế model-view-controller (MVC) ."
 ---
 
 Các ứng dụng Yii được tổ chức dựa theo mẫu thiết kế [model-view-controller (MVC)](https://vi.wikipedia.org/wiki/MVC)

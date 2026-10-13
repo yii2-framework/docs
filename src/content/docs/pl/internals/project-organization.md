@@ -1,5 +1,6 @@
 ---
 title: "Organizacja projektu"
+description: "W tym dokumencie opisana jest organizacja repozytoriów deweloperskich Yii 2."
 ---
 
 W tym dokumencie opisana jest organizacja repozytoriów deweloperskich Yii 2.

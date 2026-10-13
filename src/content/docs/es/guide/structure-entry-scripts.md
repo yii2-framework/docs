@@ -1,5 +1,6 @@
 ---
 title: "Scripts de Entrada"
+description: "Los scripts de entrada son el primer eslabón en el proceso de arranque de la aplicación."
 ---
 
 Los scripts de entrada son el primer eslabón en el proceso de arranque de la aplicación. Una aplicación (ya sea una

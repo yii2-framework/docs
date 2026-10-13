@@ -1,5 +1,6 @@
 ---
 title: "Cykl tworzenia tłumaczenia"
+description: "Yii jest przetłumaczony na wiele języków, dzięki czemu może być używany przez międzynarodowe grono deweloperów."
 ---
 
 Yii jest przetłumaczony na wiele języków, dzięki czemu może być używany przez międzynarodowe grono deweloperów. Dwa główne obszary,

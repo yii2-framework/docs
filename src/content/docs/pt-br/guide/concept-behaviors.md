@@ -1,5 +1,6 @@
 ---
 title: "Behaviors (Comportamentos)"
+description: "Behaviors são instâncias de Behavior, ou de uma classe-filha, também conhecido como mixins, permite melhorar a funcionalidade de uma classe componente..."
 ---
 
 Behaviors são instâncias de [[yii\base\Behavior]], ou de uma classe-filha, também conhecido como [mixins](https://en.wikipedia.org/wiki/Mixin), permite melhorar a funcionalidade de uma classe [[yii\base\Component|componente]] existente sem a necessidade de mudar a herança dela.

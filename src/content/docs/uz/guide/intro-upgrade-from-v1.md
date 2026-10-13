@@ -1,5 +1,6 @@
 ---
 title: "1.1 dan keyingi yangilanishlar"
+description: "Yii 2.0 talqini uchun batamom boshqatdan yozilganligi bois 1.1 va 2.0 talqinlar orasida ko'p farqlar mavjud."
 ---
 
 Yii 2.0 talqini uchun batamom boshqatdan yozilganligi bois 1.1 va 2.0 talqinlar orasida ko'p farqlar mavjud.

@@ -1,5 +1,6 @@
 ---
 title: "Classe assistante Html"
+description: "Toutes les applications Web génèrent un grand nombre de balises HTML."
 ---
 
 Toutes les applications Web génèrent un grand nombre de balises HTML. Si le code HTML est statique, il peut être créé efficacement sous forme de [mélange de code PHP et de code HTML dans un seul fichier](https://www.php.net/manual/fr/language.basic-syntax.phpmode.php), mais lorsqu'il est généré dynamiquement, cela commence à être compliqué à gérer sans une aide supplémentaire. Yii fournit une telle aide sous la forme de la classe assistante Html, qui offre un jeu de méthodes statiques pour manipuler les balises Html les plus courantes, leurs options et leur contenu.

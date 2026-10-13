@@ -1,5 +1,6 @@
 ---
 title: "Membuat Kode menggunakan Gii"
+description: "Bagian ini akan menjelaskan bagaimana cara menggunakan Gii untuk membuat kode secara otomatis yang mengimplementasikan fitur-fitur yang bersifat umum dalam..."
 ---
 
 Bagian ini akan menjelaskan bagaimana cara menggunakan [Gii](https://github.com/yiisoft/yii2-gii/blob/master/docs/guide/README.md) untuk membuat kode secara otomatis

@@ -1,5 +1,6 @@
 ---
 title: "Silniki szablonów"
+description: "Yii domyślnie używa PHP jako języka szablonów, ale nic nie stoi na przeszkodzie, aby skonfigurować wsparcie dla innych silników renderujących widok, takich..."
 ---
 
 Yii domyślnie używa PHP jako języka szablonów, ale nic nie stoi na przeszkodzie, aby skonfigurować wsparcie dla innych silników renderujących widok,

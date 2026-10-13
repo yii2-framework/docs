@@ -1,5 +1,6 @@
 ---
 title: "Gerando Código com Gii"
+description: "Essa seção irá descrever como usar o Gii para gerar automaticamente código que implementa algumas funcionalidades comuns de sites."
 ---
 
 Essa seção irá descrever como usar o [Gii](https://github.com/yiisoft/yii2-gii/blob/master/docs/guide-pt-BR/README.md) para gerar automaticamente código que implementa algumas funcionalidades comuns de sites. Usar o Gii para gerar código é simplesmente uma questão de informar os dados corretos conforme as instruções mostradas nas páginas do Gii.

@@ -1,5 +1,6 @@
 ---
 title: "Database Migration"
+description: "During the course of developing and maintaining a database-driven application, the structure of the database being used evolves just like the source code does."
 ---
 
 During the course of developing and maintaining a database-driven application, the structure of the database

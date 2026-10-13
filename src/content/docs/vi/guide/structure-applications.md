@@ -1,5 +1,6 @@
 ---
 title: "Ứng dụng"
+description: "Mỗi ứng dụng là một đối tượng giúp quản lý tổng thể cấu trúc và vòng đời của ứng dụng Yii."
 ---
 
 Mỗi ứng dụng là một đối tượng giúp quản lý tổng thể cấu trúc và vòng đời của ứng dụng Yii.

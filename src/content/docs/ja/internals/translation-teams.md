@@ -1,5 +1,6 @@
 ---
 title: "翻訳チーム"
+description: "Members of the teams that translate the Yii documentation, grouped by language."
 ---
 
 ## ブラジルのポルトガル語

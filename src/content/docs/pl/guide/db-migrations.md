@@ -1,5 +1,6 @@
 ---
 title: "Migracje bazy danych"
+description: "W czasie rozwoju i utrzymywania aplikacji zasilanej danymi z bazy danych, struktura tej ostatniej ewoluuje podobnie jak sam kod źródłowy."
 ---
 
 W czasie rozwoju i utrzymywania aplikacji zasilanej danymi z bazy danych, struktura tej ostatniej ewoluuje podobnie jak

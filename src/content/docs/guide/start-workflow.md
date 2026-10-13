@@ -1,5 +1,6 @@
 ---
 title: "Running Applications"
+description: "After installing Yii, you have a working Yii application that can be accessed via the URL https://hostname/basic/web/index.php or..."
 ---
 
 After installing Yii, you have a working Yii application that can be accessed via

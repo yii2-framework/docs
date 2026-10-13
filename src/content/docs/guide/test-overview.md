@@ -1,5 +1,6 @@
 ---
 title: "Testing"
+description: "Testing is an important part of software development. Whether we are aware of it or not, we conduct testing continuously."
 ---
 
 Testing is an important part of software development. Whether we are aware of it or not, we conduct testing continuously.

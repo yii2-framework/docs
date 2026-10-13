@@ -1,5 +1,6 @@
 ---
 title: "Diciendo Hola"
+description: "Esta sección describe cómo crear la típica página \"Hola Mundo\" (Hello World en inglés) en tu aplicación."
 ---
 
 Esta sección describe cómo crear la típica página "Hola Mundo" (Hello World en inglés) en tu aplicación.

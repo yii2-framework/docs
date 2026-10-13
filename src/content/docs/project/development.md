@@ -1,5 +1,6 @@
 ---
 title: "Development"
+description: "This document describes development workflows and maintenance tasks for the project."
 ---
 
 This document describes development workflows and maintenance tasks for the project.

@@ -1,5 +1,6 @@
 ---
 title: "Html helper"
+description: "Every web application generates lots of HTML markup."
 ---
 
 Every web application generates lots of HTML markup. If the markup is static, it can be done efficiently by

@@ -1,5 +1,6 @@
 ---
 title: "Dalsze kroki"
+description: "Jeśli przebyłeś już cały dział \"Pierwsze kroki\", powinieneś mieć utworzoną kompletną aplikację Yii."
 ---
 
 Jeśli przebyłeś już cały dział "Pierwsze kroki", powinieneś mieć utworzoną kompletną aplikację Yii. Podczas tego procesu, nauczyłeś się jak zaimplementować zwykle niezbędne

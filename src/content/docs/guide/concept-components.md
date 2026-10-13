@@ -1,5 +1,6 @@
 ---
 title: "Components"
+description: "Components are the main building blocks of Yii applications. Components are instances of Component, or an extended class."
 ---
 
 Components are the main building blocks of Yii applications. Components are instances of [[yii\base\Component]],

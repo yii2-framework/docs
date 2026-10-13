@@ -1,5 +1,6 @@
 ---
 title: "Tratamento de Erros"
+description: "O Yii inclui um próprio tratamento de erro que o torna uma experiência muito mais agradável do que antes."
 ---
 
 O Yii inclui um próprio [[yii\web\ErrorHandler|tratamento de erro]] que o torna uma experiência muito mais agradável do que antes. Em particular, o manipulador de erro do Yii faz o seguinte para melhorar o tratamento de erros:

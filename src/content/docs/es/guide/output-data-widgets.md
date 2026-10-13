@@ -1,5 +1,6 @@
 ---
 title: "Widgets de datos"
+description: "Yii proporciona un conjunto de widgets que se pueden usar para mostrar datos."
 ---
 
 Yii proporciona un conjunto de [widgets](structure-widgets.md) que se pueden usar para mostrar datos.

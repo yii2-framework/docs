@@ -1,5 +1,6 @@
 ---
 title: "客户端脚本使用"
+description: "现代 Web 应用程序， 除了呈现并发送到浏览器的静态 HTML 页面外， 还包含 JavaScript， 用于通过操纵现有元素或通过 AJAX 加载新内容来修改浏览器中的页面。 本节介绍 Yii 提供的用于向网站添加 JavaScript 和 CSS 以及动态调整它们的方法。"
 ---
 
 现代 Web 应用程序，

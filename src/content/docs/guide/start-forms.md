@@ -1,5 +1,6 @@
 ---
 title: "Working with Forms"
+description: "This section describes how to create a new page with a form for getting data from users."
 ---
 
 This section describes how to create a new page with a form for getting data from users.

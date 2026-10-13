@@ -1,5 +1,6 @@
 ---
 title: "Autocarga de clases"
+description: "Yii depende del mecanismo de autocarga de clases para localizar e incluir los archivos de las clases requiridas."
 ---
 
 Yii depende del [mecanismo de autocarga de clases](https://www.php.net/manual/es/language.oop5.autoload.php) para localizar

@@ -1,5 +1,6 @@
 ---
 title: "Security best practices"
+description: "Below we'll review common security principles and describe how to avoid threats when developing applications using Yii."
 ---
 
 Below we'll review common security principles and describe how to avoid threats when developing applications using Yii.

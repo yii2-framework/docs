@@ -1,5 +1,6 @@
 ---
 title: "Entry Scripts"
+description: "Entry scripts are the first step in the application bootstrapping process."
 ---
 
 Entry scripts are the first step in the application bootstrapping process. An application (either

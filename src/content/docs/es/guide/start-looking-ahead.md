@@ -1,5 +1,6 @@
 ---
 title: "Mirando Hacia Adelante"
+description: "Si has leído el capítulo \"Comenzando con Yii\" completo, has creado una aplicación completa en Yii."
 ---
 
 Si has leído el capítulo "Comenzando con Yii" completo, has creado una aplicación completa en Yii. En el proceso, has aprendido cómo implementar algunas

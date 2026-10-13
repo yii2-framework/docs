@@ -1,5 +1,6 @@
 ---
 title: "Pagination"
+description: "Lorsqu'il y a trop de données à afficher sur une seule page, une stratégie courante consiste à les afficher en de multiples pages, et sur chacune des pages..."
 ---
 
 Lorsqu'il y a trop de données à afficher sur une seule page, une stratégie courante consiste à les afficher en de multiples pages, et sur chacune des pages, à n'afficher qu'une fraction réduite des données. Cette stratégie est connue sous le nom de _pagination_.

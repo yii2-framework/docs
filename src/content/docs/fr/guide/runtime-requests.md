@@ -1,5 +1,6 @@
 ---
 title: "Requêtes"
+description: "Les requêtes faites à l'application sont représentées en terme d'objets Request qui fournissent des informations telles que les paramètres de requête, les..."
 ---
 
 Les requêtes faites à l'application sont représentées en terme d'objets [[yii\web\Request]] qui fournissent des informations telles que les paramètres de requête, les entêtes HTTP, les cookies, etc.

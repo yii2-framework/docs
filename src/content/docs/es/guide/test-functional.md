@@ -1,5 +1,6 @@
 ---
 title: "Tests funcionales"
+description: "Los tests funcionales verifican escenarios desde la perspectiva de un usuario."
 ---
 
 Los tests funcionales verifican escenarios desde la perspectiva de un usuario.

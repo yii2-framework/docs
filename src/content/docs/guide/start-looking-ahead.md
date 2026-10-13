@@ -1,5 +1,6 @@
 ---
 title: "Looking Ahead"
+description: "If you've read through the entire \"Getting Started\" chapter, you have now created a complete Yii application."
 ---
 
 If you've read through the entire "Getting Started" chapter, you have now created a complete Yii application. In the process, you have learned how to implement some commonly

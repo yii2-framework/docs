@@ -1,5 +1,6 @@
 ---
 title: "Apa Itu Yii"
+description: "Yii merupakan kerangka kerja berbasis komponen yang berkecepatan tinggi (high performance) yang digunakan untuk kasus pengembangan yang cepat pada aplikasi..."
 ---
 
 Yii merupakan kerangka kerja berbasis komponen yang berkecepatan tinggi (high performance) yang digunakan untuk kasus

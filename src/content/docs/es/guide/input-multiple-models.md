@@ -1,5 +1,6 @@
 ---
 title: "Obtención de datos para los modelos de múltiples"
+description: "Cuando se trata de algunos datos complejos, es posible que puede que tenga que utilizar varios modelos diferentes para recopilar la entrada del usuario."
 ---
 
 Cuando se trata de algunos datos complejos, es posible que puede que tenga que utilizar varios modelos diferentes para recopilar

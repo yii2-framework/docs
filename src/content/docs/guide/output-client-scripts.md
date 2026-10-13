@@ -1,5 +1,6 @@
 ---
 title: "Working with Client Scripts"
+description: "Modern web applications, additionally to static HTML pages that are rendered and sent to the browser, contain JavaScript that is used to modify the page in..."
 ---
 
 Modern web applications, additionally to static HTML pages that are

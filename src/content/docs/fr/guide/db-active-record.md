@@ -1,5 +1,6 @@
 ---
 title: "Enregistrement actif (_Active Record_)"
+description: "L'enregistrement actif fournit une interface orientée objet pour accéder aux données stockées dans une base de données et les manipuler."
 ---
 
 L'[enregistrement actif](https://fr.wikipedia.org/wiki/Active_record) fournit une interface orientée objet pour accéder aux données stockées dans une base de données et les manipuler.

@@ -1,5 +1,6 @@
 ---
 title: "Réponses"
+description: "Quand une application a terminé la prise en charge d'une requête, elle génère un objet response et l'envoie à l'utilisateur final."
 ---
 
 Quand une application a terminé la prise en charge d'une [requête](runtime-requests.md), elle génère un objet [[yii\web\Response|response]] et l'envoie à l'utilisateur final. L'objet `response` contient des informations telles que le code d'état HTTP, les entêtes HTTP et le corps. Le but ultime du développement d'applications Web est essentiellement du construire de tels objets `response` pour des requêtes variées.

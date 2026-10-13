@@ -1,5 +1,6 @@
 ---
 title: "Configurations"
+description: "Les configurations sont très largement utilisées dans Yii lors de la création d'objets ou l'initialisation d'objets existants."
 ---
 
 Les configurations sont très largement utilisées dans Yii lors de la création d'objets ou l'initialisation d'objets existants. Les configurations contiennent généralement le nom de la classe de l'objet en cours de création, et une liste de valeurs initiales qui doivent être assignées aux [propriétés](concept-properties.md) de l'objet. Elles peuvent aussi comprendre une liste de gestionnaires qui doivent être attachés aux [événements](concept-events.md) de l'objet et/ou une liste de [comportements](concept-behaviors.md) qui doivent être attachés à l'objet.

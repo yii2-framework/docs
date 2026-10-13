@@ -1,5 +1,6 @@
 ---
 title: "Collecting Tabular Input"
+description: "Sometimes you need to handle multiple models of the same kind in a single form."
 ---
 
 Sometimes you need to handle multiple models of the same kind in a single form. For example, multiple settings, where

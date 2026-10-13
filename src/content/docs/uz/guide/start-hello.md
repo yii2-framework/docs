@@ -1,5 +1,6 @@
 ---
 title: "«Salomlashamiz»"
+description: "Ushbu bo'limda biz \"Salom\" so'zlari bilan yangi sahifani qanday yaratishni ko'rib chiqamiz."
 ---
 
 Ushbu bo'limda biz "Salom" so'zlari bilan yangi sahifani qanday yaratishni ko'rib chiqamiz. Siz masalani hal qilish jarayonida

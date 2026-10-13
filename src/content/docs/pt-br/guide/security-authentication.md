@@ -1,5 +1,6 @@
 ---
 title: "Autenticação"
+description: "Autenticação é o processo de verificação da identidade do usuário. Geralmente é usado um identificador (ex."
 ---
 
 Autenticação é o processo de verificação da identidade do usuário. Geralmente é usado um identificador (ex. um nome de usuário ou endereço de e-mail) e um token secreto (ex. uma senha ou um token de acesso) para determinar se o usuário é quem ele diz ser. Autenticação é a base do recurso de login.

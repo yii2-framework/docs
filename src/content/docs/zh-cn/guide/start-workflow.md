@@ -1,5 +1,6 @@
 ---
 title: "运行应用"
+description: "安装 Yii 后，就有了一个可运行的 Yii 应用， 根据配置的不同，可以通过 https://hostname/basic/web/index.php 或 https://hostname/index.php 访问。 本章节将介绍应用的内建功能，如何组织代码， 以及一般情况下应用如何处理请求。"
 ---
 
 安装 Yii 后，就有了一个可运行的 Yii 应用，

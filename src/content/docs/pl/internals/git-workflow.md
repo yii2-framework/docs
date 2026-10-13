@@ -1,5 +1,6 @@
 ---
 title: "Cykl produkcyjny Git dla kontrybutorów Yii 2"
+description: "Zatem chcesz współtworzyć Yii? Świetnie! Aby przyspieszyć proces akceptacji Twoich modyfikacji, pamiętaj o przestrzeganiu poniższych wskazówek."
 ---
 
 Zatem chcesz współtworzyć Yii? Świetnie! Aby przyspieszyć proces akceptacji Twoich modyfikacji, pamiętaj o przestrzeganiu poniższych

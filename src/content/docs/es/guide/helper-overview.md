@@ -1,5 +1,6 @@
 ---
 title: "Helpers"
+description: "Yii ofrece muchas clases que ayudan a simplificar las tareas comunes de codificación, como manipulación de string o array, generación de código HTML, y más."
 ---
 
 > Note: Esta sección está en desarrollo.

@@ -1,5 +1,6 @@
 ---
 title: "Pull request quality assurance"
+description: "When checking if PR could be merged or not the following criteria should be considered among others."
 ---
 
 When checking if PR could be merged or not the following criteria should be considered among others:

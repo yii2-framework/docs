@@ -1,5 +1,6 @@
 ---
 title: "Modelos"
+description: "Los modelos forman parte de la arquitectura MVC. Son objetos que representan datos de negocio, reglas y lógica."
 ---
 
 Los modelos forman parte de la arquitectura

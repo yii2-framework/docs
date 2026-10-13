@@ -1,5 +1,6 @@
 ---
 title: "Komponenty"
+description: "Komponenty są głównym budulcem aplikacji Yii. Komponenty to instancje klasy Component lub jej potomnych."
 ---
 
 Komponenty są głównym budulcem aplikacji Yii. Komponenty to instancje klasy [[yii\base\Component|Component]] lub jej potomnych.

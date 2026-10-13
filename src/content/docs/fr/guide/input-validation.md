@@ -1,5 +1,6 @@
 ---
 title: "Validation des entrées utilisateur"
+description: "En général, vous ne devriez jamais faire confiance aux données entrées par l'utilisateur et devriez toujours les valider avant de les utiliser.,"
 ---
 
 En général, vous ne devriez jamais faire confiance aux données entrées par l'utilisateur et devriez toujours les valider avant de les utiliser.,

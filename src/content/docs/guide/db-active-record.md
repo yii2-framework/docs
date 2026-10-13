@@ -1,5 +1,6 @@
 ---
 title: "Active Record"
+description: "Active Record provides an object-oriented interface for accessing and manipulating data stored in databases."
 ---
 
 [Active Record](https://en.wikipedia.org/wiki/Active_record_pattern) provides an object-oriented interface

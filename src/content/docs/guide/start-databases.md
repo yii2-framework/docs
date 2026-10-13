@@ -1,5 +1,6 @@
 ---
 title: "Working with Databases"
+description: "This section will describe how to create a new page that displays country data fetched from a database table named country."
 ---
 
 This section will describe how to create a new page that displays country data fetched from

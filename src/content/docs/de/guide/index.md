@@ -1,5 +1,6 @@
 ---
 title: "Das umfassende Handbuch für Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Dieses Tutorial wurde unter den [Bedingungen der Yii-Dokumentation](https://www.yiiframework.com/doc/terms/) veröffentlicht.
