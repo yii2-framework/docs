@@ -25,7 +25,22 @@ jobs:
       - name: Checkout.
         uses: actions/checkout@v6
 
-      # `npm run build` runs `prebuild` first: scripts/sync.mjs clones the packages of packages.json.
+      # tools/bin/reference (run by `prebuild`) generates the API reference with yii2-apidoc.
+      - name: Set up PHP.
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mbstring
+          tools: composer
+          coverage: none
+
+      - name: Install the reference generator.
+        run: composer install --no-dev --prefer-dist --no-interaction --no-progress --working-dir tools
+
+      # `npm run build` runs `prebuild` first: scripts/sync.mjs clones the packages of packages.json, then
+      # tools/bin/reference writes the API reference and fails when apidoc errors, warnings or unresolved links grow
+      # beyond tools/baseline.json. `postbuild` (scripts/check-site.mjs) fails on literal [[ in the guide or broken
+      # links in the reference.
       - name: Build with Astro.
         uses: withastro/action@v5
 

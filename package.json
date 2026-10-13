@@ -5,15 +5,17 @@
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
-        "prebuild": "node scripts/sync.mjs && php tools/bin/reference",
+        "prebuild": "node scripts/sync.mjs && php tools/bin/reference --baseline tools/baseline.json",
         "build": "astro build",
+        "postbuild": "node scripts/check-site.mjs",
         "preview": "astro preview",
         "reference": "php tools/bin/reference",
         "astro": "astro",
         "descriptions": "node scripts/add-descriptions.mjs",
         "sync": "node scripts/sync.mjs",
         "sync:local": "node scripts/sync.mjs --local",
-        "test:plugins": "node --test plugins/yii-links.test.mjs",
+        "test": "node --test scripts/*.test.mjs plugins/*.test.mjs",
+        "test:plugins": "node --test plugins/*.test.mjs",
         "test:sync": "node --test scripts/sync.test.mjs"
     },
     "dependencies": {
