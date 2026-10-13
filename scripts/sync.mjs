@@ -1,0 +1,716 @@
+#!/usr/bin/env node
+// Syncs the Markdown guides of the extension packages listed in `packages.json` into
+// `src/content/docs/extensions/<name>/` (git-ignored build input).
+//
+// For each package the sources come from `localPath` (with `--local` or `SYNC_LOCAL=1`, when the directory exists)
+// or from a shallow clone of `repo` at `ref` in `.cache/packages/<name>/`. The package `README.md` becomes the landing
+// page (`index.md`) and every `<docsDir>/*.md` file one page; images under `<docsDir>` are copied next to the pages.
+// Each page gets frontmatter (`title` from the first H1, which is removed; `description`; `sidebar.order`; `editUrl`)
+// and its links are rewritten: links between synced pages stay relative, links to other files of the package become
+// GitHub URLs at `ref`, absolute URLs and `[[yii\...]]` references are left untouched. The output has no timestamps,
+// so running the script twice yields identical files.
+//
+// A package whose `composer.json` name differs from the manifest `packagist` value (for example a repository that
+// still holds a template) is skipped with a `[sync] skipped <name>: ...` warning and no page; the script still exits 0
+// so the deploy is not blocked, unless `--strict` is given.
+//
+// Usage: node scripts/sync.mjs [--local] [--strict] [--manifest=<path>]
+
+import { execFileSync } from 'node:child_process';
+import {
+  copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync,
+} from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { describe, yamlQuote } from './lib/description.mjs';
+
+const ROOT = fileURLToPath(new URL('../', import.meta.url));
+const OUTPUT_DIR = path.join(ROOT, 'src', 'content', 'docs', 'extensions');
+const CACHE_DIR = path.join(ROOT, '.cache', 'packages');
+const REQUIRED_KEYS = ['name', 'title', 'repo', 'ref', 'docsDir', 'srcDir', 'namespace', 'localPath', 'packagist'];
+// Sidebar order of the pages when the manifest has no `order`; the landing page is always first.
+const DEFAULT_ORDER = ['installation', 'configuration', 'examples', 'migration', 'testing'];
+const IMAGE = /\.(avif|gif|jpe?g|png|svg|webp)$/i;
+const FENCE = /^\s{0,3}(`{3,}|~{3,})/;
+// `](href)` or `](href "title")` of an inline link or image.
+const INLINE_LINK = /\]\(\s*<?([^)\s>]+)>?((?:\s+(?:"[^"]*"|'[^']*'))?\s*)\)/g;
+// GitHub alert type -> Starlight aside. `IMPORTANT` maps to `caution` so it survives the `llms-small.txt` trimming.
+const ALERTS = {
+  NOTE: ':::note',
+  TIP: ':::tip',
+  IMPORTANT: ':::caution[Important]',
+  WARNING: ':::caution',
+  CAUTION: ':::danger',
+};
+// Sections whose badges are human calls to action: their badges become text links instead of being dropped.
+const CALL_TO_ACTION = /social|sponsor|support|star|follow|license|community/i;
+
+/**
+ * Validates the manifest and returns its packages; throws with every problem found.
+ *
+ * @param {unknown} manifest Parsed `packages.json`.
+ * @param {string} file Manifest path, for messages.
+ */
+export function validateManifest(manifest, file) {
+  const errors = [];
+
+  if (!Array.isArray(manifest) || manifest.length === 0) {
+    throw new Error(`${file}: expected a non-empty array of packages.`);
+  }
+
+  const names = new Set();
+
+  manifest.forEach((entry, index) => {
+    const where = `${file}[${index}]`;
+
+    if (entry === null || typeof entry !== 'object' || Array.isArray(entry)) {
+      errors.push(`${where}: expected an object.`);
+      return;
+    }
+
+    for (const key of REQUIRED_KEYS) {
+      if (typeof entry[key] !== 'string' || entry[key].trim() === '') {
+        errors.push(`${where}: "${key}" must be a non-empty string.`);
+      }
+    }
+
+    if (typeof entry.name === 'string') {
+      if (!/^[a-z0-9][a-z0-9-]*$/.test(entry.name)) {
+        errors.push(`${where}: "name" must be lowercase letters, digits and hyphens.`);
+      }
+      if (names.has(entry.name)) {
+        errors.push(`${where}: duplicate name "${entry.name}".`);
+      }
+      names.add(entry.name);
+    }
+
+    if (typeof entry.repo === 'string' && !/^(https:\/\/|file:\/\/)/.test(entry.repo)) {
+      errors.push(`${where}: "repo" must be an https:// (or file:// for tests) URL.`);
+    }
+
+    if (entry.status !== undefined && typeof entry.status !== 'string') {
+      errors.push(`${where}: "status" must be a string.`);
+    }
+
+    if (entry.order !== undefined
+      && (!Array.isArray(entry.order) || entry.order.some((item) => typeof item !== 'string'))) {
+      errors.push(`${where}: "order" must be an array of page names.`);
+    }
+  });
+
+  if (errors.length > 0) {
+    throw new Error(`Invalid manifest:\n${errors.join('\n')}`);
+  }
+
+  return manifest;
+}
+
+/**
+ * Returns the directory holding the package sources: the local checkout or a fresh shallow clone.
+ *
+ * @returns {{ dir: string, source: string }}
+ */
+function obtainSources(pkg, useLocal) {
+  const local = path.resolve(ROOT, pkg.localPath);
+
+  if (useLocal) {
+    if (existsSync(path.join(local, 'README.md'))) {
+      return { dir: local, source: `local ${local} (working tree)` };
+    }
+    process.stderr.write(`[sync] ${pkg.name}: ${local} not found, cloning ${pkg.repo} instead.\n`);
+  }
+
+  const dir = path.join(CACHE_DIR, pkg.name);
+
+  rmSync(dir, { recursive: true, force: true });
+  mkdirSync(CACHE_DIR, { recursive: true });
+  execFileSync('git', ['clone', '--quiet', '--depth', '1', '--single-branch', '--branch', pkg.ref, pkg.repo, dir], {
+    stdio: ['ignore', 'inherit', 'inherit'],
+    env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
+  });
+
+  const commit = execFileSync('git', ['-C', dir, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+
+  return { dir, source: `${pkg.repo}@${pkg.ref} (${commit})` };
+}
+
+/**
+ * Splits a line into prose and inline code spans; `transform` is applied to the prose parts only.
+ */
+function mapProse(line, transform) {
+  return line.split(/(`+[^`]*?`+)/).map((part, index) => (index % 2 === 1 ? part : transform(part))).join('');
+}
+
+/**
+ * Applies `transform` to every line outside code fences.
+ *
+ * @param {string[]} lines
+ * @param {(line: string) => string} transform
+ */
+function mapOutsideFences(lines, transform) {
+  let fence = null;
+
+  return lines.map((line) => {
+    const match = FENCE.exec(line);
+
+    if (fence !== null) {
+      if (match && match[1][0] === fence[0] && match[1].length >= fence.length) {
+        fence = null;
+      }
+      return line;
+    }
+
+    if (match) {
+      fence = match[1];
+      return line;
+    }
+
+    return transform(line);
+  });
+}
+
+/**
+ * Returns the index ranges `[start, end]` of the top-level HTML blocks that start with `<tag` outside code fences.
+ */
+function htmlBlocks(lines, tag) {
+  const blocks = [];
+  const open = new RegExp(`^\\s{0,3}<${tag}\\b`, 'i');
+  const close = new RegExp(`</${tag}>\\s*$`, 'i');
+  let fence = null;
+
+  for (let index = 0; index < lines.length; index++) {
+    const match = FENCE.exec(lines[index]);
+
+    if (fence !== null) {
+      if (match && match[1][0] === fence[0] && match[1].length >= fence.length) {
+        fence = null;
+      }
+      continue;
+    }
+
+    if (match) {
+      fence = match[1];
+      continue;
+    }
+
+    if (open.test(lines[index])) {
+      let end = index;
+
+      while (end < lines.length - 1 && !close.test(lines[end])) {
+        end++;
+      }
+      blocks.push([index, end]);
+      index = end;
+    }
+  }
+
+  return blocks;
+}
+
+/** Decodes the few HTML entities used in READMEs. */
+function decodeEntities(text) {
+  return text.replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&');
+}
+
+/**
+ * Converts the raw HTML blocks GitHub renders but Starlight pages should not carry: `<picture>` becomes a Markdown
+ * image (the wide `<source>` when present), `<p>` blocks with a heading, a logo or badges are dropped, and other
+ * `<p>` blocks (taglines) become Markdown paragraphs.
+ *
+ * @returns {{ lines: string[], htmlTitle: string | null }}
+ */
+function convertHtmlBlocks(lines) {
+  let htmlTitle = null;
+  const replace = (tag, convert) => {
+    for (const [start, end] of htmlBlocks(lines, tag).reverse()) {
+      lines.splice(start, end - start + 1, ...convert(lines.slice(start, end + 1).join('\n')));
+    }
+  };
+
+  replace('p', (html) => {
+    const heading = /<h1\b[^>]*>([\s\S]*?)<\/h1>/i.exec(html);
+
+    if (heading) {
+      htmlTitle ??= decodeEntities(heading[1].replace(/<[^>]+>/g, '').trim());
+      return [];
+    }
+
+    if (/<(img|picture)\b/i.test(html)) {
+      return [];
+    }
+
+    const markdown = decodeEntities(html
+      .replace(/^\s*<p\b[^>]*>/i, '')
+      .replace(/<\/p>\s*$/i, '')
+      .replace(/<\/?strong>/gi, '**')
+      .replace(/<\/?b>/gi, '**')
+      .replace(/<\/?em>/gi, '_')
+      .replace(/<\/?i>/gi, '_')
+      .replace(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)')
+      .replace(/<br\s*\/?>/gi, '\n\n')
+      .replace(/<[^>]+>/g, ''));
+    const paragraphs = markdown.split(/\n\s*\n/).map((part) => part.split('\n').map((line) => line.trim())
+      .filter((line) => line !== '').join(' ')).filter((part) => part !== '');
+
+    return paragraphs.flatMap((part, index) => (index === 0 ? [part] : ['', part]));
+  });
+
+  replace('picture', (html) => {
+    const wide = /<source\b[^>]*media="[^"]*min-width[^"]*"[^>]*srcset="([^"\s]+)/i.exec(html)
+      ?? /<source\b[^>]*srcset="([^"\s]+)"[^>]*media="[^"]*min-width/i.exec(html);
+    const img = /<img\b[^>]*>/i.exec(html)?.[0] ?? '';
+    const src = wide?.[1] ?? /\bsrc="([^"]+)"/i.exec(img)?.[1];
+    const alt = /\balt="([^"]*)"/i.exec(img)?.[1] ?? '';
+
+    return src ? [`![${decodeEntities(alt)}](${src})`] : [];
+  });
+
+  return { lines, htmlTitle };
+}
+
+/**
+ * Converts GitHub alerts (`> [!NOTE]`) into Starlight asides.
+ */
+function convertAlerts(lines) {
+  const output = [];
+  let fence = null;
+
+  for (let index = 0; index < lines.length; index++) {
+    const line = lines[index];
+    const fenceMatch = FENCE.exec(line);
+
+    if (fence !== null) {
+      if (fenceMatch && fenceMatch[1][0] === fence[0] && fenceMatch[1].length >= fence.length) {
+        fence = null;
+      }
+      output.push(line);
+      continue;
+    }
+
+    if (fenceMatch) {
+      fence = fenceMatch[1];
+      output.push(line);
+      continue;
+    }
+
+    const alert = /^\s{0,3}>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*$/i.exec(line);
+
+    if (!alert) {
+      output.push(line);
+      continue;
+    }
+
+    output.push(ALERTS[alert[1].toUpperCase()]);
+
+    while (index + 1 < lines.length && /^\s{0,3}>/.test(lines[index + 1])) {
+      index++;
+      output.push(lines[index].replace(/^\s{0,3}>\s?/, ''));
+    }
+
+    output.push(':::');
+  }
+
+  return output;
+}
+
+/** Whether a Markdown image URL is a status/badge image. */
+function isBadgeImage(url) {
+  return /img\.shields\.io|badge|codecov\.io\/.*\/graph|stryker-mutator/i.test(url);
+}
+
+/**
+ * Drops badge-only lines; in call-to-action sections (social, sponsor, license) the badges become text links.
+ * Sections left without content are removed with their heading.
+ */
+function convertBadges(lines) {
+  const badge = /\[!\[([^\]]*)\]\(([^)\s]+)\)\]\(([^)\s]+)\)|!\[([^\]]*)\]\(([^)\s]+)\)/g;
+  let section = '';
+
+  const converted = mapOutsideFences(lines, (line) => {
+    const heading = /^#{1,6}\s+(.*)$/.exec(line);
+
+    if (heading) {
+      section = heading[1];
+      return line;
+    }
+
+    const rest = line.replace(badge, '').trim();
+    const badges = [...line.matchAll(badge)];
+
+    if (rest !== '' || badges.length === 0 || !badges.every((match) => isBadgeImage(match[2] ?? match[5]))) {
+      return line;
+    }
+
+    if (!CALL_TO_ACTION.test(section)) {
+      return '\u0000';
+    }
+
+    const links = badges.filter((match) => match[3] !== undefined)
+      .map((match) => `[${match[1].trim() || match[3]}](${match[3]})`);
+
+    return links.length > 0 ? links.join(' ') : '\u0000';
+  }).filter((line) => line !== '\u0000');
+
+  // Remove headings whose section became empty (only blank lines until the next heading of the same or higher level).
+  const output = [];
+
+  for (let index = 0; index < converted.length; index++) {
+    const heading = /^(#{2,6})\s/.exec(converted[index]);
+
+    if (heading) {
+      let next = index + 1;
+
+      while (next < converted.length && converted[next].trim() === '') {
+        next++;
+      }
+
+      const nextHeading = /^(#{1,6})\s/.exec(converted[next] ?? '');
+
+      if (next >= converted.length || (nextHeading && nextHeading[1].length <= heading[1].length)) {
+        index = next - 1;
+        continue;
+      }
+    }
+
+    output.push(converted[index]);
+  }
+
+  return output;
+}
+
+/**
+ * Builds the link rewriter of a package.
+ *
+ * @param {object} context
+ * @param {string} context.sourceDir Package checkout.
+ * @param {string} context.blobBase `https://github.com/<owner>/<repo>` without a trailing slash.
+ * @param {string} context.ref
+ * @param {string} context.docsDir
+ * @param {Map<string, string>} context.pages Source path (relative to the package root) -> output file name.
+ * @param {Set<string>} context.images Copied image paths relative to the package root.
+ * @returns {(href: string, sourceFile: string) => string}
+ */
+export function linkRewriter({ sourceDir, blobBase, ref, docsDir, pages, images }) {
+  return (href, sourceFile) => {
+    if (/^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith('//') || href.startsWith('#') || href === '') {
+      return href;
+    }
+
+    const match = /^([^?#]*)([?#].*)?$/.exec(href);
+    const target = href.startsWith('/')
+      ? path.posix.normalize(match[1].slice(1))
+      : path.posix.normalize(path.posix.join(path.posix.dirname(sourceFile), match[1]));
+    const suffix = match[2] ?? '';
+
+    if (target.startsWith('../')) {
+      process.stderr.write(`[sync] ${sourceFile}: link "${href}" points outside the package; left as is.\n`);
+      return href;
+    }
+
+    if (pages.has(target)) {
+      return `${pages.get(target)}${suffix}`;
+    }
+
+    if (images.has(target)) {
+      return `./${path.posix.relative(docsDir, target)}${suffix}`;
+    }
+
+    const absolute = path.join(sourceDir, target);
+    const kind = existsSync(absolute) && statSync(absolute).isDirectory() ? 'tree' : 'blob';
+    const clean = target === '.' ? '' : `/${target.replace(/\/$/, '')}`;
+
+    return `${blobBase}/${kind}/${ref}${clean}${suffix}`;
+  };
+}
+
+/**
+ * Rewrites the links of Markdown prose lines: inline links and images, reference definitions and raw HTML
+ * `href`/`src`/`srcset` attributes. Code fences and inline code are left untouched.
+ */
+function rewriteLinks(lines, rewrite) {
+  return mapOutsideFences(lines, (line) => {
+    const definition = /^(\s{0,3}\[[^\]]+\]:\s*)(\S+)(.*)$/.exec(line);
+
+    if (definition && !definition[1].startsWith('[[')) {
+      return `${definition[1]}${rewrite(definition[2])}${definition[3]}`;
+    }
+
+    return mapProse(line, (part) => part
+      .replace(INLINE_LINK, (_all, href, title) => `](${rewrite(href)}${title})`)
+      .replace(/(\s(?:href|src|srcset)=")([^"]*)(")/g, (_all, open, href, close) => `${open}${rewrite(href)}${close}`));
+  });
+}
+
+/**
+ * Removes single-line HTML comments (markdownlint directives) outside code fences.
+ */
+function dropComments(lines) {
+  return mapOutsideFences(lines, (line) => (/^\s*<!--.*-->\s*$/.test(line) ? '\u0000' : line))
+    .filter((line) => line !== '\u0000');
+}
+
+/**
+ * Removes the first H1 outside code fences and returns its text.
+ *
+ * @returns {{ lines: string[], title: string | null }}
+ */
+function extractTitle(lines) {
+  let title = null;
+  let fence = null;
+  const output = [];
+
+  for (const line of lines) {
+    const match = FENCE.exec(line);
+
+    if (fence !== null) {
+      if (match && match[1][0] === fence[0] && match[1].length >= fence.length) {
+        fence = null;
+      }
+      output.push(line);
+      continue;
+    }
+
+    if (match) {
+      fence = match[1];
+      output.push(line);
+      continue;
+    }
+
+    const heading = /^#\s+(.+?)\s*#*\s*$/.exec(line);
+
+    if (title === null && heading) {
+      title = heading[1];
+      continue;
+    }
+
+    output.push(line);
+  }
+
+  return { lines: output, title };
+}
+
+/** Collapses runs of blank lines and trims the body. */
+function tidy(lines) {
+  const output = [];
+
+  for (const line of lines.map((value) => value.replace(/\s+$/, ''))) {
+    if (line === '' && (output.length === 0 || output.at(-1) === '')) {
+      continue;
+    }
+    output.push(line);
+  }
+
+  while (output.at(-1) === '') {
+    output.pop();
+  }
+
+  return output;
+}
+
+/**
+ * Returns the frontmatter block of a generated page.
+ */
+function frontmatter({ title, description, order, label, editUrl, generatedFrom }) {
+  const lines = [
+    '---',
+    `# Generated by scripts/sync.mjs from ${generatedFrom}; edit the package repository instead.`,
+    `title: ${yamlQuote(title)}`,
+    `description: ${yamlQuote(description)}`,
+    `editUrl: ${yamlQuote(editUrl)}`,
+    'sidebar:',
+  ];
+
+  if (label) {
+    lines.push(`  label: ${yamlQuote(label)}`);
+  }
+
+  lines.push(`  order: ${order}`, '---');
+
+  return lines.join('\n');
+}
+
+/**
+ * Converts one package file to a Starlight page.
+ *
+ * @returns {string} The page source (frontmatter and body).
+ */
+export function convertPage(source, options) {
+  const { sourceFile, fallbackTitle, packageTitle, rewrite, order, label, editUrl, generatedFrom, extra } = options;
+  let lines = source.replace(/\r\n?/g, '\n').split('\n');
+
+  lines = dropComments(lines);
+  const html = convertHtmlBlocks(lines);
+  lines = convertAlerts(html.lines);
+  lines = convertBadges(lines);
+  const extracted = extractTitle(lines);
+  const title = fallbackTitle ?? extracted.title ?? html.htmlTitle;
+
+  if (!title) {
+    throw new Error(`${sourceFile}: no H1 to use as the page title.`);
+  }
+
+  lines = rewriteLinks(extracted.lines, (href) => rewrite(href, sourceFile));
+  lines = tidy([...lines, ...(extra ?? [])]);
+
+  const body = lines.join('\n');
+  let description = describe(body);
+
+  // A page without prose (a bare list or table) must not break the nightly build: fall back to the titles.
+  if (description === null) {
+    description = `${title} of the ${packageTitle} extension.`;
+    process.stderr.write(`[sync] ${sourceFile}: no paragraph usable as description; using "${description}".\n`);
+  }
+
+  return `${frontmatter({ title, description, order, label, editUrl, generatedFrom })}\n\n${body}\n`;
+}
+
+/** Lists files under `dir` recursively, as POSIX paths relative to `dir`, sorted. */
+function listFiles(dir, base = dir) {
+  return readdirSync(dir).sort().flatMap((name) => {
+    const file = path.join(dir, name);
+
+    return statSync(file).isDirectory() ? listFiles(file, base) : [path.relative(base, file).split(path.sep).join('/')];
+  });
+}
+
+/**
+ * Compares the `name` in the package `composer.json` with the manifest `packagist` value.
+ *
+ * @param {string} dir Package checkout.
+ * @param {string} expected Manifest `packagist` value, e.g. `yii2-extensions/bootstrap6`.
+ * @returns {string | null} `null` when the names match, otherwise the name found (`(no composer.json)` or
+ * `(invalid composer.json)` when it cannot be read).
+ */
+export function packageNameMismatch(dir, expected) {
+  const file = path.join(dir, 'composer.json');
+
+  if (!existsSync(file)) {
+    return '(no composer.json)';
+  }
+
+  let found;
+
+  try {
+    found = JSON.parse(readFileSync(file, 'utf8')).name;
+  } catch {
+    return '(invalid composer.json)';
+  }
+
+  return found === expected ? null : String(found);
+}
+
+/**
+ * Syncs one package into `src/content/docs/extensions/<name>/`.
+ *
+ * @returns {{ pages: number, images: number, source: string } | { skipped: string, source: string }}
+ */
+function syncPackage(pkg, useLocal) {
+  const { dir, source } = obtainSources(pkg, useLocal);
+  const found = packageNameMismatch(dir, pkg.packagist);
+
+  if (found !== null) {
+    return { skipped: `sources at ${pkg.ref} are "${found}", expected "${pkg.packagist}"`, source };
+  }
+
+  const docsDir = pkg.docsDir.replace(/^\.\/|\/$/g, '');
+  const docsPath = path.join(dir, docsDir);
+  const docsFiles = existsSync(docsPath) ? listFiles(docsPath) : [];
+  const markdown = docsFiles.filter((file) => /^[^/]+\.md$/i.test(file) && !/^readme\.md$/i.test(file));
+  const images = new Set(docsFiles.filter((file) => IMAGE.test(file)).map((file) => `${docsDir}/${file}`));
+  const pages = new Map([['README.md', 'index.md']]);
+
+  for (const file of markdown) {
+    pages.set(`${docsDir}/${file}`, file.toLowerCase());
+  }
+
+  const blobBase = pkg.repo.replace(/\.git$/, '').replace(/\/$/, '');
+  const rewrite = linkRewriter({ sourceDir: dir, blobBase, ref: pkg.ref, docsDir, pages, images });
+  const order = pkg.order ?? DEFAULT_ORDER;
+  const outDir = path.join(OUTPUT_DIR, pkg.name);
+  const generatedFrom = `${blobBase}@${pkg.ref}`;
+  const rank = (name) => {
+    const index = order.indexOf(name);
+
+    return index === -1 ? 100 + markdown.map((file) => file.replace(/\.md$/i, '')).indexOf(name) : index + 1;
+  };
+  const changelog = existsSync(path.join(dir, 'CHANGELOG.md'));
+  const extra = [
+    '',
+    '## Package',
+    '',
+    `- Source code and issues: [${blobBase.replace(/^https:\/\/github\.com\//, '')}](${blobBase}). `
+      + 'Star the repository if the package is useful to you.',
+    `- Composer package: [${pkg.packagist}](https://packagist.org/packages/${pkg.packagist}).`,
+    ...(changelog ? [`- Changelog: [CHANGELOG.md](${blobBase}/blob/${pkg.ref}/CHANGELOG.md).`] : []),
+  ];
+
+  mkdirSync(outDir, { recursive: true });
+
+  for (const [sourceFile, outName] of pages) {
+    const isIndex = outName === 'index.md';
+    const page = convertPage(readFileSync(path.join(dir, sourceFile), 'utf8'), {
+      sourceFile,
+      fallbackTitle: isIndex ? pkg.title : null,
+      packageTitle: pkg.title,
+      rewrite,
+      order: isIndex ? 0 : rank(outName.replace(/\.md$/, '')),
+      label: isIndex ? 'Overview' : null,
+      editUrl: `${blobBase}/edit/${pkg.ref}/${sourceFile}`,
+      generatedFrom,
+      extra: isIndex ? extra : null,
+    });
+
+    writeFileSync(path.join(outDir, outName), page);
+  }
+
+  for (const image of images) {
+    const target = path.join(outDir, path.posix.relative(docsDir, image));
+
+    mkdirSync(path.dirname(target), { recursive: true });
+    copyFileSync(path.join(dir, image), target);
+  }
+
+  return { pages: pages.size, images: images.size, source };
+}
+
+function main(argv) {
+  const useLocal = argv.includes('--local') || process.env.SYNC_LOCAL === '1';
+  const strict = argv.includes('--strict');
+  const manifestArg = argv.find((arg) => arg.startsWith('--manifest='));
+  const manifestFile = manifestArg
+    ? path.resolve(manifestArg.slice('--manifest='.length))
+    : path.join(ROOT, 'packages.json');
+  const packages = validateManifest(JSON.parse(readFileSync(manifestFile, 'utf8')), path.relative(ROOT, manifestFile));
+
+  // The whole directory is generated: start from scratch so removed pages and packages disappear.
+  rmSync(OUTPUT_DIR, { recursive: true, force: true });
+
+  let skipped = 0;
+
+  for (const pkg of packages) {
+    const result = syncPackage(pkg, useLocal);
+
+    if ('skipped' in result) {
+      // Greppable: `[sync] skipped <name>: ...`. No page is written, so the sidebar hides the package.
+      process.stderr.write(`[sync] skipped ${pkg.name}: ${result.skipped} (${result.source}).\n`);
+      skipped++;
+      continue;
+    }
+
+    process.stdout.write(`[sync] ${pkg.name}: ${result.pages} pages, ${result.images} images from ${result.source}.\n`);
+  }
+
+  if (skipped > 0 && strict) {
+    throw new Error(`${skipped} package(s) skipped (--strict).`);
+  }
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  try {
+    main(process.argv.slice(2));
+  } catch (error) {
+    process.stderr.write(`[sync] ${error instanceof Error ? error.message : String(error)}\n`);
+    process.exitCode = 1;
+  }
+}

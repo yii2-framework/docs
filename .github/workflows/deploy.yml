@@ -4,6 +4,9 @@ name: deploy
 on:
   push:
     branches: [main]
+  # Nightly rebuild: `npm run build` re-syncs the extension guides (scripts/sync.mjs) from their repositories.
+  schedule:
+    - cron: '0 3 * * *'
   workflow_dispatch:
 
 permissions:
@@ -22,6 +25,7 @@ jobs:
       - name: Checkout.
         uses: actions/checkout@v6
 
+      # `npm run build` runs `prebuild` first: scripts/sync.mjs clones the packages of packages.json.
       - name: Build with Astro.
         uses: withastro/action@v5
 

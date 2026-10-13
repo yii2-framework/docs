@@ -50,8 +50,15 @@ Each page declares the documented version and the build date in `<meta name="doc
   the site.
 - Agent skills for Yii and its extensions are planned in the `skills/` directory of the
   [documentation repository](https://github.com/yii2-framework/docs).
-- The API reference (`/docs/api/`) and the extension guides (`/docs/extensions/<package>/`) are planned and are not
-  published yet.
+- The API reference (`/docs/api/`) is planned and is not published yet.
+
+## Extension guides
+
+The guides of the `yii2-extensions` packages are published under `/docs/extensions/<package>/`, starting with
+Bootstrap 6 (`https://yii2-framework.github.io/docs/extensions/bootstrap6/`). They are synced from each package
+repository on every build and listed in `llms.txt` under "Extensions"; the bundle
+[`_llms-txt/extensions.txt`](https://yii2-framework.github.io/docs/_llms-txt/extensions.txt) holds them all. The
+extension guides are in English only.
 
 ## Related resources
 

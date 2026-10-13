@@ -55,3 +55,7 @@ Thumbs.db
 .buildpath
 .project
 .settings
+
+# extension guides synced by scripts/sync.mjs (build input, never committed)
+.cache/
+src/content/docs/extensions/

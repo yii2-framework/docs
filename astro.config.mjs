@@ -1,4 +1,5 @@
 // @ts-check
+import { existsSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { unified } from '@astrojs/markdown-remark';
@@ -34,6 +35,35 @@ const locales = {
   vi: { label: 'Tiếng Việt', lang: 'vi' },
   'zh-cn': { label: '简体中文', lang: 'zh-CN' },
 };
+
+/**
+ * Returns the "Extensions" sidebar group: one sub-group per package of `packages.json` whose guides were synced into
+ * `src/content/docs/extensions/<name>/` by `scripts/sync.mjs` (run by `npm run build` through `prebuild`). Packages
+ * without pages (not synced yet, or skipped by the sync) are left out with a warning, so the sidebar and `llms.txt`
+ * never point to a missing directory and `astro dev` works without a sync.
+ */
+function extensionsGroup() {
+  /** @type {Array<{ name: string, title: string }>} */
+  const packages = JSON.parse(readFileSync(new URL('./packages.json', import.meta.url), 'utf8'));
+  const synced = packages.filter(({ name }) => {
+    const found = existsSync(new URL(`./src/content/docs/extensions/${name}/index.md`, import.meta.url));
+
+    if (!found) {
+      console.warn(`[extensions] ${name} has no synced pages (not synced yet, or skipped by scripts/sync.mjs); `
+        + 'the sidebar omits it. Run `npm run sync` or `npm run sync:local`.');
+    }
+
+    return found;
+  });
+
+  return synced.length === 0 ? [] : [{
+    label: 'Extensions',
+    items: synced.map(({ name, title }) => ({
+      label: title,
+      items: [{ autogenerate: { directory: `extensions/${name}` } }],
+    })),
+  }];
+}
 
 const sidebar = [
   {
@@ -225,6 +255,7 @@ const sidebar = [
       { label: 'Glossary', slug: 'guide/glossary' },
     ],
   },
+  ...extensionsGroup(),
   {
     label: 'Internals',
     items: [{ autogenerate: { directory: 'internals' } }],

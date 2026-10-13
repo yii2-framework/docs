@@ -47,6 +47,23 @@ npm run build
 npm run preview
 ```
 
+## Extension docs
+
+The guides of the extension packages listed in `packages.json` are synced into `src/content/docs/extensions/<name>/`
+by `scripts/sync.mjs`. The synced files are build input and are never committed (`.gitignore`).
+
+```bash
+npm run sync          # shallow clone of each package at its `ref` into .cache/packages/
+npm run sync:local    # use each package's `localPath` checkout instead (working tree)
+npm run test:sync     # self-tests of the sync script
+```
+
+`npm run build` runs the sync first (`prebuild`), so CI clones the packages; `SYNC_LOCAL=1 npm run build` uses the
+local checkouts. The deploy workflow also runs nightly to pick up package changes. A package whose repository does
+not contain it yet (its `composer.json` name differs from `packagist` in the manifest) is skipped with a
+`[sync] skipped <name>` warning and left out of the sidebar; `bootstrap6` is in that state until it is pushed, so CI
+shows its docs only after the push. `node scripts/sync.mjs --strict` fails on any skip.
+
 ## Our social networks
 
 [![Follow on X](https://img.shields.io/badge/-Follow%20on%20X-1DA1F2.svg?style=for-the-badge&logo=x&logoColor=white&labelColor=000000)](https://x.com/Terabytesoftw)
