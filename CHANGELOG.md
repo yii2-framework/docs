@@ -20,3 +20,5 @@
   `npx skills add yii2-framework/docs`.
 - feat(eval): add `eval/`, a local agent evaluation runner (Claude Code headless) with 8 canonical tasks and a
   deterministic checker.
+- feat: sync the guides of `yii2-extensions/filepond` and `yii2-extensions/localeurls` (added to `packages.json`)
+  and drop Packagist (`poser.pugx.org`) and StyleCI badges from synced READMEs.

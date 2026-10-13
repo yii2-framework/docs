@@ -314,9 +314,13 @@ function convertAlerts(lines) {
   return output;
 }
 
-/** Whether a Markdown image URL is a status/badge image. */
+/**
+ * Whether a Markdown image URL is a status/badge image: shields.io, poser.pugx.org (Packagist), Codecov graphs,
+ * Stryker, StyleCI shields and any URL containing `badge`.
+ */
 function isBadgeImage(url) {
-  return /img\.shields\.io|badge|codecov\.io\/.*\/graph|stryker-mutator/i.test(url);
+  return /img\.shields\.io|poser\.pugx\.org|badge|codecov\.io\/.*\/graph|stryker-mutator|styleci\.io\/repos\/\d+\/shield/i
+    .test(url);
 }
 
 /**

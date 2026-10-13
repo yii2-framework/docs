@@ -11,5 +11,31 @@
         "localPath": "../../yii2-extensions/bootstrap6",
         "packagist": "yii2-extensions/bootstrap6",
         "order": ["installation", "configuration", "examples", "migration", "testing"]
+    },
+    {
+        "name": "filepond",
+        "title": "FilePond",
+        "repo": "https://github.com/yii2-extensions/filepond",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\filepond",
+        "localPath": "../../yii2-extensions/filepond",
+        "packagist": "yii2-extensions/filepond",
+        "order": ["installation", "configuration", "examples", "testing"]
+    },
+    {
+        "name": "localeurls",
+        "title": "Locale URLs",
+        "repo": "https://github.com/yii2-extensions/localeurls",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\localeurls",
+        "localPath": "../../yii2-extensions/localeurls",
+        "packagist": "yii2-extensions/localeurls",
+        "order": ["installation", "configuration", "examples", "testing"]
     }
 ]

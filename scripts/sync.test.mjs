@@ -138,4 +138,24 @@ describe('convertPage', () => {
     assert.match(page, /\n# not a title\n/);
     assert.doesNotMatch(page, /shields\.io|\n# Guide/);
   });
+
+  test('Packagist (poser) and StyleCI badges are dropped with their section', () => {
+    const page = convertPage([
+      '# Guide',
+      '',
+      'Installs the demo package with Composer.',
+      '',
+      '## Quality code',
+      '',
+      '[![Latest Stable Version](https://poser.pugx.org/o/demo/v)](https://github.com/o/demo/releases)',
+      '[![StyleCI](https://github.styleci.io/repos/711867018/shield?branch=main)](https://github.styleci.io/repos/1)',
+      '',
+      '## Next',
+      '',
+      'Read on.',
+    ].join('\n'), options);
+
+    assert.doesNotMatch(page, /poser\.pugx\.org|styleci|## Quality code/);
+    assert.match(page, /\n## Next\n\nRead on\.\n/);
+  });
 });

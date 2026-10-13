@@ -40,7 +40,9 @@ Prefer the Markdown version of any page: append `index.md` to the page URL.
 ## Extension guides
 
 - Guides of the `yii2-extensions` packages live under `https://yii2-framework.github.io/docs/extensions/<package>/`,
-  for example `https://yii2-framework.github.io/docs/extensions/bootstrap6/` (Bootstrap 6 widgets). They are synced
+  for example `https://yii2-framework.github.io/docs/extensions/bootstrap6/` (Bootstrap 6 widgets),
+  `https://yii2-framework.github.io/docs/extensions/filepond/` (FilePond uploads) and
+  `https://yii2-framework.github.io/docs/extensions/localeurls/` (language-prefixed URLs). They are synced
   from each package repository on every build; the `llms.txt` section "Extensions" lists the published ones.
 - Markdown URLs work the same way: `https://yii2-framework.github.io/docs/extensions/bootstrap6/installation/index.md`.
 - The bundle `https://yii2-framework.github.io/docs/_llms-txt/extensions.txt` holds all extension guides.

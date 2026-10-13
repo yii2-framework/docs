@@ -54,8 +54,9 @@ Each page declares the documented version and the build date in `<meta name="doc
 
 ## Extension guides
 
-The guides of the `yii2-extensions` packages are published under `/docs/extensions/<package>/`, starting with
-Bootstrap 6 (`https://yii2-framework.github.io/docs/extensions/bootstrap6/`). They are synced from each package
+The guides of the `yii2-extensions` packages are published under `/docs/extensions/<package>/`: Bootstrap 6
+(`https://yii2-framework.github.io/docs/extensions/bootstrap6/`), FilePond (`.../extensions/filepond/`) and Locale URLs
+(`.../extensions/localeurls/`). They are synced from each package
 repository on every build and listed in `llms.txt` under "Extensions"; the bundle
 [`_llms-txt/extensions.txt`](https://yii2-framework.github.io/docs/_llms-txt/extensions.txt) holds them all. The
 extension guides are in English only.
