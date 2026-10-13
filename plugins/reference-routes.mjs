@@ -12,13 +12,23 @@ const FALLBACK_LOOP = 'for (const fallback of defaultLocaleDocs) {';
  * @returns {string[]}
  */
 export function referenceTypeSlugs() {
+  return [...referenceTypeNames().keys()];
+}
+
+/**
+ * Returns the fully qualified name of every generated type page by slug, read from the link map written by
+ * `tools/bin/reference`; empty when the reference has not been generated.
+ *
+ * @returns {Map<string, string>}
+ */
+export function referenceTypeNames() {
   if (!existsSync(LINKS_FILE)) {
-    return [];
+    return new Map();
   }
 
   const { types } = JSON.parse(readFileSync(LINKS_FILE, 'utf8'));
 
-  return Object.values(types).map(({ slug }) => slug);
+  return new Map(Object.entries(types).map(([name, { slug }]) => [slug, name]));
 }
 
 /**

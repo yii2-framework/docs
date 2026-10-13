@@ -34,11 +34,12 @@ function frontmatterField(frontmatter, key) {
 }
 
 /**
- * Returns the default-locale (English) pages by slug: `{ title, description, order }`, read from the frontmatter
- * (`order` is `sidebar.order`, or `undefined`).
+ * Returns the default-locale (English) pages by slug: `{ title, description, order, file }`, read from the
+ * frontmatter (`order` is `sidebar.order`, or `undefined`; `file` is the source path relative to the content
+ * directory).
  *
  * @param {string[]} localeKeys Locale directory names to skip (every locale except `root`).
- * @returns {Map<string, { title: string, description: string, order: number | undefined }>}
+ * @returns {Map<string, { title: string, description: string, order: number | undefined, file: string }>}
  */
 export function englishPages(localeKeys) {
   const pages = new Map();
@@ -72,6 +73,7 @@ export function englishPages(localeKeys) {
         title,
         description,
         order: order === undefined ? undefined : Number(order),
+        file: relative,
       });
     }
   };
@@ -130,19 +132,54 @@ export function sidebarGroups(sidebar, pages) {
 }
 
 /**
+ * Shortens a description for the `llms.txt` index: whole when it fits in `max` characters, otherwise cut after the
+ * last sentence that ends within `max` (when that keeps at least half of it) or at the last word boundary, with `...`.
+ *
+ * @param {string} text
+ * @param {number} [max]
+ */
+export function shortDescription(text, max = 100) {
+  const chars = [...text.trim()];
+
+  if (chars.length <= max) {
+    return chars.join('');
+  }
+
+  const head = chars.slice(0, max).join('');
+  const sentence = /^.*[.!?](?=\s)/.exec(head)?.[0];
+
+  if (sentence !== undefined && sentence.length >= max / 2) {
+    return sentence;
+  }
+
+  const space = head.slice(0, max - 3).lastIndexOf(' ');
+  const cut = space > 0 ? head.slice(0, space) : head.slice(0, max - 3);
+
+  return `${cut.replace(/[\s,;:.\u2014-]+$/, '')}...`;
+}
+
+/**
  * Builds the `details` section of `llms.txt`: one Markdown list per sidebar group, each line linking a page's
- * Markdown URL with its one-line description; nested groups become H3 subsections. Pages missing from the sidebar are
- * listed first under "Overview".
+ * Markdown URL with its description shortened by {@link shortDescription} (API reference pages: none, the title is
+ * the namespace), then the group's bundles; nested groups become H3 subsections. Pages missing from the sidebar are
+ * listed first under "Overview". Links are base-absolute (`/docs/guide/x/index.md`), like the links inside the
+ * Markdown pages and bundles, unless `absolute` is set.
  *
  * @param {ReturnType<typeof sidebarGroups>} groups
  * @param {Map<string, { title: string, description: string }>} pages
- * @param {{ site: string, base: string, intro: string }} options
+ * @param {{ site: string, base: string, intro: string, absolute?: boolean, descriptionLength?: number,
+ *   bundles?: Array<{ name: string, description: string, group: string, section?: string, topic?: string,
+ *   whole: boolean }> }} options `descriptionLength`: the cut of {@link shortDescription} (`0`: no descriptions);
+ *   `bundles`: the `_llms-txt/<name>.txt` files, listed at the end of their group or nested group.
  */
-export function llmsTxtDetails(groups, pages, { site, base, intro }) {
+export function llmsTxtDetails(groups, pages, {
+  site, base, intro, absolute = false, descriptionLength = 100, bundles = [],
+}) {
   const listed = new Set(groups.flatMap((group) => group.slugs));
-  // Type pages of the API reference are listed by their namespace pages (and the `api` bundle), not one by one.
+  // Type pages of the API reference are listed by their namespace pages (and the `api-*` bundles), not one by one.
   const unlisted = [...pages.keys()].filter((slug) => !listed.has(slug) && !REFERENCE_ID.test(slug)).sort();
   const sections = [intro];
+  const url = (path) => (absolute ? new URL(path, site).href : path);
   const line = (slug) => {
     const page = pages.get(slug);
 
@@ -150,10 +187,29 @@ export function llmsTxtDetails(groups, pages, { site, base, intro }) {
       throw new Error(`Sidebar slug "${slug}" has no English page.`);
     }
 
-    const url = new URL(markdownUrl(slug, base), site).href;
+    const description = REFERENCE_ID.test(slug) || descriptionLength === 0 ? ''
+      : shortDescription(page.description, descriptionLength);
 
-    return `- [${page.title}](${url})${page.description ? `: ${page.description}` : ''}`;
+    return `- [${page.title}](${url(markdownUrl(slug, base))})${description ? `: ${description}` : ''}`;
   };
+  const bundleUrl = (name) => url(`${base.replace(/\/+$/, '')}/_llms-txt/${name}.txt`);
+  const bundleLines = (group, section) => {
+    const own = bundles.filter((bundle) => bundle.group === group && bundle.section === section);
+    // Bundles with a `topic` (API reference: many per namespace group) are listed by name, one line per topic.
+    const topics = [...new Set(own.filter((bundle) => bundle.topic !== undefined).map((bundle) => bundle.topic))];
+    const lines = own.filter((bundle) => bundle.topic === undefined).map(({ name, description, whole }) => `- Bundle `
+      + `[${name}.txt](${bundleUrl(name)}): ${whole ? 'all pages above' : description}`);
+
+    if (topics.length > 0) {
+      lines.push(`\nBundles at \`${bundleUrl('<name>')}\`, named after their first namespace or type (sizes in tokens):`
+        + '\n');
+      lines.push(...topics.map((topic) => `- Bundles ${topic}: ${own.filter((bundle) => bundle.topic === topic)
+        .map(({ name }) => name).join(', ')}`));
+    }
+
+    return lines;
+  };
+  const list = (slugs, group, section) => [...slugs.map(line), ...bundleLines(group, section)].join('\n');
 
   for (const { label, slugs, sections: nested = [] } of [{ label: 'Overview', slugs: unlisted }, ...groups]) {
     if (slugs.length === 0) {
@@ -161,7 +217,7 @@ export function llmsTxtDetails(groups, pages, { site, base, intro }) {
     }
 
     if (nested.length === 0) {
-      sections.push(`## ${label}\n\n${slugs.map(line).join('\n')}`);
+      sections.push(`## ${label}\n\n${list(slugs, label)}`);
       continue;
     }
 
@@ -171,11 +227,11 @@ export function llmsTxtDetails(groups, pages, { site, base, intro }) {
     const parts = [`## ${label}`];
 
     if (direct.length > 0) {
-      parts.push(direct.map(line).join('\n'));
+      parts.push(list(direct, label));
     }
 
     for (const section of nested) {
-      parts.push(`### ${section.label}\n\n${section.slugs.map(line).join('\n')}`);
+      parts.push(`### ${section.label}\n\n${list(section.slugs, label, section.label)}`);
     }
 
     sections.push(parts.join('\n\n'));

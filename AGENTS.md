@@ -12,16 +12,23 @@ Instructions for AI agents that use the Yii documentation published from this re
 
 ## Where to start
 
-1. Fetch <https://yii2-framework.github.io/docs/llms.txt>. It lists every English page with a one-line description
-   and a link to its Markdown version, grouped like the site navigation.
+1. Fetch <https://yii2-framework.github.io/docs/llms.txt> (about 9k tokens). It lists every English page with a
+   short description, a link to its Markdown version and its approximate size in tokens, grouped like the site
+   navigation. Its links are relative to `https://yii2-framework.github.io`.
 2. Fetch only the pages the task needs, using their Markdown URLs.
-3. Use the bundles only when the index is not enough:
-   - <https://yii2-framework.github.io/docs/llms-small.txt>: all English guide pages, notes, tips and info blocks
-     removed (warnings kept).
-   - <https://yii2-framework.github.io/docs/llms-full.txt>: all English guide pages. Neither file contains the API
-     reference (about 10 MB); see "API reference" below.
-   - `https://yii2-framework.github.io/docs/_llms-txt/<group>.txt`: one sidebar group, for example
-     `getting-started.txt`; `api.txt` holds the whole API reference.
+3. Use a bundle only when several pages of one topic are needed. Each bundle
+   `https://yii2-framework.github.io/docs/_llms-txt/<name>.txt` holds at most about 30k tokens (a single larger page
+   would be the only exception) and is listed in `llms.txt` with its pages and size:
+   - guide topics: one per sidebar group, for example `getting-started.txt`;
+   - extension guides: one per package, for example `extensions-filepond.txt`;
+   - API reference: one per framework namespace group (a namespace with its sub-namespaces) and per package, for
+     example `api-yii2-di.txt` (`yii\di`) and `api-localeurls.txt`.
+
+   A group larger than the limit is split into consecutive chunks: the first keeps the group name, the next ones are
+   named after their first page, namespace or type (`working-with-databases-active-record.txt`,
+   `api-yii2-db.txt` then `api-yii2-db-activerecord.txt`).
+4. `llms-full.txt` (about 360k tokens, every English page except the API reference) and `llms-small.txt` (the same
+   without notes and tips) are for indexing tools. Do not read them whole.
 
 ## Markdown URLs
 
@@ -46,7 +53,8 @@ Prefer the Markdown version of any page: append `index.md` to the page URL.
   `https://yii2-framework.github.io/docs/extensions/localeurls/` (language-prefixed URLs). They are synced
   from each package repository on every build; the `llms.txt` section "Extensions" lists the published ones.
 - Markdown URLs work the same way: `https://yii2-framework.github.io/docs/extensions/bootstrap6/installation/index.md`.
-- The bundle `https://yii2-framework.github.io/docs/_llms-txt/extensions.txt` holds all extension guides.
+- The bundles `https://yii2-framework.github.io/docs/_llms-txt/extensions-<package>.txt` hold the guides of one package
+  (split by topic when larger); `api-<package>*.txt` hold its API reference.
 
 ## API reference
 

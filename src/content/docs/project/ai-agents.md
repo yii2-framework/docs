@@ -8,15 +8,16 @@ documentation of Yii 22.0; each file states the version and the build date.
 
 ## Start with llms.txt
 
-[`llms.txt`](https://yii2-framework.github.io/docs/llms.txt) lists every English page with a one-line description
-and a link to its Markdown version. An agent reads it first and then fetches only the pages it needs.
+[`llms.txt`](https://yii2-framework.github.io/docs/llms.txt) (about 9k tokens) lists every English page with a short
+description, a link to its Markdown version and its approximate size in tokens. An agent reads it first and then
+fetches only the pages it needs.
 
 | File | Contents |
 | --- | --- |
-| [`llms.txt`](https://yii2-framework.github.io/docs/llms.txt) | Index: one line per page, grouped like the sidebar. |
-| [`llms-small.txt`](https://yii2-framework.github.io/docs/llms-small.txt) | All English pages except the API reference in one file, with notes, tips and info blocks removed (warnings kept). |
-| [`llms-full.txt`](https://yii2-framework.github.io/docs/llms-full.txt) | All English pages except the API reference in one file. Use it only when the index is not enough. |
-| `_llms-txt/<group>.txt` | One file per sidebar group, for example [`getting-started.txt`](https://yii2-framework.github.io/docs/_llms-txt/getting-started.txt); [`api.txt`](https://yii2-framework.github.io/docs/_llms-txt/api.txt) holds the whole API reference. |
+| [`llms.txt`](https://yii2-framework.github.io/docs/llms.txt) | Index: one line per page with its size, grouped like the sidebar, then the bundles of each group. |
+| `_llms-txt/<name>.txt` | Bundles of at most about 30k tokens: one per sidebar group, for example [`getting-started.txt`](https://yii2-framework.github.io/docs/_llms-txt/getting-started.txt), one per extension package (`extensions-<package>.txt`), and the API reference in one bundle per framework namespace group and per package (`api-yii2-di.txt`, `api-localeurls.txt`). Larger groups are split into consecutive chunks named after their first page, namespace or type (`working-with-databases-active-record.txt`). |
+| [`llms-full.txt`](https://yii2-framework.github.io/docs/llms-full.txt) | All English pages except the API reference in one file (about 360k tokens), for indexing tools such as Cursor or Context7. Agents should not read it whole. |
+| [`llms-small.txt`](https://yii2-framework.github.io/docs/llms-small.txt) | The same without notes, tips and info blocks (warnings kept), also for indexing tools. |
 
 Translations are available on the site, but these files contain the English pages only.
 
@@ -71,7 +72,8 @@ The guides of the `yii2-extensions` packages are published under `/docs/extensio
 (`https://yii2-framework.github.io/docs/extensions/bootstrap6/`), FilePond (`.../extensions/filepond/`) and Locale URLs
 (`.../extensions/localeurls/`). They are synced from each package
 repository on every build and listed in `llms.txt` under "Extensions"; the bundle
-[`_llms-txt/extensions.txt`](https://yii2-framework.github.io/docs/_llms-txt/extensions.txt) holds them all. The
+[`_llms-txt/extensions-filepond.txt`](https://yii2-framework.github.io/docs/_llms-txt/extensions-filepond.txt) and its
+siblings hold the guides of one package each. The
 extension guides are in English only.
 
 ## Related resources

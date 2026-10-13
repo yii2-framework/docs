@@ -41,7 +41,7 @@ export function cutPosition(text, excluded, kept) {
 /**
  * Astro integration that keeps `llms-full.txt` within a size budget: when it is larger, the API reference pages
  * (demoted to the end of the file by the `demote` option) are cut. The reference stays available in
- * `_llms-txt/api.txt` and as per-page Markdown.
+ * the `_llms-txt/api-*.txt` bundles and as per-page Markdown.
  *
  * @param {{ budget: number, excluded: string[], kept: string[] }} options `budget` in bytes; page headers as in
  * {@link cutPosition}.

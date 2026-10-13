@@ -7,7 +7,7 @@
         "start": "astro dev",
         "prebuild": "node scripts/sync.mjs && php tools/bin/reference --baseline tools/baseline.json",
         "build": "astro build",
-        "postbuild": "node scripts/check-site.mjs",
+        "postbuild": "node scripts/check-site.mjs && node scripts/llms-sizes.mjs",
         "preview": "astro preview",
         "reference": "php tools/bin/reference",
         "astro": "astro",

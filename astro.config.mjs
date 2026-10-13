@@ -12,7 +12,9 @@ import { rehypeReferenceWbr } from './plugins/rehype-reference-wbr.mjs';
 import { englishPages, llmsTxtDetails, sidebarGroups } from './plugins/llms-index.mjs';
 import { llmsSmallTrim } from './plugins/llms-small-trim.mjs';
 import { llmsFullBudget } from './plugins/llms-full-budget.mjs';
-import { referenceRoutes } from './plugins/reference-routes.mjs';
+import { apiBundles, bundleNames, sourceSizer, topicBundles } from './plugins/llms-sets.mjs';
+import { llmsTables } from './plugins/llms-tables.mjs';
+import { referenceRoutes, referenceTypeNames } from './plugins/reference-routes.mjs';
 import { apiReferenceGroup, extensionItems } from './plugins/reference-sidebar.mjs';
 import { REFERENCE_ID } from './plugins/reference-id.mjs';
 import starlightLlmActions from 'starlight-llm-actions';
@@ -278,7 +280,8 @@ invalidateContentCacheOnLinkChange();
 // One build date for the config and the route middleware (see src/site-meta.mjs).
 process.env.DOCS_BUILD_DATE = buildDate();
 
-// llms.txt: one list per sidebar group (the sidebar is the source of truth), each line linking the page's Markdown.
+// llms.txt: one list per sidebar group (the sidebar is the source of truth), each line linking the page's Markdown,
+// then the group's bundles.
 const groups = sidebarGroups(sidebar, pages);
 
 // Page ids of the generated API reference, as starlight-llms-txt globs.
@@ -289,22 +292,16 @@ const pageHeaders = (reference) => [...pages].filter(([slug]) => REFERENCE_ID.te
   .map(([, page]) => `# ${page.title}\n\n> ${page.description}`);
 
 /**
- * Returns the `_llms-txt/<set>.txt` bundles: one per sidebar group; the API reference (framework and extension
- * references, all type pages included) is the `api` bundle, and the "Extensions" bundle keeps the guides only.
+ * The `_llms-txt/<name>.txt` bundles, each at most about 30k tokens (plugins/llms-sets.mjs): one per sidebar group or
+ * extension package, split by topic when larger (sizes estimated from the sources); the API reference in one bundle
+ * per framework namespace group and per package (`api-yii2-db`, `api-bootstrap6`), split the same way.
  */
-function customSets() {
-  return groups.map(({ label, slugs }) => {
-    if (label === 'API reference') {
-      return {
-        label: 'API',
-        description: 'generated API reference of the framework and the extensions (namespaces and every type)',
-        paths: REFERENCE_GLOBS,
-      };
-    }
-
-    return { label, paths: slugs.filter((slug) => !REFERENCE_ID.test(slug)) };
-  });
-}
+const size = sourceSizer(pages);
+const bundleSets = [
+  ...topicBundles(groups, pages, { size }),
+  ...apiBundles(pages, { size, types: referenceTypeNames() }),
+];
+const bundles = bundleNames(bundleSets).map((name, index) => ({ ...bundleSets[index], name }));
 
 /** @type {Parameters<typeof starlightLlmsTxt>[0]} */
 const llmsTxtOptions = {
@@ -314,14 +311,15 @@ const llmsTxtOptions = {
   details: llmsTxtDetails(groups, pages, {
     site,
     base,
-    intro: `Every page has a Markdown version at its URL followed by \`index.md\` (linked below); prefer it over `
-      + `the HTML. Version: Yii ${DOCS_VERSION}. Translations exist on the site but are not part of these files. `
-      + 'The API reference (section "API reference": one page per class with its properties, methods, events and '
-      + 'constants) is not part of `llms-full.txt` or `llms-small.txt` (too large): read the namespace and class '
-      + `pages, the bundle ${site}${base}/_llms-txt/api.txt, or the JSON catalogs ${site}${base}/reference/yii2.json `
-      + 'and `/reference/<package>.json` (one entry per type).',
+    bundles,
+    intro: `Yii ${DOCS_VERSION}. Links are relative to ${site}. Every page has a Markdown version at its URL followed `
+      + 'by `index.md` (linked below); prefer it over the HTML. Sizes are approximate (4 bytes per token): read single '
+      + 'pages; a bundle (`_llms-txt/<name>.txt`, at most about 30k tokens) holds a topic or a namespace group. '
+      + `API reference: one page per type at \`${base}/api/<namespace>/<type>/index.md\` (lower case, for example `
+      + `\`${base}/api/yii/web/request/index.md\`) and \`${base}/extensions/<package>/reference/...\`; JSON catalogs `
+      + `at \`${base}/reference/<package>.json\`. Translations are not included.`,
   }),
-  customSets: customSets(),
+  customSets: bundles.map(({ label, description, paths }) => ({ label, description, paths })),
   promote: ['index', ...(groups.find((group) => group.label === 'Getting Started')?.slugs ?? [])],
   // The API reference goes last in llms-full.txt (cut by llmsFullBudget) and out of llms-small.txt.
   demote: REFERENCE_GLOBS,
@@ -382,9 +380,12 @@ export default defineConfig({
         starlightLlmActions(llmActionsOptions),
       ],
     }),
+    // Collapses the table padding of llms-full.txt, llms-small.txt and the bundles (before they are measured or cut).
+    llmsTables(),
     // Runs after starlight-llms-txt has written llms-small.txt: drops notes, tips and info blockquotes.
     llmsSmallTrim(),
-    // llms-full.txt above 6 MB loses the API reference (still in _llms-txt/api.txt and the per-page Markdown).
+    // llms-full.txt above 6 MB loses the API reference (still in the _llms-txt/api-*.txt bundles and the per-page
+    // Markdown).
     llmsFullBudget({ budget: 6 * 1024 * 1024, excluded: pageHeaders(true), kept: pageHeaders(false) }),
   ],
 });

@@ -40,7 +40,8 @@ jobs:
       # `npm run build` runs `prebuild` first: scripts/sync.mjs clones the packages of packages.json, then
       # tools/bin/reference writes the API reference and fails when apidoc errors, warnings or unresolved links grow
       # beyond tools/baseline.json. `postbuild` (scripts/check-site.mjs) fails on literal [[ in the guide or broken
-      # links in the reference.
+      # links in the reference; scripts/llms-sizes.mjs adds the token sizes to llms.txt and fails on missing,
+      # unlisted or oversized _llms-txt bundles.
       - name: Build with Astro.
         uses: withastro/action@v5
 

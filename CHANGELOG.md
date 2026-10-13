@@ -58,3 +58,11 @@
   (signature, text, parameters, return, throws, since, see also); styles scoped to reference pages by a
   `MarkdownContent` override, `<wbr>` after `\`, `|` and `,` in table code (`plugins/rehype-reference-wbr.mjs`)
   instead of mid-word breaks, and the `index.md` copies and `_llms-txt/api.txt` stay free of the styling HTML.
+- feat: lean `llms.txt` with sizes, topic bundles and API bundles per namespace: page descriptions cut near 100
+  characters, base-absolute links, a short preamble, an approximate token size on every entry and bundle
+  (`scripts/llms-sizes.mjs`, run by `postbuild`, which also fails on missing, unlisted or oversized bundles), and each
+  bundle listed in its section; `_llms-txt` bundles of at most about 30k tokens (sidebar groups split by topic in
+  sidebar order, one bundle per extension package, the API reference in `api-yii2*.txt` per framework namespace group
+  and `api-<package>*.txt` instead of `api.txt`; `extensions.txt` is gone too); the table padding of remark-stringify
+  is collapsed in the bundles, `llms-full.txt` and `llms-small.txt`, whose first lines now say they are for indexing
+  tools.
