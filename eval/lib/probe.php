@@ -1,0 +1,228 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Runs one semantic probe against the prepared evaluation application.
+ *
+ * Usage: php probe.php <app-dir> <probe> <argument> [<html-output-file>]
+ *
+ * Probes:
+ * - `render <view>`: renders a view file (relative to the app) with a web application; when `app\models\Post` exists,
+ *   `$model` is a `Post` whose `title` is an XSS payload. Writes the HTML to the output file.
+ * - `controller-filters <class>`: the controller declares `AccessControl` and `VerbFilter`, `delete` accepts only
+ *   POST, and a rule restricts `delete` to authenticated users.
+ * - `rest-no-ratelimit <class>`: the class extends `yii\rest\ActiveController`, no behavior resolves to
+ *   `RateLimiter`, and every other default behavior of `ActiveController` is kept.
+ * - `active-record <class>`: the class declares `tableName()`, `rules()`, and `attributeLabels()` itself, and an
+ *   empty instance fails validation.
+ *
+ * Prints one line with the outcome. Exit code 0 means pass, 1 means fail, 2 means usage error.
+ */
+
+const XSS_PAYLOAD = '<script>alert(1)</script>';
+
+if ($argc < 4) {
+    fwrite(STDERR, "Usage: php probe.php <app-dir> <probe> <argument> [<html-output-file>]\n");
+    exit(2);
+}
+
+[$script, $appDir, $probe, $argument] = $argv;
+$htmlFile = $argv[4] ?? null;
+$appDir = rtrim((string) realpath($appDir), '/');
+
+defined('YII_DEBUG') || define('YII_DEBUG', true);
+defined('YII_ENV') || define('YII_ENV', 'test');
+
+$_SERVER['SCRIPT_FILENAME'] = $appDir . '/public/index.php';
+$_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['PHP_SELF'] = '/index.php';
+$_SERVER['REQUEST_URI'] = '/';
+$_SERVER['HTTP_HOST'] = 'localhost';
+$_SERVER['SERVER_NAME'] = 'localhost';
+$_SERVER['SERVER_PORT'] = '80';
+$_SERVER['REQUEST_METHOD'] = 'GET';
+
+require $appDir . '/vendor/autoload.php';
+
+/**
+ * Prints the outcome and exits with 0 (pass) or 1 (fail).
+ */
+function finish(bool $pass, string $message): never
+{
+    echo ($pass ? 'pass: ' : 'fail: ') . $message . "\n";
+    exit($pass ? 0 : 1);
+}
+
+/**
+ * Resolves the class name of a behavior configuration (object, class string, or array with `class`).
+ */
+function behaviorClass(mixed $behavior): string|null
+{
+    return match (true) {
+        is_object($behavior) => $behavior::class,
+        is_string($behavior) => ltrim($behavior, '\\'),
+        is_array($behavior) && isset($behavior['class']) && is_string($behavior['class'])
+            => ltrim($behavior['class'], '\\'),
+        default => null,
+    };
+}
+
+/**
+ * Returns the value of a behavior property from an object or an array configuration.
+ */
+function behaviorProperty(mixed $behavior, string $name): mixed
+{
+    return is_object($behavior) ? ($behavior->$name ?? null) : ($behavior[$name] ?? null);
+}
+
+try {
+    $config = require $appDir . '/config/web.php';
+    $app = new yii\web\Application($config);
+    $app->controller = new yii\web\Controller('site', $app);
+    $app->controller->action = new yii\base\InlineAction('index', $app->controller, 'actionIndex');
+    $app->requestedRoute = 'site/index';
+
+    switch ($probe) {
+        case 'render':
+            $view = $appDir . '/' . ltrim($argument, '/');
+
+            if (!is_file($view)) {
+                finish(false, "view {$argument} does not exist");
+            }
+
+            $params = [];
+
+            if (class_exists('app\models\Post')) {
+                $post = new app\models\Post();
+
+                if ($post instanceof yii\db\ActiveRecord) {
+                    $post->setAttribute('id', 1);
+                }
+
+                $post->title = XSS_PAYLOAD;
+                $params['model'] = $post;
+            }
+
+            $html = $app->controller->getView()->renderFile($view, $params, $app->controller);
+
+            if ($htmlFile !== null) {
+                file_put_contents($htmlFile, $html);
+            }
+
+            finish(true, sprintf('rendered %s (%d bytes)', $argument, strlen($html)));
+
+        case 'controller-filters':
+            $class = ltrim($argument, '\\');
+
+            if (!class_exists($class)) {
+                finish(false, "class {$class} not found");
+            }
+
+            $controller = new $class('post', $app);
+            $behaviors = $controller->behaviors();
+            $access = null;
+            $verbs = null;
+
+            foreach ($behaviors as $behavior) {
+                $behaviorClass = behaviorClass($behavior);
+
+                if ($behaviorClass !== null && is_a($behaviorClass, yii\filters\AccessControl::class, true)) {
+                    $access = $behavior;
+                }
+
+                if ($behaviorClass !== null && is_a($behaviorClass, yii\filters\VerbFilter::class, true)) {
+                    $verbs = $behavior;
+                }
+            }
+
+            if ($access === null || $verbs === null) {
+                finish(false, 'AccessControl or VerbFilter missing from behaviors()');
+            }
+
+            $deleteVerbs = array_map('strtolower', (array) (behaviorProperty($verbs, 'actions')['delete'] ?? []));
+
+            if ($deleteVerbs !== ['post']) {
+                finish(false, 'VerbFilter does not restrict delete to POST: ' . json_encode($deleteVerbs));
+            }
+
+            $authenticatedDelete = false;
+
+            foreach ((array) behaviorProperty($access, 'rules') as $rule) {
+                $actions = (array) behaviorProperty($rule, 'actions');
+                $roles = (array) behaviorProperty($rule, 'roles');
+
+                if (behaviorProperty($rule, 'allow') === true && in_array('delete', $actions, true)
+                    && in_array('@', $roles, true)) {
+                    $authenticatedDelete = true;
+                }
+            }
+
+            finish($authenticatedDelete, $authenticatedDelete
+                ? 'filters declared, delete is POST-only and limited to authenticated users'
+                : 'no allow rule grants delete to role @');
+
+        case 'rest-no-ratelimit':
+            $class = ltrim($argument, '\\');
+
+            if (!class_exists($class)) {
+                finish(false, "class {$class} not found");
+            }
+
+            if (!is_subclass_of($class, yii\rest\ActiveController::class)) {
+                finish(false, "{$class} does not extend yii\\rest\\ActiveController");
+            }
+
+            $controller = new $class('post', $app);
+            $behaviors = $controller->behaviors();
+
+            foreach ($behaviors as $name => $behavior) {
+                $behaviorClass = behaviorClass($behavior);
+
+                if ($behaviorClass !== null && is_a($behaviorClass, yii\filters\RateLimiter::class, true)) {
+                    finish(false, "behavior '{$name}' is still a RateLimiter");
+                }
+            }
+
+            $defaults = new yii\rest\ActiveController('post', $app, ['modelClass' => $controller->modelClass]);
+            $missing = array_diff(array_keys($defaults->behaviors()), array_keys($behaviors), ['rateLimiter']);
+
+            if ($missing !== []) {
+                finish(false, 'default behaviors removed: ' . implode(', ', $missing));
+            }
+
+            finish(true, 'no RateLimiter behavior remains; other default behaviors kept');
+
+        case 'active-record':
+            $class = ltrim($argument, '\\');
+
+            if (!class_exists($class)) {
+                finish(false, "class {$class} not found");
+            }
+
+            if (!is_subclass_of($class, yii\db\ActiveRecord::class)) {
+                finish(false, "{$class} does not extend yii\\db\\ActiveRecord");
+            }
+
+            foreach (['tableName', 'rules', 'attributeLabels'] as $method) {
+                if ((new ReflectionMethod($class, $method))->getDeclaringClass()->getName() !== $class) {
+                    finish(false, "{$method}() is not declared by {$class}");
+                }
+            }
+
+            $model = new $class();
+
+            if ($model->validate()) {
+                finish(false, 'an empty model passes validation');
+            }
+
+            finish(true, 'declares tableName(), rules(), attributeLabels(); empty model fails on '
+                . implode(', ', array_keys($model->getErrors())));
+
+        default:
+            fwrite(STDERR, "Unknown probe: {$probe}\n");
+            exit(2);
+    }
+} catch (Throwable $e) {
+    finish(false, sprintf('%s: %s at %s:%d', $e::class, $e->getMessage(), $e->getFile(), $e->getLine()));
+}
