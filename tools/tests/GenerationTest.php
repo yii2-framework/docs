@@ -258,7 +258,7 @@ final class GenerationTest extends TestCase
 
         self::assertSame('/docs/', $map['base'], 'Base path.');
         self::assertSame('api/yii/base/widget', $widget['slug'], 'Lower-cased slug.');
-        self::assertContains('yii\base\BaseObject', $widget['inherits'], 'Parent class to search.');
+        self::assertSame('yii\base\BaseObject', $widget['extends'], 'Parent class to search.');
         self::assertSame('method-begin', $widget['members']['begin()'], 'Method anchor.');
         self::assertSame('property-options', $widget['members']['$options'], 'Property anchor.');
         self::assertArrayNotHasKey('getClassName()', $widget['members'], 'Inherited members stay on the parent.');

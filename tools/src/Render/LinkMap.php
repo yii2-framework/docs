@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Yii2Docs\Tools\Render;
 
+use stdClass;
 use Yii2Docs\Tools\Model\TypeReader;
+
+use function array_filter;
 
 /**
  * Builds the link map read by the site plugins (`plugins/yii-links.mjs`) to resolve `[[yii\...]]` references in the
- * guide without PHP: the slug of every type page, the types to search for inherited members, and the anchors of the
- * members each type declares.
+ * guide without PHP: the slug of every type page, its parent class, traits and interfaces (to find inherited members)
+ * and the anchors of the members it declares.
  *
  * @phpstan-import-type TypeData from TypeReader
  */
@@ -22,8 +25,7 @@ final class LinkMap
     /**
      * @param list<TypeData> $types All documented types.
      *
-     * @return array{base: string, types: array<string, array{slug: string, inherits: list<string>,
-     *   members: array<string, string>}>}
+     * @return array{base: string, types: array<string, array<string, mixed>>}
      */
     public function build(array $types): array
     {
@@ -60,17 +62,13 @@ final class LinkMap
                 $members[$name] = Anchor::enumCase($name);
             }
 
-            $inherits = [...$data['traits'], ...$data['implements']];
-
-            if ($data['extends'] !== null) {
-                $inherits[] = $data['extends'];
-            }
-
-            $map[$data['name']] = [
+            $map[$data['name']] = array_filter([
                 'slug' => $this->site->pages->slug((string) $this->site->pages->typePath($data['name'])),
-                'inherits' => $inherits,
-                'members' => $members,
-            ];
+                'extends' => $data['extends'],
+                'traits' => $data['traits'],
+                'implements' => $data['implements'],
+                'members' => $members === [] ? new stdClass() : $members,
+            ], static fn(mixed $value): bool => $value !== null && $value !== []);
         }
 
         return ['base' => $this->site->pages->base, 'types' => $map];

@@ -4,6 +4,8 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { unified } from '@astrojs/markdown-remark';
 import { remarkAutoTitle } from './plugins/remark-auto-title.mjs';
+import { remarkYiiLinks } from './plugins/remark-yii-links.mjs';
+import { invalidateContentCacheOnLinkChange } from './plugins/yii-links.mjs';
 import { rehypeFixLinks } from './plugins/rehype-fix-links.mjs';
 import { rehypeHeadingIdsV5 } from './plugins/rehype-heading-ids-v5.mjs';
 import { englishPages, llmsTxtDetails, sidebarGroups } from './plugins/llms-index.mjs';
@@ -263,6 +265,9 @@ const sidebar = [
   },
 ];
 
+// Rendered guide pages embed reference URLs: rebuild them when tools/bin/reference changed the link map.
+invalidateContentCacheOnLinkChange();
+
 // One build date for the config and the route middleware (see src/site-meta.mjs).
 process.env.DOCS_BUILD_DATE = buildDate();
 
@@ -304,7 +309,8 @@ export default defineConfig({
   markdown: {
     // Astro 7 defaults to the Satteri processor; the remark/rehype plugins below require the unified pipeline.
     processor: unified({
-      remarkPlugins: [remarkAutoTitle],
+      // remarkYiiLinks: `[[yii\...]]` references to the generated API reference (.cache/reference/links.json).
+      remarkPlugins: [remarkAutoTitle, remarkYiiLinks],
       // rehypeHeadingIdsV5 must run before Astro's own rehypeHeadingIds (and Starlight's plugins) to keep Astro 5 IDs.
       rehypePlugins: [rehypeHeadingIdsV5, [rehypeFixLinks, { base }]],
     }),

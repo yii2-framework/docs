@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import { markdownUrl, resolveMarkdownLink } from './markdown-links.mjs';
+import { rewriteApiLinksInLine } from './yii-links.mjs';
 
 const CONTENT_PREFIX = 'src/content/docs/';
 
@@ -44,8 +45,9 @@ function rewriteLine(line, rewrite) {
 
 /**
  * Returns the page body as served at `<page>/index.md`: the leading H1 removed (the title is prepended by the route)
- * and every relative `.md` link rewritten to the base-absolute Markdown URL (`/docs/guide/x/index.md#a`). Code
- * fences and `[[yii\...]]` API links are left untouched.
+ * and every relative `.md` link rewritten to the base-absolute Markdown URL (`/docs/guide/x/index.md#a`);
+ * `[[yii\...]]` API references become links to the reference Markdown URLs (unknown ones become inline code). Code
+ * fences and inline code are left untouched.
  *
  * A translated page that links a page without a translation gets the default-locale Markdown URL, because only
  * content entries have a Markdown version (Starlight's fallback pages are HTML only).
@@ -107,7 +109,7 @@ export function rewriteMarkdown(body, sourceRelative, base, hasEntry = () => tru
       seenContent = true;
     }
 
-    output.push(rewriteLine(line, rewrite));
+    output.push(rewriteApiLinksInLine(rewriteLine(line, rewrite)));
   }
 
   return output.join('\n').trim();

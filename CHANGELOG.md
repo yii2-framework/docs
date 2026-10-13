@@ -29,3 +29,7 @@
   pages, one catalog per package (`public/reference/<package>.json`, schema `tools/reference.schema.json`) and a link
   map; repairs apidoc model gaps (enums, `@var` summaries, promoted properties, `readonly`), and checks apidoc
   error/warning and unresolved-link counts against `tools/baseline.json`.
+- feat: resolve the guide's `[[yii\...]]` API references (`[[yii\base\Widget]]`, `[[yii\base\Widget::widget()]]`,
+  `[[yii\base\Widget::$id]]`, `[[...|label]]`, in every locale and in raw HTML paragraphs) to links to the generated
+  API reference (`plugins/remark-yii-links.mjs`, link map from `tools/bin/reference`), also in the Markdown version
+  of each page; unknown targets become inline code in an `api-unresolved` span instead of literal `[[...]]` text.

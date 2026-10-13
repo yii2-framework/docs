@@ -12,6 +12,7 @@
         "descriptions": "node scripts/add-descriptions.mjs",
         "sync": "node scripts/sync.mjs",
         "sync:local": "node scripts/sync.mjs --local",
+        "test:plugins": "node --test plugins/yii-links.test.mjs",
         "test:sync": "node --test scripts/sync.test.mjs"
     },
     "dependencies": {
