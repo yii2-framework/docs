@@ -4,7 +4,7 @@
         "bootstrap6": {
             "errors": 223,
             "warnings": 274,
-            "unresolvedLinks": 7
+            "unresolvedLinks": 6
         },
         "filepond": {
             "errors": 10,
