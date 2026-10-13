@@ -14,8 +14,11 @@
     <a href="https://github.com/yii2-framework/docs/actions/workflows/deploy.yml" target="_blank">
         <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/deploy.yml?style=for-the-badge&label=Deploy&logo=github" alt="Deploy">
     </a>
-    <a href="https://github.com/yii2-framework/docs/actions/workflows/linter.yml" target="_blank">
-        <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/linter.yml?style=for-the-badge&label=Super-Linter&logo=github" alt="Super-Linter">
+    <a href="https://github.com/yii2-framework/docs/actions/workflows/quality.yml" target="_blank">
+        <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/quality.yml?style=for-the-badge&label=Quality&logo=github" alt="Quality">
+    </a>
+    <a href="https://github.com/yii2-framework/docs/actions/workflows/security.yml" target="_blank">
+        <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/security.yml?style=for-the-badge&label=Security&logo=github" alt="Security">
     </a>
 </p>
 

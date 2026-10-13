@@ -39,6 +39,11 @@
   language picker and `hreflang` alternates are hidden there), and `_llms-txt/api.txt`; `llms-full.txt` and
   `llms-small.txt` leave the reference out (about 10 MB) and `llms.txt` says where to find it; `AGENTS.md`, the
   "AI agents" page and the README document the reference and the `reference/<package>.json` catalogs.
+- ci: replace Super Linter (`linter.yml`) with the `yii2-framework/actions` reusable `quality.yml` (actionlint,
+  editorconfig-checker, markdownlint, prettier on Markdown and YAML, codespell, yamllint) and `security.yml`
+  (gitleaks), pinned to v2.0.1; add `.prettierrc.json`, a `.prettierignore` that leaves the synced guide and
+  internals content alone, `.github/linters/.yamllint.yml` (120 columns) and codespell skips for generated
+  files; drop the textlint config and update the README badges.
 - ci: install PHP 8.3 and the reference generator (`composer install --no-dev --working-dir tools`) before the Astro
   build; `prebuild` fails when yii2-apidoc errors, warnings or unresolved PHPDoc links grow beyond
   `tools/baseline.json`, and `postbuild` (`scripts/check-site.mjs`) fails on literal `[[` in the English guide or
