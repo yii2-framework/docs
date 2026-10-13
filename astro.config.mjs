@@ -43,8 +43,9 @@ const locales = {
  * never point to a missing directory and `astro dev` works without a sync.
  */
 function extensionsGroup() {
-  /** @type {Array<{ name: string, title: string }>} */
-  const packages = JSON.parse(readFileSync(new URL('./packages.json', import.meta.url), 'utf8'));
+  /** @type {Array<{ name: string, title: string, type?: string }>} */
+  const packages = JSON.parse(readFileSync(new URL('./packages.json', import.meta.url), 'utf8'))
+    .filter(({ type }) => type !== 'framework');
   const synced = packages.filter(({ name }) => {
     const found = existsSync(new URL(`./src/content/docs/extensions/${name}/index.md`, import.meta.url));
 

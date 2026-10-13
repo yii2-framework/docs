@@ -65,6 +65,15 @@ describe('validateManifest', () => {
     assert.throws(() => validateManifest([partial], 'packages.json'), /"ref".*\n.*"packagist"/);
   });
 
+  test('a framework entry needs no docsDir; an unknown type is rejected', () => {
+    const { docsDir, ...framework } = { ...valid, type: 'framework' };
+
+    assert.equal(docsDir, 'docs');
+    assert.deepEqual(validateManifest([framework], 'packages.json'), [framework]);
+    assert.throws(() => validateManifest([{ ...valid, type: 'library' }], 'packages.json'), /"type" must be one of/);
+    assert.throws(() => validateManifest([{ ...framework, type: undefined }], 'packages.json'), /"docsDir"/);
+  });
+
   test('rejects duplicates and an empty manifest', () => {
     assert.throws(() => validateManifest([valid, valid], 'packages.json'), /duplicate name "demo"/);
     assert.throws(() => validateManifest([], 'packages.json'), /non-empty array/);

@@ -22,3 +22,10 @@
   deterministic checker.
 - feat: sync the guides of `yii2-extensions/filepond` and `yii2-extensions/localeurls` (added to `packages.json`)
   and drop Packagist (`poser.pugx.org`) and StyleCI badges from synced READMEs.
+- feat(reference): generate the API reference and `reference.json` from PHPDoc with yii2-apidoc: `tools/` Composer
+  project (`tools/bin/reference`) that parses the upstream `yiisoft/yii2` `22.0` framework (new `"type": "framework"`
+  entry in `packages.json`, obtained by `scripts/sync.mjs`) and the extension sources in one run, writes one Markdown
+  page per class, interface, trait and enum (`api/...`, `extensions/<package>/reference/...`) plus namespace index
+  pages, one catalog per package (`public/reference/<package>.json`, schema `tools/reference.schema.json`) and a link
+  map; repairs apidoc model gaps (enums, `@var` summaries, promoted properties, `readonly`), and checks apidoc
+  error/warning and unresolved-link counts against `tools/baseline.json`.

@@ -14,9 +14,17 @@
 // still holds a template) is skipped with a `[sync] skipped <name>: ...` warning and no page; the script still exits 0
 // so the deploy is not blocked, unless `--strict` is given.
 //
+// An entry with `"type": "framework"` (the Yii framework, input of the API reference) has no guides: only its sources
+// are obtained, as a shallow sparse clone of `<srcDir>` or, in local mode, as `git archive <ref> <srcDir>` exported
+// from the `localPath` clone (which may be checked out on another branch; it is never switched). Its name guard reads
+// `<srcDir>/composer.json`.
+//
+// Every run writes `.cache/sources.json` (mode, directory, ref, commit and skip reason per entry), the input of
+// `tools/bin/reference`.
+//
 // Usage: node scripts/sync.mjs [--local] [--strict] [--manifest=<path>]
 
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import {
   copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync,
 } from 'node:fs';
@@ -27,7 +35,9 @@ import { describe, yamlQuote } from './lib/description.mjs';
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const OUTPUT_DIR = path.join(ROOT, 'src', 'content', 'docs', 'extensions');
 const CACHE_DIR = path.join(ROOT, '.cache', 'packages');
-const REQUIRED_KEYS = ['name', 'title', 'repo', 'ref', 'docsDir', 'srcDir', 'namespace', 'localPath', 'packagist'];
+const SOURCES_FILE = path.join(ROOT, '.cache', 'sources.json');
+const REQUIRED_KEYS = ['name', 'title', 'repo', 'ref', 'srcDir', 'namespace', 'localPath', 'packagist'];
+const TYPES = ['package', 'framework'];
 // Sidebar order of the pages when the manifest has no `order`; the landing page is always first.
 const DEFAULT_ORDER = ['installation', 'configuration', 'examples', 'migration', 'testing'];
 const IMAGE = /\.(avif|gif|jpe?g|png|svg|webp)$/i;
@@ -68,7 +78,14 @@ export function validateManifest(manifest, file) {
       return;
     }
 
-    for (const key of REQUIRED_KEYS) {
+    if (entry.type !== undefined && !TYPES.includes(entry.type)) {
+      errors.push(`${where}: "type" must be one of ${TYPES.join(', ')}.`);
+    }
+
+    // A framework entry has no guides, so no `docsDir`.
+    const required = entry.type === 'framework' ? REQUIRED_KEYS : [...REQUIRED_KEYS, 'docsDir'];
+
+    for (const key of required) {
       if (typeof entry[key] !== 'string' || entry[key].trim() === '') {
         errors.push(`${where}: "${key}" must be a non-empty string.`);
       }
@@ -105,33 +122,91 @@ export function validateManifest(manifest, file) {
   return manifest;
 }
 
+const GIT_ENV = { ...process.env, GIT_TERMINAL_PROMPT: '0' };
+
+/** Runs git and returns its trimmed stdout, or `null` when it exits with an error. */
+function gitOutput(args) {
+  const result = spawnSync('git', args, { encoding: 'utf8', env: GIT_ENV });
+
+  return result.status === 0 ? result.stdout.trim() : null;
+}
+
 /**
- * Returns the directory holding the package sources: the local checkout or a fresh shallow clone.
+ * Exports `<srcDir>` of the framework clone at `localPath` into `.cache/packages/<name>/` with `git archive`, without
+ * touching the clone's checkout. The ref is the local branch `ref`, else `origin/<ref>`, else fetched from `origin`.
  *
- * @returns {{ dir: string, source: string }}
+ * @returns {{ dir: string, source: string, commit: string }}
+ */
+function exportFramework(pkg, local) {
+  let rev = [`refs/heads/${pkg.ref}`, `refs/remotes/origin/${pkg.ref}`]
+    .find((candidate) => gitOutput(['-C', local, 'rev-parse', '--verify', '--quiet', `${candidate}^{commit}`]) !== null);
+
+  if (rev === undefined) {
+    process.stderr.write(`[sync] ${pkg.name}: ${pkg.ref} missing in ${local}, fetching it from origin.\n`);
+    execFileSync('git', ['-C', local, 'fetch', '--quiet', 'origin', pkg.ref], { stdio: 'inherit', env: GIT_ENV });
+    rev = 'FETCH_HEAD';
+  }
+
+  const commit = gitOutput(['-C', local, 'rev-parse', `${rev}^{commit}`]);
+  const dir = path.join(CACHE_DIR, pkg.name);
+  const archive = spawnSync('git', ['-C', local, 'archive', '--format=tar', rev, pkg.srcDir], {
+    env: GIT_ENV,
+    maxBuffer: 512 * 1024 * 1024,
+  });
+
+  if (archive.status !== 0 || commit === null) {
+    throw new Error(`${pkg.name}: git archive ${rev} ${pkg.srcDir} failed in ${local}: ${archive.stderr}`);
+  }
+
+  rmSync(dir, { recursive: true, force: true });
+  mkdirSync(dir, { recursive: true });
+
+  const tar = spawnSync('tar', ['-x', '-C', dir], { input: archive.stdout });
+
+  if (tar.status !== 0) {
+    throw new Error(`${pkg.name}: extracting the archive into ${dir} failed: ${tar.stderr}`);
+  }
+
+  return { dir, source: `local ${local} at ${rev} (${commit})`, commit };
+}
+
+/**
+ * Returns the directory holding the package sources: the local checkout or a fresh shallow clone. A framework entry
+ * is exported from its local clone (see {@link exportFramework}) or cloned sparsely (`<srcDir>` only).
+ *
+ * @returns {{ dir: string, source: string, commit: string }}
  */
 function obtainSources(pkg, useLocal) {
   const local = path.resolve(ROOT, pkg.localPath);
+  const framework = pkg.type === 'framework';
 
   if (useLocal) {
-    if (existsSync(path.join(local, 'README.md'))) {
-      return { dir: local, source: `local ${local} (working tree)` };
+    if (framework && existsSync(path.join(local, '.git'))) {
+      return exportFramework(pkg, local);
+    }
+    if (!framework && existsSync(path.join(local, 'README.md'))) {
+      const commit = gitOutput(['-C', local, 'rev-parse', 'HEAD']) ?? 'unknown';
+
+      return { dir: local, source: `local ${local} (working tree)`, commit: `${commit}+worktree` };
     }
     process.stderr.write(`[sync] ${pkg.name}: ${local} not found, cloning ${pkg.repo} instead.\n`);
   }
 
   const dir = path.join(CACHE_DIR, pkg.name);
+  const sparse = framework ? ['--filter=blob:none', '--sparse'] : [];
 
   rmSync(dir, { recursive: true, force: true });
   mkdirSync(CACHE_DIR, { recursive: true });
-  execFileSync('git', ['clone', '--quiet', '--depth', '1', '--single-branch', '--branch', pkg.ref, pkg.repo, dir], {
-    stdio: ['ignore', 'inherit', 'inherit'],
-    env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
-  });
+  execFileSync('git', ['clone', '--quiet', '--depth', '1', '--single-branch', ...sparse, '--branch', pkg.ref, pkg.repo,
+    dir], { stdio: ['ignore', 'inherit', 'inherit'], env: GIT_ENV });
+
+  if (framework) {
+    execFileSync('git', ['-C', dir, 'sparse-checkout', 'set', pkg.srcDir], { stdio: 'inherit', env: GIT_ENV });
+  }
 
   const commit = execFileSync('git', ['-C', dir, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 
-  return { dir, source: `${pkg.repo}@${pkg.ref} (${commit})` };
+  return { dir, source: `${pkg.repo}@${pkg.ref} (${commit})`, commit };
 }
 
 /**
@@ -605,16 +680,22 @@ export function packageNameMismatch(dir, expected) {
 }
 
 /**
- * Syncs one package into `src/content/docs/extensions/<name>/`.
+ * Syncs one package into `src/content/docs/extensions/<name>/`; a framework entry only gets its sources.
  *
- * @returns {{ pages: number, images: number, source: string } | { skipped: string, source: string }}
+ * @returns {{ pages: number, images: number, source: string, dir: string, commit: string }
+ *   | { skipped: string, source: string, dir: string, commit: string }}
  */
 function syncPackage(pkg, useLocal) {
-  const { dir, source } = obtainSources(pkg, useLocal);
-  const found = packageNameMismatch(dir, pkg.packagist);
+  const { dir, source, commit } = obtainSources(pkg, useLocal);
+  const framework = pkg.type === 'framework';
+  const found = packageNameMismatch(framework ? path.join(dir, pkg.srcDir) : dir, pkg.packagist);
 
   if (found !== null) {
-    return { skipped: `sources at ${pkg.ref} are "${found}", expected "${pkg.packagist}"`, source };
+    return { skipped: `sources at ${pkg.ref} are "${found}", expected "${pkg.packagist}"`, source, dir, commit };
+  }
+
+  if (framework) {
+    return { pages: 0, images: 0, source, dir, commit };
   }
 
   const docsDir = pkg.docsDir.replace(/^\.\/|\/$/g, '');
@@ -675,7 +756,7 @@ function syncPackage(pkg, useLocal) {
     copyFileSync(path.join(dir, image), target);
   }
 
-  return { pages: pages.size, images: images.size, source };
+  return { pages: pages.size, images: images.size, source, dir, commit };
 }
 
 function main(argv) {
@@ -691,9 +772,19 @@ function main(argv) {
   rmSync(OUTPUT_DIR, { recursive: true, force: true });
 
   let skipped = 0;
+  const sources = {};
 
   for (const pkg of packages) {
     const result = syncPackage(pkg, useLocal);
+
+    sources[pkg.name] = {
+      type: pkg.type ?? 'package',
+      dir: path.relative(ROOT, result.dir).split(path.sep).join('/'),
+      ref: pkg.ref,
+      commit: result.commit,
+      source: result.source,
+      skipped: 'skipped' in result ? result.skipped : null,
+    };
 
     if ('skipped' in result) {
       // Greppable: `[sync] skipped <name>: ...`. No page is written, so the sidebar hides the package.
@@ -702,8 +793,21 @@ function main(argv) {
       continue;
     }
 
+    if (pkg.type === 'framework') {
+      process.stdout.write(`[sync] ${pkg.name}: sources only (${pkg.srcDir}) from ${result.source}.\n`);
+      continue;
+    }
+
     process.stdout.write(`[sync] ${pkg.name}: ${result.pages} pages, ${result.images} images from ${result.source}.\n`);
   }
+
+  // Input of tools/bin/reference: which sources this run used.
+  mkdirSync(path.dirname(SOURCES_FILE), { recursive: true });
+  writeFileSync(SOURCES_FILE, `${JSON.stringify({
+    mode: useLocal ? 'local' : 'clone',
+    manifest: path.relative(ROOT, manifestFile).split(path.sep).join('/'),
+    packages: sources,
+  }, null, 2)}\n`);
 
   if (skipped > 0 && strict) {
     throw new Error(`${skipped} package(s) skipped (--strict).`);

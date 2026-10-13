@@ -1,0 +1,46 @@
+{
+    "name": "yii2-framework/docs-tools",
+    "description": "Generates the API reference (Markdown pages, reference.json, link map) of the Yii 22.0 documentation site from PHPDoc with yii2-apidoc.",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": "^8.2",
+        "yiisoft/yii2-apidoc": "^4.0.1"
+    },
+    "require-dev": {
+        "opis/json-schema": "^2.4",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^10.5"
+    },
+    "replace": {
+        "bower-asset/jquery": "*",
+        "bower-asset/inputmask": "*",
+        "bower-asset/punycode": "*",
+        "bower-asset/yii2-pjax": "*",
+        "bower-asset/bootstrap": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yii2Docs\\Tools\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yii2Docs\\Tools\\Tests\\": "tests"
+        }
+    },
+    "bin": [
+        "bin/reference"
+    ],
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": false
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "analyse": "@php vendor/bin/phpstan analyse --memory-limit=1G",
+        "reference": "@php bin/reference",
+        "test": "@php vendor/bin/phpunit"
+    }
+}
