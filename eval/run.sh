@@ -18,6 +18,7 @@ TIMEOUT_SECONDS="900"
 DOCS_BASE="auto"
 DRY_RUN=0
 RUN_CHECK=1
+NO_SKILL=0
 SELECTED=()
 
 usage() {
@@ -33,6 +34,8 @@ Usage: eval/run.sh [--task <id>]... [--model <alias>] [--dry-run] [options]
                         documentation URLs in the prompt to the preview server (EVAL_LOCAL_BASE).
     --dry-run           Assemble prompt.md and command.txt per task; do not call the model or the checker.
     --no-check          Skip eval/check.sh after the model runs.
+    --no-skill          Baseline condition: omit the <skill> block (and the words "and the skill") from the prompt.
+                        Everything else, including the command line and the fresh workspace, stays identical.
 
 Results: eval/out/<UTC timestamp>/<task-id>/{prompt.md,command.txt,result.json,stderr.log,meta.json,files/}
 and eval/out/<UTC timestamp>/summary.{md,json} from check.sh.
@@ -67,6 +70,7 @@ while [[ $# -gt 0 ]]; do
             ;;
         --dry-run) DRY_RUN=1 ;;
         --no-check) RUN_CHECK=0 ;;
+        --no-skill) NO_SKILL=1 ;;
         -h | --help)
             usage
             exit 0
@@ -160,18 +164,21 @@ rebase() {
 
 DOCS_HOST="$(sed -E 's|^https?://([^/:]+).*|\1|' <<<"${DOCS_BASE}")"
 ALLOWED_TOOLS="Read,Write,Edit,Glob,Grep,WebFetch(domain:${DOCS_HOST})"
-STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
-RUN_DIR="${EVAL_DIR}/out/${STAMP}"
+STAMP="${EVAL_RUN_STAMP:-$(date -u +%Y%m%dT%H%M%SZ)}"
+RUN_DIR="${EVAL_OUT_ROOT:-${EVAL_DIR}/out}/${STAMP}"
 mkdir -p "${RUN_DIR}"
 printf '%s\n' "${LLMS_TEXT}" | rebase >"${RUN_DIR}/llms.txt"
 
 echo "Run directory: ${RUN_DIR#"${REPO_DIR}"/}"
 echo "llms.txt: ${LLMS_SOURCE}; docs base: ${DOCS_BASE}; model: ${MODEL}; budget per task: ${BUDGET_USD} USD"
+if [[ ${NO_SKILL} -eq 1 ]]; then CONDITION="no-skill"; else CONDITION="skill-injected"; fi
+echo "condition: ${CONDITION}"
 
 # Writes the prompt of one task to stdout.
 assemble_prompt() {
     local task_file="$1" skill="$2"
-    local title context=()
+    local title context=() attached="llms.txt and the skill"
+    [[ ${NO_SKILL} -eq 1 ]] && attached="llms.txt"
     title="$(php "${EVAL_DIR}/lib/task.php" "${task_file}" title)"
     mapfile -t context < <(php "${EVAL_DIR}/lib/task.php" "${task_file}" context || true)
 
@@ -188,7 +195,7 @@ HEADER
 
 ## Documentation
 
-The only documentation you may rely on is attached: llms.txt and the skill; fetch pages by their index.md URL if you
+The only documentation you may rely on is attached: ${attached}; fetch pages by their index.md URL if you
 need details. Do not use other websites or your memory of older Yii versions when they disagree with these sources.
 DOCS
     if [[ ${#context[@]} -gt 0 ]]; then
@@ -201,11 +208,13 @@ DOCS
 
 When you are done, reply with the list of files you wrote.
 
-<skill name="${skill}">
 FOOTER
-    rebase <"${SKILLS_DIR}/${skill}/SKILL.md"
-    echo "</skill>"
-    echo
+    if [[ ${NO_SKILL} -eq 0 ]]; then
+        echo "<skill name=\"${skill}\">"
+        rebase <"${SKILLS_DIR}/${skill}/SKILL.md"
+        echo "</skill>"
+        echo
+    fi
     echo "<llms_txt source=\"${DOCS_BASE}llms.txt\">"
     cat "${RUN_DIR}/llms.txt"
     echo "</llms_txt>"
@@ -216,12 +225,13 @@ write_meta() {
     local task_dir="$1" exit_code="$2" wall="$3" work="$4"
     # shellcheck disable=SC2016 # PHP code, not shell expansion
     php -r '
-        [, $dir, $exit, $wall, $model, $base, $llms, $dry, $work] = $argv;
+        [, $dir, $exit, $wall, $model, $base, $llms, $dry, $work, $condition] = $argv;
         $file = "$dir/result.json";
         $result = is_file($file) ? json_decode((string) file_get_contents($file), true) : null;
         $meta = [
             "task" => basename($dir),
             "model" => $model,
+            "condition" => $condition,
             "dry_run" => $dry === "1",
             "exit_code" => (int) $exit,
             "wall_seconds" => (float) $wall,
@@ -238,7 +248,7 @@ write_meta() {
             }
         }
         file_put_contents("$dir/meta.json", json_encode($meta, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
-    ' "${task_dir}" "${exit_code}" "${wall}" "${MODEL}" "${DOCS_BASE}" "${LLMS_SOURCE}" "${DRY_RUN}" "${work}"
+    ' "${task_dir}" "${exit_code}" "${wall}" "${MODEL}" "${DOCS_BASE}" "${LLMS_SOURCE}" "${DRY_RUN}" "${work}" "${CONDITION}"
 }
 
 for task in "${SELECTED[@]}"; do
@@ -278,6 +288,10 @@ for task in "${SELECTED[@]}"; do
     fi
 
     work="$(mktemp -d "${EVAL_WORK_ROOT:-${TMPDIR:-/tmp}}/yii2-docs-eval.XXXXXX")"
+    if [[ -n "$(find "${work}" -mindepth 1 -print -quit)" ]]; then
+        echo "Workspace ${work} is not empty; refusing to run ${task}." >&2
+        exit 1
+    fi
     start="$(date +%s.%N)"
     exit_code=0
     (cd "${work}" && timeout "${TIMEOUT_SECONDS}" "${command[@]}" <"${task_dir}/prompt.md" \

@@ -50,3 +50,4 @@
 - docs: add an agent quick start, client verification matrix, focused reading, and bulk-export limits.
 - test(eval): persist the deterministic form, validation, and ActiveRecord application flow.
 - fix(docs): distinguish direct and transaction-wrapped migration methods, type contracts, and reversibility checks.
+- feat(eval): add a no-skill baseline with deterministic dry-run coverage.

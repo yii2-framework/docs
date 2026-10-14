@@ -29,7 +29,12 @@ eval/check.sh eval/fixtures/pass --task 04-active-form-view --out eval/out/appli
 
 `run.sh` options: `--task <id>` (repeatable), `--model <alias>` (default `sonnet`), `--effort <level>`,
 `--budget-usd <n>` (per task, default `1.00`), `--timeout <seconds>` (default `900`), `--docs-base
-auto|public|local|<url>`, `--dry-run`, `--no-check`. Run `eval/run.sh --help` for details.
+auto|public|local|<url>`, `--dry-run`, `--no-check`, `--no-skill`. Run `eval/run.sh --help` for details.
+
+`--no-skill` runs the baseline condition: the prompt omits the `<skill>` block and the words "and the skill" in the
+documentation sentence, and nothing else changes (same command line, `llms.txt`, and fresh workspace). `meta.json`
+records the `condition` (`skill-injected` or `no-skill`). The runner refuses to start a task if its workspace is not
+empty.
 
 Each task runs `claude -p` in a fresh temporary directory with the user's CLAUDE.md, skills, plugins, hooks, MCP
 servers, and settings disabled (`--safe-mode --restricted --strict-mcp-config`), only the file tools and `WebFetch`
