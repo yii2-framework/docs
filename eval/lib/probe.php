@@ -9,7 +9,12 @@ declare(strict_types=1);
  *
  * Probes:
  * - `render <view>`: renders a view file (relative to the app) with a web application; when `app\models\Post` exists,
- *   `$model` is a `Post` whose `title` is an XSS payload. Writes the HTML to the output file.
+ *   `$model` is a `Post` whose `title` is an XSS payload. Writes the HTML to the output file and the HTML of the
+ *   registered scripts to a sibling `.js.txt` file.
+ * - `toast-shown <view>`: the rendered `.toast` has a stable id, and `show()` runs on it inside a module `import()`
+ *   block of the registered scripts.
+ * - `toast-visible <view>`: like `toast-shown`, but a module-initialized `.toast` rendered with the `show` class also
+ *   passes.
  * - `controller-filters <class>`: the controller declares `AccessControl` and `VerbFilter`, `delete` accepts only
  *   POST, and a rule restricts `delete` to authenticated users.
  * - `rest-no-ratelimit <class>`: the class extends `yii\rest\ActiveController`, no behavior resolves to
@@ -57,6 +62,49 @@ function finish(bool $pass, string $message): never
 }
 
 /**
+ * Renders a view file relative to the app and returns its HTML and the head and body HTML produced by the view's
+ * registered scripts and files.
+ *
+ * When `app\models\Post` exists, `$model` is a `Post` whose `title` is an XSS payload.
+ *
+ * @return array{0: string, 1: string}
+ */
+function renderView(yii\web\Application $app, string $appDir, string $relative): array
+{
+    $file = $appDir . '/' . ltrim($relative, '/');
+
+    if (!is_file($file)) {
+        finish(false, "view {$relative} does not exist");
+    }
+
+    $params = [];
+
+    if (class_exists('app\models\Post')) {
+        $post = new app\models\Post();
+
+        if ($post instanceof yii\db\ActiveRecord) {
+            $post->setAttribute('id', 1);
+        }
+
+        $post->title = XSS_PAYLOAD;
+        $params['model'] = $post;
+    }
+
+    $view = $app->controller->getView();
+    $html = $view->renderFile($file, $params, $app->controller);
+
+    ob_start();
+    $view->beginPage();
+    $view->head();
+    $view->beginBody();
+    $view->endBody();
+    $view->endPage();
+    $scripts = (string) ob_get_clean();
+
+    return [$html, $scripts];
+}
+
+/**
  * Resolves the class name of a behavior configuration (object, class string, or array with `class`).
  */
 function behaviorClass(mixed $behavior): string|null
@@ -87,32 +135,64 @@ try {
 
     switch ($probe) {
         case 'render':
-            $view = $appDir . '/' . ltrim($argument, '/');
-
-            if (!is_file($view)) {
-                finish(false, "view {$argument} does not exist");
-            }
-
-            $params = [];
-
-            if (class_exists('app\models\Post')) {
-                $post = new app\models\Post();
-
-                if ($post instanceof yii\db\ActiveRecord) {
-                    $post->setAttribute('id', 1);
-                }
-
-                $post->title = XSS_PAYLOAD;
-                $params['model'] = $post;
-            }
-
-            $html = $app->controller->getView()->renderFile($view, $params, $app->controller);
+            [$html, $scripts] = renderView($app, $appDir, $argument);
 
             if ($htmlFile !== null) {
+                $scriptsFile = str_ends_with($htmlFile, '.html')
+                    ? substr($htmlFile, 0, -5) . '.js.txt'
+                    : $htmlFile . '.js.txt';
                 file_put_contents($htmlFile, $html);
+                file_put_contents($scriptsFile, $scripts);
             }
 
             finish(true, sprintf('rendered %s (%d bytes)', $argument, strlen($html)));
+
+        case 'toast-shown':
+        case 'toast-visible':
+            [$html, $scripts] = renderView($app, $appDir, $argument);
+
+            if (preg_match('/<div\b[^>]*\bclass="[^"]*\btoast\b[^"]*"[^>]*>/', $html, $tag) !== 1) {
+                finish(false, 'no rendered .toast element');
+            }
+
+            if (preg_match('/\bid="([^"]+)"/', $tag[0], $id) !== 1) {
+                finish(false, 'the .toast element has no id');
+            }
+
+            if (preg_match('/^w\d+$/', $id[1]) === 1) {
+                finish(false, "the .toast id {$id[1]} is auto-generated, not stable");
+            }
+
+            $initialized = false;
+            $shown = false;
+
+            if (preg_match_all('/import\("[^"]+"\)\.then\(\(bootstrap\) => \{([^}]*)\}\);/', $scripts, $blocks) > 0) {
+                foreach ($blocks[1] as $block) {
+                    if (str_contains($block, $id[1]) && str_contains($block, 'bootstrap.Toast.getOrCreateInstance')) {
+                        $initialized = true;
+
+                        if (preg_match('/\.show\(\s*\)/', $block) === 1) {
+                            $shown = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if ($shown) {
+                finish(true, "#{$id[1]} is shown by show() inside a module import block");
+            }
+
+            if ($probe === 'toast-visible' && preg_match('/\bclass="[^"]*\bshow\b[^"]*"/', $tag[0]) === 1) {
+                finish(
+                    $initialized,
+                    $initialized
+                        ? "#{$id[1]} is module-initialized and rendered with the show class"
+                        : "#{$id[1]} has the show class but no module import initializes its Toast instance",
+                );
+            }
+
+            finish(false, "no module import block calls show() on #{$id[1]}");
 
         case 'controller-filters':
             $class = ltrim($argument, '\\');

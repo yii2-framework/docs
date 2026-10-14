@@ -7,7 +7,7 @@
 set -euo pipefail
 
 EVAL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TASKS_DIR="${EVAL_DIR}/tasks"
+TASKS_DIR="${EVAL_TASKS_DIR:-${EVAL_DIR}/tasks}"
 SEED_DIR="${EVAL_DIR}/seed"
 APP_DIR="${EVAL_DIR}/app"
 PRISTINE_DIR="${EVAL_DIR}/.cache/app-pristine"
@@ -123,7 +123,7 @@ check_task() {
     local task_file="${TASKS_DIR}/${task}.md"
     local files="${RUN_DIR}/${task}/files"
     local logs="${OUT_DIR}/${task}/checks"
-    local skill prepared=0 render_state=none app_skip=""
+    local skill prepared=0 render_state=none render_target="" app_skip=""
 
     echo "${task}"
     CURRENT_FILES="${files}"
@@ -134,7 +134,7 @@ check_task() {
     fi
 
     mkdir -p "${logs}"
-    rm -f "${logs}"/*.html
+    rm -f "${logs}"/*.html "${logs}"/*.js.txt
     skill="$("${PHP_BIN}" "${EVAL_DIR}/lib/task.php" "${task_file}" skill)"
 
     if [[ ${APP_READY} -eq 0 ]]; then
@@ -233,6 +233,12 @@ check_task() {
                     continue
                 fi
 
+                if [[ "${kind}" == app-probe && "${render_state}" == failed && "${arg#*:}" == "${render_target}" ]]; then
+                    record "${task}" "${check}" skip \
+                        "dependent view probe skipped: app-render failed for ${render_target}"
+                    continue
+                fi
+
                 if [[ ${prepared} -eq 0 ]]; then
                     restore_app
                     local seed
@@ -243,14 +249,25 @@ check_task() {
                     prepared=1
                 fi
 
-                app_check "${task}" "${check}" "${kind}" "${arg}" "${logs}"
+                local app_status=0
+                app_check "${task}" "${check}" "${kind}" "${arg}" "${logs}" || app_status=$?
                 if [[ "${kind}" == app-render ]]; then
-                    render_state="done"
+                    render_target="${arg}"
+                    if [[ ${app_status} -eq 0 ]]; then
+                        render_state=passed
+                    else
+                        render_state=failed
+                    fi
                 fi
                 ;;
             html | no-html)
                 if [[ "${render_state}" == skipped ]]; then
                     record "${task}" "${check}" skip "nothing rendered (${app_skip})"
+                    continue
+                fi
+                if [[ "${render_state}" == failed ]]; then
+                    record "${task}" "${check}" skip \
+                        "dependent HTML check skipped: app-render failed for ${render_target}"
                     continue
                 fi
                 local html_files=()
@@ -267,6 +284,32 @@ check_task() {
                     local verb=lacks
                     [[ ${matched} -eq 1 ]] && verb=contains
                     record "${task}" "${check}" fail "rendered HTML ${verb} the pattern"
+                fi
+                ;;
+            js | no-js)
+                if [[ "${render_state}" == skipped ]]; then
+                    record "${task}" "${check}" skip "nothing rendered (${app_skip})"
+                    continue
+                fi
+                if [[ "${render_state}" == failed ]]; then
+                    record "${task}" "${check}" skip \
+                        "dependent registered-script check skipped: app-render failed for ${render_target}"
+                    continue
+                fi
+                local js_files=()
+                mapfile -t js_files < <(find "${logs}" -maxdepth 1 -name '*.js.txt' | sort)
+                if [[ ${#js_files[@]} -eq 0 ]]; then
+                    record "${task}" "${check}" fail "no registered scripts"
+                    continue
+                fi
+                local js_matched=0
+                grep -qE -e "${arg}" -- "${js_files[@]}" && js_matched=1
+                if [[ "${kind}" == js && ${js_matched} -eq 1 ]] || [[ "${kind}" == no-js && ${js_matched} -eq 0 ]]; then
+                    record "${task}" "${check}" pass "registered scripts checked"
+                else
+                    local js_verb=lacks
+                    [[ ${js_matched} -eq 1 ]] && js_verb=contains
+                    record "${task}" "${check}" fail "registered scripts ${js_verb} the pattern"
                 fi
                 ;;
             *)
@@ -324,20 +367,23 @@ app_check() {
             ;;
         app-render)
             local html="${logs}/${arg//[^A-Za-z0-9._-]/_}.html"
+            local javascript="${html%.html}.js.txt"
             if run_log "${log}" "${PHP_BIN}" "${EVAL_DIR}/lib/probe.php" "${APP_DIR}" render "${arg}" "${html}"; then
                 record "${task}" "${check}" pass "$(last_line "${log}")"
+                return 0
             else
-                rm -f "${html}"
+                rm -f "${html}" "${javascript}"
                 record "${task}" "${check}" fail "$(last_line "${log}")"
+                return 1
             fi
             ;;
         app-static)
             local targets=() rel
             while IFS= read -r rel; do
                 targets+=("${APP_DIR}/${rel}")
-            done < <(cd "${CURRENT_FILES}" && find src config -type f -name '*.php' 2>/dev/null | sort || true)
+            done < <(cd "${CURRENT_FILES}" && find src config resources/views -type f -name '*.php' 2>/dev/null | sort || true)
             if [[ ${#targets[@]} -eq 0 ]]; then
-                record "${task}" "${check}" skip "no PHP files under src/ or config/"
+                record "${task}" "${check}" skip "no PHP files under src/, config/, or resources/views/"
                 return
             fi
             local neon="${logs}/phpstan.neon"

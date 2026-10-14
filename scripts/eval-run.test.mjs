@@ -11,10 +11,10 @@ const task = '03-active-record-migration';
 
 after(() => rmSync(outputRoot, { recursive: true, force: true }));
 
-function dryRun(stamp, extraArgs = []) {
+function dryRun(stamp, extraArgs = [], selectedTask = task) {
   const result = spawnSync(
     'bash',
-    [runner, '--task', task, '--docs-base', 'public', '--dry-run', ...extraArgs],
+    [runner, '--task', selectedTask, '--docs-base', 'public', '--dry-run', ...extraArgs],
     {
       encoding: 'utf8',
       env: {
@@ -27,7 +27,7 @@ function dryRun(stamp, extraArgs = []) {
 
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
 
-  const taskDir = path.join(outputRoot, stamp, task);
+  const taskDir = path.join(outputRoot, stamp, selectedTask);
 
   return {
     command: readFileSync(path.join(taskDir, 'command.txt'), 'utf8'),
@@ -60,5 +60,11 @@ describe('evaluation runner conditions', () => {
       assert.match(prompt, /<llms_txt source=/);
       assert.match(prompt, /# Task: ActiveRecord model and reversible migration/);
     }
+  });
+
+  test('records an optional criterion version in task metadata', () => {
+    const versioned = dryRun('criterion', [], '10-toast-migration');
+
+    assert.equal(versioned.meta.criterion, 'A2');
   });
 });

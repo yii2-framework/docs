@@ -58,9 +58,25 @@ eval/out/<UTC timestamp>/
 
 `eval/out/`, `eval/app/`, and `eval/.cache/` are ignored by Git.
 
+When a task changes its acceptance contract, its optional `criterion` frontmatter value identifies the new version
+in future `meta.json` files without rewriting historical runs. Task 10 uses criterion A2: both `yii\helpers\Html`
+and `yii2\extensions\bootstrap6\Html` satisfy its encoding requirement because the extension helper inherits the
+same `encode()` implementation. The `pass-yii-html` and `fail-no-encoding` fixture roots exercise that boundary.
+
 The last command reproduces the deterministic form, validation, migration, SQLite persistence/reload, rendering,
 and XSS-encoding flow without calling a model. See [AI application flow](ai-application-flow.md) for its recorded
 result, limitations, and the remaining native-client evaluation work.
+
+Tasks may declare a small generated documentation set in their `docs` frontmatter list. Prepare those Markdown pages
+for an isolated workspace without a model or network request:
+
+```bash
+eval/prepare-local-docs.sh 09-dialog-options /path/to/workspace
+```
+
+The command copies only the declared files from `dist/` to `.eval-docs/` and writes `INDEX.md` with each page's byte
+size and SHA-256 hash. It refuses to overwrite an existing `.eval-docs/` directory. This is a local `Read` workflow,
+not evidence that `WebFetch` can access the preview server.
 
 ## Cadence
 
@@ -103,8 +119,9 @@ CI run would need an API key.
 | `app-migrate`                 | `migrate`, `migrate/down 1`, and `migrate` succeed (SQLite)                                           |
 | `app-probe:<probe>:<arg>`     | `lib/probe.php` passes a named semantic probe, including ActiveRecord validation and persistence      |
 | `app-render:<view>`           | the view renders without an exception; `$model` is a `Post` whose title is an XSS payload             |
-| `app-static`                  | PHPStan level 5 (`EVAL_PHPSTAN_LEVEL`) reports nothing on the output files under `src/` and `config/` |
+| `app-static`                  | PHPStan level 5 (`EVAL_PHPSTAN_LEVEL`) reports nothing on output PHP under `src/`, `config/`, and `resources/views/` |
 | `html:<ERE>`, `no-html:<ERE>` | the rendered HTML matches, or does not match, the expression                                          |
+| `js:<ERE>`, `no-js:<ERE>`     | the head and body HTML of the registered scripts matches, or does not match, the expression           |
 
 `app-boot` also reports `composer static` as `app-boot:composer-static`; it is skipped while the pristine app fails
 it (the template archive omits `phpstan.neon`), and `app-static` replaces it.
@@ -120,11 +137,15 @@ A task passes when none of its checks fails; skipped checks (for example, no app
    ---
    id: NN-slug # equals the file name
    title: Short title
+   criterion: A1 # optional acceptance-contract version recorded in meta.json
    skill: yii2-framework # a directory under skills/
    context: # optional: index.md URLs to list in the prompt
      - https://yii2-framework.github.io/docs/guide/<page>/index.md
+   docs: # optional: generated Markdown paths copied into an isolated workspace by prepare-local-docs.sh
+     - extensions/bootstrap6/reference/dialog/index.md
    outputs: # files the agent must write, relative to the app root
      - src/controllers/FooController.php
+   workspace: # optional: directories under eval/workspace/ copied into an isolated workspace by prepare-local-docs.sh
    seed: # optional: directories under eval/seed/ copied into the app first
      - post
    checks:

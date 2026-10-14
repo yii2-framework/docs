@@ -223,9 +223,11 @@ FOOTER
 # Writes meta.json for one task from the CLI result (if any) and the measured wall time.
 write_meta() {
     local task_dir="$1" exit_code="$2" wall="$3" work="$4"
+    local criterion
+    criterion="$(php "${EVAL_DIR}/lib/task.php" "${TASKS_DIR}/$(basename "${task_dir}").md" criterion || true)"
     # shellcheck disable=SC2016 # PHP code, not shell expansion
     php -r '
-        [, $dir, $exit, $wall, $model, $base, $llms, $dry, $work, $condition] = $argv;
+        [, $dir, $exit, $wall, $model, $base, $llms, $dry, $work, $condition, $criterion] = $argv;
         $file = "$dir/result.json";
         $result = is_file($file) ? json_decode((string) file_get_contents($file), true) : null;
         $meta = [
@@ -239,6 +241,9 @@ write_meta() {
             "llms_source" => $llms,
             "work_dir" => $work,
         ];
+        if ($criterion !== "") {
+            $meta["criterion"] = $criterion;
+        }
         if (is_array($result)) {
             foreach (["subtype", "is_error", "num_turns", "duration_ms", "duration_api_ms", "total_cost_usd",
                 "usage", "modelUsage", "session_id", "permission_denials"] as $key) {
@@ -248,7 +253,7 @@ write_meta() {
             }
         }
         file_put_contents("$dir/meta.json", json_encode($meta, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
-    ' "${task_dir}" "${exit_code}" "${wall}" "${MODEL}" "${DOCS_BASE}" "${LLMS_SOURCE}" "${DRY_RUN}" "${work}" "${CONDITION}"
+    ' "${task_dir}" "${exit_code}" "${wall}" "${MODEL}" "${DOCS_BASE}" "${LLMS_SOURCE}" "${DRY_RUN}" "${work}" "${CONDITION}" "${criterion}"
 }
 
 for task in "${SELECTED[@]}"; do

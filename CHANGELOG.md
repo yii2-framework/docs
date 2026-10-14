@@ -51,3 +51,5 @@
 - test(eval): persist the deterministic form, validation, and ActiveRecord application flow.
 - fix(docs): distinguish direct and transaction-wrapped migration methods, type contracts, and reversibility checks.
 - feat(eval): add a no-skill baseline with deterministic dry-run coverage.
+- feat(eval): add an offline Bootstrap 6 documentation-read task and fixture.
+- feat(eval): add a versioned Bootstrap 6 toast migration task with legacy, helper-equivalence, static-analysis, and registered-script checks.
