@@ -24,6 +24,7 @@ eval/run.sh --task 08-alert-theme --model sonnet # one task, then check.sh on th
 eval/run.sh --model sonnet                       # all tasks
 eval/check.sh eval/out/<timestamp>               # re-run the checks of an existing run, no model call
 eval/check.sh eval/fixtures/pass --out eval/out/fixtures-pass   # verify the checker itself
+eval/check.sh eval/fixtures/pass --task 04-active-form-view --out eval/out/application-flow
 ```
 
 `run.sh` options: `--task <id>` (repeatable), `--model <alias>` (default `sonnet`), `--effort <level>`,
@@ -51,6 +52,10 @@ eval/out/<UTC timestamp>/
 ```
 
 `eval/out/`, `eval/app/`, and `eval/.cache/` are ignored by Git.
+
+The last command reproduces the deterministic form, validation, migration, SQLite persistence/reload, rendering,
+and XSS-encoding flow without calling a model. See [AI application flow](ai-application-flow.md) for its recorded
+result, limitations, and the remaining native-client evaluation work.
 
 ## Cadence
 
@@ -91,7 +96,7 @@ CI run would need an API key.
 | `no-forbidden:<ERE>`          | the expression matches no output file                                                                 |
 | `app-boot`                    | with the seeds and outputs copied into `eval/app`, `./yii help` exits 0 (see the note below)          |
 | `app-migrate`                 | `migrate`, `migrate/down 1`, and `migrate` succeed (SQLite)                                           |
-| `app-probe:<probe>:<arg>`     | `lib/probe.php` passes: `controller-filters`, `rest-no-ratelimit`, `active-record`                    |
+| `app-probe:<probe>:<arg>`     | `lib/probe.php` passes a named semantic probe, including ActiveRecord validation and persistence      |
 | `app-render:<view>`           | the view renders without an exception; `$model` is a `Post` whose title is an XSS payload             |
 | `app-static`                  | PHPStan level 5 (`EVAL_PHPSTAN_LEVEL`) reports nothing on the output files under `src/` and `config/` |
 | `html:<ERE>`, `no-html:<ERE>` | the rendered HTML matches, or does not match, the expression                                          |

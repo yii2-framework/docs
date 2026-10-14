@@ -16,6 +16,8 @@ declare(strict_types=1);
  *   `RateLimiter`, and every other default behavior of `ActiveController` is kept.
  * - `active-record <class>`: the class declares `tableName()`, `rules()`, and `attributeLabels()` itself, and an
  *   empty instance fails validation.
+ * - `active-record-persistence <class>`: an empty instance fails validation, while valid title and body values save
+ *   to the configured database and can be reloaded by primary key.
  *
  * Prints one line with the outcome. Exit code 0 means pass, 1 means fail, 2 means usage error.
  */
@@ -218,6 +220,55 @@ try {
 
             finish(true, 'declares tableName(), rules(), attributeLabels(); empty model fails on '
                 . implode(', ', array_keys($model->getErrors())));
+
+        case 'active-record-persistence':
+            $class = ltrim($argument, '\\');
+
+            if (!class_exists($class)) {
+                finish(false, "class {$class} not found");
+            }
+
+            if (!is_subclass_of($class, yii\db\ActiveRecord::class)) {
+                finish(false, "{$class} does not extend yii\\db\\ActiveRecord");
+            }
+
+            $invalid = new $class();
+
+            if ($invalid->validate()) {
+                finish(false, 'an empty model passes validation');
+            }
+
+            foreach (['title', 'body'] as $attribute) {
+                if (!$invalid->hasErrors($attribute)) {
+                    finish(false, "an empty model has no validation error for {$attribute}");
+                }
+            }
+
+            $model = new $class();
+            $model->title = 'Deterministic application flow';
+            $model->body = 'Validated, persisted, and reloaded from SQLite.';
+
+            if (!$model->save()) {
+                finish(false, 'valid model did not save: ' . json_encode($model->getErrors()));
+            }
+
+            $primaryKey = $model->getPrimaryKey();
+
+            if ($primaryKey === null) {
+                finish(false, 'saved model has no primary key');
+            }
+
+            $stored = $class::findOne($primaryKey);
+
+            if (!($stored instanceof $class)) {
+                finish(false, 'saved model could not be reloaded by primary key');
+            }
+
+            if ($stored->title !== $model->title || $stored->body !== $model->body) {
+                finish(false, 'reloaded title or body differs from the saved values');
+            }
+
+            finish(true, "empty input fails; valid model saves and reloads with primary key {$primaryKey}");
 
         default:
             fwrite(STDERR, "Unknown probe: {$probe}\n");

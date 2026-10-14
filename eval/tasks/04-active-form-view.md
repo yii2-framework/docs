@@ -20,6 +20,7 @@ checks:
   - 'no-forbidden:<\?=\s*\$model->(title|body)\s*;?\s*\?>'
   - app-boot
   - app-migrate
+  - 'app-probe:active-record-persistence:app\models\Post'
   - "app-render:resources/views/post/update.php"
   - "html:<form"
   - 'html:name="Post\[title\]"'
