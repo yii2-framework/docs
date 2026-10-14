@@ -213,6 +213,18 @@ check_task() {
                     record "${task}" "${check}" fail "${found}"
                 fi
                 ;;
+            migration-methods)
+                local migration_files=()
+                mapfile -t migration_files < <(find "${files}/src/migrations" -type f -name '*.php' 2>/dev/null | sort)
+                if [[ ${#migration_files[@]} -eq 0 ]]; then
+                    record "${task}" "${check}" fail "no PHP migration files under src/migrations/"
+                elif run_log "${logs}/migration-methods.log" "${PHP_BIN}" \
+                    "${EVAL_DIR}/lib/migration-methods.php" "${migration_files[@]}"; then
+                    record "${task}" "${check}" pass "$(last_line "${logs}/migration-methods.log")"
+                else
+                    record "${task}" "${check}" fail "$(last_line "${logs}/migration-methods.log")"
+                fi
+                ;;
             app-boot | app-migrate | app-probe | app-render | app-static)
                 if [[ -n "${app_skip}" ]]; then
                     record "${task}" "${check}" skip "${app_skip}"

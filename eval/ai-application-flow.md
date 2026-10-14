@@ -18,7 +18,11 @@ The generated `summary.md`, `summary.json`, rendered HTML, and per-check logs ar
 
 ## Verified result
 
-Verified on 2026-10-14 against the prepared Yii 22.0 Basic Project Template application:
+The counts in this section were verified on 2026-10-14 with migration criteria version 1, which required
+`safeUp()`/`safeDown()`. They remain historical evidence and are not reclassified by the current criteria. See
+[Migration evaluation criteria](migration-criteria.md) for version 2.
+
+Verified against the prepared Yii 22.0 Basic Project Template application:
 
 - the reproduction command completed 1 of 1 tasks with 17 passes, 0 failures, and 1 expected skip;
 - the seeded migration applies, reverts, and applies again against SQLite;
@@ -43,6 +47,10 @@ eval/check.sh eval/fixtures/pass \
 ```
 
 The verified combined result was 2 of 2 tasks, 33 passes, 0 failures, and 2 expected skips.
+
+Under migration criteria version 2, the same fixture set reports 31 passes, 0 failures, and the same 2 expected
+skips. The lower pass count is caused by replacing three overlapping method-name checks with one classifier, not by
+reduced coverage.
 
 PHPStan may need permission to open a loopback worker socket. A sandbox that forbids local listening can produce
 `Failed to listen on tcp://127.0.0.1:0`; repeat the same deterministic command in an environment that permits the

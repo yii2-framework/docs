@@ -179,7 +179,16 @@ Guides: `db-active-record`, `input-validation`, `tutorial-core-validators`, `str
 
 ## Step 5: Add a migration
 
-Implement `safeUp()` and `safeDown()`, never `up()` and `down()`.
+Choose one matching method pair:
+
+- prefer `safeUp()` and `safeDown()` when every operation can run in the database transaction that Yii adds around
+  these methods;
+- use `up()` and `down()` when the DBMS or an operation cannot be transactional, or when the migration needs explicit
+  transaction control.
+
+Do not mix the pairs. Always implement the reversing method. When overriding `up()` and `down()`, keep the signatures
+compatible with Yii's migration contract: use the generated untyped signatures and return `false` to stop a migration;
+do not add `: void`.
 
 Create it with `./yii migrate/create create_post_table`:
 
@@ -211,8 +220,9 @@ final class M260101000000CreatePostTable extends Migration
 ```
 
 `config/console.php` sets `migrationNamespaces` to `app\migrations`, and `migrate/create` uses the first namespace.
-Use the schema builder (`$this->string()`), give every `safeUp()` a reversing `safeDown()`, and never edit an applied
-migration.
+Use the schema builder (`$this->string()`), reverse operations in the matching down method, and never edit an applied
+migration. `safeUp()` and `safeDown()` cannot make unsupported DDL transactional; check the target DBMS before relying
+on rollback.
 
 **Verify:** `./yii migrate --interactive=0`, then `./yii migrate/down 1 --interactive=0`, then `./yii migrate`. All
 three succeed.

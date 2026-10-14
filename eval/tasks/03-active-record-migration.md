@@ -17,10 +17,8 @@ checks:
   - "grep:function tableName"
   - "grep:function rules"
   - "grep:function attributeLabels"
-  - "grep:function safeUp"
-  - "grep:function safeDown"
+  - migration-methods
   - 'grep:\{\{%post\}\}'
-  - 'no-forbidden:function (up|down)\('
   - app-boot
   - app-migrate
   - 'app-probe:active-record:app\models\Post'
@@ -42,3 +40,7 @@ Write two files:
 - `src/migrations/M261013000000CreatePostTable.php`: the migration that creates the table and can be reverted.
 
 The application may configure a table prefix; the table name must honor it.
+
+Use one complete method pair. Prefer `safeUp()` and `safeDown()` when the operations can run transactionally; use
+`up()` and `down()` when they cannot or when explicit transaction control is required. If you override `up()` and
+`down()`, keep their signatures compatible with Yii's migration contract and do not declare them with `: void`.

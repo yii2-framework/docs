@@ -49,3 +49,4 @@
 - fix: keep sidebar groups closed on the index and open the active page's groups on interior pages.
 - docs: add an agent quick start, client verification matrix, focused reading, and bulk-export limits.
 - test(eval): persist the deterministic form, validation, and ActiveRecord application flow.
+- fix(docs): distinguish direct and transaction-wrapped migration methods, type contracts, and reversibility checks.
