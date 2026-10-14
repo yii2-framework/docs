@@ -67,7 +67,8 @@ Rules:
 
 1. `bootstrap.bundle.js` is an ES module. `BootstrapPluginAsset` renders `<script type="module">`; there is no
    `window.bootstrap`. Never add the file with a classic `<script src>` tag.
-2. Run plugin code with `BootstrapPluginAsset::importJs()`, which wraps it in a dynamic `import()` of the same URL:
+2. Run plugin code through the bundle instance returned by `BootstrapPluginAsset::register()`. Its
+   `$bundle->importJs()` method wraps the code in a dynamic `import()` of the same URL:
 
 ```php
 $bundle = BootstrapPluginAsset::register($this);
@@ -311,7 +312,7 @@ ActiveForm::end();
 | `offcanvas`, `dropdown-menu`                                        | `Drawer`, `Menu` / `ButtonMenu`                                          |
 | `navbar-expand-lg`, `d-md-none`, `col-md-6`                         | `lg:navbar-expand`, `md:d-none`, `md:col-6` (`Breakpoint::prefix()`)     |
 | `mb-3` for 1rem spacing                                             | `mb-5`; the spacer scale changed                                         |
-| `new bootstrap.Modal(el)` in an inline script                       | `importJs()` and `bootstrap.Dialog.getOrCreateInstance(el)`              |
+| `new bootstrap.Modal(el)` in an inline script                       | Register the bundle, then call `$bundle->importJs()` with `bootstrap.Dialog.getOrCreateInstance(el)` |
 | `$item->withActive(true);` and discarding the result                | `$item = $item->withActive(true);`                                       |
 | `Toast` that never appears                                          | Call `show()` on the instance; the widget only creates it                |
 | `Popover` content between `begin()` and `end()` as the popover body | That content is the trigger; set `content`                               |

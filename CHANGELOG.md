@@ -53,3 +53,4 @@
 - feat(eval): add a no-skill baseline with deterministic dry-run coverage.
 - feat(eval): add an offline Bootstrap 6 documentation-read task and fixture.
 - feat(eval): add a versioned Bootstrap 6 toast migration task with legacy, helper-equivalence, static-analysis, and registered-script checks.
+- fix(skills): document Bootstrap 6 module helpers as instance methods returned by asset registration.
