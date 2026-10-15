@@ -1,5 +1,6 @@
 ---
 title: "Proveedores de datos"
+description: "En las secciones sobre paginación y ordenación se describe como permitir a los usuarios finales elegir que se muestre una página de datos en particular, y..."
 ---
 
 En las secciones sobre [paginación](output-pagination.md) y [ordenación](output-sorting.md) se

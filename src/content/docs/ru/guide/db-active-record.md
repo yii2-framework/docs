@@ -1,5 +1,6 @@
 ---
 title: "Active Record"
+description: "Active Record обеспечивает объектно-ориентированный интерфейс для доступа и манипулирования данными, хранящимися в базах данных."
 ---
 
 [Active Record](https://ru.wikipedia.org/wiki/ActiveRecord) обеспечивает объектно-ориентированный интерфейс для доступа

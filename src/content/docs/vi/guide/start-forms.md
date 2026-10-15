@@ -1,5 +1,6 @@
 ---
 title: "Làm việc với Forms"
+description: "Ở phần này sẽ hướng dẫn làm thế nào để tạo mới trang Web cho phép ứng dụng lấy các thông tin về user từ form."
 ---
 
 Ở phần này sẽ hướng dẫn làm thế nào để tạo mới trang Web cho phép ứng dụng lấy các thông tin về user từ form.

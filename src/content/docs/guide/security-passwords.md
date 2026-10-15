@@ -1,5 +1,6 @@
 ---
 title: "Working with Passwords"
+description: "Most developers know that passwords cannot be stored in plain text, but many developers believe it's still safe to hash passwords using md5 or sha1."
 ---
 
 Most developers know that passwords cannot be stored in plain text, but many developers believe it's still safe to hash

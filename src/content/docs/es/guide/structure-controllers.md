@@ -1,5 +1,6 @@
 ---
 title: "Controladores"
+description: "Los controladores son parte del patrón o arquitectura MVC."
 ---
 
 Los controladores son parte del patrón o arquitectura [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador).

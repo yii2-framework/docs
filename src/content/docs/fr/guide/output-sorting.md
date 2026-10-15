@@ -1,5 +1,6 @@
 ---
 title: "Tri"
+description: "Lors de l'affichage de multiples lignes de données, on a souvent besoin des trier les données en fonction des valeurs de certaines colonnes spécifiées par..."
 ---
 
 Lors de l'affichage de multiples lignes de données, on a souvent besoin des trier les données en fonction des valeurs de certaines colonnes spécifiées par l'utilisateur. Yii utilise l'objet [[yii\data\Sort]] pour représenter les information sur le schéma de triage. En particulier :

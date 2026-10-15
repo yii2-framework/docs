@@ -14,13 +14,16 @@
     <a href="https://github.com/yii2-framework/docs/actions/workflows/deploy.yml" target="_blank">
         <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/deploy.yml?style=for-the-badge&label=Deploy&logo=github" alt="Deploy">
     </a>
-    <a href="https://github.com/yii2-framework/docs/actions/workflows/linter.yml" target="_blank">
-        <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/linter.yml?style=for-the-badge&label=Super-Linter&logo=github" alt="Super-Linter">
+    <a href="https://github.com/yii2-framework/docs/actions/workflows/quality.yml" target="_blank">
+        <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/quality.yml?style=for-the-badge&label=Quality&logo=github" alt="Quality">
+    </a>
+    <a href="https://github.com/yii2-framework/docs/actions/workflows/security.yml" target="_blank">
+        <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/security.yml?style=for-the-badge&label=Security&logo=github" alt="Security">
     </a>
 </p>
 
 <p align="center">
-    <strong>The Definitive Guide to Yii 2.0</strong><br>
+    <strong>The Definitive Guide to Yii 22.0</strong><br>
     <em>Built with <a href="https://starlight.astro.build">Astro Starlight</a></em>
 </p>
 
@@ -28,8 +31,23 @@
 
 The documentation is deployed at **[yii2-framework.github.io/docs](https://yii2-framework.github.io/docs/)**.
 
-- [Guide](https://yii2-framework.github.io/docs/guide/start-prerequisites/) - The Definitive Guide to Yii 2.0
+- [Guide](https://yii2-framework.github.io/docs/guide/start-prerequisites/) - The Definitive Guide to Yii 22.0
 - [Internals](https://yii2-framework.github.io/docs/internals/) - Framework internals documentation
+
+## Agent skills
+
+Agent skills are instruction files that coding agents (Claude Code, Codex, Cursor, GitHub Copilot and others) load
+when a task matches their description. This repository publishes two of them under [`skills/`](skills/):
+
+- [`yii2-framework`](skills/yii2-framework/SKILL.md): create or change a Yii 22.0 application (setup, controllers,
+  ActiveRecord, forms, tests).
+- [`yii2-bootstrap6-widgets`](skills/yii2-bootstrap6-widgets/SKILL.md): render Bootstrap 6 UI with the
+  `yii2-extensions/bootstrap6` widgets.
+
+Install from your application's directory using the [skill installation instructions](skills/README.md). They cover
+local checkouts and checking availability on the public default branch before installation. The
+[AI guide](https://yii2-framework.github.io/docs/project/ai-agents/) documents Codex, Claude Code, OpenCode, GitHub
+Copilot in VS Code, and Amp, with a distinction between documented support and actual verification.
 
 ## Local Development
 
@@ -46,6 +64,46 @@ The site will be available at `http://localhost:4321/docs/`.
 npm run build
 npm run preview
 ```
+
+## Extension docs
+
+The guides of the extension packages listed in `packages.json` are synced into `src/content/docs/extensions/<name>/`
+by `scripts/sync.mjs`. The synced files are build input and are never committed (`.gitignore`).
+
+```bash
+npm run sync          # shallow clone of each package at its `ref` into .cache/packages/
+npm run sync:local    # use each package's `localPath` checkout instead (working tree)
+npm run test:sync     # self-tests of the sync script
+```
+
+`npm run build` runs the sync and `tools/bin/reference` first (`prebuild`, so PHP and
+`composer install --working-dir tools` are needed), so CI clones the packages; `SYNC_LOCAL=1 npm run build` uses the
+local checkouts. The deploy workflow also runs nightly to pick up package changes. A package whose repository does
+not contain it yet (its `composer.json` name differs from `packagist` in the manifest) is skipped with a
+`[sync] skipped <name>` warning and left out of the sidebar; `bootstrap6` is in that state until it is pushed, so CI
+shows its docs only after the push. `node scripts/sync.mjs --strict` fails on any skip.
+
+The `status` of a manifest entry is `published` (on Packagist), `unpublished` (not released yet) or `template` (a GitHub
+template repository, such as `yii2-extensions/template`: its landing page links "Use this template" instead of
+Packagist).
+
+## API reference
+
+`tools/` is a Composer project (PHP 8.2 or later) that generates the API reference with
+[yii2-apidoc](https://github.com/yiisoft/yii2-apidoc): one Markdown page per type under `src/content/docs/api/`
+(framework, upstream `yiisoft/yii2` branch `22.0`) and `src/content/docs/extensions/<name>/reference/`, the catalogs
+`public/reference/<name>.json` and the link map `.cache/reference/links.json` used to turn the guide's
+`[[yii\...]]` references into links. All of it is build output (`.gitignore`).
+
+```bash
+composer install --working-dir tools
+npm run sync && npm run reference   # or `npm run build`, whose prebuild runs both
+composer test --working-dir tools   # PHPUnit
+```
+
+The framework is an entry of `packages.json` with `"type": "framework"`: the sync clones only its `framework/`
+directory (or, with `sync:local`, exports branch `22.0` of the `localPath` clone with `git archive`, without
+switching its checkout). Gaps of yii2-apidoc worked around in `tools/src/` are listed in `tools/UPSTREAM.md`.
 
 ## Our social networks
 

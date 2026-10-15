@@ -1,5 +1,6 @@
 ---
 title: "Unit Tests"
+description: "A unit test verifies that a single unit of code is working as expected."
 ---
 
 A unit test verifies that a single unit of code is working as expected. That is, given different input parameters,

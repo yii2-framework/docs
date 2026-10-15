@@ -1,5 +1,6 @@
 ---
 title: "Entry Scripts"
+description: "Entry script là tiến trình đầu tiên của ứng dụng. Một ứng dụng (hoặc ứng dụng Web hoặc ứng dụng console) đều có một entry script."
 ---
 
 Entry script là tiến trình đầu tiên của ứng dụng. Một ứng dụng (hoặc

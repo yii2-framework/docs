@@ -1,5 +1,6 @@
 ---
 title: "Pamięć podręczna stron"
+description: "Pamięć podręczna stron odnosi się do zapisu zawartości całej strony po stronie serwera."
 ---
 
 Pamięć podręczna stron odnosi się do zapisu zawartości całej strony po stronie serwera. Kiedy zostanie ona ponownie wywołana,

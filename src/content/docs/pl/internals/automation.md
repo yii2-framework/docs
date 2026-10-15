@@ -1,5 +1,6 @@
 ---
 title: "Zadania zautomatyzowane"
+description: "Istnieją zadania wykonywane automatycznie podczas pracy nad Yii."
 ---
 
 Istnieją zadania wykonywane automatycznie podczas pracy nad Yii:

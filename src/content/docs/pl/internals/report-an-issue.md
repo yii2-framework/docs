@@ -1,5 +1,6 @@
 ---
 title: "Zgłaszanie problemów"
+description: "Prosimy o przestrzeganie poniższych wskazówek podczas dodawania nowego zgłoszenia, aby ułatwić i przyspieszyć rozwiązanie problemu."
 ---
 
 Prosimy o przestrzeganie poniższych wskazówek podczas dodawania nowego zgłoszenia, aby ułatwić i przyspieszyć rozwiązanie problemu:

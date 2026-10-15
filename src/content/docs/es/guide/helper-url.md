@@ -1,5 +1,6 @@
 ---
 title: "Clase Auxiliar URL (URL Helper)"
+description: "La clase auxiliar URL proporciona un conjunto de métodos estáticos para gestionar URLs."
 ---
 
 La clase auxiliar URL proporciona un conjunto de métodos estáticos para gestionar URLs.

@@ -1,5 +1,6 @@
 ---
 title: "Application Components"
+description: "Applications are service locators. They host a set of the so-called application components that provide different services for processing requests."
 ---
 
 Applications are [service locators](concept-service-locator.md). They host a set of the so-called

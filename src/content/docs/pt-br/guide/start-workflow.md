@@ -1,5 +1,6 @@
 ---
 title: "Executando Aplicações"
+description: "Após instalar o Yii, você tem uma aplicação Yii funcional que pode ser acessada pela URL https://hostname/basico/web/index.php ou..."
 ---
 
 Após instalar o Yii, você tem uma aplicação Yii funcional que pode ser acessada

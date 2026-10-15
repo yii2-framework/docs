@@ -1,5 +1,6 @@
 ---
 title: "Componentes"
+description: "Los componentes son los principales bloques de construcción de las aplicaciones Yii. Los componentes son instancias de Component o de una clase extendida."
 ---
 
 Los componentes son los principales bloques de construcción de las aplicaciones Yii. Los componentes son instancias de [[yii\base\Component]] o de una clase extendida. Las tres características principales que los componentes proporcionan

@@ -1,5 +1,6 @@
 ---
 title: "Módulos"
+description: "Os módulos são unidades independentes de software que são compostos de models (modelos), views (visões), controllers (controladores) e outros componentes de..."
 ---
 
 Os módulos são unidades independentes de software que são compostos de

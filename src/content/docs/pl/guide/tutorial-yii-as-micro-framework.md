@@ -1,5 +1,6 @@
 ---
 title: "Używanie Yii jako mikroframeworka"
+description: "Yii może być z powodzeniem wykorzystywane bez dodatkowych funkcjonalności dostarczanych przez prosty i zaawansowany szablon aplikacji."
 ---
 
 Yii może być z powodzeniem wykorzystywane bez dodatkowych funkcjonalności dostarczanych przez prosty i zaawansowany szablon aplikacji. Inaczej mówiąc,

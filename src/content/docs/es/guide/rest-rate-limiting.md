@@ -1,5 +1,6 @@
 ---
 title: "Limitando el rango (rate)"
+description: "Para prevenir el abuso, puedes considerar añadir un límitación del rango (rate limiting) para tus APIs."
 ---
 
 Para prevenir el abuso, puedes considerar añadir un _límitación del rango (rate limiting)_ para tus APIs. Por ejemplo,

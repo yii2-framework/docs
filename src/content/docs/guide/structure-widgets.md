@@ -1,5 +1,6 @@
 ---
 title: "Widgets"
+description: "Widgets are reusable building blocks used in views to create complex and configurable user interface elements in an object-oriented fashion."
 ---
 
 Widgets are reusable building blocks used in [views](structure-views.md) to create complex and configurable user

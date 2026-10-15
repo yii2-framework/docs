@@ -1,5 +1,6 @@
 ---
 title: "数据小部件"
+description: "Yii提供了一套数据小部件 widgets ，这些小部件可以用于显示数据。 DetailView 小部件能够用于显示一条记录数据， ListView 和 GridView 小部件能够用于显示一个拥有分页、 排序和过滤功能的一个列表或者表格。"
 ---
 
 Yii提供了一套数据小部件 [widgets](structure-widgets.md) ，这些小部件可以用于显示数据。

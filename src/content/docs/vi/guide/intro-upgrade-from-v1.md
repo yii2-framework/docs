@@ -1,5 +1,6 @@
 ---
 title: "Nâng cấp lên từ phiên bản 1.1"
+description: "Có nhiều sự khác biệt giữa các phiên bản 1.1 và 2.0 của Yii khi cấu trúc framework được viết lại hoàn toàn cho 2.0."
 ---
 
 Có nhiều sự khác biệt giữa các phiên bản 1.1 và 2.0 của Yii khi cấu trúc framework được viết lại hoàn toàn cho 2.0.

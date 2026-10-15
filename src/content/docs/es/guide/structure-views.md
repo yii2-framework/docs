@@ -1,5 +1,6 @@
 ---
 title: "Vistas"
+description: "Las Vistas (views) son una parte de la arquitectura MVC. Estas son el código responsable de presentar los datos al usuario final."
 ---
 
 Las Vistas (views) son una parte de la arquitectura [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador).

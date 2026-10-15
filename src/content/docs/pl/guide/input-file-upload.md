@@ -1,5 +1,6 @@
 ---
 title: "Wysyłanie plików"
+description: "Przesyłanie plików w Yii jest zazwyczaj wykonywane przy użyciu klasy UploadedFile, która hermetyzuje każdy przesłany plik jako obiekt UploadedFile."
 ---
 
 Przesyłanie plików w Yii jest zazwyczaj wykonywane przy użyciu klasy [[yii\web\UploadedFile|UploadedFile]], która hermetyzuje każdy przesłany plik jako obiekt `UploadedFile`.

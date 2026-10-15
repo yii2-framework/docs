@@ -1,5 +1,6 @@
 ---
 title: "Active Record"
+description: "Active Record zapewnia zorientowany obiektowo interfejs dostępu i manipulacji danymi zapisanymi w bazie danych."
 ---
 
 [Active Record](https://en.wikipedia.org/wiki/Active_record_pattern) zapewnia zorientowany obiektowo interfejs dostępu i manipulacji danymi

@@ -1,5 +1,6 @@
 ---
 title: "Klasy pomocnicze"
+description: "Yii jest wyposażone w wiele klas upraszczających pisanie często wykorzystywanych zadań w kodzie, takich jak manipulowanie ciągami znaków bądź tablicami..."
 ---
 
 > Note: Ta sekcja jest w trakcie tworzenia.

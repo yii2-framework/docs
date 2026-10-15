@@ -1,5 +1,6 @@
 ---
 title: "Generando Código con Gii"
+description: "En esta sección, explicaremos cómo utilizar Gii para generar código que automáticamente implementa algunas de las características más comunes de una aplicación."
 ---
 
 En esta sección, explicaremos cómo utilizar [Gii](tool-gii.md) para generar código que automáticamente

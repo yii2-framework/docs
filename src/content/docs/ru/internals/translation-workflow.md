@@ -1,5 +1,6 @@
 ---
 title: "Как работать над переводом на русский"
+description: "Yii переводится на множество языков, в том числе и на русский. Перевод включает в себя документацию и сообщения."
 ---
 
 Yii переводится на множество языков, в том числе и на русский. Перевод включает в себя документацию и сообщения.
@@ -34,7 +35,7 @@ php build translation "../docs/guide" "../docs/guide-ru" "Russian guide translat
 
 Если ругается на composer, выполните `composer install` в корневой директории.
 
-Информацию о синтаксисе и стиле документации можно найти в [documentation_style_guide.md](../documentation_style_guide.md).
+Информацию о синтаксисе и стиле документации можно найти в [documentation_style_guide.md](../project/documentation-style-guide.md).
 
 Перед тем, как начать перевод, убедитесь, что никто им ещё не занимается и запишите себя в
 [список всех переводимых документов](https://docs.google.com/spreadsheets/d/1uxV0LwmR-8XXqlT8C6VqWllZjuoyIj-UkYpAQPWyUzE/edit?usp=sharing).

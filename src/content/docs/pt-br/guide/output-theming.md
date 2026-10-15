@@ -1,5 +1,6 @@
 ---
 title: "Temas"
+description: "Tema é uma forma de substituir um conjunto de views por outras, sem a necessidade de tocar no código de renderização de view original."
 ---
 
 Tema é uma forma de substituir um conjunto de [views](structure-views.md) por outras, sem a necessidade de tocar no código de renderização de view original. Você pode usar tema para alterar sistematicamente a aparência de uma aplicação.

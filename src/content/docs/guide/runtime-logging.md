@@ -1,5 +1,6 @@
 ---
 title: "Logging"
+description: "Yii provides a powerful logging framework that is highly customizable and extensible."
 ---
 
 Yii provides a powerful logging framework that is highly customizable and extensible. Using this framework, you

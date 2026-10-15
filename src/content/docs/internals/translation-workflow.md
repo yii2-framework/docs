@@ -1,5 +1,6 @@
 ---
 title: "Translation workflow"
+description: "Yii is translated in many languages in order to be useful for international applications and developers."
 ---
 
 Yii is translated in many languages in order to be useful for international applications and developers. Two main areas
@@ -43,4 +44,4 @@ php build translation "../docs/guide" "../docs/guide-ru" "Russian guide translat
 
 If it will complain about composer, perform `composer install` in the source root dir.
 
-For information on the documentation syntax and style guide, see [documentation_style_guide.md](../documentation_style_guide.md).
+For information on the documentation syntax and style guide, see [documentation_style_guide.md](../project/documentation-style-guide.md).

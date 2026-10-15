@@ -1,5 +1,6 @@
 ---
 title: "Chạy ứng dụng"
+description: "Sau khi cài đặt Yii, ứng dụng Yii của bạn đã được chạy, tùy thuộc vào cấu hình bạn có thể truy cập qua URL https://hostname/basic/web/index.php hoặc..."
 ---
 
 Sau khi cài đặt Yii, ứng dụng Yii của bạn đã được chạy, tùy thuộc vào cấu hình bạn có thể truy cập qua URL `https://hostname/basic/web/index.php`

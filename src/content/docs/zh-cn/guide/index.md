@@ -1,5 +1,6 @@
 ---
 title: "Yii 2.0 权威指南"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 本教程的发布遵循 [Yii 文档使用许可](https://www.yiiframework.com/doc/terms/)。

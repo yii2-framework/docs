@@ -1,5 +1,6 @@
 ---
 title: "Katakan Hello"
+description: 'Bagian ini menjelaskan cara membuat halaman "Hello" baru dalam aplikasi Anda.'
 ---
 
 Bagian ini menjelaskan cara membuat halaman "Hello" baru dalam aplikasi Anda.

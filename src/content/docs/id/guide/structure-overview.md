@@ -1,5 +1,6 @@
 ---
 title: "Tinjauan"
+description: "Aplikasi Yii diorganisir berdasarkan pola arsitektur model-view-controller (MVC)."
 ---
 
 Aplikasi Yii diorganisir berdasarkan pola arsitektur [model-view-controller (MVC)](https://id.wikipedia.org/wiki/MVC).

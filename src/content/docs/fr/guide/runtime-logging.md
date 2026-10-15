@@ -1,5 +1,6 @@
 ---
 title: "Enregistrements des messages"
+description: "Yii fournit une puissante base structurée (framework) d'enregistrement des messages qui est très personnalisable et extensible."
 ---
 
 Yii fournit une puissante base structurée (framework) d'enregistrement des messages qui est très personnalisable et extensible. En utilisant cette base structurée, vous pouvez facilement enregistrer des types variés de messages, les filtrer et les rassembler dans différentes cibles comme les bases de données et les courriels.

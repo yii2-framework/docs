@@ -1,5 +1,6 @@
 ---
 title: "Testing"
+description: "This package provides a consistent set of Composer scripts for local validation."
 ---
 
 This package provides a consistent set of [Composer](https://getcomposer.org/) scripts for local validation.

@@ -1,5 +1,6 @@
 ---
 title: "コントローラ"
+description: "コントローラは MVC アーキテクチャの一部を構成するものです。 それは Controller を拡張したクラスのオブジェクトであり、リクエストの処理とレスポンスの生成について責任を負います。"
 ---
 
 コントローラは [MVC](https://ja.wikipedia.org/wiki/Model_View_Controller) アーキテクチャの一部を構成するものです。

@@ -1,5 +1,6 @@
 ---
 title: "Skrip Masuk"
+description: "Skrip masuk adalah langkah pertama pada proses bootstrap aplikasi."
 ---
 
 Skrip masuk adalah langkah pertama pada proses _bootstrap_ aplikasi. Dalam sebuah aplikasi (apakah

@@ -1,5 +1,6 @@
 ---
 title: "O que você precisa saber"
+description: "A curva de aprendizado no Yii não é tão íngreme como em outros frameworks PHP mas, ainda assim, há algumas coisas que você devia aprender antes de começar."
 ---
 
 A curva de aprendizado no Yii não é tão íngreme como em outros frameworks PHP mas, ainda assim, há algumas coisas que você devia aprender antes de começar.

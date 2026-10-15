@@ -1,5 +1,6 @@
 ---
 title: "Wysyłanie poczty"
+description: "Yii wspiera tworzenie oraz wysyłanie wiadomości email, jednakże silnik dostarcza jedynie funkcjonalność składania treści oraz prosty interfejs."
 ---
 
 > Note: Ta sekcja jest w trakcie tworzenia.

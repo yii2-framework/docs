@@ -1,5 +1,6 @@
 ---
 title: "Composants d'application"
+description: "Les applications sont des (localisateurs de services (service locators)."
 ---
 
 Les applications sont des [(localisateurs de services (service locators)](concept-service-locator.md). Elles hébergent un jeu composants appelés « composants d'application » qui procurent différents services pour la prise en charge des requêtes. Par exemple, le composant `urlManager` (gestionnaire d'url) est chargé de router les requêtes Web vers les contrôleurs appropriés ; le composant `db` (base de données) fournit les services relatifs à la base de données ; et ainsi de suite.

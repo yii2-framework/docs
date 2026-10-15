@@ -1,5 +1,6 @@
 ---
 title: "Vue d'ensemble"
+description: "À chaque fois qu'une application Yii prend en charge une requête, elle entreprend un flux de travail similaire."
 ---
 
 À chaque fois qu'une application Yii prend en charge une requête, elle entreprend un flux de travail similaire.

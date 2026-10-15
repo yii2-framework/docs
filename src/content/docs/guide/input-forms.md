@@ -1,5 +1,6 @@
 ---
 title: "Creating Forms"
+description: "The primary way of using forms in Yii is through ActiveForm. This approach should be preferred when the form is based upon a model."
 ---
 
 ## ActiveRecord based forms: ActiveForm

@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Renders the extension examples pages into static demo pages (`public/demos/`) and catalogs (`.cache/demos/`).
+ *
+ * Only the classes of `tools/src` are autoloaded here: each package renders in a worker process that loads Yii 22.0
+ * and the package from `.cache/demos/<package>/vendor`. See `tools/bin/demos --help`.
+ */
+
+use Yii2Docs\Tools\Cli\DemosCommand;
+
+$tools = dirname(__DIR__);
+
+spl_autoload_register(
+    static function (string $class) use ($tools): void {
+        $prefix = 'Yii2Docs\\Tools\\';
+
+        if (str_starts_with($class, $prefix)) {
+            $file = $tools . '/src/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
+
+            if (is_file($file)) {
+                require $file;
+            }
+        }
+    },
+);
+
+exit((new DemosCommand(dirname($tools), __FILE__))->run(array_slice($argv, 1)));

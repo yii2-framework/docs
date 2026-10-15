@@ -1,5 +1,6 @@
 ---
 title: "Creating your own Application structure"
+description: "While the basic and advanced project templates are great for most of your needs, you may want to create your own project template with which to start your..."
 ---
 
 > Note: This section is under development.

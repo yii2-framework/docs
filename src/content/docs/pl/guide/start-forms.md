@@ -1,5 +1,6 @@
 ---
 title: "Praca z formularzami"
+description: "Ta sekcja opisuje jak utworzyć nową stronę z formularzem pobierającym dane od użytkownika."
 ---
 
 Ta sekcja opisuje jak utworzyć nową stronę z formularzem pobierającym dane od użytkownika.

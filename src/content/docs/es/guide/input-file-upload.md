@@ -1,5 +1,6 @@
 ---
 title: "Subir Archivos"
+description: "Subir archivos en Yii es normalmente realizado con la ayuda de UploadedFile, que encapsula cada archivo subido en un objeto UploadedFile."
 ---
 
 Subir archivos en Yii es normalmente realizado con la ayuda de [[yii\web\UploadedFile]], que encapsula cada archivo subido

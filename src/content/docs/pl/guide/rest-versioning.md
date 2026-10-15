@@ -1,5 +1,6 @@
 ---
 title: "Wersjonowanie"
+description: "Cechą dobrego API jest jego wersjonowanie: zmiany i nowe funkcjonalności powinny być implementowane w nowych wersjach API, zamiast ciągłych modyfikacji..."
 ---
 
 Cechą dobrego API jest jego _wersjonowanie_: zmiany i nowe funkcjonalności powinny być implementowane w nowych wersjach API, zamiast

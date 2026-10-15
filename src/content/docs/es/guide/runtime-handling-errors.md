@@ -1,5 +1,6 @@
 ---
 title: "Gestión de Errores"
+description: "Yii incluye un error handler que permite una gestión de errores mucho más práctica que anteriormente."
 ---
 
 Yii incluye un [[yii\web\ErrorHandler|error handler]] que permite una gestión de errores mucho más práctica que

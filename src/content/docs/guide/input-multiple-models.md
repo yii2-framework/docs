@@ -1,5 +1,6 @@
 ---
 title: "Getting Data for Multiple Models"
+description: "When dealing with some complex data, it is possible that you may need to use multiple different models to collect the user input."
 ---
 
 When dealing with some complex data, it is possible that you may need to use multiple different models to collect

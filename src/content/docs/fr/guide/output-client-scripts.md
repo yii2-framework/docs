@@ -1,5 +1,6 @@
 ---
 title: "Travail avec des scripts clients"
+description: "Avec l'objet View vous êtes en mesure d'enregistrer des scripts."
 ---
 
 > Note: cette section est encore en développement.

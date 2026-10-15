@@ -1,5 +1,6 @@
 ---
 title: "Introdução"
+description: "O Yii fornece um conjunto de ferramentas para simplificar a tarefa de implementar APIs RESTful Web Service."
 ---
 
 O Yii fornece um conjunto de ferramentas para simplificar a tarefa de implementar APIs RESTful Web Service. Em particular, o Yii suporta os seguintes recursos sobre APIs RESTful:

@@ -1,5 +1,6 @@
 ---
 title: "Clase auxiliar Html (Html helper)"
+description: "Todas las aplicaciones web generan grandes cantidades de marcado HTML (HTML markup)."
 ---
 
 Todas las aplicaciones web generan grandes cantidades de marcado HTML (HTML markup). Si el marcado es estático, se

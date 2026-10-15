@@ -1,5 +1,6 @@
 ---
 title: "Praca ze skryptami"
+description: "Dzięki obiektowi View możesz rejestrować skrypty w aplikacji."
 ---
 
 > Note: Ta sekcja nie została jeszcze ukończona.

@@ -1,5 +1,6 @@
 ---
 title: "Tratamento de Erros"
+description: "Ao manusear uma requisição da API RESTful, se existir um erro na requisição do usuário ou se alguma coisa inesperada acontecer no servidor, você pode..."
 ---
 
 Ao manusear uma requisição da API RESTful, se existir um erro na requisição do usuário ou se alguma coisa inesperada acontecer no servidor, você pode simplesmente lançar uma exceção para notificar o usuário de que algo deu errado.

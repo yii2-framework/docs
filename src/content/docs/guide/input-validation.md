@@ -1,5 +1,6 @@
 ---
 title: "Validating Input"
+description: "As a rule of thumb, you should never trust the data received from end users and should always validate it before putting it to good use."
 ---
 
 As a rule of thumb, you should never trust the data received from end users and should always validate it

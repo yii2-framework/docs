@@ -1,5 +1,6 @@
 ---
 title: "Rate Limiting"
+description: "To prevent abuse, you should consider adding rate limiting to your APIs."
 ---
 
 To prevent abuse, you should consider adding _rate limiting_ to your APIs. For example, you may want to limit the API usage

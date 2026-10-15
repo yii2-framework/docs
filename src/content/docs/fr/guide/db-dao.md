@@ -1,5 +1,6 @@
 ---
 title: "Objets d'accès aux bases de données"
+description: "Construits au-dessus des objets de bases de données PHP (PDO – PHP Data Objects), les objets d'accès aux bases de données de Yii (DAO – Database Access..."
 ---
 
 Construits au-dessus des [objets de bases de données PHP (PDO – PHP Data Objects)](https://www.php.net/manual/fr/book.pdo.php), les objets d'accès aux bases de données de Yii (DAO – Database Access Objects) fournissent une API orientée objets pour accéder à des bases de données relationnelles. C'est la fondation pour d'autres méthodes d'accès aux bases de données plus avancées qui incluent le [constructeur de requêtes (_query builder_)](db-query-builder.md) et l'[enregistrement actif (_active record_)](db-active-record.md).

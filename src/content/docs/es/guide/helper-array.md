@@ -1,5 +1,6 @@
 ---
 title: "ArrayHelper"
+description: "Adicionalmente al rico conjunto de funciones para arrays de PHP, el array helper de Yii proporciona métodos estáticos adicionales permitiendo trabajar con..."
 ---
 
 Adicionalmente al [rico conjunto de funciones para arrays de PHP](https://www.php.net/manual/es/book.array.php), el array helper de Yii proporciona

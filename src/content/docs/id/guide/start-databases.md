@@ -1,5 +1,6 @@
 ---
 title: "Bekerja dengan Database"
+description: "Bagian ini akan memaparkan bagaimana membuat halaman yang menampilkan daftar data negara yang diambil dari tabel country pada database."
 ---
 
 Bagian ini akan memaparkan bagaimana membuat halaman yang menampilkan daftar data negara yang diambil dari

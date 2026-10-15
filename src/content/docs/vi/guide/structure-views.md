@@ -1,5 +1,6 @@
 ---
 title: "Views (Giao diện)"
+description: "Views là phần trong mô hình MVC. Thành phần này chịu trách nhiệm chính trong việc hiển thị dữ liệu tới người dùng."
 ---
 
 Views là phần trong mô hình [MVC](https://vi.wikipedia.org/wiki/MVC).

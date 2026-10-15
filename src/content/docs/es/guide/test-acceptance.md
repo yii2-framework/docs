@@ -1,5 +1,6 @@
 ---
 title: "Tests de aceptación"
+description: "Un test de aceptación verifica escenarios desde la perspectiva de un usuario."
 ---
 
 Un test de aceptación verifica escenarios desde la perspectiva de un usuario.

@@ -1,5 +1,6 @@
 ---
 title: "路由"
+description: "当入口脚本在调用 run() 方法时，它进行的第一个操作就是解析输入的请求，然后实例化对应的控制器动作处理这个请求。 该过程就被称为引导路由（routing）。 路由相反的操作会将给定的路由和参数生成一个可访问的URL地址， 这个操作叫做创建URL。"
 ---
 
 当[入口脚本](structure-entry-scripts.md)在调用 [[yii\web\Application::run()|run()]]

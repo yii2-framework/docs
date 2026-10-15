@@ -1,5 +1,6 @@
 ---
 title: "Yii là gì"
+description: "Yii là một PHP Framework mã nguồn mở và hoàn toàn miễn phí, có hiệu năng xử lý cao, phát triển tốt nhất trên các ứng dụng Web 2.0, sử dụng tối đa các thành..."
 ---
 
 Yii là một PHP Framework mã nguồn mở và hoàn toàn miễn phí, có hiệu năng xử lý cao, phát triển tốt nhất trên các ứng dụng Web 2.0, sử dụng tối đa các thành phần (component-based PHP framework) để tăng tốc độ viết ứng dụng.

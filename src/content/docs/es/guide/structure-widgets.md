@@ -1,5 +1,6 @@
 ---
 title: "Widgets"
+description: "Los widgets son bloques de código reutilizables que se usan en las vistas para crear elementos de interfaz de usuario complejos y configurables, de forma..."
 ---
 
 Los _widgets_ son bloques de código reutilizables que se usan en las [vistas](structure-views.md)

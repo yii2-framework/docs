@@ -4,16 +4,27 @@ name: vale
 on:
   push:
 
+# Vale only reads the repository; the job that posts the check declares `checks: write`.
 permissions:
   contents: read
-  checks: write
+
+concurrency:
+  group: vale-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   vale:
+    name: Vale
     runs-on: ubuntu-latest
+    # reviewdog posts the Vale findings as a GitHub check on the commit.
+    permissions:
+      contents: read
+      checks: write # reviewdog posts the Vale findings as a check on the commit.
     steps:
       - name: Checkout.
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Microsoft Style.
         run: |
@@ -22,7 +33,7 @@ jobs:
           unzip Microsoft.zip -d .github/styles
 
       - name: Run Vale.
-        uses: errata-ai/vale-action@reviewdog
+        uses: errata-ai/vale-action@518a9136acc6e6668ce7c00d367051e0941e87ff # v3.0.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:

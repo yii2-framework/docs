@@ -1,5 +1,6 @@
 ---
 title: "Aplikasi"
+description: "Aplikasi (Application) adalah objek yang mengelola semua struktur dan siklus dari sistem aplikasi Yii."
 ---
 
 Aplikasi _(Application)_ adalah objek yang mengelola semua struktur dan siklus dari sistem aplikasi Yii.

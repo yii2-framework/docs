@@ -1,5 +1,6 @@
 ---
 title: "Events"
+description: "Events allow you to inject custom code into existing code at certain execution points."
 ---
 
 Events allow you to inject custom code into existing code at certain execution points. You can attach custom

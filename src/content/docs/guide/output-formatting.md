@@ -1,5 +1,6 @@
 ---
 title: "Data Formatting"
+description: "To display data in a more readable format for users, you may format them using the formatter application component."
 ---
 
 To display data in a more readable format for users, you may format them using the `formatter` [application component](structure-application-components.md).

@@ -1,5 +1,6 @@
 ---
 title: "Komponen Aplikasi"
+description: "Objek Aplikasi (Application) adalah service locators."
 ---
 
 Objek Aplikasi _(Application)_ adalah [service locators](concept-service-locator.md). Objek ini menampung seperangkat

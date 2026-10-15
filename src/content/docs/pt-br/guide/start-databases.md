@@ -1,5 +1,6 @@
 ---
 title: "Trabalhando com Bancos de Dados"
+description: "Esta seção descreverá como criar uma nova página que exibe informações de países obtidos de uma tabela de banco de dados chamada pais."
 ---
 
 Esta seção descreverá como criar uma nova página que exibe informações de países obtidos de uma tabela de banco de dados chamada `pais`. Para isso, você

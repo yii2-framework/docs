@@ -1,5 +1,6 @@
 ---
 title: "Eventos"
+description: "Eventos permitem que você injete código personalizado dentro de outo código existente em determinados pontos de execução."
 ---
 
 Eventos permitem que você injete código personalizado dentro de outo código existente em determinados pontos de execução. Você pode anexar o código personalizado a um evento de modo que ao acionar o evento, o código é executado automaticamente. Por exemplo, um objeto de e-mail pode disparar um evento `messageSent` quando o envio da mensagem for bem sucedida. Se você quiser acompanhar as mensagens que são enviadas com sucesso, você poderia então simplesmente anexar o código de acompanhamento ao evento `messageSent`.

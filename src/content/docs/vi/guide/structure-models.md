@@ -1,5 +1,6 @@
 ---
 title: "Model"
+description: "Model là phần trong mô hình MVC. Là đối tượng đại diện cho phần dữ liệu, phương thức xử lý và nghiệp vụ logic."
 ---
 
 Model là phần trong mô hình [MVC](https://vi.wikipedia.org/wiki/MVC).

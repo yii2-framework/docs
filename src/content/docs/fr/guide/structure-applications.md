@@ -1,5 +1,6 @@
 ---
 title: "Applications"
+description: "Les Applications sont des objets qui gouvernent la structure d'ensemble et le cycle de vie des systèmes mettant en œuvre Yii."
 ---
 
 Les Applications sont des objets qui gouvernent la structure d'ensemble et le cycle de vie des systèmes mettant en œuvre Yii.

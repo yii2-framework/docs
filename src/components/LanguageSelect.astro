@@ -1,0 +1,10 @@
+---
+// Hides the language picker on API reference pages: the reference is English only and its type pages have no locale
+// copies (see plugins/reference-routes.mjs), so the other options would lead to 404 pages.
+import Default from '@astrojs/starlight/components/LanguageSelect.astro';
+import { isReferenceRoute } from '../../plugins/reference-id.mjs';
+
+const { id, locale } = Astro.locals.starlightRoute;
+---
+
+{!isReferenceRoute(id, locale) && <Default />}

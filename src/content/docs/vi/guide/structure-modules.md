@@ -1,5 +1,6 @@
 ---
 title: "Modules"
+description: "Modules là các đơn vị phần mềm độc lập bao gồm các models, views, controllers, và các thành phần hỗ trợ khác."
 ---
 
 Modules là các đơn vị phần mềm độc lập bao gồm các [models](structure-models.md), [views](structure-views.md),

@@ -1,0 +1,74 @@
+[
+    {
+        "name": "yii2",
+        "title": "Yii 22.0",
+        "type": "framework",
+        "repo": "https://github.com/yiisoft/yii2",
+        "ref": "22.0",
+        "status": "published",
+        "srcDir": "framework",
+        "namespace": "yii",
+        "localPath": "../../yiisoft/yii2",
+        "packagist": "yiisoft/yii2"
+    },
+    {
+        "name": "bootstrap6",
+        "title": "Bootstrap 6",
+        "repo": "https://github.com/yii2-extensions/bootstrap6",
+        "ref": "main",
+        "status": "unpublished",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\bootstrap6",
+        "localPath": "../../yii2-extensions/bootstrap6",
+        "packagist": "yii2-extensions/bootstrap6",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "testing"
+        ],
+        "demos": true
+    },
+    {
+        "name": "filepond",
+        "title": "FilePond",
+        "repo": "https://github.com/yii2-extensions/filepond",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\filepond",
+        "localPath": "../../yii2-extensions/filepond",
+        "packagist": "yii2-extensions/filepond",
+        "order": ["installation", "configuration", "examples", "testing"],
+        "demos": true
+    },
+    {
+        "name": "localeurls",
+        "title": "Locale URLs",
+        "repo": "https://github.com/yii2-extensions/localeurls",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\localeurls",
+        "localPath": "../../yii2-extensions/localeurls",
+        "packagist": "yii2-extensions/localeurls",
+        "order": ["installation", "configuration", "examples", "testing"]
+    },
+    {
+        "name": "template",
+        "title": "Extension template",
+        "repo": "https://github.com/yii2-extensions/template",
+        "ref": "main",
+        "status": "template",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii\\template",
+        "localPath": "../../yii2-extensions/template",
+        "packagist": "yii2-extensions/template",
+        "order": ["installation", "configuration", "examples", "testing"]
+    }
+]

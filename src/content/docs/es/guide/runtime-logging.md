@@ -1,5 +1,6 @@
 ---
 title: "Registro de anotaciones"
+description: "Yii proporciona un poderoso framework dedicado al registro de anotaciones (logging) que es altamente personalizable y extensible."
 ---
 
 Yii proporciona un poderoso framework dedicado al registro de anotaciones (logging) que es altamente personalizable y

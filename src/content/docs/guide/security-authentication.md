@@ -1,5 +1,6 @@
 ---
 title: "Authentication"
+description: "Authentication is the process of verifying the identity of a user."
 ---
 
 Authentication is the process of verifying the identity of a user. It usually uses an identifier

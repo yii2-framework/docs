@@ -1,5 +1,6 @@
 ---
 title: "Aggiornare dalla versione 1.1"
+description: "Ci sono molte differenze tra la versione 1.1 e la 2.0 di Yii, dato che il framework è stato completamente riscritto."
 ---
 
 Ci sono molte differenze tra la versione 1.1 e la 2.0 di Yii, dato che il framework è stato completamente riscritto.

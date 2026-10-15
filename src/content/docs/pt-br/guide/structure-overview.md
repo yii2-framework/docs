@@ -1,5 +1,6 @@
 ---
 title: "Visão Geral"
+description: "As aplicações do Yii são organizadas de acordo com o padrão de projeto model-view-controller (MVC) (modelo-visão-controlador)."
 ---
 
 As aplicações do Yii são organizadas de acordo com o padrão de projeto

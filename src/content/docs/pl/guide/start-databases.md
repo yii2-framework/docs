@@ -1,5 +1,6 @@
 ---
 title: "Praca z bazami danych"
+description: "Ta sekcja opisuje jak utworzyć nową stronę, która będzie wyświetlała dane krajów pobrane z tabeli bazy danych o nazwie country."
 ---
 
 Ta sekcja opisuje jak utworzyć nową stronę, która będzie wyświetlała dane krajów pobrane z tabeli bazy danych o nazwie `country`.

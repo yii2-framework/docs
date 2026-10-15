@@ -1,5 +1,6 @@
 ---
 title: "Générer du code avec Gii"
+description: "Cette section décrit comment utiliser Gii pour générer du code qui met automatiquement en œuvre des fonctionnalités courantes de sites Web."
 ---
 
 Cette section décrit comment utiliser [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) pour générer du code qui met automatiquement en œuvre des fonctionnalités courantes de sites Web. Utiliser Gii pour auto-générer du code consiste simplement à saisir les bonnes informations en suivant les instructions affichées sur les pages Web de Gii.

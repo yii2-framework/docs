@@ -1,5 +1,6 @@
 ---
 title: "Configurações"
+description: "As configurações são amplamente utilizadas em Yii na criação de novos objetos ou inicializando objetos existentes."
 ---
 
 As configurações são amplamente utilizadas em Yii na criação de novos objetos ou inicializando objetos existentes.

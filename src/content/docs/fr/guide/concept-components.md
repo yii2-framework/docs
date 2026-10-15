@@ -1,5 +1,6 @@
 ---
 title: "Composants"
+description: "Les composants sont les blocs de constructions principaux de vos applications Yii."
 ---
 
 Les composants sont les blocs de constructions principaux de vos applications Yii. Les composants sont des instances de la classe [[yii\base\Component]],

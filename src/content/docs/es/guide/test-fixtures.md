@@ -1,5 +1,6 @@
 ---
 title: "Fixtures"
+description: "Los fixtures son una parte importante de los tests."
 ---
 
 Los fixtures son una parte importante de los tests. Su propósito principal es el de preparar el entorno en una estado fijado/conocido

@@ -1,5 +1,6 @@
 ---
 title: "Handling Errors"
+description: "Yii includes a built-in error handler which makes error handling a much more pleasant experience than before."
 ---
 
 Yii includes a built-in [[yii\web\ErrorHandler|error handler]] which makes error handling a much more pleasant

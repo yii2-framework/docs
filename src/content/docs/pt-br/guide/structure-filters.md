@@ -1,5 +1,6 @@
 ---
 title: "Filtros"
+description: "Os filtros são objetos que são executados antes e/ou depois das ações do controller (controlador)."
 ---
 
 Os filtros são objetos que são executados antes e/ou depois das

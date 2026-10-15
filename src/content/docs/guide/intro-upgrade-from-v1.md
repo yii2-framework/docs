@@ -1,5 +1,6 @@
 ---
 title: "Upgrading from Version 1.1"
+description: "There are many differences between versions 1.1 and 2.0 of Yii as the framework was completely rewritten for 2.0."
 ---
 
 There are many differences between versions 1.1 and 2.0 of Yii as the framework was completely rewritten for 2.0.

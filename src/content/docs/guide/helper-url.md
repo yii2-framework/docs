@@ -1,5 +1,6 @@
 ---
 title: "Url Helper"
+description: "Url helper provides a set of static methods for managing URLs."
 ---
 
 Url helper provides a set of static methods for managing URLs.

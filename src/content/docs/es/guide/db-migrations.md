@@ -1,5 +1,6 @@
 ---
 title: "Migración de Base de Datos"
+description: "Durante el curso de desarrollo y mantenimiento de una aplicación con base de datos, la estructura de dicha base de datos evoluciona tanto como el código fuente."
 ---
 
 Durante el curso de desarrollo y mantenimiento de una aplicación con base de datos, la estructura de dicha base de datos

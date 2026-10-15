@@ -1,5 +1,6 @@
 ---
 title: "Travailler avec les formulaires"
+description: "Cette section décrit la création d'une nouvelle page comprenant un formulaire pour recevoir des données des utilisateurs."
 ---
 
 Cette section décrit la création d'une nouvelle page comprenant un formulaire pour recevoir des données des

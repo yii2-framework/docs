@@ -1,5 +1,6 @@
 ---
 title: "Yii 2.0 bo'yicha to'liq qo'llanma"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Ushbu qo'llanma [Yii qo'llanmalarining holati](https://www.yiiframework.com/doc/terms/) bilan mos holda yo'lga qo'yildi.

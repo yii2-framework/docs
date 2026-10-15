@@ -1,5 +1,6 @@
 ---
 title: "Design Decisions"
+description: "This document lists the design decisions that we have made after extensive discussions."
 ---
 
 This document lists the design decisions that we have made after extensive discussions. Unless there are very strong

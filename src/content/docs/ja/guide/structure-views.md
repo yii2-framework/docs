@@ -1,5 +1,6 @@
 ---
 title: "ビュー"
+description: "ビューは MVC アーキテクチャの一部を成すものです。 ビューはエンド・ユーザにデータを表示することに責任を持つコードです。"
 ---
 
 ビューは [MVC](https://ja.wikipedia.org/wiki/Model_View_Controller) アーキテクチャの一部を成すものです。

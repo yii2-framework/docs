@@ -1,5 +1,6 @@
 ---
 title: "Visões (Views)"
+description: "As views fazem parte da arquitetura MVC. São a parte do código responsável por apresentar dados aos usuários finais."
 ---
 
 As views fazem parte da arquitetura [MVC](https://pt.wikipedia.org/wiki/MVC).

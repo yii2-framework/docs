@@ -1,5 +1,6 @@
 ---
 title: "アプリケーションを走らせる"
+description: "Yii のインストールが終ると、実際に動く Yii のアプリケーションにアクセスすることが出来ます。 その URL は、https://hostname/basic/web/index.php あるいは https://hostname/index.php など、設定によって異なります。"
 ---
 
 Yii のインストールが終ると、実際に動く Yii のアプリケーションにアクセスすることが出来ます。

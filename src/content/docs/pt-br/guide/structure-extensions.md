@@ -1,5 +1,6 @@
 ---
 title: "Extensões"
+description: "As extensões são pacotes de software redistribuíveis especialmente projetadas para serem usadas em aplicações Yii e fornecem recursos prontos para o uso."
 ---
 
 As extensões são pacotes de software redistribuíveis especialmente projetadas

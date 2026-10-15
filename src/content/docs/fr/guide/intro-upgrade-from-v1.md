@@ -1,5 +1,6 @@
 ---
 title: "Mise à jour depuis la version 1.1"
+description: "Il y a beaucoup de différences entre les versions 1.1 et 2.0 de Yii, le framework ayant été complètement réécrit pour la 2.0."
 ---
 
 Il y a beaucoup de différences entre les versions 1.1 et 2.0 de Yii, le framework ayant été complètement réécrit pour

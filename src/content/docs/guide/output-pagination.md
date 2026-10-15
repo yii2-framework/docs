@@ -1,5 +1,6 @@
 ---
 title: "Pagination"
+description: "When there are too much data to be displayed on a single page, a common strategy is to display them in multiple pages and on each page only display a small..."
 ---
 
 When there are too much data to be displayed on a single page, a common strategy is to display them in multiple

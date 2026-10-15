@@ -1,5 +1,6 @@
 ---
 title: "Requisições"
+description: "As requisições realizadas na aplicação são representadas pelo objeto Request que fornece informações como os parâmetros da requisição, cabeçalhos HTTP..."
 ---
 
 As requisições realizadas na aplicação são representadas pelo objeto [[yii\web\Request]]

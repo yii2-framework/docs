@@ -1,5 +1,6 @@
 ---
 title: "Functional Tests"
+description: "Functional test verifies scenarios from a user's perspective."
 ---
 
 Functional test verifies scenarios from a user's perspective. It is similar to [acceptance test](test-acceptance.md)

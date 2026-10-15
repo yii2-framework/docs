@@ -1,5 +1,6 @@
 ---
 title: "Quick Start"
+description: "Yii provides a whole set of tools to simplify the task of implementing RESTful Web Service APIs."
 ---
 
 Yii provides a whole set of tools to simplify the task of implementing RESTful Web Service APIs.
@@ -224,7 +225,7 @@ class UserController extends ActiveController
 }
 ```
 
-Please see [Extending ActiveController](rest-controllers#extending-active-controller) for more information on how to
+Please see [Extending ActiveController](rest-controllers.md#extending-active-controller) for more information on how to
 configure actions of the ActiveController.
 
 ## Summary <span id="summary"></span>

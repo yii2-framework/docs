@@ -1,5 +1,6 @@
 ---
 title: "Authentication"
+description: "Unlike Web applications, RESTful APIs are usually stateless, which means sessions or cookies should not be used."
 ---
 
 Unlike Web applications, RESTful APIs are usually stateless, which means sessions or cookies should not

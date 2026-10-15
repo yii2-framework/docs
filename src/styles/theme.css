@@ -1,0 +1,108 @@
+/*
+ * Site theme: readable fonts, type scale, layout widths and palettes. Starlight declares its own variables in
+ * `@layer starlight.base` and its layout rules in `@layer starlight.core`; this file is unlayered (`customCss`), so
+ * its rules win without `!important`.
+ */
+
+/*
+ * Fonts (OFL, vendored through Fontsource, bundled by Vite into `dist/_astro/`; nothing is fetched at build or run
+ * time). Each family ships latin and latin-ext subsets with `unicode-range`, so a page downloads only what it uses.
+ * Starlight appends the system stacks (`--sl-font-system`, `--sl-font-system-mono`) as fallback, which also covers
+ * scripts these fonts do not include (Arabic, Persian, CJK, Cyrillic).
+ */
+@import url("@fontsource-variable/atkinson-hyperlegible-next/wght.css");
+@import url("@fontsource-variable/atkinson-hyperlegible-next/wght-italic.css");
+@import url("@fontsource-variable/atkinson-hyperlegible-mono/wght.css");
+
+:root {
+    --sl-font: "Atkinson Hyperlegible Next Variable";
+    --sl-font-mono: "Atkinson Hyperlegible Mono Variable";
+
+    /* Type scale: 17px body text, code one step smaller. */
+    --sl-text-base: 1.0625rem;
+    --sl-text-xs: 0.875rem;
+    --sl-text-sm: 0.9375rem;
+    --sl-text-code: 0.9375rem;
+    --sl-text-code-sm: 0.875rem;
+    --sl-line-height: 1.7;
+
+    /* Layout: wider text column, narrower left sidebar. */
+    --sl-content-width: 56rem;
+    --sl-sidebar-width: 17rem;
+}
+
+/*
+ * Starlight sizes components with `--sl-text-*` but sets no `font-size` on body text, which falls back to the browser
+ * default (16px). Apply the body size to the page content so paragraphs, lists and tables use 17px.
+ */
+.sl-markdown-content {
+    font-size: var(--sl-text-body);
+}
+
+/*
+ * Wide screens: the "On this page" panel keeps a fixed 15rem instead of taking half of the free space, and the text
+ * column is centred in the main pane. Below 72rem Starlight shows the mobile table of contents unchanged.
+ */
+@media (width >= 72rem) {
+    :root {
+        --toc-width: 15rem;
+    }
+
+    .right-sidebar-container {
+        width: var(--toc-width);
+    }
+
+    /* Starlight sizes the panel content from `--sl-sidebar-width`; keep it inside the narrower panel. */
+    .right-sidebar-panel .sl-container {
+        width: calc(var(--toc-width) - 2 * var(--sl-sidebar-pad-x));
+    }
+
+    [data-has-sidebar][data-has-toc] .main-pane {
+        width: calc(100% - var(--toc-width));
+
+        --sl-content-margin-inline: auto;
+    }
+}
+
+/* Dark theme: warm low-contrast greys instead of white on near-black, blue accent. */
+:root[data-theme="dark"] {
+    --sl-color-white: hsl(40deg 12% 94%);
+    --sl-color-gray-1: hsl(40deg 10% 88%);
+    --sl-color-gray-2: hsl(40deg 8% 79%);
+    --sl-color-gray-3: hsl(40deg 6% 62%);
+    --sl-color-gray-4: hsl(220deg 6% 42%);
+    --sl-color-gray-5: hsl(220deg 8% 28%);
+    --sl-color-gray-6: hsl(220deg 9% 19%);
+    --sl-color-black: hsl(220deg 9% 14%);
+    --sl-color-accent-low: hsl(206deg 45% 24%);
+    --sl-color-accent: hsl(206deg 68% 58%);
+    --sl-color-accent-high: hsl(206deg 80% 80%);
+    --sl-color-bg-inline-code: hsl(220deg 9% 22%);
+}
+
+/*
+ * Light theme: warm off-white background, dark grey text, the same blue accent. `only light` keeps browsers with a
+ * forced dark mode (Chrome "Auto Dark Mode for Web Contents") from recolouring the page when a reader picks Light.
+ */
+:root[data-theme="light"] {
+    color-scheme: only light;
+
+    --sl-color-white: hsl(40deg 10% 13%);
+    --sl-color-gray-1: hsl(40deg 9% 20%);
+    --sl-color-gray-2: hsl(40deg 7% 30%);
+    --sl-color-gray-3: hsl(40deg 5% 43%);
+    --sl-color-gray-4: hsl(40deg 8% 70%);
+    --sl-color-gray-5: hsl(40deg 16% 85%);
+    --sl-color-gray-6: hsl(40deg 28% 93%);
+    --sl-color-gray-7: hsl(40deg 33% 96%);
+    --sl-color-black: hsl(40deg 40% 98%);
+    --sl-color-accent-low: hsl(206deg 75% 90%);
+    --sl-color-accent: hsl(206deg 70% 39%);
+    --sl-color-accent-high: hsl(206deg 65% 26%);
+    --sl-color-bg-inline-code: hsl(40deg 25% 92%);
+}
+
+/* Inline code chips: rounded corners, same size as Starlight's. */
+.sl-markdown-content code {
+    border-radius: 0.3rem;
+}

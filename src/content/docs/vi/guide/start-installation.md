@@ -1,5 +1,6 @@
 ---
 title: "Cài đặt Yii"
+description: "Bạn có thể cài đặt Yii theo hai cách, dùng trình quản lý gói Composer hoặc tải toàn bộ mã nguồn Yii về."
 ---
 
 Bạn có thể cài đặt Yii theo hai cách, dùng trình quản lý gói [Composer](https://getcomposer.org/) hoặc tải toàn bộ mã nguồn Yii về.

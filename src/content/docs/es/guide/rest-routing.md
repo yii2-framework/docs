@@ -1,5 +1,6 @@
 ---
 title: "Enrutamiento"
+description: "Con las clases de controlador y recurso preparadas, puedes acceder a los recursos usando una URL como http://localhost/index.php?r=user/create, parecida a..."
 ---
 
 Con las clases de controlador y recurso preparadas, puedes acceder a los recursos usando una URL como

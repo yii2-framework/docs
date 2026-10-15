@@ -1,5 +1,6 @@
 ---
 title: "Versioning"
+description: "A good API is versioned: changes and new features are implemented in new versions of the API instead of continually altering just one version."
 ---
 
 A good API is _versioned_: changes and new features are implemented in new versions of the API instead of continually altering just one version. Unlike Web applications, with which you have full control of both the client-side and server-side

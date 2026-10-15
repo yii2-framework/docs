@@ -1,5 +1,6 @@
 ---
 title: "Limit użycia"
+description: "W celu zapobiegnięcia nadużyciom, powinno się rozważyć wprowadzenie limitu użycia swojego API."
 ---
 
 W celu zapobiegnięcia nadużyciom, powinno się rozważyć wprowadzenie _limitu użycia_ swojego API. Może to być na przykład ograniczenie

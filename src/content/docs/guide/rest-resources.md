@@ -1,5 +1,6 @@
 ---
 title: "Resources"
+description: "RESTful APIs are all about accessing and manipulating resources. You may view resources as models in the MVC paradigm."
 ---
 
 RESTful APIs are all about accessing and manipulating _resources_. You may view resources as

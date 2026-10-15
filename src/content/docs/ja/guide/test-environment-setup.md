@@ -1,5 +1,6 @@
 ---
 title: "テスト環境の構築"
+description: "Yii 2 は Codeception テスト・フレームワークとの統合を公式にサポートしており、 次のタイプのテストを作成することを可能にしています。"
 ---
 
 Yii 2 は [`Codeception`](https://github.com/Codeception/Codeception) テスト・フレームワークとの統合を公式にサポートしており、

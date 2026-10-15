@@ -1,5 +1,6 @@
 ---
 title: "Database Migration"
+description: "During the course of developing and maintaining a database-driven application, the structure of the database being used evolves just like the source code does."
 ---
 
 During the course of developing and maintaining a database-driven application, the structure of the database
@@ -688,6 +689,15 @@ in `safeDown()` we first delete the row and then drop the table.
 > Note: Not all DBMS support transactions. And some DB queries cannot be put into a transaction. For some examples,
 > please refer to [implicit commit](https://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html). If this is the case,
 > you should still implement `up()` and `down()`, instead.
+
+Choose exactly one matching pair in a migration. Prefer `safeUp()` and `safeDown()` when every operation supports the
+transaction Yii creates around those methods. Use `up()` and `down()` for operations that cannot be transactional or
+when the migration must control transactions itself. In either case, implement the reversing method and test an
+upgrade, downgrade, and upgrade round trip.
+
+When overriding `up()` and `down()`, keep the signatures compatible with [[yii\db\MigrationInterface]]. The generated
+methods have no native return type and may return `false` to stop the migration; do not declare them with `: void`.
+Application migrations may declare `safeUp(): void` and `safeDown(): void` when they do not return `false`.
 
 ### Database Accessing Methods <span id="db-accessing-methods"></span>
 

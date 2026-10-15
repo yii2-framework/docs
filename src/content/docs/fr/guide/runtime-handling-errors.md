@@ -1,5 +1,6 @@
 ---
 title: "Gestion des erreurs"
+description: "Yii inclut un gestionnaire d'erreur pré-construit qui rend la gestion des erreurs bien plus agréable qu'auparavant."
 ---
 
 Yii inclut un [[yii\web\ErrorHandler|gestionnaire d'erreur]] pré-construit qui rend la gestion des erreurs bien plus agréable qu'auparavant. En particulier, le gestionnaire d'erreurs de Yii possède les fonctionnalités suivantes pour améliorer la gestion des erreurs.

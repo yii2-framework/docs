@@ -1,5 +1,6 @@
 ---
 title: "Routage et création d'URL"
+description: "Lorsqu'une application Yii commence à traiter une URL objet d'une requête, sa première étape consiste à analyser cette URL pour la résoudre en une route."
 ---
 
 Lorsqu'une application Yii commence à traiter une URL objet d'une requête, sa première étape consiste à analyser cette URL

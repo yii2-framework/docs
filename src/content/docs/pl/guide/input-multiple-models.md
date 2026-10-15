@@ -1,5 +1,6 @@
 ---
 title: "Pobieranie danych dla wielu modeli"
+description: "Kiedy mamy do czynienia ze skomplikowanym zestawem danych, jest możliwe, że trzeba będzie użyć wielu różnych modeli, aby pobrać te dane od użytkownika."
 ---
 
 Kiedy mamy do czynienia ze skomplikowanym zestawem danych, jest możliwe, że trzeba będzie użyć wielu różnych modeli, aby pobrać te dane od użytkownika.

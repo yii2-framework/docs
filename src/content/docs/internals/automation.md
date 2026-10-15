@@ -1,5 +1,6 @@
 ---
 title: "Automation"
+description: "There are some tasks that are done automatically when working on Yii."
 ---
 
 There are some tasks that are done automatically when working on Yii:

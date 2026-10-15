@@ -1,5 +1,6 @@
 ---
 title: "Yii and Docker"
+description: "For development and deployments Yii applications can be run as Docker containers."
 ---
 
 For development and deployments Yii applications can be run as Docker containers. A container is like a lightweight isolated virtual machine that maps its services to host's ports, i.e. a webserver in a container on port 80 is available on port 8888 on your (local)host.

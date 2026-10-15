@@ -1,5 +1,6 @@
 ---
 title: "Componentes de la Aplicación"
+description: "Las aplicaciones son service locators (localizadores de servicios)."
 ---
 
 Las aplicaciones son [service locators](concept-service-locators.md) (localizadores de servicios). Ellas albergan

@@ -1,5 +1,6 @@
 ---
 title: "Wydawanie nowej wersji"
+description: "Lista kroków koniecznych do wykonania podczas wydawania frameworka urosła znacznie w ciągu ostatnich lat i stała się uciążliwa do utrzymywania ręcznego..."
 ---
 
 Lista kroków koniecznych do wykonania podczas wydawania frameworka urosła znacznie w ciągu ostatnich lat i stała się uciążliwa do

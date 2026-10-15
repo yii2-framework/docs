@@ -1,5 +1,6 @@
 ---
 title: "翻訳ワークフロー"
+description: "Yii は国際的なアプリケーションと開発者にとって役に立つように、数多くの言語に翻訳されています。 貢献が大いに歓迎される主な領域はドキュメントとフレームワーク・メッセージです。"
 ---
 
 Yii は国際的なアプリケーションと開発者にとって役に立つように、数多くの言語に翻訳されています。
@@ -43,4 +44,4 @@ php build translation "../docs/guide" "../docs/guide-ru" "Russian guide translat
 
 このコマンドが composer に関して不平を言うようであれば、ソースのルート・ディレクトリで `composer install` を実行してください。
 
-ドキュメントの文法の情報およびスタイル・ガイドに関して、[documentation_style_guide.md](../documentation_style_guide.md) を参照して下さい。
+ドキュメントの文法の情報およびスタイル・ガイドに関して、[documentation_style_guide.md](../project/documentation-style-guide.md) を参照して下さい。

@@ -1,5 +1,6 @@
 ---
 title: "Yii Documentation Style Guide"
+description: "Guidelines to go by when writing or editing any Yii documentation."
 ---
 
 Guidelines to go by when writing or editing any Yii documentation.
@@ -50,7 +51,7 @@ containing the translations. The following shows an example for German:
 
 ## References
 
-- Yii 2.0 or Yii 2 (not Yii2 or Yii2.0)
+- Yii 22.0 for the documented version; Yii 2.0 only when discussing the older line
 - Each "page" of the guide is referred to as a "section".
 - References to Code objects:
   - Refer to classes using the full namespace: `yii\base\Model`

@@ -1,5 +1,6 @@
 ---
 title: "Autenticación"
+description: "A diferencia de las aplicaciones Web, las API RESTful son usualmente sin estado (stateless), lo que permite que las sesiones o las cookies no sean usadas."
 ---
 
 A diferencia de las aplicaciones Web, las API RESTful son usualmente sin estado (stateless), lo que permite que las sesiones o las cookies

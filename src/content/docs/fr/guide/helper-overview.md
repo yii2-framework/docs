@@ -1,5 +1,6 @@
 ---
 title: "Classes assistantes"
+description: "Yii procure de nombreuses classes qui vous aident à simplifier le code de tâches courantes, telles que la manipulation de chaînes de caractères ou de..."
 ---
 
 > Note: cette section est en cours de développement.

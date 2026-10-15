@@ -1,5 +1,6 @@
 ---
 title: "Scripts de Entrada"
+description: "Scripts de entrada são o primeiro passo no processo de inicialização da aplicação."
 ---
 
 Scripts de entrada são o primeiro passo no processo de inicialização da aplicação.

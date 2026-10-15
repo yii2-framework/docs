@@ -1,0 +1,29 @@
+---
+// Keep Starlight's native details/summary controls, styles, and mobile footer.
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+---
+
+<Default />
+
+<script is:inline data-astro-rerun aria-hidden="true">
+  // Reset restored state, then reveal the active page. The index has no sidebar entry.
+  // Subsequent mouse, touch, and keyboard toggles stay native.
+  (() => {
+    const sidebar = document.currentScript?.closest('nav');
+    sidebar?.querySelectorAll('details').forEach((group) => {
+      group.open = false;
+    });
+    let active = sidebar?.querySelector('a[aria-current="page"]');
+    // API type pages are omitted from the menu: reveal their nearest namespace instead.
+    if (!active) {
+      active = Array.from(sidebar?.querySelectorAll('a[href]') ?? [])
+        .filter((link) => link.origin === window.location.origin && window.location.pathname.startsWith(link.pathname))
+        .sort((a, b) => b.pathname.length - a.pathname.length)[0];
+    }
+    let group = active?.closest('details');
+    while (group) {
+      group.open = true;
+      group = group.parentElement?.closest('details');
+    }
+  })();
+</script>

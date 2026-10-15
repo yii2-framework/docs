@@ -1,5 +1,6 @@
 ---
 title: "Tworzenie własnej struktury aplikacji"
+description: "Podstawowy i zaawansowany szablon projektu jest w pełni wystarczający w większości przypadków, ale czasem może zajść potrzeba stworzenia własnego szablonu..."
 ---
 
 > Note: Ta sekcja jest w trakcie tworzenia.

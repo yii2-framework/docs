@@ -1,5 +1,6 @@
 ---
 title: "Internationalization"
+description: "Internationalization (I18N) refers to the process of designing a software application so that it can be adapted to various languages and regions without..."
 ---
 
 Internationalization (I18N) refers to the process of designing a software application so that it can be adapted to

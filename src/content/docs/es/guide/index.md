@@ -1,5 +1,6 @@
 ---
 title: "Guía Definitiva de Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Este tutorial se publica bajo los [Términos de Documentación Yii](https://www.yiiframework.com/doc/terms/).

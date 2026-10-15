@@ -1,5 +1,6 @@
 ---
 title: "Modules"
+description: "Les modules sont des unités logicielles auto-suffisantes constituées de modèles, vues, contrôleurs et autres composants de prise en charge."
 ---
 
 Les modules sont des unités logicielles auto-suffisantes constituées de [modèles](structure-models.md), [vues](structure-views.md),

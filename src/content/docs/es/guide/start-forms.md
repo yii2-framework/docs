@@ -1,5 +1,6 @@
 ---
 title: "Trabajando con Formularios"
+description: "En esta sección, describiremos como crear una nueva página para solicitar información de los usuarios."
 ---
 
 En esta sección, describiremos como crear una nueva página para solicitar información de los usuarios.
