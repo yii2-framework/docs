@@ -69,3 +69,13 @@ their rules override Starlight without `!important`.
   blocks follow these colours through Starlight's default Expressive Code themes. After changing a colour, check that
   body text, links, headings, the sidebar and the table of contents keep a contrast ratio of at least 4.5:1 (WCAG
   AA) in both themes.
+
+## Extension skill sources
+
+The package `skills/` folders are the editable sources. `scripts/sync.mjs` copies their complete portable bundles to
+`.cache/skills/` and `public/skills/`, rejecting duplicate names, invalid frontmatter, and linked resources outside a
+bundle. Generated indexes record source refs and file checksums. Never edit or commit those outputs.
+
+The guides remain package `docs/`, and API contracts remain PHPDoc. To add a skill-producing package, set its
+`skillsDir` in `packages.json`, sync, run the preparation tests, then build. Publish package sources before a remote
+build can consume newly declared skills. See [skill installation](ai-agents.md#extension-skills).

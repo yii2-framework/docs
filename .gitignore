@@ -65,3 +65,6 @@ public/demos/
 public/reference/
 src/content/docs/api/
 src/content/docs/extensions/
+
+# Package-owned skill bundles copied by scripts/sync.mjs
+/public/skills/

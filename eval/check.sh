@@ -9,17 +9,18 @@ set -euo pipefail
 EVAL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TASKS_DIR="${EVAL_TASKS_DIR:-${EVAL_DIR}/tasks}"
 SEED_DIR="${EVAL_DIR}/seed"
-APP_DIR="${EVAL_DIR}/app"
-PRISTINE_DIR="${EVAL_DIR}/.cache/app-pristine"
-STATE_FILE="${EVAL_DIR}/.cache/app-state.env"
+APP_DIR="${EVAL_APP_DIR:-${EVAL_DIR}/app}"
+PRISTINE_DIR="${EVAL_PRISTINE_DIR:-${EVAL_DIR}/.cache/app-pristine}"
+STATE_FILE="${EVAL_STATE_FILE:-${EVAL_DIR}/.cache/app-state.env}"
 PHP_BIN="${PHP_BIN:-php}"
 
 usage() {
     cat <<'USAGE'
-Usage: eval/check.sh <run-dir> [--task <id>]... [--out <dir>]
+Usage: eval/check.sh <run-dir> [--task <id>]... [--task-version v1|v2] [--out <dir>]
 
     <run-dir>     Directory with one <task-id>/files/ tree per task (an eval/out/<timestamp> run or a fixture set).
     --task <id>   Check only this task (repeatable). Default: every task directory found in <run-dir>.
+    --task-version <version>  Select parallel contracts (default: v1). v2 has only tasks 09-11.
     --out <dir>   Where to write results.tsv, summary.md, summary.json, and logs. Default: <run-dir>.
 
 Exit code: 0 when every selected task passes, 1 when a check fails, 2 on usage errors.
@@ -29,6 +30,8 @@ USAGE
 RUN_DIR=""
 OUT_DIR=""
 SELECTED=()
+TASK_VERSION=v1
+VERSION_SELECTED=0
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -38,6 +41,11 @@ while [[ $# -gt 0 ]]; do
             ;;
         --out)
             OUT_DIR="${2:?--out needs a value}"
+            shift
+            ;;
+        --task-version)
+            TASK_VERSION="${2:?--task-version needs a value}"
+            VERSION_SELECTED=1
             shift
             ;;
         -h | --help)
@@ -59,6 +67,16 @@ while [[ $# -gt 0 ]]; do
     esac
     shift
 done
+
+[[ "${TASK_VERSION}" == v1 || "${TASK_VERSION}" == v2 ]] || {
+    echo "Unknown task version: ${TASK_VERSION}; select v1 or v2." >&2
+    exit 2
+}
+if [[ ${VERSION_SELECTED} -eq 1 && -n "${EVAL_TASKS_DIR:-}" ]]; then
+    echo "Do not combine --task-version with the custom EVAL_TASKS_DIR override." >&2
+    exit 2
+fi
+[[ "${TASK_VERSION}" == v1 ]] || TASKS_DIR="${EVAL_DIR}/tasks/${TASK_VERSION}"
 
 [[ -n "${RUN_DIR}" && -d "${RUN_DIR}" ]] || {
     usage >&2
@@ -89,6 +107,24 @@ fi
     echo "No task directories in ${RUN_DIR}." >&2
     exit 2
 }
+
+# Record the selected contracts separately from client metadata; historical task definitions stay untouched.
+CONTRACT_VERSION="${TASK_VERSION}"
+[[ -z "${EVAL_TASKS_DIR:-}" ]] || CONTRACT_VERSION=custom
+"${PHP_BIN}" -r '
+    [, $dir, $out, $version] = $argv;
+    $tasks = array_slice($argv, 4);
+    $definitions = [];
+    foreach ($tasks as $task) {
+        $file = "$dir/$task.md";
+        if (is_file($file)) {
+            $definitions[$task] = ["path" => $file, "sha256" => hash_file("sha256", $file)];
+        }
+    }
+    file_put_contents("$out/contracts.json", json_encode([
+        "task_version" => $version, "definitions" => $definitions,
+    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
+' "${TASKS_DIR}" "${OUT_DIR}" "${CONTRACT_VERSION}" "${SELECTED[@]}"
 
 # Appends one result row: task, check, status (pass|fail|skip), one-line detail.
 record() {
@@ -135,12 +171,29 @@ check_task() {
 
     mkdir -p "${logs}"
     rm -f "${logs}"/*.html "${logs}"/*.js.txt
+    if [[ -z "${EVAL_TASKS_DIR:-}" && -f "${RUN_DIR}/${task}/meta.json" ]]; then
+        local recorded_version recorded_hash
+        read -r recorded_version recorded_hash < <("${PHP_BIN}" -r '
+            $meta = json_decode((string) file_get_contents($argv[1]), true);
+            echo ($meta["task_version"] ?? "v1"), "\t", ($meta["task_definition_sha256"] ?? ""), "\n";
+        ' "${RUN_DIR}/${task}/meta.json")
+        if [[ "${recorded_version}" != "${TASK_VERSION}" ]]; then
+            record "${task}" task-version fail "recorded ${recorded_version}; selected ${TASK_VERSION}; refusing a different contract"
+            return
+        fi
+        if [[ -n "${recorded_hash}" && "${recorded_hash}" != "$("${PHP_BIN}" -r 'echo hash_file("sha256", $argv[1]);' "${task_file}")" ]]; then
+            record "${task}" task-contract fail "recorded task hash differs; refusing a changed contract"
+            return
+        fi
+    fi
     skill="$("${PHP_BIN}" "${EVAL_DIR}/lib/task.php" "${task_file}" skill)"
 
     if [[ ${APP_READY} -eq 0 ]]; then
         app_skip="eval/app not prepared (run eval/setup.sh)"
     elif [[ "${skill}" == yii2-bootstrap6-widgets && ! -d "${APP_DIR}/vendor/yii2-extensions/bootstrap6" ]]; then
         app_skip="yii2-extensions/bootstrap6 is not installed in eval/app"
+    elif [[ "${skill}" == yii2-filepond-uploads && ! -d "${APP_DIR}/vendor/yii2-extensions/filepond" ]]; then
+        app_skip="yii2-extensions/filepond is not installed in eval/app"
     fi
 
     local outputs=() checks=() seeds=()
@@ -204,6 +257,15 @@ check_task() {
                     record "${task}" "${check}" fail "pattern not found"
                 fi
                 ;;
+            php-import)
+                local import_files=()
+                mapfile -t import_files < <(find "${files}" -type f -name '*.php' | sort)
+                if run_log "${logs}/php-import.log" "${PHP_BIN}" "${EVAL_DIR}/lib/php-import.php" "${arg}" "${import_files[@]}"; then
+                    record "${task}" "${check}" pass "$(last_line "${logs}/php-import.log")"
+                else
+                    record "${task}" "${check}" fail "$(last_line "${logs}/php-import.log")"
+                fi
+                ;;
             no-forbidden)
                 local found
                 found="$(grep -rnE -e "${arg}" -- "${files}" | sed "s|${files}/||" || true)"
@@ -223,6 +285,20 @@ check_task() {
                     record "${task}" "${check}" pass "$(last_line "${logs}/migration-methods.log")"
                 else
                     record "${task}" "${check}" fail "$(last_line "${logs}/migration-methods.log")"
+                fi
+                ;;
+            psr-worker)
+                local package="${EVAL_PSR_BRIDGE_PACKAGE:-}"
+                if [[ -z "${package}" || ! -f "${package}/vendor/autoload.php" ]]; then
+                    record "${task}" "${check}" skip "set EVAL_PSR_BRIDGE_PACKAGE to an installed psr-bridge checkout"
+                else
+                    mkdir -p "${logs}/runtime"
+                    if run_log "${logs}/psr-worker.log" "${PHP_BIN}" "${EVAL_DIR}/lib/psr-worker.php" \
+                        --package "${package}" --files "${files}" --runtime "${logs}/runtime"; then
+                        record "${task}" "${check}" pass "real worker/session/finalization probes passed"
+                    else
+                        record "${task}" "${check}" fail "$(last_line "${logs}/psr-worker.log")"
+                    fi
                 fi
                 ;;
             app-boot | app-migrate | app-probe | app-render | app-static)
@@ -394,7 +470,8 @@ app_check() {
                 echo "    paths:"
                 printf '        - %s\n' "${targets[@]}"
             } >"${neon}"
-            if run_log "${log}" "${APP_DIR}/vendor/bin/phpstan" analyse --configuration="${neon}" --no-progress \
+            # A task emits only a few files. In-process analysis avoids a parallel-worker TCP listener in isolation.
+            if run_log "${log}" "${APP_DIR}/vendor/bin/phpstan" analyse --debug --configuration="${neon}" --no-progress \
                 --error-format=raw --memory-limit=512M; then
                 record "${task}" "${check}" pass "phpstan level ${EVAL_PHPSTAN_LEVEL:-5}: no errors"
             else

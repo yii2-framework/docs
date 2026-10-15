@@ -5,6 +5,7 @@
 // For each package the sources come from `localPath` (with `--local` or `SYNC_LOCAL=1`, when the directory exists)
 // or from a shallow clone of `repo` at `ref` in `.cache/packages/<name>/`. The package `README.md` becomes the landing
 // page (`index.md`) and every `<docsDir>/*.md` file one page; images under `<docsDir>` are copied next to the pages.
+// Optional `skillsDir` imports complete package-owned bundles into .cache/skills and public/skills unchanged.
 // Each page gets frontmatter (`title` from the first H1, which is removed; `description`; `sidebar.order`; `editUrl`)
 // and its links are rewritten: links between synced pages stay relative, links to other files of the package become
 // GitHub URLs at `ref`, absolute URLs and `[[yii\...]]` references are left untouched. The output has no timestamps,
@@ -31,11 +32,14 @@ import {
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { describe, yamlQuote } from './lib/description.mjs';
+import { safeRelativeDirectory, syncSkills } from './sync-skills.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const OUTPUT_DIR = path.join(ROOT, 'src', 'content', 'docs', 'extensions');
 const CACHE_DIR = path.join(ROOT, '.cache', 'packages');
 const SOURCES_FILE = path.join(ROOT, '.cache', 'sources.json');
+const SKILLS_CACHE = path.join(ROOT, '.cache', 'skills');
+const SKILLS_PUBLIC = path.join(ROOT, 'public', 'skills');
 const REQUIRED_KEYS = ['name', 'title', 'repo', 'ref', 'srcDir', 'namespace', 'localPath', 'packagist'];
 const TYPES = ['package', 'framework'];
 // `published`: on Packagist; `unpublished`: not released yet; `template`: a GitHub template repository, which users
@@ -110,6 +114,10 @@ export function validateManifest(manifest, file) {
 
     if (entry.status !== undefined && !STATUSES.includes(entry.status)) {
       errors.push(`${where}: "status" must be one of ${STATUSES.join(', ')}.`);
+    }
+
+    if (entry.skillsDir !== undefined && !safeRelativeDirectory(entry.skillsDir)) {
+      errors.push(`${where}: "skillsDir" must be a relative directory without traversal.`);
     }
 
     if (entry.order !== undefined
@@ -807,6 +815,9 @@ function main(argv) {
 
   // The whole directory is generated: start from scratch so removed pages and packages disappear.
   rmSync(OUTPUT_DIR, { recursive: true, force: true });
+  rmSync(SKILLS_CACHE, { recursive: true, force: true });
+  rmSync(SKILLS_PUBLIC, { recursive: true, force: true });
+  const skills = {};
 
   let skipped = 0;
   const sources = {};
@@ -835,7 +846,14 @@ function main(argv) {
       continue;
     }
 
-    process.stdout.write(`[sync] ${pkg.name}: ${result.pages} pages, ${result.images} images from ${result.source}.\n`);
+    const names = syncSkills(pkg, result.dir, { cacheDir: SKILLS_CACHE, publicDir: SKILLS_PUBLIC,
+      registry: skills, commit: result.commit, source: result.source });
+    process.stdout.write(`[sync] ${pkg.name}: ${result.pages} pages, ${result.images} images, ${names.length} skills from ${result.source}.\n`);
+  }
+
+  for (const dir of [SKILLS_CACHE, SKILLS_PUBLIC]) {
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(path.join(dir, 'index.json'), `${JSON.stringify({ generated: true, skills }, null, 2)}\n`);
   }
 
   // Input of tools/bin/reference: which sources this run used.

@@ -1,57 +1,45 @@
 # Agent skills
 
-This directory is the canonical source of the agent skills for Yii 22.0 and its extensions. Each skill is one
-`SKILL.md` file that a coding agent loads when a task matches its `description`.
+This directory owns the `yii2-framework` application skill. Extension skills are edited in their package repositories:
 
-- [`yii2-framework`](yii2-framework/SKILL.md): create or change a Yii 22.0 application.
-- [`yii2-bootstrap6-widgets`](yii2-bootstrap6-widgets/SKILL.md): render Bootstrap 6 UI with the
-  `yii2-extensions/bootstrap6` widgets in views.
+| Skill                     | Editable source                                                      |
+| ------------------------- | -------------------------------------------------------------------- |
+| `yii2-framework`          | [`yii2-framework/SKILL.md`](yii2-framework/SKILL.md)                 |
+| `yii2-bootstrap6-widgets` | `yii2-extensions/bootstrap6/skills/yii2-bootstrap6-widgets/SKILL.md` |
+| `yii2-filepond-uploads`   | `yii2-extensions/filepond/skills/yii2-filepond-uploads/SKILL.md`     |
 
-## Install
+## Install in an application
 
-Run the installer from the application's root directory. For a local documentation checkout:
+Run the installer from the application root, choose the client with `--agent`, and keep project scope:
 
 ```bash
-npx skills@1.7.2 add /absolute/path/to/docs --list
-npx skills@1.7.2 add /absolute/path/to/docs --skill yii2-framework
+npx skills@1.7.2 add yii2-framework/docs --skill yii2-framework --agent codex
+npx skills@1.7.2 add yii2-extensions/bootstrap6 --skill yii2-bootstrap6-widgets --agent codex
+npx skills@1.7.2 add yii2-extensions/filepond --skill yii2-filepond-uploads --agent codex
 ```
 
-Choose a client when prompted, or select it explicitly with `--agent`; keep the default project scope. Add `yii2-bootstrap6-widgets` only for an application using that
-extension; the basic template uses Bootstrap 5.
+Use `--agent claude-code` or `--agent opencode` for those clients. First use `add <source> --list` to confirm that
+its public default branch contains the skill. Until package changes are published, replace the source with the
+absolute path of its local checkout. Installing a skill does not install the Composer package.
 
-For the public repository, first run `npx skills@1.7.2 add yii2-framework/docs --list`. Install from that source only
-when it lists the desired skill: the installer reads the default branch, not unpublished local work. Otherwise,
-use the local checkout. Do not install these application skills as framework-maintenance instructions.
+The installer stores Codex and OpenCode skills under `.agents/skills/<name>/SKILL.md`, and Claude Code skills under
+`.claude/skills/<name>/SKILL.md`. Verify the client's discovery and then invoke the skill; an installer listing is
+not evidence of native activation. The [AI guide](../src/content/docs/project/ai-agents.md) explains the checks.
 
-The [AI guide](../src/content/docs/project/ai-agents.md) gives manual installation paths, client-specific activation,
-and the distinction between installer verification and native client testing. The
-[`skills` CLI](https://github.com/vercel-labs/skills) version verified locally is 1.7.2.
+## Generated extension bundles
 
-## Layout and frontmatter
+`npm run sync:local` imports extension skills declared by `skillsDir` in `packages.json`. The complete folders are
+copied unchanged to `.cache/skills/<name>/` for evaluations and `public/skills/<name>/` for publication. Neither
+output is committed or edited. Each generated `index.json` records the package, ref, source commit when available,
+and SHA-256 of every resource. The published index is `/docs/skills/index.json`.
 
-- One directory per skill: `skills/<name>/SKILL.md`. The CLI also finds them with `npx skills add <path> --list`
-  on a local checkout, which is the quickest check after a change.
-- Frontmatter keys: `name` (kebab-case, equal to the directory name), `description` (one sentence that says when to
-  use the skill), `license: BSD-3-Clause`, and `metadata.guide` (the documentation entry point the skill builds on).
-- The body is a workflow of numbered steps for one task family; it names real classes, methods and commands only,
-  and links the guide pages instead of repeating them.
+Fix an extension skill in its package, then sync and validate the site. The package checkout includes native client
+aliases that point to its single editable `skills/` source. Generated bundles are distribution outputs, not another
+source to maintain. No extension skill is copied manually into this directory.
 
-## Change a skill
+## Change and verify
 
-1. Verify every class, method, option and command against the source (`yiisoft/yii2` branch `22.0`, the package
-   `src/`) or the API reference.
-2. Run the evaluation tasks that use the skill (`skill:` in `eval/tasks/*.md`), for example
-   `eval/run.sh --task 08-alert-theme --model sonnet`. When a task fails, fix the skill or the guide, not the task.
-   The weekly cadence is described in [`eval/README.md`](../eval/README.md#cadence).
-3. Add a line to `CHANGELOG.md`.
-
-## Copies in package repositories
-
-A package may carry a verbatim copy of its skill, so that `npx skills add yii2-extensions/<package>` works too. This
-directory stays the source; copies are refreshed by hand after a change here:
-
-1. Copy `skills/<name>/SKILL.md` unchanged to `skills/<name>/SKILL.md` in the package repository.
-2. Confirm the copy is identical (`diff`) and that `npx skills add <package checkout> --list` lists it.
-3. Commit it in the package repository as `docs: sync the <name> skill from yii2-framework/docs@<short commit>.`
-
-No copy exists yet; the first one planned is `yii2-bootstrap6-widgets` in `yii2-extensions/bootstrap6`.
+Use portable `name`, `description`, `license`, and string-valued `metadata` frontmatter. Keep the body scoped to a
+task family and route to the relevant guides instead of duplicating the generated API. Verify every contract against
+the source and versioned acceptance criteria. Run deterministic preparation and fixture checks before model runs;
+record discovery, activation, documentation reads, and functional results separately. See [evaluations](../eval/README.md).

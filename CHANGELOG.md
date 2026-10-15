@@ -2,6 +2,15 @@
 
 ## 0.1.0 Under development
 
+- style: normalize evaluation Markdown and refresh canonical v1 task hashes without changing acceptance requirements.
+
+- docs: sync PSR bridge package guides, PHPDoc API, and canonical worker skill; add isolated lifecycle/session evaluation and native preparation checks.
+
+- feat(skills): import package-owned Bootstrap 6 and FilePond skill bundles with source provenance and checksums.
+- docs: keep extension guides in their packages, remove manual skill copies, and document client-specific installation.
+- test(eval): prepare native client evaluations and add a FilePond upload acceptance case.
+- fix(eval): add opt-in B1 task contracts with explicit strict types and semantic PHP imports while preserving v1 criteria.
+
 - chore: initial commit.
 - feat: astro Starlight documentation site.
 - fix: add `package-lock.json` to repository for CI deploy.

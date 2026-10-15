@@ -23,6 +23,10 @@ declare(strict_types=1);
  *   empty instance fails validation.
  * - `active-record-persistence <class>`: an empty instance fails validation, while valid title and body values save
  *   to the configured database and can be reloaded by primary key.
+ * - `filepond-widget <view>`: a single avatar input registers image editing, square crop, client transform and
+ *   explicit JPEG/PNG/WebP and 2 MB restrictions in its effective JavaScript options.
+ * - `filepond-upload <class>`: model validation rejects forged MIME, extension, size, malformed and multiple
+ *   payloads before storage, while the package decoder/saver stores PNG bytes with a content-derived extension.
  *
  * Prints one line with the outcome. Exit code 0 means pass, 1 means fail, 2 means usage error.
  */
@@ -134,6 +138,157 @@ try {
     $app->requestedRoute = 'site/index';
 
     switch ($probe) {
+        case 'filepond-widget':
+            [$html, $scripts] = renderView($app, $appDir, $argument);
+
+            if (preg_match('/<input\b[^>]*\bname="avatar"[^>]*>/', $html, $input) !== 1
+                || !str_contains($input[0], 'type="file"') || str_contains($input[0], 'multiple')) {
+                finish(false, 'expected one file input named avatar');
+            }
+
+            if (!str_contains($scripts, 'yii2FilePond.create(')) {
+                finish(false, 'widget did not register its FilePond initializer');
+            }
+
+            if (preg_match('/"acceptedFileTypes"\s*:\s*(\[[^\]]*\])/', $scripts, $types) !== 1) {
+                finish(false, 'effective acceptedFileTypes is missing');
+            }
+
+            $accepted = json_decode($types[1], true, flags: JSON_THROW_ON_ERROR);
+            sort($accepted);
+
+            if ($accepted !== ['image/jpeg', 'image/png', 'image/webp']) {
+                finish(false, 'effective MIME allow-list differs from JPEG/PNG/WebP');
+            }
+
+            foreach (['allowImageEdit', 'allowImageTransform', 'imageEditInstantEdit'] as $option) {
+                if (preg_match('/"' . $option . '"\s*:\s*true\b/', $scripts) !== 1) {
+                    finish(false, "effective {$option} is not true");
+                }
+            }
+
+            $square = static function (mixed $value): bool {
+                if (is_int($value) || is_float($value)) {
+                    return $value === 1 || $value === 1.0;
+                }
+
+                if (is_string($value) && preg_match('/^([0-9.]+):([0-9.]+)$/', $value, $ratio) === 1) {
+                    return (float) $ratio[1] > 0 && (float) $ratio[1] === (float) $ratio[2];
+                }
+
+                return false;
+            };
+            $initialSquare = false;
+
+            foreach (['imageCropAspectRatio', 'aspectRatio'] as $option) {
+                if (preg_match('/"' . $option . '"\s*:\s*("[^"]*"|[0-9.]+)/', $scripts, $match) === 1
+                    && $square(json_decode($match[1], true, flags: JSON_THROW_ON_ERROR))) {
+                    $initialSquare = true;
+                }
+            }
+
+            if (!$initialSquare || preg_match('/"maxFileSize"\s*:\s*("(?:2MB|2000KB|2000000)"|2000000)\s*[,}]/i', $scripts) !== 1) {
+                finish(false, 'effective square crop or 2MB limit is missing');
+            }
+
+            $presets = preg_match('/"aspectRatios"\s*:\s*(\[[^\]]*\])/', $scripts, $ratios) === 1
+                ? json_decode($ratios[1], true, flags: JSON_THROW_ON_ERROR) : [];
+
+            if (!is_array($presets) || $presets === [] || count(array_filter($presets, $square)) !== count($presets)) {
+                finish(false, 'editor must offer only the square crop preset');
+            }
+
+            finish(true, 'avatar input registers the MIME allow-list, 2MB limit, immediate editor and client crop');
+
+        case 'filepond-upload':
+            $class = ltrim($argument, '\\');
+
+            if (!is_subclass_of($class, yii\base\Model::class) || !method_exists($class, 'saveAvatar')) {
+                throw new RuntimeException('expected a Yii model with saveAvatar()');
+            }
+
+            $png = base64_decode(
+                'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+                true,
+            );
+            $payload = static fn(string $bytes, string $name = 'avatar.png', string $type = 'image/png'): string
+                => json_encode(['name' => $name, 'type' => $type, 'data' => base64_encode($bytes)], JSON_THROW_ON_ERROR);
+            $directory = $appDir . '/runtime/filepond-probe-' . bin2hex(random_bytes(6));
+            mkdir($directory);
+
+            try {
+                $model = new $class();
+                $validators = iterator_to_array($model->getValidators());
+                $encodedValidators = array_filter(
+                    $validators,
+                    static fn($validator): bool => $validator instanceof yii2\extensions\filepond\validator\EncodedFileValidator
+                        && in_array('avatar', $validator->attributes, true),
+                );
+
+                if ($encodedValidators === []) {
+                    throw new RuntimeException('avatar has no package EncodedFileValidator');
+                }
+
+                $rejected = [
+                    'empty' => null,
+                    'malformed JSON' => '{broken',
+                    'malformed base64' => json_encode(['name' => 'avatar.png', 'type' => 'image/png', 'data' => '%%%']),
+                    'forged HTML MIME' => $payload('<!doctype html><script>alert(1)</script>'),
+                    'SVG renamed PNG' => $payload('<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>'),
+                    'wrong extension' => $payload($png, 'avatar.php'),
+                    'excess size' => $payload($png . str_repeat('x', 2_000_001 - strlen($png))),
+                    'multiple files' => [$payload($png), $payload($png)],
+                ];
+
+                foreach ($rejected as $label => $value) {
+                    $invalid = new $class(['avatar' => $value]);
+
+                    if ($invalid->validate() || !$invalid->hasErrors('avatar')) {
+                        throw new RuntimeException("validation accepted {$label}");
+                    }
+
+                    // The directory is empty for every invalid case; no storage operation should leave a file.
+                    if ($invalid->saveAvatar($directory) !== null || glob($directory . '/*') !== []) {
+                        throw new RuntimeException("invalid {$label} was stored or did not return null");
+                    }
+                }
+
+                $atLimit = new $class(['avatar' => $payload($png . str_repeat('x', 2_000_000 - strlen($png)))]);
+
+                if (!$atLimit->validate()) {
+                    throw new RuntimeException('valid PNG payload at the exact 2,000,000-byte limit was rejected');
+                }
+
+                $valid = new $class(['avatar' => $payload($png, 'avatar.webp', 'text/html')]);
+
+                if (!$valid->validate()) {
+                    throw new RuntimeException('PNG bytes rejected because of client MIME or an allowed mismatched extension');
+                }
+
+                $saved = $valid->saveAvatar($directory);
+
+                if (!is_string($saved) || $saved !== $directory . '/avatar.png' || !is_file($saved)
+                    || file_get_contents($saved) !== $png) {
+                    throw new RuntimeException('saved content/path does not follow decoded PNG bytes');
+                }
+
+                $decoded = yii2\extensions\filepond\file\EncodedFile::fromInput($valid->avatar)[0];
+
+                if ($decoded->type !== 'text/html' || $decoded->getMimeType() !== 'image/png'
+                    || $decoded->getData() !== $png) {
+                    throw new RuntimeException('decoder must distinguish client-reported MIME from byte-derived MIME');
+                }
+
+            } finally {
+                foreach (glob($directory . '/*') ?: [] as $file) {
+                    unlink($file);
+                }
+
+                rmdir($directory);
+            }
+
+            finish(true, 'invalid payloads leave no files; validated PNG bytes save as avatar.png despite forged client MIME');
+
         case 'render':
             [$html, $scripts] = renderView($app, $appDir, $argument);
 

@@ -27,9 +27,11 @@
             "configuration",
             "examples",
             "migration",
+            "agents",
             "testing"
         ],
-        "demos": true
+        "demos": true,
+        "skillsDir": "skills"
     },
     {
         "name": "filepond",
@@ -42,8 +44,16 @@
         "namespace": "yii2\\extensions\\filepond",
         "localPath": "../../yii2-extensions/filepond",
         "packagist": "yii2-extensions/filepond",
-        "order": ["installation", "configuration", "examples", "testing"],
-        "demos": true
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "uploads",
+            "agents",
+            "testing"
+        ],
+        "demos": true,
+        "skillsDir": "skills"
     },
     {
         "name": "localeurls",
@@ -56,7 +66,33 @@
         "namespace": "yii2\\extensions\\localeurls",
         "localPath": "../../yii2-extensions/localeurls",
         "packagist": "yii2-extensions/localeurls",
-        "order": ["installation", "configuration", "examples", "testing"]
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "testing"
+        ]
+    },
+    {
+        "name": "psr-bridge",
+        "title": "PSR bridge",
+        "repo": "https://github.com/yii2-extensions/psr-bridge",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\psrbridge",
+        "localPath": "../../yii2-extensions/psr-bridge",
+        "packagist": "yii2-extensions/psr-bridge",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
     },
     {
         "name": "template",
@@ -69,6 +105,11 @@
         "namespace": "yii\\template",
         "localPath": "../../yii2-extensions/template",
         "packagist": "yii2-extensions/template",
-        "order": ["installation", "configuration", "examples", "testing"]
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "testing"
+        ]
     }
 ]

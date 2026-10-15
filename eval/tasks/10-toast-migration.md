@@ -43,7 +43,7 @@ checks:
 Work in an isolated Git workspace, not in a complete Yii application. A separate checker will copy your output into
 a preconfigured Yii 22.0 application that uses yii2-extensions/bootstrap6 and will render it there.
 
-The existing file resources/views/post/_saved.php is a legacy Bootstrap 5 view. It receives $model, an
+The existing file resources/views/post/\_saved.php is a legacy Bootstrap 5 view. It receives $model, an
 app\models\Post whose title comes from user input. Migrate that file to the Bootstrap 6 extension so it renders a
 dismissible notification titled "Post saved", includes the post title safely in its body, and shows automatically
 when the page loads.
@@ -55,5 +55,5 @@ and do not retain Bootstrap 5 code.
 
 A local documentation index is available at .eval-docs/INDEX.md. Read it first, then read only the local pages needed
 to confirm the migration, output-safety, widget, and asset behavior. Do not use external documentation or network
-access. Modify no file other than resources/views/post/_saved.php. When done, report the file changed and the local
+access. Modify no file other than resources/views/post/\_saved.php. When done, report the file changed and the local
 documentation pages read.

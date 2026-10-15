@@ -25,6 +25,11 @@
             "errors": 1257,
             "warnings": 266,
             "unresolvedLinks": 57
+        },
+        "psr-bridge": {
+            "errors": 126,
+            "warnings": 11,
+            "unresolvedLinks": 0
         }
     }
 }

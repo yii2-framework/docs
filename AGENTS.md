@@ -82,12 +82,15 @@ Generated from the PHPDoc of `yiisoft/yii2` (branch `22.0`) and of each extensio
 
 ## Agent skills
 
-Two skills in [`skills/`](skills/) give the conventions for common tasks and link the pages above:
+The framework skill lives in [`skills/`](skills/); extension skills are owned by their packages:
 
-- [`yii2-framework`](skills/yii2-framework/SKILL.md): create or change a Yii 22.0 application (setup, controllers,
-  ActiveRecord, migrations, forms, tests, differences from Yii 2.0).
-- [`yii2-bootstrap6-widgets`](skills/yii2-bootstrap6-widgets/SKILL.md): render Bootstrap 6 UI with the
-  `yii2-extensions/bootstrap6` widgets, item objects and enums.
+- [`yii2-framework`](skills/yii2-framework/SKILL.md): create or change a Yii 22.0 application.
+- `yii2-bootstrap6-widgets`: render UI with `yii2-extensions/bootstrap6`.
+- `yii2-filepond-uploads`: compose FilePond inputs and validate and store their encoded uploads.
+
+The build copies extension bundles unchanged to `/docs/skills/<name>/SKILL.md`; `/docs/skills/index.json` records
+provenance and checksums. Install from each package repository; a skill inside Composer `vendor/` is not automatically
+discovered from the application root.
 
 Install from the application directory using the local-checkout or verified public-source instructions in
 [`skills/README.md`](skills/README.md). Public installation requires the skills to exist on the default branch.

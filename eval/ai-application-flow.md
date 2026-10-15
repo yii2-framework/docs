@@ -68,13 +68,13 @@ over repeated trials. Do not claim token or cost savings from this deterministic
 
 ## Plan status
 
-| Item | Status |
-| --- | --- |
-| AI-agent quick start, application skills, client matrix, and selective documentation guidance | Complete |
-| Deterministic validation, rendering, migration, persistence/reload, and static checks | Complete |
-| Site build, postbuild gates, and local preview | Complete |
-| Native skill discovery and activation in Codex, Claude Code, OpenCode, Copilot, and Amp | Pending explicit client runs |
-| Repeated generation comparison with and without the skill | Pending explicit approval of destination, data, and cost |
+| Item                                                                                          | Status                                                   |
+| --------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| AI-agent quick start, application skills, client matrix, and selective documentation guidance | Complete                                                 |
+| Deterministic validation, rendering, migration, persistence/reload, and static checks         | Complete                                                 |
+| Site build, postbuild gates, and local preview                                                | Complete                                                 |
+| Native skill discovery and activation in Codex, Claude Code, OpenCode, Copilot, and Amp       | Pending explicit client runs                             |
+| Repeated generation comparison with and without the skill                                     | Pending explicit approval of destination, data, and cost |
 
 The pending items require external client communication and may consume subscription quota or incur provider cost.
 They are not part of this deterministic check.

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -8,6 +8,13 @@ import { after, describe, test } from 'node:test';
 const outputRoot = mkdtempSync(path.join(tmpdir(), 'eval-run-'));
 const runner = path.resolve('eval/run.sh');
 const task = '03-active-record-migration';
+const llms = path.join(outputRoot, 'llms.txt');
+writeFileSync(llms, '# Yii 22.0 local evaluation index\n\nFixture pages use https://yii2-framework.github.io/docs/.\n');
+const skills = path.join(outputRoot, 'skills');
+for (const name of ['yii2-framework', 'yii2-bootstrap6-widgets']) {
+  mkdirSync(path.join(skills, name), { recursive: true });
+  writeFileSync(path.join(skills, name, 'SKILL.md'), `---\nname: ${name}\ndescription: Fixture only.\n---\n\nUse selected documentation.\n`);
+}
 
 after(() => rmSync(outputRoot, { recursive: true, force: true }));
 
@@ -21,6 +28,8 @@ function dryRun(stamp, extraArgs = [], selectedTask = task) {
         ...process.env,
         EVAL_OUT_ROOT: outputRoot,
         EVAL_RUN_STAMP: stamp,
+        EVAL_LLMS_SOURCE: llms,
+        EVAL_SKILLS_DIR: skills,
       },
     },
   );

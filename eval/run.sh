@@ -6,7 +6,7 @@ set -euo pipefail
 EVAL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(cd "${EVAL_DIR}/.." && pwd)"
 TASKS_DIR="${EVAL_DIR}/tasks"
-SKILLS_DIR="${REPO_DIR}/skills"
+SKILLS_DIR="${EVAL_SKILLS_DIR:-${REPO_DIR}/skills}"
 PUBLIC_BASE="https://yii2-framework.github.io/docs/"
 LOCAL_BASE="${EVAL_LOCAL_BASE:-http://localhost:4321/docs/}"
 CLAUDE_BIN="${CLAUDE_BIN:-claude}"
@@ -137,7 +137,14 @@ esac
 # Resolves llms.txt: the local build first, then the preview server, then the public site.
 LLMS_SOURCE=""
 LLMS_TEXT=""
-if [[ -s "${REPO_DIR}/dist/llms.txt" ]]; then
+if [[ -n "${EVAL_LLMS_SOURCE:-}" ]]; then
+    [[ -s "${EVAL_LLMS_SOURCE}" ]] || {
+        echo "Explicit llms.txt source missing or empty: ${EVAL_LLMS_SOURCE}" >&2
+        exit 1
+    }
+    LLMS_SOURCE="${EVAL_LLMS_SOURCE}"
+    LLMS_TEXT="$(cat "${EVAL_LLMS_SOURCE}")"
+elif [[ -s "${REPO_DIR}/dist/llms.txt" ]]; then
     LLMS_SOURCE="dist/llms.txt"
     LLMS_TEXT="$(cat "${REPO_DIR}/dist/llms.txt")"
 else
@@ -211,7 +218,7 @@ When you are done, reply with the list of files you wrote.
 FOOTER
     if [[ ${NO_SKILL} -eq 0 ]]; then
         echo "<skill name=\"${skill}\">"
-        rebase <"${SKILLS_DIR}/${skill}/SKILL.md"
+        rebase <"${skill_file}"
         echo "</skill>"
         echo
     fi
@@ -261,7 +268,11 @@ for task in "${SELECTED[@]}"; do
     task_dir="${RUN_DIR}/${task}"
     mkdir -p "${task_dir}"
     skill="$(php "${EVAL_DIR}/lib/task.php" "${task_file}" skill)"
-    [[ -f "${SKILLS_DIR}/${skill}/SKILL.md" ]] || {
+    skill_file="${SKILLS_DIR}/${skill}/SKILL.md"
+    if [[ ! -f "${skill_file}" ]]; then
+        skill_file="${REPO_DIR}/.cache/skills/${skill}/SKILL.md"
+    fi
+    [[ -f "${skill_file}" ]] || {
         echo "Missing skill: ${skill}" >&2
         exit 1
     }

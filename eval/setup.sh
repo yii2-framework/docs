@@ -13,6 +13,7 @@ PRISTINE_DIR="${CACHE_DIR}/app-pristine"
 LOG_DIR="${CACHE_DIR}/setup"
 STATE_FILE="${CACHE_DIR}/app-state.env"
 BOOTSTRAP6_PATH="${BOOTSTRAP6_PATH:-$(cd "${EVAL_DIR}/../../.." && pwd)/yii2-extensions/bootstrap6}"
+FILEPOND_PATH="${FILEPOND_PATH:-$(cd "${EVAL_DIR}/../../.." && pwd)/yii2-extensions/filepond}"
 FORCE=0
 
 usage() {
@@ -24,6 +25,7 @@ Usage: eval/setup.sh [--force]
 Environment:
     BOOTSTRAP6_PATH   Local clone of yii2-extensions/bootstrap6 used when Packagist has no release
                     (default: ../yii2-extensions/bootstrap6 next to the yii2-framework directory).
+    FILEPOND_PATH    Local clone of yii2-extensions/filepond used for task 11 when available.
 USAGE
 }
 
@@ -105,6 +107,17 @@ elif [[ ${bootstrap6_status} -ne 0 ]]; then
     bootstrap6_source=none
 fi
 
+# Prefer the local extension source so task 11 exercises the same content and runtime as the generated guides.
+filepond_status=0
+filepond_source=packagist
+if [[ -d "${FILEPOND_PATH}" ]]; then
+    filepond_source="path:${FILEPOND_PATH}"
+    composer --working-dir="${APP_DIR}" config repositories.filepond \
+        "{\"type\":\"path\",\"url\":\"${FILEPOND_PATH}\",\"options\":{\"symlink\":false}}"
+fi
+run_logged require-filepond composer --working-dir="${APP_DIR}" require --no-interaction \
+    'yii2-extensions/filepond:^0.2@dev' || filepond_status=$?
+
 # shellcheck disable=SC2016 # PHP code, not shell expansion
 bootstrap6_assets="$(php -r '
     $f = $argv[1];
@@ -132,6 +145,8 @@ COMPOSER_VERSION="${composer_version}"
 BOOTSTRAP6_STATUS=${bootstrap6_status}
 BOOTSTRAP6_SOURCE="${bootstrap6_source}"
 BOOTSTRAP6_NPM_VERSION="${bootstrap6_assets}"
+FILEPOND_STATUS=${filepond_status}
+FILEPOND_SOURCE="${filepond_source}"
 BASELINE_HELP_STATUS=${help_status}
 BASELINE_STATIC_STATUS=${static_status}
 STATE

@@ -36,18 +36,13 @@ The documentation is deployed at **[yii2-framework.github.io/docs](https://yii2-
 
 ## Agent skills
 
-Agent skills are instruction files that coding agents (Claude Code, Codex, Cursor, GitHub Copilot and others) load
-when a task matches their description. This repository publishes two of them under [`skills/`](skills/):
+The [`yii2-framework`](skills/yii2-framework/SKILL.md) skill covers Yii 22.0 applications. Bootstrap 6 and FilePond
+own their extension skills in their package repositories. The site imports complete bundles automatically and
+publishes [their index](https://yii2-framework.github.io/docs/skills/index.json), with source and file checksums.
 
-- [`yii2-framework`](skills/yii2-framework/SKILL.md): create or change a Yii 22.0 application (setup, controllers,
-  ActiveRecord, forms, tests).
-- [`yii2-bootstrap6-widgets`](skills/yii2-bootstrap6-widgets/SKILL.md): render Bootstrap 6 UI with the
-  `yii2-extensions/bootstrap6` widgets.
-
-Install from your application's directory using the [skill installation instructions](skills/README.md). They cover
-local checkouts and checking availability on the public default branch before installation. The
-[AI guide](https://yii2-framework.github.io/docs/project/ai-agents/) documents Codex, Claude Code, OpenCode, GitHub
-Copilot in VS Code, and Amp, with a distinction between documented support and actual verification.
+See [installation and sources](skills/README.md) and the
+[AI guide](https://yii2-framework.github.io/docs/project/ai-agents/) for Claude Code, Codex, and OpenCode discovery and
+activation. A passing generated example and a listed skill are separate checks.
 
 ## Local Development
 
