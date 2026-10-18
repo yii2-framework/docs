@@ -1,5 +1,6 @@
 ---
 title: "Assets"
+description: "Um asset no Yii é um arquivo que pode ser referenciado em uma página Web."
 ---
 
 Um asset no Yii é um arquivo que pode ser referenciado em uma página Web. Pode
@@ -73,7 +74,7 @@ O bundle depende de outros dois bundles: [[yii\web\YiiAsset]] e
 - [[yii\web\AssetBundle::basePath|basePath]]: especifica um diretório acessível
   pela Web que contém os arquivos de assets neste bundle. Quando você especificar
   a propriedade [[yii\web\AssetBundle::sourcePath|sourcePath]], o
-  [gerenciador de asset](#asset-manager) publicará os assets deste bundle para um
+  [gerenciador de asset](structure-assets.md#asset-publishing) publicará os assets deste bundle para um
   diretório acessível pela Web e sobrescreverá a propriedade `basePath` para ficar
   em conformidade. Você deve definir esta propriedade caso os seus arquivos de
   asset já estejam em um diretório acessível pela Web e não precisam ser publicados.  
@@ -82,7 +83,7 @@ O bundle depende de outros dois bundles: [[yii\web\YiiAsset]] e
   diretório [[yii\web\AssetBundle::basePath|basePath]]. Assim como a propriedade
   [[yii\web\AssetBundle::basePath|basePath]], se você especificar a propriedade
   [[yii\web\AssetBundle::sourcePath|sourcePath]], o
-  [gerenciador de asset](#asset-manager) publicará os assets e sobrescreverá esta
+  [gerenciador de asset](structure-assets.md#asset-publishing) publicará os assets e sobrescreverá esta
   propriedade para entrar em conformidade. Os [alias de caminhos](concept-aliases.md)
   podem ser usados aqui.
 - [[yii\web\AssetBundle::js|js]]: um array listando os arquivos JavaScript contidos

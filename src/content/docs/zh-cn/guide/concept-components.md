@@ -1,5 +1,6 @@
 ---
 title: "组件（Component）"
+description: "组件是 Yii 应用的主要基石。是 Component 类或其子类的实例。"
 ---
 
 组件是 Yii 应用的主要基石。是 [[yii\base\Component]] 类或其子类的实例。
@@ -11,7 +12,7 @@ title: "组件（Component）"
 
 或单独使用，或彼此配合，这些功能的应用让 Yii 的类变得更加灵活和易用。
 以小部件 [[yii\jui\DatePicker|日期选择器]] 来举例，
-这是个方便你在 [视图](structure-view.md) 中生成一个交互式日期选择器的 UI 组件：
+这是个方便你在 [视图](structure-views.md) 中生成一个交互式日期选择器的 UI 组件：
 
 ```php
 use yii\jui\DatePicker;

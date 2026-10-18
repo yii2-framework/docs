@@ -1,5 +1,6 @@
 ---
 title: "Validadores del framework"
+description: "Yii provee en su núcleo un conjunto de validadores de uso común, que se pueden encontrar principalmente bajo el espacio de nombres (namespace) yii\\validators."
 ---
 
 Yii provee en su núcleo un conjunto de validadores de uso común, que se pueden encontrar principalmente bajo el espacio de nombres (namespace) `yii\validators`.

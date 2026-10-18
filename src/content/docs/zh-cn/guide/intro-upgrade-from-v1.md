@@ -1,5 +1,6 @@
 ---
 title: "从 Yii 1.1 升级"
+description: "2.0 版框架是完全重写的，在 1.1 和 2.0 两个版本之间存在相当多差异。 因此从 1.1 版升级并不像小版本间的跨越那么简单， 通过本指南你将会了解两个版本间主要的不同之处。"
 ---
 
 2.0 版框架是完全重写的，在 1.1 和 2.0 两个版本之间存在相当多差异。
@@ -463,7 +464,7 @@ class MyBehavior extends Behavior
 与之相对的，为达到相同目的，你可以实现 [[yii\web\IdentityInterface]] 接口，它使用起来更直观。
 在高级应用模版里提供了一个这样的一个例子。
 
-要了解更多细节请参考[认证（Authentication）](security-authentication.md)，[授权（Authorization）](security-authorization.md)以及[高级应用模版](tutorial-advanced-app.md) 这三个章节。
+要了解更多细节请参考[认证（Authentication）](security-authentication.md)，[授权（Authorization）](security-authorization.md)以及[高级应用模版](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide) 这三个章节。
 
 ## URL 管理
 
@@ -480,7 +481,7 @@ Yii 2.0 的 URL 管理跟 1.1 中很像。一个主要的改进是现在的 URL 
 ]
 ```
 
-请参考[URL 解析和生成](runtime-url-handling.md) 章节，以了解更多细节。.
+请参考[URL 解析和生成](runtime-routing.md) 章节，以了解更多细节。.
 
 一个重要变化是路由命名的约定，
 现在的控制器和动作的驼峰命名会被转换成小写字母，

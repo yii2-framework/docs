@@ -1,5 +1,6 @@
 ---
 title: "HTTP Caching"
+description: "Besides server-side caching that we have described in the previous sections, Web applications may also exploit client-side caching to save the time for..."
 ---
 
 Besides server-side caching that we have described in the previous sections, Web applications may

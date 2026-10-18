@@ -1,5 +1,6 @@
 ---
 title: "Configuración"
+description: "Las configuraciones se utilizan ampliamente en Yii al crear nuevos objetos o inicializar los objetos existentes."
 ---
 
 Las configuraciones se utilizan ampliamente en Yii al crear nuevos objetos o inicializar los objetos existentes. Las configuraciones por lo general incluyen el nombre de la clase del objeto que se está creando, y una lista de los valores iniciales que deberían ser asignadas a las del [propiedades](concept-properties.md) objeto. Las configuraciones también pueden incluir una lista de manipuladores que deban imponerse a del objeto [eventos](concept-events.md) y/o una lista de [comportamientos](concept-behaviors.md) que también ha de atribuirse al objeto.
@@ -211,7 +212,7 @@ Usted puede definir `YII_ENV` como uno de los valores siguientes:
 - `dev`: entorno de desarrollo. La constante `YII_ENV_DEV` evaluará como verdadero.
 - `test`: entorno de pruebas. La constante `YII_ENV_TEST` evaluará como verdadero.
 
-Con estas constantes de entorno, puede especificar sus configuraciones condicionales basado en el entorno actual. Por ejemplo, la configuración de la aplicación puede contener el siguiente código para permitir que el [depurador y barra de herramientas de depuración](tool-debugger.md) en el entorno de desarrollo.
+Con estas constantes de entorno, puede especificar sus configuraciones condicionales basado en el entorno actual. Por ejemplo, la configuración de la aplicación puede contener el siguiente código para permitir que el [depurador y barra de herramientas de depuración](../../extensions/debug/index.md) en el entorno de desarrollo.
 
 ```php
 $config = [...];

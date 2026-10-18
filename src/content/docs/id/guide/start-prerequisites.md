@@ -1,5 +1,6 @@
 ---
 title: "Apa yang perlu kamu ketahui"
+description: "Kurva pembelajaran Yii tidak setajam/sesulit kerangka kerja PHP lainnya, tapi masih ada beberapa hal yang harus kamu pelajari sebelum mulai menggunakan Yii"
 ---
 
 Kurva pembelajaran Yii tidak setajam/sesulit kerangka kerja PHP lainnya, tapi masih ada beberapa hal yang harus kamu pelajari sebelum mulai menggunakan Yii

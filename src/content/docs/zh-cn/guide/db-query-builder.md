@@ -1,5 +1,6 @@
 ---
 title: "查询构建器"
+description: "查询构建器建立在 Database Access Objects 基础之上，可让你创建 程序化的、DBMS无关的SQL语句。相比于原生的SQL语句，查询构建器可以帮你 写出可读性更强的SQL相关的代码，并生成安全性更强的SQL语句。"
 ---
 
 查询构建器建立在 [Database Access Objects](db-dao.md) 基础之上，可让你创建
@@ -230,7 +231,7 @@ $query->where(['id' => $userQuery]);
 此处你不需要手动添加参数绑定。但请注意，Yii 不会帮你转义列名，所以如果你
 从用户端获得的变量作为列名而没有进行任何额外的检查，对于 SQL 注入攻击，
 你的程序将变得很脆弱。为了保证应用程序的安全，请不要将变量用作列名
-或者你必须用白名单过滤变量。如果你实在需要从用户获取列名，请阅读 [过滤数据](output-data-widgets.md#filtering-data)
+或者你必须用白名单过滤变量。如果你实在需要从用户获取列名，请阅读 [过滤数据](../../guide/output-data-widgets.md#filtering-data)
 章节。例如，以下代码易受攻击：
 
 ```php
@@ -319,7 +320,7 @@ $query->where([$column => $value]);
 此处你不需要手动添加参数。但请注意，Yii 不会帮你转义列名，所以如果你
 从用户端获得的变量作为列名而没有进行任何额外的检查，对于 SQL 注入攻击，
 你的程序将变得很脆弱。为了保证应用程序的安全，请不要将变量用作列名
-或者你必须用白名单过滤变量。如果你实在需要从用户获取列名，请阅读 [过滤数据](output-data-widgets.md#filtering-data)
+或者你必须用白名单过滤变量。如果你实在需要从用户获取列名，请阅读 [过滤数据](../../guide/output-data-widgets.md#filtering-data)
 章节。例如，以下代码易受攻击：
 
 ```php

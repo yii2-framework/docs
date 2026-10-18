@@ -1,5 +1,6 @@
 ---
 title: "Trabajar con Passwords"
+description: "La mayoría de los desarrolladores saben que los passwords no deben ser guardados en texto plano, pero muchos desarrolladores aún creen que es seguro aplicar..."
 ---
 
 La mayoría de los desarrolladores saben que los passwords no deben ser guardados en texto plano, pero muchos desarrolladores aún creen

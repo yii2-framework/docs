@@ -1,5 +1,6 @@
 ---
 title: "Localizador de Servicios"
+description: "Un localizador de servicios es un objeto que sabe cómo proporcionar todo tipo de servicios (o componentes) que puede necesitar una aplicación."
 ---
 
 Un localizador de servicios es un objeto que sabe cómo proporcionar todo tipo de servicios (o componentes) que puede necesitar una aplicación. Dentro de un localizador de servicios, existe en cada componente como una única instancia, únicamente identificado por un ID. Se utiliza el ID para recuperar un componente desde el localizador de servicios.

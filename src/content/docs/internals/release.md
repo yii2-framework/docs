@@ -1,5 +1,6 @@
 ---
 title: "Releasing a new version"
+description: "The list of steps needed to make a release of the framework has grown over time and became hard to manage manually, so we have created a command line tool..."
 ---
 
 The list of steps needed to make a release of the framework has grown over time and became
@@ -11,7 +12,7 @@ hard to manage manually, so we have created a command line tool to ensure no ste
 
 ## The release command
 
-These steps are automated in the [release console command](../../build/controllers/ReleaseController.php)
+These steps are automated in the [release console command](https://github.com/yiisoft/yii2/blob/22.0/build/controllers/ReleaseController.php)
 which is included in the framework development repository.
 
 The release command can be invoked using the Yii application contained in the `build` directory of

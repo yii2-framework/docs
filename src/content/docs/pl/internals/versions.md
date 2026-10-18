@@ -1,5 +1,6 @@
 ---
 title: "Wersjonowanie Yii"
+description: "Ten dokument podsumowuje politykę wersjonowania Yii. Naszą aktualną strategię wersjonowania jest wariant wersjonowania semantycznego."
 ---
 
 Ten dokument podsumowuje politykę wersjonowania Yii. Naszą aktualną strategię wersjonowania jest wariant [wersjonowania semantycznego](https://semver.org/).

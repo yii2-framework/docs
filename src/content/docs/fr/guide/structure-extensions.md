@@ -1,5 +1,6 @@
 ---
 title: "Extensions"
+description: "Les extensions sont des paquets logiciels distribuables, spécialement conçus pour être utilisés dans des applications, et qui procurent des fonctionnalités..."
 ---
 
 Les extensions sont des paquets logiciels distribuables, spécialement conçus pour être utilisés dans des applications, et qui procurent des fonctionnalités prêtes à l'emploi. Par exemple, l'extension [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug) ajoute une barre de débogage très pratique au pied de chaque page dans votre application pour vous aider à comprendre plus aisément comment les pages sont générées. Vous pouvez utiliser des extensions pour accélérer votre processus de développement. Vous pouvez aussi empaqueter votre code sous forme d'extensions pour partager votre travail avec d'autres personnes.
@@ -17,7 +18,7 @@ Notez que devez installer [Composer](https://getcomposer.org/) si vous ne l'avez
 
 Par défaut, Composer installe les paquets enregistrés sur [Packagist](https://packagist.org/) — le plus grand dépôt pour les paquets Composer Open Source. Vous pouvez rechercher des extensions sur Packagist. Vous pouvez aussi [créer votre propre dépôt](https://getcomposer.org/doc/05-repositories.md#repository) et configurer Composer pour l'utiliser. Ceci est utile si vous développez des extensions privées que vous ne voulez partager que dans vos propres projets seulement.
 
-Les extensions installées par Composer sont stockées dans le dossier `BasePath/vendor`, où `BasePath` fait référence au [chemin de base](structure-applications.md#basePath) de l'application. Comme Composer est un gestionnaire de dépendances, quand il installe un paquet, il installe aussi automatiquement tous les paquets dont le paquet dépend.
+Les extensions installées par Composer sont stockées dans le dossier `BasePath/vendor`, où `BasePath` fait référence au [chemin de base](../../guide/structure-applications.md#basePath) de l'application. Comme Composer est un gestionnaire de dépendances, quand il installe un paquet, il installe aussi automatiquement tous les paquets dont le paquet dépend.
 
 Par exemple, pour installer l'extension `yiisoft/yii2-imagine`, modifier votre fichier `composer.json` comme indiqué ci-après :
 

@@ -1,5 +1,6 @@
 ---
 title: "Authorization"
+description: "Authorization is the process of verifying that a user has enough permission to do something."
 ---
 
 Authorization is the process of verifying that a user has enough permission to do something. Yii provides two authorization

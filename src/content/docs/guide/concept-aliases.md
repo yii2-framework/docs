@@ -1,5 +1,6 @@
 ---
 title: "Aliases"
+description: "Aliases are used to represent file paths or URLs so that you don't have to hard-code absolute paths or URLs in your project."
 ---
 
 Aliases are used to represent file paths or URLs so that you don't have to hard-code absolute paths or URLs in your

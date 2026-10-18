@@ -1,5 +1,6 @@
 ---
 title: "Rozszerzanie ActiveForm po stronie klienta"
+description: "Widżet ActiveForm posiada szereg wbudowanych metod JavaScript, służących do walidacji po stronie klienta."
 ---
 
 Widżet [[yii\widgets\ActiveForm]] posiada szereg wbudowanych metod JavaScript, służących do walidacji po stronie klienta.

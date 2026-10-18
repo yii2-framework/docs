@@ -1,5 +1,6 @@
 ---
 title: "コレクションのフィルタリング"
+description: "バージョン 2.0.13 以降、リソースのコレクションは DataFilter コンポーネントを使ってフィルタにかけることが出来ます。"
 ---
 
 バージョン 2.0.13 以降、リソースのコレクションは [[yii\data\DataFilter]] コンポーネントを使ってフィルタにかけることが出来ます。
@@ -9,7 +10,7 @@ title: "コレクションのフィルタリング"
 ## データ・プロバイダをフィルタリングのために構成する <span id="configuring-data-provider-for-filtering"></span>
 
 [コレクション](rest-resources.md#collections) のセクションで言及されているように、
-[データ・プロバイダ](output-data-providers#data-providers) を使うと、並べ替えてページ付けしたリソースのリストを出力することが出来ます。
+[データ・プロバイダ](output-data-providers.md) を使うと、並べ替えてページ付けしたリソースのリストを出力することが出来ます。
 また、データ・プロバイダを使って、そのリストをフィルタにかけることも出来ます。
 
 ```php

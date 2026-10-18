@@ -1,5 +1,6 @@
 ---
 title: "Extensions"
+description: "Extensions are redistributable software packages specifically designed to be used in Yii applications and provide ready-to-use features."
 ---
 
 Extensions are redistributable software packages specifically designed to be used in Yii applications and provide

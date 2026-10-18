@@ -1,5 +1,6 @@
 ---
 title: "Que devez-vous connaître"
+description: "La courbe d'apprentissage de Yii n’est pas aussi raide que celle des autres framework."
 ---
 
 La courbe d'apprentissage de Yii n’est pas aussi raide que celle des autres framework. Cependant, il y a un certain nombre de choses que vous devriez connaître avant de vous lancer avec Yii.

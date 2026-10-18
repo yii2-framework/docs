@@ -1,5 +1,6 @@
 ---
 title: "请求"
+description: "一个应用的请求是用 Request 对象来表示的，该对象提供了诸如 请求参数（译者注：通常是GET参数或者POST参数）、HTTP头、cookies等信息。"
 ---
 
 一个应用的请求是用 [[yii\web\Request]] 对象来表示的，该对象提供了诸如

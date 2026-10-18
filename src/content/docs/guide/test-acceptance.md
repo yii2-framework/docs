@@ -1,5 +1,6 @@
 ---
 title: "Acceptance Tests"
+description: "Acceptance test verifies scenarios from a user's perspective. The application tested is accessed via either PhpBrowser or a real browser."
 ---
 
 Acceptance test verifies scenarios from a user's perspective. The application tested is accessed via either PhpBrowser or

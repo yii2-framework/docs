@@ -1,5 +1,6 @@
 ---
 title: "Pamięć podręczna fragmentów"
+description: "Pamięć podręczna fragmentów dotyczy zapisywania w pamięci podręcznej części strony Web."
 ---
 
 Pamięć podręczna fragmentów dotyczy zapisywania w pamięci podręcznej części strony Web. Dla przykładu, jeśli strona wyświetla podsumowanie danych rocznej sprzedaży w postaci tabeli,

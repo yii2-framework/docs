@@ -1,0 +1,16 @@
+parameters:
+    level: 6
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - tests/fixtures
+    bootstrapFiles:
+        - vendor/yiisoft/yii2/Yii.php
+    ignoreErrors:
+        # EnumDoc passes an Enum_ reflector to TypeDoc: yii2-apidoc types the parameter as Class_|Interface_|Trait_
+        # but only calls methods that Enum_ also has (duck typing); see UPSTREAM.md.
+        -
+            identifier: argument.type
+            path: src/Model/EnumDoc.php
+            count: 1

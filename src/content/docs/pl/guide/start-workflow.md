@@ -1,5 +1,6 @@
 ---
 title: "Uruchamianie aplikacji"
+description: "Po zainstalowaniu Yii posiadasz działającą aplikację Yii dostępną pod adresem https://hostname/basic/web/index.php lub https://hostname/index.php, zależnie..."
 ---
 
 Po zainstalowaniu Yii posiadasz działającą aplikację Yii dostępną pod adresem `https://hostname/basic/web/index.php` lub `https://hostname/index.php`, zależnie od Twojej konfiguracji.

@@ -1,5 +1,6 @@
 ---
 title: "アセット"
+description: "Yii では、アセットは、ウェブ・ページで参照できるファイルを意味します。アセットは CSS ファイルであったり、JavaScript ファイルであったり、画像やビデオのファイルであったりします。 アセットはウェブでアクセス可能なディレクトリに配置され、ウェブ・サーバによって直接に提供されます。"
 ---
 
 Yii では、アセットは、ウェブ・ページで参照できるファイルを意味します。アセットは CSS ファイルであったり、JavaScript ファイルであったり、画像やビデオのファイルであったりします。
@@ -60,13 +61,13 @@ class AppAsset extends AssetBundle
   そうでない場合は、代りに、[[yii\web\AssetBundle::basePath|basePath]] と [[yii\web\AssetBundle::baseUrl|baseUrl]] のプロパティをセットしなければなりません。
   [パス・エイリアス](concept-aliases.md) をここで使うことが出来ます。
 - [[yii\web\AssetBundle::basePath|basePath]]: このバンドルのアセット・ファイルを含むウェブ・アクセス可能なディレクトリを指定します。
-  [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティをセットした場合は、[アセット・マネージャ](#asset-manager) がバンドルに含まれるファイルをウェブ・アクセス可能なディレクトリに発行して、
+  [[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティをセットした場合は、[アセット・マネージャ](structure-assets.md#asset-publishing) がバンドルに含まれるファイルをウェブ・アクセス可能なディレクトリに発行して、
   その結果、このプロパティを上書きします。
   アセット・ファイルが既にウェブ・アクセス可能なディレクトリにあり、アセットの発行が必要でない場合に、このプロパティをセットしなければなりません。
   [パス・エイリアス](concept-aliases.md) をここで使うことが出来ます。
 - [[yii\web\AssetBundle::baseUrl|baseUrl]]: [[yii\web\AssetBundle::basePath|basePath]] ディレクトリに対応する URL を指定します。
   [[yii\web\AssetBundle::basePath|basePath]] と同じように、[[yii\web\AssetBundle::sourcePath|sourcePath]] プロパティをセットした場合は、
-  [アセット・マネージャ](#asset-manager) がアセットを発行して、その結果、このプロパティを上書きします。
+  [アセット・マネージャ](structure-assets.md#asset-publishing) がアセットを発行して、その結果、このプロパティを上書きします。
   [パス・エイリアス](concept-aliases.md) をここで使うことが出来ます。
 - [[yii\web\AssetBundle::css|css]]: このバンドルに含まれている CSS ファイルをリストする配列です。
   ディレクトリの区切りとしてフォワード・スラッシュ "/" だけを使わなければならないことに注意してください。

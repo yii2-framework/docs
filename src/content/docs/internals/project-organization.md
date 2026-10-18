@@ -1,5 +1,6 @@
 ---
 title: "Project Organization"
+description: "This document describes the organization of the Yii 2 development repositories."
 ---
 
 This document describes the organization of the Yii 2 development repositories.

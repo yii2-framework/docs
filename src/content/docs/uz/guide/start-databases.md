@@ -1,5 +1,6 @@
 ---
 title: "Ma'lumotlar ombori bilan ishlash"
+description: "Bu bo'lim sizga yangi sahifani yaratishga yordam beradi, u sahifa esa countries jadvalidan kelgan ma'lumotlarni chiqarib beradi."
 ---
 
 Bu bo'lim sizga yangi sahifani yaratishga yordam beradi, u sahifa esa `countries` jadvalidan kelgan ma'lumotlarni chiqarib beradi. Buning uchun esa siz ma'lumotlar ombori bilan aloqani sozlashingiz kerak, klass yaratish [Active Record](db-active-record.md),[amalni](structure-controllers.md) va [ko'rinish](structure-views.md) yaratishimiz.

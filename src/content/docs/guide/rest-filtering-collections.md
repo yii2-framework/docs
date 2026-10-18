@@ -1,5 +1,6 @@
 ---
 title: "Filtering Collections"
+description: "Resource collection can be filtered using DataFilter component since 2.0.13."
 ---
 
 Resource collection can be filtered using [[yii\data\DataFilter]] component since 2.0.13. It allows validating and
@@ -9,7 +10,7 @@ using them in a format suitable for [[yii\db\QueryInterface::where()]].
 ## Configuring Data Provider For Filtering <span id="configuring-data-provider-for-filtering"></span>
 
 As mentioned in the [Collections](rest-resources.md#collections) section, we can use
-[Data Provider](output-data-providers#data-providers) to output sorted and paginated list of resources. We can also use
+[Data Provider](output-data-providers.md) to output sorted and paginated list of resources. We can also use
 it to filter that list.
 
 ```php

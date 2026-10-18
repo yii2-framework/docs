@@ -1,5 +1,6 @@
 ---
 title: "Ilovani ishga tushirish"
+description: "https://hostname/basic/web/index.php o'rnatganingizdan so'ng, asosiy dastur https://hostname/basic/web/index.php URL manzilida yoki..."
 ---
 
 `https://hostname/basic/web/index.php` o'rnatganingizdan so'ng, asosiy dastur `https://hostname/basic/web/index.php` URL manzilida yoki `https://hostname/index.php` orqali Veb-server sozlamalariga qarab mavjud bo'ladi. Ushbu bo'lim - kodni tashkil qilishning umumiy ta'rifi, o'rnatilgan funksionallik va murojaatlar bilan ishlash.

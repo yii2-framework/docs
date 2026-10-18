@@ -1,0 +1,259 @@
+---
+import "../../styles/portal.css";
+
+interface PackagePreview {
+  id: string;
+  name: string;
+  summary: string;
+}
+
+interface Props {
+  packages?: readonly PackagePreview[];
+}
+
+const { packages = [] } = Astro.props;
+const featuredPackages = packages.slice(0, 3);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const localUrl = (path: string) => `${base}${path.replace(/^\/+/, "")}`;
+const packageUrl = (id: string) =>
+  localUrl(`packages/${id.split("/").map(encodeURIComponent).join("/")}/`);
+
+const families = [
+  {
+    id: "yii2-extensions",
+    name: "Yii2 Extensions",
+    subject: "Application features",
+    summary:
+      "Widgets, integrations and development tools for Yii applications.",
+    symbol: "layers",
+  },
+  {
+    id: "php-forge",
+    name: "PHP Forge",
+    subject: "Package development",
+    summary: "Tools for building, testing and maintaining PHP packages.",
+    symbol: "tools",
+  },
+  {
+    id: "ui-awesome",
+    name: "UI Awesome",
+    subject: "Interface building blocks",
+    summary: "HTML and UI components for PHP applications.",
+    symbol: "layout",
+  },
+];
+---
+
+<div class="portal-home portal-container">
+  <section class="portal-hero" aria-labelledby="portal-introduction">
+    <div class="portal-hero-copy">
+      <p class="portal-intro">Tools and components for PHP applications</p>
+      <h2 id="portal-introduction" class="portal-hero-title">
+        Useful packages.<br />The context to use them.
+      </h2>
+      <p class="portal-hero-description">
+        Explore Yii2 Extensions, PHP Forge and UI Awesome, alongside a curated
+        community catalog. Find the documentation and compatibility details for
+        your application.
+      </p>
+      <div class="portal-actions">
+        <a class="portal-button" href={localUrl("packages/")}>
+          Browse packages
+        </a>
+        <a
+          class="portal-button portal-button-secondary"
+          href={localUrl("documentation/")}
+        >
+          Read documentation
+        </a>
+      </div>
+      <p class="portal-byline">
+        Curated by <a href={localUrl("about/")}>Wilmer Arambula</a>
+        <span class="portal-muted">(terabytesoftw)</span>
+      </p>
+    </div>
+
+    <aside class="portal-package-shelf" aria-labelledby="portal-shelf-title">
+      <div class="portal-shelf-heading">
+        <svg
+          class="portal-icon"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="m12 3 9 5-9 5-9-5 9-5Z" />
+          <path d="M3 8v9l9 5 9-5V8M12 13v9M7.5 5.5l9 5" />
+        </svg>
+        <h3 id="portal-shelf-title">From the catalog</h3>
+      </div>
+      {
+        featuredPackages.length > 0 ? (
+          <ul class="portal-package-list">
+            {featuredPackages.map((pkg) => (
+              <li class="portal-package-item">
+                <a class="portal-package-link" href={packageUrl(pkg.id)}>
+                  <strong class="portal-package-name">{pkg.name}</strong>
+                  <span class="portal-package-summary">{pkg.summary}</span>
+                  <code class="portal-package-id">{pkg.id}</code>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="portal-shelf-empty">
+            Package listings are being prepared. Explore the documentation or
+            suggest a package for review.
+          </p>
+        )
+      }
+      <p class="portal-shelf-note">
+        Check each package's requirements and source before installing.
+      </p>
+    </aside>
+  </section>
+
+  <section
+    class="portal-section"
+    aria-labelledby="portal-projects-title"
+  >
+    <div class="portal-section-header">
+      <div>
+        <h2 id="portal-projects-title">Three project families</h2>
+        <p class="portal-muted">
+          From application features to the tools behind them.
+        </p>
+      </div>
+      <a class="portal-text-link" href={localUrl("projects/")}>
+        Explore the projects
+      </a>
+    </div>
+    <div class="portal-grid portal-family-grid">
+      {
+        families.map((family) => (
+          <a
+            class="portal-card portal-family-card"
+            href={localUrl(`projects/#${family.id}`)}
+          >
+            <span class="portal-family-symbol" aria-hidden="true">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                focusable="false"
+              >
+                {family.symbol === "layers" && (
+                  <>
+                    <path d="m12 3 9 5-9 5-9-5 9-5Z" />
+                    <path d="m3 12 9 5 9-5M3 16l9 5 9-5" />
+                  </>
+                )}
+                {family.symbol === "tools" && (
+                  <>
+                    <path d="m8 4-5 8 5 8M16 4l5 8-5 8M14 5l-4 14" />
+                  </>
+                )}
+                {family.symbol === "layout" && (
+                  <>
+                    <rect x="3" y="4" width="18" height="16" rx="2" />
+                    <path d="M3 9h18M10 9v11" />
+                  </>
+                )}
+              </svg>
+            </span>
+            <h3>{family.name}</h3>
+            <p class="portal-family-subject">{family.subject}</p>
+            <p class="portal-family-description">{family.summary}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section
+    class="portal-section portal-reading-room"
+    aria-labelledby="portal-reading-title"
+  >
+    <div class="portal-reading-intro">
+      <h2 id="portal-reading-title">Keep the context close.</h2>
+      <p class="portal-muted">
+        Read the guide for your framework or package. Give your coding agent the
+        same focused documentation and the relevant skill.
+      </p>
+      <a class="portal-text-link" href={localUrl("documentation/")}>
+        Find your documentation
+      </a>
+    </div>
+    <ul class="portal-resource-list">
+      <li>
+        <a class="portal-resource-link" href={localUrl("documentation/")}>
+          <span class="portal-resource-kind" aria-hidden="true">Docs</span>
+          <span>
+            <strong>Guides and API reference</strong>
+            <span class="portal-resource-description">
+              Installation, examples and requirements, organized by project.
+            </span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="portal-resource-link"
+          href={localUrl("project/ai-agents/")}
+        >
+          <span class="portal-resource-kind" aria-hidden="true">Skills</span>
+          <span>
+            <strong>Set up your coding agent</strong>
+            <span class="portal-resource-description">
+              Choose the relevant skills and connect them to your application.
+            </span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="portal-resource-link" href={localUrl("skills/index.json")}>
+          <span class="portal-resource-kind" aria-hidden="true">JSON</span>
+          <span>
+            <strong>Inspect the skill index</strong>
+            <span class="portal-resource-description">
+              Source repositories, revisions and file checksums.
+            </span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section
+    class="portal-section portal-contribute"
+    aria-labelledby="portal-contribute-title"
+  >
+    <div>
+      <h2 id="portal-contribute-title">Have a useful package to share?</h2>
+      <p>
+        Suggest a PHP, Yii2 or Yii3 package for the community catalog. Listings
+        credit their maintainers and are reviewed before publication.
+      </p>
+    </div>
+    <a
+      class="portal-button portal-button-secondary"
+      href={localUrl("contribute/")}
+    >
+      Suggest a package
+    </a>
+  </section>
+
+  <p class="portal-independence">
+    An independent directory maintained by Wilmer Arambula. Community projects
+    belong to their respective maintainers. This is not an official Yii site.
+  </p>
+</div>

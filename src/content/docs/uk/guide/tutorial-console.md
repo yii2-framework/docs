@@ -1,5 +1,6 @@
 ---
 title: "Консольні додатки"
+description: "Окрім багатьох можливостей для побудови веб-додатків, Yii також має повноцінну підтримку консольних додатків, які в основному використовуються для..."
 ---
 
 Окрім багатьох можливостей для побудови веб-додатків, Yii також має повноцінну підтримку консольних додатків,
@@ -21,7 +22,7 @@ title: "Консольні додатки"
   Ви можете дізнатись більше про цю команду у розділі [Ресурси](structure-assets.md#using-the-asset-command).
 - [[yii\console\controllers\CacheController|CacheController]] - Дозволяє вам оновити кеш додатка.
 - [[yii\console\controllers\FixtureController|FixtureController]] - Керує завантаженням та вивантаженням даних фікстур для цілей тестування.
-  Ця команда описана більш детально у [розділі тестування про фікстури](test-fixtures.md#managing-fixtures).
+  Ця команда описана більш детально у [розділі тестування про фікстури](test-fixtures/index.md#managing-fixtures-with-yii-fixture).
 - [[yii\console\controllers\HelpController|HelpController]] - Надає довідкову інформацію про консольні команди, ця команда використовується за замовчуванням
   та виводить те, що ви побачили у вищенаведеному виводі.
 - [[yii\console\controllers\MessageController|MessageController]] - Здобуває повідомлення для перекладу з файлів коду.

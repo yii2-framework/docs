@@ -1,5 +1,6 @@
 ---
 title: "Testy jednostkowe"
+description: "Test jednostkowy weryfikuje poprawność działania pojedynczej jednostki kodu."
 ---
 
 > Uwaga: Ta sekcja jest w trakcie tworzenia.

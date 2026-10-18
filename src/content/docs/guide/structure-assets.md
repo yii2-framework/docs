@@ -1,5 +1,6 @@
 ---
 title: "Assets"
+description: "An asset in Yii is a file that may be referenced in a Web page."
 ---
 
 An asset in Yii is a file that may be referenced in a Web page. It can be a CSS file, a JavaScript file, an image
@@ -24,7 +25,8 @@ its corresponding fully qualified PHP class name (without the leading backslash)
 be [autoloadable](concept-autoloading.md). It usually specifies where the assets are located, what CSS and
 JavaScript files the bundle contains, and how the bundle depends on other bundles.
 
-The following code defines the main asset bundle used by [the basic project template](start-installation.md):
+The following example defines an application asset bundle using the same Yii and Bootstrap 5 dependencies as
+[the basic project template](start-installation.md):
 
 ```php
 <?php
@@ -45,14 +47,14 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap5\BootstrapAsset',
     ];
 }
 ```
 
 The above `AppAsset` class specifies that the asset files are located under the `@webroot` directory which
-corresponds to the URL `@web`; the bundle contains a single CSS file `css/site.css` and no JavaScript file;
-the bundle depends on two other bundles: [[yii\web\YiiAsset]] and [[yii\bootstrap\BootstrapAsset]]. More detailed
+corresponds to the URL `@web`; the bundle includes screen and print CSS files and no JavaScript file;
+the bundle depends on two other bundles: [[yii\web\YiiAsset]] and [[yii\bootstrap5\BootstrapAsset]]. More detailed
 explanation about the properties of [[yii\web\AssetBundle]] can be found in the following:
 
 - [[yii\web\AssetBundle::sourcePath|sourcePath]]: specifies the root directory that contains the asset files in
@@ -61,12 +63,12 @@ explanation about the properties of [[yii\web\AssetBundle]] can be found in the 
   [Path aliases](concept-aliases.md) can be used here.
 - [[yii\web\AssetBundle::basePath|basePath]]: specifies a Web-accessible directory that contains the asset files in
   this bundle. When you specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property,
-  the [asset manager](#asset-manager) will publish the assets in this bundle to a Web-accessible directory
+  the [asset manager](#asset-publishing) will publish the assets in this bundle to a Web-accessible directory
   and overwrite this property accordingly. You should set this property if your asset files are already in
   a Web-accessible directory and do not need asset publishing. [Path aliases](concept-aliases.md) can be used here.
 - [[yii\web\AssetBundle::baseUrl|baseUrl]]: specifies the URL corresponding to the directory
   [[yii\web\AssetBundle::basePath|basePath]]. Like [[yii\web\AssetBundle::basePath|basePath]],
-  if you specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property, the [asset manager](#asset-manager)
+  if you specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property, the [asset manager](#asset-publishing)
   will publish the assets and overwrite this property accordingly. [Path aliases](concept-aliases.md) can be used here.
 - [[yii\web\AssetBundle::css|css]]: an array listing the CSS files contained in this bundle. Note that only forward slash "/"
   should be used as directory separators. Each file can be specified on its own as a string or in an array together with
@@ -128,7 +130,7 @@ among assets.
 
 Asset dependencies are mainly specified through the [[yii\web\AssetBundle::depends]] property.
 In the `AppAsset` example, the asset bundle depends on two other asset bundles: [[yii\web\YiiAsset]] and
-[[yii\bootstrap\BootstrapAsset]], which means the CSS and JavaScript files in `AppAsset` will be included _after_
+[[yii\bootstrap5\BootstrapAsset]], which means the CSS and JavaScript files in `AppAsset` will be included _after_
 those files in the two dependent bundles.
 
 Asset dependencies are transitive. This means if bundle A depends on B which depends on C, A will depend on C, too.
@@ -184,7 +186,7 @@ use yii\web\AssetBundle;
 
 class FontAwesomeAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/font-awesome';
+    public $sourcePath = '@npm/font-awesome';
     public $css = [
         'css/font-awesome.min.css',
     ];
@@ -200,94 +202,25 @@ class FontAwesomeAsset extends AssetBundle
 The above example defines an asset bundle for the ["fontawesome" package](https://fontawesome.com/). By specifying
 the `only` publishing option, only the `fonts` and `css` subdirectories will be published.
 
-### Bower and NPM Assets installation <span id="bower-npm-assets"></span>
+### Installing npm Assets <span id="bower-npm-assets"></span>
 
-Most JavaScript/CSS packages are managed by [Bower](https://bower.io/) and/or [NPM](https://www.npmjs.com/) package
-managers. In PHP world we have Composer, that manages PHP dependencies, but it is possible to load
-both Bower and NPM packages using `composer.json` just as PHP packages.
+The Yii 22.0 [Basic Project Template](start-installation.md#installing-assets) uses
+[Foxy](https://github.com/php-forge/foxy) with npm to install the JavaScript and CSS dependencies declared by PHP
+packages. Keep the template's `config.foxy.manager` setting and allow-list entry for `php-forge/foxy`. Node.js and
+npm must be available when Composer runs.
 
-To achieve this, we should configure our composer a bit. There are two options to do that:
+The template defines `@npm` as the application's `node_modules/` directory. Asset bundles can publish packages
+from that directory; for example, [[yii\web\JqueryAsset]] uses `@npm/jquery/dist`. Register only the bundles your
+application needs. The Yii core's Composer dependencies do not require jQuery, while the basic template adds its
+jQuery client implementation and Bootstrap 5.
 
----
+For additional application assets, use npm and declare the dependency in `package.json`. Set the asset bundle's
+[[yii\web\AssetBundle::sourcePath|sourcePath]] to the installed package directory, including a `dist` subdirectory
+when needed. Check the package's actual files instead of assuming that all libraries share the same layout.
 
-#### Using asset-packagist repository
-
-This way will satisfy requirements of the majority of projects, that need NPM or Bower packages.
-
-> Note: Since 2.0.13 both Basic and Advanced application templates are pre-configured to use asset-packagist
-> by default, so you can skip this section.
-
-In the `composer.json` of your project, add the following lines:
-
-```json
-"repositories": [
-    {
-        "type": "composer",
-        "url": "https://asset-packagist.org"
-    }
-]
-```
-
-Adjust `@npm` and `@bower` [aliases](concept-aliases.md) in you [application configuration](concept-configurations.md):
-
-```php
-$config = [
-    ...
-    'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-    ],
-    ...
-];
-```
-
-Visit [asset-packagist.org](https://asset-packagist.org) to know, how it works.
-
-#### Using fxp/composer-asset-plugin
-
-Compared to asset-packagist, composer-asset-plugin does not require any changes to application config. Instead, it
-requires global installation of a special Composer plugin by running the following command:
-
-```bash
-composer global require "fxp/composer-asset-plugin:^1.4.1"
-```
-
-This command installs [composer asset plugin](https://github.com/fxpio/composer-asset-plugin/) globally
-which allows managing Bower and NPM package dependencies through Composer. After the plugin installation,
-every single project on your computer will support Bower and NPM packages through `composer.json`.
-
-Add the following lines to `composer.json` of your project to adjust directories where the installed packages
-will be placed, if you want to publish them using Yii:
-
-```json
-"config": {
-    "fxp-asset": {
-        "installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
-        }
-    }
-}
-```
-
-> Note: `fxp/composer-asset-plugin` significantly slows down the `composer update` command in comparison
-> to asset-packagist.
-
----
-
-After configuring Composer to support Bower and NPM:
-
-1. Modify the `composer.json` file of your application or extension and list the package in the `require` entry.
-   You should use `bower-asset/PackageName` (for Bower packages) or `npm-asset/PackageName` (for NPM packages)
-   to refer to the library.
-2. Run `composer update`
-3. Create an asset bundle class and list the JavaScript/CSS files that you plan to use in your application or extension.
-   You should specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property as `@bower/PackageName` or `@npm/PackageName`.
-   This is because Composer will install the Bower or NPM package in the directory corresponding to this alias.
-
-> Note: Some packages may put all their distributed files in a subdirectory. If this is the case, you should specify
-> the subdirectory as the value of [[yii\web\AssetBundle::sourcePath|sourcePath]]. For example, [[yii\web\JqueryAsset]]
-> uses `@bower/jquery/dist` instead of `@bower/jquery`.
+The older asset-packagist and global `fxp/composer-asset-plugin` installation instructions apply to Yii 2.0 setups.
+They are not required by this template. When adopting an extension, follow its Yii 22.0 installation instructions
+and check its asset paths and compatible versions.
 
 ## Using Asset Bundles <span id="using-asset-bundles"></span>
 
@@ -359,7 +292,7 @@ $bundle->js[] = 'i18n/' . Yii::$app->language . '.js'; // dynamic file added
 Yii manages asset bundles through an application component named `assetManager` which is implemented by [[yii\web\AssetManager]].
 By configuring the [[yii\web\AssetManager::bundles]] property, it is possible to customize the behavior of an asset bundle.
 For example, the default [[yii\web\JqueryAsset]] asset bundle uses the `jquery.js` file from the installed
-jquery Bower package. To improve the availability and performance, you may want to use a version hosted by Google.
+jquery npm package. To improve the availability and performance, you may want to use a version hosted by Google.
 This can be achieved by configuring `assetManager` in the application configuration like the following:
 
 ```php
@@ -547,15 +480,15 @@ the client to fetch the latest version of the asset.
 
 ## Commonly Used Asset Bundles <span id="common-asset-bundles"></span>
 
-The core Yii code has defined many asset bundles. Among them, the following bundles are commonly used and may
-be referenced in your application or extension code.
+Yii and its extensions provide asset bundles. Install the corresponding package before referring to its bundles
+in application code; jQuery UI and Bootstrap are optional extensions.
 
 - [[yii\web\YiiAsset]]: It mainly includes the `yii.js` file which implements a mechanism of organizing JavaScript code
   in modules. It also provides special support for `data-method` and `data-confirm` attributes and other useful features.
   More information about `yii.js` can be found in the [Client Scripts Section](output-client-scripts.md#yii.js).
-- [[yii\web\JqueryAsset]]: It includes the `jquery.js` file from the jQuery Bower package.
-- [[yii\bootstrap\BootstrapAsset]]: It includes the CSS file from the Twitter Bootstrap framework.
-- [[yii\bootstrap\BootstrapPluginAsset]]: It includes the JavaScript file from the Twitter Bootstrap framework for
+- [[yii\web\JqueryAsset]]: It includes the `jquery.js` file from the jQuery npm package.
+- [[yii\bootstrap5\BootstrapAsset]]: It includes the CSS file from the Twitter Bootstrap framework.
+- [[yii\bootstrap5\BootstrapPluginAsset]]: It includes the JavaScript file from the Twitter Bootstrap framework for
   supporting Bootstrap JavaScript plugins.
 - [[yii\jui\JuiAsset]]: It includes the CSS and JavaScript files from the jQuery UI library.
 
@@ -584,7 +517,7 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap5\BootstrapAsset',
     ];
 }
 ```

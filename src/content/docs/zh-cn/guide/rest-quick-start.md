@@ -1,5 +1,6 @@
 ---
 title: "快速入门"
+description: "Yii 提供了一整套用来简化实现 RESTful 风格的 Web Service 服务的 API。"
 ---
 
 Yii 提供了一整套用来简化实现 RESTful 风格的 Web Service 服务的 API。

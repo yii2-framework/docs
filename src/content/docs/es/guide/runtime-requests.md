@@ -1,5 +1,6 @@
 ---
 title: "Peticiones"
+description: "Las peticiones (requests) hechas a una aplicación son representadas como objetos Request que proporcionan información como parámetros de la petición..."
 ---
 
 Las peticiones (requests) hechas a una aplicación son representadas como objetos [[yii\web\Request]] que proporcionan

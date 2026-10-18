@@ -1,5 +1,6 @@
 ---
 title: "Requests"
+description: "Requests made to an application are represented in terms of Request objects which provide information such as request parameters, HTTP headers, cookies..."
 ---
 
 Requests made to an application are represented in terms of [[yii\web\Request]] objects which provide information

@@ -1,5 +1,6 @@
 ---
 title: "Guía Breve"
+description: "Yii ofrece todo un conjunto de herramientas para simplificar la tarea de implementar un servicio web APIs RESTful."
 ---
 
 Yii ofrece todo un conjunto de herramientas para simplificar la tarea de implementar un

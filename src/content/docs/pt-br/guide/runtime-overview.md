@@ -1,5 +1,6 @@
 ---
 title: "Visão Geral"
+description: "Cada vez que uma aplicação Yii processa uma requisição, ele passa por um fluxo de trabalho parecido como o seguinte."
 ---
 
 Cada vez que uma aplicação Yii processa uma requisição, ele passa por um fluxo

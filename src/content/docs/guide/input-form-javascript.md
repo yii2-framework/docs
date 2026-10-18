@@ -1,5 +1,6 @@
 ---
 title: "Extending ActiveForm on the Client Side"
+description: "The ActiveForm widget comes with a set of JavaScript methods that are used for client validation."
 ---
 
 The [[yii\widgets\ActiveForm]] widget comes with a set of JavaScript methods that are used for client validation.

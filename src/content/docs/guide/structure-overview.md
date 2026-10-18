@@ -1,5 +1,6 @@
 ---
 title: "Overview"
+description: "Yii applications are organized according to the model-view-controller (MVC) architectural pattern."
 ---
 
 Yii applications are organized according to the [model-view-controller (MVC)](https://wikipedia.org/wiki/Model-view-controller)

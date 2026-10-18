@@ -1,5 +1,6 @@
 ---
 title: "Фильтры"
+description: "Фильтры — это объекты, которые могут запускаться как перед так и после действий контроллера."
 ---
 
 Фильтры — это объекты, которые могут запускаться как перед так и после [действий контроллера](structure-controllers.md#actions).
@@ -333,7 +334,7 @@ public function behaviors()
 ```
 
 Если вам необходимо добавить CORS-фильтрацию к [[yii\rest\ActiveController]] в вашем API, обратитесь к разделу
-[Контроллеры](rest-controllers.md#cors).
+[Контроллеры](../../guide/rest-controllers.md#cors).
 
 Фильтрация Cors может быть настроена с помощью свойства [[yii\filters\Cors::$cors|$cors]].
 

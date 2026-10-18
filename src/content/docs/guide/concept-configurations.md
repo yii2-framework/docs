@@ -1,5 +1,6 @@
 ---
 title: "Configurations"
+description: "Configurations are widely used in Yii when creating new objects or initializing existing objects."
 ---
 
 Configurations are widely used in Yii when creating new objects or initializing existing objects.
@@ -272,7 +273,7 @@ You may define `YII_ENV` as one of the following values:
 
 With these environment constants, you may specify your configurations conditionally based on
 the current environment. For example, your application configuration may contain the following
-code to enable the [debug toolbar and debugger](tool-debugger.md) in development environment.
+code to enable the [debug toolbar and debugger](../extensions/debug/index.md) in development environment.
 
 ```php
 $config = [...];

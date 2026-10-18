@@ -1,5 +1,6 @@
 ---
 title: "Czym jest Yii"
+description: "Yii jest wysoko wydajnym, opartym na komponentach frameworkiem PHP do szybkiego programowania nowoczesnych stron internetowych."
 ---
 
 Yii jest wysoko wydajnym, opartym na komponentach frameworkiem PHP do szybkiego programowania

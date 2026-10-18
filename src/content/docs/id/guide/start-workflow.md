@@ -1,5 +1,6 @@
 ---
 title: "Menjalankan Aplikasi"
+description: "Setelah menginstal Yii, Anda memiliki aplikasi Yii yang dapat diakses melalui URL https://hostname/basic/web/index.php atau https://hostname/index.php..."
 ---
 
 Setelah menginstal Yii, Anda memiliki aplikasi Yii yang dapat diakses melalui

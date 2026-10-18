@@ -1,5 +1,6 @@
 ---
 title: "Cryptography"
+description: "In this section we'll review the following security aspects."
 ---
 
 In this section we'll review the following security aspects:

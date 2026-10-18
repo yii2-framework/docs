@@ -1,5 +1,6 @@
 ---
 title: "Enrutamiento y Creación de URLS"
+description: "Cuando una aplicación Yii empieza a procesar una URL solicitada, lo primero que hace es convertir la URL en una ruta."
 ---
 
 Cuando una aplicación Yii empieza a procesar una URL solicitada, lo primero que hace es convertir la URL en una

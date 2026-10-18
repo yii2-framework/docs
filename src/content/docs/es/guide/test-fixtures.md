@@ -1,5 +1,6 @@
 ---
 title: "Fixtures"
+description: "Los fixtures son una parte importante de los tests."
 ---
 
 Los fixtures son una parte importante de los tests. Su propósito principal es el de preparar el entorno en una estado fijado/conocido
@@ -274,7 +275,7 @@ return [
 
 Si estamos utilizando un fixture que carga datos en la base de datos, entonces esos registros serán insertados en la tabla `users`. Si estamos utilizando fixtures no sql, por ejemplo de `mongodb`,
 entonces estos datos serán aplicados a la colección mongodb `users`. Para aprender cómo implementar varias estrategias de carga y más, visita la [documentación oficial](https://github.com/yiisoft/yii2/blob/master/docs/guide-es/test-fixtures.md).
-El fixture de ejemplo de arriba fue autogenerado por la extensión `yii2-faker`, lee más acerca de esto en su [sección](#auto-generating-fixtures).
+El fixture de ejemplo de arriba fue autogenerado por la extensión `yii2-faker`, lee más acerca de esto en su [sección](../../guide/test-fixtures.md#auto-generating-fixtures).
 Los nombres de clase de fixtures no deberían ser en plural.
 
 ## Cargar fixtures

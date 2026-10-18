@@ -1,5 +1,6 @@
 ---
 title: "Обработка ошибок"
+description: "В состав Yii входит встроенный обработчик ошибок, делающий работу с ошибками гораздо более приятным занятием."
 ---
 
 В состав Yii входит встроенный [[yii\web\ErrorHandler|обработчик ошибок]], делающий работу с ошибками гораздо более
@@ -139,7 +140,7 @@ public function actionError()
 - `exception`: объект исключения, из которого можно получить дополнительную информацию, такую как статус HTTP,
   код ошибки, стек вызовов и т.д.
 
-> Info: Если вы используете шаблоны приложения [basic](start-installation.md) или [advanced](tutorial-advanced-app.md),
+> Info: Если вы используете шаблоны приложения [basic](start-installation.md) или [advanced](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide),
 > действие error и файл представления уже созданы за вас.
 
 ### Изменение формата ответа <span id="error-format"></span>

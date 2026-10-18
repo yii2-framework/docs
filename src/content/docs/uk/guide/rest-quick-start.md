@@ -1,5 +1,6 @@
 ---
 title: "Швидкий старт"
+description: "Yii включає повноцінний набір засобів для спрощеної реалізації RESTful API."
 ---
 
 Yii включає повноцінний набір засобів для спрощеної реалізації [RESTful API](https://ru.wikipedia.org/wiki/REST).
@@ -170,7 +171,7 @@ Content-Type: application/xml
 Додатково ви можете відсортувати колекції як `http://localhost/users?sort=email` або
 `http://localhost/users?sort=-email`. Фільтрування колекцій як `http://localhost/users?filter[id]=10` або
 `http://localhost/users?filter[email][like]=gmail.com` можлива при використанні
-фільтрів даних. Докладніше у розділі [Resources](rest-resources.md#filtering-collections).
+фільтрів даних. Докладніше у розділі [Resources](rest-filtering-collections/index.md).
 
 ## Резюме <span id="summary"></span>
 

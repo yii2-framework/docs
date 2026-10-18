@@ -1,5 +1,6 @@
 ---
 title: "Manejo de errores"
+description: "Cuando se maneja una petición de API RESTful, si ocurre un error en la petición del usuario o si algo inesperado ocurre en el servidor, simplemente puedes..."
 ---
 
 Cuando se maneja una petición de API RESTful, si ocurre un error en la petición del usuario o si algo inesperado

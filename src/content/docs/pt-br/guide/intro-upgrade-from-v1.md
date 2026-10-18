@@ -1,5 +1,6 @@
 ---
 title: "Atualizando a partir da Versão 1.1"
+description: "Existem muitas diferenças entre as versões 1.1 e 2.0 do Yii, uma vez que o framework foi completamente reescrito na 2.0."
 ---
 
 Existem muitas diferenças entre as versões 1.1 e 2.0 do Yii, uma vez que o
@@ -214,7 +215,7 @@ se o método [[yii\base\Model::rules()|rules()]] especifica completamente os
 cenários que existirão, e se não houver necessidade para declarar atributos
 `unsafe`.
 
-Para aprender mais sobre models, por favor consulte a seção [Models (Modelos)](basic-models.md).
+Para aprender mais sobre models, por favor consulte a seção [Models (Modelos)](structure-models.md).
 
 ## Controllers (Controladores)
 
@@ -279,7 +280,7 @@ até mesmo uma view renderizada fora do contexto de um controller ou widget.
 Além disso, não há mais um componente `CThemeManager`. Em vez disso, `theme` é
 uma propriedade configurável do componente `view` da aplicação.
 
-Por favor, consulte a seção [Temas](tutorial-theming.md) para mais detalhes.
+Por favor, consulte a seção [Temas](output-theming.md) para mais detalhes.
 
 ## Aplicações de Console
 
@@ -346,7 +347,7 @@ deste pacote acessíveis via Web. Ao contrário do Yii 1, a página que registra
 _bundle_ automaticamente conterá as referências aos arquivos JavaScript e CSS
 especificados naquele _bundle_.
 
-Por favor consulte a seção [Gerenciando Assets](output-assets.md) para mais detalhes.
+Por favor consulte a seção [Gerenciando Assets](structure-assets.md) para mais detalhes.
 
 ## Helpers - Classes Auxiliares
 
@@ -516,7 +517,7 @@ mais a classe `CUserIdentity`. Em vez disso, você deve implementar a interface
 de projetos fornece um exemplo de como fazer isso.
 
 Por favor, consulte as seções [Autenticação](security-authentication.md),
-[Autorização](security-authorization.md) e [Template Avançado de Projetos](tutorial-advanced-app.md)
+[Autorização](security-authorization.md) e [Template Avançado de Projetos](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)
 para mais detalhes.
 
 ## Gerenciamento de URLs

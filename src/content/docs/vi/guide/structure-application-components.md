@@ -1,5 +1,6 @@
 ---
 title: "Các thành phần ứng dụng"
+description: "Mỗi ứng dụng là hiện thực của mẫu thiết kế Service Locators."
 ---
 
 Mỗi ứng dụng là hiện thực của [mẫu thiết kế Service Locators](concept-service-locator.md). Mỗi ứng dụng sẽ chứa các thành phần

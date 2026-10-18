@@ -1,5 +1,6 @@
 ---
 title: "Assets"
+description: "Un asset en Yii es un archivo al que se puede hacer referencia en una página Web."
 ---
 
 Un asset en Yii es un archivo al que se puede hacer referencia en una página Web. Puede ser un archivo CSS, un archivo
@@ -61,12 +62,12 @@ A continuación se explicarán más detalladamente las propiedades del [[yii\web
   [[yii\web\AssetBundle::baseUrl|baseUrl]], en su lugar. Se pueden usar [alias de ruta](concept-aliases.md).
 - [[yii\web\AssetBundle::basePath|basePath]]: especifica el directorio Web público que contiene los archivos assets de
   este bundle. Cuando se especifica la propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]], el [gestor de
-  assets](#asset-manager) publicará los assets de este bundle en un directorio Web público y sobrescribirá la
+  assets](structure-assets.md#asset-publishing) publicará los assets de este bundle en un directorio Web público y sobrescribirá la
   propiedad en consecuencia. Se debe establecer esta propiedad si los archivos asset ya se encuentran en un directorio
   Web público y no necesitan ser publicados. Se pueden usar [alias de ruta](concept-aliases.md).
 - [[yii\web\AssetBundle::baseUrl|baseUrl]]: especifica la URL correspondiente al directorio
   [[yii\web\AssetBundle::basePath|basePath]]. Como en [[yii\web\AssetBundle::basePath|basePath]], si se especifica la
-  propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]], el [gestor de assets](#asset-manager) publicara los assets
+  propiedad [[yii\web\AssetBundle::sourcePath|sourcePath]], el [gestor de assets](structure-assets.md#asset-publishing) publicara los assets
   y sobrescribirá esta propiedad en consecuencia. Se pueden usar [alias de ruta](concept-aliases.md).
 - [[yii\web\AssetBundle::js|js]]: un array lista los archivos JavaScript que contiene este bundle. Tenga en cuenta que
   solo deben usarse las barras invertidas "/" como separadores de directorios. Cada archivo Javascript se puede

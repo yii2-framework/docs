@@ -1,5 +1,6 @@
 ---
 title: "Làm việc với CSDL"
+description: "Phần này sẽ hướng dẫn làm thế nào để tạo mới trang có chức năng hiển thị dữ liệu các thành phố (country) và được lấy từ bảng country nằm trong cơ sở dữ liệu."
 ---
 
 Phần này sẽ hướng dẫn làm thế nào để tạo mới trang có chức năng hiển thị dữ liệu các thành phố (country) và được lấy
@@ -234,6 +235,6 @@ Trong luồng xử lý này, đối tượng [[yii\data\Pagination|Pagination]] 
 Bài hướng dẫn này, giúp bạn tìm hiểu và làm việc với CSDL. Bạn cũng được tìm hiều đối tượng [[yii\data\Pagination]] và [[yii\widgets\LinkPager]]. giúp cho việc
 lấy và hiển thì dữ liệu trên trang.
 
-Trong phần tới, bạn sẽ được tìm hiểu về công cụ generate code khá mạnh, được gọi là [Gii](tool-gii.md),
+Trong phần tới, bạn sẽ được tìm hiểu về công cụ generate code khá mạnh, được gọi là [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide),
 giúp bạn nhanh chóng thực hiện một số tính năng tương tự, những hoạt động thao tác với các bảng trong CSDL như Tạo-Xem-Cập nhật-Xóa (CRUD)
 . Trong thực tế, những mã nguồn được viết có thể tự động generate trong Yii sử dụng công cụ Gii.

@@ -2,8 +2,86 @@
 
 ## 0.1.0 Under development
 
+- style: normalize evaluation Markdown and refresh canonical v1 task hashes without changing acceptance requirements.
+
+- docs: sync PSR bridge package guides, PHPDoc API, and canonical worker skill; add isolated lifecycle/session evaluation and native preparation checks.
+
+- feat(skills): import package-owned Bootstrap 6 and FilePond skill bundles with source provenance and checksums.
+- docs: keep extension guides in their packages, remove manual skill copies, and document client-specific installation.
+- test(eval): prepare native client evaluations and add a FilePond upload acceptance case.
+- fix(eval): add opt-in B1 task contracts with explicit strict types and semantic PHP imports while preserving v1 criteria.
+
 - chore: initial commit.
 - feat: astro Starlight documentation site.
 - fix: add `package-lock.json` to repository for CI deploy.
 - chore: align local and CI checks for eslint, codespell, editorconfig, and markdown formatting.
 - docs!: migrate autoload guidance to Composer-only flow and replace PHP `7.4` baseline references with PHP `8.2` (https://github.com/yii2-framework/core/pull/5).
+- build: upgrade to Astro `7.3.8` and Starlight `0.42.6`; keep the Astro 5 heading anchors with `rehype-heading-ids-v5`.
+- fix: resolve relative Markdown links against the source file so content links no longer 404.
+- docs: add `description` frontmatter to every page (`npm run descriptions`).
+- feat: publish `llms.txt`, `llms-full.txt`, `llms-small.txt` and one bundle per sidebar section with `starlight-llms-txt`.
+- feat: serve a Markdown version of every page at `<page>/index.md` with Copy, View and Open-in actions.
+- feat: add JSON-LD, `docs:version` and `docs:build-date` meta tags and Open Graph images to every page.
+- docs: add `AGENTS.md` and the "Using the documentation with AI agents" page.
+- fix: drop note, tip and info blockquotes from `llms-small.txt` and vendor the Open Graph font (no network at build).
+- feat: sync the extension guides listed in `packages.json` into `/docs/extensions/<package>/` (`scripts/sync.mjs`, nightly deploy).
+- feat(skills): add the `yii2-framework` and `yii2-bootstrap6-widgets` agent skills (`npx skills add yii2-framework/docs`).
+- feat(eval): add `eval/`, a local agent evaluation runner with 8 canonical tasks and a deterministic checker.
+- feat: sync the `filepond` and `localeurls` guides and drop the Packagist and StyleCI badges from synced READMEs.
+- feat(reference): generate the API reference pages and `reference/<package>.json` from PHPDoc with yii2-apidoc (`tools/bin/reference`).
+- feat: resolve `[[yii\...]]` references in the guide to the API reference, also in the Markdown version of each page.
+- feat: publish the API reference: namespaces in the sidebar, a "Reference" group per extension, English-only type pages, `llms.txt` section.
+- ci: build the API reference in the deploy workflow with a PHPDoc baseline gate, a link check and a `tools` workflow (PHPUnit, PHPStan).
+- fix(reference): close an open docblock fence, count empty `{@see}` as unresolved, keep Markdown `@see` links, qualify foreign type labels.
+- fix(reference): keep the reference tables readable (three columns, wrapping code in cells).
+- feat(reference): redesign the type and namespace pages after the yiiframework.com layout (badge, breadcrumb, summary tables, member cards).
+- feat: lean `llms.txt` with token sizes, absolute URLs, 60-character descriptions and bundles per topic and API namespace (30k tokens max).
+- feat: readable site theme: Atkinson Hyperlegible fonts, 17px text, 56rem column, 15rem "On this page" panel, soft dark and light palettes.
+- ci: replace Super Linter with the `yii2-framework/actions` quality and security reusable workflows and their configs.
+- ci: harden the workflows for zizmor: actions pinned by commit, job-level permissions with comments, no credential persistence.
+- feat(demos): render each package's `docs/examples.md` with a Yii app into static demo pages (`tools/bin/demos`, run by `prebuild`).
+- feat: show live widget demos with Preview, PHP and HTML tabs on the extension example pages (`<docs-demo>` iframes).
+- feat(demos): fail the build when an example snippet fails (`tools/bin/demos --strict` in `prebuild`); all 64 bootstrap6 examples render.
+- feat(demos): `--strict` also fails on skipped snippets, so every example of a package with demos must render.
+- feat: sync the `template` guides; `status: "template"` links "Use this template" instead of Packagist on the landing page.
+- docs: drop the stale `composer sync-metadata` section from the development page (the script no longer exists).
+- fix: drop the template's removed `development` guide from `packages.json`; the sync warns about `order` pages that do not exist.
+- feat(demos): render the FilePond examples as live demos; `filepond`, its plugins and `cropperjs` are exact devDependencies.
+- docs(eval): add a weekly cadence: report only for three runs, then a gate of 7 of 8 tasks and no task failing twice in a row.
+- docs(skills): add install instructions (`npx skills add yii2-framework/docs`) to README, `AGENTS.md`, the AI agents page and `skills/README.md`.
+- fix(skills): the framework skill points to the `index.md` Markdown URLs instead of a `.md` suffix.
+- docs: align the Yii 22.0 application setup, Composer autoloading, and skill checks with the basic template.
+- feat: add a useful landing page and Yii2, Extensions, and AI navigation while preserving page URLs and topic bundle names.
+- docs: clarify skill installation, focused reading, and documented versus tested support for five coding agents.
+- fix(eval): accept the double-quoted check names used by the evaluation tasks.
+- feat: keep the landing page behind the logo and start all sidebar groups closed on each page load.
+- fix: keep sidebar groups closed on the index and open the active page's groups on interior pages.
+- docs: add an agent quick start, client verification matrix, focused reading, and bulk-export limits.
+- test(eval): persist the deterministic form, validation, and ActiveRecord application flow.
+- fix(docs): distinguish direct and transaction-wrapped migration methods, type contracts, and reversibility checks.
+- feat(eval): add a no-skill baseline with deterministic dry-run coverage.
+- feat(eval): add an offline Bootstrap 6 documentation-read task and fixture.
+- feat(eval): add a versioned Bootstrap 6 toast migration task with legacy, helper-equivalence, static-analysis, and registered-script checks.
+- fix(skills): document Bootstrap 6 module helpers as instance methods returned by asset registration.
+- docs: add Development tools > Docker with package-owned guides and a portable environment skill, separate from Composer extensions.
+- test(sync): cover non-Composer guide imports and unchanged skill distribution.
+- fix(reference): bind virtual property tags to Yii accessors, preserve declared fields, and remove only warnings disproved by restored source descriptions.
+- docs: replace contributor template placeholders with real source ownership, setup and validation workflows.
+- docs: integrate PHPStan and Inertia package guides, API sources and canonical skills into navigation and discovery.
+- docs(skills): consolidate installation and workflow selection in the AI guide and link ownership summaries to it.
+- fix(reference): resolve verified external contracts, builtins and private source members, and count inherited diagnostics at their defining declaration.
+- chore(format): align JavaScript and Astro Prettier indentation with EditorConfig.
+- test(reference): register zero-tolerance gates for Debug, PHPStan and Inertia after resolving their diagnostics.
+- docs(skills): integrate the package-owned LocaleURLs workflow and agent guide.
+- docs: record Bootstrap6 0.1.0 availability on Packagist and distinguish package publication from documentation deployment.
+- chore: exclude private maintainer resources from repository and documentation exports.
+- docs(skills): resolve documentation against the installed package reference and preserve local fallbacks.
+- fix(skills): follow live checkout state and Composer-selected references when resolving documentation.
+- fix(skills): scope Yii application guidance to the requested change and verify
+  actual validation, routing, query and migration behavior.
+- docs: correct contributor source ownership and setup, repair the skill installation link, and keep local agent maintenance notes private.
+- fix(docs): repair English guide links and align external Debug API source links with the verified dependency revisions.
+- fix(markdown): resolve local images to emitted assets so extension Markdown pages retain working illustrations.
+- fix(docs): repair translated guide destinations and anchors, and preserve standalone HTML paths in link checks.
+- feat(portal): add an independent PHP ecosystem home, project navigation, evidence-based package catalog and moderated community proposals while preserving Markdown documentation and agent resources.
+- fix(reference): retain setter parameter types keyed by name and prefer getter metadata for synthesized virtual properties.

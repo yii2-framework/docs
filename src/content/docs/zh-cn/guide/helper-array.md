@@ -1,5 +1,6 @@
 ---
 title: "数组助手类（ArrayHelper）"
+description: "除了 PHP 中丰富的数组函数集， Yii 数组助手类提供了额外的静态方法，让你更高效地处理数组。"
 ---
 
 除了 [PHP 中丰富的数组函数集](https://www.php.net/manual/zh/book.array.php)，

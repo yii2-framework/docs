@@ -1,5 +1,6 @@
 ---
 title: "Das umfassende Handbuch für Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Dieses Tutorial wurde unter den [Bedingungen der Yii-Dokumentation](https://www.yiiframework.com/doc/terms/) veröffentlicht.
@@ -45,7 +46,7 @@ Alle Rechte vorbehalten.
 - **TBD** [Requests](runtime-requests.md)
 - **TBD** [Responses](runtime-responses.md)
 - **TBD** [Sessions and Cookies](runtime-sessions-cookies.md)
-- [Parsen und Generieren von URLs](runtime-url-handling.md)
+- [Parsen und Generieren von URLs](runtime-routing.md)
 - [Fehlerbehandlung](runtime-handling-errors.md)
 - [Logging](runtime-logging.md)
 
@@ -67,10 +68,10 @@ Alle Rechte vorbehalten.
 - [Query Builder](db-query-builder.md) - Querying the database using a simple abstraction layer
 - [Active Record](db-active-record.md) - The active record ORM, retrieving and manipulating records and defining relations
 - [Migrations](db-migrations.md) - Version control your databases in a team development environment
-- **TBD** [Sphinx](db-sphinx.md)
-- **TBD** [Redis](db-redis.md)
-- **TBD** [MongoDB](db-mongodb.md)
-- **TBD** [ElasticSearch](db-elastic-search.md)
+- **TBD** [Sphinx](https://www.yiiframework.com/extension/yiisoft/yii2-sphinx/doc/guide)
+- **TBD** [Redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/guide)
+- **TBD** [MongoDB](https://www.yiiframework.com/extension/yiisoft/yii2-mongodb/doc/guide)
+- **TBD** [ElasticSearch](https://www.yiiframework.com/extension/yiisoft/yii2-elasticsearch/doc/guide)
 
 ## Eingabedaten verarbeiten
 
@@ -93,7 +94,7 @@ Alle Rechte vorbehalten.
 - [Authentication](security-authentication.md)
 - [Authorization](security-authorization.md)
 - [Working with Passwords](security-passwords.md)
-- **TBD** [Auth Clients](security-auth-clients.md)
+- **TBD** [Auth Clients](https://www.yiiframework.com/extension/yiisoft/yii2-authclient/doc/guide)
 - **TBD** [Best Practices](security-best-practices.md)
 
 ## Caching
@@ -118,9 +119,9 @@ Alle Rechte vorbehalten.
 
 ## Development Tools
 
-- [Debug Toolbar and Debugger](tool-debugger.md)
-- [Generating Code using Gii](tool-gii.md)
-- **TBD** [Generating API Documentation](tool-api-doc.md)
+- [Debug Toolbar and Debugger](../../extensions/debug/index.md)
+- [Generating Code using Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide)
+- **TBD** [Generating API Documentation](https://www.yiiframework.com/extension/yiisoft/yii2-apidoc)
 
 ## Testing
 
@@ -132,16 +133,16 @@ Alle Rechte vorbehalten.
 
 ## Yii erweitern
 
-- [Creating Extensions](extend-creating-extensions.md)
-- [Customizing Core Code](extend-customizing-core.md)
-- [Using 3rd-Party Libraries](extend-using-libs.md)
-- **TBD** [Using Yii in 3rd-Party Systems](extend-embedding-in-others.md)
-- **TBD** [Using Yii 1.1 and 2.0 Together](extend-using-v1-v2.md)
-- [Using Composer](extend-using-composer.md)
+- [Creating Extensions](structure-extensions.md#creating-extensions)
+- [Customizing Core Code](concept-di-container.md#practical-usage)
+- [Using 3rd-Party Libraries](tutorial-yii-integration.md#using-libs-in-yii)
+- **TBD** [Using Yii in 3rd-Party Systems](tutorial-yii-integration.md#using-yii-in-others)
+- **TBD** [Using Yii 1.1 and 2.0 Together](tutorial-yii-integration.md#using-both-yii2-yii1)
+- [Using Composer](tutorial-yii-integration.md#using-composer-packages)
 
 ## Weitere Themen
 
-- [Advanced Application Template](tutorial-advanced-app.md)
+- [Advanced Application Template](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)
 - [Building Application from Scratch](tutorial-start-from-scratch.md)
 - [Console Commands](tutorial-console.md)
 - [Core Validators](tutorial-core-validators.md)
@@ -161,8 +162,8 @@ Alle Rechte vorbehalten.
 - Menu: link to demo page
 - LinkPager: link to demo page
 - LinkSorter: link to demo page
-- [Bootstrap Widgets](bootstrap-widgets.md)
-- [Jquery UI Widgets](jui-widgets.md)
+- [Bootstrap Widgets](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap/doc/guide)
+- [Jquery UI Widgets](https://www.yiiframework.com/extension/yiisoft/yii2-jui/doc/guide)
 
 ## Helfer-Klassen
 
@@ -170,4 +171,4 @@ Alle Rechte vorbehalten.
 - **TBD** [ArrayHelper](helper-array.md)
 - **TBD** [Html](helper-html.md)
 - **TBD** [Url](helper-url.md)
-- **TBD** [Security](helper-security.md)
+- **TBD** [Security](security-cryptography.md)

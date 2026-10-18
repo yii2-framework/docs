@@ -1,5 +1,6 @@
 ---
 title: "セッションとクッキー"
+description: "セッションとクッキーは、データが複数回のユーザ・リクエストにまたがって持続することを可能にします。 素の PHP では、それぞれ、グローバル変数 $_SESSION と $_COOKIE によってアクセスすることが出来ます。"
 ---
 
 セッションとクッキーは、データが複数回のユーザ・リクエストにまたがって持続することを可能にします。
@@ -393,7 +394,7 @@ Yii 2.0.21 以降、[[yii\web\Cookie::sameSite]] 設定がサポートされて�
 ```
 
 > Note: 今はまだ `sameSite` 設定をサポートしていないブラウザもありますので、
-> [追加の CSRF 保護](security-best-practices.md#avoiding-csrf) を行うことを強く推奨します。
+> [追加の CSRF 保護](../../guide/security-best-practices.md#avoiding-csrf) を行うことを強く推奨します。
 
 ## セッションに関する php.ini の設定
 

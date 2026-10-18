@@ -1,5 +1,6 @@
 ---
 title: "Полное руководство по Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Данное руководство выпущено в соответствии с [положениями о документации Yii](https://www.yiiframework.com/doc/terms/).

@@ -1,5 +1,6 @@
 ---
 title: "模型"
+description: "模型是 MVC 模式中的一部分， 是代表业务数据、规则和逻辑的对象。"
 ---
 
 模型是 [MVC](https://zh.wikipedia.org/wiki/MVC) 模式中的一部分，
@@ -513,7 +514,7 @@ public function fields()
   通过继承对应的模型基类来定义具体的模型类，
   具体模型类包含应用主体或模块指定的规则和逻辑。
 
-例如，在[高级应用模板](tutorial-advanced-app.md)，
+例如，在[高级应用模板](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)，
 你可以定义一个模型基类`common\models\Post`，
 然后在前台应用中，定义并使用一个继承`common\models\Post`的具体模型类`frontend\models\Post`，
 在后台应用中可以类似地定义`backend\models\Post`。

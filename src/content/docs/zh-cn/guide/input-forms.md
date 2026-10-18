@@ -1,5 +1,6 @@
 ---
 title: "创建表单"
+description: "在yii中使用表单的主要方式是通过 ActiveForm。 当某个表单是基于一个模型时，应该首选这种方式。 此外，在 Html 中有很多实用的方法为表单添加按钮和帮助文档。"
 ---
 
 ## 基于活动记录（ActiveRecord）的表单：ActiveForm

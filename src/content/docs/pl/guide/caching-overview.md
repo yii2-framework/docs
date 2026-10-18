@@ -1,5 +1,6 @@
 ---
 title: "Pamięć podręczna"
+description: "Mechanizmy wykorzystujące pamięć podręczną pozwalają na poprawienie wydajności aplikacji sieciowej w tani i efektywny sposób."
 ---
 
 Mechanizmy wykorzystujące pamięć podręczną pozwalają na poprawienie wydajności aplikacji sieciowej w tani i efektywny sposób.

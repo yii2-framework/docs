@@ -1,5 +1,6 @@
 ---
 title: "Behaviors"
+description: "Behaviors are instances of Behavior, or of a child class."
 ---
 
 Behaviors are instances of [[yii\base\Behavior]], or of a child class. Behaviors, also known

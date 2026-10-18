@@ -1,5 +1,6 @@
 ---
 title: "Yii 2.0 決定版ガイド"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 このチュートリアルは [Yii ドキュメント許諾条件](https://www.yiiframework.com/doc/terms/) の下にリリースされています。

@@ -1,5 +1,6 @@
 ---
 title: "Caché de Fragmentos"
+description: "La Caché de Fragmentos se refiere al almacenamiento en caché de un fragmento, o sección, de una página Web."
 ---
 
 La Caché de Fragmentos se refiere al almacenamiento en caché de un fragmento, o sección, de una página Web. Por ejemplo, si

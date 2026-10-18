@@ -1,5 +1,6 @@
 ---
 title: "Configurações"
+description: "As configurações são amplamente utilizadas em Yii na criação de novos objetos ou inicializando objetos existentes."
 ---
 
 As configurações são amplamente utilizadas em Yii na criação de novos objetos ou inicializando objetos existentes.
@@ -218,7 +219,7 @@ você pode definir `YII_ENV` como um dos seguintes valores:
 - `dev`: ambiente de desenvolvimento. A constante `YII_ENV_DEV` será avaliada como verdadeira.
 - `test`: ambiente de teste. A constante `YII_ENV_TEST` será avaliada como verdadeira.
 
-Com estas constantes de ambientes, você pode especificar suas configurações de acordo com o ambiente atual. Por exemplo, sua configuração da aplicação pode conter o seguinte código para habilitar a [barra de ferramentas de depuração e depurador](tool-debugger.md) no ambiente de desenvolvimento.
+Com estas constantes de ambientes, você pode especificar suas configurações de acordo com o ambiente atual. Por exemplo, sua configuração da aplicação pode conter o seguinte código para habilitar a [barra de ferramentas de depuração e depurador](../../extensions/debug/index.md) no ambiente de desenvolvimento.
 
 ```php
 $config = [...];

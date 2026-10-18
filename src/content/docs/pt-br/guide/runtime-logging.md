@@ -1,5 +1,6 @@
 ---
 title: "Log"
+description: "O Yii fornece um poderoso framework de log que é altamente personalizável e extensível."
 ---
 
 O Yii fornece um poderoso framework de log que é altamente personalizável e extensível. Utilizando este framework, você pode facilmente gerar logs de vários tipos de mensagens, filtrá-las, e salva-las em diferentes meios, tais como arquivos, banco de dados, e-mails.
@@ -8,7 +9,7 @@ Usar o Yii framework Log envolve os seguintes passos:
 
 - Registrar [mensagens de log](#log-messages) de vários lugares do seu código;
 - Configurar o [destino de log](#log-targets) na configuração da aplicação para filtrar e exportar mensagens de log;
-- Examinar as mensagens de erro exportadas (ex.: [Yii debugger](tool-debugger.md)).
+- Examinar as mensagens de erro exportadas (ex.: [Yii debugger](../../extensions/debug/index.md)).
 
 Nesta seção, vamos descrever principalmente os dois primeiros passos.
 
@@ -298,4 +299,4 @@ onde `myBenchmark` representa um token único de identificação de um bloco de 
 
 Se você esquecer `\Yii::endProfile('block1')` ou trocar a ordem de `\Yii::endProfile('block1')` e `\Yii::endProfile('block2')`, o perfil de desempenho não funcionará.
 
-Para cada bloco de código iniciado com `beginProfile`, uma mensagem de log com o nível `profile` é registrada. Você pode configurar um [destino de log](#log-targets) para coletar tais mensagens e exportá-las. O [Yii debugger](tool-debugger.md) implementa um painel de perfil de desempenho mostrando os seus resultados.
+Para cada bloco de código iniciado com `beginProfile`, uma mensagem de log com o nível `profile` é registrada. Você pode configurar um [destino de log](#log-targets) para coletar tais mensagens e exportá-las. O [Yii debugger](../../extensions/debug/index.md) implementa um painel de perfil de desempenho mostrando os seus resultados.

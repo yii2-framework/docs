@@ -1,5 +1,6 @@
 ---
 title: "Chargement de fichiers sur le serveur"
+description: "Le chargement de fichiers sur le serveur dans Yii est ordinairement effectué avec l'aide de UploadedFile qui encapsule chaque fichier chargé dans un objet..."
 ---
 
 Le chargement de fichiers sur le serveur dans Yii est ordinairement effectué avec l'aide de [[yii\web\UploadedFile]] qui encapsule chaque fichier chargé dans un objet `UploadedFile`. Combiné avec les [[yii\widgets\ActiveForm]] et les [modèles](structure-models.md), vous pouvez aisément mettre en œuvre un mécanisme sûr de chargement de fichiers sur le serveur.

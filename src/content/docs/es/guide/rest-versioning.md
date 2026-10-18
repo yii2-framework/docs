@@ -1,5 +1,6 @@
 ---
 title: "Versionado"
+description: "Una buena API ha de ser versionada: los cambios y las nuevas características son implementadas en las nuevas versiones del API, en vez de estar..."
 ---
 
 Una buena API ha de ser _versionada_: los cambios y las nuevas características son implementadas en las nuevas versiones del API, en vez de estar continuamente modificando sólo una versión. Al contrario que en las aplicaciones Web, en las cuales tienes total control del código de ambas partes lado del cliente y lado del servidor,

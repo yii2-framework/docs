@@ -1,5 +1,6 @@
 ---
 title: "A"
+description: "Definitions of Yii terms used in the guide, such as alias, application, asset bundle, extension, module, namespace and vendor."
 ---
 
 ## alias

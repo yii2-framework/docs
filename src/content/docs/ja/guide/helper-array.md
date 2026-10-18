@@ -1,5 +1,6 @@
 ---
 title: "配列ヘルパ"
+description: "PHP の充実した配列関数 への追加として、 Yii の配列ヘルパは、配列をさらに効率的に扱うことを可能にするスタティックなメソッドを提供しています。"
 ---
 
 [PHP の充実した配列関数](https://www.php.net/manual/ja/book.array.php) への追加として、

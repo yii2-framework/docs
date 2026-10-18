@@ -1,9 +1,10 @@
 ---
 title: "Installer Yii"
+description: "Vous pouvez installer Yii de deux façons, en utilisant le gestionnaire de paquets Composer ou en téléchargeant une archive."
 ---
 
 Vous pouvez installer Yii de deux façons, en utilisant le gestionnaire de paquets [Composer](https://getcomposer.org/) ou en téléchargeant une archive.
-La première méthode est conseillée, étant donné qu'elle permet d'installer de nouvelles [extensions](extend-creating-extensions.md) ou de mettre Yii à jour en exécutant simplement une commande.
+La première méthode est conseillée, étant donné qu'elle permet d'installer de nouvelles [extensions](structure-extensions.md#creating-extensions) ou de mettre Yii à jour en exécutant simplement une commande.
 
 Les installations standard de Yii provoquent le téléchargement et l'installation d'un modèle de projet. Un modèle de projet et un projet Yii fonctionnel qui met en œuvre quelques fonctionnalités de base, telles que la connexion, le formulaire de contact, etc.
 Son code est organisé de la façon recommandée. En conséquence, c'est un bon point de départ pour vos propres projets.
@@ -148,7 +149,7 @@ L'application installée selon les instructions ci-dessus devrait fonctionner _o
 [HHVM](https://hhvm.com/) de Facebook. Cependant, il existe des cas marginaux pour lesquels HHVM se comporte différemment du PHP natif; c'est pourquoi vous devez faire plus attention en utilisant HHVM..
 
 Sur un serveur de production, vous pouvez configurer votre serveur Web afin que l'application soit accessible via l'URL `https://www.example.com/index.php` au lieu de `https://www.example.com/basic/web/index.php`. Cela implique que le dossier racine de votre serveur Web pointe vers le dossier `basic/web`.
-Vous pouvez également cacher `index.php` dans l'URL, comme décrit dans la partie [Génération et traitement des URL](runtime-url-handling.md), vous y apprendrez comment configurer votre serveur Apache ou Nginx pour atteindre ces objectifs.
+Vous pouvez également cacher `index.php` dans l'URL, comme décrit dans la partie [Génération et traitement des URL](runtime-routing.md), vous y apprendrez comment configurer votre serveur Apache ou Nginx pour atteindre ces objectifs.
 
 > Note: en utilisant `basic/web` comme dossier racine, vous empêchez également aux utilisateurs finaux d'accéder à votre code d'application privé et fichiers de données sensibles qui sont stockés dans le dossier `basic`. Refuser l'accès à ces ressources est une amélioration de la sécurité.
 

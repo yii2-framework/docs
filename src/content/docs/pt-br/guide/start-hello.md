@@ -1,5 +1,6 @@
 ---
 title: 'Dizendo "Olá!"'
+description: 'Esta seção descreve como criar uma nova página de "Olá!" em sua aplicação.'
 ---
 
 Esta seção descreve como criar uma nova página de "Olá!" em sua aplicação.

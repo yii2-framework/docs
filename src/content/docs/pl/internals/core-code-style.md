@@ -1,5 +1,6 @@
 ---
 title: "Styl kodowania bazowych plików frameworka Yii 2"
+description: "Poniższy styl kodowania jest stosowany w kodzie frameworka Yii 2.x i oficjalnych rozszerzeniach."
 ---
 
 Poniższy styl kodowania jest stosowany w kodzie frameworka Yii 2.x i oficjalnych rozszerzeniach. Jeśli planujesz wysłać prośbę

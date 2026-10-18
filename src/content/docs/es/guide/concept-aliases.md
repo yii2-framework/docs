@@ -1,5 +1,6 @@
 ---
 title: "Alias"
+description: "Loa alias son utilizados para representar rutas o URLs de manera que no tengas que escribir explícitamente rutas absolutas o URLs en tu proyecto."
 ---
 
 Loa alias son utilizados para representar rutas o URLs de manera que no tengas que escribir explícitamente rutas absolutas o URLs en tu

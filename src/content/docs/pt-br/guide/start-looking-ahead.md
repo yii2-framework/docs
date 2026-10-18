@@ -1,11 +1,12 @@
 ---
 title: "Seguindo em Frente"
+description: 'Se você leu toda a seção "Primeiros Passos", você criou uma aplicação Yii completa.'
 ---
 
 Se você leu toda a seção "Primeiros Passos", você criou uma aplicação Yii
 completa. No processo, você aprendeu como implementar algumas funcionalidades comumente necessárias, tais como obter dados de usuários através de um formulário
 HTML, consultar dados de um banco de dados e exibir os dados de forma paginada.
-Você também aprendeu a usar o [Gii](tool-gii.md) para gerar código automaticamente.
+Você também aprendeu a usar o [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) para gerar código automaticamente.
 Usar o Gii para a geração de código torna a carga do seu processo de desenvolvimento
 Web uma tarefa tão simples quanto preencher alguns formulários.
 

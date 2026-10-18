@@ -1,5 +1,6 @@
 ---
 title: "モジュール"
+description: "モジュールは、モデル、ビュー、コントローラ、およびその他の支援コンポーネントから構成される自己充足的なソフトウェアのユニットです。 モジュールが アプリケーション にインストールされている場合、エンド・ユーザはモジュールのコントローラにアクセスする事が出来ます。"
 ---
 
 モジュールは、[モデル](structure-models.md)、[ビュー](structure-views.md)、[コントローラ](structure-controllers.md)、およびその他の支援コンポーネントから構成される自己充足的なソフトウェアのユニットです。
@@ -99,7 +100,7 @@ class PostController extends Controller
 
 コントローラ・クラスの名前空間は、[[yii\base\Module::controllerNamespace]] プロパティを構成してカスタマイズすることが出来ます。
 いくつかのコントローラがこの名前空間の外にある場合でも、[[yii\base\Module::controllerMap]] プロパティを構成することによって、それらをアクセス可能にすることが出来ます。
-これは、[アプリケーションでのコントローラ・マップ](structure-applications.md#controller-map) の場合と同様です。
+これは、[アプリケーションでのコントローラ・マップ](structure-applications.md#controllerMap) の場合と同様です。
 
 ### モジュール内のビュー <span id="views-in-modules"></span>
 

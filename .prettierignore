@@ -1,3 +1,30 @@
-dist/
+# Build output, caches and dependencies.
 .astro/
-src/content/docs/ru/guide/tutorial-core-validators.md
+.cache/
+dist/
+node_modules/
+public/demos/
+tools/vendor/
+tools/demos/vendor/
+tools/output/
+eval/app/
+eval/out/
+
+# Generated build inputs (see .gitignore).
+src/content/docs/api/
+src/content/docs/extensions/
+src/content/docs/development-tools/
+
+# Upstream guide and internals content, in every locale, is synced and translated elsewhere and is not reformatted
+# here (the same paths are skipped by codespell in .github/linters/.codespellrc).
+src/content/docs/guide/
+src/content/docs/*/guide/
+src/content/docs/internals/
+src/content/docs/*/internals/
+
+# Vale styles are vendored as published.
+.github/styles/
+
+# Local notes and agent worktrees.
+internal/
+.claude/

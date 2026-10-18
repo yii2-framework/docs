@@ -1,5 +1,6 @@
 ---
 title: "Générer du code avec Gii"
+description: "Cette section décrit comment utiliser Gii pour générer du code qui met automatiquement en œuvre des fonctionnalités courantes de sites Web."
 ---
 
 Cette section décrit comment utiliser [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) pour générer du code qui met automatiquement en œuvre des fonctionnalités courantes de sites Web. Utiliser Gii pour auto-générer du code consiste simplement à saisir les bonnes informations en suivant les instructions affichées sur les pages Web de Gii.
@@ -114,7 +115,7 @@ Ce qui suit est la liste des fichiers générés par Gii, au cas où vous souhai
 - Modèles: `models/Country.php` et `models/CountrySearch.php`
 - Vues: `views/country/*.php`
 
-> Info: Gii est conçu pour être un outil de génération de code hautement personnalisable et extensible. L’utiliser avec sagesse peut grandement accélérer le développement de vos applications. Pour plus de détails, merci de vous référer à la section [Gii](tool-gii.md).
+> Info: Gii est conçu pour être un outil de génération de code hautement personnalisable et extensible. L’utiliser avec sagesse peut grandement accélérer le développement de vos applications. Pour plus de détails, merci de vous référer à la section [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide).
 
 ## Résumé <span id="summary"></span>
 

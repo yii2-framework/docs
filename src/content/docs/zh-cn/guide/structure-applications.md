@@ -1,5 +1,6 @@
 ---
 title: "应用主体"
+description: "应用主体是管理 Yii 应用系统整体结构和生命周期的对象。 每个 Yii 应用系统只能包含一个应用主体，应用主体在 入口脚本 中创建并能通过表达式 \\Yii::$app 全局范围内访问。"
 ---
 
 应用主体是管理 Yii 应用系统整体结构和生命周期的对象。
@@ -92,7 +93,7 @@ $config = require __DIR__ . '/../config/web.php';
 
 这个属性很实用，它允许你用数组指定启动阶段 [[yii\base\Application::bootstrap()|bootstrapping process]] 需要运行的组件。
 比如，如果你希望一个 [模块](structure-modules.md)
-自定义 [URL 规则](runtime-url-handling.md)，
+自定义 [URL 规则](runtime-routing.md)，
 你可以将模块ID加入到bootstrap数组中。
 
 属性中的每个组件需要指定以下一项:
@@ -185,7 +186,7 @@ if (YII_ENV_DEV) {
 
 #### [[yii\base\Application::components|components]] <span id="components"></span>
 
-这是最重要的属性，它允许你注册多个在其他地方使用的 [应用组件](#structure-application-components.md)。
+这是最重要的属性，它允许你注册多个在其他地方使用的 [应用组件](structure-application-components.md)。
 例如
 
 ```php

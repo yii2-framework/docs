@@ -1,5 +1,6 @@
 ---
 title: "Wsteczna kompatybilność"
+description: "Absolutnie nie łamiemy wstecznej kompatybilności w wydaniach - łatach typu 2.x.y.Z i staramy się unikać koniecznych do wprowadzenia zmian niekompatybilnych..."
 ---
 
 Absolutnie nie łamiemy wstecznej kompatybilności w wydaniach - łatach typu `2.x.y.Z` i staramy się unikać koniecznych do wprowadzenia

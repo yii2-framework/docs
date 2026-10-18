@@ -1,5 +1,6 @@
 ---
 title: "Trabajar con Scripts del Cliente"
+description: "Con el objeto View puedes registrar scripts. Hay dos métodos dedicados a esto: registerJs() para scripts en línea registerJsFile() para scripts externos."
 ---
 
 > Note: Esta sección se encuentra en desarrollo.

@@ -1,5 +1,6 @@
 ---
 title: "Core Validators"
+description: "Yii provides a set of commonly used core validators, found primarily under the yii\\validators namespace."
 ---
 
 Yii provides a set of commonly used core validators, found primarily under the `yii\validators` namespace.

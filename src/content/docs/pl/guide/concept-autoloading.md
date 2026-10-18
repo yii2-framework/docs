@@ -1,5 +1,6 @@
 ---
 title: "Autoładowanie klas"
+description: "Yii opiera się na mechanizmie automatycznego ładowania klas służącym do zlokalizowania i dołączenia wszystkich wymaganych plików klas."
 ---
 
 Yii opiera się na [mechanizmie automatycznego ładowania klas](https://www.php.net/manual/pl/language.oop5.autoload.php) służącym do

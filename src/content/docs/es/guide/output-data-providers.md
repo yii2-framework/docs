@@ -1,5 +1,6 @@
 ---
 title: "Proveedores de datos"
+description: "En las secciones sobre paginación y ordenación se describe como permitir a los usuarios finales elegir que se muestre una página de datos en particular, y..."
 ---
 
 En las secciones sobre [paginación](output-pagination.md) y [ordenación](output-sorting.md) se
@@ -358,8 +359,8 @@ class CsvDataProvider extends BaseDataProvider
 ## Filtrar proveedores de datos usando filtros de datos <span id="filtering-data-providers-using-data-filters"></span>
 
 Si bien puede construir condiciones para un proveedor de datos activo manualmente tal
-y como se describe en las secciones [Filtering Data](output-data-widgets.md#filtering-data)
-y [Separate Filter Form](output-data-widgets.md#separate-filter-form) de la guía de
+y como se describe en las secciones [Filtering Data](../../guide/output-data-widgets.md#filtering-data)
+y [Separate Filter Form](../../guide/output-data-widgets.md#separate-filter-form) de la guía de
 _widgets_ de datos, Yii tiene filtros de datos que son muy útiles si necesita
 condiciones de filtro flexibles. Los filtros de datos se pueden usar así:
 

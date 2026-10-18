@@ -1,5 +1,6 @@
 ---
 title: "Autorisation"
+description: "L'autorisation est le processus qui vérifie si un utilisateur dispose des permissions suffisantes pour faire quelque chose."
 ---
 
 L'autorisation est le processus qui vérifie si un utilisateur dispose des permissions suffisantes pour faire quelque chose. Yii fournit deux méthodes d'autorisation : le filtre de contrôle d'accès (ACF — Access Control Filter) et le contrôle d'accès basé sur les rôles (RBAC — Role-Based Access Control).

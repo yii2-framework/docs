@@ -1,5 +1,6 @@
 ---
 title: "Overview"
+description: "Each time when a Yii application handles a request, it undergoes a similar workflow."
 ---
 
 Each time when a Yii application handles a request, it undergoes a similar workflow.

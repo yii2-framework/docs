@@ -1,5 +1,6 @@
 ---
 title: "Zapewnienie jakości kodu w prośbie o połączenie"
+description: "Podczas sprawdzania czy PR może być scalony lub nie, następujące kryteria powinny być również wzięte pod uwagę."
 ---
 
 Podczas sprawdzania czy PR może być scalony lub nie, następujące kryteria powinny być również wzięte pod uwagę:

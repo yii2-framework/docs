@@ -1,5 +1,6 @@
 ---
 title: "Flujo de Trabajo de Traducción"
+description: "Yii se traduce en muchos idiomas con el fin de ser útil para desarrolladores de aplicaciones e internacionales."
 ---
 
 Yii se traduce en muchos idiomas con el fin de ser útil para desarrolladores de aplicaciones e internacionales.
@@ -23,7 +24,7 @@ Se volverán a extraer automáticamente los mensajes de mantenimiento intactos s
 
 En el archivo de traducción de cada elemento del `array` representa un mensaje (clave) y su la traducción (valor). Si el valor está vacío, el mensaje se considera como no traducido.
 Los mensajes que ya no necesiten traducción tendrán sus traducciones encerrado entre un par de marcas '@@'. El texto de los mensajes se puede utilizar con el formato de formas plurales.
-Chequea la [sección i18n de la guía](../guide-es/tutorial-i18n.md) para más detalles.
+Chequea la [sección i18n de la guía](../guide/tutorial-i18n.md) para más detalles.
 
 ## Documentación
 

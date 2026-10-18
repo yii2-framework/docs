@@ -1,5 +1,6 @@
 ---
 title: "Meilleures pratiques de sécurité"
+description: "Ci-dessous, nous passons en revue les principes de sécurité courants et décrivons comment éviter les menaces lorsque vous développez une application Yii."
 ---
 
 Ci-dessous, nous passons en revue les principes de sécurité courants et décrivons comment éviter les menaces lorsque vous développez une application Yii.

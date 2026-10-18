@@ -1,5 +1,6 @@
 ---
 title: "Vues"
+description: "Les vues font partie du modèle d'architecture MVC (Modèle Vue Contrôleur). Elles sont chargées de présenter les données à l'utilisateur final."
 ---
 
 Les vues font partie du modèle d'architecture [MVC](https://fr.wikipedia.org/wiki/Mod%C3%A8le-vue-contr%C3%B4leur) (Modèle Vue Contrôleur).

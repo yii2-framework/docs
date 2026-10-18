@@ -1,5 +1,6 @@
 ---
 title: "Filters"
+description: "Filters are objects that run before and/or after controller actions."
 ---
 
 Filters are objects that run before and/or after [controller actions](structure-controllers.md#actions). For example,

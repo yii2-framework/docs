@@ -1,5 +1,6 @@
 ---
 title: "Sessions and Cookies"
+description: "Sessions and cookies allow data to be persisted across multiple user requests."
 ---
 
 Sessions and cookies allow data to be persisted across multiple user requests. In plain PHP you may access them

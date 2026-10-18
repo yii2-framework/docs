@@ -42,3 +42,6 @@ indent_size = 2
 [LICENSE*]
 indent_style = unset
 indent_size = unset
+
+[*.sh]
+switch_case_indent = true

@@ -1,5 +1,6 @@
 ---
 title: "Working with Forms"
+description: "This section describes how to create a new page with a form for getting data from users."
 ---
 
 This section describes how to create a new page with a form for getting data from users.
@@ -18,7 +19,7 @@ Through this tutorial, you will learn how to:
 ## Creating a Model <span id="creating-model"></span>
 
 The data to be requested from the user will be represented by an `EntryForm` model class as shown below and
-saved in the file `models/EntryForm.php`. Please refer to the [Class Autoloading](concept-autoloading.md)
+saved in the file `src/models/EntryForm.php`. Please refer to the [Class Autoloading](concept-autoloading.md)
 section for more details about the class file naming convention.
 
 ```php
@@ -134,7 +135,7 @@ be rendered, wherein the HTML form will be shown, along with any validation erro
 Finally, create two view files named `entry-confirm` and `entry`. These will be rendered by the `entry` action,
 as just described.
 
-The `entry-confirm` view simply displays the name and email data. It should be stored in the file `views/site/entry-confirm.php`.
+The `entry-confirm` view simply displays the name and email data. It should be stored in the file `resources/views/site/entry-confirm.php`.
 
 ```php
 <?php
@@ -148,7 +149,7 @@ use yii\helpers\Html;
 </ul>
 ```
 
-The `entry` view displays an HTML form. It should be stored in the file `views/site/entry.php`.
+The `entry` view displays an HTML form. It should be stored in the file `resources/views/site/entry.php`.
 
 ```php
 <?php

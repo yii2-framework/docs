@@ -1,5 +1,6 @@
 ---
 title: "Trabalhando com Formulários"
+description: "Esta seção descreve como criar uma nova página com um formulário para receber dados dos usuários."
 ---
 
 Esta seção descreve como criar uma nova página com um formulário para receber

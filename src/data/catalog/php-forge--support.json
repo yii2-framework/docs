@@ -1,0 +1,32 @@
+{
+    "id": "php-forge/support",
+    "name": "Testing support",
+    "summary": "Support utilities for enhanced testing capabilities.",
+    "family": "php-forge",
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": "^8.1",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": "^8.1",
+            "evidence": "https://github.com/php-forge/support/blob/d829f7b4e1acf2ce3a46f771a79063f918081219/composer.json"
+        }
+    ],
+    "docsUrl": "https://github.com/php-forge/support/blob/d829f7b4e1acf2ce3a46f771a79063f918081219/README.md",
+    "repository": "https://github.com/php-forge/support",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/php-forge/support/blob/d829f7b4e1acf2ce3a46f771a79063f918081219/LICENSE.md",
+    "provenance": {
+        "ref": "HEAD snapshot",
+        "commit": "d829f7b4e1acf2ce3a46f771a79063f918081219",
+        "reviewedAt": "2026-10-18",
+        "url": "https://github.com/php-forge/support/blob/d829f7b4e1acf2ce3a46f771a79063f918081219/composer.json",
+        "kind": "source"
+    }
+}

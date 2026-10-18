@@ -1,5 +1,6 @@
 ---
 title: "Mise en cache HTTP"
+description: "En plus de la mise en cache côté serveur que nous avons décrite dans les sections précédentes, les applications Web peuvent aussi exploiter la mise en cache..."
 ---
 
 En plus de la mise en cache côté serveur que nous avons décrite dans les sections précédentes, les applications Web peuvent aussi exploiter la mise en cache côté client pour économiser le temps de génération et de transfert d'un contenu de page inchangé.

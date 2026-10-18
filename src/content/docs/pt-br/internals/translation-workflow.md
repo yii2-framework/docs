@@ -1,5 +1,6 @@
 ---
 title: "Como Colaborar Com a Tradução Para o Português do Brasil"
+description: "O Yii tem tradução para vários idiomas, incluindo o Português do Brasil. Existem duas áreas onde a contribuição para a tradução é muito bem-vindo."
 ---
 
 O Yii tem tradução para vários idiomas, incluindo o Português do Brasil. Existem
@@ -34,7 +35,7 @@ mensagem. Sendo que a "chave" representa o texto a ser traduzido e o "valor" a
 sua tradução. Se o "valor" estiver vazio, a mensagem é considerada como não
 traduzida. As mensagens que não precisam de tradução terão seus valores cercadas
 por um par de '@@'. Atentar para algumas mensagens que estão no formato de plural,
-para isso verifique a [seção i18n do guia](../guide-pt-BR/tutorial-i18n.md) para
+para isso verifique a [seção i18n do guia](../guide/tutorial-i18n.md) para
 mais detalhes.
 
 ## Documentação

@@ -1,5 +1,6 @@
 ---
 title: "Objetos de Acceso a Bases de Datos"
+description: "Construido sobre PDO, Yii DAO (Objetos de Acceso a Bases de Datos) proporciona una API orientada a objetos para el acceso a bases de datos relacionales."
 ---
 
 Construido sobre [PDO](https://www.php.net/manual/es/book.pdo.php), Yii DAO (Objetos de Acceso a Bases de Datos) proporciona una

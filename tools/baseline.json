@@ -1,0 +1,50 @@
+{
+    "description": "Maximum yii2-apidoc errors and warnings and unresolved PHPDoc links per package; tools/bin/reference --baseline fails when a count grows. Values are the maximum of a clone-mode and a local-mode run; update with --update-baseline.",
+    "packages": {
+        "bootstrap6": {
+            "errors": 223,
+            "warnings": 274,
+            "unresolvedLinks": 6
+        },
+        "filepond": {
+            "errors": 10,
+            "warnings": 47,
+            "unresolvedLinks": 4
+        },
+        "localeurls": {
+            "errors": 7,
+            "warnings": 3,
+            "unresolvedLinks": 2
+        },
+        "template": {
+            "errors": 0,
+            "warnings": 2,
+            "unresolvedLinks": 0
+        },
+        "yii2": {
+            "errors": 1257,
+            "warnings": 266,
+            "unresolvedLinks": 57
+        },
+        "psr-bridge": {
+            "errors": 126,
+            "warnings": 11,
+            "unresolvedLinks": 0
+        },
+        "debug": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "phpstan": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "inertia": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        }
+    }
+}

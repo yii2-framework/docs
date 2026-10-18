@@ -1,5 +1,6 @@
 ---
 title: "Uploading Files"
+description: "Uploading files in Yii is usually done with the help of UploadedFile which encapsulates each uploaded file as an UploadedFile object."
 ---
 
 Uploading files in Yii is usually done with the help of [[yii\web\UploadedFile]] which encapsulates each uploaded

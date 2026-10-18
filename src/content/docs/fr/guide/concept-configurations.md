@@ -1,5 +1,6 @@
 ---
 title: "Configurations"
+description: "Les configurations sont très largement utilisées dans Yii lors de la création d'objets ou l'initialisation d'objets existants."
 ---
 
 Les configurations sont très largement utilisées dans Yii lors de la création d'objets ou l'initialisation d'objets existants. Les configurations contiennent généralement le nom de la classe de l'objet en cours de création, et une liste de valeurs initiales qui doivent être assignées aux [propriétés](concept-properties.md) de l'objet. Elles peuvent aussi comprendre une liste de gestionnaires qui doivent être attachés aux [événements](concept-events.md) de l'objet et/ou une liste de [comportements](concept-behaviors.md) qui doivent être attachés à l'objet.
@@ -232,7 +233,7 @@ Vous pouvez assigner à `YII_ENV` une des valeurs suivantes :
 - `dev`: environnement de développement. La constante `YII_ENV_DEV` est évaluée comme étant `true` (vrai).
 - `test`: environnement de test. La constante `YII_ENV_TEST` est évaluée comme étant `true` (vrai).
 
-Avec ces constantes d'environnement, vous pouvez spécifier les configurations en fonction de l'environnement courant. Par exemple, votre configuration d'application peut contenir le code suivant pour activer la [barre de débogage et le module de débogage](tool-debugger.md) dans l'environnement de développement seulement :
+Avec ces constantes d'environnement, vous pouvez spécifier les configurations en fonction de l'environnement courant. Par exemple, votre configuration d'application peut contenir le code suivant pour activer la [barre de débogage et le module de débogage](../../extensions/debug/index.md) dans l'environnement de développement seulement :
 
 ```php
 $config = [...];

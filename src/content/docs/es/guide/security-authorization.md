@@ -1,5 +1,6 @@
 ---
 title: "Autorización"
+description: "Autorización esl el proceso de verificación de que un usuario tenga sugifientes permisos para realizar algo."
 ---
 
 Autorización esl el proceso de verificación de que un usuario tenga sugifientes permisos para realizar algo. Yii provee

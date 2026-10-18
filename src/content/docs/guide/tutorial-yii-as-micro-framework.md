@@ -1,5 +1,6 @@
 ---
 title: "Using Yii as a Micro-framework"
+description: "Yii can be easily used without the features included in basic and advanced templates. In other words, Yii is already a micro-framework."
 ---
 
 Yii can be easily used without the features included in basic and advanced templates. In other words, Yii is already a micro-framework. It is not required to have the directory structure provided by templates to work with Yii.

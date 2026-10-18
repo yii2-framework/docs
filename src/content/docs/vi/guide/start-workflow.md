@@ -1,5 +1,6 @@
 ---
 title: "Chạy ứng dụng"
+description: "Sau khi cài đặt Yii, ứng dụng Yii của bạn đã được chạy, tùy thuộc vào cấu hình bạn có thể truy cập qua URL https://hostname/basic/web/index.php hoặc..."
 ---
 
 Sau khi cài đặt Yii, ứng dụng Yii của bạn đã được chạy, tùy thuộc vào cấu hình bạn có thể truy cập qua URL `https://hostname/basic/web/index.php`
@@ -23,7 +24,7 @@ Mẫu ứng dụng _Basic Application_ bao gồm 4 trang cơ bản:
 
 Những trang trên đều có cùng phần header và footer. Phần header chứa main menu bar cho phép điều hướng giữa các trang.
 
-Ở dưới cùng của trình duyệt, bạn có thể thấy một thanh công cụ. Đây là một công cụ gỡ lỗi [debugger tool](tool-debugger.md) rất hữu ích
+Ở dưới cùng của trình duyệt, bạn có thể thấy một thanh công cụ. Đây là một công cụ gỡ lỗi [debugger tool](../../extensions/debug/index.md) rất hữu ích
 được cung cấp bởi Yii, bạn có thể ghi lại và hiển thị một lượng lớn các thông tin gỡ lỗi,
 chẳng hạn như thông tin đăng nhập, tình trạng phản ứng, các câu lệnh truy vấn cơ sở dữ liệu, và như vậy.
 

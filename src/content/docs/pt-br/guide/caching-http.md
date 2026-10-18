@@ -1,5 +1,6 @@
 ---
 title: "Cache HTTP"
+description: "Além do cache no servidor que nós descrevemos nas seções anteriores, aplicações Web pode também aproveitar-se de cache no cliente para economizar o tempo na..."
 ---
 
 Além do cache no servidor que nós descrevemos nas seções anteriores, aplicações Web pode também aproveitar-se

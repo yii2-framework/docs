@@ -1,0 +1,32 @@
+{
+    "id": "php-forge/vite",
+    "name": "Vite integration",
+    "summary": "Framework-agnostic PHP integration for Vite development servers and build manifests.",
+    "family": "php-forge",
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": ">=8.3",
+            "evidence": "https://github.com/php-forge/vite/blob/ec8ec61d5e574236ce6bf9a9085e9a7ec2351752/composer.json"
+        }
+    ],
+    "docsUrl": "https://github.com/php-forge/vite/blob/ec8ec61d5e574236ce6bf9a9085e9a7ec2351752/README.md",
+    "repository": "https://github.com/php-forge/vite",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/php-forge/vite/blob/ec8ec61d5e574236ce6bf9a9085e9a7ec2351752/composer.json",
+    "provenance": {
+        "ref": "HEAD snapshot",
+        "commit": "ec8ec61d5e574236ce6bf9a9085e9a7ec2351752",
+        "reviewedAt": "2026-10-18",
+        "url": "https://github.com/php-forge/vite/blob/ec8ec61d5e574236ce6bf9a9085e9a7ec2351752/composer.json",
+        "kind": "source"
+    }
+}

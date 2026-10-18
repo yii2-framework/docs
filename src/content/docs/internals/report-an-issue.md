@@ -1,5 +1,6 @@
 ---
 title: "Report an Issue"
+description: "Please follow the guidelines below when creating an issue so that your issue can be more promptly resolved."
 ---
 
 Please follow the guidelines below when creating an issue so that your issue can be more promptly resolved:

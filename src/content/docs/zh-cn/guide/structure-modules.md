@@ -1,5 +1,6 @@
 ---
 title: "模块"
+description: "模块是独立的软件单元，由模型，视图， 控制器和其他支持组件组成， 终端用户可以访问在应用主体中已安装的模块的控制器， 模块被当成小应用主体来看待，和应用主体不同的是， 模块不能单独部署，必须属于某个应用主体。"
 ---
 
 模块是独立的软件单元，由[模型](structure-models.md)，[视图](structure-views.md)，
@@ -99,7 +100,7 @@ class PostController extends Controller
 
 可配置 [[yii\base\Module::controllerNamespace]] 属性来自定义控制器类的命名空间，
 如果一些控制器不再该命名空间下，可配置 [[yii\base\Module::controllerMap]] 属性让它们能被访问，
-这类似于 [应用主体配置](structure-applications.md#controller-map) 所做的。
+这类似于 [应用主体配置](structure-applications.md#controllerMap) 所做的。
 
 ### 模块中的视图 <span id="views-in-modules"></span>
 

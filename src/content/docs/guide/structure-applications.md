@@ -1,5 +1,6 @@
 ---
 title: "Applications"
+description: "Applications are objects that govern the overall structure and lifecycle of Yii application systems."
 ---
 
 Applications are objects that govern the overall structure and lifecycle of Yii application systems.

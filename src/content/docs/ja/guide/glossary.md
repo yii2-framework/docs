@@ -1,5 +1,6 @@
 ---
 title: "A"
+description: "Definitions of Yii terms used in the guide, such as alias, application, asset bundle, extension, module, namespace and vendor."
 ---
 
 ## alias エイリアス
@@ -66,7 +67,7 @@ Yii の場合は、パーミッションを設定すること、および、ソ�
 
 ## package パッケージ
 
-[バンドル](#bundle) を参照。
+[バンドル](../../guide/glossary.md#bundle) を参照。
 
 # V
 

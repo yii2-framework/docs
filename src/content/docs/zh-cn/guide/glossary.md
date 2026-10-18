@@ -1,5 +1,6 @@
 ---
 title: "glossary"
+description: "Definitions of Yii terms used in the guide, such as alias, application, asset bundle, extension, module, namespace and vendor."
 ---
 
 ## 排版规范

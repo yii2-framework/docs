@@ -1,0 +1,30 @@
+---
+// Scopes the API reference styles (src/styles/custom.css, `.api-reference`) to the generated reference pages, so
+// guide pages keep Starlight's default look, and adds the <docs-demo> element (DocsDemo.astro) to the extension
+// examples pages that plugins/remark-demos.mjs fills with live demos.
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import Home from './portal/Home.astro';
+import { packages } from '../lib/catalog.mjs';
+import DocsDemo from './DocsDemo.astro';
+import { isReferenceRoute } from '../../plugins/reference-id.mjs';
+
+const { id, locale } = Astro.locals.starlightRoute;
+// Locale fallback copies of the page carry the same demos.
+const home = ['', 'index'].includes(Astro.locals.starlightRoute.entry.id);
+const featured = ['yii2-extensions/filepond', 'php-forge/vite', 'ui-awesome/html']
+  .map((id) => packages.find((pkg) => pkg.id === id)).filter(Boolean);
+const examples = /(^|\/)extensions\/[^/]+\/examples$/.test(id);
+---
+
+{
+  home ? (
+    <Home packages={featured} />
+  ) : isReferenceRoute(id, locale) ? (
+    <div class="api-reference">
+      <Default><slot /></Default>
+    </div>
+  ) : (
+    <Default><slot /></Default>
+  )
+}
+{examples && <DocsDemo />}

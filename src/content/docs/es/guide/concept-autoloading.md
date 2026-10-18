@@ -1,5 +1,6 @@
 ---
 title: "Autocarga de clases"
+description: "Yii depende del mecanismo de autocarga de clases para localizar e incluir los archivos de las clases requiridas."
 ---
 
 Yii depende del [mecanismo de autocarga de clases](https://www.php.net/manual/es/language.oop5.autoload.php) para localizar
@@ -33,7 +34,7 @@ definir un nuevo alias. Esto es porque `@app` es un [alias predefinido](concept-
 nombre de una clase tal como `app\components\MyClass` puede ser resuelto en el archivo de la clase `AppBasePath/components/MyClass.php`,
 de acuerdo con el algoritmo previamente descrito.
 
-En la [Plantilla de Aplicación Avanzada](tutorial-advanced-app.md), cada nivel tiene su propio alias. Por ejemplo, el nivel
+En la [Plantilla de Aplicación Avanzada](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide), cada nivel tiene su propio alias. Por ejemplo, el nivel
 `front-end` tiene un alias de raíz `@frontend` mientras que el nivel `back-end` tiene `@backend`. Como resultado, es posible
 poner las clases `front-end` bajo el espacio de nombres `frontend` mientras que las clases `back-end` pueden hacerlo bajo
 `backend`. Esto permitirá que estas clases sean automaticamente cargadas por el autocargador de Composer.

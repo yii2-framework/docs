@@ -1,5 +1,6 @@
 ---
 title: "Gestión de Errores"
+description: "Yii incluye un error handler que permite una gestión de errores mucho más práctica que anteriormente."
 ---
 
 Yii incluye un [[yii\web\ErrorHandler|error handler]] que permite una gestión de errores mucho más práctica que
@@ -142,7 +143,7 @@ a las siguientes variables si se define el error como un [[yii\web\ErrorAction]]
 - `exception`: el objeto de excepción a través del cual se puede obtener más información útil, tal como el código de
   estado HTTP, el código de error, la pila de llamadas del error, etc.
 
-> Info: Tanto la [plantilla de aplicación básica](start-installation.md) como la [plantilla de aplicación avanzada](tutorial-advanced-app.md),
+> Info: Tanto la [plantilla de aplicación básica](start-installation.md) como la [plantilla de aplicación avanzada](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide),
 > ya incorporan la acción de error y la vista de error.
 
 > Note: Si necesitas redireccionar en un gestor de error, hazlo de la siguiente manera:

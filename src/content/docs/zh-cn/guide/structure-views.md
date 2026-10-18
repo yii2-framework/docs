@@ -1,5 +1,6 @@
 ---
 title: "视图"
+description: "视图是 MVC 模式中的一部分。 它是展示数据到终端用户的代码，在网页应用中， 根据视图模板来创建视图，视图模板为PHP脚本文件， 主要包含HTML代码和展示类PHP代码，通过view应用组件来管理， 该组件主要提供通用方法帮助视图构造和渲染， 简单起见，我们称视图模板或视图模板文件为视图。"
 ---
 
 视图是 [MVC](https://zh.wikipedia.org/wiki/MVC) 模式中的一部分。
@@ -594,7 +595,7 @@ website made with Yii!'], 'description'); $this->registerMetaTag(['name' =>
 
 ### 注册链接标签 <span id="registering-link-tags"></span>
 
-和 [Meta标签](#adding-meta-tags) 类似，链接标签有时很实用，如自定义网站图标，指定Rss订阅，或授权OpenID到其他服务器。
+和 [Meta标签](structure-views.md#registering-meta-tags) 类似，链接标签有时很实用，如自定义网站图标，指定Rss订阅，或授权OpenID到其他服务器。
 可以和元标签相似的方式调用[[yii\web\View::registerLinkTag()]]，
 例如，在内容视图中注册链接标签如下所示：
 

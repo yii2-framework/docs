@@ -1,5 +1,6 @@
 ---
 title: "Service Locator"
+description: "A service locator is an object that knows how to provide all sorts of services (or components) that an application might need."
 ---
 
 A service locator is an object that knows how to provide all sorts of services (or components) that an application

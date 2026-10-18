@@ -1,5 +1,6 @@
 ---
 title: 'Yiini o''rnatish <span id="installing-from-composer"></span>'
+description: "Siz Yii'ni ikki usulda o'rnatishingiz mumkin: Composer - dan foydalanishingiz mumkin yoki arxivdan yuklab olib ishlatishingiz mumkin."
 ---
 
 Siz Yii'ni ikki usulda o'rnatishingiz mumkin: [Composer](https://getcomposer.org/) - dan foydalanishingiz mumkin yoki arxivdan yuklab olib ishlatishingiz mumkin. Birinchi usul afzalroq bo'ladi, chunki u yangi [kengaytmalar](structure-extensions.md) o'rnatish yoki Yii'ni bitta buyruq bilan yangilash imkonini beradi.
@@ -19,7 +20,7 @@ mv composer.phar /usr/local/bin/composer
 
 Windowsda [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe)-ni yuklab oling va ishga tushiring.
 
-Muammo bo'lsa, Composer hujjatida ["Muammo bartaraf qilish" bo'limini o'qing](<(https://getcomposer.org/doc/articles/troubleshooting.md)>). Agar siz faqat Composer dasturidan foydalanmoqchi bo'lsangiz, hech bo'lmasa ["Foydalanish asoslari"](<(https://getcomposer.org/doc/01-basic-usage.md)>) bo'limini o'qishni tavsiya etamiz.
+Muammo bo'lsa, Composer hujjatida ["Muammo bartaraf qilish" bo'limini o'qing](https://getcomposer.org/doc/articles/troubleshooting.md). Agar siz faqat Composer dasturidan foydalanmoqchi bo'lsangiz, hech bo'lmasa ["Foydalanish asoslari"](https://getcomposer.org/doc/01-basic-usage.md) bo'limini o'qishni tavsiya etamiz.
 
 Ushbu qo'llanma `composer` global tizim boyicha umumiy o'rnatilganligini ta'kidlaydi. Ya'ni, bu `composer` buyrug'i orqali mavjud. Agar local (ichki) katalogdan `composer.phar` foydalanayotgan bo'lsangiz, buyruqlar mos ravishda o'zgartiring.
 

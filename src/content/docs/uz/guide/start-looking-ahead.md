@@ -1,5 +1,6 @@
 ---
 title: "Oldinga nigoh"
+description: "Oxir oqibat siz Yii to'liq va ko'p ishlatiladigan funksiyalarini bildingiz ulardan HTML-shakl yordamida foydalanuvchidan, ma'lumotlar omboridan..."
 ---
 
 Oxir oqibat siz Yii to'liq va ko'p ishlatiladigan funksiyalarini bildingiz ulardan HTML-shakl yordamida foydalanuvchidan, ma'lumotlar omboridan ma'lumotlarni olib ularni sahifalarga bo'lib chiqarishni va yana siz [Gii](https://github.com/yiisoft/yii2-gii/blob/master/docs/guide/README.md) bilan

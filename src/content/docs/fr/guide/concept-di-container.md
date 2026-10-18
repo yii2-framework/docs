@@ -1,5 +1,6 @@
 ---
 title: "Conteneur d'injection de dépendances"
+description: "Un conteneur d'injection de dépendances (DI container) est un objet qui sait comment instancier et configurer des objets et tous leurs objets dépendants."
 ---
 
 Un conteneur d'injection de dépendances (DI container) est un objet qui sait comment instancier et configurer des objets et tous leurs objets dépendants. [Cet article de Martin Fowler](https://martinfowler.com/articles/injection.html) explique très bien en quoi un conteneur d'injection de dépendances est utile. Ici nous expliquons essentiellement l'utilisation qui est faite du conteneur d'injection de dépendances que fournit Yii.

@@ -1,5 +1,6 @@
 ---
 title: "Fournisseurs de données"
+description: "Dans les sections Pagination et Tri, nous avons décrit comment permettre à l'utilisateur de choisir une page particulière de données à afficher et de trier..."
 ---
 
 Dans les sections [Pagination](output-pagination.md) et [Tri](output-sorting.md), nous avons décrit comment permettre à l'utilisateur de choisir une page particulière de données à afficher et de trier ces données en fonction de certaines colonnes. Comme les tâches de pagination et de tri sont très courantes, Yii met à votre disposition un jeu de classes _fournisseurs de données_ pour les encapsuler.

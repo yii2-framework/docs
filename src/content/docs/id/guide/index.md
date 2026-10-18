@@ -1,5 +1,6 @@
 ---
 title: "Panduan Definitif Untuk Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Tutorial ini dirilis di bawah [Persyaratan Dokumentasi Yii](https://www.yiiframework.com/doc/terms/).

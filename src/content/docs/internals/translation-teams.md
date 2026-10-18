@@ -1,5 +1,6 @@
 ---
 title: "Translation teams"
+description: "Members of the teams that translate the Yii documentation, grouped by language."
 ---
 
 ## Brazilian Portuguese

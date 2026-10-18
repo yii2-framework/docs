@@ -1,5 +1,6 @@
 ---
 title: "Guía Definitiva de Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Este tutorial se publica bajo los [Términos de Documentación Yii](https://www.yiiframework.com/doc/terms/).
@@ -72,10 +73,10 @@ Todos los derechos reservados.
   definición de relaciones
 - **TBD** [Migraciones](db-migrations.md) - Control de versiones de bases de datos en el entorno de desarrollo en
   equipo
-- **TBD** [Sphinx](db-sphinx.md)
-- **TBD** [Redis](db-redis.md)
-- **TBD** [MongoDB](db-mongodb.md)
-- **TBD** [ElasticSearch](db-elastic-search.md)
+- **TBD** [Sphinx](https://www.yiiframework.com/extension/yiisoft/yii2-sphinx/doc/guide)
+- **TBD** [Redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/guide)
+- **TBD** [MongoDB](https://www.yiiframework.com/extension/yiisoft/yii2-mongodb/doc/guide)
+- **TBD** [ElasticSearch](https://www.yiiframework.com/extension/yiisoft/yii2-elasticsearch/doc/guide)
 
 ## Obtener datos de los usuarios
 
@@ -126,8 +127,8 @@ Todos los derechos reservados.
 ## Herramientas de Desarrollo
 
 - [Depurador y Barra de Herramientas de Depuración](https://github.com/yiisoft/yii2-debug/blob/master/docs/guide-es/README.md)
-- **TBD** [Generación de códigos con Gii](tool-gii.md)
-- **TBD** [Generación de documentación de API](tool-api-doc.md)
+- **TBD** [Generación de códigos con Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide)
+- **TBD** [Generación de documentación de API](https://www.yiiframework.com/extension/yiisoft/yii2-apidoc)
 
 ## Pruebas
 
@@ -140,7 +141,7 @@ Todos los derechos reservados.
 
 ## Temas especiales
 
-- **TBD** [Plantilla aplicación avanzada](tutorial-advanced-app.md)
+- **TBD** [Plantilla aplicación avanzada](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)
 - **TBD** [Creación de una aplicación desde cero](tutorial-start-from-scratch.md)
 - **TBD** [Comandos de consola](tutorial-console.md)
 - [Validadores del núcleo](tutorial-core-validators.md)

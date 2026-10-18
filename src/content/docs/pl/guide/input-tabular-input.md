@@ -1,5 +1,6 @@
 ---
 title: "Odczytywanie tablicowych danych wejściowych"
+description: "Czasami zachodzi potrzeba obsłużenia wielu modeli tego samego rodzaju w jednym formularzu."
 ---
 
 Czasami zachodzi potrzeba obsłużenia wielu modeli tego samego rodzaju w jednym formularzu. Dla przykładu - ustawienia, gdzie każde z nich jest przechowywane jako para klucz-wartość

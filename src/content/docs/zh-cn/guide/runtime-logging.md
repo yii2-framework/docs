@@ -1,5 +1,6 @@
 ---
 title: "日志"
+description: "Yii提供了一个强大的日志框架，这个框架具有高度的可定制性和可扩展性。使用这个框架， 你可以轻松地记录各种类型的消息，过滤它们， 并且将它们收集到不同的目标，诸如文件，数据库，邮件。"
 ---
 
 Yii提供了一个强大的日志框架，这个框架具有高度的可定制性和可扩展性。使用这个框架，
@@ -10,7 +11,7 @@ Yii提供了一个强大的日志框架，这个框架具有高度的可定制�
 
 - 在你代码里的各个地方记录 [log messages](#log-messages)；
 - 在应用配置里通过配置 [log targets](#log-targets) 来过滤和导出日志消息；
-- 检查由不同的目标导出的已过滤的日志消息（例如：[Yii debugger](tool-debugger.md)）。
+- 检查由不同的目标导出的已过滤的日志消息（例如：[Yii debugger](../../extensions/debug/index.md)）。
 
 在这部分，我们主要描述前两个步骤。
 
@@ -380,4 +381,4 @@ return [
 
 对于每个被分析的代码块，一个带有严重程度为 `profile` 的日志消息将被记录。
 你可以配置一个 [log target](#log-targets) 去收集这些
-消息，并且导出他们。[Yii debugger](tool-debugger.md) 有一个内建的性能分析面板能够展示分析结果。
+消息，并且导出他们。[Yii debugger](../../extensions/debug/index.md) 有一个内建的性能分析面板能够展示分析结果。

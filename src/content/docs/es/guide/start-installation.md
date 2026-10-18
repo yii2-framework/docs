@@ -1,5 +1,6 @@
 ---
 title: "Instalar Yii"
+description: "Puedes instalar Yii de dos maneras, utilizando el administrador de paquetes Composer o descargando un archivo comprimido."
 ---
 
 Puedes instalar Yii de dos maneras, utilizando el administrador de paquetes [Composer](https://getcomposer.org/) o descargando un archivo comprimido.
@@ -85,7 +86,7 @@ Pero también hay otras opciones de instalación disponibles:
 - Si sólo quieres instalar el núcleo del framework y entonces crear una nueva aplicación desde cero,
   puedes seguir las instrucciones explicadas en [Generando una Aplicación desde Cero](tutorial-start-from-scratch.md).
 - Si quisieras comenzar con una aplicación más avanzada, más adecuada para un entorno de desarrollo de equipo,
-  deberías considerar instalar el [Template de Aplicación Avanzada](tutorial-advanced-app.md).
+  deberías considerar instalar el [Template de Aplicación Avanzada](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide).
 
 ## Verificando las Instalación <span id="verifying-installation"></span>
 
@@ -141,7 +142,7 @@ PHP oficial, por lo que tendrás que tener cuidados extra al utilizarlo.
 En un servidor de producción, podrías querer configurar el servidor Web para que la aplicación sea accedida
 a través de la URL `https://www.example.com/index.php` en vez de `https://www.example.com/basic/web/index.php`. Tal configuración
 require apuntar el document root de tu servidor Web a la carpeta `basic/web`. También podrías
-querer ocultar `index.php` de la URL, como se describe en la sección [Parseo y Generación de URLs](runtime-url-handling.md).
+querer ocultar `index.php` de la URL, como se describe en la sección [Parseo y Generación de URLs](runtime-routing.md).
 En esta sub-sección, aprenderás a configurar tu servidor Apache o Nginx para alcanzar estos objetivos.
 
 > Info: Al definir `basic/web` como document root, también previenes que los usuarios finales accedan

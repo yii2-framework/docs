@@ -1,5 +1,6 @@
 ---
 title: "Mailing"
+description: "Yii supports composition and sending of the email messages. However, the framework core provides only the content composition functionality and basic interface."
 ---
 
 > Note: This section is under development.

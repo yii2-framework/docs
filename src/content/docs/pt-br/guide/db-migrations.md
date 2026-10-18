@@ -1,5 +1,6 @@
 ---
 title: "Migrações de Dados (Migrations)"
+description: "Durante o curso de desenvolvimento e manutenção de uma aplicação orientada a banco de dados, a estrutura de banco sendo usada evolui ao mesmo tempo em que o..."
 ---
 
 Durante o curso de desenvolvimento e manutenção de uma aplicação orientada a banco de dados, a estrutura de banco sendo usada evolui ao mesmo tempo em que o código. Por exemplo, durante o desenvolvimento de uma aplicação, a criação de uma nova tabela pode ser necessária; após ser feito o deploy da aplicação em produção, pode ser descoberto que um índice deveria ser criado para melhorar a performance de alguma query; entre outros. Como a mudança de uma estrutura de banco de dados normalmente necessita de alguma mudança no código, o Yii suporta a então chamada funcionalidade de _migração de dados_ que permite que você mantenha um registro das mudanças feitas no banco de dados em termos de _migrações de dados_ que são versionadas em conjunto com o código fonte da aplicação.
@@ -128,7 +129,7 @@ a `Schema::TYPE_STRING` para especificar que a coluna não pode ser nula.
 
 Ao realizar migrações de dados complexas, é importante assegurar que cada migração terá sucesso ou falhará
 por completo para que o banco não perca sua integridade e consistência. Para atingir este objetivo, recomenda-se que
-você encapsule suas operações de banco de dados de cada migração em uma [transação](db-dao.md#performing-transactions-).
+você encapsule suas operações de banco de dados de cada migração em uma [transação](db-dao/index.md#performing-transactions).
 
 Um jeito mais fácil de implementar uma migração transacional é colocar o seu código de migração nos métodos `safeUp()` e `safeDown()`. Estes métodos diferem de `up()` e `down()` porque eles estão implicitamente encapsulados em uma transação. Como resultado, se qualquer operação nestes métodos falhar, todas as operações anteriores sofrerão roll back
 automaticamente.

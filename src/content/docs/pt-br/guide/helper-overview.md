@@ -1,5 +1,6 @@
 ---
 title: "Helpers"
+description: "O Yii oferece muitas classes que ajudam a simplificar as tarefas comuns de codificação, como manipulação de string ou de array, geração de código HTML, e..."
 ---
 
 > Observação: Esta seção está em desenvolvimento.

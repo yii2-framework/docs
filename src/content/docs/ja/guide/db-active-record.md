@@ -1,5 +1,6 @@
 ---
 title: "アクティブ・レコード"
+description: "アクティブ・レコード は、データベースに保存されているデータにアクセスするために、 オブジェクト指向のインタフェイスを提供するものです。 アクティブ・レコード・クラスはデータベース・テーブルと関連付けられます。"
 ---
 
 [アクティブ・レコード](https://ja.wikipedia.org/wiki/Active_Record) は、データベースに保存されているデータにアクセスするために、
@@ -304,7 +305,7 @@ class Customer extends ActiveRecord
 
 > Tip: 上記は、一般にデータの変換を達成するための簡単な方法を示すためのものです。
 > 日付の値については、Yii は、[DateValidator](tutorial-core-validators.md#date) と DatePicker ウィジェットを使用するという、より良い方法を提供しています。
-> DatePicker については、[JUI ウィジェットのセクション](widget-jui#datepicker-date-input) で説明されています。
+> DatePicker については、[JUI ウィジェットのセクション](https://www.yiiframework.com/extension/yiisoft/yii2-jui/doc/guide) で説明されています。
 
 ### データを配列に取得する <span id="data-in-arrays"></span>
 

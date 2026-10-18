@@ -1,5 +1,6 @@
 ---
 title: "Travailler avec des bases de données"
+description: "Cette section décrit comment créer une nouvelle page qui affiche des données pays récupérées dans une table de base de données nommée country."
 ---
 
 Cette section décrit comment créer une nouvelle page qui affiche des données pays récupérées dans une table de base

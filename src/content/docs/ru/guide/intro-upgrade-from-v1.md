@@ -1,5 +1,6 @@
 ---
 title: "Обновление с версии 1.1"
+description: "Между версиями 1.1 и 2.0 существует много различий, так как Yii был полностью переписан для версии 2.0."
 ---
 
 Между версиями 1.1 и 2.0 существует много различий, так как Yii был полностью переписан для версии 2.0.
@@ -460,7 +461,7 @@ class MyBehavior extends Behavior
 приложения advanced.
 
 Более подробная информация представлена в разделах «[Аутентификация](security-authentication.md)»,
-«[Авторизация](security-authorization.md)» и «[Шаблон приложения advanced](tutorial-advanced-app.md)».
+«[Авторизация](security-authorization.md)» и «[Шаблон приложения advanced](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)».
 
 ## Разбор и генерация URL
 

@@ -1,5 +1,6 @@
 ---
 title: "Testowanie"
+description: "Testowanie jest istotnym elementem produkcji każdego oprogramowania. Niezależnie, czy jesteśmy tego świadomi, czy też nie, testy przeprowadzamy nieustannie."
 ---
 
 Testowanie jest istotnym elementem produkcji każdego oprogramowania. Niezależnie, czy jesteśmy tego świadomi, czy też nie, testy przeprowadzamy nieustannie.

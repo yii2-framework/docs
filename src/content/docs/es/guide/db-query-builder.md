@@ -1,5 +1,6 @@
 ---
 title: "Constructor de Consultas"
+description: "Yii proporciona una capa de acceso básico a bases de datos como se describe en la sección Objetos de Acceso a Bases de Datos."
 ---
 
 > Note: Esta sección está en desarrollo.

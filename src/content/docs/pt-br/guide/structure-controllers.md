@@ -1,5 +1,6 @@
 ---
 title: "Controllers (Controladores)"
+description: "Os controllers (controladores) fazem parte da arquitetura MVC."
 ---
 
 Os controllers (controladores) fazem parte da arquitetura [MVC](https://pt.wikipedia.org/wiki/MVC).
@@ -184,7 +185,7 @@ na [configuração da aplicação](structure-applications.md#application-configu
 ### Controller Padrão <span id="default-controller"></span>
 
 Cada aplicação tem um controller padrão que é especificado pela propriedade [[yii\base\Application::defaultRoute]].
-Quando uma requisição não especificar uma [rota](#id-da-rota), será utilizada a
+Quando uma requisição não especificar uma [rota](structure-controllers.md#routes), será utilizada a
 rota especificada pela propriedade.
 Para as [[yii\web\Application|aplicações Web]], este valor é `'site'`, enquanto
 para as [[yii\console\Application|aplicações console]] é `help`. Portanto, se uma
@@ -406,7 +407,7 @@ aplicações Web. Para aplicações console, por favor, consulte a seção
 
 Cada controller tem uma ação padrão especificado pela propriedade
 [[yii\base\Controller::defaultAction]].
-Quando uma [rota](#id-da-rota) contém apenas o ID do controller, implica que a
+Quando uma [rota](structure-controllers.md#routes) contém apenas o ID do controller, implica que a
 ação padrão do controller seja solicitada.
 
 Por padrão, a ação padrão é definida como `index`. Se quiser alterar o valor padrão,

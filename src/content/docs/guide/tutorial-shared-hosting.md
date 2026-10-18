@@ -1,5 +1,6 @@
 ---
 title: "Shared Hosting Environment"
+description: "Shared hosting environments are often quite limited about configuration and directory structure."
 ---
 
 Shared hosting environments are often quite limited about configuration and directory structure. Still in most cases you

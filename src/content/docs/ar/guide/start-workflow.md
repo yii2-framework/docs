@@ -1,5 +1,6 @@
 ---
 title: '<div dir="rtl">تشغيل التطبيقات</div>'
+description: "بعد تثبيت ال Yii، سيكون لديك تطبيق Yii جاهز للعمل عليه ويمكن الوصول إليه عبر الرابط التالي: https://hostname/basic/web/index.php أو..."
 ---
 
 <p dir="rtl">

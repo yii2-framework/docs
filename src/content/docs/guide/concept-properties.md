@@ -1,5 +1,6 @@
 ---
 title: "Properties"
+description: "In PHP, class member variables are also called properties."
 ---
 
 In PHP, class member variables are also called _properties_. These variables are part of the class definition, and are used

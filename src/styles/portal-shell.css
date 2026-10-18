@@ -1,0 +1,174 @@
+/* Global navigation belongs to the portal; documentation content keeps its existing layout. */
+.portal-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 100%;
+    min-width: 0;
+}
+.portal-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--sl-color-white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.portal-brand-symbol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 0.7rem;
+    background: var(--sl-color-gray-6);
+    font:
+        650 0.8rem var(--sl-font-mono),
+        monospace;
+    letter-spacing: -0.08em;
+}
+.portal-brand-symbol span {
+    color: var(--sl-color-accent-high);
+}
+.portal-desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+.portal-desktop-nav a,
+.portal-mobile-nav a {
+    color: var(--sl-color-gray-2);
+    font-size: 0.9rem;
+    font-weight: 550;
+    text-decoration: none;
+}
+.portal-desktop-nav a:hover,
+.portal-desktop-nav a[aria-current],
+.portal-mobile-nav a:hover {
+    color: var(--sl-color-white);
+    text-decoration: underline;
+    text-underline-offset: 0.45rem;
+}
+.portal-header-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-inline-start: auto;
+    min-width: 0;
+}
+.portal-header-tools site-search {
+    max-width: 12rem;
+}
+.portal-language {
+    display: flex;
+}
+.portal-mobile-nav {
+    display: none;
+}
+.portal-header :where(a, summary, button, select):focus-visible {
+    outline: 3px solid var(--sl-color-accent-high);
+    outline-offset: 4px;
+}
+/* The home uses the full splash width, with an understated page label before the hero. */
+main:has(.portal-home) > .content-panel:first-child {
+    padding-block-end: 0;
+}
+main:has(.portal-home) h1 {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
+}
+main:has(.portal-home) > .content-panel + .content-panel {
+    border-top: 0;
+    padding-block-start: 1.25rem;
+}
+@media (width < 80rem) {
+    .portal-desktop-nav {
+        gap: 0.85rem;
+    }
+    .portal-language {
+        display: none;
+    }
+}
+@media (width < 64rem) {
+    .portal-desktop-nav {
+        display: none;
+    }
+    .portal-mobile-nav {
+        display: block;
+    }
+    .portal-mobile-nav summary {
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .portal-mobile-nav nav {
+        position: absolute;
+        inset-inline-end: 1rem;
+        inset-block-start: calc(var(--sl-nav-height) - 0.3rem);
+        display: grid;
+        gap: 0.25rem;
+        width: min(20rem, calc(100vw - 2rem));
+        padding: 0.7rem;
+        border: 1px solid var(--sl-color-gray-4);
+        border-radius: 0.5rem;
+        background: var(--sl-color-bg);
+        box-shadow: 0 0.75rem 2rem #0003;
+    }
+    .portal-mobile-nav a {
+        padding: 0.65rem;
+    }
+}
+@media (width < 50rem) {
+    .portal-header {
+        gap: 0.7rem;
+    }
+    .portal-header-sidebar {
+        padding-inline-end: 3rem;
+    }
+    .portal-brand {
+        font-size: 1rem;
+        gap: 0.4rem;
+    }
+    .portal-brand-symbol {
+        display: none;
+    }
+    .portal-header-tools {
+        gap: 0.15rem;
+    }
+}
+@media (width < 25rem) {
+    .portal-brand {
+        white-space: normal;
+        max-width: 5.5rem;
+    }
+    .portal-header {
+        gap: 0.45rem;
+    }
+}
+@media (width < 50rem) {
+    .portal-header-tools starlight-theme-select select {
+        width: 2.5rem;
+        padding-inline: 0.5rem;
+        color: transparent;
+    }
+    .portal-header-tools starlight-theme-select .caret {
+        display: none;
+    }
+    .portal-header-tools starlight-theme-select .label-icon {
+        inset-inline-start: 0.4rem;
+    }
+}
+/* Reserve space for heading anchor links on narrow documentation pages. */
+@media (width < 50rem) {
+    .sl-markdown-content .sl-heading-wrapper > :is(h2, h3, h4, h5, h6) {
+        display: inline-block;
+        max-width: calc(100% - 1.5rem);
+        overflow-wrap: anywhere;
+    }
+}

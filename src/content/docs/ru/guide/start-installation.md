@@ -1,5 +1,6 @@
 ---
 title: 'Установка Yii <span id="installing-from-composer"></span>'
+description: "Вы можете установить Yii двумя способами: используя Composer или скачав архив."
 ---
 
 Вы можете установить Yii двумя способами: используя [Composer](https://getcomposer.org/) или скачав архив.

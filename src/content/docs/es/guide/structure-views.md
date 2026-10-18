@@ -1,5 +1,6 @@
 ---
 title: "Vistas"
+description: "Las Vistas (views) son una parte de la arquitectura MVC. Estas son el código responsable de presentar los datos al usuario final."
 ---
 
 Las Vistas (views) son una parte de la arquitectura [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador).
@@ -591,7 +592,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => 'Este sitio Web es
 
 ### Registrar Link Tags <span id="registering-link-tags"></span>
 
-Tal como los [meta tags](#adding-meta-tags), los link tags son útiles en muchos casos, como personalizar el ícono (favicon) del sitio,
+Tal como los [meta tags](structure-views.md#registering-meta-tags), los link tags son útiles en muchos casos, como personalizar el ícono (favicon) del sitio,
 apuntar a una fuente de RSS o delegar OpenID a otro servidor. Puedes trabajar con link tags, al igual que con meta tags,
 utilizando [[yii\web\View::registerLinkTag()]]. Por ejemplo, en el contenido de una vista, puedes registrar un link tag como se muestra a continuación:
 

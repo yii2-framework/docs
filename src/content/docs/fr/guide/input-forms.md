@@ -1,5 +1,6 @@
 ---
 title: "Création de formulaires"
+description: "La manière primaire d'utiliser des formulaires dans Yii de faire appel aux ActiveForm."
 ---
 
 La manière primaire d'utiliser des formulaires dans Yii de faire appel aux [[yii\widgets\ActiveForm]]. Cette approche doit être privilégiée lorsque le formulaire est basé sur un modèle. En plus, il existe quelques méthodes utiles dans [[yii\helpers\Html]] qui sont typiquement utilisées pour ajouter des boutons et des textes d'aides de toute forme.

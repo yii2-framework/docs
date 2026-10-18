@@ -1,5 +1,6 @@
 ---
 title: "Vue d'ensemble"
+description: "Les applications Yii sont organisées suivant le modèle de conception model-view-controller (MVC)."
 ---
 
 Les applications Yii sont organisées suivant le modèle de conception

@@ -1,5 +1,6 @@
 ---
 title: "Le constructeur de requêtes"
+description: "Construit sur la base des objets d'accès aux bases de données (DAO), le constructeur de requêtes vous permet de construire des requêtes SQL par programme..."
 ---
 
 Construit sur la base des [objets d'accès aux bases de données (DAO)](db-dao.md), le constructeur de requêtes vous permet de construire des requêtes SQL par programme qui sont indifférentes au système de gestion de base de données utilisé. Comparé à l'écriture d'instructions SQL brutes, l'utilisation du constructeur de requêtes vous aide à écrire du code relatif à SQL plus lisible et à générer des instructions SQL plus sûres.
@@ -221,7 +222,7 @@ En utilisant le format haché, Yii, en interne, utilise la liaison des paramètr
 Cependant, notez que Yii ne procède pas à l'échappement des noms de colonne, c'est pourquoi si vous passez un nom de variable obtenu de l'utilisateur en tant que nom de colonne sans vérification, l'application devient vulnérable à l'injection SQL.
 Afin de maintenir l'application sûre, soit n'utilisez pas de variables comme nom de colonne, soit filtrez les variables par une liste blanche.
 Dans le cas où vous avez besoin d'obtenir un nom de colonne de l'utilisateur, lisez
-l'article du guide [Filtrage des données](output-data-widgets.md#filtering-data).
+l'article du guide [Filtrage des données](../../guide/output-data-widgets.md#filtering-data).
 Ainsi l'exemple de code suivant est vulnérable :
 
 ```php
@@ -307,7 +308,7 @@ En utilisant le format opérateur, Yii, en interne, utilise la liaison des param
 Cependant, notez que Yii ne procède pas à l'échappement des noms de colonne, c'est pourquoi si vous passez un nom de variable obtenu de l'utilisateur en tant que nom de colonne sans vérification, l'application devient vulnérable à l'injection SQL.
 Afin de maintenir l'application sûre, soit n'utilisez pas de variables comme nom de colonne, soit filtrez les variables par une liste blanche.
 Dans le cas où vous avez besoin d'obtenir un nom de colonne de l'utilisateur, lisez
-l'article du guide [Filtrage des données](output-data-widgets.md#filtering-data).
+l'article du guide [Filtrage des données](../../guide/output-data-widgets.md#filtering-data).
 Ainsi l'exemple de code suivant est vulnérable :
 
 ```php

@@ -1,5 +1,6 @@
 ---
 title: "Authentification"
+description: "L'authentification est le processus qui consiste à vérifier l'identité d'un utilisateur. Elle utilise ordinairement un identifiant (p. ex."
 ---
 
 L'authentification est le processus qui consiste à vérifier l'identité d'un utilisateur. Elle utilise ordinairement un identifiant (p. ex. un nom d'utilisateur ou une adresse de courriels) et un jeton secret (p. ex. un mot de passe ou un jeton d'accès) pour juger si l'utilisateur est bien qui il prétend être. L'authentification est à la base de la fonctionnalité de connexion.

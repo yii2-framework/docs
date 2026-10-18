@@ -1,5 +1,6 @@
 ---
 title: "コンソール・アプリケーション"
+description: "ウェブ・アプリケーションを構築するための豊富な機能に加えて、Yii はコンソール・アプリケーションのためのフル装備のサポートを持っています。 コンソール・アプリケーションは、主として、ウェブ・サイトのために実行する必要のあるバックグラウンドのタスクやメンテナンスのタスクを作成するために使われるものです。"
 ---
 
 ウェブ・アプリケーションを構築するための豊富な機能に加えて、Yii はコンソール・アプリケーションのためのフル装備のサポートを持っています。
@@ -18,10 +19,10 @@ title: "コンソール・アプリケーション"
 スクリーン・ショットに表示されているように、デフォルトで利用できる一連のコマンドが Yii によって既に定義されています。
 
 - [[yii\console\controllers\AssetController|AssetController]] - JavaScript と CSS ファイルを結合して圧縮することが出来ます。
-  このコマンドについては、[アセットのセクション](structure-assets.md#using-the-asset-command) でさらに学習することが出来ます。
+  このコマンドについては、[アセットのセクション](structure-assets.md#using-asset-command) でさらに学習することが出来ます。
 - [[yii\console\controllers\CacheController|CacheController]] - アプリケーションのキャッシュをフラッシュすることが出来ます。
 - [[yii\console\controllers\FixtureController|FixtureController]] - テストのために、フィクスチャ・データのロードとアンロードを管理します。
-  このコマンドについては [テストのフィクスチャのセクション](test-fixtures.md#managing-fixtures) で詳細に説明されています。
+  このコマンドについては [テストのフィクスチャのセクション](../../guide/test-fixtures.md#managing-fixtures-with-yii-fixture) で詳細に説明されています。
 - [[yii\console\controllers\HelpController|HelpController]] - コンソール・コマンドについてのヘルプ情報を提供します。
   これがデフォルトのコマンドであり、上のスクリーン・ショットで見た出力を表示するものです。
 - [[yii\console\controllers\MessageController|MessageController]] - ソース・ファイルから翻訳すべきメッセージを抽出します。

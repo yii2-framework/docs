@@ -1,5 +1,6 @@
 ---
 title: "Componentes"
+description: "Componente é a parte principal na construção de aplicações Yii. Componentes são instâncias de Component, ou uma classe estendida."
 ---
 
 Componente é a parte principal na construção de aplicações Yii. Componentes são instâncias de [[yii\base\Component]], ou uma classe estendida. As três características principais que os componentes fornecem a outras classes são:
@@ -8,7 +9,7 @@ Componente é a parte principal na construção de aplicações Yii. Componentes
 - [Eventos](concept-events.md)
 - [Behaviors (Comportamentos)](concept-behaviors.md)
 
-Separadamente e combinadas, essas características fazem com que as classes no Yii sejam muito mais customizáveis e fáceis de usar. Por exemplo, o [[yii\jui\DatePicker|widget date picker]], um componente de interface do usuário, pode ser usado na [view (visão)](structure-view.md) para gerar um `date picker` interativo:
+Separadamente e combinadas, essas características fazem com que as classes no Yii sejam muito mais customizáveis e fáceis de usar. Por exemplo, o [[yii\jui\DatePicker|widget date picker]], um componente de interface do usuário, pode ser usado na [view (visão)](structure-views.md) para gerar um `date picker` interativo:
 
 ```php
 use yii\jui\DatePicker;

@@ -1,5 +1,6 @@
 ---
 title: "Automatizacija"
+description: "Postoje taskovi koji se rade automatski kada radite sa Yii frejmvorkom."
 ---
 
 Postoje taskovi koji se rade automatski kada radite sa Yii frejmvorkom:

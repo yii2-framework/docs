@@ -1,5 +1,6 @@
 ---
 title: "Filtros"
+description: "Los Filtros (filters) son objetos que se ejecutan antes y/o después de las acciones de controlador."
 ---
 
 Los Filtros (filters) son objetos que se ejecutan antes y/o después de las

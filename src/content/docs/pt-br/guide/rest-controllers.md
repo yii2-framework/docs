@@ -1,5 +1,6 @@
 ---
 title: "Controllers (Controladores)"
+description: "Depois de criar as classes de recursos e especificar como os dados de recursos devem ser formatados, a próxima coisa a fazer é criar ações do controller..."
 ---
 
 Depois de criar as classes de recursos e especificar como os dados de recursos devem ser formatados, a próxima coisa a fazer é criar ações do controller para expor os recursos para os usuários finais através das APIs RESTful.

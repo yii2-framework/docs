@@ -1,5 +1,6 @@
 ---
 title: "Повний посібник з Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Даний посібник випущено відповідно до [положень про документацію Yii](https://www.yiiframework.com/doc/terms/).
@@ -76,7 +77,7 @@ All Rights Reserved.
 
 - **TBD** [Створення форм](input-forms.md)
 - **TBD** [Перевірка вводу](input-validation.md)
-- **TBD** [Завантаження файлів](input-file-uploading.md)
+- **TBD** [Завантаження файлів](input-file-upload.md)
 - **TBD** [Збір табличного вводу](input-tabular-input.md)
 - **TBD** [Робота з декількома моделями](input-multiple-models.md)
 

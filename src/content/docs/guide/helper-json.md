@@ -1,5 +1,6 @@
 ---
 title: "Json Helper"
+description: "Json helper provides a set of static methods for encoding and decoding JSON."
 ---
 
 Json helper provides a set of static methods for encoding and decoding JSON.

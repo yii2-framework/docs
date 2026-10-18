@@ -1,5 +1,6 @@
 ---
 title: "Amorçage"
+description: "L'amorçage fait référence au processus de préparation de l'environnement avant qu'une application ne démarre, pour résoudre et traiter une requête d'entrée."
 ---
 
 L'amorçage fait référence au processus de préparation de l'environnement avant qu'une application ne démarre, pour résoudre et traiter une requête d'entrée. L'amorçage se fait en deux endroits : le [script d'entrée](structure-entry-scripts.md) et l'[application](structure-applications.md).

@@ -1,5 +1,6 @@
 ---
 title: "使用数据库"
+description: "本章节将介绍如何创建一个从数据表 country 中读取国家数据并显示出来的页面。 为了实现这个目标，你将会配置一个数据库连接， 创建一个活动记录类， 并且创建一个操作及一个视图。"
 ---
 
 本章节将介绍如何创建一个从数据表 `country` 中读取国家数据并显示出来的页面。
@@ -128,7 +129,7 @@ $country->save();
 ```
 
 > Info: 活动记录是面向对象、功能强大的访问和操作数据库数据的方式。你可以在[活动记录](db-active-record.md)章节了解更多信息。
-> 除此之外你还可以使用另一种更原生的被称做[数据访问对象](db-dao)的方法操作数据库数据。
+> 除此之外你还可以使用另一种更原生的被称做[数据访问对象](db-dao.md)的方法操作数据库数据。
 
 ## 创建动作 <span id="creating-action"></span>
 
@@ -248,7 +249,7 @@ https://hostname/index.php?r=country/index&page=2
 本章节中你学到了如何使用数据库。你还学到了如何取出并使用
 [[yii\data\Pagination]] 和 [[yii\widgets\LinkPager]] 显示数据。
 
-下一章中你会学到如何使用 Yii 中强大的代码生成器 [Gii](tool-gii.md)，
+下一章中你会学到如何使用 Yii 中强大的代码生成器 [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide)，
 去帮助你实现一些常用的功能需求，
 例如增查改删（CRUD）数据表中的数据。
 事实上你之前所写的代码全部都可以由 Gii 自动生成。

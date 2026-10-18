@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Generates the API reference of the documentation site (pages, reference.json, link map) with yii2-apidoc.
+ *
+ * Run from anywhere; paths are resolved against the repository root. See `tools/bin/reference --help`.
+ */
+
+use Yii2Docs\Tools\Cli\ReferenceCommand;
+
+$tools = dirname(__DIR__);
+$autoload = $tools . '/vendor/autoload.php';
+
+if (!is_file($autoload)) {
+    fwrite(STDERR, "[reference] $autoload not found; run `composer install --working-dir tools` first.\n");
+    exit(1);
+}
+
+ini_set('memory_limit', '1G');
+
+require $autoload;
+// yii2-apidoc models extend Yii base classes; the Yii class itself is not autoloaded by Composer.
+require $tools . '/vendor/yiisoft/yii2/Yii.php';
+
+exit((new ReferenceCommand(dirname($tools)))->run(array_slice($argv, 1)));

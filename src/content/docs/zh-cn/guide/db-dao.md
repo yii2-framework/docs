@@ -1,5 +1,6 @@
 ---
 title: "数据库访问对象（Database Access Objects）"
+description: "Yii 包含了一个建立在 PHP PDO 之上的数据访问层 (DAO)。DAO为不同的数据库提供了一套统一的API。 其中 ActiveRecord 提供了数据库与模型(MVC 中的 M,Model) 的交互，QueryBuilder 用于创建动态的查询语句。"
 ---
 
 Yii 包含了一个建立在 PHP PDO 之上的数据访问层 (DAO)。DAO为不同的数据库提供了一套统一的API。

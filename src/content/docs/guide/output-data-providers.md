@@ -1,5 +1,6 @@
 ---
 title: "Data Providers"
+description: "In the Pagination and Sorting sections, we have described how to allow end users to choose a particular page of data to display and sort them by some columns."
 ---
 
 In the [Pagination](output-pagination.md) and [Sorting](output-sorting.md) sections, we have described how to

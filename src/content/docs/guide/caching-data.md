@@ -1,5 +1,6 @@
 ---
 title: "Data Caching"
+description: "Data caching is about storing some PHP variables in cache and retrieving it later from cache."
 ---
 
 Data caching is about storing some PHP variables in cache and retrieving it later from cache.

@@ -1,5 +1,6 @@
 ---
 title: "Mise en cache de données"
+description: "La mise en cache de données consiste à stocker quelques variables PHP dans un cache et à les y retrouver plus tard."
 ---
 
 La mise en cache de données consiste à stocker quelques variables PHP dans un cache et à les y retrouver plus tard.

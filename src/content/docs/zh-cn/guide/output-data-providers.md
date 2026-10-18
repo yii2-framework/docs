@@ -1,5 +1,6 @@
 ---
 title: "数据提供者"
+description: "在 Pagination 和 Sorting 部分, 我们已经介绍了如何允许终端用户选择一个特定的数据页面，根据一些字段对它们进行展现与排序。 因为分页和排序数据的任务是很常见的，所以Yii提供了一组封装好的data provider类。"
 ---
 
 在 [Pagination](output-pagination.md) 和 [Sorting](output-sorting.md) 部分,
@@ -338,7 +339,7 @@ class CsvDataProvider extends BaseDataProvider
 ## 使用数据过滤器过滤数据提供者 <span id="filtering-data-providers-using-data-filters"></span>
 
 虽然您可以手动为活动数据提供构建条件，
-例如使用 [过滤数据](output-data-widgets.md#filtering-data) 和 [单独过滤表格](output-data-widgets.md#separate-filter-form) 数据小部件，
+例如使用 [过滤数据](../../guide/output-data-widgets.md#filtering-data) 和 [单独过滤表格](../../guide/output-data-widgets.md#separate-filter-form) 数据小部件，
 但如果你需要灵活的过滤条件，Yii 的数据过滤器会非常有用。
 以下是数据过滤器使用的方式：
 

@@ -1,5 +1,6 @@
 ---
 title: "Eventos"
+description: "Los eventos permiten inyectar código dentro de otro código existente en ciertos puntos de ejecución."
 ---
 
 Los eventos permiten inyectar código dentro de otro código existente en ciertos puntos de ejecución. Se pueden adjuntar

@@ -1,5 +1,6 @@
 ---
 title: "Instalacja Yii"
+description: "Yii możesz zainstalować na dwa sposoby, korzystając z Composera lub pobierając plik archiwum."
 ---
 
 Yii możesz zainstalować na dwa sposoby, korzystając z [Composera](https://getcomposer.org/) lub pobierając plik archiwum.  

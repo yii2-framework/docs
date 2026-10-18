@@ -1,0 +1,48 @@
+---
+name: tools
+
+on:
+  pull_request:
+    paths:
+      - "tools/**"
+      - ".github/workflows/tools.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tools/**"
+      - ".github/workflows/tools.yml"
+
+# PHPUnit and PHPStan only read the repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: tools-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  phpunit:
+    name: PHPUnit and PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout.
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP.
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: "8.3"
+          extensions: mbstring
+          tools: composer
+          coverage: none
+
+      - name: Install dependencies.
+        run: composer install --prefer-dist --no-interaction --no-progress --working-dir tools
+
+      - name: Run PHPUnit.
+        run: composer test --working-dir tools
+
+      - name: Run PHPStan.
+        run: composer analyse --working-dir tools -- --no-progress

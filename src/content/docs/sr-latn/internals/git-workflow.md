@@ -1,5 +1,6 @@
 ---
 title: "Git proces rada za Yii 2 saradnike"
+description: "Želite da doprinesete Yii razvoju? Divno! Kako bi povećali šanse da vaše izmene budu prihvaćene što pre, molimo da ispratite sledeće korake."
 ---
 
 Želite da doprinesete Yii razvoju? Divno! Kako bi povećali šanse da vaše izmene budu prihvaćene što pre, molimo da

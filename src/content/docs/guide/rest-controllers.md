@@ -1,5 +1,6 @@
 ---
 title: "Controllers"
+description: "After creating the resource classes and specifying how resource data should be formatted, the next thing to do is to create controller actions to expose the..."
 ---
 
 After creating the resource classes and specifying how resource data should be formatted, the next thing

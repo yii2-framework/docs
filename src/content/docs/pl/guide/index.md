@@ -1,5 +1,6 @@
 ---
 title: "Przewodnik po Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Ten poradnik udostępniony jest na [Warunkach dokumentacji Yii](https://www.yiiframework.com/doc/terms/).

@@ -1,5 +1,6 @@
 ---
 title: "Formatando Respostas"
+description: "Ao manipular uma requisição da API RESTful, a aplicação normalmente realiza as seguintes etapas que estão relacionadas com a formatação da resposta."
 ---
 
 Ao manipular uma requisição da API RESTful, a aplicação normalmente realiza as seguintes etapas que estão relacionadas com a formatação da resposta:

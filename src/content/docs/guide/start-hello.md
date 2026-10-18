@@ -1,5 +1,6 @@
 ---
 title: "Saying Hello"
+description: 'This section describes how to create a new "Hello" page in your application.'
 ---
 
 This section describes how to create a new "Hello" page in your application.
@@ -27,7 +28,7 @@ does not provide a `message` parameter, the action will display the default "Hel
 
 Actions must be declared in [controllers](structure-controllers.md). For simplicity, you may
 declare the `say` action in the existing `SiteController`. This controller is defined
-in the class file `controllers/SiteController.php`. Here is the start of the new action:
+in the class file `src/controllers/SiteController.php`. Here is the start of the new action:
 
 ```php
 <?php
@@ -80,8 +81,8 @@ use yii\helpers\Html;
 <?= Html::encode($message) ?>
 ```
 
-The `say` view should be saved in the file `views/site/say.php`. When the method [[yii\web\Controller::render()|render()]]
-is called in an action, it will look for a PHP file named as `views/ControllerID/ViewName.php`.
+The `say` view should be saved in the file `resources/views/site/say.php`. When the method [[yii\web\Controller::render()|render()]]
+is called in an action, it will look for a PHP file named as `resources/views/ControllerID/ViewName.php`.
 
 Note that in the above code, the `message` parameter is [[yii\helpers\Html::encode()|HTML-encoded]]
 before being printed. This is necessary as the parameter comes from an end user, making it vulnerable to
@@ -109,7 +110,7 @@ the default value of `"Hello"` will be used instead.
 
 > Info: The new page shares the same header and footer as other pages because the [[yii\web\Controller::render()|render()]]
 > method will automatically embed the result of the `say` view in a so-called [layout](structure-views.md#layouts) which in this
-> case is located at `views/layouts/main.php`.
+> case is located at `resources/views/layouts/main.php`.
 
 The `r` parameter in the above URL requires more explanation. It stands for [route](runtime-routing.md), an application wide unique ID
 that refers to an action. The route's format is `ControllerID/ActionID`. When the application receives

@@ -1,5 +1,6 @@
 ---
 title: "Active Record"
+description: "Active Record обеспечивает объектно-ориентированный интерфейс для доступа и манипулирования данными, хранящимися в базах данных."
 ---
 
 [Active Record](https://ru.wikipedia.org/wiki/ActiveRecord) обеспечивает объектно-ориентированный интерфейс для доступа
@@ -530,7 +531,7 @@ $customer->loadDefaultValues();
 $query->andWhere(['=', 'json', new ArrayExpression(['foo' => 'bar'])])
 ```
 
-Дополнительные сведения о системе построения выражений см. [Query Builder – добавление пользовательских условий и выражений](db-query-builder.md#adding-custom-conditions-and-expressions)
+Дополнительные сведения о системе построения выражений см. [Query Builder – добавление пользовательских условий и выражений](../../guide/db-query-builder.md#adding-custom-conditions-and-expressions)
 
 ### Обновление нескольких строк данных <span id="updating-multiple-rows"></span>
 

@@ -1,0 +1,176 @@
+[
+    {
+        "name": "yii2",
+        "title": "Yii 22.0",
+        "type": "framework",
+        "repo": "https://github.com/yiisoft/yii2",
+        "ref": "22.0",
+        "status": "published",
+        "srcDir": "framework",
+        "namespace": "yii",
+        "localPath": "../../yiisoft/yii2",
+        "packagist": "yiisoft/yii2"
+    },
+    {
+        "name": "bootstrap6",
+        "title": "Bootstrap 6",
+        "repo": "https://github.com/yii2-extensions/bootstrap6",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\bootstrap6",
+        "localPath": "../../yii2-extensions/bootstrap6",
+        "packagist": "yii2-extensions/bootstrap6",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "agents",
+            "testing"
+        ],
+        "demos": true,
+        "skillsDir": "skills"
+    },
+    {
+        "name": "filepond",
+        "title": "FilePond",
+        "repo": "https://github.com/yii2-extensions/filepond",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\filepond",
+        "localPath": "../../yii2-extensions/filepond",
+        "packagist": "yii2-extensions/filepond",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "uploads",
+            "agents",
+            "testing"
+        ],
+        "demos": true,
+        "skillsDir": "skills"
+    },
+    {
+        "name": "localeurls",
+        "title": "Locale URLs",
+        "repo": "https://github.com/yii2-extensions/localeurls",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\localeurls",
+        "localPath": "../../yii2-extensions/localeurls",
+        "packagist": "yii2-extensions/localeurls",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
+    },
+    {
+        "name": "psr-bridge",
+        "title": "PSR bridge",
+        "repo": "https://github.com/yii2-extensions/psr-bridge",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\psrbridge",
+        "localPath": "../../yii2-extensions/psr-bridge",
+        "packagist": "yii2-extensions/psr-bridge",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
+    },
+    {
+        "name": "template",
+        "title": "Extension template",
+        "repo": "https://github.com/yii2-extensions/template",
+        "ref": "main",
+        "status": "template",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii\\template",
+        "localPath": "../../yii2-extensions/template",
+        "packagist": "yii2-extensions/template",
+        "order": ["installation", "configuration", "examples", "testing"]
+    },
+    {
+        "name": "debug",
+        "title": "Debug",
+        "repo": "https://github.com/yii2-extensions/debug",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii\\debug",
+        "localPath": "../../yii2-extensions/debug",
+        "packagist": "yii2-extensions/debug",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "agents",
+            "testing",
+            "screenshots"
+        ],
+        "skillsDir": "skills"
+    },
+    {
+        "name": "phpstan",
+        "title": "PHPStan",
+        "repo": "https://github.com/yii2-extensions/phpstan",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\phpstan",
+        "localPath": "../../yii2-extensions/phpstan",
+        "packagist": "yii2-extensions/phpstan",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
+    },
+    {
+        "name": "inertia",
+        "title": "Inertia",
+        "repo": "https://github.com/yii2-extensions/inertia",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii\\inertia",
+        "localPath": "../../yii2-extensions/inertia",
+        "packagist": "yii2-extensions/inertia",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
+    }
+]

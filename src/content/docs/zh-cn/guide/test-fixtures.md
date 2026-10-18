@@ -1,5 +1,6 @@
 ---
 title: "Fixtures"
+description: "Fixtures 是测试中非常重要的一部分。他们的主要目的是建立一个固定/已知的环境状态以确保 测试可重复并且按照预期方式运行。Yii 提供一个简单可用的 Fixure 框架 允许你精确的定义你的 Fixtures 。"
 ---
 
 Fixtures 是测试中非常重要的一部分。他们的主要目的是建立一个固定/已知的环境状态以确保
@@ -234,7 +235,7 @@ return [
 
 如果我们使用 fixture 将数据加载到数据库中，那么这些行将作用到 `users` 表。 如果我们使用的是 nosql 类型的 fixtures，例如 `mongodb` fixture然后这个数据将应用于 `users` mongodb 集合。 要了解有关实现各种加载策略的信息，请参阅官方[文档](https://github.com/yiisoft/yii2/blob/master/docs/guide/test-fixtures.md)。
 
-上面的 fixture 示例是由 `yii2-faker` 扩展自动生成的，在这些[章节](#auto-generating-fixtures)中可以了解更多相关内容。
+上面的 fixture 示例是由 `yii2-faker` 扩展自动生成的，在这些[章节](../../guide/test-fixtures.md#auto-generating-fixtures)中可以了解更多相关内容。
 Fixture 类名称不应为复数。
 
 ### 加载 Fixtures

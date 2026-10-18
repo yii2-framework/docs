@@ -1,5 +1,6 @@
 ---
 title: "Cryptographie"
+description: "Dans cette section nous allons passer en revue les aspects suivants relatifs à la sécurité."
 ---
 
 Dans cette section nous allons passer en revue les aspects suivants relatifs à la sécurité :

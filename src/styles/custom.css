@@ -1,0 +1,238 @@
+/*
+ * Generated API reference (`api/...`, `extensions/<package>/reference/...`). `src/components/MarkdownContent.astro`
+ * wraps the content of those pages in `.api-reference`, so guide pages keep Starlight's defaults. The hooks
+ * (`api-crumbs`, `api-meta`, `api-badge-*`, `api-relations`, `api-summary`, `api-member`, `api-facts`, `api-flag`)
+ * are written by `tools/src/Render/TypePageRenderer.php` and `IndexPageRenderer.php`. Starlight's styles live in
+ * cascade layers, so these unlayered rules win without extra specificity.
+ */
+
+/* Tables fill the content width; long types wrap at the <wbr> added by plugins/rehype-reference-wbr.mjs. */
+.api-reference table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.api-reference :is(th, td) {
+    padding: 0.5rem 0.75rem;
+    overflow-wrap: break-word;
+}
+
+.api-reference :is(th, td):first-child {
+    padding-inline-start: 0;
+}
+
+.api-reference :is(th, td):last-child {
+    padding-inline-end: 0;
+}
+
+/* Names in the first column never wrap; modifiers after them may move to the next line. */
+.api-reference td:first-child :is(a, code),
+.api-reference .api-flag {
+    white-space: nowrap;
+}
+
+/* Code in tables, facts and lists reads as monospaced text, not as chips. */
+.api-reference :is(td, th, .api-facts, .api-relations) code {
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+
+.api-reference a:has(> code) {
+    text-decoration: none;
+}
+
+/* Breadcrumb under the page title. */
+.api-reference .api-crumbs {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+}
+
+.api-reference .api-crumbs a {
+    text-decoration: none;
+}
+
+.api-reference a:has(> code):hover {
+    text-decoration: underline;
+}
+
+.api-reference .api-crumbs a:hover {
+    text-decoration: underline;
+}
+
+/* Metadata table: kind badge and full name as the header row, labels in a narrow muted column. */
+.api-reference .api-meta th {
+    border-bottom: 1px solid var(--sl-color-gray-5);
+    padding-block: 0.25rem 0.625rem;
+    vertical-align: middle;
+}
+
+.api-reference .api-meta th:last-child code {
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-base);
+}
+
+.api-reference .api-meta td {
+    border-bottom-color: var(--sl-color-hairline);
+    padding-block: 0.375rem;
+}
+
+.api-reference .api-meta :is(th, td):first-child {
+    width: 9rem;
+}
+
+.api-reference .api-meta td:first-child {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+}
+
+/* Kind badges: Starlight's .sl-badge styles are only emitted when its Badge component is used. */
+.api-reference .api-badge {
+    --api-badge: var(--sl-color-accent);
+    --api-badge-low: var(--sl-color-accent-low);
+    --api-badge-high: var(--sl-color-accent-high);
+
+    display: inline-block;
+    border: 1px solid var(--api-badge);
+    border-radius: 0.25rem;
+    background-color: var(--api-badge-low);
+    color: var(--api-badge-high);
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    line-height: 1.6;
+    padding-inline: 0.5rem;
+    white-space: nowrap;
+}
+
+.api-reference .api-badge-interface {
+    --api-badge: var(--sl-color-green);
+    --api-badge-low: var(--sl-color-green-low);
+    --api-badge-high: var(--sl-color-green-high);
+}
+
+.api-reference .api-badge-trait {
+    --api-badge: var(--sl-color-orange);
+    --api-badge-low: var(--sl-color-orange-low);
+    --api-badge-high: var(--sl-color-orange-high);
+}
+
+.api-reference .api-badge-enum {
+    --api-badge: var(--sl-color-purple);
+    --api-badge-low: var(--sl-color-purple-low);
+    --api-badge-high: var(--sl-color-purple-high);
+}
+
+/* Modifiers after a name (static, protected, read-only, abstract): small muted words, no chip. */
+.api-reference .api-flag {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-xs);
+    font-style: italic;
+    margin-inline-start: 0.375rem;
+}
+
+/* Collapsed relation lists (subclasses, implementations, users) flow in columns. */
+.api-reference .api-relations ul {
+    columns: 16rem;
+    column-gap: 1.5rem;
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+.api-reference .api-relations li {
+    break-inside: avoid;
+    margin: 0;
+}
+
+.api-reference .api-relations summary {
+    font-weight: 600;
+}
+
+/* Summary tables: the "Defined by" column is secondary (enum cases end with their description instead). */
+.api-reference
+    .api-summary
+    table:not(:has([id^="case-"]))
+    :is(th, td):last-child {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+}
+
+.api-reference .api-summary th {
+    white-space: nowrap;
+}
+
+/* The description column keeps a readable width next to long types and definer names. */
+.api-reference .api-summary table:has([id^="case-"]) td:last-child,
+.api-reference
+    .api-summary
+    table:not(:has([id^="case-"]))
+    td:nth-last-child(2):not(:first-child) {
+    min-width: 15rem;
+}
+
+/* Member cards (property and method details). */
+.api-reference .api-member {
+    border: 1px solid var(--sl-color-gray-5);
+    border-inline-start: 3px solid var(--sl-color-accent);
+    border-radius: 0.5rem;
+    background-color: var(--sl-color-bg-nav);
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem 1.25rem;
+}
+
+.api-reference .api-member > :first-child,
+.api-reference .api-member > :first-child :is(h3, h4) {
+    margin-top: 0;
+}
+
+.api-reference .api-member h3 {
+    /* stylelint-disable-next-line custom-property-pattern -- Starlight's internal variable. */
+    font-family: var(--__sl-font-mono, monospace);
+    font-size: var(--sl-text-h4);
+}
+
+/* Labelled facts of a member: label column and content column. */
+.api-reference .api-facts {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 0.625rem 1rem;
+    align-items: baseline;
+    border-top: 1px solid var(--sl-color-gray-5);
+    padding-top: 0.875rem;
+}
+
+.api-reference .api-facts > * {
+    margin: 0;
+}
+
+.api-reference .api-facts > :nth-child(odd) {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+}
+
+.api-reference .api-facts > :nth-child(odd) strong {
+    color: inherit;
+    font-weight: 600;
+}
+
+.api-reference .api-facts ul {
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+@media (width <= 50rem) {
+    /* Narrow screens: tables scroll horizontally (Starlight's default) and facts stack. */
+    .api-reference table {
+        display: block;
+        overflow: auto;
+    }
+
+    .api-reference .api-facts {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.25rem;
+    }
+
+    .api-reference .api-facts > :nth-child(even) {
+        margin-bottom: 0.5rem;
+    }
+}

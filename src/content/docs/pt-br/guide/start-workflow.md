@@ -1,5 +1,6 @@
 ---
 title: "Executando Aplicações"
+description: "Após instalar o Yii, você tem uma aplicação Yii funcional que pode ser acessada pela URL https://hostname/basico/web/index.php ou..."
 ---
 
 Após instalar o Yii, você tem uma aplicação Yii funcional que pode ser acessada
@@ -29,7 +30,7 @@ O template básico de projetos instalado contém quatro páginas:
 Essas páginas compartilham o mesmo cabeçalho e rodapé. O cabeçalho contém uma barra de menu principal que permite a navegação entre as diferentes páginas.
 
 Você também deverá ver uma barra de ferramentas no rodapé da janela do navegador.
-Essa é uma [ferramenta de depuração](tool-debugger.md) muito útil fornecida pelo Yii para
+Essa é uma [ferramenta de depuração](../../extensions/debug/index.md) muito útil fornecida pelo Yii para
 registrar e exibir várias informações de depuração, tais como: mensagens de logs, status de respostas, as consultas de banco de dados executadas, e assim por diante.
 
 Além da aplicação Web, existe um script de console chamado `yii`, que está localizado no diretório raiz da aplicação.

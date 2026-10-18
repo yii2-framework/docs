@@ -1,5 +1,6 @@
 ---
 title: "Réponses"
+description: "Quand une application a terminé la prise en charge d'une requête, elle génère un objet response et l'envoie à l'utilisateur final."
 ---
 
 Quand une application a terminé la prise en charge d'une [requête](runtime-requests.md), elle génère un objet [[yii\web\Response|response]] et l'envoie à l'utilisateur final. L'objet `response` contient des informations telles que le code d'état HTTP, les entêtes HTTP et le corps. Le but ultime du développement d'applications Web est essentiellement du construire de tels objets `response` pour des requêtes variées.
@@ -157,7 +158,7 @@ Dans des endroits autres que les méthodes d'action, vous devez appeler la méth
 Lorsque la requête courante est une requête AJAX, l'envoi d'un entête `Location` ne provoque pas automatiquement une redirection du navigateur. Pour pallier ce problème, la méthode [[yii\web\Response::redirect()]] définit un entête `X-Redirect` avec l'URL de redirection comme valeur. Du côté client, vous pouvez écrire un code JavaScript pour lire l'entête et rediriger le navigateur sur l'URL transmise.
 
 > Info: Yii est fourni avec un fichier JavaScript `yii.js` qui fournit un jeu d'utilitaires JavaScript, y compris l'utilitaire de redirection basé sur l'entête `X-Redirect`. Par conséquent, si vous utilisez ce fichier JavaScript (en enregistrant le paquet de ressources [[yii\web\YiiAsset]] ), vous n'avez rien à écrire pour prendre en charge la redirection AJAX.
-> De l'information complémentaire sur `yii.js` est disponible à la [section Scripts client](output-client-scripts.md#yii.js).
+> De l'information complémentaire sur `yii.js` est disponible à la [section Scripts client](../../guide/output-client-scripts.md#yii.js).
 
 ## Envoi de fichiers <span id="sending-files"></span>
 

@@ -1,5 +1,6 @@
 ---
 title: "Registro de anotaciones"
+description: "Yii proporciona un poderoso framework dedicado al registro de anotaciones (logging) que es altamente personalizable y extensible."
 ---
 
 Yii proporciona un poderoso framework dedicado al registro de anotaciones (logging) que es altamente personalizable y
@@ -12,7 +13,7 @@ Usar el framework de registro de anotaciones de Yii involucra los siguientes pas
 - Configurar los [destinos de las anotaciones](#log-targets) en la configuración de la aplicación para filtrar y
   exportar los mensajes de las anotaciones;
 - Examinar los mensajes filtrados de los las anotaciones exportadas para diferentes destinos
-  (ej. [Yii debugger](tool-debugger.md)).
+  (ej. [Yii debugger](../../extensions/debug/index.md)).
 
 En esta sección, se describirán principalmente los dos primeros pasos.
 
@@ -394,5 +395,5 @@ Si nos dejamos el `\Yii::endProfile('block1')` o lo intercambiamos `\Yii::endPro
 
 Se registra un mensaje de registro con el nivel de severidad `profile` para cada bloque de código que se haya
 perfilado. Se puede configurar el [destino del registro](#log-targets) para reunir todos los mensajes y exportarlos.
-El [depurador de Yii](tool-debugger.md) incluye un panel de perfilado de rendimiento que muestra los resultados de
+El [depurador de Yii](../../extensions/debug/index.md) incluye un panel de perfilado de rendimiento que muestra los resultados de
 perfilado.

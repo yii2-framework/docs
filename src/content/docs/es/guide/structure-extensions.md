@@ -1,9 +1,10 @@
 ---
 title: "Extensiones"
+description: "Las extensiones son paquetes de software redistribuibles diseñados especialmente para ser usados en aplicaciones Yii y proporcionar características listas..."
 ---
 
 Las extensiones son paquetes de software redistribuibles diseñados especialmente para ser usados en aplicaciones Yii y
-proporcionar características listas para ser usadas. Por ejemplo, la extensión [yiisoft/yii2-debug](tool-debugger.md)
+proporcionar características listas para ser usadas. Por ejemplo, la extensión [yiisoft/yii2-debug](../../extensions/debug/index.md)
 añade una practica barra de herramientas de depuración (debug toolbar) al final de cada página de la aplicación para
 ayudar a comprender más fácilmente como se han generado las páginas. Se pueden usar extensiones para acelerar el
 proceso de desarrollo. También se puede empaquetar código propio para compartir nuestro trabajo con otra gente.

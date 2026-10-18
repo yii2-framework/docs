@@ -1,5 +1,6 @@
 ---
 title: "The Definitive Guide to Yii 2.0"
+description: "Table of contents of the guide: getting started, application structure, requests, key concepts, databases, forms, output, security, caching, REST and testing."
 ---
 
 Các hướng dẫn được phát hành theo [Các điều khoản về tài liệu Yii](https://www.yiiframework.com/doc/terms/).
@@ -84,7 +85,7 @@ Tất cả bản quyền đã được bảo hộ (All Rights Reserved).
 
 ## Hiển thị dữ liệu
 
-- [Định dạng dữ liệu (Data Formatting)](output-formatter.md)
+- [Định dạng dữ liệu (Data Formatting)](output-formatting.md)
 - [Phân trang (Pagination)](output-pagination.md)
 - [Sắp xếp (Sorting)](output-sorting.md)
 - [Cung cấp dữ liệu ra (Data Providers)](output-data-providers.md)

@@ -1,5 +1,6 @@
 ---
 title: "Widgets"
+description: "Os widgets são blocos de construção reutilizáveis usados nas views (visões) para criar e configurar complexos elementos de interface do usuário sob uma..."
 ---
 
 Os widgets são blocos de construção reutilizáveis usados nas
@@ -18,7 +19,7 @@ use yii\jui\DatePicker;
 
 Existe uma quantidade considerável de widgets empacotados no Yii, como o
 [[yii\widgets\ActiveForm|active form]], o [[yii\widgets\Menu|menu]], o
-[jQuery UI widgets](widget-jui.md), o [Twitter Bootstrap widgets](widget-bootstrap.md), etc.
+[jQuery UI widgets](https://www.yiiframework.com/extension/yiisoft/yii2-jui/doc/guide), o [Twitter Bootstrap widgets](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap/doc/guide), etc.
 A seguir, iremos introduzir os conhecimentos básicos sobre os widgets. Por favor,
 consulte a documentação de classes da API se você quiser saber mais sobre o uso de um determinado widget.
 

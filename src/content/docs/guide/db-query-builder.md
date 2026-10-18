@@ -1,5 +1,6 @@
 ---
 title: "Query Builder"
+description: "Built on top of Database Access Objects, query builder allows you to construct a SQL query in a programmatic and DBMS-agnostic way."
 ---
 
 Built on top of [Database Access Objects](db-dao.md), query builder allows you to construct a SQL query

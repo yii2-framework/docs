@@ -1,5 +1,6 @@
 ---
 title: "Bootstrapping"
+description: "Bootstrapping to proces przygotowania środowiska działania aplikacji przed jej uruchomieniem, w celu przyjęcia i przetworzenia przychodzącego żądania."
 ---
 
 Bootstrapping to proces przygotowania środowiska działania aplikacji przed jej uruchomieniem, w celu przyjęcia i przetworzenia przychodzącego żądania.

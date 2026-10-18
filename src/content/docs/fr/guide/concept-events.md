@@ -1,5 +1,6 @@
 ---
 title: "Événements"
+description: "Les événement vous permettent d'injecter du code personnalisé dans le code existant à des points précis de son exécution."
 ---
 
 Les événement vous permettent d'injecter du code personnalisé dans le code existant à des points précis de son exécution. Vous pouvez attacher du code personnalisé à un événement de façon à ce que, lorsque l'événement est déclenché, le code s'exécute automatiquement. Par exemple, un objet serveur de courriel peut déclencher un événement `messageSent` (message envoyé) quand il réussit à envoyer un message. Si vous voulez conserver une trace des messages dont l'envoi a réussi, vous pouvez simplement attacher le code de conservation de la trace à l'événement `messageSent`.

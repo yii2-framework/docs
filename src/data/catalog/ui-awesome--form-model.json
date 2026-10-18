@@ -1,0 +1,32 @@
+{
+    "id": "ui-awesome/form-model",
+    "name": "Form Model",
+    "summary": "Form metadata and validation errors for model-driven PHP forms.",
+    "family": "ui-awesome",
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": "^8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": "^8.3",
+            "evidence": "https://github.com/ui-awesome/form-model/blob/db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f/composer.json"
+        }
+    ],
+    "docsUrl": "https://github.com/ui-awesome/form-model/blob/db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f/README.md",
+    "repository": "https://github.com/ui-awesome/form-model",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/ui-awesome/form-model/blob/db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f/LICENSE",
+    "provenance": {
+        "ref": "main",
+        "commit": "db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f",
+        "reviewedAt": "2026-10-18",
+        "url": "https://github.com/ui-awesome/form-model/blob/db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f/composer.json",
+        "kind": "source"
+    }
+}

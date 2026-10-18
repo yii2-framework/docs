@@ -1,5 +1,6 @@
 ---
 title: "Caché de Páginas"
+description: "La caché de páginas se refiere a guardar el contenido de toda una página en el almacenamiento de caché del servidor."
 ---
 
 La caché de páginas se refiere a guardar el contenido de toda una página en el almacenamiento de caché del servidor.

@@ -1,5 +1,6 @@
 ---
 title: "Yii nedir?"
+description: "Yii, yüksek performanslı ve modern Web uygulamalarını hızlı geliştirmeyi sağlayan bileşen tabanlı bir PHP kütüphanesidir."
 ---
 
 Yii, yüksek performanslı ve modern Web uygulamalarını hızlı geliştirmeyi sağlayan bileşen tabanlı bir PHP kütüphanesidir. Yii kelimesinin anlamı Çince de **basit ve evrimseldir.** Ayrıca, **Yes It Is** (Evet, İşte bu) kısaltması olarak da düşünülebilir.

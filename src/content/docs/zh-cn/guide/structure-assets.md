@@ -1,5 +1,6 @@
 ---
 title: "资源"
+description: "Yii 中的资源是和 Web 页面相关的文件，可为 CSS 文件，JavaScript 文件，图片或视频等， 资源放在 Web 可访问的目录下，直接被 Web 服务器调用。"
 ---
 
 Yii 中的资源是和 Web 页面相关的文件，可为 CSS 文件，JavaScript 文件，图片或视频等，
@@ -61,13 +62,13 @@ class AppAsset extends AssetBundle
   [路径别名](concept-aliases.md) 可在此处使用；
 - [[yii\web\AssetBundle::basePath|basePath]]：指定包含资源包中资源文件并可Web访问的目录，
   当指定 [[yii\web\AssetBundle::sourcePath|sourcePath]] 属性，
-  [资源管理器](#asset-manager) 会发布包的资源到一个可 Web 访问并覆盖该属性，
+  [资源管理器](structure-assets.md#asset-publishing) 会发布包的资源到一个可 Web 访问并覆盖该属性，
   如果你的资源文件在一个 Web 可访问目录下，应设置该属性，这样就不用再发布了。
   [路径别名](concept-aliases.md) 可在此处使用。
 - [[yii\web\AssetBundle::baseUrl|baseUrl]]：指定对应到 [[yii\web\AssetBundle::basePath|basePath]] 目录的 URL，
   和 [[yii\web\AssetBundle::basePath|basePath]] 类似，
   如果你指定 [[yii\web\AssetBundle::sourcePath|sourcePath]] 属性，
-  [资源管理器](#asset-manager) 会发布这些资源并覆盖该属性，[路径别名](concept-aliases.md) 可在此处使用。
+  [资源管理器](structure-assets.md#asset-publishing) 会发布这些资源并覆盖该属性，[路径别名](concept-aliases.md) 可在此处使用。
 - [[yii\web\AssetBundle::css|css]]：列出此包中包含的 CSS 文件的数组。
   请注意，只应使用正斜杠“/”作为目录分隔符。每个文件都可以单独指定为字符串，
   也可以与属性标记及其值一起指定在数组中。

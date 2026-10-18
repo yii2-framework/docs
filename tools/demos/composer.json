@@ -1,0 +1,18 @@
+{
+    "name": "yii2-framework/docs-demos",
+    "description": "Base of the Composer projects that tools/bin/demos generates in .cache/demos/<package>/: the framework and the package are added as path repositories from their synced checkouts.",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": ">=8.3"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "php-forge/foxy": false,
+            "yiisoft/yii2-composer": false
+        },
+        "sort-packages": true
+    }
+}

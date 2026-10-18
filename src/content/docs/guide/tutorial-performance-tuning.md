@@ -1,5 +1,6 @@
 ---
 title: "Performance Tuning"
+description: "There are many factors affecting the performance of your Web application."
 ---
 
 There are many factors affecting the performance of your Web application. Some are environmental, some are related

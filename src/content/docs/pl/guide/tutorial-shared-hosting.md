@@ -1,5 +1,6 @@
 ---
 title: "Współdzielone środowisko hostujące"
+description: "Współdzielone środowiska hostujące są często ograniczone, jeśli chodzi o możliwości ich konfiguracji i struktury folderów."
 ---
 
 Współdzielone środowiska hostujące są często ograniczone, jeśli chodzi o możliwości ich konfiguracji i struktury folderów. Pomimo to, wciąż, w większości przypadków,

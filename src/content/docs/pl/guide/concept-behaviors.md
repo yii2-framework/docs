@@ -1,5 +1,6 @@
 ---
 title: "Behaviory"
+description: "Behaviory są instancjami klasy Behavior lub jej pochodnych."
 ---
 
 Behaviory są instancjami klasy [[yii\base\Behavior]] lub jej pochodnych. Behaviory, zwane także

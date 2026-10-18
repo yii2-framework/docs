@@ -1,5 +1,6 @@
 ---
 title: "Sessions et témoins de connexion"
+description: "Les sessions et les témoins de connexion permettent à des données d'être conservées à travers des requêtes multiples."
 ---
 
 Les sessions et les témoins de connexion permettent à des données d'être conservées à travers des requêtes multiples. Avec le langage PHP simple, vous pouvez y accéder via les variables globales `$_SESSION` et `$_COOKIE`, respectivement. Yii encapsule les sessions et les témoins de connexion sous forme d'objets et, par conséquent, vous permet d'y accéder d'une manière orientée objet avec des améliorations utiles.
