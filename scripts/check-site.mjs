@@ -12,16 +12,33 @@
 //
 // Usage: node scripts/check-site.mjs [--dist=dist] [--links=<prefix>,<prefix>...]
 
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-const ROOT = fileURLToPath(new URL('../', import.meta.url));
-const BASE = '/docs/';
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
+const BASE = "/docs/";
 // A start or end tag; quoted attribute values may contain `>` (expressive-code `data-code`).
 const TAG = /<\/?[a-zA-Z](?:[^>"']|"[^"]*"|'[^']*')*>/g;
-const LOCALES = ['ar', 'de', 'es', 'fa', 'fr', 'id', 'it', 'ja', 'pl', 'pt-br', 'ru', 'sr-latn', 'tr', 'uk', 'uz', 'vi',
-  'zh-cn'];
+const LOCALES = [
+  "ar",
+  "de",
+  "es",
+  "fa",
+  "fr",
+  "id",
+  "it",
+  "ja",
+  "pl",
+  "pt-br",
+  "ru",
+  "sr-latn",
+  "tr",
+  "uk",
+  "uz",
+  "vi",
+  "zh-cn",
+];
 
 /** Lists the HTML files under `dir`, as POSIX paths relative to `dir`. */
 export function htmlFiles(dir, base = dir) {
@@ -32,14 +49,20 @@ export function htmlFiles(dir, base = dir) {
       return htmlFiles(file, base);
     }
 
-    return name.endsWith('.html') ? [path.relative(base, file).split(path.sep).join('/')] : [];
+    return name.endsWith(".html")
+      ? [path.relative(base, file).split(path.sep).join("/")]
+      : [];
   });
 }
 
 /** Decodes the HTML entities used in attributes. */
 function decode(value) {
-  return value.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&amp;/g, '&');
+  return value
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
 }
 
 /**
@@ -50,7 +73,9 @@ function decode(value) {
 export function proseText(html) {
   const main = /<main\b[\s\S]*<\/main>/i.exec(html)?.[0] ?? html;
 
-  return main.replace(/<(pre|code|script|style)\b[\s\S]*?<\/\1>/gi, ' ').replace(TAG, ' ');
+  return main
+    .replace(/<(pre|code|script|style)\b[\s\S]*?<\/\1>/gi, " ")
+    .replace(TAG, " ");
 }
 
 /**
@@ -64,7 +89,7 @@ export function apiLinkStats(dist, files) {
   const unresolved = new Map();
 
   for (const file of files) {
-    const html = readFileSync(path.join(dist, file), 'utf8');
+    const html = readFileSync(path.join(dist, file), "utf8");
     const count = (proseText(html).match(/\[\[/g) ?? []).length;
 
     if (count > 0) {
@@ -72,7 +97,9 @@ export function apiLinkStats(dist, files) {
       pages.push(`${file} (${count})`);
     }
 
-    for (const match of html.matchAll(/class="api-unresolved" data-target="([^"]*)"/g)) {
+    for (const match of html.matchAll(
+      /class="api-unresolved" data-target="([^"]*)"/g,
+    )) {
       const target = decode(match[1]);
       unresolved.set(target, (unresolved.get(target) ?? 0) + 1);
     }
@@ -90,8 +117,15 @@ export function checkLinks(dist, files) {
   const ids = new Map();
   const idsOf = (file) => {
     if (!ids.has(file)) {
-      const html = readFileSync(file, 'utf8');
-      ids.set(file, new Set([...html.matchAll(/\sid="([^"]*)"/g)].map((match) => decode(match[1]))));
+      const html = readFileSync(file, "utf8");
+      ids.set(
+        file,
+        new Set(
+          [...html.matchAll(/\sid="([^"]*)"/g)].map((match) =>
+            decode(match[1]),
+          ),
+        ),
+      );
     }
 
     return ids.get(file);
@@ -100,15 +134,20 @@ export function checkLinks(dist, files) {
   const broken = [];
 
   for (const file of files) {
-    const html = readFileSync(path.join(dist, file), 'utf8');
-    const pageUrl = `${BASE}${file.replace(/index\.html$/, '').replace(/\.html$/, '/')}`;
-    const attributes = [...html.matchAll(TAG)]
-      .flatMap((tag) => [...tag[0].matchAll(/\s(?:href|src)="([^"]*)"/g)]);
+    const html = readFileSync(path.join(dist, file), "utf8");
+    const pageUrl = `${BASE}${file.replace(/index\.html$/, "")}`;
+    const attributes = [...html.matchAll(TAG)].flatMap((tag) => [
+      ...tag[0].matchAll(/\s(?:href|src)="([^"]*)"/g),
+    ]);
 
     for (const [, raw] of attributes) {
       const href = decode(raw);
 
-      if (href === '' || /^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith('//')) {
+      if (
+        href === "" ||
+        /^[a-z][a-z0-9+.-]*:/i.test(href) ||
+        href.startsWith("//")
+      ) {
         continue;
       }
 
@@ -123,10 +162,13 @@ export function checkLinks(dist, files) {
 
       let target = path.join(dist, pathname.slice(BASE.length));
 
-      if (pathname.endsWith('/')) {
-        target = path.join(target, 'index.html');
-      } else if (!existsSync(target) && existsSync(path.join(target, 'index.html'))) {
-        target = path.join(target, 'index.html');
+      if (pathname.endsWith("/")) {
+        target = path.join(target, "index.html");
+      } else if (
+        !existsSync(target) &&
+        existsSync(path.join(target, "index.html"))
+      ) {
+        target = path.join(target, "index.html");
       }
 
       if (!existsSync(target)) {
@@ -136,7 +178,11 @@ export function checkLinks(dist, files) {
 
       const fragment = decodeURIComponent(url.hash.slice(1));
 
-      if (fragment !== '' && target.endsWith('.html') && !idsOf(target).has(fragment)) {
+      if (
+        fragment !== "" &&
+        target.endsWith(".html") &&
+        !idsOf(target).has(fragment)
+      ) {
         broken.push(`${file}: ${href} (no id "${fragment}")`);
       }
     }
@@ -152,16 +198,23 @@ export function checkLinks(dist, files) {
  * @returns {{ frames: number, pages: number, assets: number, broken: string[] }}
  */
 export function checkDemos(dist, files) {
-  const exists = (url) => existsSync(path.join(dist, decodeURIComponent(new URL(url, 'http://site').pathname)
-    .slice(BASE.length)));
+  const exists = (url) =>
+    existsSync(
+      path.join(
+        dist,
+        decodeURIComponent(new URL(url, "http://site").pathname).slice(
+          BASE.length,
+        ),
+      ),
+    );
   let frames = 0;
   let assets = 0;
   const broken = [];
 
-  for (const file of files.filter((name) => !name.startsWith('demos/'))) {
-    const html = readFileSync(path.join(dist, file), 'utf8');
+  for (const file of files.filter((name) => !name.startsWith("demos/"))) {
+    const html = readFileSync(path.join(dist, file), "utf8");
 
-    if (!html.includes('<iframe')) {
+    if (!html.includes("<iframe")) {
       continue;
     }
 
@@ -178,10 +231,10 @@ export function checkDemos(dist, files) {
     }
   }
 
-  const pages = files.filter((name) => name.startsWith('demos/'));
+  const pages = files.filter((name) => name.startsWith("demos/"));
 
   for (const file of pages) {
-    const html = readFileSync(path.join(dist, file), 'utf8');
+    const html = readFileSync(path.join(dist, file), "utf8");
 
     for (const [, raw] of html.matchAll(/\s(?:src|href)="([^"]*)"/g)) {
       const url = decode(raw);
@@ -200,50 +253,86 @@ export function checkDemos(dist, files) {
 }
 
 function main(argv) {
-  const dist = path.resolve(ROOT, argv.find((arg) => arg.startsWith('--dist='))?.slice(7) ?? 'dist');
-  const prefixes = (argv.find((arg) => arg.startsWith('--links='))?.slice(8) ?? 'api/,extensions/')
-    .split(',').filter((prefix) => prefix !== '');
+  const dist = path.resolve(
+    ROOT,
+    argv.find((arg) => arg.startsWith("--dist="))?.slice(7) ?? "dist",
+  );
+  const prefixes = (
+    argv.find((arg) => arg.startsWith("--links="))?.slice(8) ??
+    "api/,extensions/"
+  )
+    .split(",")
+    .filter((prefix) => prefix !== "");
   const files = htmlFiles(dist);
-  const locale = new RegExp(`^(${LOCALES.join('|')})/`);
-  const english = apiLinkStats(dist, files.filter((file) => file.startsWith('guide/')));
-  const translated = apiLinkStats(dist, files.filter((file) => locale.test(file) && file.includes('/guide/')));
+  const locale = new RegExp(`^(${LOCALES.join("|")})/`);
+  const english = apiLinkStats(
+    dist,
+    files.filter((file) => file.startsWith("guide/")),
+  );
+  const translated = apiLinkStats(
+    dist,
+    files.filter((file) => locale.test(file) && file.includes("/guide/")),
+  );
   let failed = false;
 
-  process.stdout.write(`[check-site] literal [[ in the English guide: ${english.literal}; in translations: `
-    + `${translated.literal}.\n`);
+  process.stdout.write(
+    `[check-site] literal [[ in the English guide: ${english.literal}; in translations: ` +
+      `${translated.literal}.\n`,
+  );
 
   if (english.literal > 0) {
     failed = true;
-    process.stderr.write(`[check-site] FAIL: literal [[ left in ${english.pages.slice(0, 20).join(', ')}.\n`);
+    process.stderr.write(
+      `[check-site] FAIL: literal [[ left in ${english.pages.slice(0, 20).join(", ")}.\n`,
+    );
   }
 
-  const total = [...english.unresolved.values()].reduce((sum, count) => sum + count, 0);
-  const top = [...english.unresolved].sort((a, b) => b[1] - a[1]).slice(0, 20)
+  const total = [...english.unresolved.values()].reduce(
+    (sum, count) => sum + count,
+    0,
+  );
+  const top = [...english.unresolved]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 20)
     .map(([target, count]) => `${target} (${count})`);
 
-  process.stdout.write(`[check-site] unresolved API references in the English guide: ${total} `
-    + `(${english.unresolved.size} distinct)${top.length > 0 ? `; top: ${top.join(', ')}` : ''}.\n`);
+  process.stdout.write(
+    `[check-site] unresolved API references in the English guide: ${total} ` +
+      `(${english.unresolved.size} distinct)${top.length > 0 ? `; top: ${top.join(", ")}` : ""}.\n`,
+  );
 
-  const referencePages = files.filter((file) => prefixes.some((prefix) => file.startsWith(prefix))
-    && (prefix(file) !== 'extensions/' || /^extensions\/[^/]+\/reference\//.test(file)));
+  const referencePages = files.filter(
+    (file) =>
+      prefixes.some((prefix) => file.startsWith(prefix)) &&
+      (prefix(file) !== "extensions/" ||
+        /^extensions\/[^/]+\/reference\//.test(file)),
+  );
   const links = checkLinks(dist, referencePages);
 
-  process.stdout.write(`[check-site] reference pages: ${referencePages.length}, internal links checked: `
-    + `${links.checked}, broken: ${links.broken.length}.\n`);
+  process.stdout.write(
+    `[check-site] reference pages: ${referencePages.length}, internal links checked: ` +
+      `${links.checked}, broken: ${links.broken.length}.\n`,
+  );
 
   if (links.broken.length > 0) {
     failed = true;
-    process.stderr.write(`[check-site] FAIL: broken links:\n  ${links.broken.slice(0, 40).join('\n  ')}\n`);
+    process.stderr.write(
+      `[check-site] FAIL: broken links:\n  ${links.broken.slice(0, 40).join("\n  ")}\n`,
+    );
   }
 
   const demos = checkDemos(dist, files);
 
-  process.stdout.write(`[check-site] demo iframes: ${demos.frames}, demo pages: ${demos.pages}, demo assets `
-    + `checked: ${demos.assets}, broken: ${demos.broken.length}.\n`);
+  process.stdout.write(
+    `[check-site] demo iframes: ${demos.frames}, demo pages: ${demos.pages}, demo assets ` +
+      `checked: ${demos.assets}, broken: ${demos.broken.length}.\n`,
+  );
 
   if (demos.broken.length > 0) {
     failed = true;
-    process.stderr.write(`[check-site] FAIL: broken demos:\n  ${demos.broken.slice(0, 40).join('\n  ')}\n`);
+    process.stderr.write(
+      `[check-site] FAIL: broken demos:\n  ${demos.broken.slice(0, 40).join("\n  ")}\n`,
+    );
   }
 
   return failed ? 1 : 0;
@@ -253,6 +342,9 @@ function main(argv) {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
   process.exitCode = main(process.argv.slice(2));
 }

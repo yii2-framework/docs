@@ -20,7 +20,7 @@ Da bi započeli rad sa prevodom poruka potrebno je da:
 
 Kako bi vaš prevod bio ažuran možete pokrenuti komandu `./yii message/extract @yii/messages/config.php --languages=<your_language>` još jednom. Ona će automatski ponovo izvući poruke ostavljajući nepromenjene netaknutim.
 
-U fajlu za prevođenje svaki element niza predstavlja prevod (vrednost) poruke (ključ). Ako je vrednost prazna, poruka se smatra neprevedenom. Poruke koje više ne trebaju prevod će imati svoje prevode zatvorene između para '@@' znaka. Poruke se mogu koristiti i u formatu za množinu. Pogledajte [i18n sekciju uputstva](../guide-sr-Latn/tutorial-i18n.md) za više informacija.
+U fajlu za prevođenje svaki element niza predstavlja prevod (vrednost) poruke (ključ). Ako je vrednost prazna, poruka se smatra neprevedenom. Poruke koje više ne trebaju prevod će imati svoje prevode zatvorene između para '@@' znaka. Poruke se mogu koristiti i u formatu za množinu. Pogledajte [i18n sekciju uputstva](../guide/tutorial-i18n.md) za više informacija.
 
 ## Dokumentacija
 

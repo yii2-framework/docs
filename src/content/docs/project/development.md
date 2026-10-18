@@ -78,4 +78,29 @@ bundle. Generated indexes record source refs and file checksums. Never edit or c
 
 The guides remain package `docs/`, and API contracts remain PHPDoc. To add a skill-producing package, set its
 `skillsDir` in `packages.json`, sync, run the preparation tests, then build. Publish package sources before a remote
-build can consume newly declared skills. See [skill installation](ai-agents.md#extension-skills).
+build can consume newly declared skills. See [skill installation](ai-agents.md#install-the-relevant-skill).
+
+## Development tool guides
+
+`tools.json` lists non-Composer repositories separately from `packages.json`. Tool entries use `type: "tool"`,
+`name`, `title`, `repo`, `ref`, `localPath`, `docsDir`, optional `order`, and optional `skillsDir`. They do not declare
+PHP namespaces, Composer packages, API references or live PHP demos. `scripts/sync.mjs` imports their README and
+package-owned guides into `src/content/docs/development-tools/<name>/`, and distributes skills through the same
+checksum registry as extension skills. Generated pages are never edited or committed.
+
+The navigation groups these guides under **Development tools**, separate from **Extensions**. Docker is maintained
+in `yii2-extensions/docker-images`; fix its guides and skill there, then run `npm run sync:local` and build. A custom
+`--manifest` sync excludes tools unless `--tools-manifest=<path>` is also supplied. Publish source changes before a
+remote build can consume newly declared guides or skills.
+
+## External API links
+
+`tools/external-references.json` maps exact canonical PHP type and member names to verified HTTPS documentation or
+source URLs. PHPStan targets use its 2.3 API reference; PHP Forge targets use source commits matching the inspected
+dependency metadata. Builds read this registry without loading dependency runtime code or making network requests.
+Verify target symbols and member anchors again when updating dependency versions; unknown members remain unresolved.
+
+References to private members use their reflected source lines instead of inventing public catalog entries.
+Inherited descriptions remain visible on subclass pages, but unresolved diagnostics are counted on their defining
+type page, where the source can be repaired. The original package baseline limits remain unchanged; new clean
+packages start at zero for errors, warnings and unresolved references.

@@ -32,7 +32,7 @@ $classFile = Yii::getAlias('@' . str_replace('\\', '/', $className) . '.php');
 且类似于 `app\components\MyClass` 这样的类名，
 基于我们刚才所提到的算法，可以正确解析出 `AppBasePath/components/MyClass.php` 路径。
 
-在[高级应用模版](tutorial-advanced-app.md)里，每一逻辑层级会使用他自己的根别名。
+在[高级应用模版](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)里，每一逻辑层级会使用他自己的根别名。
 比如，前端层会使用 `@frontend` 而后端层会使用 `@backend`。
 因此，你可以把前端的类放在 `frontend` 命名空间，而后端的类放在 `backend`。
 这样这些类就可以被 Yii 自动加载了。

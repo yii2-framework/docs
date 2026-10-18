@@ -19,6 +19,8 @@ use yii\apidoc\models\TypeDoc;
 use yii\helpers\StringHelper;
 
 use function array_merge;
+use function array_filter;
+use function array_values;
 use function in_array;
 use function trim;
 
@@ -120,6 +122,10 @@ final class ModelRepairer
             if ($promoted && isset($params[$key])) {
                 $this->repairPromoted($doc, $params[$key]);
             }
+
+            if (trim((string) $doc->shortDescription) !== '') {
+                $this->removeRepairedPropertyWarnings($doc);
+            }
         }
     }
 
@@ -155,6 +161,26 @@ final class ModelRepairer
                 default => 'read-write',
             };
         }
+    }
+
+    /**
+     * Removes only property warnings disproved by the restored source summary or promoted-parameter description.
+     * Constructor and unrelated missing documentation diagnostics remain unchanged.
+     */
+    private function removeRepairedPropertyWarnings(PropertyDoc $doc): void
+    {
+        $messages = [
+            "No docblock for element '{$doc->name}'",
+            "No short description for element '{$doc->name}'",
+        ];
+        $this->context->warnings = array_values(array_filter(
+            $this->context->warnings,
+            static fn(array $warning): bool => !(
+                ($warning['file'] ?? null) === $doc->sourceFile
+                && ($warning['line'] ?? null) === $doc->startLine
+                && in_array($warning['message'] ?? '', $messages, true)
+            ),
+        ));
     }
 
     private function repairSummary(PropertyDoc $doc, Property $property): void

@@ -75,8 +75,7 @@ npm run test:sync     # self-tests of the sync script
 `composer install --working-dir tools` are needed), so CI clones the packages; `SYNC_LOCAL=1 npm run build` uses the
 local checkouts. The deploy workflow also runs nightly to pick up package changes. A package whose repository does
 not contain it yet (its `composer.json` name differs from `packagist` in the manifest) is skipped with a
-`[sync] skipped <name>` warning and left out of the sidebar; `bootstrap6` is in that state until it is pushed, so CI
-shows its docs only after the push. `node scripts/sync.mjs --strict` fails on any skip.
+`[sync] skipped <name>` warning and left out of the sidebar. `node scripts/sync.mjs --strict` fails on any skip.
 
 The `status` of a manifest entry is `published` (on Packagist), `unpublished` (not released yet) or `template` (a GitHub
 template repository, such as `yii2-extensions/template`: its landing page links "Use this template" instead of

@@ -1,0 +1,94 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { ecosystemLabels, familyLabels, packages, withBase } from "../../lib/catalog.mjs";
+import "../../styles/portal.css";
+import "../../styles/catalog.css";
+
+export function getStaticPaths() {
+  return packages.map((pkg) => ({ params: { id: pkg.id }, props: { pkg } }));
+}
+
+const { pkg } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const markdownUrl = withBase(`/packages/${pkg.id}/index.md`, base);
+const relationships = {
+  maintained: "Maintained by Wilmer Arambula",
+  contributed: "Wilmer Arambula has contributed",
+  community: "Community maintained",
+};
+---
+
+<StarlightPage
+  hasSidebar={false}
+  frontmatter={{
+    title: pkg.name,
+    description: pkg.summary,
+    template: "splash",
+    tableOfContents: false,
+    editUrl: false,
+    lastUpdated: false,
+    prev: false,
+    next: false,
+    head: [{ tag: "link", attrs: { rel: "alternate", type: "text/markdown", href: markdownUrl } }],
+  }}
+>
+  <article class="portal-container portal-package">
+    <nav class="catalog-breadcrumb" aria-label="Breadcrumb"><a href={withBase("/packages/", base)}>Package catalog</a><span aria-hidden="true">/</span><span>{familyLabels[pkg.family]}</span></nav>
+    <div class="package-introduction">
+      <p class="catalog-package-id">{pkg.id}</p>
+      <p class="package-summary">{pkg.summary}</p>
+      <ul class="catalog-tags" aria-label="Ecosystems">{pkg.ecosystems.map((ecosystem) => <li>{ecosystemLabels[ecosystem]}</li>)}</ul>
+      <div class="portal-actions">
+        <a class="portal-button" href={withBase(pkg.docsUrl, base)}>Read documentation</a>
+        <a class="portal-button portal-button-secondary" href={pkg.repository}>View repository</a>
+        <a class="package-markdown" href={markdownUrl}>Read as Markdown</a>
+      </div>
+    </div>
+
+    <div class="package-layout">
+      <div class="package-details">
+        <section class="package-section" aria-labelledby="compatibility">
+          <h2 id="compatibility">Compatibility</h2>
+          <p>Declared requirements at the source revision below. Check the package documentation before adding it to your application.</p>
+          <dl class="package-requirements">
+            <div><dt>PHP</dt><dd><code>{pkg.php}</code><a href={pkg.provenance.url} aria-label="PHP requirement source">View source</a></dd></div>
+            {pkg.compatibility.filter((entry) => entry.ecosystem !== "php").map((entry) => <div>
+              <dt>{ecosystemLabels[entry.ecosystem]}</dt>
+              <dd><code>{entry.constraint}</code><a href={entry.evidence} aria-label={`${ecosystemLabels[entry.ecosystem]} compatibility source`}>View source</a></dd>
+            </div>)}
+          </dl>
+        </section>
+
+        <section class="package-section" aria-labelledby="source-version">
+          <h2 id="source-version">Source and version</h2>
+          <p class="package-version-status">{pkg.provenance.kind === "source" ? "Source snapshot" : "Release reference"}</p>
+          <p>{pkg.provenance.kind === "source"
+            ? "This record describes a source revision. It does not establish a published package version or release stability. Development requirements remain explicit."
+            : "This record describes the linked release reference. It does not claim that this is the newest release."}</p>
+          <dl class="package-provenance">
+            <div><dt>Reference inspected</dt><dd>{pkg.provenance.ref}</dd></div>
+            <div><dt>Exact revision</dt><dd><a href={pkg.provenance.url}><code>{pkg.provenance.commit}</code></a></dd></div>
+            <div><dt>Metadata reviewed</dt><dd><time datetime={pkg.provenance.reviewedAt}>{pkg.provenance.reviewedAt}</time></dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <aside class="package-facts" aria-labelledby="package-details">
+        <h2 id="package-details">Package details</h2>
+        <dl>
+          <div><dt>Collection</dt><dd>{familyLabels[pkg.family]}</dd></div>
+          <div><dt>Type</dt><dd class="package-kind">{pkg.kind}</dd></div>
+          <div><dt>Maintainer</dt><dd><a href={pkg.maintainer.url}>{pkg.maintainer.name}</a></dd></div>
+          <div><dt>Relationship to this portal</dt><dd>{relationships[pkg.relationship]} <a class="package-evidence" href={pkg.relationshipEvidence}>View evidence</a></dd></div>
+          <div><dt>License</dt><dd>{pkg.license}</dd></div>
+        </dl>
+        {pkg.relationship === "community" && <p class="catalog-note">This package is maintained independently. Its listing does not imply an official Yii affiliation or support agreement with this portal.</p>}
+      </aside>
+    </div>
+
+    <aside class="catalog-contribute" aria-label="Improve the catalog">
+      <div><h2>Help keep this record useful</h2><p>Propose a correction or share another package for review.</p></div>
+      <a class="portal-button portal-button-secondary" href={withBase("/contribute/", base)}>Contribute to the catalog</a>
+    </aside>
+  </article>
+</StarlightPage>

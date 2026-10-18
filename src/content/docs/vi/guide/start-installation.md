@@ -10,11 +10,11 @@ Mặc định, sau khi cài đặt Yii sẽ cung cấp cho bạn một số tín
 Những tính năng trên đều được khuyến khích và sử dụng rộng rãi, vì thế, nó có thể hữu ích cho các dự án của bạn.
 
 Trong bài hướng dẫn này và các phần tiếp theo, chúng ta sẽ tìm hiều cách cài ứng dụng Yii với tên _Basic Application Template_ và
-làm thế nào để triển khai các tính năng mới trên mẫu ứng dụng này. Yii đồng thời cũng cung cấp mẫu ứng dụng tên là [Advanced Application Template](tutorial-advanced-app.md)
+làm thế nào để triển khai các tính năng mới trên mẫu ứng dụng này. Yii đồng thời cũng cung cấp mẫu ứng dụng tên là [Advanced Application Template](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)
 Template này hướng đến những đội dự án cần phát triển ứng dụng có nhiều tầng (multiple tiers).
 
 > Lưu ý: _Basic Application Template_ thích hợp đến 90% cho việc phát triển web. Nó khác
-> với [Advanced Application Template](tutorial-advanced-app.md) trong cách tổ chức mã nguồn. Nếu bạn là người mới tìm hiều về Yii, chúng tôi khuyến khích
+> với [Advanced Application Template](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide) trong cách tổ chức mã nguồn. Nếu bạn là người mới tìm hiều về Yii, chúng tôi khuyến khích
 > bạn bắt đầu với _Basic Application Template_ , ứng dụng này đơn giản và ít chức năng. Thích hợp hơn cho việc tìm hiểu về Yii.
 
 ## Cài đặt qua trinh quản lý gói Composer <span id="installing-via-composer"></span>
@@ -76,7 +76,7 @@ Nhưng cũng có những phương pháp cài đặt khác:
 - Nếu bạn chỉ muốn cài đặt các khung cốt lõi và muốn xây dựng toàn bộ một ứng dụng từ đầu,
   bạn có thể làm theo hướng dẫn như đã hướng dẫn ở bài viết [Building Application from Scratch](tutorial-start-from-scratch.md).
 - Nếu bạn muốn bắt đầu với một ứng dụng phức tạp hơn, phù hợp hơn với môi trường phát triển trong team bạn,
-  bạn có thể xem xét việc cài đặt mẫu ứng dụng [Advanced Application Template](tutorial-advanced-app.md).
+  bạn có thể xem xét việc cài đặt mẫu ứng dụng [Advanced Application Template](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide).
 
 ## Kết quả cài đặt <span id="verifying-installation"></span>
 

@@ -12,18 +12,24 @@
 //
 // Usage: node scripts/llms-sizes.mjs [--dist=dist]
 
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-import { BUNDLE_LIMIT } from '../plugins/llms-sets.mjs';
+import {
+  existsSync,
+  readFileSync,
+  readdirSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { BUNDLE_LIMIT } from "../plugins/llms-sets.mjs";
 
-const ROOT = fileURLToPath(new URL('../', import.meta.url));
-const SITE = 'https://yii2-framework.github.io';
-const BASE = '/docs/';
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
+const SITE = "https://yii2-framework.github.io";
+const BASE = "/docs/";
 const SUFFIX = / \(~[0-9.]+k tokens\)$/;
 const LINK = /\]\(([^)\s]+)\)/;
 const FENCE = /^\s*(`{3,}|~{3,})/;
-const INDEXING = '. For indexing tools';
+const INDEXING = ". For indexing tools";
 const COMPACT = /^(- Bundles [^:]+: )(.+)$/;
 
 /**
@@ -55,12 +61,14 @@ export function distPath(href) {
     return null;
   }
 
-  return decodeURIComponent(pathname.slice(BASE.length).split('#')[0]);
+  return decodeURIComponent(pathname.slice(BASE.length).split("#")[0]);
 }
 
 /** Returns the text without the H2 section `title` (up to the next H2). */
 function dropSection(text, title) {
-  return text.replace(new RegExp(`(^|\\n)## ${title}\\n[\\s\\S]*?(?=\\n## |$)`), '$1').replace(/\n+$/, '\n');
+  return text
+    .replace(new RegExp(`(^|\\n)## ${title}\\n[\\s\\S]*?(?=\\n## |$)`), "$1")
+    .replace(/\n+$/, "\n");
 }
 
 /**
@@ -77,16 +85,18 @@ export function annotateIndex(text, sizeOf, { fullHasReference = false } = {}) {
   const linked = new Set();
   const seen = new Set();
   const output = [];
-  let section = '';
-  const full = fullHasReference ? 'every English page, the API reference included'
-    : 'every English page except the API reference';
+  let section = "";
+  const full = fullHasReference
+    ? "English documentation pages, the API reference included"
+    : "English documentation pages except the API reference";
   const labels = {
-    'llms-full.txt': `for indexing tools (Cursor, Context7 and similar); do not read it whole: ${full}`,
-    'llms-small.txt': 'for indexing tools; do not read it whole: the guides without notes and tips, no API reference',
+    "llms-full.txt": `for indexing tools (Cursor, Context7 and similar); do not read it whole: ${full}`,
+    "llms-small.txt":
+      "for indexing tools; do not read it whole: the guides without notes and tips, no API reference",
   };
 
-  for (const line of dropSection(text, 'Notes').split('\n')) {
-    if (line.startsWith('## ')) {
+  for (const line of dropSection(text, "Notes").split("\n")) {
+    if (line.startsWith("## ")) {
       section = line.slice(3);
     }
 
@@ -94,8 +104,8 @@ export function annotateIndex(text, sizeOf, { fullHasReference = false } = {}) {
 
     if (compact) {
       // `- Bundles yii\db: api-yii2-db, api-yii2-db-activerecord`: bundle names, each followed by its size.
-      const items = compact[2].split(', ').map((item) => {
-        const name = item.replace(/ ~[0-9.]+k$/, '');
+      const items = compact[2].split(", ").map((item) => {
+        const name = item.replace(/ ~[0-9.]+k$/, "");
         const file = `_llms-txt/${name}.txt`;
         const size = sizeOf(file);
 
@@ -110,11 +120,11 @@ export function annotateIndex(text, sizeOf, { fullHasReference = false } = {}) {
         return `${name} ~${formatTokens(size)}`;
       });
 
-      output.push(`${compact[1]}${items.join(', ')}`);
+      output.push(`${compact[1]}${items.join(", ")}`);
       continue;
     }
 
-    const href = line.startsWith('- ') ? LINK.exec(line)?.[1] : undefined;
+    const href = line.startsWith("- ") ? LINK.exec(line)?.[1] : undefined;
     const file = href === undefined ? null : distPath(href);
 
     if (file === null) {
@@ -122,17 +132,17 @@ export function annotateIndex(text, sizeOf, { fullHasReference = false } = {}) {
       continue;
     }
 
-    if (section === 'Documentation Sets' && seen.has(file)) {
+    if (section === "Documentation Sets" && seen.has(file)) {
       continue;
     }
 
     seen.add(file);
     linked.add(file);
 
-    let entry = line.replace(SUFFIX, '');
+    let entry = line.replace(SUFFIX, "");
 
-    if (section === 'Documentation Sets' && labels[file] !== undefined) {
-      entry = `${entry.slice(0, entry.indexOf(')') + 1)}: ${labels[file]}`;
+    if (section === "Documentation Sets" && labels[file] !== undefined) {
+      entry = `${entry.slice(0, entry.indexOf(")") + 1)}: ${labels[file]}`;
     }
 
     const size = sizeOf(file);
@@ -146,7 +156,7 @@ export function annotateIndex(text, sizeOf, { fullHasReference = false } = {}) {
     output.push(`${entry} (~${formatTokens(size)} tokens)`);
   }
 
-  return { text: output.join('\n'), missing, linked };
+  return { text: output.join("\n"), missing, linked };
 }
 
 /**
@@ -157,7 +167,7 @@ export function annotateIndex(text, sizeOf, { fullHasReference = false } = {}) {
  * @returns {string}
  */
 export function labelFullBundle(text) {
-  const newline = text.indexOf('\n');
+  const newline = text.indexOf("\n");
   const first = newline === -1 ? text : text.slice(0, newline);
   const match = /^<SYSTEM>(.*)<\/SYSTEM>$/.exec(first);
 
@@ -165,10 +175,11 @@ export function labelFullBundle(text) {
     return text;
   }
 
-  const rest = newline === -1 ? '' : text.slice(newline);
-  const sentence = match[1].split(INDEXING)[0].replace(/\.$/, '');
-  const label = `${sentence}${INDEXING} (Cursor, Context7 and similar), about ${formatTokens(Buffer.byteLength(rest))} `
-    + `tokens: do not read it whole. Agents: start at ${SITE}${BASE}llms.txt and fetch single pages or topic bundles.`;
+  const rest = newline === -1 ? "" : text.slice(newline);
+  const sentence = match[1].split(INDEXING)[0].replace(/\.$/, "");
+  const label =
+    `${sentence}${INDEXING} (Cursor, Context7 and similar), about ${formatTokens(Buffer.byteLength(rest))} ` +
+    `tokens: do not read it whole. Agents: start at ${SITE}${BASE}llms.txt and fetch single pages or topic bundles.`;
 
   return `<SYSTEM>${label}</SYSTEM>${rest}`;
 }
@@ -179,7 +190,7 @@ export function labelFullBundle(text) {
  * @param {string} text
  */
 export function countPages(text) {
-  const lines = text.split('\n');
+  const lines = text.split("\n");
   let fence = null;
   let pages = 0;
 
@@ -187,7 +198,11 @@ export function countPages(text) {
     const match = FENCE.exec(lines[index]);
 
     if (fence !== null) {
-      if (match && match[1][0] === fence[0] && match[1].length >= fence.length) {
+      if (
+        match &&
+        match[1][0] === fence[0] &&
+        match[1].length >= fence.length
+      ) {
         fence = null;
       }
       continue;
@@ -198,7 +213,11 @@ export function countPages(text) {
       continue;
     }
 
-    if (/^# /.test(lines[index]) && lines[index + 1] === '' && /^> /.test(lines[index + 2] ?? '')) {
+    if (
+      /^# /.test(lines[index]) &&
+      lines[index + 1] === "" &&
+      /^> /.test(lines[index + 2] ?? "")
+    ) {
       pages++;
     }
   }
@@ -209,31 +228,37 @@ export function countPages(text) {
 /** Runs the step on `dist/`; returns the error messages. */
 export function run(dist) {
   const errors = [];
-  const read = (name) => readFileSync(path.join(dist, name), 'utf8');
+  const read = (name) => readFileSync(path.join(dist, name), "utf8");
   const write = (name, text) => {
     if (read(name) !== text) {
       writeFileSync(path.join(dist, name), text);
     }
   };
 
-  for (const name of ['llms-full.txt', 'llms-small.txt']) {
+  for (const name of ["llms-full.txt", "llms-small.txt"]) {
     write(name, labelFullBundle(read(name)));
   }
 
   const sizeOf = (file) => {
     const target = path.join(dist, file);
 
-    return existsSync(target) && statSync(target).isFile() ? statSync(target).size : null;
+    return existsSync(target) && statSync(target).isFile()
+      ? statSync(target).size
+      : null;
   };
-  const before = read('llms.txt');
+  const before = read("llms.txt");
   const { text, missing, linked } = annotateIndex(before, sizeOf, {
-    fullHasReference: /\n# API reference\n\n> /.test(read('llms-full.txt')),
+    fullHasReference: /\n# API reference\n\n> /.test(read("llms-full.txt")),
   });
 
-  write('llms.txt', text);
-  errors.push(...missing.map((file) => `llms.txt links a missing file: ${file}`));
+  write("llms.txt", text);
+  errors.push(
+    ...missing.map((file) => `llms.txt links a missing file: ${file}`),
+  );
 
-  const bundles = readdirSync(path.join(dist, '_llms-txt')).filter((name) => name.endsWith('.txt')).sort();
+  const bundles = readdirSync(path.join(dist, "_llms-txt"))
+    .filter((name) => name.endsWith(".txt"))
+    .sort();
   const sizes = [];
 
   for (const name of bundles) {
@@ -249,24 +274,34 @@ export function run(dist) {
     }
 
     if (bytes > BUNDLE_LIMIT && pages > 1) {
-      errors.push(`${file}: ${bytes} bytes in ${pages} pages, above the ${BUNDLE_LIMIT}-byte bundle limit (adjust `
-        + 'the size estimate in plugins/llms-sets.mjs).');
+      errors.push(
+        `${file}: ${bytes} bytes in ${pages} pages, above the ${BUNDLE_LIMIT}-byte bundle limit (adjust ` +
+          "the size estimate in plugins/llms-sets.mjs).",
+      );
     }
   }
 
-  const largest = sizes.reduce((max, entry) => (entry[1] > max[1] ? entry : max), ['', 0, 0]);
+  const largest = sizes.reduce(
+    (max, entry) => (entry[1] > max[1] ? entry : max),
+    ["", 0, 0],
+  );
   const index = Buffer.byteLength(text);
 
-  console.log(`[llms-sizes] llms.txt: ${index} bytes (~${formatTokens(index)} tokens), ${text.split('\n').length - 1} `
-    + `lines; ${bundles.length} bundles, largest ${largest[0]} ${largest[1]} bytes (~${formatTokens(largest[1])} `
-    + `tokens, ${largest[2]} pages); llms-full.txt ~${formatTokens(sizeOf('llms-full.txt'))}, llms-small.txt `
-    + `~${formatTokens(sizeOf('llms-small.txt'))} tokens.`);
+  console.log(
+    `[llms-sizes] llms.txt: ${index} bytes (~${formatTokens(index)} tokens), ${text.split("\n").length - 1} ` +
+      `lines; ${bundles.length} bundles, largest ${largest[0]} ${largest[1]} bytes (~${formatTokens(largest[1])} ` +
+      `tokens, ${largest[2]} pages); llms-full.txt ~${formatTokens(sizeOf("llms-full.txt"))}, llms-small.txt ` +
+      `~${formatTokens(sizeOf("llms-small.txt"))} tokens.`,
+  );
 
   return errors;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
-  const dist = path.resolve(ROOT, process.argv.find((arg) => arg.startsWith('--dist='))?.slice(7) ?? 'dist');
+if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
+  const dist = path.resolve(
+    ROOT,
+    process.argv.find((arg) => arg.startsWith("--dist="))?.slice(7) ?? "dist",
+  );
   const errors = run(dist);
 
   for (const error of errors) {

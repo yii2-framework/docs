@@ -6,6 +6,12 @@
     "printWidth": 80,
     "overrides": [
         {
+            "files": ["**/*.{astro,mjs,ts,js}"],
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
             "files": ["**/*.{yml,yaml}"],
             "options": {
                 "tabWidth": 2

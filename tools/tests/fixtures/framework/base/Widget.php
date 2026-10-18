@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace yii\base;
 
 /**
@@ -36,6 +38,12 @@ class Widget extends BaseObject
      * @var \yii\web\View|null
      */
     public $view;
+
+    /**
+     * Calls [[missingFixtureMember()]] from the owning declaration.
+     * @return void
+     */
+    public function unresolvedFixtureReference() {}
 
     /**
      * Begins a widget.

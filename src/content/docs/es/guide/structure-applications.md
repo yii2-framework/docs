@@ -94,7 +94,7 @@ en vez de llamadas al método [[Yii::setAlias()]].
 
 Esta es una propiedad importante. Te permite definir un array de los componentes que deben ejecutarse
 durante el [[yii\base\Application::bootstrap()|proceso de `bootstrapping`]] de la aplicación.
-Por ejemplo, si quieres personalizar las [reglas de URL](runtime-url-handling.md) de un [módulo](structure-modules.md),
+Por ejemplo, si quieres personalizar las [reglas de URL](runtime-routing.md) de un [módulo](structure-modules.md),
 podrías listar su ID como un elemento de este array.
 
 Cada componente listado en esta propiedad puede ser especificado en cualquiera de los siguientes formatos:
@@ -168,7 +168,7 @@ Por ejemplo:
 
 #### [[yii\base\Application::components|components]] <span id="components"></span>
 
-Esta es la propiedad más importante. Te permite registrar una lista de componentes llamados [componentes de aplicación](#structure-application-components.md)
+Esta es la propiedad más importante. Te permite registrar una lista de componentes llamados [componentes de aplicación](structure-application-components.md)
 que puedes utilizar en otras partes de tu aplicación. Por ejemplo:
 
 ```php

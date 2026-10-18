@@ -95,7 +95,7 @@ class PostController extends Controller
 
 Изменить пространство имен классов контроллеров можно задав свойство [[yii\base\Module::controllerNamespace]]. Если
 какие-либо контроллеры выпадают из этого пространства имен, доступ к ним можно осуществить, настроив свойство
-[[yii\base\Module::controllerMap]], аналогично тому, [как это делается в приложении](structure-applications.md#controller-map).
+[[yii\base\Module::controllerMap]], аналогично тому, [как это делается в приложении](structure-applications.md#controllerMap).
 
 ### Представления в модулях <span id="views-in-modules"></span>
 

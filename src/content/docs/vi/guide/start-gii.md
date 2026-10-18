@@ -3,7 +3,7 @@ title: "Sử dụng Gii để sinh code"
 description: "Trong phần này sẽ hướng dẫn sử dụng Gii để tự động sinh code, những mã nguồn tương tự với Web site ."
 ---
 
-Trong phần này sẽ hướng dẫn sử dụng [Gii](tool-gii.md) để tự động sinh code, những mã nguồn tương tự với Web site
+Trong phần này sẽ hướng dẫn sử dụng [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) để tự động sinh code, những mã nguồn tương tự với Web site
 . Sử dụng Gii để tự động tạo mã nguồn thật đơn giản, bạn chỉ việc nhập thông tin đúng theo các hướng dẫn hiển thị trên các trang Web Gii và mã
 nguỗn sẽ được sinh tự động.
 
@@ -16,7 +16,7 @@ Nội dung chính trong phần này:
 
 ## Bắt đầu với Gii <span id="starting-gii"></span>
 
-Yii cung cấp [Gii](tool-gii.md) như một [module](structure-modules.md). Bạn có thể nhúng Gii
+Yii cung cấp [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) như một [module](structure-modules.md). Bạn có thể nhúng Gii
 bằng việc cấu hình các thuộc tính của ứng dụng ở phần [[yii\base\Application::modules|modules]] . Tùy thuộc vào ứng dụng của bạn, bạn có thể nhìn thấy được những đoạn mã sau được cung cấp trong file cấu hình `config/web.php`:
 
 ```php
@@ -121,7 +121,7 @@ Danh sách các file sau được sinh bởi Gii, bạn có thể dùng trong �
 - Views: `views/country/*.php`
 
 > Thông tin: Công cụ Gii được xây dụng lên với việc phát triển ứng dụng nhanh và dễ mở rộng. Sử dụng nó một cách thích hợp
-> rất có thể đẩy nhanh tốc độ phát triển ứng dụng của bạn. Biết thêm thông tin, xem thêm ở phần [Gii](tool-gii.md).
+> rất có thể đẩy nhanh tốc độ phát triển ứng dụng của bạn. Biết thêm thông tin, xem thêm ở phần [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide).
 
 ## Tổng kết <span id="summary"></span>
 

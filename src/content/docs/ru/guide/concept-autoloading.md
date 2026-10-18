@@ -34,7 +34,7 @@ $classFile = Yii::getAlias('@' . str_replace('\\', '/', $className) . '.php');
 `app\components\MyClass`, в соответствии с описанным выше алгоритмом, преобразуется в путь
 `директорияПриложения/components/MyClass.php`.
 
-В [шаблоне приложения advanced](tutorial-advanced-app.md) каждый уровень приложения обладает собственным корневым
+В [шаблоне приложения advanced](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide) каждый уровень приложения обладает собственным корневым
 псевдонимом. Например, для frontend корневым псевдонимом является `@frontend`, а для backend — `@backend`. Это позволяет
 разместить классы frontend в пространство имён `frontend`, а классы backend в пространство имён `backend`. При этом
 классы будут загружены автоматически.

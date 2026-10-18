@@ -12,7 +12,7 @@ utrzymywania ręcznego, zatem stworzyliśmy narzędzie dostępne z linii komend,
 
 ## Komenda wydania
 
-Poniższe kroki są zautomatyzowane za pomocą [konsolowej komendy wydania](../../build/controllers/ReleaseController.php), która jest
+Poniższe kroki są zautomatyzowane za pomocą [konsolowej komendy wydania](https://github.com/yiisoft/yii2/blob/22.0/build/controllers/ReleaseController.php), która jest
 dostępna w deweloperskim repozytorium frameworka.
 
 Komenda wydania może być uruchomiona za pomocą aplikacji Yii w folderze `build` frameworka:
@@ -27,7 +27,7 @@ Komenda wydania może być uruchomiona za pomocą aplikacji Yii w folderze `buil
 ### Wymagania
 
 Działanie komenda wydania uzależnione jest od środowiska deweloperskiego opisanego w
-[Cyklu produkcyjnym Git](git-workflow.md#extensions), przykładowo szablony aplikacji muszą znajdować się w folderze `/apps/`
+[Cyklu produkcyjnym Git](../../internals/git-workflow.md#extensions), przykładowo szablony aplikacji muszą znajdować się w folderze `/apps/`
 a rozszerzenia w `/extensions/`.
 Struktury te najlepiej utworzyć za pomocą komend `dev/app` i `dev/ext`.
 

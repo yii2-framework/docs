@@ -33,6 +33,7 @@ use function interface_exists;
 use function is_file;
 use function ltrim;
 use function preg_match;
+use function rtrim;
 use function str_contains;
 use function str_ends_with;
 use function str_replace;
@@ -91,7 +92,8 @@ final class LinkResolver
             $type = $this->findTypeInContexts($typeName, $context);
 
             if ($type === null) {
-                return $this->external(ltrim($typeName, '\\'), $member);
+                return $this->externalReference($typeName, $member, $context)
+                    ?? $this->external(ltrim($typeName, '\\'), $member);
             }
 
             if ($member === '') {
@@ -101,7 +103,7 @@ final class LinkResolver
             $subject = $this->findMember($type, $member);
 
             if ($subject === null) {
-                return $this->externalAncestor($type, $member);
+                return $this->privateSource($type, $member) ?? $this->externalAncestor($type, $member);
             }
 
             return $this->memberResolution($type, $subject, $this->shortName($type) . '::');
@@ -114,6 +116,10 @@ final class LinkResolver
                 if ($subject !== null) {
                     return $this->memberResolution($candidate, $subject, '');
                 }
+
+                if (($private = $this->privateSource($candidate, $target)) !== null) {
+                    return $private;
+                }
             }
         }
 
@@ -125,7 +131,8 @@ final class LinkResolver
 
         // phpDocumentor renders an inline `{@see begin()}` of a description as `{@see \<namespace>\begin()}`: when
         // the qualified name is no type, look its last segment up as a member of the context.
-        if ($context !== null && ($position = strrpos($target, '\\')) !== false) {
+        if ($context !== null && ($position = strrpos($target, '\\')) !== false
+            && ltrim(substr($target, 0, $position), '\\') === $context->namespace) {
             $member = substr($target, $position + 1);
 
             foreach ($this->contexts($context) as $candidate) {
@@ -134,7 +141,34 @@ final class LinkResolver
                 if ($subject !== null) {
                     return $this->memberResolution($candidate, $subject, '');
                 }
+
+                if (($private = $this->privateSource($candidate, $member)) !== null) {
+                    return $private;
+                }
             }
+
+            // phpDocumentor qualifies unqualified inline function references with the declaring namespace.
+            if (ltrim(substr($target, 0, $position), '\\') === $context->namespace && str_ends_with($member, '()')) {
+                $function = $this->externalFunction(substr($member, 0, -2));
+
+                $shadowed = false;
+
+                foreach ($this->context->reflectionFiles as $file) {
+                    foreach ($file->getFunctions() as $declared) {
+                        if (ltrim((string) $declared->getFqsen(), '\\') === ltrim($target, '\\')) {
+                            $shadowed = true;
+                        }
+                    }
+                }
+
+                if ($function !== null && !$shadowed) {
+                    return $function;
+                }
+            }
+        }
+
+        if (($external = $this->externalReference($target, '', $context)) !== null) {
+            return $external;
         }
 
         return str_ends_with($target, '()')
@@ -334,6 +368,68 @@ final class LinkResolver
         }
 
         return $this->aliases[$key];
+    }
+
+    /**
+     * Resolves only explicitly registered external contracts; unknown members remain unresolved.
+     */
+    private function externalReference(string $name, string $member, ?TypeDoc $context): ?Resolution
+    {
+        $names = [ltrim($name, '\\')];
+
+        if ($context !== null && !str_starts_with($name, '\\')) {
+            foreach ($this->contexts($context) as $candidate) {
+                $parts = explode('\\', $name);
+                $alias = strtolower((string) array_shift($parts));
+                $aliases = $this->aliases($candidate);
+
+                if (isset($aliases[$alias])) {
+                    $names[] = implode('\\', [$aliases[$alias], ...$parts]);
+                }
+
+                $names[] = $candidate->namespace . '\\' . $name;
+            }
+        }
+
+        foreach ($names as $canonical) {
+            $key = $canonical . ($member === '' ? '' : '::' . $member);
+            $url = $this->context->externalReferences[$key] ?? null;
+
+            if ($url !== null) {
+                $position = strrpos($canonical, '\\');
+                $label = ($position === false ? $canonical : substr($canonical, $position + 1))
+                    . ($member === '' ? '' : '::' . $member);
+
+                return new Resolution(null, null, '', $key, $label, $url);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Links a verified private member to its source line without inventing a public API entry or anchor.
+     */
+    private function privateSource(TypeDoc $type, string $member): ?Resolution
+    {
+        $reflector = $this->context->reflectors[$type->name] ?? null;
+        $url = $this->context->sourceUrls[$type->name] ?? null;
+
+        if ($reflector === null || $url === null) {
+            return null;
+        }
+
+        $subjects = str_starts_with($member, '$') ? $reflector->getProperties() : $reflector->getMethods();
+        $name = str_starts_with($member, '$') ? substr($member, 1) : rtrim($member, '()');
+
+        foreach ($subjects as $subject) {
+            if ($subject->getName() === $name && (string) $subject->getVisibility() === 'private') {
+                return new Resolution(null, null, '', $type->name . '::' . $member, $member,
+                    $url . '#L' . $subject->getLocation()->getLineNumber());
+            }
+        }
+
+        return null;
     }
 
     private function typeResolution(TypeDoc $type): Resolution

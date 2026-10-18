@@ -1,0 +1,55 @@
+---
+import Search from '@astrojs/starlight/components/Search.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import LanguageSelect from '../LanguageSelect.astro';
+import { PROJECT_NAME } from '../../site-meta.mjs';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const navigation = [
+  { label: 'Packages', path: 'packages/' },
+  { label: 'Documentation', path: 'documentation/' },
+  { label: 'Projects', path: 'projects/' },
+  { label: 'Contribute', path: 'contribute/' },
+];
+const current = Astro.url.pathname;
+const active = (path: string) => current.startsWith(`${base}${path}`);
+const { hasSidebar } = Astro.locals.starlightRoute;
+---
+
+<div class:list={['portal-header', { 'portal-header-sidebar': hasSidebar }]}>
+  <a class="portal-brand" href={base} aria-label={`${PROJECT_NAME} home`}>
+    <span class="portal-brand-symbol" aria-hidden="true">p<span>h</span>p</span>
+    <span>{PROJECT_NAME}</span>
+  </a>
+  <nav class="portal-desktop-nav" aria-label="Main navigation">
+    {navigation.map(({ label, path }) => (
+      <a href={`${base}${path}`} aria-current={active(path) ? 'page' : undefined}>{label}</a>
+    ))}
+  </nav>
+  <div class="portal-header-tools">
+    <Search />
+    <ThemeSelect />
+    <span class="portal-language"><LanguageSelect /></span>
+  </div>
+  <details class="portal-mobile-nav">
+    <summary aria-label="Main navigation">Explore</summary>
+    <nav aria-label="Mobile main navigation">
+      {navigation.map(({ label, path }) => (
+        <a href={`${base}${path}`} aria-current={active(path) ? 'page' : undefined}>{label}</a>
+      ))}
+      <a href={`${base}about/`}>About</a>
+    </nav>
+  </details>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.portal-mobile-nav').forEach((menu) => {
+    menu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { menu.open = false; }));
+  });
+</script>

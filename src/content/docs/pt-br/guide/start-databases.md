@@ -271,7 +271,7 @@ aprendeu como buscar e exibir dados em páginas com a ajuda do
 [[yii\data\Pagination]] e do [[yii\widgets\LinkPager]].
 
 Na próxima seção, você aprenderá como usar a poderosa ferramenta de geração de códigos,
-chamada [Gii](tool-gii.md), para ajudá-lo a implementar rapidamente algumas
+chamada [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide), para ajudá-lo a implementar rapidamente algumas
 funcionalidades comumente necessárias, tais como as operações CRUD
 (Criar-Ler-Atualizar-Excluir) para trabalhar com os dados de uma tabela do
 banco de dados. Na verdade, todo o código que você acabou de escrever pode ser

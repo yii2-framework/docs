@@ -1,0 +1,394 @@
+/* Catalog layouts share the portal palette without changing documentation pages. */
+.portal-catalog,
+.portal-package {
+    min-width: 0;
+}
+
+.portal-container [hidden] {
+    display: none !important;
+}
+
+.portal-container .catalog-introduction {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+    margin-block-end: 2rem;
+}
+
+.catalog-introduction p {
+    max-width: 60ch;
+    font-size: 1.125rem;
+    color: var(--portal-muted);
+}
+
+.catalog-introduction .portal-button {
+    flex: 0 0 auto;
+}
+
+.portal-container .catalog-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    gap: 1rem;
+    margin-block: 1.75rem;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    background: var(--portal-surface-soft);
+    border: 1px solid var(--portal-border);
+}
+
+.catalog-search {
+    grid-column: 1 / -1;
+}
+
+.catalog-filters label {
+    display: block;
+    margin-block-end: 0.375rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.catalog-filters :where(input, select) {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 2.75rem;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.25rem;
+    background: var(--portal-surface);
+    color: var(--portal-ink);
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.35;
+}
+
+.catalog-filters input::placeholder {
+    color: var(--portal-muted);
+    opacity: 1;
+}
+
+.catalog-filters select {
+    cursor: pointer;
+}
+
+.catalog-reset {
+    justify-self: start;
+    min-height: 2.75rem;
+    margin-block-start: -0.25rem;
+    padding: 0.375rem 0;
+    background: transparent;
+    border: 0;
+    color: var(--portal-link);
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+}
+
+.catalog-results-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding-block-end: 0.75rem;
+    font-size: 0.9375rem;
+}
+
+.catalog-count {
+    font-weight: 600;
+}
+
+.portal-container .catalog-list,
+.portal-container .catalog-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.portal-container .catalog-entry {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(12rem, 1fr);
+    gap: 1.5rem 2rem;
+    margin: 0;
+    padding-block: 1.75rem;
+    border-block-start: 1px solid var(--portal-border);
+}
+
+.catalog-entry-copy,
+.catalog-entry-meta {
+    min-width: 0;
+}
+
+.portal-container .catalog-collection {
+    color: var(--portal-accent);
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-block-end: 0.5rem;
+}
+
+.portal-container .catalog-entry h2 {
+    font-size: 1.375rem;
+    margin: 0;
+}
+
+.catalog-entry h2 a {
+    text-decoration: none;
+}
+
+.catalog-entry h2 a:hover {
+    text-decoration: underline;
+}
+
+.portal-container .catalog-package-id {
+    color: var(--portal-muted);
+    font-family: var(--sl-font-mono), var(--sl-font-system-mono);
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+    margin-block-start: 0.375rem;
+}
+
+.portal-container .catalog-summary {
+    margin-block-start: 0.875rem;
+    max-width: 65ch;
+}
+
+.portal-container .catalog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+}
+
+.portal-container .catalog-tags li {
+    border-radius: 0.25rem;
+    background: var(--portal-accent-soft);
+    color: var(--portal-ink);
+    padding: 0.125rem 0.5rem;
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.8125rem;
+}
+
+.portal-container .catalog-entry-meta dl {
+    margin-block-start: 0.875rem;
+    font-size: 0.875rem;
+}
+
+.catalog-entry-meta dl > div {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    column-gap: 0.5rem;
+    margin-block: 0.25rem;
+}
+
+.portal-container
+    :where(.catalog-entry-meta, .package-facts, .package-provenance)
+    dt {
+    color: var(--portal-muted);
+    font-weight: 400;
+}
+
+.portal-container .catalog-source-label {
+    margin-block-start: 0.875rem;
+    color: var(--portal-muted);
+    font-size: 0.8125rem;
+}
+
+.portal-container .catalog-note {
+    color: var(--portal-muted);
+    font-size: 0.9375rem;
+    margin-block-start: 1.5rem;
+    max-width: 75ch;
+}
+
+.catalog-empty {
+    padding: 2rem 1.5rem;
+    background: var(--portal-surface-soft);
+    border-radius: 0.5rem;
+}
+
+.portal-container .catalog-empty p {
+    margin-block: 0.75rem 1.25rem;
+}
+
+.catalog-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-end: 1.5rem;
+    color: var(--portal-muted);
+    font-size: 0.9375rem;
+}
+
+.package-summary {
+    font-size: 1.25rem;
+    max-width: 65ch;
+}
+
+.portal-container .package-introduction > p + p {
+    margin-block-start: 1rem;
+}
+
+.package-introduction .catalog-tags {
+    margin-block-start: 1rem;
+}
+
+.package-introduction .portal-actions {
+    align-items: center;
+}
+
+.package-markdown {
+    padding: 0.625rem 0.375rem;
+    font-size: 0.9375rem;
+}
+
+.package-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(14rem, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+    margin-block-start: 3rem;
+}
+
+.package-section + .package-section {
+    margin-block-start: 2.5rem;
+}
+
+.portal-container .package-section > p {
+    margin-block-start: 1rem;
+}
+
+.portal-container :where(.package-requirements, .package-provenance) {
+    margin-block-start: 1.25rem;
+}
+
+.package-requirements > div {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: 0.5rem 1rem;
+    padding-block: 1rem;
+    border-block-start: 1px solid var(--portal-border);
+}
+
+.package-requirements dt {
+    font-weight: 600;
+}
+
+.package-requirements dd > a {
+    display: block;
+    margin-block-start: 0.375rem;
+    font-size: 0.875rem;
+}
+
+.portal-container :where(.package-requirements, .package-provenance) code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    font-size: 0.9375rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.portal-container .package-version-status {
+    display: inline-block;
+    padding: 0.125rem 0.625rem;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.25rem;
+    background: var(--portal-surface-soft);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.package-provenance > div {
+    margin-block-start: 0.875rem;
+}
+
+.package-provenance dt {
+    font-size: 0.875rem;
+}
+
+.package-facts {
+    min-width: 0;
+    padding: 1.5rem;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.5rem;
+    background: var(--portal-surface-soft);
+}
+
+.portal-container .package-facts h2 {
+    font-size: 1.25rem;
+}
+
+.package-facts dl > div {
+    margin-block-start: 1rem;
+}
+
+.package-facts dt {
+    font-size: 0.875rem;
+}
+
+.package-kind {
+    text-transform: capitalize;
+}
+
+.package-evidence {
+    display: block;
+    font-size: 0.875rem;
+}
+
+.portal-container .catalog-contribute {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-block-start: 3rem;
+    padding-block: 1.5rem;
+    border-block-start: 1px solid var(--portal-border);
+}
+
+.portal-container .catalog-contribute h2 {
+    font-size: 1.25rem;
+}
+
+.portal-container .catalog-contribute p {
+    margin-block-start: 0.5rem;
+    color: var(--portal-muted);
+}
+
+@media (width < 45rem) {
+    .portal-container .catalog-entry,
+    .package-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .catalog-entry-meta {
+        border-inline-start: 3px solid var(--portal-accent-soft);
+        padding-inline-start: 1rem;
+    }
+
+    .portal-container .catalog-filters {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .package-layout {
+        gap: 2rem;
+    }
+}
+
+@media (width < 30rem) {
+    .portal-container .catalog-filters {
+        padding: 1rem;
+    }
+
+    .package-requirements > div {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .package-facts {
+        padding: 1.25rem;
+    }
+}

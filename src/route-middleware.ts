@@ -2,7 +2,12 @@
 import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
 import { getCollection } from "astro:content";
 import { isReferenceRoute } from "../plugins/reference-id.mjs";
-import { buildDate, DOCS_VERSION, PROJECT_NAME } from "./site-meta.mjs";
+import {
+  buildDate,
+  DOCS_VERSION,
+  PROJECT_NAME,
+  isFrameworkDocumentation,
+} from "./site-meta.mjs";
 
 type SidebarEntry =
   | { type: "link"; label: string; href: string; isCurrent: boolean }
@@ -75,6 +80,7 @@ export const onRequest = defineRouteMiddleware(async (context) => {
     .href;
   const pageUrl = new URL(context.url.pathname, site).href;
   const date = buildDate();
+  const framework = isFrameworkDocumentation(route.id, route.locale);
   const { title, description } = route.entry.data;
   const modified = route.lastUpdated
     ? route.lastUpdated.toISOString().slice(0, 10)
@@ -103,7 +109,10 @@ export const onRequest = defineRouteMiddleware(async (context) => {
         const name = titles.get(id);
 
         if (name !== undefined) {
-          crumbs.push({ name, item: new URL(`${id}/`, homeUrl).href });
+          crumbs.push({
+            name,
+            item: new URL(`${id}/`, homeUrl).href,
+          });
         }
       }
     }
@@ -118,7 +127,7 @@ export const onRequest = defineRouteMiddleware(async (context) => {
       ...(description ? { description } : {}),
       inLanguage: route.entryMeta.lang,
       url: pageUrl,
-      version: DOCS_VERSION,
+      ...(framework ? { version: DOCS_VERSION } : {}),
       dateModified: modified,
       isPartOf: { "@type": "WebSite", name: PROJECT_NAME, url: homeUrl },
     },
@@ -147,8 +156,14 @@ export const onRequest = defineRouteMiddleware(async (context) => {
 
     route.head.push(
       { tag: "meta", attrs: { property: "og:image", content: image } },
-      { tag: "meta", attrs: { property: "og:image:width", content: "1200" } },
-      { tag: "meta", attrs: { property: "og:image:height", content: "630" } },
+      {
+        tag: "meta",
+        attrs: { property: "og:image:width", content: "1200" },
+      },
+      {
+        tag: "meta",
+        attrs: { property: "og:image:height", content: "630" },
+      },
       { tag: "meta", attrs: { name: "twitter:image", content: image } },
     );
   }
@@ -166,7 +181,14 @@ export const onRequest = defineRouteMiddleware(async (context) => {
   }
 
   route.head.push(
-    { tag: "meta", attrs: { name: "docs:version", content: DOCS_VERSION } },
+    ...(framework
+      ? [
+          {
+            tag: "meta" as const,
+            attrs: { name: "docs:version", content: DOCS_VERSION },
+          },
+        ]
+      : []),
     { tag: "meta", attrs: { name: "docs:build-date", content: date } },
     {
       tag: "script",

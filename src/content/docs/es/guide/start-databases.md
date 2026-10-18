@@ -246,7 +246,7 @@ Entre bastidores, [[yii\data\Pagination|Pagination]] está realizando su magia.
 En esta sección has aprendido cómo trabajar con una base de datos. También has aprendido cómo traer y mostrar
 datos paginados con la ayuda de [[yii\data\Pagination]] y [[yii\widgets\LinkPager]].
 
-En la siguiente sección, aprenderás a utilizar la poderosa herramienta de generación de código llamada [Gii](tool-gii.md),
+En la siguiente sección, aprenderás a utilizar la poderosa herramienta de generación de código llamada [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide),
 para ayudarte a implementar rápidamente algunas características comunes, como crear operaciones de Alta-Baja-Modificación
 (ABM, o CRUD en inglés) de los datos guardados en la base de datos. De hecho, el código que acabas de escribir fue
 generado automáticamente a través de esta herramienta.

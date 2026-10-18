@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Syncs the Markdown guides of the extension packages listed in `packages.json` into
+// Syncs package guides from `packages.json` and non-Composer tools from `tools.json`.
+// Tool guides go to `development-tools/<name>/`; extension guides go to
 // `src/content/docs/extensions/<name>/` (git-ignored build input).
 //
 // For each package the sources come from `localPath` (with `--local` or `SYNC_LOCAL=1`, when the directory exists)
@@ -23,41 +24,70 @@
 // Every run writes `.cache/sources.json` (mode, directory, ref, commit and skip reason per entry), the input of
 // `tools/bin/reference`.
 //
-// Usage: node scripts/sync.mjs [--local] [--strict] [--manifest=<path>]
+// Usage: node scripts/sync.mjs [--local] [--strict] [--manifest=<path>] [--tools-manifest=<path>]
 
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from "node:child_process";
 import {
-  copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync,
-} from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-import { describe, yamlQuote } from './lib/description.mjs';
-import { safeRelativeDirectory, syncSkills } from './sync-skills.mjs';
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { describe, yamlQuote } from "./lib/description.mjs";
+import { safeRelativeDirectory, syncSkills } from "./sync-skills.mjs";
 
-const ROOT = fileURLToPath(new URL('../', import.meta.url));
-const OUTPUT_DIR = path.join(ROOT, 'src', 'content', 'docs', 'extensions');
-const CACHE_DIR = path.join(ROOT, '.cache', 'packages');
-const SOURCES_FILE = path.join(ROOT, '.cache', 'sources.json');
-const SKILLS_CACHE = path.join(ROOT, '.cache', 'skills');
-const SKILLS_PUBLIC = path.join(ROOT, 'public', 'skills');
-const REQUIRED_KEYS = ['name', 'title', 'repo', 'ref', 'srcDir', 'namespace', 'localPath', 'packagist'];
-const TYPES = ['package', 'framework'];
-// `published`: on Packagist; `unpublished`: not released yet; `template`: a GitHub template repository, which users
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
+const OUTPUT_DIR = path.join(ROOT, "src", "content", "docs", "extensions");
+const CACHE_DIR = path.join(ROOT, ".cache", "packages");
+const SOURCES_FILE = path.join(ROOT, ".cache", "sources.json");
+const SKILLS_CACHE = path.join(ROOT, ".cache", "skills");
+const SKILLS_PUBLIC = path.join(ROOT, "public", "skills");
+const REQUIRED_KEYS = [
+  "name",
+  "title",
+  "repo",
+  "ref",
+  "srcDir",
+  "namespace",
+  "localPath",
+  "packagist",
+];
+const TYPES = ["package", "framework", "tool"];
+const TOOLS_OUTPUT_DIR = path.join(
+  ROOT,
+  "src",
+  "content",
+  "docs",
+  "development-tools",
+);
+// `published`: on Packagist; `unpublished`: not on Packagist (a GitHub release may exist); `template`: a repository users
 // copy with "Use this template" instead of installing it with Composer.
-const STATUSES = ['published', 'unpublished', 'template'];
+const STATUSES = ["published", "unpublished", "template"];
 // Sidebar order of the pages when the manifest has no `order`; the landing page is always first.
-const DEFAULT_ORDER = ['installation', 'configuration', 'examples', 'migration', 'testing'];
+const DEFAULT_ORDER = [
+  "installation",
+  "configuration",
+  "examples",
+  "migration",
+  "testing",
+];
 const IMAGE = /\.(avif|gif|jpe?g|png|svg|webp)$/i;
 const FENCE = /^\s{0,3}(`{3,}|~{3,})/;
 // `](href)` or `](href "title")` of an inline link or image.
 const INLINE_LINK = /\]\(\s*<?([^)\s>]+)>?((?:\s+(?:"[^"]*"|'[^']*'))?\s*)\)/g;
 // GitHub alert type -> Starlight aside. `IMPORTANT` maps to `caution` so it survives the `llms-small.txt` trimming.
 const ALERTS = {
-  NOTE: ':::note',
-  TIP: ':::tip',
-  IMPORTANT: ':::caution[Important]',
-  WARNING: ':::caution',
-  CAUTION: ':::danger',
+  NOTE: ":::note",
+  TIP: ":::tip",
+  IMPORTANT: ":::caution[Important]",
+  WARNING: ":::caution",
+  CAUTION: ":::danger",
 };
 // Sections whose badges are human calls to action: their badges become text links instead of being dropped.
 const CALL_TO_ACTION = /social|sponsor|support|star|follow|license|community/i;
@@ -80,27 +110,34 @@ export function validateManifest(manifest, file) {
   manifest.forEach((entry, index) => {
     const where = `${file}[${index}]`;
 
-    if (entry === null || typeof entry !== 'object' || Array.isArray(entry)) {
+    if (entry === null || typeof entry !== "object" || Array.isArray(entry)) {
       errors.push(`${where}: expected an object.`);
       return;
     }
 
     if (entry.type !== undefined && !TYPES.includes(entry.type)) {
-      errors.push(`${where}: "type" must be one of ${TYPES.join(', ')}.`);
+      errors.push(`${where}: "type" must be one of ${TYPES.join(", ")}.`);
     }
 
     // A framework entry has no guides, so no `docsDir`.
-    const required = entry.type === 'framework' ? REQUIRED_KEYS : [...REQUIRED_KEYS, 'docsDir'];
+    const required =
+      entry.type === "tool"
+        ? ["name", "title", "repo", "ref", "localPath", "docsDir"]
+        : entry.type === "framework"
+          ? REQUIRED_KEYS
+          : [...REQUIRED_KEYS, "docsDir"];
 
     for (const key of required) {
-      if (typeof entry[key] !== 'string' || entry[key].trim() === '') {
+      if (typeof entry[key] !== "string" || entry[key].trim() === "") {
         errors.push(`${where}: "${key}" must be a non-empty string.`);
       }
     }
 
-    if (typeof entry.name === 'string') {
+    if (typeof entry.name === "string") {
       if (!/^[a-z0-9][a-z0-9-]*$/.test(entry.name)) {
-        errors.push(`${where}: "name" must be lowercase letters, digits and hyphens.`);
+        errors.push(
+          `${where}: "name" must be lowercase letters, digits and hyphens.`,
+        );
       }
       if (names.has(entry.name)) {
         errors.push(`${where}: duplicate name "${entry.name}".`);
@@ -108,36 +145,49 @@ export function validateManifest(manifest, file) {
       names.add(entry.name);
     }
 
-    if (typeof entry.repo === 'string' && !/^(https:\/\/|file:\/\/)/.test(entry.repo)) {
-      errors.push(`${where}: "repo" must be an https:// (or file:// for tests) URL.`);
+    if (
+      typeof entry.repo === "string" &&
+      !/^(https:\/\/|file:\/\/)/.test(entry.repo)
+    ) {
+      errors.push(
+        `${where}: "repo" must be an https:// (or file:// for tests) URL.`,
+      );
     }
 
     if (entry.status !== undefined && !STATUSES.includes(entry.status)) {
-      errors.push(`${where}: "status" must be one of ${STATUSES.join(', ')}.`);
+      errors.push(`${where}: "status" must be one of ${STATUSES.join(", ")}.`);
     }
 
-    if (entry.skillsDir !== undefined && !safeRelativeDirectory(entry.skillsDir)) {
-      errors.push(`${where}: "skillsDir" must be a relative directory without traversal.`);
+    if (
+      entry.skillsDir !== undefined &&
+      !safeRelativeDirectory(entry.skillsDir)
+    ) {
+      errors.push(
+        `${where}: "skillsDir" must be a relative directory without traversal.`,
+      );
     }
 
-    if (entry.order !== undefined
-      && (!Array.isArray(entry.order) || entry.order.some((item) => typeof item !== 'string'))) {
+    if (
+      entry.order !== undefined &&
+      (!Array.isArray(entry.order) ||
+        entry.order.some((item) => typeof item !== "string"))
+    ) {
       errors.push(`${where}: "order" must be an array of page names.`);
     }
   });
 
   if (errors.length > 0) {
-    throw new Error(`Invalid manifest:\n${errors.join('\n')}`);
+    throw new Error(`Invalid manifest:\n${errors.join("\n")}`);
   }
 
   return manifest;
 }
 
-const GIT_ENV = { ...process.env, GIT_TERMINAL_PROMPT: '0' };
+const GIT_ENV = { ...process.env, GIT_TERMINAL_PROMPT: "0" };
 
 /** Runs git and returns its trimmed stdout, or `null` when it exits with an error. */
 function gitOutput(args) {
-  const result = spawnSync('git', args, { encoding: 'utf8', env: GIT_ENV });
+  const result = spawnSync("git", args, { encoding: "utf8", env: GIT_ENV });
 
   return result.status === 0 ? result.stdout.trim() : null;
 }
@@ -149,33 +199,55 @@ function gitOutput(args) {
  * @returns {{ dir: string, source: string, commit: string }}
  */
 function exportFramework(pkg, local) {
-  let rev = [`refs/heads/${pkg.ref}`, `refs/remotes/origin/${pkg.ref}`]
-    .find((candidate) => gitOutput(['-C', local, 'rev-parse', '--verify', '--quiet', `${candidate}^{commit}`]) !== null);
+  let rev = [`refs/heads/${pkg.ref}`, `refs/remotes/origin/${pkg.ref}`].find(
+    (candidate) =>
+      gitOutput([
+        "-C",
+        local,
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        `${candidate}^{commit}`,
+      ]) !== null,
+  );
 
   if (rev === undefined) {
-    process.stderr.write(`[sync] ${pkg.name}: ${pkg.ref} missing in ${local}, fetching it from origin.\n`);
-    execFileSync('git', ['-C', local, 'fetch', '--quiet', 'origin', pkg.ref], { stdio: 'inherit', env: GIT_ENV });
-    rev = 'FETCH_HEAD';
+    process.stderr.write(
+      `[sync] ${pkg.name}: ${pkg.ref} missing in ${local}, fetching it from origin.\n`,
+    );
+    execFileSync("git", ["-C", local, "fetch", "--quiet", "origin", pkg.ref], {
+      stdio: "inherit",
+      env: GIT_ENV,
+    });
+    rev = "FETCH_HEAD";
   }
 
-  const commit = gitOutput(['-C', local, 'rev-parse', `${rev}^{commit}`]);
+  const commit = gitOutput(["-C", local, "rev-parse", `${rev}^{commit}`]);
   const dir = path.join(CACHE_DIR, pkg.name);
-  const archive = spawnSync('git', ['-C', local, 'archive', '--format=tar', rev, pkg.srcDir], {
-    env: GIT_ENV,
-    maxBuffer: 512 * 1024 * 1024,
-  });
+  const archive = spawnSync(
+    "git",
+    ["-C", local, "archive", "--format=tar", rev, pkg.srcDir],
+    {
+      env: GIT_ENV,
+      maxBuffer: 512 * 1024 * 1024,
+    },
+  );
 
   if (archive.status !== 0 || commit === null) {
-    throw new Error(`${pkg.name}: git archive ${rev} ${pkg.srcDir} failed in ${local}: ${archive.stderr}`);
+    throw new Error(
+      `${pkg.name}: git archive ${rev} ${pkg.srcDir} failed in ${local}: ${archive.stderr}`,
+    );
   }
 
   rmSync(dir, { recursive: true, force: true });
   mkdirSync(dir, { recursive: true });
 
-  const tar = spawnSync('tar', ['-x', '-C', dir], { input: archive.stdout });
+  const tar = spawnSync("tar", ["-x", "-C", dir], { input: archive.stdout });
 
   if (tar.status !== 0) {
-    throw new Error(`${pkg.name}: extracting the archive into ${dir} failed: ${tar.stderr}`);
+    throw new Error(
+      `${pkg.name}: extracting the archive into ${dir} failed: ${tar.stderr}`,
+    );
   }
 
   return { dir, source: `local ${local} at ${rev} (${commit})`, commit };
@@ -189,33 +261,58 @@ function exportFramework(pkg, local) {
  */
 function obtainSources(pkg, useLocal) {
   const local = path.resolve(ROOT, pkg.localPath);
-  const framework = pkg.type === 'framework';
+  const framework = pkg.type === "framework";
 
   if (useLocal) {
-    if (framework && existsSync(path.join(local, '.git'))) {
+    if (framework && existsSync(path.join(local, ".git"))) {
       return exportFramework(pkg, local);
     }
-    if (!framework && existsSync(path.join(local, 'README.md'))) {
-      const commit = gitOutput(['-C', local, 'rev-parse', 'HEAD']) ?? 'unknown';
+    if (!framework && existsSync(path.join(local, "README.md"))) {
+      const commit = gitOutput(["-C", local, "rev-parse", "HEAD"]) ?? "unknown";
 
-      return { dir: local, source: `local ${local} (working tree)`, commit: `${commit}+worktree` };
+      return {
+        dir: local,
+        source: `local ${local} (working tree)`,
+        commit: `${commit}+worktree`,
+      };
     }
-    process.stderr.write(`[sync] ${pkg.name}: ${local} not found, cloning ${pkg.repo} instead.\n`);
+    process.stderr.write(
+      `[sync] ${pkg.name}: ${local} not found, cloning ${pkg.repo} instead.\n`,
+    );
   }
 
   const dir = path.join(CACHE_DIR, pkg.name);
-  const sparse = framework ? ['--filter=blob:none', '--sparse'] : [];
+  const sparse = framework ? ["--filter=blob:none", "--sparse"] : [];
 
   rmSync(dir, { recursive: true, force: true });
   mkdirSync(CACHE_DIR, { recursive: true });
-  execFileSync('git', ['clone', '--quiet', '--depth', '1', '--single-branch', ...sparse, '--branch', pkg.ref, pkg.repo,
-    dir], { stdio: ['ignore', 'inherit', 'inherit'], env: GIT_ENV });
+  execFileSync(
+    "git",
+    [
+      "clone",
+      "--quiet",
+      "--depth",
+      "1",
+      "--single-branch",
+      ...sparse,
+      "--branch",
+      pkg.ref,
+      pkg.repo,
+      dir,
+    ],
+    { stdio: ["ignore", "inherit", "inherit"], env: GIT_ENV },
+  );
 
   if (framework) {
-    execFileSync('git', ['-C', dir, 'sparse-checkout', 'set', pkg.srcDir], { stdio: 'inherit', env: GIT_ENV });
+    execFileSync("git", ["-C", dir, "sparse-checkout", "set", pkg.srcDir], {
+      stdio: "inherit",
+      env: GIT_ENV,
+    });
   }
 
-  const commit = execFileSync('git', ['-C', dir, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+  const commit = execFileSync("git", ["-C", dir, "rev-parse", "HEAD"], {
+    encoding: "utf8",
+  }).trim();
 
   return { dir, source: `${pkg.repo}@${pkg.ref} (${commit})`, commit };
 }
@@ -224,7 +321,10 @@ function obtainSources(pkg, useLocal) {
  * Splits a line into prose and inline code spans; `transform` is applied to the prose parts only.
  */
 function mapProse(line, transform) {
-  return line.split(/(`+[^`]*?`+)/).map((part, index) => (index % 2 === 1 ? part : transform(part))).join('');
+  return line
+    .split(/(`+[^`]*?`+)/)
+    .map((part, index) => (index % 2 === 1 ? part : transform(part)))
+    .join("");
 }
 
 /**
@@ -240,7 +340,11 @@ function mapOutsideFences(lines, transform) {
     const match = FENCE.exec(line);
 
     if (fence !== null) {
-      if (match && match[1][0] === fence[0] && match[1].length >= fence.length) {
+      if (
+        match &&
+        match[1][0] === fence[0] &&
+        match[1].length >= fence.length
+      ) {
         fence = null;
       }
       return line;
@@ -260,15 +364,19 @@ function mapOutsideFences(lines, transform) {
  */
 function htmlBlocks(lines, tag) {
   const blocks = [];
-  const open = new RegExp(`^\\s{0,3}<${tag}\\b`, 'i');
-  const close = new RegExp(`</${tag}>\\s*$`, 'i');
+  const open = new RegExp(`^\\s{0,3}<${tag}\\b`, "i");
+  const close = new RegExp(`</${tag}>\\s*$`, "i");
   let fence = null;
 
   for (let index = 0; index < lines.length; index++) {
     const match = FENCE.exec(lines[index]);
 
     if (fence !== null) {
-      if (match && match[1][0] === fence[0] && match[1].length >= fence.length) {
+      if (
+        match &&
+        match[1][0] === fence[0] &&
+        match[1].length >= fence.length
+      ) {
         fence = null;
       }
       continue;
@@ -295,8 +403,12 @@ function htmlBlocks(lines, tag) {
 
 /** Decodes the few HTML entities used in READMEs. */
 function decodeEntities(text) {
-  return text.replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&');
+  return text
+    .replace(/&nbsp;/g, " ")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, "&");
 }
 
 /**
@@ -310,15 +422,19 @@ function convertHtmlBlocks(lines) {
   let htmlTitle = null;
   const replace = (tag, convert) => {
     for (const [start, end] of htmlBlocks(lines, tag).reverse()) {
-      lines.splice(start, end - start + 1, ...convert(lines.slice(start, end + 1).join('\n')));
+      lines.splice(
+        start,
+        end - start + 1,
+        ...convert(lines.slice(start, end + 1).join("\n")),
+      );
     }
   };
 
-  replace('p', (html) => {
+  replace("p", (html) => {
     const heading = /<h1\b[^>]*>([\s\S]*?)<\/h1>/i.exec(html);
 
     if (heading) {
-      htmlTitle ??= decodeEntities(heading[1].replace(/<[^>]+>/g, '').trim());
+      htmlTitle ??= decodeEntities(heading[1].replace(/<[^>]+>/g, "").trim());
       return [];
     }
 
@@ -326,28 +442,43 @@ function convertHtmlBlocks(lines) {
       return [];
     }
 
-    const markdown = decodeEntities(html
-      .replace(/^\s*<p\b[^>]*>/i, '')
-      .replace(/<\/p>\s*$/i, '')
-      .replace(/<\/?strong>/gi, '**')
-      .replace(/<\/?b>/gi, '**')
-      .replace(/<\/?em>/gi, '_')
-      .replace(/<\/?i>/gi, '_')
-      .replace(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)')
-      .replace(/<br\s*\/?>/gi, '\n\n')
-      .replace(/<[^>]+>/g, ''));
-    const paragraphs = markdown.split(/\n\s*\n/).map((part) => part.split('\n').map((line) => line.trim())
-      .filter((line) => line !== '').join(' ')).filter((part) => part !== '');
+    const markdown = decodeEntities(
+      html
+        .replace(/^\s*<p\b[^>]*>/i, "")
+        .replace(/<\/p>\s*$/i, "")
+        .replace(/<\/?strong>/gi, "**")
+        .replace(/<\/?b>/gi, "**")
+        .replace(/<\/?em>/gi, "_")
+        .replace(/<\/?i>/gi, "_")
+        .replace(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, "[$2]($1)")
+        .replace(/<br\s*\/?>/gi, "\n\n")
+        .replace(/<[^>]+>/g, ""),
+    );
+    const paragraphs = markdown
+      .split(/\n\s*\n/)
+      .map((part) =>
+        part
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line !== "")
+          .join(" "),
+      )
+      .filter((part) => part !== "");
 
-    return paragraphs.flatMap((part, index) => (index === 0 ? [part] : ['', part]));
+    return paragraphs.flatMap((part, index) =>
+      index === 0 ? [part] : ["", part],
+    );
   });
 
-  replace('picture', (html) => {
-    const wide = /<source\b[^>]*media="[^"]*min-width[^"]*"[^>]*srcset="([^"\s]+)/i.exec(html)
-      ?? /<source\b[^>]*srcset="([^"\s]+)"[^>]*media="[^"]*min-width/i.exec(html);
-    const img = /<img\b[^>]*>/i.exec(html)?.[0] ?? '';
+  replace("picture", (html) => {
+    const wide =
+      /<source\b[^>]*media="[^"]*min-width[^"]*"[^>]*srcset="([^"\s]+)/i.exec(
+        html,
+      ) ??
+      /<source\b[^>]*srcset="([^"\s]+)"[^>]*media="[^"]*min-width/i.exec(html);
+    const img = /<img\b[^>]*>/i.exec(html)?.[0] ?? "";
     const src = wide?.[1] ?? /\bsrc="([^"]+)"/i.exec(img)?.[1];
-    const alt = /\balt="([^"]*)"/i.exec(img)?.[1] ?? '';
+    const alt = /\balt="([^"]*)"/i.exec(img)?.[1] ?? "";
 
     return src ? [`![${decodeEntities(alt)}](${src})`] : [];
   });
@@ -367,7 +498,11 @@ function convertAlerts(lines) {
     const fenceMatch = FENCE.exec(line);
 
     if (fence !== null) {
-      if (fenceMatch && fenceMatch[1][0] === fence[0] && fenceMatch[1].length >= fence.length) {
+      if (
+        fenceMatch &&
+        fenceMatch[1][0] === fence[0] &&
+        fenceMatch[1].length >= fence.length
+      ) {
         fence = null;
       }
       output.push(line);
@@ -380,7 +515,8 @@ function convertAlerts(lines) {
       continue;
     }
 
-    const alert = /^\s{0,3}>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*$/i.exec(line);
+    const alert =
+      /^\s{0,3}>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*$/i.exec(line);
 
     if (!alert) {
       output.push(line);
@@ -391,10 +527,10 @@ function convertAlerts(lines) {
 
     while (index + 1 < lines.length && /^\s{0,3}>/.test(lines[index + 1])) {
       index++;
-      output.push(lines[index].replace(/^\s{0,3}>\s?/, ''));
+      output.push(lines[index].replace(/^\s{0,3}>\s?/, ""));
     }
 
-    output.push(':::');
+    output.push(":::");
   }
 
   return output;
@@ -405,8 +541,9 @@ function convertAlerts(lines) {
  * Stryker, StyleCI shields and any URL containing `badge`.
  */
 function isBadgeImage(url) {
-  return /img\.shields\.io|poser\.pugx\.org|badge|codecov\.io\/.*\/graph|stryker-mutator|styleci\.io\/repos\/\d+\/shield/i
-    .test(url);
+  return /img\.shields\.io|poser\.pugx\.org|badge|codecov\.io\/.*\/graph|stryker-mutator|styleci\.io\/repos\/\d+\/shield/i.test(
+    url,
+  );
 }
 
 /**
@@ -414,8 +551,9 @@ function isBadgeImage(url) {
  * Sections left without content are removed with their heading.
  */
 function convertBadges(lines) {
-  const badge = /\[!\[([^\]]*)\]\(([^)\s]+)\)\]\(([^)\s]+)\)|!\[([^\]]*)\]\(([^)\s]+)\)/g;
-  let section = '';
+  const badge =
+    /\[!\[([^\]]*)\]\(([^)\s]+)\)\]\(([^)\s]+)\)|!\[([^\]]*)\]\(([^)\s]+)\)/g;
+  let section = "";
 
   const converted = mapOutsideFences(lines, (line) => {
     const heading = /^#{1,6}\s+(.*)$/.exec(line);
@@ -425,22 +563,27 @@ function convertBadges(lines) {
       return line;
     }
 
-    const rest = line.replace(badge, '').trim();
+    const rest = line.replace(badge, "").trim();
     const badges = [...line.matchAll(badge)];
 
-    if (rest !== '' || badges.length === 0 || !badges.every((match) => isBadgeImage(match[2] ?? match[5]))) {
+    if (
+      rest !== "" ||
+      badges.length === 0 ||
+      !badges.every((match) => isBadgeImage(match[2] ?? match[5]))
+    ) {
       return line;
     }
 
     if (!CALL_TO_ACTION.test(section)) {
-      return '\u0000';
+      return "\u0000";
     }
 
-    const links = badges.filter((match) => match[3] !== undefined)
+    const links = badges
+      .filter((match) => match[3] !== undefined)
       .map((match) => `[${match[1].trim() || match[3]}](${match[3]})`);
 
-    return links.length > 0 ? links.join(' ') : '\u0000';
-  }).filter((line) => line !== '\u0000');
+    return links.length > 0 ? links.join(" ") : "\u0000";
+  }).filter((line) => line !== "\u0000");
 
   // Remove headings whose section became empty (only blank lines until the next heading of the same or higher level).
   const output = [];
@@ -451,13 +594,16 @@ function convertBadges(lines) {
     if (heading) {
       let next = index + 1;
 
-      while (next < converted.length && converted[next].trim() === '') {
+      while (next < converted.length && converted[next].trim() === "") {
         next++;
       }
 
-      const nextHeading = /^(#{1,6})\s/.exec(converted[next] ?? '');
+      const nextHeading = /^(#{1,6})\s/.exec(converted[next] ?? "");
 
-      if (next >= converted.length || (nextHeading && nextHeading[1].length <= heading[1].length)) {
+      if (
+        next >= converted.length ||
+        (nextHeading && nextHeading[1].length <= heading[1].length)
+      ) {
         index = next - 1;
         continue;
       }
@@ -481,20 +627,36 @@ function convertBadges(lines) {
  * @param {Set<string>} context.images Copied image paths relative to the package root.
  * @returns {(href: string, sourceFile: string) => string}
  */
-export function linkRewriter({ sourceDir, blobBase, ref, docsDir, pages, images }) {
+export function linkRewriter({
+  sourceDir,
+  blobBase,
+  ref,
+  docsDir,
+  pages,
+  images,
+}) {
   return (href, sourceFile) => {
-    if (/^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith('//') || href.startsWith('#') || href === '') {
+    if (
+      /^[a-z][a-z0-9+.-]*:/i.test(href) ||
+      href.startsWith("//") ||
+      href.startsWith("#") ||
+      href === ""
+    ) {
       return href;
     }
 
     const match = /^([^?#]*)([?#].*)?$/.exec(href);
-    const target = href.startsWith('/')
+    const target = href.startsWith("/")
       ? path.posix.normalize(match[1].slice(1))
-      : path.posix.normalize(path.posix.join(path.posix.dirname(sourceFile), match[1]));
-    const suffix = match[2] ?? '';
+      : path.posix.normalize(
+          path.posix.join(path.posix.dirname(sourceFile), match[1]),
+        );
+    const suffix = match[2] ?? "";
 
-    if (target.startsWith('../')) {
-      process.stderr.write(`[sync] ${sourceFile}: link "${href}" points outside the package; left as is.\n`);
+    if (target.startsWith("../")) {
+      process.stderr.write(
+        `[sync] ${sourceFile}: link "${href}" points outside the package; left as is.\n`,
+      );
       return href;
     }
 
@@ -507,8 +669,11 @@ export function linkRewriter({ sourceDir, blobBase, ref, docsDir, pages, images 
     }
 
     const absolute = path.join(sourceDir, target);
-    const kind = existsSync(absolute) && statSync(absolute).isDirectory() ? 'tree' : 'blob';
-    const clean = target === '.' ? '' : `/${target.replace(/\/$/, '')}`;
+    const kind =
+      existsSync(absolute) && statSync(absolute).isDirectory()
+        ? "tree"
+        : "blob";
+    const clean = target === "." ? "" : `/${target.replace(/\/$/, "")}`;
 
     return `${blobBase}/${kind}/${ref}${clean}${suffix}`;
   };
@@ -522,13 +687,21 @@ function rewriteLinks(lines, rewrite) {
   return mapOutsideFences(lines, (line) => {
     const definition = /^(\s{0,3}\[[^\]]+\]:\s*)(\S+)(.*)$/.exec(line);
 
-    if (definition && !definition[1].startsWith('[[')) {
+    if (definition && !definition[1].startsWith("[[")) {
       return `${definition[1]}${rewrite(definition[2])}${definition[3]}`;
     }
 
-    return mapProse(line, (part) => part
-      .replace(INLINE_LINK, (_all, href, title) => `](${rewrite(href)}${title})`)
-      .replace(/(\s(?:href|src|srcset)=")([^"]*)(")/g, (_all, open, href, close) => `${open}${rewrite(href)}${close}`));
+    return mapProse(line, (part) =>
+      part
+        .replace(
+          INLINE_LINK,
+          (_all, href, title) => `](${rewrite(href)}${title})`,
+        )
+        .replace(
+          /(\s(?:href|src|srcset)=")([^"]*)(")/g,
+          (_all, open, href, close) => `${open}${rewrite(href)}${close}`,
+        ),
+    );
   });
 }
 
@@ -536,8 +709,9 @@ function rewriteLinks(lines, rewrite) {
  * Removes single-line HTML comments (markdownlint directives) outside code fences.
  */
 function dropComments(lines) {
-  return mapOutsideFences(lines, (line) => (/^\s*<!--.*-->\s*$/.test(line) ? '\u0000' : line))
-    .filter((line) => line !== '\u0000');
+  return mapOutsideFences(lines, (line) =>
+    /^\s*<!--.*-->\s*$/.test(line) ? "\u0000" : line,
+  ).filter((line) => line !== "\u0000");
 }
 
 /**
@@ -554,7 +728,11 @@ function extractTitle(lines) {
     const match = FENCE.exec(line);
 
     if (fence !== null) {
-      if (match && match[1][0] === fence[0] && match[1].length >= fence.length) {
+      if (
+        match &&
+        match[1][0] === fence[0] &&
+        match[1].length >= fence.length
+      ) {
         fence = null;
       }
       output.push(line);
@@ -584,14 +762,14 @@ function extractTitle(lines) {
 function tidy(lines) {
   const output = [];
 
-  for (const line of lines.map((value) => value.replace(/\s+$/, ''))) {
-    if (line === '' && (output.length === 0 || output.at(-1) === '')) {
+  for (const line of lines.map((value) => value.replace(/\s+$/, ""))) {
+    if (line === "" && (output.length === 0 || output.at(-1) === "")) {
       continue;
     }
     output.push(line);
   }
 
-  while (output.at(-1) === '') {
+  while (output.at(-1) === "") {
     output.pop();
   }
 
@@ -601,23 +779,30 @@ function tidy(lines) {
 /**
  * Returns the frontmatter block of a generated page.
  */
-function frontmatter({ title, description, order, label, editUrl, generatedFrom }) {
+function frontmatter({
+  title,
+  description,
+  order,
+  label,
+  editUrl,
+  generatedFrom,
+}) {
   const lines = [
-    '---',
+    "---",
     `# Generated by scripts/sync.mjs from ${generatedFrom}; edit the package repository instead.`,
     `title: ${yamlQuote(title)}`,
     `description: ${yamlQuote(description)}`,
     `editUrl: ${yamlQuote(editUrl)}`,
-    'sidebar:',
+    "sidebar:",
   ];
 
   if (label) {
     lines.push(`  label: ${yamlQuote(label)}`);
   }
 
-  lines.push(`  order: ${order}`, '---');
+  lines.push(`  order: ${order}`, "---");
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 /**
@@ -626,8 +811,18 @@ function frontmatter({ title, description, order, label, editUrl, generatedFrom 
  * @returns {string} The page source (frontmatter and body).
  */
 export function convertPage(source, options) {
-  const { sourceFile, fallbackTitle, packageTitle, rewrite, order, label, editUrl, generatedFrom, extra } = options;
-  let lines = source.replace(/\r\n?/g, '\n').split('\n');
+  const {
+    sourceFile,
+    fallbackTitle,
+    packageTitle,
+    rewrite,
+    order,
+    label,
+    editUrl,
+    generatedFrom,
+    extra,
+  } = options;
+  let lines = source.replace(/\r\n?/g, "\n").split("\n");
 
   lines = dropComments(lines);
   const html = convertHtmlBlocks(lines);
@@ -643,13 +838,15 @@ export function convertPage(source, options) {
   lines = rewriteLinks(extracted.lines, (href) => rewrite(href, sourceFile));
   lines = tidy([...lines, ...(extra ?? [])]);
 
-  const body = lines.join('\n');
+  const body = lines.join("\n");
   let description = describe(body);
 
   // A page without prose (a bare list or table) must not break the nightly build: fall back to the titles.
   if (description === null) {
     description = `${title} of the ${packageTitle} extension.`;
-    process.stderr.write(`[sync] ${sourceFile}: no paragraph usable as description; using "${description}".\n`);
+    process.stderr.write(
+      `[sync] ${sourceFile}: no paragraph usable as description; using "${description}".\n`,
+    );
   }
 
   return `${frontmatter({ title, description, order, label, editUrl, generatedFrom })}\n\n${body}\n`;
@@ -667,25 +864,35 @@ export function convertPage(source, options) {
  */
 export function packageSection(pkg, blobBase, ref, changelog) {
   return [
-    '',
-    '## Package',
-    '',
-    `- Source code and issues: [${blobBase.replace(/^https:\/\/github\.com\//, '')}](${blobBase}). `
-      + 'Star the repository if the package is useful to you.',
-    pkg.status === 'template'
-      ? `- Template repository: [create a package from it](${blobBase}/generate) on GitHub.`
-      : `- Composer package: [${pkg.packagist}](https://packagist.org/packages/${pkg.packagist}).`,
-    ...(changelog ? [`- Changelog: [CHANGELOG.md](${blobBase}/blob/${ref}/CHANGELOG.md).`] : []),
+    "",
+    "## Package",
+    "",
+    `- Source code and issues: [${blobBase.replace(/^https:\/\/github\.com\//, "")}](${blobBase}). ` +
+      "Star the repository if the package is useful to you.",
+    ...(pkg.type === "tool"
+      ? []
+      : [
+          pkg.status === "template"
+            ? `- Template repository: [create a package from it](${blobBase}/generate) on GitHub.`
+            : `- Composer package: [${pkg.packagist}](https://packagist.org/packages/${pkg.packagist}).`,
+        ]),
+    ...(changelog
+      ? [`- Changelog: [CHANGELOG.md](${blobBase}/blob/${ref}/CHANGELOG.md).`]
+      : []),
   ];
 }
 
 /** Lists files under `dir` recursively, as POSIX paths relative to `dir`, sorted. */
 function listFiles(dir, base = dir) {
-  return readdirSync(dir).sort().flatMap((name) => {
-    const file = path.join(dir, name);
+  return readdirSync(dir)
+    .sort()
+    .flatMap((name) => {
+      const file = path.join(dir, name);
 
-    return statSync(file).isDirectory() ? listFiles(file, base) : [path.relative(base, file).split(path.sep).join('/')];
-  });
+      return statSync(file).isDirectory()
+        ? listFiles(file, base)
+        : [path.relative(base, file).split(path.sep).join("/")];
+    });
 }
 
 /**
@@ -697,18 +904,18 @@ function listFiles(dir, base = dir) {
  * `(invalid composer.json)` when it cannot be read).
  */
 export function packageNameMismatch(dir, expected) {
-  const file = path.join(dir, 'composer.json');
+  const file = path.join(dir, "composer.json");
 
   if (!existsSync(file)) {
-    return '(no composer.json)';
+    return "(no composer.json)";
   }
 
   let found;
 
   try {
-    found = JSON.parse(readFileSync(file, 'utf8')).name;
+    found = JSON.parse(readFileSync(file, "utf8")).name;
   } catch {
-    return '(invalid composer.json)';
+    return "(invalid composer.json)";
   }
 
   return found === expected ? null : String(found);
@@ -722,7 +929,9 @@ export function packageNameMismatch(dir, expected) {
  * @returns {string[]}
  */
 export function missingOrderPages(order, markdown) {
-  const names = new Set(markdown.map((file) => file.replace(/\.md$/i, '').toLowerCase()));
+  const names = new Set(
+    markdown.map((file) => file.replace(/\.md$/i, "").toLowerCase()),
+  );
 
   return order.filter((name) => !names.has(name));
 }
@@ -733,59 +942,97 @@ export function missingOrderPages(order, markdown) {
  * @returns {{ pages: number, images: number, source: string, dir: string, commit: string }
  *   | { skipped: string, source: string, dir: string, commit: string }}
  */
-function syncPackage(pkg, useLocal) {
+export function syncPackage(pkg, useLocal) {
   const { dir, source, commit } = obtainSources(pkg, useLocal);
-  const framework = pkg.type === 'framework';
-  const found = packageNameMismatch(framework ? path.join(dir, pkg.srcDir) : dir, pkg.packagist);
+  const framework = pkg.type === "framework";
+  const found =
+    pkg.type === "tool"
+      ? null
+      : packageNameMismatch(
+          framework ? path.join(dir, pkg.srcDir) : dir,
+          pkg.packagist,
+        );
 
   if (found !== null) {
-    return { skipped: `sources at ${pkg.ref} are "${found}", expected "${pkg.packagist}"`, source, dir, commit };
+    return {
+      skipped: `sources at ${pkg.ref} are "${found}", expected "${pkg.packagist}"`,
+      source,
+      dir,
+      commit,
+    };
   }
 
   if (framework) {
     return { pages: 0, images: 0, source, dir, commit };
   }
 
-  const docsDir = pkg.docsDir.replace(/^\.\/|\/$/g, '');
+  const docsDir = pkg.docsDir.replace(/^\.\/|\/$/g, "");
   const docsPath = path.join(dir, docsDir);
   const docsFiles = existsSync(docsPath) ? listFiles(docsPath) : [];
-  const markdown = docsFiles.filter((file) => /^[^/]+\.md$/i.test(file) && !/^readme\.md$/i.test(file));
-  const images = new Set(docsFiles.filter((file) => IMAGE.test(file)).map((file) => `${docsDir}/${file}`));
-  const pages = new Map([['README.md', 'index.md']]);
+  const markdown = docsFiles.filter(
+    (file) => /^[^/]+\.md$/i.test(file) && !/^readme\.md$/i.test(file),
+  );
+  const images = new Set(
+    docsFiles
+      .filter((file) => IMAGE.test(file))
+      .map((file) => `${docsDir}/${file}`),
+  );
+  const pages = new Map([["README.md", "index.md"]]);
 
   for (const file of markdown) {
     pages.set(`${docsDir}/${file}`, file.toLowerCase());
   }
 
-  const blobBase = pkg.repo.replace(/\.git$/, '').replace(/\/$/, '');
-  const rewrite = linkRewriter({ sourceDir: dir, blobBase, ref: pkg.ref, docsDir, pages, images });
+  const blobBase = pkg.repo.replace(/\.git$/, "").replace(/\/$/, "");
+  const rewrite = linkRewriter({
+    sourceDir: dir,
+    blobBase,
+    ref: pkg.ref,
+    docsDir,
+    pages,
+    images,
+  });
   const order = pkg.order ?? DEFAULT_ORDER;
 
   // A stale `order` entry (a guide the package removed) only costs a sidebar slot: warn, do not fail the build.
-  for (const name of pkg.order === undefined ? [] : missingOrderPages(pkg.order, markdown)) {
-    process.stderr.write(`[sync] ${pkg.name}: "order" lists "${name}", but ${docsDir}/${name}.md does not exist.\n`);
+  for (const name of pkg.order === undefined
+    ? []
+    : missingOrderPages(pkg.order, markdown)) {
+    process.stderr.write(
+      `[sync] ${pkg.name}: "order" lists "${name}", but ${docsDir}/${name}.md does not exist.\n`,
+    );
   }
 
-  const outDir = path.join(OUTPUT_DIR, pkg.name);
+  const outDir = path.join(
+    pkg.type === "tool" ? TOOLS_OUTPUT_DIR : OUTPUT_DIR,
+    pkg.name,
+  );
   const generatedFrom = `${blobBase}@${pkg.ref}`;
   const rank = (name) => {
     const index = order.indexOf(name);
 
-    return index === -1 ? 100 + markdown.map((file) => file.replace(/\.md$/i, '')).indexOf(name) : index + 1;
+    return index === -1
+      ? 100 + markdown.map((file) => file.replace(/\.md$/i, "")).indexOf(name)
+      : index + 1;
   };
-  const extra = packageSection(pkg, blobBase, pkg.ref, existsSync(path.join(dir, 'CHANGELOG.md')));
+  const extra = packageSection(
+    pkg,
+    blobBase,
+    pkg.ref,
+    existsSync(path.join(dir, "CHANGELOG.md")),
+  );
 
   mkdirSync(outDir, { recursive: true });
 
   for (const [sourceFile, outName] of pages) {
-    const isIndex = outName === 'index.md';
-    const page = convertPage(readFileSync(path.join(dir, sourceFile), 'utf8'), {
+    const isIndex = outName === "index.md";
+    const page = convertPage(readFileSync(path.join(dir, sourceFile), "utf8"), {
       sourceFile,
       fallbackTitle: isIndex ? pkg.title : null,
       packageTitle: pkg.title,
       rewrite,
-      order: isIndex ? 0 : rank(outName.replace(/\.md$/, '')),
-      label: isIndex ? 'Overview' : null,
+      order: isIndex ? 0 : rank(outName.replace(/\.md$/, "")),
+      label: isIndex ? "Overview" : null,
       editUrl: `${blobBase}/edit/${pkg.ref}/${sourceFile}`,
       generatedFrom,
       extra: isIndex ? extra : null,
@@ -805,16 +1052,34 @@ function syncPackage(pkg, useLocal) {
 }
 
 function main(argv) {
-  const useLocal = argv.includes('--local') || process.env.SYNC_LOCAL === '1';
-  const strict = argv.includes('--strict');
-  const manifestArg = argv.find((arg) => arg.startsWith('--manifest='));
+  const useLocal = argv.includes("--local") || process.env.SYNC_LOCAL === "1";
+  const strict = argv.includes("--strict");
+  const manifestArg = argv.find((arg) => arg.startsWith("--manifest="));
   const manifestFile = manifestArg
-    ? path.resolve(manifestArg.slice('--manifest='.length))
-    : path.join(ROOT, 'packages.json');
-  const packages = validateManifest(JSON.parse(readFileSync(manifestFile, 'utf8')), path.relative(ROOT, manifestFile));
+    ? path.resolve(manifestArg.slice("--manifest=".length))
+    : path.join(ROOT, "packages.json");
+  const toolsArg = argv.find((arg) => arg.startsWith("--tools-manifest="));
+  // Custom package manifests used by callers/tests are isolated unless tools are explicitly requested.
+  const toolsFile = toolsArg
+    ? path.resolve(toolsArg.slice("--tools-manifest=".length))
+    : manifestArg || !existsSync(path.join(ROOT, "tools.json"))
+      ? null
+      : path.join(ROOT, "tools.json");
+  const entries = JSON.parse(readFileSync(manifestFile, "utf8"));
+  if (toolsFile !== null) {
+    const tools = validateManifest(
+      JSON.parse(readFileSync(toolsFile, "utf8")),
+      path.relative(ROOT, toolsFile),
+    );
+    if (tools.some((entry) => entry.type !== "tool"))
+      throw new Error(`${toolsFile}: expected tool entries only.`);
+    entries.push(...tools);
+  }
+  const packages = validateManifest(entries, path.relative(ROOT, manifestFile));
 
   // The whole directory is generated: start from scratch so removed pages and packages disappear.
   rmSync(OUTPUT_DIR, { recursive: true, force: true });
+  rmSync(TOOLS_OUTPUT_DIR, { recursive: true, force: true });
   rmSync(SKILLS_CACHE, { recursive: true, force: true });
   rmSync(SKILLS_PUBLIC, { recursive: true, force: true });
   const skills = {};
@@ -826,54 +1091,80 @@ function main(argv) {
     const result = syncPackage(pkg, useLocal);
 
     sources[pkg.name] = {
-      type: pkg.type ?? 'package',
-      dir: path.relative(ROOT, result.dir).split(path.sep).join('/'),
+      type: pkg.type ?? "package",
+      dir: path.relative(ROOT, result.dir).split(path.sep).join("/"),
       ref: pkg.ref,
       commit: result.commit,
       source: result.source,
-      skipped: 'skipped' in result ? result.skipped : null,
+      skipped: "skipped" in result ? result.skipped : null,
     };
 
-    if ('skipped' in result) {
+    if ("skipped" in result) {
       // Greppable: `[sync] skipped <name>: ...`. No page is written, so the sidebar hides the package.
-      process.stderr.write(`[sync] skipped ${pkg.name}: ${result.skipped} (${result.source}).\n`);
+      process.stderr.write(
+        `[sync] skipped ${pkg.name}: ${result.skipped} (${result.source}).\n`,
+      );
       skipped++;
       continue;
     }
 
-    if (pkg.type === 'framework') {
-      process.stdout.write(`[sync] ${pkg.name}: sources only (${pkg.srcDir}) from ${result.source}.\n`);
+    if (pkg.type === "framework") {
+      process.stdout.write(
+        `[sync] ${pkg.name}: sources only (${pkg.srcDir}) from ${result.source}.\n`,
+      );
       continue;
     }
 
-    const names = syncSkills(pkg, result.dir, { cacheDir: SKILLS_CACHE, publicDir: SKILLS_PUBLIC,
-      registry: skills, commit: result.commit, source: result.source });
-    process.stdout.write(`[sync] ${pkg.name}: ${result.pages} pages, ${result.images} images, ${names.length} skills from ${result.source}.\n`);
+    const names = syncSkills(pkg, result.dir, {
+      cacheDir: SKILLS_CACHE,
+      publicDir: SKILLS_PUBLIC,
+      registry: skills,
+      commit: result.commit,
+      source: result.source,
+    });
+    process.stdout.write(
+      `[sync] ${pkg.name}: ${result.pages} pages, ${result.images} images, ${names.length} skills from ${result.source}.\n`,
+    );
   }
 
   for (const dir of [SKILLS_CACHE, SKILLS_PUBLIC]) {
     mkdirSync(dir, { recursive: true });
-    writeFileSync(path.join(dir, 'index.json'), `${JSON.stringify({ generated: true, skills }, null, 2)}\n`);
+    writeFileSync(
+      path.join(dir, "index.json"),
+      `${JSON.stringify({ generated: true, skills }, null, 2)}\n`,
+    );
   }
 
   // Input of tools/bin/reference: which sources this run used.
   mkdirSync(path.dirname(SOURCES_FILE), { recursive: true });
-  writeFileSync(SOURCES_FILE, `${JSON.stringify({
-    mode: useLocal ? 'local' : 'clone',
-    manifest: path.relative(ROOT, manifestFile).split(path.sep).join('/'),
-    packages: sources,
-  }, null, 2)}\n`);
+  writeFileSync(
+    SOURCES_FILE,
+    `${JSON.stringify(
+      {
+        mode: useLocal ? "local" : "clone",
+        manifest: path.relative(ROOT, manifestFile).split(path.sep).join("/"),
+        packages: sources,
+      },
+      null,
+      2,
+    )}\n`,
+  );
 
   if (skipped > 0 && strict) {
     throw new Error(`${skipped} package(s) skipped (--strict).`);
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
   try {
     main(process.argv.slice(2));
   } catch (error) {
-    process.stderr.write(`[sync] ${error instanceof Error ? error.message : String(error)}\n`);
+    process.stderr.write(
+      `[sync] ${error instanceof Error ? error.message : String(error)}\n`,
+    );
     process.exitCode = 1;
   }
 }

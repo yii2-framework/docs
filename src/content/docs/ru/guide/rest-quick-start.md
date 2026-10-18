@@ -173,7 +173,7 @@ Content-Type: application/xml
 Дополнительно, вы можете отсортировать коллекции как `http://localhost/users?sort=email` или
 `http://localhost/users?sort=-email`. Фильтрация коллекций как `http://localhost/users?filter[id]=10` или
 `http://localhost/users?filter[email][like]=gmail.com` возможна при использовании
-фильтров данных. Подробнее в секции [Resources](rest-resources.md#filtering-collections).
+фильтров данных. Подробнее в секции [Resources](rest-filtering-collections/index.md).
 
 ## Резюме <span id="summary"></span>
 

@@ -18,7 +18,7 @@ Notez que devez installer [Composer](https://getcomposer.org/) si vous ne l'avez
 
 Par défaut, Composer installe les paquets enregistrés sur [Packagist](https://packagist.org/) — le plus grand dépôt pour les paquets Composer Open Source. Vous pouvez rechercher des extensions sur Packagist. Vous pouvez aussi [créer votre propre dépôt](https://getcomposer.org/doc/05-repositories.md#repository) et configurer Composer pour l'utiliser. Ceci est utile si vous développez des extensions privées que vous ne voulez partager que dans vos propres projets seulement.
 
-Les extensions installées par Composer sont stockées dans le dossier `BasePath/vendor`, où `BasePath` fait référence au [chemin de base](structure-applications.md#basePath) de l'application. Comme Composer est un gestionnaire de dépendances, quand il installe un paquet, il installe aussi automatiquement tous les paquets dont le paquet dépend.
+Les extensions installées par Composer sont stockées dans le dossier `BasePath/vendor`, où `BasePath` fait référence au [chemin de base](../../guide/structure-applications.md#basePath) de l'application. Comme Composer est un gestionnaire de dépendances, quand il installe un paquet, il installe aussi automatiquement tous les paquets dont le paquet dépend.
 
 Par exemple, pour installer l'extension `yiisoft/yii2-imagine`, modifier votre fichier `composer.json` comme indiqué ci-après :
 

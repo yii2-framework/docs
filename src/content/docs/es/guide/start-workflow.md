@@ -30,7 +30,7 @@ Estas páginas comparten un encabezado y un pie. El encabezado contiene una barr
 la navegación entre las diferentes páginas.
 
 También deberías ver una barra en la parte inferior de la ventana del navegador.
-Esta es la útil [herramienta de depuración](tool-debugger.md) provista por Yii para registrar y mostrar mucha información de depuración, tal como los mensajes de log, response status, las consultas ejecutadas a la base de datos, y más.
+Esta es la útil [herramienta de depuración](../../extensions/debug/index.md) provista por Yii para registrar y mostrar mucha información de depuración, tal como los mensajes de log, response status, las consultas ejecutadas a la base de datos, y más.
 
 Adicionalmente a la aplicación web, hay un script de consola llamado `yii`, localizado en el directorio base de la aplicación.
 El script puede ser utilizado para ejecutar tareas de fondo y tareas de mantenimiento de la aplicación, las cuales son descritas

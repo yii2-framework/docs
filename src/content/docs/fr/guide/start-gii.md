@@ -115,7 +115,7 @@ Ce qui suit est la liste des fichiers générés par Gii, au cas où vous souhai
 - Modèles: `models/Country.php` et `models/CountrySearch.php`
 - Vues: `views/country/*.php`
 
-> Info: Gii est conçu pour être un outil de génération de code hautement personnalisable et extensible. L’utiliser avec sagesse peut grandement accélérer le développement de vos applications. Pour plus de détails, merci de vous référer à la section [Gii](tool-gii.md).
+> Info: Gii est conçu pour être un outil de génération de code hautement personnalisable et extensible. L’utiliser avec sagesse peut grandement accélérer le développement de vos applications. Pour plus de détails, merci de vous référer à la section [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide).
 
 ## Résumé <span id="summary"></span>
 

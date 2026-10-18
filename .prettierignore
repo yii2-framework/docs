@@ -13,6 +13,7 @@ eval/out/
 # Generated build inputs (see .gitignore).
 src/content/docs/api/
 src/content/docs/extensions/
+src/content/docs/development-tools/
 
 # Upstream guide and internals content, in every locale, is synced and translated elsewhere and is not reformatted
 # here (the same paths are skipped by codespell in .github/linters/.codespellrc).

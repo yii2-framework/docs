@@ -10,7 +10,7 @@ using them in a format suitable for [[yii\db\QueryInterface::where()]].
 ## Configuring Data Provider For Filtering <span id="configuring-data-provider-for-filtering"></span>
 
 As mentioned in the [Collections](rest-resources.md#collections) section, we can use
-[Data Provider](output-data-providers.md#data-providers) to output sorted and paginated list of resources. We can also use
+[Data Provider](output-data-providers.md) to output sorted and paginated list of resources. We can also use
 it to filter that list.
 
 ```php

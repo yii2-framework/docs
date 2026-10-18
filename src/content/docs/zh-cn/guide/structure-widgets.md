@@ -16,8 +16,8 @@ use yii\jui\DatePicker;
 ```
 
 Yii提供许多优秀的小部件，比如 [[yii\widgets\ActiveForm|active form]]，[[yii\widgets\Menu|menu]]，
-[jQuery UI widgets](widget-jui.md)，
-[Twitter Bootstrap widgets](widget-bootstrap.md)。
+[jQuery UI widgets](https://www.yiiframework.com/extension/yiisoft/yii2-jui/doc/guide)，
+[Twitter Bootstrap widgets](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap/doc/guide)。
 接下来介绍小部件的基本知识，如果你想了解某个小部件请参考对应的类 API 文档。
 
 ## 使用小部件 <span id="using-widgets"></span>
@@ -212,7 +212,7 @@ use app\components\HelloWidget;
 小部件设计时应是独立的，也就是说使用一个小部件时候，
 可以直接丢弃它而不需要额外的处理。
 但是当小部件需要外部资源如 CSS，JavaScript，图片等会比较棘手，
-幸运的时候Yii提供 [资源包](structure-asset-bundles.md) 来解决这个问题。
+幸运的时候Yii提供 [资源包](structure-assets.md) 来解决这个问题。
 
 当一个小部件只包含视图代码，它和[视图](structure-views.md)很相似，
 实际上，在这种情况下，唯一的区别是小部件是可以重用类，

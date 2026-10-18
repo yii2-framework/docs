@@ -46,7 +46,7 @@ Tous droits réservés.
 - **TBD** [Requêtes](runtime-requests.md)
 - **TBD** [Réponses](runtime-responses.md)
 - **TBD** [Sessions et Cookies](runtime-sessions-cookies.md)
-- [Génération et traitement des URL](runtime-url-handling.md)
+- [Génération et traitement des URL](runtime-routing.md)
 - [Gestion des erreurs](runtime-handling-errors.md)
 - [Journalisation](runtime-logging.md)
 
@@ -68,10 +68,10 @@ Tous droits réservés.
 - [Constructeur de requête](db-query-builder.md) - Interrogation de base de données en utilisant une couche d'abstraction simple
 - [Active Record](db-active-record.md) - Active Record ORM, récupération et manipulation d'enregistrements et définition des relations
 - [Migrations](db-migrations.md) - Contrôle de version de vos bases de données dans un environnement de développement en équipe
-- **TBD** [Sphinx](db-sphinx.md)
-- **TBD** [Redis](db-redis.md)
-- **TBD** [MongoDB](db-mongodb.md)
-- **TBD** [ElasticSearch](db-elastic-search.md)
+- **TBD** [Sphinx](https://www.yiiframework.com/extension/yiisoft/yii2-sphinx/doc/guide)
+- **TBD** [Redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/guide)
+- **TBD** [MongoDB](https://www.yiiframework.com/extension/yiisoft/yii2-mongodb/doc/guide)
+- **TBD** [ElasticSearch](https://www.yiiframework.com/extension/yiisoft/yii2-elasticsearch/doc/guide)
 
 ## Getting Data from Users
 
@@ -94,7 +94,7 @@ Tous droits réservés.
 - [Authentification](security-authentication.md)
 - [Autorisation](security-authorization.md)
 - [Gestion des mots de passe](security-passwords.md)
-- **TBD** [Clients authentification](security-auth-clients.md)
+- **TBD** [Clients authentification](https://www.yiiframework.com/extension/yiisoft/yii2-authclient/doc/guide)
 - **TBD** [Meilleures pratiques](security-best-practices.md)
 
 ## Cache
@@ -119,9 +119,9 @@ Tous droits réservés.
 
 ## Outils de développement
 
-- [Barre de débogage, et débogueur](tool-debugger.md)
-- [Générer du code avec Gii](tool-gii.md)
-- **TBD** [Générer une documentation API](tool-api-doc.md)
+- [Barre de débogage, et débogueur](../../extensions/debug/index.md)
+- [Générer du code avec Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide)
+- **TBD** [Générer une documentation API](https://www.yiiframework.com/extension/yiisoft/yii2-apidoc)
 
 ## Tests
 
@@ -133,16 +133,16 @@ Tous droits réservés.
 
 ## Etendre Yii
 
-- [Créer des extensions](extend-creating-extensions.md)
-- [Personnalisation du code du noyau](extend-customizing-core.md)
-- [Utiliser des libraires tierces](extend-using-libs.md)
-- **TBD** [Utiliser Yii dans d'autres systèmes](extend-embedding-in-others.md)
-- **TBD** [Utiliser Yii 1.1 et 2.0 ensemble](extend-using-v1-v2.md)
-- [Utiliser Composer](extend-using-composer.md)
+- [Créer des extensions](structure-extensions.md#creating-extensions)
+- [Personnalisation du code du noyau](concept-di-container.md#practical-usage)
+- [Utiliser des libraires tierces](tutorial-yii-integration.md#using-libs-in-yii)
+- **TBD** [Utiliser Yii dans d'autres systèmes](tutorial-yii-integration.md#using-yii-in-others)
+- **TBD** [Utiliser Yii 1.1 et 2.0 ensemble](tutorial-yii-integration.md#using-both-yii2-yii1)
+- [Utiliser Composer](tutorial-yii-integration.md#using-composer-packages)
 
 ## Sujets avancés
 
-- [Modèle application avancée](tutorial-advanced-app.md)
+- [Modèle application avancée](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)
 - [Créer une application à partir de zéro](tutorial-start-from-scratch.md)
 - [Commandes console](tutorial-console.md)
 - [Validateurs de base](tutorial-core-validators.md)
@@ -162,8 +162,8 @@ Tous droits réservés.
 - Menu: link to demo page
 - LinkPager: link to demo page
 - LinkSorter: link to demo page
-- [Widgets Bootstrap](bootstrap-widgets.md)
-- **TBD** [Widgets Jquery UI](jui-widgets.md)
+- [Widgets Bootstrap](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap/doc/guide)
+- **TBD** [Widgets Jquery UI](https://www.yiiframework.com/extension/yiisoft/yii2-jui/doc/guide)
 
 ## Assistants
 
@@ -171,4 +171,4 @@ Tous droits réservés.
 - **TBD** [ArrayHelper](helper-array.md)
 - **TBD** [Html](helper-html.md)
 - **TBD** [Url](helper-url.md)
-- **TBD** [Security](helper-security.md)
+- **TBD** [Security](security-cryptography.md)

@@ -11,7 +11,7 @@ Using the Yii logging framework involves the following steps:
 
 - Record [log messages](#log-messages) at various places in your code;
 - Configure [log targets](#log-targets) in the application configuration to filter and export log messages;
-- Examine the filtered logged messages exported by different targets (e.g. the [Yii debugger](tool-debugger.md)).
+- Examine the filtered logged messages exported by different targets (e.g. the [Yii debugger](../extensions/debug/index.md)).
 
 In this section, we will mainly describe the first two steps.
 
@@ -399,5 +399,5 @@ If you miss `\Yii::endProfile('block1')` or switch the order of `\Yii::endProfil
 `\Yii::endProfile('block2')`, the performance profiling will not work.
 
 For each code block being profiled, a log message with the severity level `profile` is recorded. You can configure
-a [log target](#log-targets) to collect such messages and export them. The [Yii debugger](tool-debugger.md) has
+a [log target](#log-targets) to collect such messages and export them. The [Yii debugger](../extensions/debug/index.md) has
 a built-in performance profiling panel showing the profiling results.

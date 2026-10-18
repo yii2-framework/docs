@@ -3,7 +3,7 @@ title: "使用 Gii 生成代码"
 description: "本章将介绍如何使用 Gii 去自动生成 Web 站点常用功能的代码。使用 Gii 生成代码非常简单， 只要按照 Gii 页面上的介绍输入正确的信息即可。"
 ---
 
-本章将介绍如何使用 [Gii](tool-gii.md) 去自动生成 Web 站点常用功能的代码。使用 Gii 生成代码非常简单，
+本章将介绍如何使用 [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) 去自动生成 Web 站点常用功能的代码。使用 Gii 生成代码非常简单，
 只要按照 Gii 页面上的介绍输入正确的信息即可。
 
 贯穿本章节，你将会学到：
@@ -15,7 +15,7 @@ description: "本章将介绍如何使用 Gii 去自动生成 Web 站点常用�
 
 ## 开始 Gii <span id="starting-gii"></span>
 
-[Gii](tool-gii.md) 是 Yii 中的一个[模块](structure-modules.md)。
+[Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) 是 Yii 中的一个[模块](structure-modules.md)。
 可以通过配置应用的 [[yii\base\Application::modules|modules]] 属性开启它。通常来讲在 `config/web.php` 文件中会有以下配置代码：
 
 ```php
@@ -123,7 +123,7 @@ https://hostname/index.php?r=country/index
 
 > Info: Gii 被设计成高度可定制和可扩展的代码生成工具。
 > 使用它可以大幅提高应用开发速度。
-> 请参考 [Gii](tool-gii.md) 章节了解更多内容。
+> 请参考 [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) 章节了解更多内容。
 
 ## 总结 <span id="summary"></span>
 

@@ -249,7 +249,7 @@ https://hostname/index.php?r=country/index&page=2
 本章节中你学到了如何使用数据库。你还学到了如何取出并使用
 [[yii\data\Pagination]] 和 [[yii\widgets\LinkPager]] 显示数据。
 
-下一章中你会学到如何使用 Yii 中强大的代码生成器 [Gii](tool-gii.md)，
+下一章中你会学到如何使用 Yii 中强大的代码生成器 [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide)，
 去帮助你实现一些常用的功能需求，
 例如增查改删（CRUD）数据表中的数据。
 事实上你之前所写的代码全部都可以由 Gii 自动生成。

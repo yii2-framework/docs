@@ -11,7 +11,7 @@ description: "Список шагов для выпуска релиза фре�
 
 ## Команда release
 
-Эти шаги автоматизированы в [консольной команде release](../../build/controllers/ReleaseController.php), которая включена в репозиторий разработки фреймворка.
+Эти шаги автоматизированы в [консольной команде release](https://github.com/yiisoft/yii2/blob/22.0/build/controllers/ReleaseController.php), которая включена в репозиторий разработки фреймворка.
 
 Команду release можно вызвать через Yii-приложение в директории `build`:
 

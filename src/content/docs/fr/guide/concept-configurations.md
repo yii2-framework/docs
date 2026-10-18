@@ -233,7 +233,7 @@ Vous pouvez assigner à `YII_ENV` une des valeurs suivantes :
 - `dev`: environnement de développement. La constante `YII_ENV_DEV` est évaluée comme étant `true` (vrai).
 - `test`: environnement de test. La constante `YII_ENV_TEST` est évaluée comme étant `true` (vrai).
 
-Avec ces constantes d'environnement, vous pouvez spécifier les configurations en fonction de l'environnement courant. Par exemple, votre configuration d'application peut contenir le code suivant pour activer la [barre de débogage et le module de débogage](tool-debugger.md) dans l'environnement de développement seulement :
+Avec ces constantes d'environnement, vous pouvez spécifier les configurations en fonction de l'environnement courant. Par exemple, votre configuration d'application peut contenir le code suivant pour activer la [barre de débogage et le module de débogage](../../extensions/debug/index.md) dans l'environnement de développement seulement :
 
 ```php
 $config = [...];

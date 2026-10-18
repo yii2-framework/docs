@@ -67,7 +67,7 @@ Yii の場合は、パーミッションを設定すること、および、ソ�
 
 ## package パッケージ
 
-[バンドル](#bundle) を参照。
+[バンドル](../../guide/glossary.md#bundle) を参照。
 
 # V
 

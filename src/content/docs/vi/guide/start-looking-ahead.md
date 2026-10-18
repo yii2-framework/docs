@@ -5,7 +5,7 @@ description: 'Nếu bạn đã đọc và thực hành các bài viết trong ch
 
 Nếu bạn đã đọc và thực hành các bài viết trong chuyên mục "Getting Started", thì bạn có thể xây dựng ứng dụng Yii hoàn chỉnh. Trong những phần trước, bạn đã được tìm hiều để thực hiện một số chức năng cơ bản
 , như lấy thông tin từ user qua form, thu thập thông tin từ CSDL, và hiển thị dữ liệu cùng với phân trang
-. Bạn cũng được tìm hiểu sử dụng [Gii](tool-gii.md) đểsinh code tự động. Sử dụng Gii thật đơn giản chỉ việc điển các thông tin vào các form và gii sẽ sinh code tự động, và giảm tải số lượng lơn
+. Bạn cũng được tìm hiểu sử dụng [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) đểsinh code tự động. Sử dụng Gii thật đơn giản chỉ việc điển các thông tin vào các form và gii sẽ sinh code tự động, và giảm tải số lượng lơn
 các chức năng tương tự.
 
 Trong phần này sẽ tổng hợp những tài nguyên về tìm hiểu Yii framework.

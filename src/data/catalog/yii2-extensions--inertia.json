@@ -1,0 +1,32 @@
+{
+    "id": "yii2-extensions/inertia",
+    "name": "Inertia for Yii2",
+    "summary": "Yii2 adapter for the framework-agnostic Inertia.js PHP protocol core.",
+    "family": "yii2-extensions",
+    "ecosystems": ["yii2"],
+    "kind": "extension",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "yii2",
+            "constraint": "^22.0@dev",
+            "evidence": "https://github.com/yii2-extensions/inertia/blob/97582aaa3ce6cac4f064331f7a8c7caf4e1e6373/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/inertia/",
+    "repository": "https://github.com/yii2-extensions/inertia",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/yii2-extensions/inertia/blob/97582aaa3ce6cac4f064331f7a8c7caf4e1e6373/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "97582aaa3ce6cac4f064331f7a8c7caf4e1e6373",
+        "reviewedAt": "2026-10-18",
+        "url": "https://github.com/yii2-extensions/inertia/blob/97582aaa3ce6cac4f064331f7a8c7caf4e1e6373/composer.json",
+        "kind": "source"
+    }
+}

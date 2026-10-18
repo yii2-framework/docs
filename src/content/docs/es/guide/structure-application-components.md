@@ -3,7 +3,7 @@ title: "Componentes de la Aplicación"
 description: "Las aplicaciones son service locators (localizadores de servicios)."
 ---
 
-Las aplicaciones son [service locators](concept-service-locators.md) (localizadores de servicios). Ellas albergan
+Las aplicaciones son [service locators](concept-service-locator.md) (localizadores de servicios). Ellas albergan
 un grupo de los llamados _componentes de aplicación_ que proveen diferentes servicios para procesar el `request` (petición).
 Por ejemplo, el componente `urlManager` es responsable por rutear Web `requests` (peticiones) a los controladores apropiados;
 el componente `db` provee servicios relacionados a base de datos; y así sucesivamente.
@@ -62,20 +62,20 @@ como lo haces con componentes normales de la aplicación. Cuando configuras un c
 si no especificas su nombre de clase, la clase por defecto será utilizada.
 
 - [[yii\web\AssetManager|assetManager]]: maneja los `assets bundles` y su publicación.
-  Consulta la sección [Menajando Assets](output-assets.md) para más detalles.
+  Consulta la sección [Menajando Assets](structure-assets.md) para más detalles.
 - [[yii\db\Connection|db]]: representa una conexión a la base de datos a través de la cual puedes realizar consultas a la misma.
   Ten en cuenta que cuando configuras este componente, debes especificar el nombre de clase así como otras
   propiedades requeridas por el mismo, como [[yii\db\Connection::dsn]].
   Por favor consulta la sección [Data Access Objects](db-dao.md) para más detalles.
 - [[yii\base\Application::errorHandler|errorHandler]]: maneja errores y excepciones de PHP.
-  Por favor consulta la sección [Handling Errors](tutorial-handling-errors.md) para más detalles.
+  Por favor consulta la sección [Handling Errors](runtime-handling-errors.md) para más detalles.
 - [[yii\base\Formatter|formatter]]: da formato a los datos cuando son mostrados a los usuarios. Por ejemplo, un número
   puede ser mostrado usando un separador de miles, una fecha en una forma extensa.
   Por favor consulta la sección [Formato de Datos](output-formatting.md) para más detalles.
 - [[yii\i18n\I18N|i18n]]: soporta traducción y formato de mensajes.
   Por favor consulta la sección [Internacionalización](tutorial-i18n.md) para más detalles.
 - [[yii\log\Dispatcher|log]]: maneja a dónde dirigir los logs.
-  Por favor consulta la sección [Logging](tutorial-logging.md) para más detalles.
+  Por favor consulta la sección [Logging](runtime-logging.md) para más detalles.
 - [[yii\swiftmailer\Mailer|mail]]: soporta construcción y envío de emails.
   Por favor consulta la sección [Enviando Emails](tutorial-mailing.md) para más detalles.
 - [[yii\base\Application::response|response]]: representa la respuesta enviada a los usuarios.
@@ -86,7 +86,7 @@ si no especificas su nombre de clase, la clase por defecto será utilizada.
   en [[yii\web\Application|alpicaciones Web]].
   Por favor consulta la sección [Sessions and Cookies](runtime-sessions-cookies.md) para más detalles.
 - [[yii\web\UrlManager|urlManager]]: soporta el parseo y generación de URLs.
-  Por favor consulta la sección [URL Parsing and Generation](runtime-url-handling.md) para más detalles.
+  Por favor consulta la sección [URL Parsing and Generation](runtime-routing.md) para más detalles.
 - [[yii\web\User|user]]: representa la información e autenticación del usuario. Este componente sólo está disponible
   en [[yii\web\Application|aplicaciones Web]]
   Por favor consulta la sección [Autenticación](security-authentication.md) para más detalles.

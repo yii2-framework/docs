@@ -45,7 +45,7 @@ Composer installs the dependencies and its template scripts generate a random `c
 > its document root, as described below.
 
 Next, learn the [application structure](start-workflow.md). To work with a coding agent, follow
-[the application skill setup](../project/ai-agents.md#install-a-skill) from the new application's directory.
+[the application skill setup](../project/ai-agents.md#install-the-relevant-skill) from the new application's directory.
 
 ## Installing from an Archive File <span id="installing-from-archive-file"></span>
 

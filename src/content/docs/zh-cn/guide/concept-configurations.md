@@ -272,7 +272,7 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 
 有了这些环境常量，你就可以根据当下应用运行环境的不同，进行差异化配置。
 例如，应用可以包含下述代码只在开发环境中开启
-[调试工具](tool-debugger.md)。
+[调试工具](../../extensions/debug/index.md)。
 
 ```php
 $config = [...];

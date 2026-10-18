@@ -39,6 +39,10 @@ use function ctype_upper;
 use function dirname;
 use function error_reporting;
 use function file_put_contents;
+use function file_get_contents;
+use function json_decode;
+use function is_array;
+use function is_string;
 use function fwrite;
 use function getenv;
 use function gmdate;
@@ -185,6 +189,23 @@ final class ReferenceCommand
         }
 
         $context = new ReferenceContext();
+        $externalFile = $this->root . '/tools/external-references.json';
+
+        if (is_file($externalFile)) {
+            $external = json_decode((string) file_get_contents($externalFile), true, flags: JSON_THROW_ON_ERROR);
+
+            if (!is_array($external)) {
+                throw new RuntimeException('External references must be a canonical-name to HTTPS URL object.');
+            }
+
+            foreach ($external as $name => $url) {
+                if (!is_string($name) || !is_string($url) || !str_starts_with($url, 'https://')) {
+                    throw new RuntimeException('Invalid external reference: ' . $name);
+                }
+            }
+
+            $context->externalReferences = $external;
+        }
 
         foreach ($manifest->packages as $package) {
             foreach ($this->sourceFiles($package->sourceDir) as $file) {
@@ -209,6 +230,7 @@ final class ReferenceCommand
                 throw new RuntimeException("$name ({$type->sourceFile}) belongs to no package.");
             }
 
+            $context->sourceUrls[$name] = Site::sourceUrl($package, $package->repositoryPath((string) $type->sourceFile));
             $typePackages[$name] = $package;
             $registry[$name] = ['package' => $package, 'kind' => TypeReader::kind($type)];
         }

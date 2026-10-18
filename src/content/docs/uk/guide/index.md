@@ -77,7 +77,7 @@ All Rights Reserved.
 
 - **TBD** [Створення форм](input-forms.md)
 - **TBD** [Перевірка вводу](input-validation.md)
-- **TBD** [Завантаження файлів](input-file-uploading.md)
+- **TBD** [Завантаження файлів](input-file-upload.md)
 - **TBD** [Збір табличного вводу](input-tabular-input.md)
 - **TBD** [Робота з декількома моделями](input-multiple-models.md)
 

@@ -30,6 +30,21 @@
             "errors": 126,
             "warnings": 11,
             "unresolvedLinks": 0
+        },
+        "debug": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "phpstan": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "inertia": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
         }
     }
 }

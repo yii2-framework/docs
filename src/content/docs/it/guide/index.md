@@ -49,7 +49,7 @@ Traduzione italiana a cura di Lorenzo Milesi ([yetopen.it](https://www.yetopen.i
 - [Richieste](runtime-requests.md)
 - [Risposte](runtime-responses.md)
 - **TBD** [Sessioni e cookie](runtime-sessions-cookies.md)
-- [Analisi e generazione URL](runtime-url-handling.md)
+- [Analisi e generazione URL](runtime-routing.md)
 - [Gestione errori](runtime-handling-errors.md)
 - [Log](runtime-logging.md)
 
@@ -71,10 +71,10 @@ Traduzione italiana a cura di Lorenzo Milesi ([yetopen.it](https://www.yetopen.i
 - [Query Builder](db-query-builder.md): Esecuzione di query al database usando un semplice livello di astrazione
 - [Active Record](db-active-record.md): The Active Record ORM, retrieving and manipulating records, and defining relations
 - [Migrazoni](db-migrations.md): Applicare il controllo di versione al database in un ambiente di sviluppo di gruppo
-- **TBD** [Sphinx](db-sphinx.md)
-- **TBD** [Redis](db-redis.md)
-- **TBD** [MongoDB](db-mongodb.md)
-- **TBD** [ElasticSearch](db-elasticsearch.md)
+- **TBD** [Sphinx](https://www.yiiframework.com/extension/yiisoft/yii2-sphinx/doc/guide)
+- **TBD** [Redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/guide)
+- **TBD** [MongoDB](https://www.yiiframework.com/extension/yiisoft/yii2-mongodb/doc/guide)
+- **TBD** [ElasticSearch](https://www.yiiframework.com/extension/yiisoft/yii2-elasticsearch/doc/guide)
 
 ## Ricezione dati dagli utenti
 
@@ -98,7 +98,7 @@ Traduzione italiana a cura di Lorenzo Milesi ([yetopen.it](https://www.yetopen.i
 - [Autenticazione](security-authentication.md)
 - [Autorizzazione](security-authorization.md)
 - [Utilizzo delle password](security-passwords.md)
-- **TBD** [Auth Clients](security-auth-clients.md)
+- **TBD** [Auth Clients](https://www.yiiframework.com/extension/yiisoft/yii2-authclient/doc/guide)
 - **TBD** [Buona prassi](security-best-practices.md)
 
 ## Cache
@@ -123,9 +123,9 @@ Traduzione italiana a cura di Lorenzo Milesi ([yetopen.it](https://www.yetopen.i
 
 ## Strumenti di sviluppo
 
-- [Barra di debug e debugger](tool-debugger.md)
-- [Generazione codice con Gii](tool-gii.md)
-- **TBD** [Generazione documentazione API](tool-api-doc.md)
+- [Barra di debug e debugger](../../extensions/debug/index.md)
+- [Generazione codice con Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide)
+- **TBD** [Generazione documentazione API](https://www.yiiframework.com/extension/yiisoft/yii2-apidoc)
 
 ## Test
 
@@ -138,7 +138,7 @@ Traduzione italiana a cura di Lorenzo Milesi ([yetopen.it](https://www.yetopen.i
 
 ## Argomenti speciali
 
-- [Modello di applicazione avanzata](tutorial-advanced-app.md)
+- [Modello di applicazione avanzata](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)
 - [Creazione di una applicazione da zero](tutorial-start-from-scratch.md)
 - [Comandi da console](tutorial-console.md)
 - [Validazioni predefinite](tutorial-core-validators.md)
@@ -159,8 +159,8 @@ Traduzione italiana a cura di Lorenzo Milesi ([yetopen.it](https://www.yetopen.i
 - Menu: link to demo page
 - LinkPager: link to demo page
 - LinkSorter: link to demo page
-- [Widget Bootstrap](widget-bootstrap.md)
-- [Widget Jquery UI](widget-jui.md)
+- [Widget Bootstrap](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap/doc/guide)
+- [Widget Jquery UI](https://www.yiiframework.com/extension/yiisoft/yii2-jui/doc/guide)
 
 ## Helper
 
@@ -168,4 +168,4 @@ Traduzione italiana a cura di Lorenzo Milesi ([yetopen.it](https://www.yetopen.i
 - **TBD** [ArrayHelper](helper-array.md)
 - **TBD** [Html](helper-html.md)
 - **TBD** [Url](helper-url.md)
-- **TBD** [Security](helper-security.md)
+- **TBD** [Security](security-cryptography.md)

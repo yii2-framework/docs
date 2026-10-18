@@ -85,7 +85,7 @@ Tất cả bản quyền đã được bảo hộ (All Rights Reserved).
 
 ## Hiển thị dữ liệu
 
-- [Định dạng dữ liệu (Data Formatting)](output-formatter.md)
+- [Định dạng dữ liệu (Data Formatting)](output-formatting.md)
 - [Phân trang (Pagination)](output-pagination.md)
 - [Sắp xếp (Sorting)](output-sorting.md)
 - [Cung cấp dữ liệu ra (Data Providers)](output-data-providers.md)

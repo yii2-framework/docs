@@ -189,7 +189,7 @@ Content-Type: application/json; charset=UTF-8
 さらに、`http://localhost/users?sort=email` や `http://localhost/users?sort=-email` のように、コレクションをソートすることも出来ます。
 `http://localhost/users?filter[id]=10` や `http://localhost/users?filter[email][like]=gmail.com` のように、
 コレクションをフィルタリングすることも、データ・フィルターを使って実装することが出来ます。
-詳細は、[リソース](rest-resources.md#filtering-collections) のセクションを参照して下さい。
+詳細は、[リソース](rest-filtering-collections.md) のセクションを参照して下さい。
 
 ## まとめ <span id="summary"></span>
 

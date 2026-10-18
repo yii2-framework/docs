@@ -172,7 +172,7 @@ class SiteController extends Controller
 ### 默认控制器 <span id="default-controller"></span>
 
 每个应用有一个由[[yii\base\Application::defaultRoute]]属性指定的默认控制器；
-当请求没有指定 [路由](#ids-routes)，该属性值作为路由使用。
+当请求没有指定 [路由](structure-controllers.md#routes)，该属性值作为路由使用。
 对于[[yii\web\Application|Web applications]]网页应用，它的值为 `'site'`，对于 [[yii\console\Application|console applications]]
 控制台应用，它的值为 `help`，所以URL为 `https://hostname/index.php` 表示由 `site` 控制器来处理。
 
@@ -370,7 +370,7 @@ public function actionView(array $id, $version = null)
 ### 默认动作 <span id="default-action"></span>
 
 每个控制器都有一个由 [[yii\base\Controller::defaultAction]] 属性指定的默认操作，
-当[路由](#ids-routes) 只包含控制器ID，
+当[路由](structure-controllers.md#routes) 只包含控制器ID，
 会使用所请求的控制器的默认操作。
 
 默认操作默认为 `index`，如果想修改默认操作，只需简单地在控制器类中覆盖这个属性，

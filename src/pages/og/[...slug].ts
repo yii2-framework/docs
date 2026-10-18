@@ -1,7 +1,11 @@
 /* eslint-disable n/no-missing-import -- Astro virtual modules and sibling .mjs files are resolved by Vite. */
 import { getCollection } from "astro:content";
 import { OGImageRoute } from "astro-og-canvas";
-import { DOCS_VERSION, PROJECT_NAME } from "../../site-meta.mjs";
+import {
+  DOCS_VERSION,
+  PROJECT_NAME,
+  isFrameworkDocumentation,
+} from "../../site-meta.mjs";
 
 // Noto Sans (latin, 400), the plugin's default font, vendored so builds make no request to api.fontsource.org.
 // License: src/assets/fonts/OFL.txt. Local paths are resolved against the project root.
@@ -18,9 +22,11 @@ const entries = await getCollection(
 /** Serves `/og/<slug>.png` (1200x630) for every English page. */
 export const { getStaticPaths, GET } = await OGImageRoute({
   pages: Object.fromEntries(entries.map(({ id, data }) => [id, data])),
-  getImageOptions: (_path, page) => ({
+  getImageOptions: (path, page) => ({
     title: page.title,
-    description: `${PROJECT_NAME} ${DOCS_VERSION}`,
+    description: isFrameworkDocumentation(path)
+      ? `Yii2 Framework ${DOCS_VERSION}`
+      : PROJECT_NAME,
     bgGradient: [
       [24, 32, 48],
       [12, 16, 24],

@@ -1,10 +1,23 @@
-import { getCollection } from 'astro:content';
-import { markdownUrl, resolveMarkdownLink } from './markdown-links.mjs';
-import { REFERENCE_ID } from './reference-id.mjs';
-import { cleanReferenceMarkdown } from './reference-markdown.mjs';
-import { rewriteApiLinksInLine } from './yii-links.mjs';
+import { getCollection } from "astro:content";
+import {
+  markdownUrl,
+  resolveAssetLink,
+  resolveMarkdownLink,
+} from "./markdown-links.mjs";
+import { REFERENCE_ID } from "./reference-id.mjs";
+import { cleanReferenceMarkdown } from "./reference-markdown.mjs";
+import { rewriteApiLinksInLine } from "./yii-links.mjs";
 
-const CONTENT_PREFIX = 'src/content/docs/';
+const CONTENT_PREFIX = "src/content/docs/";
+// Markdown routes need the emitted assets too: source-relative image paths do not exist beside index.md.
+const assets = import.meta.glob(
+  "/src/content/docs/**/*.{avif,gif,jpeg,jpg,png,svg,webp}",
+  {
+    eager: true,
+    query: "?url&no-inline",
+    import: "default",
+  },
+);
 
 /**
  * Rewrites one line of Markdown prose (no code fence): relative `.md` links in inline links, reference definitions
@@ -31,23 +44,27 @@ function rewriteLine(line, rewrite) {
       }
 
       return part
-        .replace(/\]\(\s*([^)\s]+)((?:\s+(?:"[^"]*"|'[^']*'))?\s*)\)/g, (all, href, title) => {
-          const resolved = rewrite(href);
+        .replace(
+          /\]\(\s*([^)\s]+)((?:\s+(?:"[^"]*"|'[^']*'))?\s*)\)/g,
+          (all, href, title) => {
+            const resolved = rewrite(href);
 
-          return resolved === null ? all : `](${resolved}${title})`;
-        })
+            return resolved === null ? all : `](${resolved}${title})`;
+          },
+        )
         .replace(/(\shref=")([^"]*)(")/g, (all, open, href, close) => {
           const resolved = rewrite(href);
 
           return resolved === null ? all : `${open}${resolved}${close}`;
         });
     })
-    .join('');
+    .join("");
 }
 
 /**
  * Returns the page body as served at `<page>/index.md`: the leading H1 removed (the title is prepended by the route)
  * and every relative `.md` link rewritten to the base-absolute Markdown URL (`/docs/guide/x/index.md#a`);
+ * local image paths use the emitted asset URLs;
  * `[[yii\...]]` API references become links to the reference Markdown URLs (unknown ones become inline code). Code
  * fences and inline code are left untouched.
  *
@@ -58,19 +75,28 @@ function rewriteLine(line, rewrite) {
  * @param {string} sourceRelative POSIX path of the source file relative to `src/content/docs`.
  * @param {string} base The Astro `base`.
  * @param {(slug: string) => boolean} [hasEntry] Whether a content entry exists for a slug (default: always).
+ * @param {Record<string, string>} [assetUrls] Local content assets and their emitted URLs.
  */
-export function rewriteMarkdown(body, sourceRelative, base, hasEntry = () => true) {
+export function rewriteMarkdown(
+  body,
+  sourceRelative,
+  base,
+  hasEntry = () => true,
+  assetUrls = {},
+) {
   const rewrite = (href) => {
     const target = resolveMarkdownLink(href, sourceRelative);
 
     if (target === null) {
-      return null;
+      return resolveAssetLink(href, sourceRelative, assetUrls);
     }
 
     let { slug } = target;
 
     if (!hasEntry(slug)) {
-      const unprefixed = slug.includes('/') ? slug.slice(slug.indexOf('/') + 1) : '';
+      const unprefixed = slug.includes("/")
+        ? slug.slice(slug.indexOf("/") + 1)
+        : "";
 
       if (hasEntry(unprefixed)) {
         slug = unprefixed;
@@ -79,7 +105,7 @@ export function rewriteMarkdown(body, sourceRelative, base, hasEntry = () => tru
 
     return `${markdownUrl(slug, base)}${target.hash}`;
   };
-  const lines = body.split('\n');
+  const lines = body.split("\n");
   const output = [];
   let fence = null;
   let seenContent = false;
@@ -89,7 +115,11 @@ export function rewriteMarkdown(body, sourceRelative, base, hasEntry = () => tru
 
     if (fence !== null) {
       output.push(line);
-      if (fenceMatch && fenceMatch[1][0] === fence[0] && fenceMatch[1].length >= fence.length) {
+      if (
+        fenceMatch &&
+        fenceMatch[1][0] === fence[0] &&
+        fenceMatch[1].length >= fence.length
+      ) {
         fence = null;
       }
       continue;
@@ -107,14 +137,14 @@ export function rewriteMarkdown(body, sourceRelative, base, hasEntry = () => tru
       continue;
     }
 
-    if (line.trim() !== '') {
+    if (line.trim() !== "") {
       seenContent = true;
     }
 
     output.push(rewriteApiLinksInLine(rewriteLine(line, rewrite)));
   }
 
-  return output.join('\n').trim();
+  return output.join("\n").trim();
 }
 
 /**
@@ -125,26 +155,37 @@ export function rewriteMarkdown(body, sourceRelative, base, hasEntry = () => tru
  * @param {{ id: string, filePath?: string, body?: string }} entry
  */
 export default async function renderMarkdown(entry) {
-  const filePath = (entry.filePath ?? '').replace(/\\/g, '/');
+  const filePath = (entry.filePath ?? "").replace(/\\/g, "/");
 
   if (!filePath.startsWith(CONTENT_PREFIX)) {
     // starlight-llm-actions catches this, logs a warning and serves the raw source for the page.
-    throw new Error(`Entry "${entry.id}" is not under ${CONTENT_PREFIX}; relative links cannot be resolved.`);
+    throw new Error(
+      `Entry "${entry.id}" is not under ${CONTENT_PREFIX}; relative links cannot be resolved.`,
+    );
   }
 
   const ids = await entryIds();
   const sourceRelative = filePath.slice(CONTENT_PREFIX.length);
-  const body = REFERENCE_ID.test(sourceRelative) ? cleanReferenceMarkdown(entry.body ?? '') : entry.body ?? '';
+  const body = REFERENCE_ID.test(sourceRelative)
+    ? cleanReferenceMarkdown(entry.body ?? "")
+    : (entry.body ?? "");
 
-  return rewriteMarkdown(body, sourceRelative, import.meta.env.BASE_URL,
-    (slug) => ids.has(slug === '' ? 'index' : slug));
+  return rewriteMarkdown(
+    body,
+    sourceRelative,
+    import.meta.env.BASE_URL,
+    (slug) => ids.has(slug === "" ? "index" : slug),
+    assets,
+  );
 }
 
 let ids;
 
 /** Returns the ids of all `docs` entries (loaded once per build). */
 function entryIds() {
-  ids ??= getCollection('docs').then((entries) => new Set(entries.map((entry) => entry.id)));
+  ids ??= getCollection("docs").then(
+    (entries) => new Set(entries.map((entry) => entry.id)),
+  );
 
   return ids;
 }

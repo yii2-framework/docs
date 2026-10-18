@@ -238,7 +238,7 @@ return [
 
 データベースにデータをロードするフィクチャを使う場合は、これらの行が `users` テーブルに対して適用されます。NoSQL フィクスチャ、例えば `mongodb` フィクチャを使う場合は、このデータは `users` コレクションに対して適用されます。
 さまざまなロード戦略を実装する方法などについて公式 [ドキュメント](https://github.com/yiisoft/yii2/blob/master/docs/guide/test-fixtures.md)を参照して下さい。
-上記のフィクスチャのサンプルは `yii2-faker` エクステンションによって生成されました。これについての詳細は、[自動生成のセクション](#auto-generating-fixtures) を参照して下さい。
+上記のフィクスチャのサンプルは `yii2-faker` エクステンションによって生成されました。これについての詳細は、[自動生成のセクション](../../guide/test-fixtures.md#auto-generating-fixtures) を参照して下さい。
 フィクスチャ・クラスの名前は複数形であってはいけません。
 
 ### フィクスチャをロードする

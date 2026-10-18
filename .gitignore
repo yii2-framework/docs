@@ -68,3 +68,9 @@ src/content/docs/extensions/
 
 # Package-owned skill bundles copied by scripts/sync.mjs
 /public/skills/
+
+# Synced non-Composer development tool guides
+src/content/docs/development-tools/
+
+# Private maintainer files
+/internal/

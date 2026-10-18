@@ -210,7 +210,7 @@ lógica en las clases del widget y la presentación en las [vistas](structure-vi
 Los _widgets_ deberían diseñarse para ser autosuficientes. Es decir, cuando se use un _widget_, se
 debería poder ponerlo en una vista sin hacer nada más. Esto puede resultar complicado si un
 _widget_ requiere recursos externos, tales como CSS, JavaScript, imágenes, etc. Afortunadamente
-Yii proporciona soporte para [paquetes de recursos](structure-asset-bundles.md) (_asset bundles_)
+Yii proporciona soporte para [paquetes de recursos](structure-assets.md) (_asset bundles_)
 que se pueden utilizar para resolver este problema.
 
 Cuando un _widget_ sólo contiene código de vista, es muy similar a una [vista](structure-views.md).

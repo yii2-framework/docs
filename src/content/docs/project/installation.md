@@ -1,46 +1,39 @@
 ---
-title: "Installation guide"
-description: "System requirements and Composer installation steps for the project (template page)."
+title: "Set up the documentation site"
+description: "Install the Node and PHP dependencies, import package sources, and preview the documentation locally."
 ---
 
-## System requirements
+These instructions maintain this documentation repository. To create a Yii application, use
+[Installing Yii](../guide/start-installation.md).
 
-- [`PHP`](https://www.php.net/downloads) 8.1 or higher.
-- [`Composer`](https://getcomposer.org/download/) for dependency management.
-- [`Yii2`](https://github.com/yiisoft/yii2) 2.0.53+ or 22.x.
+## Requirements
 
-## Installation
+Use Node 22.12 or newer, npm 9.6.5 or newer, Git, PHP 8.3 or newer, and Composer 2.
+The reference generator requires `mbstring`; the FilePond demos also use `fileinfo` and GD.
+Live demos use the PHP requirements of their package dependencies. Check `tools/composer.json` and
+`tools/demos/composer.json` before changing the PHP version.
 
-### Method 1: Using [Composer](https://getcomposer.org/download/) (recommended)
+## Install and preview
 
-Install the extension.
-
-```bash
-composer require github_username/github_repository-name
-```
-
-### Method 2: Manual installation
-
-Add to your `composer.json`.
-
-```json
-{
-  "require": {
-    "github_username/github_repository-name": "^1.0"
-  }
-}
-```
-
-Then run.
+From this repository's root:
 
 ```bash
-composer update
+npm ci
+composer install --working-dir tools
+npm run build
+npm run preview
 ```
 
-## Next steps
+The preview is available at `http://localhost:4321/docs/`. The build imports upstream guides and package sources,
+generates the PHP API reference and widget demos, builds the site, and checks its internal links and bundle sizes.
+It does not publish the result.
 
-Once the installation is complete.
+To use existing package checkouts at the `localPath` locations declared in the manifests:
 
-- ⚙️ [Configuration Reference](configuration.md)
-- 💡 [Usage Examples](examples.md)
-- 🧪 [Testing Guide](testing.md)
+```bash
+SYNC_LOCAL=1 npm run build
+```
+
+Local mode reads their working trees and exports the framework's configured branch without changing any checkout.
+Use `npm run dev` after generation for interactive documentation edits. Keep generated guides, catalogs and skills
+out of version control; see [source ownership](configuration.md) and [validation](testing.md).

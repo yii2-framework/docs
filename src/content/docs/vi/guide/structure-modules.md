@@ -100,7 +100,7 @@ class PostController extends Controller
 
 Bạn có thể tùy chỉnh không gian tên của lớp controller bằng việc cấu hình thuộc tính [[yii\base\Module::controllerNamespace]]
 . Trong trường hợp một số controllers nằm ngoài không gian tên, bạn có thể làm cho chúng có thể truy cập bằng cách cấu hình
-qua thuộc tính [[yii\base\Module::controllerMap]], tương tự như [điều bạn làm cho ứng dụng](structure-applications.md#controller-map).
+qua thuộc tính [[yii\base\Module::controllerMap]], tương tự như [điều bạn làm cho ứng dụng](structure-applications.md#controllerMap).
 
 ### Views trong Modules <span id="views-in-modules"></span>
 

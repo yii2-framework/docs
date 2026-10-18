@@ -10,7 +10,7 @@ framework or maintaining this documentation site.
 ## Quick start
 
 1. Create the Yii 22.0 application and open its root directory in the coding agent.
-2. Install the `yii2-framework` skill. Add the Bootstrap 6 or FilePond skill from its package only when the application uses that extension.
+2. Install the `yii2-framework` skill. Add a package-owned skill only when its workflow applies to the application.
 3. Confirm that the client discovers the installed skill, then activate it explicitly for the first task.
 4. Start with a small change. Give the agent a known Markdown page when possible; use `llms.txt` only to discover
    documentation when the relevant page is not known.
@@ -24,99 +24,66 @@ not replace your application's requirements or permissions.
 The framework skill follows the `yiisoft/yii2-app-basic` template's `22` branch: PHP 8.3+, Composer autoloading,
 `src/` for application classes, `resources/views/` for views, and `public/` as the Web root.
 
-## Install application skills
+## Install the relevant skill
 
-Choose only the skills relevant to the application:
+Install from the application's root, not inside Composer `vendor/`. Choose the workflow the application uses:
 
-| Skill                     | Use it for                                                                                       |
-| ------------------------- | ------------------------------------------------------------------------------------------------ |
-| `yii2-framework`          | Setup, controllers, ActiveRecord, migrations, forms, and tests in a Yii 22.0 application.        |
-| `yii2-bootstrap6-widgets` | Views using `yii2-extensions/bootstrap6`; install from that package repository.                  |
-| `yii2-filepond-uploads`   | FilePond inputs, encoded upload validation and storage; install from `yii2-extensions/filepond`. |
+| Skill                           | Owning repository               | Guide                                                       |
+| ------------------------------- | ------------------------------- | ----------------------------------------------------------- |
+| `yii2-framework`                | `yii2-framework/docs`           | [Yii application setup](../guide/start-installation.md)     |
+| `yii2-bootstrap6-widgets`       | `yii2-extensions/bootstrap6`    | [Bootstrap 6](../extensions/bootstrap6/agents.md)           |
+| `yii2-filepond-uploads`         | `yii2-extensions/filepond`      | [FilePond uploads](../extensions/filepond/agents.md)        |
+| `yii2-psr-bridge-worker`        | `yii2-extensions/psr-bridge`    | [Worker lifecycle](../extensions/psr-bridge/agents.md)      |
+| `yii2-debug-inspection`         | `yii2-extensions/debug`         | [Debug inspection](../extensions/debug/agents.md)           |
+| `yii2-phpstan-analysis`         | `yii2-extensions/phpstan`       | [Static analysis](../extensions/phpstan/agents.md)          |
+| `yii2-inertia-integration`      | `yii2-extensions/inertia`       | [Inertia integration](../extensions/inertia/agents.md)      |
+| `yii2-localeurls-configuration` | `yii2-extensions/localeurls`    | [Language URLs](../extensions/localeurls/agents.md)         |
+| `yii2-docker-environment`       | `yii2-extensions/docker-images` | [Docker environment](../development-tools/docker/agents.md) |
 
-The Basic Project Template currently uses Bootstrap 5. Add the Bootstrap 6 skill only when the application uses
-that extension; installing a skill does not install or switch the PHP package.
+The Basic Project Template uses Bootstrap 5, so select the Bootstrap 6 skill only when that extension is
+installed. Installing any skill does not install or switch PHP packages.
 
-### From a local documentation checkout
-
-From the application's root directory, list the available skills, then install the selected skill. Replace the
-path with your documentation checkout:
-
-```bash
-npx skills@1.7.2 add /absolute/path/to/docs --list
-npx skills@1.7.2 add /absolute/path/to/docs --skill yii2-framework
-```
-
-The installer can detect the current agent or prompt for a client. Use `--agent` to select a client explicitly;
-keep the default project scope to store the skill with this application. For an extension skill, use its package checkout as the source and its own name with `--skill`.
-
-### From the public repository
-
-First check whether the repository's default branch contains the skills:
+Use the verified `skills` CLI version 1.7.2. List the chosen source before installing:
 
 ```bash
 npx skills@1.7.2 add yii2-framework/docs --list
+npx skills@1.7.2 add yii2-framework/docs --skill yii2-framework --agent codex
 ```
 
-Run the following only after that command lists `yii2-framework`:
-
-```bash
-npx skills@1.7.2 add yii2-framework/docs --skill yii2-framework
-```
-
-The installer reads the default branch. Local work on another branch is not published by this command. If the skill
-is absent, use the local checkout above. Installation examples use the verified `skills` CLI version 1.7.2; recheck
-its options and target directories before using another version.
-
-### Extension skills
-
-Extension packages own their skills. From the application root:
-
-```bash
-npx skills@1.7.2 add yii2-extensions/bootstrap6 --skill yii2-bootstrap6-widgets --agent codex
-npx skills@1.7.2 add yii2-extensions/filepond --skill yii2-filepond-uploads --agent codex
-```
-
-Use `--agent claude-code` or `--agent opencode` for those clients. Check `add <source> --list` first; unpublished
-changes require the local package checkout. The build publishes unchanged bundles at `/docs/skills/<name>/SKILL.md`
-and provenance at `/docs/skills/index.json`. These are generated copies, not independently edited instructions.
-Composer installation alone does not expose a skill under `vendor/` to agents launched in the application root.
+For a package, replace the repository and skill with the matching row above. The installer reads the source's
+default branch; unpublished local changes require its absolute checkout path instead of the public repository.
+Keep project scope. Use `--agent claude-code` or `--agent opencode` for those clients. Recheck options before using
+another installer version.
 
 ### Manual installation
 
-Copy the complete `skills/<name>/` directory from its owning repository into the client directory below, retaining the
-`<name>/SKILL.md` structure. Use one copy per skill for the client; duplicate copies can make selection ambiguous.
-The shared format is [Agent Skills](https://agentskills.io/home), with portable `name`, `description`, `license`,
-and `metadata` frontmatter. Client-specific hooks, tools, permissions, and activation rules are separate features.
+Copy the owning repository's complete `skills/<name>/` directory, including referenced resources, into the client
+path below. Retain the `<name>/SKILL.md` structure and one copy per client. The portable
+[Agent Skills format](https://agentskills.io/home) is separate from client hooks, permissions and activation rules.
+The site distributes unchanged package bundles under `/docs/skills/<name>/`; its
+[generated index](https://yii2-framework.github.io/docs/skills/index.json) records source refs and resource hashes.
+[Contributor source ownership](configuration.md) explains regeneration.
 
 ## Configure and verify the client
 
-The following project paths and activation methods are documented by the clients as of 2026-10-13. They describe
-where to install the same skill file, not a guarantee that every client version or model behaves identically.
+Installation, discovery, activation and the task result are separate checks. A copied skill proves installation;
+a client catalog proves discovery. Neither establishes correct execution.
 
-Treat installation, discovery, activation, and the task result as separate checks. A copied `SKILL.md` proves only
-installation; a client listing the skill proves discovery; neither proves that the model followed it correctly.
+| Client                                                                                           | Project path                                            | Explicit activation                   | Native evidence to retain                                                                       |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [Codex](https://learn.chatgpt.com/docs/build-skills)                                             | `.agents/skills/<name>/SKILL.md`                        | `$<name>` or skill picker             | Discovered workspace origin, matching loaded body, file changes and acceptance results.         |
+| [Claude Code](https://code.claude.com/docs/en/skills)                                            | `.claude/skills/<name>/SKILL.md`                        | `/<name>`                             | Native skill-tool event, consulted pages, file changes and acceptance results.                  |
+| [OpenCode](https://opencode.ai/docs/skills/)                                                     | `.opencode/skills/<name>/SKILL.md` or `.agents/skills/` | Request its native skill tool by name | Available-skills list, skill-tool event and functional results for the selected provider/model. |
+| [GitHub Copilot in VS Code](https://code.visualstudio.com/docs/agent-customization/agent-skills) | `.github/skills/<name>/SKILL.md` or `.agents/skills/`   | `/<name>` in agent chat               | Client discovery and task outputs; installer support alone does not establish activation.       |
+| [Amp](https://ampcode.com/docs/customize/skills)                                                 | `.agents/skills/<name>/SKILL.md`                        | Ask it to load the skill              | `amp skills list`, loading trace and task results.                                              |
 
-| Client                                                                                           | Installation path                                                   | Discovery check                                   | Explicit activation                  | Result verified here                                                                  |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------- |
-| [Codex](https://learn.chatgpt.com/docs/build-skills)                                             | `.agents/skills/<name>/SKILL.md`                                    | Find `yii2-framework` in the skill picker.        | Use `$yii2-framework` or select it.  | Installer target only; no native client run.                                          |
-| [Claude Code](https://code.claude.com/docs/en/skills)                                            | `.claude/skills/<name>/SKILL.md`                                    | Find `/yii2-framework` in the slash-command menu. | Use `/yii2-framework`.               | Skill content passed one smoke task; native discovery and activation were not tested. |
-| [OpenCode](https://opencode.ai/docs/skills/)                                                     | `.opencode/skills/<name>/SKILL.md`; also accepts `.agents/skills/`. | Ask the client to confirm the skill is available. | Ask it to load `yii2-framework`.     | Installer target only; no native client run.                                          |
-| [GitHub Copilot in VS Code](https://code.visualstudio.com/docs/agent-customization/agent-skills) | `.github/skills/<name>/SKILL.md`; also accepts `.agents/skills/`.   | Find `yii2-framework` in the agent chat `/` menu. | Use `/yii2-framework` in agent chat. | Installer target only; no native client run.                                          |
-| [Amp](https://ampcode.com/docs/customize/skills)                                                 | `.agents/skills/<name>/SKILL.md`                                    | Run `amp skills list`.                            | Ask it to load `yii2-framework`.     | Installer target only; no native client run.                                          |
+The installer chooses `.agents/skills/` for Codex, OpenCode, Copilot and Amp, and `.claude/skills/` for Claude Code.
+When using the Codex extension inside VS Code, follow the Codex row. Use separate workspaces for explicit activation
+and automatic selection, and include a negative task where the skill should remain unused.
 
-VS Code is the editor: the Copilot row applies to its Copilot agent. When using the Codex extension in VS Code,
-follow the Codex row instead.
-
-The earlier local verification covered listing and copying the framework and Bootstrap skills with `skills` 1.7.2 for these five installer targets.
-That installer chooses `.agents/skills/` for Codex, OpenCode, Copilot, and Amp, and `.claude/skills/` for Claude Code.
-It does not launch the clients or prove native discovery, activation, or correct output. The recorded Claude smoke
-task supplied the skill content directly to the model; it did not test Claude Code's installed-skill workflow.
-
-After installation, check the client's skill list or picker and request the skill by name. Start with a small task,
-for example: "Use yii2-framework to inspect this application's layout and available checks before editing."
-Confirm the reported paths and tool configuration against the project. A listed Composer script is not proof that
-its tests and configuration files are present; see [Development checks](../guide/start-installation.md#development-checks).
+Start with a small task, inspect the changed files, and run the application's existing checks. A listed Composer
+script is not proof that its configuration or tests exist; see
+[development checks](../guide/start-installation.md#development-checks).
 
 ## Read only the documentation you need
 
@@ -180,8 +147,8 @@ Append `index.md` to a page URL:
 - HTML: `https://yii2-framework.github.io/docs/guide/structure-widgets/`;
 - Markdown: `https://yii2-framework.github.io/docs/guide/structure-widgets/index.md`.
 
-Markdown contains the title, description, and page body. Links between pages point to Markdown versions. The HTML
-page announces its Markdown URL with `<link rel="alternate" type="text/markdown">`.
+Markdown contains the title, description, and page body. Relative page links point to Markdown versions; absolute
+URLs from the source stay unchanged. The HTML page announces its Markdown URL with `<link rel="alternate" type="text/markdown">`.
 
 Translated content also has Markdown URLs, for example `/docs/ja/guide/start-hello/index.md`. For a page shown through
 English fallback in another locale, use its declared alternate URL; do not assume the locale-prefixed Markdown file
@@ -202,16 +169,13 @@ states the version and build date. Markdown page bodies do not currently include
 
 The repository's `AGENTS.md` explains how agents consume the site. `skills/` owns the framework application skill; extension packages own their skills and the site generates their distribution bundles; maintaining this site uses the separate [contributor documentation](index.md).
 
-`eval/README.md` describes versioned acceptance tasks, native-client preparation, and a proposed weekly evaluation cadence. These are manually run
-checks, not evidence of an automated weekly evaluation. The recorded Claude smoke task exercised supplied skill
-content; it does not establish native skill activation or coverage of all tasks and clients.
-
 ## Extension guides
 
 The Extensions navigation and `llms.txt` list packages present in this build. Guides, reference pages, and examples
-are synced from their package sources. [FilePond](../extensions/filepond/index.md) and
-[Locale URLs](../extensions/localeurls/index.md) have published package sources. Bootstrap 6 remains marked
-unpublished in `packages.json`; its documentation is available in local builds that have those sources.
+are synced from their package sources. Match the selected documentation to the
+package state being inspected; a
+site version label or skill bundle checksum alone does not establish that its
+API matches an installed dependency.
 
 For packages with demos, including Bootstrap 6 and FilePond, example snippets are rendered by a Yii 22.0 application
 into static pages at `/docs/demos/<package>/<slug>.html`. HTML examples offer Preview, PHP, and HTML tabs. Markdown

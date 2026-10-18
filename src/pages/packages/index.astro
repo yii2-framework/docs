@@ -1,0 +1,24 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import Catalog from "../../components/portal/Catalog.astro";
+import { packages, withBase } from "../../lib/catalog.mjs";
+
+const markdownUrl = withBase("/packages/index.md", import.meta.env.BASE_URL);
+---
+
+<StarlightPage
+  hasSidebar={false}
+  frontmatter={{
+    title: "Package catalog",
+    description: "Find Yii2, Yii3 and PHP packages with documented compatibility, maintainer relationships and source evidence.",
+    template: "splash",
+    tableOfContents: false,
+    editUrl: false,
+    lastUpdated: false,
+    prev: false,
+    next: false,
+    head: [{ tag: "link", attrs: { rel: "alternate", type: "text/markdown", href: markdownUrl } }],
+  }}
+>
+  <Catalog packages={packages} />
+</StarlightPage>

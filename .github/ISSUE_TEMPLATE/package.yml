@@ -1,0 +1,120 @@
+---
+name: Package proposal
+description: Propose a Yii2, Yii3, or PHP package for the community catalog.
+title: "[Package]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a package by linking its public source and compatibility evidence.
+        A moderator reviews the proposal before a catalog data pull request can be accepted.
+        This issue does not publish, install, or execute a package.
+
+        Listing review covers metadata; it is not a security certification, maintenance guarantee,
+        or official Yii endorsement. Sponsorship and paid work do not affect acceptance or ordering.
+        Use public links only. Do not upload package archives, credentials, private application code,
+        or personal contact details. Report vulnerabilities through the owning project's security policy.
+  - type: input
+    id: composer-name
+    attributes:
+      label: Composer package name
+      description: Use the exact vendor/package name from composer.json.
+      placeholder: vendor/package
+    validations:
+      required: true
+  - type: input
+    id: repository
+    attributes:
+      label: Package repository
+      description: Link to the public source repository.
+      placeholder: https://github.com/owner/repository
+    validations:
+      required: true
+  - type: textarea
+    id: purpose
+    attributes:
+      label: What does the package do?
+      description: Describe its purpose, intended users, and known limitations briefly.
+    validations:
+      required: true
+  - type: dropdown
+    id: ecosystems
+    attributes:
+      label: Ecosystem
+      description: Select only ecosystems supported by the evidence below.
+      multiple: true
+      options:
+        - Yii2
+        - Yii3
+        - Framework-independent PHP
+    validations:
+      required: true
+  - type: input
+    id: php-constraint
+    attributes:
+      label: PHP constraint
+      description: Copy the exact PHP constraint from the selected revision's composer.json.
+      placeholder: ">=8.3"
+    validations:
+      required: true
+  - type: textarea
+    id: source-revision
+    attributes:
+      label: Inspected release and commit
+      description: Provide the release tag or branch, full commit ID, and a link to composer.json at that commit.
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility-evidence
+    attributes:
+      label: Framework compatibility and evidence
+      description: |
+        State exact framework dependency constraints and link to their source at the inspected revision.
+        Distinguish declared requirements from tested combinations. For framework-independent PHP,
+        explain that classification and link to its dependency requirements.
+        Identify Yii 2.0, Yii 22.0, and Yii3 explicitly when relevant.
+    validations:
+      required: true
+  - type: input
+    id: documentation
+    attributes:
+      label: Documentation
+      description: Link to installation and usage guidance for the selected revision.
+      placeholder: https://github.com/owner/repository/blob/commit/README.md
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License and source
+      description: State the license identifier and link to the license file at the selected revision.
+    validations:
+      required: true
+  - type: input
+    id: maintainer
+    attributes:
+      label: Maintainer
+      description: Give the maintainer name and a public source establishing their relationship to the package.
+    validations:
+      required: true
+  - type: dropdown
+    id: relationship
+    attributes:
+      label: Your relationship to the package
+      options:
+        - Maintainer or author
+        - Contributor
+        - User proposing someone else's package
+    validations:
+      required: true
+  - type: checkboxes
+    id: proposal-policy
+    attributes:
+      label: Proposal policy
+      options:
+        - label: I have read the proposal policy above and searched the catalog for an existing listing.
+          required: true
+        - label: I have provided public source links and described the revision that supports my claims.
+          required: true
+        - label: I understand that human review and a catalog data pull request are required before publication.
+          required: true

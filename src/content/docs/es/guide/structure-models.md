@@ -495,7 +495,7 @@ fácil de mantener, se puede seguir la siguiente estrategia:
   clase modelo concreta que extienda a la correspondiente clase modelo base. La clase modelo concreta debe contener
   reglas y lógica que sean específicas para esa aplicación o módulo.
 
-Por ejemplo, en la [Plantilla de Aplicación Avanzada](tutorial-advanced-app.md), definiendo una clase modelo base
+Por ejemplo, en la [Plantilla de Aplicación Avanzada](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide), definiendo una clase modelo base
 'common\models\Post'. Después en la aplicación front end, definiendo y usando una clase modelo concreta
 'frontend\models\Post' que extienda a 'common\models\Post'. Y de forma similar en la aplicación back end, definiendo
 'backend\models\Post'. Con esta estrategia, nos aseguramos que el código de 'frontend\models\Post' es específico para

@@ -22,7 +22,7 @@ As you can see in the screenshot, Yii has already defined a set of commands that
   You can learn more about this command in the [Assets Section](structure-assets.md#using-asset-bundles).
 - [[yii\console\controllers\CacheController|CacheController]] - Allows you to flush application caches.
 - [[yii\console\controllers\FixtureController|FixtureController]] - Manages fixture data loading and unloading for testing purposes.
-  This command is described in more detail in the [Testing Section about Fixtures](test-fixtures.md#managing-fixtures).
+  This command is described in more detail in the [Testing Section about Fixtures](test-fixtures.md#managing-fixtures-with-yii-fixture).
 - [[yii\console\controllers\HelpController|HelpController]] - Provides help information about console commands, this is the default command
   and prints what you have seen in the above output.
 - [[yii\console\controllers\MessageController|MessageController]] - Extracts messages to be translated from source files.

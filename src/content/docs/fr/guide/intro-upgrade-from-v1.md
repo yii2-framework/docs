@@ -20,7 +20,7 @@ Yii 2.0 exploite pleinement [Composer](https://getcomposer.org/), le gestionnair
 du framework, ainsi que des extensions, sont gérées par Composer. Reportez-vous à la section
 [Installer Yii](start-installation.md) pour apprendre comment installer Yii 2.0. Si vous voulez
 créer de nouvelles extensions, ou rendre vos extensions existantes 1.1 compatibles 2.0, reportez-vous à
-la section [Créer des extensions](extend-creating-extensions.md) de ce guide.
+la section [Créer des extensions](structure-extensions.md#creating-extensions) de ce guide.
 
 ## Pré-requis PHP
 
@@ -250,7 +250,7 @@ de fichier de vue en correspondance avec un chemin de fichier de vue thématisé
 En outre, il n'y a plus de composant `CThemeManager`. A la place, `theme` est une propriété configurable du composant `view`
 de l'application.
 
-Reportez-vous à la section [Thématisation](tutorial-theming.md) pour plus de détails.
+Reportez-vous à la section [Thématisation](output-theming.md) pour plus de détails.
 
 ## Applications en ligne de commande
 

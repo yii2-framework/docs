@@ -389,6 +389,14 @@ final class GenerationTest extends TestCase
         self::assertArrayNotHasKey('getClassName()', $widget['members'], 'Inherited members stay on the parent.');
     }
 
+    public function testInheritedUnresolvedLinksRemainReportedAtTheirOwningDeclaration(): void
+    {
+        $report = json_decode((string) file_get_contents(self::$root . '/.cache/reference/report.json'), true);
+        self::assertArrayHasKey('missingFixtureMember()', $report['packages']['yii2']['topUnresolved']);
+        self::assertArrayNotHasKey('missingFixtureMember()', $report['packages']['pkg']['topUnresolved'] ?? []);
+        self::assertStringContainsString('missingFixtureMember()', $this->page('extensions/pkg/reference/Alert.md'));
+    }
+
     private function page(string $path): string
     {
         return (string) file_get_contents(self::$root . '/src/content/docs/' . $path);

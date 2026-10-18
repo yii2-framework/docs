@@ -1,5 +1,5 @@
-import { slug as githubSlug } from 'github-slugger';
-import path from 'node:path';
+import { slug as githubSlug } from "github-slugger";
+import path from "node:path";
 
 /**
  * Returns the site slug of a content file path relative to `src/content/docs`, using the rules of Astro's glob
@@ -10,10 +10,14 @@ import path from 'node:path';
  * @returns {string} The slug, e.g. `ja/guide/start-hello`.
  */
 export function contentPathToSlug(relativePath) {
-  const withoutExt = relativePath.replace(/\.mdx?$/, '');
-  const slug = withoutExt.split('/').map((segment) => githubSlug(segment)).join('/').replace(/\/index$/, '');
+  const withoutExt = relativePath.replace(/\.mdx?$/, "");
+  const slug = withoutExt
+    .split("/")
+    .map((segment) => githubSlug(segment))
+    .join("/")
+    .replace(/\/index$/, "");
 
-  return slug === 'index' ? '' : slug;
+  return slug === "index" ? "" : slug;
 }
 
 /**
@@ -25,7 +29,12 @@ export function contentPathToSlug(relativePath) {
  * link is not a relative Markdown link inside the content directory.
  */
 export function resolveMarkdownLink(href, sourceRelative) {
-  if (/^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith('//') || href.startsWith('#') || href.startsWith('/')) {
+  if (
+    /^[a-z][a-z0-9+.-]*:/i.test(href) ||
+    href.startsWith("//") ||
+    href.startsWith("#") ||
+    href.startsWith("/")
+  ) {
     return null;
   }
 
@@ -35,13 +44,15 @@ export function resolveMarkdownLink(href, sourceRelative) {
     return null;
   }
 
-  const target = path.posix.normalize(path.posix.join(path.posix.dirname(sourceRelative), match[1]));
+  const target = path.posix.normalize(
+    path.posix.join(path.posix.dirname(sourceRelative), match[1]),
+  );
 
-  if (target.startsWith('../')) {
+  if (target.startsWith("../")) {
     return null;
   }
 
-  return { slug: contentPathToSlug(target), hash: match[2] ?? '' };
+  return { slug: contentPathToSlug(target), hash: match[2] ?? "" };
 }
 
 /**
@@ -51,9 +62,9 @@ export function resolveMarkdownLink(href, sourceRelative) {
  * @param {string} base The Astro `base`, with or without a trailing slash.
  */
 export function pageUrl(slug, base) {
-  const prefix = `${base.replace(/\/+$/, '')}/`;
+  const prefix = `${base.replace(/\/+$/, "")}/`;
 
-  return slug === '' ? prefix : `${prefix}${slug}/`;
+  return slug === "" ? prefix : `${prefix}${slug}/`;
 }
 
 /**
@@ -64,4 +75,24 @@ export function pageUrl(slug, base) {
  */
 export function markdownUrl(slug, base) {
   return `${pageUrl(slug, base)}index.md`;
+}
+
+/** Resolves a local content asset against its source file to the URL emitted by Vite. */
+export function resolveAssetLink(href, sourceRelative, assets) {
+  if (
+    /^[a-z][a-z0-9+.-]*:/i.test(href) ||
+    href.startsWith("/") ||
+    href.startsWith("#")
+  ) {
+    return null;
+  }
+
+  const match = /^([^?#]+)([?#].*)?$/.exec(href);
+  if (!match) return null;
+  const source = path.posix.normalize(
+    path.posix.join(path.posix.dirname(sourceRelative), match[1]),
+  );
+  const url = assets[`/src/content/docs/${source}`];
+
+  return typeof url === "string" ? `${url}${match[2] ?? ""}` : null;
 }

@@ -15,7 +15,7 @@ Shuningdek shuni unutmangki Yii 2.0 bu yerda yozilganidan ko'proq imkoniyatlarga
 
 Yii ning 2.0 talqini PHP uchun bog'liqliklarni boshqaruvchi hisoblangan [Composer](https://getcomposer.org/) ga butunlay asoslangan.
 Freymvorkni o'rnatish va shuningdek kengaytirish Composer orqali qilinadi. Yii 2.0 ni o'rnatish bo'yicha yanada batafsilroq ma'lumot
-[Yii ni o'rnatish](start-installation.md) bo'limida keltirilgan. Yii 2.0 uchun qanday qilib kengaytmalar yaratish yoki 1.1 talqindagi mavjud kengaytmalarni qanday qilib 2.0 talqinga adaptiatsiyalash ko'rsatmalari [Kengaytmalarni yaratish](extend-creating-extensions.md) bo'limida ko'rsatilgan.
+[Yii ni o'rnatish](start-installation.md) bo'limida keltirilgan. Yii 2.0 uchun qanday qilib kengaytmalar yaratish yoki 1.1 talqindagi mavjud kengaytmalarni qanday qilib 2.0 talqinga adaptiatsiyalash ko'rsatmalari [Kengaytmalarni yaratish](structure-extensions.md#creating-extensions) bo'limida ko'rsatilgan.
 
 ## PHP talabi
 

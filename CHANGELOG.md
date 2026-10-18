@@ -63,3 +63,25 @@
 - feat(eval): add an offline Bootstrap 6 documentation-read task and fixture.
 - feat(eval): add a versioned Bootstrap 6 toast migration task with legacy, helper-equivalence, static-analysis, and registered-script checks.
 - fix(skills): document Bootstrap 6 module helpers as instance methods returned by asset registration.
+- docs: add Development tools > Docker with package-owned guides and a portable environment skill, separate from Composer extensions.
+- test(sync): cover non-Composer guide imports and unchanged skill distribution.
+- fix(reference): bind virtual property tags to Yii accessors, preserve declared fields, and remove only warnings disproved by restored source descriptions.
+- docs: replace contributor template placeholders with real source ownership, setup and validation workflows.
+- docs: integrate PHPStan and Inertia package guides, API sources and canonical skills into navigation and discovery.
+- docs(skills): consolidate installation and workflow selection in the AI guide and link ownership summaries to it.
+- fix(reference): resolve verified external contracts, builtins and private source members, and count inherited diagnostics at their defining declaration.
+- chore(format): align JavaScript and Astro Prettier indentation with EditorConfig.
+- test(reference): register zero-tolerance gates for Debug, PHPStan and Inertia after resolving their diagnostics.
+- docs(skills): integrate the package-owned LocaleURLs workflow and agent guide.
+- docs: record Bootstrap6 0.1.0 availability on Packagist and distinguish package publication from documentation deployment.
+- chore: exclude private maintainer resources from repository and documentation exports.
+- docs(skills): resolve documentation against the installed package reference and preserve local fallbacks.
+- fix(skills): follow live checkout state and Composer-selected references when resolving documentation.
+- fix(skills): scope Yii application guidance to the requested change and verify
+  actual validation, routing, query and migration behavior.
+- docs: correct contributor source ownership and setup, repair the skill installation link, and keep local agent maintenance notes private.
+- fix(docs): repair English guide links and align external Debug API source links with the verified dependency revisions.
+- fix(markdown): resolve local images to emitted assets so extension Markdown pages retain working illustrations.
+- fix(docs): repair translated guide destinations and anchors, and preserve standalone HTML paths in link checks.
+- feat(portal): add an independent PHP ecosystem home, project navigation, evidence-based package catalog and moderated community proposals while preserving Markdown documentation and agent resources.
+- fix(reference): retain setter parameter types keyed by name and prefer getter metadata for synthesized virtual properties.

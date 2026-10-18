@@ -1,0 +1,32 @@
+{
+    "id": "yiisoft/bootstrap5",
+    "name": "Bootstrap 5 for Yii3",
+    "summary": "Yii Framework Twitter Bootstrap 5 Extension.",
+    "family": "community",
+    "ecosystems": ["yii3"],
+    "kind": "extension",
+    "php": "8.1 - 8.5",
+    "compatibility": [
+        {
+            "ecosystem": "yii3",
+            "constraint": "yiisoft/html ^3.0; yiisoft/widget ^2.0",
+            "evidence": "https://github.com/yiisoft/bootstrap5/blob/e27cfae0675a29f083aa055cec398bf58bb28c4e/composer.json"
+        }
+    ],
+    "docsUrl": "https://github.com/yiisoft/bootstrap5/blob/e27cfae0675a29f083aa055cec398bf58bb28c4e/docs/guide/en/README.md",
+    "repository": "https://github.com/yiisoft/bootstrap5",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Yii Software",
+        "url": "https://www.yiiframework.com/"
+    },
+    "relationship": "community",
+    "relationshipEvidence": "https://github.com/yiisoft/bootstrap5/blob/e27cfae0675a29f083aa055cec398bf58bb28c4e/README.md",
+    "provenance": {
+        "ref": "master",
+        "commit": "e27cfae0675a29f083aa055cec398bf58bb28c4e",
+        "reviewedAt": "2026-10-18",
+        "url": "https://github.com/yiisoft/bootstrap5/blob/e27cfae0675a29f083aa055cec398bf58bb28c4e/composer.json",
+        "kind": "source"
+    }
+}

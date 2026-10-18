@@ -13,7 +13,31 @@ classes only through Composer. The Yii 2.0 API is largely unchanged; this skill 
 the places where 22.0 differs. Guide pages live at `https://yii2-framework.github.io/docs/guide/<slug>/`; append
 `index.md` for the Markdown version. Fetch `https://yii2-framework.github.io/docs/llms.txt` to find pages not named here.
 
+## Resolve the documentation revision
+
+In a root package checkout, use `composer show --self --format=json` for metadata. For installed dependencies,
+resolve the real path and read the configured vendor directory's `composer/installed.php` (`versions[<package>]`):
+`install_path`, `pretty_version` and Composer's selected `reference`. Do not blindly prefer `source.reference`
+over `dist.reference`. For any live package checkout, including a symlinked path install, inspect its current
+`HEAD` and files even when clean; report metadata mismatches and let the actual files govern. Uncommitted changes
+have no matching SHA. Otherwise use the selected reference or a verified matching tag only after establishing
+its source provenance. Compare `composer.lock`; it may differ from the inspected installation. Identify a
+lock-only state when no package files are installed, and resolve dependencies separately. Use hosted pages,
+catalogs or snapshots only when their source revision matches.
+
+Resolve `yiisoft/yii2` and each extension or template used by the task separately. The site tracks a development
+line; its version label alone does not establish a matching commit. Prefer supplied local indexes, checkout
+guides and installed PHPDoc. Otherwise read the needed guide/code at the resolved upstream reference. If matching
+guides are unavailable or offline, inspect local source/PHPDoc and the changelog, and report the gap. The examples
+below must be checked against that state before use.
+
 ## Workflow
+
+Use only the sections relevant to the requested change. Preserve an existing
+application's template, packages, configuration and code conventions; create a
+project or add models, controllers and migrations only when the task needs them.
+The commands below are examples: equivalent tools are valid when they establish
+the same behavior.
 
 - [ ] Step 1: Create the project from a template
 - [ ] Step 2: Learn the structure and configuration
@@ -76,9 +100,12 @@ Guides: `structure-applications`, `concept-configurations`, `structure-modules`,
 
 ## Step 3: Add a controller with access control and verb filters
 
-Every controller declares `AccessControl` and `VerbFilter` in `behaviors()`, as `UserController` of the template does.
-(`SiteController` declares neither; do not copy that.) List every action under `only` and allow roles explicitly
-(`?` guest, `@` authenticated, or an RBAC role).
+Verify authorization and allowed verbs for the affected web actions, including
+inherited behaviors and the application's existing policy. Use `AccessControl`
+and `VerbFilter` where needed; the example below protects `create`. List
+protected actions and allow roles explicitly (`?` guest, `@` authenticated, or
+an RBAC role). Do not replace parent behaviors or apply web filters to console
+controllers by default.
 
 ```php
 <?php
@@ -134,8 +161,10 @@ Guides: `structure-controllers`, `structure-filters`, `security-authorization`.
 
 ## Step 4: Add an ActiveRecord model with validation
 
-Define `tableName()`, `rules()`, and `attributeLabels()` in every ActiveRecord class. The template `User` model has
-the first two but no `attributeLabels()`; add it.
+Verify the model's table mapping, validation rules and labels, including
+inherited defaults. Override `tableName()`, `rules()` or `attributeLabels()`
+when the requested model needs different behavior; do not edit unrelated
+template models to add redundant methods.
 
 ```php
 <?php
@@ -169,8 +198,12 @@ class Post extends ActiveRecord
 }
 ```
 
-`load()` assigns only attributes that appear in `rules()`: list the fields a user may submit, and no others. Use
-`{{%name}}` so the table prefix applies. `save()` validates and returns `false` on failure. Core validators include
+`load()` mass-assigns only safe attributes in the current scenario; an attribute
+mentioned in `rules()` can still be unsafe or inactive. Loading does not
+validate. Restrict safe attributes to permitted user input, then call
+`validate()` or a validating `save()` before persistence. Use `{{%name}}` so the
+table prefix applies. `save()` validates by default; `save(false)` skips
+validation. Core validators include
 `required`, `string`, `integer`, `email`, `unique`, `exist`, `in`, and `date`.
 
 **Verify:** `php -l src/models/Post.php`; a test saves an invalid model and asserts `false` and the error key.
@@ -186,7 +219,9 @@ Choose one matching method pair:
 - use `up()` and `down()` when the DBMS or an operation cannot be transactional, or when the migration needs explicit
   transaction control.
 
-Do not mix the pairs. Always implement the reversing method. When overriding `up()` and `down()`, keep the signatures
+Do not mix the pairs. Implement reversal where possible; explicitly return
+`false` when a migration cannot be reversed. When overriding `up()` and
+`down()`, keep the signatures
 compatible with Yii's migration contract: use the generated untyped signatures and return `false` to stop a migration;
 do not add `: void`.
 
@@ -224,8 +259,10 @@ Use the schema builder (`$this->string()`), reverse operations in the matching d
 migration. `safeUp()` and `safeDown()` cannot make unsupported DDL transactional; check the target DBMS before relying
 on rollback.
 
-**Verify:** `./yii migrate --interactive=0`, then `./yii migrate/down 1 --interactive=0`, then `./yii migrate`. All
-three succeed.
+**Verify:** For a reversible migration, apply it, revert it and apply it again
+against an explicitly disposable test database. Assert the expected schema/data
+after each operation. For an irreversible migration, verify its refusal to
+revert. Do not run reversal against existing user data as a generic skill check.
 
 Guide: `db-migrations`.
 
@@ -254,7 +291,9 @@ use yii\widgets\ActiveForm;
 
 1. Framework widgets render no CSS framework classes in 22.0. The template views use `yii\bootstrap5\ActiveForm`;
    for Bootstrap 6 use `yii2\extensions\bootstrap6\ActiveForm` (skill `yii2-bootstrap6-widgets`).
-2. Client-side validation needs `yiisoft/yii2-jquery` (Step 8). Server-side validation always runs.
+2. Client-side validation needs `yiisoft/yii2-jquery` (Step 8). Validate
+   server-side explicitly before persistence; rendering a form and loading
+   submitted values do not run model validation.
 3. Pass data to views through `render()`; never read `$_GET` or `$_POST` in a view.
 
 **Verify:** `php -l resources/views/post/create.php`; submit the form empty and see the messages; submit
@@ -282,16 +321,19 @@ $rows = Yii::$app->db
 Never concatenate request data into SQL; check user-supplied column or table names against an allow-list. Use
 `andFilterWhere()` for optional filters and `Yii::$app->db->transaction(function () { ... })` for multi-step writes.
 
-**Verify:** request the pretty URL and the default `controller/action` route; both reach the action. Search the diff
-for `createCommand(` with a concatenated string and for `->where("`; both find nothing.
+**Verify:** Test routing against the application's configured rules, including
+strict parsing when enabled. Verify that untrusted query values reach bound
+parameters and identifiers come from an allowlist. A concatenation of trusted
+SQL fragments or a parameterized string condition is not a failure by itself;
+interpolated untrusted values are a failure even when a text search misses them.
 
 Guides: `runtime-routing`, `helper-url`, `db-query-builder`, `db-dao`.
 
 ## Step 8: Account for the differences from Yii 2.0
 
-Only changes listed in the `22.0 under development` section of
-`https://raw.githubusercontent.com/yiisoft/yii2/22.0/framework/CHANGELOG.md` are included. The upstream
-`UPGRADE.md` has no 22.0 section yet, so read that changelog before a migration; more changes may land.
+Read `framework/CHANGELOG.md` and any applicable `UPGRADE.md` at the resolved `yiisoft/yii2` reference before a
+migration. A moving `22.0` branch may contain changes absent from the installed revision; check the areas below
+against its source.
 
 | Area      | 22.0 behavior                                                                                           |
 | --------- | ------------------------------------------------------------------------------------------------------- |
@@ -322,11 +364,14 @@ Guides: `concept-autoloading`, `intro-upgrade-from-v1`.
 ## Step 9: Apply the code standards and run the tests
 
 1. `declare(strict_types=1);` after `<?php` in every PHP file; PER 3.0 and PSR-12 (the template configures ECS).
-2. Typed properties, parameters, return types; English identifiers, comments, messages.
+2. Use types compatible with inherited signatures, property contracts and
+   supported PHP versions. Keep identifiers, comments and messages in English.
 3. Follow the application's test setup. The template source uses Codeception 5 (suites `unit`, `functional`,
    `acceptance`, PHP built-in server).
 
-Write one test per rule: an invalid save, an access denial, and a successful save.
+Test the behavior changed by the task, including invalid input and access denial
+when those paths are affected. Preserve the application's existing test
+organization.
 
 **Verify:** inspect `composer.json`, `composer run-script --list`, installed tools, and their configuration first.
 The `--prefer-dist` template archive excludes `tests/`, `ecs.php`, `phpstan*.neon*`, and `codeception.yml`, even though

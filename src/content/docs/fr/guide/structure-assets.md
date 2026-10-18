@@ -61,14 +61,14 @@ Des explications plus détaillées sur les propriétés d'[[yii\web\AssetBundle]
   racine n'est pas accessible du Web.
   Autrement, vous devez définir les propriétés [[yii\web\AssetBundle::basePath|basePath]] et [[yii\web\AssetBundle::baseUrl|baseUrl]]. Des [alias de chemin](concept-aliases.md) sont utilisables ici.
 - [[yii\web\AssetBundle::basePath|basePath]] (chemin de base): spécifie un dossier accessible du Web qui contient les fichiers de ressources dans ce paquet.
-  Lorsque vous spécifiez la propriété[[yii\web\AssetBundle::sourcePath|sourcePath (chemin des sources)]], le [gestionnaire de ressources](#asset-manager) publie les ressources de ce paquet dans un dossier accessible du Web et redéfinit cette propriété en conséquence.
+  Lorsque vous spécifiez la propriété[[yii\web\AssetBundle::sourcePath|sourcePath (chemin des sources)]], le [gestionnaire de ressources](structure-assets.md#asset-publishing) publie les ressources de ce paquet dans un dossier accessible du Web et redéfinit cette propriété en conséquence.
   Vous devez définir cette propriété si vos fichiers de ressources sont déjà
   dans un dossier accessible du Web et n'ont pas besoin d'être publiés.
   Les [alias de chemin](concept-aliases.md) sont utilisables ici.
 - [[yii\web\AssetBundle::baseUrl|baseUrl]] (URL de base): spécifie l'URL qui correspond au dossier
   [[yii\web\AssetBundle::basePath|basePath]].
   Comme pour [[yii\web\AssetBundle::basePath|basePath]] (chemin de base),
-  si vous spécifiez la propriété [[yii\web\AssetBundle::sourcePath|sourcePath]], le [gestionnaire de ressources](#asset-manager) publie les ressources et redéfinit cette propriété en conséquence. Les [alias de chemin](concept-aliases.md) sont utilisables ici.
+  si vous spécifiez la propriété [[yii\web\AssetBundle::sourcePath|sourcePath]], le [gestionnaire de ressources](structure-assets.md#asset-publishing) publie les ressources et redéfinit cette propriété en conséquence. Les [alias de chemin](concept-aliases.md) sont utilisables ici.
 - [[yii\web\AssetBundle::css|css]]: un tableau listant les fichiers CSS contenu dans ce paquet de ressources.
   Notez que seul la barre oblique "/" doit être utilisée en tant que séparateur de dossier. Chaque fichier peut être spécifié en lui-même comme une chaîne de caractères ou dans un tableau avec les balises attributs et leur valeur.
 

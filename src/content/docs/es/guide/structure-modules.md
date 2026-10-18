@@ -103,7 +103,7 @@ class PostController extends Controller
 Se puede personalizar el espacio de nombres de las clases controlador configurando la propiedad
 [[yii\base\Module::controllerNamespace]]. En el caso que alguno de los controladores esté fuera del espacio de
 nombres, se puede hacer accesible configurando la propiedad [[yii\base\Module::controllerMap]], similar a
-[como se hace en una aplicación](structure-applications.md#controller-map).
+[como se hace en una aplicación](structure-applications.md#controllerMap).
 
 ### Vistas en Módulos <span id="views-in-modules"></span>
 

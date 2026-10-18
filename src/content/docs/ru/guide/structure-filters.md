@@ -334,7 +334,7 @@ public function behaviors()
 ```
 
 Если вам необходимо добавить CORS-фильтрацию к [[yii\rest\ActiveController]] в вашем API, обратитесь к разделу
-[Контроллеры](rest-controllers.md#cors).
+[Контроллеры](../../guide/rest-controllers.md#cors).
 
 Фильтрация Cors может быть настроена с помощью свойства [[yii\filters\Cors::$cors|$cors]].
 

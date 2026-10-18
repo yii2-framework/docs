@@ -1,85 +1,34 @@
 ---
-title: "Testing"
-description: "This package provides a consistent set of Composer scripts for local validation."
+title: "Validate documentation changes"
+description: "Run the site's JavaScript tests, PHP generator checks, complete build and link checks."
 ---
 
-This package provides a consistent set of [Composer](https://getcomposer.org/) scripts for local validation.
+Run these commands from the documentation repository root after [setup](installation.md).
+They validate the commands and outputs maintained here; package runtime suites remain owned by each package.
 
-Tool references:
-
-- [Composer Require Checker](https://github.com/maglnet/ComposerRequireChecker) for dependency definition checks.
-- [Easy Coding Standard (ECS)](https://github.com/easy-coding-standard/easy-coding-standard) for coding standards.
-- [Infection](https://infection.github.io/) for mutation testing.
-- [PHPStan](https://phpstan.org/) for static analysis.
-- [PHPUnit](https://phpunit.de/) for unit tests.
-- [Rector](https://github.com/rectorphp/rector) for automated refactoring.
-
-## Automated refactoring (Rector)
-
-Run Rector to apply automated code refactoring.
+## Tests and static analysis
 
 ```bash
-composer rector
+npm test
+composer test --working-dir tools
+composer analyse --working-dir tools -- --no-progress
 ```
 
-## Coding standards (ECS)
+The JavaScript tests cover sync, skill distribution, Markdown plugins and discovery sizes.
+PHPUnit checks the reference generator, JSON schema, link resolution and demo renderer. PHPStan analyzes `tools/`.
+Use the repository's Prettier, EditorConfig and Markdown lint configuration together on edited files; passing one
+formatter does not prove the other checks pass.
 
-Run Easy Coding Standard (ECS) and apply fixes.
+## Complete build and links
 
 ```bash
-composer ecs
+SYNC_LOCAL=1 npm run build
 ```
 
-## Dependency definition check
+`prebuild` synchronizes sources, checks the PHPDoc baseline and renders demos in strict mode. Astro builds HTML,
+Markdown and discovery files. `postbuild` validates internal links, anchors, demo assets and bundle-size budgets.
+An isolated `astro build` does not prove the prebuild gate passed. Inspect `.cache/reference/report.json` for
+unresolved PHPDoc references: they can render as code and evade an HTML link check.
 
-Verify that runtime dependencies are correctly declared in `composer.json`.
-
-```bash
-composer check-dependencies
-```
-
-## Mutation testing (Infection)
-
-Run mutation testing.
-
-```bash
-composer mutation
-```
-
-Run mutation testing with static analysis enabled.
-
-```bash
-composer mutation-static
-```
-
-## Static analysis (PHPStan)
-
-Run static analysis.
-
-```bash
-composer static
-```
-
-## Unit tests (PHPUnit)
-
-Run the full test suite.
-
-```bash
-composer tests
-```
-
-## Passing extra arguments
-
-Composer scripts support forwarding additional arguments using `--`.
-
-Run PHPUnit with code coverage report generation.
-
-```bash
-composer tests -- --coverage-html code_coverage
-```
-
-Run PHPStan with a different memory limit.
-
-```bash
-composer static -- --memory-limit=512M
-```
+Keep `tools/baseline.json` unchanged while fixing a regression. Repair the documented contract or generator cause;
+do not raise counts or hide diagnostics to make a build pass. See [development](development.md) for demo rules.

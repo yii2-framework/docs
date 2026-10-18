@@ -19,10 +19,10 @@ description: "ウェブ・アプリケーションを構築するための豊富
 スクリーン・ショットに表示されているように、デフォルトで利用できる一連のコマンドが Yii によって既に定義されています。
 
 - [[yii\console\controllers\AssetController|AssetController]] - JavaScript と CSS ファイルを結合して圧縮することが出来ます。
-  このコマンドについては、[アセットのセクション](structure-assets.md#using-the-asset-command) でさらに学習することが出来ます。
+  このコマンドについては、[アセットのセクション](structure-assets.md#using-asset-command) でさらに学習することが出来ます。
 - [[yii\console\controllers\CacheController|CacheController]] - アプリケーションのキャッシュをフラッシュすることが出来ます。
 - [[yii\console\controllers\FixtureController|FixtureController]] - テストのために、フィクスチャ・データのロードとアンロードを管理します。
-  このコマンドについては [テストのフィクスチャのセクション](test-fixtures.md#managing-fixtures) で詳細に説明されています。
+  このコマンドについては [テストのフィクスチャのセクション](../../guide/test-fixtures.md#managing-fixtures-with-yii-fixture) で詳細に説明されています。
 - [[yii\console\controllers\HelpController|HelpController]] - コンソール・コマンドについてのヘルプ情報を提供します。
   これがデフォルトのコマンドであり、上のスクリーン・ショットで見た出力を表示するものです。
 - [[yii\console\controllers\MessageController|MessageController]] - ソース・ファイルから翻訳すべきメッセージを抽出します。

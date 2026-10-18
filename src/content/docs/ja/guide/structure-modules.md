@@ -100,7 +100,7 @@ class PostController extends Controller
 
 コントローラ・クラスの名前空間は、[[yii\base\Module::controllerNamespace]] プロパティを構成してカスタマイズすることが出来ます。
 いくつかのコントローラがこの名前空間の外にある場合でも、[[yii\base\Module::controllerMap]] プロパティを構成することによって、それらをアクセス可能にすることが出来ます。
-これは、[アプリケーションでのコントローラ・マップ](structure-applications.md#controller-map) の場合と同様です。
+これは、[アプリケーションでのコントローラ・マップ](structure-applications.md#controllerMap) の場合と同様です。
 
 ### モジュール内のビュー <span id="views-in-modules"></span>
 

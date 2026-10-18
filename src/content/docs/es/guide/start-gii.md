@@ -3,7 +3,7 @@ title: "Generando Código con Gii"
 description: "En esta sección, explicaremos cómo utilizar Gii para generar código que automáticamente implementa algunas de las características más comunes de una aplicación."
 ---
 
-En esta sección, explicaremos cómo utilizar [Gii](tool-gii.md) para generar código que automáticamente
+En esta sección, explicaremos cómo utilizar [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) para generar código que automáticamente
 implementa algunas de las características más comunes de una aplicación. Para lograrlo, todo lo que tienes que hacer es
 ingresar la información de acuerdo a las instrucciones mostradas en la páginas web de Gii.
 
@@ -16,7 +16,7 @@ A lo largo de este tutorial, aprenderás
 
 ## Comenzando con Gii <span id="starting-gii"></span>
 
-[Gii](tool-gii.md) está provisto por Yii en forma de [módulo](structure-modules.md). Puedes habilitar Gii
+[Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide) está provisto por Yii en forma de [módulo](structure-modules.md). Puedes habilitar Gii
 configurándolo en la propiedad [[yii\base\Application::modules|modules]] de la aplicación. Dependiendo de cómo hayas creado tu aplicación, podrás encontrar que el siguiente código ha sido ya incluido en el archivo de configuración `config/web.php`:
 
 ```php
@@ -115,7 +115,7 @@ o por si desearas personalizarlos:
 
 > Info: Gii está diseñado para ser una herramienta altamente configurable. Utilizándola con sabiduría
 > puede acelerar enormemente la velocidad de desarrollo de tu aplicación. Para más detalles, consulta la
-> sección [Gii](tool-gii.md).
+> sección [Gii](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide).
 
 ## Resumen <span id="summary"></span>
 

@@ -461,7 +461,7 @@ class MyBehavior extends Behavior
 приложения advanced.
 
 Более подробная информация представлена в разделах «[Аутентификация](security-authentication.md)»,
-«[Авторизация](security-authorization.md)» и «[Шаблон приложения advanced](tutorial-advanced-app.md)».
+«[Авторизация](security-authorization.md)» и «[Шаблон приложения advanced](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)».
 
 ## Разбор и генерация URL
 

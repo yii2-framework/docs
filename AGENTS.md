@@ -13,7 +13,7 @@ Instructions for AI agents that use the Yii documentation published from this re
 ## Where to start
 
 1. If the task names a page, fetch its Markdown directly. Otherwise, fetch
-   <https://yii2-framework.github.io/docs/llms.txt> (about 9k tokens). It lists every English page with a
+   <https://yii2-framework.github.io/docs/llms.txt> (with sizes for planning focused reads). It lists every English page with a
    short description, a link to its Markdown version and its approximate size in tokens, grouped like the site
    navigation.
 2. Fetch only the pages the task needs, using their Markdown URLs.
@@ -29,7 +29,7 @@ Instructions for AI agents that use the Yii documentation published from this re
    named after their first page, namespace or type (`working-with-databases-active-record.txt`,
    `api-yii2-db.txt` then `api-yii2-db-activerecord.txt`).
 
-4. `llms-full.txt` (about 360k tokens, every English page except the API reference) and `llms-small.txt` (the same
+4. `llms-full.txt` (every English page except the API reference) and `llms-small.txt` (the same
    without notes and tips) are for indexing tools. Do not read them whole.
 
 ## Markdown URLs
@@ -42,7 +42,7 @@ Prefer the Markdown version of any page: append `index.md` to the page URL.
 | `https://yii2-framework.github.io/docs/ja/guide/start-hello/`    | `https://yii2-framework.github.io/docs/ja/guide/start-hello/index.md`    |
 
 - Each HTML page links its Markdown version with `<link rel="alternate" type="text/markdown">`.
-- Links between pages in the Markdown versions already point to Markdown URLs.
+- Relative page links in the Markdown versions point to Markdown URLs. Absolute URLs from the source stay unchanged.
 - References to framework classes and members in the guide (`[[yii\base\Component::on()]]` in the sources) are
   links to the API reference; the few targets the reference does not document are plain code.
 - `llms*.txt` contain English pages only. Translations exist for some pages under a locale prefix (`/docs/ja/...`).
@@ -61,6 +61,15 @@ Prefer the Markdown version of any page: append `index.md` to the page URL.
   application. Every demo is a static HTML page at `https://yii2-framework.github.io/docs/demos/<package>/<slug>.html`
   (for example `.../demos/bootstrap6/alert-1.html`) with the widget markup, the CSS and the module scripts it
   registered. The Markdown version of the examples page keeps the PHP and HTML code blocks and has no demo markup.
+
+## Development tools
+
+Container environments are separate from Composer extensions. Docker guides live under
+`https://yii2-framework.github.io/docs/development-tools/docker/`; append `index.md` to a page URL for Markdown,
+for example `https://yii2-framework.github.io/docs/development-tools/docker/testing/index.md`. These guides and the
+`yii2-docker-environment` skill are owned by `yii2-extensions/docker-images` and imported using `tools.json`.
+There is no Docker PHP API reference or Composer package. A healthy image stack does not prove an application or
+database works; follow its own test commands separately.
 
 ## API reference
 
@@ -82,19 +91,16 @@ Generated from the PHPDoc of `yiisoft/yii2` (branch `22.0`) and of each extensio
 
 ## Agent skills
 
-The framework skill lives in [`skills/`](skills/); extension skills are owned by their packages:
+The framework's [`yii2-framework`](skills/yii2-framework/SKILL.md) skill covers Yii 22.0 applications.
+Package and development-tool skills are owned by their repositories. Use the
+[skill selection and client setup guide](src/content/docs/project/ai-agents.md#install-the-relevant-skill) and
+`https://yii2-framework.github.io/docs/skills/index.json` for the current package bundle names, provenance and hashes.
 
-- [`yii2-framework`](skills/yii2-framework/SKILL.md): create or change a Yii 22.0 application.
-- `yii2-bootstrap6-widgets`: render UI with `yii2-extensions/bootstrap6`.
-- `yii2-filepond-uploads`: compose FilePond inputs and validate and store their encoded uploads.
-
-The build copies extension bundles unchanged to `/docs/skills/<name>/SKILL.md`; `/docs/skills/index.json` records
-provenance and checksums. Install from each package repository; a skill inside Composer `vendor/` is not automatically
-discovered from the application root.
-
-Install from the application directory using the local-checkout or verified public-source instructions in
-[`skills/README.md`](skills/README.md). Public installation requires the skills to exist on the default branch.
-Read the `SKILL.md` file directly when native skill loading is unavailable; this does not test client activation.
+The build copies complete package bundles unchanged to `/docs/skills/<name>/SKILL.md`. Install from the owning
+repository using the local-checkout or verified public-source instructions in [`skills/README.md`](skills/README.md).
+A skill inside Composer `vendor/` is not automatically discovered from an application's root. Reading `SKILL.md`
+directly when native loading is unavailable does not test activation. Keep installation, discovery, loading and
+functional acceptance separate; use only the selected pages or catalog entries for the task.
 
 ## Limits
 

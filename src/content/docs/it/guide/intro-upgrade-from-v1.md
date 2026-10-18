@@ -460,7 +460,7 @@ La classe `CWebUser` di Yii 1.1 è stata rimpiazzata da [[yii\web\User]], e non 
 Il template dell'applicazione avanzata fornisce un esempio di implementazione di quella libreria.
 
 Fai riferimento alle sezioni [Autenticazione](security-authentication.md), [Autorizzazione](security-authorization.md) e
-[Template applicazione avanzata](tutorial-advanced-app.md) per maggiori informazioni.
+[Template applicazione avanzata](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide) per maggiori informazioni.
 
 ## Gestione degli URL
 
@@ -476,7 +476,7 @@ ci sarebbero volute due regole per lo stesso risultato.
 ]
 ```
 
-Fai riferimento alla sezione [Url manager](runtime-url-handling.md) per ulteriori dettagli.
+Fai riferimento alla sezione [Url manager](runtime-routing.md) per ulteriori dettagli.
 
 ## Usare Yii 1.1 e 2.x insieme
 

@@ -557,7 +557,7 @@ seguinte estratégia:
   concreta irá conter apenas as regras e lógicas que são específicas de uma aplicação
   ou módulo.
 
-Por exemplo, no [Template Avançado de Projetos](tutorial-advanced-app.md), você
+Por exemplo, no [Template Avançado de Projetos](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide), você
 pode definir uma classe model (modelo) base `common\models\Post`. Em seguida,
 para a aplicação front-end, você define uma classe model (modelo) concreta
 `frontend\models\Post` que estende de `common\models\Post`. E de forma similar

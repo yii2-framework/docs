@@ -1,0 +1,32 @@
+{
+    "id": "ui-awesome/html",
+    "name": "HTML generator",
+    "summary": "UI Awesome HTML Code Generator for PHP.",
+    "family": "ui-awesome",
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": "^8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": "^8.3",
+            "evidence": "https://github.com/ui-awesome/html/blob/d440678f148c3ace4b8407effdd80ab8c18458f7/composer.json"
+        }
+    ],
+    "docsUrl": "https://github.com/ui-awesome/html/blob/d440678f148c3ace4b8407effdd80ab8c18458f7/README.md",
+    "repository": "https://github.com/ui-awesome/html",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/ui-awesome/html/blob/d440678f148c3ace4b8407effdd80ab8c18458f7/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "d440678f148c3ace4b8407effdd80ab8c18458f7",
+        "reviewedAt": "2026-10-18",
+        "url": "https://github.com/ui-awesome/html/blob/d440678f148c3ace4b8407effdd80ab8c18458f7/composer.json",
+        "kind": "source"
+    }
+}

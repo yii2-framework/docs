@@ -93,7 +93,7 @@ $config = require __DIR__ . '/../config/web.php';
 
 这个属性很实用，它允许你用数组指定启动阶段 [[yii\base\Application::bootstrap()|bootstrapping process]] 需要运行的组件。
 比如，如果你希望一个 [模块](structure-modules.md)
-自定义 [URL 规则](runtime-url-handling.md)，
+自定义 [URL 规则](runtime-routing.md)，
 你可以将模块ID加入到bootstrap数组中。
 
 属性中的每个组件需要指定以下一项:
@@ -186,7 +186,7 @@ if (YII_ENV_DEV) {
 
 #### [[yii\base\Application::components|components]] <span id="components"></span>
 
-这是最重要的属性，它允许你注册多个在其他地方使用的 [应用组件](#structure-application-components.md)。
+这是最重要的属性，它允许你注册多个在其他地方使用的 [应用组件](structure-application-components.md)。
 例如
 
 ```php

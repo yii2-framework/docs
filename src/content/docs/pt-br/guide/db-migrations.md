@@ -129,7 +129,7 @@ a `Schema::TYPE_STRING` para especificar que a coluna não pode ser nula.
 
 Ao realizar migrações de dados complexas, é importante assegurar que cada migração terá sucesso ou falhará
 por completo para que o banco não perca sua integridade e consistência. Para atingir este objetivo, recomenda-se que
-você encapsule suas operações de banco de dados de cada migração em uma [transação](db-dao.md#performing-transactions-).
+você encapsule suas operações de banco de dados de cada migração em uma [transação](db-dao/index.md#performing-transactions).
 
 Um jeito mais fácil de implementar uma migração transacional é colocar o seu código de migração nos métodos `safeUp()` e `safeDown()`. Estes métodos diferem de `up()` e `down()` porque eles estão implicitamente encapsulados em uma transação. Como resultado, se qualquer operação nestes métodos falhar, todas as operações anteriores sofrerão roll back
 automaticamente.

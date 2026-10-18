@@ -113,7 +113,7 @@ Você pode personalizar o namespace da classe do controller (controlador)
 configurando a propriedade [[yii\base\Module::controllerNamespace]]. No caso de
 alguns controllers (controladores) estiverem fora do namespace, você poderá
 torna-los acessíveis pela configuração da propriedade [[yii\base\Module::controllerMap]],
-de forma similar ao [que você fez na aplicação](structure-applications.md#controller-map).
+de forma similar ao [que você fez na aplicação](structure-applications.md#controllerMap).
 
 ### Views em Módulos <span id="views-in-modules"></span>
 

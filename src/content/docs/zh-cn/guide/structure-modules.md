@@ -100,7 +100,7 @@ class PostController extends Controller
 
 可配置 [[yii\base\Module::controllerNamespace]] 属性来自定义控制器类的命名空间，
 如果一些控制器不再该命名空间下，可配置 [[yii\base\Module::controllerMap]] 属性让它们能被访问，
-这类似于 [应用主体配置](structure-applications.md#controller-map) 所做的。
+这类似于 [应用主体配置](structure-applications.md#controllerMap) 所做的。
 
 ### 模块中的视图 <span id="views-in-modules"></span>
 

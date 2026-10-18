@@ -19,7 +19,7 @@ Yii 2.0 sepenuhnya menggunakan [composer](https://getcomposer.org/), yaitu depen
 
 - Instalasi dari kerangka inti serta ekstensi, ditangani melalui Composer.
 - Silakan merujuk ke bagian [Instalasi Yii](start-installation.md) untuk belajar cara menginstal Yii 2.0.
-- Jika ingin membuat ekstensi baru, atau mengubah/memperbarui ekstensi 1.1 yang telah Anda buat ke ekstensi 2.0 (agar kompatibel), silakan merujuk pada panduan [Membuat Ekstensi](structure-extensions.md#menciptakan-ekstensi).
+- Jika ingin membuat ekstensi baru, atau mengubah/memperbarui ekstensi 1.1 yang telah Anda buat ke ekstensi 2.0 (agar kompatibel), silakan merujuk pada panduan [Membuat Ekstensi](structure-extensions/index.md#creating-extensions).
 
 ## Persyaratan PHP
 

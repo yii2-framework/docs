@@ -171,7 +171,7 @@ Puedes configurar [[yii\base\Application::controllerMap|controller map]] en la
 ### Controller por Defecto <span id="default-controller"></span>
 
 Cada aplicación tiene un controlador por defecto especificado a través de la propiedad [[yii\base\Application::defaultRoute]].
-Cuando un `request` no especifica una [ruta](#ids-routes), se utilizará la ruta especificada en esta propiedad.
+Cuando un `request` no especifica una [ruta](structure-controllers.md#routes), se utilizará la ruta especificada en esta propiedad.
 Para [[yii\web\Application|aplicaciones Web]], el valor es `'site'`, mientras que para [[yii\console\Application|aplicaciones de consola]]
 es `help`. Por lo tanto, si la URL es `https://hostname/index.php`, significa que el `request` será manejado por el controlador `site`.
 
@@ -370,7 +370,7 @@ por favor consulta la sección [Comandos de Consola](tutorial-console.md) para m
 ### Acción por Defecto <span id="default-action"></span>
 
 Cada controlador tiene una acción por defecto especificada a través de la propiedad [[yii\base\Controller::defaultAction]].
-Cuando una [ruta](#ids-routes) contiene sólo el ID del controlador, implica que se está solicitando la acción por defecto
+Cuando una [ruta](structure-controllers.md#routes) contiene sólo el ID del controlador, implica que se está solicitando la acción por defecto
 del controlador especificado.
 
 Por defecto, la acción por defecto (valga la redundancia) definida es `index`. Si quieres cambiar dicho valor, simplemente sobrescribe

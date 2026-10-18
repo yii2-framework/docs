@@ -9,7 +9,7 @@ L'utilisation de la base structurée d'enregistrement des messages de Yii néces
 
 - Enregistrer les [messages](#log-messages) à différents endroits de votre code ;
 - Configurer [cibles d'enregistrement](#log-targets) dans la configuration de l'application pour filtrer et exporter les messages enregistrés ;
-- Examiner les messages enregistrés, filtrés et exportés par les différentes cibles (p. ex. [débogueur de Yii](tool-debugger.md)).
+- Examiner les messages enregistrés, filtrés et exportés par les différentes cibles (p. ex. [débogueur de Yii](../../extensions/debug/index.md)).
 
 Dans cette section, nous décrivons principalement les deux premières étapes.
 
@@ -309,4 +309,4 @@ Par exemple,
 
 Si vous omettez `\Yii::endProfile('block1')` ou inversez l'ordre de `\Yii::endProfile('block1')` et de `\Yii::endProfile('block2')`, le profilage de performance ne fonctionnera pas.
 
-Pour chaque bloc de code profilé, un message est enregistré avec le niveau de sévérité `profile`. Vous pouvez configurer une [cible d'enregistrement](#log-targets) pour collecter de tels messages et les exporter. L'outil [_Yii debugger_](tool-debugger.md) comporte un panneau d'affichage pré-construit des résultats de profilage.
+Pour chaque bloc de code profilé, un message est enregistré avec le niveau de sévérité `profile`. Vous pouvez configurer une [cible d'enregistrement](#log-targets) pour collecter de tels messages et les exporter. L'outil [_Yii debugger_](../../extensions/debug/index.md) comporte un panneau d'affichage pré-construit des résultats de profilage.

@@ -212,7 +212,7 @@ Usted puede definir `YII_ENV` como uno de los valores siguientes:
 - `dev`: entorno de desarrollo. La constante `YII_ENV_DEV` evaluará como verdadero.
 - `test`: entorno de pruebas. La constante `YII_ENV_TEST` evaluará como verdadero.
 
-Con estas constantes de entorno, puede especificar sus configuraciones condicionales basado en el entorno actual. Por ejemplo, la configuración de la aplicación puede contener el siguiente código para permitir que el [depurador y barra de herramientas de depuración](tool-debugger.md) en el entorno de desarrollo.
+Con estas constantes de entorno, puede especificar sus configuraciones condicionales basado en el entorno actual. Por ejemplo, la configuración de la aplicación puede contener el siguiente código para permitir que el [depurador y barra de herramientas de depuración](../../extensions/debug/index.md) en el entorno de desarrollo.
 
 ```php
 $config = [...];

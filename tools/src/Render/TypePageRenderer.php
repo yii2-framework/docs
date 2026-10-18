@@ -332,7 +332,7 @@ final class TypePageRenderer
                 $label,
                 $this->flags($this->propertyFlags($property)),
                 $property['type'] === null ? '' : $page->type($property['type']),
-                trim($context->cell($property['summary'], !in_array($name, $withDetails, true)) . $default
+                trim($context->cell($property['summary'], $property['definedBy'] === $data['name'] && !in_array($name, $withDetails, true)) . $default
                     . $this->notes($property['since'], $property['deprecated'], $page)),
                 $this->definedBy($data['name'], $property['definedBy'], $page),
             );
@@ -407,7 +407,7 @@ final class TypePageRenderer
                 '| %s%s | %s | %s |',
                 $label,
                 $this->flags($this->methodFlags($method)),
-                trim($context->cell($method['summary'], !$native) . $deprecated),
+                trim($context->cell($method['summary'], false) . $deprecated),
                 $this->definedBy($data['name'], $method['definedBy'], $page),
             );
         }
@@ -514,7 +514,7 @@ final class TypePageRenderer
                     $page,
                 ),
                 $event['type'] === null ? '' : $page->type($event['type']),
-                trim($context->cell($event['summary']) . $value . $this->notes($event['since'], null, $page)),
+                trim($context->cell($event['summary'], $event['definedBy'] === $data['name']) . $value . $this->notes($event['since'], null, $page)),
                 $this->definedBy($data['name'], $event['definedBy'], $page),
             );
         }
@@ -556,7 +556,7 @@ final class TypePageRenderer
                 ),
                 $constant['value'] === null ? '' : DocText::cellCode($constant['value']),
                 trim(
-                    $context->cell($constant['summary'])
+                    $context->cell($constant['summary'], $constant['definedBy'] === $data['name'])
                     . $this->notes($constant['since'], $constant['deprecated'], $page),
                 ),
                 $this->definedBy($data['name'], $constant['definedBy'], $page),

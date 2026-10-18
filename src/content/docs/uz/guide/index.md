@@ -46,7 +46,7 @@ All Rights Reserved.
 - **TBD** [So'rovlar](runtime-requests.md)
 - **TBD** [Javoblar](runtime-responses.md)
 - **TBD** [Sessiyalar va kuklar](runtime-sessions-cookies.md)
-- [URL ni tahlil va generatsiya qilish](runtime-url-handling.md)
+- [URL ni tahlil va generatsiya qilish](runtime-routing.md)
 - [Xatoliklarni qayta ishlash](runtime-handling-errors.md)
 - [Jurnallarga yozish](runtime-logging.md)
 
@@ -68,16 +68,16 @@ All Rights Reserved.
 - [So'rovlarni yaratuvchi](db-query-builder.md) - Ma'lumotlar omboriga abstraksiyaning oddiy qatlamidan so'rovlar.
 - [Active Record](db-active-record.md) - AR obektlarini olish, ular bilan ishlash va bog'lanishlarni aniqlash.
 - [Migratsiyalar](db-migrations.md) - Komandada (jamoada) ishlaganda ma'lumotlar sxemasini talqinlarini boshqarish.
-- **TBD** [Sphinx](db-sphinx.md)
-- **TBD** [Redis](db-redis.md)
-- **TBD** [MongoDB](db-mongodb.md)
-- **TBD** [ElasticSearch](db-elastic-search.md)
+- **TBD** [Sphinx](https://www.yiiframework.com/extension/yiisoft/yii2-sphinx/doc/guide)
+- **TBD** [Redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/guide)
+- **TBD** [MongoDB](https://www.yiiframework.com/extension/yiisoft/yii2-mongodb/doc/guide)
+- **TBD** [ElasticSearch](https://www.yiiframework.com/extension/yiisoft/yii2-elasticsearch/doc/guide)
 
 ## Foydalanuvchidan ma'lumotlarni qabul qilish
 
 - [Formani yaratish](input-forms.md)
 - [Validatsiya](input-validation.md)
-- **TBD** [Fayllarni yuklash](input-file-uploading.md)
+- **TBD** [Fayllarni yuklash](input-file-upload.md)
 - **TBD** [Bir nechta modellar bilan ishlash](input-multiple-models.md)
 
 ## Ma'lumotlarni namoyish etish
@@ -94,7 +94,7 @@ All Rights Reserved.
 - [Autentifikatsiya](security-authentication.md)
 - [Avtorizatsiya](security-authorization.md)
 - [Parollar bilan ishlash](security-passwords.md)
-- **TBD** [Avtorizatsiya mijozlari](security-auth-clients.md)
+- **TBD** [Avtorizatsiya mijozlari](https://www.yiiframework.com/extension/yiisoft/yii2-authclient/doc/guide)
 - **TBD** [Eng yaxshi amaliyotlar](security-best-practices.md)
 
 ## Keshlash
@@ -119,9 +119,9 @@ All Rights Reserved.
 
 ## Ishlab chiquvchining uskunalari
 
-- [Qayta ishlash paneli va qayta ishlovchi](tool-debugger.md)
-- [Gii bilan kodni generatsiya qilish](tool-gii.md)
-- **TBD** [API qo'llanmani generatori](tool-api-doc.md)
+- [Qayta ishlash paneli va qayta ishlovchi](../../extensions/debug/index.md)
+- [Gii bilan kodni generatsiya qilish](https://www.yiiframework.com/extension/yiisoft/yii2-gii/doc/guide)
+- **TBD** [API qo'llanmani generatori](https://www.yiiframework.com/extension/yiisoft/yii2-apidoc)
 
 ## Test o'tkazish
 
@@ -133,16 +133,16 @@ All Rights Reserved.
 
 ## Yii kengaytmalari
 
-- [Kengaytmani yaratish](extend-creating-extensions.md)
-- [Freymvork kodini kengaytirish](extend-customizing-core.md)
-- [Tashqi kutubxonalarni qo'llash](extend-using-libs.md)
-- **TBD** [Tashqi tizimlarda Yii integratsiyasi](extend-embedding-in-others.md)
-- **TBD** [Yii 1.1 va 2.0 larni bir vaqtda ishlatish](extend-using-v1-v2.md)
-- [Composer ni ishlatish](extend-using-composer.md)
+- [Kengaytmani yaratish](structure-extensions.md#creating-extensions)
+- [Freymvork kodini kengaytirish](concept-di-container.md#practical-usage)
+- [Tashqi kutubxonalarni qo'llash](tutorial-yii-integration.md#using-libs-in-yii)
+- **TBD** [Tashqi tizimlarda Yii integratsiyasi](tutorial-yii-integration.md#using-yii-in-others)
+- **TBD** [Yii 1.1 va 2.0 larni bir vaqtda ishlatish](tutorial-yii-integration.md#using-both-yii2-yii1)
+- [Composer ni ishlatish](tutorial-yii-integration.md#using-composer-packages)
 
 ## Maxsus mavzular
 
-- [advanced ilova shabloni](tutorial-advanced-app.md)
+- [advanced ilova shabloni](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide)
 - [Ilovani noldan yaratish](tutorial-start-from-scratch.md)
 - [Konsol komandalari](tutorial-console.md)
 - [Xalqarolashtirish](tutorial-i18n.md)
@@ -161,8 +161,8 @@ All Rights Reserved.
 - Menu: link to demo page
 - LinkPager: link to demo page
 - LinkSorter: link to demo page
-- [Bootstrap vidjetlari](bootstrap-widgets.md)
-- **TBD** [Jquery UI vidjetlari](jui-widgets.md)
+- [Bootstrap vidjetlari](https://www.yiiframework.com/extension/yiisoft/yii2-bootstrap/doc/guide)
+- **TBD** [Jquery UI vidjetlari](https://www.yiiframework.com/extension/yiisoft/yii2-jui/doc/guide)
 
 ## Xelperlar
 
@@ -170,4 +170,4 @@ All Rights Reserved.
 - **TBD** [ArrayHelper](helper-array.md)
 - **TBD** [Html](helper-html.md)
 - **TBD** [Url](helper-url.md)
-- **TBD** [Security](helper-security.md)
+- **TBD** [Security](security-cryptography.md)

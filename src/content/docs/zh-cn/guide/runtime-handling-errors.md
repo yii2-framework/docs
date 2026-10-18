@@ -143,7 +143,7 @@ public function actionError()
 - `exception`: 更多详细信息的异常对象，如HTTP 状态码，
   错误码，错误调用栈等。
 
-> Note: 如果你使用 [基础应用模板](start-installation.md) 或 [高级应用模板](tutorial-advanced-app.md),
+> Note: 如果你使用 [基础应用模板](start-installation.md) 或 [高级应用模板](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide),
 > 错误动作和错误视图已经定义好了。
 
 > Note: 如果您需要在错误处理程序中重定向，请执行以下操作：

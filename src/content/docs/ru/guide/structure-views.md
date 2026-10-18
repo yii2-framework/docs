@@ -519,7 +519,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => 'Это сайт �
 
 ### Регистрация тэгов link <span id="registering-link-tags"></span>
 
-Как и [мета тэги](#adding-meta-tags), link тэги полезны во многих случаях, как, например, задание уникальной favicon, указание на RSS фид или указание OpenID сервера для авторизации. С link тэгами можно работать аналогично работе с мета тэгами, вызывая метод [[yii\web\View::registerLinkTag()]]. Например,
+Как и [мета тэги](structure-views.md#registering-meta-tags), link тэги полезны во многих случаях, как, например, задание уникальной favicon, указание на RSS фид или указание OpenID сервера для авторизации. С link тэгами можно работать аналогично работе с мета тэгами, вызывая метод [[yii\web\View::registerLinkTag()]]. Например,
 вы можете зарегистрировать link тэг в виде таким образом:
 
 ```php

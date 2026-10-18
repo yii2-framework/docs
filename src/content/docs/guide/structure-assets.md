@@ -63,12 +63,12 @@ explanation about the properties of [[yii\web\AssetBundle]] can be found in the 
   [Path aliases](concept-aliases.md) can be used here.
 - [[yii\web\AssetBundle::basePath|basePath]]: specifies a Web-accessible directory that contains the asset files in
   this bundle. When you specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property,
-  the [asset manager](#asset-manager) will publish the assets in this bundle to a Web-accessible directory
+  the [asset manager](#asset-publishing) will publish the assets in this bundle to a Web-accessible directory
   and overwrite this property accordingly. You should set this property if your asset files are already in
   a Web-accessible directory and do not need asset publishing. [Path aliases](concept-aliases.md) can be used here.
 - [[yii\web\AssetBundle::baseUrl|baseUrl]]: specifies the URL corresponding to the directory
   [[yii\web\AssetBundle::basePath|basePath]]. Like [[yii\web\AssetBundle::basePath|basePath]],
-  if you specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property, the [asset manager](#asset-manager)
+  if you specify the [[yii\web\AssetBundle::sourcePath|sourcePath]] property, the [asset manager](#asset-publishing)
   will publish the assets and overwrite this property accordingly. [Path aliases](concept-aliases.md) can be used here.
 - [[yii\web\AssetBundle::css|css]]: an array listing the CSS files contained in this bundle. Note that only forward slash "/"
   should be used as directory separators. Each file can be specified on its own as a string or in an array together with

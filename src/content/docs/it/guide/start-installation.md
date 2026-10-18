@@ -72,7 +72,7 @@ Ma ci sono altre opzioni disponibili per l'installazione:
 - se vuoi installare solo il core e costruire l'applocazione da zero puoi seguire le istruzioni della sezione
   [costruire un'applicazione da zero](tutorial-start-from-scratch.md).
 - se vuoi avviare un'applicazione più sofisticata, che meglio si sposa per uno sviluppo di gruppo, puoi considerare l'insallazione del
-  [template di applicazione avanzata](tutorial-advanced-app.md).
+  [template di applicazione avanzata](https://www.yiiframework.com/extension/yiisoft/yii2-app-advanced/doc/guide).
 
 ## Verifica dell'installazione <span id="verifying-installation"></span>
 
@@ -115,7 +115,7 @@ comporta diversamente dal PHP nativo, quindi devi avere maggiore cura se intendi
 Su un server di produzione vorrai probabilmente che la tua applicazione sia accessibile tramite l'url
 `https://www.example.com/index.php` invece di `https://www.example.com/basic/web/index.php`. Questo risultato richiede che punti la
 _document root_ del tuo webserver nella directory `basic/web`. Vorrai magari anche nascondere `index.php` dall'URL, come descritto
-nella sezione [analizzare e generare URL](runtime-url-handling.md).
+nella sezione [analizzare e generare URL](runtime-routing.md).
 In questa parte vedrai configurare il tuo server Apache o Nginx per ottenere questo risultato.
 
 > Informazione: impostando `basic/web` come _document root_ impedisci agli utenti finali di accedere al codice e a file/informazioni

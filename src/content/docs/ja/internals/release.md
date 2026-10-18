@@ -12,7 +12,7 @@ description: "フレームワークのリリースを作成するのに必要と
 
 ## リリース・コマンド
 
-リリースの手順は、フレームワークの開発レポジトリに含まれている [release コンソール・コマンド](../../build/controllers/ReleaseController.php)
+リリースの手順は、フレームワークの開発レポジトリに含まれている [release コンソール・コマンド](https://github.com/yiisoft/yii2/blob/22.0/build/controllers/ReleaseController.php)
 によって自動化されています。
 
 リリース・コマンドは、フレームワークの `build` ディレクトリに含まれている Yii
@@ -25,7 +25,7 @@ description: "フレームワークのリリースを作成するのに必要と
 
 ### 必要条件
 
-リリース・コマンドは、[Git ワークフローのドキュメント](git-workflow.md#extensions) で紹介されている開発環境に依存しています。
+リリース・コマンドは、[Git ワークフローのドキュメント](../../internals/git-workflow.md#extensions) で紹介されている開発環境に依存しています。
 すなわち、アプリケーション・テンプレートは `/apps/` の下に配置されていなければならず、
 エクステンションは `/extensions/` の下に配置されていなければなりません。
 この構成は `dev/app` および `dev/ext` のコマンドを使って作成することが推奨されます。

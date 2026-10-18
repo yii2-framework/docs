@@ -1,0 +1,19 @@
+[
+    {
+        "name": "docker",
+        "title": "Docker",
+        "type": "tool",
+        "repo": "https://github.com/yii2-extensions/docker-images",
+        "ref": "main",
+        "docsDir": "docs",
+        "localPath": "../../yii2-extensions/docker-images",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
+    }
+]
