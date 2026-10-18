@@ -4,8 +4,9 @@ description: "Modules are self-contained software units that consist of models, 
 ---
 
 Modules are self-contained software units that consist of [models](structure-models.md), [views](structure-views.md),
-[controllers](structure-controllers.md), and other supporting components. End users can access the controllers
-of a module when it is installed in [application](structure-applications.md). For these reasons, modules are
+[controllers](structure-controllers.md), [standalone actions](structure-standalone-actions.md), and other supporting
+components. End users can access the endpoints of a module when it is installed in an
+[application](structure-applications.md). For these reasons, modules are
 often viewed as mini-applications. Modules differ from [applications](structure-applications.md) in that
 modules cannot be deployed alone and must reside within applications.
 
@@ -101,6 +102,16 @@ class PostController extends Controller
 You may customize the namespace of controller classes by configuring the [[yii\base\Module::controllerNamespace]]
 property. In case some of the controllers are outside of this namespace, you may make them accessible
 by configuring the [[yii\base\Module::controllerMap]] property, similar to [what you do in an application](structure-applications.md#controllerMap).
+
+### Standalone actions in modules <span id="standalone-actions-in-modules"></span>
+
+Configure `actionNamespace` on a module to expose action classes without a controller. For example, a module
+named `admin` with `'actionNamespace' => 'app\\modules\\admin\\actions'` resolves `admin/report` to
+`app\modules\admin\actions\ReportAction`. The action can use `$this->getModule()` and module components.
+
+Application dispatch descends into the child's namespace, not its `actionMap`. A child map applies when that
+child's `runAction()` is called directly. See [module action registration](structure-standalone-actions.md#actions-in-modules)
+for the configuration and [lifecycle](structure-standalone-actions.md#filters-and-lifecycle) for module hooks.
 
 ### Views in Modules <span id="views-in-modules"></span>
 

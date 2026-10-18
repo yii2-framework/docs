@@ -31,6 +31,13 @@ guides and installed PHPDoc. Otherwise read the needed guide/code at the resolve
 guides are unavailable or offline, inspect local source/PHPDoc and the changelog, and report the gap. The examples
 below must be checked against that state before use.
 
+## Focused subsystem skills
+
+For a scoped change, select the matching skill from the owning repository's `skills/README.md` or published skill index.
+Each subsystem bundle carries its own conventions and evidence routes; install only the needed bundles.
+For an existing Yii 2.0.x application, select `yii2-upgrade-22` for dependency readiness, applicable breaking changes
+and staged verification before using the subsystem guidance.
+
 ## Workflow
 
 Use only the sections relevant to the requested change. Preserve an existing
@@ -291,7 +298,7 @@ use yii\widgets\ActiveForm;
 
 1. Framework widgets render no CSS framework classes in 22.0. The template views use `yii\bootstrap5\ActiveForm`;
    for Bootstrap 6 use `yii2\extensions\bootstrap6\ActiveForm` (skill `yii2-bootstrap6-widgets`).
-2. Client-side validation needs `yiisoft/yii2-jquery` (Step 8). Validate
+2. Client-side validation needs configured client-script strategies, supplied by `yiisoft/yii2-jquery` or a custom implementation (Step 8). Validate
    server-side explicitly before persistence; rendering a form and loading
    submitted values do not run model validation.
 3. Pass data to views through `render()`; never read `$_GET` or `$_POST` in a view.
@@ -331,7 +338,7 @@ Guides: `runtime-routing`, `helper-url`, `db-query-builder`, `db-dao`.
 
 ## Step 8: Account for the differences from Yii 2.0
 
-Read `framework/CHANGELOG.md` and any applicable `UPGRADE.md` at the resolved `yiisoft/yii2` reference before a
+Read `framework/CHANGELOG.md`, `framework/UPGRADE-22.md`, and applicable `framework/UPGRADE.md` sections at the resolved `yiisoft/yii2` reference before a
 migration. A moving `22.0` branch may contain changes absent from the installed revision; check the areas below
 against its source.
 
@@ -343,7 +350,7 @@ against its source.
 | CSS       | The framework is CSS-agnostic: widgets have no Bootstrap class defaults.                                |
 | Assets    | Bower is replaced by npm: the `@npm` alias points to `node_modules`.                                    |
 | Cache     | `ApcCache` is renamed `ApcuCache`; XCache and ZendDataCache are removed.                                |
-| Databases | CUBRID removed. Pagination needs SQL Server 2019+, Oracle 12.1+, MariaDB 10.6+, PostgreSQL 13+.         |
+| Databases | CUBRID removed. Pagination needs SQL Server 2019+, Oracle 12.1+, MariaDB 10.6+, PostgreSQL 14+.         |
 | Models    | Anonymous models must define `formName()` explicitly.                                                   |
 | Actions   | Standalone: `Module::$actionNamespace` and `$actionMap` dispatch `yii\web\Action` without a controller. |
 
@@ -359,7 +366,7 @@ The template requires `yiisoft/yii2` `^22.0@dev`, `yiisoft/yii2-jquery` `^1.0@de
 
 **Verify:** `composer validate`, `composer dump-autoload`, and a request through each changed area.
 
-Guides: `concept-autoloading`, `intro-upgrade-from-v1`.
+Guides: `concept-autoloading`, `intro-upgrade-from-v2`.
 
 ## Step 9: Apply the code standards and run the tests
 

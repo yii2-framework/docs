@@ -1,0 +1,32 @@
+{
+    "id": "yii2-extensions/franken-php",
+    "name": "FrankenPHP",
+    "summary": "FrankenPHP worker adapter for Yii2 with PSR Bridge integration and request isolation.",
+    "family": "yii2-extensions",
+    "ecosystems": ["yii2"],
+    "kind": "extension",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "yii2",
+            "constraint": "~2.0.55 || ^22.0@dev",
+            "evidence": "https://github.com/yii2-extensions/franken-php/blob/aa2228cb7551c2a4b2c06db118ecb67a89153804/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/franken-php/",
+    "repository": "https://github.com/yii2-extensions/franken-php",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/yii2-extensions/franken-php/blob/aa2228cb7551c2a4b2c06db118ecb67a89153804/composer.json",
+    "provenance": {
+        "ref": "ci/update-quality",
+        "commit": "aa2228cb7551c2a4b2c06db118ecb67a89153804",
+        "reviewedAt": "2026-10-18",
+        "url": "https://github.com/yii2-extensions/franken-php/blob/aa2228cb7551c2a4b2c06db118ecb67a89153804/composer.json",
+        "kind": "source"
+    }
+}

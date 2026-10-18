@@ -60,6 +60,33 @@ $form = ActiveForm::begin([
 <?php ActiveForm::end() ?>
 ```
 
+The example supplies its own Bootstrap classes. Core widgets in Yii 22.0 do not add Bootstrap field, input or label
+classes; configure the needed classes or use the corresponding UI extension. For browser validation, configure the
+[client-script strategies](input-validation.md#client-side-validation) as well as server-side validation.
+
+### Client behavior and styling <span id="client-behavior-and-styling"></span>
+
+An `ActiveForm` with no `clientScript` strategy renders its HTML, but does not install browser validation or
+Ajax submission behavior. Setting `enableClientValidation` alone does not provide a strategy. Server validation
+still uses the model's rules. Follow [client-side validation](input-validation.md#client-side-validation) to
+configure the jQuery implementation or a custom strategy.
+
+Configure CSS classes for the UI you use. For example, an application loading Bootstrap CSS can set:
+
+```php
+$form = ActiveForm::begin([
+    'fieldConfig' => [
+        'options' => ['class' => 'mb-3'],
+        'inputOptions' => ['class' => 'form-control'],
+        'labelOptions' => ['class' => 'form-label'],
+        'errorOptions' => ['class' => 'field-error'],
+    ],
+]);
+```
+
+Pair this call with `ActiveForm::end()` after rendering the fields. CSS classes and client-script strategies
+are separate configuration choices; neither installs the other.
+
 ### Wrapping with `begin()` and `end()` <span id="wrapping-with-begin-and-end"></span>
 
 In the above code, [[yii\widgets\ActiveForm::begin()|ActiveForm::begin()]] not only creates a form instance, but also marks the beginning of the form.
@@ -123,9 +150,9 @@ class like it is done in the above example with [[yii\helpers\Html::submitButton
 > Tip: In order to style required fields with asterisks, you can use the following CSS:
 >
 > ```css
-> div.required label.control-label:after {
->   content: " *";
->   color: red;
+> div.required label:after {
+>     content: " *";
+>     color: red;
 > }
 > ```
 

@@ -71,6 +71,16 @@ path. Derived paths may then be formed using this alias (e.g. `@app/runtime` to 
 The properties described in this subsection often need to be configured because they differ across
 different applications.
 
+#### Standalone action registration <span id="standalone-actions"></span>
+
+An application inherits [[yii\base\Module::$actionMap|actionMap]] and
+[[yii\base\Module::$actionNamespace|actionNamespace]]. These dispatch action classes without a controller:
+`actionMap` explicitly maps the first route segment to a class or configuration; `actionNamespace` discovers
+classes such as `HealthAction` from routes such as `health`. The namespace defaults to `controllerNamespace`.
+
+See [Standalone Actions](structure-standalone-actions.md#registering-actions) for complete configurations,
+module routing and coexistence with controller actions. These properties are independent of `controllerMap`.
+
 #### [[yii\base\Application::aliases|aliases]] <span id="aliases"></span>
 
 This property allows you to define a set of [aliases](concept-aliases.md) in terms of an array.
@@ -576,7 +586,8 @@ an application will undergo the following lifecycle:
 
 - Trigger the [[yii\base\Application::EVENT_BEFORE_REQUEST|EVENT_BEFORE_REQUEST]] event.
 - Handle the request: resolve the request into a [route](runtime-routing.md) and the associated parameters;
-  create the module, controller, and action objects as specified by the route; and run the action.
+  create the necessary module and action objects, with a controller when the route uses one; and run the action.
+  [Standalone actions](structure-standalone-actions.md#filters-and-lifecycle) have their own action events and module hooks.
 - Trigger the [[yii\base\Application::EVENT_AFTER_REQUEST|EVENT_AFTER_REQUEST]] event.
 - Send response to the end user.
 

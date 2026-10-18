@@ -9,6 +9,10 @@ generating responses. In particular, after taking over the control from [applica
 controllers will analyze incoming request data, pass them to [models](structure-models.md), inject model results
 into [views](structure-views.md), and finally generate outgoing responses.
 
+Yii 22.0 also supports [standalone actions](structure-standalone-actions.md) dispatched directly by an application
+or module. Use that guide for endpoints without a hosting controller, registration, dependency injection and
+organization by use case. This chapter describes actions hosted by controllers.
+
 ## Actions <span id="actions"></span>
 
 Controllers are composed of _actions_ which are the most basic units that end users can address and request for
@@ -64,7 +68,7 @@ the `create` view through which users can provide the needed input.
 
 ## Routes <span id="routes"></span>
 
-End users address actions through the so-called _routes_. A route is a string that consists of the following parts:
+End users address controller actions through _routes_. A controller action route consists of the following parts:
 
 - a module ID: this exists only if the controller belongs to a non-application [module](structure-modules.md);
 - a [controller ID](#controller-ids): a string that uniquely identifies the controller among all controllers within the same application
@@ -218,11 +222,10 @@ By default, action IDs should contain these characters only: English letters in 
 underscores, and hyphens (you can use hyphens to separate words). For example,
 `view`, `update2`, and `comment-post` are all valid action IDs, while `view?` and `Update` are not.
 
-You can create actions in two ways: inline actions and standalone actions. An inline action is
-defined as a method in the controller class, while a standalone action is a class extending
-[[yii\base\Action]] or its child classes. Inline actions take less effort to create and are often preferred
-if you have no intention to reuse these actions. Standalone actions, on the other hand, are mainly
-created to be used in different controllers or be redistributed as [extensions](structure-extensions.md).
+A controller can host inline actions, defined as its methods, or external action classes extending
+[[yii\base\Action]]. External classes can be reused by controllers or distributed as
+[extensions](structure-extensions.md). Yii 22.0 can also dispatch suitable action classes without a controller;
+see [Standalone Actions](structure-standalone-actions.md).
 
 ### Inline Actions <span id="inline-actions"></span>
 
@@ -245,13 +248,17 @@ Inline actions are the most commonly defined actions because they take little ef
 if you plan to reuse the same action in different places, or if you want to redistribute an action,
 you should consider defining it as a _standalone action_.
 
-### Standalone Actions <span id="standalone-actions"></span>
+Inline actions invoke their `beforeRun()` and `afterRun()` hooks in Yii 22.0. A `false` result from `beforeRun()`
+prevents the action method from running. `afterRun()` takes no result argument and does not replace the result;
+use the controller's `afterAction()` or an after-action event handler when the result must change.
 
-Standalone actions are defined in terms of action classes extending [[yii\base\Action]] or its child classes.
+### External Actions <span id="standalone-actions"></span>
+
+External actions, also called standalone actions in controller configurations, are classes extending [[yii\base\Action]] or its child classes.
 For example, in the Yii releases, there are [[yii\web\ViewAction]] and [[yii\web\ErrorAction]], both of which
 are standalone actions.
 
-To use a standalone action, you should declare it in the _action map_ by overriding the
+To host an external action in a controller, declare it in the _action map_ by overriding the
 [[yii\base\Controller::actions()]] method in your controller classes like the following:
 
 ```php
@@ -291,6 +298,11 @@ class HelloWorldAction extends Action
     }
 }
 ```
+
+<span id="module-level-actions"></span>
+
+For direct application/module dispatch, use the separate [Standalone Actions](structure-standalone-actions.md)
+guide. Controller-hosted actions continue to receive their controller and use its parameter binding and filters.
 
 ### Action Results <span id="action-results"></span>
 

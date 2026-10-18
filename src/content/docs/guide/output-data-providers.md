@@ -99,6 +99,36 @@ $query = (new Query())->from('post')->where(['status' => 1]);
 By default, [[yii\data\ActiveDataProvider]] uses the `db` application component as the database connection. You may
 use a different database connection by configuring the [[yii\data\ActiveDataProvider::db]] property.
 
+### Queries with UNION <span id="union-queries"></span>
+
+In Yii 22.0, `ActiveDataProvider` applies sorting and pagination to the complete `UNION` result. It uses
+`unionOrderBy`, `unionLimit` and `unionOffset`, preserving the individual SELECT operands' modifiers:
+
+```php
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
+
+$query = (new Query())
+    ->select(['id'])
+    ->from('current_orders')
+    ->union((new Query())->select(['id'])->from('archived_orders'));
+
+$provider = new ActiveDataProvider([
+    'query' => $query,
+    'pagination' => ['pageSize' => 10],
+    'sort' => [
+        'attributes' => ['id'],
+        'defaultOrder' => ['id' => SORT_ASC],
+    ],
+]);
+```
+
+Each page contains up to ten IDs from the combined result, ordered by ID. The total count covers the whole
+result, without the combined result's pagination limits. For SQL `UNION` this count reflects duplicate removal;
+use `union($query, true)` for `UNION ALL` when duplicates should remain. For a UNION query, an operand's ordinary
+`limit()`, `offset()` and `orderBy()` remain part of that operand; the provider does not replace them.
+See [query builder UNION modifiers](db-query-builder.md#union) when constructing a query without a provider.
+
 ## SQL Data Provider <span id="sql-data-provider"></span>
 
 [[yii\data\SqlDataProvider]] works with a raw SQL statement which is used to fetch the needed

@@ -121,6 +121,20 @@ echo ListView::widget([
 
 These are then also available as variables in the view.
 
+## Styling and client behavior <span id="styling-and-client-behavior"></span>
+
+Yii 22.0 core widgets render HTML without adding Bootstrap table, pagination or input classes automatically.
+Set properties such as `GridView::tableOptions`, `DataColumn::filterInputOptions` and `LinkPager::options` for
+the CSS framework used by the application. `ActionColumn::icons` or `buttons` can supply the application's
+icons; an unspecified icon falls back to its name in a plain `span`.
+
+`GridView` and `CheckboxColumn` expose a `clientScript` strategy. Without a configured strategy, the table,
+filter inputs, checkboxes and normal sort/page links still render, but jQuery grid filtering, selection helpers
+and select-all behavior are not registered. The JavaScript examples in this chapter require the corresponding
+jQuery strategies. Configure `yiisoft/yii2-jquery` as described under
+[client-side validation](input-validation.md#client-side-validation), or supply strategies implementing
+[[yii\web\client\ClientScriptInterface]]. Rendering a checkbox does not itself provide a select-all handler.
+
 ## GridView <span id="grid-view"></span>
 
 Data grid or [[yii\grid\GridView|GridView]] is one of the most powerful Yii widgets. It is extremely useful if you need to quickly build the admin

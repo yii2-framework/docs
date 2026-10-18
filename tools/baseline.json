@@ -45,6 +45,16 @@
             "errors": 0,
             "warnings": 0,
             "unresolvedLinks": 0
+        },
+        "road-runner": {
+            "errors": 0,
+            "warnings": 16,
+            "unresolvedLinks": 0
+        },
+        "franken-php": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
         }
     }
 }

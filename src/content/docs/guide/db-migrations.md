@@ -737,6 +737,12 @@ Below is the list of all these database accessing methods:
 - [[yii\db\Migration::addCommentOnTable()|addCommentOnTable()]]: adding comment to table
 - [[yii\db\Migration::dropCommentFromTable()|dropCommentFromTable()]]: dropping comment from table
 
+For PostgreSQL column alterations, a plain type such as `'string'` preserves the existing default and nullability.
+Use a [[yii\db\ColumnSchemaBuilder]] for compound definitions, for example
+`$this->alterColumn('post', 'title', $this->string()->notNull()->defaultValue('Untitled'));`.
+Compound strings such as `'string NOT NULL DEFAULT ...'` are not supported. To remove an existing default, use
+`$this->alterColumn('post', 'title', 'DROP DEFAULT');`; `defaultValue(null)` does not remove it.
+
 > Info: [[yii\db\Migration]] does not provide a database query method. This is because you normally do not need
 > to display extra message about retrieving data from a database. It is also because you can use the powerful
 > [Query Builder](db-query-builder.md) to build and run complex queries.

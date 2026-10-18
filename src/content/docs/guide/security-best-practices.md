@@ -210,39 +210,33 @@ class SiteController extends Controller
 }
 ```
 
-Disabling CSRF validation in [standalone actions](structure-controllers.md#standalone-actions) must be done in `init()`
-method. Do not place this code into `beforeRun()` method because it won't have effect.
+For an [external action hosted by a controller](structure-controllers.md#standalone-actions), an intentional
+change to the controller's `enableCsrfValidation` must happen before the controller's `beforeAction()` runs,
+for example in the action's `init()`. Changing it in `beforeRun()` is too late.
+
+[Standalone actions dispatched without a controller](structure-standalone-actions.md) do not execute
+`yii\web\Controller::beforeAction()` and therefore do not receive that controller's CSRF validation. For
+cookie-authenticated endpoints that change state, add validation before executing the use case, for example
+in a shared action filter or in the action's hook:
 
 ```php
-<?php
-
-namespace app\components;
-
-use yii\base\Action;
-
-class ContactAction extends Action
+protected function beforeRun()
 {
-    public function init()
-    {
-        parent::init();
-        $this->controller->enableCsrfValidation = false;
+    if (!parent::beforeRun()) {
+        return false;
     }
 
-    public function run()
-    {
-          $model = new ContactForm();
-          $request = Yii::$app->request;
-          if ($request->referrer === 'yiipowered.com'
-              && $model->load($request->post())
-              && $model->validate()
-          ) {
-              $model->sendEmail();
-          }
+    if (!\Yii::$app->request->validateCsrfToken()) {
+        throw new \yii\web\BadRequestHttpException('Unable to verify your data submission.');
     }
+
+    return true;
 }
 ```
 
-> Warning: Disabling CSRF will allow any site to send POST requests to your site. It is important to implement extra validation such as checking an IP address or a secret token in this case.
+Keep request CSRF validation enabled, send the token with the form or Ajax request, and restrict the endpoint's
+allowed HTTP methods separately. An HTTP verb filter or a `Referer` header check does not replace CSRF token
+validation. See the [standalone action lifecycle](structure-standalone-actions.md#filters-and-lifecycle).
 
 > Note: Since version 2.0.21 Yii supports the `sameSite` cookie setting (requires PHP version 7.3.0 or higher).
 > Setting the `sameSite` cookie setting does not make the above obsolete since not all browsers support the setting yet.

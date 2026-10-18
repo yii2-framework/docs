@@ -595,6 +595,18 @@ $query1->union($query2);
 
 You can call [[yii\db\Query::union()|union()]] multiple times to append more `UNION` fragments.
 
+In Yii 22.0, `orderBy()`, `addOrderBy()`, `limit()`, and `offset()` apply to the first `SELECT`, even when called
+after `union()`. Use [[yii\db\Query::unionOrderBy()]], [[yii\db\Query::addUnionOrderBy()]],
+[[yii\db\Query::unionLimit()]], and [[yii\db\Query::unionOffset()]] for the complete compound result:
+
+```php
+$query1->union($query2)
+    ->unionOrderBy(['id' => SORT_ASC])
+    ->unionLimit(20);
+```
+
+[[yii\data\ActiveDataProvider]] applies its sorting and pagination to the complete UNION result.
+
 ### [[yii\db\Query::withQuery()|withQuery()]] <span id="with-query"></span>
 
 The [[yii\db\Query::withQuery()|withQuery()]] method specifies the `WITH` prefix of a SQL query. You can use it instead of subquery for more readability and some unique features (recursive CTE). Read more at [modern-sql](https://modern-sql.com/feature/with). For example, this query will select all nested permissions of `admin` with their children recursively,

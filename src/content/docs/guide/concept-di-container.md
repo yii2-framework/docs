@@ -370,7 +370,7 @@ cannot be instantiated. This is because you need to tell the DI container how to
 Now if you access the controller again, an instance of `app\components\BookingService` will be
 created and injected as the 3rd parameter to the controller's constructor.
 
-Since Yii 2.0.36 when using PHP 7 action injection is available for both web and console controllers:
+Action method injection is available for both web and console controllers:
 
 ```php
 namespace app\controllers;
@@ -387,6 +387,27 @@ class HotelController extends Controller
     }
 }
 ```
+
+### Standalone action dependencies <span id="standalone-action-dependencies"></span>
+
+[Standalone actions](structure-standalone-actions.md) in Yii 22.0 are created through `Yii::createObject()` without
+positional constructor arguments. Constructor injection follows the normal container rules above: concrete
+dependencies can be autowired, while interfaces need definitions. Route parameters are supplied to `run()`,
+not to the constructor.
+
+For HTTP `run()` injection, [[yii\web\Action]] first looks for a compatible module component named after the
+parameter, then one registered by type, then an explicit global container definition. For example,
+`Response $response` receives the application's `response` component. A concrete custom service in `run()`
+requires registration, even though the normal container could construct it automatically for a constructor:
+
+```php
+Yii::$container->set(\app\checkout\quote\QuoteService::class);
+```
+
+With the `QuoteService` from the [use-case example](structure-standalone-actions.md#organizing-by-use-case),
+this permits a `run()` parameter typed as `QuoteService`. Prefer constructor injection when that service is
+also needed by the action's other methods. See the [binding rules](structure-standalone-actions.md#run-parameters)
+for missing services, scalar parameters and HTTP errors.
 
 ## Advanced Practical Usage <span id="advanced-practical-usage"></span>
 

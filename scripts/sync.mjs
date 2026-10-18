@@ -852,6 +852,60 @@ export function convertPage(source, options) {
   return `${frontmatter({ title, description, order, label, editUrl, generatedFrom })}\n\n${body}\n`;
 }
 
+/** Renders repository-owned skills as guide pages while keeping portable bundles unchanged. */
+export function syncFrameworkSkillPages(root, names) {
+  const navigation = JSON.parse(
+    readFileSync(path.join(root, "skills/navigation.json"), "utf8"),
+  );
+  const listed = navigation.map(({ name }) => name);
+  if (
+    new Set(listed).size !== listed.length ||
+    [...names].sort().join("\n") !== [...listed].sort().join("\n")
+  ) {
+    throw new Error(
+      "Every framework skill must have exactly one navigation entry.",
+    );
+  }
+  const output = path.join(root, "src/content/docs/guide/skills");
+  rmSync(output, { recursive: true, force: true });
+  mkdirSync(output, { recursive: true });
+  for (const { name, label, after } of navigation) {
+    const folder = path.join(root, "skills", name);
+    const original = readFileSync(path.join(folder, "SKILL.md"), "utf8");
+    const body = original.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, "");
+    const page = convertPage(body, {
+      sourceFile: "SKILL.md",
+      fallbackTitle: `Skill: ${label}`,
+      packageTitle: "Yii framework",
+      order: 0,
+      editUrl: `https://github.com/yii2-framework/docs/edit/main/skills/${name}/SKILL.md`,
+      generatedFrom: `skills/${name}/SKILL.md`,
+      rewrite: (href) => {
+        if (/^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(href)) return href;
+        const resource = href.split(/[?#]/, 1)[0];
+        if (
+          !safeRelativeDirectory(resource) ||
+          !existsSync(path.join(folder, resource))
+        ) {
+          throw new Error(`${name}: missing portable skill resource ${href}`);
+        }
+        return `/docs/skills/${name}/${href}`;
+      },
+      extra: [
+        "",
+        "## Install and activate this skill",
+        "",
+        `Select \`${name}\` in the [installation and client verification guide](../../project/ai-agents.md#install-the-relevant-skill).`,
+        `Install the complete bundle, including referenced resources. The [canonical SKILL.md](/docs/skills/${name}/SKILL.md) is also available for direct reading.`,
+        "",
+        `Continue with the [related framework guide](../../${after}.md).`,
+      ],
+    });
+    writeFileSync(path.join(output, `${name}.md`), page);
+  }
+  return listed;
+}
+
 /**
  * Returns the "Package" section appended to the landing page: repository, Composer package (or, for a template
  * repository, the GitHub link that creates a repository from it) and changelog.
@@ -1083,6 +1137,31 @@ function main(argv) {
   rmSync(SKILLS_CACHE, { recursive: true, force: true });
   rmSync(SKILLS_PUBLIC, { recursive: true, force: true });
   const skills = {};
+
+  // Framework workflow skills are owned here; custom manifests stay isolated.
+  if (!manifestArg && existsSync(path.join(ROOT, "skills"))) {
+    const frameworkNames = syncSkills(
+      {
+        name: "yii2-docs",
+        repo: "https://github.com/yii2-framework/docs",
+        ref: "main",
+        skillsDir: "skills",
+      },
+      ROOT,
+      {
+        cacheDir: SKILLS_CACHE,
+        publicDir: SKILLS_PUBLIC,
+        registry: skills,
+        commit:
+          gitOutput(["-C", ROOT, "status", "--porcelain", "--", "skills"]) ===
+          ""
+            ? gitOutput(["-C", ROOT, "rev-parse", "HEAD"])
+            : null,
+        source: "local",
+      },
+    );
+    syncFrameworkSkillPages(ROOT, frameworkNames);
+  }
 
   let skipped = 0;
   const sources = {};

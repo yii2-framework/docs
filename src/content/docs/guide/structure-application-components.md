@@ -29,7 +29,7 @@ For example,
 [
     'components' => [
         // register "cache" component using a class name
-        'cache' => 'yii\caching\ApcCache',
+        'cache' => 'yii\caching\ApcuCache',
 
         // register "db" component using a configuration array
         'db' => [
