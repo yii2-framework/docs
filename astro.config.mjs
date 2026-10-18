@@ -170,7 +170,9 @@ const guideGroups = [
   {
     label: "Introduction",
     items: [
+      { label: "What's new in Yii 22.0", slug: "guide/intro-whats-new" },
       { label: "About Yii", slug: "guide/intro-yii" },
+      { label: "Upgrading from Yii 2.0", slug: "guide/intro-upgrade-from-v2" },
       {
         label: "Upgrading from Version 1.1",
         slug: "guide/intro-upgrade-from-v1",
@@ -204,6 +206,10 @@ const guideGroups = [
         slug: "guide/structure-application-components",
       },
       { label: "Controllers", slug: "guide/structure-controllers" },
+      {
+        label: "Standalone Actions",
+        slug: "guide/structure-standalone-actions",
+      },
       { label: "Models", slug: "guide/structure-models" },
       { label: "Views", slug: "guide/structure-views" },
       { label: "Modules", slug: "guide/structure-modules" },
@@ -405,6 +411,25 @@ const guideGroups = [
   },
 ];
 
+// Each framework skill belongs beside its guide; its page is generated from SKILL.md during sync.
+const frameworkSkills = JSON.parse(
+  readFileSync(new URL("./skills/navigation.json", import.meta.url), "utf8"),
+);
+for (const { name, label, after } of frameworkSkills) {
+  const group = guideGroups.find(({ items }) =>
+    items.some((item) => item.slug === after),
+  );
+  if (!group)
+    throw new Error(`Unknown guide for framework skill ${name}: ${after}`);
+  const slug = `guide/skills/${name}`;
+  if (!pages.has(slug)) {
+    console.warn(`[skills] ${name} has no synced page. Run npm run sync.`);
+    continue;
+  }
+  const index = group.items.findIndex((item) => item.slug === after);
+  group.items.splice(index + 1, 0, { label: `Skill: ${label}`, slug });
+}
+
 const extensions = extensionsGroup();
 const developmentTools = developmentToolsGroup();
 const reference = apiReferenceGroup(pages);
@@ -502,7 +527,8 @@ const pageHeaders = (reference) =>
  * extension package, split by topic when larger (sizes estimated from the sources); the API reference in one bundle
  * per framework namespace group and per package (`api-yii2-db`, `api-bootstrap6`), split the same way.
  */
-const size = sourceSizer(pages);
+// Reserve room for Markdown links expanded to full site URLs, including skill resources.
+const size = sourceSizer(pages, { factor: 1.1 });
 const bundleSets = [
   ...topicBundles(groups, pages, { size }),
   ...apiBundles(pages, { size, types: referenceTypeNames() }),

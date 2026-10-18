@@ -26,7 +26,7 @@ use yii\caching\FileCache;
 $locator = new ServiceLocator;
 
 // register "cache" using a class name that can be used to create a component
-$locator->set('cache', 'yii\caching\ApcCache');
+$locator->set('cache', 'yii\caching\ApcuCache');
 
 // register "db" using a configuration array that can be used to create a component
 $locator->set('db', [
@@ -77,7 +77,7 @@ return [
             'username' => 'root',
             'password' => '',
         ],
-        'cache' => 'yii\caching\ApcCache',
+        'cache' => 'yii\caching\ApcuCache',
         'tz' => function() {
             return new \DateTimeZone(Yii::$app->formatter->defaultTimeZone);
         },

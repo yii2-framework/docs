@@ -85,3 +85,13 @@
 - fix(docs): repair translated guide destinations and anchors, and preserve standalone HTML paths in link checks.
 - feat(portal): add an independent PHP ecosystem home, project navigation, evidence-based package catalog and moderated community proposals while preserving Markdown documentation and agent resources.
 - fix(reference): retain setter parameter types keyed by name and prefer getter metadata for synthesized virtual properties.
+
+- docs: align Yii 22.0 migration, database, cache, client-script, and PSR-3 guidance with framework contracts.
+- feat(skills): add portable Yii subsystem skills and include repository-owned bundles in skill distribution.
+- docs: import RoadRunner and FrankenPHP guides, API references, worker skills and catalog records.
+- feat(skills): add a Yii 2.0-to-22.0 upgrade workflow with dependency readiness and staged verification.
+- fix(skills): clarify client strategy configuration, upload revalidation, and runnable upgrade stages.
+- feat(skills): expose every framework skill as a generated guide page with contextual sidebar navigation.
+- docs: add standalone action and Yii 22.0 highlights guides, with contextual routing, DI, client integration, UNION and PSR-3 examples.
+- feat(portal): highlight the Yii 22.0 feature guide on the home page and expose standalone actions in application navigation.
+- fix(docs): link upgrades to Standalone Actions and retain the previous controller anchor.

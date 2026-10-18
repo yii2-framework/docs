@@ -83,16 +83,16 @@ and accessible. The following code shows how to configure the `cache` applicatio
 
 You can then access the above cache component using the expression `Yii::$app->cache`.
 
-If no cache component is specified, then Yii will use [yii\caching\FileCache](https://www.yiiframework.com/doc/api/2.0/yii-caching-filecache) as default.
+Configure the `cache` application component explicitly; the framework does not register a default cache backend.
 
 Because all cache components support the same set of APIs, you can swap the underlying cache component
 with a different one by reconfiguring it in the application configuration without modifying the code that uses the cache.
-For example, you can modify the above configuration to use [[yii\caching\ApcCache|APC cache]]:
+For example, you can modify the above configuration to use [[yii\caching\ApcuCache|APCu cache]]:
 
 ```php
 'components' => [
     'cache' => [
-        'class' => 'yii\caching\ApcCache',
+        'class' => 'yii\caching\ApcuCache',
     ],
 ],
 ```
@@ -104,7 +104,7 @@ For example, you can modify the above configuration to use [[yii\caching\ApcCach
 
 Yii supports a wide range of cache storage. The following is a summary:
 
-- [[yii\caching\ApcCache]]: uses PHP [APC](https://www.php.net/manual/en/book.apcu.php) extension. This option can be
+- [[yii\caching\ApcuCache]]: uses PHP [APCu](https://www.php.net/manual/en/book.apcu.php) extension. This option can be
   considered as the fastest one when dealing with cache for a centralized thick application (e.g. one
   server, no dedicated load balancers, etc.).
 - [[yii\caching\DbCache]]: uses a database table to store cached data. To use this cache, you must
@@ -203,7 +203,7 @@ property. For example, in the application configuration you can write the follow
 ```php
 'components' => [
     'cache' => [
-        'class' => 'yii\caching\ApcCache',
+        'class' => 'yii\caching\ApcuCache',
         'keyPrefix' => 'myapp',       // a unique cache key prefix
     ],
 ],

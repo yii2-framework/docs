@@ -24,7 +24,7 @@ The [[yii\web\View::registerJs()|registerJs()]] method for adding these can be u
 
 ```php
 $this->registerJs(
-    "$('#myButton').on('click', function() { alert('Button clicked!'); });",
+    "document.getElementById('myButton').addEventListener('click', function () { alert('Button clicked!'); });",
     View::POS_READY,
     'my-button-handler'
 );
@@ -37,10 +37,11 @@ determines at which position the script should be inserted into the page. Possib
 - [[yii\web\View::POS_HEAD|View::POS_HEAD]] for head section.
 - [[yii\web\View::POS_BEGIN|View::POS_BEGIN]] for right after opening `<body>`.
 - [[yii\web\View::POS_END|View::POS_END]] for right before closing `</body>`.
-- [[yii\web\View::POS_READY|View::POS_READY]] for executing code on the [document `ready` event](https://learn.jquery.com/using-jquery-core/document-ready/).
-  This will automatically register [[yii\web\JqueryAsset|jQuery]] and wrap the code into the appropriate jQuery code. This is the default position.
-- [[yii\web\View::POS_LOAD|View::POS_LOAD]] for executing code on the
-  [document `load` event](https://learn.jquery.com/using-jquery-core/document-ready/). Same as the above, this will also register [[yii\web\JqueryAsset|jQuery]] automatically.
+- [[yii\web\View::POS_READY|View::POS_READY]] wraps the code in a native `DOMContentLoaded` event listener. This is the default position.
+- [[yii\web\View::POS_LOAD|View::POS_LOAD]] wraps the code in a native window `load` event listener.
+
+These positions do not register jQuery or inject `$`. Code that uses jQuery must register
+[[yii\web\JqueryAsset]] explicitly, for example through the layout's asset bundle, and use `jQuery` or its own wrapper.
 
 The last argument is a unique script ID that is used to identify the script code block and replace an existing one with the same ID
 instead of adding a new one. If you don't provide it, the JS code itself will be used as the ID. It is used to avoid registration of the same code multiple times.

@@ -5,7 +5,7 @@ description: "When a Yii application starts processing a requested URL, the firs
 
 When a Yii application starts processing a requested URL, the first step it takes is to parse the URL
 into a [route](structure-controllers.md#routes). The route is then used to instantiate the corresponding
-[controller action](structure-controllers.md) to handle the request. This whole process is called _routing_.
+[controller action](structure-controllers.md) or [standalone action](structure-standalone-actions.md) to handle the request. This whole process is called _routing_.
 
 The reverse process of routing is called _URL creation_, which creates a URL from a given route
 and the associated query parameters. When the created URL is later requested, the routing process can resolve it
@@ -63,8 +63,7 @@ property of the [[yii\web\UrlManager|URL manager]] without changing any other ap
 Routing involves two steps:
 
 - the incoming request is parsed into a route and the associated query parameters;
-- a [controller action](structure-controllers.md#actions) corresponding to the parsed route
-  is created to handle the request.
+- the action corresponding to the parsed route is created and run, with a hosting controller when required.
 
 When using the default URL format, parsing a request into a route is as simple as getting the value of a `GET`
 query parameter named `r`.
@@ -73,7 +72,13 @@ When using the pretty URL format, the [[yii\web\UrlManager|URL manager]] will ex
 [[yii\web\UrlManager::rules|URL rules]] to find matching one that can resolve the request into a route.
 If such a rule cannot be found, a [[yii\web\NotFoundHttpException]] exception will be thrown.
 
-Once the request is parsed into a route, it is time to create the controller action identified by the route.
+In Yii 22.0, application dispatch first checks its `actionMap` for the first non-empty route segment. A match
+runs that standalone action. Otherwise Yii resolves a controller action or discovers a standalone action under
+`actionNamespace`, descending into registered modules when needed. If both a controller action and a discovered
+standalone action resolve the same route, dispatch raises `InvalidConfigException`; choose distinct routes.
+See [standalone action registration](structure-standalone-actions.md#registering-actions) for mapping scope and examples.
+
+For the controller path, Yii creates the controller action identified by the route.
 The route is broken down into multiple parts by the slashes in it. For example, `site/index` will be
 broken into `site` and `index`. Each part is an ID which may refer to a module, a controller or an action.
 Starting from the first part in the route, the application takes the following steps to create modules (if any),
@@ -92,8 +97,8 @@ controller and action:
    it creates an action according to the configuration found in the map. Otherwise, the controller will
    attempt to create an inline action which is defined by an action method corresponding to the current [action ID](structure-controllers.md#action-ids).
 
-Among the above steps, if any error occurs, a [[yii\web\NotFoundHttpException]] will be thrown, indicating
-the failure of the routing process.
+If no action can be resolved, the web application raises [[yii\web\NotFoundHttpException]]. Configuration errors,
+such as a route collision, remain configuration exceptions.
 
 ### Default Route <span id="default-route"></span>
 

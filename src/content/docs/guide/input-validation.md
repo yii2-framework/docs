@@ -645,7 +645,13 @@ to enter something appear right away without any communication with the server.
 <?php yii\widgets\ActiveForm::end(); ?>
 ```
 
-Behind the scene, [[yii\widgets\ActiveForm]] will read the validation rules declared in the model
+In Yii 22.0, client-side behavior requires configured client-script strategies. For the jQuery implementation,
+install `yiisoft/yii2-jquery` and add `\yii\jquery\Bootstrap::class` to the application's `bootstrap` configuration.
+Custom implementations can use [[yii\web\client\ClientScriptInterface]] for widgets and
+[[yii\validators\client\ClientValidatorScriptInterface]] for validators. Without these strategies, forms still
+render HTML and validators still work on the server; enabling client validation alone does not install a strategy.
+
+With the jQuery strategies configured, [[yii\widgets\ActiveForm]] will read the validation rules declared in the model
 and generate appropriate JavaScript code for validators that support client-side validation. When a user
 changes the value of an input field or submit the form, the client-side validation JavaScript will be triggered.
 

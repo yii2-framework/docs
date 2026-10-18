@@ -104,6 +104,11 @@ In the above, we have shown how to define a fixture about a DB table. To define 
 (e.g. a fixture about certain files and directories), you may extend from the more general base class
 [[yii\test\Fixture]] and override the [[yii\test\Fixture::load()|load()]] and [[yii\test\Fixture::unload()|unload()]] methods.
 
+With `modelClass` and no explicit `tableName`, [[yii\test\ActiveFixture]] takes its connection from the model's
+`getDb()`, overriding the fixture's `db` setting. Resolve that connection to a disposable test database before use.
+Calling `load()` directly inserts rows without clearing existing data; `unload()` clears the table. Use the test
+runner's fixture lifecycle or an explicit unload/load sequence on that isolated database.
+
 ## Using Fixtures
 
 If you are using [Codeception](https://codeception.com/) to test your code, you can use the built-in support for loading

@@ -1,9 +1,10 @@
 ---
 title: "Filters"
-description: "Filters are objects that run before and/or after controller actions."
+description: "Filters run before or after controller actions and standalone actions."
 ---
 
-Filters are objects that run before and/or after [controller actions](structure-controllers.md#actions). For example,
+Filters are objects that run before and/or after [controller actions](structure-controllers.md#actions) or
+[standalone actions](structure-standalone-actions.md). For example,
 an access control filter may run before actions to ensure that they are allowed to be accessed by particular end users;
 a content compression filter may run after actions to compress the response content before sending them out to end users.
 
@@ -39,13 +40,18 @@ however, explicitly specify which actions the filter should be applied to by con
 some actions from being filtered.
 
 Besides controllers, you can also declare filters in a [module](structure-modules.md) or [application](structure-applications.md).
-When you do so, the filters will be applied to _all_ controller actions belonging to that module or application,
+When you do so, the filters will be applied to controller and standalone actions belonging to that module or application,
 unless you configure the filters' [[yii\base\ActionFilter::only|only]] and [[yii\base\ActionFilter::except|except]]
 properties like described above.
 
 > Note: When declaring filters in modules or applications, you should use [routes](structure-controllers.md#routes)
 > instead of action IDs in the [[yii\base\ActionFilter::only|only]] and [[yii\base\ActionFilter::except|except]] properties.
 > This is because action IDs alone cannot fully specify actions within the scope of a module or application.
+
+A [standalone action](structure-standalone-actions.md#filters-and-lifecycle) can declare its own `behaviors()`.
+For direct dispatch, application and ancestor-module filters still run; the action's filters take the place of
+controller filters in the sequence below. Controller filters are not inherited by a controllerless endpoint.
+An `AccessRule` with a `controllers` constraint does not match an action without a controller.
 
 When multiple filters are configured for a single action, they are applied according to the rules described below:
 

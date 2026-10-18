@@ -146,6 +146,10 @@ echo Url::current(['src' => null]);
 echo Url::current(['id' => 100]);
 ```
 
+For controllerless actions, `Url::current()` and `Url::canonical()` use [[yii\base\Application::$requestedRoute]].
+`current()` retains GET parameters; `canonical()` includes no action parameters in that case. If neither an active
+controller nor a requested route is available, these methods throw [[yii\base\InvalidConfigException]].
+
 ## Remember URLs <span id="remember-urls"></span>
 
 There are cases when you need to remember URL and afterwards use it during processing of the one of sequential requests.

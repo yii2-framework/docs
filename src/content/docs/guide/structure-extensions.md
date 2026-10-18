@@ -179,31 +179,16 @@ If your extension also depends on other extensions or third-party libraries, you
 Make sure you also list appropriate version constraints (e.g. `1.*`, `@stable`) for each dependent package. Use stable
 dependencies when your extension is released in a stable version.
 
-Most JavaScript/CSS packages are managed using [Bower](https://bower.io/) and/or [NPM](https://www.npmjs.com/),
-instead of Composer. Yii uses the [Composer asset plugin](https://github.com/fxpio/composer-asset-plugin)
-to enable managing these kinds of packages through Composer. If your extension depends on a Bower package, you can
-simply list the dependency in `composer.json` like the following:
-
-```json
-{
-  // package dependencies
-  "require": {
-    "bower-asset/jquery": ">=1.11.*"
-  }
-}
-```
-
-The above code states that the extension depends on the `jquery` Bower package. In general, you can use
-`bower-asset/PackageName` to refer to a Bower package in `composer.json`, and use `npm-asset/PackageName`
-to refer to a NPM package. When Composer installs a Bower or NPM package, by default the package content will be
-installed under the `@vendor/bower/PackageName` and `@vendor/npm/Packages` directories, respectively.
-These two directories can also be referred to using the shorter aliases `@bower/PackageName` and `@npm/PackageName`.
+Declare JavaScript and CSS dependencies in `package.json` and reference their installed files from asset bundles.
+Yii 22.0 defines `@npm` as `@app/node_modules` and no longer defines `@bower`. Applications may install packages
+with npm, use Foxy, or configure alternative bundle URLs and paths. Document which packages and files the extension
+requires; Composer installation alone does not guarantee that those asset files exist.
 
 For more details about asset management, please refer to the [Assets](structure-assets.md#bower-npm-assets) section.
 
 #### Class Autoloading <span id="class-autoloading"></span>
 
-In order for your classes to be autoloaded by the Yii class autoloader or the Composer class autoloader,
+For Composer to autoload your classes,
 you should specify the `autoload` entry in the `composer.json` file, like shown below:
 
 ```json

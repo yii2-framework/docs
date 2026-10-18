@@ -356,9 +356,35 @@ sending the content of the [[yii\log\Target::messages]] array to a designated me
 [[yii\log\Target::formatMessage()]] method to format each message. For more details, you may refer to any of the
 log target classes included in the Yii release.
 
-> Tip: Instead of creating your own loggers you may try any PSR-3 compatible logger such
-> as [Monolog](https://github.com/Seldaek/monolog) by using
-> [PSR log target extension](https://github.com/samdark/yii2-psr-log-target).
+### PSR-3 interoperability <span id="psr-3-interoperability"></span>
+
+Yii 22.0 includes two adapters for libraries using `Psr\Log\LoggerInterface` (`psr/log:^3.0`).
+[[yii\log\PsrLogger]] sends PSR-3 messages into Yii's normal logger and targets:
+
+```php
+$logger = new \yii\log\PsrLogger(category: 'checkout');
+$logger->info('Quote prepared for {quantity} items.', ['quantity' => 2]);
+```
+
+Pass this adapter to a library that accepts a PSR-3 logger. A string `category` in the context overrides the
+default category for that message. The adapter keeps the original message, level and context in
+[[yii\log\PsrMessage]]; ordinary Yii targets can format its string value with interpolated placeholders.
+
+[[yii\log\PsrTarget]] sends Yii messages in the other direction. Given an existing external PSR-3 logger
+instance in `$externalLogger`, add this target to the application's `log.targets` configuration:
+
+```php
+[
+    'class' => \yii\log\PsrTarget::class,
+    'logger' => $externalLogger,
+    'levels' => ['error', 'warning'],
+    'logVars' => [],
+],
+```
+
+Normal Yii level and category filters still apply. `PsrTarget::psrLevels` can further select exact PSR-3 levels,
+including original levels preserved by `PsrLogger`. Do not route this target back through a `PsrLogger` using
+the same Yii logging pipeline, which would create a logging loop.
 
 ## Performance Profiling <span id="performance-profiling"></span>
 

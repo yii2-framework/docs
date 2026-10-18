@@ -172,5 +172,40 @@
             "testing"
         ],
         "skillsDir": "skills"
+    },
+    {
+        "name": "road-runner",
+        "title": "RoadRunner",
+        "repo": "https://github.com/yii2-extensions/road-runner",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\roadrunner",
+        "localPath": "../../yii2-extensions/road-runner",
+        "packagist": "yii2-extensions/road-runner",
+        "order": ["installation", "configuration", "agents", "testing"],
+        "skillsDir": "skills"
+    },
+    {
+        "name": "franken-php",
+        "title": "FrankenPHP",
+        "repo": "https://github.com/yii2-extensions/franken-php",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "yii2\\extensions\\frankenphp",
+        "localPath": "../../yii2-extensions/franken-php",
+        "packagist": "yii2-extensions/franken-php",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "migration",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
     }
 ]

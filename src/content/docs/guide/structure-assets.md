@@ -156,7 +156,7 @@ This will cause a CSS file in the bundle to be included using the following HTML
 
 ```html
 <!--[if lte IE9]>
-  <link rel="stylesheet" href="path/to/foo.css" />
+    <link rel="stylesheet" href="path/to/foo.css" />
 <![endif]-->
 ```
 
@@ -209,7 +209,7 @@ The Yii 22.0 [Basic Project Template](start-installation.md#installing-assets) u
 packages. Keep the template's `config.foxy.manager` setting and allow-list entry for `php-forge/foxy`. Node.js and
 npm must be available when Composer runs.
 
-The template defines `@npm` as the application's `node_modules/` directory. Asset bundles can publish packages
+Yii 22.0 defines `@npm` as `<basePath>/node_modules` by default; `@bower` is not predefined. Asset bundles can publish packages
 from that directory; for example, [[yii\web\JqueryAsset]] uses `@npm/jquery/dist`. Register only the bundles your
 application needs. The Yii core's Composer dependencies do not require jQuery, while the basic template adds its
 jQuery client implementation and Bootstrap 5.

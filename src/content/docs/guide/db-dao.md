@@ -11,19 +11,16 @@ When using Yii DAO, you mainly need to deal with plain SQLs and PHP arrays. As a
 way to access databases. However, because SQL syntax may vary for different databases, using Yii DAO also means
 you have to take extra effort to create a database-agnostic application.
 
-In Yii 2.0, DAO supports the following databases out of the box:
+Yii 22.0 supports the following databases through PDO:
 
-- [MySQL](https://www.mysql.com/)
-- [MariaDB](https://mariadb.com/)
-- [SQLite](https://sqlite.org/)
-- [PostgreSQL](https://www.postgresql.org/): version 8.4 or higher
-- [CUBRID](https://www.cubrid.org/): version 9.3 or higher.
-- [Oracle](https://www.oracle.com/database/)
-- [MSSQL](https://www.microsoft.com/en-us/sqlserver/default.aspx): version 2008 or higher.
+- MySQL 8.0 or later;
+- MariaDB 10.6 or later;
+- SQLite 3.35 or later;
+- PostgreSQL 14 or later;
+- Oracle Database 12.1 or later;
+- Microsoft SQL Server 2019 or later.
 
-> Note: New version of pdo_oci for PHP 7 currently exists only as the source code. Follow
-> [instruction provided by community](https://github.com/yiisoft/yii2/issues/10975#issuecomment-248479268)
-> to compile it or use [PDO emulation layer](https://github.com/taq/pdooci).
+Install the PDO driver for the selected database. CUBRID is no longer supported.
 
 ## Creating DB Connections <span id="creating-db-connections"></span>
 
@@ -34,7 +31,7 @@ $db = new yii\db\Connection([
     'dsn' => 'mysql:host=localhost;dbname=example',
     'username' => 'root',
     'password' => '',
-    'charset' => 'utf8',
+    'charset' => 'utf8mb4',
 ]);
 ```
 
@@ -51,7 +48,7 @@ return [
             'dsn' => 'mysql:host=localhost;dbname=example',
             'username' => 'root',
             'password' => '',
-            'charset' => 'utf8',
+            'charset' => 'utf8mb4',
         ],
     ],
     // ...
@@ -69,7 +66,6 @@ for more details. Below are some examples:
 - MySQL, MariaDB: `mysql:host=localhost;dbname=mydatabase`
 - SQLite: `sqlite:/path/to/database/file`
 - PostgreSQL: `pgsql:host=localhost;port=5432;dbname=mydatabase`
-- CUBRID: `cubrid:dbname=demodb;host=localhost;port=33000`
 - MS SQL Server (via sqlsrv driver): `sqlsrv:Server=localhost;Database=mydatabase`
 - MS SQL Server (via dblib driver): `dblib:host=localhost;dbname=mydatabase`
 - MS SQL Server (via mssql driver): `mssql:host=localhost;dbname=mydatabase`
@@ -120,6 +116,14 @@ For MS SQL Server additional connection option is needed for proper binary data 
     ]
 ],
 ```
+
+For MySQL and MariaDB, Yii 22.0 uses `utf8mb4` when neither [[yii\db\Connection::$charset]] nor the DSN specifies a
+charset. An explicit `charset` takes precedence over a DSN charset. [[yii\db\Connection::getEffectiveCharset()]]
+resolves this value without opening the connection. Changing connection settings does not convert existing tables.
+
+On PostgreSQL, an explicitly configured `defaultSchema` in `schemaMap['pgsql']` also sets the connection's
+`search_path`; otherwise Yii preserves the server setting. Configure the same schema in `masterConfig` and
+`slaveConfig` when using [connection pools](#read-write-splitting).
 
 ## Executing SQL Queries <span id="executing-sql-queries"></span>
 

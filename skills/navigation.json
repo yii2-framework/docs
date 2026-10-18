@@ -1,0 +1,102 @@
+[
+    {
+        "name": "yii2-framework",
+        "label": "Application setup",
+        "after": "guide/start-installation"
+    },
+    {
+        "name": "yii2-upgrade-22",
+        "label": "Upgrade to Yii 22.0",
+        "after": "guide/intro-upgrade-from-v2"
+    },
+    {
+        "name": "yii2-autoload-di",
+        "label": "Autoloading and DI",
+        "after": "guide/concept-di-container"
+    },
+    {
+        "name": "yii2-caching",
+        "label": "Caching",
+        "after": "guide/caching-data"
+    },
+    {
+        "name": "yii2-console-commands",
+        "label": "Console commands",
+        "after": "guide/tutorial-console"
+    },
+    {
+        "name": "yii2-data-widgets",
+        "label": "Data widgets",
+        "after": "guide/output-data-widgets"
+    },
+    {
+        "name": "yii2-database-migrations",
+        "label": "Queries and migrations",
+        "after": "guide/db-migrations"
+    },
+    {
+        "name": "yii2-events-behaviors",
+        "label": "Events and behaviors",
+        "after": "guide/concept-behaviors"
+    },
+    {
+        "name": "yii2-files-uploads",
+        "label": "Files and uploads",
+        "after": "guide/input-file-upload"
+    },
+    {
+        "name": "yii2-forms-validation",
+        "label": "Forms and validation",
+        "after": "guide/input-validation"
+    },
+    {
+        "name": "yii2-i18n-formatting",
+        "label": "Translation and formatting",
+        "after": "guide/tutorial-i18n"
+    },
+    {
+        "name": "yii2-logging-errors",
+        "label": "Logging and errors",
+        "after": "guide/runtime-logging"
+    },
+    {
+        "name": "yii2-mail",
+        "label": "Mail",
+        "after": "guide/tutorial-mailing"
+    },
+    {
+        "name": "yii2-mutex",
+        "label": "Mutex coordination",
+        "after": "guide/tutorial-performance-tuning"
+    },
+    {
+        "name": "yii2-rest-apis",
+        "label": "REST APIs",
+        "after": "guide/rest-quick-start"
+    },
+    {
+        "name": "yii2-security-access",
+        "label": "Identity and access",
+        "after": "guide/security-authorization"
+    },
+    {
+        "name": "yii2-sessions-cookies",
+        "label": "Sessions and cookies",
+        "after": "guide/runtime-sessions-cookies"
+    },
+    {
+        "name": "yii2-testing-fixtures",
+        "label": "Tests and fixtures",
+        "after": "guide/test-fixtures"
+    },
+    {
+        "name": "yii2-views-assets",
+        "label": "Views and assets",
+        "after": "guide/structure-assets"
+    },
+    {
+        "name": "yii2-web-routing-actions",
+        "label": "Routing and actions",
+        "after": "guide/runtime-routing"
+    }
+]

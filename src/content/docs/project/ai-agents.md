@@ -10,7 +10,8 @@ framework or maintaining this documentation site.
 ## Quick start
 
 1. Create the Yii 22.0 application and open its root directory in the coding agent.
-2. Install the `yii2-framework` skill. Add a package-owned skill only when its workflow applies to the application.
+2. Install `yii2-framework` for setup, or select a focused framework subsystem skill for an existing application.
+   Add a package-owned skill when its workflow applies.
 3. Confirm that the client discovers the installed skill, then activate it explicitly for the first task.
 4. Start with a small change. Give the agent a known Markdown page when possible; use `llms.txt` only to discover
    documentation when the relevant page is not known.
@@ -28,12 +29,46 @@ The framework skill follows the `yiisoft/yii2-app-basic` template's `22` branch:
 
 Install from the application's root, not inside Composer `vendor/`. Choose the workflow the application uses:
 
+### Yii framework skills
+
+Each skill has its own page in the corresponding Yii2 navigation section. These pages render the maintained
+`SKILL.md` instructions; select the workflow you need, then follow the installation steps below.
+
+| Skill                                                                     | Workflow                   |
+| ------------------------------------------------------------------------- | -------------------------- |
+| [`yii2-framework`](../guide/skills/yii2-framework.md)                     | Application setup          |
+| [`yii2-upgrade-22`](../guide/skills/yii2-upgrade-22.md)                   | Upgrade to Yii 22.0        |
+| [`yii2-autoload-di`](../guide/skills/yii2-autoload-di.md)                 | Autoloading and DI         |
+| [`yii2-caching`](../guide/skills/yii2-caching.md)                         | Caching                    |
+| [`yii2-console-commands`](../guide/skills/yii2-console-commands.md)       | Console commands           |
+| [`yii2-data-widgets`](../guide/skills/yii2-data-widgets.md)               | Data widgets               |
+| [`yii2-database-migrations`](../guide/skills/yii2-database-migrations.md) | Queries and migrations     |
+| [`yii2-events-behaviors`](../guide/skills/yii2-events-behaviors.md)       | Events and behaviors       |
+| [`yii2-files-uploads`](../guide/skills/yii2-files-uploads.md)             | Files and uploads          |
+| [`yii2-forms-validation`](../guide/skills/yii2-forms-validation.md)       | Forms and validation       |
+| [`yii2-i18n-formatting`](../guide/skills/yii2-i18n-formatting.md)         | Translation and formatting |
+| [`yii2-logging-errors`](../guide/skills/yii2-logging-errors.md)           | Logging and errors         |
+| [`yii2-mail`](../guide/skills/yii2-mail.md)                               | Mail                       |
+| [`yii2-mutex`](../guide/skills/yii2-mutex.md)                             | Mutex coordination         |
+| [`yii2-rest-apis`](../guide/skills/yii2-rest-apis.md)                     | REST APIs                  |
+| [`yii2-security-access`](../guide/skills/yii2-security-access.md)         | Identity and access        |
+| [`yii2-sessions-cookies`](../guide/skills/yii2-sessions-cookies.md)       | Sessions and cookies       |
+| [`yii2-testing-fixtures`](../guide/skills/yii2-testing-fixtures.md)       | Tests and fixtures         |
+| [`yii2-views-assets`](../guide/skills/yii2-views-assets.md)               | Views and assets           |
+| [`yii2-web-routing-actions`](../guide/skills/yii2-web-routing-actions.md) | Routing and actions        |
+
+All framework skills are owned by `yii2-framework/docs`. Each subsystem bundle carries its shared conventions.
+Use the local checkout procedure for changes not yet published.
+
+### Package and tool skills
+
 | Skill                           | Owning repository               | Guide                                                       |
 | ------------------------------- | ------------------------------- | ----------------------------------------------------------- |
-| `yii2-framework`                | `yii2-framework/docs`           | [Yii application setup](../guide/start-installation.md)     |
 | `yii2-bootstrap6-widgets`       | `yii2-extensions/bootstrap6`    | [Bootstrap 6](../extensions/bootstrap6/agents.md)           |
 | `yii2-filepond-uploads`         | `yii2-extensions/filepond`      | [FilePond uploads](../extensions/filepond/agents.md)        |
 | `yii2-psr-bridge-worker`        | `yii2-extensions/psr-bridge`    | [Worker lifecycle](../extensions/psr-bridge/agents.md)      |
+| `yii2-roadrunner-worker`        | `yii2-extensions/road-runner`   | [RoadRunner worker](../extensions/road-runner/agents.md)    |
+| `yii2-frankenphp-worker`        | `yii2-extensions/franken-php`   | [FrankenPHP worker](../extensions/franken-php/agents.md)    |
 | `yii2-debug-inspection`         | `yii2-extensions/debug`         | [Debug inspection](../extensions/debug/agents.md)           |
 | `yii2-phpstan-analysis`         | `yii2-extensions/phpstan`       | [Static analysis](../extensions/phpstan/agents.md)          |
 | `yii2-inertia-integration`      | `yii2-extensions/inertia`       | [Inertia integration](../extensions/inertia/agents.md)      |
@@ -167,7 +202,7 @@ states the version and build date. Markdown page bodies do not currently include
 
 ## Agent instructions and skills
 
-The repository's `AGENTS.md` explains how agents consume the site. `skills/` owns the framework application skill; extension packages own their skills and the site generates their distribution bundles; maintaining this site uses the separate [contributor documentation](index.md).
+The repository's `AGENTS.md` explains how agents consume the site. `skills/` owns the framework application and subsystem skills; extension packages own their skills and the site generates their distribution bundles; maintaining this site uses the separate [contributor documentation](index.md).
 
 ## Extension guides
 
