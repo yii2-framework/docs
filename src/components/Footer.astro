@@ -1,0 +1,36 @@
+---
+import DefaultFooter from "@astrojs/starlight/components/Footer.astro";
+
+const token = (
+  import.meta.env.PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN ??
+  "3d393900d250422a8900b73549a7273f"
+).trim();
+const origin = Astro.site?.origin;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const enabled = import.meta.env.PROD && Boolean(token) && Boolean(origin);
+---
+
+<DefaultFooter />
+{
+  enabled && (
+    <script is:inline define:vars={{ token, origin, base }}>
+      (() => {
+        // Keep production builds previewed locally or on other hosts out of analytics.
+        if (
+          location.origin !== origin ||
+          !location.pathname.startsWith(base) ||
+          document.getElementById("cloudflare-web-analytics")
+        ) {
+          return;
+        }
+
+        const beacon = document.createElement("script");
+        beacon.id = "cloudflare-web-analytics";
+        beacon.type = "module";
+        beacon.src = "https://static.cloudflareinsights.com/beacon.min.js";
+        beacon.dataset.cfBeacon = JSON.stringify({ token });
+        document.body.append(beacon);
+      })();
+    </script>
+  )
+}

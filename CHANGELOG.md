@@ -96,3 +96,4 @@
 - feat(portal): highlight the Yii 22.0 feature guide on the home page and expose standalone actions in application navigation.
 - fix(docs): link upgrades to Standalone Actions and retain the previous controller anchor.
 - docs(skills): prefer Composer for installed package skills and keep npx as an optional installer.
+- feat(analytics): configure Cloudflare Web Analytics with a private dashboard and production-origin checks.

@@ -652,6 +652,7 @@ export default defineConfig({
       ],
       components: {
         Header: "./src/components/portal/Header.astro",
+        Footer: "./src/components/Footer.astro",
         Sidebar: "./src/components/Sidebar.astro",
         LanguageSelect: "./src/components/LanguageSelect.astro",
         MarkdownContent: "./src/components/MarkdownContent.astro",
