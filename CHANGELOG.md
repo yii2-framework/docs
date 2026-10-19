@@ -95,3 +95,4 @@
 - docs: add standalone action and Yii 22.0 highlights guides, with contextual routing, DI, client integration, UNION and PSR-3 examples.
 - feat(portal): highlight the Yii 22.0 feature guide on the home page and expose standalone actions in application navigation.
 - fix(docs): link upgrades to Standalone Actions and retain the previous controller anchor.
+- docs(skills): prefer Composer for installed package skills and keep npx as an optional installer.
