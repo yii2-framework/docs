@@ -1,0 +1,7 @@
+{
+    "name": "yii2-skill",
+    "repo": "https://github.com/yii2-extensions/skill",
+    "ref": "52ec7506ec53cff2217e2a8e56212825a71508aa",
+    "localPath": "../../yii2-extensions/skill",
+    "skillsDir": "skills"
+}

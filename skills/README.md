@@ -1,6 +1,7 @@
 # Agent skills
 
-This directory owns [`yii2-framework`](yii2-framework/SKILL.md) and the focused Yii 22.0 subsystem skills listed below.
+This directory retains compatibility snapshots of the framework skills. The editable source is now
+[`yii2-extensions/skill`](https://github.com/yii2-extensions/skill), a separate Composer bundle.
 Package and development-tool skills remain owned by their repositories. Use the
 [skill selection and client installation guide](../src/content/docs/project/ai-agents.md#install-the-relevant-skill)
 for the current skill names, sources, project paths and activation checks.
@@ -14,7 +15,8 @@ source commit and resource SHA-256 values; the published index is `/docs/skills/
 
 Framework skills also generate readable pages under `/docs/guide/skills/<name>/` during sync. Each entry in
 [`navigation.json`](navigation.json) places one skill beside its corresponding guide in the Yii2 sidebar.
-Edit the canonical `SKILL.md` and navigation metadata; do not maintain or commit the generated pages.
+Edit framework SKILL.md files in the common package and navigation metadata here; do not maintain generated pages.
+`framework-skills.json` pins the imported package revision. Existing public skill and guide URLs are preserved.
 
 A package's native aliases point to that single editable tree. Composer installation alone does not make a skill in
 `vendor/` discoverable from an application's root. Remote documentation builds require the skill to exist at the

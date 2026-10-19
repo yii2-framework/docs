@@ -91,7 +91,9 @@ Generated from the PHPDoc of `yiisoft/yii2` (branch `22.0`) and of each extensio
 
 ## Agent skills
 
-The framework's [`yii2-framework`](skills/yii2-framework/SKILL.md) skill covers Yii 22.0 applications.
+The framework's `yii2-framework` skill covers Yii 22.0 applications. Its editable source and the other nineteen
+framework workflows live in [`yii2-extensions/skill`](https://github.com/yii2-extensions/skill); the local `skills/`
+files remain compatibility snapshots. `framework-skills.json` selects the imported revision.
 Package and development-tool skills are owned by their repositories. Use the
 [skill selection and client setup guide](src/content/docs/project/ai-agents.md#install-the-relevant-skill) and
 `https://yii2-framework.github.io/docs/skills/index.json` for the current package bundle names, provenance and hashes.

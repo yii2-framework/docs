@@ -87,3 +87,36 @@ test("rejects broken portable links instead of emitting a page with a missing re
     /missing portable skill resource/,
   );
 });
+
+test("every generated workflow offers automatic Composer setup before optional npx", () => {
+  const { root, output } = fixture("automatic-installation");
+  syncFrameworkSkillPages(root, [entry.name]);
+  const page = readFileSync(path.join(output, `${entry.name}.md`), "utf8");
+  assert.ok(page.indexOf("composer install") < page.indexOf("npx skills@"));
+  assert.match(page, /yii2-extensions\/skill/);
+  assert.match(page, /### Optional npx installation/);
+});
+
+test("imports the owning package instead of a local compatibility snapshot", () => {
+  const { root, output } = fixture("separate-owner");
+  const owner = fixture("package-source");
+  writeFileSync(
+    path.join(owner.folder, "SKILL.md"),
+    owner.source.replace(
+      "Keep this workflow unchanged.",
+      "Read the owning package workflow.",
+    ),
+  );
+  syncFrameworkSkillPages(root, [entry.name], {
+    dir: owner.root,
+    repo: "https://github.com/yii2-extensions/skill",
+    ref: "verified-reference",
+  });
+  const page = readFileSync(path.join(output, `${entry.name}.md`), "utf8");
+  assert.match(page, /Read the owning package workflow\./);
+  assert.doesNotMatch(page, /Keep this workflow unchanged\./);
+  assert.match(
+    page,
+    /https:\/\/github\.com\/yii2-extensions\/skill\/edit\/verified-reference\/skills\/yii2-example\/SKILL\.md/,
+  );
+});

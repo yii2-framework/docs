@@ -11,14 +11,17 @@ Edit each document at its owning source, then regenerate the site. A generated c
 | Extension guides                      | Each package's README and `docs/`, registered in `packages.json` | `src/content/docs/extensions/<package>/`                                 |
 | Container and development tool guides | Each tool's README and `docs/`, registered in `tools.json`       | `src/content/docs/development-tools/<tool>/`                             |
 | PHP API contracts                     | Framework and package PHPDoc                                     | API Markdown, `public/reference/` and `.cache/reference/links.json`      |
-| Application skills                    | `skills/<name>/` or the owning package's `skills/`               | Package bundles in `.cache/skills/` and `public/skills/`                 |
-| Framework skill navigation            | `skills/navigation.json` and each canonical `SKILL.md`           | Pages in `src/content/docs/guide/skills/`                                |
+| Application skills                    | `yii2-extensions/skill` or the owning package's skill directory  | Package bundles in `.cache/skills/` and `public/skills/`                 |
+| Framework skill navigation            | `skills/navigation.json` and the common package's `SKILL.md`     | Pages in `src/content/docs/guide/skills/`                                |
 | Contributor documentation             | `src/content/docs/project/`                                      | HTML and per-page Markdown                                               |
 | Navigation and discovery              | `astro.config.mjs`, manifests and page frontmatter               | Sidebar, `llms.txt` and topic bundles                                    |
 
 `packages.json` describes Composer extensions and the framework; `tools.json` describes tools such as Docker that
 have no PHP namespace or Composer installation. Register a package's optional `skillsDir` to distribute its complete
-skill tree unchanged. The generated skills index records source refs and resource checksums.
+skill tree unchanged. The generated skills index records source refs and resource checksums. `framework-skills.json` pins the separate
+common package; legacy `skills/` files remain compatibility snapshots rather than a second editable source. Its
+`localPath` is only a contributor source for `sync:local`; application installation uses Packagist without a local
+Composer repository. Remote builds use the verified `ref` instead of the working tree.
 
 The `status` field records package distribution (`published`, `unpublished` or `template`), not the HTTP publication
 state of this site. A local build does not make a route public. Remote builds read the configured `repo` and `ref`;
