@@ -78,6 +78,55 @@ Use the local checkout procedure for changes not yet published.
 The Basic Project Template uses Bootstrap 5, so select the Bootstrap 6 skill only when that extension is
 installed. Installing any skill does not install or switch PHP packages.
 
+### Composer installation
+
+Prefer Composer with [`llm/skills`](https://packagist.org/packages/llm/skills) 1.15.0 (PHP 8.2+) for skills shipped
+by the application's installed packages.
+Run from the application root. This example assumes `yii2-extensions/psr-bridge` is already installed and its
+release includes `skills/`; the plugin does not install the extension for you.
+
+Create `skills.json` before installing the plugin:
+
+```json
+{
+    "target": ".agents/skills",
+    "aliases": [".claude/skills"],
+    "auto-sync": false,
+    "discovery": true,
+    "vendor-sources": false,
+    "dependencies": {
+        "composer": {
+            "trusted-replace": true,
+            "trusted": ["yii2-extensions/psr-bridge"]
+        }
+    }
+}
+```
+
+Then allow the plugin in this project and synchronize explicitly:
+
+```bash
+composer config allow-plugins.llm/skills true
+composer require --dev llm/skills:1.15.0
+composer skills:update
+composer skills:show
+```
+
+Keep the exact package names you approve in `trusted`; for Bootstrap 6, use `yii2-extensions/bootstrap6`.
+`trusted-replace` disables implicit trust in direct dependencies and built-in vendors. The Claude alias shares
+`.agents/skills`, which Codex, OpenCode, and Copilot can use directly. Keep generated directories and aliases out
+of Git; edit skills in their owning repositories.
+
+With `auto-sync` disabled, run `composer skills:update` after dependency installation or updates, including in CI,
+so synchronization errors have their own exit status. Synchronization overwrites donor-owned files and retains
+retired files or skills; inspect `composer skills:update --clean --dry-run` before cleaning generated output.
+
+This reads the packages actually installed in `vendor/`, not an unapplied `composer.lock` update. It does not
+install the separate `yii2-framework/docs` bundle: use [optional npx installation](#optional-npx-installation) or
+[manual installation](#manual-installation) for framework skills.
+
+### Optional npx installation
+
 Use the verified `skills` CLI version 1.7.2. List the chosen source before installing:
 
 ```bash
@@ -112,7 +161,7 @@ a client catalog proves discovery. Neither establishes correct execution.
 | [GitHub Copilot in VS Code](https://code.visualstudio.com/docs/agent-customization/agent-skills) | `.github/skills/<name>/SKILL.md` or `.agents/skills/`   | `/<name>` in agent chat               | Client discovery and task outputs; installer support alone does not establish activation.       |
 | [Amp](https://ampcode.com/docs/customize/skills)                                                 | `.agents/skills/<name>/SKILL.md`                        | Ask it to load the skill              | `amp skills list`, loading trace and task results.                                              |
 
-The installer chooses `.agents/skills/` for Codex, OpenCode, Copilot and Amp, and `.claude/skills/` for Claude Code.
+The npx installer chooses `.agents/skills/` for Codex, OpenCode, Copilot and Amp, and `.claude/skills/` for Claude Code.
 When using the Codex extension inside VS Code, follow the Codex row. Use separate workspaces for explicit activation
 and automatic selection, and include a negative task where the skill should remain unused.
 
