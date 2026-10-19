@@ -183,7 +183,12 @@ test("resync removes retired generated bundles and leaves editable package sourc
   const run = () =>
     spawnSync(
       process.execPath,
-      [path.join(site, "scripts/sync.mjs"), "--local", "--strict"],
+      [
+        path.join(site, "scripts/sync.mjs"),
+        "--local",
+        "--strict",
+        `--manifest=${path.join(site, "packages.json")}`,
+      ],
       { encoding: "utf8" },
     );
   let result = run();

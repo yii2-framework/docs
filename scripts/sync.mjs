@@ -7,6 +7,7 @@
 // or from a shallow clone of `repo` at `ref` in `.cache/packages/<name>/`. The package `README.md` becomes the landing
 // page (`index.md`) and every `<docsDir>/*.md` file one page; images under `<docsDir>` are copied next to the pages.
 // Optional `skillsDir` imports complete package-owned bundles into .cache/skills and public/skills unchanged.
+// The required `framework-skills.json` selects the common skill package; without `localPath` it always uses `repo`/`ref`.
 // Each page gets frontmatter (`title` from the first H1, which is removed; `description`; `sidebar.order`; `editUrl`)
 // and its links are rewritten: links between synced pages stay relative, links to other files of the package become
 // GitHub URLs at `ref`, absolute URLs and `[[yii\...]]` references are left untouched. The output has no timestamps,
@@ -260,10 +261,11 @@ function exportFramework(pkg, local) {
  * @returns {{ dir: string, source: string, commit: string }}
  */
 function obtainSources(pkg, useLocal) {
-  const local = path.resolve(ROOT, pkg.localPath);
+  const local =
+    useLocal && pkg.localPath ? path.resolve(ROOT, pkg.localPath) : null;
   const framework = pkg.type === "framework";
 
-  if (useLocal) {
+  if (local !== null) {
     if (framework && existsSync(path.join(local, ".git"))) {
       return exportFramework(pkg, local);
     }
@@ -1156,6 +1158,33 @@ function main(argv) {
     entries.push(...tools);
   }
   const packages = validateManifest(entries, path.relative(ROOT, manifestFile));
+  const common = manifestArg
+    ? null
+    : JSON.parse(
+        readFileSync(path.join(ROOT, "framework-skills.json"), "utf8"),
+      );
+  if (!manifestArg) {
+    if (
+      common === null ||
+      typeof common !== "object" ||
+      Array.isArray(common)
+    ) {
+      throw new Error("framework-skills.json: expected an object.");
+    }
+    for (const key of ["name", "repo", "ref", "skillsDir"]) {
+      if (typeof common[key] !== "string" || common[key].trim() === "") {
+        throw new Error(`framework-skills.json: missing ${key}`);
+      }
+    }
+    if (
+      common.localPath !== undefined &&
+      (typeof common.localPath !== "string" || common.localPath.trim() === "")
+    ) {
+      throw new Error(
+        "framework-skills.json: localPath must be a non-empty string when supplied.",
+      );
+    }
+  }
 
   // The whole directory is generated: start from scratch so removed pages and packages disappear.
   rmSync(OUTPUT_DIR, { recursive: true, force: true });
@@ -1164,40 +1193,22 @@ function main(argv) {
   rmSync(SKILLS_PUBLIC, { recursive: true, force: true });
   const skills = {};
 
-  // Common skills are a separate package; local snapshots remain a compatibility fallback.
+  // Common bundles come only from the owning package, with site-owned navigation.
   let commonSource = null;
-  if (!manifestArg && existsSync(path.join(ROOT, "skills"))) {
-    const commonFile = path.join(ROOT, "framework-skills.json");
-    const common = existsSync(commonFile)
-      ? JSON.parse(readFileSync(commonFile, "utf8"))
-      : null;
-    if (common !== null) {
-      for (const key of ["name", "repo", "ref", "localPath", "skillsDir"]) {
-        if (typeof common[key] !== "string" || common[key] === "") {
-          throw new Error(`framework-skills.json: missing ${key}`);
-        }
-      }
-      commonSource = {
-        ...obtainSources({ ...common, type: "tool" }, useLocal),
-        ...common,
-      };
-    }
-    const frameworkRoot = commonSource?.dir ?? ROOT;
+  if (common !== null) {
+    commonSource = {
+      ...common,
+      ...obtainSources({ ...common, type: "tool" }, useLocal),
+    };
     const frameworkNames = syncSkills(
-      {
-        name: commonSource ? "yii2-extensions/skill" : "yii2-docs",
-        repo: commonSource?.repo ?? "https://github.com/yii2-framework/docs",
-        ref: commonSource?.ref ?? "main",
-        skillsDir: "skills",
-      },
-      frameworkRoot,
+      { ...common, name: "yii2-extensions/skill" },
+      commonSource.dir,
       {
         cacheDir: SKILLS_CACHE,
         publicDir: SKILLS_PUBLIC,
         registry: skills,
-        commit:
-          commonSource?.commit ?? gitOutput(["-C", ROOT, "rev-parse", "HEAD"]),
-        source: commonSource?.source ?? "local",
+        commit: commonSource.commit,
+        source: commonSource.source,
       },
     );
     syncFrameworkSkillPages(ROOT, frameworkNames, commonSource);

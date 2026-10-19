@@ -18,10 +18,10 @@ Edit each document at its owning source, then regenerate the site. A generated c
 
 `packages.json` describes Composer extensions and the framework; `tools.json` describes tools such as Docker that
 have no PHP namespace or Composer installation. Register a package's optional `skillsDir` to distribute its complete
-skill tree unchanged. The generated skills index records source refs and resource checksums. `framework-skills.json` pins the separate
-common package; legacy `skills/` files remain compatibility snapshots rather than a second editable source. Its
-`localPath` is only a contributor source for `sync:local`; application installation uses Packagist without a local
-Composer repository. Remote builds use the verified `ref` instead of the working tree.
+skill tree unchanged. The generated skills index records source refs and resource checksums. The required
+`framework-skills.json` pins the common package, which is fetched from its remote `repo` at `ref` even during
+`sync:local`. No adjacent common-package checkout is needed. The local `skills/` directory contains only site
+navigation and a source pointer; application installation uses Packagist.
 
 The `status` field records package distribution (`published`, `unpublished` or `template`), not the HTTP publication
 state of this site. A local build does not make a route public. Remote builds read the configured `repo` and `ref`;

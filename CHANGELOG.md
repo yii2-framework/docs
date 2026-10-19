@@ -98,3 +98,4 @@
 - docs(skills): prefer Composer for installed package skills and keep npx as an optional installer.
 - feat(analytics): configure Cloudflare Web Analytics with a private dashboard and production-origin checks.
 - feat(skills): import the common skill package, install its releases from Packagist with automatic Composer synchronization, and verify generated installation routes.
+- refactor(skills)!: remove duplicate framework bundles and require the remote common package for every sync; install from `yii2-extensions/skill` instead of this repository.

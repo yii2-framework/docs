@@ -34,9 +34,7 @@ export function checkSkillInstallation(
   );
   const rows = [];
   for (const [name, entry] of Object.entries(index.skills)) {
-    const framework = ["yii2-extensions/skill", "yii2-docs"].includes(
-      entry.package,
-    );
+    const framework = entry.package === "yii2-extensions/skill";
     const owner = manifests.find((candidate) => candidate.repo === entry.repo);
     if (!framework && !owner)
       throw new Error(`${name}: missing owner in the site manifests`);

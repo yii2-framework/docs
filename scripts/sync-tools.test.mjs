@@ -93,7 +93,10 @@ test("a tool needs no Composer contract; package guards remain enforced", () => 
 });
 
 test("imports non-Composer guides separately and distributes complete byte-identical skills", () => {
-  const result = run();
+  const result = run([
+    "--manifest=packages.json",
+    "--tools-manifest=tools.json",
+  ]);
   assert.equal(result.status, 0, result.stderr);
   const page = readFileSync(
     path.join(root, "src/content/docs/development-tools/docker/index.md"),
@@ -145,7 +148,10 @@ test("imports non-Composer guides separately and distributes complete byte-ident
     "src/content/docs/development-tools/docker/stale.md",
     "Removed upstream.\n",
   );
-  assert.equal(run().status, 0);
+  assert.equal(
+    run(["--manifest=packages.json", "--tools-manifest=tools.json"]).status,
+    0,
+  );
   assert.ok(
     !existsSync(
       path.join(root, "src/content/docs/development-tools/docker/stale.md"),

@@ -264,8 +264,9 @@ states the version and build date. Markdown page bodies do not currently include
 ## Agent instructions and skills
 
 The repository's `AGENTS.md` explains how agents consume the site. Framework skills are maintained in
-`yii2-extensions/skill`; extension and tool repositories own their bundles. The site imports these sources and keeps
-its local `skills/` copies for compatibility. Maintaining the site uses the separate [contributor documentation](index.md).
+`yii2-extensions/skill`; extension and tool repositories own their bundles. The site imports these sources and
+generates the published bundles and guide pages; it keeps only framework skill navigation locally.
+Maintaining the site uses the separate [contributor documentation](index.md).
 
 ## Extension guides
 
