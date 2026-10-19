@@ -68,15 +68,16 @@ by `scripts/sync.mjs`. The synced files are build input and are never committed 
 
 ```bash
 npm run sync          # shallow clone of each package at its `ref` into .cache/packages/
-npm run sync:local    # use configured `localPath` checkouts; common skills still use the remote ref
+npm run sync:local    # use configured `localPath` checkouts; otherwise use the remote ref
 npm run test:sync     # self-tests of the sync script
 ```
 
 `npm run build` runs the sync and `tools/bin/reference` first (`prebuild`, so PHP and
 `composer install --working-dir tools` are needed), so CI clones the packages; `SYNC_LOCAL=1 npm run build` uses the
-local checkouts for entries with `localPath`. The common bundle always comes from the remote ref in
-`framework-skills.json`; no adjacent skill checkout is needed. The deploy workflow also runs nightly to pick up package changes. A package whose repository does
-not contain it yet (its `composer.json` name differs from `packagist` in the manifest) is skipped with a
+local checkouts for entries with `localPath`. The common bundle uses the remote ref in
+`framework-skills.json` unless that file configures an available `localPath`; no adjacent skill checkout is needed
+by default. The deploy workflow also runs nightly to pick up package changes. A package whose repository does not
+contain it yet (its `composer.json` name differs from `packagist` in the manifest) is skipped with a
 `[sync] skipped <name>` warning and left out of the sidebar. `node scripts/sync.mjs --strict` fails on any skip.
 
 The `status` of a manifest entry is `published` (on Packagist), `unpublished` (not released yet) or `template` (a GitHub

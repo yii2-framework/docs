@@ -4,6 +4,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  renameSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
@@ -118,5 +119,30 @@ test("imports the owning package instead of a local compatibility snapshot", () 
   assert.match(
     page,
     /https:\/\/github\.com\/yii2-extensions\/skill\/edit\/verified-reference\/skills\/yii2-example\/SKILL\.md/,
+  );
+});
+
+test("uses a configured skill directory for page content and edit links", () => {
+  const { root, output } = fixture("custom-directory");
+  const owner = fixture("custom-directory-owner");
+  const skillsDir = "agent/workflows";
+  mkdirSync(path.join(owner.root, "agent"));
+  renameSync(path.join(owner.root, "skills"), path.join(owner.root, skillsDir));
+  syncFrameworkSkillPages(root, [entry.name], {
+    dir: owner.root,
+    repo: "https://github.com/yii2-extensions/skill",
+    ref: "custom-layout-reference",
+    skillsDir,
+  });
+  const page = readFileSync(path.join(output, `${entry.name}.md`), "utf8");
+  assert.match(page, /Keep this workflow unchanged\./);
+  assert.match(page, /from agent\/workflows\/yii2-example\/SKILL\.md/);
+  assert.match(
+    page,
+    /https:\/\/github\.com\/yii2-extensions\/skill\/edit\/custom-layout-reference\/agent\/workflows\/yii2-example\/SKILL\.md/,
+  );
+  assert.match(
+    page,
+    /\[conventions\]\(\/docs\/skills\/yii2-example\/references\/conventions.md#scope\)/,
   );
 });

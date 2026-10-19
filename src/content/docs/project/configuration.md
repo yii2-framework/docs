@@ -19,8 +19,9 @@ Edit each document at its owning source, then regenerate the site. A generated c
 `packages.json` describes Composer extensions and the framework; `tools.json` describes tools such as Docker that
 have no PHP namespace or Composer installation. Register a package's optional `skillsDir` to distribute its complete
 skill tree unchanged. The generated skills index records source refs and resource checksums. The required
-`framework-skills.json` pins the common package, which is fetched from its remote `repo` at `ref` even during
-`sync:local`. No adjacent common-package checkout is needed. The local `skills/` directory contains only site
+`framework-skills.json` pins the common package, which is fetched from its remote `repo` at `ref`. During
+`sync:local`, an available `localPath` configured in that manifest takes precedence. The default manifest has none,
+so no adjacent common-package checkout is needed. The local `skills/` directory contains only site
 navigation and a source pointer; application installation uses Packagist.
 
 The `status` field records package distribution (`published`, `unpublished` or `template`), not the HTTP publication

@@ -6,8 +6,9 @@ The twenty framework skill bundles are maintained and distributed by
 Extension and development-tool repositories own their respective skills.
 
 This directory contains only site-owned [`navigation.json`](navigation.json) and this pointer.
-[`framework-skills.json`](../framework-skills.json) pins the common package's remote revision, including for
-`sync:local`. Edit skill bodies and their portable resources in the owning package.
+[`framework-skills.json`](../framework-skills.json) pins the common package's remote revision. In `sync:local`,
+an available `localPath` configured in that manifest takes precedence; the default manifest has none.
+Edit skill bodies and their portable resources in the owning package.
 
 The sync generates unchanged bundles in `.cache/skills/` and `public/skills/`, with provenance and resource hashes
 in `/docs/skills/index.json`, and framework guide pages under `/docs/guide/skills/<name>/`.

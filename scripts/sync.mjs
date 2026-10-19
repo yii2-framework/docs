@@ -884,8 +884,9 @@ export function syncFrameworkSkillPages(root, names, source = null) {
   const output = path.join(root, "src/content/docs/guide/skills");
   rmSync(output, { recursive: true, force: true });
   mkdirSync(output, { recursive: true });
+  const skillsDir = source?.skillsDir ?? "skills";
   for (const { name, label, after } of navigation) {
-    const folder = path.join(source?.dir ?? root, "skills", name);
+    const folder = path.join(source?.dir ?? root, skillsDir, name);
     const original = readFileSync(path.join(folder, "SKILL.md"), "utf8");
     const body = original.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, "");
     const page = convertPage(body, {
@@ -893,8 +894,8 @@ export function syncFrameworkSkillPages(root, names, source = null) {
       fallbackTitle: `Skill: ${label}`,
       packageTitle: "Yii framework",
       order: 0,
-      editUrl: `${source?.repo ?? "https://github.com/yii2-framework/docs"}/edit/${source?.ref ?? "main"}/skills/${name}/SKILL.md`,
-      generatedFrom: `skills/${name}/SKILL.md`,
+      editUrl: `${source?.repo ?? "https://github.com/yii2-framework/docs"}/edit/${source?.ref ?? "main"}/${skillsDir}/${name}/SKILL.md`,
+      generatedFrom: `${skillsDir}/${name}/SKILL.md`,
       rewrite: (href) => {
         if (/^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(href)) return href;
         const resource = href.split(/[?#]/, 1)[0];
