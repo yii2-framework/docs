@@ -43,7 +43,7 @@ jobs:
       # .cache/demos/<package>/ (Yii 22.0 and the package from their synced checkouts); the downloads of the other
       # dependencies come from this cache. Packages without sources in this build are skipped.
       - name: Cache Composer downloads.
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/composer
           key: composer-${{ runner.os }}-${{ hashFiles('tools/composer.lock', 'tools/demos/composer.json') }}
