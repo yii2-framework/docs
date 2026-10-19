@@ -7,6 +7,7 @@
 // or from a shallow clone of `repo` at `ref` in `.cache/packages/<name>/`. The package `README.md` becomes the landing
 // page (`index.md`) and every `<docsDir>/*.md` file one page; images under `<docsDir>` are copied next to the pages.
 // Optional `skillsDir` imports complete package-owned bundles into .cache/skills and public/skills unchanged.
+// The required `framework-skills.json` selects the common skill package; without `localPath` it always uses `repo`/`ref`.
 // Each page gets frontmatter (`title` from the first H1, which is removed; `description`; `sidebar.order`; `editUrl`)
 // and its links are rewritten: links between synced pages stay relative, links to other files of the package become
 // GitHub URLs at `ref`, absolute URLs and `[[yii\...]]` references are left untouched. The output has no timestamps,
@@ -260,10 +261,11 @@ function exportFramework(pkg, local) {
  * @returns {{ dir: string, source: string, commit: string }}
  */
 function obtainSources(pkg, useLocal) {
-  const local = path.resolve(ROOT, pkg.localPath);
+  const local =
+    useLocal && pkg.localPath ? path.resolve(ROOT, pkg.localPath) : null;
   const framework = pkg.type === "framework";
 
-  if (useLocal) {
+  if (local !== null) {
     if (framework && existsSync(path.join(local, ".git"))) {
       return exportFramework(pkg, local);
     }
@@ -283,6 +285,7 @@ function obtainSources(pkg, useLocal) {
 
   const dir = path.join(CACHE_DIR, pkg.name);
   const sparse = framework ? ["--filter=blob:none", "--sparse"] : [];
+  const pinned = /^[a-f0-9]{40}$/i.test(pkg.ref);
 
   rmSync(dir, { recursive: true, force: true });
   mkdirSync(CACHE_DIR, { recursive: true });
@@ -295,13 +298,25 @@ function obtainSources(pkg, useLocal) {
       "1",
       "--single-branch",
       ...sparse,
-      "--branch",
-      pkg.ref,
+      ...(pinned ? ["--no-checkout"] : ["--branch", pkg.ref]),
       pkg.repo,
       dir,
     ],
     { stdio: ["ignore", "inherit", "inherit"], env: GIT_ENV },
   );
+
+  if (pinned) {
+    execFileSync(
+      "git",
+      ["-C", dir, "fetch", "--quiet", "--depth", "1", "origin", pkg.ref],
+      { stdio: "inherit", env: GIT_ENV },
+    );
+    execFileSync(
+      "git",
+      ["-C", dir, "checkout", "--quiet", "--detach", "FETCH_HEAD"],
+      { stdio: "inherit", env: GIT_ENV },
+    );
+  }
 
   if (framework) {
     execFileSync("git", ["-C", dir, "sparse-checkout", "set", pkg.srcDir], {
@@ -853,7 +868,7 @@ export function convertPage(source, options) {
 }
 
 /** Renders repository-owned skills as guide pages while keeping portable bundles unchanged. */
-export function syncFrameworkSkillPages(root, names) {
+export function syncFrameworkSkillPages(root, names, source = null) {
   const navigation = JSON.parse(
     readFileSync(path.join(root, "skills/navigation.json"), "utf8"),
   );
@@ -869,8 +884,9 @@ export function syncFrameworkSkillPages(root, names) {
   const output = path.join(root, "src/content/docs/guide/skills");
   rmSync(output, { recursive: true, force: true });
   mkdirSync(output, { recursive: true });
+  const skillsDir = source?.skillsDir ?? "skills";
   for (const { name, label, after } of navigation) {
-    const folder = path.join(root, "skills", name);
+    const folder = path.join(source?.dir ?? root, skillsDir, name);
     const original = readFileSync(path.join(folder, "SKILL.md"), "utf8");
     const body = original.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, "");
     const page = convertPage(body, {
@@ -878,8 +894,8 @@ export function syncFrameworkSkillPages(root, names) {
       fallbackTitle: `Skill: ${label}`,
       packageTitle: "Yii framework",
       order: 0,
-      editUrl: `https://github.com/yii2-framework/docs/edit/main/skills/${name}/SKILL.md`,
-      generatedFrom: `skills/${name}/SKILL.md`,
+      editUrl: `${source?.repo ?? "https://github.com/yii2-framework/docs"}/edit/${source?.ref ?? "main"}/${skillsDir}/${name}/SKILL.md`,
+      generatedFrom: `${skillsDir}/${name}/SKILL.md`,
       rewrite: (href) => {
         if (/^(?:[a-z][a-z0-9+.-]*:|\/|#)/i.test(href)) return href;
         const resource = href.split(/[?#]/, 1)[0];
@@ -896,6 +912,19 @@ export function syncFrameworkSkillPages(root, names) {
         "## Install and activate this skill",
         "",
         `Select \`${name}\` in the [installation and client verification guide](../../project/ai-agents.md#install-the-relevant-skill).`,
+        `Complete the [one-time Composer setup](../../project/ai-agents.md#composer-installation). The common \`yii2-extensions/skill\` package installs all twenty framework skills; no separate installer is needed for \`${name}\`.`,
+        "",
+        "```bash",
+        "composer install",
+        "composer skills:show",
+        "```",
+        "",
+        "### Optional npx installation",
+        "",
+        "```bash",
+        `npx skills@1.7.2 add yii2-extensions/skill --skill ${name} --agent codex`,
+        "```",
+        "",
         `Install the complete bundle, including referenced resources. The [canonical SKILL.md](/docs/skills/${name}/SKILL.md) is also available for direct reading.`,
         "",
         `Continue with the [related framework guide](../../${after}.md).`,
@@ -1130,6 +1159,33 @@ function main(argv) {
     entries.push(...tools);
   }
   const packages = validateManifest(entries, path.relative(ROOT, manifestFile));
+  const common = manifestArg
+    ? null
+    : JSON.parse(
+        readFileSync(path.join(ROOT, "framework-skills.json"), "utf8"),
+      );
+  if (!manifestArg) {
+    if (
+      common === null ||
+      typeof common !== "object" ||
+      Array.isArray(common)
+    ) {
+      throw new Error("framework-skills.json: expected an object.");
+    }
+    for (const key of ["name", "repo", "ref", "skillsDir"]) {
+      if (typeof common[key] !== "string" || common[key].trim() === "") {
+        throw new Error(`framework-skills.json: missing ${key}`);
+      }
+    }
+    if (
+      common.localPath !== undefined &&
+      (typeof common.localPath !== "string" || common.localPath.trim() === "")
+    ) {
+      throw new Error(
+        "framework-skills.json: localPath must be a non-empty string when supplied.",
+      );
+    }
+  }
 
   // The whole directory is generated: start from scratch so removed pages and packages disappear.
   rmSync(OUTPUT_DIR, { recursive: true, force: true });
@@ -1138,29 +1194,25 @@ function main(argv) {
   rmSync(SKILLS_PUBLIC, { recursive: true, force: true });
   const skills = {};
 
-  // Framework workflow skills are owned here; custom manifests stay isolated.
-  if (!manifestArg && existsSync(path.join(ROOT, "skills"))) {
+  // Common bundles come only from the owning package, with site-owned navigation.
+  let commonSource = null;
+  if (common !== null) {
+    commonSource = {
+      ...common,
+      ...obtainSources({ ...common, type: "tool" }, useLocal),
+    };
     const frameworkNames = syncSkills(
-      {
-        name: "yii2-docs",
-        repo: "https://github.com/yii2-framework/docs",
-        ref: "main",
-        skillsDir: "skills",
-      },
-      ROOT,
+      { ...common, name: "yii2-extensions/skill" },
+      commonSource.dir,
       {
         cacheDir: SKILLS_CACHE,
         publicDir: SKILLS_PUBLIC,
         registry: skills,
-        commit:
-          gitOutput(["-C", ROOT, "status", "--porcelain", "--", "skills"]) ===
-          ""
-            ? gitOutput(["-C", ROOT, "rev-parse", "HEAD"])
-            : null,
-        source: "local",
+        commit: commonSource.commit,
+        source: commonSource.source,
       },
     );
-    syncFrameworkSkillPages(ROOT, frameworkNames);
+    syncFrameworkSkillPages(ROOT, frameworkNames, commonSource);
   }
 
   let skipped = 0;
@@ -1221,6 +1273,7 @@ function main(argv) {
     `${JSON.stringify(
       {
         mode: useLocal ? "local" : "clone",
+        commonSkills: commonSource,
         manifest: path.relative(ROOT, manifestFile).split(path.sep).join("/"),
         packages: sources,
       },

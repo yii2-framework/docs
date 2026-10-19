@@ -4,6 +4,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  renameSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
@@ -85,5 +86,63 @@ test("rejects broken portable links instead of emitting a page with a missing re
   assert.throws(
     () => syncFrameworkSkillPages(root, [entry.name]),
     /missing portable skill resource/,
+  );
+});
+
+test("every generated workflow offers automatic Composer setup before optional npx", () => {
+  const { root, output } = fixture("automatic-installation");
+  syncFrameworkSkillPages(root, [entry.name]);
+  const page = readFileSync(path.join(output, `${entry.name}.md`), "utf8");
+  assert.ok(page.indexOf("composer install") < page.indexOf("npx skills@"));
+  assert.match(page, /yii2-extensions\/skill/);
+  assert.match(page, /### Optional npx installation/);
+});
+
+test("imports the owning package instead of a local compatibility snapshot", () => {
+  const { root, output } = fixture("separate-owner");
+  const owner = fixture("package-source");
+  writeFileSync(
+    path.join(owner.folder, "SKILL.md"),
+    owner.source.replace(
+      "Keep this workflow unchanged.",
+      "Read the owning package workflow.",
+    ),
+  );
+  syncFrameworkSkillPages(root, [entry.name], {
+    dir: owner.root,
+    repo: "https://github.com/yii2-extensions/skill",
+    ref: "verified-reference",
+  });
+  const page = readFileSync(path.join(output, `${entry.name}.md`), "utf8");
+  assert.match(page, /Read the owning package workflow\./);
+  assert.doesNotMatch(page, /Keep this workflow unchanged\./);
+  assert.match(
+    page,
+    /https:\/\/github\.com\/yii2-extensions\/skill\/edit\/verified-reference\/skills\/yii2-example\/SKILL\.md/,
+  );
+});
+
+test("uses a configured skill directory for page content and edit links", () => {
+  const { root, output } = fixture("custom-directory");
+  const owner = fixture("custom-directory-owner");
+  const skillsDir = "agent/workflows";
+  mkdirSync(path.join(owner.root, "agent"));
+  renameSync(path.join(owner.root, "skills"), path.join(owner.root, skillsDir));
+  syncFrameworkSkillPages(root, [entry.name], {
+    dir: owner.root,
+    repo: "https://github.com/yii2-extensions/skill",
+    ref: "custom-layout-reference",
+    skillsDir,
+  });
+  const page = readFileSync(path.join(output, `${entry.name}.md`), "utf8");
+  assert.match(page, /Keep this workflow unchanged\./);
+  assert.match(page, /from agent\/workflows\/yii2-example\/SKILL\.md/);
+  assert.match(
+    page,
+    /https:\/\/github\.com\/yii2-extensions\/skill\/edit\/custom-layout-reference\/agent\/workflows\/yii2-example\/SKILL\.md/,
+  );
+  assert.match(
+    page,
+    /\[conventions\]\(\/docs\/skills\/yii2-example\/references\/conventions.md#scope\)/,
   );
 });

@@ -75,5 +75,5 @@ src/content/docs/development-tools/
 # Private maintainer files
 /internal/
 
-# Framework skill pages generated from the canonical skills/ tree
+# Framework skill pages generated from the owning common package
 src/content/docs/guide/skills/

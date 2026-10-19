@@ -7,7 +7,7 @@
         "start": "astro dev",
         "prebuild": "node scripts/sync.mjs && php tools/bin/reference --baseline tools/baseline.json && php tools/bin/demos --strict",
         "build": "astro build",
-        "postbuild": "node scripts/check-site.mjs && node scripts/llms-sizes.mjs",
+        "postbuild": "node scripts/check-site.mjs && node scripts/llms-sizes.mjs && node scripts/check-skill-installation.mjs",
         "preview": "astro preview",
         "reference": "php tools/bin/reference",
         "astro": "astro",
@@ -17,7 +17,8 @@
         "sync:local": "node scripts/sync.mjs --local",
         "test": "node --test scripts/*.test.mjs plugins/*.test.mjs",
         "test:plugins": "node --test plugins/*.test.mjs",
-        "test:sync": "node --test scripts/sync.test.mjs"
+        "test:sync": "node --test scripts/sync.test.mjs",
+        "check:skills": "node scripts/check-skill-installation.mjs"
     },
     "dependencies": {
         "@astrojs/markdown-remark": "7.3.2",

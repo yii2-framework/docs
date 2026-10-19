@@ -36,8 +36,9 @@ The documentation is deployed at **[yii2-framework.github.io/docs](https://yii2-
 
 ## Agent skills
 
-The [`yii2-framework`](skills/yii2-framework/SKILL.md) skill covers Yii 22.0 applications. Bootstrap 6 and FilePond
-own their extension skills in their package repositories. The site imports complete bundles automatically and
+The [`yii2-extensions/skill`](https://github.com/yii2-extensions/skill) package owns the twenty framework skills for
+Yii 22.0 applications. Bootstrap 6 and FilePond own their extension skills in their package repositories.
+The site imports complete bundles automatically and
 publishes [their index](https://yii2-framework.github.io/docs/skills/index.json), with source and file checksums.
 
 See [installation and sources](skills/README.md) and the
@@ -67,14 +68,16 @@ by `scripts/sync.mjs`. The synced files are build input and are never committed 
 
 ```bash
 npm run sync          # shallow clone of each package at its `ref` into .cache/packages/
-npm run sync:local    # use each package's `localPath` checkout instead (working tree)
+npm run sync:local    # use configured `localPath` checkouts; otherwise use the remote ref
 npm run test:sync     # self-tests of the sync script
 ```
 
 `npm run build` runs the sync and `tools/bin/reference` first (`prebuild`, so PHP and
 `composer install --working-dir tools` are needed), so CI clones the packages; `SYNC_LOCAL=1 npm run build` uses the
-local checkouts. The deploy workflow also runs nightly to pick up package changes. A package whose repository does
-not contain it yet (its `composer.json` name differs from `packagist` in the manifest) is skipped with a
+local checkouts for entries with `localPath`. The common bundle uses the remote ref in
+`framework-skills.json` unless that file configures an available `localPath`; no adjacent skill checkout is needed
+by default. The deploy workflow also runs nightly to pick up package changes. A package whose repository does not
+contain it yet (its `composer.json` name differs from `packagist` in the manifest) is skipped with a
 `[sync] skipped <name>` warning and left out of the sidebar. `node scripts/sync.mjs --strict` fails on any skip.
 
 The `status` of a manifest entry is `published` (on Packagist), `unpublished` (not released yet) or `template` (a GitHub

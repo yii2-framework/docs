@@ -57,7 +57,7 @@ Each skill has its own page in the corresponding Yii2 navigation section. These 
 | [`yii2-views-assets`](../guide/skills/yii2-views-assets.md)               | Views and assets           |
 | [`yii2-web-routing-actions`](../guide/skills/yii2-web-routing-actions.md) | Routing and actions        |
 
-All framework skills are owned by `yii2-framework/docs`. Each subsystem bundle carries its shared conventions.
+All framework skills are owned by `yii2-extensions/skill`. Each subsystem bundle carries its shared conventions.
 Use the local checkout procedure for changes not yet published.
 
 ### Package and tool skills
@@ -80,58 +80,70 @@ installed. Installing any skill does not install or switch PHP packages.
 
 ### Composer installation
 
-Prefer Composer with [`llm/skills`](https://packagist.org/packages/llm/skills) 1.15.0 (PHP 8.2+) for skills shipped
-by the application's installed packages.
-Run from the application root. This example assumes `yii2-extensions/psr-bridge` is already installed and its
-release includes `skills/`; the plugin does not install the extension for you.
-
-Create `skills.json` before installing the plugin:
+Bootstrap [`llm/skills`](https://packagist.org/packages/llm/skills) 1.15.0 once in the application (PHP 8.2+).
+Package metadata declares where skills live; it does not install or enable the plugin. Create `skills.json` first:
 
 ```json
 {
     "target": ".agents/skills",
     "aliases": [".claude/skills"],
-    "auto-sync": false,
-    "discovery": true,
+    "auto-sync": true,
     "vendor-sources": false,
     "dependencies": {
         "composer": {
             "trusted-replace": true,
-            "trusted": ["yii2-extensions/psr-bridge"]
+            "trusted": ["yii2-extensions/skill", "yii2-extensions/psr-bridge"]
         }
     }
 }
 ```
 
-Then allow the plugin in this project and synchronize explicitly:
+The common [`yii2-extensions/skill`](https://packagist.org/packages/yii2-extensions/skill) package supplies all twenty
+framework workflows, including migration, separately from `yiisoft/yii2`. Install it from Packagist:
 
 ```bash
 composer config allow-plugins.llm/skills true
-composer require --dev llm/skills:1.15.0
-composer skills:update
+composer require --dev llm/skills:1.15.0 "yii2-extensions/skill:^0.1"
 composer skills:show
 ```
 
-Keep the exact package names you approve in `trusted`; for Bootstrap 6, use `yii2-extensions/bootstrap6`.
-`trusted-replace` disables implicit trust in direct dependencies and built-in vendors. The Claude alias shares
-`.agents/skills`, which Codex, OpenCode, and Copilot can use directly. Keep generated directories and aliases out
-of Git; edit skills in their owning repositories.
+Commit the application's `composer.lock` to reproduce its resolved package revisions with `composer install`.
+Use `composer update` to select releases within the declared constraints. Both commands synchronize trusted bundles automatically. Add only the exact
+extension package names you approve to `trusted`; the PSR Bridge entry above is an example. `trusted-replace` removes
+implicit trust in direct dependencies and built-in vendors. Codex, OpenCode and Copilot read `.agents/skills`;
+Claude Code uses the alias. No individual npx installation is required.
 
-With `auto-sync` disabled, run `composer skills:update` after dependency installation or updates, including in CI,
-so synchronization errors have their own exit status. Synchronization overwrites donor-owned files and retains
-retired files or skills; inspect `composer skills:update --clean --dry-run` before cleaning generated output.
+Keep one donor per skill name. When adopting the common package, remove a previous framework Git/directory source
+from `skills.json` to avoid duplicate donors. Edit bundles in their owning repositories; generated skill directories
+and aliases belong outside Git. `composer skills:show` lists donor skills and synchronization status, not every
+skill available on the internet or proof that an agent loaded them.
 
-This reads the packages actually installed in `vendor/`, not an unapplied `composer.lock` update. It does not
-install the separate `yii2-framework/docs` bundle: use [optional npx installation](#optional-npx-installation) or
-[manual installation](#manual-installation) for framework skills.
+The automatic hook reports synchronization failures without failing Composer. Run `composer skills:update` explicitly
+when CI must fail on a sync error. Set `auto-sync` to `false` to disable the hook; do not rely on `--no-scripts` for
+that with Composer 2.10.3. Donor-owned files are overwritten; retired files remain until deliberate cleanup. Preview
+`composer skills:update --clean --dry-run` before cleaning generated output.
+
+#### Git and local bundles
+
+For bundles without a Composer release, register a Git or local source once. For example, Docker remains an image
+repository, and a local checkout can supply a skill missing from an installed release:
+
+```bash
+composer skills:add yii2-extensions/docker-images --ref=main --skill=yii2-docker-environment
+composer skills:add /absolute/path/to/nested-sets-behavior --skill=yii2-nested-sets
+```
+
+These explicit sources are trusted by declaration and synchronize on later Composer operations. They are separate
+from installed PHP packages and are not versioned by `composer.lock`; pin a checked tag or commit instead of `main`
+when reproducibility is needed. Do not use `self.version` between repositories with unrelated versions.
 
 ### Optional npx installation
 
 Use the verified `skills` CLI version 1.7.2. List the chosen source before installing:
 
 ```bash
-npx skills@1.7.2 add yii2-framework/docs --list
-npx skills@1.7.2 add yii2-framework/docs --skill yii2-framework --agent codex
+npx skills@1.7.2 add yii2-extensions/skill --list
+npx skills@1.7.2 add yii2-extensions/skill --skill yii2-framework --agent codex
 ```
 
 For a package, replace the repository and skill with the matching row above. The installer reads the source's
@@ -251,7 +263,10 @@ states the version and build date. Markdown page bodies do not currently include
 
 ## Agent instructions and skills
 
-The repository's `AGENTS.md` explains how agents consume the site. `skills/` owns the framework application and subsystem skills; extension packages own their skills and the site generates their distribution bundles; maintaining this site uses the separate [contributor documentation](index.md).
+The repository's `AGENTS.md` explains how agents consume the site. Framework skills are maintained in
+`yii2-extensions/skill`; extension and tool repositories own their bundles. The site imports these sources and
+generates the published bundles and guide pages; it keeps only framework skill navigation locally.
+Maintaining the site uses the separate [contributor documentation](index.md).
 
 ## Extension guides
 
