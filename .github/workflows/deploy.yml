@@ -2,6 +2,7 @@
 name: deploy
 
 on:
+  pull_request:
   push:
     branches: [main]
   # Nightly rebuild: `npm run build` re-syncs the extension guides (scripts/sync.mjs) from their repositories.
@@ -14,7 +15,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: "pages"
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.event.number) || 'pages' }}
   cancel-in-progress: false
 
 jobs:
@@ -60,6 +61,7 @@ jobs:
 
   deploy:
     name: Deploy
+    if: ${{ github.event_name != 'pull_request' }}
     needs: build
     runs-on: ubuntu-latest
     # Deploying to GitHub Pages writes the deployment and mints the OIDC token that authenticates it.

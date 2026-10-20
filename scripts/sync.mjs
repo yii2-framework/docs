@@ -919,6 +919,8 @@ export function syncFrameworkSkillPages(root, names, source = null) {
         "composer skills:show",
         "```",
         "",
+        "With `auto-sync` set to `true`, dependency installs and updates synchronize the trusted skills. If it is `false`, run `composer skills:update` after dependency installation or updates.",
+        "",
         "### Optional npx installation",
         "",
         "```bash",

@@ -55,6 +55,11 @@
             "errors": 0,
             "warnings": 0,
             "unresolvedLinks": 0
+        },
+        "select2": {
+            "errors": 0,
+            "warnings": 27,
+            "unresolvedLinks": 0
         }
     }
 }
