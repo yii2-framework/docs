@@ -227,6 +227,6 @@
             "agents",
             "testing"
         ],
-        "skillsDir": ".agents/skills"
+        "skillsDir": "skills"
     }
 ]

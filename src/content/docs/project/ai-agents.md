@@ -76,9 +76,6 @@ Use the local checkout procedure for changes not yet published.
 | `yii2-localeurls-configuration` | `yii2-extensions/localeurls`    | [Language URLs](../extensions/localeurls/agents.md)         |
 | `yii2-docker-environment`       | `yii2-extensions/docker-images` | [Docker environment](../development-tools/docker/agents.md) |
 
-Select2 owns its bundle at `.agents/skills/yii2-select2/`; the other package and tool bundles above use
-`skills/<skill-name>/`.
-
 The Basic Project Template uses Bootstrap 5, so select the Bootstrap 6 skill only when that extension is
 installed. Installing any skill does not install or switch PHP packages.
 
