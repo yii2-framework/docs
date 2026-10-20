@@ -65,6 +65,7 @@ Use the local checkout procedure for changes not yet published.
 | Skill                           | Owning repository               | Guide                                                       |
 | ------------------------------- | ------------------------------- | ----------------------------------------------------------- |
 | `yii2-bootstrap6-widgets`       | `yii2-extensions/bootstrap6`    | [Bootstrap 6](../extensions/bootstrap6/agents.md)           |
+| `yii2-select2`                  | `yii2-extensions/select2`       | [Select2 integration](../extensions/select2/agents.md)      |
 | `yii2-filepond-uploads`         | `yii2-extensions/filepond`      | [FilePond uploads](../extensions/filepond/agents.md)        |
 | `yii2-psr-bridge-worker`        | `yii2-extensions/psr-bridge`    | [Worker lifecycle](../extensions/psr-bridge/agents.md)      |
 | `yii2-roadrunner-worker`        | `yii2-extensions/road-runner`   | [RoadRunner worker](../extensions/road-runner/agents.md)    |
@@ -81,7 +82,8 @@ installed. Installing any skill does not install or switch PHP packages.
 ### Composer installation
 
 Bootstrap [`llm/skills`](https://packagist.org/packages/llm/skills) 1.15.0 once in the application (PHP 8.2+).
-Package metadata declares where skills live; it does not install or enable the plugin. Create `skills.json` first:
+Package metadata declares where skills live; it does not install or enable the plugin. Create `skills.json` first,
+or use the [optional initializer](#optional-initializer) below:
 
 ```json
 {
@@ -108,7 +110,8 @@ composer skills:show
 ```
 
 Commit the application's `composer.lock` to reproduce its resolved package revisions with `composer install`.
-Use `composer update` to select releases within the declared constraints. Both commands synchronize trusted bundles automatically. Add only the exact
+Use `composer update` to select releases within the declared constraints. With `auto-sync` set to `true`, both
+commands synchronize trusted bundles automatically. Add only the exact
 extension package names you approve to `trusted`; the PSR Bridge entry above is an example. `trusted-replace` removes
 implicit trust in direct dependencies and built-in vendors. Codex, OpenCode and Copilot read `.agents/skills`;
 Claude Code uses the alias. No individual npx installation is required.
@@ -123,6 +126,27 @@ when CI must fail on a sync error. Set `auto-sync` to `false` to disable the hoo
 that with Composer 2.10.3. Donor-owned files are overwritten; retired files remain until deliberate cleanup. Preview
 `composer skills:update --clean --dry-run` before cleaning generated output.
 
+#### Optional initializer
+
+For a new `skills.json`, install the plugin with its hooks disabled, then initialize this PSR Bridge example:
+
+```bash
+composer config --no-plugins allow-plugins.llm/skills true
+composer require --dev llm/skills:1.15.0 --no-interaction --no-plugins --no-scripts
+composer skills:init --no-interaction --no-sync \
+  --target=.agents/skills --alias=.claude/skills \
+  --trust=yii2-extensions/psr-bridge --no-auto-sync --discovery
+```
+
+Before synchronizing, set `vendor-sources` to `false` and `dependencies.composer.trusted-replace` to `true` in
+`skills.json`. The initializer has no flags for these two settings; both are needed to retain the explicit trust
+policy above. It refuses to overwrite an existing file by default.
+
+Review `composer skills:show` and `composer skills:update --dry-run`, then run `composer skills:update`.
+`--no-sync` skips the initial sync; `--no-auto-sync` leaves later installs and updates without automatic sync.
+With this setting, run `composer skills:update` after dependency installation or updates. To enable automatic
+synchronization, set `auto-sync` to `true` after reviewing the trust settings above.
+
 #### Git and local bundles
 
 For bundles without a Composer release, register a Git or local source once. For example, Docker remains an image
@@ -133,8 +157,9 @@ composer skills:add yii2-extensions/docker-images --ref=main --skill=yii2-docker
 composer skills:add /absolute/path/to/nested-sets-behavior --skill=yii2-nested-sets
 ```
 
-These explicit sources are trusted by declaration and synchronize on later Composer operations. They are separate
-from installed PHP packages and are not versioned by `composer.lock`; pin a checked tag or commit instead of `main`
+These explicit sources are trusted by declaration. With `auto-sync` set to `true`, they synchronize on later
+Composer operations; with `false`, run `composer skills:update` after dependency installation or updates. They are
+separate from installed PHP packages and are not versioned by `composer.lock`; pin a checked tag or commit instead of `main`
 when reproducibility is needed. Do not use `self.version` between repositories with unrelated versions.
 
 ### Optional npx installation

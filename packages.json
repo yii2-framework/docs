@@ -207,5 +207,26 @@
             "testing"
         ],
         "skillsDir": "skills"
+    },
+    {
+        "name": "select2",
+        "title": "Select2",
+        "repo": "https://github.com/yii2-extensions/select2",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "Yii2\\Extensions\\Select2",
+        "localPath": "../../yii2-extensions/select2",
+        "packagist": "yii2-extensions/select2",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "remote-data",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
     }
 ]
