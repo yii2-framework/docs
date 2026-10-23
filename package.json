@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "@astrojs/markdown-remark": "7.3.2",
-        "@astrojs/mdx": "8.0.3",
+        "@astrojs/mdx": "8.1.0",
         "@astrojs/starlight": "0.42.6",
         "@fontsource-variable/atkinson-hyperlegible-mono": "5.3.0",
         "@fontsource-variable/atkinson-hyperlegible-next": "5.3.0",
