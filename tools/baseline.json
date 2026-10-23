@@ -60,6 +60,11 @@
             "errors": 0,
             "warnings": 27,
             "unresolvedLinks": 0
+        },
+        "selectize": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
         }
     }
 }

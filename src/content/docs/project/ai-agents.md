@@ -66,6 +66,7 @@ Use the local checkout procedure for changes not yet published.
 | ------------------------------- | ------------------------------- | ----------------------------------------------------------- |
 | `yii2-bootstrap6-widgets`       | `yii2-extensions/bootstrap6`    | [Bootstrap 6](../extensions/bootstrap6/agents.md)           |
 | `yii2-select2`                  | `yii2-extensions/select2`       | [Select2 integration](../extensions/select2/agents.md)      |
+| `yii2-selectize`                | `yii2-extensions/selectize`     | [Selectize integration](../extensions/selectize/agents.md)  |
 | `yii2-filepond-uploads`         | `yii2-extensions/filepond`      | [FilePond uploads](../extensions/filepond/agents.md)        |
 | `yii2-psr-bridge-worker`        | `yii2-extensions/psr-bridge`    | [Worker lifecycle](../extensions/psr-bridge/agents.md)      |
 | `yii2-roadrunner-worker`        | `yii2-extensions/road-runner`   | [RoadRunner worker](../extensions/road-runner/agents.md)    |
