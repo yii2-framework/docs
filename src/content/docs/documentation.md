@@ -20,6 +20,13 @@ selector. For Yii3, use the separate [Yii3 resources](ecosystems/yii3.md).
 | Look up a framework type           | [API reference](api/index.md)                        |
 | Choose an extension or PHP library | [Package catalog](/docs/packages/)                   |
 
+## Cookbook
+
+The [Cookbook](cookbook/index.md) collects practical recipes for deploying and
+operating Yii applications. Start with [hardening a PHP VPS with Tailscale and
+Cloudflare](cookbook/hardening-vps.md) and [configuring PHP for
+production](cookbook/php-production.md).
+
 ## Package guides and examples
 
 Open a package's catalog entry for its repository, requirements, source revision,
