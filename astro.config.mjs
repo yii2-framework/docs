@@ -433,6 +433,20 @@ for (const { name, label, after } of frameworkSkills) {
 const extensions = extensionsGroup();
 const developmentTools = developmentToolsGroup();
 const reference = apiReferenceGroup(pages);
+const cookbookGroup = {
+  label: "Cookbook",
+  items: [
+    { label: "Overview", slug: "cookbook" },
+    {
+      label: "Harden a PHP VPS",
+      slug: "cookbook/hardening-vps",
+    },
+    {
+      label: "Configure PHP for production",
+      slug: "cookbook/php-production",
+    },
+  ],
+};
 const aiGroup = {
   label: "AI",
   items: [{ label: "Build with an agent", slug: "project/ai-agents" }],
@@ -459,6 +473,7 @@ const sidebar = [
     label: "Yii2",
     items: [...guideGroups, ...reference],
   },
+  cookbookGroup,
   ...extensions,
   ...developmentTools,
   aiGroup,
@@ -498,6 +513,7 @@ const groups = sidebarGroups(
   [
     portalGroup,
     ...guideGroups,
+    cookbookGroup,
     ...extensions,
     ...developmentTools,
     ...reference,

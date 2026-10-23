@@ -100,3 +100,4 @@
 - feat(skills): import the common skill package, install its releases from Packagist with automatic Composer synchronization, and verify generated installation routes.
 - refactor(skills)!: remove duplicate framework bundles and require the remote common package for every sync; install from `yii2-extensions/skill` instead of this repository.
 - docs: integrate Select2, clarify Composer skill setup, and validate builds before deployment.
+- docs: integrate Selectize guides, API reference and package skill; add VPS hardening and production PHP Cookbook recipes.
