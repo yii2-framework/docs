@@ -103,6 +103,13 @@ to reach tagged web servers on TCP 22 and authenticate as `deploy`:
             "dst": ["tag:web-server"],
             "users": ["deploy"]
         }
+    ],
+    "tests": [
+        {
+            "src": "tag:web-server",
+            "proto": "tcp",
+            "deny": ["you@example.com:22"]
+        }
     ]
 }
 ```
@@ -113,6 +120,12 @@ required access for other devices. Review tag ownership and policy-editing permi
 change the boundary. Add positive and negative
 [policy tests](https://tailscale.com/docs/reference/syntax/policy-file#tests) for the administrator, a
 non-administrator, TCP 22, and denied service ports.
+
+This policy does not let the VPS start new Tailscale connections to your personal devices; replies within authorized
+connections still work. The example's negative test checks TCP 22 from the server tag to devices signed in as your
+identity, without needing an SSH service to be running. A `deny` test checks the expected restriction; it does not
+create a blocking rule. Add cases for other relevant ports and personal-device owners, and make sure the tests pass when
+saving policy changes.
 
 On the VPS, join that tailnet, enable Tailscale SSH, and apply the server tag:
 
@@ -125,6 +138,20 @@ Authenticate with an identity authorized to assign the tag. Your workstation mus
 listed administrator on a user-owned, untagged device. Open a new SSH session from it to the VPS's Tailscale address as
 `deploy`, and verify any required sudo access before proceeding. Tagged automation clients need their own deliberately
 scoped policy.
+
+Check the VPS's [device key expiry](https://tailscale.com/docs/features/access-control/key-expiry) before relying on
+unattended access. The default is 180 days, but your tailnet can configure it differently.
+[Initial authentication with a tag](https://tailscale.com/docs/features/access-control/auth-keys#key-expiry-for-tagged-devices)
+disables expiry by default; adding a tag to an already authenticated device leaves its existing expiry setting
+unchanged. In the admin console's _Machines_ page, open the VPS's three-dot menu and choose _Disable Key Expiry_ if it
+is enabled and you want unattended access to persist. Confirm the device now shows key expiry disabled. This trades
+periodic reauthentication for availability; it is not an additional security protection. Keep independent console
+recovery. If the VPS is compromised, use _Machines_ > the VPS's menu > _Remove_ to
+[remove the registered device](https://tailscale.com/docs/features/access-control/device-management/how-to/remove) and
+revoke its tailnet access. Revoking an auth key alone does not revoke access for devices already registered with it.
+Also
+[revoke any compromised reusable auth keys](https://tailscale.com/docs/features/access-control/auth-keys#revoke-an-auth-key)
+to prevent new registrations using those keys.
 
 **Checkpoint:** keep the original session open and confirm the new Tailscale session can run the administration commands
 you need. If it fails, fix the policy, identity or local account before changing any firewall rule.
