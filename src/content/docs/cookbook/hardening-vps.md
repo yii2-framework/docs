@@ -146,7 +146,12 @@ disables expiry by default; adding a tag to an already authenticated device leav
 unchanged. In the admin console's _Machines_ page, open the VPS's three-dot menu and choose _Disable Key Expiry_ if it
 is enabled and you want unattended access to persist. Confirm the device now shows key expiry disabled. This trades
 periodic reauthentication for availability; it is not an additional security protection. Keep independent console
-recovery and the ability to revoke the device's access if it is compromised.
+recovery. If the VPS is compromised, use _Machines_ > the VPS's menu > _Remove_ to
+[remove the registered device](https://tailscale.com/docs/features/access-control/device-management/how-to/remove) and
+revoke its tailnet access. Revoking an auth key alone does not revoke access for devices already registered with it.
+Also
+[revoke any compromised reusable auth keys](https://tailscale.com/docs/features/access-control/auth-keys#revoke-an-auth-key)
+to prevent new registrations using those keys.
 
 **Checkpoint:** keep the original session open and confirm the new Tailscale session can run the administration commands
 you need. If it fails, fix the policy, identity or local account before changing any firewall rule.
