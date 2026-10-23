@@ -493,9 +493,9 @@ restrictions and mTLS provide the origin-access controls.
 
 **FastCGI** is how nginx passes a request to PHP-FPM, the process that runs PHP. With the standard `fastcgi_params`,
 nginx sends the restored visitor address as `REMOTE_ADDR` and its TLS state as `HTTPS`. Yii can use these with its
-default request configuration, without adding Cloudflare networks to `trustedHosts` or changing `ipHeaders`. Verify
-customized distribution includes contain `REMOTE_ADDR $remote_addr` and `HTTPS $https if_not_empty`; keep the
-client-to-Cloudflare connection HTTPS-only as described above.
+default request configuration, without adding Cloudflare networks to `trustedHosts` or changing `ipHeaders`. Verify that
+your distribution's customized FastCGI include files contain `REMOTE_ADDR $remote_addr` and `HTTPS $https if_not_empty`;
+keep the client-to-Cloudflare connection HTTPS-only as described above.
 
 Review existing overrides of [[yii\web\Request::$trustedHosts]], [[yii\web\Request::$secureHeaders]],
 [[yii\web\Request::$ipHeaders]], and [[yii\web\Request::$secureProtocolHeaders]]. In this direct nginx-to-FPM topology,
@@ -600,6 +600,11 @@ Keep your recovery console available for these checks. Use your computer for nor
 separate connection outside Tailscale for public-exposure tests. Test both IPv4 and IPv6 wherever enabled. If a check
 fails, stop and fix that layer before treating the setup as complete.
 
+For the direct-origin examples below, an ordinary request to the domain is not enough: its proxied DNS record points to
+Cloudflare. [`--resolve`](https://everything.curl.dev/usingcurl/connections/name.html) selects the destination address
+while keeping the hostname for SNI, HTTP Host and server-certificate checks. `--noproxy '*'` bypasses configured
+proxies, and `-q` ignores saved curl options.
+
 - A new administrator session works over Tailscale; unauthorized tailnet devices cannot reach the VPS services.
 - Public SSH and other unintended services are unreachable from outside the tailnet, over both address families in use.
 - `http://example.com` redirects to HTTPS at Cloudflare, and an uncached HTTPS request reaches the application.
@@ -607,14 +612,40 @@ fails, stop and fix that layer before treating the setup as complete.
   Confirm Yii's `userIP`, `isSecureConnection`, and absolute URLs agree. Send deliberately false `X-Forwarded-For`,
   `X-Forwarded-Host`, and `X-Forwarded-Proto` values through the public site and confirm they do not override Yii's
   request data.
-- From an external non-Cloudflare connection, direct access to the origin is blocked even when the correct hostname/SNI
-  is supplied.
+- From an external non-Cloudflare connection outside Tailscale, test the VPS's public IP with the correct hostname/SNI.
+  Replace `example.com` and `192.0.2.10` with your domain and the origin's actual public IP from the hosting provider,
+  not an address returned by proxied DNS:
+
+  ```bash
+  curl -q --noproxy '*' -v --connect-timeout 5 \
+      --resolve 'example.com:443:192.0.2.10' https://example.com/
+  ```
+
+  The TCP connection must not be established. If TLS negotiation starts or an HTTP response arrives, port 443 is
+  reachable: an mTLS rejection does not prove the firewall blocked access. Check the destination and firewall rules; a
+  generic curl error alone is inconclusive. If the origin exposes IPv6, repeat with
+  `--resolve 'example.com:443:[2001:db8::10]'`, replacing that example address with its actual public IPv6 address.
+
 - Check SNI and HTTP Host separately: an absent or unknown SNI is rejected during TLS negotiation; correct SNI with an
   unrelated Host must not serve the application. Confirm the expected hostname works with the intended AOP client
   certificate.
-- From the VPS itself, a local HTTPS request using the correct hostname but without an AOP client certificate is
-  rejected by nginx. This checks mTLS independently of the public firewall. Ensure the test client trusts the origin
-  server's CA, so failure is due to the missing client certificate rather than server-certificate validation.
+- From the VPS itself, test mTLS independently of the public firewall by connecting to `127.0.0.1` (the VPS itself).
+  Replace the domain and CA file path below. The CA must verify the origin **server** certificate; it is not the AOP
+  client CA. For Cloudflare Origin CA certificates, use the matching
+  [Origin CA root](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/#cloudflare-origin-ca-root-certificate).
+  If the server uses a public CA already trusted by curl, omit `--cacert`:
+
+  ```bash
+  curl -q --noproxy '*' -v \
+      --resolve 'example.com:443:127.0.0.1' \
+      --cacert /path/to/origin-server-ca.pem https://example.com/
+  ```
+
+  The request must reach nginx, pass server-certificate verification, and be rejected because no client certificate was
+  supplied. Confirm that reason in nginx's response or, if recorded, its error log; a generic TLS failure or curl exit
+  status alone does not prove mTLS enforcement. Do not add `--cert`, `--key` or `-k`. With the IPv6 listener enabled,
+  repeat using `--resolve 'example.com:443:[::1]'`. This local test does not verify the public firewall.
+
 - Static files and normal routes work; `.env`, `.git/`, `/other.php`, and `/index.php/extra` do not expose files or
   execute another script.
 - Recheck access after a planned reboot and after changes to networking, container port publishing or firewall software.
