@@ -65,6 +65,11 @@
             "errors": 0,
             "warnings": 0,
             "unresolvedLinks": 0
+        },
+        "nested-sets-behavior": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
         }
     }
 }

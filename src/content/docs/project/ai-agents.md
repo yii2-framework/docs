@@ -62,20 +62,21 @@ Use the local checkout procedure for changes not yet published.
 
 ### Package and tool skills
 
-| Skill                           | Owning repository               | Guide                                                       |
-| ------------------------------- | ------------------------------- | ----------------------------------------------------------- |
-| `yii2-bootstrap6-widgets`       | `yii2-extensions/bootstrap6`    | [Bootstrap 6](../extensions/bootstrap6/agents.md)           |
-| `yii2-select2`                  | `yii2-extensions/select2`       | [Select2 integration](../extensions/select2/agents.md)      |
-| `yii2-selectize`                | `yii2-extensions/selectize`     | [Selectize integration](../extensions/selectize/agents.md)  |
-| `yii2-filepond-uploads`         | `yii2-extensions/filepond`      | [FilePond uploads](../extensions/filepond/agents.md)        |
-| `yii2-psr-bridge-worker`        | `yii2-extensions/psr-bridge`    | [Worker lifecycle](../extensions/psr-bridge/agents.md)      |
-| `yii2-roadrunner-worker`        | `yii2-extensions/road-runner`   | [RoadRunner worker](../extensions/road-runner/agents.md)    |
-| `yii2-frankenphp-worker`        | `yii2-extensions/franken-php`   | [FrankenPHP worker](../extensions/franken-php/agents.md)    |
-| `yii2-debug-inspection`         | `yii2-extensions/debug`         | [Debug inspection](../extensions/debug/agents.md)           |
-| `yii2-phpstan-analysis`         | `yii2-extensions/phpstan`       | [Static analysis](../extensions/phpstan/agents.md)          |
-| `yii2-inertia-integration`      | `yii2-extensions/inertia`       | [Inertia integration](../extensions/inertia/agents.md)      |
-| `yii2-localeurls-configuration` | `yii2-extensions/localeurls`    | [Language URLs](../extensions/localeurls/agents.md)         |
-| `yii2-docker-environment`       | `yii2-extensions/docker-images` | [Docker environment](../development-tools/docker/agents.md) |
+| Skill                           | Owning repository                      | Guide                                                                |
+| ------------------------------- | -------------------------------------- | -------------------------------------------------------------------- |
+| `yii2-bootstrap6-widgets`       | `yii2-extensions/bootstrap6`           | [Bootstrap 6](../extensions/bootstrap6/agents.md)                    |
+| `yii2-select2`                  | `yii2-extensions/select2`              | [Select2 integration](../extensions/select2/agents.md)               |
+| `yii2-selectize`                | `yii2-extensions/selectize`            | [Selectize integration](../extensions/selectize/agents.md)           |
+| `yii2-nested-sets`              | `yii2-extensions/nested-sets-behavior` | [Nested sets behavior](../extensions/nested-sets-behavior/agents.md) |
+| `yii2-filepond-uploads`         | `yii2-extensions/filepond`             | [FilePond uploads](../extensions/filepond/agents.md)                 |
+| `yii2-psr-bridge-worker`        | `yii2-extensions/psr-bridge`           | [Worker lifecycle](../extensions/psr-bridge/agents.md)               |
+| `yii2-roadrunner-worker`        | `yii2-extensions/road-runner`          | [RoadRunner worker](../extensions/road-runner/agents.md)             |
+| `yii2-frankenphp-worker`        | `yii2-extensions/franken-php`          | [FrankenPHP worker](../extensions/franken-php/agents.md)             |
+| `yii2-debug-inspection`         | `yii2-extensions/debug`                | [Debug inspection](../extensions/debug/agents.md)                    |
+| `yii2-phpstan-analysis`         | `yii2-extensions/phpstan`              | [Static analysis](../extensions/phpstan/agents.md)                   |
+| `yii2-inertia-integration`      | `yii2-extensions/inertia`              | [Inertia integration](../extensions/inertia/agents.md)               |
+| `yii2-localeurls-configuration` | `yii2-extensions/localeurls`           | [Language URLs](../extensions/localeurls/agents.md)                  |
+| `yii2-docker-environment`       | `yii2-extensions/docker-images`        | [Docker environment](../development-tools/docker/agents.md)          |
 
 The Basic Project Template uses Bootstrap 5, so select the Bootstrap 6 skill only when that extension is
 installed. Installing any skill does not install or switch PHP packages.
@@ -151,7 +152,7 @@ synchronization, set `auto-sync` to `true` after reviewing the trust settings ab
 #### Git and local bundles
 
 For bundles without a Composer release, register a Git or local source once. For example, Docker remains an image
-repository, and a local checkout can supply a skill missing from an installed release:
+repository, and a local checkout can supply skill changes not yet in an installed release:
 
 ```bash
 composer skills:add yii2-extensions/docker-images --ref=main --skill=yii2-docker-environment

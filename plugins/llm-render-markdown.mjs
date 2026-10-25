@@ -1,4 +1,7 @@
 import { getCollection } from "astro:content";
+import { packageEntryMarkdown } from "../src/lib/catalog.mjs";
+import { guideLandingPackage } from "../src/lib/hosting.mjs";
+import { replaceHubPlaceholders } from "../src/lib/hub.mjs";
 import {
   markdownUrl,
   resolveAssetLink,
@@ -150,7 +153,8 @@ export function rewriteMarkdown(
 /**
  * Markdown renderer for `starlight-llm-actions` (`renderMarkdown: { module }`): returns the body only; the route
  * prepends `# <title>` and `> <description>`. Generated API reference pages lose their HTML styling hooks first
- * (see `cleanReferenceMarkdown()`).
+ * (see `cleanReferenceMarkdown()`). Extension guide landing pages (`extensions/<name>`) with a catalog record start
+ * with one paragraph that links their package entry (`packageEntryMarkdown()`).
  *
  * @param {{ id: string, filePath?: string, body?: string }} entry
  */
@@ -166,17 +170,27 @@ export default async function renderMarkdown(entry) {
 
   const ids = await entryIds();
   const sourceRelative = filePath.slice(CONTENT_PREFIX.length);
+  // The Documentation hub's generated lists use relative `.md` links, rewritten below like the rest of the page.
   const body = REFERENCE_ID.test(sourceRelative)
     ? cleanReferenceMarkdown(entry.body ?? "")
-    : (entry.body ?? "");
+    : replaceHubPlaceholders(entry.body ?? "", {
+        base: import.meta.env.BASE_URL,
+        markdown: true,
+      });
 
-  return rewriteMarkdown(
+  const markdown = rewriteMarkdown(
     body,
     sourceRelative,
     import.meta.env.BASE_URL,
     (slug) => ids.has(slug === "" ? "index" : slug),
     assets,
   );
+  // Extension guide landing pages point to their package entry, like the strip of src/components/MarkdownContent.astro.
+  const pkg = guideLandingPackage(entry.id);
+
+  return pkg === null
+    ? markdown
+    : `${packageEntryMarkdown(pkg, import.meta.env.BASE_URL)}\n\n${markdown}`;
 }
 
 let ids;

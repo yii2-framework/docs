@@ -1,21 +1,32 @@
 ---
-import { ecosystemLabels, familyLabels, withBase } from "../../lib/catalog.mjs";
+import { documentationTarget, ecosystemLabels, familyLabels, maintainerLink, requirementParts, withBase } from "../../lib/catalog.mjs";
 import { catalogSearchRecord } from "../../lib/catalog-filter.mjs";
+import { displayOrder, hostingFor, loadHosting } from "../../lib/hosting.mjs";
 import "../../styles/portal.css";
 import "../../styles/catalog.css";
+import "../../styles/directory.css";
 
-const { packages } = Astro.props;
+const { packages, hosting = loadHosting() } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const relationshipLabels = {
-  maintained: "Maintained by Wilmer",
-  contributed: "Wilmer has contributed",
-  community: "Community maintained",
+const entries = displayOrder(packages, hosting).map((pkg) => ({ pkg, hosted: hostingFor(pkg, hosting) }));
+const documentationLabels = {
+  guide: "Guide on this site",
+  skill: "Agent skill available",
+  external: "Documentation elsewhere",
 };
+// Ecosystem pills name the frameworks; the "Requires" line already shows PHP.
+const frameworks = (pkg) => pkg.ecosystems.filter((ecosystem) => ecosystem !== "php");
+const checked = (pkg) => `against ${pkg.provenance.ref} (${pkg.provenance.kind === "source" ? "development version" : "release"})`;
 ---
 
-<section class="portal-container portal-catalog" data-package-catalog aria-label="Package catalog">
+<section class="portal-container portal-catalog" data-package-catalog aria-label="Package directory">
   <div class="catalog-introduction">
-    <p>Find packages for Yii2, Yii3 and PHP. Compare their declared requirements and follow the documentation to put them to work.</p>
+    <p>
+      A reviewed directory of Yii2, Yii3 and framework-independent PHP packages. Each entry shows the PHP and framework
+      versions its source declares, who maintains it, and where its documentation is. Entries marked "Guide on this
+      site" also have installation steps, examples, API reference and, where available, an agent skill here. Looking
+      for how to use something? Go to <a href={withBase("/documentation/", base)}>Documentation</a>.
+    </p>
     <a class="portal-button portal-button-secondary" href={withBase("/contribute/", base)}>Propose a package</a>
   </div>
 
@@ -39,10 +50,10 @@ const relationshipLabels = {
       </select>
     </div>
     <div>
-      <label for="catalog-relationship">Maintainer relationship</label>
-      <select id="catalog-relationship" name="relationship">
-        <option value="">All relationships</option>
-        {Object.entries(relationshipLabels).map(([value, label]) => <option value={value}>{label}</option>)}
+      <label for="catalog-docs">Documentation</label>
+      <select id="catalog-docs" name="docs">
+        <option value="">Any documentation</option>
+        {Object.entries(documentationLabels).map(([value, label]) => <option value={value}>{label}</option>)}
       </select>
     </div>
     <button class="catalog-reset" type="reset">Clear filters</button>
@@ -54,14 +65,17 @@ const relationshipLabels = {
     <a href={withBase("/packages/index.md", base)}>Read as Markdown</a>
   </div>
   <ul class="catalog-list" data-catalog-list>
-    {packages.map((pkg) => {
-      const record = catalogSearchRecord(pkg);
+    {entries.map(({ pkg, hosted }) => {
+      const record = catalogSearchRecord(pkg, hosted);
+      const target = documentationTarget(pkg, hosted);
+      const pills = frameworks(pkg);
       return <li
-        class="catalog-entry"
+        class="catalog-entry directory-entry"
         data-catalog-entry
         data-search={record.search}
         data-ecosystems={record.ecosystems.join(" ")}
         data-family={record.family}
+        data-docs={record.docs.join(" ")}
         data-relationship={record.relationship}
       >
         <div class="catalog-entry-copy">
@@ -69,27 +83,50 @@ const relationshipLabels = {
           <h2><a href={withBase(`/packages/${pkg.id}/`, base)}>{pkg.name}</a></h2>
           <p class="catalog-package-id">{pkg.id}</p>
           <p class="catalog-summary">{pkg.summary}</p>
+          <ul class="directory-badges" aria-label="Documentation">
+            {target.kind === "hosted" ? (
+              <>
+                <li class="directory-badge directory-badge-hosted">Guide on this site</li>
+                {hosted.reference && <li class="directory-badge">API reference</li>}
+                {hosted.demos && <li class="directory-badge">Live demos</li>}
+                {hosted.agentSkill && <li class="directory-badge">Agent skill</li>}
+              </>
+            ) : (
+              <li class="directory-badge directory-badge-external">{target.label}</li>
+            )}
+            {pkg.kind === "template" && <li class="directory-badge">Starter template</li>}
+          </ul>
+          <div class="directory-actions">
+            {target.kind === "hosted" && (
+              <a class="portal-button" href={withBase(target.url, base)}>{target.label}<span class="sr-only"> for {pkg.name}</span></a>
+            )}
+            {target.kind === "external" && (
+              <a class="portal-button" href={target.url} rel="noopener">{target.label}<span class="sr-only"> for {pkg.name}</span> (leaves this site)</a>
+            )}
+            <a class="portal-button portal-button-secondary" href={withBase(`/packages/${pkg.id}/`, base)}>Details<span class="sr-only"> for {pkg.name}</span></a>
+          </div>
         </div>
         <div class="catalog-entry-meta">
-          <ul class="catalog-tags" aria-label="Ecosystems">
-            {pkg.ecosystems.map((ecosystem) => <li>{ecosystemLabels[ecosystem]}</li>)}
-          </ul>
-          <dl>
-            <div><dt>PHP</dt><dd>{pkg.php}</dd></div>
-            <div><dt>Relationship</dt><dd>{relationshipLabels[pkg.relationship]}</dd></div>
-          </dl>
-          <p class="catalog-source-label">{pkg.provenance.kind === "source" ? "Source snapshot" : "Release reference"} reviewed <time datetime={pkg.provenance.reviewedAt}>{pkg.provenance.reviewedAt}</time></p>
+          {pills.length > 0 && <ul class="catalog-tags" aria-label="Ecosystems">
+            {pills.map((ecosystem) => <li>{ecosystemLabels[ecosystem]}</li>)}
+          </ul>}
+          <p class="directory-requires">
+            <span class="directory-label">Requires</span>
+            {requirementParts(pkg).map(({ label, constraint }) => <span class="directory-requirement">{label} <code>{constraint}</code></span>)}
+          </p>
+          <p class="directory-maintainer">Maintained by <a href={maintainerLink(pkg).url}>{maintainerLink(pkg).label}</a></p>
+          <p class="directory-checked">Checked <time datetime={pkg.provenance.reviewedAt}>{pkg.provenance.reviewedAt}</time> {checked(pkg)}</p>
         </div>
       </li>;
     })}
   </ul>
   <div class="catalog-empty" data-catalog-empty hidden>
     <h2>No packages match these filters</h2>
-    <p>Try a shorter search or choose another ecosystem, collection or relationship.</p>
+    <p>Try a shorter search or choose another ecosystem, collection or documentation.</p>
     <button class="portal-button portal-button-secondary" type="button" data-catalog-clear>Clear filters</button>
   </div>
   <aside class="catalog-note" aria-label="About these listings">
-    <p>Each listing records requirements from a specific source revision. Open a package to check the evidence and release status. Community listings are maintained independently; inclusion does not imply an official Yii affiliation.</p>
+    <p>Each entry records requirements read from one specific commit. Open an entry to see the evidence. Community entries are maintained independently; listing does not imply an official Yii affiliation, a security review or support from this site.</p>
   </aside>
 </section>
 
@@ -104,13 +141,17 @@ const relationshipLabels = {
     const empty = root.querySelector<HTMLElement>("[data-catalog-empty]");
     if (!form || !count || !empty) return;
     root.dataset.initialized = "true";
-    const controls = Object.fromEntries(filterKeys.map((key) => [key, form.elements.namedItem(key) as HTMLInputElement | HTMLSelectElement]));
+    // A filter without a form control (`relationship`, kept for existing links) keeps the value of the URL.
+    const controls = Object.fromEntries(filterKeys.map((key) => [key, form.elements.namedItem(key) as HTMLInputElement | HTMLSelectElement | null]));
+    const hidden: Record<string, string> = {};
+    const read = () => Object.fromEntries(filterKeys.map((key) => [key, controls[key]?.value ?? hidden[key] ?? ""]));
     const entries = Array.from(root.querySelectorAll<HTMLElement>("[data-catalog-entry]")).map((element) => ({
       element,
       record: {
         search: element.dataset.search ?? "",
         ecosystems: (element.dataset.ecosystems ?? "").split(" "),
         family: element.dataset.family ?? "",
+        docs: (element.dataset.docs ?? "").split(" "),
         relationship: element.dataset.relationship ?? "",
       },
     }));
@@ -128,12 +169,16 @@ const relationshipLabels = {
 
     function restore() {
       const filters = normalizeFilters(new URL(window.location.href).searchParams);
-      for (const key of filterKeys) controls[key].value = filters[key];
+      for (const key of filterKeys) {
+        const control = controls[key];
+        if (control) control.value = filters[key];
+        else hidden[key] = filters[key];
+      }
       render(filters);
     }
 
     function update() {
-      const filters = normalizeFilters(Object.fromEntries(filterKeys.map((key) => [key, controls[key].value])));
+      const filters = normalizeFilters(read());
       const next = filtersUrl(window.location.href, filters);
       if (next.href !== window.location.href) window.history.pushState(null, "", next);
       render(filters);
@@ -157,12 +202,16 @@ const relationshipLabels = {
     form.addEventListener("reset", (event) => {
       event.preventDefault();
       clearTimeout(timer);
-      for (const key of filterKeys) controls[key].value = "";
+      for (const key of filterKeys) {
+        const control = controls[key];
+        if (control) control.value = "";
+        else hidden[key] = "";
+      }
       update();
     });
     root.querySelector("[data-catalog-clear]")?.addEventListener("click", () => {
       form.reset();
-      controls.q.focus();
+      controls.q?.focus();
     });
     window.addEventListener("popstate", () => {
       clearTimeout(timer);

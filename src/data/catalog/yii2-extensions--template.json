@@ -1,0 +1,32 @@
+{
+    "id": "yii2-extensions/template",
+    "name": "Extension template",
+    "summary": "Starter repository for a Yii2 22.0 extension, with PHPUnit, PHPStan, Infection, ECS, GitHub Actions workflows and Codecov configured.",
+    "family": "yii2-extensions",
+    "ecosystems": ["yii2"],
+    "kind": "template",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "yii2",
+            "constraint": "^22.0@dev",
+            "evidence": "https://github.com/yii2-extensions/template/blob/46811d6f55888cae59390df93ff49e7a472c61e3/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/template/",
+    "repository": "https://github.com/yii2-extensions/template",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/yii2-extensions/template/blob/46811d6f55888cae59390df93ff49e7a472c61e3/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "46811d6f55888cae59390df93ff49e7a472c61e3",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yii2-extensions/template/blob/46811d6f55888cae59390df93ff49e7a472c61e3/composer.json",
+        "kind": "source"
+    }
+}

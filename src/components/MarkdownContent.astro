@@ -1,21 +1,47 @@
 ---
 // Scopes the API reference styles (src/styles/custom.css, `.api-reference`) to the generated reference pages, so
 // guide pages keep Starlight's default look, and adds the <docs-demo> element (DocsDemo.astro) to the extension
-// examples pages that plugins/remark-demos.mjs fills with live demos.
+// examples pages that plugins/remark-demos.mjs fills with live demos. Extension guide landing pages get a strip
+// that links their package entry (the same sentence is prepended to their index.md, plugins/llm-render-markdown.mjs).
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 import Home from './portal/Home.astro';
-import { packages } from '../lib/catalog.mjs';
+import { packages, requirementParts, withBase } from '../lib/catalog.mjs';
+import { displayOrder, guideLandingPackage, hostedPackages, hostingFor, loadHosting } from '../lib/hosting.mjs';
 import DocsDemo from './DocsDemo.astro';
 import { isReferenceRoute } from '../../plugins/reference-id.mjs';
+import '../styles/directory.css';
 
 const { id, locale } = Astro.locals.starlightRoute;
 // Locale fallback copies of the page carry the same demos.
 const home = ['', 'index'].includes(Astro.locals.starlightRoute.entry.id);
-const featured = ['yii2-extensions/filepond', 'php-forge/vite', 'ui-awesome/html']
-  .map((id) => packages.find((pkg) => pkg.id === id)).filter(Boolean);
+const hosting = loadHosting();
+// The first three records with a guide on this site, in the directory's display order; the starter template is not
+// an application package.
+const featured = home
+  ? displayOrder(hostedPackages(packages, hosting), hosting)
+      .filter((pkg) => hostingFor(pkg, hosting)?.status !== 'template')
+      .slice(0, 3)
+  : [];
 const examples = /(^|\/)extensions\/[^/]+\/examples$/.test(id);
+// English only: a locale fallback copy has a prefixed id (`es/extensions/x`) and gets no strip.
+const entry = locale ? null : guideLandingPackage(id, hosting);
+const base = import.meta.env.BASE_URL;
 ---
 
+{
+  entry && (
+    <aside class="directory-strip" aria-label="Package entry">
+      <p>
+        Package entry: <code>{entry.id}</code>. Requires{' '}
+        {requirementParts(entry).map(({ label, constraint }, index) => (
+          <>{index > 0 && ', '}{label} <code>{constraint}</code></>
+        ))}
+        . Checked <time datetime={entry.provenance.reviewedAt}>{entry.provenance.reviewedAt}</time>.{' '}
+        <a href={withBase(`/packages/${entry.id}/`, base)}>View the entry in the package directory</a>
+      </p>
+    </aside>
+  )
+}
 {
   home ? (
     <Home packages={featured} />

@@ -18,17 +18,60 @@
     --sl-font: "Atkinson Hyperlegible Next Variable";
     --sl-font-mono: "Atkinson Hyperlegible Mono Variable";
 
-    /* Type scale: 17px body text, code one step smaller. */
+    /*
+     * Type scale: 17px body text; every secondary size sits one step above Starlight's so no reading text drops
+     * below 14px (sidebar leaves, selects and tabs 16px, TOC and footer 15px, the search key hint 14px).
+     */
+    /* 14px, was 12px: search key hint, the smallest label */
+    --sl-text-2xs: 0.875rem;
+    /* 15px: TOC, footer, badges, flags (meta text minimum) */
+    --sl-text-xs: 0.9375rem;
+    /* 16px: sidebar leaves, selects, buttons, demo tabs */
+    --sl-text-sm: 1rem;
+    /* 17px body text */
     --sl-text-base: 1.0625rem;
-    --sl-text-xs: 0.875rem;
-    --sl-text-sm: 0.9375rem;
-    --sl-text-code: 0.9375rem;
-    --sl-text-code-sm: 0.875rem;
+    /* 16px code blocks: an 80-column line still fits the 56rem column */
+    --sl-text-code: 1rem;
+    /* 15px inline code, one step under the 17px text around it */
+    --sl-text-code-sm: 0.9375rem;
     --sl-line-height: 1.7;
 
     /* Layout: wider text column, narrower left sidebar. */
     --sl-content-width: 56rem;
     --sl-sidebar-width: 17rem;
+
+    /*
+     * Site tokens shared by the documentation and the portal pages (home, catalog, package records). They resolve
+     * per theme because the Starlight colours they point to change with `data-theme`; ratios are listed per theme
+     * below. `--portal-*` in portal.css are aliases of these.
+     */
+    /* Headings: 13.9:1 dark, 15.3:1 light on the page */
+    --site-ink: var(--sl-color-white);
+    /* Body copy: 9.8:1 dark, 8.0:1 light on the page */
+    --site-text: var(--sl-color-text);
+    /* Meta and notes: >= 5.3:1 on the page and both surfaces (not for text on the chip, 4.9:1) */
+    --site-muted: var(--sl-color-gray-3);
+    /* Links: >= 5.5:1 on the page, both surfaces and inline code */
+    --site-link: var(--sl-color-text-accent);
+    /* Focus ring: 9.8:1 dark, 6.2:1 light on the page */
+    --site-focus: var(--sl-color-text-accent);
+    /* Cards and panels (light overrides it below) */
+    --site-surface: var(--sl-color-gray-6);
+    /* Decorative card borders and hairlines */
+    --site-border: var(--sl-color-gray-5);
+    /* Tags, kind chips, sidebar active tint */
+    --site-chip-bg: var(--sl-color-accent-low);
+    /* Text on the chip: 6.6:1 dark, 7.6:1 light */
+    --site-chip-ink: var(--sl-color-accent-high);
+    /* Buttons, inputs, chips, inline code */
+    --site-radius-control: 0.375rem;
+    /* Cards, shelf, filters, facts, member cards, demos */
+    --site-radius-panel: 0.5rem;
+    /* Thick enough to find at a glance with low vision */
+    --site-focus-width: 3px;
+
+    /* Notes use the accent hue (206) instead of Starlight's violet-blue 234; every aside pair stays >= 6:1 */
+    --sl-hue-blue: 206;
 }
 
 /*
@@ -69,15 +112,28 @@
     --sl-color-white: hsl(40deg 12% 94%);
     --sl-color-gray-1: hsl(40deg 10% 88%);
     --sl-color-gray-2: hsl(40deg 8% 79%);
-    --sl-color-gray-3: hsl(40deg 6% 62%);
+    /* Muted text 7.2:1 on the page, 5.3:1 on surface-2 */
+    --sl-color-gray-3: hsl(40deg 7% 68%);
     --sl-color-gray-4: hsl(220deg 6% 42%);
-    --sl-color-gray-5: hsl(220deg 8% 28%);
+    /* Hairlines 1.9:1, visible but quiet */
+    --sl-color-gray-5: hsl(220deg 8% 32%);
     --sl-color-gray-6: hsl(220deg 9% 19%);
     --sl-color-black: hsl(220deg 9% 14%);
     --sl-color-accent-low: hsl(206deg 45% 24%);
     --sl-color-accent: hsl(206deg 68% 58%);
     --sl-color-accent-high: hsl(206deg 80% 80%);
     --sl-color-bg-inline-code: hsl(220deg 9% 22%);
+
+    /* Inset surface: filters, pills, shelf note */
+    --site-surface-2: hsl(220deg 9% 23%);
+    /* Control borders: 4.5:1 page, 3.9 surface, 3.3 surface-2 */
+    --site-border-strong: hsl(220deg 7% 55%);
+    /* Primary button fill, same blue as links */
+    --site-action-bg: hsl(206deg 80% 80%);
+    /* Hover fill: ink 11.8:1 */
+    --site-action-bg-hover: hsl(206deg 80% 86%);
+    /* Button text: 10.2:1 on the fill */
+    --site-action-ink: hsl(206deg 50% 12%);
 }
 
 /*
@@ -90,19 +146,189 @@
     --sl-color-white: hsl(40deg 10% 13%);
     --sl-color-gray-1: hsl(40deg 9% 20%);
     --sl-color-gray-2: hsl(40deg 7% 30%);
-    --sl-color-gray-3: hsl(40deg 5% 43%);
+    /* Muted text 6.0:1 on the page, 5.4:1 on gray-6 */
+    --sl-color-gray-3: hsl(40deg 6% 37%);
     --sl-color-gray-4: hsl(40deg 8% 70%);
-    --sl-color-gray-5: hsl(40deg 16% 85%);
+    /* Hairlines 1.6:1, visible but quiet */
+    --sl-color-gray-5: hsl(40deg 12% 78%);
     --sl-color-gray-6: hsl(40deg 28% 93%);
     --sl-color-gray-7: hsl(40deg 33% 96%);
     --sl-color-black: hsl(40deg 40% 98%);
     --sl-color-accent-low: hsl(206deg 75% 90%);
-    --sl-color-accent: hsl(206deg 70% 39%);
+    /* Links 6.2:1 on the page, 5.5:1 on inline code */
+    --sl-color-accent: hsl(206deg 72% 35%);
     --sl-color-accent-high: hsl(206deg 65% 26%);
     --sl-color-bg-inline-code: hsl(40deg 25% 92%);
+
+    /* Cards sit one step off the page, as the nav bar does */
+    --site-surface: var(--sl-color-gray-7);
+    /* Inset surface: filters, pills, shelf note */
+    --site-surface-2: var(--sl-color-gray-6);
+    /* Control borders: 4.0:1 page, 3.8 surface, 3.6 surface-2 */
+    --site-border-strong: hsl(40deg 6% 48%);
+    /* Primary button fill, same blue as links */
+    --site-action-bg: var(--sl-color-accent);
+    /* Hover fill: white text 8.3:1 */
+    --site-action-bg-hover: hsl(206deg 74% 29%);
+    /* White button text: 6.5:1 on the fill */
+    --site-action-ink: hsl(0deg 0% 100%);
 }
 
-/* Inline code chips: rounded corners, same size as Starlight's. */
+/* Inline code chips: the control radius, like buttons and tags. */
 .sl-markdown-content code {
-    border-radius: 0.3rem;
+    border-radius: var(--site-radius-control);
+}
+
+/*
+ * Tables in guides: the header rule is 2px in the control border colour (4.5:1 dark, 4.0:1 light), so it reads as
+ * a header and not as one more row. Body rows keep the 1px hairline; asides keep their tinted rules.
+ */
+.sl-markdown-content th:not(:where(.not-content *, .starlight-aside *)) {
+    border-bottom: 2px solid var(--site-border-strong);
+}
+
+/* Blockquotes: a 3px bar one step darker than the hairlines, visible as a quotation marker. */
+.sl-markdown-content
+    blockquote:not(:where(.not-content *, .starlight-aside *)) {
+    border-inline-start: 3px solid var(--sl-color-gray-4);
+}
+
+/*
+ * Documentation hub (`/documentation/`): the package and tool lists generated by plugins/remark-hub.mjs. Each item
+ * is a title paragraph (`<strong><a>Title</a></strong>: description.`) and a row of links separated by literal " | "
+ * text. The separators stay in the DOM, so screen readers announce the row unchanged; on screen they are transparent
+ * and take no width, and the links read as a wrapping row of 40px-high pills.
+ */
+.sl-markdown-content .documentation-hub {
+    padding-inline-start: 0;
+    list-style: none;
+}
+
+.sl-markdown-content .documentation-hub > li + li {
+    margin-block-start: 1.25rem;
+}
+
+/* Title line: 17px, the linked name in 650 weight, the description in the body colour on the same line. */
+.sl-markdown-content .documentation-hub > li > p:first-child {
+    color: var(--site-text);
+    font-size: var(--sl-text-base);
+}
+
+.sl-markdown-content .documentation-hub > li > p:first-child strong a {
+    font-weight: 650;
+}
+
+/*
+ * Link row: a flex row, so each " | " becomes its own anonymous item; transparent colour and a negative letter
+ * spacing give that item no visible glyph and no width, and the links carry their own spacing (margin, not `gap`,
+ * so a separator that lands at the start of a wrapped line does not indent it).
+ */
+.sl-markdown-content .documentation-hub > li > p + p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-block-start: 0.5rem;
+    color: transparent;
+    letter-spacing: -1em;
+}
+
+/* Pills: control radius on the surface, 16px link text (8.3:1 dark, 6.0:1 light), 40px targets. */
+.sl-markdown-content .documentation-hub > li > p + p a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    margin-block: 0.25rem;
+    margin-inline-end: 0.5rem;
+    padding-inline: 0.75rem;
+    border: 1px solid var(--site-border);
+    border-radius: var(--site-radius-control);
+    background: var(--site-surface);
+    color: var(--site-link);
+    font-size: var(--sl-text-sm);
+    letter-spacing: normal;
+    line-height: 1.3;
+    text-decoration: none;
+}
+
+.sl-markdown-content .documentation-hub > li > p + p a:hover {
+    border-color: var(--site-link);
+    text-decoration: underline;
+}
+
+/* The summary under each topic heading is secondary: muted (7.2:1 dark, 6.0:1 light) at the 17px body size. */
+.sl-markdown-content .sl-heading-wrapper:has(> .documentation-hub-topic) + p {
+    color: var(--site-muted);
+    font-size: var(--sl-text-base);
+}
+
+/* Code frames: the panel radius instead of Starlight's square frames (Expressive Code reads `--ec-brdRad`). */
+.sl-markdown-content .expressive-code {
+    --ec-brdRad: var(--site-radius-panel);
+}
+
+/*
+ * One focus ring for every interactive element: 3px in the link colour, 3px away from the element so it does not
+ * touch the text. Components inside clipping containers set a negative offset below or in their own stylesheet.
+ */
+:where(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [tabindex="0"]
+):focus-visible {
+    outline: var(--site-focus-width) solid var(--site-focus);
+    outline-offset: 3px;
+}
+
+/* Full-width rows in scrolling panels (mobile TOC, Starlight tabs) keep the ring inside, or it would be clipped. */
+:is(mobile-starlight-toc, starlight-tabs)
+    :where(a, summary, [role="tab"]):focus-visible {
+    outline-offset: calc(-1 * var(--site-focus-width));
+}
+
+/* Sidebar active page: a tint and a bar instead of a solid block of the brightest colour (6.6:1 dark, 7.6:1 light). */
+.sidebar-content [aria-current="page"],
+.sidebar-content [aria-current="page"]:hover,
+.sidebar-content [aria-current="page"]:focus {
+    background: var(--site-chip-bg);
+    color: var(--site-chip-ink);
+    box-shadow: inset 3px 0 0 var(--sl-color-accent);
+    font-weight: 600;
+}
+
+/* Hover: a faint tint of the text colour, so the pointer target is visible without competing with the active page. */
+.sidebar-content a:not([aria-current="page"]):hover {
+    background: color-mix(in srgb, var(--sl-color-white) 7%, transparent);
+}
+
+/* Second-level groups read as sub-headings (16px), not as peers of the 17px top-level groups. */
+.sidebar-content ul ul summary .large {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-1);
+}
+
+/* Nested leaves get a little more height: 16px text wraps in the 17rem sidebar and needs room between entries. */
+.sidebar-content ul ul a {
+    padding-block: 0.4em;
+}
+
+/* On this page: entries get room between them; the active one gets weight and a bar, not only a colour change. */
+.right-sidebar a {
+    padding-block: 0.3rem;
+    line-height: 1.4;
+}
+
+.right-sidebar a[aria-current="true"] {
+    font-weight: 600;
+    box-shadow: inset 2px 0 0 var(--sl-color-accent);
+}
+
+/* Readers who ask for less motion: the sidebar group caret turns without animating. */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar-content .caret {
+        transition: none;
+    }
 }

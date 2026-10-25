@@ -6,53 +6,77 @@
     height: 100%;
     min-width: 0;
 }
+
+/* The site name is the largest text in the bar (19px), next to an accent-tinted chip. */
 .portal-brand {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
     color: var(--sl-color-white);
-    font-size: 1.1rem;
+    font-size: 1.1875rem;
     font-weight: 700;
     line-height: 1.15;
     text-decoration: none;
     white-space: nowrap;
 }
+
 .portal-brand-symbol {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border: 1px solid var(--sl-color-gray-4);
-    border-radius: 0.7rem;
-    background: var(--sl-color-gray-6);
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--sl-color-accent);
+    border-radius: var(--site-radius-panel);
+    background: var(--site-chip-bg);
+    color: var(--site-chip-ink); /* 6.6:1 dark, 7.6:1 light on the chip */
     font:
-        650 0.8rem var(--sl-font-mono),
-        monospace;
-    letter-spacing: -0.08em;
+        700 0.9375rem var(--sl-font-mono),
+        monospace; /* 15px instead of 12.8px: readable, not a decoration */
+    letter-spacing: -0.06em;
 }
+
+/* The middle letter keeps its two-tone contrast (9.4:1 dark, 12.6:1 light on the chip). */
 .portal-brand-symbol span {
-    color: var(--sl-color-accent-high);
+    color: var(--sl-color-white);
 }
+
+/* Links carry their own padding, so a small gap is enough between them. */
 .portal-desktop-nav {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0.25rem;
 }
+
+/* 16px labels in 44px-high targets. */
 .portal-desktop-nav a,
 .portal-mobile-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.75rem;
+    border-radius: var(--site-radius-control);
     color: var(--sl-color-gray-2);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 550;
     text-decoration: none;
 }
+
+/* Hover is a tint; the current page (below) is a bar, so the two states never look alike. */
 .portal-desktop-nav a:hover,
-.portal-desktop-nav a[aria-current],
 .portal-mobile-nav a:hover {
+    background: color-mix(in srgb, var(--sl-color-white) 9%, transparent);
     color: var(--sl-color-white);
-    text-decoration: underline;
-    text-underline-offset: 0.45rem;
 }
+
+/* Current section: heavier label and a 3px accent bar under it (8.3:1 dark, 6.0:1 light against the bar). */
+.portal-desktop-nav a[aria-current] {
+    border-radius: 0;
+    box-shadow: inset 0 -3px 0 var(--sl-color-text-accent);
+    color: var(--sl-color-white);
+    font-weight: 650;
+}
+
 .portal-header-tools {
     display: flex;
     align-items: center;
@@ -60,53 +84,89 @@
     margin-inline-start: auto;
     min-width: 0;
 }
+
 .portal-header-tools site-search {
     max-width: 12rem;
 }
+
+/* The search button is a 44px target like the navigation links. */
+.portal-header-tools site-search button {
+    min-height: 2.75rem;
+}
+
 .portal-language {
     display: flex;
 }
+
 .portal-mobile-nav {
     display: none;
 }
-.portal-header :where(a, summary, button, select):focus-visible {
-    outline: 3px solid var(--sl-color-accent-high);
-    outline-offset: 4px;
-}
+
 /* The home uses the full splash width, with an understated page label before the hero. */
 main:has(.portal-home) > .content-panel:first-child {
     padding-block-end: 0;
 }
+
 main:has(.portal-home) h1 {
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
+    font-size: 0.9375rem; /* 15px: the uppercase label stays readable */
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--sl-color-gray-3);
+    color: var(--sl-color-gray-2); /* body colour: 9.8:1 dark, 8.0:1 light */
 }
+
 main:has(.portal-home) > .content-panel + .content-panel {
     border-top: 0;
     padding-block-start: 1.25rem;
 }
+
 @media (width < 80rem) {
-    .portal-desktop-nav {
-        gap: 0.85rem;
-    }
     .portal-language {
         display: none;
     }
 }
+
 @media (width < 64rem) {
     .portal-desktop-nav {
         display: none;
     }
+
     .portal-mobile-nav {
         display: block;
     }
+
+    /* The disclosure looks like a button: bordered 44px target with a drawn chevron instead of the native triangle. */
     .portal-mobile-nav summary {
-        cursor: pointer;
-        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 2.75rem;
+        padding-inline: 0.875rem;
+        /* 3.9:1 dark, 3.8:1 light on the bar */
+        border: 1px solid var(--site-border-strong);
+        border-radius: var(--site-radius-control);
+        list-style: none;
+        font-size: 1rem;
         font-weight: 600;
+        cursor: pointer;
     }
+
+    .portal-mobile-nav summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .portal-mobile-nav summary::after {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        border-inline-end: 2px solid currentcolor;
+        border-block-end: 2px solid currentcolor;
+        transform: translateY(-0.15rem) rotate(45deg);
+    }
+
+    .portal-mobile-nav[open] summary::after {
+        transform: translateY(0.1rem) rotate(-135deg);
+    }
+
     .portal-mobile-nav nav {
         position: absolute;
         inset-inline-end: 1rem;
@@ -115,55 +175,97 @@ main:has(.portal-home) > .content-panel + .content-panel {
         gap: 0.25rem;
         width: min(20rem, calc(100vw - 2rem));
         padding: 0.7rem;
-        border: 1px solid var(--sl-color-gray-4);
-        border-radius: 0.5rem;
-        background: var(--sl-color-bg);
+        border: 1px solid var(--site-border-strong);
+        border-radius: var(--site-radius-panel);
+        background: var(--sl-color-bg-nav);
         box-shadow: 0 0.75rem 2rem #0003;
     }
+
+    /* 17px entries in the open menu: the one place the links are the main content. */
     .portal-mobile-nav a {
-        padding: 0.65rem;
+        padding: 0.75rem;
+        font-size: 1.0625rem;
+    }
+
+    /*
+     * Current section in the open menu: the sidebar's recipe for a vertical list (chip tint, 3px accent bar at the
+     * start, heavier label; 6.6:1 dark, 7.6:1 light).
+     */
+    .portal-mobile-nav a[aria-current] {
+        background: var(--site-chip-bg);
+        box-shadow: inset 3px 0 0 var(--sl-color-accent);
+        color: var(--site-chip-ink);
+        font-weight: 650;
+    }
+
+    /*
+     * Pages with a sidebar: Starlight's menu (and the sidebar from 50rem) already starts with the "Explore" group
+     * of the same links, so the header copy is dropped and leaves its room to search and the theme menu.
+     */
+    .portal-header-sidebar .portal-mobile-nav {
+        display: none;
     }
 }
+
 @media (width < 50rem) {
     .portal-header {
         gap: 0.7rem;
     }
+
     .portal-header-sidebar {
         padding-inline-end: 3rem;
     }
+
     .portal-brand {
         font-size: 1rem;
         gap: 0.4rem;
     }
-    .portal-brand-symbol {
-        display: none;
-    }
+
     .portal-header-tools {
         gap: 0.15rem;
     }
 }
+
+/* The brand chip stays visible on phones; only the narrowest screens drop it to fit the controls. */
+@media (width < 30rem) {
+    .portal-brand-symbol {
+        display: none;
+    }
+}
+
 @media (width < 25rem) {
     .portal-brand {
         white-space: normal;
         max-width: 5.5rem;
     }
+
+    /* A narrower "Explore" button so the header fits at 360px. */
+    .portal-mobile-nav summary {
+        gap: 0.375rem;
+        padding-inline: 0.625rem;
+    }
+
     .portal-header {
         gap: 0.45rem;
     }
 }
+
 @media (width < 50rem) {
     .portal-header-tools starlight-theme-select select {
         width: 2.5rem;
         padding-inline: 0.5rem;
         color: transparent;
     }
+
     .portal-header-tools starlight-theme-select .caret {
         display: none;
     }
+
     .portal-header-tools starlight-theme-select .label-icon {
         inset-inline-start: 0.4rem;
     }
 }
+
 /* Reserve space for heading anchor links on narrow documentation pages. */
 @media (width < 50rem) {
     .sl-markdown-content .sl-heading-wrapper > :is(h2, h3, h4, h5, h6) {

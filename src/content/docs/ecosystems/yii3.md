@@ -20,11 +20,11 @@ a copy of the Yii3 manual or represent the Yii team.
 
 ## Find a package for your application
 
-Use the Yii3 filter in the [package catalog](/docs/packages/). Each entry records
+Use the Yii3 filter in the [package directory](/docs/packages/). Each entry records
 its own PHP requirement, compatibility evidence, and inspected source. Read that
 evidence alongside the upstream documentation before choosing a package.
 
-Yii2 and Yii3 are distinct ecosystems. Neither membership in a project collection
+Yii2 and Yii3 are distinct ecosystems. Neither membership in a collection
 nor framework-independent PHP code establishes compatibility with a specific
 Yii3 integration. A lack of listings means the catalog has no reviewed entry for
 that selection; it is not a statement about the availability of packages elsewhere.

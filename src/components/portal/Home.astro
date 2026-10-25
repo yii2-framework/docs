@@ -128,13 +128,13 @@ const families = [
   >
     <div class="portal-section-header">
       <div>
-        <h2 id="portal-projects-title">Three project families</h2>
+        <h2 id="portal-projects-title">Three collections</h2>
         <p class="portal-muted">
           From application features to the tools behind them.
         </p>
       </div>
       <a class="portal-text-link" href={localUrl("projects/")}>
-        Explore the projects
+        Explore the collections
       </a>
     </div>
     <div class="portal-grid portal-family-grid">
@@ -142,7 +142,7 @@ const families = [
         families.map((family) => (
           <a
             class="portal-card portal-family-card"
-            href={localUrl(`projects/#${family.id}`)}
+            href={localUrl(`packages/?family=${encodeURIComponent(family.id)}`)}
           >
             <span class="portal-family-symbol" aria-hidden="true">
               <svg

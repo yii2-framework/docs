@@ -1,0 +1,32 @@
+{
+    "id": "yii2-extensions/nested-sets-behavior",
+    "name": "Nested sets behavior",
+    "summary": "Nested sets tree storage for Yii2 ActiveRecord with root and leaf queries, node moves, subtree deletes, multiple trees per table, and transactional writer locking.",
+    "family": "yii2-extensions",
+    "ecosystems": ["yii2"],
+    "kind": "extension",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "yii2",
+            "constraint": "~2.0.55 || ^22.0@dev",
+            "evidence": "https://github.com/yii2-extensions/nested-sets-behavior/blob/35e49c93f2b9dac39eae25239b742b22e76d6350/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/nested-sets-behavior/",
+    "repository": "https://github.com/yii2-extensions/nested-sets-behavior",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/yii2-extensions/nested-sets-behavior/blob/35e49c93f2b9dac39eae25239b742b22e76d6350/composer.json",
+    "provenance": {
+        "ref": "0.2.0",
+        "commit": "35e49c93f2b9dac39eae25239b742b22e76d6350",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yii2-extensions/nested-sets-behavior/blob/35e49c93f2b9dac39eae25239b742b22e76d6350/composer.json",
+        "kind": "release"
+    }
+}

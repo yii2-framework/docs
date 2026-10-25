@@ -44,8 +44,8 @@ as a starting point and keep the proposal limited to catalog data.
 3. Set an independent proposal's `family` and `relationship` to `community`.
    Preserve the real maintainer attribution and provide an immutable HTTPS source
    in `relationshipEvidence`. The other relationship values, `maintained` and
-   `contributed`, require evidence of the portal maintainer's role. Project
-   collection membership is reviewed separately.
+   `contributed`, require evidence of the portal maintainer's role. Collection
+   membership is reviewed separately.
 4. Include a constraint and evidence link for each compatibility entry. Record
    the inspected source and review date in `provenance`; do not imply that the
    portal maintainer has already approved your proposal.

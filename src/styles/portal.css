@@ -1,36 +1,28 @@
 /* Shared portal styles. Documentation outside these containers is unaffected. */
+/*
+ * The portal palette is the site palette (theme.css): these aliases keep the existing `--portal-*` names working
+ * in this file, catalog.css and directory.css, and resolve per theme through the `--site-*` tokens.
+ */
 .portal-container {
-    --portal-ink: #e8edf7;
-    --portal-muted: #b3bed1;
-    --portal-surface: #252e3d;
-    --portal-surface-soft: #202938;
-    --portal-border: #46536a;
-    --portal-link: #adc5ff;
-    --portal-action: #b8cbff;
-    --portal-action-ink: #17213a;
-    --portal-accent: #8bd4d5;
-    --portal-accent-soft: #243d46;
-    --portal-focus: #c4d4ff;
+    --portal-ink: var(--site-ink);
+    --portal-muted: var(--site-muted);
+    --portal-surface: var(--site-surface);
+    --portal-surface-soft: var(--site-surface-2);
+    --portal-border: var(--site-border);
+    --portal-link: var(--site-link);
+    --portal-action: var(--site-action-bg);
+    --portal-action-ink: var(--site-action-ink);
+    /* Teal retired: labels use the link blue */
+    --portal-accent: var(--sl-color-text-accent);
+    --portal-accent-soft: var(--site-chip-bg);
+    --portal-focus: var(--site-focus);
 
-    color: var(--portal-ink);
+    /* Body copy = docs body colour; headings keep --portal-ink */
+    color: var(--site-text);
     font-family: var(--sl-font), var(--sl-font-system);
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: var(--sl-text-base); /* 17px, same as the documentation */
+    line-height: var(--sl-line-height);
     min-width: 0;
-}
-
-:root[data-theme="light"] .portal-container {
-    --portal-ink: #17213a;
-    --portal-muted: #53617c;
-    --portal-surface: #fff;
-    --portal-surface-soft: #f0f4f8;
-    --portal-border: #ccd5e2;
-    --portal-link: #254ccb;
-    --portal-action: #254ccb;
-    --portal-action-ink: #fff;
-    --portal-accent: #087e8b;
-    --portal-accent-soft: #e4f0f2;
-    --portal-focus: #254ccb;
 }
 
 .portal-container :where(h2, h3, p, ul, ol, dl, dd) {
@@ -58,11 +50,6 @@
     color: var(--portal-link);
     text-underline-offset: 0.2em;
     text-decoration-thickness: 0.075em;
-}
-
-.portal-container :where(a, button, input, select, summary):focus-visible {
-    outline: 3px solid var(--portal-focus);
-    outline-offset: 4px;
 }
 
 .portal-container :where(a, code, dd, .portal-package-name) {
@@ -123,15 +110,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.875rem;
+    min-height: 3rem; /* 48px target */
     max-width: 100%;
-    padding: 0.625rem 1.125rem;
+    padding: 0.625rem 1.25rem;
     border: 1px solid transparent;
-    border-radius: 0.375rem;
+    border-radius: var(--site-radius-control);
     background: var(--portal-action);
     color: var(--portal-action-ink);
     font: inherit;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 600;
     line-height: 1.4;
     text-align: center;
@@ -139,25 +126,29 @@
     cursor: pointer;
 }
 
+/* Outline button: the strong border meets 3:1 on every surface; the text is the link colour. */
 .portal-container .portal-button-secondary {
-    border-color: var(--portal-border);
-    background: var(--portal-surface);
+    border-color: var(--site-border-strong);
+    background: transparent;
     color: var(--portal-link);
 }
 
+/* Hover changes the fill as well as the underline, so it is visible without reading the label. */
 .portal-container .portal-button:hover {
+    background: var(--site-action-bg-hover);
     text-decoration: underline;
 }
 
 .portal-container .portal-button-secondary:hover {
     border-color: var(--portal-link);
+    background: var(--site-surface);
 }
 
 .portal-container .portal-byline {
     display: flex;
     flex-wrap: wrap;
     gap: 0 0.3rem;
-    font-size: 0.875rem;
+    font-size: 0.9375rem; /* 15px meta text */
     margin-block-start: 1.25rem;
     color: var(--portal-muted);
 }
@@ -166,7 +157,7 @@
     min-width: 0;
     border: 1px solid var(--portal-border);
     border-block-start: 3px solid var(--portal-accent);
-    border-radius: 0.75rem;
+    border-radius: var(--site-radius-panel);
     background: var(--portal-surface);
     overflow: hidden;
 }
@@ -224,7 +215,7 @@
 
 .portal-package-summary {
     color: var(--portal-muted);
-    font-size: 0.875rem;
+    font-size: 1rem; /* 16px description */
     line-height: 1.5;
 }
 
@@ -232,7 +223,8 @@
     color: var(--portal-muted);
     background: transparent;
     font-family: var(--sl-font-mono), var(--sl-font-system-mono);
-    font-size: 0.75rem;
+    /* 14px: the smallest text, mono identifiers are wide */
+    font-size: 0.875rem;
     line-height: 1.5;
     padding: 0;
     margin-block-start: 0.25rem;
@@ -242,7 +234,7 @@
 .portal-container .portal-shelf-empty {
     padding: 1rem 1.5rem;
     color: var(--portal-muted);
-    font-size: 0.8125rem;
+    font-size: 0.9375rem; /* 15px note */
     line-height: 1.55;
 }
 
@@ -273,7 +265,7 @@
     display: inline-flex;
     align-items: center;
     min-height: 2.75rem;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -283,11 +275,12 @@
     gap: 1rem;
 }
 
+/* The site panel recipe: surface, decorative border, panel radius. */
 .portal-card {
     min-width: 0;
     padding: 1.5rem;
     border: 1px solid var(--portal-border);
-    border-radius: 0.625rem;
+    border-radius: var(--site-radius-panel);
     background: var(--portal-surface);
 }
 
@@ -318,13 +311,13 @@
     width: 2.75rem;
     height: 2.75rem;
     margin-block-end: 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: var(--site-radius-panel);
     background: var(--portal-accent-soft);
     color: var(--portal-accent);
 }
 
 .portal-container .portal-family-subject {
-    font-size: 0.8125rem;
+    font-size: 0.9375rem; /* 15px label */
     font-weight: 600;
     color: var(--portal-accent);
     margin-block-start: 0.5rem;
@@ -332,7 +325,7 @@
 
 .portal-container .portal-family-description {
     color: var(--portal-muted);
-    font-size: 0.9375rem;
+    font-size: 1rem;
     line-height: 1.6;
     margin-block-start: 1rem;
 }
@@ -344,10 +337,10 @@
     max-width: 100%;
     padding: 0.125rem 0.625rem;
     border: 1px solid var(--portal-border);
-    border-radius: 999px;
+    border-radius: var(--site-radius-control);
     color: var(--portal-muted);
     background: var(--portal-surface-soft);
-    font-size: 0.8125rem;
+    font-size: 0.875rem; /* 14px chip */
     line-height: 1.65;
 }
 
@@ -378,7 +371,7 @@
 
 .portal-container .portal-resource-link {
     display: grid;
-    grid-template-columns: 3.375rem minmax(0, 1fr);
+    grid-template-columns: 4rem minmax(0, 1fr); /* fits the 14px kind label */
     gap: 1rem;
     padding-block: 1.125rem;
     text-decoration: none;
@@ -394,10 +387,11 @@
     justify-content: center;
     align-self: start;
     min-height: 2rem;
-    border-radius: 0.25rem;
-    color: var(--portal-accent);
+    border-radius: var(--site-radius-control);
+    /* 6.6:1 dark, 7.6:1 light; the accent was 5.1:1 on the light chip */
+    color: var(--site-chip-ink);
     background: var(--portal-accent-soft);
-    font-size: 0.75rem;
+    font-size: 0.875rem; /* 14px chip */
     font-weight: 600;
 }
 
@@ -405,7 +399,7 @@
     display: block;
     margin-block-start: 0.25rem;
     color: var(--portal-muted);
-    font-size: 0.875rem;
+    font-size: 1rem; /* 16px description */
     line-height: 1.55;
 }
 
@@ -416,8 +410,8 @@
     justify-content: space-between;
     gap: 1.5rem;
     padding: clamp(1.25rem, 3vw, 2rem);
-    border-radius: 0.75rem;
-    background: var(--portal-accent-soft);
+    border-radius: var(--site-radius-panel);
+    background: var(--site-chip-bg);
 }
 
 .portal-contribute > div {
@@ -431,15 +425,21 @@
 
 .portal-contribute p {
     max-width: 62ch;
-    color: var(--portal-muted);
-    font-size: 0.9375rem;
+    /* Body colour: muted is only 4.9:1 on the blue chip background */
+    color: var(--site-text);
+    font-size: 1rem;
     margin-block-start: 0.75rem;
 }
 
+/* The outline button on the blue banner uses the chip ink: the link blue is only 5.1:1 there in light (now 7.6:1). */
+.portal-container .portal-contribute .portal-button-secondary {
+    color: var(--site-chip-ink);
+}
+
 .portal-container .portal-independence {
-    max-width: 90ch;
+    max-width: 70ch; /* shorter lines for the larger note */
     color: var(--portal-muted);
-    font-size: 0.8125rem;
+    font-size: 0.9375rem; /* 15px note */
     line-height: 1.65;
     margin-block-start: 2rem;
 }

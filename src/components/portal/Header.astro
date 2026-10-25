@@ -3,16 +3,14 @@ import Search from '@astrojs/starlight/components/Search.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 import LanguageSelect from '../LanguageSelect.astro';
 import { PROJECT_NAME } from '../../site-meta.mjs';
+import { NAVIGATION as navigation, currentNavigation } from '../../lib/navigation.mjs';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const navigation = [
-  { label: 'Packages', path: 'packages/' },
-  { label: 'Documentation', path: 'documentation/' },
-  { label: 'Projects', path: 'projects/' },
-  { label: 'Contribute', path: 'contribute/' },
-];
-const current = Astro.url.pathname;
-const active = (path: string) => current.startsWith(`${base}${path}`);
+// Documentation covers the guide, API reference, extension and tool guides, Cookbook and project pages too.
+const current = currentNavigation(Astro.url.pathname, base);
+// `page` on the item's own page, `true` (current section) on the pages it covers.
+const active = (path: string) =>
+  current !== path ? undefined : Astro.url.pathname.replace(/\/?$/, '/') === `${base}${path}` ? 'page' : 'true';
 const { hasSidebar } = Astro.locals.starlightRoute;
 ---
 
@@ -23,7 +21,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
   </a>
   <nav class="portal-desktop-nav" aria-label="Main navigation">
     {navigation.map(({ label, path }) => (
-      <a href={`${base}${path}`} aria-current={active(path) ? 'page' : undefined}>{label}</a>
+      <a href={`${base}${path}`} aria-current={active(path)}>{label}</a>
     ))}
   </nav>
   <div class="portal-header-tools">
@@ -35,7 +33,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
     <summary aria-label="Main navigation">Explore</summary>
     <nav aria-label="Mobile main navigation">
       {navigation.map(({ label, path }) => (
-        <a href={`${base}${path}`} aria-current={active(path) ? 'page' : undefined}>{label}</a>
+        <a href={`${base}${path}`} aria-current={active(path)}>{label}</a>
       ))}
       <a href={`${base}about/`}>About</a>
     </nav>

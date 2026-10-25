@@ -1,4 +1,5 @@
 import { lstatSync, readFileSync, readdirSync } from "node:fs";
+import { githubHandle, isLocalDocsUrl } from "./catalog-filter.mjs";
 
 export const familyLabels = Object.freeze({
   "yii2-extensions": "Yii2 Extensions",
@@ -13,7 +14,27 @@ export const ecosystemLabels = Object.freeze({
   php: "PHP",
 });
 
-const relationships = new Set(["maintained", "contributed", "community"]);
+/** Reader-facing wording of each maintainer relationship, shared by the list, the record pages and Markdown. */
+export const relationshipLabels = Object.freeze({
+  maintained: "Site curator",
+  contributed: "Contributor",
+  community: "Independent community project",
+});
+
+/**
+ * The maintainer as a link: `{ label: "@user", url }` for a GitHub profile URL (`https://github.com/<user>`),
+ * otherwise `{ label: <maintainer name>, url }`.
+ *
+ * @param {{ maintainer: { name: string, url: string } }} pkg
+ */
+export function maintainerLink(pkg) {
+  return {
+    label: githubHandle(pkg.maintainer.url) ?? pkg.maintainer.name,
+    url: pkg.maintainer.url,
+  };
+}
+
+const relationships = new Set(Object.keys(relationshipLabels));
 const kinds = new Set(["library", "extension", "tool", "template"]);
 const fields = [
   "id",
@@ -270,9 +291,122 @@ export function markdownText(value) {
 
 const link = (label, url) => `[${markdownText(label)}](<${url}>)`;
 
-/** Complete Markdown detail document, generated from the same records as the HTML catalog. */
-export function packageMarkdown(pkg, base = "") {
+/**
+ * Lists what this site hosts for a package (`guide, API reference, live demos, agent skill`), or `""`.
+ *
+ * @param {{ guide?: boolean, reference?: boolean, demos?: boolean, agentSkill?: boolean } | null} hosting
+ */
+export function hostedSummary(hosting) {
+  if (hosting?.guide !== true) return "";
+  return [
+    "guide",
+    hosting.reference === true && "API reference",
+    hosting.demos === true && "live demos",
+    hosting.agentSkill === true && "agent skill",
+  ]
+    .filter(Boolean)
+    .join(", ");
+}
+
+/**
+ * Where a record's documentation is, for the list, the record page and Markdown:
+ * `{ kind: "hosted", url, label }` (guide on this site, `url` site-root relative), `{ kind: "external", url, label }`
+ * (HTTPS documentation elsewhere) or `{ kind: "unpublished", url: null, label }` (a local `docsUrl` whose guide is
+ * not synced, for example in `astro dev` without a sync).
+ *
+ * @param {{ docsUrl: string }} pkg
+ * @param {{ guide?: boolean, url?: string | null } | null} [hosting] The record's entry of `loadHosting()`.
+ */
+export function documentationTarget(pkg, hosting = null) {
+  if (hosting?.guide === true) {
+    return { kind: "hosted", url: hosting.url, label: "Read the guide" };
+  }
+  if (isLocalDocsUrl(pkg.docsUrl)) {
+    return {
+      kind: "unpublished",
+      url: null,
+      label: "Documentation not yet published",
+    };
+  }
+  const host = new URL(pkg.docsUrl, "https://site.invalid").hostname;
+  return {
+    kind: "external",
+    url: pkg.docsUrl,
+    label:
+      host === "github.com"
+        ? "Documentation on GitHub"
+        : "External documentation",
+  };
+}
+
+/**
+ * Label of an evidence link: "composer.json at this commit" when the URL names a `composer.json`, otherwise
+ * "View source at this commit" (`provenance`) or "View requirement evidence" (`compatibility`, which may be
+ * integration documentation or test evidence).
+ *
+ * @param {string} url HTTPS evidence URL.
+ * @param {"provenance" | "compatibility"} kind
+ */
+export function evidenceLabel(url, kind) {
+  if (new URL(url).pathname.endsWith("/composer.json")) {
+    return "composer.json at this commit";
+  }
+  return kind === "provenance"
+    ? "View source at this commit"
+    : "View requirement evidence";
+}
+
+const hostedBullet = (pkg, hosting) => {
+  const target = documentationTarget(pkg, hosting);
+  if (target.kind === "hosted")
+    return `- On this site: ${hostedSummary(hosting)}`;
+  return target.kind === "unpublished"
+    ? "- Documentation: not yet published on this site"
+    : "- Documentation: in the project's repository";
+};
+
+const pageMarkdownUrl = (url, base) => withBase(`${url}index.md`, base);
+
+/**
+ * Complete Markdown detail document, generated from the same records as the HTML catalog.
+ *
+ * `hosting` (the record's entry of `loadHosting()` in `src/lib/hosting.mjs`, or `{ guide: false }` for a record
+ * without hosted documentation) adds what this site hosts. Without it the document is unchanged.
+ */
+export function packageMarkdown(pkg, base = "", hosting = null) {
   validateCatalog([pkg]);
+  const hosted = hosting?.guide === true;
+  const onSite =
+    hosting === null
+      ? []
+      : hosted
+        ? [
+            "## Documentation on this site",
+            "",
+            ...hosting.pages.map(
+              (page) =>
+                `- ${link(page.title, pageMarkdownUrl(page.url, base))}`,
+            ),
+            ...(hosting.referenceUrl
+              ? [
+                  `- ${link("API reference", pageMarkdownUrl(hosting.referenceUrl, base))}`,
+                ]
+              : []),
+            ...(hosting.skillUrl
+              ? [
+                  `- ${link(`Agent skill ${hosting.skill}`, withBase(hosting.skillUrl, base))}`,
+                ]
+              : []),
+            "",
+          ]
+        : [
+            "## Documentation",
+            "",
+            documentationTarget(pkg, hosting).kind === "unpublished"
+              ? "The guide is not yet published on this site."
+              : "The guide is maintained in the project's repository.",
+            "",
+          ];
   const source =
     pkg.provenance.kind === "source" ? "Source revision" : "Release reference";
   const documentation = pkg.docsUrl.startsWith("/")
@@ -286,16 +420,18 @@ export function packageMarkdown(pkg, base = "") {
     `- Package: ${markdownText(pkg.id)}`,
     `- Collection: ${familyLabels[pkg.family]}`,
     `- Kind: ${pkg.kind}`,
-    `- Relationship: ${pkg.relationship} (${link("evidence", pkg.relationshipEvidence)})`,
-    `- Maintainer: ${link(pkg.maintainer.name, pkg.maintainer.url)}`,
+    `- Relationship: ${hosting === null ? pkg.relationship : relationshipLabels[pkg.relationship]} (${link("evidence", pkg.relationshipEvidence)})`,
+    `- Maintainer: ${link(maintainerLink(pkg).label, pkg.maintainer.url)}`,
     `- PHP requirement: ${markdownText(pkg.php)}`,
     `- License: ${markdownText(pkg.license)}`,
+    ...(hosting === null ? [] : [hostedBullet(pkg, hosting)]),
     "",
+    ...onSite,
     "## Compatibility",
     "",
     ...pkg.compatibility.map(
       (entry) =>
-        `- ${ecosystemLabels[entry.ecosystem]}: ${markdownText(entry.constraint)} (${link("source", entry.evidence)})`,
+        `- ${ecosystemLabels[entry.ecosystem]}: ${markdownText(entry.constraint)} (${link(evidenceLabel(entry.evidence, "compatibility"), entry.evidence)})`,
     ),
     "",
     "Requirements are recorded from the linked source revision. A catalog listing does not verify an application's dependency resolution or runtime behavior.",
@@ -312,22 +448,69 @@ export function packageMarkdown(pkg, base = "") {
     "",
     "## Links",
     "",
-    `- ${link("Documentation", withBase(documentation, base))}`,
+    ...(hosting !== null &&
+    documentationTarget(pkg, hosting).kind === "unpublished"
+      ? []
+      : [`- ${link("Documentation", withBase(documentation, base))}`]),
     `- ${link("Repository", pkg.repository)}`,
     `- ${link("Package catalog", withBase("/packages/index.md", base))}`,
     "",
   ].join("\n");
 }
 
-/** Complete Markdown discovery document; external packages remain metadata-only entries. */
-export function catalogMarkdown(base = "") {
+/** The literal requirements of a record, PHP first: `[{ label: "PHP", constraint: ">=8.3" }, ...]`. */
+export function requirementParts(pkg) {
+  return [
+    { label: ecosystemLabels.php, constraint: pkg.php },
+    ...pkg.compatibility
+      .filter((entry) => entry.ecosystem !== "php")
+      .map((entry) => ({
+        label: ecosystemLabels[entry.ecosystem],
+        constraint: entry.constraint,
+      })),
+  ];
+}
+
+const code = (value) =>
+  value.includes("`") ? markdownText(value) : `\`${value}\``;
+
+/** One Markdown paragraph that points a hosted guide to the package's entry in the directory. */
+export function packageEntryMarkdown(pkg, base = "") {
+  const requires = requirementParts(pkg)
+    .map(({ label, constraint }) => `${label} ${code(constraint)}`)
+    .join(", ");
+  return (
+    `Package entry: ${code(pkg.id)}. Requires ${requires}. Checked ${pkg.provenance.reviewedAt}. ` +
+    link(
+      "View the entry in the package directory",
+      withBase(`/packages/${pkg.id}/index.md`, base),
+    )
+  );
+}
+
+const noHosting = () => null;
+
+/**
+ * Complete Markdown discovery document; external packages remain metadata-only entries.
+ *
+ * `hostingFor(pkg)` (see `src/lib/hosting.mjs`) adds one line per entry saying where its documentation is, and a
+ * pointer to the Documentation hub. Without it the document is unchanged.
+ */
+export function catalogMarkdown(base = "", hostingFor = noHosting) {
+  const hosted = hostingFor !== noHosting;
   return [
     "# Package catalog",
     "",
     "> Packages for Yii2, Yii3 and PHP, with compatibility evidence and source revisions.",
     "",
-    "Maintained projects and community packages have separate relationship labels. Listing a package does not imply an official Yii affiliation or execute its code. Source revisions are not release claims.",
+    "Maintained collections and community packages have separate relationship labels. Listing a package does not imply an official Yii affiliation or execute its code. Source revisions are not release claims.",
     "",
+    ...(hosted
+      ? [
+          `Entries marked "On this site" have their guide here. For task-based reading, start from ${link("Documentation", withBase("/documentation/index.md", base))}.`,
+          "",
+        ]
+      : []),
     ...packages.flatMap((pkg) => [
       `## ${link(pkg.name, withBase(`/packages/${pkg.id}/index.md`, base))}`,
       "",
@@ -341,6 +524,7 @@ export function catalogMarkdown(base = "") {
           `- ${ecosystemLabels[entry.ecosystem]}: ${markdownText(entry.constraint)}`,
       ),
       `- ${link(pkg.provenance.kind === "source" ? "Source revision" : "Release reference", pkg.provenance.url)}; reviewed ${pkg.provenance.reviewedAt}`,
+      ...(hosted ? [hostedBullet(pkg, hostingFor(pkg))] : []),
       "",
     ]),
   ].join("\n");

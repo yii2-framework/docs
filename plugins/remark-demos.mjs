@@ -1,12 +1,12 @@
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { dropContentCache } from './content-cache.mjs';
 
 // Paths from the project root (the working directory of `astro build` and `astro dev`).
 const ROOT = process.cwd();
 const CATALOG_DIR = path.join(ROOT, '.cache', 'demos');
 const CATALOG_DIGEST = path.join(CATALOG_DIR, 'catalogs.rendered.sha256');
-const DATA_STORE = path.join(ROOT, 'node_modules', '.astro', 'data-store.json');
 
 /** Matches the synced examples page of an extension package (`src/content/docs/extensions/<package>/examples.md`). */
 const EXAMPLES_PAGE = /(?:^|\/)src\/content\/docs\/extensions\/([^/]+)\/examples\.md$/;
@@ -163,7 +163,7 @@ export function invalidateContentCacheOnDemoChange() {
   const previous = existsSync(CATALOG_DIGEST) ? readFileSync(CATALOG_DIGEST, 'utf8').trim() : 'none';
 
   if (previous !== digest) {
-    rmSync(DATA_STORE, { force: true });
+    dropContentCache(ROOT);
   }
 
   if (existsSync(CATALOG_DIR)) {
