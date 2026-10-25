@@ -1,0 +1,52 @@
+{
+    "minified": "composer/2.0",
+    "packages": {
+        "miniframe/social-login": [
+            {
+                "name": "miniframe/social-login",
+                "description": "Addon to enable social login providers for the Miniframe PHP Framework.",
+                "keywords": [
+                    "oauth",
+                    "bitbucket",
+                    "github",
+                    "twitter",
+                    "login",
+                    "google",
+                    "facebook",
+                    "linkedin",
+                    "instagram",
+                    "microsoft",
+                    "atlassian",
+                    "gitlab",
+                    "reddit"
+                ],
+                "homepage": "https://miniframe.dev/",
+                "version": "v1.1.0",
+                "version_normalized": "1.1.0.0",
+                "license": ["CC-BY-SA-4.0"],
+                "authors": [
+                    {
+                        "name": "Stefan Thoolen",
+                        "homepage": "https://www.stefanthoolen.nl/"
+                    }
+                ],
+                "source": {
+                    "url": "https://bitbucket.org/miniframe/social-login.git",
+                    "type": "git",
+                    "reference": "7ba823203d26b0224f04999584550089a2aadea3"
+                },
+                "type": "library",
+                "support": {
+                    "source": "https://bitbucket.org/miniframe/social-login/src/7ba823203d26b0224f04999584550089a2aadea3/?at=v1.1.0"
+                },
+                "funding": [],
+                "require": {
+                    "miniframe/core": "^1.1",
+                    "php": ">=7.3",
+                    "ext-curl": "*",
+                    "ext-json": "*"
+                }
+            }
+        ]
+    }
+}

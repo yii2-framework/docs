@@ -1,0 +1,13 @@
+{
+    "package": {
+        "name": "swiftmailer/swiftmailer",
+        "repository": "https://github.com/swiftmailer/swiftmailer",
+        "downloads": {
+            "total": 453150606,
+            "monthly": 2206793,
+            "daily": 35093
+        },
+        "favers": 9754,
+        "abandoned": "symfony/mailer"
+    }
+}

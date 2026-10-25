@@ -3,6 +3,8 @@
     "name": "HTML generator",
     "summary": "UI Awesome HTML Code Generator for PHP.",
     "family": "ui-awesome",
+    "topic": "html-views",
+    "tags": ["html", "code-generator"],
     "ecosystems": ["php"],
     "kind": "library",
     "php": "^8.3",
@@ -10,10 +12,10 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/html/blob/d440678f148c3ace4b8407effdd80ab8c18458f7/composer.json"
+            "evidence": "https://github.com/ui-awesome/html/blob/a776d54e1df5c657ba874f3bdb2ab094e3405bb8/composer.json"
         }
     ],
-    "docsUrl": "https://github.com/ui-awesome/html/blob/d440678f148c3ace4b8407effdd80ab8c18458f7/README.md",
+    "docsUrl": "https://github.com/ui-awesome/html/blob/a776d54e1df5c657ba874f3bdb2ab094e3405bb8/README.md",
     "repository": "https://github.com/ui-awesome/html",
     "license": "BSD-3-Clause",
     "maintainer": {
@@ -21,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/html/blob/d440678f148c3ace4b8407effdd80ab8c18458f7/composer.json",
+    "relationshipEvidence": "https://github.com/ui-awesome/html/blob/a776d54e1df5c657ba874f3bdb2ab094e3405bb8/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "d440678f148c3ace4b8407effdd80ab8c18458f7",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/ui-awesome/html/blob/d440678f148c3ace4b8407effdd80ab8c18458f7/composer.json",
-        "kind": "source"
+        "ref": "0.6.0",
+        "commit": "a776d54e1df5c657ba874f3bdb2ab094e3405bb8",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/ui-awesome/html/blob/a776d54e1df5c657ba874f3bdb2ab094e3405bb8/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 3180,
+        "downloadsTotal": 26649,
+        "favers": 1,
+        "fetchedAt": "2026-10-25"
     }
 }

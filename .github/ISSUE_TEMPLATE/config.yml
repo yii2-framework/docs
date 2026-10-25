@@ -1,0 +1,7 @@
+---
+# Blank issues stay enabled for corrections, removals and site problems that no form covers.
+blank_issues_enabled: true
+contact_links:
+  - name: Package proposal guide
+    url: https://yii2-framework.github.io/docs/contribute/
+    about: Read which form to use, what a catalog record contains and how review, corrections and removal work.

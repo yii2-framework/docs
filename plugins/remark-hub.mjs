@@ -76,8 +76,9 @@ export function remarkHub(options = {}) {
 /**
  * Drops Astro's content cache when the generated hub changed since the last start, like
  * `invalidateContentCacheOnDemoChange()`: the content layer would otherwise reuse the rendered Documentation hub
- * after `packages.json`, `tools.json`, `src/data/documentation-topics.json`, the skill index or a synced guide's
- * frontmatter changed. The digest is taken of the generated Markdown itself, which covers exactly those inputs.
+ * after `packages.json`, `tools.json`, `src/data/catalog-topics.json`, a catalog record's topic, the skill index or a
+ * synced guide's frontmatter changed. The digest is taken of the generated Markdown itself, which covers exactly
+ * those inputs.
  *
  * @param {{ base?: string }} [options]
  */

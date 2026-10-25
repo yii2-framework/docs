@@ -3,6 +3,15 @@
     "name": "FilePond",
     "summary": "FilePond file upload widget for Yii2 with Cropper.js image editing, previews, validation plugins, and server-side helpers for encoded uploads.",
     "family": "yii2-extensions",
+    "topic": "forms-widgets",
+    "tags": [
+        "filepond",
+        "file-upload",
+        "image-upload",
+        "image-crop",
+        "cropperjs",
+        "widget"
+    ],
     "ecosystems": ["yii2"],
     "kind": "extension",
     "php": ">=8.3",
@@ -10,7 +19,7 @@
         {
             "ecosystem": "yii2",
             "constraint": "~2.0.55 || ^22.0@dev",
-            "evidence": "https://github.com/yii2-extensions/filepond/blob/f3bca88288d68b372b55952beec82e1a36b6e8fc/composer.json"
+            "evidence": "https://github.com/yii2-extensions/filepond/blob/37162e9fdb996cbe25c47879741b06a5e0d24bc8/composer.json"
         }
     ],
     "docsUrl": "/extensions/filepond/",
@@ -21,12 +30,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/yii2-extensions/filepond/blob/f3bca88288d68b372b55952beec82e1a36b6e8fc/composer.json",
+    "relationshipEvidence": "https://github.com/yii2-extensions/filepond/blob/37162e9fdb996cbe25c47879741b06a5e0d24bc8/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "f3bca88288d68b372b55952beec82e1a36b6e8fc",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/yii2-extensions/filepond/blob/f3bca88288d68b372b55952beec82e1a36b6e8fc/composer.json",
-        "kind": "source"
+        "ref": "0.2.1",
+        "commit": "37162e9fdb996cbe25c47879741b06a5e0d24bc8",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yii2-extensions/filepond/blob/37162e9fdb996cbe25c47879741b06a5e0d24bc8/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 5,
+        "downloadsTotal": 743,
+        "favers": 2,
+        "fetchedAt": "2026-10-25"
     }
 }

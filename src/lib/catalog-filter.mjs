@@ -3,8 +3,26 @@ export const filterKeys = Object.freeze([
   "ecosystem",
   "family",
   "docs",
+  "tag",
   "relationship",
 ]);
+
+/** Longest accepted tag, as in the record validator of `catalog.mjs`. */
+const MAX_TAG_LENGTH = 32;
+
+/**
+ * Whether a value is a tag slug (`^[a-z0-9]+(?:-[a-z0-9]+)*$`, at most 32 characters), the shape every record tag has.
+ * The list of tags is not known here, so a well-formed tag that no record uses is accepted and matches nothing.
+ *
+ * @param {unknown} value
+ */
+export function isTagSlug(value) {
+  return (
+    typeof value === "string" &&
+    value.length <= MAX_TAG_LENGTH &&
+    /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)
+  );
+}
 
 const choices = Object.freeze({
   ecosystem: ["yii2", "yii3", "php"],
@@ -13,11 +31,12 @@ const choices = Object.freeze({
   relationship: ["maintained", "contributed", "community"],
 });
 
-/** Keep URLs and browser controls within the supported catalog filters. */
+/** Keep URLs and browser controls within the supported catalog filters; `tag` must be a tag slug. */
 export function normalizeFilters(input = {}) {
   const read = (key) =>
     input instanceof URLSearchParams ? input.get(key) : input[key];
   const q = read("q");
+  const tag = read("tag");
   return {
     q: typeof q === "string" ? q.trim().slice(0, 200) : "",
     ...Object.fromEntries(
@@ -26,6 +45,7 @@ export function normalizeFilters(input = {}) {
         return [key, values.includes(value) ? value : ""];
       }),
     ),
+    tag: isTagSlug(tag) ? tag : "",
   };
 }
 
@@ -76,8 +96,16 @@ export function documentationKinds(hosting = null, docsUrl = null) {
   return kinds;
 }
 
-/** Produce the same searchable record for rendered HTML and unit tests; `hosting` adds the documentation facts. */
-export function catalogSearchRecord(pkg, hosting = null) {
+/**
+ * Produce the same searchable record for rendered HTML and unit tests; `hosting` adds the documentation facts. The
+ * search text holds every tag (also those a card does not show), the topic id and, when `topic` is passed, its title.
+ * This module is bundled for the browser, so the caller passes the topic (`getTopic()` of `catalog.mjs`).
+ *
+ * @param {object} pkg Catalog record.
+ * @param {object | null} [hosting] Result of `hostingFor()` in `hosting.mjs`.
+ * @param {{ title: string } | null} [topic] The record's topic.
+ */
+export function catalogSearchRecord(pkg, hosting = null, topic = null) {
   const docs = documentationKinds(hosting, pkg.docsUrl);
   const words = [
     hosting?.guide === true ? "guide" : "",
@@ -99,6 +127,9 @@ export function catalogSearchRecord(pkg, hosting = null) {
         githubHandle(pkg.maintainer.url) ?? "",
         ...pkg.ecosystems,
         ...pkg.compatibility.map((entry) => entry.constraint),
+        pkg.topic ?? "",
+        topic?.title ?? "",
+        ...(pkg.tags ?? []),
         ...words,
       ]
         .filter(Boolean)
@@ -108,6 +139,8 @@ export function catalogSearchRecord(pkg, hosting = null) {
     family: pkg.family,
     docs,
     relationship: pkg.relationship,
+    tags: pkg.tags ?? [],
+    topic: pkg.topic ?? "",
   };
 }
 
@@ -118,6 +151,7 @@ export function matchesFilters(record, input = {}) {
     (!filters.family || record.family === filters.family) &&
     (!filters.docs || (record.docs ?? []).includes(filters.docs)) &&
     (!filters.relationship || record.relationship === filters.relationship) &&
+    (!filters.tag || (record.tags ?? []).includes(filters.tag)) &&
     searchable(filters.q)
       .split(/\s+/u)
       .filter(Boolean)

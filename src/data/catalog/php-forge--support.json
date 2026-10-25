@@ -3,6 +3,8 @@
     "name": "Testing support",
     "summary": "Support utilities for enhanced testing capabilities.",
     "family": "php-forge",
+    "topic": "quality-debugging",
+    "tags": ["testing", "support"],
     "ecosystems": ["php"],
     "kind": "library",
     "php": "^8.1",
@@ -10,10 +12,10 @@
         {
             "ecosystem": "php",
             "constraint": "^8.1",
-            "evidence": "https://github.com/php-forge/support/blob/d829f7b4e1acf2ce3a46f771a79063f918081219/composer.json"
+            "evidence": "https://github.com/php-forge/support/blob/21a68279578e3e6c4847bd38f6bb6619a7edd8b1/composer.json"
         }
     ],
-    "docsUrl": "https://github.com/php-forge/support/blob/d829f7b4e1acf2ce3a46f771a79063f918081219/README.md",
+    "docsUrl": "https://github.com/php-forge/support/blob/21a68279578e3e6c4847bd38f6bb6619a7edd8b1/README.md",
     "repository": "https://github.com/php-forge/support",
     "license": "BSD-3-Clause",
     "maintainer": {
@@ -21,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/php-forge/support/blob/d829f7b4e1acf2ce3a46f771a79063f918081219/LICENSE.md",
+    "relationshipEvidence": "https://github.com/php-forge/support/blob/21a68279578e3e6c4847bd38f6bb6619a7edd8b1/LICENSE",
     "provenance": {
-        "ref": "HEAD snapshot",
-        "commit": "d829f7b4e1acf2ce3a46f771a79063f918081219",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/php-forge/support/blob/d829f7b4e1acf2ce3a46f771a79063f918081219/composer.json",
-        "kind": "source"
+        "ref": "0.3.2",
+        "commit": "21a68279578e3e6c4847bd38f6bb6619a7edd8b1",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/php-forge/support/blob/21a68279578e3e6c4847bd38f6bb6619a7edd8b1/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 5528,
+        "downloadsTotal": 93826,
+        "favers": 1,
+        "fetchedAt": "2026-10-25"
     }
 }

@@ -3,6 +3,15 @@
     "name": "Extension template",
     "summary": "Starter repository for a Yii2 22.0 extension, with PHPUnit, PHPStan, Infection, ECS, GitHub Actions workflows and Codecov configured.",
     "family": "yii2-extensions",
+    "topic": "extension-authoring",
+    "tags": [
+        "template",
+        "starter",
+        "phpunit",
+        "phpstan",
+        "infection",
+        "github-actions"
+    ],
     "ecosystems": ["yii2"],
     "kind": "template",
     "php": ">=8.3",

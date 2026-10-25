@@ -3,17 +3,19 @@
     "name": "Bootstrap 5 for Yii3",
     "summary": "Yii Framework Twitter Bootstrap 5 Extension.",
     "family": "community",
+    "topic": "forms-widgets",
+    "tags": ["bootstrap5", "bootstrap"],
     "ecosystems": ["yii3"],
     "kind": "extension",
     "php": "8.1 - 8.5",
     "compatibility": [
         {
             "ecosystem": "yii3",
-            "constraint": "yiisoft/html ^3.0; yiisoft/widget ^2.0",
-            "evidence": "https://github.com/yiisoft/bootstrap5/blob/e27cfae0675a29f083aa055cec398bf58bb28c4e/composer.json"
+            "constraint": "yiisoft/html ^3.13 || ^4.0; yiisoft/widget ^2.0",
+            "evidence": "https://github.com/yiisoft/bootstrap5/blob/46d48f44b35e2c938b78733a7f479f2b48041c6c/composer.json"
         }
     ],
-    "docsUrl": "https://github.com/yiisoft/bootstrap5/blob/e27cfae0675a29f083aa055cec398bf58bb28c4e/docs/guide/en/README.md",
+    "docsUrl": "https://github.com/yiisoft/bootstrap5/blob/46d48f44b35e2c938b78733a7f479f2b48041c6c/docs/guide/en/README.md",
     "repository": "https://github.com/yiisoft/bootstrap5",
     "license": "BSD-3-Clause",
     "maintainer": {
@@ -21,12 +23,18 @@
         "url": "https://www.yiiframework.com/"
     },
     "relationship": "community",
-    "relationshipEvidence": "https://github.com/yiisoft/bootstrap5/blob/e27cfae0675a29f083aa055cec398bf58bb28c4e/README.md",
+    "relationshipEvidence": "https://github.com/yiisoft/bootstrap5/blob/46d48f44b35e2c938b78733a7f479f2b48041c6c/README.md",
     "provenance": {
-        "ref": "master",
-        "commit": "e27cfae0675a29f083aa055cec398bf58bb28c4e",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/yiisoft/bootstrap5/blob/e27cfae0675a29f083aa055cec398bf58bb28c4e/composer.json",
-        "kind": "source"
+        "ref": "1.2.0",
+        "commit": "46d48f44b35e2c938b78733a7f479f2b48041c6c",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yiisoft/bootstrap5/blob/46d48f44b35e2c938b78733a7f479f2b48041c6c/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 1955,
+        "downloadsTotal": 32653,
+        "favers": 70,
+        "fetchedAt": "2026-10-25"
     }
 }

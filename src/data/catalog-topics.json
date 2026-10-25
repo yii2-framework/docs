@@ -1,0 +1,54 @@
+{
+    "topics": [
+        {
+            "id": "forms-widgets",
+            "title": "Forms and widgets",
+            "summary": "Widgets, form models and UI components for forms, layout and file uploads."
+        },
+        {
+            "id": "routing-frontend",
+            "title": "Routing, languages and frontend",
+            "summary": "Language-prefixed URLs, asset tooling and client-driven pages served by PHP controllers."
+        },
+        {
+            "id": "data-modelling",
+            "title": "Data modelling",
+            "summary": "Storage patterns and behaviors for Active Record and database models."
+        },
+        {
+            "id": "servers-workers",
+            "title": "Application servers and workers",
+            "summary": "Run an application in a long-running PHP worker or behind a PSR-7 bridge."
+        },
+        {
+            "id": "quality-debugging",
+            "title": "Quality and debugging",
+            "summary": "Inspect requests at runtime, check code with static analysis and share test helpers."
+        },
+        {
+            "id": "extension-authoring",
+            "title": "Build your own extension",
+            "summary": "Starters and tooling for writing and testing a new package."
+        },
+        {
+            "id": "html-views",
+            "title": "Views and HTML",
+            "summary": "HTML generation and templating helpers for views."
+        },
+        {
+            "id": "security-auth",
+            "title": "Authentication and security",
+            "summary": "Login, access control, tokens and request hardening."
+        },
+        {
+            "id": "background-integrations",
+            "title": "Queues and integrations",
+            "summary": "Queues, caching, mail, HTTP clients and third-party service connectors."
+        },
+        {
+            "id": "console-tooling",
+            "title": "Console and code generation",
+            "summary": "Commands, generators and developer tooling for the command line."
+        }
+    ]
+}

@@ -1,0 +1,96 @@
+{
+    "minified": "composer/2.0",
+    "packages": {
+        "yiisoft/db-redis": [
+            {
+                "name": "yiisoft/db-redis",
+                "description": "Yii Framework Redis Cache, Session and ActiveRecord extension",
+                "keywords": [
+                    "redis",
+                    "cache",
+                    "session",
+                    "yii",
+                    "active-record"
+                ],
+                "homepage": "",
+                "version": "dev-master",
+                "version_normalized": "dev-master",
+                "license": ["BSD-3-Clause"],
+                "authors": [],
+                "source": {
+                    "url": "https://github.com/yiisoft/db-redis.git",
+                    "type": "git",
+                    "reference": "deb9a1ff5ca333dcd6b0641ba0c7e2ad885c1c69"
+                },
+                "type": "library",
+                "support": {
+                    "chat": "https://t.me/yii3en",
+                    "forum": "https://www.yiiframework.com/forum/",
+                    "irc": "ircs://irc.libera.chat:6697/yii",
+                    "issues": "https://github.com/yiisoft/db-redis/issues?state=open",
+                    "source": "https://github.com/yiisoft/db-redis",
+                    "wiki": "https://www.yiiframework.com/wiki/"
+                },
+                "funding": [
+                    {
+                        "url": "https://github.com/sponsors/yiisoft",
+                        "type": "github"
+                    },
+                    {
+                        "url": "https://opencollective.com/yiisoft",
+                        "type": "opencollective"
+                    }
+                ],
+                "default-branch": true,
+                "require": {
+                    "ext-mbstring": "*",
+                    "ext-json": "*",
+                    "yiisoft/db": "^3.0@dev",
+                    "yiisoft/strings": "^2.0",
+                    "yiisoft/yii-event": "^1.0",
+                    "yiisoft/arrays": "^2.0",
+                    "php": "^8.0",
+                    "yiisoft/log": "^2.0"
+                },
+                "abandoned": true
+            },
+            {
+                "version": "dev-dependabot/github_actions/superchargejs/redis-github-action-1.5.0",
+                "version_normalized": "dev-dependabot/github_actions/superchargejs/redis-github-action-1.5.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/db-redis.git",
+                    "type": "git",
+                    "reference": "675ae7a39adf8c6703f26191c6e58472c7e4e3d8"
+                },
+                "support": {
+                    "forum": "http://www.yiiframework.com/forum/",
+                    "irc": "irc://irc.freenode.net/yii",
+                    "issues": "https://github.com/yiisoft/db-redis/issues",
+                    "source": "https://github.com/yiisoft/db-redis",
+                    "wiki": "http://www.yiiframework.com/wiki/"
+                },
+                "funding": [
+                    {
+                        "url": "https://github.com/yiisoft",
+                        "type": "github"
+                    },
+                    {
+                        "url": "https://opencollective.com/yiisoft",
+                        "type": "open_collective"
+                    }
+                ],
+                "require": {
+                    "php": "^8.0",
+                    "ext-mbstring": "*",
+                    "ext-json": "*",
+                    "yiisoft/arrays": "^2.0",
+                    "yiisoft/db": "^3.0@dev",
+                    "yiisoft/log": "^2.0",
+                    "yiisoft/strings": "^2.0",
+                    "yiisoft/yii-event": "^1.0"
+                },
+                "default-branch": "__unset"
+            }
+        ]
+    }
+}

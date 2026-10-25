@@ -1,0 +1,49 @@
+{
+    "minified": "composer/2.0",
+    "packages": {
+        "yii2-extensions/nested-sets-behavior": [
+            {
+                "name": "yii2-extensions/nested-sets-behavior",
+                "description": "Nested sets behavior and tree queries for Yii ActiveRecord models.",
+                "keywords": [
+                    "tree",
+                    "activerecord",
+                    "Behavior",
+                    "hierarchy",
+                    "yii2",
+                    "yii2-extension",
+                    "nested-sets"
+                ],
+                "homepage": "https://yii2-framework.github.io/docs/extensions/nested-sets-behavior/",
+                "version": "dev-main",
+                "version_normalized": "dev-main",
+                "license": ["BSD-3-Clause"],
+                "authors": [
+                    {
+                        "name": "Wilmer Arambula",
+                        "homepage": "https://github.com/terabytesoftw",
+                        "role": "Developer"
+                    }
+                ],
+                "source": {
+                    "url": "https://github.com/yii2-extensions/nested-sets-behavior.git",
+                    "type": "git",
+                    "reference": "e10a0ad055cc047adc402c25e71be2880a7397ac"
+                },
+                "type": "library",
+                "support": {
+                    "docs": "https://yii2-framework.github.io/docs/extensions/nested-sets-behavior/",
+                    "issues": "https://github.com/yii2-extensions/nested-sets-behavior/issues",
+                    "source": "https://github.com/yii2-extensions/nested-sets-behavior"
+                },
+                "funding": [],
+                "default-branch": true,
+                "require": {
+                    "php": ">=8.3",
+                    "ext-pdo": "*",
+                    "yiisoft/yii2": "~2.0.55 || ^22.0@dev"
+                }
+            }
+        ]
+    }
+}

@@ -3,6 +3,15 @@
     "name": "Debug",
     "summary": "Debug toolbar and debugger panels for Yii2 covering requests, logs, queries, profiling, timeline, queue, mail, events, asset bundles and user switching.",
     "family": "yii2-extensions",
+    "topic": "quality-debugging",
+    "tags": [
+        "debug",
+        "debug-toolbar",
+        "profiling",
+        "database-profiling",
+        "request-inspector",
+        "timeline"
+    ],
     "ecosystems": ["yii2"],
     "kind": "tool",
     "php": ">=8.3",
@@ -28,5 +37,11 @@
         "reviewedAt": "2026-10-25",
         "url": "https://github.com/yii2-extensions/debug/blob/d1b208afa729a26cb2aeb742710e13f277cac099/composer.json",
         "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 136,
+        "downloadsTotal": 5516,
+        "favers": 4,
+        "fetchedAt": "2026-10-25"
     }
 }

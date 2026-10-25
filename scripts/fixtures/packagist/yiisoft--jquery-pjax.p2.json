@@ -1,0 +1,86 @@
+{
+    "minified": "composer/2.0",
+    "packages": {
+        "yiisoft/jquery-pjax": [
+            {
+                "name": "yiisoft/jquery-pjax",
+                "keywords": [],
+                "homepage": "https://github.com/yiisoft/jquery-pjax#readme",
+                "version": "v2.0.5",
+                "version_normalized": "2.0.5.0",
+                "license": ["MIT"],
+                "authors": [],
+                "source": {
+                    "url": "https://github.com/yiisoft/jquery-pjax.git",
+                    "type": "git",
+                    "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67"
+                },
+                "type": "library",
+                "support": {
+                    "forum": "http://www.yiiframework.com/forum/",
+                    "irc": "irc://irc.freenode.org/jquery",
+                    "issues": "https://github.com/yiisoft/jquery-pjax/issues",
+                    "source": "https://github.com/yiisoft/jquery-pjax"
+                },
+                "require": {
+                    "yiisoft/jquery": ">=1.8"
+                },
+                "abandoned": "install via bower instead"
+            },
+            {
+                "version": "v2.0.4",
+                "version_normalized": "2.0.4.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/jquery-pjax.git",
+                    "type": "git",
+                    "reference": "3f20897307cca046fca5323b318475ae9dac0ca0"
+                }
+            },
+            {
+                "version": "v2.0.3",
+                "version_normalized": "2.0.3.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/jquery-pjax.git",
+                    "type": "git",
+                    "reference": "d35c0a8fca20c61c6c2bd7276ecd06b714a6bebc"
+                }
+            },
+            {
+                "version": "v2.0.2",
+                "version_normalized": "2.0.2.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/jquery-pjax.git",
+                    "type": "git",
+                    "reference": "fb92be865c0fd6583714475cb7d629020749d73f"
+                }
+            },
+            {
+                "version": "v2.0.1",
+                "version_normalized": "2.0.1.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/jquery-pjax.git",
+                    "type": "git",
+                    "reference": "f07ce95f6098c0bd5421789a20789f39a19be73b"
+                }
+            },
+            {
+                "version": "v2.0.0",
+                "version_normalized": "2.0.0.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/jquery-pjax.git",
+                    "type": "git",
+                    "reference": "520f8c12b5a417e21d2cd0df499fa2a4e4e9a9d6"
+                }
+            },
+            {
+                "version": "v1.8.0-patch1",
+                "version_normalized": "1.8.0.0-patch1",
+                "source": {
+                    "url": "https://github.com/yiisoft/jquery-pjax.git",
+                    "type": "git",
+                    "reference": "74330005f9d5ffdf923d6ce45c10814d9a8902bb"
+                }
+            }
+        ]
+    }
+}

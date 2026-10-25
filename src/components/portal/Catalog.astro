@@ -1,5 +1,5 @@
 ---
-import { documentationTarget, ecosystemLabels, familyLabels, maintainerLink, requirementParts, withBase } from "../../lib/catalog.mjs";
+import { documentationTarget, ecosystemLabels, facetTags, familyLabels, getTopic, groupByTopic, installCommand, maintainerLink, requirementParts, withBase } from "../../lib/catalog.mjs";
 import { catalogSearchRecord } from "../../lib/catalog-filter.mjs";
 import { displayOrder, hostingFor, loadHosting } from "../../lib/hosting.mjs";
 import "../../styles/portal.css";
@@ -8,7 +8,18 @@ import "../../styles/directory.css";
 
 const { packages, hosting = loadHosting() } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const entries = displayOrder(packages, hosting).map((pkg) => ({ pkg, hosted: hostingFor(pkg, hosting) }));
+// One section per topic that has records (catalog-topics.json order), hosted guides first inside each section.
+const sections = groupByTopic(displayOrder(packages, hosting)).map(({ topic, packages: members }) => ({
+  topic,
+  entries: members.map((pkg) => ({ pkg, hosted: hostingFor(pkg, hosting) })),
+}));
+// The tag filter lists the tags of two or more packages; any other tag stays searchable and linkable.
+const tagChoices = facetTags(packages);
+const packagesUrl = withBase("/packages/", base);
+const tagUrl = (tag) => `${packagesUrl}?tag=${encodeURIComponent(tag)}`;
+// A card shows its first tags in curated order; the record page shows all of them.
+const shownTags = 3;
+const unit = (count) => (count === 1 ? "package" : "packages");
 const documentationLabels = {
   guide: "Guide on this site",
   skill: "Agent skill available",
@@ -56,74 +67,124 @@ const checked = (pkg) => `against ${pkg.provenance.ref} (${pkg.provenance.kind =
         {Object.entries(documentationLabels).map(([value, label]) => <option value={value}>{label}</option>)}
       </select>
     </div>
+    <div>
+      <label for="catalog-tag">Tag</label>
+      <select id="catalog-tag" name="tag">
+        <option value="">Any tag</option>
+        {tagChoices.map(({ tag, count }) => <option value={tag}>{tag} ({count})</option>)}
+      </select>
+    </div>
     <button class="catalog-reset" type="reset">Clear filters</button>
   </form>
   <noscript><p class="catalog-note">All packages are listed below. Enable JavaScript to filter this list.</p></noscript>
 
-  <div class="catalog-results-heading">
-    <p class="catalog-count" role="status" aria-live="polite" aria-atomic="true" data-catalog-count>{packages.length} packages</p>
-    <a href={withBase("/packages/index.md", base)}>Read as Markdown</a>
-  </div>
-  <ul class="catalog-list" data-catalog-list>
-    {entries.map(({ pkg, hosted }) => {
-      const record = catalogSearchRecord(pkg, hosted);
-      const target = documentationTarget(pkg, hosted);
-      const pills = frameworks(pkg);
-      return <li
-        class="catalog-entry directory-entry"
-        data-catalog-entry
-        data-search={record.search}
-        data-ecosystems={record.ecosystems.join(" ")}
-        data-family={record.family}
-        data-docs={record.docs.join(" ")}
-        data-relationship={record.relationship}
-      >
-        <div class="catalog-entry-copy">
-          <p class="catalog-collection">{familyLabels[pkg.family]}</p>
-          <h2><a href={withBase(`/packages/${pkg.id}/`, base)}>{pkg.name}</a></h2>
-          <p class="catalog-package-id">{pkg.id}</p>
-          <p class="catalog-summary">{pkg.summary}</p>
-          <ul class="directory-badges" aria-label="Documentation">
-            {target.kind === "hosted" ? (
-              <>
-                <li class="directory-badge directory-badge-hosted">Guide on this site</li>
-                {hosted.reference && <li class="directory-badge">API reference</li>}
-                {hosted.demos && <li class="directory-badge">Live demos</li>}
-                {hosted.agentSkill && <li class="directory-badge">Agent skill</li>}
-              </>
-            ) : (
-              <li class="directory-badge directory-badge-external">{target.label}</li>
-            )}
-            {pkg.kind === "template" && <li class="directory-badge">Starter template</li>}
-          </ul>
-          <div class="directory-actions">
-            {target.kind === "hosted" && (
-              <a class="portal-button" href={withBase(target.url, base)}>{target.label}<span class="sr-only"> for {pkg.name}</span></a>
-            )}
-            {target.kind === "external" && (
-              <a class="portal-button" href={target.url} rel="noopener">{target.label}<span class="sr-only"> for {pkg.name}</span> (leaves this site)</a>
-            )}
-            <a class="portal-button portal-button-secondary" href={withBase(`/packages/${pkg.id}/`, base)}>Details<span class="sr-only"> for {pkg.name}</span></a>
-          </div>
-        </div>
-        <div class="catalog-entry-meta">
-          {pills.length > 0 && <ul class="catalog-tags" aria-label="Ecosystems">
-            {pills.map((ecosystem) => <li>{ecosystemLabels[ecosystem]}</li>)}
-          </ul>}
-          <p class="directory-requires">
-            <span class="directory-label">Requires</span>
-            {requirementParts(pkg).map(({ label, constraint }) => <span class="directory-requirement">{label} <code>{constraint}</code></span>)}
-          </p>
-          <p class="directory-maintainer">Maintained by <a href={maintainerLink(pkg).url}>{maintainerLink(pkg).label}</a></p>
-          <p class="directory-checked">Checked <time datetime={pkg.provenance.reviewedAt}>{pkg.provenance.reviewedAt}</time> {checked(pkg)}</p>
-        </div>
-      </li>;
-    })}
-  </ul>
-  <div class="catalog-empty" data-catalog-empty hidden>
-    <h2>No packages match these filters</h2>
-    <p>Try a shorter search or choose another ecosystem, collection or documentation.</p>
-    <button class="portal-button portal-button-secondary" type="button" data-catalog-clear>Clear filters</button>
+  <!-- Wide screens: the topic list is a sticky column to the right of the results; narrower screens: a row of chips. -->
+  <div class="directory-browse">
+    <nav class="directory-topics" aria-labelledby="directory-topics-title" data-catalog-topics>
+      <p class="directory-topics-title" id="directory-topics-title">Topics</p>
+      <ul>
+        {sections.map(({ topic, entries }) => (
+          <li data-catalog-chip={topic.id}>
+            <a href={`#topic-${topic.id}`}>{topic.title} (<span data-catalog-chip-count>{entries.length}</span><span class="sr-only" data-catalog-chip-unit>{` ${unit(entries.length)}`}</span>)</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="directory-results">
+      <div class="catalog-results-heading">
+        <p class="catalog-count" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" data-catalog-count>{packages.length} packages</p>
+        <a href={withBase("/packages/index.md", base)}>Read as Markdown</a>
+      </div>
+      <div class="directory-sections" data-catalog-list>
+        {sections.map(({ topic, entries }) => (
+          <section class="directory-topic" id={`topic-${topic.id}`} aria-labelledby={`topic-${topic.id}-title`} data-catalog-section={topic.id}>
+            <h2 id={`topic-${topic.id}-title`}>{topic.title} <span class="directory-topic-count">(<span data-catalog-section-count>{entries.length}</span><span class="sr-only" data-catalog-section-unit>{` ${unit(entries.length)}`}</span>)</span></h2>
+            <p class="directory-topic-summary">{topic.summary}</p>
+            <ul class="catalog-list">
+              {entries.map(({ pkg, hosted }) => {
+                const record = catalogSearchRecord(pkg, hosted, getTopic(pkg.topic));
+                const target = documentationTarget(pkg, hosted);
+                const pills = frameworks(pkg);
+                const command = installCommand(pkg);
+                const more = pkg.tags.length - shownTags;
+                return <li
+                  class="catalog-entry directory-entry"
+                  data-catalog-entry
+                  data-search={record.search}
+                  data-ecosystems={record.ecosystems.join(" ")}
+                  data-family={record.family}
+                  data-docs={record.docs.join(" ")}
+                  data-relationship={record.relationship}
+                  data-tags={record.tags.join(" ")}
+                  data-topic={record.topic}
+                >
+                  <div class="catalog-entry-copy">
+                    <p class="catalog-collection">{familyLabels[pkg.family]}</p>
+                    <h3><a href={withBase(`/packages/${pkg.id}/`, base)}>{pkg.name}</a></h3>
+                    <p class="catalog-package-id">{pkg.id}</p>
+                    <p class="catalog-summary">{pkg.summary}</p>
+                    <div class="directory-tags">
+                      <span class="directory-tags-label" aria-hidden="true">Tags</span>
+                      <ul aria-label="Tags">
+                        {pkg.tags.slice(0, shownTags).map((tag) => (
+                          <li><a href={tagUrl(tag)} data-catalog-tag={tag}>{tag}</a></li>
+                        ))}
+                        {more > 0 && <li class="directory-tags-more">{`+${more} more`}<span class="sr-only">{more === 1 ? " tag" : " tags"}</span></li>}
+                      </ul>
+                    </div>
+                    <ul class="directory-badges" aria-label="Documentation">
+                      {target.kind === "hosted" ? (
+                        <>
+                          <li class="directory-badge directory-badge-hosted">Guide on this site</li>
+                          {hosted.reference && <li class="directory-badge">API reference</li>}
+                          {hosted.demos && <li class="directory-badge">Live demos</li>}
+                          {hosted.agentSkill && <li class="directory-badge">Agent skill</li>}
+                        </>
+                      ) : (
+                        <li class="directory-badge directory-badge-external">{target.label}</li>
+                      )}
+                      {pkg.kind === "template" && <li class="directory-badge">Starter template</li>}
+                    </ul>
+                    <div class="directory-actions">
+                      {target.kind === "hosted" && (
+                        <a class="portal-button" href={withBase(target.url, base)}>{target.label}<span class="sr-only"> for {pkg.name}</span></a>
+                      )}
+                      {target.kind === "external" && (
+                        <a class="portal-button" href={target.url} rel="noopener">{target.label} (leaves this site)<span class="sr-only"> for {pkg.name}</span></a>
+                      )}
+                      <a class="portal-button portal-button-secondary" href={withBase(`/packages/${pkg.id}/`, base)}>Details<span class="sr-only"> for {pkg.name}</span></a>
+                    </div>
+                  </div>
+                  <div class="catalog-entry-meta">
+                    {pills.length > 0 && <ul class="catalog-tags" aria-label="Ecosystems">
+                      {pills.map((ecosystem) => <li>{ecosystemLabels[ecosystem]}</li>)}
+                    </ul>}
+                    <p class="directory-requires">
+                      <span class="directory-label">Requires</span>
+                      {requirementParts(pkg).map(({ label, constraint }) => <span class="directory-requirement">{label} <code>{constraint}</code></span>)}
+                    </p>
+                    {command && (
+                      <p class="directory-install">
+                        <span class="directory-label">Install</span>
+                        <code>composer require <span class="directory-nowrap">{pkg.id.split("/")[0]}/</span><wbr /><span class="directory-nowrap">{pkg.id.split("/")[1]}</span></code>
+                      </p>
+                    )}
+                    <p class="directory-maintainer">Maintained by <a href={maintainerLink(pkg).url}>{maintainerLink(pkg).label}</a></p>
+                    <p class="directory-checked">Checked <time datetime={pkg.provenance.reviewedAt}>{pkg.provenance.reviewedAt}</time> {checked(pkg)}</p>
+                  </div>
+                </li>;
+              })}
+            </ul>
+          </section>
+        ))}
+      </div>
+      <div class="catalog-empty" data-catalog-empty hidden>
+        <h2>No packages match these filters</h2>
+        <p>Try a shorter search or choose another ecosystem, collection, documentation or tag.</p>
+        <button class="portal-button portal-button-secondary" type="button" data-catalog-clear>Clear filters</button>
+      </div>
+    </div>
   </div>
   <aside class="catalog-note" aria-label="About these listings">
     <p>Each entry records requirements read from one specific commit. Open an entry to see the evidence. Community entries are maintained independently; listing does not imply an official Yii affiliation, a security review or support from this site.</p>
@@ -153,22 +214,85 @@ const checked = (pkg) => `against ${pkg.provenance.ref} (${pkg.provenance.kind =
         family: element.dataset.family ?? "",
         docs: (element.dataset.docs ?? "").split(" "),
         relationship: element.dataset.relationship ?? "",
+        tags: (element.dataset.tags ?? "").split(" ").filter(Boolean),
+        topic: element.dataset.topic ?? "",
       },
     }));
+    const topics = root.querySelector<HTMLElement>("[data-catalog-topics]");
+    const sections = Array.from(root.querySelectorAll<HTMLElement>("[data-catalog-section]")).map((element) => ({
+      element,
+      id: element.dataset.catalogSection ?? "",
+      chip: root.querySelector<HTMLElement>(`[data-catalog-chip="${CSS.escape(element.dataset.catalogSection ?? "")}"]`),
+    }));
+    const unit = (total: number) => ` ${total === 1 ? "package" : "packages"}`;
+    const tagSelect = controls.tag instanceof HTMLSelectElement ? controls.tag : null;
+
+    // The tag select lists the tags of two or more packages. A tag of one package (from a tag link or a shared URL)
+    // gets a temporary option, so the control shows the active filter; it goes away once another tag is chosen.
+    function showTag(tag: string) {
+      if (!tagSelect) return;
+      for (const option of Array.from(tagSelect.querySelectorAll<HTMLOptionElement>("option[data-temporary]"))) {
+        if (option.value !== tag) option.remove();
+      }
+      if (tag === "" || Array.from(tagSelect.options).some((option) => option.value === tag)) return;
+      const option = new Option(`${tag} (${entries.filter(({ record }) => record.tags.includes(tag)).length})`, tag);
+      option.dataset.temporary = "";
+      tagSelect.add(option);
+    }
+
+    // The topic list marks the section being read: the last visible section whose top is in the upper third of the
+    // window (a jump to a topic leaves its heading there, under Starlight's scroll padding).
+    let frame = 0;
+    function markCurrent() {
+      frame = 0;
+      const offset = window.innerHeight / 3;
+      let current: (typeof sections)[number] | undefined;
+      for (const section of sections) {
+        if (section.element.hidden) continue;
+        if (!current || section.element.getBoundingClientRect().top <= offset) current = section;
+      }
+      for (const section of sections) {
+        const link = section.chip?.querySelector("a");
+        if (section === current) link?.setAttribute("aria-current", "location");
+        else link?.removeAttribute("aria-current");
+      }
+    }
+    const scheduleMark = () => {
+      if (frame === 0) frame = requestAnimationFrame(markCurrent);
+    };
 
     function render(filters: ReturnType<typeof normalizeFilters>) {
       let total = 0;
+      const perTopic = new Map<string, number>();
       for (const { element, record } of entries) {
         const visible = matchesFilters(record, filters);
         element.hidden = !visible;
-        if (visible) total += 1;
+        if (visible) {
+          total += 1;
+          perTopic.set(record.topic, (perTopic.get(record.topic) ?? 0) + 1);
+        }
       }
+      // A topic without a visible entry hides its section and its jump link; the others show their current counts.
+      for (const section of sections) {
+        const visible = perTopic.get(section.id) ?? 0;
+        section.element.hidden = visible === 0;
+        if (section.chip) section.chip.hidden = visible === 0;
+        for (const target of [section.element, section.chip]) {
+          const number = target?.querySelector<HTMLElement>("[data-catalog-section-count], [data-catalog-chip-count]");
+          const label = target?.querySelector<HTMLElement>("[data-catalog-section-unit], [data-catalog-chip-unit]");
+          if (number) number.textContent = String(visible);
+          if (label) label.textContent = unit(visible);
+        }
+      }
+      if (topics) topics.hidden = total === 0;
+      scheduleMark();
       count!.textContent = `${total} ${total === 1 ? "package" : "packages"}${total !== entries.length ? ` of ${entries.length}` : ""}`;
       empty!.hidden = total !== 0;
     }
 
     function restore() {
       const filters = normalizeFilters(new URL(window.location.href).searchParams);
+      showTag(filters.tag);
       for (const key of filterKeys) {
         const control = controls[key];
         if (control) control.value = filters[key];
@@ -179,6 +303,7 @@ const checked = (pkg) => `against ${pkg.provenance.ref} (${pkg.provenance.kind =
 
     function update() {
       const filters = normalizeFilters(read());
+      showTag(filters.tag);
       const next = filtersUrl(window.location.href, filters);
       if (next.href !== window.location.href) window.history.pushState(null, "", next);
       render(filters);
@@ -213,11 +338,30 @@ const checked = (pkg) => `against ${pkg.provenance.ref} (${pkg.provenance.kind =
       form.reset();
       controls.q?.focus();
     });
+    // A tag link applies the tag filter in place (same history entry as the other filters) and moves focus to the
+    // result count, which announces the new total. Modified clicks keep the browser's behaviour (new tab, window).
+    root.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[data-catalog-tag]") : null;
+      const tag = link?.dataset.catalogTag ?? "";
+      if (!link || normalizeFilters({ tag }).tag === "") return;
+      event.preventDefault();
+      clearTimeout(timer);
+      showTag(tag);
+      if (controls.tag) controls.tag.value = tag;
+      else hidden.tag = tag;
+      update();
+      count!.focus();
+    });
     window.addEventListener("popstate", () => {
       clearTimeout(timer);
       restore();
     });
+
+    window.addEventListener("scroll", scheduleMark, { passive: true });
+    window.addEventListener("resize", scheduleMark, { passive: true });
     restore();
+    markCurrent();
     form.hidden = false;
   }
 

@@ -1,7 +1,7 @@
 ---
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
-import { documentationTarget, ecosystemLabels, evidenceLabel, familyLabels, maintainerLink, packages, relationshipLabels, withBase } from "../../lib/catalog.mjs";
-import { hostingFor, loadHosting } from "../../lib/hosting.mjs";
+import { documentationTarget, ecosystemLabels, evidenceLabel, familyLabels, getTopic, installCommand, maintainerLink, packages, relationshipLabels, statsNote, statsSummary, withBase } from "../../lib/catalog.mjs";
+import { displayOrder, hostingFor, loadHosting } from "../../lib/hosting.mjs";
 import "../../styles/portal.css";
 import "../../styles/catalog.css";
 import "../../styles/directory.css";
@@ -13,12 +13,19 @@ export function getStaticPaths() {
 const { pkg } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const markdownUrl = withBase(`/packages/${pkg.id}/index.md`, base);
-const hosting = hostingFor(pkg, loadHosting());
+const allHosting = loadHosting();
+const hosting = hostingFor(pkg, allHosting);
 const target = documentationTarget(pkg, hosting);
 const hosted = target.kind === "hosted";
 // Ecosystem pills name the frameworks; the requirements below show PHP.
 const pills = pkg.ecosystems.filter((ecosystem) => ecosystem !== "php");
 const pageMarkdown = (url) => withBase(`${url}index.md`, base);
+const packagesUrl = withBase("/packages/", base);
+const topic = getTopic(pkg.topic);
+const topicUrl = `${packagesUrl}#topic-${topic.id}`;
+const command = installCommand(pkg);
+// The other records of the topic, in directory order (hosted guides first), at most six.
+const related = displayOrder(packages.filter((other) => other.topic === pkg.topic && other.id !== pkg.id), allHosting).slice(0, 6);
 const rows = hosted
   ? [
       ...hosting.pages.map((page) => ({
@@ -46,10 +53,16 @@ const rows = hosted
   }}
 >
   <article class="portal-container portal-package">
-    <nav class="catalog-breadcrumb" aria-label="Breadcrumb"><a href={withBase("/packages/", base)}>Packages</a><span aria-hidden="true">/</span><span>{familyLabels[pkg.family]}</span></nav>
+    <nav class="catalog-breadcrumb" aria-label="Breadcrumb"><a href={packagesUrl}>Packages</a><span aria-hidden="true">/</span><a href={topicUrl}>{topic.title}</a></nav>
     <div class="package-introduction">
       <p class="catalog-package-id">{pkg.id}</p>
       <p class="package-summary">{pkg.summary}</p>
+      <div class="directory-tags">
+        <span class="directory-tags-label" aria-hidden="true">Tags</span>
+        <ul aria-label="Tags">
+          {pkg.tags.map((tag) => <li><a href={`${packagesUrl}?tag=${encodeURIComponent(tag)}`}>{tag}</a></li>)}
+        </ul>
+      </div>
       {pills.length > 0 && <ul class="catalog-tags" aria-label="Ecosystems">{pills.map((ecosystem) => <li>{ecosystemLabels[ecosystem]}</li>)}</ul>}
       <div class="portal-actions">
         {hosted && <a class="portal-button" href={withBase(target.url, base)}>{target.label}</a>}
@@ -92,6 +105,18 @@ const rows = hosted
           </section>
         )}
 
+        <section class="package-section" aria-labelledby="install">
+          <h2 id="install">Install</h2>
+          {command ? (
+            <>
+              <pre class="directory-command"><code>composer require <span class="directory-nowrap">{pkg.id.split("/")[0]}/</span><wbr /><span class="directory-nowrap">{pkg.id.split("/")[1]}</span></code></pre>
+              <p>Checked against release <code>{pkg.provenance.ref}</code>. Composer installs the newest release that matches your application's constraints.</p>
+            </>
+          ) : (
+            <p>This entry does not name a released version, so no install command is shown. See the <a href={pkg.repository}>repository</a> for how to install it.</p>
+          )}
+        </section>
+
         <section class="package-section" aria-labelledby="requirements">
           <h2 id="requirements">Requirements</h2>
           <p>As declared in the package's <code>composer.json</code> at the commit below. Check the guide before adding it to an application.</p>
@@ -133,14 +158,35 @@ const rows = hosted
             </dd>
           </div>
           <div><dt>License</dt><dd>{pkg.license}</dd></div>
+          {pkg.stats && (
+            <div>
+              <dt>Packagist</dt>
+              <dd>
+                {statsSummary(pkg.stats)} (as of <time datetime={pkg.stats.fetchedAt}>{pkg.stats.fetchedAt}</time>)
+                <span class="directory-stats-note">{statsNote}</span>
+              </dd>
+            </div>
+          )}
         </dl>
         {pkg.relationship === "community" && <p class="catalog-note">This package is maintained independently. Its listing does not imply an official Yii affiliation or support agreement with this site.</p>}
       </aside>
     </div>
 
+    {related.length > 0 && (
+      <section class="directory-related" aria-labelledby="more-in-topic">
+        <h2 id="more-in-topic">More in {topic.title}</h2>
+        <ul>
+          {related.map((other) => (
+            <li><a href={withBase(`/packages/${other.id}/`, base)}>{other.name}</a> <span class="directory-related-summary">{other.summary}</span></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
     <nav class="directory-more" aria-label="Related pages">
       <ul>
-        <li><a href={`${withBase("/packages/", base)}?family=${encodeURIComponent(pkg.family)}`}>More from {familyLabels[pkg.family]}</a></li>
+        <li><a href={topicUrl}>All packages in {topic.title}</a></li>
+        <li><a href={`${packagesUrl}?family=${encodeURIComponent(pkg.family)}`}>More from {familyLabels[pkg.family]}</a></li>
         {hosted && <li><a href={withBase("/documentation/", base)}>All documentation on this site</a></li>}
       </ul>
     </nav>

@@ -3,6 +3,8 @@
     "name": "Select2",
     "summary": "Select2 widgets for Yii2 with ActiveForm integration, AJAX searches and native browser assets.",
     "family": "yii2-extensions",
+    "topic": "forms-widgets",
+    "tags": ["select2", "dropdown", "ajax", "jquery", "widget"],
     "ecosystems": ["yii2"],
     "kind": "extension",
     "php": ">=8.3",
@@ -28,5 +30,11 @@
         "reviewedAt": "2026-10-25",
         "url": "https://github.com/yii2-extensions/select2/blob/2c0fd026a44beaf4f95ca594ce6a33c588786b05/composer.json",
         "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 2,
+        "downloadsTotal": 11,
+        "favers": 1,
+        "fetchedAt": "2026-10-25"
     }
 }

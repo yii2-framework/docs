@@ -1,0 +1,79 @@
+{
+    "minified": "composer/2.0",
+    "packages": {
+        "yiisoft/yii2-queue": [
+            {
+                "name": "yiisoft/yii2-queue",
+                "description": "Yii2 Queue Extension which supports queues based on DB, Redis, RabbitMQ, Beanstalk, SQS, and Gearman",
+                "keywords": [
+                    "redis",
+                    "queue",
+                    "db",
+                    "rabbitmq",
+                    "async",
+                    "gearman",
+                    "beanstalk",
+                    "sqs",
+                    "yii",
+                    "gii"
+                ],
+                "homepage": "",
+                "version": "dev-master",
+                "version_normalized": "dev-master",
+                "license": ["BSD-3-Clause"],
+                "authors": [
+                    {
+                        "name": "Roman Zhuravlev"
+                    }
+                ],
+                "source": {
+                    "url": "https://github.com/yiisoft/yii2-queue.git",
+                    "type": "git",
+                    "reference": "0f0a46326cb561dbf2102b69bf7de99f6744a830"
+                },
+                "type": "yii2-extension",
+                "support": {
+                    "docs": "https://github.com/yiisoft/yii2-queue/blob/master/docs/guide",
+                    "issues": "https://github.com/yiisoft/yii2-queue/issues",
+                    "source": "https://github.com/yiisoft/yii2-queue"
+                },
+                "funding": [
+                    {
+                        "url": "https://github.com/yiisoft",
+                        "type": "github"
+                    },
+                    {
+                        "url": "https://opencollective.com/yiisoft",
+                        "type": "open_collective"
+                    },
+                    {
+                        "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-queue",
+                        "type": "tidelift"
+                    }
+                ],
+                "default-branch": true,
+                "require": {
+                    "php": ">=8.3",
+                    "yiisoft/yii2": "~2.0.54",
+                    "laravel/serializable-closure": "^v2.0.0",
+                    "symfony/process": "^7.0||^8.0"
+                }
+            },
+            {
+                "version": "2.3.x-dev",
+                "version_normalized": "2.3.9999999.9999999-dev",
+                "source": {
+                    "url": "https://github.com/yiisoft/yii2-queue.git",
+                    "type": "git",
+                    "reference": "9456397fc50306bf0e9a698227e223e94bb2564c"
+                },
+                "require": {
+                    "php": ">=5.5.0",
+                    "yiisoft/yii2": "~2.0.14",
+                    "symfony/process": "^3.3||^4.0||^5.0||^6.0||^7.0||^8.0"
+                },
+                "default-branch": "__unset"
+            }
+        ]
+    }
+}

@@ -3,6 +3,8 @@
     "name": "Locale URLs",
     "summary": "Automatic locale/language management for URLs.",
     "family": "yii2-extensions",
+    "topic": "routing-frontend",
+    "tags": ["locale", "i18n", "language"],
     "ecosystems": ["yii2"],
     "kind": "extension",
     "php": ">=8.3",
@@ -10,7 +12,7 @@
         {
             "ecosystem": "yii2",
             "constraint": "~2.0.55 || ^22.0@dev",
-            "evidence": "https://github.com/yii2-extensions/localeurls/blob/617d5f28c92ad635a70af864d1f67bcf6d278805/composer.json"
+            "evidence": "https://github.com/yii2-extensions/localeurls/blob/eb46e43f1f337cd2694b709002bdce0bb4e8bea1/composer.json"
         }
     ],
     "docsUrl": "/extensions/localeurls/",
@@ -21,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/yii2-extensions/localeurls/blob/617d5f28c92ad635a70af864d1f67bcf6d278805/composer.json",
+    "relationshipEvidence": "https://github.com/yii2-extensions/localeurls/blob/eb46e43f1f337cd2694b709002bdce0bb4e8bea1/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "617d5f28c92ad635a70af864d1f67bcf6d278805",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/yii2-extensions/localeurls/blob/617d5f28c92ad635a70af864d1f67bcf6d278805/composer.json",
-        "kind": "source"
+        "ref": "0.2.1",
+        "commit": "eb46e43f1f337cd2694b709002bdce0bb4e8bea1",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yii2-extensions/localeurls/blob/eb46e43f1f337cd2694b709002bdce0bb4e8bea1/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 15,
+        "downloadsTotal": 6736,
+        "favers": 3,
+        "fetchedAt": "2026-10-25"
     }
 }

@@ -3,6 +3,8 @@
     "name": "Inertia for Yii2",
     "summary": "Yii2 adapter for the framework-agnostic Inertia.js PHP protocol core.",
     "family": "yii2-extensions",
+    "topic": "routing-frontend",
+    "tags": ["inertia", "spa", "server-driven"],
     "ecosystems": ["yii2"],
     "kind": "extension",
     "php": ">=8.3",
@@ -10,7 +12,7 @@
         {
             "ecosystem": "yii2",
             "constraint": "^22.0@dev",
-            "evidence": "https://github.com/yii2-extensions/inertia/blob/97582aaa3ce6cac4f064331f7a8c7caf4e1e6373/composer.json"
+            "evidence": "https://github.com/yii2-extensions/inertia/blob/e256958c788d13382ce5f1f1ddce60556d656a78/composer.json"
         }
     ],
     "docsUrl": "/extensions/inertia/",
@@ -21,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/yii2-extensions/inertia/blob/97582aaa3ce6cac4f064331f7a8c7caf4e1e6373/composer.json",
+    "relationshipEvidence": "https://github.com/yii2-extensions/inertia/blob/e256958c788d13382ce5f1f1ddce60556d656a78/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "97582aaa3ce6cac4f064331f7a8c7caf4e1e6373",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/yii2-extensions/inertia/blob/97582aaa3ce6cac4f064331f7a8c7caf4e1e6373/composer.json",
-        "kind": "source"
+        "ref": "0.6.2",
+        "commit": "e256958c788d13382ce5f1f1ddce60556d656a78",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yii2-extensions/inertia/blob/e256958c788d13382ce5f1f1ddce60556d656a78/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 753,
+        "downloadsTotal": 3999,
+        "favers": 3,
+        "fetchedAt": "2026-10-25"
     }
 }

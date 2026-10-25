@@ -3,6 +3,8 @@
     "name": "Inertia protocol",
     "summary": "Framework-agnostic PHP core for the Inertia.js protocol.",
     "family": "php-forge",
+    "topic": "routing-frontend",
+    "tags": ["inertia", "spa", "framework-agnostic"],
     "ecosystems": ["php"],
     "kind": "library",
     "php": ">=8.3",
@@ -10,10 +12,10 @@
         {
             "ecosystem": "php",
             "constraint": ">=8.3",
-            "evidence": "https://github.com/php-forge/inertia/blob/9e9b660692fc260b6b04fa18b8125f16f1427336/composer.json"
+            "evidence": "https://github.com/php-forge/inertia/blob/d0765eda94ee70615c79e95488ad5eab403d0e26/composer.json"
         }
     ],
-    "docsUrl": "https://github.com/php-forge/inertia/blob/9e9b660692fc260b6b04fa18b8125f16f1427336/README.md",
+    "docsUrl": "https://github.com/php-forge/inertia/blob/d0765eda94ee70615c79e95488ad5eab403d0e26/README.md",
     "repository": "https://github.com/php-forge/inertia",
     "license": "BSD-3-Clause",
     "maintainer": {
@@ -21,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/php-forge/inertia/blob/9e9b660692fc260b6b04fa18b8125f16f1427336/LICENSE",
+    "relationshipEvidence": "https://github.com/php-forge/inertia/blob/d0765eda94ee70615c79e95488ad5eab403d0e26/LICENSE",
     "provenance": {
-        "ref": "HEAD snapshot",
-        "commit": "9e9b660692fc260b6b04fa18b8125f16f1427336",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/php-forge/inertia/blob/9e9b660692fc260b6b04fa18b8125f16f1427336/composer.json",
-        "kind": "source"
+        "ref": "0.5.1",
+        "commit": "d0765eda94ee70615c79e95488ad5eab403d0e26",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/php-forge/inertia/blob/d0765eda94ee70615c79e95488ad5eab403d0e26/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 1248,
+        "downloadsTotal": 5723,
+        "favers": 2,
+        "fetchedAt": "2026-10-25"
     }
 }

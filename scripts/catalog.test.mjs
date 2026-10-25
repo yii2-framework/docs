@@ -1,19 +1,31 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { test } from "node:test";
 import {
   catalogMarkdown,
   documentationTarget,
   ecosystemLabels,
   evidenceLabel,
+  facetTags,
   familyLabels,
   getPackage,
+  getTopic,
+  groupByTopic,
   hostedSummary,
+  installCommand,
   maintainerLink,
+  markdownText,
+  normalizeTags,
   packageMarkdown,
   packages,
   relationshipLabels,
+  statsNote,
+  statsSummary,
+  TAG_STOP_LIST,
+  topicLabels,
+  topics,
   validateCatalog,
+  validateTopics,
   withBase,
 } from "../src/lib/catalog.mjs";
 
@@ -37,6 +49,204 @@ test("loads reviewed records for all collections in a stable order", () => {
   assert.ok(Object.isFrozen(packages));
   assert.ok(Object.isFrozen(packages[0].provenance));
   assert.equal(getPackage("missing/package"), undefined);
+});
+
+test("loads the catalog topics in display order and every record names one of them", () => {
+  assert.deepEqual(
+    topics.map((topic) => topic.id),
+    [
+      "forms-widgets",
+      "routing-frontend",
+      "data-modelling",
+      "servers-workers",
+      "quality-debugging",
+      "extension-authoring",
+      "html-views",
+      "security-auth",
+      "background-integrations",
+      "console-tooling",
+    ],
+  );
+  assert.ok(Object.isFrozen(topics));
+  assert.ok(Object.isFrozen(topics[0]));
+  assert.ok(Object.isFrozen(topicLabels));
+  assert.equal(getTopic("html-views").title, "Views and HTML");
+  assert.equal(getTopic("missing"), undefined);
+  assert.equal(getTopic("__proto__"), undefined);
+  const known = new Set(topics.map((topic) => topic.id));
+  for (const pkg of packages) {
+    assert.ok(known.has(pkg.topic), `${pkg.id} topic ${pkg.topic}`);
+  }
+});
+
+test("the topic file replaces the former documentation topics file", () => {
+  assert.ok(
+    existsSync(new URL("../src/data/catalog-topics.json", import.meta.url)),
+  );
+  assert.ok(
+    !existsSync(
+      new URL("../src/data/documentation-topics.json", import.meta.url),
+    ),
+  );
+});
+
+test("rejects malformed topic files", () => {
+  const topic = { id: "forms", title: "Forms", summary: "Form widgets." };
+  assert.deepEqual(validateTopics({ topics: [topic] }), [topic]);
+  for (const data of [
+    [],
+    { topics: [] },
+    { topics: [topic], extra: true },
+    { topics: [topic, { ...topic }] },
+    { topics: [{ ...topic, id: "Forms" }] },
+    { topics: [{ ...topic, id: "forms widgets" }] },
+    { topics: [{ ...topic, title: "Forms\nand widgets" }] },
+    { topics: [{ ...topic, summary: "" }] },
+    { topics: [{ ...topic, packages: ["filepond"] }] },
+    { topics: [{ id: "forms", title: "Forms" }] },
+  ]) {
+    assert.throws(() => validateTopics(data), /Catalog/);
+  }
+});
+
+test("requires a known topic for every record", () => {
+  for (const [change, message] of [
+    [(pkg) => delete pkg.topic, /missing field topic/],
+    [(pkg) => (pkg.topic = "uploads"), /unknown topic/],
+    [(pkg) => (pkg.topic = ["forms-widgets"]), /unknown topic/],
+    [(pkg) => (pkg.topic = "__proto__"), /unknown topic/],
+  ]) {
+    const pkg = copy();
+    change(pkg);
+    assert.throws(() => validateCatalog([pkg]), message);
+  }
+  const pkg = copy();
+  pkg.topic = "uploads";
+  assert.doesNotThrow(() =>
+    validateCatalog([pkg], [{ id: "uploads", title: "Uploads", summary: "" }]),
+  );
+  assert.throws(() => validateCatalog([copy()], []), /unknown topic/);
+});
+
+test("requires one to eight distinct lowercase tags outside the stop list", () => {
+  for (const [tags, message] of [
+    [[], /1–8 tags/],
+    [Array.from({ length: 9 }, (_, index) => `tag-${index}`), /1–8 tags/],
+    ["upload", /1–8 tags/],
+    [["upload", "upload"], /distinct/],
+    [["Upload"], /lowercase slugs/],
+    [["file upload"], /lowercase slugs/],
+    [["-upload"], /lowercase slugs/],
+    [["upload--file"], /lowercase slugs/],
+    [[42], /lowercase slugs/],
+    [["a".repeat(33)], /at most 32/],
+    [["upload", "yii2"], /stop list/],
+    [["extension"], /stop list/],
+  ]) {
+    const pkg = copy();
+    pkg.tags = tags;
+    assert.throws(() => validateCatalog([pkg]), message);
+  }
+  const pkg = copy();
+  delete pkg.tags;
+  assert.throws(() => validateCatalog([pkg]), /missing field tags/);
+  pkg.tags = ["a".repeat(32), ...Array.from({ length: 7 }, (_, i) => `t${i}`)];
+  assert.doesNotThrow(() => validateCatalog([pkg]));
+  for (const word of TAG_STOP_LIST) {
+    assert.match(word, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+  }
+  assert.ok(Object.isFrozen(TAG_STOP_LIST));
+});
+
+test("accepts optional download statistics only in their closed shape", () => {
+  const stats = {
+    downloadsMonthly: 120,
+    downloadsTotal: 4500,
+    favers: 0,
+    fetchedAt: "2026-10-25",
+  };
+  const pkg = copy();
+  pkg.stats = stats;
+  assert.deepEqual(validateCatalog([pkg])[0].stats, stats);
+  const bare = copy();
+  delete bare.stats;
+  assert.equal(Object.hasOwn(validateCatalog([bare])[0], "stats"), false);
+  for (const [change, message] of [
+    [(value) => (value.stars = 3), /unknown field stars/],
+    [(value) => delete value.favers, /missing field favers/],
+    [(value) => (value.downloadsTotal = -1), /non-negative integer/],
+    [(value) => (value.downloadsMonthly = 1.5), /non-negative integer/],
+    [(value) => (value.favers = "3"), /non-negative integer/],
+    [(value) => (value.downloadsTotal = 2 ** 53), /non-negative integer/],
+    [(value) => (value.fetchedAt = "2026-02-30"), /fetchedAt/],
+    [(value) => (value.fetchedAt = "2026-10-25T00:00:00Z"), /fetchedAt/],
+  ]) {
+    const invalid = copy();
+    invalid.stats = { ...stats };
+    change(invalid.stats);
+    assert.throws(() => validateCatalog([invalid]), message);
+  }
+  for (const value of [null, [], "120"]) {
+    const invalid = copy();
+    invalid.stats = value;
+    assert.throws(() => validateCatalog([invalid]), /plain object/);
+  }
+  const invalid = JSON.parse(
+    JSON.stringify({ ...copy(), stats }).replace(
+      '"favers":',
+      '"__proto__":{},"favers":',
+    ),
+  );
+  assert.throws(() => validateCatalog([invalid]), /unknown field __proto__/);
+});
+
+test("normalizes keywords into tag candidates", () => {
+  assert.deepEqual(
+    normalizeTags([
+      "File Upload",
+      "Image_Crop",
+      "cropper.js",
+      "  Widget  ",
+      "Yii 2",
+      "yii-2",
+      "YII2-Extension",
+      "PHP",
+      "Ünïcode",
+      "c++",
+      "--a--b--",
+      "!!!",
+      42,
+      null,
+    ]),
+    [
+      "file-upload",
+      "image-crop",
+      "cropper-js",
+      "widget",
+      "unicode",
+      "c",
+      "a-b",
+    ],
+  );
+  assert.deepEqual(
+    normalizeTags(["php-forge", "vite", "routing-frontend", "Vite", "HMR"], {
+      vendor: "php-forge",
+      topic: "routing-frontend",
+    }),
+    ["vite", "hmr"],
+  );
+  assert.deepEqual(normalizeTags(["a".repeat(33), "b".repeat(32)]), [
+    "b".repeat(32),
+  ]);
+  assert.deepEqual(
+    normalizeTags(Array.from({ length: 12 }, (_, index) => `tag ${index}`)),
+    Array.from({ length: 8 }, (_, index) => `tag-${index}`),
+  );
+  assert.deepEqual(normalizeTags("upload"), []);
+  assert.deepEqual(normalizeTags(undefined), []);
+  for (const word of TAG_STOP_LIST) {
+    assert.deepEqual(normalizeTags([word]), []);
+  }
 });
 
 test("rejects duplicate package identities instead of shadowing another record", () => {
@@ -169,7 +379,7 @@ test("keeps community ownership distinct from the maintained collections", () =>
   assert.equal(pkg.maintainer.name, "Yii Software");
   assert.equal(
     pkg.compatibility[0].constraint,
-    "yiisoft/html ^3.0; yiisoft/widget ^2.0",
+    "yiisoft/html ^3.13 || ^4.0; yiisoft/widget ^2.0",
   );
   pkg.relationship = "maintained";
   assert.throws(() => validateCatalog([pkg]), /community/);
@@ -232,7 +442,8 @@ test("base handling preserves site paths under project hosting and leaves extern
 });
 
 test("Markdown details are complete documents with reviewable evidence and working Markdown routes", () => {
-  const pkg = getPackage("yii2-extensions/inertia");
+  const pkg = copy("yii2-extensions/inertia");
+  pkg.provenance.kind = "source";
   const result = packageMarkdown(pkg, "/docs/");
   assert.match(result, /^# Inertia for Yii2\n\n> /);
   assert.ok(result.includes("^22\\.0@dev"));
@@ -386,6 +597,175 @@ test("Markdown discovery says where each entry's documentation is when a resolve
   );
   assert.equal(hostedSummary(null), "");
   assert.equal(hostedSummary({ guide: true }), "guide");
+});
+
+/** A copy of a record as a release (`kind: release`) or a source snapshot. */
+const asKind = (id, kind) => {
+  const pkg = copy(id);
+  pkg.provenance.kind = kind;
+  if (kind === "release") pkg.provenance.ref = "1.2.3";
+  return pkg;
+};
+
+const stats = Object.freeze({
+  downloadsMonthly: 106851,
+  downloadsTotal: 1906996,
+  favers: 66,
+  fetchedAt: "2026-10-25",
+});
+
+test("Markdown discovery groups entries under their topic in topic order", () => {
+  const result = catalogMarkdown("/docs/");
+  const groups = groupByTopic(packages);
+  assert.deepEqual(
+    result.match(/^## .+$/gm),
+    groups.map(({ topic }) => `## ${markdownText(topic.title)}`),
+  );
+  assert.deepEqual(
+    groups.map(({ topic }) => topic.id),
+    topics
+      .map((topic) => topic.id)
+      .filter((id) => packages.some((pkg) => pkg.topic === id)),
+  );
+  assert.equal((result.match(/^### /gm) || []).length, packages.length);
+  for (const { topic, packages: members } of groups) {
+    const start = result.indexOf(`\n## ${markdownText(topic.title)}\n`);
+    const next = result.indexOf("\n## ", start + 1);
+    const section = result.slice(start, next === -1 ? undefined : next);
+    assert.ok(
+      section.startsWith(
+        `\n## ${markdownText(topic.title)}\n\n${markdownText(topic.summary)}\n\n### `,
+      ),
+      topic.id,
+    );
+    assert.deepEqual(
+      [
+        ...section.matchAll(
+          /^### \[.+\]\(<\/docs\/packages\/(.+)\/index\.md>\)$/gm,
+        ),
+      ]
+        .map((match) => match[1])
+        .sort(),
+      members.map((pkg) => pkg.id).sort(),
+      topic.id,
+    );
+  }
+  // Every entry lists all of its tags.
+  for (const pkg of packages) {
+    assert.ok(result.includes(`- Tags: ${pkg.tags.join(", ")}\n`), pkg.id);
+  }
+  // Empty topics are left out.
+  for (const topic of topics) {
+    if (!packages.some((pkg) => pkg.topic === topic.id)) {
+      assert.ok(!result.includes(`## ${topic.title}`), topic.id);
+    }
+  }
+});
+
+test("Markdown discovery puts entries with a hosted guide first inside each topic", () => {
+  const result = catalogMarkdown("/docs/", (pkg) =>
+    pkg.id === "yiisoft/bootstrap5" ? hosting : null,
+  );
+  const section = result.slice(result.indexOf("\n## Forms and widgets\n"));
+  const first = /^### .+$/m.exec(section)?.[0] ?? "";
+  assert.ok(
+    first.includes("/docs/packages/yiisoft/bootstrap5/index.md"),
+    first,
+  );
+});
+
+test("the install command appears only on release records", () => {
+  const release = asKind("yii2-extensions/filepond", "release");
+  const source = asKind("yii2-extensions/filepond", "source");
+  assert.equal(
+    installCommand(release),
+    "composer require yii2-extensions/filepond",
+  );
+  assert.equal(installCommand(source), null);
+  const line = "- Install: `composer require yii2-extensions/filepond`";
+  assert.ok(packageMarkdown(release, "/docs/").includes(line));
+  assert.ok(!packageMarkdown(source, "/docs/").includes("- Install:"));
+  assert.ok(!packageMarkdown(source, "/docs/").includes("composer require"));
+  const result = catalogMarkdown("/docs/");
+  assert.equal(
+    (result.match(/^- Install: `composer require [^`]+`$/gm) || []).length,
+    packages.filter((pkg) => pkg.provenance.kind === "release").length,
+  );
+  for (const pkg of packages) {
+    assert.equal(
+      result.includes(`- Install: \`composer require ${pkg.id}\``),
+      pkg.provenance.kind === "release",
+      pkg.id,
+    );
+  }
+});
+
+test("Markdown details name the topic and every tag", () => {
+  for (const pkg of packages) {
+    const result = packageMarkdown(pkg, "/docs/");
+    assert.ok(
+      result.includes(`- Topic: ${getTopic(pkg.topic).title}\n`),
+      pkg.id,
+    );
+    assert.ok(result.includes(`- Tags: ${pkg.tags.join(", ")}\n`), pkg.id);
+  }
+});
+
+test("Packagist figures appear only with stats, with their date and what they count", () => {
+  assert.equal(statsSummary(undefined), "");
+  assert.equal(
+    statsSummary(stats),
+    "106,851 installs in the last 30 days, 1,906,996 in total, 66 favourites",
+  );
+  assert.equal(
+    statsSummary({ ...stats, downloadsMonthly: 1, favers: 1 }),
+    "1 install in the last 30 days, 1,906,996 in total, 1 favourite",
+  );
+  assert.equal(
+    statsSummary({ ...stats, downloadsMonthly: 0, favers: 0 }),
+    "0 installs in the last 30 days, 1,906,996 in total, 0 favourites",
+  );
+  const pkg = asKind("yii2-extensions/filepond", "release");
+  delete pkg.stats;
+  assert.ok(!packageMarkdown(pkg, "/docs/").includes("Packagist"));
+  pkg.stats = { ...stats };
+  const result = packageMarkdown(pkg, "/docs/");
+  assert.ok(
+    result.includes(
+      `- Packagist: 106,851 installs in the last 30 days, 1,906,996 in total, 66 favourites (as of 2026-10-25). ${statsNote}\n`,
+    ),
+  );
+  // Stats never add a section heading, and the catalog index does not show them.
+  assert.deepEqual(result.match(/^## .+$/gm), [
+    "## Compatibility",
+    "## Source and version",
+    "## Links",
+  ]);
+  assert.ok(!catalogMarkdown("/docs/").includes("installs in the last"));
+});
+
+test("the tag facet lists tags of two or more records alphabetically with counts", () => {
+  const records = [
+    { tags: ["widget", "psr-7", "solo"] },
+    { tags: ["psr-7", "widget"] },
+    { tags: ["widget", "assets"] },
+  ];
+  assert.deepEqual(facetTags(records), [
+    { tag: "psr-7", count: 2 },
+    { tag: "widget", count: 3 },
+  ]);
+  assert.deepEqual(
+    facetTags(records, 1).map(({ tag }) => tag),
+    ["assets", "psr-7", "solo", "widget"],
+  );
+  for (const { tag, count } of facetTags(packages)) {
+    assert.ok(count >= 2, tag);
+    assert.equal(
+      packages.filter((pkg) => pkg.tags.includes(tag)).length,
+      count,
+      tag,
+    );
+  }
 });
 
 test("documentation targets distinguish hosted, external and unpublished documentation", () => {

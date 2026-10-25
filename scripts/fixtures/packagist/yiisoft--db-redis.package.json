@@ -1,0 +1,13 @@
+{
+    "package": {
+        "name": "yiisoft/db-redis",
+        "repository": "https://github.com/yiisoft/db-redis",
+        "downloads": {
+            "total": 8975,
+            "monthly": 1,
+            "daily": 0
+        },
+        "favers": 17,
+        "abandoned": true
+    }
+}

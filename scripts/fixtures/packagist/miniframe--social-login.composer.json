@@ -1,0 +1,34 @@
+{
+    "name": "miniframe/social-login",
+    "description": "Addon to enable social login providers for the Miniframe PHP Framework.",
+    "type": "library",
+    "keywords": [
+        "oauth",
+        "login",
+        "atlassian",
+        "bitbucket",
+        "facebook",
+        "instagram",
+        "github",
+        "gitlab",
+        "microsoft",
+        "google",
+        "twitter",
+        "linkedin",
+        "reddit"
+    ],
+    "homepage": "https://miniframe.dev/",
+    "license": "CC-BY-SA-4.0",
+    "authors": [
+        {
+            "name": "Stefan Thoolen",
+            "homepage": "https://www.stefanthoolen.nl/"
+        }
+    ],
+    "require": {
+        "miniframe/core": "^1.1",
+        "php": ">=7.3",
+        "ext-curl": "*",
+        "ext-json": "*"
+    }
+}
