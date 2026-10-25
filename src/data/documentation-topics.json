@@ -1,0 +1,34 @@
+{
+    "topics": [
+        {
+            "title": "Forms and widgets",
+            "summary": "Widgets for forms, layout and file uploads in Yii2 views.",
+            "packages": ["bootstrap6", "select2", "selectize", "filepond"]
+        },
+        {
+            "title": "Routing, languages and frontend",
+            "summary": "Language-prefixed URLs and client-driven pages served by Yii2 controllers.",
+            "packages": ["localeurls", "inertia"]
+        },
+        {
+            "title": "Data modelling",
+            "summary": "Storage patterns for Active Record models.",
+            "packages": ["nested-sets-behavior"]
+        },
+        {
+            "title": "Application servers and workers",
+            "summary": "Run a Yii2 application in a long-running PHP worker or behind a PSR-7 bridge.",
+            "packages": ["road-runner", "franken-php", "psr-bridge"]
+        },
+        {
+            "title": "Quality and debugging",
+            "summary": "Inspect requests at runtime and check the code with static analysis.",
+            "packages": ["debug", "phpstan"]
+        },
+        {
+            "title": "Build your own extension",
+            "summary": "A starting point for writing and testing a new Yii2 extension.",
+            "packages": ["template"]
+        }
+    ]
+}

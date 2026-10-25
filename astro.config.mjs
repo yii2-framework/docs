@@ -10,6 +10,10 @@ import {
   invalidateContentCacheOnDemoChange,
   remarkDemos,
 } from "./plugins/remark-demos.mjs";
+import {
+  invalidateContentCacheOnHubChange,
+  remarkHub,
+} from "./plugins/remark-hub.mjs";
 import { rehypeFixLinks } from "./plugins/rehype-fix-links.mjs";
 import { rehypeHeadingIdsV5 } from "./plugins/rehype-heading-ids-v5.mjs";
 import { rehypeReferenceWbr } from "./plugins/rehype-reference-wbr.mjs";
@@ -44,6 +48,7 @@ import {
   packages as catalogPackages,
   markdownText,
 } from "./src/lib/catalog.mjs";
+import { hostingFor, loadHosting } from "./src/lib/hosting.mjs";
 
 const site = "https://yii2-framework.github.io";
 const base = "/docs";
@@ -460,15 +465,22 @@ const portalGroup = {
   label: "Explore",
   items: [
     { label: "Documentation", slug: "documentation" },
-    { label: "Projects", slug: "projects" },
+    { label: "Collections", slug: "projects" },
     { label: "Yii3", slug: "ecosystems/yii3" },
     { label: "Propose a package", slug: "contribute" },
     { label: "About", slug: "about" },
   ],
 };
 
+// The sidebar also links the package directory (an Astro page, not a content entry). `sidebarGroups()` accepts
+// slug items only, so it keeps reading `portalGroup`.
+const portalSidebarGroup = {
+  ...portalGroup,
+  items: [{ label: "Packages", link: "/packages/" }, ...portalGroup.items],
+};
+
 const sidebar = [
-  portalGroup,
+  portalSidebarGroup,
   {
     label: "Yii2",
     items: [...guideGroups, ...reference],
@@ -504,6 +516,8 @@ collapseSidebar(sidebar);
 invalidateContentCacheOnLinkChange();
 // The examples pages embed the demos of tools/bin/demos: rebuild them when a catalog changed.
 invalidateContentCacheOnDemoChange();
+// The Documentation hub embeds the generated extension and tool lists: rebuild it when they changed.
+invalidateContentCacheOnHubChange({ base });
 
 // One build date for the config and the route middleware (see src/site-meta.mjs).
 process.env.DOCS_BUILD_DATE = buildDate();
@@ -554,6 +568,9 @@ const bundles = bundleNames(bundleSets).map((name, index) => ({
   name,
 }));
 
+// What this site hosts per catalog record: marks the hosted guides in the llms.txt package list.
+const hosting = loadHosting();
+
 /** @type {Parameters<typeof starlightLlmsTxt>[0]} */
 const llmsTxtOptions = {
   projectName: PROJECT_NAME,
@@ -579,10 +596,15 @@ const llmsTxtOptions = {
     `[Catalog index](${site}${base}/packages/index.md). Metadata is reviewed at a pinned revision; ` +
     "it does not establish a latest release or every tested combination. " +
     "Catalog records are separate Markdown documents, outside the documentation bundles.\n\n" +
+    `[Documentation](${site}${base}/documentation/index.md) lists the guides on this site by task.\n\n` +
     catalogPackages
       .map(
         (pkg) =>
-          `- [${pkg.id}](${site}${base}/packages/${pkg.id}/index.md): ${markdownText(pkg.summary)}`,
+          `- [${pkg.id}](${site}${base}/packages/${pkg.id}/index.md)` +
+          (hostingFor(pkg, hosting)?.guide === true
+            ? " (guide on this site)"
+            : "") +
+          `: ${markdownText(pkg.summary)}`,
       )
       .join("\n"),
   customSets: bundles.map(({ label, description, paths }) => ({
@@ -647,7 +669,13 @@ export default defineConfig({
     processor: unified({
       // remarkYiiLinks: `[[yii\...]]` references to the generated API reference (.cache/reference/links.json).
       // remarkDemos: live demos on the extension examples pages (.cache/demos/<package>.json, tools/bin/demos).
-      remarkPlugins: [remarkAutoTitle, remarkYiiLinks, remarkDemos],
+      // remarkHub: the generated lists of the Documentation hub (src/lib/hub.mjs), before the API links resolve.
+      remarkPlugins: [
+        remarkAutoTitle,
+        [remarkHub, { base }],
+        remarkYiiLinks,
+        remarkDemos,
+      ],
       // rehypeHeadingIdsV5 must run before Astro's own rehypeHeadingIds (and Starlight's plugins) to keep Astro 5 IDs.
       // rehypeReferenceWbr: break opportunities in the table code of API reference pages (HTML only).
       rehypePlugins: [

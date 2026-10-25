@@ -4,8 +4,9 @@
 // 1. API references: no literal `[[` outside code in the English guide (every `[[yii\...]]` reference must have been
 //    turned into a link or an `api-unresolved` span by plugins/remark-yii-links.mjs). The `[[` left in translations
 //    and the unresolved targets (top 20) are reported, not gated.
-// 2. Links of the generated API reference (`api/`, `extensions/<package>/reference/`): every internal `href`/`src`
-//    must point to a built file and every fragment to an `id` on the target page.
+// 2. Links of the generated API reference (`api/`, `extensions/<package>/reference/`), the package directory
+//    (`packages/`), the Documentation hub (`documentation/`) and the home page (`index.html`): every internal
+//    `href`/`src` must point to a built file and every fragment to an `id` on the target page.
 // 3. Live demos: every `<iframe src>` under `/docs/demos/` (written by plugins/remark-demos.mjs) and every
 //    base-absolute script, stylesheet and image of the demo pages (`demos/<package>/<slug>.html`, written by
 //    tools/bin/demos) must exist in `dist/`.
@@ -39,6 +40,40 @@ const LOCALES = [
   "vi",
   "zh-cn",
 ];
+
+/**
+ * Default `--links` prefixes. `extensions/` covers only the generated reference (`extensions/<package>/reference/`);
+ * a prefix ending in `.html` names one file (`index.html`: the home page).
+ */
+export const LINK_PREFIXES = Object.freeze([
+  "api/",
+  "extensions/",
+  "packages/",
+  "documentation/",
+  "index.html",
+]);
+
+/**
+ * Selects the pages whose internal links are checked: files under one of the prefixes (a `.html` prefix matches that
+ * file only), `extensions/` restricted to the generated reference.
+ *
+ * @param {string[]} files POSIX paths relative to `dist`.
+ * @param {readonly string[]} [prefixes]
+ */
+export function linkCheckedPages(files, prefixes = LINK_PREFIXES) {
+  return files.filter((file) => {
+    const prefix = prefixes.find((candidate) =>
+      candidate.endsWith(".html")
+        ? file === candidate
+        : file.startsWith(candidate),
+    );
+
+    return (
+      prefix !== undefined &&
+      (prefix !== "extensions/" || /^extensions\/[^/]+\/reference\//.test(file))
+    );
+  });
+}
 
 /** Lists the HTML files under `dir`, as POSIX paths relative to `dir`. */
 export function htmlFiles(dir, base = dir) {
@@ -259,7 +294,7 @@ function main(argv) {
   );
   const prefixes = (
     argv.find((arg) => arg.startsWith("--links="))?.slice(8) ??
-    "api/,extensions/"
+    LINK_PREFIXES.join(",")
   )
     .split(",")
     .filter((prefix) => prefix !== "");
@@ -301,16 +336,11 @@ function main(argv) {
       `(${english.unresolved.size} distinct)${top.length > 0 ? `; top: ${top.join(", ")}` : ""}.\n`,
   );
 
-  const referencePages = files.filter(
-    (file) =>
-      prefixes.some((prefix) => file.startsWith(prefix)) &&
-      (prefix(file) !== "extensions/" ||
-        /^extensions\/[^/]+\/reference\//.test(file)),
-  );
+  const referencePages = linkCheckedPages(files, prefixes);
   const links = checkLinks(dist, referencePages);
 
   process.stdout.write(
-    `[check-site] reference pages: ${referencePages.length}, internal links checked: ` +
+    `[check-site] link-checked pages (reference, packages, documentation, home): ${referencePages.length}, internal links checked: ` +
       `${links.checked}, broken: ${links.broken.length}.\n`,
   );
 
@@ -336,10 +366,6 @@ function main(argv) {
   }
 
   return failed ? 1 : 0;
-
-  function prefix(file) {
-    return prefixes.find((candidate) => file.startsWith(candidate));
-  }
 }
 
 if (

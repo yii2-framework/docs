@@ -95,7 +95,7 @@
 
     display: inline-block;
     border: 1px solid var(--api-badge);
-    border-radius: 0.25rem;
+    border-radius: var(--site-radius-control);
     background-color: var(--api-badge-low);
     color: var(--api-badge-high);
     font-size: var(--sl-text-xs);
@@ -174,8 +174,8 @@
 .api-reference .api-member {
     border: 1px solid var(--sl-color-gray-5);
     border-inline-start: 3px solid var(--sl-color-accent);
-    border-radius: 0.5rem;
-    background-color: var(--sl-color-bg-nav);
+    border-radius: var(--site-radius-panel);
+    background-color: var(--site-surface);
     margin-top: 1.25rem;
     padding: 1rem 1.25rem 1.25rem;
 }

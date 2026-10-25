@@ -1,0 +1,32 @@
+{
+    "id": "yii2-extensions/selectize",
+    "name": "Selectize",
+    "summary": "Selectize widgets for Yii2 with ActiveForm integration, remote JSON choices, Bootstrap 5 styling and lifecycle cleanup.",
+    "family": "yii2-extensions",
+    "ecosystems": ["yii2"],
+    "kind": "extension",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "yii2",
+            "constraint": "~2.0.55 || ^22.0@dev",
+            "evidence": "https://github.com/yii2-extensions/selectize/blob/bcfdbc304afda6279367e5d631e3677703792bdc/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/selectize/",
+    "repository": "https://github.com/yii2-extensions/selectize",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/yii2-extensions/selectize/blob/bcfdbc304afda6279367e5d631e3677703792bdc/composer.json",
+    "provenance": {
+        "ref": "0.2.1",
+        "commit": "bcfdbc304afda6279367e5d631e3677703792bdc",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yii2-extensions/selectize/blob/bcfdbc304afda6279367e5d631e3677703792bdc/composer.json",
+        "kind": "release"
+    }
+}

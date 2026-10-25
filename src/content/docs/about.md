@@ -11,7 +11,7 @@ site's identity takes shape.
 
 Wilmer Arambula, known as
 [terabytesoftw on GitHub](https://github.com/terabytesoftw), brings together work
-from [Yii2 Extensions, PHP Forge, and UI Awesome](projects.md). The portal connects
+from three [collections](projects.md): Yii2 Extensions, PHP Forge, and UI Awesome. The portal connects
 that work with its guides, package requirements, and source repositories.
 
 Community packages remain the work of their named maintainers. Their presence
@@ -21,8 +21,8 @@ Wilmer.
 ## An independent resource
 
 This portal is not an official Yii website and does not speak for the Yii team.
-Official framework resources are identified in the
-[documentation gateway](documentation.md) and the [Yii3 guide](ecosystems/yii3.md).
+Official framework resources are identified in
+[Documentation](documentation.md) and the [Yii3 guide](ecosystems/yii3.md).
 
 Catalog review checks the information supporting a listing. It is not a security
 audit, certification, or guarantee that a package suits a particular application.

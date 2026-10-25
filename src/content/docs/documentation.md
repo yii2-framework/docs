@@ -1,59 +1,63 @@
 ---
 title: "Documentation"
-description: "Find framework guides, package documentation, API references, and focused resources for coding agents."
+description: "Guides, API reference, extension docs and agent skills by task."
 ---
 
-Start with the framework or package used by your application. The catalog brings
-projects together; each project's requirements and documentation determine how to
-use it.
+Everything you can read on this site, organized by what you are building. Start
+with the Yii 22.0 guide, add the guide for each extension you install, and give
+your coding agent the matching Markdown pages and skill. To compare packages
+before choosing one, use the [package directory](/docs/packages/).
 
-## Yii application development
+## Start with your task
 
-The local [Yii guide](guide/index.md) and [API reference](api/index.md) document
-the Yii 22.0 line. Existing translations remain available through the language
-selector. For Yii3, use the separate [Yii3 resources](ecosystems/yii3.md).
+| Task                                          | Start here                                                                                                  |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Create a Yii 22.0 application                 | [Installing Yii](guide/start-installation.md)                                                               |
+| Understand how a Yii application is organized | [Application structure](guide/structure-overview.md)                                                        |
+| Upgrade an existing application               | [Upgrading from Yii 2.0](guide/intro-upgrade-from-v2.md)                                                    |
+| Look up a class, method or property           | [API reference](api/index.md)                                                                               |
+| Add a widget, integration or tool             | [Extension guides](#extension-guides) below, or compare options in the [package directory](/docs/packages/) |
+| Deploy and operate an application             | [Cookbook](cookbook/index.md)                                                                               |
+| Develop in containers                         | [Docker environments](development-tools/docker/index.md)                                                    |
+| Use a coding agent                            | [Build Yii applications with AI agents](project/ai-agents.md)                                               |
 
-| Task                               | Start here                                           |
-| ---------------------------------- | ---------------------------------------------------- |
-| Set up a Yii 22.0 application      | [Installing Yii](guide/start-installation.md)        |
-| Understand application structure   | [Application structure](guide/structure-overview.md) |
-| Look up a framework type           | [API reference](api/index.md)                        |
-| Choose an extension or PHP library | [Package catalog](/docs/packages/)                   |
+## Yii 22.0 framework
+
+The guide and API reference cover the Yii 22.0 development line. Translations of
+the guide are available through the language selector.
+[What's new in Yii 22.0](guide/intro-whats-new.md) | [Guide](guide/index.md) |
+[API reference](api/index.md). For Yii3, follow the
+[Yii3 resources](ecosystems/yii3.md).
+
+## Extension guides
+
+Each extension below has installation steps, configuration, examples, API
+reference and, where available, an agent skill, all on this site. Versions and
+requirements are recorded in the matching [package entry](/docs/packages/).
+
+<!-- hub:extensions -->
+
+## Development tools
+
+Tools that set up your environment rather than your application code. They have
+guides and skills, but no Composer package or PHP API.
+
+<!-- hub:tools -->
 
 ## Cookbook
 
-The [Cookbook](cookbook/index.md) collects practical recipes for deploying and
-operating Yii applications. Start with [hardening a PHP VPS with Tailscale and
-Cloudflare](cookbook/hardening-vps.md) and [configuring PHP for
-production](cookbook/php-production.md).
+Practical recipes for deploying and operating Yii applications:
 
-## Package guides and examples
+- [Harden a PHP VPS with Tailscale and Cloudflare](cookbook/hardening-vps.md)
+- [Configure PHP for production](cookbook/php-production.md)
 
-Open a package's catalog entry for its repository, requirements, source revision,
-and documentation. Imported guides and API references remain available at their
-existing addresses.
+## Read with a coding agent
 
-| Integration                 | Documentation                                            |
-| --------------------------- | -------------------------------------------------------- |
-| Bootstrap widgets           | [Bootstrap 6](extensions/bootstrap6/index.md)            |
-| File uploads                | [FilePond](extensions/filepond/index.md)                 |
-| Client-driven navigation    | [Inertia](extensions/inertia/index.md)                   |
-| Container-based development | [Docker environments](development-tools/docker/index.md) |
-
-PHP Forge, UI Awesome, and community entries link to their owning projects when
-their documentation is hosted elsewhere. Catalog inclusion does not create a
-local copy or broaden a package's compatibility.
-
-## Coding agents and Markdown
-
-The [AI assistance guide](project/ai-agents.md) explains skill selection,
-installation, discovery, and verification. Choose a skill for the installed
-package and the task at hand.
-
-For focused reading, use a page's Markdown version by appending `index.md` to its
-URL. The [documentation index](/docs/llms.txt) lists English pages and topic
-bundles. The [skill index](/docs/skills/index.json) records the distributed bundles
-and their provenance.
+Install the skill for your framework or package, then give the agent the
+Markdown version of the page it needs (append `index.md` to any page URL). The
+[AI guide](project/ai-agents.md) explains skill selection and checking.
+[`llms.txt`](/docs/llms.txt) lists every English page; the
+[skill index](/docs/skills/index.json) records provenance and hashes.
 
 ## Improve the documentation
 

@@ -1,0 +1,186 @@
+/*
+ * Package directory additions: hosted-documentation badges, entry meta lines and actions (Catalog.astro), the
+ * "Documentation on this site" list and related links of a record page ([...id].astro), and the package-entry strip
+ * on extension guide landing pages (MarkdownContent.astro). Uses the site tokens only (theme.css).
+ */
+
+/* Badges: what this site hosts for an entry. Bordered so they read as labels, not buttons. */
+.portal-container .directory-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.875rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.portal-container .directory-badge {
+    margin: 0;
+    padding: 0.1875rem 0.625rem;
+    /* Border 3.1:1 dark, 3.3:1 light on the chip; chip ink 6.6:1 dark, 7.6:1 light */
+    border: 1px solid var(--site-border-strong);
+    border-radius: var(--site-radius-control);
+    background: var(--site-chip-bg);
+    color: var(--site-chip-ink);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/*
+ * The hosted-guide badge leads the row: a 2px accent outline (1px border plus a 1px inset shadow, so the badge keeps
+ * the height of the others in the row) and a heavier weight.
+ */
+.portal-container .directory-badge-hosted {
+    border-color: var(--sl-color-text-accent);
+    box-shadow: inset 0 0 0 1px var(--sl-color-text-accent);
+    font-weight: 700;
+}
+
+/* Documentation hosted elsewhere: no fill, so it does not look like a hosted fact. */
+.portal-container .directory-badge-external {
+    background: transparent;
+    color: var(--site-ink);
+}
+
+/* Entry actions: primary guide or external documentation, secondary details. */
+.portal-container .directory-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block-start: 1.25rem;
+}
+
+/* Entry meta lines: requirements, maintainer, checked revision. */
+.portal-container
+    :where(.directory-requires, .directory-maintainer, .directory-checked) {
+    margin: 0.75rem 0 0;
+    /* Body colour, as for every paragraph: 9.8:1 dark, 8.0:1 light */
+    color: var(--site-text);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.portal-container .directory-requires {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+}
+
+.portal-container .directory-label {
+    flex-basis: 100%;
+    font-weight: 600;
+}
+
+.portal-container .directory-requirement code {
+    font-family: var(--sl-font-mono);
+    font-size: 0.9375rem;
+    overflow-wrap: anywhere;
+}
+
+/* The review date is secondary but stays at reading size. */
+.portal-container .directory-checked {
+    color: var(--site-muted);
+    font-size: 0.9375rem;
+}
+
+/* Record page: hosted guide pages, each with its Markdown version. */
+.portal-container .directory-pages {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: 1px solid var(--site-border);
+}
+
+.portal-container .directory-pages li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    margin: 0;
+    padding-block: 0.625rem;
+    border-block-end: 1px solid var(--site-border);
+    font-size: 1.0625rem;
+}
+
+.portal-container .directory-pages a {
+    color: var(--site-link);
+}
+
+.portal-container .directory-markdown {
+    font-size: 0.9375rem;
+    white-space: nowrap;
+}
+
+/* Record page: relationship wording under the maintainer name. */
+.portal-container .directory-relationship {
+    display: block;
+    margin-block: 0.25rem;
+    /* Secondary wording: 6.1:1 dark, 5.8:1 light on the facts panel */
+    color: var(--site-muted);
+    font-size: 0.9375rem;
+}
+
+/* Record page: links to the collection and the Documentation hub. */
+.portal-container .directory-more ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1rem;
+}
+
+.portal-container .directory-more li {
+    margin: 0;
+}
+
+/* Record page: one-line contribution prompt. */
+.portal-container .directory-contribute {
+    margin: 1.5rem 0 0;
+    padding-block-start: 1.25rem;
+    border-block-start: 1px solid var(--site-border);
+    color: var(--site-text);
+    font-size: 1rem;
+}
+
+/*
+ * Guide landing page: link to the package entry, above the guide content. It sits outside `.portal-container`, so it
+ * uses the site tokens directly.
+ */
+.directory-strip {
+    margin-block-end: 1.5rem;
+    padding: 0.875rem 1.125rem;
+    /* The site panel with the 3px accent start bar of the member cards and the sidebar */
+    border: 1px solid var(--site-border);
+    border-inline-start: 3px solid var(--sl-color-accent);
+    border-radius: var(--site-radius-panel);
+    background: var(--site-surface);
+    color: var(--site-text);
+    font-size: var(--sl-text-base);
+    line-height: 1.55;
+}
+
+.directory-strip p {
+    margin: 0;
+}
+
+.directory-strip code {
+    font-family: var(--sl-font-mono);
+    overflow-wrap: anywhere;
+}
+
+.directory-strip a {
+    /* 8.3:1 dark, 6.0:1 light on the surface */
+    color: var(--site-link);
+    font-weight: 600;
+}
+
+/* Narrow screens: full-width actions. */
+@media (width < 45rem) {
+    .portal-container .directory-actions .portal-button {
+        flex: 1 1 100%;
+    }
+}

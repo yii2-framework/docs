@@ -1,13 +1,13 @@
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { dropContentCache } from './content-cache.mjs';
 
 // Paths from the project root (the working directory of `astro build` and `astro dev`): this module is also bundled
 // into the Markdown endpoint (plugins/llm-render-markdown.mjs), where `import.meta.url` points into `dist/`.
 const ROOT = process.cwd();
 const LINKS_FILE = path.join(ROOT, '.cache', 'reference', 'links.json');
 const LINKS_DIGEST = path.join(ROOT, '.cache', 'reference', 'links.rendered.sha256');
-const DATA_STORE = path.join(ROOT, 'node_modules', '.astro', 'data-store.json');
 
 /** Matches `[[target]]` and `[[target|title]]` as written in the guide (apidoc syntax). */
 export const API_LINK = /\[\[([^\]|]*)(?:\|([^\]]*))?\]\]/g;
@@ -156,7 +156,7 @@ export function invalidateContentCacheOnLinkChange() {
   const previous = existsSync(LINKS_DIGEST) ? readFileSync(LINKS_DIGEST, 'utf8').trim() : null;
 
   if (previous !== digest) {
-    rmSync(DATA_STORE, { force: true });
+    dropContentCache(ROOT);
 
     if (existsSync(LINKS_FILE)) {
       writeFileSync(LINKS_DIGEST, `${digest}\n`);

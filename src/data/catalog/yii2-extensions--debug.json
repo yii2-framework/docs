@@ -1,0 +1,32 @@
+{
+    "id": "yii2-extensions/debug",
+    "name": "Debug",
+    "summary": "Debug toolbar and debugger panels for Yii2 covering requests, logs, queries, profiling, timeline, queue, mail, events, asset bundles and user switching.",
+    "family": "yii2-extensions",
+    "ecosystems": ["yii2"],
+    "kind": "tool",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "yii2",
+            "constraint": "^22.0@dev",
+            "evidence": "https://github.com/yii2-extensions/debug/blob/d1b208afa729a26cb2aeb742710e13f277cac099/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/debug/",
+    "repository": "https://github.com/yii2-extensions/debug",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/yii2-extensions/debug/blob/d1b208afa729a26cb2aeb742710e13f277cac099/composer.json",
+    "provenance": {
+        "ref": "0.2.2",
+        "commit": "d1b208afa729a26cb2aeb742710e13f277cac099",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yii2-extensions/debug/blob/d1b208afa729a26cb2aeb742710e13f277cac099/composer.json",
+        "kind": "release"
+    }
+}

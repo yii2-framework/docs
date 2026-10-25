@@ -3,11 +3,15 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import {
   catalogMarkdown,
+  documentationTarget,
   ecosystemLabels,
   familyLabels,
   getPackage,
+  hostedSummary,
+  maintainerLink,
   packageMarkdown,
   packages,
+  relationshipLabels,
   validateCatalog,
   withBase,
 } from "../src/lib/catalog.mjs";
@@ -106,7 +110,13 @@ test("preserves PHP and Yii development constraints instead of inventing stable 
   const pkg = copy("php-forge/support");
   pkg.compatibility[0].constraint = ">=8.3";
   assert.throws(() => validateCatalog([pkg]), /literal PHP requirement/);
-  assert.ok(packages.every((item) => item.provenance.kind === "source"));
+  assert.ok(
+    packages.every(
+      (item) =>
+        item.provenance.kind === "source" ||
+        /^v?\d+\.\d+\.\d+$/.test(item.provenance.ref),
+    ),
+  );
 });
 
 test("does not silently turn unknown requirements into a supported version", () => {
@@ -268,4 +278,184 @@ test("Markdown discovery includes every package and keeps the public catalog sep
   assert.ok(!loader.includes("tools.json"));
   assert.ok(!loader.includes("child_process"));
   assert.ok(!loader.includes("fetch("));
+});
+
+const hosting = Object.freeze({
+  guide: true,
+  reference: true,
+  demos: true,
+  agentSkill: true,
+  skill: "yii2-filepond-uploads",
+  skillUrl: "/skills/yii2-filepond-uploads/SKILL.md",
+  referenceUrl: "/extensions/filepond/reference/",
+  pages: [
+    { slug: "", title: "Overview", url: "/extensions/filepond/" },
+    {
+      slug: "installation",
+      title: "Installation guide",
+      url: "/extensions/filepond/installation/",
+    },
+  ],
+});
+
+test("relationship labels describe every supported relationship in reader wording", () => {
+  assert.deepEqual(Object.keys(relationshipLabels).sort(), [
+    "community",
+    "contributed",
+    "maintained",
+  ]);
+  assert.ok(Object.isFrozen(relationshipLabels));
+  assert.equal(relationshipLabels.maintained, "Site curator");
+  assert.equal(relationshipLabels.community, "Independent community project");
+  for (const pkg of packages) {
+    assert.ok(Object.hasOwn(relationshipLabels, pkg.relationship));
+  }
+});
+
+test("Markdown documents stay unchanged when no hosting is passed", () => {
+  for (const pkg of packages) {
+    const result = packageMarkdown(pkg, "/docs/");
+    assert.equal(packageMarkdown(pkg, "/docs/", null), result);
+    assert.deepEqual(result.match(/^## .+$/gm), [
+      "## Compatibility",
+      "## Source and version",
+      "## Links",
+    ]);
+    assert.ok(result.includes(`- Relationship: ${pkg.relationship} (`));
+    assert.ok(!result.includes("On this site"));
+  }
+  const result = catalogMarkdown("/docs/");
+  assert.equal(catalogMarkdown("/docs/", undefined), result);
+  assert.ok(!result.includes("On this site"));
+  assert.ok(!result.includes("Documentation: in the project"));
+  assert.ok(!result.includes("/docs/documentation/index.md"));
+});
+
+test("Markdown details list the hosted guide pages, reference and skill when hosting is passed", () => {
+  const pkg = getPackage("yii2-extensions/filepond");
+  const result = packageMarkdown(pkg, "/docs/", hosting);
+  assert.ok(
+    result.includes(
+      "- On this site: guide, API reference, live demos, agent skill",
+    ),
+  );
+  assert.ok(
+    result.includes(`- Relationship: ${relationshipLabels.maintained}`),
+  );
+  assert.ok(result.includes("## Documentation on this site"));
+  for (const url of [
+    "/docs/extensions/filepond/index.md",
+    "/docs/extensions/filepond/installation/index.md",
+    "/docs/extensions/filepond/reference/index.md",
+    "/docs/skills/yii2-filepond-uploads/SKILL.md",
+  ]) {
+    assert.ok(result.includes(`(<${url}>)`), url);
+  }
+  assert.ok(
+    result.indexOf("## Documentation on this site") <
+      result.indexOf("## Compatibility"),
+  );
+  assert.equal((result.match(/^# /gm) || []).length, 1);
+
+  const external = packageMarkdown(getPackage("php-forge/vite"), "/docs/", {
+    guide: false,
+  });
+  assert.ok(external.includes("- Documentation: in the project's repository"));
+  assert.ok(
+    external.includes("The guide is maintained in the project's repository."),
+  );
+  assert.ok(!external.includes("## Documentation on this site"));
+});
+
+test("Markdown discovery says where each entry's documentation is when a resolver is passed", () => {
+  const result = catalogMarkdown("/docs/", (pkg) =>
+    pkg.id === "yii2-extensions/filepond" ? hosting : null,
+  );
+  assert.ok(result.includes("(</docs/documentation/index.md>)"));
+  assert.equal((result.match(/^- On this site: /gm) || []).length, 1);
+  assert.equal(
+    (result.match(/^- Documentation: in the project's repository$/gm) || [])
+      .length,
+    packages.filter((pkg) => pkg.docsUrl.startsWith("https://")).length,
+  );
+  assert.equal(
+    (result.match(/^- Documentation: not yet published on this site$/gm) || [])
+      .length,
+    packages.filter((pkg) => pkg.docsUrl.startsWith("/")).length - 1,
+  );
+  assert.equal(hostedSummary(null), "");
+  assert.equal(hostedSummary({ guide: true }), "guide");
+});
+
+test("documentation targets distinguish hosted, external and unpublished documentation", () => {
+  const filepond = getPackage("yii2-extensions/filepond");
+  assert.deepEqual(documentationTarget(filepond, hosting), {
+    kind: "hosted",
+    url: undefined,
+    label: "Read the guide",
+  });
+  assert.deepEqual(
+    documentationTarget(filepond, { ...hosting, url: "/extensions/filepond/" }),
+    { kind: "hosted", url: "/extensions/filepond/", label: "Read the guide" },
+  );
+  for (const missing of [null, { guide: false }]) {
+    assert.deepEqual(documentationTarget(filepond, missing), {
+      kind: "unpublished",
+      url: null,
+      label: "Documentation not yet published",
+    });
+  }
+  const vite = getPackage("php-forge/vite");
+  assert.deepEqual(documentationTarget(vite), {
+    kind: "external",
+    url: vite.docsUrl,
+    label: "Documentation on GitHub",
+  });
+  assert.equal(
+    documentationTarget({ docsUrl: "https://example.com/docs/" }).label,
+    "External documentation",
+  );
+
+  const result = packageMarkdown(filepond, "/docs/", { guide: false });
+  assert.ok(result.includes("- Documentation: not yet published on this site"));
+  assert.ok(result.includes("The guide is not yet published on this site."));
+  assert.ok(!result.includes("/docs/extensions/filepond/index.md"));
+});
+
+test("maintainers are shown as their GitHub handle, or by name for other URLs", () => {
+  assert.deepEqual(maintainerLink(getPackage("yii2-extensions/filepond")), {
+    label: "@terabytesoftw",
+    url: "https://github.com/terabytesoftw",
+  });
+  assert.deepEqual(maintainerLink(getPackage("yiisoft/bootstrap5")), {
+    label: "Yii Software",
+    url: "https://www.yiiframework.com/",
+  });
+  const named = (url) =>
+    maintainerLink({ maintainer: { name: "Example Org", url } }).label;
+  assert.equal(named("https://github.com/terabytesoftw/"), "@terabytesoftw");
+  assert.equal(
+    named("https://github.com/yii2-extensions/filepond"),
+    "Example Org",
+  );
+  assert.equal(
+    named("https://github.com/orgs/yii2-extensions/people"),
+    "Example Org",
+  );
+  assert.equal(named("https://gitlab.com/example"), "Example Org");
+  assert.equal(relationshipLabels.contributed, "Contributor");
+  const result = packageMarkdown(
+    getPackage("yii2-extensions/filepond"),
+    "/docs/",
+  );
+  assert.ok(
+    result.includes(
+      "- Maintainer: [@terabytesoftw](<https://github.com/terabytesoftw>)",
+    ),
+  );
+  assert.ok(
+    packageMarkdown(getPackage("yiisoft/bootstrap5")).includes(
+      "- Maintainer: [Yii Software](<https://www.yiiframework.com/>)",
+    ),
+  );
 });

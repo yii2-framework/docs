@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   catalogSearchRecord,
+  documentationKinds,
   filtersUrl,
+  githubHandle,
   matchesFilters,
   normalizeFilters,
 } from "../src/lib/catalog-filter.mjs";
@@ -65,6 +67,7 @@ test("query state accepts supported values and bounds search text", () => {
       q: "uploads",
       ecosystem: "yii2",
       family: "",
+      docs: "",
       relationship: "community",
     },
   );
@@ -73,6 +76,7 @@ test("query state accepts supported values and bounds search text", () => {
     q: "",
     ecosystem: "",
     family: "",
+    docs: "",
     relationship: "",
   });
 });
@@ -93,6 +97,7 @@ test("URL round trips preserve the base path, unrelated parameters and fragment"
     q: "upload & media",
     ecosystem: "yii2",
     family: "yii2-extensions",
+    docs: "",
     relationship: "",
   });
   assert.equal(before.search, "?campaign=guide");
@@ -103,4 +108,93 @@ test("reset removes all filter parameters including duplicates", () => {
     "https://example.test/docs/packages/?q=one&q=two&family=community&campaign=guide",
   );
   assert.equal(result.search, "?campaign=guide");
+});
+
+const hosted = catalogSearchRecord(
+  {
+    id: "example/hosted",
+    name: "Hosted",
+    summary: "A package with a guide on this site",
+    family: "yii2-extensions",
+    kind: "extension",
+    php: ">=8.3",
+    maintainer: { name: "Example maintainer" },
+    ecosystems: ["yii2"],
+    relationship: "maintained",
+    compatibility: [{ constraint: "^22.0@dev" }],
+  },
+  { guide: true, demos: true, reference: true, agentSkill: true },
+);
+
+test("documentation kinds describe hosted guides, skills and external documentation", () => {
+  assert.deepEqual(documentationKinds(), ["external"]);
+  assert.deepEqual(documentationKinds({ guide: false, agentSkill: true }), [
+    "skill",
+    "external",
+  ]);
+  assert.deepEqual(hosted.docs, ["guide", "skill"]);
+  assert.deepEqual(record.docs, ["external"]);
+});
+
+test("the documentation filter selects hosted guides, skills or external documentation", () => {
+  assert.equal(matchesFilters(hosted, { docs: "guide" }), true);
+  assert.equal(matchesFilters(hosted, { docs: "skill" }), true);
+  assert.equal(matchesFilters(hosted, { docs: "external" }), false);
+  assert.equal(matchesFilters(record, { docs: "external" }), true);
+  assert.equal(matchesFilters(record, { docs: "guide" }), false);
+  assert.equal(matchesFilters(record, { docs: "elsewhere" }), true);
+  assert.equal(normalizeFilters({ docs: "elsewhere" }).docs, "");
+  assert.equal(
+    normalizeFilters(new URLSearchParams("docs=skill")).docs,
+    "skill",
+  );
+});
+
+test("hosting words are searchable and the legacy relationship filter still applies", () => {
+  for (const q of ["guide", "demos", "skill", "api reference"]) {
+    assert.equal(matchesFilters(hosted, { q }), true, q);
+    assert.equal(matchesFilters(record, { q }), false, q);
+  }
+  assert.equal(
+    matchesFilters(hosted, { docs: "guide", relationship: "maintained" }),
+    true,
+  );
+  assert.equal(
+    matchesFilters(hosted, { docs: "guide", relationship: "community" }),
+    false,
+  );
+  assert.equal(
+    filtersUrl("https://example.test/docs/packages/", {
+      docs: "guide",
+      relationship: "maintained",
+    }).search,
+    "?docs=guide&relationship=maintained",
+  );
+});
+
+test("the maintainer's GitHub handle is searchable", () => {
+  const curated = catalogSearchRecord({
+    id: "example/curated",
+    name: "Curated",
+    summary: "A curated package",
+    family: "yii2-extensions",
+    kind: "extension",
+    php: ">=8.3",
+    maintainer: {
+      name: "Wilmer Arambula",
+      url: "https://github.com/terabytesoftw",
+    },
+    ecosystems: ["yii2"],
+    relationship: "maintained",
+    compatibility: [{ constraint: "^22.0@dev" }],
+  });
+  assert.equal(matchesFilters(curated, { q: "terabytesoftw" }), true);
+  assert.equal(matchesFilters(curated, { q: "@terabytesoftw" }), true);
+  assert.equal(matchesFilters(record, { q: "terabytesoftw" }), false);
+  assert.equal(
+    githubHandle("https://github.com/terabytesoftw/"),
+    "@terabytesoftw",
+  );
+  assert.equal(githubHandle("https://github.com/a/b"), null);
+  assert.equal(githubHandle(undefined), null);
 });

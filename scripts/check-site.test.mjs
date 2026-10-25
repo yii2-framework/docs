@@ -8,6 +8,7 @@ import {
   checkDemos,
   checkLinks,
   htmlFiles,
+  linkCheckedPages,
   proseText,
 } from "./check-site.mjs";
 
@@ -115,6 +116,66 @@ test("standalone HTML files keep their filename when resolving fragments", () =>
       checked: 1,
       broken: [],
     });
+  } finally {
+    rmSync(site, { recursive: true, force: true });
+  }
+});
+
+test("package directory, Documentation hub and home pages are link-checked like the reference", () => {
+  const site = mkdtempSync(path.join(tmpdir(), "check-portal-"));
+  const write = (file, body) => {
+    mkdirSync(path.dirname(path.join(site, file)), { recursive: true });
+    writeFileSync(path.join(site, file), `<main>${body}</main>`);
+  };
+
+  try {
+    write(
+      "index.html",
+      '<a href="/docs/packages/?family=php-forge">family</a>' +
+        '<a href="/docs/documentation/#missing">hub</a>',
+    );
+    write(
+      "packages/vendor/demo/index.html",
+      '<a href="/docs/extensions/demo/">guide</a>' +
+        '<a href="/docs/extensions/demo/index.md">md</a>' +
+        '<a href="/docs/extensions/demo/missing/">missing</a>' +
+        '<a href="/docs/skills/demo/SKILL.md">skill</a>' +
+        '<a href="https://github.com/vendor/demo" rel="noopener">repo</a>',
+    );
+    write("packages/index.html", '<a href="/docs/packages/vendor/demo/">x</a>');
+    write(
+      "documentation/index.html",
+      '<p id="tasks"></p><a href="#tasks">x</a>',
+    );
+    write("extensions/demo/index.html", '<a href="/docs/nowhere/">ignored</a>');
+    write("extensions/demo/reference/index.html", '<a href="/docs/api/">x</a>');
+    write("guide/a/index.html", '<a href="/docs/nowhere/">ignored</a>');
+    writeFileSync(path.join(site, "extensions/demo/index.md"), "# Demo\n");
+    mkdirSync(path.join(site, "api"));
+    writeFileSync(path.join(site, "api/index.html"), "<main></main>");
+
+    const pages = linkCheckedPages(htmlFiles(site)).sort();
+
+    assert.deepEqual(pages, [
+      "api/index.html",
+      "documentation/index.html",
+      "extensions/demo/reference/index.html",
+      "index.html",
+      "packages/index.html",
+      "packages/vendor/demo/index.html",
+    ]);
+    assert.deepEqual(
+      linkCheckedPages(["index.html", "a/index.html"], ["index.html"]),
+      ["index.html"],
+    );
+
+    const { broken } = checkLinks(site, pages);
+
+    assert.deepEqual(broken.sort(), [
+      'index.html: /docs/documentation/#missing (no id "missing")',
+      "packages/vendor/demo/index.html: /docs/extensions/demo/missing/ (missing)",
+      "packages/vendor/demo/index.html: /docs/skills/demo/SKILL.md (missing)",
+    ]);
   } finally {
     rmSync(site, { recursive: true, force: true });
   }
