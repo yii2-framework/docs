@@ -1,6 +1,6 @@
 ---
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
-import { documentationTarget, ecosystemLabels, familyLabels, maintainerLink, packages, relationshipLabels, withBase } from "../../lib/catalog.mjs";
+import { documentationTarget, ecosystemLabels, evidenceLabel, familyLabels, maintainerLink, packages, relationshipLabels, withBase } from "../../lib/catalog.mjs";
 import { hostingFor, loadHosting } from "../../lib/hosting.mjs";
 import "../../styles/portal.css";
 import "../../styles/catalog.css";
@@ -96,10 +96,10 @@ const rows = hosted
           <h2 id="requirements">Requirements</h2>
           <p>As declared in the package's <code>composer.json</code> at the commit below. Check the guide before adding it to an application.</p>
           <dl class="package-requirements">
-            <div><dt>PHP</dt><dd><code>{pkg.php}</code><a href={pkg.provenance.url}>composer.json at this commit<span class="sr-only"> (PHP requirement)</span></a></dd></div>
+            <div><dt>PHP</dt><dd><code>{pkg.php}</code><a href={pkg.provenance.url}>{evidenceLabel(pkg.provenance.url, "provenance")}<span class="sr-only"> (PHP requirement)</span></a></dd></div>
             {pkg.compatibility.filter((entry) => entry.ecosystem !== "php").map((entry) => <div>
               <dt>{ecosystemLabels[entry.ecosystem]}</dt>
-              <dd><code>{entry.constraint}</code><a href={entry.evidence}>composer.json at this commit<span class="sr-only"> ({ecosystemLabels[entry.ecosystem]} requirement)</span></a></dd>
+              <dd><code>{entry.constraint}</code><a href={entry.evidence}>{evidenceLabel(entry.evidence, "compatibility")}<span class="sr-only"> ({ecosystemLabels[entry.ecosystem]} requirement)</span></a></dd>
             </div>)}
           </dl>
         </section>

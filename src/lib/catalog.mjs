@@ -1,5 +1,5 @@
 import { lstatSync, readFileSync, readdirSync } from "node:fs";
-import { githubHandle } from "./catalog-filter.mjs";
+import { githubHandle, isLocalDocsUrl } from "./catalog-filter.mjs";
 
 export const familyLabels = Object.freeze({
   "yii2-extensions": "Yii2 Extensions",
@@ -321,7 +321,7 @@ export function documentationTarget(pkg, hosting = null) {
   if (hosting?.guide === true) {
     return { kind: "hosted", url: hosting.url, label: "Read the guide" };
   }
-  if (pkg.docsUrl.startsWith("/")) {
+  if (isLocalDocsUrl(pkg.docsUrl)) {
     return {
       kind: "unpublished",
       url: null,
@@ -337,6 +337,23 @@ export function documentationTarget(pkg, hosting = null) {
         ? "Documentation on GitHub"
         : "External documentation",
   };
+}
+
+/**
+ * Label of an evidence link: "composer.json at this commit" when the URL names a `composer.json`, otherwise
+ * "View source at this commit" (`provenance`) or "View requirement evidence" (`compatibility`, which may be
+ * integration documentation or test evidence).
+ *
+ * @param {string} url HTTPS evidence URL.
+ * @param {"provenance" | "compatibility"} kind
+ */
+export function evidenceLabel(url, kind) {
+  if (new URL(url).pathname.endsWith("/composer.json")) {
+    return "composer.json at this commit";
+  }
+  return kind === "provenance"
+    ? "View source at this commit"
+    : "View requirement evidence";
 }
 
 const hostedBullet = (pkg, hosting) => {
@@ -414,7 +431,7 @@ export function packageMarkdown(pkg, base = "", hosting = null) {
     "",
     ...pkg.compatibility.map(
       (entry) =>
-        `- ${ecosystemLabels[entry.ecosystem]}: ${markdownText(entry.constraint)} (${link("source", entry.evidence)})`,
+        `- ${ecosystemLabels[entry.ecosystem]}: ${markdownText(entry.constraint)} (${link(evidenceLabel(entry.evidence, "compatibility"), entry.evidence)})`,
     ),
     "",
     "Requirements are recorded from the linked source revision. A catalog listing does not verify an application's dependency resolution or runtime behavior.",

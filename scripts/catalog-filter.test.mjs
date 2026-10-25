@@ -198,3 +198,38 @@ test("the maintainer's GitHub handle is searchable", () => {
   assert.equal(githubHandle("https://github.com/a/b"), null);
   assert.equal(githubHandle(undefined), null);
 });
+
+test("a local docsUrl without a hosted guide is neither a guide nor documentation elsewhere", () => {
+  assert.deepEqual(documentationKinds(null, "/extensions/demo/"), []);
+  assert.deepEqual(
+    documentationKinds({ guide: false }, "/extensions/demo/"),
+    [],
+  );
+  assert.deepEqual(
+    documentationKinds({ guide: false, agentSkill: true }, "/extensions/demo/"),
+    ["skill"],
+  );
+  assert.deepEqual(
+    documentationKinds({ guide: false }, "https://github.com/vendor/demo"),
+    ["external"],
+  );
+  assert.deepEqual(documentationKinds({ guide: true }, "/extensions/demo/"), [
+    "guide",
+  ]);
+  const unsynced = catalogSearchRecord({
+    id: "example/unsynced",
+    name: "Unsynced",
+    summary: "A guide that is not synced yet",
+    family: "yii2-extensions",
+    kind: "extension",
+    php: ">=8.3",
+    maintainer: { name: "Example maintainer" },
+    ecosystems: ["yii2"],
+    relationship: "maintained",
+    compatibility: [{ constraint: "^22.0@dev" }],
+    docsUrl: "/extensions/unsynced/",
+  });
+  assert.equal(matchesFilters(unsynced, { docs: "external" }), false);
+  assert.equal(matchesFilters(unsynced, { docs: "guide" }), false);
+  assert.equal(matchesFilters(unsynced), true);
+});

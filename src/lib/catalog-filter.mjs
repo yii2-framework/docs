@@ -48,24 +48,37 @@ const searchable = (text) =>
   String(text).normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase();
 
 /**
+ * Whether a `docsUrl` is a path on this site (`/extensions/<name>/`) rather than documentation elsewhere. Shared with
+ * `documentationTarget()` in `catalog.mjs`.
+ *
+ * @param {unknown} docsUrl
+ */
+export function isLocalDocsUrl(docsUrl) {
+  return typeof docsUrl === "string" && docsUrl.startsWith("/");
+}
+
+/**
  * Lists where a record's documentation is: `guide` (hosted on this site), `skill` (agent skill available) or
- * `external` (no hosted guide).
+ * `external` (no hosted guide and documentation elsewhere). A local `docsUrl` without a hosted guide (not synced or
+ * not published yet) is neither `guide` nor `external`.
  *
  * @param {{ guide?: boolean, agentSkill?: boolean } | null} hosting Result of `hostingFor()` in `hosting.mjs`.
+ * @param {string | null} [docsUrl] The record's `docsUrl`.
  */
-export function documentationKinds(hosting = null) {
+export function documentationKinds(hosting = null, docsUrl = null) {
   const kinds = [];
 
   if (hosting?.guide === true) kinds.push("guide");
   if (hosting?.agentSkill === true) kinds.push("skill");
-  if (!kinds.includes("guide")) kinds.push("external");
+  if (!kinds.includes("guide") && !isLocalDocsUrl(docsUrl))
+    kinds.push("external");
 
   return kinds;
 }
 
 /** Produce the same searchable record for rendered HTML and unit tests; `hosting` adds the documentation facts. */
 export function catalogSearchRecord(pkg, hosting = null) {
-  const docs = documentationKinds(hosting);
+  const docs = documentationKinds(hosting, pkg.docsUrl);
   const words = [
     hosting?.guide === true ? "guide" : "",
     hosting?.demos === true ? "demos" : "",

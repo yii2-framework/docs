@@ -5,6 +5,7 @@ import {
   catalogMarkdown,
   documentationTarget,
   ecosystemLabels,
+  evidenceLabel,
   familyLabels,
   getPackage,
   hostedSummary,
@@ -458,4 +459,40 @@ test("maintainers are shown as their GitHub handle, or by name for other URLs", 
       "- Maintainer: [Yii Software](<https://www.yiiframework.com/>)",
     ),
   );
+});
+
+test("evidence links are labelled by their destination", () => {
+  const commit = "35e49c93f2b9dac39eae25239b742b22e76d6350";
+  const blob = `https://github.com/yii2-extensions/demo/blob/${commit}`;
+  for (const kind of ["provenance", "compatibility"]) {
+    assert.equal(
+      evidenceLabel(`${blob}/composer.json`, kind),
+      "composer.json at this commit",
+    );
+  }
+  assert.equal(
+    evidenceLabel(`${blob}/docs/installation.md`, "provenance"),
+    "View source at this commit",
+  );
+  assert.equal(
+    evidenceLabel(`${blob}/tests/WidgetTest.php`, "compatibility"),
+    "View requirement evidence",
+  );
+  assert.equal(
+    evidenceLabel("https://example.com/docs/requirements", "compatibility"),
+    "View requirement evidence",
+  );
+  assert.equal(
+    evidenceLabel("https://example.com/composer.json.bak", "provenance"),
+    "View source at this commit",
+  );
+  const pkg = getPackage("yii2-extensions/filepond");
+  assert.ok(
+    packageMarkdown(pkg).includes(
+      `([composer\\.json at this commit](<${pkg.compatibility[0].evidence}>))`,
+    ),
+  );
+  const other = copy();
+  other.compatibility[0].evidence = `${other.repository}/blob/${other.provenance.commit}/docs/installation.md`;
+  assert.ok(packageMarkdown(other).includes("([View requirement evidence](<"));
 });
