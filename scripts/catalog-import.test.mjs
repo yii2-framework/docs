@@ -868,6 +868,34 @@ test("--update keeps curated fields, re-pins the newest stable tag and moves evi
   );
 });
 
+test("--update keeps the curated tags when the keywords leave none; --tags still needs one", async () => {
+  const url = `https://raw.githubusercontent.com/yii2-extensions/nested-sets-behavior/${COMMITS.nested}/composer.json`;
+  const composer = fixture(
+    "yii2-extensions--nested-sets-behavior.composer.json",
+  );
+  const routes = {
+    [url]: {
+      status: 200,
+      body: JSON.stringify({
+        ...composer,
+        keywords: ["yii2", "yii2-extension"],
+      }),
+    },
+  };
+  const catalogDir = catalogCopy();
+  const file = path.join(
+    catalogDir,
+    "yii2-extensions--nested-sets-behavior.json",
+  );
+  const tags = JSON.parse(readFileSync(file, "utf8")).tags;
+  const argv = ["yii2-extensions/nested-sets-behavior", "--update"];
+  let result = await importCli(argv, { catalogDir, routes });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(readFileSync(file, "utf8")).tags, tags);
+  result = await importCli([...argv, "--tags=,"], { catalogDir, routes });
+  assert.match(result.stderr, /no usable keywords for tags; pass --tags=/);
+});
+
 test("--update refuses a moved link whose file is gone at the new revision", async () => {
   const catalogDir = catalogCopy();
   const file = path.join(catalogDir, "yiisoft--bootstrap5.json");

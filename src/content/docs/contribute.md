@@ -106,7 +106,7 @@ library needs evidence for a claimed framework integration too.
 6. Include a constraint and evidence link for each compatibility entry. Record
    the inspected source and review date in `provenance`; do not imply that the
    site curator has already approved your proposal.
-7. Leave out `stats`. Only the weekly refresh script writes it: Packagist
+7. Leave out `stats`. The importer and the weekly refresh write it: Packagist
    install and favourite counts with the date they were read. The site shows
    them with that date, never fetches them during a build, and does not sort by
    them.

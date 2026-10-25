@@ -161,8 +161,8 @@ function object(value, keys, location, optional = []) {
   }
 }
 
-/** A valid calendar date written as YYYY-MM-DD. */
-function isDate(value) {
+/** A valid calendar date written as YYYY-MM-DD; the importer checks `--date` with it. */
+export function isDate(value) {
   return (
     typeof value === "string" &&
     /^\d{4}-\d{2}-\d{2}$/.test(value) &&

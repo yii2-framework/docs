@@ -1,12 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import {
-  existsSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from "node:fs";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { test } from "node:test";
@@ -16,7 +10,6 @@ import {
   PACKAGE_PATTERN,
   POLICY_LABELS,
   RELATIONSHIP_OPTIONS,
-  TOPICS_FILE,
   loadTopics,
   outputLines,
   parseIssueBody,
@@ -276,13 +269,9 @@ test("the CLI writes $GITHUB_OUTPUT from ISSUE_BODY and fails with one line per 
         encoding: "utf8",
         env: { ISSUE_BODY: issueBody, GITHUB_OUTPUT: output, PATH: "" },
       });
-    const topicsFile = existsSync(TOPICS_FILE);
-    if (topicsFile) {
-      const title = loadTopics()[0].title;
-      const ok = run(body({ topic: title }));
-      assert.equal(ok.status, 0, ok.stderr);
-      assert.match(readFileSync(output, "utf8"), /^package=vendor\/package$/m);
-    }
+    const ok = run(body({ topic: loadTopics()[0].title }));
+    assert.equal(ok.status, 0, ok.stderr);
+    assert.match(readFileSync(output, "utf8"), /^package=vendor\/package$/m);
     const bad = run(body({ pkg: "Bad", topic: "Nope" }));
     assert.equal(bad.status, 1);
     assert.ok(
@@ -314,13 +303,7 @@ test("the short form matches the parser: labels, order, relationship options and
   );
 });
 
-test("the Topic options of both issue forms equal the titles of catalog-topics.json in order", (t) => {
-  if (!existsSync(TOPICS_FILE)) {
-    t.skip(
-      "src/data/catalog-topics.json does not exist yet; rerun after the topic file is added",
-    );
-    return;
-  }
+test("the Topic options of both issue forms equal the titles of catalog-topics.json in order", () => {
   const titles = loadTopics().map((topic) => topic.title);
   for (const file of [
     ".github/ISSUE_TEMPLATE/catalog-package.yml",

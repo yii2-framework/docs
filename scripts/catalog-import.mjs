@@ -24,7 +24,9 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import {
+  PACKAGE_ID_PATTERN,
   getTopic,
+  isDate,
   normalizeTags,
   topics,
   validateCatalog,
@@ -55,9 +57,6 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 /** Where the records live. */
 export const CATALOG_DIR = path.join(ROOT, "src/data/catalog");
 
-const PACKAGE_ID =
-  /^[a-z0-9]+(?:[._-][a-z0-9]+)*\/[a-z0-9]+(?:[._-][a-z0-9]+)*$/;
-
 /** A refusal or validation failure; `problems` holds one line per problem. */
 export class ImportError extends Error {
   constructor(problems) {
@@ -69,11 +68,6 @@ export class ImportError extends Error {
 
 /** Today's date in UTC as YYYY-MM-DD. */
 export const todayUtc = () => new Date().toISOString().slice(0, 10);
-
-const isDate = (value) =>
-  /^\d{4}-\d{2}-\d{2}$/.test(value) &&
-  Number.isFinite(Date.parse(value)) &&
-  new Date(value).toISOString().slice(0, 10) === value;
 
 /** File name of a record: `<vendor>--<package>.json`. */
 export const recordFileName = (id) => `${id.replace("/", "--")}.json`;
@@ -158,7 +152,7 @@ export async function importPackage(options, context) {
   const { id, update = false, allowPrerelease = false } = options;
   const { client, catalogDir = CATALOG_DIR, today = todayUtc() } = context;
   const date = options.date ?? today;
-  if (typeof id !== "string" || !PACKAGE_ID.test(id))
+  if (typeof id !== "string" || !PACKAGE_ID_PATTERN.test(id))
     throw new ImportError(
       `${id}: expected a lowercase vendor/package Composer name`,
     );
@@ -242,7 +236,11 @@ export async function importPackage(options, context) {
   const kind = deriveKind(composer.type ?? meta.type);
   const keywords = composer.keywords ?? meta.keywords;
   const tagValues = options.tags ?? normalizeTags(keywords, { vendor, topic });
-  if (tagValues.length === 0)
+  // `--update` keeps the record's curated tags (`mergeCurated`) unless `--tags` replaces them.
+  if (
+    tagValues.length === 0 &&
+    (existing === null || options.tags !== undefined)
+  )
     throw new ImportError(
       `${id}: no usable keywords for tags; pass --tags=<tag>,<tag>`,
     );

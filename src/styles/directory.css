@@ -67,8 +67,10 @@
     outline-offset: 3px;
 }
 
-/* Topic sections are spaced well apart from each other. */
-.portal-container .directory-topic + .directory-topic {
+/* Visible topic sections are spaced well apart; a section hidden by the filters does not count. */
+.portal-container
+    .directory-topic:not([hidden])
+    ~ .directory-topic:not([hidden]) {
     margin-block-start: 3.5rem;
 }
 
@@ -417,7 +419,9 @@
 
 /* Phones (400px and narrower): the jump chips keep their natural width (44px high), so the list starts sooner. */
 @media (width <= 25rem) {
-    .portal-container .directory-topic + .directory-topic {
+    .portal-container
+        .directory-topic:not([hidden])
+        ~ .directory-topic:not([hidden]) {
         margin-block-start: 2.5rem;
     }
 }

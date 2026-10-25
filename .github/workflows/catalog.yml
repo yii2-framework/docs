@@ -7,6 +7,11 @@ on:
       - "src/data/**"
       - "src/lib/catalog*.mjs"
       - "scripts/catalog*.mjs"
+      - "scripts/lib/catalog-import.mjs"
+      - "scripts/lib/packagist.mjs"
+      - "scripts/fixtures/packagist/**"
+      - "src/lib/hosting.mjs"
+      - "packages.json"
       - ".github/ISSUE_TEMPLATE/**"
       - ".github/workflows/catalog*.yml"
   push:
@@ -15,6 +20,11 @@ on:
       - "src/data/**"
       - "src/lib/catalog*.mjs"
       - "scripts/catalog*.mjs"
+      - "scripts/lib/catalog-import.mjs"
+      - "scripts/lib/packagist.mjs"
+      - "scripts/fixtures/packagist/**"
+      - "src/lib/hosting.mjs"
+      - "packages.json"
       - ".github/ISSUE_TEMPLATE/**"
       - ".github/workflows/catalog*.yml"
 
