@@ -1,11 +1,10 @@
 // Generated parts of the Documentation hub (src/content/docs/documentation.md): the extension guides grouped by
-// topic and the development tools. One Markdown source for both outputs: plugins/remark-hub.mjs renders it into the
-// HTML page and plugins/llm-render-markdown.mjs into its index.md. Links are relative `.md` paths from
-// `documentation.md`, like the hand-written links of that page, so both pipelines resolve them the same way.
-import { readFileSync } from "node:fs";
-import path from "node:path";
-import { packages, withBase } from "./catalog.mjs";
-import { PROJECT_ROOT, loadHosting } from "./hosting.mjs";
+// the catalog topics (src/data/catalog-topics.json) and the development tools. One Markdown source for both
+// outputs: plugins/remark-hub.mjs renders it into the HTML page and plugins/llm-render-markdown.mjs into its
+// index.md. Links are relative `.md` paths from `documentation.md`, like the hand-written links of that page, so
+// both pipelines resolve them the same way.
+import { packages, topics as catalogTopics, withBase } from "./catalog.mjs";
+import { displayOrder, loadHosting } from "./hosting.mjs";
 
 /** Placeholders of `documentation.md`, each replaced by the Markdown of its section. */
 export const HUB_PLACEHOLDERS = Object.freeze({
@@ -30,18 +29,6 @@ const STANDARD_LABELS = Object.freeze({
 // own pages, then the remaining standard pages.
 const PRIORITY = ["installation", "configuration", "examples"];
 const LATER = ["migration", "agents", "testing"];
-
-/**
- * Reads the topics of the extension guides (`src/data/documentation-topics.json`).
- *
- * @param {string} [root] Project root.
- * @returns {Array<{ title: string, summary: string, packages: string[] }>}
- */
-export function loadTopics(root = PROJECT_ROOT) {
-  const file = path.join(root, "src/data/documentation-topics.json");
-
-  return JSON.parse(readFileSync(file, "utf8")).topics;
-}
 
 /** Escapes inline Markdown in text read from manifests and frontmatter. */
 const inline = (text) => String(text).replace(/[\\`*_[\]<>]/g, "\\$&");
@@ -109,7 +96,7 @@ function item(hosted, record, base, markdown) {
 /**
  * Returns the hosting entries of synced guides; unsynced ones are skipped with a warning, like the sidebar.
  *
- * @param {Array<[string, object]>} entries
+ * @param {Array<[unknown, object]>} entries Pairs of a key (Composer id or catalog record) and its hosting facts.
  */
 function synced(entries) {
   return entries.filter(([, hosted]) => {
@@ -124,17 +111,21 @@ function synced(entries) {
 }
 
 /**
- * Returns the Markdown of a generated hub section: `extensions` (one `### <topic>` per topic, one list item per
- * package with its page links, API reference, agent skill and package entry) or `tools` (one list item per
- * development tool of `tools.json`).
+ * Returns the Markdown of a generated hub section: `extensions` (one `### <topic>` per topic of
+ * `src/data/catalog-topics.json`, one list item per hosted extension whose catalog record has that topic, with its
+ * page links, API reference, agent skill and package entry) or `tools` (one list item per development tool of
+ * `tools.json`). Topics keep their display order and topics without a synced extension are skipped; inside a topic
+ * the extensions follow `displayOrder()` of `src/lib/hosting.mjs`.
  *
- * Every package of `packages.json` (except the framework) must be in exactly one topic, and every topic package must
- * exist; otherwise this throws.
+ * Every extension of `packages.json` (except the framework) must have a catalog record, so that it is placed in a
+ * topic; otherwise this throws.
  *
  * @param {"extensions" | "tools"} section
- * @param {{ hosting?: ReturnType<typeof loadHosting>, topics?: ReturnType<typeof loadTopics>,
- *   records?: ReadonlyArray<{ id: string }>, base?: string, markdown?: boolean }} [options] `base`: the Astro
- *   `base` for site-absolute links (package entry, agent skill); `markdown`: link the package entry's index.md.
+ * @param {{ hosting?: ReturnType<typeof loadHosting>, topics?: ReadonlyArray<{ id: string, title: string,
+ *   summary: string }>, records?: ReadonlyArray<{ id: string, topic: string, family: string, name: string }>,
+ *   base?: string, markdown?: boolean }} [options] `topics`: the catalog topics (default: `catalog-topics.json`);
+ *   `records`: the catalog records (default: `src/data/catalog/`); `base`: the Astro `base` for site-absolute links
+ *   (package entry, agent skill); `markdown`: link the package entry's index.md.
  */
 export function hubMarkdown(section, options = {}) {
   const hosting = options.hosting ?? loadHosting();
@@ -153,55 +144,37 @@ export function hubMarkdown(section, options = {}) {
     throw new Error(`[hub] unknown section "${section}".`);
   }
 
-  const topics = options.topics ?? loadTopics();
-  const extensions = new Map(
-    entries
-      .filter(([, hosted]) => hosted.type === "extension")
-      .map(([id, hosted]) => [hosted.name, { id, hosted }]),
+  const topics = options.topics ?? catalogTopics;
+  const known = new Set(topics.map((topic) => topic.id));
+  const extensions = entries.filter(
+    ([, hosted]) => hosted.type === "extension",
   );
-  const seen = new Map();
+  const placed = extensions.map(([id, hosted]) => {
+    const record = records.find((pkg) => pkg.id === id);
 
-  for (const topic of topics) {
-    for (const name of topic.packages) {
-      if (!extensions.has(name)) {
-        throw new Error(
-          `[hub] topic "${topic.title}" names "${name}", which is not a package of packages.json.`,
-        );
-      }
-
-      if (seen.has(name)) {
-        throw new Error(
-          `[hub] package "${name}" is in two topics: "${seen.get(name)}" and "${topic.title}".`,
-        );
-      }
-
-      seen.set(name, topic.title);
+    if (record === undefined) {
+      throw new Error(
+        `[hub] ${hosted.name} (${id}) has no catalog record in src/data/catalog/, so it has no topic.`,
+      );
     }
-  }
 
-  const missing = [...extensions.keys()].filter((name) => !seen.has(name));
+    if (!known.has(record.topic)) {
+      throw new Error(
+        `[hub] ${hosted.name} (${id}) has the topic "${record.topic}", which is not in src/data/catalog-topics.json.`,
+      );
+    }
 
-  if (missing.length > 0) {
-    throw new Error(
-      `[hub] packages missing from src/data/documentation-topics.json: ${missing.join(", ")}.`,
-    );
-  }
+    return record;
+  });
+  const ordered = displayOrder(placed, hosting);
 
   return topics
     .map((topic) => {
       const items = synced(
-        topic.packages.map((name) => [
-          extensions.get(name).id,
-          extensions.get(name).hosted,
-        ]),
-      ).map(([id, hosted]) =>
-        item(
-          hosted,
-          records.find((pkg) => pkg.id === id) ?? null,
-          base,
-          markdown,
-        ),
-      );
+        ordered
+          .filter((record) => record.topic === topic.id)
+          .map((record) => [record, hosting.get(record.id)]),
+      ).map(([record, hosted]) => item(hosted, record, base, markdown));
 
       return items.length === 0
         ? ""

@@ -103,3 +103,4 @@
 - docs: integrate Selectize guides, API reference and package skill; add VPS hardening and production PHP Cookbook recipes.
 - docs(cookbook): clarify Tailscale connection direction, policy tests, and device key expiry.
 - feat: redesign the Documentation hub and package directory, unify the site theme, and integrate nested-sets-behavior.
+- feat(catalog): group packages by topic and tags, import records from Packagist, and accept proposals through a moderated issue-to-PR flow.

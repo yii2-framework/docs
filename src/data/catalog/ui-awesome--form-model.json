@@ -3,6 +3,8 @@
     "name": "Form Model",
     "summary": "Form metadata and validation errors for model-driven PHP forms.",
     "family": "ui-awesome",
+    "topic": "forms-widgets",
+    "tags": ["form-model", "forms", "validation", "metadata"],
     "ecosystems": ["php"],
     "kind": "library",
     "php": "^8.3",
@@ -10,10 +12,10 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/form-model/blob/db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f/composer.json"
+            "evidence": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/composer.json"
         }
     ],
-    "docsUrl": "https://github.com/ui-awesome/form-model/blob/db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f/README.md",
+    "docsUrl": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/README.md",
     "repository": "https://github.com/ui-awesome/form-model",
     "license": "BSD-3-Clause",
     "maintainer": {
@@ -21,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/form-model/blob/db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f/LICENSE",
+    "relationshipEvidence": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/LICENSE",
     "provenance": {
-        "ref": "main",
-        "commit": "db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/ui-awesome/form-model/blob/db20c63a1c86e0f7c1c42c02b2ad1d0b788cf36f/composer.json",
-        "kind": "source"
+        "ref": "0.2.1",
+        "commit": "969b8f8bc0119f0f7205b96b5f57df2ce5af6e06",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 9,
+        "downloadsTotal": 815,
+        "favers": 1,
+        "fetchedAt": "2026-10-25"
     }
 }

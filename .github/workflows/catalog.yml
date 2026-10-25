@@ -1,0 +1,61 @@
+---
+name: catalog
+
+on:
+  pull_request:
+    paths:
+      - "src/data/**"
+      - "src/lib/catalog*.mjs"
+      - "scripts/catalog*.mjs"
+      - "scripts/lib/catalog-import.mjs"
+      - "scripts/lib/packagist.mjs"
+      - "scripts/fixtures/packagist/**"
+      - "src/lib/hosting.mjs"
+      - "packages.json"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/catalog*.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/data/**"
+      - "src/lib/catalog*.mjs"
+      - "scripts/catalog*.mjs"
+      - "scripts/lib/catalog-import.mjs"
+      - "scripts/lib/packagist.mjs"
+      - "scripts/fixtures/packagist/**"
+      - "src/lib/hosting.mjs"
+      - "packages.json"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/catalog*.yml"
+
+# The catalog check and its tests only read the repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Catalog check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout.
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # The catalog scripts and their tests use Node.js built-ins only, so no dependency is installed.
+      - name: Set up Node.js.
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Validate the records, topics, tags and issue forms.
+        run: node scripts/catalog-check.mjs
+
+      - name: Run the catalog tests.
+        run: node --test scripts/catalog*.test.mjs

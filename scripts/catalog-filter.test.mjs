@@ -3,8 +3,10 @@ import test from "node:test";
 import {
   catalogSearchRecord,
   documentationKinds,
+  filterKeys,
   filtersUrl,
   githubHandle,
+  isTagSlug,
   matchesFilters,
   normalizeFilters,
 } from "../src/lib/catalog-filter.mjs";
@@ -68,6 +70,7 @@ test("query state accepts supported values and bounds search text", () => {
       ecosystem: "yii2",
       family: "",
       docs: "",
+      tag: "",
       relationship: "community",
     },
   );
@@ -77,6 +80,7 @@ test("query state accepts supported values and bounds search text", () => {
     ecosystem: "",
     family: "",
     docs: "",
+    tag: "",
     relationship: "",
   });
 });
@@ -98,6 +102,7 @@ test("URL round trips preserve the base path, unrelated parameters and fragment"
     ecosystem: "yii2",
     family: "yii2-extensions",
     docs: "",
+    tag: "",
     relationship: "",
   });
   assert.equal(before.search, "?campaign=guide");
@@ -232,4 +237,120 @@ test("a local docsUrl without a hosted guide is neither a guide nor documentatio
   assert.equal(matchesFilters(unsynced, { docs: "external" }), false);
   assert.equal(matchesFilters(unsynced, { docs: "guide" }), false);
   assert.equal(matchesFilters(unsynced), true);
+});
+
+const tagged = catalogSearchRecord(
+  {
+    id: "example/tagged",
+    name: "Tagged",
+    summary: "A package with tags and a topic",
+    family: "yii2-extensions",
+    topic: "forms-widgets",
+    tags: ["widget", "file-upload", "cropperjs", "image-crop"],
+    kind: "extension",
+    php: ">=8.3",
+    maintainer: { name: "Example maintainer" },
+    ecosystems: ["yii2"],
+    relationship: "maintained",
+    compatibility: [{ constraint: "^22.0@dev" }],
+  },
+  null,
+  { id: "forms-widgets", title: "Forms and widgets" },
+);
+
+test("the tag filter accepts tag slugs of at most 32 characters only", () => {
+  assert.ok(filterKeys.includes("tag"));
+  for (const tag of ["widget", "psr-7", "a", "x".repeat(32)]) {
+    assert.equal(isTagSlug(tag), true, tag);
+    assert.equal(normalizeFilters({ tag }).tag, tag, tag);
+  }
+  for (const tag of [
+    "",
+    "Widget",
+    "-widget",
+    "widget-",
+    "psr--7",
+    "file upload",
+    "file_upload",
+    "<script>",
+    "x".repeat(33),
+    ["widget"],
+    7,
+    null,
+  ]) {
+    assert.equal(isTagSlug(tag), false, String(tag));
+    assert.equal(normalizeFilters({ tag }).tag, "", String(tag));
+  }
+  assert.equal(
+    normalizeFilters(new URLSearchParams("tag=psr-7&tag=widget")).tag,
+    "psr-7",
+  );
+});
+
+test("the tag filter matches records carrying the tag and combines with the other filters", () => {
+  assert.deepEqual(tagged.tags, [
+    "widget",
+    "file-upload",
+    "cropperjs",
+    "image-crop",
+  ]);
+  assert.equal(tagged.topic, "forms-widgets");
+  assert.equal(matchesFilters(tagged, { tag: "widget" }), true);
+  // A tag the card does not show (fourth tag) still matches.
+  assert.equal(matchesFilters(tagged, { tag: "image-crop" }), true);
+  assert.equal(matchesFilters(tagged, { tag: "file" }), false);
+  // A malformed tag is dropped, so it filters nothing instead of hiding every record.
+  assert.equal(matchesFilters(tagged, { tag: "Widget" }), true);
+  assert.equal(
+    matchesFilters(tagged, { tag: "widget", ecosystem: "yii3" }),
+    false,
+  );
+  assert.equal(
+    matchesFilters(tagged, { tag: "widget", relationship: "maintained" }),
+    true,
+  );
+  // Records without tags (an older search record) never match a tag filter.
+  assert.equal(matchesFilters(record, { tag: "widget" }), false);
+  assert.deepEqual(record.tags, []);
+  assert.equal(record.topic, "");
+  assert.equal(
+    filtersUrl("https://example.test/docs/packages/?tag=old", {
+      tag: "psr-7",
+      relationship: "maintained",
+    }).search,
+    "?tag=psr-7&relationship=maintained",
+  );
+  assert.equal(
+    filtersUrl("https://example.test/docs/packages/?tag=widget").search,
+    "",
+  );
+});
+
+test("the search text holds every tag, the topic id and the topic title", () => {
+  for (const q of [
+    "image-crop",
+    "cropperjs",
+    "file upload",
+    "forms-widgets",
+    "forms and widgets",
+    "WIDGETS",
+  ]) {
+    assert.equal(matchesFilters(tagged, { q }), true, q);
+  }
+  const untitled = catalogSearchRecord({
+    id: "example/untitled",
+    name: "Untitled",
+    summary: "A record searched without its topic title",
+    family: "yii2-extensions",
+    topic: "html-views",
+    tags: ["html"],
+    kind: "library",
+    php: ">=8.3",
+    maintainer: { name: "Example maintainer" },
+    ecosystems: ["php"],
+    relationship: "maintained",
+    compatibility: [{ constraint: ">=8.3" }],
+  });
+  assert.equal(matchesFilters(untitled, { q: "html-views" }), true);
+  assert.equal(matchesFilters(untitled, { q: "views and html" }), false);
 });

@@ -1,8 +1,161 @@
 /*
- * Package directory additions: hosted-documentation badges, entry meta lines and actions (Catalog.astro), the
- * "Documentation on this site" list and related links of a record page ([...id].astro), and the package-entry strip
- * on extension guide landing pages (MarkdownContent.astro). Uses the site tokens only (theme.css).
+ * Package directory additions: the topic jump row, topic sections, tag links, hosted-documentation badges, entry
+ * meta lines and actions (Catalog.astro), the "Documentation on this site" list, install command, Packagist figures
+ * and related links of a record page ([...id].astro), and the package-entry strip on extension guide landing pages
+ * (MarkdownContent.astro). Uses the site tokens only (theme.css). Ratios: dark / light theme.
  */
+
+/*
+ * Topic jump row: one link per topic with its count. Outlined chips in the control border (4.5:1 dark, 4.0:1 light
+ * on the page), link text 15px (9.8:1 dark, 6.2:1 light), 44px high targets.
+ */
+.portal-container .directory-topics ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    list-style: none;
+}
+
+.portal-container .directory-topics li {
+    margin: 0;
+}
+
+.portal-container .directory-topics a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--site-border-strong);
+    border-radius: var(--site-radius-control);
+    color: var(--site-link);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-decoration: none;
+}
+
+/* Visible name of the topic list (its navigation label): 15px heading ink. */
+.portal-container .directory-topics-title {
+    margin: 0 0 0.625rem;
+    color: var(--site-ink);
+    font-size: 0.9375rem;
+    font-weight: 700;
+}
+
+/* The topic being read (aria-current, set by the script): the accent border and the chip fill. */
+.portal-container .directory-topics a[aria-current] {
+    border-color: var(--sl-color-text-accent);
+    background: var(--site-chip-bg);
+    color: var(--site-chip-ink);
+}
+
+/* Hover: the chip fill with chip ink (6.6:1 dark, 7.6:1 light); the border stays 3.1:1 dark, 3.3:1 light on it. */
+.portal-container .directory-topics a:hover {
+    background: var(--site-chip-bg);
+    color: var(--site-chip-ink);
+    text-decoration: underline;
+}
+
+/*
+ * The result count takes focus after a tag link applies its filter (tabindex="-1"): the site focus ring. Starlight's
+ * `scroll-padding-top` already keeps it and the topic sections clear of the sticky header.
+ */
+.portal-container .catalog-count:focus-visible {
+    outline: var(--site-focus-width) solid var(--site-focus);
+    outline-offset: 3px;
+}
+
+/* Visible topic sections are spaced well apart; a section hidden by the filters does not count. */
+.portal-container
+    .directory-topic:not([hidden])
+    ~ .directory-topic:not([hidden]) {
+    margin-block-start: 3.5rem;
+}
+
+/* The count beside the title is secondary: muted (7.3:1 dark, 6.0:1 light on the page) at the heading size. */
+.portal-container .directory-topic-count {
+    color: var(--site-muted);
+    font-weight: 600;
+}
+
+/* Summary under the topic title: muted body size (7.3:1 dark, 6.0:1 light). */
+.portal-container .directory-topic-summary {
+    max-width: 65ch;
+    margin-block: 0.5rem 1rem;
+    color: var(--site-muted);
+    font-size: 1.0625rem;
+}
+
+/* Entry titles are h3 under the topic h2; same size as the former h2 entries. */
+.portal-container .catalog-entry h3 {
+    margin: 0;
+    font-size: 1.375rem;
+}
+
+.portal-container .catalog-entry h3 a {
+    text-decoration: none;
+}
+
+.portal-container .catalog-entry h3 a:hover {
+    text-decoration: underline;
+}
+
+/*
+ * Tags: plain underlined links (9.8:1 dark, 6.2:1 light on the page; 8.3:1 dark, 6.0:1 light on the facts surface)
+ * without border or fill, so they read as links and not as the bordered hosted-documentation badges. 15px text,
+ * 24px high targets.
+ */
+.portal-container .directory-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    margin-block-start: 0.75rem;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+}
+
+.portal-container .directory-tags-label {
+    color: var(--site-muted);
+    font-weight: 600;
+}
+
+.portal-container .directory-tags ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.875rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.portal-container .directory-tags li {
+    margin: 0;
+}
+
+.portal-container .directory-tags a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    color: var(--site-link);
+    text-decoration: underline;
+}
+
+.portal-container .directory-tags a:hover {
+    text-decoration-thickness: 0.15em;
+}
+
+/* "+N more": plain muted text, not a control (7.3:1 dark, 6.0:1 light). */
+.portal-container .directory-tags-more {
+    color: var(--site-muted);
+}
+
+.portal-container .package-introduction .directory-tags {
+    margin-block-start: 1rem;
+}
 
 /* Badges: what this site hosts for an entry. Bordered so they read as labels, not buttons. */
 .portal-container .directory-badges {
@@ -51,9 +204,14 @@
     margin-block-start: 1.25rem;
 }
 
-/* Entry meta lines: requirements, maintainer, checked revision. */
+/* Entry meta lines: requirements, install command, maintainer, checked revision. */
 .portal-container
-    :where(.directory-requires, .directory-maintainer, .directory-checked) {
+    :where(
+        .directory-requires,
+        .directory-install,
+        .directory-maintainer,
+        .directory-checked
+    ) {
     margin: 0.75rem 0 0;
     /* Body colour, as for every paragraph: 9.8:1 dark, 8.0:1 light */
     color: var(--site-text);
@@ -61,7 +219,7 @@
     line-height: 1.5;
 }
 
-.portal-container .directory-requires {
+.portal-container :where(.directory-requires, .directory-install) {
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem 0.75rem;
@@ -72,10 +230,18 @@
     font-weight: 600;
 }
 
-.portal-container .directory-requirement code {
+.portal-container :where(.directory-requirement, .directory-install) code {
     font-family: var(--sl-font-mono);
     font-size: 0.9375rem;
     overflow-wrap: anywhere;
+}
+
+/*
+ * Install commands break only after "require" or after the vendor's slash, never at a hyphen inside a package name
+ * (copying the command is unaffected: <wbr> adds no text).
+ */
+.portal-container .directory-nowrap {
+    white-space: nowrap;
 }
 
 /* The review date is secondary but stays at reading size. */
@@ -111,6 +277,72 @@
 .portal-container .directory-markdown {
     font-size: 0.9375rem;
     white-space: nowrap;
+}
+
+/*
+ * Record page: the install command. It wraps instead of scrolling, so the block never needs a keyboard-reachable
+ * scroll area; heading ink on the inset surface (10.2:1 dark, 13.8:1 light).
+ */
+.portal-container .directory-command {
+    margin: 1rem 0 0;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--site-border);
+    border-radius: var(--site-radius-control);
+    background: var(--site-surface-2);
+    color: var(--site-ink);
+    font-family: var(--sl-font-mono), var(--sl-font-system-mono);
+    font-size: 1rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.portal-container .directory-command code {
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+/* Record page: what the Packagist figures count, under them (6.2:1 dark, 5.8:1 light on the facts panel). */
+.portal-container .directory-stats-note {
+    display: block;
+    margin-block-start: 0.25rem;
+    color: var(--site-muted);
+    font-size: 0.9375rem;
+}
+
+/* Record page: other records of the same topic, each with its summary (muted 7.3:1 dark, 6.0:1 light). */
+.portal-container .directory-related {
+    margin-block-start: 3rem;
+}
+
+.portal-container .directory-related h2 {
+    font-size: 1.25rem;
+}
+
+.portal-container .directory-related ul {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: 1px solid var(--site-border);
+}
+
+.portal-container .directory-related li {
+    margin: 0;
+    padding-block: 0.625rem;
+    border-block-end: 1px solid var(--site-border);
+    font-size: 1.0625rem;
+}
+
+.portal-container .directory-related a {
+    font-weight: 600;
+}
+
+.portal-container .directory-related-summary {
+    display: block;
+    color: var(--site-muted);
+    font-size: 1rem;
 }
 
 /* Record page: relationship wording under the maintainer name. */
@@ -182,5 +414,75 @@
 @media (width < 45rem) {
     .portal-container .directory-actions .portal-button {
         flex: 1 1 100%;
+    }
+}
+
+/* Phones (400px and narrower): the jump chips keep their natural width (44px high), so the list starts sooner. */
+@media (width <= 25rem) {
+    .portal-container
+        .directory-topic:not([hidden])
+        ~ .directory-topic:not([hidden]) {
+        margin-block-start: 2.5rem;
+    }
+}
+
+/*
+ * Wide screens: the results and a sticky topic column on their right. This page alone gets a wider content column
+ * (Starlight sets 67.5rem on pages without a sidebar), so the entries keep their width beside the topic column.
+ * The column is a plain list: 44px rows, the link colour, a 3px bar on the left of the topic being read.
+ */
+@media (width >= 80rem) {
+    html:not([data-has-sidebar]):has([data-package-catalog]) {
+        --sl-content-width: 80rem;
+    }
+
+    .portal-container .directory-browse {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 15rem;
+        align-items: start;
+        gap: 3rem;
+    }
+
+    .portal-container .directory-topics {
+        position: sticky;
+        top: calc(var(--sl-nav-height) + 1.5rem);
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .portal-container .directory-results {
+        grid-column: 1;
+        grid-row: 1;
+        min-width: 0;
+    }
+
+    .portal-container .directory-topics ul {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0;
+        margin: 0;
+        /* Control border: 4.5:1 dark, 4.0:1 light on the page */
+        border-inline-start: 1px solid var(--site-border-strong);
+    }
+
+    /* Block, not flex: a title that wraps keeps its count on the same text line. */
+    .portal-container .directory-topics a {
+        display: block;
+        margin-inline-start: -1px;
+        padding: 0.625rem 0.75rem 0.625rem 1rem;
+        border: 0;
+        border-inline-start: 3px solid transparent;
+        border-radius: 0;
+    }
+
+    .portal-container .directory-topics a:hover {
+        background: transparent;
+        color: var(--site-link);
+    }
+
+    .portal-container .directory-topics a[aria-current] {
+        border-inline-start-color: var(--sl-color-text-accent);
+        background: transparent;
+        color: var(--site-ink);
     }
 }

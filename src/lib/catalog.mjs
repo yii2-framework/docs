@@ -41,6 +41,8 @@ const fields = [
   "name",
   "summary",
   "family",
+  "topic",
+  "tags",
   "ecosystems",
   "kind",
   "php",
@@ -53,8 +55,19 @@ const fields = [
   "relationshipEvidence",
   "provenance",
 ];
-const packageId =
+/** Fields a record may leave out; every other field of `fields` is required. */
+const optionalFields = ["stats"];
+const statsFields = [
+  "downloadsMonthly",
+  "downloadsTotal",
+  "favers",
+  "fetchedAt",
+];
+const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+/** Composer `vendor/package` id of a record; `scripts/catalog-issue.mjs` checks proposals with the same pattern. */
+export const PACKAGE_ID_PATTERN =
   /^[a-z0-9]+(?:[._-][a-z0-9]+)*\/[a-z0-9]+(?:[._-][a-z0-9]+)*$/;
+const packageId = PACKAGE_ID_PATTERN;
 const localDocs =
   /^\/(?:extensions|guide|api|development-tools|project|internals)\/(?:[a-z0-9-]+\/)*$/;
 
@@ -62,7 +75,76 @@ function fail(location, message) {
   throw new TypeError(`Catalog ${location}: ${message}`);
 }
 
-function object(value, keys, location) {
+/**
+ * Words that do not tell packages apart (the framework, the language, the packaging), so they never become tags.
+ * `validateCatalog()` rejects them; `normalizeTags()` drops them.
+ */
+export const TAG_STOP_LIST = Object.freeze([
+  "php",
+  "yii",
+  "yii2",
+  "yii3",
+  "yii-2",
+  "yii-3",
+  "yiisoft",
+  "extension",
+  "extensions",
+  "yii2-extension",
+  "yii2-extensions",
+  "yii-extension",
+  "library",
+  "framework",
+  "package",
+  "composer",
+]);
+
+const stopWords = new Set(TAG_STOP_LIST);
+
+/** At most this many tags per record, each at most `MAX_TAG_LENGTH` characters. */
+const MAX_TAGS = 8;
+const MAX_TAG_LENGTH = 32;
+
+/**
+ * Turns Packagist or `composer.json` keywords into tag candidates: each keyword is folded to ASCII lower case,
+ * spaces, underscores and dots become `-`, other characters outside `[a-z0-9-]` are dropped and dashes are collapsed
+ * (`"Yii 2"` and `"yii-2"` become `yii2`). Stop-list words, the vendor slug and the topic id are dropped, then
+ * duplicates (first occurrence kept), empty values and values over 32 characters; at most 8 tags remain. Non-string
+ * keywords are ignored. The result still needs a curator's review.
+ *
+ * @param {unknown} keywords Keyword list; anything other than an array gives `[]`.
+ * @param {{ vendor?: string, topic?: string }} [context] Vendor slug and topic id of the record.
+ * @returns {string[]}
+ */
+export function normalizeTags(keywords, { vendor, topic } = {}) {
+  if (!Array.isArray(keywords)) return [];
+  const excluded = new Set([...stopWords, vendor, topic]);
+  const tags = [];
+  for (const keyword of keywords) {
+    if (typeof keyword !== "string") continue;
+    let tag = keyword
+      .normalize("NFKD")
+      .replace(/\p{M}+/gu, "")
+      .toLowerCase()
+      .trim()
+      .replace(/[\s_.]+/g, "-")
+      .replace(/[^a-z0-9-]/g, "")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+    if (tag === "yii-2") tag = "yii2";
+    if (
+      tag === "" ||
+      tag.length > MAX_TAG_LENGTH ||
+      excluded.has(tag) ||
+      tags.includes(tag)
+    )
+      continue;
+    tags.push(tag);
+    if (tags.length === MAX_TAGS) break;
+  }
+  return tags;
+}
+
+function object(value, keys, location, optional = []) {
   if (
     value === null ||
     typeof value !== "object" ||
@@ -71,11 +153,22 @@ function object(value, keys, location) {
   )
     fail(location, "must be a plain object");
   for (const key of Object.keys(value)) {
-    if (!keys.includes(key)) fail(location, `unknown field ${key}`);
+    if (!keys.includes(key) && !optional.includes(key))
+      fail(location, `unknown field ${key}`);
   }
   for (const key of keys) {
     if (!Object.hasOwn(value, key)) fail(location, `missing field ${key}`);
   }
+}
+
+/** A valid calendar date written as YYYY-MM-DD; the importer checks `--date` with it. */
+export function isDate(value) {
+  return (
+    typeof value === "string" &&
+    /^\d{4}-\d{2}-\d{2}$/.test(value) &&
+    Number.isFinite(Date.parse(value)) &&
+    new Date(value).toISOString().slice(0, 10) === value
+  );
 }
 
 function text(value, location, max = 240) {
@@ -120,13 +213,72 @@ function freeze(value) {
   return value;
 }
 
-/** Validate display metadata only. No record can select code, imports or build steps. */
-export function validateCatalog(records) {
+/**
+ * Validates the topic file (`{ topics: [{ id, title, summary }] }`): at least one topic, slug ids without
+ * duplicates, single-line titles and summaries. Returns the topics, frozen, in display order.
+ *
+ * @param {unknown} data Parsed `catalog-topics.json`.
+ * @returns {ReadonlyArray<Readonly<{ id: string, title: string, summary: string }>>}
+ */
+export function validateTopics(data) {
+  object(data, ["topics"], "topics file");
+  if (!Array.isArray(data.topics) || data.topics.length === 0)
+    fail("topics", "must be a non-empty array");
+  const seen = new Set();
+  for (const [index, topic] of data.topics.entries()) {
+    const at = `topic ${index}`;
+    object(topic, ["id", "title", "summary"], at);
+    text(topic.id, `${at}.id`, 64);
+    if (!slug.test(topic.id)) fail(`${at}.id`, "must be a lowercase slug");
+    if (seen.has(topic.id)) fail(`${at}.id`, `duplicate topic ${topic.id}`);
+    seen.add(topic.id);
+    text(topic.title, `${topic.id}.title`, 80);
+    text(topic.summary, `${topic.id}.summary`, 240);
+  }
+  return freeze(structuredClone(data.topics));
+}
+
+/** The catalog directory: `src/data/catalog/`, or the build define that names it once this module is bundled. */
+const directory =
+  typeof __PORTAL_CATALOG_SOURCE__ === "string"
+    ? new URL(__PORTAL_CATALOG_SOURCE__)
+    : new URL("../data/catalog/", import.meta.url);
+
+function readData(file, name) {
+  if (lstatSync(file).isSymbolicLink())
+    fail(name, "data files must not be symlinks");
+  return JSON.parse(readFileSync(file, "utf8"));
+}
+
+/** Topics of the directory and the Documentation hub (`src/data/catalog-topics.json`), in display order. */
+export const topics = validateTopics(
+  readData(new URL("../catalog-topics.json", directory), "catalog-topics.json"),
+);
+
+/** Topic id to its `{ id, title, summary }`. */
+export const topicLabels = Object.freeze(
+  Object.fromEntries(topics.map((topic) => [topic.id, topic])),
+);
+
+/** The topic with this id, or `undefined`. */
+export const getTopic = (id) =>
+  typeof id === "string" && Object.hasOwn(topicLabels, id)
+    ? topicLabels[id]
+    : undefined;
+
+/**
+ * Validate display metadata only. No record can select code, imports or build steps.
+ *
+ * @param {unknown} records Parsed catalog records.
+ * @param {ReadonlyArray<{ id: string }>} [topicList] Known topics (default: `catalog-topics.json`).
+ */
+export function validateCatalog(records, topicList = topics) {
   if (!Array.isArray(records)) fail("records", "must be an array");
+  const topicIds = new Set(topicList.map((topic) => topic.id));
   const seen = new Set();
   for (const [index, pkg] of records.entries()) {
     const at = `record ${index}`;
-    object(pkg, fields, at);
+    object(pkg, fields, at, optionalFields);
     text(pkg.id, `${at}.id`, 160);
     if (!packageId.test(pkg.id)) fail(`${at}.id`, "must be vendor/package");
     if (seen.has(pkg.id)) fail(`${at}.id`, `duplicate package ${pkg.id}`);
@@ -139,6 +291,28 @@ export function validateCatalog(records) {
       !Object.hasOwn(familyLabels, pkg.family)
     )
       fail(pkg.id, "unknown family");
+    if (typeof pkg.topic !== "string" || !topicIds.has(pkg.topic))
+      fail(pkg.id, "unknown topic");
+    if (
+      !Array.isArray(pkg.tags) ||
+      pkg.tags.length === 0 ||
+      pkg.tags.length > MAX_TAGS
+    )
+      fail(pkg.id, `tags must contain 1–${MAX_TAGS} tags`);
+    for (const tag of pkg.tags) {
+      if (
+        typeof tag !== "string" ||
+        tag.length > MAX_TAG_LENGTH ||
+        !slug.test(tag)
+      )
+        fail(
+          pkg.id,
+          `tags must be lowercase slugs of at most ${MAX_TAG_LENGTH} characters`,
+        );
+      if (stopWords.has(tag)) fail(pkg.id, `tag ${tag} is on the stop list`);
+    }
+    if (new Set(pkg.tags).size !== pkg.tags.length)
+      fail(pkg.id, "tags must be distinct");
     if (!kinds.has(pkg.kind)) fail(pkg.id, "unknown kind");
     if (!relationships.has(pkg.relationship))
       fail(pkg.id, "unknown relationship");
@@ -215,13 +389,7 @@ export function validateCatalog(records) {
     if (!/^[a-f0-9]{40}$/.test(pkg.provenance.commit)) {
       fail(pkg.id, "provenance.commit must be a full Git SHA");
     }
-    const reviewedAt = pkg.provenance.reviewedAt;
-    if (
-      typeof reviewedAt !== "string" ||
-      !/^\d{4}-\d{2}-\d{2}$/.test(reviewedAt) ||
-      !Number.isFinite(Date.parse(reviewedAt)) ||
-      new Date(reviewedAt).toISOString().slice(0, 10) !== reviewedAt
-    )
+    if (!isDate(pkg.provenance.reviewedAt))
       fail(pkg.id, "provenance.reviewedAt must be a valid YYYY-MM-DD date");
     if (!["source", "release"].includes(pkg.provenance.kind)) {
       fail(pkg.id, "provenance.kind must be source or release");
@@ -235,25 +403,25 @@ export function validateCatalog(records) {
         pkg.id,
         "provenance.url must identify this repository and exact commit",
       );
+    if (Object.hasOwn(pkg, "stats")) {
+      object(pkg.stats, statsFields, `${pkg.id}.stats`);
+      for (const field of statsFields.slice(0, -1)) {
+        if (!Number.isSafeInteger(pkg.stats[field]) || pkg.stats[field] < 0)
+          fail(pkg.id, `stats.${field} must be a non-negative integer`);
+      }
+      if (!isDate(pkg.stats.fetchedAt))
+        fail(pkg.id, "stats.fetchedAt must be a valid YYYY-MM-DD date");
+    }
   }
   return freeze(
     structuredClone(records).sort((a, b) => a.id.localeCompare(b.id, "en")),
   );
 }
 
-const directory =
-  typeof __PORTAL_CATALOG_SOURCE__ === "string"
-    ? new URL(__PORTAL_CATALOG_SOURCE__)
-    : new URL("../data/catalog/", import.meta.url);
 const records = readdirSync(directory)
   .filter((name) => name.endsWith(".json"))
   .sort()
-  .map((name) => {
-    const file = new URL(name, directory);
-    if (lstatSync(file).isSymbolicLink())
-      fail(name, "data files must not be symlinks");
-    return JSON.parse(readFileSync(file, "utf8"));
-  });
+  .map((name) => readData(new URL(name, directory), name));
 
 export const packages = validateCatalog(records);
 export const getPackage = (id) => packages.find((pkg) => pkg.id === id);
@@ -356,6 +524,93 @@ export function evidenceLabel(url, kind) {
     : "View requirement evidence";
 }
 
+/**
+ * The Composer command that installs a record, or `null` when the record does not pin a release (`provenance.kind`
+ * `source`): a development snapshot does not establish that `composer require` resolves to the reviewed code.
+ *
+ * @param {{ id: string, provenance: { kind: string } }} pkg
+ */
+export function installCommand(pkg) {
+  return pkg.provenance.kind === "release"
+    ? `composer require ${pkg.id}`
+    : null;
+}
+
+const numberFormat = new Intl.NumberFormat("en");
+const count = (value, one, many) =>
+  `${numberFormat.format(value)} ${value === 1 ? one : many}`;
+
+/**
+ * The Packagist figures of a record as one sentence without the date, or `""` when the record has no `stats`:
+ * "106,851 installs in the last 30 days, 1,906,996 in total, 66 favourites". Packagist's `downloads.monthly` is the
+ * figure its statistics page labels "Last 30 days" (a rolling window, not a calendar month).
+ *
+ * @param {{ downloadsMonthly: number, downloadsTotal: number, favers: number } | undefined} stats
+ */
+export function statsSummary(stats) {
+  if (!stats) return "";
+  return [
+    `${count(stats.downloadsMonthly, "install", "installs")} in the last 30 days`,
+    `${numberFormat.format(stats.downloadsTotal)} in total`,
+    count(stats.favers, "favourite", "favourites"),
+  ].join(", ");
+}
+
+/** What the install figures count; shown next to every `statsSummary()`. */
+export const statsNote = "Installs count Composer downloads, not users.";
+
+/**
+ * The topics that have records, in the order of `catalog-topics.json`, each with its records in the given order.
+ * Topics without records are left out.
+ *
+ * @template {{ topic: string }} T
+ * @param {readonly T[]} records
+ * @param {ReadonlyArray<{ id: string, title: string, summary: string }>} [topicList]
+ * @returns {{ topic: { id: string, title: string, summary: string }, packages: T[] }[]}
+ */
+export function groupByTopic(records, topicList = topics) {
+  return topicList
+    .map((topic) => ({
+      topic,
+      packages: records.filter((pkg) => pkg.topic === topic.id),
+    }))
+    .filter((group) => group.packages.length > 0);
+}
+
+/**
+ * The tags used by at least `minimum` records, alphabetically, with the number of records: the choices of the tag
+ * filter. Tags used less often stay searchable and linkable but are not listed.
+ *
+ * @param {ReadonlyArray<{ tags: readonly string[] }>} records
+ * @param {number} [minimum]
+ * @returns {{ tag: string, count: number }[]}
+ */
+export function facetTags(records, minimum = 2) {
+  const counts = new Map();
+  for (const pkg of records) {
+    for (const tag of pkg.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  }
+  return [...counts]
+    .filter(([, total]) => total >= minimum)
+    .map(([tag, total]) => ({ tag, count: total }))
+    .sort((a, b) => a.tag.localeCompare(b.tag, "en"));
+}
+
+/**
+ * Display order without the hosting manifests (`displayOrder()` of `hosting.mjs` needs them): documentation hosted
+ * on this site first when `hostingFor` says so, then by collection (the order of `familyLabels`), then by name.
+ */
+function displaySort(records, hostingFor) {
+  const families = Object.keys(familyLabels);
+  const rank = (pkg) => (hostingFor(pkg)?.guide === true ? 0 : 1);
+  return [...records].sort(
+    (a, b) =>
+      rank(a) - rank(b) ||
+      families.indexOf(a.family) - families.indexOf(b.family) ||
+      a.name.localeCompare(b.name, "en"),
+  );
+}
+
 const hostedBullet = (pkg, hosting) => {
   const target = documentationTarget(pkg, hosting);
   if (target.kind === "hosted")
@@ -367,8 +622,23 @@ const hostedBullet = (pkg, hosting) => {
 
 const pageMarkdownUrl = (url, base) => withBase(`${url}index.md`, base);
 
+/** `- Install: \`composer require <id>\`` on release records; nothing for source snapshots. */
+const installBullet = (pkg) => {
+  const command = installCommand(pkg);
+  return command === null ? [] : [`- Install: \`${command}\``];
+};
+
+/** The Packagist figures with their date, when the record has `stats`. */
+const statsBullet = (pkg) =>
+  pkg.stats
+    ? [
+        `- Packagist: ${statsSummary(pkg.stats)} (as of ${pkg.stats.fetchedAt}). ${statsNote}`,
+      ]
+    : [];
+
 /**
- * Complete Markdown detail document, generated from the same records as the HTML catalog.
+ * Complete Markdown detail document, generated from the same records as the HTML catalog: topic, tags, the
+ * `composer require` command on release records and the dated Packagist figures when the record has `stats`.
  *
  * `hosting` (the record's entry of `loadHosting()` in `src/lib/hosting.mjs`, or `{ guide: false }` for a record
  * without hosted documentation) adds what this site hosts. Without it the document is unchanged.
@@ -419,11 +689,15 @@ export function packageMarkdown(pkg, base = "", hosting = null) {
     "",
     `- Package: ${markdownText(pkg.id)}`,
     `- Collection: ${familyLabels[pkg.family]}`,
+    `- Topic: ${markdownText(getTopic(pkg.topic).title)}`,
+    `- Tags: ${pkg.tags.join(", ")}`,
     `- Kind: ${pkg.kind}`,
     `- Relationship: ${hosting === null ? pkg.relationship : relationshipLabels[pkg.relationship]} (${link("evidence", pkg.relationshipEvidence)})`,
     `- Maintainer: ${link(maintainerLink(pkg).label, pkg.maintainer.url)}`,
     `- PHP requirement: ${markdownText(pkg.php)}`,
     `- License: ${markdownText(pkg.license)}`,
+    ...installBullet(pkg),
+    ...statsBullet(pkg),
     ...(hosting === null ? [] : [hostedBullet(pkg, hosting)]),
     "",
     ...onSite,
@@ -491,10 +765,13 @@ export function packageEntryMarkdown(pkg, base = "") {
 const noHosting = () => null;
 
 /**
- * Complete Markdown discovery document; external packages remain metadata-only entries.
+ * Complete Markdown discovery document; external packages remain metadata-only entries. Entries are grouped under
+ * one `##` heading per topic that has records (`catalog-topics.json` order, with the topic summary), each entry a
+ * `###` heading with its tags and, on release records, the `composer require` command.
  *
- * `hostingFor(pkg)` (see `src/lib/hosting.mjs`) adds one line per entry saying where its documentation is, and a
- * pointer to the Documentation hub. Without it the document is unchanged.
+ * `hostingFor(pkg)` (see `src/lib/hosting.mjs`) adds one line per entry saying where its documentation is, puts the
+ * entries with a hosted guide first in each topic, and adds a pointer to the Documentation hub. Without it the
+ * document is unchanged.
  */
 export function catalogMarkdown(base = "", hostingFor = noHosting) {
   const hosted = hostingFor !== noHosting;
@@ -511,21 +788,31 @@ export function catalogMarkdown(base = "", hostingFor = noHosting) {
           "",
         ]
       : []),
-    ...packages.flatMap((pkg) => [
-      `## ${link(pkg.name, withBase(`/packages/${pkg.id}/index.md`, base))}`,
-      "",
-      markdownText(pkg.summary),
-      "",
-      `- Package: ${markdownText(pkg.id)}`,
-      `- Collection: ${familyLabels[pkg.family]}; relationship: ${pkg.relationship}`,
-      `- PHP requirement: ${markdownText(pkg.php)}`,
-      ...pkg.compatibility.map(
-        (entry) =>
-          `- ${ecosystemLabels[entry.ecosystem]}: ${markdownText(entry.constraint)}`,
-      ),
-      `- ${link(pkg.provenance.kind === "source" ? "Source revision" : "Release reference", pkg.provenance.url)}; reviewed ${pkg.provenance.reviewedAt}`,
-      ...(hosted ? [hostedBullet(pkg, hostingFor(pkg))] : []),
-      "",
-    ]),
+    ...groupByTopic(displaySort(packages, hostingFor)).flatMap(
+      ({ topic, packages: members }) => [
+        `## ${markdownText(topic.title)}`,
+        "",
+        markdownText(topic.summary),
+        "",
+        ...members.flatMap((pkg) => [
+          `### ${link(pkg.name, withBase(`/packages/${pkg.id}/index.md`, base))}`,
+          "",
+          markdownText(pkg.summary),
+          "",
+          `- Package: ${markdownText(pkg.id)}`,
+          `- Collection: ${familyLabels[pkg.family]}; relationship: ${pkg.relationship}`,
+          `- Tags: ${pkg.tags.join(", ")}`,
+          `- PHP requirement: ${markdownText(pkg.php)}`,
+          ...pkg.compatibility.map(
+            (entry) =>
+              `- ${ecosystemLabels[entry.ecosystem]}: ${markdownText(entry.constraint)}`,
+          ),
+          ...installBullet(pkg),
+          `- ${link(pkg.provenance.kind === "source" ? "Source revision" : "Release reference", pkg.provenance.url)}; reviewed ${pkg.provenance.reviewedAt}`,
+          ...(hosted ? [hostedBullet(pkg, hostingFor(pkg))] : []),
+          "",
+        ]),
+      ],
+    ),
   ].join("\n");
 }

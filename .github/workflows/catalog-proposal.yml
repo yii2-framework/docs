@@ -1,0 +1,227 @@
+---
+name: catalog-proposal
+
+# A maintainer adds the `catalog:import` label to an "Add a package from Packagist" issue. The run reads the issue
+# form, imports the package metadata from Packagist and GitHub, validates the catalog and opens a draft pull request.
+# `issues` events run the workflow of the default branch, so the code that runs is always reviewed code.
+#
+# Repository setup (once): labels `catalog:proposal` (applied by the issue form) and `catalog:import`; a GitHub App
+# installed on this repository only, with Contents and Pull requests set to read and write; an environment
+# `catalog-bot` limited to the default branch, holding the variable CATALOG_APP_CLIENT_ID (the App's client ID) and
+# the secret CATALOG_APP_PRIVATE_KEY (its private key). catalog-refresh.yml uses the same environment.
+on:
+  issues:
+    types: [labeled]
+
+# Jobs declare what they need; the workflow itself only reads.
+permissions:
+  contents: read
+
+# One run per issue; relabelling while a run is active queues instead of racing on the same branch.
+concurrency:
+  group: catalog-proposal-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  import:
+    name: Import package
+    # Only the maintainer label starts the job; applying a label needs triage access, and forks never match.
+    if: >-
+      ${{ github.repository == 'yii2-framework/docs'
+      && github.event.label.name == 'catalog:import'
+      && github.event.issue.state == 'open' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Holds the App client ID and private key; restrict this environment to the default branch.
+    environment: catalog-bot
+    # The job token stays read-only, so the importer and the catalog check never hold a write-capable token; the pull
+    # request is pushed with the short-lived GitHub App token created after validation.
+    permissions:
+      contents: read # Reads the default branch and the labeler's repository permission.
+    outputs:
+      log-tail: ${{ steps.log.outputs.tail }}
+      package: ${{ steps.form.outputs.package }}
+      pull-request-operation: ${{ steps.pr.outputs.pull-request-operation }}
+      pull-request-url: ${{ steps.pr.outputs.pull-request-url }}
+    steps:
+      - name: Check the GitHub App configuration.
+        env:
+          CLIENT_ID: ${{ vars.CATALOG_APP_CLIENT_ID }}
+          HAS_PRIVATE_KEY: ${{ secrets.CATALOG_APP_PRIVATE_KEY != '' }}
+        run: |
+          if [ -z "$CLIENT_ID" ] || [ "$HAS_PRIVATE_KEY" != "true" ]; then
+            message="The catalog-bot environment needs the CATALOG_APP_CLIENT_ID variable and the"
+            message="${message} CATALOG_APP_PRIVATE_KEY secret of a GitHub App installed on this repository"
+            message="${message} (Contents and Pull requests: read and write)."
+            message="${message} See the setup notes in .github/workflows/catalog-proposal.yml."
+            echo "::error::${message}"
+            echo "${message}" >> "$RUNNER_TEMP/catalog.log"
+            exit 1
+          fi
+
+      - name: Check the labeler can write.
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SENDER: ${{ github.event.sender.login }}
+        run: |
+          permission="$(gh api "repos/${GITHUB_REPOSITORY}/collaborators/${SENDER}/permission" --jq .permission)"
+          case "$permission" in
+            admin | maintain | write) ;;
+            *)
+              message="The catalog:import label needs a labeler with write access."
+              echo "::error::${message}"
+              echo "${message}" >> "$RUNNER_TEMP/catalog.log"
+              exit 1
+              ;;
+          esac
+
+      - name: Checkout.
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # The catalog scripts use Node.js built-ins only, so no dependency is installed and no lifecycle script runs.
+      - name: Set up Node.js.
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      # The body is untrusted: it reaches the parser only through the environment, never through `run:`. The parser
+      # writes validated values only (package, topic, relationship, branch) to the step outputs.
+      - name: Read the issue form.
+        id: form
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: node scripts/catalog-issue.mjs 2>&1 | tee -a "$RUNNER_TEMP/catalog.log"
+
+      # Workflow commands are stopped while the importer runs: its output can quote text from Packagist.
+      - name: Import the package.
+        env:
+          GITHUB_TOKEN: ${{ github.token }} # Read-only; lifts the api.github.com rate limit.
+          PACKAGE: ${{ steps.form.outputs.package }}
+          RELATIONSHIP: ${{ steps.form.outputs.relationship }}
+          TOPIC: ${{ steps.form.outputs.topic }}
+        run: |
+          stop="$(openssl rand -hex 16)"
+          echo "::stop-commands::${stop}"
+          node scripts/catalog-import.mjs "$PACKAGE" "--topic=$TOPIC" "--relationship=$RELATIONSHIP" 2>&1 \
+            | tee "$RUNNER_TEMP/import.log" | tee -a "$RUNNER_TEMP/catalog.log"
+          echo "::${stop}::"
+
+      - name: Validate the catalog.
+        run: node scripts/catalog-check.mjs 2>&1 | tee -a "$RUNNER_TEMP/catalog.log"
+
+      - name: Write the pull request body.
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          PACKAGE: ${{ steps.form.outputs.package }}
+          RELATIONSHIP: ${{ steps.form.outputs.relationship }}
+          TOPIC: ${{ steps.form.outputs.topic }}
+        run: |
+          fence='```'
+          {
+            # \x60 is a backtick: the validated values are shown as code.
+            printf 'Imports \x60%s\x60 from its public Packagist and GitHub metadata.\n\n' "$PACKAGE"
+            printf -- '- Topic: \x60%s\x60\n- Relationship: \x60%s\x60\n\n' "$TOPIC" "$RELATIONSHIP"
+            printf 'Closes #%s\n\n' "$ISSUE_NUMBER"
+            echo "The importer reads metadata only; it does not install or run the package. Before marking this pull"
+            echo "request ready, review the summary, topic, tags, relationship evidence and pinned revision."
+            echo
+            echo "Importer report:"
+            echo
+            echo "${fence}text"
+            # ANSI colours and backticks removed so the report cannot leave the fence; mentions stay inert inside it.
+            sed 's/\x1b\[[0-9;]*m//g' "$RUNNER_TEMP/import.log" | tr -d '`' | cut -c1-300 | tail -n 60
+            echo "${fence}"
+          } > "$RUNNER_TEMP/pull-request.md"
+
+      - name: Create the GitHub App token.
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ vars.CATALOG_APP_CLIENT_ID }}
+          private-key: ${{ secrets.CATALOG_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      # Re-running for the same package resets the same branch and updates the same pull request; no diff, no PR.
+      - name: Open the draft pull request. # zizmor: ignore[superfluous-actions]
+        id: pr
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          add-paths: src/data/catalog/
+          branch: ${{ steps.form.outputs.branch }}
+          commit-message: "feat(catalog): add ${{ steps.form.outputs.package }}"
+          title: "feat(catalog): add ${{ steps.form.outputs.package }}"
+          body-path: ${{ runner.temp }}/pull-request.md
+          draft: true
+
+      - name: Keep the end of the log for the issue comment.
+        id: log
+        if: ${{ failure() }}
+        run: |
+          delimiter="EOF_$(openssl rand -hex 16)"
+          {
+            echo "tail<<${delimiter}"
+            # Last lines only, ANSI colours and backticks removed so the output cannot break out of the fence.
+            tail -n 40 "$RUNNER_TEMP/catalog.log" 2>/dev/null \
+              | sed 's/\x1b\[[0-9;]*m//g' | tr -d '`' | cut -c1-300 || true
+            echo "${delimiter}"
+          } >> "$GITHUB_OUTPUT"
+
+  report:
+    name: Report on the issue
+    needs: import
+    if: >-
+      ${{ !cancelled()
+      && github.repository == 'yii2-framework/docs'
+      && github.event.label.name == 'catalog:import'
+      && github.event.issue.state == 'open' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Runs no repository code; its token can only comment on and unlabel the issue.
+    permissions:
+      issues: write # Comments the result or the failure and removes the catalog:import label.
+    steps:
+      - name: Comment on the issue.
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          LOG_TAIL: ${{ needs.import.outputs.log-tail }}
+          OPERATION: ${{ needs.import.outputs.pull-request-operation }}
+          PR_URL: ${{ needs.import.outputs.pull-request-url }}
+          RESULT: ${{ needs.import.result }}
+        run: |
+          fence='```'
+          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          {
+            if [ "$RESULT" = "success" ] && [ -n "$PR_URL" ]; then
+              echo "Draft pull request ${OPERATION}: ${PR_URL}"
+            elif [ "$RESULT" = "success" ]; then
+              echo "No catalog change: the generated record equals the one in the default branch."
+            else
+              echo "The catalog import failed. When the log below points to the issue form, correct the form; a"
+              echo "maintainer then adds the catalog:import label again."
+              echo
+              echo "${fence}text"
+              printf '%s\n' "${LOG_TAIL:-No log was recorded.}"
+              echo "${fence}"
+              echo
+              echo "Run: ${run_url}"
+            fi
+          } > "$RUNNER_TEMP/comment.md"
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/comment.md"
+
+      # Adding the label again starts a new run.
+      - name: Remove the import label.
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --remove-label "catalog:import"

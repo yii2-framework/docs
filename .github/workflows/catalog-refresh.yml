@@ -1,0 +1,109 @@
+---
+name: catalog-refresh
+
+# Re-reads the Packagist and GitHub metadata of every catalog record (newest stable tag, statistics) and proposes the
+# changes in one draft pull request on the `catalog/refresh` branch.
+on:
+  schedule:
+    # Mondays 04:17 UTC, off the hour to avoid the scheduler peak.
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+# Jobs declare what they need; the workflow itself only reads.
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-refresh
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  refresh:
+    name: Refresh catalog
+    if: ${{ github.repository == 'yii2-framework/docs' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Holds the App client ID and private key; restrict this environment to the default branch.
+    environment: catalog-bot
+    # The job token stays read-only; the pull request is pushed with the short-lived GitHub App token below.
+    permissions:
+      contents: read # Reads the default branch.
+    steps:
+      - name: Check the GitHub App configuration.
+        env:
+          CLIENT_ID: ${{ vars.CATALOG_APP_CLIENT_ID }}
+          HAS_PRIVATE_KEY: ${{ secrets.CATALOG_APP_PRIVATE_KEY != '' }}
+        run: |
+          if [ -z "$CLIENT_ID" ] || [ "$HAS_PRIVATE_KEY" != "true" ]; then
+            message="The catalog-bot environment needs the CATALOG_APP_CLIENT_ID variable and the"
+            message="${message} CATALOG_APP_PRIVATE_KEY secret of a GitHub App installed on this repository"
+            message="${message} (Contents and Pull requests: read and write)."
+            message="${message} See the setup notes in .github/workflows/catalog-proposal.yml."
+            echo "::error::${message}"
+            exit 1
+          fi
+
+      - name: Checkout.
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # The catalog scripts use Node.js built-ins only, so no dependency is installed and no lifecycle script runs.
+      - name: Set up Node.js.
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      # Rewrites changed records in src/data/catalog/ and writes a Markdown summary of the changes. Workflow commands
+      # are stopped while it runs: its output can quote text from Packagist.
+      - name: Refresh the records.
+        env:
+          GITHUB_TOKEN: ${{ github.token }} # Read-only; lifts the api.github.com rate limit.
+        run: |
+          stop="$(openssl rand -hex 16)"
+          echo "::stop-commands::${stop}"
+          node scripts/catalog-refresh.mjs "--summary=$RUNNER_TEMP/summary.md"
+          echo "::${stop}::"
+
+      - name: Validate the catalog.
+        run: node scripts/catalog-check.mjs
+
+      - name: Write the pull request body.
+        run: |
+          {
+            if [ -s "$RUNNER_TEMP/summary.md" ]; then
+              cat "$RUNNER_TEMP/summary.md"
+            else
+              echo "The refresh script wrote no summary."
+            fi
+            echo
+            echo "Generated from public Packagist and GitHub metadata; nothing was installed or run. Statistics are"
+            echo "dated by their fetchedAt field. Review the pinned revisions before marking this pull request ready."
+          } > "$RUNNER_TEMP/pull-request.md"
+
+      - name: Create the GitHub App token.
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ vars.CATALOG_APP_CLIENT_ID }}
+          private-key: ${{ secrets.CATALOG_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      # One long-lived branch: later runs update the same pull request and a run without changes closes it.
+      - name: Open or update the draft pull request. # zizmor: ignore[superfluous-actions]
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          add-paths: src/data/catalog/
+          branch: catalog/refresh
+          delete-branch: true
+          commit-message: "chore(catalog): refresh package metadata"
+          title: "chore(catalog): refresh package metadata"
+          body-path: ${{ runner.temp }}/pull-request.md
+          draft: true

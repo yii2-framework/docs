@@ -1,0 +1,74 @@
+{
+    "minified": "composer/2.0",
+    "packages": {
+        "yiisoft/bootstrap5": [
+            {
+                "name": "yiisoft/bootstrap5",
+                "description": "Yii Framework Twitter Bootstrap 5 Extension",
+                "keywords": ["yii", "bootstrap5"],
+                "homepage": "",
+                "version": "1.2.0",
+                "version_normalized": "1.2.0.0",
+                "license": ["BSD-3-Clause"],
+                "authors": [],
+                "source": {
+                    "url": "https://github.com/yiisoft/bootstrap5.git",
+                    "type": "git",
+                    "reference": "46d48f44b35e2c938b78733a7f479f2b48041c6c"
+                },
+                "type": "library",
+                "support": {
+                    "chat": "https://t.me/yii3en",
+                    "forum": "https://www.yiiframework.com/forum/",
+                    "irc": "ircs://irc.libera.chat:6697/yii",
+                    "issues": "https://github.com/yiisoft/bootstrap5/issues?state=open",
+                    "source": "https://github.com/yiisoft/bootstrap5",
+                    "wiki": "https://www.yiiframework.com/wiki/"
+                },
+                "funding": [
+                    {
+                        "url": "https://github.com/yiisoft",
+                        "type": "github"
+                    },
+                    {
+                        "url": "https://opencollective.com/yiisoft",
+                        "type": "open_collective"
+                    }
+                ],
+                "require": {
+                    "php": "8.1 - 8.5",
+                    "yiisoft/html": "^3.13 || ^4.0",
+                    "yiisoft/widget": "^2.0"
+                }
+            },
+            {
+                "version": "1.1.0",
+                "version_normalized": "1.1.0.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/bootstrap5.git",
+                    "type": "git",
+                    "reference": "94da3be20f85d4b06fde186c2718742c0049a2c6"
+                },
+                "require": {
+                    "php": "8.1 - 8.5",
+                    "yiisoft/html": "^3.0",
+                    "yiisoft/widget": "^2.0"
+                }
+            },
+            {
+                "version": "1.0.0",
+                "version_normalized": "1.0.0.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/bootstrap5.git",
+                    "type": "git",
+                    "reference": "f8770e4281b7dbbb33c7b695e64a52d360795fc7"
+                },
+                "require": {
+                    "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+                    "yiisoft/html": "^3.0",
+                    "yiisoft/widget": "^2.0"
+                }
+            }
+        ]
+    }
+}

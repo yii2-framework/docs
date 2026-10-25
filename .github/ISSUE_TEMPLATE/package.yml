@@ -6,6 +6,10 @@ body:
   - type: markdown
     attributes:
       value: |
+        For a package published on Packagist, use the shorter "Add a package from Packagist" form first:
+        its catalog record is generated from the public metadata. Use this form for a package that is not on
+        Packagist, or when the record needs hand-curated evidence.
+
         Propose a package by linking its public source and compatibility evidence.
         A moderator reviews the proposal before a catalog data pull request can be accepted.
         This issue does not publish, install, or execute a package.
@@ -37,6 +41,33 @@ body:
       description: Describe its purpose, intended users, and known limitations briefly.
     validations:
       required: true
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      description: The one directory topic that best describes what the package does.
+      options:
+        - Forms and widgets
+        - Routing, languages and frontend
+        - Data modelling
+        - Application servers and workers
+        - Quality and debugging
+        - Build your own extension
+        - Views and HTML
+        - Authentication and security
+        - Queues and integrations
+        - Console and code generation
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: |
+        One to eight distinct lowercase slugs separated by commas, at most 32 characters each. Generic words
+        such as php, yii2, extension, or library are not tags. Leave empty to let the reviewer derive them from the
+        package keywords.
+      placeholder: file-upload, active-form
   - type: dropdown
     id: ecosystems
     attributes:

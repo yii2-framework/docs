@@ -46,9 +46,10 @@ import { buildDate, DOCS_VERSION, PROJECT_NAME } from "./src/site-meta.mjs";
 
 import {
   packages as catalogPackages,
+  groupByTopic,
   markdownText,
 } from "./src/lib/catalog.mjs";
-import { hostingFor, loadHosting } from "./src/lib/hosting.mjs";
+import { displayOrder, hostingFor, loadHosting } from "./src/lib/hosting.mjs";
 
 const site = "https://yii2-framework.github.io";
 const base = "/docs";
@@ -597,16 +598,23 @@ const llmsTxtOptions = {
     "it does not establish a latest release or every tested combination. " +
     "Catalog records are separate Markdown documents, outside the documentation bundles.\n\n" +
     `[Documentation](${site}${base}/documentation/index.md) lists the guides on this site by task.\n\n` +
-    catalogPackages
+    // One `###` group per topic that has records (catalog-topics.json order), hosted guides first in each group.
+    groupByTopic(displayOrder(catalogPackages, hosting))
       .map(
-        (pkg) =>
-          `- [${pkg.id}](${site}${base}/packages/${pkg.id}/index.md)` +
-          (hostingFor(pkg, hosting)?.guide === true
-            ? " (guide on this site)"
-            : "") +
-          `: ${markdownText(pkg.summary)}`,
+        ({ topic, packages }) =>
+          `### ${markdownText(topic.title)}\n\n` +
+          packages
+            .map(
+              (pkg) =>
+                `- [${pkg.id}](${site}${base}/packages/${pkg.id}/index.md)` +
+                (hostingFor(pkg, hosting)?.guide === true
+                  ? " (guide on this site)"
+                  : "") +
+                `: ${markdownText(pkg.summary)}`,
+            )
+            .join("\n"),
       )
-      .join("\n"),
+      .join("\n\n"),
   customSets: bundles.map(({ label, description, paths }) => ({
     label,
     description,

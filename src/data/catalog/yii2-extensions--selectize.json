@@ -3,6 +3,8 @@
     "name": "Selectize",
     "summary": "Selectize widgets for Yii2 with ActiveForm integration, remote JSON choices, Bootstrap 5 styling and lifecycle cleanup.",
     "family": "yii2-extensions",
+    "topic": "forms-widgets",
+    "tags": ["selectize", "autocomplete", "tags", "bootstrap5", "widget"],
     "ecosystems": ["yii2"],
     "kind": "extension",
     "php": ">=8.3",
@@ -28,5 +30,11 @@
         "reviewedAt": "2026-10-25",
         "url": "https://github.com/yii2-extensions/selectize/blob/bcfdbc304afda6279367e5d631e3677703792bdc/composer.json",
         "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 0,
+        "downloadsTotal": 204,
+        "favers": 1,
+        "fetchedAt": "2026-10-25"
     }
 }

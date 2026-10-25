@@ -3,6 +3,15 @@
     "name": "PSR bridge",
     "summary": "PSR-7 bridge for Yii2 with worker mode support.",
     "family": "yii2-extensions",
+    "topic": "servers-workers",
+    "tags": [
+        "psr-bridge",
+        "psr-7",
+        "psr-17",
+        "worker-mode",
+        "roadrunner",
+        "frankenphp"
+    ],
     "ecosystems": ["yii2"],
     "kind": "extension",
     "php": ">=8.3",
@@ -10,7 +19,7 @@
         {
             "ecosystem": "yii2",
             "constraint": "~2.0.55 || ^22.0@dev",
-            "evidence": "https://github.com/yii2-extensions/psr-bridge/blob/8dfc178f2d12d07e0601f204a707b2f440f24a28/composer.json"
+            "evidence": "https://github.com/yii2-extensions/psr-bridge/blob/7444bb410a1866ed627e132e8831679870fd47b6/composer.json"
         }
     ],
     "docsUrl": "/extensions/psr-bridge/",
@@ -21,12 +30,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/yii2-extensions/psr-bridge/blob/8dfc178f2d12d07e0601f204a707b2f440f24a28/composer.json",
+    "relationshipEvidence": "https://github.com/yii2-extensions/psr-bridge/blob/7444bb410a1866ed627e132e8831679870fd47b6/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "8dfc178f2d12d07e0601f204a707b2f440f24a28",
-        "reviewedAt": "2026-10-18",
-        "url": "https://github.com/yii2-extensions/psr-bridge/blob/8dfc178f2d12d07e0601f204a707b2f440f24a28/composer.json",
-        "kind": "source"
+        "ref": "0.4.1",
+        "commit": "7444bb410a1866ed627e132e8831679870fd47b6",
+        "reviewedAt": "2026-10-25",
+        "url": "https://github.com/yii2-extensions/psr-bridge/blob/7444bb410a1866ed627e132e8831679870fd47b6/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 1662,
+        "downloadsTotal": 13429,
+        "favers": 5,
+        "fetchedAt": "2026-10-25"
     }
 }

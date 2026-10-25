@@ -1,0 +1,173 @@
+{
+    "minified": "composer/2.0",
+    "packages": {
+        "yiisoft/yii2-dev": [
+            {
+                "name": "yiisoft/yii2-dev",
+                "description": "Yii PHP Framework Version 2 - Development Package",
+                "keywords": ["framework", "yii2"],
+                "homepage": "http://www.yiiframework.com/",
+                "version": "3.0.0-alpha1",
+                "version_normalized": "3.0.0.0-alpha1",
+                "license": ["BSD-3-Clause"],
+                "authors": [
+                    {
+                        "name": "Qiang Xue",
+                        "homepage": "http://www.yiiframework.com/",
+                        "role": "Founder and project lead"
+                    },
+                    {
+                        "name": "Alexander Makarov",
+                        "homepage": "http://rmcreative.ru/",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Maurizio Domba",
+                        "homepage": "http://mdomba.info/",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Carsten Brandt",
+                        "homepage": "http://cebe.cc/",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Timur Ruziev",
+                        "homepage": "http://resurtm.com/",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Paul Klimov",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Dmitry Naumenko",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Boudewijn Vahrmeijer",
+                        "homepage": "http://dynasource.eu",
+                        "role": "Core framework development"
+                    }
+                ],
+                "source": {
+                    "url": "https://github.com/yiisoft/yii2.git",
+                    "type": "git",
+                    "reference": "c184ef864e026e927e0515af4d9c6670e3bea4a8"
+                },
+                "type": "yii2-extension",
+                "support": {
+                    "forum": "http://www.yiiframework.com/forum/",
+                    "irc": "irc://irc.freenode.net/yii",
+                    "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+                    "source": "https://github.com/yiisoft/yii2",
+                    "wiki": "http://www.yiiframework.com/wiki/"
+                },
+                "funding": [
+                    {
+                        "url": "https://github.com/yiisoft",
+                        "type": "github"
+                    },
+                    {
+                        "url": "https://opencollective.com/yiisoft",
+                        "type": "open_collective"
+                    },
+                    {
+                        "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2",
+                        "type": "tidelift"
+                    }
+                ],
+                "require": {
+                    "php": ">=7.1.0",
+                    "ext-mbstring": "*",
+                    "ext-ctype": "*",
+                    "lib-pcre": "*",
+                    "psr/log": "~1.0.2",
+                    "yiisoft/yii2-composer": "~2.0.4",
+                    "psr/simple-cache": "~1.0.0",
+                    "psr/http-message": "~1.0.0",
+                    "cebe/markdown": "~1.0.0 | ~1.1.0"
+                }
+            },
+            {
+                "homepage": "https://www.yiiframework.com/",
+                "version": "2.0.55",
+                "version_normalized": "2.0.55.0",
+                "authors": [
+                    {
+                        "name": "Qiang Xue",
+                        "homepage": "https://www.yiiframework.com/",
+                        "role": "Founder and project lead"
+                    },
+                    {
+                        "name": "Alexander Makarov",
+                        "homepage": "https://rmcreative.ru/",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Maurizio Domba",
+                        "homepage": "http://mdomba.info/",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Carsten Brandt",
+                        "homepage": "https://www.cebe.cc/",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Timur Ruziev",
+                        "homepage": "http://resurtm.com/",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Paul Klimov",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Dmitry Naumenko",
+                        "role": "Core framework development"
+                    },
+                    {
+                        "name": "Boudewijn Vahrmeijer",
+                        "homepage": "http://dynasource.eu",
+                        "role": "Core framework development"
+                    }
+                ],
+                "source": {
+                    "url": "https://github.com/yiisoft/yii2.git",
+                    "type": "git",
+                    "reference": "babee66def599432735a1ed39c9cf0bc5163a775"
+                },
+                "support": {
+                    "forum": "https://forum.yiiframework.com/",
+                    "irc": "ircs://irc.libera.chat:6697/yii",
+                    "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+                    "source": "https://github.com/yiisoft/yii2",
+                    "wiki": "https://www.yiiframework.com/wiki"
+                },
+                "require": {
+                    "php": ">=7.4.0",
+                    "ext-mbstring": "*",
+                    "ext-ctype": "*",
+                    "lib-pcre": "*",
+                    "yiisoft/yii2-composer": "~2.0.4",
+                    "ezyang/htmlpurifier": "^4.17",
+                    "cebe/markdown": "~1.0.0 | ~1.1.0 | ~1.2.0",
+                    "bower-asset/jquery": "3.7.*@stable | 3.6.*@stable | 3.5.*@stable | 3.4.*@stable | 3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
+                    "bower-asset/inputmask": "^5.0.8 ",
+                    "bower-asset/punycode": "^2.2",
+                    "bower-asset/yii2-pjax": "~2.0.1"
+                }
+            },
+            {
+                "version": "2.0.54",
+                "version_normalized": "2.0.54.0",
+                "source": {
+                    "url": "https://github.com/yiisoft/yii2.git",
+                    "type": "git",
+                    "reference": "1389aacf035b0ad573aa84a16cdf7c3d3d5c3c5d"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,72 @@
+---
+name: Add a package from Packagist
+description: Propose a public Composer package; a maintainer imports its Packagist metadata into a draft pull request.
+title: "[Package]: "
+labels: ["catalog:proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for a package published on [Packagist](https://packagist.org/). A maintainer reviews the
+        proposal and, when it fits the directory, starts an import that reads the public Packagist and GitHub
+        metadata and opens a draft catalog pull request. Nothing is installed or executed. For a package that is
+        not on Packagist, use the "Package proposal" form instead.
+
+        Listing review covers metadata; it is not a security certification, maintenance guarantee, or official
+        Yii endorsement. Sponsorship and paid work do not affect acceptance or ordering. Use public links only.
+        Do not include credentials, private application code, or personal contact details. Report
+        vulnerabilities through the owning project's security policy.
+  - type: input
+    id: composer-name
+    attributes:
+      label: Composer package name
+      description: The exact lowercase vendor/package name published on Packagist.
+      placeholder: vendor/package
+    validations:
+      required: true
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      description: The one directory topic that best describes what the package does.
+      options:
+        - Forms and widgets
+        - Routing, languages and frontend
+        - Data modelling
+        - Application servers and workers
+        - Quality and debugging
+        - Build your own extension
+        - Views and HTML
+        - Authentication and security
+        - Queues and integrations
+        - Console and code generation
+    validations:
+      required: true
+  - type: dropdown
+    id: relationship
+    attributes:
+      label: Site curator's role in the package
+      description: |
+        Most proposals are independent community projects. Choose the second option only when the curator of this
+        site contributes to the package, and link the public evidence in Notes.
+      options:
+        - Independent community project
+        - The site curator contributes to it
+    validations:
+      required: true
+  - type: checkboxes
+    id: proposal-policy
+    attributes:
+      label: Proposal policy
+      options:
+        - label: I have read the proposal policy above and searched the package directory for an existing listing.
+          required: true
+        - label: I understand that human review of a catalog data pull request is required before publication.
+          required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: |
+        Optional context for the reviewer: whether you maintain, contribute to, or only use the package, known
+        compatibility limits, and public links.

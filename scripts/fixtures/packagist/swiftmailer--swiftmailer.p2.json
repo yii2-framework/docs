@@ -1,0 +1,65 @@
+{
+    "minified": "composer/2.0",
+    "packages": {
+        "swiftmailer/swiftmailer": [
+            {
+                "name": "swiftmailer/swiftmailer",
+                "description": "Swiftmailer, free feature-rich PHP mailer",
+                "keywords": ["mail", "mailer", "email"],
+                "homepage": "https://swiftmailer.symfony.com",
+                "version": "v6.3.0",
+                "version_normalized": "6.3.0.0",
+                "license": ["MIT"],
+                "authors": [
+                    {
+                        "name": "Chris Corbyn"
+                    },
+                    {
+                        "name": "Fabien Potencier"
+                    }
+                ],
+                "source": {
+                    "url": "https://github.com/swiftmailer/swiftmailer.git",
+                    "type": "git",
+                    "reference": "8a5d5072dca8f48460fce2f4131fcc495eec654c"
+                },
+                "type": "library",
+                "support": {
+                    "issues": "https://github.com/swiftmailer/swiftmailer/issues",
+                    "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.3.0"
+                },
+                "funding": [
+                    {
+                        "url": "https://github.com/fabpot",
+                        "type": "github"
+                    },
+                    {
+                        "url": "https://tidelift.com/funding/github/packagist/swiftmailer/swiftmailer",
+                        "type": "tidelift"
+                    }
+                ],
+                "require": {
+                    "php": ">=7.0.0",
+                    "egulias/email-validator": "^2.0|^3.1",
+                    "symfony/polyfill-iconv": "^1.0",
+                    "symfony/polyfill-mbstring": "^1.0",
+                    "symfony/polyfill-intl-idn": "^1.10"
+                },
+                "abandoned": "symfony/mailer"
+            },
+            {
+                "version": "v6.2.7",
+                "version_normalized": "6.2.7.0",
+                "source": {
+                    "url": "https://github.com/swiftmailer/swiftmailer.git",
+                    "type": "git",
+                    "reference": "15f7faf8508e04471f666633addacf54c0ab5933"
+                },
+                "support": {
+                    "issues": "https://github.com/swiftmailer/swiftmailer/issues",
+                    "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.2.7"
+                }
+            }
+        ]
+    }
+}

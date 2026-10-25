@@ -3,6 +3,8 @@
     "name": "Nested sets behavior",
     "summary": "Nested sets tree storage for Yii2 ActiveRecord with root and leaf queries, node moves, subtree deletes, multiple trees per table, and transactional writer locking.",
     "family": "yii2-extensions",
+    "topic": "data-modelling",
+    "tags": ["nested-sets", "tree", "hierarchy", "activerecord", "behavior"],
     "ecosystems": ["yii2"],
     "kind": "extension",
     "php": ">=8.3",
@@ -28,5 +30,11 @@
         "reviewedAt": "2026-10-25",
         "url": "https://github.com/yii2-extensions/nested-sets-behavior/blob/35e49c93f2b9dac39eae25239b742b22e76d6350/composer.json",
         "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 27,
+        "downloadsTotal": 504,
+        "favers": 3,
+        "fetchedAt": "2026-10-25"
     }
 }
