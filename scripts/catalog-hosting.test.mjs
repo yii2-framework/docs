@@ -74,7 +74,7 @@ test("hosting tolerates a missing skill index and falls back to skillsDir", () =
           title: "Demo",
           status: "published",
           packagist: "vendor/demo",
-          order: ["installation", "missing"],
+          order: ["index", "installation", "missing"],
           demos: true,
           skillsDir: "skills",
         },
@@ -90,6 +90,11 @@ test("hosting tolerates a missing skill index and falls back to skillsDir", () =
       '---\ntitle: "Install the demo"\n---\n',
     );
 
+    write(
+      "src/content/docs/extensions/demo/getting-started.md",
+      '---\ntitle: "Getting started"\n---\n',
+    );
+
     const hosting = loadHosting({ root });
     const demo = hostingFor("vendor/demo", hosting);
 
@@ -103,6 +108,7 @@ test("hosting tolerates a missing skill index and falls back to skillsDir", () =
       demo.pages.map(({ title, url }) => [title, url]),
       [
         ["Overview", "/extensions/demo/"],
+        ["Getting started", "/extensions/demo/getting-started/"],
         ["Install the demo", "/extensions/demo/installation/"],
       ],
     );

@@ -63,6 +63,16 @@ final class ReferenceContextTest extends TestCase
                 /** Private helper. */
                 private function hidden() {}
                 /**
+                 * Internal state.
+                 * @internal
+                 */
+                public $internalState;
+                /**
+                 * Internal helper.
+                 * @internal
+                 */
+                public function internalHelper() {}
+                /**
                  * Restored field summary.
                  * @var string
                  */
@@ -242,6 +252,45 @@ final class ReferenceContextTest extends TestCase
         self::assertStringStartsWith('https://example.test/source/ParentObject.php#L',
             $resolver->resolve('\fixture\hidden()', $type)->externalUrl);
         self::assertNull($resolver->resolve('$missing', $type));
+    }
+
+    public function testInternalMembersLinkToVerifiedDeclaringSourceWithoutPublicEntries(): void
+    {
+        $parent = $this->context->classes['fixture\\ParentObject'];
+        $child = $this->context->classes['fixture\\ChildObject'];
+        $url = 'https://example.test/source/ParentObject.php';
+        $this->context->sourceUrls[$parent->name] = $url;
+        $resolver = new LinkResolver($this->context);
+        $reflector = $this->context->reflectors[$parent->name];
+        $method = array_values(array_filter($reflector->getMethods(),
+            static fn($method): bool => $method->getName() === 'internalHelper'))[0];
+        $property = array_values(array_filter($reflector->getProperties(),
+            static fn($property): bool => $property->getName() === 'internalState'))[0];
+
+        foreach ([$parent, $child] as $type) {
+            self::assertArrayNotHasKey('internalHelper', $type->methods);
+            self::assertArrayNotHasKey('$internalState', $type->properties);
+
+            foreach (['internalHelper()', '\\fixture\\internalHelper()'] as $target) {
+                $resolution = $resolver->resolve($target, $type);
+                self::assertNotNull($resolution);
+                self::assertSame($url . '#L' . $method->getLocation()->getLineNumber(), $resolution->externalUrl);
+                self::assertSame('fixture\\ParentObject::internalHelper()', $resolution->canonical);
+                self::assertNull($resolution->type);
+                self::assertSame('', $resolution->anchor);
+            }
+
+            self::assertSame($url . '#L' . $property->getLocation()->getLineNumber(),
+                $resolver->resolve('$internalState', $type)->externalUrl);
+            self::assertNull($resolver->resolve('missingHelper()', $type));
+            self::assertNull($resolver->resolve('$missingState', $type));
+        }
+
+        self::assertSame($url . '#L' . $method->getLocation()->getLineNumber(),
+            $resolver->resolve('ParentObject::internalHelper()', $child)->externalUrl);
+        unset($this->context->sourceUrls[$parent->name]);
+        self::assertNull($resolver->resolve('internalHelper()', $child));
+        self::assertNull($resolver->resolve('$internalState', $child));
     }
 
     public function testGenuinelyUndocumentedFieldStillProducesWarnings(): void

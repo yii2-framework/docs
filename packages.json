@@ -269,5 +269,109 @@
             "testing"
         ],
         "skillsDir": "skills"
+    },
+    {
+        "name": "dynamicform",
+        "title": "DynamicForm",
+        "repo": "https://github.com/yii2-extensions/dynamicform",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "Yii2\\Extensions\\DynamicForm",
+        "localPath": "../../yii2-extensions/dynamicform",
+        "packagist": "yii2-extensions/dynamicform",
+        "order": [
+            "installation",
+            "configuration",
+            "examples",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
+    },
+    {
+        "name": "diff",
+        "title": "Diff",
+        "repo": "https://github.com/php-forge/diff",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "PHPForge\\Diff",
+        "localPath": "../../php-forge/diff",
+        "packagist": "php-forge/diff",
+        "order": [
+            "installation",
+            "algorithms",
+            "examples",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
+    },
+    {
+        "name": "foxy",
+        "title": "Foxy",
+        "repo": "https://github.com/php-forge/foxy",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "Foxy",
+        "localPath": "../../php-forge/foxy",
+        "packagist": "php-forge/foxy",
+        "order": [
+            "index",
+            "config",
+            "usage",
+            "events",
+            "faqs",
+            "migration",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
+    },
+    {
+        "name": "scaffold",
+        "title": "Scaffold",
+        "repo": "https://github.com/php-forge/scaffold",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "PHPForge\\Scaffold",
+        "localPath": "../../php-forge/scaffold",
+        "packagist": "php-forge/scaffold",
+        "order": [
+            "installation",
+            "configuration",
+            "providers",
+            "modes",
+            "console",
+            "testing"
+        ]
+    },
+    {
+        "name": "yii3-debug",
+        "title": "Yii3 Debug",
+        "repo": "https://github.com/yii3/debug",
+        "ref": "main",
+        "status": "published",
+        "docsDir": "docs",
+        "srcDir": "src",
+        "namespace": "Yii3\\Debug",
+        "localPath": "../../yii3/debug",
+        "packagist": "yii3/debug",
+        "order": [
+            "index",
+            "configuration",
+            "examples",
+            "screenshots",
+            "agents",
+            "testing"
+        ],
+        "skillsDir": "skills"
     }
 ]

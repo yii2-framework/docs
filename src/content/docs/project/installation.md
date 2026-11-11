@@ -8,7 +8,7 @@ These instructions maintain this documentation repository. To create a Yii appli
 
 ## Requirements
 
-Use Node 22.12 or newer, npm 9.6.5 or newer, Git, PHP 8.3 or newer, and Composer 2.
+Use Node 22.23.4 or newer, npm 9.6.5 or newer, Git, PHP 8.3 or newer, and Composer 2.
 The reference generator requires `mbstring`; the FilePond demos also use `fileinfo` and GD.
 Live demos use the PHP requirements of their package dependencies. Check `tools/composer.json` and
 `tools/demos/composer.json` before changing the PHP version.

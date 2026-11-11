@@ -24,12 +24,12 @@
         "check:skills": "node scripts/check-skill-installation.mjs"
     },
     "dependencies": {
-        "@astrojs/markdown-remark": "7.3.3",
-        "@astrojs/mdx": "8.1.0",
-        "@astrojs/starlight": "0.42.6",
+        "@astrojs/markdown-remark": "7.3.4",
+        "@astrojs/mdx": "8.1.1",
+        "@astrojs/starlight": "0.42.7",
         "@fontsource-variable/atkinson-hyperlegible-mono": "5.3.0",
         "@fontsource-variable/atkinson-hyperlegible-next": "5.3.0",
-        "astro": "7.4.0",
+        "astro": "7.4.2",
         "astro-og-canvas": "0.13.2",
         "github-slugger": "2.0.0",
         "hast-util-select": "6.0.4",
@@ -42,7 +42,7 @@
         "starlight-llms-txt": "0.12.0",
         "unified": "11.0.5",
         "unist-util-remove": "4.0.0",
-        "unist-util-visit": "5.1.0"
+        "unist-util-visit": "5.2.0"
     },
     "devDependencies": {
         "bootstrap": "6.0.0-alpha.1",

@@ -186,6 +186,26 @@ export function validateManifest(manifest, file) {
 
 const GIT_ENV = { ...process.env, GIT_TERMINAL_PROMPT: "0" };
 
+/**
+ * Returns a remote URL and command-local Git options that keep an explicit HTTPS URL on HTTPS.
+ *
+ * The identity rewrite matches the complete URL, so it is more specific than a user-level rule such as
+ * `url.git@github.com:.insteadOf=https://github.com/`. Other Git configuration, including TLS and credential
+ * settings, remains active.
+ */
+export function gitRemote(repo) {
+  if (!repo.startsWith("https://")) {
+    return { options: [], url: repo };
+  }
+
+  const url = `${repo.replace(/\/+$/, "")}/`;
+
+  return {
+    options: ["-c", `url.${url}.insteadOf=${url}`],
+    url,
+  };
+}
+
 /** Runs git and returns its trimmed stdout, or `null` when it exits with an error. */
 function gitOutput(args) {
   const result = spawnSync("git", args, { encoding: "utf8", env: GIT_ENV });
@@ -286,12 +306,14 @@ function obtainSources(pkg, useLocal) {
   const dir = path.join(CACHE_DIR, pkg.name);
   const sparse = framework ? ["--filter=blob:none", "--sparse"] : [];
   const pinned = /^[a-f0-9]{40}$/i.test(pkg.ref);
+  const remote = gitRemote(pkg.repo);
 
   rmSync(dir, { recursive: true, force: true });
   mkdirSync(CACHE_DIR, { recursive: true });
   execFileSync(
     "git",
     [
+      ...remote.options,
       "clone",
       "--quiet",
       "--depth",
@@ -299,7 +321,7 @@ function obtainSources(pkg, useLocal) {
       "--single-branch",
       ...sparse,
       ...(pinned ? ["--no-checkout"] : ["--branch", pkg.ref]),
-      pkg.repo,
+      remote.url,
       dir,
     ],
     { stdio: ["ignore", "inherit", "inherit"], env: GIT_ENV },
@@ -308,21 +330,43 @@ function obtainSources(pkg, useLocal) {
   if (pinned) {
     execFileSync(
       "git",
-      ["-C", dir, "fetch", "--quiet", "--depth", "1", "origin", pkg.ref],
+      [
+        ...remote.options,
+        "-C",
+        dir,
+        "fetch",
+        "--quiet",
+        "--depth",
+        "1",
+        "origin",
+        pkg.ref,
+      ],
       { stdio: "inherit", env: GIT_ENV },
     );
     execFileSync(
       "git",
-      ["-C", dir, "checkout", "--quiet", "--detach", "FETCH_HEAD"],
+      [
+        ...remote.options,
+        "-C",
+        dir,
+        "checkout",
+        "--quiet",
+        "--detach",
+        "FETCH_HEAD",
+      ],
       { stdio: "inherit", env: GIT_ENV },
     );
   }
 
   if (framework) {
-    execFileSync("git", ["-C", dir, "sparse-checkout", "set", pkg.srcDir], {
-      stdio: "inherit",
-      env: GIT_ENV,
-    });
+    execFileSync(
+      "git",
+      [...remote.options, "-C", dir, "sparse-checkout", "set", pkg.srcDir],
+      {
+        stdio: "inherit",
+        env: GIT_ENV,
+      },
+    );
   }
 
   const commit = execFileSync("git", ["-C", dir, "rev-parse", "HEAD"], {
@@ -690,7 +734,10 @@ export function linkRewriter({
         : "blob";
     const clean = target === "." ? "" : `/${target.replace(/\/$/, "")}`;
 
-    return `${blobBase}/${kind}/${ref}${clean}${suffix}`;
+    // Images outside docsDir (for example README screenshots) must return image bytes, not a GitHub HTML page.
+    const route = kind === "blob" && IMAGE.test(target) ? "raw" : kind;
+
+    return `${blobBase}/${route}/${ref}${clean}${suffix}`;
   };
 }
 
@@ -1021,6 +1068,28 @@ export function missingOrderPages(order, markdown) {
   return order.filter((name) => !names.has(name));
 }
 
+/** Map source pages to distinct output names without overwriting the README landing page. */
+export function packagePages(docsDir, markdown) {
+  const pages = new Map([["README.md", "index.md"]]);
+  const used = new Set(["index.md"]);
+
+  for (const file of markdown) {
+    const target =
+      file.toLowerCase() === "index.md"
+        ? "getting-started.md"
+        : file.toLowerCase();
+    if (used.has(target)) {
+      throw new Error(
+        `${docsDir}/${file}: output page ${target} conflicts with another source.`,
+      );
+    }
+    pages.set(`${docsDir}/${file}`, target);
+    used.add(target);
+  }
+
+  return pages;
+}
+
 /**
  * Syncs one package into `src/content/docs/extensions/<name>/`; a framework entry only gets its sources.
  *
@@ -1062,11 +1131,7 @@ export function syncPackage(pkg, useLocal) {
       .filter((file) => IMAGE.test(file))
       .map((file) => `${docsDir}/${file}`),
   );
-  const pages = new Map([["README.md", "index.md"]]);
-
-  for (const file of markdown) {
-    pages.set(`${docsDir}/${file}`, file.toLowerCase());
-  }
+  const pages = packagePages(docsDir, markdown);
 
   const blobBase = pkg.repo.replace(/\.git$/, "").replace(/\/$/, "");
   const rewrite = linkRewriter({
@@ -1097,7 +1162,10 @@ export function syncPackage(pkg, useLocal) {
     const index = order.indexOf(name);
 
     return index === -1
-      ? 100 + markdown.map((file) => file.replace(/\.md$/i, "")).indexOf(name)
+      ? 100 +
+          markdown
+            .map((file) => file.replace(/\.md$/i, "").toLowerCase())
+            .indexOf(name)
       : index + 1;
   };
   const extra = packageSection(
@@ -1111,12 +1179,13 @@ export function syncPackage(pkg, useLocal) {
 
   for (const [sourceFile, outName] of pages) {
     const isIndex = outName === "index.md";
+    const name = path.basename(sourceFile).replace(/\.md$/i, "").toLowerCase();
     const page = convertPage(readFileSync(path.join(dir, sourceFile), "utf8"), {
       sourceFile,
       fallbackTitle: isIndex ? pkg.title : null,
       packageTitle: pkg.title,
       rewrite,
-      order: isIndex ? 0 : rank(outName.replace(/\.md$/, "")),
+      order: isIndex ? 0 : rank(name),
       label: isIndex ? "Overview" : null,
       editUrl: `${blobBase}/edit/${pkg.ref}/${sourceFile}`,
       generatedFrom,

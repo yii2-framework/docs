@@ -1,0 +1,34 @@
+{
+    "id": "php-forge/foxy",
+    "name": "Foxy",
+    "summary": "Composer plugin that aggregates and installs frontend dependencies.",
+    "family": "php-forge",
+    "topic": "routing-frontend",
+    "tags": ["assets", "composer-plugin", "npm"],
+    "ecosystems": ["php"],
+    "kind": "tool",
+    "php": "^8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": "^8.3",
+            "evidence": "https://github.com/php-forge/foxy/blob/3257af7e523d2fc7da3889adf5fcba5dda197865/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/foxy/",
+    "repository": "https://github.com/php-forge/foxy",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/php-forge/foxy/blob/3257af7e523d2fc7da3889adf5fcba5dda197865/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "3257af7e523d2fc7da3889adf5fcba5dda197865",
+        "reviewedAt": "2026-10-27",
+        "url": "https://github.com/php-forge/foxy/blob/3257af7e523d2fc7da3889adf5fcba5dda197865/composer.json",
+        "kind": "source"
+    }
+}

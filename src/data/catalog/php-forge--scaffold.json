@@ -1,0 +1,34 @@
+{
+    "id": "php-forge/scaffold",
+    "name": "Scaffold",
+    "summary": "Declarative multi-layer file scaffolding for Composer projects.",
+    "family": "php-forge",
+    "topic": "console-tooling",
+    "tags": ["composer-plugin", "scaffold", "scaffolding", "file-mapping"],
+    "ecosystems": ["php"],
+    "kind": "tool",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": ">=8.3",
+            "evidence": "https://github.com/php-forge/scaffold/blob/57c60240f9bd90d0e6248bcb4a1ac0a5230866d2/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/scaffold/",
+    "repository": "https://github.com/php-forge/scaffold",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/php-forge/scaffold/blob/57c60240f9bd90d0e6248bcb4a1ac0a5230866d2/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "57c60240f9bd90d0e6248bcb4a1ac0a5230866d2",
+        "reviewedAt": "2026-10-27",
+        "url": "https://github.com/php-forge/scaffold/blob/57c60240f9bd90d0e6248bcb4a1ac0a5230866d2/composer.json",
+        "kind": "source"
+    }
+}

@@ -65,6 +65,7 @@ Use the local checkout procedure for changes not yet published.
 | Skill                           | Owning repository                      | Guide                                                                |
 | ------------------------------- | -------------------------------------- | -------------------------------------------------------------------- |
 | `yii2-bootstrap6-widgets`       | `yii2-extensions/bootstrap6`           | [Bootstrap 6](../extensions/bootstrap6/agents.md)                    |
+| `yii2-dynamicform`              | `yii2-extensions/dynamicform`          | [Dynamic form rows](../extensions/dynamicform/agents.md)             |
 | `yii2-select2`                  | `yii2-extensions/select2`              | [Select2 integration](../extensions/select2/agents.md)               |
 | `yii2-selectize`                | `yii2-extensions/selectize`            | [Selectize integration](../extensions/selectize/agents.md)           |
 | `yii2-nested-sets`              | `yii2-extensions/nested-sets-behavior` | [Nested sets behavior](../extensions/nested-sets-behavior/agents.md) |
@@ -73,6 +74,7 @@ Use the local checkout procedure for changes not yet published.
 | `yii2-roadrunner-worker`        | `yii2-extensions/road-runner`          | [RoadRunner worker](../extensions/road-runner/agents.md)             |
 | `yii2-frankenphp-worker`        | `yii2-extensions/franken-php`          | [FrankenPHP worker](../extensions/franken-php/agents.md)             |
 | `yii2-debug-inspection`         | `yii2-extensions/debug`                | [Debug inspection](../extensions/debug/agents.md)                    |
+| `yii3-debug-integration`        | `yii3/debug`                           | [Yii3 Debug integration](../extensions/yii3-debug/agents.md)         |
 | `yii2-phpstan-analysis`         | `yii2-extensions/phpstan`              | [Static analysis](../extensions/phpstan/agents.md)                   |
 | `yii2-inertia-integration`      | `yii2-extensions/inertia`              | [Inertia integration](../extensions/inertia/agents.md)               |
 | `yii2-localeurls-configuration` | `yii2-extensions/localeurls`           | [Language URLs](../extensions/localeurls/agents.md)                  |

@@ -85,6 +85,7 @@ function describe(root, entry, type, skills) {
     ? [
         { slug: "", title: "Overview", url, file: file("index") },
         ...(entry.order ?? [])
+          .map((slug) => (slug === "index" ? "getting-started" : slug))
           .filter((slug) => existsSync(path.join(directory, `${slug}.md`)))
           .map((slug) => ({
             slug,

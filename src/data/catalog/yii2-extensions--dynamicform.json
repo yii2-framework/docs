@@ -1,0 +1,40 @@
+{
+    "id": "yii2-extensions/dynamicform",
+    "name": "DynamicForm",
+    "summary": "Yii2 widget for cloning nested form elements while maintaining accessibility and client validation.",
+    "family": "yii2-extensions",
+    "topic": "forms-widgets",
+    "tags": ["dynamic-form", "widget", "jquery", "nested-forms"],
+    "ecosystems": ["yii2"],
+    "kind": "extension",
+    "php": ">=8.1",
+    "compatibility": [
+        {
+            "ecosystem": "yii2",
+            "constraint": "^2.0.55 || ^22.0",
+            "evidence": "https://github.com/yii2-extensions/dynamicform/blob/144fbd3dfcf0e32d01f1528b910829aa54f09c6b/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/dynamicform/",
+    "repository": "https://github.com/yii2-extensions/dynamicform",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "yii2-extensions",
+        "url": "https://github.com/yii2-extensions"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/yii2-extensions/dynamicform/blob/144fbd3dfcf0e32d01f1528b910829aa54f09c6b/composer.json",
+    "provenance": {
+        "ref": "2.0.0",
+        "commit": "144fbd3dfcf0e32d01f1528b910829aa54f09c6b",
+        "reviewedAt": "2026-11-11",
+        "url": "https://github.com/yii2-extensions/dynamicform/blob/144fbd3dfcf0e32d01f1528b910829aa54f09c6b/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 4184,
+        "downloadsTotal": 28797,
+        "favers": 8,
+        "fetchedAt": "2026-11-11"
+    }
+}
