@@ -948,16 +948,16 @@
         },
         {
             "name": "yiisoft/yii2-apidoc",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-apidoc.git",
-                "reference": "445043e62159a28838ee52d8c9b29f233c0d7108"
+                "reference": "8e497c08205a8800f17708bf854e03c994b454f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-apidoc/zipball/445043e62159a28838ee52d8c9b29f233c0d7108",
-                "reference": "445043e62159a28838ee52d8c9b29f233c0d7108",
+                "url": "https://api.github.com/repos/yiisoft/yii2-apidoc/zipball/8e497c08205a8800f17708bf854e03c994b454f3",
+                "reference": "8e497c08205a8800f17708bf854e03c994b454f3",
                 "shasum": ""
             },
             "require": {
@@ -974,12 +974,13 @@
                 "yiisoft/yii2": "~2.0.16"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.95",
+                "mspirkov/yii2-rector": "^0.2",
                 "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^11.5",
                 "rector/rector": "^2.3",
                 "spatie/phpunit-snapshot-assertions": "^5.0",
-                "yiisoft/yii2-bootstrap": "~2.0.0",
-                "yiisoft/yii2-coding-standards": "^3.0"
+                "yiisoft/yii2-bootstrap": "~2.0.0"
             },
             "suggest": {
                 "ext-intl": "for generating slugs in non-English guides",
@@ -1034,7 +1035,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-30T20:16:48+00:00"
+            "time": "2026-11-04T12:02:34+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",

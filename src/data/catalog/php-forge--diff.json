@@ -1,0 +1,34 @@
+{
+    "id": "php-forge/diff",
+    "name": "Diff",
+    "summary": "Git-compatible line diff and unified diff renderer for PHP.",
+    "family": "php-forge",
+    "topic": "quality-debugging",
+    "tags": ["diff", "git", "unified-diff"],
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": ">=8.3",
+            "evidence": "https://github.com/php-forge/diff/blob/abf7720e6e365d16d8b0e5cbeab9310e5fe5edba/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/diff/",
+    "repository": "https://github.com/php-forge/diff",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/php-forge/diff/blob/abf7720e6e365d16d8b0e5cbeab9310e5fe5edba/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "abf7720e6e365d16d8b0e5cbeab9310e5fe5edba",
+        "reviewedAt": "2026-10-27",
+        "url": "https://github.com/php-forge/diff/blob/abf7720e6e365d16d8b0e5cbeab9310e5fe5edba/composer.json",
+        "kind": "source"
+    }
+}

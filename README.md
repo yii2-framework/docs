@@ -18,7 +18,7 @@
         <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/quality.yml?style=for-the-badge&label=Quality&logo=github" alt="Quality">
     </a>
     <a href="https://github.com/yii2-framework/docs/actions/workflows/security.yml" target="_blank">
-        <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/security.yml?style=for-the-badge&label=Security&logo=github" alt="Security">
+        <img src="https://img.shields.io/github/actions/workflow/status/yii2-framework/docs/security.yml?style=for-the-badge&label=Zizmor&logo=github" alt="Zizmor">
     </a>
 </p>
 

@@ -2,9 +2,9 @@
     "description": "Maximum yii2-apidoc errors and warnings and unresolved PHPDoc links per package; tools/bin/reference --baseline fails when a count grows. Values are the maximum of a clone-mode and a local-mode run; update with --update-baseline.",
     "packages": {
         "bootstrap6": {
-            "errors": 223,
-            "warnings": 274,
-            "unresolvedLinks": 6
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
         },
         "filepond": {
             "errors": 10,
@@ -67,6 +67,31 @@
             "unresolvedLinks": 0
         },
         "nested-sets-behavior": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "diff": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "foxy": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "scaffold": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "yii3-debug": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "dynamicform": {
             "errors": 0,
             "warnings": 0,
             "unresolvedLinks": 0

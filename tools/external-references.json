@@ -1,4 +1,11 @@
 {
+    "Composer\\IO\\IOInterface::write()": "https://github.com/composer/composer/blob/f0de0bf90226853b841672f086d8b58b02332504/src/Composer/IO/IOInterface.php#L75",
+    "Composer\\IO\\IOInterface::writeError()": "https://github.com/composer/composer/blob/f0de0bf90226853b841672f086d8b58b02332504/src/Composer/IO/IOInterface.php#L86",
+    "Composer\\Semver\\VersionParser": "https://github.com/composer/semver/blob/528948210cc46f967a4b98e83b19e76f2b504993/src/VersionParser.php",
+    "Composer\\Util\\Url::sanitize()": "https://github.com/composer/composer/blob/f0de0bf90226853b841672f086d8b58b02332504/src/Composer/Util/Url.php#L130",
+    "PHPForge\\Debug\\Panel\\Dump\\DumpCardRenderer": "https://github.com/php-forge/debug-core/blob/53c259241281d3275cd5cbfa64f08eb986d6bce3/src/Panel/Dump/DumpCardRenderer.php",
+    "PHPForge\\Debug\\Panel\\User\\UserPanel": "https://github.com/php-forge/debug-core/blob/53c259241281d3275cd5cbfa64f08eb986d6bce3/src/Panel/User/UserPanel.php",
+    "PHPForge\\Debug\\Registration\\PanelOverride::KEYS": "https://github.com/php-forge/debug-core/blob/53c259241281d3275cd5cbfa64f08eb986d6bce3/src/Registration/PanelOverride.php#L29",
     "PHPForge\\Debug\\Capture\\CapturePolicy": "https://github.com/php-forge/debug-core/blob/b70459f033a1d7a1c5edf7951029aad2061986dd/src/Capture/CapturePolicy.php",
     "PHPForge\\Debug\\CollectorInterface": "https://github.com/php-forge/debug/blob/e4fbb8c3238a4d011ceef5e0094344abd50deaf4/src/CollectorInterface.php",
     "PHPForge\\Debug\\CollectorInterface::id()": "https://github.com/php-forge/debug/blob/e4fbb8c3238a4d011ceef5e0094344abd50deaf4/src/CollectorInterface.php#L29",
@@ -29,5 +36,13 @@
     "PHPStan\\Type\\DynamicMethodReturnTypeExtension": "https://apiref.phpstan.org/2.3.x/PHPStan.Type.DynamicMethodReturnTypeExtension.html",
     "PHPStan\\Type\\DynamicStaticMethodReturnTypeExtension": "https://apiref.phpstan.org/2.3.x/PHPStan.Type.DynamicStaticMethodReturnTypeExtension.html",
     "PHPStan\\Type\\ExpressionTypeResolverExtension": "https://apiref.phpstan.org/2.3.x/PHPStan.Type.ExpressionTypeResolverExtension.html",
-    "PHPStan\\Type\\MixedType": "https://apiref.phpstan.org/2.3.x/PHPStan.Type.MixedType.html"
+    "PHPStan\\Type\\MixedType": "https://apiref.phpstan.org/2.3.x/PHPStan.Type.MixedType.html",
+    "Symfony\\Component\\Console\\Output\\ConsoleOutputInterface": "https://github.com/symfony/console/blob/21f1bc2296f7ff6043241a8dcbc09559b3732820/Output/ConsoleOutputInterface.php#L20",
+    "UIAwesome\\Html\\Helper\\Enum::normalizeStringValue()": "https://github.com/ui-awesome/html-helper/blob/ab5b9c6fd20a29ad0e3606b41bc4c45068b467aa/src/Base/BaseEnum.php#L95",
+    "UIAwesome\\Html\\Svg\\Svg": "https://github.com/ui-awesome/html-svg/blob/6b1e0ec9d283d37ee92d2c9c2f6a24d5ea7740d2/src/Svg.php",
+    "Yiisoft\\Mailer\\Event\\AfterSend": "https://github.com/yiisoft/mailer/blob/8c0ba1558760ce990285ce7f24b91f6fb619b06f/src/Event/AfterSend.php",
+    "Yiisoft\\Rbac\\ManagerInterface": "https://github.com/yiisoft/rbac/blob/229a47e0af4ede19dfe6da2220af7cabee724dbf/src/ManagerInterface.php",
+    "Yiisoft\\User\\CurrentUser": "https://github.com/yiisoft/user/blob/f982e9faa3acac8a04299968b1c74e5123e4cc14/src/CurrentUser.php",
+    "Yiisoft\\VarDumper\\Handler\\EchoHandler": "https://github.com/yiisoft/var-dumper/blob/0860637f99fddfbeb98976bcc716b2aabc94ff85/src/Handler/EchoHandler.php",
+    "PHPStan\\Rules\\Rule": "https://apiref.phpstan.org/2.3.x/PHPStan.Rules.Rule.html"
 }

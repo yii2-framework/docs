@@ -1,0 +1,34 @@
+{
+    "id": "yii3/debug",
+    "name": "Yii3 Debug",
+    "summary": "Debugger and toolbar for Yii3 applications with request history, logs, events, profiling and database inspection.",
+    "family": "community",
+    "topic": "quality-debugging",
+    "tags": ["debug", "debug-toolbar", "profiling", "request-inspector"],
+    "ecosystems": ["yii3"],
+    "kind": "tool",
+    "php": ">=8.3",
+    "compatibility": [
+        {
+            "ecosystem": "yii3",
+            "constraint": "Yii 3 application using Yii Config Plugin",
+            "evidence": "https://github.com/yii3/debug/blob/419f7d0820d7ef8f6615ec106314efcfb452c8bd/README.md"
+        }
+    ],
+    "docsUrl": "/extensions/yii3-debug/",
+    "repository": "https://github.com/yii3/debug",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "community",
+    "relationshipEvidence": "https://github.com/yii3/debug/blob/419f7d0820d7ef8f6615ec106314efcfb452c8bd/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "419f7d0820d7ef8f6615ec106314efcfb452c8bd",
+        "reviewedAt": "2026-10-29",
+        "url": "https://github.com/yii3/debug/blob/419f7d0820d7ef8f6615ec106314efcfb452c8bd/composer.json",
+        "kind": "source"
+    }
+}

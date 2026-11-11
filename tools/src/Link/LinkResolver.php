@@ -103,7 +103,7 @@ final class LinkResolver
             $subject = $this->findMember($type, $member);
 
             if ($subject === null) {
-                return $this->privateSource($type, $member) ?? $this->externalAncestor($type, $member);
+                return $this->excludedMemberSource($type, $member) ?? $this->externalAncestor($type, $member);
             }
 
             return $this->memberResolution($type, $subject, $this->shortName($type) . '::');
@@ -117,8 +117,8 @@ final class LinkResolver
                     return $this->memberResolution($candidate, $subject, '');
                 }
 
-                if (($private = $this->privateSource($candidate, $target)) !== null) {
-                    return $private;
+                if (($source = $this->excludedMemberSource($candidate, $target)) !== null) {
+                    return $source;
                 }
             }
         }
@@ -142,8 +142,8 @@ final class LinkResolver
                     return $this->memberResolution($candidate, $subject, '');
                 }
 
-                if (($private = $this->privateSource($candidate, $member)) !== null) {
-                    return $private;
+                if (($source = $this->excludedMemberSource($candidate, $member)) !== null) {
+                    return $source;
                 }
             }
 
@@ -408,9 +408,9 @@ final class LinkResolver
     }
 
     /**
-     * Links a verified private member to its source line without inventing a public API entry or anchor.
+     * Links a verified private or `@internal` member to its source line without inventing a public API entry or anchor.
      */
-    private function privateSource(TypeDoc $type, string $member): ?Resolution
+    private function excludedMemberSource(TypeDoc $type, string $member): ?Resolution
     {
         $reflector = $this->context->reflectors[$type->name] ?? null;
         $url = $this->context->sourceUrls[$type->name] ?? null;
@@ -423,7 +423,8 @@ final class LinkResolver
         $name = str_starts_with($member, '$') ? substr($member, 1) : rtrim($member, '()');
 
         foreach ($subjects as $subject) {
-            if ($subject->getName() === $name && (string) $subject->getVisibility() === 'private') {
+            if ($subject->getName() === $name
+                && ((string) $subject->getVisibility() === 'private' || $subject->getDocBlock()?->hasTag('internal'))) {
                 return new Resolution(null, null, '', $type->name . '::' . $member, $member,
                     $url . '#L' . $subject->getLocation()->getLineNumber());
             }
