@@ -1,0 +1,34 @@
+{
+    "id": "ui-awesome/model",
+    "name": "Model",
+    "summary": "Typed model mapping, nested properties and value casting for PHP applications.",
+    "family": "ui-awesome",
+    "topic": "data-modelling",
+    "tags": ["model", "data-binding", "nested-properties", "type-casting"],
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": "^8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": "^8.3",
+            "evidence": "https://github.com/ui-awesome/model/blob/256aa4d3dd06f563c86574d82fa94b3d80e5437b/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/model/",
+    "repository": "https://github.com/ui-awesome/model",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/ui-awesome/model/blob/256aa4d3dd06f563c86574d82fa94b3d80e5437b/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "256aa4d3dd06f563c86574d82fa94b3d80e5437b",
+        "reviewedAt": "2026-11-13",
+        "url": "https://github.com/ui-awesome/model/blob/256aa4d3dd06f563c86574d82fa94b3d80e5437b/composer.json",
+        "kind": "source"
+    }
+}

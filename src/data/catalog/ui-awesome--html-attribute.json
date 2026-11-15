@@ -1,0 +1,34 @@
+{
+    "id": "ui-awesome/html-attribute",
+    "name": "HTML Attribute",
+    "summary": "Type-safe traits and backed enums for HTML attributes, ARIA, data, events and element-specific setters.",
+    "family": "ui-awesome",
+    "topic": "html-views",
+    "tags": ["html", "attributes", "traits", "enums", "aria"],
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": "^8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": "^8.3",
+            "evidence": "https://github.com/ui-awesome/html-attribute/blob/55fc76e76fca1eff85195ef921c652b9a117df8a/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/html-attribute/",
+    "repository": "https://github.com/ui-awesome/html-attribute",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/ui-awesome/html-attribute/blob/55fc76e76fca1eff85195ef921c652b9a117df8a/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "55fc76e76fca1eff85195ef921c652b9a117df8a",
+        "reviewedAt": "2026-11-14",
+        "url": "https://github.com/ui-awesome/html-attribute/blob/55fc76e76fca1eff85195ef921c652b9a117df8a/composer.json",
+        "kind": "source"
+    }
+}

@@ -9,7 +9,7 @@
  * Topic jump row: one link per topic with its count. Outlined chips in the control border (4.5:1 dark, 4.0:1 light
  * on the page), link text 15px (9.8:1 dark, 6.2:1 light), 44px high targets.
  */
-.portal-container .directory-topics ul {
+.portal-container :is(.directory-topics, .catalog-quick-selections) ul {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -18,11 +18,11 @@
     list-style: none;
 }
 
-.portal-container .directory-topics li {
+.portal-container :is(.directory-topics, .catalog-quick-selections) li {
     margin: 0;
 }
 
-.portal-container .directory-topics a {
+.portal-container :is(.directory-topics, .catalog-quick-selections) a {
     display: inline-flex;
     align-items: center;
     min-height: 2.75rem;
@@ -45,14 +45,16 @@
 }
 
 /* The topic being read (aria-current, set by the script): the accent border and the chip fill. */
-.portal-container .directory-topics a[aria-current] {
+.portal-container
+    :is(.directory-topics, .catalog-quick-selections)
+    a[aria-current] {
     border-color: var(--sl-color-text-accent);
     background: var(--site-chip-bg);
     color: var(--site-chip-ink);
 }
 
 /* Hover: the chip fill with chip ink (6.6:1 dark, 7.6:1 light); the border stays 3.1:1 dark, 3.3:1 light on it. */
-.portal-container .directory-topics a:hover {
+.portal-container :is(.directory-topics, .catalog-quick-selections) a:hover {
     background: var(--site-chip-bg);
     color: var(--site-chip-ink);
     text-decoration: underline;

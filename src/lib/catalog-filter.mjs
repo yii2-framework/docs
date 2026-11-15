@@ -1,3 +1,11 @@
+/** Quick entry points reuse the ecosystem and collection filters, without conflating their taxonomies. */
+export const quickSelections = Object.freeze([
+  Object.freeze({ label: "Yii2", key: "ecosystem", value: "yii2" }),
+  Object.freeze({ label: "Yii3", key: "ecosystem", value: "yii3" }),
+  Object.freeze({ label: "UI Awesome", key: "family", value: "ui-awesome" }),
+  Object.freeze({ label: "PHP Forge", key: "family", value: "php-forge" }),
+]);
+
 export const filterKeys = Object.freeze([
   "q",
   "ecosystem",
@@ -168,4 +176,10 @@ export function filtersUrl(url, input = {}) {
     if (filters[key]) result.searchParams.set(key, filters[key]);
   }
   return result;
+}
+
+/** Current quick links reflect the normalized filters, including restored browser history. */
+export function activeQuickSelections(input = {}) {
+  const filters = normalizeFilters(input);
+  return quickSelections.filter(({ key, value }) => filters[key] === value);
 }

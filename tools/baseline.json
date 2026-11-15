@@ -95,6 +95,56 @@
             "errors": 0,
             "warnings": 0,
             "unresolvedLinks": 0
+        },
+        "html-helper": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "html-contracts": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "coding-standard": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "model": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "html-mixin": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "form-model": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "html-attribute": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "html-core": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "html": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
+        },
+        "html-svg": {
+            "errors": 0,
+            "warnings": 0,
+            "unresolvedLinks": 0
         }
     }
 }

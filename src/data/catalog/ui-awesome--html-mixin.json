@@ -1,0 +1,34 @@
+{
+    "id": "ui-awesome/html-mixin",
+    "name": "HTML Mixin",
+    "summary": "Immutable PHP traits for HTML attributes, content, templates and prefix, suffix and label collections.",
+    "family": "ui-awesome",
+    "topic": "html-views",
+    "tags": ["html", "traits", "attributes", "templates"],
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": "^8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": "^8.3",
+            "evidence": "https://github.com/ui-awesome/html-mixin/blob/5b7982953a84d6fb2317d72babec0d0ece7cc78a/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/html-mixin/",
+    "repository": "https://github.com/ui-awesome/html-mixin",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/ui-awesome/html-mixin/blob/5b7982953a84d6fb2317d72babec0d0ece7cc78a/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "5b7982953a84d6fb2317d72babec0d0ece7cc78a",
+        "reviewedAt": "2026-11-13",
+        "url": "https://github.com/ui-awesome/html-mixin/blob/5b7982953a84d6fb2317d72babec0d0ece7cc78a/composer.json",
+        "kind": "source"
+    }
+}

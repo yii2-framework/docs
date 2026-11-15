@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  activeQuickSelections,
   catalogSearchRecord,
   documentationKinds,
   filterKeys,
@@ -9,6 +10,7 @@ import {
   isTagSlug,
   matchesFilters,
   normalizeFilters,
+  quickSelections,
 } from "../src/lib/catalog-filter.mjs";
 
 const record = catalogSearchRecord({
@@ -353,4 +355,41 @@ test("the search text holds every tag, the topic id and the topic title", () => 
   });
   assert.equal(matchesFilters(untitled, { q: "html-views" }), true);
   assert.equal(matchesFilters(untitled, { q: "views and html" }), false);
+});
+
+test("quick selections reuse valid ecosystem and collection filters", () => {
+  assert.deepEqual(
+    quickSelections.map(({ label }) => label),
+    ["Yii2", "Yii3", "UI Awesome", "PHP Forge"],
+  );
+  for (const { key, value } of quickSelections) {
+    const filters = normalizeFilters({ [key]: value });
+    assert.equal(filters[key], value);
+    const matching = { ...record, ecosystems: [value], family: value };
+    assert.equal(matchesFilters(matching, filters), true);
+    assert.equal(
+      matchesFilters(
+        { ...record, ecosystems: ["other"], family: "other" },
+        filters,
+      ),
+      false,
+    );
+    const url = filtersUrl("https://example.test/docs/packages/", filters);
+    assert.equal(url.searchParams.get(key), value);
+  }
+});
+
+test("quick selection state follows filters, combinations, and reset", () => {
+  const labels = (filters) =>
+    activeQuickSelections(filters).map(({ label }) => label);
+  assert.deepEqual(labels({}), []);
+  assert.deepEqual(labels({ ecosystem: "yii2" }), ["Yii2"]);
+  assert.deepEqual(labels(new URLSearchParams("ecosystem=yii3")), ["Yii3"]);
+  assert.deepEqual(labels({ family: "ui-awesome" }), ["UI Awesome"]);
+  assert.deepEqual(labels({ family: "php-forge", ecosystem: "yii2" }), [
+    "Yii2",
+    "PHP Forge",
+  ]);
+  assert.deepEqual(labels({ ecosystem: "unknown", family: "unknown" }), []);
+  assert.deepEqual(labels({ family: "" }), []);
 });

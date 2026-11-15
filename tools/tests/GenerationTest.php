@@ -46,6 +46,7 @@ final class GenerationTest extends TestCase
         $fixtures = dirname(__DIR__) . '/tests/fixtures';
         self::$root = sys_get_temp_dir() . '/reference-test-' . bin2hex(random_bytes(6));
         mkdir(self::$root . '/.cache', 0777, true);
+        mkdir(self::$root . '/empty/src', 0777, true);
         mkdir(self::$root . '/src/content/docs/guide', 0777, true);
         file_put_contents(self::$root . '/src/content/docs/guide/structure-widgets.md', "---\ntitle: Widgets\n---\n");
         file_put_contents(self::$root . '/packages.json', json_encode([
@@ -59,12 +60,18 @@ final class GenerationTest extends TestCase
                 'docsDir' => 'docs', 'srcDir' => 'src', 'namespace' => 'vendor\pkg', 'localPath' => 'y',
                 'packagist' => 'fixture/package',
             ],
+            [
+                'name' => 'empty', 'title' => 'Empty', 'repo' => 'https://github.com/o/empty', 'ref' => 'main',
+                'docsDir' => 'docs', 'srcDir' => 'src', 'namespace' => 'vendor', 'localPath' => 'z',
+                'packagist' => 'fixture/empty',
+            ],
         ], JSON_THROW_ON_ERROR));
         file_put_contents(self::$root . '/.cache/sources.json', json_encode([
             'mode' => 'clone',
             'packages' => [
                 'yii2' => ['dir' => $fixtures, 'commit' => 'abc', 'skipped' => null],
                 'pkg' => ['dir' => $fixtures . '/package', 'commit' => 'def', 'skipped' => null],
+                'empty' => ['dir' => self::$root . '/empty', 'commit' => 'ghi', 'skipped' => null],
             ],
         ], JSON_THROW_ON_ERROR));
 
@@ -95,6 +102,7 @@ final class GenerationTest extends TestCase
         self::assertSame(0, self::$exitCode, 'Exit code must be 0. Output: ' . self::$output);
         self::assertStringContainsString('[reference] yii2: 6 types', self::$output, 'Framework count.');
         self::assertStringContainsString('[reference] pkg: 4 types', self::$output, 'Package count.');
+        self::assertStringContainsString('[reference] empty: 0 types', self::$output, 'Empty package count.');
     }
 
     public function testEnumPageListsCasesWithBackingType(): void
@@ -353,13 +361,16 @@ final class GenerationTest extends TestCase
         $validator = new Validator();
         $validator->setMaxErrors(5);
 
-        foreach (['yii2', 'pkg'] as $package) {
+        foreach (['yii2', 'pkg', 'empty'] as $package) {
             $data = json_decode((string) file_get_contents(self::$root . "/public/reference/$package.json"));
             $result = $validator->validate($data, (string) $schema);
             $errors = $result->isValid() ? [] : (new ErrorFormatter())->format($result->error());
 
             self::assertTrue($result->isValid(), "$package.json: " . json_encode($errors));
         }
+
+        $empty = json_decode((string) file_get_contents(self::$root . '/public/reference/empty.json'));
+        self::assertEquals((object) [], $empty->types, 'An empty type map must remain a JSON object.');
 
         $catalog = json_decode((string) file_get_contents(self::$root . '/public/reference/pkg.json'), true);
         $alert = $catalog['types']['vendor\pkg\Alert'];

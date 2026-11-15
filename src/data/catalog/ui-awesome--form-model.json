@@ -15,7 +15,7 @@
             "evidence": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/composer.json"
         }
     ],
-    "docsUrl": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/README.md",
+    "docsUrl": "/extensions/form-model/",
     "repository": "https://github.com/ui-awesome/form-model",
     "license": "BSD-3-Clause",
     "maintainer": {

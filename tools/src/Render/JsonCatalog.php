@@ -54,7 +54,7 @@ final class JsonCatalog
             'commit' => $package->commit,
             'generatedAt' => $this->site->buildDate,
             'url' => $this->site->pages->url($this->site->pages->packageIndexPath($package)),
-            'types' => $entries,
+            'types' => (object) $entries,
         ];
     }
 

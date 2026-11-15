@@ -1,6 +1,6 @@
 ---
 import { documentationTarget, ecosystemLabels, facetTags, familyLabels, getTopic, groupByTopic, installCommand, maintainerLink, requirementParts, withBase } from "../../lib/catalog.mjs";
-import { catalogSearchRecord } from "../../lib/catalog-filter.mjs";
+import { catalogSearchRecord, quickSelections } from "../../lib/catalog-filter.mjs";
 import { displayOrder, hostingFor, loadHosting } from "../../lib/hosting.mjs";
 import "../../styles/portal.css";
 import "../../styles/catalog.css";
@@ -40,6 +40,14 @@ const checked = (pkg) => `against ${pkg.provenance.ref} (${pkg.provenance.kind =
     </p>
     <a class="portal-button portal-button-secondary" href={withBase("/contribute/", base)}>Propose a package</a>
   </div>
+
+  <nav class="catalog-quick-selections" aria-label="Browse by ecosystem or collection">
+    <ul>
+      {quickSelections.map(({ label, key, value }) => (
+        <li><a href={`${packagesUrl}?${key}=${encodeURIComponent(value)}`} data-quick-key={key} data-quick-value={value}>{label}</a></li>
+      ))}
+    </ul>
+  </nav>
 
   <form class="catalog-filters" role="search" aria-label="Filter packages" data-catalog-form hidden>
     <div class="catalog-search">
@@ -192,7 +200,7 @@ const checked = (pkg) => `against ${pkg.provenance.ref} (${pkg.provenance.kind =
 </section>
 
 <script>
-  import { filterKeys, filtersUrl, matchesFilters, normalizeFilters } from "../../lib/catalog-filter.mjs";
+  import { activeQuickSelections, filterKeys, filtersUrl, matchesFilters, normalizeFilters } from "../../lib/catalog-filter.mjs";
 
   function initializeCatalog() {
     const root = document.querySelector<HTMLElement>("[data-package-catalog]");
@@ -262,6 +270,12 @@ const checked = (pkg) => `against ${pkg.provenance.ref} (${pkg.provenance.kind =
     };
 
     function render(filters: ReturnType<typeof normalizeFilters>) {
+      const selected = activeQuickSelections(filters);
+      for (const link of root!.querySelectorAll<HTMLAnchorElement>("[data-quick-key]")) {
+        const active = selected.some(({ key, value }) => key === link.dataset.quickKey && value === link.dataset.quickValue);
+        if (active) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      }
       let total = 0;
       const perTopic = new Map<string, number>();
       for (const { element, record } of entries) {
