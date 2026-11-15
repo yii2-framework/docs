@@ -105,3 +105,5 @@
 - feat: redesign the Documentation hub and package directory, unify the site theme, and integrate nested-sets-behavior.
 - feat(catalog): group packages by topic and tags, import records from Packagist, and accept proposals through a moderated issue-to-PR flow.
 - docs: integrate DynamicForm, Diff, Foxy, Scaffold and Yii3 Debug; update API generation, package skills and documentation dependencies.
+- feat(docs): integrate UI Awesome guides, APIs and skills; fix empty API catalogs; add ecosystem and collection selections.
+- docs: integrate Coding Standard guides and package skill into the documentation site.

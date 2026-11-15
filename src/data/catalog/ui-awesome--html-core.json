@@ -1,0 +1,34 @@
+{
+    "id": "ui-awesome/html-core",
+    "name": "HTML Core",
+    "summary": "Core PHP HTML rendering with immutable base elements, lifecycle hooks, a factory and application-scoped configuration.",
+    "family": "ui-awesome",
+    "topic": "html-views",
+    "tags": ["html", "rendering", "factory", "theming"],
+    "ecosystems": ["php"],
+    "kind": "library",
+    "php": "^8.3",
+    "compatibility": [
+        {
+            "ecosystem": "php",
+            "constraint": "^8.3",
+            "evidence": "https://github.com/ui-awesome/html-core/blob/b1f2e7bff73f25ed80627143005b965ce17beba9/composer.json"
+        }
+    ],
+    "docsUrl": "/extensions/html-core/",
+    "repository": "https://github.com/ui-awesome/html-core",
+    "license": "BSD-3-Clause",
+    "maintainer": {
+        "name": "Wilmer Arambula",
+        "url": "https://github.com/terabytesoftw"
+    },
+    "relationship": "maintained",
+    "relationshipEvidence": "https://github.com/ui-awesome/html-core/blob/b1f2e7bff73f25ed80627143005b965ce17beba9/composer.json",
+    "provenance": {
+        "ref": "main",
+        "commit": "b1f2e7bff73f25ed80627143005b965ce17beba9",
+        "reviewedAt": "2026-11-14",
+        "url": "https://github.com/ui-awesome/html-core/blob/b1f2e7bff73f25ed80627143005b965ce17beba9/composer.json",
+        "kind": "source"
+    }
+}
