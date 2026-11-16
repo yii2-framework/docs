@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/model/blob/256aa4d3dd06f563c86574d82fa94b3d80e5437b/composer.json"
+            "evidence": "https://github.com/ui-awesome/model/blob/928e52191e0ce7f70773ae80bb866478d679a1a5/composer.json"
         }
     ],
     "docsUrl": "/extensions/model/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/model/blob/256aa4d3dd06f563c86574d82fa94b3d80e5437b/composer.json",
+    "relationshipEvidence": "https://github.com/ui-awesome/model/blob/928e52191e0ce7f70773ae80bb866478d679a1a5/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "256aa4d3dd06f563c86574d82fa94b3d80e5437b",
-        "reviewedAt": "2026-11-13",
-        "url": "https://github.com/ui-awesome/model/blob/256aa4d3dd06f563c86574d82fa94b3d80e5437b/composer.json",
-        "kind": "source"
+        "ref": "0.2.3",
+        "commit": "928e52191e0ce7f70773ae80bb866478d679a1a5",
+        "reviewedAt": "2026-11-16",
+        "url": "https://github.com/ui-awesome/model/blob/928e52191e0ce7f70773ae80bb866478d679a1a5/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 729,
+        "downloadsTotal": 2667,
+        "favers": 1,
+        "fetchedAt": "2026-11-16"
     }
 }
