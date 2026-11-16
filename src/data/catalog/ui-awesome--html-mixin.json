@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/html-mixin/blob/5b7982953a84d6fb2317d72babec0d0ece7cc78a/composer.json"
+            "evidence": "https://github.com/ui-awesome/html-mixin/blob/eca9e6e8ec90bf4187331253c932ce3f49b7e10c/composer.json"
         }
     ],
     "docsUrl": "/extensions/html-mixin/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/html-mixin/blob/5b7982953a84d6fb2317d72babec0d0ece7cc78a/composer.json",
+    "relationshipEvidence": "https://github.com/ui-awesome/html-mixin/blob/eca9e6e8ec90bf4187331253c932ce3f49b7e10c/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "5b7982953a84d6fb2317d72babec0d0ece7cc78a",
-        "reviewedAt": "2026-11-13",
-        "url": "https://github.com/ui-awesome/html-mixin/blob/5b7982953a84d6fb2317d72babec0d0ece7cc78a/composer.json",
-        "kind": "source"
+        "ref": "0.8.4",
+        "commit": "eca9e6e8ec90bf4187331253c932ce3f49b7e10c",
+        "reviewedAt": "2026-11-16",
+        "url": "https://github.com/ui-awesome/html-mixin/blob/eca9e6e8ec90bf4187331253c932ce3f49b7e10c/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 4750,
+        "downloadsTotal": 49612,
+        "favers": 1,
+        "fetchedAt": "2026-11-16"
     }
 }
