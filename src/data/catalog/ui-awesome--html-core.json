@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/html-core/blob/b1f2e7bff73f25ed80627143005b965ce17beba9/composer.json"
+            "evidence": "https://github.com/ui-awesome/html-core/blob/4db707532b256dd45887b964229b238365169213/composer.json"
         }
     ],
     "docsUrl": "/extensions/html-core/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/html-core/blob/b1f2e7bff73f25ed80627143005b965ce17beba9/composer.json",
+    "relationshipEvidence": "https://github.com/ui-awesome/html-core/blob/4db707532b256dd45887b964229b238365169213/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "b1f2e7bff73f25ed80627143005b965ce17beba9",
-        "reviewedAt": "2026-11-14",
-        "url": "https://github.com/ui-awesome/html-core/blob/b1f2e7bff73f25ed80627143005b965ce17beba9/composer.json",
-        "kind": "source"
+        "ref": "0.9.1",
+        "commit": "4db707532b256dd45887b964229b238365169213",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/ui-awesome/html-core/blob/4db707532b256dd45887b964229b238365169213/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 4137,
+        "downloadsTotal": 54211,
+        "favers": 1,
+        "fetchedAt": "2026-11-23"
     }
 }

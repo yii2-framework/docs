@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/php-forge/foxy/blob/3257af7e523d2fc7da3889adf5fcba5dda197865/composer.json"
+            "evidence": "https://github.com/php-forge/foxy/blob/6451406cca3b4912279d0f34e2f11e14268b6b7b/composer.json"
         }
     ],
     "docsUrl": "/extensions/foxy/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/php-forge/foxy/blob/3257af7e523d2fc7da3889adf5fcba5dda197865/composer.json",
+    "relationshipEvidence": "https://github.com/php-forge/foxy/blob/6451406cca3b4912279d0f34e2f11e14268b6b7b/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "3257af7e523d2fc7da3889adf5fcba5dda197865",
-        "reviewedAt": "2026-10-27",
-        "url": "https://github.com/php-forge/foxy/blob/3257af7e523d2fc7da3889adf5fcba5dda197865/composer.json",
-        "kind": "source"
+        "ref": "0.4.0",
+        "commit": "6451406cca3b4912279d0f34e2f11e14268b6b7b",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/php-forge/foxy/blob/6451406cca3b4912279d0f34e2f11e14268b6b7b/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 2839,
+        "downloadsTotal": 161106,
+        "favers": 47,
+        "fetchedAt": "2026-11-23"
     }
 }

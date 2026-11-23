@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": ">=8.1",
-            "evidence": "https://github.com/php-forge/coding-standard/blob/c9794df929534e60f7452c916420b908cad97b0e/composer.json"
+            "evidence": "https://github.com/php-forge/coding-standard/blob/08f8b884b1e9d72520dae80e152d763bedc2638e/composer.json"
         }
     ],
     "docsUrl": "/extensions/coding-standard/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/php-forge/coding-standard/blob/c9794df929534e60f7452c916420b908cad97b0e/composer.json",
+    "relationshipEvidence": "https://github.com/php-forge/coding-standard/blob/08f8b884b1e9d72520dae80e152d763bedc2638e/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "c9794df929534e60f7452c916420b908cad97b0e",
-        "reviewedAt": "2026-11-12",
-        "url": "https://github.com/php-forge/coding-standard/blob/c9794df929534e60f7452c916420b908cad97b0e/composer.json",
-        "kind": "source"
+        "ref": "0.3.5",
+        "commit": "08f8b884b1e9d72520dae80e152d763bedc2638e",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/php-forge/coding-standard/blob/08f8b884b1e9d72520dae80e152d763bedc2638e/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 18942,
+        "downloadsTotal": 122339,
+        "favers": 2,
+        "fetchedAt": "2026-11-23"
     }
 }

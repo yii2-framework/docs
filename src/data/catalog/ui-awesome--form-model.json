@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/composer.json"
+            "evidence": "https://github.com/ui-awesome/form-model/blob/69019e86a3fb94db89f3381731bd61cef38dbc47/composer.json"
         }
     ],
     "docsUrl": "/extensions/form-model/",
@@ -23,18 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/LICENSE",
+    "relationshipEvidence": "https://github.com/ui-awesome/form-model/blob/69019e86a3fb94db89f3381731bd61cef38dbc47/LICENSE",
     "provenance": {
-        "ref": "0.2.1",
-        "commit": "969b8f8bc0119f0f7205b96b5f57df2ce5af6e06",
-        "reviewedAt": "2026-10-25",
-        "url": "https://github.com/ui-awesome/form-model/blob/969b8f8bc0119f0f7205b96b5f57df2ce5af6e06/composer.json",
+        "ref": "0.2.3",
+        "commit": "69019e86a3fb94db89f3381731bd61cef38dbc47",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/ui-awesome/form-model/blob/69019e86a3fb94db89f3381731bd61cef38dbc47/composer.json",
         "kind": "release"
     },
     "stats": {
-        "downloadsMonthly": 9,
-        "downloadsTotal": 815,
+        "downloadsMonthly": 546,
+        "downloadsTotal": 1361,
         "favers": 1,
-        "fetchedAt": "2026-10-25"
+        "fetchedAt": "2026-11-23"
     }
 }
