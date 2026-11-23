@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": ">=8.3",
-            "evidence": "https://github.com/php-forge/diff/blob/abf7720e6e365d16d8b0e5cbeab9310e5fe5edba/composer.json"
+            "evidence": "https://github.com/php-forge/diff/blob/ca30773eb8d708e0e8d58875a44f528bd96edfe1/composer.json"
         }
     ],
     "docsUrl": "/extensions/diff/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/php-forge/diff/blob/abf7720e6e365d16d8b0e5cbeab9310e5fe5edba/composer.json",
+    "relationshipEvidence": "https://github.com/php-forge/diff/blob/ca30773eb8d708e0e8d58875a44f528bd96edfe1/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "abf7720e6e365d16d8b0e5cbeab9310e5fe5edba",
-        "reviewedAt": "2026-10-27",
-        "url": "https://github.com/php-forge/diff/blob/abf7720e6e365d16d8b0e5cbeab9310e5fe5edba/composer.json",
-        "kind": "source"
+        "ref": "0.1.0",
+        "commit": "ca30773eb8d708e0e8d58875a44f528bd96edfe1",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/php-forge/diff/blob/ca30773eb8d708e0e8d58875a44f528bd96edfe1/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 322,
+        "downloadsTotal": 322,
+        "favers": 1,
+        "fetchedAt": "2026-11-23"
     }
 }

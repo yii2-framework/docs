@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/html-attribute/blob/55fc76e76fca1eff85195ef921c652b9a117df8a/composer.json"
+            "evidence": "https://github.com/ui-awesome/html-attribute/blob/ea5ab16b35169bbe4fddc975f4e51ae03a1dffc6/composer.json"
         }
     ],
     "docsUrl": "/extensions/html-attribute/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/html-attribute/blob/55fc76e76fca1eff85195ef921c652b9a117df8a/composer.json",
+    "relationshipEvidence": "https://github.com/ui-awesome/html-attribute/blob/ea5ab16b35169bbe4fddc975f4e51ae03a1dffc6/composer.json",
     "provenance": {
-        "ref": "main",
-        "commit": "55fc76e76fca1eff85195ef921c652b9a117df8a",
-        "reviewedAt": "2026-11-14",
-        "url": "https://github.com/ui-awesome/html-attribute/blob/55fc76e76fca1eff85195ef921c652b9a117df8a/composer.json",
-        "kind": "source"
+        "ref": "0.8.2",
+        "commit": "ea5ab16b35169bbe4fddc975f4e51ae03a1dffc6",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/ui-awesome/html-attribute/blob/ea5ab16b35169bbe4fddc975f4e51ae03a1dffc6/composer.json",
+        "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 4578,
+        "downloadsTotal": 60802,
+        "favers": 1,
+        "fetchedAt": "2026-11-23"
     }
 }

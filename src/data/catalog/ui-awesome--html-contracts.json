@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/html-contracts/blob/f5055aff4969f4bc71e064db00f475f8cf4edef0/composer.json"
+            "evidence": "https://github.com/ui-awesome/html-contracts/blob/d7f9f53357f23e3475b81bf9ccc1865ccd9da656/composer.json"
         }
     ],
     "docsUrl": "/extensions/html-contracts/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/html-contracts/blob/f5055aff4969f4bc71e064db00f475f8cf4edef0/composer.json",
+    "relationshipEvidence": "https://github.com/ui-awesome/html-contracts/blob/d7f9f53357f23e3475b81bf9ccc1865ccd9da656/composer.json",
     "provenance": {
-        "ref": "0.2.3",
-        "commit": "f5055aff4969f4bc71e064db00f475f8cf4edef0",
-        "reviewedAt": "2026-11-13",
-        "url": "https://github.com/ui-awesome/html-contracts/blob/f5055aff4969f4bc71e064db00f475f8cf4edef0/composer.json",
+        "ref": "0.2.4",
+        "commit": "d7f9f53357f23e3475b81bf9ccc1865ccd9da656",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/ui-awesome/html-contracts/blob/d7f9f53357f23e3475b81bf9ccc1865ccd9da656/composer.json",
         "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 4568,
+        "downloadsTotal": 31985,
+        "favers": 2,
+        "fetchedAt": "2026-11-23"
     }
 }

@@ -19,7 +19,7 @@
         {
             "ecosystem": "yii2",
             "constraint": "^22.0@dev",
-            "evidence": "https://github.com/yii2-extensions/debug/blob/d1b208afa729a26cb2aeb742710e13f277cac099/composer.json"
+            "evidence": "https://github.com/yii2-extensions/debug/blob/3cb2ef431782a476b364d963e1a91f9056e343b2/composer.json"
         }
     ],
     "docsUrl": "/extensions/debug/",
@@ -30,18 +30,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/yii2-extensions/debug/blob/d1b208afa729a26cb2aeb742710e13f277cac099/composer.json",
+    "relationshipEvidence": "https://github.com/yii2-extensions/debug/blob/3cb2ef431782a476b364d963e1a91f9056e343b2/composer.json",
     "provenance": {
-        "ref": "0.2.2",
-        "commit": "d1b208afa729a26cb2aeb742710e13f277cac099",
-        "reviewedAt": "2026-10-25",
-        "url": "https://github.com/yii2-extensions/debug/blob/d1b208afa729a26cb2aeb742710e13f277cac099/composer.json",
+        "ref": "0.2.3",
+        "commit": "3cb2ef431782a476b364d963e1a91f9056e343b2",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/yii2-extensions/debug/blob/3cb2ef431782a476b364d963e1a91f9056e343b2/composer.json",
         "kind": "release"
     },
     "stats": {
-        "downloadsMonthly": 136,
-        "downloadsTotal": 5516,
+        "downloadsMonthly": 188,
+        "downloadsTotal": 5704,
         "favers": 4,
-        "fetchedAt": "2026-10-25"
+        "fetchedAt": "2026-11-23"
     }
 }

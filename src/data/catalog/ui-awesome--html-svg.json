@@ -12,7 +12,7 @@
         {
             "ecosystem": "php",
             "constraint": "^8.3",
-            "evidence": "https://github.com/ui-awesome/html-svg/blob/6b1e0ec9d283d37ee92d2c9c2f6a24d5ea7740d2/composer.json"
+            "evidence": "https://github.com/ui-awesome/html-svg/blob/d58ee467796a588d67640f763c45e4d0a97040ef/composer.json"
         }
     ],
     "docsUrl": "/extensions/html-svg/",
@@ -23,12 +23,18 @@
         "url": "https://github.com/terabytesoftw"
     },
     "relationship": "maintained",
-    "relationshipEvidence": "https://github.com/ui-awesome/html-svg/blob/6b1e0ec9d283d37ee92d2c9c2f6a24d5ea7740d2/composer.json",
+    "relationshipEvidence": "https://github.com/ui-awesome/html-svg/blob/d58ee467796a588d67640f763c45e4d0a97040ef/composer.json",
     "provenance": {
-        "ref": "0.6.1",
-        "commit": "6b1e0ec9d283d37ee92d2c9c2f6a24d5ea7740d2",
-        "reviewedAt": "2026-11-15",
-        "url": "https://github.com/ui-awesome/html-svg/blob/6b1e0ec9d283d37ee92d2c9c2f6a24d5ea7740d2/composer.json",
+        "ref": "0.7.0",
+        "commit": "d58ee467796a588d67640f763c45e4d0a97040ef",
+        "reviewedAt": "2026-11-23",
+        "url": "https://github.com/ui-awesome/html-svg/blob/d58ee467796a588d67640f763c45e4d0a97040ef/composer.json",
         "kind": "release"
+    },
+    "stats": {
+        "downloadsMonthly": 2322,
+        "downloadsTotal": 30864,
+        "favers": 2,
+        "fetchedAt": "2026-11-23"
     }
 }
